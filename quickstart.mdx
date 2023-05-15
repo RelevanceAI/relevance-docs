@@ -59,15 +59,31 @@ This will output a preview URL to view the chain online in the Notebook or an ID
 
 ## 4. Use the SDK to run the chain
 
-In your application, you can now call the chain using the SDK:
+In your application, you can now call the chain using the SDK!
+
+If you are running server side, simply:
 
 ```js
+import helloWorldChain from './chains/hello-world';
+
+// in your logic
+const { output } = await helloWorldChain.run({ name: 'Dan' });
+```
+
+Or, on the client side, you can run the chain without exposing internals - as long as you set `publiclyTriggerable: true` in `defineChain`.
+
+```ts
 import { Client } from '@relevance-ai/chain';
+
+// we can import the type for the chain to get type safety
+import type helloWorldChain from './chains/hello-world';
 
 const client = new Client({ regionId, projectId });
 
-const result = await client.runChain('hello-world', { name: 'Dan' });
+const output = await client.runChain<typeof helloWorldChain>('hello-world', {
+    name: 'Dan',
+});
 
-// { answer: "Hey Dan, how are you?" }
-console.log(result);
+// "Hey Dan, how are you?"
+console.log(output.answer);
 ```
