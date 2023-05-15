@@ -3,12 +3,6 @@ title: 'How to build a chain'
 description: 'We make it super easy to build LLM-powered chains'
 ---
 
-## The basic anatomy of a chain
-
-A chain is a collection of steps that are executed in order. Each step is a function that takes a transformation ID as its first param, and then options. It outputs variables which can be used in future steps of your chain.
-
-You can also define input parameters, that can be passed in when you run the chain.
-
 ## Creating a chain
 
 Start by instantiating your chain with the `defineChain` method.
@@ -22,14 +16,14 @@ const chain = defineChain({
 
 ## Define parameters
 
-You can think of parameters like the inputs to an API endpoint. When you run this chain, you may want to pass in variables that affect how your chain runs. They can (and should) be typed using [JSONSchema](https://json-schema.org/understanding-json-schema/reference/type.html).
+You can think of parameters like the inputs to an API endpoint. When you run this chain, you may want to pass in variables. They can (and should) be typed using [JSONSchema](https://json-schema.org/understanding-json-schema/reference/type.html).
 
-For example, if you are creating a chain that asks questions of PDF's, you will want to define a `question` parameter of type `string`.
+For example, if you are creating a chain that asks questions of PDF's, you will want to define a `question` parameter of type `string`. You'll want to use this question in your LLM completion step.
 
 ```js
 const chain = defineChain({
+    title: 'PDF Q&A',
     params: {
-        title: 'PDF Q&A',
         question: {
             type: 'string',
         },
@@ -43,8 +37,8 @@ Steps are the sequence of transformations that your chain will perform. You defi
 
 ```js
 const chain = defineChain({
+    title: 'PDF Q&A',
     params: {
-        title: 'PDF Q&A',
         question: {
             type: 'string',
         },
@@ -75,7 +69,7 @@ ${search_results}
 
 Based off the above context answer the question below:
 
-Question: 
+Question:
 ${question}
 
 Answer:`,

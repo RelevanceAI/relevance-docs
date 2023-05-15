@@ -39,7 +39,7 @@ const chain = defineChain({
     setup({ params, step }) {
         const { name } = params;
 
-        const { answer } = step('llm_completion', {
+        const { answer } = step('prompt_completion', {
             prompt: `Say hello to me! My name is: ${name}.`,
         });
 
