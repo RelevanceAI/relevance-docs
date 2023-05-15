@@ -1,0 +1,87 @@
+---
+title: 'How to build a chain'
+description: 'We make it super easy to build chains'
+---
+
+# The basic anatomy of a chain
+
+A chain is a collection of steps that are executed in order. Each step is a function that takes a transformation ID as its first param, and then options. It outputs variables which can be used in future steps of your chain.
+
+You can also define input parameters, that can be passed in when you run the chain.
+
+# Creating a chain
+
+Start by instantiating your chain with the `defineChain` method.
+
+```js
+import { defineChain } from '@relevanceai/chain';
+const chain = defineChain({
+    title: 'PDF Q&A',
+});
+```
+
+# Define parameters
+
+You can think of parameters like the inputs to an API endpoint. When you run this chain, you may want to pass in variables that affect how your chain runs. They can (and should) be typed using [JSONSchema](https://json-schema.org/understanding-json-schema/reference/type.html).
+
+For example, if you are creating a chain that asks questions of PDF's, you will want to define a `question` parameter of type `string`.
+
+```js
+const chain = defineChain({
+    params: {
+        title: 'PDF Q&A',
+        question: {
+            type: 'string',
+        },
+    },
+});
+```
+
+# Define steps
+
+Steps are the sequence of transformations that your chain will perform. You define your steps within `setup` function, which receives your `params` and the `step` method. The step method is used to define a step, receiving the desired transformation's `id` and then `options`.
+
+```js
+const chain = defineChain({
+    params: {
+        title: 'PDF Q&A',
+        question: {
+            type: 'string',
+        },
+    },
+    setup({ params, steps }) {
+        const { question } = params;
+
+        const pdf_url = 'https://www.mypdf.com/doc.pdf';
+
+        const { text } = step('pdf_to_text', {
+            pdf_url,
+        });
+
+        const { chunks } = step('split_text', {
+            method: 'tokens',
+            num_tokens: 500,
+            text,
+        });
+
+        const { results: search_results } = step('search_array', {
+            array: chunks,
+            query: question,
+        });
+
+        const { answer } = step('prompt_completion', {
+            prompt: `
+${search_results}
+
+Based off the above context answer the question below:
+
+Question: 
+${question}
+
+Answer:`,
+        });
+
+        return { answer };
+    },
+});
+```
