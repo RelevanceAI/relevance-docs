@@ -33,7 +33,9 @@ const chain = defineChain({
 
 ## Define steps
 
-Steps are the sequence of transformations that your chain will perform. You define your steps within `setup` function, which receives your `params` and the `step` method. The step method is used to define a step, receiving the desired transformation's `id` and then `options`.
+Steps are the sequence of transformations that your chain will perform. You define your steps within the `setup` function, which receives your `params` and the `step` method.
+
+The `step` method is used to define a step. It receives a transformation `id` as the first parameter, and an object of `params` as the second parameter. You can find all transformation options from the link in the sidebar.
 
 ```js
 const chain = defineChain({
@@ -64,8 +66,7 @@ const chain = defineChain({
         });
 
         const { answer } = step('prompt_completion', {
-            prompt: `
-${search_results}
+            prompt: `${search_results}
 
 Based off the above context answer the question below:
 
