@@ -80,3 +80,26 @@ Answer:`,
     },
 });
 ```
+
+## Define output
+
+Note that the `setup` function returns an object.
+
+In the above example:
+
+```js
+return {
+    answer,
+};
+```
+
+This is the output of the chain. When you run this chain, only those variables will be returned.
+
+You can add anything from with the setup function into this return object. For example, if you wanted to return the `pdf_url` you could add return:
+
+```js
+return {
+    answer,
+    pdf_url,
+};
+```

@@ -5,7 +5,9 @@ description: 'Instantly deploy your chains to hosted API endpoints'
 
 ## The chains folder
 
-Create all of your chains in a `chains` folder at the root of your project. Each chain should be a separate file and export your `chain` instance. The name of the file will be the ID of the chain. For example, if you create a file called `chains/pdf-qa.ts`, the chain ID will be `pdf-qa`.
+Create all of your chains in a `chains` folder at the root of your project. Each chain should be a separate file and export your `chain` instance. The name of the file will be the ID of the chain.
+
+For example, if you create a file called `chains/pdf-qa.ts`, the chain ID will be `pdf-qa`.
 
 You use the ID for running the chain from your application.
 
@@ -14,7 +16,7 @@ You use the ID for running the chain from your application.
 const chain = defineChain({
     title: 'Hello world',
     setup({ step }) {
-        const { answer } = step('llm_completion', {
+        const { answer } = step('prompt_completion', {
             prompt: 'Say hello world.',
         });
 
@@ -30,6 +32,6 @@ export default chain;
 const { answer } = await chain.runChain('hello-world');
 ```
 
-## Deploying the chains folder
+## Deployment
 
 To deploy your chains, simply run `relevance deploy` in your terminal. This will deploy all chains exported in the `chains` folder. It's as simple as that! You can now run your chains from your application.
