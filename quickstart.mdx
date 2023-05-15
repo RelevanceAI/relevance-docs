@@ -10,7 +10,7 @@ Getting started with Relevance AI is easy. You can get started in under 5 minute
 To get started, install our Javascript SDK. You can do this using `npm`:
 
 ```bash
-$ npm install --save @relevance-ai/chain
+$ npm install --save @relevanceai/chain
 $ relevance login
 ```
 
@@ -29,7 +29,23 @@ $ relevance keys
 Create a `/chains` folder in your project and create a file called `hello-world.js` with the following contents:
 
 ```js
+const chain = defineChain({
+    title: 'Hello world!',
+    params: {
+        name: {
+            type: 'string',
+        },
+    },
+    setup({ params, step }) {
+        const { name } = params;
 
+        const { answer } = step('llm_completion', {
+            prompt: `Say hello to me! My name is: ${name}.`,
+        });
+
+        return { answer };
+    },
+});
 ```
 
 To deploy this chain, run:
@@ -49,7 +65,8 @@ import { Client } from '@relevance-ai/chain';
 
 const client = new Client({ regionId, projectId });
 
-const result = await client.runChain('hello-world', { name: 'World' });
+const result = await client.runChain('hello-world', { name: 'Dan' });
 
+// { answer: "Hey Dan, how are you?" }
 console.log(result);
 ```
