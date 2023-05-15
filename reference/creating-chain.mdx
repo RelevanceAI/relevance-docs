@@ -1,15 +1,15 @@
 ---
 title: 'How to build a chain'
-description: 'We make it super easy to build chains'
+description: 'We make it super easy to build LLM-powered chains'
 ---
 
-# The basic anatomy of a chain
+## The basic anatomy of a chain
 
 A chain is a collection of steps that are executed in order. Each step is a function that takes a transformation ID as its first param, and then options. It outputs variables which can be used in future steps of your chain.
 
 You can also define input parameters, that can be passed in when you run the chain.
 
-# Creating a chain
+## Creating a chain
 
 Start by instantiating your chain with the `defineChain` method.
 
@@ -20,7 +20,7 @@ const chain = defineChain({
 });
 ```
 
-# Define parameters
+## Define parameters
 
 You can think of parameters like the inputs to an API endpoint. When you run this chain, you may want to pass in variables that affect how your chain runs. They can (and should) be typed using [JSONSchema](https://json-schema.org/understanding-json-schema/reference/type.html).
 
@@ -37,7 +37,7 @@ const chain = defineChain({
 });
 ```
 
-# Define steps
+## Define steps
 
 Steps are the sequence of transformations that your chain will perform. You define your steps within `setup` function, which receives your `params` and the `step` method. The step method is used to define a step, receiving the desired transformation's `id` and then `options`.
 
