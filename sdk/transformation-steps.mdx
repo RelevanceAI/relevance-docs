@@ -1,5 +1,5 @@
 ---
-title: 'Transformations'
+title: 'Transformation steps'
 description: 'Library of transformations that can be used in chains'
 ---
 
@@ -11,21 +11,19 @@ Generate text from a large language model like GPT.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| prompt | string | The prompt that is fed to the model. |
-| model | string | The model to use for completion. Make sure to set an API key. |
-| history | array | Conversation history to be passed into the prompt. For example, `[{role: 'user', message: 'Hello, my name is Bob.'}, {role: 'ai', message: 'Hello Bob, how are you?'}]`. |
-| temperature | number | Temperature of the selected model. Typically, higher temperature means more random output. |
-
+| Property    | Type   | Description                                                                                                                                                              |
+| ----------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| prompt      | string | The prompt that is fed to the model.                                                                                                                                     |
+| model       | string | The model to use for completion. Make sure to set an API key.                                                                                                            |
+| history     | array  | Conversation history to be passed into the prompt. For example, `[{role: 'user', message: 'Hello, my name is Bob.'}, {role: 'ai', message: 'Hello Bob, how are you?'}]`. |
+| temperature | number | Temperature of the selected model. Typically, higher temperature means more random output.                                                                               |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| answer | string |  |
-| prompt | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| answer   | string |             |
+| prompt   | string |             |
 
 ## Make API request
 
@@ -35,22 +33,20 @@ Make an API request based on provided input and return the response.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| url | string | The URL to make the request to. |
-| method | string | The HTTP method to use. |
-| headers | object | The headers to send with the request. |
-| body | undefined | The body to send with the request. |
-| response_type | string | The format of the response. |
-
+| Property      | Type      | Description                           |
+| ------------- | --------- | ------------------------------------- |
+| url           | string    | The URL to make the request to.       |
+| method        | string    | The HTTP method to use.               |
+| headers       | object    | The headers to send with the request. |
+| body          | undefined | The body to send with the request.    |
+| response_type | string    | The format of the response.           |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| response_body | undefined |  |
-| status | number |  |
-
+| Property      | Type      | Description |
+| ------------- | --------- | ----------- |
+| response_body | undefined |             |
+| status        | number    |             |
 
 ## JS code transformation
 
@@ -60,18 +56,16 @@ Run JavaScript code to transform any inputs
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| code | string | The JS code to execute, returning the value to be used as the output of this transformation. |
-
+| Property | Type   | Description                                                                                  |
+| -------- | ------ | -------------------------------------------------------------------------------------------- |
+| code     | string | The JS code to execute, returning the value to be used as the output of this transformation. |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| transformed | undefined |  |
-| duration | number |  |
-
+| Property    | Type      | Description |
+| ----------- | --------- | ----------- |
+| transformed | undefined |             |
+| duration    | number    |             |
 
 ## Vector search for the most relevant content in a dataset.
 
@@ -81,22 +75,20 @@ Easily set up a vector search that returns relevant content
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| dataset_id | string | The ID of the dataset to search. |
-| query | string | The query to search for. |
-| vector_field | string | The name of the field that contains the vector. |
-| model | string |  |
-| content_field | string |  |
-| page_size | number | The number of results to return. |
-
+| Property      | Type   | Description                                     |
+| ------------- | ------ | ----------------------------------------------- |
+| dataset_id    | string | The ID of the dataset to search.                |
+| query         | string | The query to search for.                        |
+| vector_field  | string | The name of the field that contains the vector. |
+| model         | string |                                                 |
+| content_field | string |                                                 |
+| page_size     | number | The number of results to return.                |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| results | array |  |
-
+| Property | Type  | Description |
+| -------- | ----- | ----------- |
+| results  | array |             |
 
 ## Vectorize and search provided array
 
@@ -106,19 +98,17 @@ Vectorise an array of strings and rank items by relevance.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| array | array | The array of strings to search. |
-| query | string | The query to search for. |
+| Property  | Type   | Description                      |
+| --------- | ------ | -------------------------------- |
+| array     | array  | The array of strings to search.  |
+| query     | string | The query to search for.         |
 | page_size | number | The number of results to return. |
-
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| results | array |  |
-
+| Property | Type  | Description |
+| -------- | ----- | ----------- |
+| results  | array |             |
 
 ## Update Documents in a Dataset.
 
@@ -128,20 +118,18 @@ Update documents in a chosen dataset. If a list of strings is used as documents,
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| dataset_id | string | The ID of the dataset to search. |
-| documents | array |  |
+| Property             | Type    | Description                                                                                                     |
+| -------------------- | ------- | --------------------------------------------------------------------------------------------------------------- |
+| dataset_id           | string  | The ID of the dataset to search.                                                                                |
+| documents            | array   |                                                                                                                 |
 | ingest_in_background | boolean | If set to true, the step will immediately continue, without waiting for documents to be inserted and available. |
-
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| inserted | number |  |
-| failed_documents | array |  |
-
+| Property         | Type   | Description |
+| ---------------- | ------ | ----------- |
+| inserted         | number |             |
+| failed_documents | array  |             |
 
 ## Generate vector embedding
 
@@ -151,18 +139,16 @@ Generate a vector embedding from a given input with a choice of models.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| input | string | The input to generate a vector embedding with. |
-| model | string |  |
-
+| Property | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| input    | string | The input to generate a vector embedding with. |
+| model    | string |                                                |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| vector | array |  |
-
+| Property | Type  | Description |
+| -------- | ----- | ----------- |
+| vector   | array |             |
 
 ## Vector search (redis)
 
@@ -172,21 +158,19 @@ Use Redis to retrieve data using vector search
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| index | string | The name of the index to search. |
-| query | string | The query to search for. |
+| Property     | Type   | Description                                     |
+| ------------ | ------ | ----------------------------------------------- |
+| index        | string | The name of the index to search.                |
+| query        | string | The query to search for.                        |
 | vector_field | string | The name of the field that contains the vector. |
-| model | string |  |
-| page_size | number | The number of results to return. |
-
+| model        | string |                                                 |
+| page_size    | number | The number of results to return.                |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| results | array |  |
-
+| Property | Type  | Description |
+| -------- | ----- | ----------- |
+| results  | array |             |
 
 ## Insert data into Redis
 
@@ -196,19 +180,17 @@ Insert a JSON object into Redis by key.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| key | string | The key to reference the object |
-| document | object | The JSON object to insert |
-| wait | boolean | Whether to wait for the insert to complete before continuing to next step |
-
+| Property | Type    | Description                                                               |
+| -------- | ------- | ------------------------------------------------------------------------- |
+| key      | string  | The key to reference the object                                           |
+| document | object  | The JSON object to insert                                                 |
+| wait     | boolean | Whether to wait for the insert to complete before continuing to next step |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| inserted | number |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| inserted | number |             |
 
 ## Combine array of strings
 
@@ -218,18 +200,16 @@ Combine an array of strings into a single string.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| array | array | The array of strings to join. |
-| sep | string | The separator to use between each element when joining the array. |
-
+| Property | Type   | Description                                                       |
+| -------- | ------ | ----------------------------------------------------------------- |
+| array    | array  | The array of strings to join.                                     |
+| sep      | string | The separator to use between each element when joining the array. |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| text | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| text     | string |             |
 
 ## Convert PDF to text
 
@@ -239,17 +219,15 @@ Extract text from PDF without OCR. Doesn't support handwritting and scans.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| pdf_url | string | The URL of the PDF to convert to text. |
-
+| Property | Type   | Description                            |
+| -------- | ------ | -------------------------------------- |
+| pdf_url  | string | The URL of the PDF to convert to text. |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| text | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| text     | string |             |
 
 ## Convert Audio to text
 
@@ -259,17 +237,15 @@ Extract text from Audio.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
+| Property  | Type   | Description                              |
+| --------- | ------ | ---------------------------------------- |
 | audio_url | string | The URL of the Audio to convert to text. |
-
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| text | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| text     | string |             |
 
 ## Render Markdown in Notebook
 
@@ -279,16 +255,14 @@ Renders markdown in the notebook. Does not execute any code.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| markdown | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| markdown | string |             |
 
 ### Output
 
 | Property | Type | Description |
-| --- | --- | --- |
-
+| -------- | ---- | ----------- |
 
 ## Convert string to JSON
 
@@ -298,17 +272,15 @@ Convert a string to a JSON object.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| text | string | The string to convert to JSON. |
-
+| Property | Type   | Description                    |
+| -------- | ------ | ------------------------------ |
+| text     | string | The string to convert to JSON. |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| output | undefined |  |
-
+| Property | Type      | Description |
+| -------- | --------- | ----------- |
+| output   | undefined |             |
 
 ## Export data to a temporary downloadable file.
 
@@ -318,18 +290,16 @@ Export data to a temporary downloadable file. It will be deleted after 1 hour au
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| data | undefined | Data to store in the file. This could be csv, json content etc. |
-| extension | string | Extension of the file to save to. Defaults to csv |
-
+| Property  | Type      | Description                                                     |
+| --------- | --------- | --------------------------------------------------------------- |
+| data      | undefined | Data to store in the file. This could be csv, json content etc. |
+| extension | string    | Extension of the file to save to. Defaults to csv               |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| export_url | string |  |
-
+| Property   | Type   | Description |
+| ---------- | ------ | ----------- |
+| export_url | string |             |
 
 ## Filter out keys in JSON object
 
@@ -339,18 +309,16 @@ Given a string or array of strings, filter out all other keys in the JSON object
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| needle | array,string | Keys to keep in the JSON object. |
-| haystack | object | The JSON object to filter. |
-
+| Property | Type         | Description                      |
+| -------- | ------------ | -------------------------------- |
+| needle   | array,string | Keys to keep in the JSON object. |
+| haystack | object       | The JSON object to filter.       |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| filtered | undefined |  |
-
+| Property | Type      | Description |
+| -------- | --------- | ----------- |
+| filtered | undefined |             |
 
 ## Regex
 
@@ -360,19 +328,17 @@ Extract data from a string using regex and return match. Empty array is returned
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| regex | string | The regex to use for extraction, in JS flavor. |
-| string | string | The string to search for matches. |
-
+| Property | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| regex    | string | The regex to use for extraction, in JS flavor. |
+| string   | string | The string to search for matches.              |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| match | undefined |  |
-| found | boolean |  |
-
+| Property | Type      | Description |
+| -------- | --------- | ----------- |
+| match    | undefined |             |
+| found    | boolean   |             |
 
 ## Run chain
 
@@ -382,24 +348,22 @@ Executes an existing chain.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| studio_id | string | The ID of the chain to run. |
-| project | string | The ID of the project the chain belongs to. |
-| version | string |  |
-| params | undefined | The parameters to pass to the chain. |
-
+| Property  | Type      | Description                                 |
+| --------- | --------- | ------------------------------------------- |
+| studio_id | string    | The ID of the chain to run.                 |
+| project   | string    | The ID of the project the chain belongs to. |
+| version   | string    |                                             |
+| params    | undefined | The parameters to pass to the chain.        |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| output | object |  |
-| state | object |  |
-| status | string |  |
-| errors | array |  |
-| executionTime | number |  |
-
+| Property      | Type   | Description |
+| ------------- | ------ | ----------- |
+| output        | object |             |
+| state         | object |             |
+| status        | string |             |
+| errors        | array  |             |
+| executionTime | number |             |
 
 ## Start workflow
 
@@ -409,19 +373,17 @@ Executes a workflow. It will not wait for the workflow to finish, instead runnin
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| workflow_id | string | The ID of the workflow to run. |
-| dataset_id | string | The ID of the dataset to run the workflow on. |
-| params | object | The parameters to pass to the workflow. |
-
+| Property    | Type   | Description                                   |
+| ----------- | ------ | --------------------------------------------- |
+| workflow_id | string | The ID of the workflow to run.                |
+| dataset_id  | string | The ID of the dataset to run the workflow on. |
+| params      | object | The parameters to pass to the workflow.       |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| job_id | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| job_id   | string |             |
 
 ## Split text
 
@@ -431,20 +393,18 @@ Split text into an array of strings.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| text | string | The text to split. |
-| method | string | Separator will split the text by the separator. Tokens will split the text into chunks of a given number of tokens. |
-| num_tokens | number | The number of tokens to split the text into. |
-| sep | string | The separator to split the text by. |
-
+| Property   | Type   | Description                                                                                                         |
+| ---------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
+| text       | string | The text to split.                                                                                                  |
+| method     | string | Separator will split the text by the separator. Tokens will split the text into chunks of a given number of tokens. |
+| num_tokens | number | The number of tokens to split the text into.                                                                        |
+| sep        | string | The separator to split the text by.                                                                                 |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| chunks | array |  |
-
+| Property | Type  | Description |
+| -------- | ----- | ----------- |
+| chunks   | array |             |
 
 ## Combine array
 
@@ -454,18 +414,16 @@ Combine an array of strings into a single array.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| array | array |  |
-| method | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| array    | array  |             |
+| method   | string |             |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| combined | undefined |  |
-
+| Property | Type      | Description |
+| -------- | --------- | ----------- |
+| combined | undefined |             |
 
 ## Upload temporary file
 
@@ -475,18 +433,16 @@ Upload to a temporary file in S3.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| blob | undefined |  |
-| extension | string |  |
-
+| Property  | Type      | Description |
+| --------- | --------- | ----------- |
+| blob      | undefined |             |
+| extension | string    |             |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| url | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| url      | string |             |
 
 ## Analyse image
 
@@ -496,18 +452,16 @@ Analyse an image using a prompt.
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
+| Property  | Type   | Description                                                        |
+| --------- | ------ | ------------------------------------------------------------------ |
 | image_url | string | URL of the image to analyse. JPEG/JPG, PNG and WebP are supported. |
-| prompt | string | The question(s) to answer about the image. |
-
+| prompt    | string | The question(s) to answer about the image.                         |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| output | string |  |
-
+| Property | Type   | Description |
+| -------- | ------ | ----------- |
+| output   | string |             |
 
 ## Truncate text
 
@@ -517,14 +471,13 @@ Truncate text based on token count
 
 ### Input
 
-| Property | Type | Description |
-| --- | --- | --- |
-| text | undefined | The text to truncate. |
-| num_tokens | number | The number of tokens to truncate the text or array by. |
-
+| Property   | Type      | Description                                            |
+| ---------- | --------- | ------------------------------------------------------ |
+| text       | undefined | The text to truncate.                                  |
+| num_tokens | number    | The number of tokens to truncate the text or array by. |
 
 ### Output
 
-| Property | Type | Description |
-| --- | --- | --- |
-| chunks | undefined |  |
+| Property | Type      | Description |
+| -------- | --------- | ----------- |
+| chunks   | undefined |             |

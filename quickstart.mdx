@@ -1,24 +1,28 @@
 ---
 title: 'Quickstart'
-description: 'Start building awesome LLM-powered features in under 5 minutes'
+description: 'Start building LLM-powered features in under 5 minutes'
 ---
 
 Getting started with Relevance AI is easy. You can get started in under 5 minutes using our SDK.
 
 ## 1. Download and configure the Relevance CLI and SDK
 
-You need to install our JS SDK to get started. You can do this using npm:
+To get started, install our Javascript SDK. You can do this using `npm`:
 
 ```bash
-$ npm install --save @relevance-ai/sdk
+$ npm install --save @relevance-ai/chain
 $ relevance login
 ```
 
-The second command will prompt you for an API key and redirect you to the web app. You will then need to sign up or log in and grab an API key to enter into the CLI.
+The second command will redirect you to your browser, where you can sign up or log in. Follow the instructions to enter your region, project and API key into the CLI to authenticate the SDK.
 
 ## 2. Set up integrations
 
-You need to configure integrations such as OpenAI and Cohere to use their LLMs. This is done in the web app [here](https://chain.relevanceai.com/api).
+To take advantage of their LLMs, you'll need to configure integrations such as Open AI and Cohere. If you need to re-open your page for setting keys, simply run in your terminal:
+
+```bash
+$ relevance keys
+```
 
 ## 3. Create a sample chain
 
@@ -28,20 +32,20 @@ Create a `/chains` folder in your project and create a file called `hello-world.
 
 ```
 
-Spin up a development server which will watch the file for changes and deploy it.
+To deploy this chain, run:
 
 ```bash
-$ relevance dev
+$ relevance deploy
 ```
 
-This will output a preview URL to view the chain online in the Notebook or an ID that can be used with the SDK.
+This will output a preview URL to view the chain online in the Notebook or an ID that can be used to run the chain with the SDK.
 
-## 4. Use the SDK to call the chain
+## 4. Use the SDK to run the chain
 
 In your web app, you can now call the chain using the SDK:
 
 ```js
-import { Client } from '@relevance-ai/sdk'
+import { Client } from '@relevance-ai/chain';
 
 const client = new Client({ regionId, projectId });
 
@@ -49,7 +53,3 @@ const result = await client.runChain('hello-world', { name: 'World' });
 
 console.log(result);
 ```
-
-## 5. View other templates
-
-We provide guides and templates for many different use cases using LLM chains. You can check them out [here](https://chain.relevanceai.com/templates).
