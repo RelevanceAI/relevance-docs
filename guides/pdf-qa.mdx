@@ -132,42 +132,52 @@ To build this chain, we'll need to use the following steps as specified earlier:
 
 We do this in the `setup` function in `defineChain`, which receives `params` and a `step` function as arguments. The `step` function is used to define the steps of the chain.
 
-Note: the `setup` function only allows you to declare each step of a chain. No Javascript you write outside of this paradigm, except for your returned output will be executed. You can use `js_code_transformation` to execute Javascript, as well as the `code` helper function provided in `setup` to convert your function into a variable.
+Note: the `setup` function only allows you to declare each step of a chain. No Javascript you write outside of this paradigm, except for your returned output will be executed.
+
+However, you can use the `code` helper function provided in `setup` to run custom Javascript. You can also use the `runIf` function to conditionally run steps.
 
 ```js
 const chain = defineChain({
     ...restOfChain,
-    setup({ params, step, code }) {
+    setup({ params, step, code, runIf }) {
         // steps go here
         const { question, history } = params;
 
-        // wrap our custom Javascript function in our code utility
-        const { transformed: reducedHistory } = code({ history }, ({ history }) =>
-            history.reduce(
-                (acc, item) =>
-                    `${acc}\n${item.role === 'ai' ? 'ASSISTANT' : 'USER'}: ${
-                        item.message
-                    }\n`,
-                ''
-            )
-        );
-
         // use an LLM to modify the question
-        const { answer: modifiedQuestion } = step('prompt_completion', {
+        const { modifiedQuestion, reducedHistory } = runIf(chatHistory, () => {
+          // wrap our custom Javascript function in our code utility
+          const { transformed: reducedHistory } = code({ history }, ({ history }) =>
+              history.reduce(
+                  (acc, item) =>
+                      `${acc}\n${item.role === 'ai' ? 'ASSISTANT' : 'USER'}: ${
+                          item.message
+                      }\n`,
+                  ''
+              )
+          );
+
+          const { answer: modifiedQuestion } = step('prompt_completion', {
             prompt: `The human is having a conversation with an assistant, where the assistant will query a knowledgebase to get the context needed to provide an answer. You must use the chat history and the follow-up input to rephrase the question such that it can be used on its own. This means the standalone question must be include context from the chat history necessary to provide an answer.
 
-For example, if the chat history contains information about the temperature and the user asks to convert it into another unit - provide that in the standalone question. Or if the user asks a question about a subject from the history, reference that subject with detail.
+            For example, if the chat history contains information about the temperature and the user asks to convert it into another unit - provide that in the standalone question. Or if the user asks a question about a subject from the history, reference that subject with detail.
 
-Chat History: ${reducedHistory}
+            Chat History: ${reducedHistory}
 
-Follow Up Input: ${question}.
+            Follow Up Input: ${question}.
 
-Standalone question:`,
+            Standalone question:`,
+          });
+
+          return { modifiedQuestion, reducedHistory };
+        });
+
+        const { transformed: questionToUse } = code(({ history, modifiedQuestion, question }) => ({ history, modifiedQuestion, question }) => {
+          return history && history.length ? modifiedQuestion : question;
         });
 
         // Step 2. search vector database for relevant text chunks
         const { results: vectorSearchResults } = step('search', {
-            query: modifiedQuestion,
+            query: questionToUse,
             dataset_id: 'knowledge_base',
             vector_field: 'embedding',
             model: 'text-embedding-ada-002',
@@ -185,7 +195,7 @@ Standalone question:`,
 
 ${vectorSearchResults}
 
-Question: ${modifiedQuestion}
+Question: ${questionToUse}
 
 Helpful Answer JSON:`
         });
