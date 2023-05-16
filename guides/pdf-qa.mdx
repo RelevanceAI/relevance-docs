@@ -138,7 +138,7 @@ Note: the `setup` function only allows you to declare each step of a chain. No J
 
 However, you can use the `code` helper function provided in `setup` to run custom Javascript. You can also use the `runIf` function to conditionally run steps. [Learn more.](/reference/setup)
 
-```js
+```ts
 const chain = defineChain({
     ...restOfChain,
     setup({ params, step, code, runIf }) {
@@ -146,20 +146,22 @@ const chain = defineChain({
         const { question, history } = params;
 
         // use an LLM to modify the question
-        const { modifiedQuestion, reducedHistory } = runIf(chatHistory, () => {
-          // wrap our custom Javascript function in our code utility
-          const { transformed: reducedHistory } = code({ history }, ({ history }) =>
-              history.reduce(
-                  (acc, item) =>
-                      `${acc}\n${item.role === 'ai' ? 'ASSISTANT' : 'USER'}: ${
-                          item.message
-                      }\n`,
-                  ''
-              )
-          );
+        const { modifiedQuestion } = runIf(history, () => {
+            // wrap our custom Javascript function in our code utility
+            const { transformed: reducedHistory } = code(
+                { history },
+                ({ history }) =>
+                    history.reduce(
+                        (acc, item) =>
+                            `${acc}\n${
+                                item.role === 'ai' ? 'ASSISTANT' : 'USER'
+                            }: ${item.message}\n`,
+                        ''
+                    )
+            );
 
-          const { answer: modifiedQuestion } = step('prompt_completion', {
-            prompt: `The human is having a conversation with an assistant, where the assistant will query a knowledgebase to get the context needed to provide an answer. You must use the chat history and the follow-up input to rephrase the question such that it can be used on its own. This means the standalone question must be include context from the chat history necessary to provide an answer.
+            const { answer: modifiedQuestion } = step('prompt_completion', {
+                prompt: `The human is having a conversation with an assistant, where the assistant will query a knowledgebase to get the context needed to provide an answer. You must use the chat history and the follow-up input to rephrase the question such that it can be used on its own. This means the standalone question must be include context from the chat history necessary to provide an answer.
 
             For example, if the chat history contains information about the temperature and the user asks to convert it into another unit - provide that in the standalone question. Or if the user asks a question about a subject from the history, reference that subject with detail.
 
@@ -168,14 +170,24 @@ const chain = defineChain({
             Follow Up Input: ${question}.
 
             Standalone question:`,
-          });
+            });
 
-          return { modifiedQuestion, reducedHistory };
+            return { modifiedQuestion };
         });
 
-        const { transformed: questionToUse } = code(({ history, modifiedQuestion, question }) => ({ history, modifiedQuestion, question }) => {
-          return history && history.length ? modifiedQuestion : question;
-        });
+        const { transformed: questionTransform } = code(
+            { history, modifiedQuestion, question },
+            ({ history, modifiedQuestion, question }) => {
+                return {
+                    question:
+                        history && history.length
+                            ? modifiedQuestion
+                            : (question as string),
+                };
+            }
+        );
+
+        const questionToUse = questionTransform.question;
 
         // Step 2. search vector database for relevant text chunks
         const { results: vectorSearchResults } = step('search', {
@@ -186,37 +198,56 @@ const chain = defineChain({
             page_size: 3,
         });
 
-        const { transformed: resultsMapped } = code(({ vectorSearchResults }), ({ vectorSearchResults }) => vectorSearchResults.map((result) => {
-          text: r.text,
-          url: r.pdf_url
-        }));
+        // const { transformed: resultsMapped } = code(({ vectorSearchResults }), ({ vectorSearchResults }) => vectorSearchResults.map((result) => ({
+        //   text: result.text,
+        //   url: result.pdf_url
+        // }));
+
+        const { transformed: searchTransformed } = code(
+            { vectorSearchResults },
+            ({ vectorSearchResults }) => {
+                return {
+                    results: vectorSearchResults.map(
+                        (result: Record<string, any>) => ({
+                            text: result.text,
+                            url: result.pdf_url,
+                        })
+                    ),
+                };
+            }
+        );
+
+        const resultsMapped = searchTransformed.results;
 
         // Step 3. ask LLM, injecting vector database results as context
         const { answer } = step('prompt_completion', {
-          prompt: `Use the following pieces of context to answer the question at the end in JSON. If you don't know the answer, just say that you don't know, don't try to make up an answer. Provide a reference to the `pdf_url` of the items used to give the answer. The response must be JSON using the format "{ answer, references: [url] }".
+            prompt: `Use the following pieces of context to answer the question at the end in JSON. If you don't know the answer, just say that you don't know, don't try to make up an answer. Provide a reference to the "pdf_url" of the items used to give the answer. The response must be JSON using the format "{ answer, references: [url] }".
 
-${vectorSearchResults}
+${resultsMapped}
 
 Question: ${questionToUse}
 
-Helpful Answer JSON:`
+Helpful Answer JSON:`,
         });
 
         // finally, let's convert the answer to JSON
-        const { transformed: answerJSON } = code(({ answer }), ({ answer }) => {
-          let returnAnswer = { answer: "I couldn't answer the question. Please try again.", references: [] };
+        const { transformed: answerJSON } = code({ answer }, ({ answer }) => {
+            let returnAnswer = {
+                answer: "I couldn't answer the question. Please try again.",
+                references: [],
+            };
 
             try {
-              // try to convert the LLM's answer into JSON
-              returnAnswer = JSON.parse(answer);
+                // try to convert the LLM's answer into JSON
+                returnAnswer = JSON.parse(answer);
             } catch (err) {}
 
             return returnAnswer;
         });
 
         return {
-          answer: answerJSON
-        }
+            answer: answerJSON,
+        };
     },
 });
 ```
