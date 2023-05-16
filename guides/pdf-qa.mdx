@@ -25,6 +25,8 @@ After following the instructions, you'll be set up and ready to go! Make sure to
 
 The first thing we need to do is index our PDFs in some sort of database. Ideally, we actually want this to be a vector database - where we can store embeddings for the PDF text.
 
+https://colab.research.google.com/drive/10hHATBigT1vB5dJTjrS8dAjc0pId0lKp?usp=sharing
+
 ### What is a vector database?
 
 Vector databases allow you to store and query "embeddings" alongisde your metadata. You can think of embeddings as numerical representations of your text, capturing the many semantic dimensions.
@@ -43,7 +45,14 @@ This is because the meaning of the two sentences is similar, even though the wor
 
 ### Loading our PDFs into our built-in vector database
 
-We have a built in vector database, but for this tutorial let's have a look at using a third party vector database such as Redis.
+Good news! Relevance has a built in vector database. We call these "datasets". We want to:
+
+1. Scrape PDFs from URLs
+2. Split up the PDF text into chunks
+3. Create embeddings with OpenAI for each chunk
+4. Upload the chunks into a Relevance AI dataset
+
+We'll be creating more tooling and content around this process, but for now you can check out a simple [Google Colab showing how](https://colab.research.google.com/drive/10hHATBigT1vB5dJTjrS8dAjc0pId0lKp?usp=sharing). To run, you'll have to fill in your authentication details at the top of the notebook.
 
 ## Planning the chain
 
@@ -133,7 +142,7 @@ const chain = defineChain({
         const { question, history } = params;
 
         // wrap our custom Javascript function in our code utility
-        const historyReducer = code(
+        const { transformed: reducedHistory } = code({ history }, ({ history }) =>
             history.reduce(
                 (acc, item) =>
                     `${acc}\n${item.role === 'ai' ? 'ASSISTANT' : 'USER'}: ${
@@ -142,11 +151,6 @@ const chain = defineChain({
                 ''
             )
         );
-
-        // Step 1. let's turn the chat history into a string for prompt
-        const { transformed: reducedHistory } = step('js_code_transformation', {
-            code: `return ${historyReducer}`,
-        });
 
         // use an LLM to modify the question
         const { answer: modifiedQuestion } = step('prompt_completion', {
@@ -170,15 +174,10 @@ Standalone question:`,
             page_size: 3,
         });
 
-        const resultsMapper = code(vectorSearchResults.map((result) => {
+        const { transformed: resultsMapped } = code(({ vectorSearchResults }), ({ vectorSearchResults }) => vectorSearchResults.map((result) => {
           text: r.text,
           url: r.pdf_url
         }));
-
-        // let's map the results to be a little cleaner
-        const { transformed: resultsMapped } = step('js_code_transformation', {
-          code: `return ${resultsMapper}`
-        });
 
         // Step 3. ask LLM, injecting vector database results as context
         const { answer } = step('prompt_completion', {
@@ -186,15 +185,13 @@ Standalone question:`,
 
 ${vectorSearchResults}
 
-
 Question: ${modifiedQuestion}
-
 
 Helpful Answer JSON:`
         });
 
         // finally, let's convert the answer to JSON
-        const answerConverter = code(function () {
+        const { transformed: answerJSON } = code(({ answer }), ({ answer }) => {
           let returnAnswer = { answer: "I couldn't answer the question. Please try again.", references: [] };
 
             try {
@@ -203,10 +200,6 @@ Helpful Answer JSON:`
             } catch (err) {}
 
             return returnAnswer;
-        });
-
-        const { transformed: answerJSON } = step('js_code_transformation', {
-          code: `return ${answerConverter}`
         });
 
         return {
