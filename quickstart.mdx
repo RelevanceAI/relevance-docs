@@ -10,8 +10,8 @@ Getting started with Relevance AI is easy. You can get started in under 5 minute
 To get started, install our Javascript SDK and CLI. You can do this using `npm`:
 
 ```bash
-$ npm install -g --save @relevanceai/chain
-$ relevance login
+npm install -g --save @relevanceai/chain
+relevance login
 ```
 
 The second command will redirect you to your browser, where you can sign up or log in. Follow the instructions to enter your region, project and API key into the CLI to authenticate.
@@ -21,7 +21,7 @@ The second command will redirect you to your browser, where you can sign up or l
 To take advantage of LLMs, you'll need to configure integrations such as Open AI and Cohere. You can do this on the same page you got your API key from, or to re-open that page:
 
 ```bash
-$ relevance keys
+relevance keys
 ```
 
 ## 3. Create a sample chain
@@ -52,7 +52,7 @@ const chain = defineChain({
 To deploy this chain, run:
 
 ```bash
-$ relevance deploy
+relevance deploy
 ```
 
 This will output a preview URL to view the chain online in the Notebook or an ID that can be used to run the chain with the SDK.

@@ -10,16 +10,22 @@ Let's start by creating our chains backend! Create a repository with a `chains` 
 Speaking of CLI, let's install it!
 
 ```bash
-$ npm install -g @relevanceai/chain
+npm install -g @relevanceai/chain
 ```
 
 Next, let's authenticate:
 
 ```bash
-$ relevance login
+relevance login
 ```
 
 After following the instructions, you'll be set up and ready to go! Make sure to also add your Open AI key.
+
+<Tip>
+    Want to skip to the end? We have a Github repo with a ChatGPT style frontend
+    and chains folder ready-made! [Click
+    here.](https://github.com/RelevanceAI/template-ask-relevance-chat)
+</Tip>
 
 ## Loading your PDFs
 
@@ -54,7 +60,7 @@ Good news! Relevance has a built in vector database. We call these "datasets". W
 3. Create embeddings with OpenAI for each chunk
 4. Upload the chunks into a Relevance AI dataset
 
-We'll be creating more tooling and content around this process, but for now you can check out a simple [Google Colab showing how](https://colab.research.google.com/drive/17CGlVUzcE3kz0Oqy4qmi33CJPuTlLaav?usp=sharing). To run, you'll have to fill in your authentication details at the top of the notebook.
+We'll be creating more tooling and content around this process, but for now you can check out a simple [Google Colab showing how](https://colab.research.google.com/drive/1XYaRamHmHop3GV4MGTMaDZjRZuWfMy9O?usp=sharing). To run, you'll have to fill in your authentication details at the top of the notebook.
 
 ## Planning the chain
 
@@ -192,7 +198,7 @@ const chain = defineChain({
         // Step 2. search vector database for relevant text chunks
         const { results: vectorSearchResults } = step('search', {
             query: questionToUse,
-            dataset_id: 'my_pdfs',
+            dataset_id: 'knowledge_base',
             vector_field: 'embedding_vector_',
             model: 'text-embedding-ada-002',
             page_size: 3,
@@ -256,8 +262,8 @@ Let's show off how to run this bad boy client side! I've created a simple Nuxt.j
 To get it working with your own chain, make sure to:
 
 ```bash
-$ relevance login
-$ relevance deploy
+relevance login
+relevance deploy
 ```
 
 The relevant code exists in the `useChain` composable. We run the chain by it's ID, which is the file name of the chain.
