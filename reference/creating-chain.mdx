@@ -117,3 +117,28 @@ On run, these will be accessible at:
 ```
 
 [Read more about the setup function.](/reference/setup)
+
+## Setting publiclyTriggerable
+
+If you want to run your chain in client-side code, you should set it to be publicly triggerable.
+
+```js
+const chain = defineChain({
+    title: 'PDF Q&A',
+    publiclyTriggerable: true,
+});
+```
+
+You can now run your chain in client-side code by referencing the chain ID (file name in `chains` folder).
+
+```ts
+import { Client } from '@relevance-ai/chain';
+
+// we can import the type for the chain to get type safety (optional)
+import type pdfQa from './chains/pdf-qa.ts';
+
+const client = new Client({ regionId, projectId });
+
+// run the chain by its ID
+const output = await client.runChain<typeof pdfQa>('pdf-qa');
+```
