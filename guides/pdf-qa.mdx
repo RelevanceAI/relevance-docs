@@ -1,0 +1,219 @@
+---
+title: 'ChatGPT on your PDFs'
+description: 'In this guide I\'ll show you how to create a ChatGPT-like question & answer widget for your PDFs.'
+---
+
+## Getting started
+
+Let's start by creating our chains backend! Create a repository with a `chains` folder inside it. Our CLI will automatically deploy all chains we create in this folder.
+
+Speaking of CLI, let's install it!
+
+```bash
+$ npm install -g @relevanceai/chains
+```
+
+Next, let's authenticate:
+
+```bash
+$ relevance login
+```
+
+After following the instructions, you'll be set up and ready to go! Make sure to also add your Open AI key.
+
+## Loading your PDFs
+
+The first thing we need to do is index our PDFs in some sort of database. Ideally, we actually want this to be a vector database - where we can store embeddings for the PDF text.
+
+### What is a vector database?
+
+Vector databases allow you to store and query "embeddings" alongisde your metadata. You can think of embeddings as numerical representations of your text, capturing the many semantic dimensions.
+
+By querying embeddings against embeddings (vector similarity search), you're able to find content based on meaning. This is in contrast to traditional search techniques such as keyword matching.
+
+For example, in a vector database, the following two sentences would have similar embeddings:
+
+```
+1. There are many ways to skin a cat.
+
+2. You can achieve your goal through a variety of possible methods.
+```
+
+This is because the meaning of the two sentences is similar, even though the words are different. Traditional keyword matching would not find these two sentences similar.
+
+### Loading our PDFs into our built-in vector database
+
+We have a built in vector database, but for this tutorial let's have a look at using a third party vector database such as Redis.
+
+## Planning the chain
+
+Now let's build the chain. We want it to:
+
+1. Receive a question
+2. Use the question to search our vector database for relevant text chunks from our PDFs
+3. Feed those chunks into the LLM as context, and have the LLM answer our question
+
+Additionally, we want the chain to be able to consider the chat history when answering questions. This will allow us to have a conversation, like with ChatGPT.
+
+To do that, we need to alter our chain to also accept a history param. The trick is, we want to use that history to re-word the user's question.
+
+So for example, if their question is "What's that in fahrenheit?" - standalone, this will make no sense to the LLM. However, if we have just asked the LLM "what is the boiling point of water in celsius?", by passing in the history, we can re-word the new question to "what is the boiling point of water in fahrenheit?". An LLM is able to answer that successfully!
+
+So with that in mind, our chain should look like:
+
+1. Receive a question and chat history
+2. If chat history exists, use an LLM to reword the question based on the history
+3. Use the question to search our vector database for relevant text chunks from our PDFs
+4. Feed those chunks into the LLM as context, and have the LLM answer our question
+
+## Defining our chain input
+
+Let's start by creating a new file in the `chains` folder called `pdf-chat.js`. This will be our chain!
+
+We start by importing the `defineChain` method from the `@relevanceai/chains` package:
+
+```js
+import { defineChain } from '@relevanceai/chains';
+
+const chain = defineChain({
+    title: 'PDF Q&A',
+});
+```
+
+Next, we want to define the input parameters for this chain. As discussed, those should be `question` and `history`. We then give the params types, based on [JSONSchema](https://json-schema.org/understanding-json-schema/reference/type.html).
+
+```js
+const chain = defineChain({
+    title: 'PDF Q&A',
+    params: {
+        question: {
+            type: 'string',
+        },
+        history: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    message: {
+                        type: 'string',
+                    },
+                    role: {
+                        type: 'string', // either 'user' or 'ai'
+                    },
+                },
+            },
+        },
+    },
+});
+```
+
+Our history will be an array of objects, with the message and who sent the message (`role`).
+
+## Defining our chain steps
+
+The meat and potatoes of any chain are the "steps". These are the transformations that will execute on running a chain. They run in our hosted Relevance AI run time.
+
+We have a whole library of pre-built steps, which you can see [here](/reference/tranformation-steps)! We also also support more advanced use cases where you can self-host any code as a chain step! Speak to our team if this is you.
+
+To build this chain, we'll need to use the following steps as specified earlier:
+
+1. Modify question based on chat history
+2. Search vector database for relevant text chunks
+3. Feed chunks into LLM and get answer
+
+We do this in the `setup` function in `defineChain`, which receives `params` and a `step` function as arguments. The `step` function is used to define the steps of the chain.
+
+Note: the `setup` function only allows you to declare each step of a chain. No Javascript you write outside of this paradigm, except for your returned output will be executed. You can use `js_code_transformation` to execute Javascript, as well as the `code` helper function provided in `setup` to convert your function into a variable.
+
+```js
+const chain = defineChain({
+    ...restOfChain,
+    setup({ params, step, code }) {
+        // steps go here
+        const { question, history } = params;
+
+        // wrap our custom Javascript function in our code utility
+        const historyReducer = code(
+            history.reduce(
+                (acc, item) =>
+                    `${acc}\n${item.role === 'ai' ? 'ASSISTANT' : 'USER'}: ${
+                        item.message
+                    }\n`,
+                ''
+            )
+        );
+
+        // Step 1. let's turn the chat history into a string for prompt
+        const { transformed: reducedHistory } = step('js_code_transformation', {
+            code: `return ${historyReducer}`,
+        });
+
+        // use an LLM to modify the question
+        const { answer: modifiedQuestion } = step('prompt_completion', {
+            prompt: `The human is having a conversation with an assistant, where the assistant will query a knowledgebase to get the context needed to provide an answer. You must use the chat history and the follow-up input to rephrase the question such that it can be used on its own. This means the standalone question must be include context from the chat history necessary to provide an answer.
+
+For example, if the chat history contains information about the temperature and the user asks to convert it into another unit - provide that in the standalone question. Or if the user asks a question about a subject from the history, reference that subject with detail.
+
+Chat History: ${reducedHistory}
+
+Follow Up Input: ${question}.
+
+Standalone question:`,
+        });
+
+        // Step 2. search vector database for relevant text chunks
+        const { results: vectorSearchResults } = step('search', {
+            query: modifiedQuestion,
+            dataset_id: 'knowledge_base',
+            vector_field: 'embedding',
+            model: 'text-embedding-ada-002',
+            page_size: 3,
+        });
+
+        const resultsMapper = code(vectorSearchResults.map((result) => {
+          text: r.text,
+          url: r.pdf_url
+        }));
+
+        // let's map the results to be a little cleaner
+        const { transformed: resultsMapped } = step('js_code_transformation', {
+          code: `return ${resultsMapper}`
+        });
+
+        // Step 3. ask LLM, injecting vector database results as context
+        const { answer } = step('prompt_completion', {
+          prompt: `Use the following pieces of context to answer the question at the end in JSON. If you don't know the answer, just say that you don't know, don't try to make up an answer. Provide a reference to the `pdf_url` of the items used to give the answer. The response must be JSON using the format "{ answer, references: [url] }".
+
+${vectorSearchResults}
+
+
+Question: ${modifiedQuestion}
+
+
+Helpful Answer JSON:`
+        });
+
+        // finally, let's convert the answer to JSON
+        const answerConverter = code(function () {
+          let returnAnswer = { answer: "I couldn't answer the question. Please try again.", references: [] };
+
+            try {
+              // try to convert the LLM's answer into JSON
+              returnAnswer = JSON.parse(answer);
+            } catch (err) {}
+
+            return returnAnswer;
+        });
+
+        const { transformed: answerJSON } = step('js_code_transformation', {
+          code: `return ${answerConverter}`
+        });
+
+        return {
+          answer: answerJSON
+        }
+    },
+});
+```
+
+## Integrating into frontend
