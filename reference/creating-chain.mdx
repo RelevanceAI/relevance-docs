@@ -43,9 +43,9 @@ Steps are the sequence of transformations that your chain will perform. You defi
 
 The `step` method is used to define a step. It receives a transformation `id` as the first parameter, and an object of `params` as the second parameter. You can find all transformation options from the link in the sidebar.
 
-Note: the `setup` function only allows you to declare each step of a chain. No Javascript you write outside of this paradigm, except for your returned output will be executed.
+Note: the `setup` function only allows you to declare each step of a chain. No Javascript you write outside of these steps, except for your returned output will be executed.
 
-However, you can use the `code` helper function provided in `setup` to run custom Javascript. You can also use the `runIf` function to conditionally run steps. [Learn more.](/reference/setup)
+However, you can use the `code` function provided in `setup` to run custom Javascript. You can also use the `runIf` function to conditionally run steps. [Learn more.](/reference/setup)
 
 ```js
 const chain = defineChain({
@@ -105,15 +105,6 @@ return {
 
 This is the output of the chain. When you run this chain, only those variables will be returned (nested in an `output` key).
 
-You can add anything from with the setup function into this return object. For example, if you wanted to return the `pdf_url` you could add return:
-
-```js
-return {
-    answer,
-    pdf_url,
-};
-```
-
 On run, these will be accessible at:
 
 ```js
@@ -124,3 +115,5 @@ On run, these will be accessible at:
     }
 }
 ```
+
+[Read more about the setup function.](/reference/setup)
