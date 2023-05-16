@@ -43,7 +43,9 @@ Steps are the sequence of transformations that your chain will perform. You defi
 
 The `step` method is used to define a step. It receives a transformation `id` as the first parameter, and an object of `params` as the second parameter. You can find all transformation options from the link in the sidebar.
 
-Note: the `setup` function only allows you to declare each step of a chain. No Javascript you write outside of this paradigm, except for your returned output will be executed. You can use `js_code_transformation` to execute Javascript, as well as the `code` helper function provided in `setup` to convert your function into a variable.
+Note: the `setup` function only allows you to declare each step of a chain. No Javascript you write outside of this paradigm, except for your returned output will be executed.
+
+However, you can use the `code` helper function provided in `setup` to run custom Javascript. You can also use the `runIf` function to conditionally run steps. [Learn more.]('/reference/setup')
 
 ```js
 const chain = defineChain({

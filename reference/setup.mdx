@@ -1,0 +1,119 @@
+---
+title: 'Setup'
+description: 'The setup function is where you compose your chain'
+---
+
+In the `defineChain` method, you create your chain logic in the `setup` function.
+
+The setup function allows you to declare the chain's steps and their order. It provides context such as `params`, `step`, `runIf` and `code`.
+
+At the end of the `setup` function, you should return your chain's output.
+
+Example:
+
+```js
+const chain = defineChain({
+    params: {
+        foo: {
+            type: 'string',
+        },
+    },
+    setup({ params, step }) {
+        const { chunks } = step('split_text', {
+            text: params.foo,
+            num_tokens: 200,
+        });
+
+        return {
+            foo: params.foo,
+            chunkedFoo: chunks,
+        };
+    },
+});
+```
+
+### params
+
+The `params` property contains the inputs you define in the `params` key of `defineChain`. They are typed based on your JSONSchema, meaning Typescript will get upset if you try to pass a param of type "string" into a transformation that wants an array.
+
+### step
+
+The `step` function is how you define steps in your chain. It accepts as its first parameter the [ID of the chain]('/reference/transformation-steps'). The second parameter is an object containing the inputs to the transformation.
+
+For example:
+
+```js
+const { chunks } = step('split_text', {
+    text: params.foo,
+    num_tokens: 200,
+});
+```
+
+### code
+
+No Javascript you write in your `setup` function will be executed, except for defining primitive variables and returning your output.
+
+For example, you **can not** do this:
+
+```js
+const { chunks } = step('split_text', {
+    text: params.foo,
+    num_tokens: 200,
+});
+
+const capitalisedChunks = chunks.map((chunk) => chunk.toUpperCase()); // this will not work
+
+return {
+    capitalisedChunks,
+};
+```
+
+To accomodate this, we provide a `code` helper function that wraps the `js_code_transformation` step (which outputs a param called `transformed`). This allows you to write arbitrary Javascript code that will be executed in the cloud.
+
+It receives as its first parameter all dependencies that the code block will need. The second parameter is a function that receives the dependencies as its first parameter, and returns the code that will be executed.
+
+This **will** work!
+
+```js
+const { chunks } = step('split_text', {
+    text: params.foo,
+    num_tokens: 200,
+});
+
+const { transformed: capitalisedChunks } = code({ chunks }, ({ chunks }) => {
+    return chunks.map((chunk) => chunk.toUpperCase()); // this works!
+});
+
+return {
+    capitalisedChunks,
+};
+```
+
+### runIf
+
+Another common use case is to run a step conditionally. For this, we provide the `runIf` helper function.
+
+It receives as its first parameter a variable that determines whether to run the nested code or not.
+
+The second parameter it receives is a function, where steps can be defined and then variables returned. These steps will only be run if the first parameter is truthy.
+
+```js
+const { chunks, capitalisedChunks } = runIf(params.shouldChunkText, () => {
+    const { chunks } = step('split_text', {
+        text: params.foo,
+        num_tokens: 200,
+    });
+
+    const { transformed: capitalisedChunks } = code(
+        { chunks },
+        ({ chunks }) => {
+            return chunks.map((chunk) => chunk.toUpperCase()); // this works!
+        }
+    );
+
+    return {
+        chunks,
+        capitalisedChunks,
+    };
+});
+```
