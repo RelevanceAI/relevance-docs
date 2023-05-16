@@ -41,6 +41,10 @@ For example, in a vector database, the following two sentences would have simila
 
 This is because the meaning of the two sentences is similar, even though the words are different. Traditional keyword matching would not find these two sentences similar.
 
+### How do they help with LLMs?
+
+A very common technique is to use vector databases to provide additional context to LLMs. We can search the vector database with the user's input and retrieve relevant information. This can then be added into the prompt.
+
 ### Loading our PDFs into our built-in vector database
 
 Good news! Relevance has a built in vector database. We call these "datasets". We want to:
