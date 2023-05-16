@@ -209,6 +209,34 @@ Helpful Answer JSON:`
 });
 ```
 
-## Integrating into frontend
+## Demo
 
-WIP
+Let's show off how to run this bad boy client side! I've created a simple Nuxt.js application containing the above chain and a chat frontend. You're free to clone this template and use it as a starting point for your own projects.
+
+[Check it out here!](https://github.com/RelevanceAI/template-ask-relevance-chat)
+
+To get it working with your own chain, make sure to:
+
+```bash
+$ relevance login
+$ relevance deploy
+```
+
+The key code exists in the `useChain` composable. We run the chain by it's ID.
+
+```ts
+import { Client } from '@relevance-ai/chain';
+
+// we can import the type for the chain to get type safety (optional)
+import type PdfQa from './chains/pdf-qa.ts';
+
+const client = new Client({
+    regionId: REGION_ID,
+    projectId: PROJECT_ID,
+});
+
+const output = await client.runChain<typeof PdfQa>('pdf-qa', {
+    question: clonedUserInput,
+    history: chatHistory.value,
+});
+```
