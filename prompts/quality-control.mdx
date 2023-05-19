@@ -1,0 +1,17 @@
+---
+title: 'Quality control'
+description: 'We help protect your chain against LLM unreliability'
+---
+
+<Info>
+    This page is a work in progress. Stay tuned for more details about how to
+    use this feature!
+</Info>
+
+One of the biggest roadblocks with using LLMs is when they return invalid content. For example, you may be requiring a specific format of JSON, but the LLM returns a string instead. This can cause your application to crash, or worse, return incorrect data.
+
+To protect against this, we provide a feature called "Quality control". You can specify which quality control schema you want to apply to your prompt, and we will validate the LLM's response against this schema. If the LLM returns invalid data, we will try to fix it with another LLM request. If that fails, we will return an error to your application.
+
+This way, you can rest easy that your application will always receive valid data or error gracefully.
+
+We currently provide two options for `quality_control`, but will be adding more and more. For more information on how this works, or if you need a custom option for quality control - please get in touch!

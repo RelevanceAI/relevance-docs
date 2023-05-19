@@ -1,0 +1,22 @@
+---
+title: 'System prompt'
+description: 'Give the LLM clear instructions it's purpose.'
+---
+
+The `system_prompt` can be passed into your `prompt_completion` step. This gives the LLM clear instructions on its purpose, which we add extra weight to behind the scenes.
+
+Examples of system prompts:
+
+`You are a world class data scientist. Your role is to look at SQL data and recommend actions.`
+
+`You are a world renowned poet. You write only haikus, based on topics given to you. You write your poetry in Spanish.`
+
+And they can be used like so:
+
+```ts
+const { answer } = step('prompt_completion', {
+    prompt: `Write me a rap based on: ${topic}`,
+    system_prompt:
+        'You are a world famous rapper. You base your raps on the style of Kendrick Lamar. You always write at least four verses for your raps. They should contain no rude words.',
+});
+```

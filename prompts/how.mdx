@@ -1,0 +1,21 @@
+---
+title: 'The basics'
+description: 'Prompt completion is a core facet of working with Relevance AI.'
+---
+
+We believe that LLM powered features will change how software is made. With Relevance AI, using prompts is extremely easy.
+
+Simply use our `prompt_completion` transformation step. It receives a `prompt` param, and returns an `answer`.
+
+```ts
+// in your setup function
+const { answer } = step('prompt_completion', {
+    prompt: 'What is the best way to make a pizza?',
+});
+
+return {
+    answer,
+};
+```
+
+There are a few ways you can power up your prompts with Relevance AI: `model`, `system_prompt` and `quality_control` being the most powerful.

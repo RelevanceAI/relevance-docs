@@ -1,0 +1,22 @@
+---
+title: 'Models'
+description: 'We support multiple LLM vendors.'
+---
+
+<Info>
+    This page is a work in progress. We will provide an update to date list of
+    models we support.
+</Info>
+
+We provide support for not just GPT, but other vendors such as Cohere and Anthropic. We are always adding to this list. Implement once, with the knowledge that as new models come out, your product can take advantage!
+
+You can specify the model like so:
+
+```ts
+const { answer } = step('prompt_completion', {
+    prompt: 'What is the meaning of life?',
+    model: 'anthropic-claude-v1',
+});
+```
+
+Our SDK will provide the options by intellisense.

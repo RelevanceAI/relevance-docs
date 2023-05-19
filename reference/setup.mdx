@@ -5,7 +5,7 @@ description: 'The setup function is where you compose your chain'
 
 In the `defineChain` method, you create your chain logic in the `setup` function.
 
-The setup function allows you to declare the chain's steps and their order. It provides context such as `params`, `step`, `runIf` and `code`.
+The setup function allows you to declare the chain's steps and their order. It provides context such as `params`, `step`, `runIf`, `forEach` and `code`.
 
 At the end of the `setup` function, you should return your chain's output.
 
@@ -117,5 +117,43 @@ const { chunks, capitalisedChunks } = runIf(params.shouldChunkText, () => {
         chunks,
         capitalisedChunks,
     };
+});
+```
+
+### forEach
+
+We allow you to loop over arrays to run steps multiple times. You can do this with the `forEach` utility, passed in to setup.
+
+In the first argument, you pass the iterator. Then you pass a callback that receives each iterated item. This callback should return a `step` or `code.
+
+```ts
+defineChain({
+    ...restOfChain,
+    setup({ params, step, foreach }) {
+        const { pdf_url } = params;
+
+        const { text } = step("pdf_to_text", {
+            pdf_url,
+        });
+
+        const { chunks } = step("split_text", {
+            method: "tokens",
+            num_tokens: 200,
+            text,
+        });
+
+        const results = foreach(chunks, ({ item }) =>
+            step("prompt_completion", {
+                prompt: `${item}. Summarise this text.`,
+            })
+        );
+
+        const { text: summary } = step("join_array", {
+            array: results["*"].answer,
+            sep: "\n",
+        });
+        return { summary };
+        },
+    }
 });
 ```

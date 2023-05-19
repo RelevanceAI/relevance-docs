@@ -1,25 +1,22 @@
 ---
 title: Introduction
-description: 'The managed, developer-first SDK for building LLM chains.'
+description: 'The framework for building LLM powered features and agents.'
 ---
 
-With advanced customization and multi-provider support, Relevance AI makes it easy to integrate large language models like GPT or Cohere into your applications.
+With advanced customization, magical deployment and multi-provider support, Relevance AI makes it easy to integrate large language models into your product.
 
 <CardGroup cols={2}>
     <Card title="Get started" icon="circle-play" href="/quickstart">
         Build AI features in under 5 mins
     </Card>
-    <Card title="Features" icon="function" href="/features">
-        Dive deep into what makes us special
+    <Card
+        title="Library of transformations"
+        icon="book"
+        href="/reference/tranformation-steps"
+    >
+        The building blocks for your chains
     </Card>
 </CardGroup>
-<Card
-    title="Library of transformations"
-    icon="book"
-    href="/reference/tranformation-steps"
->
-    Explore all the transformations available to be used in your chain steps.
-</Card>
 
 ## See a demo
 
@@ -37,9 +34,13 @@ Check out how easy it is to builda and deploy a PDF Q&A application, in less tha
 
 ## Key Features
 
--   ### Fully-managed service
+-   ### Type safe and flexible SDK
 
-    Relevance AI is a fully-managed service that allows you to build and deploy LLM chains in minutes. You can use the platform to build and deploy chains without worrying about infrastructure, scaling, or maintenance.
+    Our SDK makes it easy to build real applications with LLM powered features. It's provides type hinting for your chains and let's you design every step. We validate types both on compile time _and_ run time in our API.
+
+-   ### Magic deployment to API
+
+    Relevance AI is a fully-managed service that allows you to deploy LLM features in minutes. Don't worry about infrastructure, scaling, or maintenance. Simply `relevance deploy` and your chains are live.
 
 -   ### Multi-provider support
 
@@ -61,3 +62,15 @@ Advanced use-cases leveraging LLMs can be built by using chains. These are some 
 -   Natural language to nQL (SQL, JSON, regex etc)
 -   Documentation extraction (PDF to CSV)
 -   Recursive chains (Agents)
+
+Here's an example of a business analyst agent built with Relevance AI's SDK.
+
+<iframe
+    src="https://www.loom.com/embed/78316ead5b3c4317bf9f0d37abd112bb"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+    width="100%"
+    height="500px"
+></iframe>
