@@ -3,23 +3,7 @@ title: 'ChatGPT on your PDFs'
 description: 'In this guide we will create a ChatGPT-like question & answer widget for your PDFs.'
 ---
 
-## Getting started
-
-Let's start by creating our chains backend! Create a repository with a `chains` folder inside it. Our CLI will automatically deploy all chains we create in this folder.
-
-Speaking of CLI, let's install it!
-
-```bash
-npm install -g @relevanceai/chain
-```
-
-Next, let's authenticate:
-
-```bash
-relevance login
-```
-
-After following the instructions, you'll be set up and ready to go! Make sure to also add your Open AI key.
+<Snippet file="getting-started.mdx" />
 
 <Tip>
     Want to skip to the end? We have a Github repo with a ChatGPT style frontend
@@ -31,25 +15,7 @@ After following the instructions, you'll be set up and ready to go! Make sure to
 
 The first thing we need to do is index our PDFs in some sort of database. Ideally, we actually want this to be a vector database - where we can store embeddings for the PDF text.
 
-### What is a vector database?
-
-Vector databases allow you to store and query "embeddings" alongisde your metadata. You can think of embeddings as numerical representations of your text, capturing the many semantic dimensions.
-
-By querying embeddings against embeddings (vector similarity search), you're able to find content based on meaning. This is in contrast to traditional search techniques such as keyword matching.
-
-For example, in a vector database, the following two sentences would have similar embeddings:
-
-```
-1. There are many ways to skin a cat.
-
-2. You can achieve your goal through a variety of possible methods.
-```
-
-This is because the meaning of the two sentences is similar, even though the words are different. Traditional keyword matching would not find these two sentences similar.
-
-### How do they help with LLMs?
-
-A very common technique is to use vector databases to provide additional context to LLMs. We can search the vector database with the user's input and retrieve relevant information. This can then be added into the prompt.
+<Snippet file="vector-db-explanation.mdx" />
 
 ### Loading PDFs into our built-in vector database
 
@@ -133,9 +99,7 @@ Our history will be an array of objects, with the message and who sent the messa
 
 ## Defining our chain steps
 
-The meat and potatoes of any chain are the "steps". These are the transformations that will execute on running a chain. They run in our hosted Relevance AI run time.
-
-We have a whole library of pre-built steps, which you can see [here](/reference/tranformation-steps)! We also also support more advanced use cases where you can self-host any code as a chain step! Speak to our team if this is you.
+<Snippet file="chain-steps-introduction">
 
 To build this chain, we'll need to use the following steps as specified earlier:
 
@@ -145,9 +109,7 @@ To build this chain, we'll need to use the following steps as specified earlier:
 
 We do this in the `setup` function in `defineChain`, which receives `params` and a `step` function as arguments. The `step` function is used to define the steps of the chain.
 
-Note: the `setup` function only allows you to declare each step of a chain. No Javascript you write outside of this paradigm, except for your returned output will be executed.
-
-However, you can use the `code` helper function provided in `setup` to run custom Javascript. You can also use the `runIf` function to conditionally run steps. [Learn more.](/reference/setup)
+<Snippet file="setup-code-warning.mdx" />
 
 ```ts
 const chain = defineChain({

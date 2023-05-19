@@ -1,0 +1,19 @@
+### What is a vector database?
+
+Vector databases allow you to store and query "embeddings" alongisde your metadata. You can think of embeddings as numerical representations of your text, capturing the many semantic dimensions.
+
+By querying embeddings against embeddings (vector similarity search), you're able to find content based on meaning. This is in contrast to traditional search techniques such as keyword matching.
+
+For example, in a vector database, the following two sentences would have similar embeddings:
+
+```
+1. There are many ways to skin a cat.
+
+2. You can achieve your goal through a variety of possible methods.
+```
+
+This is because the meaning of the two sentences is similar, even though the words are different. Traditional keyword matching would not find these two sentences similar.
+
+### How do they help with LLMs?
+
+A very common technique is to use vector databases to provide additional context to LLMs. We can search the vector database with the user's input and retrieve relevant information. This can then be added into the prompt.
