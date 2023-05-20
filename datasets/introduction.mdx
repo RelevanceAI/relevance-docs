@@ -1,0 +1,35 @@
+---
+title: 'Datasets'
+description: 'How do Datasets in Relevance AI work'
+---
+
+Relevance AI has built-in datasets that are NoSQL-based documents and support storing vector embeddings and vector search.
+
+## What is a Dataset?
+
+A dataset is a collection of documents that are stored in a NoSQL database. Each document has a unique ID and a set of fields. Each field can be a string, number, date, or a vector. A vector is a list of numbers that represent a point in a multi-dimensional space.
+
+You can use this dataset like you would a Table in SQL or Collection in Mongo. It has CRUD with support for endpoints like:
+- Get documents
+- Get documents where
+- Insert documents
+- Update documents
+- Update documents where
+- Delete documents
+- Delete documents where
+- Search
+
+Every document in the dataset has an `_id` string field that acts as a unique identifier.
+
+## Support for vector embeddings
+
+Each dataset can store one or more vector fields that have a `_vector_` suffix with up to 2048 dimensions. Relevance AI's API can automatically generate the embeddings upon insert and during search by specifying the model.
+
+```typescript
+const dataset = client.dataset('1000-movies');
+
+const movies = [{ title: 'Lord of the Rings: The Fellowship of the Ring', grenre: 'action', budget: 100 }, ...]
+await dataset.insertDocuments(movies, [{ model_name: 'text-embedding-ada-002', field: 'title' }]);
+
+const {results} = await dataset.search(QueryBuilder().vector('title_vector_', { query: 'LOTR', model: 'text-embeddings-ada-002' }));
+```
