@@ -9,6 +9,25 @@ To protect against this, we provide a feature called "Quality control". You can 
 
 This way, you can rest assured your application will always receive valid data or error gracefully.
 
+```ts
+const { answer } = step('prompt_completion', {
+    prompt: `Analyse this PDF text: ${pdf_text}, and summarise it into a JSON with the following properties: 'title', 'description', 'page'.`,
+    validators: [
+        {
+            type: 'jsonschema',
+            value: {
+                type: 'object',
+                properties: {
+                    title: { type: 'string' },
+                    description: { type: 'string' },
+                    page: { type: 'number' },
+                },
+            },
+        },
+    ],
+});
+```
+
 ## The "validators" property
 
 Specify quality control by using the `validators` property on the `prompt_completion` step. This receives a list of validators that we want to apply to our LLM's response, in the format of:
