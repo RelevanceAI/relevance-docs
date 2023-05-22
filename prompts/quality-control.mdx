@@ -49,6 +49,11 @@ Currently there are three options, but we will always be adding more:
 
 This validates whether the LLM has returned **only** JSON. It will try to fix it if not. This doesn't require a `value` property.
 
+<Warning>
+    The transformation will still return a string still, but you will be safe to
+    `JSON.parse()` it.
+</Warning>
+
 ### `jsonschema`
 
 If you would like to validate a specific format of JSON, you can take advantage of [JSONSchema](https://cswr.github.io/JsonSchema/spec/basic_types/)! Provide the schema as the `value` property.
@@ -62,6 +67,11 @@ If you would like to validate a specific format of JSON, you can take advantage 
     }
 }
 ```
+
+<Warning>
+    The transformation will still return a string still, but you will be safe to
+    `JSON.parse()` it.
+</Warning>
 
 ### `regex`
 
