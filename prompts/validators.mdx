@@ -1,11 +1,11 @@
 ---
-title: 'Quality control'
+title: 'Validators'
 description: 'We help protect your chain against LLM unreliability & hallucinations'
 ---
 
 One of the biggest roadblocks with using LLMs is when they return invalid content. For example, you may ask for a specific format of JSON, but the LLM returns an explanation that breaks it in your `JSON.parse()`.
 
-To protect against this, we provide a feature called "Quality control". You can specify a schema you want to apply to your prompt, and we will validate the LLM's response against this schema. If the LLM returns invalid data, we will ask the LLM to fix it. If that fails, we will return an error to your application.
+To protect against this, we provide a quality control feature called `validators`. You can specify a schema you want to apply to your prompt, and we will validate the LLM's response against this schema. If the LLM returns invalid data, we will ask the LLM to fix it. If that fails, we will return an error to your application.
 
 This way, you can rest assured your application will always receive valid data or error gracefully.
 
