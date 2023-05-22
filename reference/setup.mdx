@@ -132,28 +132,27 @@ defineChain({
     setup({ params, step, foreach }) {
         const { pdf_url } = params;
 
-        const { text } = step("pdf_to_text", {
+        const { text } = step('pdf_to_text', {
             pdf_url,
         });
 
-        const { chunks } = step("split_text", {
-            method: "tokens",
+        const { chunks } = step('split_text', {
+            method: 'tokens',
             num_tokens: 200,
             text,
         });
 
         const results = foreach(chunks, ({ item }) =>
-            step("prompt_completion", {
+            step('prompt_completion', {
                 prompt: `${item}. Summarise this text.`,
             })
         );
 
-        const { text: summary } = step("join_array", {
-            array: results["*"].answer,
-            sep: "\n",
+        const { text: summary } = step('join_array', {
+            array: results['*'].answer,
+            sep: '\n',
         });
         return { summary };
-        },
-    }
+    },
 });
 ```
