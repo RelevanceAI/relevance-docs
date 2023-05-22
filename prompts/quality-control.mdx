@@ -35,7 +35,13 @@ This validates whether the LLM has returned **only** JSON. It will try to fix it
 If you would like to validate a specific format of JSON, you can take advantage of [JSONSchema](https://cswr.github.io/JsonSchema/spec/basic_types/)! Provide the schema as the `value` property.
 
 ```ts
-{ type: 'object', properties: { title: { type: 'string' }; description: { type: 'string' } } }
+{
+    type: 'object',
+    properties: {
+        title: { type: 'string' },
+        description: { type: 'string' }
+    }
+}
 ```
 
 ### `regex`
@@ -43,5 +49,8 @@ If you would like to validate a specific format of JSON, you can take advantage 
 This validates whether the LLM's response matches a regex. It will try to fix it if not. This requires a `value` property, in this format:
 
 ```ts
-{ pattern: "[a-z0-9]", flags: 'i' } // equaters to /[a-z0-9]/i
+{
+    pattern: "[a-z0-9]",
+    flags: 'i'
+} // equaters to /[a-z0-9]/i
 ```
