@@ -1,0 +1,52 @@
+---
+title: 'The params property'
+sidebarTitle: 'params'
+description: 'Define the inputs that your chain should receive'
+---
+
+Core to any chain is the inputs it receives from the user, or consuming application. For example, if you are building a chain that converts PDF to text and then summarises it, you will need to receive the PDF file as an input. Or if you're building a chain that answers a user's question, you will want to receive the user's question as an input.
+
+Define these in your Relevance AI chain via the `params` option.
+
+You define each step using [JSONSchema](https://cswr.github.io/JsonSchema/spec/basic_types/) typing. This gets validated both on **build time** via our SDK and Typescript, _as well as_ on **run time** via our API. This helps you create rock solid production ready features.
+
+```ts
+const chain = defineChain({
+    params: {
+        pdf_url: {
+            type: 'string',
+        },
+        user_question: {
+            type: 'string',
+        },
+        num_answers_to_generate: {
+            type: 'number',
+        },
+    },
+});
+```
+
+You are then able to retrieve these params in your `setup` function:
+
+```ts
+const chain = defineChain({
+    params: {
+        pdf_url: {
+            type: 'string',
+        },
+        user_question: {
+            type: 'string',
+        },
+        num_answers_to_generate: {
+            type: 'number',
+        },
+    },
+    setup({ params, step }) {
+        const { pdf_url, user_questions, num_answers_to_generate } = params;
+
+        const { text } = step('pdf_to_text', { pdf_url });
+    },
+});
+```
+
+All of your params will be typed, and warnings will be thrown if you try to use them in a transformation step inappopriately.
