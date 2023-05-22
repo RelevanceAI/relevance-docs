@@ -1,17 +1,47 @@
 ---
 title: 'Quality control'
-description: 'We help protect your chain against LLM unreliability'
+description: 'We help protect your chain against LLM unreliability & hallucinations'
 ---
 
-<Info>
-    This page is a work in progress. Stay tuned for more details about how to
-    use this feature!
-</Info>
+One of the biggest roadblocks with using LLMs is when they return invalid content. For example, you may ask for a specific format of JSON, but the LLM returns an explanation that breaks it in your `JSON.parse()`.
 
-One of the biggest roadblocks with using LLMs is when they return invalid content. For example, you may be requiring a specific format of JSON, but the LLM returns a string instead. This can cause your application to crash, or worse, return incorrect data.
+To protect against this, we provide a feature called "Quality control". You can specify a schema you want to apply to your prompt, and we will validate the LLM's response against this schema. If the LLM returns invalid data, we will ask the LLM to fix it. If that fails, we will return an error to your application.
 
-To protect against this, we provide a feature called "Quality control". You can specify which quality control schema you want to apply to your prompt, and we will validate the LLM's response against this schema. If the LLM returns invalid data, we will try to fix it with another LLM request. If that fails, we will return an error to your application.
+This way, you can rest assured your application will always receive valid data or error gracefully.
 
-This way, you can rest easy that your application will always receive valid data or error gracefully.
+## The "validators" property
 
-We currently provide two options for `quality_control`, but will be adding more and more. For more information on how this works, or if you need a custom option for quality control - please get in touch!
+Specify quality control by using the `validators` property on the `prompt_completion` step. This receives a list of validators that we want to apply to our LLM's response, in the format of:
+
+```ts
+{
+    type: 'is_json' | 'regex' | 'jsonschema';
+    value?: // based on what type of validator;
+}
+```
+
+Currently there are three options, but we will always be adding more:
+
+-   `is_json`
+-   `regex`
+-   `jsonschema`
+
+### `is_json`
+
+This validates whether the LLM has returned **only** JSON. It will try to fix it if not. This doesn't require a `value` property.
+
+### `jsonschema`
+
+If you would like to validate a specific format of JSON, you can take advantage of [JSONSchema](https://cswr.github.io/JsonSchema/spec/basic_types/)! Provide the schema as the `value` property.
+
+```ts
+{ type: 'object', properties: { title: { type: 'string' }; description: { type: 'string' } } }
+```
+
+### `regex`
+
+This validates whether the LLM's response matches a regex. It will try to fix it if not. This requires a `value` property, in this format:
+
+```ts
+{ pattern: "[a-z0-9]", flags: 'i' } // equaters to /[a-z0-9]/i
+```

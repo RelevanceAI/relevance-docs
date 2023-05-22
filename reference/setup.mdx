@@ -32,11 +32,11 @@ const chain = defineChain({
 });
 ```
 
-### params
+### `params`
 
 The `params` property contains the inputs you define in the `params` key of `defineChain`. They are typed based on your JSONSchema, meaning Typescript will get upset if you try to pass a param of type "string" into a transformation that wants an array.
 
-### step
+### `step`
 
 The `step` function is how you define steps in your chain. It accepts as its first parameter the ID of the chain. The second parameter is an object containing the inputs to the transformation.
 
@@ -51,7 +51,7 @@ const { chunks } = step('split_text', {
 });
 ```
 
-### code
+### `code`
 
 No Javascript you write in your `setup` function will be executed, except for defining primitive variables and returning your output.
 
@@ -91,7 +91,7 @@ return {
 };
 ```
 
-### runIf
+### `runIf`
 
 Another common use case is to run a step conditionally. For this, we provide the `runIf` helper function.
 
@@ -120,7 +120,7 @@ const { chunks, capitalisedChunks } = runIf(params.shouldChunkText, () => {
 });
 ```
 
-### forEach
+### `forEach`
 
 We allow you to loop over arrays to run steps multiple times. You can do this with the `forEach` utility, passed in to setup.
 
