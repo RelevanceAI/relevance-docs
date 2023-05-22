@@ -1,9 +1,9 @@
 ---
-title: 'Dataset Reference'
-description: 'Reference of SDK methods for using dataset'
+title: 'Reference'
+description: 'Use our SDK for querying your datasets'
 ---
 
-Install the SDK via:
+Install the dataset SDK:
 
 ```sh
 npm install --save @relevanceai/dataset
@@ -14,12 +14,12 @@ npm install --save @relevanceai/dataset
 Import the dataset SDK and create the client.
 
 ```typescript
-import { Client, QueryBuilder } from "@relevanceai/dataset";
+import { Client, QueryBuilder } from '@relevanceai/dataset';
 
 const client = new Client({
-  project: '',
-  api_key: '',
-  endpoint: ''
+    project: '',
+    api_key: '',
+    endpoint: '',
 });
 ```
 
@@ -51,7 +51,6 @@ The `recreateIfExists` method is used to recreate a dataset if it exists.
 ```typescript
 recreateIfExists(): Promise<Boolean>
 ```
-
 
 ### insertDocuments
 
@@ -126,7 +125,10 @@ vector(field: string, options: { query?: string, model?: enum, vector?: array[do
 Example:
 
 ```typescript
-QueryBuilder().vector('title_vector_', { query: 'LOTR', model: 'text-embeddings-ada-002' })
+QueryBuilder().vector('title_vector_', {
+    query: 'LOTR',
+    model: 'text-embeddings-ada-002',
+});
 ```
 
 ### Sort
@@ -140,7 +142,7 @@ sort(field: string, direction: enum): QueryBuilder
 Example:
 
 ```typescript
-QueryBuilder().sort('budget', 'asc')
+QueryBuilder().sort('budget', 'asc');
 ```
 
 ### Page
@@ -154,7 +156,7 @@ page(page: number): QueryBuilder
 Example:
 
 ```typescript
-QueryBuilder().page(2)
+QueryBuilder().page(2);
 ```
 
 ### Page size
@@ -168,7 +170,7 @@ pageSize(pageSize: number): QueryBuilder
 Example:
 
 ```typescript
-QueryBuilder().pageSize(10)
+QueryBuilder().pageSize(10);
 ```
 
 ### Include fields
@@ -182,8 +184,5 @@ includeFields(fields: array[string]): QueryBuilder
 Example:
 
 ```typescript
-QueryBuilder().includeFields(['title', 'budget'])
+QueryBuilder().includeFields(['title', 'budget']);
 ```
-
-
-
