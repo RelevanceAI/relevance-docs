@@ -28,8 +28,10 @@ relevance keys
 
 Create a `/chains` folder in your project and create a file called `hello-world.ts` with the following contents:
 
-```js
+```ts
 // chains/hello-world.ts
+import { defineChain } from '@relevanceai/chain';
+
 const chain = defineChain({
     title: 'Hello world!',
     params: {
