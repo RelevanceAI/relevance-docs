@@ -14,8 +14,8 @@ const { answer } = step('prompt_completion', {
     prompt: `Analyse this PDF text: ${pdf_text}, and summarise it into a JSON with the following properties: 'title', 'description', 'page'.`,
     validators: [
         {
-            type: 'jsonschema',
-            value: {
+            _oneof_type_: 'jsonschema',
+            schema: {
                 type: 'object',
                 properties: {
                     title: { type: 'string' },
@@ -34,8 +34,9 @@ Specify quality control by using the `validators` property on the `prompt_comple
 
 ```ts
 {
-    type: 'is_json' | 'regex' | 'jsonschema';
-    value?: // based on what type of validator;
+    _oneof_type_: 'is_json' | 'regex' | 'jsonschema';
+    schema?: // for jsonschema
+    pattern?: // for regex
 }
 ```
 
@@ -47,7 +48,7 @@ Currently there are three options, but we will always be adding more:
 
 ### `is_json`
 
-This validates whether the LLM has returned **only** JSON. It will try to fix it if not. This doesn't require a `value` property.
+This validates whether the LLM has returned **only** JSON. It will try to fix it if not. This doesn't require any additional properties.
 
 <Warning>
     The `prompt_completion` transformation will still return a string, but you
@@ -56,7 +57,7 @@ This validates whether the LLM has returned **only** JSON. It will try to fix it
 
 ### `jsonschema`
 
-If you would like to validate a specific format of JSON, you can take advantage of [JSONSchema](https://cswr.github.io/JsonSchema/spec/basic_types/)! Provide the schema as the `value` property.
+If you would like to validate a specific format of JSON, you can take advantage of [JSONSchema](https://cswr.github.io/JsonSchema/spec/basic_types/)! Provide the schema as the `schema` property.
 
 ```ts
 {
@@ -75,11 +76,11 @@ If you would like to validate a specific format of JSON, you can take advantage 
 
 ### `regex`
 
-This validates whether the LLM's response matches a regex. It will try to fix it if not. This requires a `value` property, in this format:
+This validates whether the LLM's response matches a regex. It will try to fix it if not. This requires a `pattern` property, in this format:
 
 ```ts
 {
     pattern: "[a-z0-9]",
     flags: 'i'
-} // equaters to /[a-z0-9]/i
+} // equates to /[a-z0-9]/i
 ```
