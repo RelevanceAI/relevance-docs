@@ -1,0 +1,91 @@
+---
+title: 'Quick start'
+description: 'Ship LLM-powered features into production'
+---
+
+Getting started with Relevance AI is easy. You can get started in under 5 minutes using our SDK.
+
+## 1. Install Relevance and authenticate
+
+To get started, install our Javascript SDK and CLI. You can do this using `npm`:
+
+```bash
+npm install -g --save @relevanceai/chain
+relevance login
+```
+
+The second command will redirect you to your browser, where you can sign up or log in. Follow the instructions to enter your region, project and API key into the CLI to authenticate.
+
+## 2. Set up integrations
+
+To take advantage of LLMs, you'll need to configure integrations such as Open AI and Cohere. You can do this on the same page you got your API key from, or to re-open that page:
+
+```bash
+relevance keys
+```
+
+## 3. Create a sample chain
+
+Create a `/chains` folder in your project and create a file called `hello-world.ts` with the following contents:
+
+```ts
+// chains/hello-world.ts
+import { defineChain } from '@relevanceai/chain';
+
+export default defineChain({
+    title: 'Hello world!',
+    params: {
+        name: {
+            type: 'string',
+        },
+    },
+    setup({ params, step }) {
+        const { name } = params;
+
+        const { answer } = step('prompt_completion', {
+            prompt: `Say hello to me! My name is: ${name}.`,
+        });
+
+        return { answer };
+    },
+});
+```
+
+To deploy this chain, run:
+
+```bash
+relevance deploy
+```
+
+This will output a preview URL to view the chain online in the Notebook or an ID that can be used to run the chain with the SDK.
+
+## 4. Use the SDK to run the chain
+
+In your application, you can now call the chain using the SDK!
+
+If you are running server side, simply:
+
+```js
+import helloWorldChain from './chains/hello-world';
+
+// in your logic
+const { output } = await helloWorldChain.run({ name: 'Dan' });
+```
+
+Or, on the client side, you can run the chain without exposing internals - as long as you set `publiclyTriggerable: true` in `defineChain`.
+
+```ts
+import { Client } from '@relevance-ai/chain';
+
+// we can import the type for the chain to get type safety
+import type helloWorldChain from './chains/hello-world';
+
+const client = new Client({ regionId, projectId });
+
+const output = await client.runChain<typeof helloWorldChain>('hello-world', {
+    name: 'Dan',
+});
+
+// "Hey Dan, how are you?"
+console.log(output.answer);
+```
