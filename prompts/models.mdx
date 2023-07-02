@@ -12,29 +12,38 @@ We provide support for not just GPT, but other vendors such as Cohere and Anthro
 
 You can specify the model like so:
 
-```ts
-const { answer } = step('prompt_completion', {
-    prompt: 'What is the meaning of life?',
-    model: 'anthropic-claude-v1',
-});
-```
+<Tabs>
+  <Tab title="No-code">
+    In the step, you will see a "model" dropdown. You can select the model you want to use from there.
 
-Our SDK will provide the options by intellisense.
+    ![LLM step](/images/llm-step.png)
+  </Tab>
+  <Tab title="SDK">
+    ```ts
+    const { answer } = step('prompt_completion', {
+        prompt: 'What is the meaning of life?',
+        model: 'anthropic-claude-v1',
+    });
+    ```
+
+    Our SDK will provide the options by intellisense.
+  </Tab>
+</Tabs>
 
 ## Models
 
-| Provider  | Model name     | Model ID                      |
-| --------- | -------------- | ----------------------------- |
-| OpenAI    | GPT 4          | `openai-gpt4`                 |
-| OpenAI    | GPT 4 NEW      | `openai-gpt4-0613`            |
-| OpenAI    | GPT 3.5        | `openai-gpt35`                |
-| OpenAI    | GPT 3.5 NEW    | `openai-gpt35-0613`           |
-| OpenAI    | GPT 3.5 16k    | `openai-gpt35-16k `           |
-| Anthropic | Claude         | `anthropic-claude-v1`         |
-| Anthropic | Claude (100k)  | `anthropic-claude-v1-100k`    |
-| Anthropic | Claude Instant | `anthropic-claude-instant-v1` |
-| Anthropic | Claude Instant (100k) | `anthropic-claude-instant-v1-100k` |
-| Palm      | Text Bison     | `palm-text-bison`             |
-| Palm      | Chat Bison     | `palm-chat-bison`             |
-| Cohere    | Command        | `cohere-command`              |
-| Cohere    | Command Light  | `cohere-command-light`        |
+| Model name     | Model ID                      | Provider  |
+| -------------- | ----------------------------- | --------- |
+| GPT 4          | `openai-gpt4`                 | OpenAI    |
+| GPT 4 NEW      | `openai-gpt4-0613`            | OpenAI    |
+| GPT 3.5        | `openai-gpt35`                | OpenAI    |
+| GPT 3.5 NEW    | `openai-gpt35-0613`           | OpenAI    |
+| GPT 3.5 16k    | `openai-gpt35-16k `           | OpenAI    |
+| Claude         | `anthropic-claude-v1`         | Anthropic |
+| Claude (100k)  | `anthropic-claude-v1-100k`    | Anthropic |
+| Claude Instant | `anthropic-claude-instant-v1` | Anthropic |
+| Claude Instant (100k) | `anthropic-claude-instant-v1-100k` | Anthropic |
+| Text Bison     | `palm-text-bison`             | Palm      |
+| Chat Bison     | `palm-chat-bison`             | Palm      |
+| Command        | `cohere-command`              | Cohere    |
+| Command Light  | `cohere-command-light`        | Cohere    |

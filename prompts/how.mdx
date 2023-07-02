@@ -3,19 +3,33 @@ title: 'The basics'
 description: 'Prompt completion is a core facet of working with Relevance AI.'
 ---
 
-We believe that LLM powered features will change how software is made. With Relevance AI, using prompts is extremely easy.
+We believe that LLM-powered apps will change how software is used and the way we work. With Relevance AI, using prompts is extremely easy.
 
-Simply use our `prompt_completion` transformation step. It receives a `prompt` param, and returns an `answer`.
+Each time you use an LLM you will need to set up your prompt, this is what will determine what kind of output you receive and the model. For a full list of supported models, check out [here](/promps/models).
 
-```ts
-// in your setup function
-const { answer } = step('prompt_completion', {
-    prompt: 'What is the best way to make a pizza?',
-});
+<Tabs>
+  <Tab title="No-code">
+    To use an LLM you need to add a "Generate text using LLMs" step to your chain. You can then choose the LLM you want to use, and set up your prompt.
 
-return {
-    answer,
-};
-```
+    ![LLM step](/images/llm-step.png)
 
-There are a few ways you can power up your prompts with Relevance AI: `model`, `system_prompt` and `quality_control` being the most powerful.
+    The prompt input accepts both regular text and variable templating using `{{}}` syntax. When you start entering a variable, you will see a list of available variables to choose from. Use this functionality to enhance your prompts.
+  </Tab>
+  <Tab title="SDK">
+    Simply use our `prompt_completion` transformation step. It receives a `prompt` param, and returns an `answer`.
+
+    ```ts
+    // in your setup function
+    const { answer } = step('prompt_completion', {
+        prompt: 'What is the best way to make a pizza?',
+    });
+
+    return {
+        answer,
+    };
+    ```
+
+    There are a few ways you can power up your prompts with Relevance AI: `model`, `system_prompt` and `quality_control` being the most powerful.
+  </Tab>
+</Tabs>
+
