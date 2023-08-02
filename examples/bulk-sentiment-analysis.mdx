@@ -1,0 +1,57 @@
+---
+title: 'Run sentiment analysis in bulk with LLMs'
+sidebarTitle: 'Bulk sentiment analysis'
+description: 'Use LLMs in bulk to extract sentiment from messages'
+---
+
+**Sentiment analysis with LLMs**
+
+Large language models can be utilized in various ways, including tasks that might have been previously addressed with more "traditional ML". One such task is the sentiment analysis of data, determining whether a text is positive, neutral, or negative. 
+
+In this example, we'll show you how to use a spreadsheet full of messages and apply LLMs to extract the sentiment from the messages.
+
+**Prepare data** 
+
+Begin by preparing your CSV with the data you wish to classify. Ensure to include a column header for us to reference the correct fields. You can use the one shown in the video here.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pqdXfr352-Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**Create your prompt chain**
+
+We need to create a chain that will convert an input "message" into an output "sentiment". To accomplish this, navigate to the Relevance dashboard and create a new chain. 
+
+In this chain, you need to include a "text input" and name it "message" for example. Then add an "LLM" step and complete the prompt. Here's a straightforward example for that.:
+
+```
+MESSAGE:
+
+"""
+{{message}}
+"""
+
+Based on the above message, respond with the sentiment in it as one of "neutral", "positive" or "negative".
+```
+
+**Customise the system prompt**
+
+You can also customise the "system prompt" under "advanced options" with something like:
+
+`You are an expert sentiment classifier. Only ever respond with "neutral", "positive" or "negative". Do not say anything else.`
+
+<Tip>Customizing the prompts and including examples specific to your data context can enhance performance.</Tip>
+
+**Configure output**
+
+At the end of the process, click on "configure output" and turn off "infer from last step". This allows you to set a custom output. Each output item becomes a column in your spreadsheet, so it's crucial to define this to prevent unwanted information during a bulk run. In this instance, we want to add an output named "sentiment" and input the variable from our llm step like `{{llm.answer}}`.
+
+Name your chain and click Save in the top-right corner. You can test its performance by inputting a single message and clicking 'run all'.
+
+**Run in bulk**
+
+Switching to the 'use' tab lets us access 'run in bulk', where you can choose to upload files and submit your CSV. After the file is uploaded, you need to pick the fields you want to use as inputs for the chain. Here, you can select the message column in your CSV as the input and then click continue.
+
+A job will now be initiated to process the spreadsheet through the chain and produce the output. You can track the progress on this page and watch the data come in live.
+
+**Export the results**
+
+Once finished, you'll be able to export the CSV as a link. The CSV will now feature a new column `sentiment`, with the output from our chain.
