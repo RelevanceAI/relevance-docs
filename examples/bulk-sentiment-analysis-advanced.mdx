@@ -1,0 +1,74 @@
+---
+title: 'Run sentiment analysis and reasons in bulk with LLMs'
+sidebarTitle: 'Bulk sentiment and reason'
+description: 'Use LLMs in bulk to extract sentiment from messages and their reason'
+---
+
+In our last tutorial, we demonstrated a straightforward example of conducting sentiment analysis using LLM chains.
+
+In this tutorial, we're going to enhance this example by configuring multiple outputs to our chain and adding them back to our original spreadsheet as two new columns - we're extracting the reason behind the given sentiment as well. You'll learn how you can have a single LLM prompt output multiple pieces of information.
+
+**Extracting Sentiment and Reason Simultaneously**
+
+In this example we're going to layer on multiple pieces of functionality within the same chain to give us the desired output. 
+
+So, we'll go back to our extract sentiment analysis chain that we created in the [previous example](/examples/bulk-sentiment-analysis).
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kzcPW2Qudhs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**Modifying the LLM Prompt**
+
+In our initial chain, we've already received the input for the message we want the AI chain to examine. 
+
+To obtain the explanation for the sentiment score, we could either introduce a separate LLM prompt or simply modify our original prompt and then transform the output into a JSON. We'll proceed with the latter.
+
+To accomplish this, we adjust our prompt:
+
+```
+MESSAGE:
+
+"""
+{{message}}
+"""
+
+Based on the above message, respond with a JSON object of the format "{ sentiment, reason }". The sentiment of the message as one of "neutral", "positive" or 
+"negative" and the reason as to why that sentiment is assigned. Only respond with valid JSON.
+```
+
+And set the system prompt to:
+
+`You are an expert sentiment classifier. Only ever respond with JSON in the format "{ sentiment, reason }". Do not say anything else.`
+
+**Configuring Your LLM Output**
+
+After we've adjusted our prompt, we can proceed to copy one of the messages from our dataset that we want the chain to examine, and then hit run.
+
+We can now observe that this has provided us with a JSON-like output that includes a reason and the sentiment.
+
+![JSON-like output.svg](/images/bulk-run-output.svg)
+
+**Adding Columns for Sentiment and Reason in our original dataset**
+
+We aim to add a 'sentiment' column and a 'reason' column to our original dataset. To do this, we need to adjust our output.
+
+We must properly convert our string to JSON. This can be accomplished by adding the 'Convert string to JSON' step to our chain, specifying the text field we wish to convert. 
+
+In this instance, it's the output of our LLM prompt called `{{llm.answer}}` that now includes the instruction to perform sentiment analysis and provide a rationale for it.
+
+![convert string to JSON.svg](/images/bulk-run-json.svg)
+
+**Configure Chain Output**
+
+Now instead of just the LLM answer, we actually want to reference the JSON output for ‘sentiment’, and we'll add another one for ‘reason’.
+
+![Configure output.svg](/images/bulk-run-configure-output.svg)
+
+**Run in bulk**
+
+Now if we hit run all again, we should see we have a sentiment label and reason. 
+
+If we bulk run the chain on our spreadsheet, the chain is going to add a column ‘reason’ and a column ‘sentiment’ to it.
+
+**Export the results**
+
+Once finished, you’ll be able to export the CSV as a link. The CSV will now feature a new column `sentiment`, and `reason`with the output from our chain.
