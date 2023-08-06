@@ -1,0 +1,29 @@
+---
+title: 'Conditions and loops'
+sidebarTitle: 'Conditions and loops'
+description: 'Low-code builder of LLM chains and automations'
+---
+
+Each step in Relevance AI can have conditions to determine whether it should run or items to loop through.
+
+## Conditions
+
+With conditions, you can define whether the step should run. Through the three-dot menu on a step you can select to "Enable conditions". This will then show an input field.
+
+The conditions syntax that is accepted is Javascript style and it has be inside the template handlebars `{{ condition }}`. This means you can use `&&` and `||` for "and" and "or", respectively. Similarly, if you'd like to check if a value has been provided for an optional input "key" you can do `{{ 'key' in params }}`.
+
+For example, if you'd like to run if the input variable `age` is 30 then you would specify `{{ age === 30 }}`.
+
+<Frame caption="Screenshot of the Conditions input in a step">
+  <img src="/images/conditions.png" />
+</Frame>
+
+## Loops
+
+Sometimes you'd like to run a step across a set of items. To do this, under the three-dot menu on a step you can select "Enable foreach". An input field is then show that expects a list of items. You can provide the list of items via the input field and these will be fixed to run each time or you can enter variable mode and specify a variable.
+
+If loop is enabled, a special variable is then avaiable to be used within the step that can reference the individual item or index that it's being ran on with `{{ foreach.item }}` and `{{ foreach.index }}`.
+
+<Frame caption="Screenshot of the Loop input in a step">
+  <img src="/images/loop-dynamic.png" />
+</Frame>
