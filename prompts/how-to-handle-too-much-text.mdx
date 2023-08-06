@@ -1,0 +1,33 @@
+---
+title: 'How to handle too much text in a prompt'
+sidebarTitle: 'Too much text'
+description: 'Use LLMs with content that is too large for the context size'
+---
+
+LLMs have a limit on the context size they can take as input. Relevance has a great feature to prevent you from running into errors with this, by default.
+
+## Automatic data processing
+
+Under "Advanced options", you can see the variables and define how you want them to behave if they're too long to fit into the prompt. There are three settings for each one:
+
+<Frame caption="Screenshot of the modal on how to handle too much text">
+  <img src="/images/handle-too-much-text.png" />
+</Frame>
+
+<Tabs>
+  <Tab title="Most relevant data">
+    This will run a semantic search through the data and extract the most relevant parts of it.
+
+    By default, it will use the part of the prompt after the knowledge variable as a search query. You can set a custom value for the search query, including a variable.
+
+    By default, it will also include all columns from the row of data. You can specify which columns you'd like to only use.
+  </Tab>
+  <Tab title="Summarize">
+    This will loop through the knowledge and summarise it. 
+
+    You can customise the prompt and model used to summarise it.
+  </Tab>
+  <Tab title="Full">
+    This will try to use the entire knowledgebase, even if it will error. It is not recommended.
+  </Tab>
+</Tabs>
