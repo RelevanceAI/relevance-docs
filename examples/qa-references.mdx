@@ -1,0 +1,54 @@
+---
+title: 'Add references to Q&A apps'
+sidebarTitle: 'Q&A references'
+description: 'Include references to your knowledgebase in a Questioning and Answering app'
+---
+
+With Relevance, it's very easy to create a Q&A app on your knowledgebase using our [Knowledge feature](/notebook/knowledge). However, a common question we're asked is how to include references in the response. In this example, we'll take a look at a couple of approaches you can take.
+
+## Adding fields to use as a reference
+
+To be able to create references, you need to make sure the context you provide to the LLM includes a field that you can use as a reference. For example, this typically is a URL, a filename, an article title or a product name.
+
+If you're uploading a CSV to Knowledge, this will mean you'll need to ensure you have a column that will act as your identifier that will be used in the reference. If you're upload a PDF or an audio file, then a column with the filename will be automatically created.
+
+In this example, we'll use a CSV that has columns "title", "content" and "url" where each row is a different article from our support documentation.
+
+## Configuring your Knowledge to include the correct fields
+
+Under "Advanced options" in the LLM step, you will find a section on "How to handle too much text". If you click "edit" for the `knowledge` variable you will see a modal that has an "Advanced options" section. Under here, you will find an input to configure which columns from the dataset to include. Specify the columns that include the knowledge and the ones that you'll use as reference here.
+
+<Tip>Read more about the "How to handle too much text" feature [here](/prompts/how-to-handle-too-much-text).</Tip>
+
+In this example, we'll include "title", "content" and "url". Now, when we use the `knowledge` variable in our LLM, it'll be replaced with only these fields from the most relevant content.
+
+<Frame caption="Screenshot of the column selection modal">
+  <img src="/images/column-selection.png" />
+</Frame>
+
+<Tip>You can see what is being inserted in the variable by checking the "Prompt" output variable in the LLM step.</Tip>
+
+## Updating your prompt to include the reference
+
+Now that we have configured our knowledge to include the fields we want, we can update our prompt to include the reference. In this example, we'll use the `url` field as our reference. There are many different ways you can choose to format this, here we cover two: JSON and Footnotes.
+
+<Tabs>
+  <Tab title="JSON">
+    ```
+    Specify the response as JSON in format { answer, references: [{title, url}]" }. Use proper punctuation. Never provide URLs that are not included in my messages. You must respond in JSON.
+    ```
+
+    We have asked for a JSON response that includes an `answer` and a `references` field. The `references` field is an array of objects that have a `title` and a `url` field. The `title` field is the title of the article and the `url` field is the URL of the article.
+  </Tab>
+  <Tab title="Footnotes">
+    ```
+    Specify the response as a sentence with footnotes and include the list of references at the end that are formatted as title and url. Format it like "answer[reference number]". Use proper punctuation. Never provide URLs that are not included in my messages.
+    ```
+
+    We have asked for a response that is a sentence with footnotes. The footnotes will be the references to the articles.
+</Tabs>
+
+Adjust the prompts to suit your data, output and accuracy needs best. LLMs are more than capable of providing references and can even be extend to include things like quotes.
+
+<Tip>Few-shot examples of the desired input and output combinations at the start of your prompt is a great way to ensure it mimics you better.</Tip>
+
