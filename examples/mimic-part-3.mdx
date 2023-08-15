@@ -1,0 +1,43 @@
+---
+title: 'Teach LLMs to mimic your style - Part 3'
+sidebarTitle: 'Configure output and share'
+description: 'Deploy your application and share it with your team'
+---
+
+This guide will assist you in sharing and deploying your AI app by configuring the LLM output for a clearer, more understandable result.
+
+In our previous tutorial, we walked you through creating an AI app using few-shot prompting, teaching the Large Language Model (LLM) to mimic your style. Now, it's time to share your AI app with your team and colleagues. 
+
+To achieve this, we'll ensure it's user-friendly and its output is configured correctly. 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lRU6nk9jUMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+**Add a description**
+
+Return to the builder and add a description. This simple step can make your App UI look more professional and easier to understand.
+
+When you first create your app, the output contains a lot of different elements that might not make sense to most users. It’s a bit messy and confusing. This is where the configuration of your AI chain output comes into play.
+
+**Simplify the LLM output**
+
+Scroll to the bottom of the builder to find the chain output with the configure button. By default, it will infer the last step of the chain and use its output, which includes answers, prompts, user key use, and other information.
+
+![Simplify LLM output.png](/images/simplify-llm-output.png)
+
+**Name your output**
+
+To simplify the output, disable the unnecessary components. Instead, have a single output, and call it let’s say ‘answer’. 
+
+With this step we can make the app much more user-friendly.
+
+**Choose a variable as the output**
+
+Then select a variable to be the answer from the LLM step. In our case this variable is called `{{steps.prompt_completion.output.answer}}`. This reduces all the fields into a single one called 'answer', linked to the output variable from the LLM step. 
+
+This simplification is the essence of Large Language Model output configuration.
+
+![Configure LLM output.png](/images/configure-llm-output.png)
+
+**Save and share your AI app** 
+
+Once you've configured the output, hit save. It's time to share your improved app with your team and colleagues.
