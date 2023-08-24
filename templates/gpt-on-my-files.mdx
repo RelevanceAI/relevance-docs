@@ -1,0 +1,38 @@
+---
+title: 'GPT on my files'
+sidebarTitle: 'GPT on my files'
+description: 'Ask GPT to find the answer to your question in a file'
+---
+One of the frequently templates at Relevance is GPT on my files.
+
+![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files-form.png)
+
+## How to use the chain
+Locate the chain in the template page and click on `Use template`. You can use the 
+chain or [clone](/_snippets/clone-a-template) (i.e. create a copy of the chain in 
+your account) it first and then use it.
+
+### Chain inputs and output
+The chain requires two inputs: 1) a file to look at and 2) a question to answer.
+Provide the data and hit `Run once`, you will see the LLM response in a few seconds.
+![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files-answer.png)
+
+## Chain components
+If you [clone](/_snippets/clone-a-template) a template, or 
+[make a chain from scratch](/notebook/introduction), 
+you will have access to the Build tab. 
+Build is where one put together different components to build a chain suitable for
+their needs.
+
+### User inputs
+![User inputs](/images/templates/gpt-on-my-files/GPT-on-my-files-answer-build-input.png)
+
+1. **File to text**: An easy-to-use, one step component, which takes care of all 
+you need when uploading a file and extracting text from it.
+
+2. **Text input**: A text component suitable for short text pieces, such as entering a question.
+
+### Chain steps
+![User inputs](/images/templates/gpt-on-my-files/GPT-on-my-files-answer-build-llm.png)
+1. **LLM**: A large language model component is all set up to provide you access to GPT. You
+can see how the input components are fed to the prompt.
