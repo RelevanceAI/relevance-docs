@@ -3,21 +3,20 @@ title: 'GPT on my files'
 sidebarTitle: 'GPT on my files'
 description: 'Ask GPT to find the answer to your question in a file'
 ---
-One of the frequently used templates at Relevance is GPT on my files.
+One of the frequently used templates at Relevance is GPT on my files. 
+This tool enables you to find the answer to a given question in a file.
 
 ![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files-form.png)
 
 ## How to use the tool
-![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files.png)
-
-Locate the tool in the template page and click on `Use template`. You can use the 
-tool as is or clone it.
-<Snippet file="clone-a-template.mdx" />
+[Locate the tool in the template page](/templates/introduction) and click on `Use template`. 
+You can use the tool as is or 
+[clone](/templates/introduction#clone-a-template-create-a-copy-of-a-tool-in-your-account) it.
 
 ### Tool inputs and output
 The tool requires two inputs: 
-1. a file to look at (Upload files)
-2. a question to answer (Question)
+1. A file to look at (Upload files)
+2. A question to answer (Question): 
 Provide the input data and hit `Run once`, you will see the LLM response in a few seconds
 similar to what is shown in the image below.
 ![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files-answer.png)
@@ -27,27 +26,29 @@ similar to what is shown in the image below.
 are likely to raise the "I could not find the answer" response unless there is a note in 
 the provided information stating the answer.</Tip>
 
+The output is the answer to the question based on the provided information.
+
 ## Tool components
-If you [clone](/_snippets/clone-a-template) a template, or 
-[make a tool from scratch](/notebook/introduction), 
-you will have access to the Build tab. 
-Build is where one put together different components to build a tool suitable for
+If you [clone](/templates/introduction#clone-a-template-create-a-copy-of-a-tool-in-your-account) 
+a template, or [make a tool from scratch](/custom-tools/introduction), you will have access to the 
+Build tab. Build is where one put together different components to build a tool suitable for
 their needs.
 
 ### User inputs
-![User inputs](/images/templates/gpt-on-my-files/GPT-on-my-files-answer-build-input.png)
+![User inputs](/images/templates/gpt-on-my-files/GPT-on-my-files-build-input.png)
 
-1. **[File to text](/notebook/user-inputs/file-to-text)**: An easy-to-use, one step component, 
+1. **[File to text](/custom-tools/user-inputs/file-to-text)**: An easy-to-use, one step component, 
 which takes care of all you need when uploading a file and extracting text from it.
 
-2. **[Text input](/notebook/user-inputs/text-to-input)**: An input text component suitable for short 
+2. **[Text input](/custom-tools/user-inputs/text-input)**: An input text component suitable for short 
 text pieces, such as entering a question.
 
 ### Tool steps
-![LLM](/images/templates/gpt-on-my-files/GPT-on-my-files-answer-build-llm.png)
-1. **LLM**: [A large language model component](/custom-tools/tool-steps/llm) is all set up to provide you access to GPT. 
-In the prompt section, you will provide the required information
-as well as an instruction to what has to be done.
+![LLM](/images/templates/gpt-on-my-files/GPT-on-my-files-build-llm.png)
+**LLM**: [A large language model component](/custom-tools/tool-steps/llm) is all set up to provide 
+you access to GPT (and many other LLMs). 
+In the prompt section, you will provide the required information as well as instructions to what 
+is expected to be done.
 <Tip>
 **[A Good Prompt](/llms/prompt)**
 1. Provide the context at the top

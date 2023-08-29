@@ -1,0 +1,84 @@
+---
+title: 'Extract data from PDF'
+sidebarTitle: 'Extract data from PDF'
+description: 'Extract specific information from a PDF'
+---
+One of the frequently used templates at Relevance is Extract data from PDF.
+This tool enables you to extract specific information from a PDF file.
+
+![Extract data from PDF](/images/templates/extract-data-from-pdf/extract-data-from-pdf-form.png)
+
+## How to use the tool
+[Locate the tool in the template page](/templates/introduction) and click on `Use template`. 
+You can use the tool as is or 
+[clone](/templates/introduction#clone-a-template-create-a-copy-of-a-tool-in-your-account) it.
+
+### Tool inputs and output
+The tool requires two inputs: 
+1. A PDF file (PDF)
+2. A list of topics to extract (Data to extract):
+Provide the input data and hit `Run once`, you will see the LLM response in a few seconds
+similar to what is shown in the image below. Simply click on the Export button on the bottom
+right to save the output.
+![Extract data from PDF](/images/templates/extract-data-from-pdf/extract-data-from-pdf-answer.png)
+
+<Tip>LLMs are not designed or trained for statistical analysis. Hence, it is recommended
+to ask for topics or subjects that are clearly mentioned in the text.</Tip>
+
+The output is a CSV with columns representing the extracted data.
+
+## Tool components
+If you [clone](/templates/introduction#clone-a-template-create-a-copy-of-a-tool-in-your-account) 
+a template, or [make a tool from scratch](/custom-tools/introduction), you will have access to the 
+Build tab. Build is where one put together different components to build a tool suitable for
+their needs.
+
+### User inputs
+![User inputs](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-input.png)
+
+1. **[File to URL](/custom-tools/user-inputs/file-to-url)**: An easy-to-use, one step component, 
+which takes care of all you need when uploading a file for further analysis.
+
+2. **[Text list input](/custom-tools/user-inputs/text-list)**: An input text component suitable 
+for entering a list of items, such as entering a list of topics or examples.
+
+### Tool steps
+There are 5 components under the Tool steps in this tool. These components take care of three
+tasks: converting PDF to text, the LLM step, and formatting for CSV export.
+
+#### Converting PDF to text
+![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-convert-pdf-to-text.png)
+[A text to PDF component](/custom-tools/tool-steps/convert-pdf-to-text) is available which 
+receives a file URL and extract the text from it. This component supports OCR.
+
+#### Large Language Model (LLM)
+![LLM](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-llm.png)
+[A large language model component](/custom-tools/tool-steps/llm) is all set up to provide 
+you access to GPT (and many other LLMs). 
+In the prompt section, you will provide the required information as well as instructions to what 
+is expected to be done.
+
+**[A Good Prompt](/llms/prompt)**
+1. Be short and precise with your instruction/request from the LLM
+2. Include formatting instruction when necessary
+
+#### Formatting for CSV export
+1. Markdown to CSV
+![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-code1.png)
+[A Javascript code component](/custom-tools/tool-steps/code-javascript) is available to Run
+Javascript codes when necessary. In this tool, the code-snippet turns the Markdown format
+to a CSV.
+
+2. A temporary downloadable file
+![export](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-export1.png)
+When the output is generated, it needs to be turned into a downloadable file. At Relevance
+this can be easily done via a ready-to-use component.
+[Export to a temporary file](/custom-tools/tool-steps/export-data-to-a-temporary-downloadable-file)
+takes the data (the extracted content from the source PDF in this tool), exports it to a
+downloadable CSV and returns a URL to access the file.
+
+3. Export to CSV
+![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-code2.png)
+[A Javascript code component](/custom-tools/tool-steps/code-javascript) is available to Run
+Javascript codes when necessary. In this tool, the second code-snippet simply returns the
+downloadable URL to the output file.
