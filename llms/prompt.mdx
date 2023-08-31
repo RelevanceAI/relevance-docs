@@ -19,17 +19,26 @@ on Relevance are provided for each tip.
 ## Tips on writing a good prompt
 1. If the LLM needs information for doing a task, provide the information at
 the top. Use keywords such as "Context" to specify what the information represents
-[(see a sample)](/templates/gpt-on-my-files/#tool-steps).
+[(see a sample)](/templates/gpt-on-my-files#large-language-model-llm).
 
 2. Keep the instruction short and precise. Specify what exactly needs to be done
 in the bare minimum required number of words 
-[(see a sample)](/templates/gpt-on-my-files/#tool-steps/#large-language-model-llm).
+[(see a sample)](/templates/gpt-on-my-files#large-language-model-llm).
 
 3. Note what you expect instead of noting what you don't want
 For instance, instead of `avoid uninformative output` use `answer should be informative & useful`
-[(see a sample)](/templates/gpt-on-my-website/#tool-steps/#large-language-model-llm). 
+[(see a sample)](/templates/gpt-on-my-website#large-language-model-llm). 
 
 4. Include formatting instruction when necessary.
-In many cases, we might need the output to follow a cetrain format or structure. 
+In many cases, we might need the output to follow a certain format or structure. 
 This can be clearly stated in the prompt 
-[(see a sample)](/templates/extract-data-from-pdf/#tool-steps/#large-language-model-llm).
+[(see a sample)](/templates/extract-data-from-pdf#large-language-model-llm).
+
+5. Explicitly note constraints and goals
+In more complicated prompts there are various information that can be categorize in sections.
+Two of the common categories are Constraints and Goals. Note them explicitly and it is recommended
+to mention goals after the constraints.
+[(see a sample)](/templates/category-tag-suggester#large-language-model-llm).
+
+6. For large prompts, note the goals and important instructions closes to the end of the prompt.
+This is mostly valid for large prompts. It is best to 
