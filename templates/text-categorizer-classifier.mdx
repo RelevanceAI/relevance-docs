@@ -4,14 +4,14 @@ sidebarTitle: 'Text categorizer/classifier'
 description: 'Categorize/Classify the text into pre-specified categories/classes'
 ---
 One of the frequently used templates at Relevance is Text categorizer/classifier.
-This tool enables you to find the answer to a given question on a website.
+This Tool enables you to find the answer to a given question on a website.
 
 ![Text categorizer/classifier](/images/templates/text-categorizer-classifier/text-categorizer-classifier-form.png)
 
 <Snippet file="how-to-use-a-tool.mdx" />
 
 ### Tool inputs and output
-The tool requires two inputs: 
+The Tool requires two inputs: 
 1. URL to a website to look at (Website)
 2. A question to answer (Question): 
 Provide the input data and hit `Run once`, you will see the LLM response in a few seconds
@@ -30,20 +30,20 @@ The output is the answer to the question based on the provided information.
 ### User inputs
 ![User inputs](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-input.png)
 
-Both inputs in this tool are of Text input. The first one is to provide a URL and the second
+Both inputs in this Tool are of Text input. The first one is to provide a URL and the second
 one to enter a question.
 **[Text input](/custom-tools/user-inputs/text-input)**: An input text component suitable for short 
 text pieces, such as entering a question.
 
 ### Tool steps
-There are 5 components under the Tool steps in this tool. These components take care of three
+There are 5 components under the Tool steps in this analysis flow. These components take care of three
 tasks: extracting the website content, preparing the data for search, and the LLM step.
 
 #### Extract the website Content
 1. URL control
 ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-code.png)
 [A Javascript code component](/custom-tools/tool-steps/code-javascript) is available to Run
-Javascript codes when necessary. In this tool, the code-snippet checks the URL format.
+Javascript codes when necessary. In this Tool, the code-snippet checks the URL format.
 
 2. Scrape the website
 ![website](/images/templates/text-categorizer-classifier/text-categorizer-classifier-website-content.png)
@@ -59,7 +59,7 @@ in use-cases such as question answering, it is unlikely that the whole content
 is the answer to a given question.
 Therefore, it is highly recommended to break the content into smaller chunks (i.e. 
 text splitting).
-[Split text](/custom-tools/tool-steps/split-text) in this tool breaks the website content
+[Split text](/custom-tools/tool-steps/split-text) in this Tool breaks the website content
 to chunks of 500 tokens.
 
 2. Vectorize and search array
@@ -68,7 +68,7 @@ Vectors are representation of data in vector space (i.e. a numeric representatio
 in which items that are semantically close to each other are located close to 
 one another as well).
 [Vectorize and search](/custom-tools/tool-steps/vectorize-and-search) takes the source
-data and a query (the website content and question respectively in this tool), vectorizes
+data and a query (the website content and question respectively in this Tool), vectorizes
 the data and query and returns the most relevance piece in the data source as the answer 
 to the query.
 

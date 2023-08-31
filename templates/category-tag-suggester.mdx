@@ -4,7 +4,7 @@ sidebarTitle: 'Category/Tag suggester'
 description: 'Suggest Categories/Tags/Labels/Code-frame by looking at a subset of the data'
 ---
 One of the frequently used templates at Relevance is Category/Tag suggester.
-This tool analyses a subset of a CSV file and provides you with suggestions
+This Tool analyses a subset of a CSV file and provides you with suggestions
 on existing categories (i.e. themes/topics) in the data. 
 These categories can be later used for 
 [text categorization](/templates/text-categorizer-classifier).
@@ -14,7 +14,7 @@ These categories can be later used for
 <Snippet file="how-to-use-a-tool.mdx" />
 
 ### Tool inputs and output
-The tool requires three main and four optional inputs: 
+The Tool requires three main and four optional inputs: 
 1. A CSV file (CSV)
 2. The name of the target column (Target column: Column containing the text for categorization):
 3. Row numbers of the target subset (Rows to look at)
@@ -24,7 +24,7 @@ copy for the next step.
 ![Category/Tag suggester](/images/templates/category-tag-suggester/category-tag-suggester-answer.png)
 
 <Tip>
-* Use the Category/Tag suggester tool on different subsets of your file (i.e. multiple runs 
+* Use the Category/Tag suggester Tool on different subsets of your file (i.e. multiple runs 
 for different ranges of rows). Copy the suggestions to a text file and finalize the category 
 suggestion list by applying your domain knowledge considering the 
 [next step](/templates/text-categorizer-classifier) requirements.
@@ -60,19 +60,19 @@ The output is a list of suggested categories.
 1. <Snippet file="components/inputs/file-to-url.mdx" />
 
 2. <Snippet file="components/inputs/text-input.mdx" />
-    This component is used twice in this tool. Target column and the objective are both of Text
+    This component is used twice in this Tool. Target column and the objective are both of Text
     inputs.
 
 3. <Snippet file="components/inputs/table.mdx" />
-    This component is used twice in this tool. Row range (from - to) and well as Examples
+    This component is used twice in this Tool. Row range (from - to) and well as Examples
     (Text - Categories/topics) are both samples of structured input data.
 
 4. <Snippet file="components/inputs/numeric-input.mdx" />
-    This component is used twice in this tool. Both maximum word count per category and maximum
+    This component is used twice in this Tool. Both maximum word count per category and maximum
     number of suggested categories are of numeric inputs.
 
 ### Tool steps
-There are 4 components under the Tool steps in this tool. These components take care of three
+There are 4 components under the Tool steps in this analysis flow. These components take care of three
 tasks: loading the specified subset of the file, properly formatting the provided samples,
 and the LLM step.
 

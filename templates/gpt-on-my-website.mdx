@@ -4,14 +4,14 @@ sidebarTitle: 'GPT on my website'
 description: 'Ask GPT to find the answer to your question in a web-page'
 ---
 One of the frequently used templates at Relevance is GPT on my website.
-This tool enables you to find the answer to a given question on a website.
+This Tool enables you to find the answer to a given question on a website.
 
 ![GPT on my Website](/images/templates/gpt-on-my-website/GPT-on-my-website-form.png)
 
 <Snippet file="how-to-use-a-tool.mdx" />
 
 ### Tool inputs and output
-The tool requires two inputs: 
+The Tool requires two inputs: 
 1. URL to a website to look at (Website)
 2. A question to answer (Question): 
 Provide the input data and hit `Run once`, you will see the LLM response in a few seconds
@@ -30,19 +30,19 @@ The output is the answer to the question based on the provided information.
 ### User inputs
 ![User inputs](/images/templates/gpt-on-my-website/GPT-on-my-website-build-input.png)
 
-Both inputs in this tool are of Text input. The first one is to provide a URL and the second
+Both inputs in this Tool are of Text input. The first one is to provide a URL and the second
 one to enter a question.
 <Snippet file="components/inputs/text-input.mdx" />
 
 ### Tool steps
-There are 5 components under the Tool steps in this tool. These components take care of three
+There are 5 components under the Tool steps in this analysis flow. These components take care of three
 tasks: extracting the website content, preparing the data for search, and the LLM step.
 
 #### Extract the website Content
 1. URL control
 ![code](/images/templates/gpt-on-my-website/GPT-on-my-website-code.png)
 <Snippet file="components/tools/code-javascript.mdx" />
-    In this tool, the code-snippet checks the URL format.
+    In this Tool, the code-snippet checks the URL format.
 
 2. Scrape the website
 ![website](/images/templates/gpt-on-my-website/GPT-on-my-website-website-content.png)
