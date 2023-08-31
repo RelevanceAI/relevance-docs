@@ -1,12 +1,12 @@
 ---
-title: 'GPT on my website'
-sidebarTitle: 'GPT on my website'
-description: 'Ask GPT to find the answer to your question in a web-page'
+title: 'Text categorizer/classifier'
+sidebarTitle: 'Text categorizer/classifier'
+description: 'Categorize/Classify the text into pre-specified categories/classes'
 ---
-One of the frequently used templates at Relevance is GPT on my website.
+One of the frequently used templates at Relevance is Text categorizer/classifier.
 This tool enables you to find the answer to a given question on a website.
 
-![GPT on my Website](/images/templates/gpt-on-my-website/GPT-on-my-website-form.png)
+![Text categorizer/classifier](/images/templates/text-categorizer-classifier/text-categorizer-classifier-form.png)
 
 <Snippet file="how-to-use-a-tool.mdx" />
 
@@ -16,7 +16,7 @@ The tool requires two inputs:
 2. A question to answer (Question): 
 Provide the input data and hit `Run once`, you will see the LLM response in a few seconds
 similar to what is shown in the image below.
-![GPT on my Website](/images/templates/gpt-on-my-website/GPT-on-my-website-answer.png)
+![Text categorizer/classifier](/images/templates/text-categorizer-classifier/text-categorizer-classifier-answer.png)
 
 <Tip>LLMs are not designed or trained for statistical analysis. Questions like 
 "How many projects were conducted?" or "What was the overall success on the x projects?" 
@@ -25,14 +25,15 @@ the provided information stating the answer.</Tip>
 
 The output is the answer to the question based on the provided information.
 
-<Snippet file="components/tools/tool-components.mdx" />
+<Snippet file="tool-components.mdx" />
 
 ### User inputs
-![User inputs](/images/templates/gpt-on-my-website/GPT-on-my-website-build-input.png)
+![User inputs](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-input.png)
 
 Both inputs in this tool are of Text input. The first one is to provide a URL and the second
 one to enter a question.
-<Snippet file="components/inputs/text-input.mdx" />
+**[Text input](/custom-tools/user-inputs/text-input)**: An input text component suitable for short 
+text pieces, such as entering a question.
 
 ### Tool steps
 There are 5 components under the Tool steps in this tool. These components take care of three
@@ -40,27 +41,29 @@ tasks: extracting the website content, preparing the data for search, and the LL
 
 #### Extract the website Content
 1. URL control
-![code](/images/templates/gpt-on-my-website/GPT-on-my-website-code.png)
-<Snippet file="components/tools/code-javascript.mdx" />
-    In this tool, the code-snippet checks the URL format.
+![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-code.png)
+[A Javascript code component](/custom-tools/tool-steps/code-javascript) is available to Run
+Javascript codes when necessary. In this tool, the code-snippet checks the URL format.
 
 2. Scrape the website
-![website](/images/templates/gpt-on-my-website/GPT-on-my-website-website-content.png)
-<Snippet file="components/tools/extract-website-content.mdx" />
+![website](/images/templates/text-categorizer-classifier/text-categorizer-classifier-website-content.png)
+[Extract Website Content](/custom-tools/tool-steps/extract-website-content) is a ready-to-use
+component for scraping website contents. All that is needed a a URL to a website which
+allows scraping.
 
 #### Data preparation and vector search
 1. Split text
-![split-text](/images/templates/gpt-on-my-website/GPT-on-my-website-splittext.png)
+![website](/images/templates/text-categorizer-classifier/text-categorizer-classifier-splittext.png)
 When scraping a website, the whole content is loaded as a big chunk of text. However, 
 in use-cases such as question answering, it is unlikely that the whole content
 is the answer to a given question.
 Therefore, it is highly recommended to break the content into smaller chunks (i.e. 
 text splitting).
 [Split text](/custom-tools/tool-steps/split-text) in this tool breaks the website content
-to chunks of 500 tokens by default but you have access to changing the settings.
+to chunks of 500 tokens.
 
 2. Vectorize and search array
-![vectorize](/images/templates/gpt-on-my-website/GPT-on-my-website-vectorize.png)
+![website](/images/templates/text-categorizer-classifier/text-categorizer-classifier-vectorize.png)
 Vectors are representation of data in vector space (i.e. a numeric representation 
 in which items that are semantically close to each other are located close to 
 one another as well).
@@ -70,8 +73,11 @@ the data and query and returns the most relevance piece in the data source as th
 to the query.
 
 #### Large Language Model (LLM)
-![LLM](/images/templates/gpt-on-my-website/GPT-on-my-website-build-llm.png)
-<Snippet file="components/tools/llm.mdx" />
+![LLM](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-llm.png)
+[A large language model component](/custom-tools/tool-steps/llm) is all set up to provide 
+you access to GPT (and many other LLMs). 
+In the prompt section, you will provide the required information as well as instructions to what 
+is expected to be done.
 
 **[A Good Prompt](/llms/prompt)**
 1. Provide the context at the top
