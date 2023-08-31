@@ -4,56 +4,95 @@ sidebarTitle: 'Create a Tool'
 description: 'Getting started with creating my first Tool'
 ---
 
-## Creating a chain
+## Creating a Tool
 
-You can create a new chain by clicking "**New Chain +**" in the dashboard.
+The easiest way to get started with creating a tool is to start at the 
+[Tools page](/get-started/key-concepts/tools).
+Once on the page, click on `+ Create tool` on the top right of the page.
 
-![Empty state of new chain](/images/new-chain.png)
+![Empty state of new Tools](/images/custom-tools/tool2.png)
 
-You will be presented with an empty state where you can view some video tutorials, define some inputs or add your first step.
+You will be presented with an empty state where you can:
+1. add knowledge
+2. add inputs
+3. add desired steps
+4. access some video tutorials
 
-## Defining your first input
+### Add knowledge
+Knowledge is defined as any information that a language model might not already have.
+For instance, a chain of conversation in emails is a knowledge for a Tool scripting
+email responses.
 
-Every chain has inputs, they are used to pass data into the chain for execution. This will be presented as form for the app or as JSON params for the API.
+Adding knowledge to a Tool is done by clicking on the `+ Add data` button. Relevance takes
+care of all the required steps, from storing the data to vectorizing all or specified
+fields; details are fully explained at [knowledge](/custom-tools/knowledge/knowledge).
 
-Click on "**+ Text input**" to add a new input that accepts text. An input will now be created. Every input has a title, description, input and variable name.
+### Add inputs
+Every Tool has inputs. 
+Inputs are used to pass data or instruction on how to analyze the data into the Tool. 
 
-![Text input](/images/text-input.png)
+Adding inputs to a Tool is done by clicking on the `+ Add input` button. Relevance has
+provided you with variety of input types and takes care of all the required steps; 
+details are fully explained at [User inputs](/custom-tools/user-inputs/user-inputs). 
 
-<Tip>Description has support for limited markdown syntax such as bold, italics and URLs. Use this to make your inputs sparkle.</Tip>
+### Add desired steps
+Steps are analysis components. The most frequently used step at Relevance is 
+[LLM](/custom-tools/tool-steps/llm), which allows you to
+communicate with a Large Language Model (LLM) of choice. However, it is not
+limited to that. 
+Relevance has provided you with variety of steps from rather simple ones such as an
+API call to more complicated ones such as vectorizing and knowledge search.
 
-Variables are used to reference the input in the chain. For example, if you want to use the input in a step, you can use the variable name as `{{params.text_variable}}`. It's recommended that you use relevance names so it's easier to reference the right ones.
-
-## Adding your first step
-
-Click on "**+ Generate text using LLMs**" to add your first LLM step. This will add a step to the chain that can generate text using an LLM like GPT based on inputs and settings you specify. 
-
-![LLM step](/images/llm-step.png)
-
-Get started by selecting the model to use, select GPT 3.5 (OpenAI).
-
-Now we are ready to write our prompt. We can use the templating syntax to inject variables into the prompt from our inputs and previous steps. Add the following to the prompt:
-
-```text
-Create an engaging Instagram caption based on the following: "{{params.text_variable}}"
-```
-
-Write in the input variable: "AI is changing the way teams work". This will be used as the prompt for the LLM. Click the run icon on the LLM step and you will see the following output:
-
-```text
-🚀 Embrace the future of teamwork! AI is revolutionizing the way teams collaborate, innovate, and achieve extraordinary results. Say goodbye to traditional work methods and hello to a whole new era of efficiency and creativity! 💡✨ #AIRevolution #TeamworkEvolved
-```
-
-## Adding a datasets
-
-Adding a knowledgebase to your chain can make it much more effective. For example, if we provide past examples of the types of Instagram captions we make then we can make sure our new ones are in the same style and tone.
-
+Adding analysis steps to a Tool is done by clicking on the `+ Add step` button. For
+more information on the available steps visit 
+[Tool steps](/custom-tools/tool-steps/tool-steps).
 
 
+## Example
+1. On your new Tool page, click on `+ Add input` and then on `+ Text input` 
+to add a new input that accepts short pieces of text. 
+A [Text input](/custom-tools/user-inputs/text-input) component will now appear on the page.
 
-### Step configuration
+    Next, 
+    * Add a title (optional)
+    * Add a description (optional)
+    * Change the variable name, shown in green, from `text` to `topic`.
+        Note that this variable name will be used further down on the guide.
 
-1. Each step has a set of inputs, with some visible under "**Advanced options**". These inputs are used to configure the step. You can either specify the value or switch to variable mode by pressing "**{}**" next to each input. This will instead set the value to the variable you reference.
-2. Each step will have a set of outputs. These are the values that will be passed on to the next step. You can configure the outputs by pressing "**Configure output**" and selecting the variable names you want to keep. 
-3. Each step has a variable name is used to reference it in another step. For example, you can use `{{steps.step_name.output.variable_name}}` to reference it. It can be changed just like the inputs.
-4. The order of a step can be changed using the drag indicator or the up and down buttons. Steps can be ran individually, which is helpful for testing, by pressing the play icon. 
+    <Tip>
+    Every input has a title, description, variable name and setup. 
+    All these are accessible to you to define and use the component as you desire.
+    </Tip>
+
+    ![Text inputs](/images/custom-tools/components/user-input/text-input-details1.png)
+
+2. Click on `+ Add step` and then chose [LLM](/custom-tools/tool-steps/llm) from the 
+available options. This will add an LLM component to the Tool. We are going to 
+experiment with text generation relying on LLMs such as GPT. 
+
+    We are ready to write our prompt (i.e. our way of communication with a large 
+    language model). Enter the text below, in the Prompt section of the LLM component.
+    ```text 
+    Create an engaging Instagram caption based on the following: "{{topic}}"
+    ```
+    
+    ![LLM](/images/custom-tools/components/tool-step/llm-get-started.png)
+
+    <Tip>
+    Using `{{}}` and variable names, you can access the variables and their values.
+    </Tip>
+
+3. Hit save from the top right. 
+4. Execute your Tool. You can either go to the `Use` tab or give your tool a try on the current page.
+    Enter the text below, in the user input component. This will be used in the prompt. 
+    ```text
+    AI is changing the way teams work
+    ``` 
+
+    Click on `Run once` (on the App page) or on the run icon (on the Build page) on the LLM step 
+    and you will see the LLM output. In my execution, the GPT 3.5 wrote:
+    ```
+    🚀 Embrace the future of teamwork! AI is revolutionizing the way teams collaborate, 
+    innovate, and achieve extraordinary results. Say goodbye to traditional work methods 
+    and hello to a whole new era of efficiency and creativity! 💡✨ #AIRevolution #TeamworkEvolved
+    ```
