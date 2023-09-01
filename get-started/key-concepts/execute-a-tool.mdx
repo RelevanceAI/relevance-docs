@@ -1,0 +1,58 @@
+---
+title: 'Execute a Tool/Template'
+sidebarTitle: 'Execute Tools'
+description: 'How to execute a Tool/Template on a single data sample or on the whole dataset'
+---
+
+When we [design a Tool](/custom-tools/create-a-tool) or use an [existing template](templates/introduction), 
+we can 
+1. Single Run the Tool: test the Tool/Template on individual sample inputs
+2. Bulk Run the Tool: use a dataset as input and let the Tool/Template to fetch the input data directly from the source 
+and apply the analysis to the whole dataset in one go.
+
+### Single Run
+Analyzing one input sample with the Tool/Template.
+
+#### On the Tool/APP page
+![Single run - app](/images/get-started/tool-app.png)
+Clicking on `Run once` on the APP page, after providing all the required inputs will execute the Tool
+and provide you with the analysis results.
+
+#### On the Build page
+Tools can be tested on the Build page as well.
+Build is where different components are combined together to form
+the whole input to analysis results flow.
+![Build](/images/get-started/tool-build.png)
+
+Once the tool is ready, provide all the required inputs and you can
+1. execute each step component in order by clicking on the "play" button on each step
+2. Use the `Run all` button located on the top right
+![Single run - build](/images/get-started/tool-build-run.png)
+
+Final analysis result will be shown at the bottom of the page. Noe that you can see the 
+output of each step by clicking on `+ Expand` at the step.
+
+### Bulk Run
+Bulk run is to apply a Tool or Template not just on an individual input sample, but on the whole dataset.
+
+#### On the Tool/Run in bulk page
+![Bulk run - Tool](/images/get-started/tool-bulk-run.png)
+Going to the "Run in bulk" page, you have access to `Run on my data` button. This button directs 
+you to the [Data](/get-started/key-concepts/data.mdx) page. Tool and template execution from the 
+Data table is explained in the next section.
+
+#### On the Data table page
+Select your target dataset the the [Data](/get-started/key-concepts/data.mdx) page.
+Once the data table is opened, you can "Enrich" your data using any of the analysis Tools and Templates.
+![Bulk run - Table](/images/get-started/bulk-run-table.png)
+
+"Enrich" will add a new column to your dataset including the analysis results per rows.
+
+1. Select the desired Tool/Templates
+2. Fill in the form 
+    a. Use `Manually type data` when the input is not available in the dataset
+    b. Select the column where the input data can be fetched from the dataset
+3. Click on `Confirm` to finalize the enrichment setup
+4. Once the enrichment is setup, you will see a new column added to your table. This column allows you 
+to run the enrichment on one individual row, or on the whole table as shown in the image below.
+![Execute - Table](/images/get-started/run-table.png)
