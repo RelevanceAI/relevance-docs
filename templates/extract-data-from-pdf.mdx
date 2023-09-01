@@ -39,34 +39,28 @@ tasks: converting PDF to text, the LLM step, and formatting for CSV export.
 
 #### Converting PDF to text
 ![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-convert-pdf-to-text.png)
-[A text to PDF component](/custom-tools/tool-steps/convert-pdf-to-text) is available which 
-receives a file URL and extract the text from it. This component supports OCR.
+    <Snippet file="components/tools/pdf-to-text.mdx" />
 
 #### Large Language Model (LLM)
 ![LLM](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-llm.png)
-<Snippet file="components/tools/llm.mdx" />
+    <Snippet file="components/tools/llm.mdx" />
 
-**[A Good Prompt](/llms/prompt)**
-1. Be short and precise with your instruction/request from the LLM
-2. Include formatting instruction when necessary
+    <Snippet file="a-good-prompt.mdx" />
+    1. Be short and precise with your instruction/request from the LLM
+    2. Include formatting instruction when necessary
 
 #### Formatting for CSV export
 1. Markdown to CSV
 ![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-code1.png)
-<Snippet file="components/tools/code-javascript.mdx" />
-    In this tool, the code-snippet turns the Markdown format
-to a CSV.
+    <Snippet file="components/tools/code-javascript.mdx" />
+    In this Tool, the code-snippet turns the Markdown format to a CSV.
 
 2. A temporary downloadable file
 ![export](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-export1.png)
-When the output is generated, it needs to be turned into a downloadable file. At Relevance
-this can be easily done via a ready-to-use component.
-[Export to a temporary file](/custom-tools/tool-steps/export-data-to-a-temporary-downloadable-file)
-takes the data (the extracted content from the source PDF in this tool), exports it to a
-downloadable CSV and returns a URL to access the file.
+    <Snippet file="components/tools/export-data-to-a-temporary-downloadable-file.mdx" />
+
 
 3. Export to CSV
 ![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-code2.png)
-[A Javascript code component](/custom-tools/tool-steps/code-javascript) is available to Run
-Javascript codes when necessary. In this tool, the second code-snippet simply returns the
-downloadable URL to the output file.
+    <Snippet file="components/tools/code-javascript.mdx" />
+    In this Tool, the second code-snippet simply returns the downloadable URL to the output file.
