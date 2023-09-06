@@ -1,0 +1,48 @@
+---
+title: 'GPT on my files'
+sidebarTitle: 'GPT on my files'
+description: 'Ask GPT to find the answer to your question in a file'
+---
+One of the frequently used templates at Relevance is GPT on my files. 
+This Tool enables you to find the answer to a given question in a file.
+
+![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files-form.png)
+
+### Tool execution
+<Snippet file="tool-execution.mdx" />
+
+<Snippet file="how-to-use-a-tool.mdx" />
+
+### Tool inputs and output
+The Tool requires two inputs: 
+1. A file to look at (Upload files)
+2. A question to answer (Question): 
+Provide the input data and hit `Run once`, you will see the LLM response in a few seconds
+similar to what is shown in the image below.
+![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files-answer.png)
+
+<Tip>LLMs are not designed or trained for statistical analysis. Questions like 
+"How many projects were conducted?" or "What was the overall success on the x projects?" 
+are likely to raise the "I could not find the answer" response unless there is a note in 
+the provided information stating the answer.</Tip>
+
+The output is the answer to the question based on the provided information.
+
+<Snippet file="components/tools/tool-components.mdx" />
+
+### User inputs
+![User inputs](/images/templates/gpt-on-my-files/GPT-on-my-files-build-input.png)
+
+1. <Snippet file="components/inputs/file-to-text.mdx" />
+
+2. <Snippet file="components/inputs/text-input.mdx" />
+
+### Tool steps
+![LLM](/images/templates/gpt-on-my-files/GPT-on-my-files-build-llm.png)
+#### Large Language Model (LLM)
+<Snippet file="components/tools/llm.mdx" />
+
+
+<Snippet file="a-good-prompt.mdx" />
+1. Provide the context at the top
+2. Be short and precise with your instruction/request from the LLM

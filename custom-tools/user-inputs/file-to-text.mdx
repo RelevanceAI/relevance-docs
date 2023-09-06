@@ -1,0 +1,44 @@
+---
+title: 'File to text'
+sidebarTitle: 'File to text'
+description: 'Input files and extract the texts from them'
+---
+
+## What is a File to text input
+File to text input is an input component that allows you to upload a file. It then 
+automatically extracts all the included text or transcribe the file. This text can
+later be used as the source of truth is tasks like question-answering or summarization.
+
+## When to use the File to text component
+The File to text input component is suitable for when you need to upload a file
+to provide the consisting information to a Large Language Model (LLM).
+For instance, when your file is a 10 page report but you want an LLM to summarize
+the information to 2 pages. Or when you want an LLM list all the items discussed in
+an audio recording.
+Supported formats are 
+* PDF (no ocr)
+* Word (.doc, .docx)
+* Excel (.xlsx, .xls)
+* CSV
+* Audio (.mp3, .mp4, .mp2, aac, .wav, .flac, .pcm, .m4a, .ogg, .opus, .webm)
+* JSON
+* TXT
+
+Note: Audio transcription is done using the Deepgram model.
+
+## How to add a File to text input to my custom Tool
+The File to text input component is listed under User inputs. You can add it to your
+Tool using the main section or the side-bar.
+![Text inputs](/images/tools/components/user-input/file-to-text-input-1.png)
+
+## File to text setting
+* Title: you can enter a title for your upload component
+* Description: you can enter a description on what this input is or will used for, etc.
+* Variable name: marked in green, you can rename the variable and use the name to access the 
+data in your Tool
+* Optional/Required: you can switch between the two options on the top right. As the name suggests, 
+unlike an optional component, a required components must be provided before your analysis starts.
+
+![Text inputs](/images/tools/components/user-input/file-to-text-input-details1.png)
+
+And do not forget to save the changes using the options on the top right of the page.

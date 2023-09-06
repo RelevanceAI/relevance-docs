@@ -1,0 +1,69 @@
+---
+title: 'Large Language Model (LLM)'
+sidebarTitle: 'LLM'
+description: 'Direct access to variety of Large language models and many supporting functionalities'
+---
+
+We believe that Large Language models (LLMs) like GPT will change how software is used and the way we work. 
+With Relevance, using LLMs is extremely easy, since all the requirements (e.g. access, settings, output handling)
+are taken cate of.
+
+Communication with LLMs is via natural language and in written format. The piece of text that is used for 
+providing information and instruction to a LLM is called a "Prompt".
+Each time you use an LLM, you will need to 
+* write up a good prompt
+* choose a model
+
+## How to use an LLM step
+To use an LLM you need to add a "LLMs" step to your chain. s
+![LLM step](/images/tools/components/tool-step/llm-get-started.png)
+
+You can then choose the model you want to use, and write up your prompt in the base window.
+![LLM step](/images/tools/components/tool-step/llm-base.png)
+
+### Prompt 
+A prompt is a written text that includes the information you want to provide to a language model
+as well as the instruction and expectation.
+It is important to be clear and explicit. Notes on prompt engineering with real samples are provided
+at [How to write a good prompt](/custom-tools/tool-steps/llms/prompt).
+
+#### Access to input variables and other step outputs
+The prompt input accepts both regular text and variable templating using `{{}}` syntax.
+For instance is there is an input variable called "my_text", you can included it in the prompt using `{{my_text}}`
+![LLM step](/images/tools/components/tool-step/llm-variable-access.png)
+
+<Tip>
+Start entering a variable name, you will see a list of available variables to choose from.
+</Tip>
+
+### Model
+<Info>
+    To use a model to which you have subscribed, make sure to [add your API key](/get-started/key-concepts/api-keys) from the provider.
+    Otherwise you will be using `Relevance keys` and it will be calculated in the used credit costs.
+</Info>
+
+We provide support for not just GPT, but other vendors such as Cohere and Anthropic. We are always adding to this list. 
+Implement once, with the knowledge that as new models come out, your product can take advantage!
+
+| Model name     | Model ID                      | Provider  |
+| -------------- | ----------------------------- | --------- |
+| GPT 4          | `openai-gpt4`                 | OpenAI    |
+| GPT 4 NEW      | `openai-gpt4-0613`            | OpenAI    |
+| GPT 3.5        | `openai-gpt35`                | OpenAI    |
+| GPT 3.5 NEW    | `openai-gpt35-0613`           | OpenAI    |
+| GPT 3.5 16k    | `openai-gpt35-16k `           | OpenAI    |
+| Claude         | `anthropic-claude-v1`         | Anthropic |
+| Claude (100k)  | `anthropic-claude-v1-100k`    | Anthropic |
+| Claude Instant | `anthropic-claude-instant-v1` | Anthropic |
+| Claude Instant (100k) | `anthropic-claude-instant-v1-100k` | Anthropic |
+| Text Bison     | `palm-text-bison`             | Palm      |
+| Chat Bison     | `palm-chat-bison`             | Palm      |
+| Command        | `cohere-command`              | Cohere    |
+| Command Light  | `cohere-command-light`        | Cohere    |
+
+In the next pages, we will explain about more advanced settings for your LLM component:
+* [Conversation history](/custom-tools/tool-steps/llms/llm-advance-setting#conversation-history)
+* [System prompt](/custom-tools/tool-steps/llms/llm-advance-setting#system-prompt)
+* [Temperature](/custom-tools/tool-steps/llms/llm-advance-setting#temperature)
+* [Validators](/custom-tools/tool-steps/llms/llm-advance-setting#validators)
+* [How to handle large amount of text/context](/custom-tools/tool-steps/llms/how-to-handle-too-much-text)

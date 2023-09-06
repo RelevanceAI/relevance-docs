@@ -1,0 +1,56 @@
+---
+title: 'Add Knowledge to LLMs'
+sidebarTitle: 'Knowledge'
+description: 'LLMs can be enhanced with your own context and data'
+---
+
+The Knowledge feature in Relevance AI empowers the Language Model (LLM) in your chain with the ability to understand and answer questions related to specific topics or domains that might not be covered by its general training data. This document provides a comprehensive guide to using the Knowledge feature to enhance the capabilities of your LLM in answering user queries accurately.
+
+## Uploading knowledge
+
+When you create a new chain, in the builder you'll see a section called "Knowledge". This is where you can upload documents or datasets that you want your LLM to learn from.
+
+Click on "add data" and you will see a modal to add data from an uploaded file, a website crawl, a third-party integration or an existing dataset.
+
+<Frame caption="Screenshot of Add Data modal for Knowledge">
+  <img src="/images/knowledge-modal.png" />
+</Frame>
+
+These are the following types:
+
+<Tabs>
+  <Tab title="File">
+    Files are supported as a source of knowledge. They can be of type CSV, Excel, PDF and audio. For files like PDF and Audio, they will automatically have their text extracted and stored.
+
+    Multiple files can be uploaded to be added to knowledge.
+
+    Within the dataset that's created, depending on the file type additional metadata may be supplied. For example, the PDF filename will be included as an additional column whereas a CSV file will not contain additional columns beyond what's provided.
+  </Tab>
+  <Tab title="Website">
+    Websites can commonly be a great source of knowledge - such as support documentation. You can automatically crawl these websites based on a URL. It'll follow links up to 5 levels deep.
+
+    Crawling websites can take some time (hours for very large ones), leave the page open until complete.
+  </Tab>
+  <Tab title="Third-party">
+    Certain sources are supported for importing data such as Zendesk, Github and Youtube.
+
+    You can select a source and follow the instructions to import that data into your dataset.
+  </Tab>
+  <Tab title="Existing dataset">
+    If you have previously created a dataset, you can select it for use in a new chain. You can do so by searching for its name.
+  </Tab>
+</Tabs>
+
+## Adding knowledge to LLM
+
+Once you have selected the knowledge items you'd like to use in the Chain they're now available to be used in LLM steps.
+
+If you add an LLM step to the chain, you will now be able to inject into it the prompt with the variable `{{ knowledge }}`. This will inject into the prompt information from the dataset based on the setting you have configured.
+
+If you have multiple knowledge datasets selected, you can reference them individually by doing `{{ knowledge.dataset_name }}`.
+
+## How is knowledge selected?
+
+LLMs have a limit on the amount of context you can feed them into them, based on the modal you use. Because of this, if a dataset is too large it must be edited to fit into the context size. This is managed by a feature of relevance that gives you a number of options on how this is configured. You can read about this feature [here](/custom-tools/tool-steps/llms/how-to-handle-too-much-text).
+
+<Tip>You can check the context limit of models [here](/custom-tools/tool-steps/llms/llm#model).</Tip>

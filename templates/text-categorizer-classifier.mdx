@@ -1,0 +1,106 @@
+---
+title: 'Text categorizer/classifier'
+sidebarTitle: 'Text categorizer/classifier'
+description: 'Categorize/Classify the text into pre-specified categories/classes'
+---
+One of the frequently used templates at Relevance is Category/Tag suggester.
+This Tool receives a list of predefined categories/themes/topics and a dataset composed
+of at least one column containing text values such as reviews.
+The Tool goes through the data and categorizes each text value to the matching 
+categories/themes/topics from the provided list.
+
+![Category/Tag suggester](/images/templates/text-categorizer-classifier/text-categorizer-classifier-form.png)
+
+<Tip>
+You can bring your own list of categories/themes/topics (BYO) or use 
+[Suggest category Tool](/templates/category-tag-suggester) as the first step of text categorization flow.
+</Tip>
+
+<Snippet file="how-to-use-a-tool.mdx" />
+
+### Tool inputs and output
+The Tool requires three main and one optional inputs: 
+1. Text to categorize
+2. List of categories/themes/topics: To be entered as a one category per line
+3. Maximum number of expected categories per input text
+Provide the main inputs and hit `Run once`, you will see the LLM response in a few seconds
+similar to what is shown in the image below. You can use the copy button or select the text to
+copy for the next step.
+
+![Text categorizer](/images/templates/text-categorizer-classifier/text-categorizer-classifier-answer.png)
+
+4. Example (Example(s) of categorization done by you):
+LLMs are proven to work better when they see samples. Provide sample(s) of your text data and how you would
+categorize it **using items from the list that you entered in the second input**. Use `,` when multiple 
+categories/themes/topics apply.
+
+<Tip>
+**Good Categories**
+
+1. Clear: AI is not an expert in your domain. Keep the categories simple and clear as if you are helping an intern.
+2. Unbiased: Even though AI understands sentiment, it is better to keep the categories neutral (Service vs Good service)
+3. Use `/` to combine two relevant categories (e.g. Customer Service / Support)
+4. Avoid including overlapping categories
+</Tip>
+
+The output is a list of categories assigned to the input. 
+
+### Tool execution
+<Snippet file="tool-execution.mdx" />
+
+<Snippet file="components/tools/tool-components.mdx" />
+
+### User inputs
+![User inputs](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-input.png)
+
+1. <Snippet file="components/inputs/long-text-input.mdx" />
+    This component is used twice in this Tool. Both input text (Text to categorize) and 
+    the list of categories (List of categories) are of long tex inputs.
+
+2. <Snippet file="components/inputs/numeric-input.mdx" />
+    Use the default value (3) or enter your preferred maximum number of categories to be assigned to each input.
+
+3. <Snippet file="components/inputs/table.mdx" />
+    This component allows you to provide samples of text categorization done by you.
+    * Enter the input sample under "text"
+    * Enter matching categories under "topics"
+    * Use categories/themes/topics from the list you provided with the exact same spelling
+    * Use `,` when multiple categories/themes/topics apply
+
+### Tool steps
+There are 4 components under the Tool steps in this analysis flow. These components take care of three
+tasks: properly formatting the provided categories/themes/topics, the LLM step and formatting the output.
+
+#### Properly formatting the provided categories/themes/topics
+    String to List formatting
+    ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-code1.png)
+    <Snippet file="components/tools/code-python.mdx" />
+        In this case, the Python code, filters out empty lines and creates a list of 
+        categories/themes/topics from the provided text.
+
+#### Large Language Model (LLM)
+    ![LLM](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-llm.png)
+    <Snippet file="components/tools/llm.mdx" />
+
+    **[A Good Prompt](/custom-tools/tool-steps/llms/prompt)**
+    1. Be short and precise with your instruction/request from the LLM
+    2. Stick to one term when referring to the same concept throughout the prompt
+    3. Note the goals and important instructions closes possible to the end of the prompt
+    4. Explicitly note constraints and goals
+    5. Specify a data scope using `"`, `"""` or similar identifiers
+    6. Include formatting instruction when necessary
+
+
+#### Properly formatting the output
+1. <Snippet file="components/tools/convert-string-to-json.mdx" />
+   ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-str-to-json.png)
+   This is to make sure we can properly save the results in the desired structure.
+   
+
+2. Filtering out unwanted categories/themes/topics
+    ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-code2.png)
+    <Snippet file="components/tools/code-python.mdx" />
+    Occasionally the LLM might output categories/themes/topics that are not in the pre-specified list.
+    This is taken care of using a simple Python code snippet in this Tool.
+    
+

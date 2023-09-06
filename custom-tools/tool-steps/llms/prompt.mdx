@@ -1,0 +1,56 @@
+---
+title: 'Large Language Model prompt'
+sidebarTitle: 'LLM prompt'
+description: 'Providing information to an LLM and requesting an action'
+---
+
+## What is a prompt
+Prompt is a piece of text and your way of communication with LLMs, 
+to provide information and request an action. 
+We know this communication is done in natural language form but we also know
+that not all communications reach the same success level.
+
+Even though LLMs are improving beyond what we imagined less than a year ago, 
+there are still shortcomings to their capacities. 
+One critical factor for successful use of LLM is a good prompt. On this page,
+we summarize tips on how to form a good prompts. Links to sample prompts 
+on Relevance are provided for each tip.
+
+## Tips on writing a good prompt (prompt engineering)
+1. If the LLM needs information for doing a task, provide the information at
+the top. Use keywords such as "Context" to specify what the information represents
+[(see a sample)](/templates/gpt-on-my-files#large-language-model-llm)
+
+2. Keep the instruction short and precise. Specify what exactly needs to be done
+in the bare minimum required number of words 
+[(see a sample)](/templates/gpt-on-my-files#large-language-model-llm)
+
+3. Note what you expect instead of noting what you don't want
+For instance, instead of `avoid uninformative output` use `answer should be informative & useful`
+[(see a sample)](/templates/gpt-on-my-website#large-language-model-llm)
+
+4. Include formatting instruction when necessary
+In many cases, we might need the output to follow a certain format or structure. 
+This can be clearly stated in the prompt 
+[(see a sample)](/templates/extract-data-from-pdf#large-language-model-llm)
+
+5. Specify the scope using `"`, `"""` or similar identifiers
+In many cases, we need to provide a large piece of text as the input data within the prompt.
+To avoid mixing the data and instruction (i.e. identifying the data scope), it is recommended
+to use characters such as `"`, `"""` at the beginning and end of the text or the corresponding
+date variable [(see a sample)](/templates/extract-data-from-pdf#large-language-model-llm)
+
+6. Explicitly note constraints and goals
+In more complicated prompts there are various information that can be categorize in sections.
+Two of the common categories are Constraints and Goals. Note them explicitly and it is recommended
+to mention goals after the constraints
+[(see a sample)](/templates/category-tag-suggester#large-language-model-llm)
+
+7. For large prompts, note the goals and important instructions closes possible to the end of the prompt
+This is mostly valid for large prompts
+[(see a sample)](/templates/text-categorizer-classifier#large-language-model-llm)
+
+8. Stick to one term when referring to the same concept throughout the prompt. LLMs tend to get confused
+when the prompt is long and wordy. The best way to avoid such a confusion is to use the exact same words
+and spelling when referring to the same concepts
+[(see a sample)](/templates/text-categorizer-classifier#large-language-model-llm)

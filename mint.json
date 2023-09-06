@@ -2,8 +2,8 @@
     "$schema": "https://mintlify.com/schema.json",
     "name": "Relevance AI",
     "logo": {
-        "dark": "/logo/dark.png",
-        "light": "/logo/light.png"
+        "dark": "/images/logo/dark.png",
+        "light": "/images/logo/light.png"
     },
     "favicon": "/favicon.png",
     "colors": {
@@ -28,24 +28,135 @@
     "navigation": [
         {
             "group": "Get started",
-            "pages": ["introduction", "quickstart"]
+            "pages": [
+                "get-started/introduction",
+                {
+                    "group": "Key concepts",
+                    "pages": [
+                        "/get-started/key-concepts/home",
+                        "/get-started/key-concepts/agent",
+                        "/get-started/key-concepts/tools",
+                        "/get-started/key-concepts/data",
+                        "/get-started/key-concepts/templates",
+                        "/get-started/key-concepts/api-keys",
+                        "/get-started/key-concepts/execute-a-tool",
+                        "/get-started/key-concepts/llm"
+                    ]
+                },
+                {
+                    "group": "Quick start",
+                    "pages": [
+                        "/get-started/quickstart/templates",
+                        "/get-started/quickstart/agent"
+                    ]
+                }]
         },
         {
-            "group": "LLMs",
+            "group": "Agent",
             "pages": [
-                "prompts/how",
-                "prompts/how-to-handle-too-much-text",
-                "prompts/models",
-                "prompts/system-prompt",
-                "prompts/validators"
+                "/agent/agent"
+            ]
+        },
+        {
+            "group": "Templates",
+            "pages": [
+                "/templates/introduction",
+                {
+                    "group": "Execute",
+                    "pages": [
+                        "/templates/single-run",
+                        "/templates/bulk-run"
+                    ]
+                },
+                {
+                    "group": "All templates",
+                    "pages": [
+                        "/templates/gpt-on-my-files",
+                        "/templates/gpt-on-my-website",
+                        "/templates/extract-data-from-pdf",
+                        "/templates/category-tag-suggester",
+                        "/templates/text-categorizer-classifier"
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Custom Tools",
+            "pages": [
+                "/custom-tools/introduction",
+                "/custom-tools/create-a-tool",
+                {
+                    "group": "Execute",
+                    "pages": [
+                        "/custom-tools/single-run",
+                        "/custom-tools/bulk-run"
+                    ]
+                },
+                {
+                    "group": "User inputs",
+                    "pages": [
+                        "/custom-tools/user-inputs/getting_started",
+                        "/custom-tools/user-inputs/text-input",
+                        "/custom-tools/user-inputs/long-text-input",
+                        "/custom-tools/user-inputs/options-drop-down",
+                        "/custom-tools/user-inputs/numeric-input",
+                        "/custom-tools/user-inputs/text-list",
+                        "/custom-tools/user-inputs/json",
+                        "/custom-tools/user-inputs/list-of-jsons",
+                        "/custom-tools/user-inputs/file-to-text",
+                        "/custom-tools/user-inputs/file-to-url",
+                        "/custom-tools/user-inputs/table"
+                    ]
+                },
+                {
+                    "group": "Tool steps",
+                    "pages": [
+                        "/custom-tools/tool-steps/getting_started",
+                        {
+                            "group": "LLM",
+                            "pages": [
+                                "/custom-tools/tool-steps/llms/llm",
+                                "/custom-tools/tool-steps/llms/llm-advance-setting",
+                                "/custom-tools/tool-steps/llms/validators",
+                                "/custom-tools/tool-steps/llms/how-to-handle-too-much-text",
+                                "/custom-tools/tool-steps/llms/prompt"
+                            ]
+                        },
+                        "/custom-tools/tool-steps/convert-pdf-to-text",
+                        "/custom-tools/tool-steps/extract-website-content",
+                        "/custom-tools/tool-steps/split-text",
+                        "/custom-tools/tool-steps/vectorize-and-search",
+                        "/custom-tools/tool-steps/convert-spreadsheet-to-json",
+                        "/custom-tools/tool-steps/convert-string-to-json",
+                        "/custom-tools/tool-steps/code-javascript",
+                        "/custom-tools/tool-steps/code-python",
+                        "/custom-tools/tool-steps/export-data-to-a-temporary-downloadable-file"
+                    ]
+                },
+                {
+                    "group": "Knowledge",
+                    "pages": [
+                        "/custom-tools/knowledge/knowledge"
+                    ]
+                },
+                {
+                    "group": "Advance setups",
+                    "pages": [
+                        "/custom-tools/advance-setups/conditions-and-loops"
+                    ]
+                }
+            ]
+        },
+        {
+            "group": "Data",
+            "pages": [
+                "/data/introduction"
             ]
         },
         {
             "group": "Notebook",
             "pages": [
-                "notebook/introduction",
-                "notebook/knowledge",
-                "notebook/conditions-and-loops"
+                "/notebook/introduction"
             ]
         },
         {
@@ -84,7 +195,7 @@
                 },
                 "sdk/reference/transformation-steps",
                 "sdk/reference/deploying-chain",
-                "dashboard/notebook",
+                "sdk/dashboard/notebook",
                 {
                     "group": "Guides",
                     "pages": ["sdk/guides/pdf-qa", "sdk/guides/charting-agent"]

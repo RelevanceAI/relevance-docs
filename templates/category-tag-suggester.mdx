@@ -1,0 +1,108 @@
+---
+title: 'Category/Tag suggester'
+sidebarTitle: 'Category/Tag suggester'
+description: 'Suggest Categories/Tags/Labels/Code-frame by looking at a subset of the data'
+---
+One of the frequently used templates at Relevance is Category/Tag suggester.
+This Tool analyses a subset of a CSV file and provides you with suggestions
+on existing categories (i.e. themes/topics) in the data. 
+These categories can be later used for 
+[text categorization](/templates/text-categorizer-classifier).
+
+![Category/Tag suggester](/images/templates/category-tag-suggester/category-tag-suggester-form.png)
+
+<Snippet file="how-to-use-a-tool.mdx" />
+
+### Tool inputs and output
+The Tool requires three main and four optional inputs: 
+1. A CSV file (CSV)
+2. The name of the target column (Target column: Column containing the text for categorization)
+3. Row numbers of the target subset (Rows to look at)
+Provide the main inputs and hit `Run once`, you will see the LLM response in a few seconds
+similar to what is shown in the image below. You can use the copy button or select the text to
+copy for the next step.
+![Category/Tag suggester](/images/templates/category-tag-suggester/category-tag-suggester-answer.png)
+
+<Tip>
+* Use the Category/Tag suggester Tool on different subsets of your file (i.e. multiple runs 
+for different ranges of rows). Copy the suggestions to a text file and finalize the category 
+suggestion list by applying your domain knowledge considering the 
+[next step](/templates/text-categorizer-classifier) requirements.
+* LLMs have limited capacity for receiving input data. Instead of using your whole file
+(i.e. first row to the last row) use subsets of the file to analyze the data for category
+suggestions.
+</Tip>
+
+4. Maximum preferred word count per categories/themes/topics: 
+An optional input, set to 3 by default, indicating how wordy suggested categories could be. 
+Note that it is about the number of words in each suggested category/topic and not the 
+total number of suggestions.
+5. Maximum number of categories/themes/topic to extract:
+An optional input, set to 10 by default, indicating the expected number of category/topic suggestions.
+6. Objective:
+An optional input, set to `General` by default, indicating the objective for extracting categories.
+In other words indicating a lense through which the data is analyzed.
+7. Example (Example(s) of category/theme/topic extraction done by you):
+LLMs are proven to work better when they see samples. Provide sample(s) of your text data and the 
+categories you would annotate for the samples.
+<Tip>
+* Using `,` you can provide multiple categories per sample
+* Keep the writing style uniform (e.g.Capital each word)
+</Tip>
+
+The output is a list of suggested categories. 
+
+We Highly recommend 
+* running this Tool on different subsets of your file
+* checking the received suggestions from multiple runs all together
+* finalizing the category list using your domain knowledge and the goals for text categorization
+* use the finalized list in the [Text categorizer/Classifier](/templates/text-categorizer-classifier) Tool.
+
+<Snippet file="components/tools/tool-components.mdx" />
+
+### User inputs
+![User inputs](/images/templates/category-tag-suggester/category-tag-suggester-build-input.png)
+
+1. <Snippet file="components/inputs/file-to-url.mdx" />
+
+2. <Snippet file="components/inputs/text-input.mdx" />
+    This component is used twice in this Tool. Target column and the objective are both of Text
+    inputs.
+
+3. <Snippet file="components/inputs/table.mdx" />
+    This component is used twice in this Tool. Row range (from - to) and well as Examples
+    (Text - Categories/topics) are both samples of structured input data.
+
+4. <Snippet file="components/inputs/numeric-input.mdx" />
+    This component is used twice in this Tool. Both maximum word count per category and maximum
+    number of suggested categories are of numeric inputs.
+
+### Tool steps
+There are 4 components under the Tool steps in this analysis flow. These components take care of three
+tasks: loading the specified subset of the file, properly formatting the provided samples,
+and the LLM step.
+
+#### Loading the specified subset of the file
+1. Loading the file into readable json format
+![CSV to JSON](/images/templates/category-tag-suggester/category-tag-suggester-build-csv-to-json.png)
+<Snippet file="components/tools/convert-spreadsheet-to-json.mdx" />
+
+2. Selecting the specified subset of the data
+![code](/images/templates/category-tag-suggester/category-tag-suggester-build-subset.png)
+<Snippet file="components/tools/code-python.mdx" />
+    In this case, the Python code, filters out any rows that is not in the specified range.
+
+#### Properly formatting the provided samples
+![code](/images/templates/category-tag-suggester/category-tag-suggester-build-sample.png)
+<Snippet file="components/tools/code-python.mdx" />
+    In this case, the Python code, forms the entered samples in the format that is suitable
+    abd compatible to the prompt.
+
+#### Large Language Model (LLM)
+![LLM](/images/templates/category-tag-suggester/category-tag-suggester-build-llm.png)
+<Snippet file="components/tools/llm.mdx" />
+
+**[A Good Prompt](/custom-tools/tool-steps/llms/prompt)**
+1. Be short and precise with your instruction/request from the LLM
+2. Explicitly note constraints and goals
+3. Include formatting instruction when necessary

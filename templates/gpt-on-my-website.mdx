@@ -1,0 +1,71 @@
+---
+title: 'GPT on my website'
+sidebarTitle: 'GPT on my website'
+description: 'Ask GPT to find the answer to your question in a web-page'
+---
+One of the frequently used templates at Relevance is GPT on my website.
+This Tool enables you to find the answer to a given question on a website.
+
+![GPT on my Website](/images/templates/gpt-on-my-website/GPT-on-my-website-form.png)
+
+### Tool execution
+<Snippet file="tool-execution.mdx" />
+
+<Snippet file="how-to-use-a-tool.mdx" />
+
+### Tool inputs and output
+The Tool requires two inputs: 
+1. URL to a website to look at (Website)
+2. A question to answer (Question): 
+Provide the input data and hit `Run once`, you will see the LLM response in a few seconds
+similar to what is shown in the image below.
+![GPT on my Website](/images/templates/gpt-on-my-website/GPT-on-my-website-answer.png)
+
+<Tip>LLMs are not designed or trained for statistical analysis. Questions like 
+"How many projects were conducted?" or "What was the overall success on the x projects?" 
+are likely to raise the "I could not find the answer" response unless there is a note in 
+the provided information stating the answer.</Tip>
+
+The output is the answer to the question based on the provided information.
+
+<Snippet file="components/tools/tool-components.mdx" />
+
+### User inputs
+![User inputs](/images/templates/gpt-on-my-website/GPT-on-my-website-build-input.png)
+
+Both inputs in this Tool are of Text input. The first one is to provide a URL and the second
+one to enter a question.
+<Snippet file="components/inputs/text-input.mdx" />
+
+### Tool steps
+There are 5 components under the Tool steps in this analysis flow. These components take care of three
+tasks: extracting the website content, preparing the data for search, and the LLM step.
+
+#### Extract the website Content
+1. URL control
+![code](/images/templates/gpt-on-my-website/GPT-on-my-website-code.png)
+    <Snippet file="components/tools/code-javascript.mdx" />
+    In this Tool, the code-snippet checks the URL format.
+
+2. Scrape the website
+![website](/images/templates/gpt-on-my-website/GPT-on-my-website-website-content.png)
+    <Snippet file="components/tools/extract-website-content.mdx" />
+
+#### Data preparation and vector search
+1. Split text
+    ![split-text](/images/templates/gpt-on-my-website/GPT-on-my-website-splittext.png)
+    <Snippet file="components/tools/split-text.mdx" />
+
+2. Vectorize and search array
+    ![vectorize](/images/templates/gpt-on-my-website/GPT-on-my-website-vectorize.png)
+    <Snippet file="components/tools/vectorize-and-search.mdx" />
+
+#### Large Language Model (LLM)
+![LLM](/images/templates/gpt-on-my-website/GPT-on-my-website-build-llm.png)
+    <Snippet file="components/tools/llm.mdx" />
+
+    <Snippet file="a-good-prompt.mdx" />
+    1. Provide the context at the top
+    2. Be short and precise with your instruction/request from the LLM
+    3. Note what you expect instead of noting what you don't want
+
