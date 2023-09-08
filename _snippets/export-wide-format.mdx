@@ -1,0 +1,41 @@
+### Export wide format
+
+*  **What is wide/flatten format**
+
+    Wide format or flatten format is to turn categorical fields into numeric.
+    An example is shown in the table below where the Categories column contains unique categorical values 
+    (`App crashes, Upgrade, Expensive`).
+
+    <Tip>
+    Side note: [Text categorization](/templates/text-categorizer-classifier) will produce such results as
+    shown in the first table below.
+    </Tip>
+
+
+    |                              **Text response**                     |          **Categories**          |
+    |--------------------------------------------------------------------|----------------------------------|
+    |Apart from being too costly, the app keeps exiting after the update | App crashes, Upgrade, Expensive  |
+    |It crashes after 10 seconds                                         | App crashes                      |
+    |Love the latest update                                              | Upgrade                          |
+
+    Below, we can see the wide format export for the table above. There are as many new columns as the existing
+    categories, with zero/one values indicating if a category applies to the text response in
+    the corresponding row.
+
+    |                             **Text response**                      |**App crashes**|**Upgrade**|**Expensive**|
+    |--------------------------------------------------------------------|---------------|-----------|-------------|
+    |Apart from being too costly, the app keeps exiting after the update |      1        |     1     |      1      |
+    |It crashes after 10 seconds                                         |      1        |     0     |      0      |
+    |Love the latest update                                              |      0        |     1     |      0      |
+
+* **Access to wide format export**
+
+    Select the dataset from [data table](/get-started/key-concepts/data) and click on the `Download as CSV` button.
+
+    ![export](/images/general/export.png)
+
+    Export type is set to "Standard" by default, change it to "Wide format".
+    Enter the Categorical field name that you wish to flatten (e.g. `Categories` in the table above).
+    ![export](/images/general/export.png)
+
+    Clicking on `Download` will download a CSV file to your download folder.
