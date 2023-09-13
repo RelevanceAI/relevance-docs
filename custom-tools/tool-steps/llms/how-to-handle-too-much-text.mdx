@@ -1,36 +1,53 @@
 ---
 title: 'How to handle too much text in a prompt'
 sidebarTitle: 'Too much text'
-description: 'Use LLMs with content that is too large for the context size'
+description: 'Ways of managing too large context when working with LLMs'
 ---
 
-LLMs have a limit on the context size they can take as input. Relevance has a great feature to prevent you from running into errors with this, by default.
+LLMs have a limit on the context size they can take as input. 
+Relevance has provided you with great features to help you manage context size and prevent facing run-time error.
 
-## Automatic data processing
+## Handling large content
 
-Under "Advanced options", you can see the variables and define how you want them to behave if they're too long to fit into the prompt. There are three settings for each one:
+In an LLM component and under "Advanced options", you can see a section for `How to handle too much content`. 
+All variables that are included in the prompt should be listed in this section with an `Edit` button in the front.
+
+![LLM step](/images/tools/components/tool-step/llm-adv.png)
+
+Small contents can be fed to LLMs directly but for large contents such as a Knowledge, Relevance provide you with two
+options:
+* Summarize the content
+* Select the most relevant content to the query/goal (Vector search)
+
+Clicking on `Edit`, you will access the options.
 
 <Frame caption="Screenshot of the modal on how to handle too much text">
-  <img src="/images/handle-too-much-text.png" />
+  <img src="/images/tools/components/tool-step/how-to-handle-large-content.png" />
 </Frame>
 
-<Tabs>
-  <Tab title="Most relevant data">
-    This will run a semantic search through the data and extract the most relevant parts of it.
+### Summarize
+This option reads the provided content and produce a summary.
+Under advanced setting you can provide a prompt for better and more guided summarization.
+For example you can note the objective or goal of the analysis.
+You can also specify the large language model you wish to use for summarization.
 
-    By default, it will use the part of the prompt after the knowledge variable as a search query. You can set a custom value for the search query, including a variable.
-    It is recommended to set a value here. For example if you have an input that is a query. like `{{ question }}` or `{{ search_query }}`.
-    <Frame caption="Screenshot of the modal of selecting a query.">
-      <img src="/images/knowledge-most-relevant-query.png" />
-    </Frame>
-    By default, it will also include all columns from the row of data. You can specify which columns you'd like to only use.
-  </Tab>
-  <Tab title="Summarize">
-    This will loop through the knowledge and summarise it. 
+### Most relevant data
+This option will run a semantic search through the data to extract the most relevant parts to 
+the provided query.
+There are some useful advances options:
+* **Query**: 
+By default, we extract the query from the original prompt. However, it is highly recommended to
+set a custom value for the search query. You can type in a query or use `{{}}` to include a variable,
+for example `{{ question }}` or `{{ search_query }}`.
 
-    You can customise the prompt and model used to summarise it.
-  </Tab>
-  <Tab title="Full">
-    This will try to use the entire knowledgebase, even if it will error. It is not recommended.
-  </Tab>
-</Tabs>
+* **Query type**: You can select between vector and keyword search
+
+* **Columns**
+By default, all columns from the row of data are included in the results. However, you can 
+specify a subset of columns in order to exclude unnecessary data.
+
+### Full
+This option will return the entire content (e.g. the whole knowledge base). 
+Note that too large content can cause run-time error and this option is not recommended when
+working with large data.
+  
