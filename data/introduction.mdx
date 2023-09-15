@@ -4,4 +4,55 @@ sidebarTitle: 'Data'
 description: "How to use Relevance to store and access your datasets"
 ---
 
-Coming Soon
+Relevance AI has built-in datasets that are NoSQL-based documents and support storing vector embeddings and vector search.
+
+## What is a dataset?
+
+A dataset is a collection of documents that are stored in a NoSQL database. 
+Each document has a unique ID and a set of fields. Each field can be a string, number, date, or a vector. 
+A vector is a list of numbers that represent a point in a multi-dimensional space.
+
+<Tip>
+Vectors are additional features to a dataset. Such a feature enables better performance in tasks including search, and
+answer retrieval. In other words, vectors add extra knowledge to AI.
+Therefore, at Relevance, a dataset containing Vectors is referred to as Knowledge enabled.
+</Tip>
+
+## How to create a data table
+On the [Data](/get-started/key-concepts/data) page, click on `Create table` on the top right and choose the option matching
+you data.
+* Black: to create and empty table
+* Upload file: to upload a file (CSV, PDF, MP3, ...)
+    <Info>
+    - PDF files automatically go through a PDF-to-Text steps
+    - Audio/Video files automatically go through a transcription step
+    </Info>
+* Import from a website: to scrape a website and save the data in the table
+* Integration: to import data from a third party
+
+![Upload data](/images/data-table/data-create-a-table.png)
+
+### Upload file
+Simply select the file(s) or drag and drop them in the box and type a name for your data table.
+<Tip>
+1. Data table names can only contain small letters, number and `-`. Relevance automatically replaces any other character with a `-`.
+2. You can upload multiple files at onces.
+</Tip>
+
+![Upload data](/images/data-table/data-upload1.png)
+
+Click on `Upload data to table` and wait till the upload process finalizes. Note that the larger the files, the longer the upload time.
+
+### Enable knowledge
+After the data is saved in a data table, Relevance detects all fields that can be vectorized and be later used as knowledge for an AI agent
+or for further analysis.
+
+![Enable knowledge](/images/data-table/enable-knowledge.png)
+
+You can vectorize all fields (`Select all`) or only select your desired fields and then click on `Continue`.
+
+Note that only knowledge enabled data can be used for further analysis.
+
+    <p align="center">
+    <img width="500" height="300" align="center" src="/images/data-table/knowledge-enabled-data.png" />
+    </p>
