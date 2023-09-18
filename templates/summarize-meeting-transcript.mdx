@@ -1,0 +1,62 @@
+---
+title: 'Summarize meeting transcript'
+sidebarTitle: 'Summarize transcript'
+description: 'Summarize a meeting transcript based on the specified agenda and focus points'
+---
+One of the frequently used templates at Relevance is Summarize meeting transcript.
+This Tool receives the transcription of a meeting along with information such as meeting agenda and and
+objectives, and produces a summary including all the noted items.
+
+![Summarize meeting transcript](/images/templates/summarize-meeting-transcript/summarize-meeting-transcript-form.png)
+
+<Tip>
+If you want to work with multiple recordings (focus group analysis), [upload them all](/data/data-tables#upload-file) 
+to Relevance as text or original audio/video file first.
+Then use [Bulk run](/templates/bulk-run) with this Tool.
+</Tip>
+
+<Snippet file="how-to-use-a-tool.mdx" />
+
+### Tool inputs and output
+The Tool requires four main inputs: 
+1. Transcription
+2. Meeting context & agenda
+3. Names of participants
+4. Data to extract
+Provide the main inputs and hit `Run once`, you will see the LLM response in a few seconds.
+
+The output is a summary focusing on all the specified points.
+
+### Tool execution
+<Snippet file="tool-execution.mdx" />
+
+<Snippet file="components/tools/tool-components.mdx" />
+
+### User inputs
+![User inputs](/images/templates/summarize-meeting-transcript/summarize-meeting-transcript-build-input.png)
+
+1. <Snippet file="components/inputs/long-text-input.mdx" />
+    This component is to provide the transcription and is of type long tex inputs.
+
+2. <Snippet file="components/inputs/text-input.mdx" />
+    This component is to briefly overview the meeting agenda and is of Text input type.
+
+3. <Snippet file="components/inputs/table.mdx" />
+    This component is used twice both for providing names and roles of the people in the recording
+    and to specify the objectives, goals and focus points for summarization.
+    * Enter the names and roles (Use unknown if the data is not available)
+    * Enter the data you wish to extract along with a brief explanation
+
+### Tool steps
+There is only 1 LLM component under the Tool steps in this analysis flow. 
+
+#### Large Language Model (LLM)
+    ![LLM](/images/templates/summarize-meeting-transcript/summarize-meeting-transcript-build-llm.png)
+    <Snippet file="components/tools/llm.mdx" />
+
+    **[A Good Prompt](/custom-tools/tool-steps/llms/prompt)**
+    1. Be short and precise with your instruction/request from the LLM
+    2. Note the goals and important instructions closes possible to the end of the prompt
+    3. Specify a data scope using `"`, `"""` or similar identifiers
+    4. Include formatting instruction when necessary
+
