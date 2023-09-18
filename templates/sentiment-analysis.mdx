@@ -1,0 +1,50 @@
+---
+title: 'Sentiment analysis'
+sidebarTitle: 'Sentiment analysis'
+description: 'Analyze the overall sentiment of an input text and label it with Positive/Negative or Neutral.'
+---
+Sentiment analysis is the task of identifying the overall polarity of a piece of text and classifying it as 
+Positive, Negative or Neutral.
+Relevance AI's Sentiment analysis Template receives an input text and produces categorize it into one of the
+three sentiment classes.
+
+<Note>
+This tool does not break the input text into its composing sentences. The assigned label is the **overall**
+sentiment.
+Therefore, if the input is composed of multiple sentences, some positive (e.g. She is truly excited) and
+some negative (e.g. but she was not successful last time) the overall sentiment is likely to be Neutral.
+</Note>
+
+![Sentiment analysis](/images/templates/sentiment/sentiment-form.png)
+
+<Snippet file="how-to-use-a-tool.mdx" />
+
+### Tool inputs and output
+The Tool requires one main input: Text to analyze
+Provide the main input and hit `Run once`, you will see the LLM response in a few seconds as shown in the image above.
+
+The output is the overall sentiment label (Positive, Negative or Neutral).
+
+### Tool execution
+<Snippet file="tool-execution.mdx" />
+
+<Snippet file="components/tools/tool-components.mdx" />
+
+### User inputs
+![User inputs](/images/templates/sentiment/sentiment-build-long-text.png)
+
+<Snippet file="components/inputs/long-text-input.mdx" />
+    This component is to provide the input text and is of type long tex inputs.
+
+### Tool steps
+There is only 1 LLM component under the Tool steps in this analysis flow. 
+
+#### Large Language Model (LLM)
+    ![LLM](/images/templates/sentiment/sentiment-build-llm.png)
+    <Snippet file="components/tools/llm.mdx" />
+
+    **[A Good Prompt](/custom-tools/tool-steps/llms/prompt)**
+    1. Be short and precise with your instruction/request from the LLM
+    2. Explicitly note constraints and goals
+    3. Note the goals and important instructions closes possible to the end of the prompt
+
