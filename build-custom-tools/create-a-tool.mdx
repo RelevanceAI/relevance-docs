@@ -11,7 +11,7 @@ The easiest way to get started with creating a tool is to start at the
 Once on the page, click on `+ Create tool` on the top right of the page.
 
 You will be presented with an empty state where you can:
-![Empty state of new Tools](/images/tools/tool2.png)
+![Empty state of new Tools](/images/build-custom-tools/tool2.png)
 1. add knowledge
 2. add inputs
 3. add tool steps
@@ -24,7 +24,7 @@ email responses.
 
 Adding knowledge to a Tool is done by clicking on the `+ Add data` button. Relevance takes
 care of all the required steps, from storing the data to vectorizing all or specified
-fields; details are fully explained at [knowledge](/custom-tools/knowledge/knowledge).
+fields; details are fully explained at [knowledge](/build-custom-tools/knowledge/knowledge).
 
 ### Add inputs
 Every Tool has inputs. 
@@ -32,11 +32,11 @@ Inputs are used to pass data or instruction on how to analyze the data into the 
 
 Adding inputs to a Tool is done by clicking on the `+ Add input` button. Relevance has
 provided you with variety of input types and takes care of all the required steps; 
-details are fully explained at [User inputs](/custom-tools/user-inputs/getting_started). 
+details are fully explained at [User inputs](/build-custom-tools/user-inputs/getting_started). 
 
 ### Add desired steps
 Steps are analysis components. The most frequently used step at Relevance is 
-[LLM](/custom-tools/tool-steps/llms/llm), which allows you to
+[LLM](/build-custom-tools/tool-steps/llms/llm), which allows you to
 communicate with a Large Language Model (LLM) of choice. However, it is not
 limited to that. 
 Relevance has provided you with variety of steps from rather simple ones such as an
@@ -44,13 +44,13 @@ API call to more complicated ones such as vectorizing and knowledge search.
 
 Adding analysis steps to a Tool is done by clicking on the `+ Add step` button. For
 more information on the available steps visit 
-[Tool steps](/custom-tools/tool-steps/getting_started).
+[Tool steps](/build-custom-tools/tool-steps/getting_started).
 
 
 ## Example
 1. On your new Tool page, click on `+ Add input` and then on `+ Text input` 
 to add a new input that accepts short pieces of text. 
-A [Text input](/custom-tools/user-inputs/text-input) component will now appear on the page.
+A [Text input](/build-custom-tools/user-inputs/text-input) component will now appear on the page.
 
     Next, 
     * Add a title (optional)
@@ -63,9 +63,9 @@ A [Text input](/custom-tools/user-inputs/text-input) component will now appear o
     All these are accessible to you to define and use the component as you desire.
     </Tip>
 
-    ![Text inputs](/images/tools/components/user-input/text-input-details1.png)
+    ![Text inputs](/images/build-custom-tools/user-input/text-input-details1.png)
 
-2. Click on `+ Add step` and then choose [LLM](/custom-tools/tool-steps/llms/llm) from the 
+2. Click on `+ Add step` and then choose [LLM](/build-custom-tools/tool-steps/llms/llm) from the 
 available options. This will add an LLM component to the Tool. We are going to 
 experiment with text generation relying on LLMs such as GPT. 
 
@@ -75,7 +75,7 @@ experiment with text generation relying on LLMs such as GPT.
     Create an engaging Instagram caption based on the following: "{{topic}}"
     ```
     
-    ![LLM](/images/tools/components/tool-step/llm-get-started.png)
+    ![LLM](/images/build-custom-tools/tool-step/llm-get-started.png)
 
     <Tip>
     Using `{{}}` and variable names, you can access the variables and their values.
