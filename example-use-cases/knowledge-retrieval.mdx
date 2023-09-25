@@ -30,18 +30,18 @@ even embed it to a websites.
 
 ## Let's build a knowledge retrieval Tool
 1. Start with clicking on `+ Create tool` located on top right of the [Tools](/get-started/key-concepts/tools) page.
-For more information see [how to create a tool](/custom-tools/introduction).
-2. Click on `+ Add data` on the knowledge section to [add knowledge](/custom-tools/knowledge/knowledge) to your Tool. 
+For more information see [how to create a tool](/build-custom-tools/introduction).
+2. Click on `+ Add data` on the knowledge section to [add knowledge](/build-custom-tools/knowledge/knowledge) to your Tool. 
 Note that you can upload knowledge sources to your Tool directly from the add knowledge window, or select already 
 existing data tables on your accounts.
 <Tip>
 Make sure to [enable knowledge](/data/data-tables#enable-knowledge) (i.e. vectorize your data). Vectors allow semantic 
 search (as opposed to word-matching) and increase the accuracy of knowledge retrieval. 
 </Tip>
-3. Add a [text input](/custom-tools/user-inputs/text-input) component which will carry the query/question. Lets call
+3. Add a [text input](/build-custom-tools/user-inputs/text-input) component which will carry the query/question. Lets call
 it `query`. Your Tool must be similar to the image below.
-![knowledge and input](/images/tools/use-cases/knowledge-retrieval-1.png)
-4. Add an [LLM](/custom-tools/tool-steps/llms/llm) component.
+![knowledge and input](/example-use-cases/knowledge-retrieval-1.png)
+4. Add an [LLM](/build-custom-tools/tool-steps/llms/llm) component.
 * **The prompt**
     
     Use `{{}}` and the component names (i.e. `knowledge` and `query` in our current example) to bring the knowledge and the 
@@ -62,10 +62,10 @@ it `query`. Your Tool must be similar to the image below.
     Under LLM advanced options, under "How to handle too much content", click on `Edit` located in front 
     of `knowledge`. By default we select most relevant data using vector search. But it is recommended to 
     set it up manually. 
-    ![knowledge and input](/images/tools/use-cases/knowledge-retrieval-2.png)
+    ![knowledge and input](/images/example-use-cases/knowledge-retrieval-2.png)
     With `Most relevant data` selected, click on "Advanced options" and type `{{query}}` (i.e. name of the component
     containing our question) to filter out any non-relevant information to the query. More details are provided at
-    [How to handle too much text](/custom-tools/tool-steps/llms/how-to-handle-too-much-text).
+    [How to handle too much text](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text).
 
 * **System prompt**
 
@@ -84,9 +84,9 @@ it `query`. Your Tool must be similar to the image below.
 
     Click on LLM output button (located on the top right of the component) if you wish to modify the output. `Answer`
     is the main output, the rest provide you with information regarding the execution and can be safely deleted.
-    ![knowledge and input](/images/tools/use-cases/knowledge-retrieval-3.png)
+    ![knowledge and input](/images/example-use-cases/knowledge-retrieval-3.png)
 
 5. Save the Tool using the button on the top right of the page and you are ready to enter your query and get
 responses from your knowledge retrieval large language model.
 
-![knowledge and input](/images/tools/use-cases/knowledge-retrieval-4.png)
+![knowledge and input](/images/example-use-cases/knowledge-retrieval-4.png)
