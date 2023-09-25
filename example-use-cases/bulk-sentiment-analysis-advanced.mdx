@@ -6,7 +6,9 @@ description: 'Use LLMs in bulk to extract sentiment from messages and their reas
 
 In our last tutorial, we demonstrated a straightforward example of conducting sentiment analysis using LLM chains.
 
-In this tutorial, we're going to enhance this example by configuring multiple outputs to our chain and adding them back to our original spreadsheet as two new columns - we're extracting the reason behind the given sentiment as well. You'll learn how you can have a single LLM prompt output multiple pieces of information.
+In this tutorial, we're going to enhance this example by configuring multiple outputs to our chain and adding them back to our original 
+spreadsheet as two new columns - we're extracting the reason behind the given sentiment as well. 
+You'll learn how you can have a single LLM prompt output multiple pieces of information.
 
 **Extracting Sentiment and Reason Simultaneously**
 
@@ -20,7 +22,8 @@ So, we'll go back to our extract sentiment analysis chain that we created in the
 
 In our initial chain, we've already received the input for the message we want the AI chain to examine. 
 
-To obtain the explanation for the sentiment score, we could either introduce a separate LLM prompt or simply modify our original prompt and then transform the output into a JSON. We'll proceed with the latter.
+To obtain the explanation for the sentiment score, we could either introduce a separate LLM prompt or simply modify our original 
+prompt and then transform the output into a JSON. We'll proceed with the latter.
 
 To accomplish this, we adjust our prompt:
 
@@ -45,7 +48,7 @@ After we've adjusted our prompt, we can proceed to copy one of the messages from
 
 We can now observe that this has provided us with a JSON-like output that includes a reason and the sentiment.
 
-![JSON-like output.svg](/images/bulk-run-output.svg)
+![JSON-like output.svg](/images/templates/sentiment/sentiment-json-like-output.svg)
 
 **Adding Columns for Sentiment and Reason in our original dataset**
 
@@ -55,13 +58,13 @@ We must properly convert our string to JSON. This can be accomplished by adding 
 
 In this instance, it's the output of our LLM prompt called `{{llm.answer}}` that now includes the instruction to perform sentiment analysis and provide a rationale for it.
 
-![convert string to JSON.svg](/images/bulk-run-json.svg)
+![convert string to JSON.svg](/images/templates/sentiment/sentiment-convert-to-json.svg)
 
 **Configure Chain Output**
 
 Now instead of just the LLM answer, we actually want to reference the JSON output for ‘sentiment’, and we'll add another one for ‘reason’.
 
-![Configure output.svg](/images/bulk-run-configure-output.svg)
+![Configure output.svg](/images/templates/sentiment/sentiment-tool-output.svg)
 
 **Run in bulk**
 

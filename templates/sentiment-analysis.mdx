@@ -48,3 +48,71 @@ There is only 1 LLM component under the Tool steps in this analysis flow.
     2. Explicitly note constraints and goals
     3. Include a few examples when possible
 
+## Modify the Tool: Extracting the reason behind the given sentiment
+The existing Tool conducts sentiment analysis using large language models. You might want to modify the Tool to receive
+other analysis results. This can be easily achieved by [cloning](/templates/introduction#clone-a-template-create-a-copy-of-a-tool-in-your-account)
+the existing tool and customizing it in your account.
+
+In this tutorial, we're going to enhance the existing sentiment analyzer by configuring multiple outputs to our Tool and 
+adding them back to our original spreadsheet as two new columns - we're extracting the reason behind the given sentiment as well.
+You'll learn how you can have a single LLM prompt produces multiple pieces of information.
+
+### Copy the existing Tool
+[Cloning](/templates/introduction#clone-a-template-create-a-copy-of-a-tool-in-your-account) the Tool creates a copy of the 
+Tool in your account and enables you to modify the components.
+After cloning the Tool, select it from the [Tools](/get-started/key-concepts/tools) page and go to the Build tab.
+
+### Extracting Sentiment and Reason Simultaneously
+We're going to layer on multiple pieces of functionality within the same Tool to give us the desired output.
+
+**Modify the LLM Prompt**
+
+To obtain the explanation for the sentiment score, we could either introduce a separate LLM prompt or simply modify our existing 
+prompt and then transform the output into a JSON. We'll proceed with the latter.
+
+To accomplish this, we adjust our prompt:
+
+```
+MESSAGE:
+
+"""
+{{message}}
+"""
+
+Based on the above message, respond with a JSON object of the format "{ sentiment, reason }". 
+The sentiment of the message as one of "Neutral", "Positive" or "Negative" and the reason as to why that sentiment is assigned. 
+Only respond with valid JSON.
+```
+
+**Modify the LLM System Prompt**
+
+`You are an expert sentiment classifier. Only ever respond with JSON in the format "{ sentiment, reason }". Do not say anything else.`
+
+After we've adjusted our prompt, we can proceed to try the Tool on one data sample (i.e. simply copy one of the messages from our dataset
+and then hit run). We can now observe that this has provided us with a JSON-like output that includes a reason and the sentiment.
+
+![JSON-like output.svg](/images/templates/sentiment/sentiment-json-like-output.svg)
+
+<Tip>
+Note that LLM outputs are of type string (text). The example above, is a string that is JSON convertible.
+</Tip>
+
+**Configure the LLM Output**
+
+We aim to add a 'sentiment' column and a 'reason' column to our original dataset. To do this, we need to adjust our output.
+We must properly convert our string to JSON. This can be accomplished by adding the 'Convert string to JSON' step to our Tool.
+
+Add a 'Convert string to JSON' component to your Tool. Next, specify the input to this component (i.e the output of the LLM component). 
+For an LLM component that is called `LLM` the output is accessible via `{{llm.answer}}`.
+
+![convert string to JSON.svg](/images/templates/sentiment/sentiment-convert-to-json.svg)
+
+**Configure the Tool Output**
+
+The goal is to reference the JSON output for ‘sentiment’, as well as the ‘reason’ instead of having the sentiment label as the only output.
+This can be achieved by clicking on `Configure` on the output component (i.e. last component of the page) and add the output fields.
+
+![Configure output.svg](/images/templates/sentiment/sentiment-tool-output.svg)
+
+Save all the changes and you are ready for [running](/templates/sentiment-analysis#tool-execution) your Tool and 
+[exporting](/templates/export) the results.
