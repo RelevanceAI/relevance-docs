@@ -1,0 +1,40 @@
+---
+title: 'Frequently Asked Questions'
+sidebarTitle: 'FAQ'
+description: "Frequently asked questions about data and data preparation"
+---
+
+### What is the best practice when preparing a CSV file?
+The quality of your data significantly impacts the results you'll get from your LLM therefore it’s important to properly prepare your dataset.
+You can manually generate your data or pull it from your CRM or any other source. The process of creating the dataset remains the same, regardless of the data source.
+It’s important to include headers for every field/columns in your file.
+Better to void using spaces or special characters in the headers. Stick to lowercase letters and use dashes instead of spaces.
+To improve your experience, we recommend short (a few words) and meaningful header names. 
+
+### What is the maximum allowed file size?
+* Maximum file size to upload is 100mb
+* Maximum number of rows per data table is 50K
+
+### What does Knowledge enable mean?
+After [uploading](/data/data-tables) your data, you will see a pop up window asking which fields to use to [enable knowledge](/data/data-tables#enable-knowledge).
+The selected fields are vectorized and vectors enable semantic search (i.e. search by meaning and not just word matching).
+In other words, vectors help match up a query with the most similar set of information from your dataset (e.g. the most similar responses from the past in a QA dataset).
+
+### How do I know if my dataset is vectorized?
+A dataset labeled with `Knowledge enabled` in the [Data](/get-started/key-concepts/data) page indicated there are vectors associated with the data.
+
+### Is there a way to vectorize/re-vectorize a dataset after the upload process is completed?
+* Re-vectorize: Select the table, click on the `Knowledge` button on the top right and follow up the vectorize wizard
+* Vectorize after upload: If there are no vectors associated with a dataset, your table will appear under `Datasets` (i.e. not Knowledge). Click on the dataset that you wish
+to vectorize. On the new page click on `Convert to knowledge set` and follow up the wizard.
+![Convert a dataset to knowledg](/images/data/data-to-knowledge.png)
+
+### What model(s) Relevance uses for vectorizing text data?
+By default MpNet is used for vectorizing text data. However, there are other models available. To use them, skip [enable knowledge](/data/data-tables#enable-knowledge),
+when [uploading](/data/data-tables) your dataset.
+Next, select the uploaded dataset and click on the `Vectorize`button.
+![Customer vectorize](/images/data/custom-vectorize.png)
+
+### How do I know the name of the field containing the vectirized data?
+Select the dataset that is vectorized and you will see the name of the vector field on the top.
+![vector field](/images/data/vector-field.png)
