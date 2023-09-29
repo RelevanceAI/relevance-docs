@@ -1,0 +1,25 @@
+---
+title: 'Frequently Asked Questions'
+sidebarTitle: 'FAQ'
+description: "Frequently asked questions about building Tools"
+---
+
+### How do I insert variables into CODE step?
+Access to variables is possible via the `params` parameter. For instance, to access a variable called `name`,
+use `params.name` is Javascript or `params["name"]` in Python.
+
+### How do I insert variables into api step?
+On your [API](/build-custom-tools/tool-steps/api) component, change the body to edit as string and use `{{}}` to access variables
+(`{"myfield":"{{myvalue}}"}`).
+
+### How to reduce hallucination for LLM?
+Here are a list of steps to take to improve your experience with LLMs:
+* Providing good and precise [system prompt](/build-custom-tools/tool-steps/llms/llm-advance-setting#system-prompt)
+* providing good prompt [Tips on a good prompt](/build-custom-tools/tool-steps/llms/prompt#tips-on-writing-a-good-prompt-prompt-engineering)
+* Providing data as a background [knowledge](/build-custom-tools/knowledge/knowledge)
+* More experiment with LLMs
+
+### How do I set multiple output?
+In the last step of your Tool, click on `Configure output`. Disable "Infer output from the last step".
+* Using the `Add new output key` you can add outputs
+* Using `{{}}` you can access to variables and steps' outputs
