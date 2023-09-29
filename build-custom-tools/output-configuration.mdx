@@ -1,0 +1,52 @@
+---
+title: 'Configure Tools Output'
+sidebarTitle: 'Output configuration'
+description: 'Configure Tools outputs and get them ready for sharing with your team'
+---
+
+This guide will assist you in sharing and deploying your AI app by configuring the LLM output for a clearer, more understandable result.
+
+So far, we have walked through creating an AI app, adding inputs, knowledge and analysis steps. 
+We want to ensure, Tools are user-friendly and the output(s) are configured correctly. 
+So, the next step is to configure the output, add description to make them fully ready to be shared the Tool team and colleagues. 
+
+
+
+## Add a description
+On your Tool, use the "Build" tab and add a description on top. This simple step can make your Tool UI look more professional and easier to understand.
+![Tool description](/images/build-custom-tools/description.png)
+
+<Tip>
+Tool description is proven to be important in [Agents](/agent/agent) performance.
+</Tip>
+
+## LLM output
+The [LLM component](/build-custom-tools/tool-steps/llms/llm) provides you with various outputs. You can set what to include on the Tool to avoid confusing users.
+On the "Build" page, scroll to your LLM component and click on `Output` on the top right of the component.
+
+![Simplify LLM output.png](/images/build-custom-tools/simplify-llm-output.png)
+
+## Tool output
+On the "Build" page, scroll to the bottom of the page to find the Tool output with the configure button. 
+By default, it will infer the last step of the Tool and use its output.
+
+### Name your output
+If you wish to customize the output, disable "Infer output from last step of chain".
+Using `{{}}` select the desired output variable. For example the answer from a LLM step. 
+Note that when you type in `{{`, the platform provides you with all the available components. 
+Simply click on the desired one, for instance `{{llm.answer}}`. 
+
+![Configure LLM output.png](/images/build-custom-tools/configure-tool-output.png)
+
+You can also name the output filed to make it much more user-friendly. In the picture above, we have named the output ‘answer’.
+
+### Choose multiple outputs
+Click on `Add new output key` to add more variables to your Tool. Using the `X` on the bottom right of each entry, you can remove them.
+
+### Save and share your Tool
+Once you've configured the everything, hit save on the top right. You are ready to [share](/templates/introduction#share-a-tool) your Tool with your team and colleagues.
+
+
+**A bit out-dated but useful video**
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lRU6nk9jUMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
