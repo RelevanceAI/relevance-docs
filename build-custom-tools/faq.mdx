@@ -25,3 +25,78 @@ In the last step of your Tool, click on `Configure output` button. Disable "Infe
 * Using `{{}}` you can access to variables and steps' outputs
 
 More details are provided at [Output configuration](/build-custom-tools/output-configuration)
+
+### Error: Wrong chat history setup
+Below errors can occur when "Conversation history" is not set correctly.
+
+![LLM - conversation History](/images/build-custom-tools/tool-step/llm-conversation-history.png)
+
+```js
+Studio transformation prompt_completion input validation error: must be array {"type":"array"} /history
+```
+Provide values for the conversation or use the `x` to remove it
+
+```js
+Studio transformation prompt_completion input validation error: must be equal to one of the allowed values {"allowedValues":["user","ai","function"]} /history/0/role
+```
+Note that the only allowed roles are `ai` and `user`.
+
+### Error: Rate limit
+```js
+429:
+      {"message":"Rate limit reached for default-gpt-3.5-turbo-16k
+      in organization org-JfRBhZhDGaEQPgWeVxj3OEGF on tokens per min. Limit: 180000
+      / min. Current: 1 / min. Contact us through our help center at
+      help.openai.com if you continue to have
+      issues.","type":"tokens","param":null,"code":"rate_limit_exceeded"}
+```
+
+This error happens when the used API key is set to a different rate limit compared to what Relevance use by default. Trying again with different intervals of pause helps with this issue.
+
+### Error: URL issue
+This error occurs when the input to "Extract website content" receives an input parameter that is not of type string (e.g. a URL).
+
+```js
+Studio transformation browserless_scrape input validation error: must be string {"type":"string"} /website_url
+```
+ 
+![Extract website content](/images/build-custom-tools/tool-step/extract-website-content.png)
+
+A common situation where this happens is when the output of another step (e.g. Google search as shown below) is used as the input to "Extract website content".
+If the output is a list or an object similar to the example below, you need to access the URL field.
+
+![Google search](/images/build-custom-tools/tool-step/google-search-output.png)
+
+In our example, we can access the string URLs in three ways:
+
+<Tabs>
+  <Tab title="Access one URL in the results">
+    If the above result is the output of a `google search` step, accessing the first link is via `google.organic[0].link`
+  </Tab>
+  <Tab title="For Loop">
+    If you wish to check all the items in the returned results, enable `foreach` options
+    ![Enable foreach](/images/build-custom-tools/tool-step/for-each-access.png)
+    And specify the source list and the name of the field you wish to access in each item of the list.
+    ![list access](/images/build-custom-tools/tool-step/extract-website-content-for-each.png)
+  </Tab>
+  <Tip title="LLM to extract URL">
+    The output of Google search can be used as the input to a LLM instructed to extract and return only the first URL.
+  </Tip>
+</Tabs>
+
+### Error: Validators
+
+At Relevance, you can [set up validators](build-custom-tools/tool-steps/llms/validators) for your LLM component to ensure that the output 
+follows the desired format. The below error happens when the LLM's output does not meet the criteria. Prompt engineering is the best way to 
+handle such as situation. Try rewording your prompt and providing examples. 
+
+```js
+Prompt completion did not pass validation
+```
+
+### Error: Credits
+The following error indicates that the credits are below zero and you need to top up to be able to continue using the platform.
+
+```js
+Organization Entitlement setting negative_credits : {"limit":-10000} does not allow this action.
+```
