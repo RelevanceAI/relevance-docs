@@ -1,0 +1,11 @@
+### Run a step if a condition is met
+
+If you wish to run a step, only when a condition is met, click on the three dot menu located on the top right and select **Add conditions** from the menu.
+<p align="center">
+<img width="350" height="150" align="center" src="/images/build-custom-tools/tool-step/add-delete-condition-loop.png" />
+</p>
+
+Conditions must follow JavaScript rules and be written in `{{}}`. For instance,
+* `{{text==="XYZ"}}` --> the variable called `text` is equal to `XYZ`
+* `{{text!=="XYZ"}}` --> the variable called `text` is not equal to `XYZ`
+* `{{clean.transformed===""}}` --> the output of a code step called `clean` is an empty string

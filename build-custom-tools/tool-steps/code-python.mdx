@@ -4,4 +4,41 @@ sidebarTitle: 'Code - Python'
 description: 'A component to run Python'
 ---
 
-Coming Soon
+Although Relevance in general is a zero or low code platform, the functionality of adding Python code snippets to your Tools is 
+available and fully supported.
+Code snippets can be useful is tasks such as pre or post processing of data or analysis at which LLMs are not good.
+
+## How to use a Python step
+
+### Add the component
+To use Python a code you need to add a "Code-Python" step to your Tool.
+![Python step](/images/build-custom-tools/tool-step/python-code-get-started.png)
+
+### Python packages and runtime commands
+
+![Python step](/images/build-custom-tools/tool-step/python-code-fields.png)
+
+You can specify all the required Python packages (e.g. pandas) under `Packages` and all the 
+Runtime commands (apt-get install cuda) under `Runtime Commands`.
+
+Enter your code in the code section as you do in any other IDE (e.g. VS code, PyCharm)
+
+
+### Access to input variables and other steps' output
+* **Access to input variables** is via `params`. `params` is a dictionary and names of variables are the dictionary keys. For example, 
+if there is an input parameter named "title" you can access to title value using `params["title"]
+
+* **Access to other steps' output** is via `steps`. `steps` is a dictionary and names of steps are the dictionary keys. For example, 
+if there is a step named "summary" you can access to its produced value using `steps["summary"]
+
+<Snippet file="components/tools/configure-output.mdx" />
+
+<Snippet file="components/tools/run-step.mdx" />
+
+<Snippet file="components/tools/add-condition.mdx" />
+
+<Snippet file="components/tools/for-each.mdx" />
+
+<Snippet file="components/tools/duplicate-step.mdx" />
+
+<Snippet file="components/tools/delete-step.mdx" />
