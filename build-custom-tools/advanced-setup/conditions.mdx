@@ -4,15 +4,25 @@ sidebarTitle: 'Conditions'
 description: 'Running a step only if conditions are met'
 ---
 
-Each step in Relevance AI can have conditions to determine whether it should run or items to loop through.
+By default, when running a Tool, each tool step is executed once. However, Relevance supports conditional execution. Where 
+a step runs only if the defined condition is met
 
 ## Conditions
 
-With conditions, you can define whether the step should run. Through the three-dot menu on a step you can select to "Enable conditions". This will then show an input field.
+Access loops under the three-dot menu on the top right of steps. Click on **Enable conditions**.
 
-The conditions syntax that is accepted is Javascript style and it has be inside the template handlebars `{{ condition }}`. This means you can use `&&` and `||` for "and" and "or", respectively. Similarly, if you'd like to check if a value has been provided for an optional input "key" you can do `{{ 'key' in params }}`.
+  <p align="center">
+  <img width="350" height="150" align="center" src="/images/build-custom-tools/tool-step/add-delete-condition-loop.png" />
+  </p>
 
-For example, if you'd like to run if the input variable `age` is 30 then you would specify `{{ age === 30 }}`.
+Conditions must follow Javascript syntax and must be written inside the template handlebars `{{ condition }}`. 
+
+<Tip>
+You can use `&&` and `||` for "and" and "or", respectively. 
+</Tip>
+
+In the example below, the LLM step runs if the input variable `age` is 30 (`{{ age === 30 }}`) and the input variable 
+`gender` is female (`{{ gender === "female" }}`).
 
 <Frame caption="Screenshot of the Conditions input in a step">
   <img src="/images/conditions.png" />
