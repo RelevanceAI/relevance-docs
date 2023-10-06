@@ -4,13 +4,9 @@ sidebarTitle: 'Output configuration'
 description: 'Configure Tools outputs and get them ready for sharing with your team'
 ---
 
-This guide will assist you in sharing and deploying your AI app by configuring the LLM output for a clearer, more understandable result.
+This guide will assist you in sharing and deploying your AI Tool by configuring the Tool output for a clearer, more understandable result.
 
-So far, we have walked through creating an AI app, adding inputs, knowledge and analysis steps. 
-We want to ensure, Tools are user-friendly and the output(s) are configured correctly. 
-So, the next step is to configure the output, add description to make them fully ready to be shared the Tool team and colleagues. 
-
-
+After Tools are created, we want to ensure, they are user-friendly and the output(s) are configured correctly. 
 
 ## Add a description
 On your Tool, use the "Build" tab and add a description on top. This simple step can make your Tool UI look more professional and easier to understand.
@@ -20,31 +16,37 @@ On your Tool, use the "Build" tab and add a description on top. This simple step
 Tool description is proven to be important in [Agents](/agent/agent) performance.
 </Tip>
 
-## LLM output
+## LLM step output
 The [LLM component](/build-custom-tools/tool-steps/llms/llm) provides you with various outputs. You can set what to include on the Tool to avoid confusing users.
 On the "Build" page, scroll to your LLM component and click on `Output` on the top right of the component.
 
 ![Simplify LLM output.png](/images/build-custom-tools/simplify-llm-output.png)
 
+Note that you can rename each output by clicking on the name (written after `output.`). You can remove the output by clicking on `x` on the bottom right.
+
 ## Tool output
-On the "Build" page, scroll to the bottom of the page to find the Tool output with the configure button. 
-By default, it will infer the last step of the Tool and use its output.
+On the "Build" page, scroll to the bottom of the page to find "Tool output" box with a "Configure output" button in the center. 
+By default, Tools return the output of the last step. You can change the output name and modify the setup.
 
 ### Name your output
-If you wish to customize the output, disable "Infer output from last step of chain".
+If you wish to customize the output, first click on `Configure output` and disable "Infer output from last step of tool".
 Using `{{}}` select the desired output variable. For example the answer from a LLM step. 
-Note that when you type in `{{`, the platform provides you with all the available components. 
-Simply click on the desired one, for instance `{{llm.answer}}`. 
+Note that when you type in `{{`, the platform provides you with all the available items. 
+Simply click on the desired one, for instance `{{llm.answer}}`. If there is an LLM component in your tool called `llm` whose output is saved in a variable
+called `answer`. 
 
 ![Configure LLM output.png](/images/build-custom-tools/configure-tool-output.png)
 
-You can also name the output filed to make it much more user-friendly. In the picture above, we have named the output ‘answer’.
+Keep in mind that similar to all other outputs, it is possible to also name the final output filed to make it much more user-friendly. 
+In the picture above, we have named the output ‘answer’ (marked with number 4).
 
 ### Choose multiple outputs
-Click on `Add new output key` to add more variables to your Tool. Using the `X` on the bottom right of each entry, you can remove them.
+On the "Set up the output for this tool" page, click on `Add new output key` to add more output variables to your Tool. 
+Using the `X` on the bottom right of each entry, you can remove them.
 
 ### Save and share your Tool
-Once you've configured the everything, hit save on the top right. You are ready to [share](/templates/introduction#share-a-tool) your Tool with your team and colleagues.
+Once you've configured the everything, hit save on the top right. You are ready to [share](/templates/introduction#share-a-tool) your Tool with your 
+team and colleagues.
 
 
 **A bit out-dated but useful video**
