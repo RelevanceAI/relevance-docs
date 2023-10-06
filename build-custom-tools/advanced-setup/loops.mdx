@@ -4,14 +4,36 @@ sidebarTitle: 'Loops'
 description: 'Running a step in a loop'
 ---
 
-Each step in Relevance AI can have conditions to determine whether it should run or items to loop through.
+By default, when running a Tool, each tool step is executed once. However, Relevance supports running a step multiple times in a loop as well.
 
 ## Loops
+Imagine a scenario where we wish to run a step across a set of items. For instance, a list of topics, foreach we need to generate a description
+using a large language model. Or a list of movie names for each we want to generate a summary.
 
-Sometimes you'd like to run a step across a set of items. To do this, under the three-dot menu on a step you can select "Enable foreach". An input field is then show that expects a list of items. You can provide the list of items via the input field and these will be fixed to run each time or you can enter variable mode and specify a variable.
+1. Access loops under the three-dot menu on the top right of steps. Click on **Enable foreach**.
 
-If loop is enabled, a special variable is then avaiable to be used within the step that can reference the individual item or index that it's being ran on with `{{ foreach.item }}` and `{{ foreach.index }}`.
+  <p align="center">
+  <img width="350" height="150" align="center" src="/images/build-custom-tools/tool-step/add-delete-condition-loop.png" />
+  </p>
 
-<Frame caption="Screenshot of the Loop input in a step">
-  <img src="/images/loop-dynamic.png" />
-</Frame>
+2. `Run this transformation multiple times` is the input field that expects a **list** of items (e.g. list of movie names). 
+Provide the input list manually or activate the variable mode as shown in the image below.
+    <p align="center">
+    <img width="600" height="400" align="center" src="/images/build-custom-tools/tool-step/for-each-enable-variable-mode.png" />
+    </p>
+
+  and use `{{variable-name}}` to access an existing variable in the Tool, for instance `{{movies}}`.
+
+3. Access every single item from your input list within a step via `{{ foreach.item }}` or/and `{{ foreach.index }}`.
+In the image below, there is a Python step returning a list of items. We wish to run a large language model 
+on each of the elements with the instruction "Write me a ... ".
+  <p align="center">
+  <img width="700" height="500" align="center" src="/images/build-custom-tools/tool-step/for-each-access-sample.png" />
+  </p>
+
+After enabling Foreach, under `Run this transformation multiple times`, we enable the variable mode and access
+the Python step output via `{{python.transformed}}` - note that the name of the step is `python` in our example.
+
+Next, we use `{{foreach.item}}` to access each of the elements in the list.
+After running the step, we will have as many output tabs as the number of elements in the input list.
+

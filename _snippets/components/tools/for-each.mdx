@@ -5,15 +5,13 @@ If you wish to run a step multiple times, click on the three dot menu located on
 <img width="350" height="150" align="center" src="/images/build-custom-tools/tool-step/add-delete-condition-loop.png" />
 </p>
 
-Imagine there is a Python step returning a list of items and you wish to run a large language model 
-for each of the elements in the list.
+Imagine there is a list of movie names and you wish to run a large language model on each item to generate a summary.
 After enabling Foreach, under `Run this transformation multiple times`, provide the list of items on which the loop should work. 
-In our example, access to the Python step output is via `{{python.transformed}}`.
-Next, use `{{foreach.item}}` to access each of the elements.
-When running the step, you will have as many output tabs as the number of elements in your list.
 
-<p align="center">
-<img width="700" height="500" align="center" src="/images/build-custom-tools/tool-step/for-each-access-sample.png" />
-</p>
+Next, use `{{foreach.item}}` to access each of the elements in your input list.
+
+  <Frame caption="Screenshot of the Loop input in a step">
+    <img src="/images/build-custom-tools/tool-step/loop-dynamic.png" />
+  </Frame>
 
 More details are available at [Loops](/build-custom-tools/advanced-setup/loops).
