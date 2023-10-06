@@ -1,0 +1,17 @@
+---
+title: 'Add loops to steps'
+sidebarTitle: 'Loops'
+description: 'Running a step in a loop'
+---
+
+Each step in Relevance AI can have conditions to determine whether it should run or items to loop through.
+
+## Loops
+
+Sometimes you'd like to run a step across a set of items. To do this, under the three-dot menu on a step you can select "Enable foreach". An input field is then show that expects a list of items. You can provide the list of items via the input field and these will be fixed to run each time or you can enter variable mode and specify a variable.
+
+If loop is enabled, a special variable is then avaiable to be used within the step that can reference the individual item or index that it's being ran on with `{{ foreach.item }}` and `{{ foreach.index }}`.
+
+<Frame caption="Screenshot of the Loop input in a step">
+  <img src="/images/loop-dynamic.png" />
+</Frame>
