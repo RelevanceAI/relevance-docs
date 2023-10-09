@@ -44,8 +44,73 @@ In the picture above, we have named the output ‘answer’ (marked with number 
 On the "Set up the output for this tool" page, click on `Add new output key` to add more output variables to your Tool. 
 Using the `X` on the bottom right of each entry, you can remove them.
 
-### Save and share your Tool
-Once you've configured the everything, hit save on the top right. You are ready to [share](/templates/introduction#share-a-tool) your Tool with your 
+### Add references to Q&A apps
+With Relevance, it is very easy to create a Q&A app on your knowledge-base using our [Knowledge feature](/build-custom-tools/knowledge/knowledge).
+However, a common question we are asked is **how to include references in the response**. In this page, we explain three steps to address
+the referencing concern.
+
+1. Adding fields to use as a reference
+
+    To be able to create references, you need to make sure the context you provide to the LLM includes a field that you can use as a reference. 
+    Such a reference is typically a URL, a filename, an article title or a product name.
+    This means, if you are uploading a CSV to Knowledge, you need to ensure the CSV file includes a column that can be used as a reference. 
+    
+    <Tip>
+    When uploading a PDF or an audio file to Relevance, a filename column will be automatically created. This field can be used as a reference.
+    Naming the files wisely can help with referencing.
+    </Tip>
+
+    As an example, we are using a CSV including columns "title", "content" and "url" and each row is refers to an article from our support documentation.
+
+2. Configuring your Knowledge to include the correct fields
+
+    Under "Advanced options" in the LLM step, you will find a section on 
+    [How to handle too much text](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text). 
+    When "edit" for the `knowledge` variable is clicked a new page pops open, click on "Advanced options".
+    "Columns of data to use as knowledge" is where you can specify the desired column(s) name.
+
+    In our example, we include "title", "content" and "url". Which means only these fields are fetched from the CSV and loaded to the LLM.
+
+    <Frame caption="Screenshot of the column selection modal">
+    <img src="/images/build-custom-tools/tool-step/column-selection.png" />
+    </Frame>
+
+    <Tip>You can [configure](/build-custom-tools/advanced-setup/output-configuration#llm-step-output) an LLM "Prompt" output and check what 
+    is loaded to the LLM.</Tip>
+
+3. Updating your prompt to include the reference
+
+    Finally the instruction to the LLM (the prompt) must indicate inclusion of the reference when a question is answered. In our example, 
+    we use the `url` field as the reference. There are various ways to format the instruction or the output. Here, we tried both JSON and Footnotes.
+
+    <Tabs>
+    <Tab title="JSON">
+        ```
+        Specify the response as JSON in format { answer, references: [{title, url}]" }. Use proper punctuation. 
+        Never provide URLs that are not included in my messages. You must respond in JSON.
+        ```
+
+        We have asked for a JSON response that includes an `answer` and a `references` field. The `references` field is an array of objects that have a 
+        `title` and a `url` field. The `title` field is the title of the article and the `url` field is the URL of the article.
+    </Tab>
+    <Tab title="Footnotes">
+        ```
+        Specify the response as a sentence with footnotes and include the list of references at the end that are formatted as title and url. 
+        Format it like "answer[reference number]". Use proper punctuation. Never provide URLs that are not included in my messages.
+        ```
+
+        We have asked for a response that is a sentence with footnotes. The footnotes will be the references to the articles.
+    </Tab>
+    </Tabs>
+
+    <Tip>
+    1. Adjust the prompts to suit your data, output and accuracy. LLMs are more than capable of providing references and can even be extend to include quotes.
+    2. Few-shot examples of the desired input and output combinations at the start of your prompt is a great way to ensure the LLM mimics your style.
+    </Tip>
+
+
+## Save and share your Tool
+Once you have configured the everything, hit save on the top right. You are ready to [share](/templates/introduction#share-a-tool) your Tool with your 
 team and colleagues.
 
 
