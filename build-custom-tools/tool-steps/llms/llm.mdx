@@ -46,21 +46,21 @@ Start entering a variable name, you will see a list of available variables to ch
 We provide support for not just GPT, but other vendors such as Cohere and Anthropic. We are always adding to this list. 
 Implement once, with the knowledge that as new models come out, your product can take advantage!
 
-| Model name     | Model ID                      | Provider  |
-| -------------- | ----------------------------- | --------- |
-| GPT 4          | `openai-gpt4`                 | OpenAI    |
-| GPT 4 NEW      | `openai-gpt4-0613`            | OpenAI    |
-| GPT 3.5        | `openai-gpt35`                | OpenAI    |
-| GPT 3.5 NEW    | `openai-gpt35-0613`           | OpenAI    |
-| GPT 3.5 16k    | `openai-gpt35-16k `           | OpenAI    |
-| Claude         | `anthropic-claude-v1`         | Anthropic |
-| Claude (100k)  | `anthropic-claude-v1-100k`    | Anthropic |
-| Claude Instant | `anthropic-claude-instant-v1` | Anthropic |
-| Claude Instant (100k) | `anthropic-claude-instant-v1-100k` | Anthropic |
-| Text Bison     | `palm-text-bison`             | Palm      |
-| Chat Bison     | `palm-chat-bison`             | Palm      |
-| Command        | `cohere-command`              | Cohere    |
-| Command Light  | `cohere-command-light`        | Cohere    |
+| Model name     | Model ID                      | Provider  |Model specifics    |
+| -------------- | ----------------------------- | --------- |-------------------|
+| GPT 4          | `openai-gpt4`                 | OpenAI    |English data, larger context (compared to GPT 3.5), Strong reasoning, Coding, Layout, 200+ output languages|
+| GPT 4 NEW      | `openai-gpt4-0613`            | OpenAI    |GPT 3.5 new version (improved accuracy)                        |
+| GPT 3.5        | `openai-gpt35`                | OpenAI    |English data, Medium context, Simple reasoning, Coding, Layout |
+| GPT 3.5 NEW    | `openai-gpt35-0613`           | OpenAI    |GPT 3.5 new version (improved accuracy)                        |
+| GPT 3.5 16k    | `openai-gpt35-16k `           | OpenAI    |GPT 3.5 with increased context window                          |
+| Claude         | `anthropic-claude-v1`         | Anthropic |Large context, Strong in parsing large texts and documents     |
+| Claude (100k)  | `anthropic-claude-v1-100k`    | Anthropic |Claude with increased context window                           |
+| Claude Instant | `anthropic-claude-instant-v1` | Anthropic |Anthropic’s fastest model                                      |
+| Claude Instant (100k) | `anthropic-claude-instant-v1-100k`| Anthropic |Anthropic’s fastest model with increased context window        |
+| Text Bison     | `palm-text-bison`             | Palm      |PaLM 2 model, Fast, Strong in tasks such as sentiment analysis, entity extraction, and content creation|
+| Chat Bison     | `palm-chat-bison`             | Palm      |PaLM 2 model, Fast, Strong in tasks such as language understanding, language generation, and conversations|
+| Command        | `cohere-command`              | Cohere    |Cohere model, supports over 100 languages                      |
+| Command Light  | `cohere-command-light`        | Cohere    |Cohere model, easy to retrain                                  |
 
 In the next pages, we will explain about more advanced settings for your LLM component:
 * [Conversation history](/build-custom-tools/tool-steps/llms/llm-advance-setting#conversation-history)
