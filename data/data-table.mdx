@@ -4,4 +4,60 @@ sidebarTitle: 'Data table'
 description: "A single data table and the available features"
 ---
 
-Coming Soon
+When a data table from uploaded datasets on the [Data](/get-started/key-concepts/data) page is selected, data entries appear 
+in a table view similar to the image below.
+
+![Data table](/images/data/data-table.png)
+
+As can be seen in the image, a data table provides you with many functionalities.
+
+## Enrich with Tools
+Use your Relevance Tools (listed under [Templates](/get-started/key-concepts/templates)) or your own designed/customized tools to
+analyze your data. This functionality is fully explained at [Bulk run](/templates/bulk-run#on-the-data-table-page).
+
+<Tip>
+When setting up an enrichment, try it on the first few [rows](/templates/single-run#on-the-data-table) first to confirm the output 
+and behavior is as expected. Then apply the analysis to your whole data table.
+</Tip>
+
+## Show/Hide columns
+Click on the `n Hidden` button will provide you with a list of columns included in your table and an on/off toggle. Another way to 
+Hide a column is to click on the header and choose "Hide".
+
+## Download
+You can export your data and the analysis results in [standard format](/templates/export#export-to-csv) (i.e. as seen in the table)
+or [wide format](/templates/export#export-wide-format) (i.e. flattened categorical fields).
+
+## Import data
+when there is a new batch of entries (i.e. new rows to be added to an existing dataset), simply click on `Import data` and follow
+the upload wizard.
+Note that, when adding new entries via uploading a new CSV file, for the new data to sit properly under the existing columns, the 
+headers in your existing table and in the new upload file, should be **exactly** the same.
+
+## Add rows
+If you wish to manually add new rows to your data table, click on `Add rows` located under the table. When hovering over a cell in 
+the newly added row, the "full screen" icon (i.e. square with 4 arrows) appears which provides you with edit mode to type in values.
+
+## Add columns
+If you wish to manually add new columns to your data table, click on `Add columns` located to the right of your table. 
+You need to specify if the new column is an Enrichment ([Generate with Tool](/templates/bulk-run#on-the-data-table-page)), or 
+if values will be entered manually. For the latter, you are required to specify the data type as well.
+When hovering over a cell in the newly added column, the "full screen" icon (i.e. square with 4 arrows) appears which provides you with 
+edit mode to type in values. 
+
+<Tip>
+When modifying rows or columns in a table:
+* Do not forget to hit save which appears on the top right of the table.
+* You can use the "Clear changes" button that appears on the top, to undo your changes to the latest saved state.
+</Tip>
+
+## Delete a column
+Click on the header and select "Delete" from the appeared list. Keep in mind that this action is not reversible.
+
+## Rename a column
+Click on the header and select and you can see that the header appears in a text-box. Simply modify the text to rename a column.
+
+## Knowledge
+Knowledge shows you information regarding which fields (if any) in your dataset have been involved in vectorizing and
+what percentage of the entries have been vectorized.
+You can modify the list and save the changes.
