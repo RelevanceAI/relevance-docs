@@ -62,6 +62,75 @@ Implement once, with the knowledge that as new models come out, your product can
 | Command        | `cohere-command`              | Cohere    |Cohere model, supports over 100 languages                      |
 | Command Light  | `cohere-command-light`        | Cohere    |Cohere model, easy to retrain                                  |
 
+
+## Common errors
+### Prompt is too long. Please reduce prompt in length.
+The error message below indicate that the provided prompt includes more tokens than what the choses model allows. To resolve the issue, you can
+use a model that supports higher number of tokens. For large text inputs, Relevance provides you with techniques to automatically keep the tokens withing the accepted
+range; more information is available at [How to handle to much text](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text).
+```
+1. 400: {"message":"aviary.backend.llm.error_handling.PromptTooLongError: Input too long. Received 5002 tokens, but the maximum input length is 
+4090 tokens.","internal_message":"aviary.backend.server.openai_compat.openai_exception.OpenAIHTTPException","code":400,"type":"PromptTooLongError","param":{}}
+2. Token limit for each model
+```
+
+### Validation
+When there are [output validations](/build-custom-tools/tool-steps/llms/llm-advance-setting#validators) set for an LLM, Relevance automatically checks the output
+to confirm the validity. If the output does not match the required setup, the below error will raise.
+The best solution is to improve your prompt with more explanation or examples. 
+```
+Prompt completion did not pass validation
+```
+
+### Too large data
+When using Relevance to [handle large inputs by selecting the most relevant entries](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text), if the 
+input data is too large, you need to [upload](/data/data-tables#upload-file) it as a dataset use it as a [knowledge](/build-custom-tools/knowledge/knowledge) 
+in your Tool. Maximun size for non-knowledge data is 131,072 tokens (~90kb).
+```
+Data is too large for the 'Most relevant data'. Consider adding the data to knowledge.
+```
+
+### Rate limit
+This error happens when the used API key is set to a different rate limit compared to what Relevance uses by default. 
+Trying again with different intervals of pause helps with this issue.
+```
+429: {"message":"Rate limit reached for default-gpt-4 in organization org-... on tokens per min. Limit: 40000 / min. 
+Please try again in 1ms. Contact us through our help center at help.openai.com if you continue to have issues.",
+"type":"tokens","param":null,"code":"rate_limit_exceeded"}
+```
+
+### Negative credits
+The following error indicates that the credits are below zero and you need to top up to be able to continue using the platform.
+```
+Organization Entitlement setting negative_credits : {"limit":0} does not allow this action.
+```
+
+### LLM run rate
+This error happens when the used API key is set to a different limit compared to what Relevance uses by default. 
+Trying again with a longer pause between each run helps with this issue.
+```
+The maximum number of LLM runs per minute for your OpenAI Plan has been reached. If you are using your own OpenAI Key, please either delete your key to use Relevances account, or upgrade your OpenAI Plan.429: {"message":"You exceeded your current quota, please check your plan and billing details.","type":"insufficient_quota","param":null,"code":"insufficient_quota"}
+```
+
+### Temperature
+There is a [temperature](/build-custom-tools/tool-steps/llms/llm-advance-setting#temperature) parameter under LLM advance setting. The below error occurs if the entered value is out of the accepted (0,1) range.
+```
+400: {"message":"-0.5 is less than the minimum of 0 - 'temperature'","type":"invalid_request_error","param":null,"code":null}
+```
+
+### History
+This error occurs if [History](/build-custom-tools/tool-steps/llms/llm-advance-setting#conversation-history) is set to an empty array. Either enter values, or use the `X` button on the right side of each row to remove the empty rows.
+```
+Studio transformation prompt_completion input validation error: must be array {"type":"array"} /history
+```
+
+### Plan limitations
+The below error occurs when GPT-4 is used under a Relevance account with a [plan](/get-started/key-concepts/plans) that does not support the GPT-4 model.
+```
+Organization Entitlement setting premium_llm_generation : {"limit":false} does not allow this action.
+``` 
+
+
 In the next pages, we will explain about more advanced settings for your LLM component:
 * [Conversation history](/build-custom-tools/tool-steps/llms/llm-advance-setting#conversation-history)
 * [System prompt](/build-custom-tools/tool-steps/llms/llm-advance-setting#system-prompt)

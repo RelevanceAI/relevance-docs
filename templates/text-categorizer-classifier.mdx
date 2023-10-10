@@ -32,14 +32,36 @@ similar to what is shown in the image below.
 LLMs are proven to work better when they see samples. Provide sample(s) of your text data and how you would
 categorize it **using items from the list that you entered in the second input**. Use `,` when multiple 
 categories/themes/topics apply.
+**NOTE**: Examples are to cover your coding style not to teach the LLM about your specific data related categorization.
+For instance, if in a dataset, anything related to a dorm (tidiness, cleanness, noise, etc.) is considered "Amenities",
+since "Amenities" is not a near synonym for any of those categories, providing examples will not necessarily result LLMs to 
+categorize "I wish they cleaned the kitchen more frequently" under "Amenities".
 
 <Tip>
 **Good Categories**
 
+LLMs work is to consider 
+Taken from your examples:
+"Cheaper" is semantically close to Affordable (in other words the word affordable is a near-synonym)
+"Make my property value go down" is a good map to "Property value decline" (another near-synonym)
+But
+"Domestic violence" does not bring "less fortunate" or "disadvantaged" to mind.
+Messy / Structure / Maintenance / etc. are not near-synonyms for Amenity. The relation to Amenity is the context that this specific dataset specifies and a 
+general-purpose LLM is not expected to know it. We do not want to force the model to work with word matching or rule-based results as moving away from 
+semantics is like moving backwards.
+
+What I recommend is to 
+keep these (Messy / Structure / Maintenance / etc.) as separate categories
+categorize the data and export the results into a CSV file
+merge all child categories to Amenities as the parent category, in a software like Excel
+
 1. Clear: AI is not an expert in your domain. Keep the categories simple and clear as if you are helping an intern.
 2. Unbiased: Even though AI understands sentiment, it is better to keep the categories neutral (Service vs Good service)
-3. Use `/` to combine two relevant categories (e.g. Customer Service / Support)
-4. Avoid including overlapping categories
+3. Meaningful combination: Use `/` to combine two relevant categories (e.g. Customer Service / Support)
+4. One category per concept: Avoid including overlapping categories
+5. How LLM sees/applies categories: Keep in mind that LLMs see the data under general English, not within any specific context. Categories are applied when 
+there is a near synonym found. For instance, "Making property prices go down" is a near synonym for "Property value decline" or "Drop in value" but not a 
+good map for  "Inflation effect".
 </Tip>
 
 The output is a list of categories assigned to the input. 
