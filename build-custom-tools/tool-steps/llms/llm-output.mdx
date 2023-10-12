@@ -11,17 +11,17 @@ or "write me a number between x and y" the output is always a string that **only
 or a number.
 
 <Tip>
-LLM outputs are always string. So even if they resemble a list, a JSON object, a number or a boolean, make
+LLM outputs are always of type string. So even if they resemble a list, a JSON object, a number or a Boolean, make
 sure to convert the output from string to the actual type when necessary.
 </Tip>
 
-For non-programmers readers, let us look at an example to understand the difference easier:
+For non-programmer readers, let us look at an example to understand the difference easier:
 A string is just a chain of characters with absolutely zero underlying structure. Consider this text, 
 for example, what we see as words does not really mean a word, it is a bunch of non-white-space 
 characters coming after one another.
 
-A json object, however, is a structured set of key values.
-In the json object below, we can access the person's information using the keys (Name, Last name and Age); e.g. `person["Age"]`.
+A JSON object, however, is a structured set of key values.
+In the JSON object below, we can access the person's information using the keys (Name, Last name and Age); e.g. `person["Age"]`.
 
 ```
 person = {
@@ -42,7 +42,7 @@ To be able to further work with the output, you will need to convert it to the d
 When instructing an LLM to generate a JSON object, it is recommended to also set up the 
 [is_json](/build-custom-tools/tool-steps/llms/validators#is-json) validator.
 Next, use a [Convert string to json](/build-custom-tools/tool-steps/convert-string-to-json).
-All you need to do is to feed the llm answer to the convertor component that generates the
+All you need to do is to feed the LLM answer to the convertor component that generates the
 mapping JSON.
 
 ![String to json](/images/build-custom-tools/tool-step/convert-string-to-json.png)
@@ -61,5 +61,5 @@ Use a coding step ([JavaScript](/build-custom-tools/tool-steps/code-javascript) 
 All you need to do is to feed the llm answer to your code step.
 For numbers apply the parser (e.g. `parseInt(string-value)` in JavaScript) and return
 the results.
-For booleans, you can simply use a conditional statement (`if ... else ...`) to return
-the corresponding boolean value (True or False).
+For Booleans, you can simply use a conditional statement (`if ... else ...`) to return
+the corresponding Boolean value (True or False).
