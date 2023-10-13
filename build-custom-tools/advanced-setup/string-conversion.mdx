@@ -1,0 +1,47 @@
+---
+title: 'Convert string to another object'
+sidebarTitle: 'String conversion'
+description: 'How to convert a string object into other formats'
+---
+
+Strings, the default output of LLMs, can be converted into other objects. For example, if you ask an LLM to return a list of strings to you will need to convert it into an array object so that it can be passed into `foreach` loop.
+
+
+### String to JSON
+You can use a [Convert string to json](/build-custom-tools/tool-steps/convert-string-to-json) step to convert the string. Pass in the LLM step answer as input into the step and the output will be converted into a JSON object.
+
+![String to json](/images/build-custom-tools/tool-step/convert-string-to-json.png)
+
+### String to list
+Use a ([JavaScript](/build-custom-tools/tool-steps/code-javascript) Code step or 
+[Python](/build-custom-tools/tool-steps/code-python)) Code step to handle the conversion.
+
+All you need to do is to feed the LLM step answer to your code step, apply the change
+(e.g. `split(separator)` in JavaScript) and return the value.
+
+```javascript
+// if the separator is a comma like "a,b,c,d" -> "['a', 'b', 'c', 'd']"
+return llm.answer.split(',');
+```
+
+![String to list](/images/build-custom-tools/tool-step/llm-output-str-to-list.png)
+
+### String to Numbers or Booleans
+Use a ([JavaScript](/build-custom-tools/tool-steps/code-javascript) Code step or 
+[Python](/build-custom-tools/tool-steps/code-python)) Code step to handle the conversion.
+
+All you need to do is to feed the LLM step answer to your code step
+
+For numbers apply the parser (e.g. `parseInt(string-value)` in JavaScript) and return
+the results.
+
+```javascript
+return parseInt(llm.answer);
+```
+
+For Booleans, you can simply use a conditional statement (`if ... else ...`) to return
+the corresponding Boolean value (True or False).
+
+```javascript
+return llm.answer === 'true';
+```
