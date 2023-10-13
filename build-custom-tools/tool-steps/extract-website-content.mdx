@@ -42,4 +42,26 @@ The below object shows an example where an authentication token called `auth-tok
 <Snippet file="components/tools/step-general.mdx" />
 
 ## Common errors
-* [URL must be a string](/build-custom-tools/faq#error-url-issue)
+### Wrong URL formatting
+This error occurs when the URL field is set to a value that is not of type string. When using the output of another
+step make sure, you access the URL field. Read more at [URL must be a string](/build-custom-tools/faq#error-url-issue).
+
+### Non-array Elements
+When setting up specific elements to be scrapped, make sure to use `+ Add new` to have more than one Element. And if the
+button is clicked do not leave it as an empty list. Use the `x` icon to the right of the row to remove the extra line.
+
+```
+Studio transformation browserless_scrape input validation error: must be array {"type":"array"} /element_selector
+```
+
+### Invalid URL
+This error occurs when the provided URL is not valid.
+```Protocol error (Page.navigate): Cannot navigate to invalid URL```
+
+### Network issue
+This error normally occurs when there are network issues. Make sure your connection is strong, refresh the page and try again.
+```Navigation failed because browser has disconnected!```
+
+### Time output
+This happens wh
+```Navigation timeout of 30000 ms exceeded```
