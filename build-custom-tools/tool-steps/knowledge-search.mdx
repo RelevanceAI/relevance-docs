@@ -4,17 +4,69 @@ sidebarTitle: 'knowledge search'
 description: 'Semantic search in knowledge'
 ---
 
-A vectorized dataset can be used in a vector similarity search. 
-Simply copy the vector name and paste it into the vector field in the 'Knowledge search' step of your Tool.
+A vectorized dataset can be used in a Knowledge search where you look for specific entries relevant to a query.
 
+<Tip>
+If you have not [enabled knowledge](/data/data-tables#enable-knowledge) in the process of 
+[uploading your dataset](/data/data-tables#how-to-create-a-data-table), go to [Data](/get-started/key-concepts/data) 
+page, switch from "Knowledge" to "Datasets", use the `Vectorize` button on the top to vectorize your data.
+If you use other options than knowledge, you will see the name of the vector field as shown in the image
+below.
 ![Vector field.png](/images/data/vector-field.png)
+</Tip>
 
-Go to the chain where you want to use the vectorized dataset and add a Knowledge search’ step for vector similarity search. 
-Select the dataset you've created and set the 'search query'. This will be the user input you want to match with the most similar examples in your dataset.
+## How to use the Knowledge search step
+### Add the component
+You need to add the "Knowledge search" step to your Tool (check how to get started with 
+[creating a tool](/build-custom-tools/tool-steps/getting_started)).
+![Knowledge search](/images/build-custom-tools/tool-step/knowledge-search-get-started.png)
 
-Then choose the model. It should correspond with the one we used to vectorize the data.
+### Knowledge Source
+![Knowledge search](/images/build-custom-tools/tool-step/knowledge-search-fields.png)
+
+Select the target dataset (datasets containing at least a vector field) from the drop-down menu.
+You can also select "All knowledge sets" to perform the search across all the uploaded and vectorized data.
+
+<Tip>
+Only use "All knowledge sets" if they all contain relevant data.
+</Tip>
+
+### Query
+The query is your reference to what you want from your data; it is similar to what you type in Google when performing
+web searches.
+Form your queries wisely, not too long, not too short, precisely mention what needs to be fetched from the data.
+
+### Search type
+* Keyword: This search is suitable for word/phrase matching.
+* Vector search: This search is suitable for semantic search and looking not just at words but at the concept.
+
+<Tip>
+Use word matching when looking for specific words, or even IDs such as model number or response id.
+</Tip>
+
+### Model
+This is the model used for vectorizing your data. By default, Relevance uses the MpNet model for enabling knowledge.
+So, if you have vectorized your data with a model other than MpNet, make sure to select the model from the drop-down
+menu, otherwise, you do not need to make any selection.
 
 
-Coming Soon
+### Content field
+You can select which specific column in your knowledge table be searched. Enter the name of the column (i.e. the header)
+** EXACTLY ** as seen in the table.
+If you do not select any field, Relevance searches across the whole dataset (Keyword), the first vector field (Vector).
+
+<Tip>
+When uploading a CSV file knowing one column will be used for search, it is better to only select that target column when
+[enabling knowledge](/data/data-tables#enable-knowledge), instead of selecting all columns.
+</Tip>
+
+### Page size
+After a search query finalizes, you can specify, how many of the top matching results should be returned as the Search
+result.
+
+### Raw filters
+If you wish to look at a subset of entries in your dataset and perform a search on that subset, you can set raw filters.
+Keep in mind you must form your filters as JSON objects.
+![Raw filters](/images/build-custom-tools/tool-step/knowledge-search-filters.png)
 
 <Snippet file="components/tools/step-general.mdx" />
