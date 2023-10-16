@@ -1,14 +1,22 @@
 ---
-title: 'Convert string to another object'
+title: 'Convert string to another format'
 sidebarTitle: 'String conversion'
-description: 'How to convert a string object into other formats'
+description: 'How to convert a string into other formats'
 ---
 
-Strings, the default output of LLMs, can be converted into other objects. For example, if you ask an LLM to return a list of strings to you will need to convert it into an array object so that it can be passed into `foreach` loop.
+Strings, the default output of LLMs, can be converted into other formats. 
+For example, if you ask an LLM to produce a list of strings, you will need to convert the result into an array object to be
+able to analyze each element in a `foreach` loop individually.
+
+On this page, we will note some of the common conversions. Please keep in mind that we use LLM output as a string example but
+the content applies to any string conversion.
 
 
 ### String to JSON
-You can use a [Convert string to json](/build-custom-tools/tool-steps/convert-string-to-json) step to convert the string. Pass in the LLM step answer as input into the step and the output will be converted into a JSON object.
+You can use a [Convert string to json](/build-custom-tools/tool-steps/convert-string-to-json) step to convert a JSON string
+to a JSON object. 
+In the image below, we pass in the LLM step answer as input into the convertor step and the output is the corresponding
+JSON object.
 
 ![String to json](/images/build-custom-tools/tool-step/convert-string-to-json.png)
 
@@ -16,13 +24,15 @@ You can use a [Convert string to json](/build-custom-tools/tool-steps/convert-st
 Use a ([JavaScript](/build-custom-tools/tool-steps/code-javascript) Code step or 
 [Python](/build-custom-tools/tool-steps/code-python)) Code step to handle the conversion.
 
-All you need to do is to feed the LLM step answer to your code step, apply the change
+All you need to do is to feed the string source value (e.g. LLM step answer) to your code step, apply the change
 (e.g. `split(separator)` in JavaScript) and return the value.
 
+<Tip>
 ```javascript
 // if the separator is a comma like "a,b,c,d" -> "['a', 'b', 'c', 'd']"
 return llm.answer.split(',');
 ```
+</Tip>
 
 ![String to list](/images/build-custom-tools/tool-step/llm-output-str-to-list.png)
 
@@ -30,7 +40,7 @@ return llm.answer.split(',');
 Use a ([JavaScript](/build-custom-tools/tool-steps/code-javascript) Code step or 
 [Python](/build-custom-tools/tool-steps/code-python)) Code step to handle the conversion.
 
-All you need to do is to feed the LLM step answer to your code step
+All you need to do is to feed the string version of the input (e.g. LLM step answer) to your code step.
 
 For numbers apply the parser (e.g. `parseInt(string-value)` in JavaScript) and return
 the results.
