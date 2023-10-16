@@ -1,0 +1,49 @@
+---
+title: 'Insert data into a dataset'
+sidebarTitle: 'Insert to dataset'
+description: 'Insert data from a Tool into a dataset'
+---
+When working with Tools, you might need to save the results into a dataset.
+This can be easily done using Relevance's Insert data in a dataset step.
+
+## How to use a Insert data in a dataset step
+
+### Add the component
+To insert data into a dataset, you need to add a "Insert data in a dataset" step to your Tool (check how to get started with 
+[creating a tool](/build-custom-tools/tool-steps/getting_started)).
+![Python step](/images/build-custom-tools/tool-step/insert-in-ds-get-started.png)
+
+### Dataset id
+
+![Insert to DS step](/images/build-custom-tools/tool-step/insert-in-ds-fields.png)
+
+Name the destination dataset. Not that there are two possibilities:
+* if you enter the name of an existing dataset, new entries will be added to it
+* if a new name is entered, a new dataset will be created to which the new entries will be saved
+
+<Warning>
+Dataset Name must contain only lowercase letters, numbers, hyphens and underscores.
+</Warning>
+
+By using the variable mode (as marked in the image above), you can use `{{}}` to provide the dataset name.
+For instance, if the dataset name is under an input component called `ds_name`, using `{{ds_name}}` in the
+Dataset id field will pass the typed value to be used as the name.
+
+### Documents
+"Documents" is a list (array) of JSON object. You can 
+* manually enter each document (i.e. JSON object) individually using the `+ Add new` button
+* switch to the variable mode (as shown in the image above) and pass on the name of the variable containing
+the list of JSON objects
+
+<Snippet file="components/tools/step-general.mdx" />
+
+## Common errors
+### Dataset name not matching the convention
+```{"message":"Dataset Name must contain only lowercase letters, numbers, hyphens and underscores."} trace-id: 422...429d```
+Enter a valid name for your dataset and try again
+
+### Wrong document format
+What is passed as Documents must be a list/array of valid JSONs. If you see an error similar to the the below, you will need
+to reformat the input documents.
+```Bulk update: Studio transformation bulk_update input validation error: must be array {"type":"array"} /documents```
+

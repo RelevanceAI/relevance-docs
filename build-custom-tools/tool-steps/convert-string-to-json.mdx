@@ -1,9 +1,40 @@
 ---
 title: 'Convert string to JSON'
 sidebarTitle: 'String to JSON'
-description: 'Convert a string value to its corresponding JSON format'
+description: 'Convert a JSON string to its corresponding JSON object'
 ---
 
-Coming Soon
+Strings, the default output of LLMs, can be converted into other formats. 
+For example, if you ask an LLM to produce a JSON object, you will need to convert the result (i.e. a JSON string) to
+its corresponding JSON object.
+
+On this page, we will introduce Relevance's String to JSON converter. Please keep in mind that we use LLM output as a string example but
+the content applies to any JSON string conversion.
+
+
+## How to use the String to JSON converter step
+### Add the component
+Add a "Convert string to JSON" step to your Tool (check how to get started with 
+[creating a tool](/build-custom-tools/tool-steps/getting_started)).
+![Convert string to JSON step](/images/build-custom-tools/tool-step/convert-string-to-json-get-started.png)
+
+### Text input
+Provide the JSON string as the input. In the image below, we pass in the LLM step answer as input into the converter step and 
+the output is the corresponding JSON object.
+
+![String to json](/images/build-custom-tools/tool-step/convert-string-to-json-fields.png)
+
+<Tip>
+Make sure, the input string is a valid JSON otherwise this component will raise an error.
+
+When instructing an LLM to generate a JSON object, it is recommended to also set up the 
+[is_json](/build-custom-tools/tool-steps/llms/validators#is-json) validator. 
+</Tip>
 
 <Snippet file="components/tools/step-general.mdx" />
+
+## Common errors
+### Invalid JSOM
+When the provided input text is not a valid JSON string, similar errors to the one noted below will occur.
+```Unexpected token u in JSON at position 0```
+Fix the input (i.e. make sure it is representing a valid JSON string) and try again.
