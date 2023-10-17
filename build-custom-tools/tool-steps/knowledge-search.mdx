@@ -69,4 +69,108 @@ If you wish to look at a subset of entries in your dataset and perform a search 
 Keep in mind you must form your filters as JSON objects.
 ![Raw filters](/images/build-custom-tools/tool-step/knowledge-search-filters.png)
 
+#### Filter samples
+<Tabs>
+    <Tab title="contains">
+        List rows where entries in the field `description` contains the term `Durian BID`:
+        ```js
+            {
+                "field": "description",
+                "filter_type": "contains",
+                "condition": "==",
+                "condition_value": "Durian BID"
+            }
+        ```
+    </Tab>
+
+    <Tab title="exact_match">
+    List rows where entries in the field `product_name` are exactly `Durian Leather 2 Seater Sofa`:
+    ```js
+        {
+            "field": "product_name",
+            "filter_type": "exact_match",
+            "condition": "==",
+            "condition_value": "Durian Leather 2 Seater Sofa"
+        }
+    ```
+    </Tab>
+    <Tab title="word_match">
+    List rows where entries in the field `description` matches the words `Home curtain`:
+    ```js
+        {
+            "field": "description",
+            "filter_type": "word_match",
+            "condition": "==",
+            "condition_value": "Home curtain"
+        }
+    ```
+    </Tab>
+    <Tab title="categories">
+    List rows where entries in the field `brand` contain `LG` or `samsung`:
+    ```js
+        {
+            "field": "brand",
+            "filter_type": "categories",
+            "condition": ">=",
+            "condition_value": "['LG', 'samsung']"
+        }
+    ```
+    </Tab>
+    <Tab title="exists">
+    List rows where the field `brand` exists (i.e. has a value):
+    ```js
+        {
+            "field": "brand",
+            "filter_type": "exists",
+            "condition": "==",
+            "condition_value": " "
+        }
+    ```
+    </Tab>
+    <Tab title="date">
+    List rows where the field `date` is equal to `2020-07-01`:
+    ```js
+        {
+            "field": ""insert_date_"",
+            "filter_type": "date",
+            "condition": "==",
+            "condition_value": "2020-07-01"
+        }
+    ```
+    </Tab>
+    <Tab title="numeric">
+    List rows where the field `retail_price` is larger than `5000`:
+    ```js
+        {
+            "field": "retail_price",
+            "filter_type": "numeric",
+            "condition": ">",
+            "condition_value": "5000"
+        }
+    ```
+    </Tab>
+    <Tab title="ids">
+    List rows where the field `_id` is equal to `7790e058cbe1b1e10e20cd22a1e53d36`:
+    ```js
+        {
+            "field": "_id",
+            "filter_type": "ids",
+            "condition": "==",
+            "condition_value": "7790e058cbe1b1e10e20cd22a1e53d36"
+        }
+    ```
+    </Tab>
+    <Tab title="regexp">
+    List rows where the field `description` matches the regular expression `.*Durian (\w+)`:
+    ```js
+        {
+            "field": "description",
+            "filter_type": "regexp",
+            "condition": "==",
+            "condition_value": ".*Durian (\w+)"
+        }
+    ```
+    </Tab>
+</Tabs>
+
 <Snippet file="components/tools/step-general.mdx" />
