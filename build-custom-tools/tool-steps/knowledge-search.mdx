@@ -69,20 +69,13 @@ If you wish to look at a subset of entries in your dataset and perform a search 
 Keep in mind you must form your filters as JSON objects.
 ![Raw filters](/images/build-custom-tools/tool-step/knowledge-search-filters.png)
 
+<Tip>
+* Supported operators and conditions: `==`, `!=`, `neq`, `<=`, `>=`, `<` and `>`.
+* The `AND` logic is applied when multiple filters are used (i.e. a list of filters).
+</Tip>
+
 #### Filter samples
 <Tabs>
-    <Tab title="contains">
-        List rows where entries in the field `description` contains the term `Durian BID`:
-        ```js
-            {
-                "field": "description",
-                "filter_type": "contains",
-                "condition": "==",
-                "condition_value": "Durian BID"
-            }
-        ```
-    </Tab>
-
     <Tab title="exact_match">
     List rows where entries in the field `product_name` are exactly `Durian Leather 2 Seater Sofa`:
     ```js
@@ -91,28 +84,6 @@ Keep in mind you must form your filters as JSON objects.
             "filter_type": "exact_match",
             "condition": "==",
             "condition_value": "Durian Leather 2 Seater Sofa"
-        }
-    ```
-    </Tab>
-    <Tab title="word_match">
-    List rows where entries in the field `description` matches the words `Home curtain`:
-    ```js
-        {
-            "field": "description",
-            "filter_type": "word_match",
-            "condition": "==",
-            "condition_value": "Home curtain"
-        }
-    ```
-    </Tab>
-    <Tab title="categories">
-    List rows where entries in the field `brand` contain `LG` or `samsung`:
-    ```js
-        {
-            "field": "brand",
-            "filter_type": "categories",
-            "condition": ">=",
-            "condition_value": "['LG', 'samsung']"
         }
     ```
     </Tab>
