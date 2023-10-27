@@ -1,0 +1,109 @@
+---
+title: 'Convert audio/video to text'
+sidebarTitle: 'Audio/Video to Text'
+description: 'Extract text from an audio/video file'
+---
+
+Audio/Video to text helps save us time when the source data is in audio/video format. When the data is transcribed, it is easy to
+apply any text processing tool such as summarization, quote extraction and theme and topic identification. More importantly, we 
+will no longer need to listen to the file over and over again when we require some information.
+
+On this page, we will introduce three available Tool steps at Relevance to convert audio/video to text.
+
+<Tip>
+Relevance is currently more focused on text analysis. As a result, the supported upload size does not need to be massive. 
+Keep in mind that audio is all needed for transcription. So, if you are working with large video files that might not be
+possible to upload to the platform, you can use tools such as QuickTime to export the audio from and audio file.
+</Tip>
+
+## How to use Convert audio/video to text step
+### Available converters
+* Open AI audio-to-text converter: only supports audio input and you will need your API key to use this converter
+* Deepgram audio/video-to-text converter: Relevance AI's default audio and video-to-text converter
+* Assembly AI audio/video to text converter: Supports both audio and video, highly accurate and the most expensive option
+
+### Add the component
+Add the desired audio (video) to text converter step to your Tool (check how to get started with 
+[creating a tool](/build-custom-tools/tool-steps/getting_started)).
+![Audio to text](/images/build-custom-tools/tool-step/audio-to-text-get-started.png)
+
+### File URL
+All the aforementioned converters require a file as an input. If your file is publicly accessible on the web (i.e. with no 
+authentication or sign-up requirement), simply provide the URL directly or as a 
+[text input](/build-custom-tools/user-inputs/text-input). Otherwise, you will need to add a 
+[File-to-URL](/build-custom-tools/user-inputs/file-to-url) input.
+In either situation, use the `{{variable name}}` to provide the data to the converter.
+
+![Audio to text](/images/build-custom-tools/tool-step/audio-to-text-field.png)
+
+<Snippet file="components/tools/step-general.mdx" />
+
+## Access the output
+<Tip>
+The output produced by different audio/video processing tools follows different structure. You might want to experiment with
+the structure in a code step.
+</Tip>
+### Deepgram
+The output is a dictionary. 
+* To access the transcription in a JavaScript code step:
+
+```
+audio_to_text_v2.results.channels[0].alternatives[0].transcript;
+```
+
+* To access utterances and metadata such as speaker label and start and end time of each utterance in a JavaScript code step:
+
+```
+let paragraphs = steps.audio_to_text_v2.output.results.channels[0].alternatives[0].paragraphs.paragraphs;
+
+for (let p of paragraphs){
+  let speaker = p.speaker;
+  let start = p.start;
+  let end = p.end;
+  let text = "";
+  for (let s of p.sentences){
+    text = text + s.text;
+  }
+```
+
+### AssemblyAI
+The output is a dictionary.
+
+* To access the transcription in a JavaScript code step:
+ 
+```
+steps.audio_to_text_v3.output.text
+```
+
+* To access utterances and metadata such as speaker label and start and end time of each utterance in a JavaScript code step:
+
+```
+let utterances = steps.audio_to_text_v3.output.utterances;
+
+for (let p of utterances){
+  let speaker = p.speaker;
+  let start = p.start;
+  let end = p.end;
+  let text = "";
+  for (let t of p.text){
+    text = text + t.text;
+  }
+```
+
+## Common errors
+### Unsupported file format
+An error similar to the one noted below indicates that the provided input file is not of the supported formats.
+
+```
+"err_code":"Unsupported Media Type","err_msg":"..
+```
+
+Use an audio/video editor to export your file to common audio/video formats and try again.
+
+### File size
+This error only occurs for too large files (60+ MB). If you are working with large video files, use video editing tools such
+as Quicktime to extract the audio.
+
+```
+Request body larger than maxBodyLength limit
+```
