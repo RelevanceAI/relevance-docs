@@ -19,7 +19,8 @@ There are three options available, but we will always be adding more:
 
 ### `is_json`
 
-This validates whether the LLM has returned **only** JSON. It will try to fix it if not. This doesn't require any additional properties.
+This validates whether the LLM has returned **only** JSON. It will try to fix it if not. This doesn't require any additional 
+properties.
 
 <Warning>
     The `prompt_completion` transformation will still return a string, but you
@@ -47,7 +48,12 @@ If you would like to validate a specific format of JSON, you can take advantage 
 
 ### `regex`
 
-This validates whether the LLM's response matches a regex. It will try to fix it if not. This requires a `pattern` property, in this format:
+This validates whether the LLM's response matches a regex. It will try to fix it if not. This requires a `pattern` property, 
+in this format:
+<Tip>
+Relevance automatically adds the noted regex validator to your prompt, meaning that you do not need to double define the regular expression
+both in the prompt and the validator.
+</Tip>
 
 ```ts
 {
