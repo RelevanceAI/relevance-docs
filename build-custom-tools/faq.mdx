@@ -3,6 +3,10 @@ title: 'Frequently Asked Questions'
 sidebarTitle: 'FAQ'
 description: "Frequently asked questions about building Tools"
 ---
+### How do I set default values for input parameters?
+Click on the setting icon, located on the bottom right of the input component. Set the values, and click on "Set current value".
+
+![Input default values](/images/build-custom-tools/tool-step/set-default-value.png)
 
 ### How do I insert variables into CODE step?
 Access to variables is possible via the `params` parameter. For instance, to access a variable called `name`,
@@ -11,6 +15,20 @@ use `params.name` is Javascript or `params["name"]` in Python.
 ### How do I insert variables into the API step?
 On your [API](/build-custom-tools/tool-steps/api) component, change the body to edit as string and use `{{}}` to access variables
 (`{"myfield":"{{myvalue}}"}`).
+
+### Why do I have to use `"""` or "`" around variables in my prompts?
+Such marks (e.g. triple quote marks) are not required nor have a direct functional utility. It is a prompting technique that has been found to work well with LLMs.
+Keep in mind that an LLM prompt is a long piece of text composed of instructions, examples, etc.
+"""X""" / "X" / X are just to specify the scope of X (i.e. the beginning and end of the string X within the prompt).
+A side note that the whole {{X}} brings the variable X into the prompt, meaning there won't be {{}} around it.
+
+### How to make running a step conditional?
+Click on the three vertical dot on the top right of the step and select "Add conditions".
+See the full guide at [Adding condition](/build-custom-tools/tool-steps/getting_started#run-a-step-if-a-condition-is-met) to a step.
+
+### How to run a step multiple time like a loop?
+Click on the three vertical dot on the top right of the step and select "Enable foreach".
+See the full guide at [Loop through a step](/build-custom-tools/tool-steps/getting_started#run-a-step-multiple-times-in-a-loop).
 
 ### How to reduce hallucination for LLM?
 Here are a list of steps to take to improve your experience with LLMs:
