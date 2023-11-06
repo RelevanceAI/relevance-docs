@@ -37,6 +37,15 @@ Here are a list of steps to take to improve your experience with LLMs:
 * Providing data as a background [knowledge](/build-custom-tools/knowledge/knowledge)
 * More experiment with LLMs
 
+### Why is the LLM output cut off in the middle of a sentence and how to fix it?
+LLMs have the capacity for a limited number of tokens. At Relevance, we use ~90% for the prompt (including knowledge) and the rest for the output.
+This means, if your prompt/knowledge are very rich in the number of tokens, there will be not enough room for the full output.
+
+In almost all such cases, the most relevant pieces of knowledge are fetched from the knowledge [How to handle large text](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text).
+Most relevant is a vector search applied to your knowledge to only select the best matching entries within the context to be fed to LLM. 
+By default the top 100 matching entries are fetched. Decrease the page size parameter under advanced option in 
+[most relevant](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text#most-relevant-data).
+
 ### How do I set multiple outputs?
 In the last step of your Tool, click on `Configure output` button. Disable "Infer output from the last step".
 * Using the `Add new output key` you can add outputs
