@@ -31,9 +31,14 @@ Under advanced setting you can provide a prompt for better and more guided summa
 For example you can note the objective or goal of the analysis.
 You can also specify the large language model you wish to use for summarization.
 
+![LLM step](/images/build-custom-tools/tool-step/how-to-handle-large-content-summary.png)
+
 ### Most relevant data
 This option will run a semantic search through the data to extract the most relevant parts to 
 the provided query.
+
+![LLM step](/images/build-custom-tools/tool-step/how-to-handle-large-content-most-relevant.png)
+
 There are some useful advances options:
 * **Query**: 
 By default, we extract the query from the original prompt. However, it is highly recommended to
@@ -45,6 +50,9 @@ for example `{{ question }}` or `{{ search_query }}`.
 * **Columns**
 By default, all columns from the row of data are included in the results. However, you can 
 specify a subset of columns in order to exclude unnecessary data.
+
+* **Page_size**
+This parameter indicates the number of matching entries to be fetched as the search results. It is set to 100 by default.
 
 ### Full
 This option will return the entire content (e.g. the whole knowledge base). 
