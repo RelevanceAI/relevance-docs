@@ -4,6 +4,52 @@ sidebarTitle: 'PDF to Text'
 description: 'Extract text from a PDF - Supports OCR'
 ---
 
-Coming Soon
+PDF-to-Text allows you to extract all the text data from PDF files and further analyze the text or use the text in applications
+such as question answering.
+Note that you can save the extracted text into a knowledge-set to avoid redoing the PDF-to-Text step.
+
+On this page, we will introduce three available Tool steps at Relevance to convert audio/video to text.
+## How to use Convert PDF to text step
+
+### Add the component
+Add the PDF to text converter step to your Tool (check how to get started with 
+[creating a tool](/build-custom-tools/tool-steps/getting_started)).
+![PDF to text](/images/build-custom-tools/tool-step/pdf-to-text-get-started.png)
+
+### File URL
+A PDF-to-text converter requires a file as an input. If your file is publicly accessible on the web (i.e. with no 
+authentication or sign-up requirement), simply provide the URL directly or as a 
+[text input](/build-custom-tools/user-inputs/text-input). Otherwise, you will need to add a 
+[File-to-URL](/build-custom-tools/user-inputs/file-to-url) input.
+In either situation, use the `{{variable name}}` to provide the data to the converter.
+
+![PDF to text](/images/build-custom-tools/tool-step/pdf-to-text-fields.png)
+
+### Use OCR
+OCR (Optical character recognition or optical character reader) is needed for image PDFs (e.g. scanned data).
+This option uses more credits. So, only activate it for image PDFs.
+
+### Available converters
+* Fast converter: Relevance AI's default audio and video-to-text converter which is fast and reasonably accurate
+* Quality converter: Slower and more accurate compared to the previous option
 
 <Snippet file="components/tools/step-general.mdx" />
+
+## Access the output
+The output is a dictionary with two keys `text` and `number_of_pages` containing the extracted text and the number 
+of pages in the file respectively.
+
+```
+pdf_to_text.text
+pdf_to_text.number_of_pages
+```
+
+
+## Common errors
+### Unsupported protocol
+An error similar to the one noted below indicates that the provided input is not a valid URL.
+
+```
+Error:
+Only HTTP(S) protocols are supported
+```
