@@ -41,6 +41,18 @@ The below object shows an example where an authentication token called `auth-tok
 
 <Snippet file="components/tools/step-general.mdx" />
 
+## Access the step output
+The output is a dictionary with two keys `page` and `selectors` containing the extracted text and if any selectors were used.
+Below you can see samples where the default name assigned to the step `scrape` is used.
+Note that a step name is different from the step title. Step titles can be found on the top left
+of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
+
+```
+scrape.output.page
+scrape.output.selectors
+```
+
+
 ## Common errors
 ### Wrong URL formatting
 This error occurs when the URL field is set to a value that is not of type string. When using the output of another
