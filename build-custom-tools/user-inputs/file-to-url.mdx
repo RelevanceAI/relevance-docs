@@ -1,7 +1,33 @@
 ---
 title: 'File to URL'
 sidebarTitle: 'File to URL'
-description: 'Save your input file on the cloud'
+description: 'Temporarily save your input file on the cloud'
 ---
 
-Coming Soon
+## What is a File to URL input
+File to URL input is an input component that allows you to upload a file to the cloud and access it
+via a temporarily URL. This URL can be used in other steps such as Audio transcription, or PDF-to-Text
+to access the content of the file.
+
+<Tip>
+Relevance does not store your file permanently for security reasons. This means the provided URL is
+temporary and expires within 3 days after upload. Therefore, it is recommended to apply the desired analysis
+steps right after upload.
+</Tip>
+
+## When to use the File to URL component
+The File to URL input component is suitable for when you need to provide a file as an input to another component.
+For instance to an OCR step.
+
+## How to add a File to text input to my custom Tool
+The File to URL input component is listed under User inputs. You can add it to your
+Tool using the main section or the side-bar.
+![File to URL](/images/build-custom-tools/user-input/file-to-url-1.png)
+
+## File to URL setting
+<Snippet file="components/inputs/general-input-setting.mdx" />
+
+
+## Access the URL
+To access the URL output use the variable mode `{{}}` and the input step name. Under the default setting it is accessible
+via `{{file_url}}` (or `params.file_url` in  a JavaScript step).
