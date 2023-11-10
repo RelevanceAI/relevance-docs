@@ -4,4 +4,26 @@ sidebarTitle: 'Table'
 description: 'Input data in a tabular format'
 ---
 
-Coming Soon
+## What is a Table input
+Table input is an input component that allows you to enter a structured table-line data.
+
+## When to use the Table input component
+The Table input component is suitable for situations where we have structured data. For example Responses and
+their corresponding labels.
+
+## How to add a Table input to my custom Tool
+The Table input component is listed under User inputs. You can add it to your Tool using the main section
+or the side-bar.
+
+![Table input](/images/build-custom-tools/user-input/table-input-1.png)
+
+## Table input setting
+<Snippet file="components/inputs/general-input-setting.mdx" />
+<Snippet file="components/inputs/default-value-tip.mdx" />
+
+Add new rows using the "Add row" button. When the first row is added, you can specify number of column and their
+corresponding headers.
+
+## Access the entered data
+To access the entered text use the variable mode `{{}}` and the input step name. Under the default setting it is accessible
+via `{{table}}`  (or `params.table` in  a JavaScript step).

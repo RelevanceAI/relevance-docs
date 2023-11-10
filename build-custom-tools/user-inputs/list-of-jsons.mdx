@@ -1,7 +1,26 @@
 ---
-title: 'List of jsons'
+title: 'List of JSON'
 sidebarTitle: 'JSON list'
 description: 'Input a list of JSON objects'
 ---
 
-Coming Soon
+## What is a JSON list
+JSON list is an input component that allows you to enter a list of JSON objects. 
+
+## When to use the JSON list component
+The JSON list component is suitable for lists composed of multiple key values.
+
+## How to add a JSON list to my custom Tool
+The JSON list component is listed under User inputs. You can add it to your Tool using the main section
+or the side-bar.
+
+![JSON list](/images/build-custom-tools/user-input/json-list-input-1.png)
+
+## List of JSON input setting
+<Snippet file="components/inputs/general-input-setting.mdx" />
+<Snippet file="components/inputs/default-value-tip.mdx" />
+
+
+## Access the entered list of JSON
+To access the entered data use the variable mode `{{}}` and the input step name. Under the default setting it is accessible
+via `{{json_list}}` (or `params.json_list` in  a JavaScript step).

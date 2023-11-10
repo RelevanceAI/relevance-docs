@@ -5,8 +5,8 @@ description: 'Input a line of text'
 ---
 
 ## What is a Text input
-Text input is an input component that allows you to enter a line of text. This text can be entered by 
-the user or later fetched from an existing or uploaded dataset.
+Text input is an input component that allows you to enter a line of text. 
+The value can be entered by the user or later fetched from an uploaded dataset (bulk-run).
 
 ## When to use the Text input component
 The Text input component is suitable for short pieces of text. Such as a question, name, topic, etc.
@@ -17,14 +17,9 @@ or the side-bar.
 ![Text inputs](/images/build-custom-tools/user-input/text-input-1.png)
 
 ## Text input setting
-* Title: you can enter a title for your input text
-* Description: you can enter a description on what this input is about
-* Variable name: marked in green, you can rename the variable and use the name to access the variable in your Tool
-* Default value: enter a value and click on `Set current value` to set a default value for the component. Use the 
-bin icon to clear the set default value
-* Optional/Required: you can switch between the two options on the top right. As the name suggests, unlike an
-optional component, a required components must be provided before your analysis starts.
+<Snippet file="components/inputs/general-input-setting.mdx" />
+<Snippet file="components/inputs/default-value-tip.mdx" />
 
-![Text inputs](/images/build-custom-tools/user-input/text-input-details1.png)
-
-And do not forget to save the changes using the options on the top right of the page.
+## Access the entered text
+To access the entered text use the variable mode `{{}}` and the input step name. Under the default setting it is accessible
+via `{{text}}` (or `params.text` in  a JavaScript step).
