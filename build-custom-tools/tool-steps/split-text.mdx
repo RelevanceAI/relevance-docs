@@ -4,6 +4,55 @@ sidebarTitle: 'Split text'
 description: 'Split large pieces of text to smaller chunks'
 ---
 
-Coming Soon
+Split text allows you to break a large piece of text (e.g. the text included in a 10-page PDF guide) into
+smaller chunks. A great use case for this step is how it makes search results more accurate by returning 
+the smaller and more relevant pieces of text.
+
+On this page, we will introduce the Tool step to split text.
+
+## How to use Split text step
+
+### Add the component
+Add the Split text step to your Tool (check how to get started with 
+[creating a tool](/build-custom-tools/tool-steps/getting_started)).
+![Split text](/images/build-custom-tools/tool-step/split-text-get-started.png)
+
+### Text
+A Split text step requires a piece of text as an input. This text can be entered within the step. 
+However, it is often more practical to fetch the value from an input component (e.g. [file to text](/build-custom-tools/user-inputs/file-to-text)) or 
+another step output (e.g. [pdf to text](/build-custom-tools/tool-steps/convert-pdf-to-text)). 
+Use `{{variable name}}` to provide the data to the Split text step.
+
+![Split text](/images/build-custom-tools/tool-step/split-text-fields.png)
+
+### Splitting method
+This is to specify how to chunk the text. There are three options, based on which the rest of the form will 
+be field.
+
+* Tokens: break the input text based on token count. For instance, chunks of 500 tokens/words.
+* Separator: break the input text based on a character separator. For instance, if set to '.', the
+input text will be broken into composing chunks each of them ending with a '.'.
+* New line: break the input text based on new lines.
+
+### Number of tokens
+If "Tokens" is selected in the previous step, the number entered in this field will be used to chunk the input text
+into chunks of X number of tokens. The value can be entered in the step, or can be fetched using the variable 
+mode (`{{variable_name}}`).
+
+
+### Separator
+If "Separator" is selected in the previous step, the character entered in this field will be used to chunk the input text.
+The value can be entered in the step, or can be fetched using the variable 
+mode (`{{variable_name}}`).
 
 <Snippet file="components/tools/step-general.mdx" />
+
+## Access the step output
+The output is a dictionary with a key `chunks`. 
+Below you can see samples where the default name assigned to the step `split` is used.
+Note that a step name is different from the step title. Step titles can be found on the top left
+of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
+
+```
+split.chunks
+```

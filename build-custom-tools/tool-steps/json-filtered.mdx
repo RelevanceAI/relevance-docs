@@ -1,0 +1,48 @@
+---
+title: 'Filter JSON by fields'
+sidebarTitle: 'JSON filtering'
+description: 'Filter a JSON object by fields/keys'
+---
+
+"Filter JSON by fields" allows you to filter out unwanted fields in a JSON dictionary.
+
+On this page, we will introduce the Tool step to "Filter JSON by fields".
+
+## How to use "Filter JSON by fields" step
+
+### Add the component
+Add the "Filter JSON by fields" step to your Tool (check how to get started with 
+[creating a tool](/build-custom-tools/tool-steps/getting_started)).
+![Filter JSON by fields](/images/build-custom-tools/tool-step/filtered-json-get-started.png)
+
+### Object to filter
+A "Filter JSON by fields" step requires a JSON object as an input. This object can be entered within the step. 
+However, it is often more practical to fetch the value from an input component (e.g. [JSON input](/build-custom-tools/user-inputs/json)) or 
+another step output (e.g. [String to JSON](/build-custom-tools/tool-steps/convert-string-to-json)). 
+Use `{{variable name}}` to provide the data to the "Filter JSON by fields" step.
+
+![Filter JSON by fields](/images/build-custom-tools/tool-step/filtered-json-fields.png)
+
+### Fields to keep
+This is to specify which fields (i.e. dictionary keys in the JSON input) must be kept.
+Note that the field names must be typed EXACTLY the same as what was provided in the input.
+
+<Snippet file="components/tools/step-general.mdx" />
+
+## Access the step output
+The output is a dictionary with a key `filtered`. 
+Below you can see samples where the default name assigned to the step `json_filtered` is used.
+Note that a step name is different from the step title. Step titles can be found on the top left
+of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
+
+```
+json_filtered.filtered
+```
+
+## Common errors
+### Unsupported input
+An error similar to the one noted below indicates that the provided input is not a valid JSON object.
+
+```
+Studio transformation object_key_filter input validation error: must be object {"type":"object"} /haystack
+```
