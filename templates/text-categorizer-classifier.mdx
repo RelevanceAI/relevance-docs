@@ -3,71 +3,87 @@ title: 'Categorize text'
 sidebarTitle: 'Categorize text'
 description: 'Categorize/Classify the text into pre-specified categories/classes'
 ---
-One of the frequently used templates at Relevance is "Categorize text".
-This Tool receives a list of predefined categories/themes/topics and a dataset composed
-of at least one column containing text values such as reviews.
-The Tool goes through the data and categorizes each text value to the matching 
-categories/themes/topics from the provided list.
+## Introduction
+Welcome to the documentation for the Categorize Text Tool!
+This Tool is designed to help you categorize text data based on predefined categories or taxonomies. 
+Whether you are a marketer, data analyst, or researcher, this Tool will assist you in efficiently organizing and analyzing your text data.
 
-![Categorize text](/images/templates/text-categorizer-classifier/text-categorizer-classifier-form.png)
+## Overview
+The Categorize Text Tool utilizes advanced artificial intelligence algorithms to categorize text based on a predefined list of categories. 
+By inputting a text sample and a taxonomy, the tool will automatically assign the appropriate categories to the text. 
+This allows you to quickly and accurately categorize your text data, saving you time and effort.
+
+![Categorize text](/images/templates/text-categorizer-classifier/text-categorizer-classifier-answer.png)
 
 <Tip>
 You can bring your own list of categories/themes/topics (BYO) or use 
 [Suggest category Tool](/templates/category-tag-suggester) as the first step of text categorization flow.
 </Tip>
 
-<Snippet file="how-to-use-a-tool.mdx" />
+## Key Features
+1. AI-powered Categorization
+The Categorize Text tool utilizes cutting-edge artificial intelligence to categorize text data. 
+The advanced algorithms analyze the text and match it with the predefined categories, ensuring accurate and reliable categorization. 
+Say goodbye to manual sorting and welcome the speed and accuracy of AI-powered categorization.
 
-### Tool inputs and output
-The Tool requires three main and one optional inputs: 
-1. Text to categorize
-2. List of categories/themes/topics: To be entered as a one category per line
-3. Maximum number of expected categories per input text
-Provide the main inputs and hit `Run once`, you will see the LLM response in a few seconds
-similar to what is shown in the image below. 
+2. Customizable Taxonomy
+Tailor the Tool to your specific needs with the customizable taxonomy feature. 
+You can define your own list of categories or code frame by simply entering them into the Tool. 
+This flexibility allows you to categorize text data according to your unique requirements, making the Tool adaptable to any industry or domain.
 
-![Categorize text](/images/templates/text-categorizer-classifier/text-categorizer-classifier-answer.png)
+3. Tagging per Sample
+Achieve more nuanced categorization with the tagging per sample feature. 
+Specify the number of tags or categories you want to assign to each text sample, enabling you to capture the complexity and richness of your data. 
+This feature is particularly valuable when dealing with diverse or multi-dimensional text data.
 
-4. Example (Example(s) of categorization done by you):
-LLMs are proven to work better when they see samples. Provide sample(s) of your text data and how you would
-categorize it **using items from the list that you entered in the second input**. Use `,` when multiple 
-categories/themes/topics apply.
-**NOTE**: Examples are to cover your coding style not to teach the LLM about your specific data related categorization.
-For instance, if in a dataset, anything related to a dorm (tidiness, cleanness, noise, etc.) is considered "Amenities",
-since "Amenities" is not a near synonym for any of those categories, providing examples will not necessarily result LLMs to 
-categorize "I wish they cleaned the kitchen more frequently" under "Amenities".
+4. User-Friendly Interface
+With its intuitive design, you can effortlessly input text samples and taxonomies, allowing you to focus on the analysis rather than the technicalities. 
+
+<Snippet file="how-to-use-a-Tool.mdx" />
+
+## How to Use
+Using the Categorize Text Tool is a straightforward process. Follow these steps to categorize your text data effortlessly:
+
+* **Text to categorize**: Enter the text sample that you wish to categorize into the "Text Input" field. 
+* **List of categories**: Specify the complete list of categories or taxonomy by entering them into the "Taxonomy" field. 
+Each category should be on a separate line. Customize the taxonomy to align with your specific categorization needs.
+
+    <Tip>
+    **Good Categories**
+
+    1. Clear: AI is not an expert in your domain. Keep the categories simple and clear as if you are helping an intern with zero domain knowledge.
+    2. Near-synonym: Hallucination is a known LLM issue. To prevent such cases, we have pushed the model to avoid self-interpretation.
+    3. Meaningful combination: Use ` / ` (with space on both sides) to combine two relevant categories (e.g. Customer Service / Support)
+    4. One category per concept: Avoid including overlapping categories
+    5. How LLM sees/applies categories: Keep in mind that LLMs see the data under general English, not within any specific context. Categories are applied when 
+    there is a near synonym found. For instance, "Making property prices go down" is a near synonym for "Property value decline" or "Drop in value" but not a 
+    good map for  "Inflation effect".
+    </Tip>
+
+* **Maximum number of categories per Sample**: Determine the number of tags or categories you want to assign to each text sample by specifying the "Tag per Sample" value. 
+This allows for more granular categorization, capturing the nuances of your data.
+* **Example (Optional)**: Provide a few samples using samples similar to your existing data as well as matching items in your taxonomy
 
 <Tip>
-**Good Categories**
+**Near-synonymy is the key**
 
-LLMs work is to consider 
-Taken from your examples:
-"Cheaper" is semantically close to Affordable (in other words the word affordable is a near-synonym)
-"Make my property value go down" is a good map to "Property value decline" (another near-synonym)
-But
-"Domestic violence" does not bring "less fortunate" or "disadvantaged" to mind.
-Messy / Structure / Maintenance / etc. are not near-synonyms for Amenity. The relation to Amenity is the context that this specific dataset specifies and a 
-general-purpose LLM is not expected to know it. We do not want to force the model to work with word matching or rule-based results as moving away from 
-semantics is like moving backwards.
-
-What I recommend is to 
-keep these (Messy / Structure / Maintenance / etc.) as separate categories
-categorize the data and export the results into a CSV file
-merge all child categories to Amenities as the parent category, in a software like Excel
-
-1. Clear: AI is not an expert in your domain. Keep the categories simple and clear as if you are helping an intern.
-2. Unbiased: Even though AI understands sentiment, it is better to keep the categories neutral (Service vs Good service)
-3. Meaningful combination: Use `/` to combine two relevant categories (e.g. Customer Service / Support)
-4. One category per concept: Avoid including overlapping categories
-5. How LLM sees/applies categories: Keep in mind that LLMs see the data under general English, not within any specific context. Categories are applied when 
-there is a near synonym found. For instance, "Making property prices go down" is a near synonym for "Property value decline" or "Drop in value" but not a 
-good map for  "Inflation effect".
+Examples are to cover your coding style not to teach the LLM about your specific data related categorization.
+For instance, if in a survey, topics such as tidiness, cleanness, noise, bills are all considered "Amenities",
+we cannot expect an LLM to tag "I wish they cleaned the kitchen more frequently" with "Amenities". 
+Since "Amenities" is not a near-synonym for any of those categories.
 </Tip>
 
-The output is a list of categories assigned to the input. 
+* **Run the Tool**: Once you have entered the text and defined the taxonomy, click the "Run Tool" button (on the App page) or use the run options 
+on your data table (bulk/single run) to initiate the categorization process. Sit back and let the Tool do the heavy lifting.
 
-### Tool execution
-<Snippet file="tool-execution.mdx" />
+        #### Tool execution at Relevance
+        <Snippet file="tool-execution.mdx" />
+
+* **View Results**: The Tool will analyze the text and assign the appropriate categories based on the predefined taxonomy. 
+The results will be displayed in a clear and organized format, enabling you to easily review and analyze the categorization.
+ 
+
+## Deep dive in the Tool
 
 <Snippet file="components/tools/tool-components.mdx" />
 
@@ -95,15 +111,15 @@ tasks: properly formatting the provided categories/themes/topics, the LLM step a
 #### Properly formatting the provided categories/themes/topics
     String to List formatting
     ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-code1.png)
-    <Snippet file="components/tools/code-python.mdx" />
+    <Snippet file="components/Tools/code-python.mdx" />
         In this case, the Python code, filters out empty lines and creates a list of 
         categories/themes/topics from the provided text.
 
 #### Large Language Model (LLM)
     ![LLM](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-llm.png)
-    <Snippet file="components/tools/llm.mdx" />
+    <Snippet file="components/Tools/llm.mdx" />
 
-    **[A Good Prompt](/build-custom-tools/tool-steps/llms/prompt)**
+    **[A Good Prompt](/build-custom-Tools/Tool-steps/llms/prompt)**
     1. Be short and precise with your instruction/request from the LLM
     2. Stick to one term when referring to the same concept throughout the prompt
     3. Note the goals and important instructions closes possible to the end of the prompt
@@ -113,14 +129,14 @@ tasks: properly formatting the provided categories/themes/topics, the LLM step a
 
 
 #### Properly formatting the output
-1. <Snippet file="components/tools/convert-string-to-json.mdx" />
+1. <Snippet file="components/Tools/convert-string-to-json.mdx" />
    ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-str-to-json.png)
    This is to make sure we can properly save the results in the desired structure.
    
 
 2. Filtering out unwanted categories/themes/topics
     ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-code2.png)
-    <Snippet file="components/tools/code-python.mdx" />
+    <Snippet file="components/Tools/code-python.mdx" />
     Occasionally the LLM might output categories/themes/topics that are not in the pre-specified list.
     This is taken care of using a simple Python code snippet in this Tool.
     
