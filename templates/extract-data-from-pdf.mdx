@@ -3,29 +3,63 @@ title: 'Extract data from PDF'
 sidebarTitle: 'Extract data from PDF'
 description: 'Extract specific information from a PDF'
 ---
-One of the frequently used templates at Relevance is Extract data from PDF.
-This tool enables you to extract specific information from a PDF file.
+## Introduction
+Welcome to the documentation for the "Extract data from PDF" Tool! This Tool is designed to automate the extraction of data from PDF files. 
+Whether you are a data analyst, researcher, or business professional, this Tool will assist you in effortlessly extracting valuable information 
+from PDF documents. With its powerful capabilities and user-friendly interface, this Tool is a great asset in the field of data extraction.
 
-![Extract data from PDF](/images/templates/extract-data-from-pdf/extract-data-from-pdf-form.png)
+## Overview
+The "Extract data from PDF" Tool leverages advanced algorithms and machine learning techniques to extract data from PDFs. It eliminates the 
+need for manual data entry and saves you valuable time and effort. By automating the extraction process, this Tool ensures accuracy and efficiency 
+in handling PDF documents. With its intuitive design and robust features, it is the perfect solution for extracting data from PDFs of any size.
 
-<Snippet file="how-to-use-a-tool.mdx" />
-
-### Tool inputs and output
-The Tool requires two inputs: 
-1. A PDF file (PDF)
-2. A list of topics to extract (Data to extract):
-Provide the input data and hit `Run once`, you will see the LLM response in a few seconds
-similar to what is shown in the image below. Simply click on the Export button on the bottom
-right to save the output.
 ![Extract data from PDF](/images/templates/extract-data-from-pdf/extract-data-from-pdf-answer.png)
 
-<Tip>LLMs are not designed or trained for statistical analysis. Hence, it is recommended
-to ask for topics or subjects that are clearly mentioned in the text.</Tip>
+## Key Features
+1. Automated Data Extraction:
+The "Extract data from PDF" Tool automates the process of extracting data from PDF documents. It analyzes the structure and content of the PDF to 
+identify and extract the relevant data points. This eliminates the need for manual data entry, reducing errors and saving you valuable time.
 
-The output is a CSV with columns representing the extracted data.
+2. Data Point Customization:
+The Tool allows you to customize the data points you want to extract from the PDF. Whether it is extracting invoice details, financial data, or customer 
+information, you can specify the data points you need. This flexibility ensures that you extract the specific information that is relevant to your analysis 
+or business needs.
 
-### Tool execution
-<Snippet file="tool-execution.mdx" />
+3. Handling Image PDFs and difficult structure:
+Relevance supports OCR for image PDFs and complex structures.
+<Tip>
+Use the Build page to access the set up and activate OCR - more details are provided in the Deep dive in the Tool section.
+</Tip>
+
+4. Export and Integration:
+The "Extract data from PDF" Tool allows you to export the extracted data in the CSV format. This enables seamless integration with other tools or systems, 
+making it easy to further analyze or process the extracted data.
+
+## How to use the Tool
+<Snippet file="how-to-use-a-tool.mdx" />
+
+Follow these steps to extract data from your PDF documents:
+
+* **Upload PDF**: Upload the PDF file you want to extract data from. 
+
+* **Specify Data Points**: Customize the data points you want to extract from the PDF. This could include fields such as "Legal name," "Invoice number," 
+"Invoice date," "Bank details," or "Invoice items breakdown." Specify the data points that are relevant to your analysis or business needs.
+    <Tip>
+    LLMs are not designed or trained for statistical analysis. Hence, it is recommended
+    to ask for topics or subjects that are clearly mentioned in the text.
+    </Tip>
+
+* **Run the Tool**: Once you have uploaded the file and entered your data points, click the "Run Tool" button (on the App page) or use 
+the run options on your data table (bulk/single run) to initiate the the analysis process. The Tool will analyze the PDF document and 
+extract the specified data points. Sit back and relax while the Tool does the work for you.
+
+        #### Tool execution at Relevance
+        <Snippet file="tool-execution.mdx" />
+
+* **Export and Integrate**: Click on "Export" and the extracted data be downloaded to your computer as a CSV file. This CSV contains 
+columns representing the extracted data. You can then integrate the data with other tools or systems for further analysis or processing.
+
+## Deep dive in the Tool
 
 <Snippet file="components/tools/tool-components.mdx" />
 

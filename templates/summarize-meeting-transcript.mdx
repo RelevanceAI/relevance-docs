@@ -3,32 +3,70 @@ title: 'Summarize meeting transcript'
 sidebarTitle: 'Summarize transcript'
 description: 'Summarize a meeting transcript based on the specified agenda and focus points'
 ---
-One of the frequently used templates at Relevance is Summarize meeting transcript.
-This Tool receives the transcription of a meeting along with information such as meeting agenda and
-objectives, and produces a summary including all the noted items.
+
+## Introduction
+Welcome to the documentation for the "Summarize Meeting Transcript" Tool! This Tool is designed to provide you with accurate
+and useful summaries of meeting transcripts. Whether you are a busy professional, a team leader, or a researcher, this Tool 
+will assist you in quickly extracting the key points and insights from your meeting discussions. 
+Relying on state-of-the-art natural language processing capabilities and a seamlessly user-friendly interface, 
+this Tool represents a paradigm shift in the realm of meeting summarization, facilitating optimal efficiency.
+
+## Overview
+The "Summarize Meeting Transcript" Tool leverages cutting-edge natural language processing techniques to analyze meeting transcripts 
+and generate concise summaries. It eliminates the need for manual note-taking and saves you valuable time and effort. By summarizing 
+the transcript, this Tool enables you to focus on the most important aspects of the meeting and easily share the key takeaways with 
+your team. With its intuitive design and powerful AI capabilities, it is the perfect solution for extracting valuable insights from 
+your meetings.
 
 ![Summarize meeting transcript](/images/templates/summarize-meeting-transcript/summarize-meeting-transcript-form.png)
 
 <Tip>
-If you want to work with multiple recordings (focus group analysis), [upload them all](/data/data-tables#upload-file) 
-to Relevance as text or original audio/video file first.
-Then use [Bulk run](/templates/bulk-run) with this Tool.
+When analyzing multiple recordings (focus group analysis), [upload them all](/data/data-tables#upload-file) 
+to Relevance as text or original audio/video file first. Then use [Bulk run](/templates/bulk-run) with this Tool.
 </Tip>
 
+## Key Features
+1. Accurate Summarization:
+The "Summarize Meeting Transcript" Tool utilizes advanced language models to accurately summarize meeting transcripts. It identifies 
+the noted key points in the discussion and generates a summary that captures the essence of the meeting. This feature saves you time 
+and effort by condensing lengthy transcripts into concise and informative summaries.
+
+2. Contextual Understanding:
+The Tool goes beyond simple keyword extraction and understands the context of the meeting discussion. It captures the overall flow of 
+the conversation. This contextual understanding enables the Tool to generate summaries that provide a comprehensive overview of the 
+meeting's content.
+
+<Tip>
+Use the Build page to access the set up and directly instruct the LLM. for instance, you can customize the length of the generated summary. 
+More details are provided in the Deep dive in the Tool section.
+</Tip>
+
+3. User-Friendly Interface:
+The "Summarize Meeting Transcript" Tool features a user-friendly interface. Simply provide the transcript, fill the form and specify the 
+themes and topics of interest. The Tool will process the transcript and generate a concise summary in a matter of seconds. 
+The intuitive design ensures a seamless and enjoyable user experience, allowing you to focus on the insights rather than the technicalities.
+
+## How to use the Tool
 <Snippet file="how-to-use-a-tool.mdx" />
 
-### Tool inputs and output
-The Tool requires four main inputs: 
-1. Transcription
-2. Meeting context & agenda
-3. Names of participants
-4. Data to extract
-Provide the main inputs and hit `Run once`, you will see the LLM response in a few seconds.
+Follow these steps to generate a summary of your meeting transcript:
 
-The output is a summary focusing on all the specified points.
+* **Transcript**: Provide the meeting transcript via copy/paste.
 
-### Tool execution
-<Snippet file="tool-execution.mdx" />
+* **Meeting Context and Agenda**: This helps the large language model to understand the context better and focus on the target.
+
+* **People involve**: Providing the names make the summary easier to follow.
+
+* **Data to extract**: Specify the target themes and topics to be included in the summary.
+
+* **Run the Tool**: Once you have filled the form, click the "Run Tool" button (on the App page) or use 
+the run options on your data table (bulk/single run) to initiate the the analysis process. The Tool will analyze the transcript and 
+generate a concise summary based on the content and context of the meeting discussion.
+
+        #### Tool execution at Relevance
+        <Snippet file="tool-execution.mdx" />
+
+## Deep dive in the Tool
 
 <Snippet file="components/tools/tool-components.mdx" />
 
