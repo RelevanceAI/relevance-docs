@@ -3,30 +3,53 @@ title: 'Sentiment analysis'
 sidebarTitle: 'Sentiment analysis'
 description: 'Analyze the overall sentiment of an input text and label it with Positive/Negative or Neutral.'
 ---
-Sentiment analysis is the task of identifying the overall polarity of a piece of text and classifying it as 
-Positive, Negative or Neutral.
-Relevance AI's Sentiment analysis Template receives an input text and produces categorize it into one of the
-three sentiment classes.
+## Introduction
+Welcome to the documentation for the Sentiment Analysis Tool! This Tool is designed to analyze the sentiment of text and provide 
+valuable insights into the expressed opinions. Whether you're a marketer, customer service representative, or business owner, 
+this Tool will assist you in understanding the sentiment behind customer feedback, social media posts, and other textual data. 
+With its advanced algorithms and user-friendly interface, this Tool is a quick and easy way for leveraging sentiment analysis.
+
+## Overview
+The Sentiment Analysis Tool leverages state-of-the-art natural language processing to analyze the sentiment of text. 
+It goes beyond simple keyword analysis and provides a nuanced understanding of the expressed sentiment in the text. By analyzing 
+the sentiment, this Tool enables you to gain valuable insights into customer satisfaction, brand perception, and market trends. 
+With its powerful capabilities and intuitive design, it is the perfect solution for unlocking the sentiment behind textual data.
 
 <Note>
-This tool does not break the input text into its composing sentences. The assigned label is the **overall**
+This Tool does not break the input text into its composing sentences. The assigned label is the **overall**
 sentiment.
-Therefore, if the input is composed of multiple sentences, some positive (e.g. She is truly excited) and
+Therefore, if the input is composed of multiple sentences, some positive (e.g. She is really excited) and
 some negative (e.g. but she was not successful last time) the overall sentiment is likely to be Neutral.
 </Note>
 
 ![Sentiment analysis](/images/templates/sentiment/sentiment-form.png)
 
+## Key Features
+1. **Accurate Sentiment Analysis**:
+The Sentiment Analysis Tool utilizes large language models to accurately analyze the sentiment of text. This feature ensures that 
+you receive reliable and accurate sentiment analysis results, allowing you to make informed decisions based on the insights gained.
+
+2. **Fast Analysis**:
+The Sentiment Analysis Tool produces results in the matter of seconds.
+
+## How to use the Tool
 <Snippet file="how-to-use-a-tool.mdx" />
 
-### Tool inputs and output
-The Tool requires one main input: Text to analyze
-Provide the main input and hit `Run once`, you will see the LLM response in a few seconds as shown in the image above.
+Follow these steps to to analyze the sentiment of your text:
 
-The output is the overall sentiment label (Positive, Negative or Neutral).
+* **Input Text**: Enter the text you want to analyze into the Tool. This could be customer feedback, social media posts, product reviews, 
+or any other textual data. 
 
-### Tool execution
-<Snippet file="tool-execution.mdx" />
+* **Run the Tool**: Once you have uploaded the file and entered your question, click the "Run Tool" button (on the App page) or use 
+the run options on your data table (bulk/single run) to initiate the the analysis process. The Tool will analyze the text and provide 
+sentiment analysis results.
+
+        #### Tool execution at Relevance
+        <Snippet file="tool-execution.mdx" />
+
+* **View Results**: The Tool will display the sentiment analysis results under one of (Positive, Negative or Neutral) labels.
+
+## Deep dive in the Tool
 
 <Snippet file="components/tools/tool-components.mdx" />
 
