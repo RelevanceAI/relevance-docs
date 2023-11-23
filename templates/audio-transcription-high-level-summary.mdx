@@ -1,0 +1,100 @@
+---
+title: 'Audio transcription + High-level analysis'
+sidebarTitle: 'High-level audio analysis'
+description: 'Transcribe audio (speaker and time stamp), an optional high level analysis (topic identification, quote extraction and summary generation)'
+---
+
+## Introduction
+Welcome to the documentation for the "Audio Transcription + High-Level Analysis" Tool! 
+This Tool is designed to transcribe audio files and provide a high-level summary of the main themes/topics as well as quote extraction. 
+Whether you are a journalist, researcher, or business professional, this Tool will assist you in quickly extracting valuable information 
+from audio recordings. 
+With its advanced speech recognition technology and intuitive interface, this Tool provides you with high-quality transcription and high-level
+analysis within seconds.
+
+![audio-transcription-high-level-summary](/images/templates/audio-transcription-high-level-summary/audio-transcription-high-level-summary-1.png)
+
+## Overview
+The "Audio Transcription + High-Level Analysis" Tool leverages state-of-the-art speech recognition algorithms to transcribe audio files accurately. 
+It goes beyond simple transcription and provides meta data such as speaker labels and timestamps. 
+There is an option for high-level theme and topic identification plus generating a summary which allows you to quickly grasp the key points and insights. 
+By combining audio transcription with high-level analysis relying on large language models, this Tool enables you to save time and effort in 
+extracting valuable information from your audio recordings. With its powerful capabilities and user-friendly design, it is the perfect solution 
+for efficient audio analysis.
+
+![audio-transcription-high-level-summary](/images/templates/audio-transcription-high-level-summary/audio-transcription-high-level-summary-2.png)
+
+Key Features
+1. **Accurate Audio Transcription**:
+The "Audio Transcription + High-Level Analysis" Tool utilizes advanced speech recognition technology to transcribe audio files accurately. 
+It can handle various audio formats, including MP3, WAV, and M4a, and convert them into text with high precision. 
+This feature ensures that you receive reliable and accurate transcriptions, saving you time and effort in manual transcription.
+
+<Tip>
+When working with video files, to avoid upload issues, extract the audio before upload and directly work with the audio content.
+</Tip>
+
+2. **Theme/Topic identification**:
+In addition to transcription, the Tool identifies the main discussed themes and topics. It analyzes the transcribed text and extracts key points
+relying on state of the art language models. This frees you from having to listen to the recording to only get the gist.
+
+3. **High-Level Summary**:
+In addition to transcription, the Tool provides a high-level summary of the audio content relying on state of the art large language models. 
+It analyzes the transcribed text and extracts key points, main ideas, and important details. 
+This summary allows you to quickly grasp the essence of the audio recording without having to listen to the entire file. 
+It is a valuable time-saving feature for busy professionals who need to extract information efficiently.
+
+4. **Customizable Analysis**:
+You have the flexibility to customize the level of detail in the high-level analysis. Whether you want to exclude the first speaker, a concise summary or a more detailed overview,
+you can specify the desired depth of analysis. This customization ensures that the high-level summary aligns with your specific needs and preferences.
+
+5. **Speaker Identification**:
+The Tool can identify different speakers in the audio recording. This speaker identification feature is particularly useful in interviews, panel 
+discussions, or any audio recording with multiple participants. It allows you to differentiate between speakers and understand who said what in 
+the transcribed text.
+The first heard voice is labeled with 1, the second one is 2 and so on.
+
+<Snippet file="audio-trim-speaker1.mdx" />
+
+6. **Time Stamps**:
+The Tool provides time stamps in the transcribed text, indicating the exact timing of each segment/utterance. These time stamps enable you to 
+navigate through the audio recording and locate specific parts of interest quickly. 
+It is a convenient feature for reviewing and referencing the audio content.
+
+## How to use the Tool
+<Snippet file="how-to-use-a-tool.mdx" />
+
+Using the "Audio Transcription + High-Level Analysis" Tool is a simple and straightforward process. Follow these steps to transcribe and 
+analyze your audio files:
+
+* **Upload Audio File**: Select the audio file you want to transcribe and analyze. The Tool supports various audio formats, including MP3, 
+WAV, and M4a. Ensure that the audio file is accessible and available for upload.
+
+* **Customize Analysis (Optional)**: If desired, you can customize the level of detail in the high-level analysis. Select your desired options:
+    * Only transcribe / Transcribe and further analysis (i.e. summary over themes and quote extraction)
+    * Keep all utterances / Exclude speaker 1
+    * Instruction for summary and quotes
+
+    <Note>
+    Summary and quote extraction will be done only when the `Transcribe and further analysis` option is selected.
+    If left unspecified, the default analysis settings will be used.
+    </Note>
+
+* **Run the Tool**: Once you have provided the input and configured your desired setup, click the "Run Tool" button (on the App page) or use 
+the run options on your data table (bulk/single run) to initiate the the analysis process.
+        #### Tool execution at Relevance
+        <Snippet file="tool-execution.mdx" />
+
+* **View results**:
+The Tool will display the transcribed text and provide a high-level summary of the audio content in separate tabs (columns in bulk run). 
+You can explore the transcribed text, review the speaker identification, and navigate through the time stamps. 
+The high-level summary will help you quickly grasp the key points and insights from the audio recording.
+
+<Snippet file="bulk-run-for-audio.mdx" />
+
+## Deep dive in the Tool
+
+<Snippet file="components/tools/tool-components.mdx" />
+
+
+

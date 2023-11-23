@@ -4,25 +4,41 @@ sidebarTitle: 'Agent quickstart'
 description: 'Start with your own AI assistant'
 ---
 
-AI Agents are the building blocks of your future AI workforce that you will build and deploy within Relevance. There are powerful assistants that can be equipped with Skills to expanded their capabilities beyond what's traditionally possible. From our customers, we've seen that the best Agents are created by domain experts equipping them with custom Tools that are tailored to their specific needs. 
+Agents are powerful assistants that can be equipped with a variety of Skills. 
+Skills such as Tools designed to target different goals and address different challenges. 
+This is how with AI workforce, we expanded beyond what is traditionally possible.
 
-Creating an agent is a simple process that can be done in a few minutes. We'll guide you through the process of creating your own in this guide.
+<Tip>
+**AI Agents are the building blocks of your future AI workforce. The AI workforce that you will build and deploy 
+within Relevance.**
+</Tip>
+
+Experiment and feedback have proven that best Agents are created by domain experts. Domain expert have the 
+knowledge to equip their Agents with custom Tools that are best tailored to their specific needs. 
 
 ## Creating an Agent
-
-Select "Agents" from the sidebar and click on "+ Create Agent". You will then be able to select to start from scratch or from a template.
+Creating an Agent is a simple process taking only a few minutes.
+Select "Agents" from the left sidebar and click on the "+ Create Agent" button on the top right. 
+This will prompt you to a page with two options 
+* Build your Agent from scratch
+* Use a template (i.e. most settings options are already prefilled)
 
 <Frame>
   <img src="/images/agent/create-agent.png" />
 </Frame>
 
-For this guide, we will use a template so that our next steps are pre-filled. Select "Sales Rep Sean".
+For this guide, we select "Sales Rep Sean".
 
-## Instruct your agent
+## Instruct your Agent
 
-Every agent has a resume that describes their skills and experience. It's important to spend time to configure this so that the agent behaves in a way you expect them to.
+Every Agent has a resume that describes their skills and experience. For best results, it is very important to 
+think through what we want from and Agent and spend enough time on the configuration step.
 
-Each agent has the following details:
+<Tip>
+The more precise you are in the Agents configuration step, the closer the Agents' behavior will be to the desired outcome.
+</Tip>
+
+Each Agent has the following details:
 - Name
 - Emoji
 - System prompt
@@ -33,20 +49,33 @@ Each agent has the following details:
   <img src="/images/agent/sales-rep-sean.png" />
 </Frame>
 
-Sean is a sales rep so the system prompt describes the company he is working for and what he does. In this case, his job is to research companies and write personalised outreach emails for them. That's helpful :)
+Sean is a sales rep so the system prompt describes the company he is working for and what he does. In this case, his job 
+is to research companies and write personalized outreach emails for them. That is helpful :)
 
-However, to take Sean to the next level we need to give him some skills to be able to achieve this - just like a human wouldn't be able to research a company without a device, the internet and google neither can Sean. Let's make sure he has the right skills for the job.
+However, to take Sean to the next level we need to give him some skills to be able to achieve his goals - just like us, 
+Sean would not be able to research a company without a device, the internet and google. 
+Let's make sure he has the right skills for the job.
 
-## Equip skills
+## Equip Skills
 
-Skills are ways for Agents to interact with other systems. They can be used to perform actions, retrieve information and more. In Relevance, the Tools that you create can be equipped as Skills for Agents. This is extremely useful for two reasons:
+Skills are ways for Agents to interact with other systems. They can be used to perform actions, retrieve information and more. 
+In Relevance, all Tools that you create can be equipped as Skills for Agents. This is extremely useful for two reasons:
 
-1. Agents are not limited by the functionality on the platform. It allows you and your team to expand on any functionality that you desire.
-2. The best Agents have skills created for them by domain experts for a specific company. Businesses operate in different ways and just like hiring a person, you want to onboard them on your specific ways.
+1. Agents are not limited to or restricted by the available functionality on the platform; you can expand on any functionality that you desire.
+2. The best Agents have skills created for them by domain experts in a specific company and a specific use case.
 
-However, the benefit of having a community is that you can share and use templates from other members that you then customise to your liking to fast track. For example, with Sean we have Skills for enriching leads with LinkedIn, google search and web browsing to begin. You can start with these and toggle which ones you'd like to run without asking - if you don't toggle this, Sean will ask to run the skill each time it's needed.
+For example, with Sean we have Skills for enriching leads with LinkedIn, google search and web browsing to begin. Start with these and toggle 
+the ones you would give permission for auto-run (i.e. if the toggle is off, Sean will ask for permission to run the Skill each time it is needed).
 
-Once you're done, you can start talking to Sean by clicking on the "Talk to Sales Rep Sean" button.
+<Tip>
+**Take action and [build your own Tools](/build-custom-tools/introduction)**:
+
+Businesses operate in different ways. Similar to hiring a person, you want to onboard your Agents on your specific ways, to your specific Tools.
+So while benefiting from having a community where you can share and use templates from other members, get started with customizing Tools to your 
+liking and do not hesitate to start building your own Tools.
+</Tip>
+
+When finished configuring Sean, start talking to him by clicking on the "Talk to Sales Rep Sean" button.
 
 <Frame>
   <img src="/images/agent/agent-skills.png" />
@@ -54,13 +83,23 @@ Once you're done, you can start talking to Sean by clicking on the "Talk to Sale
 
 ## Working with the Agent
 
-You can talk with your Agent from the conversation view, which has a conversation list on the left sidebar and the current conversation on the right.
+We can talk with Agents on the conversation view page. There is a list of all conversation on the left. Where we 
+can start a new chat using the `+ new chat` button. 
+And, the current conversation can be seen and followed on the right.
 
 <Frame>
   <img src="/images/agent/talk-agent.png" />
 </Frame>
 
-You can see the active Tools in the conversation to remind yourself what skills the agent has. You can also attach files to the conversation by clicking on the paperclip icon. This works by uploading the file to Relevance in a temporary location and sending the URL to the file in the conversation to the agent. It can then use Tools that handle file URLs and pass it through. The agent itself cannot process files.
+Clicking on the `N tools` button in the chat window, we can see the list of Skills/Tools with which the agent is equipped. 
+
+<Tip>
+**Provide input files to an Agent** 
+
+Click on the paperclip icon and follow the upload wizard. This works by uploading your file to Relevance in a temporary
+location and sending the temporary file URL to the Agent in the conversation. 
+The Agent knows how to pass the URL to Tools for analyzing the data.
+</Tip>
 
 If a skill required permission to run, you will see a question appear in the conversation asking you whether it can be ran or not.
 
@@ -68,7 +107,8 @@ If a skill required permission to run, you will see a question appear in the con
   <img src="/images/agent/agent-skill-permission.png" />
 </Frame>
 
-And that's it, with your conversation you can quickly achieve tasks that previously would've taken hours. If you have any questions reach out to our team on in-app live chat or join our Discord community.
+And that's it, with your conversation you can quickly achieve tasks that previously would have taken hours. 
+If you have any questions reach out to our team on in-app live chat or join our Discord community.
 
 <Frame>
   <img src="/images/agent/agent-response.png" />
