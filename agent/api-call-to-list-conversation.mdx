@@ -19,7 +19,7 @@ This page explains all the required steps to successfully make an API call to co
 ### API call to list all conversation Ids
 Relevance stores agent conversations in knowledge. 
 To list all conversations with your Agent, provide the corresponding values for `Region`, `Agent Id` and `Authorization token` in the
-code snippet below and that's all :)
+code snippet below.
 
 ```Python
 url = f"https://api-{Region}.stack.tryrelevance.com/latest/knowledge/sets/list"
@@ -51,13 +51,14 @@ response.json()["results"]
 ```
 
 The output is a list of dictionaries. All conversation Ids associated with the target agent can be found under the `knowledge_set` field.
+In the sample below, `041157d4-61bb-4855-8202-cdf8fab7202a` a conversation than can be used in the next step.
 
 `'knowledge_set': '041157d4-61bb-4855-8202-cdf8fab7202a'`
 
 ## API call to list all conversations using the conversation Id(s)
 
 To list all conversations with your Agent, provide the corresponding values for `Region`, `Conversation Id` and `Authorization token` in the
-code snippet below. The output is a list of all conversations registered between the Agent and the User under the provided, Conversation Id.
+code snippet below. The output is a list of all conversations registered between the Agent and the user under the provided conversation Id.
 
 ```Python
 url = f"https://api-{Region}.stack.tryrelevance.com/latest/knowledge/list"
