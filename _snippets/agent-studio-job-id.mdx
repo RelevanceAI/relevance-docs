@@ -1,0 +1,41 @@
+Run the Python code below with corresponding values for `Region`, `Authorization token` 
+and `Agent Id` on your project.
+
+```Python
+import requests
+import json
+import time
+
+# Define the URL, authorization header, and the JSON payload
+region = "Region"
+url = f"https://api-{region}.stack.tryrelevance.com/latest/agents/trigger"
+authorization_token = "Authorization token"
+headers = {
+    "Authorization": authorization_token,
+    "Content-Type": "application/json"
+}
+payload = {"message":{"role":"user","content":"Hello"},"agent_id":"Agent Id"}
+
+# Convert the payload to a JSON string
+payload_json = json.dumps(payload)
+
+# Send the POST request
+response = requests.post(url, headers=headers, data=payload_json)
+
+# Check the response
+if response.status_code == 200:
+    print("Request was successful!")
+    print("Response:", response.text)
+else:
+    print("Request failed with status code:", response.status_code)
+    print("Response:", response.text)
+
+```
+
+In a successful run, the output is a dictionary containing "studio_id" and "job_id" which are required for the next step 
+(i.e `agent_details`).
+We can access the corresponding values via the code below.
+
+```Python
+agent_details = response.json()
+```
