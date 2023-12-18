@@ -13,8 +13,7 @@ Access to variables is possible via the `params` parameter. For instance, to acc
 use `params.name` is Javascript or `params["name"]` in Python.
 
 ### How do I insert variables into the API step?
-On your [API](/build-custom-tools/tool-steps/api) component, change the body to edit as string and use `{{}}` to access variables
-(`{"myfield":"{{myvalue}}"}`).
+On your [API](/build-custom-tools/tool-steps/api) component, change the body to edit as string and use `{{}}` to access variables..
 
 ### Why do I have to use `"""` or "`" around variables in my prompts?
 Such marks (e.g. triple quote marks) are not required nor have a direct functional utility. It is a prompting technique that has been found to work well with LLMs.
@@ -27,13 +26,13 @@ Click on the three vertical dot on the top right of the step and select "Add con
 See the full guide at [Adding condition](/build-custom-tools/tool-steps/getting_started#run-a-step-if-a-condition-is-met) to a step.
 
 ### How do I use the [Checkbox input](/build-custom-tools/user-inputs/check-box) component as a condition for running a step?
-[Add a condition](/build-custom-tools/advanced-setup/conditions) to your step. And use the `{{checkbox variable name}}`as the value for the condition. For example, under the default
-step name:
+[Add a condition](/build-custom-tools/advanced-setup/conditions) to your step. 
+And use the `{{checkbox variable name}}`as the value for the condition. For example, under the default step name:
 
 * `{{checkbox}}` when checkbox is ticked
 * `{{!checkbox}}` when checkbox is not ticked
 
-  <p align="center">
+  <p>
   <img width="450" height="250" align="center" src="/images/build-custom-tools/checkbox-condition.png" />
   </p>
 
@@ -53,7 +52,8 @@ Here are a list of steps to take to improve your experience with LLMs:
 LLMs have the capacity for a limited number of tokens. At Relevance, we use ~90% for the prompt (including knowledge) and the rest for the output.
 This means, if your prompt/knowledge are very rich in the number of tokens, there will be not enough room for the full output.
 
-In almost all such cases, the most relevant pieces of knowledge are fetched from the knowledge [How to handle large text](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text).
+In almost all such cases, the most relevant pieces of knowledge are fetched from the knowledge 
+[How to handle large text](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text).
 Most relevant is a vector search applied to your knowledge to only select the best matching entries within the context to be fed to LLM. 
 By default the top 100 matching entries are fetched. Decrease the page size parameter under advanced option in 
 [most relevant](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text#most-relevant-data).
@@ -70,18 +70,18 @@ Below errors can occur when "Conversation history" is not set correctly.
 
 ![LLM - conversation History](/images/build-custom-tools/tool-step/llm-conversation-history.png)
 
-```js
+```
 Studio transformation prompt_completion input validation error: must be array {"type":"array"} /history
 ```
 Provide values for the conversation or use the `x` to remove it
 
-```js
+```
 Studio transformation prompt_completion input validation error: must be equal to one of the allowed values {"allowedValues":["user","ai","function"]} /history/0/role
 ```
 Note that the only allowed roles are `ai` and `user`.
 
 ### Error: Rate limit
-```js
+```
 429:
       {"message":"Rate limit reached for default-gpt-3.5-turbo-16k
       in organization org-JfRBhZhDGaEQPgWeVxj3OEGF on tokens per min. Limit: 180000
@@ -90,12 +90,13 @@ Note that the only allowed roles are `ai` and `user`.
       issues.","type":"tokens","param":null,"code":"rate_limit_exceeded"}
 ```
 
-This error happens when the used API key is set to a different rate limit compared to what Relevance uses by default. Trying again with different intervals of pause helps with this issue.
+This error happens when the used API key is set to a different rate limit compared to what Relevance uses by default. 
+Trying again with different intervals of pause helps with this issue.
 
 ### Error: URL issue
 This error occurs when the input to "Extract website content" receives an input parameter that is not of type string (e.g. a URL).
 
-```js
+```
 Studio transformation browserless_scrape input validation error: must be string {"type":"string"} /website_url
 ```
  
@@ -129,13 +130,13 @@ At Relevance, you can [set up validators](build-custom-tools/tool-steps/llms/val
 follows the desired format. The below error happens when the LLM's output does not meet the criteria. Prompt engineering is the best way to 
 handle such as situation. Try rewording your prompt and providing examples. 
 
-```js
+```
 Prompt completion did not pass validation
 ```
 
 ### Error: Credits
 The following error indicates that the credits are below zero and you need to top up to be able to continue using the platform.
 
-```js
+```
 Organization Entitlement setting negative_credits : {"limit":-10000} does not allow this action.
 ```
