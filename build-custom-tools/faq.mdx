@@ -15,12 +15,6 @@ use `params.name` is Javascript or `params["name"]` in Python.
 ### How do I insert variables into the API step?
 On your [API](/build-custom-tools/tool-steps/api) component, change the body to edit as string and use `{{}}` to access variables..
 
-### Why do I have to use `"""` or "`" around variables in my prompts?
-Such marks (e.g. triple quote marks) are not required nor have a direct functional utility. It is a prompting technique that has been found to work well with LLMs.
-Keep in mind that an LLM prompt is a long piece of text composed of instructions, examples, etc.
-"""X""" / "X" / X are just to specify the scope of X (i.e. the beginning and end of the string X within the prompt).
-A side note that the whole {{X}} brings the variable X into the prompt, meaning there won't be {{}} around it.
-
 ### How to make running a step conditional?
 Click on the three vertical dot on the top right of the step and select "Add conditions".
 See the full guide at [Adding condition](/build-custom-tools/tool-steps/getting_started#run-a-step-if-a-condition-is-met) to a step.
