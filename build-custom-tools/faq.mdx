@@ -6,3 +6,12 @@ description: 'Frequently asked questions about building Tools'
 ### How do I set default values for input parameters?
 Click on the setting icon, located on the bottom right of the input component. Set the values, and click on "Set current value".
 
+![Input default values](/images/build-custom-tools/tool-step/set-default-value.png)
+
+### How do I insert variables into CODE step?
+Access to variables is possible via the `params` parameter. For instance, to access a variable called `name`,
+use `params.name` is Javascript or `params["name"]` in Python.
+
+### How do I insert variables into the API step?
+On your [API](/build-custom-tools/tool-steps/api) component, change the body to edit as string and use `{{}}` to access variables..
+
