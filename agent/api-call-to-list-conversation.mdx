@@ -21,6 +21,14 @@ Relevance stores agent conversations in knowledge.
 To list all conversations with your Agent, provide the corresponding values for `Region`, `Agent Id` and `Authorization token` in the
 code snippet below.
 
+<Tip>
+**The endpoint to list all conversation Ids**:
+
+https://api-{Region}.stack.tryrelevance.com/latest/knowledge/sets/list
+
+\<Region\> can be found at [API keys](/get-started/key-concepts/api-keys).
+</Tip>
+
 ```Python
 url = f"https://api-{Region}.stack.tryrelevance.com/latest/knowledge/sets/list"
 filters = [
@@ -59,6 +67,14 @@ In the sample below, `041157d4-61bb-4855-8202-cdf8fab7202a` a conversation than 
 
 To list all conversations with your Agent, provide the corresponding values for `Region`, `Conversation Id` and `Authorization token` in the
 code snippet below. The output is a list of all conversations registered between the Agent and the user under the provided conversation Id.
+
+<Tip>
+**The endpoint to list all conversations with an agent**:
+
+https://api-{Region}.stack.tryrelevance.com/latest/knowledge/list
+
+\<Region\> can be found at [API keys](/get-started/key-concepts/api-keys).
+</Tip>
 
 ```Python
 url = f"https://api-{Region}.stack.tryrelevance.com/latest/knowledge/list"
