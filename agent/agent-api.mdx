@@ -19,6 +19,12 @@ This page explains all the required steps to successfully make an API call to yo
 To start a conversation with your Agent, provide the corresponding values for `Region` and `Authorization token` in the
 code snippet below and that's all :)
 
+    ```Python
+    authorization_token = f"{project_id}:{api_key}"  # Or copy directly from the API Keys page
+    region = Region                                  # Can be found in the API Keys page
+
+    ```
+
 <Tip>
 **The endpoint to trigger a conversation with an agent**:
 
@@ -31,8 +37,7 @@ See above for instructions to access \<region\>, \<studio_id\> and \<job_id\>.
 # Replace these with the actual values obtained from the previous response
 studio_id = agent_details["job_info"]["studio_id"]
 job_id = agent_details["job_info"]["job_id"]
-region = "Region"
-authorization_token = "Authorization token"
+
 done = False
 message = None
 
