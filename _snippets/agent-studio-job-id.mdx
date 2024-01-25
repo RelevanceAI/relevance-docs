@@ -1,49 +1,68 @@
-Run the Python code below with corresponding values for `Region`, `Authorization token` 
-and `Agent Id` on your project.
+* **Step 1: Authorization Token**
 
-```Python
-import requests
-import json
-import time
+    Either directly copy the `Authorization token` from the API page (see above for instructions) or use the 
+    `Project id` and `API key` combination as shown in the snippet below:
 
-# Define the URL, authorization header, and the JSON payload
-region = "Region"
-url = f"https://api-{region}.stack.tryrelevance.com/latest/agents/trigger"
-authorization_token = "Authorization token"
-headers = {
-    "Authorization": authorization_token,
-    "Content-Type": "application/json"
-}
-payload = {"message":{"role":"user","content":"Hello"},"agent_id":"Agent Id"}
+    ```Python
+    authorization_token = f"{project_id}:{api_key}"   # Both values can be found in the API Keys page
 
-# Convert the payload to a JSON string
-payload_json = json.dumps(payload)
+    ```
 
-# Send the POST request
-response = requests.post(url, headers=headers, data=payload_json)
+* **Step 2: Region and Agent id**
 
-# Check the response
-if response.status_code == 200:
-    print("Request was successful!")
-    print("Response:", response.text)
-else:
-    print("Request failed with status code:", response.status_code)
-    print("Response:", response.text)
+    Fetch the values as instructed further up in this page
+    ```Python
+    region = Region       # Can be found in the API Keys page
+    agent_id = Agent_id   # Can be found in the Agent page URL
 
-```
+    ```
 
-<Tip>
-**The endpoint to access an Agent's info**:
+* **Step3: Agent's studio and job ids**
 
-`https://api-{region}.stack.tryrelevance.com/latest/agents/trigger`
+    Run the Python snippets below with corresponding values for `Region`, `Authorization token` and `Agent Id` on your project.
 
-\<region\> can be found at [API keys](/get-started/key-concepts/api-keys).
-</Tip>
+    ```Python
+    import requests
+    import json
+    import time
 
-In a successful run, the output is a dictionary containing "studio_id" and "job_id" which are required for the next step 
-(i.e `agent_details`).
-We can access the corresponding values via the code below.
+    # Define the URL, authorization header, and the JSON payload
+    
+    url = f"https://api-{region}.stack.tryrelevance.com/latest/agents/trigger"
+    headers = {
+        "Authorization": authorization_token,
+        "Content-Type": "application/json"
+    }
+    payload = {"message":{"role":"user","content":"Hello"},"agent_id":agent_id}
 
-```Python
-agent_details = response.json()
-```
+    # Convert the payload to a JSON string
+    payload_json = json.dumps(payload)
+
+    # Send the POST request
+    response = requests.post(url, headers=headers, data=payload_json)
+
+    # Check the response
+    if response.status_code == 200:
+        print("Request was successful!")
+        print("Response:", response.text)
+    else:
+        print("Request failed with status code:", response.status_code)
+        print("Response:", response.text)
+
+    ```
+
+    <Tip>
+    **The endpoint to access an Agent's info**:
+
+    `https://api-{region}.stack.tryrelevance.com/latest/agents/trigger`
+
+    \<region\> can be found at [API keys](/get-started/key-concepts/api-keys).
+    </Tip>
+
+    In a successful run, the output is a dictionary containing "studio_id" and "job_id" which are required for the next step 
+    (i.e `agent_details`).
+    We can access the corresponding values via the code below.
+
+    ```Python
+    agent_details = response.json()
+    ```

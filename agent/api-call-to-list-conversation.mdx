@@ -21,6 +21,13 @@ Relevance stores agent conversations in knowledge.
 To list all conversations with your Agent, provide the corresponding values for `Region`, `Agent Id` and `Authorization token` in the
 code snippet below.
 
+    ```Python
+    authorization_token = f"{project_id}:{api_key}"   # Both values can be found in the API Keys page
+    region = Region       # Can be found in the API Keys page
+    agent_id = Agent_id   # Can be found in the Agent page URL
+
+    ```
+
 <Tip>
 **The endpoint to list all conversation Ids**:
 
@@ -30,7 +37,7 @@ code snippet below.
 </Tip>
 
 ```Python
-url = f"https://api-{Region}.stack.tryrelevance.com/latest/knowledge/sets/list"
+url = f"https://api-{region}.stack.tryrelevance.com/latest/knowledge/sets/list"
 filters = [
             {
               "filter_type": "exact_match",
@@ -40,12 +47,12 @@ filters = [
             {
                 "filter_type": "exact_match",
                 "field": "conversation.agent_id",
-                "condition_value": "Agent Id"
+                "condition_value": agent_id
             }
 ]
 
 headers = {
-      "Authorization": "Authorization token"
+      "Authorization": authorization_token
   }
 
 payload = {"filters":filters, "include_hidden":True}
@@ -59,7 +66,7 @@ response.json()["results"]
 ```
 
 The output is a list of dictionaries. All conversation Ids associated with the target agent can be found under the `knowledge_set` field.
-In the sample below, `041157d4-61bb-4855-8202-cdf8fab7202a` a conversation than can be used in the next step.
+In the sample below, `041157d4-61bb-4855-8202-cdf8fab7202a` is a conversation that can be used in the next step.
 
 `'knowledge_set': '041157d4-61bb-4855-8202-cdf8fab7202a'`
 
@@ -67,6 +74,13 @@ In the sample below, `041157d4-61bb-4855-8202-cdf8fab7202a` a conversation than 
 
 To list all conversations with your Agent, provide the corresponding values for `Region`, `Conversation Id` and `Authorization token` in the
 code snippet below. The output is a list of all conversations registered between the Agent and the user under the provided conversation Id.
+
+    ```Python
+    authorization_token = f"{project_id}:{api_key}"   # Both values can be found in the API Keys page
+    region = Region                                   # Can be found in the API Keys page
+    conversation_id = Conversation_Id                 # From the previous step
+
+    ```
 
 <Tip>
 **The endpoint to list all conversations with an agent**:
@@ -77,12 +91,12 @@ code snippet below. The output is a list of all conversations registered between
 </Tip>
 
 ```Python
-url = f"https://api-{Region}.stack.tryrelevance.com/latest/knowledge/list"
+url = f"https://api-{region}.stack.tryrelevance.com/latest/knowledge/list"
 
-headers = {"Authorization": Authorization token}
+headers = {"Authorization": authorization_token}
 
 payload = {
-    "knowledge_set": "Conversation Id",
+    "knowledge_set": conversation_id,
     "filters":[]
     }
 payload_json = json.dumps(payload)
