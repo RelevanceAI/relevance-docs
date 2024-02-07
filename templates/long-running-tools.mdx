@@ -4,8 +4,7 @@ sidebarTitle: 'Long run time'
 description: 'How to activate a Tool and allow long run time'
 ---
 
-By default Tools run time is set to 15 minutes on Relevance. Below you can find instruction on how to 
-allow long run (i.e. 24 hours execution time) on your desired Tool.
+This page contains all the required steps to allow longer runtime on your desired Tool.
 
 ## Requirements
 ### Region and Authorization token
@@ -57,6 +56,11 @@ tool_inputs = tool_info["params_schema"]["properties"]
 ### Start long running tool
 
 Provide `studio_id` in the code below to trigger a task and check the progress:
+
+<Info>
+* Synchronous triggers last for 30 seconds
+* Asynchronous triggers last for 15 minutes
+</Info>
 
 ```Python
 # Start long running tool
