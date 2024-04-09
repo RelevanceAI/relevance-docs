@@ -97,12 +97,17 @@ headers = {"Authorization": authorization_token}
 
 payload = {
     "knowledge_set": conversation_id,
-    "filters":[]
-    }
+    "filters": [],
+    "sort": [
+        {
+            "insert_date_": "desc"
+        }
+    ]
+}
 payload_json = json.dumps(payload)
 
 # Send the POST request
 response = requests.post(url, headers=headers, data=payload_json)
 
-Conversations = response.json()["results"]
+conversation_messages = response.json()["results"]
 ```
