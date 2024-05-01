@@ -88,32 +88,32 @@ Uploads a temporary file to Relevance.
 
 ## Run a step
 
-```python
+```python Python
 response = run_step("my_step", {"param1": "value1", "param2": "value2"})
 ```
 
 ## Insert data
 
-```python
+```python Python
 data = [{"field1": "value1", "field2": "value2"}, {"field1": "value3", "field2": "value4"}]
 response = insert_data("my_dataset", data)
 ```
 
 ## Retrieve data
 
-```python
+```python Python
 response = retrieve_data("my_dataset", page_size=10, include_fields=["field1", "field2"])
 ```
 
 ## Prompt completion
 
-```python
+```python Python
 response = prompt_completion("My prompt", model="openai-gpt35")
 ```
 
 ## Upload a temporary file
 
-```python
+```python Python
 file_path = "path/to/file.txt"
 response = insert_temp_file(file_path)
 ```
