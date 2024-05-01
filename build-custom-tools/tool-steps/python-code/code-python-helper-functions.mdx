@@ -8,22 +8,9 @@ This client provides an interface to interact with the Relevance API. It include
 
 ## **Functions**
 
-## ```python
-run_step(step_name: str, params: Dict[str, Any])
-```
+## Insert data
 
-Runs a Relevance step with the given name and parameters.
-
-**Arguments**
-
-- `step_name`: The name of the step to run.
-- `params`: A dictionary of parameters to pass to the step.
-
-**Returns**
-
-- The response from the API as a JSON object.
-
-## ```python
+```python Python
 insert_data(dataset_id: str, data: List[Dict[str, Any]])
 ```
 
@@ -38,7 +25,9 @@ Inserts data into a Relevance dataset.
 
 - The response from the API as a JSON object.
 
-## ```python
+## Retrieve data
+
+```python Python
 retrieve_data(dataset_id: str, page_size: int = None, include_fields: List[str] = None)
 ```
 
@@ -54,22 +43,9 @@ Retrieves data from a Relevance dataset.
 
 - The response from the API as a JSON object.
 
-## ```python
-prompt_completion(prompt: str, model: int = None)
-```
+## Upload a temporary file
 
-Runs the `prompt_completion` step with the given prompt and model.
-
-**Arguments**
-
-- `prompt`: The prompt to complete.
-- `model`: The model to use for completion (optional).
-
-**Returns**
-
-- The response from the API as a JSON object.
-
-## ```python
+```python
 insert_temp_file(file_path_or_bytes: str, ext: str = None)
 ```
 
@@ -84,38 +60,73 @@ Uploads a temporary file to Relevance.
 
 - A dictionary containing the download URL of the uploaded file.
 
-## **Usage Examples**
+## Prompt completion
+
+```
+python Python
+prompt_completion(prompt: str, model: int = None)
+```
+
+Runs the `prompt_completion` step with the given prompt and model.
+
+**Arguments**
+
+- `prompt`: The prompt to complete.
+- `model`: The model to use for completion (optional).
+
+**Returns**
+
+- The response from the API as a JSON object.
 
 ## Run a step
 
 ```python Python
-response = run_step("my_step", {"param1": "value1", "param2": "value2"})
+run_step(step_name: str, params: Dict[str, Any])
 ```
 
-## Insert data
+Runs a Relevance step with the given name and parameters.
+
+**Arguments**
+
+- `step_name`: The name of the step to run.
+- `params`: A dictionary of parameters to pass to the step.
+
+**Returns**
+
+- The response from the API as a JSON object.
+
+## **Usage Examples**
+
+### Insert data
 
 ```python Python
 data = [{"field1": "value1", "field2": "value2"}, {"field1": "value3", "field2": "value4"}]
 response = insert_data("my_dataset", data)
 ```
 
-## Retrieve data
+### Retrieve data
 
 ```python Python
 response = retrieve_data("my_dataset", page_size=10, include_fields=["field1", "field2"])
 ```
 
-## Prompt completion
-
-```python Python
-response = prompt_completion("My prompt", model="openai-gpt35")
-```
-
-## Upload a temporary file
+### Upload a temporary file
+Note: Make sure to replace the `region` variable with your actual region.
 
 ```python Python
 file_path = "path/to/file.txt"
 response = insert_temp_file(file_path)
 ```
 
-Note: Make sure to replace the `region` variable with your actual region.
+
+### Prompt completion
+
+```python Python
+response = prompt_completion("My prompt", model="openai-gpt35")
+```
+
+### Run a step
+
+```python Python
+response = run_step("my_step", {"param1": "value1", "param2": "value2"})
+```
