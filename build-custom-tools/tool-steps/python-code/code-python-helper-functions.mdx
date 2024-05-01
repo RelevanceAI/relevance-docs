@@ -1,0 +1,101 @@
+---
+title: "Python Helper Functions"
+sidebarTitle: "Helper Functions"
+description: "Natively Supported Helper Functions"
+---
+
+This client provides an interface to interact with the Relevance API. It includes functions to run various steps, insert and retrieve data, and upload temporary files.
+
+## **Functions**
+
+## `run_step(step_name: str, params: Dict[str, Any])`
+
+Runs a Relevance step with the given name and parameters.
+
+**Arguments**
+
+- `step_name`: The name of the step to run.
+- `params`: A dictionary of parameters to pass to the step.
+
+**Returns**
+
+- The response from the API as a JSON object.
+
+## `insert_data(dataset_id: str, data: List[Dict[str, Any]])`
+
+Inserts data into a Relevance dataset.
+
+**Arguments**
+
+- `dataset_id`: The ID of the dataset to insert into.
+- `data`: A list of dictionaries containing the data to insert.
+
+**Returns**
+
+- The response from the API as a JSON object.
+
+## `retrieve_data(dataset_id: str, page_size: int = None, include_fields: List[str] = None)`
+
+Retrieves data from a Relevance dataset.
+
+**Arguments**
+
+- `dataset_id`: The ID of the dataset to retrieve from.
+- `page_size`: The number of results to return per page (optional).
+- `include_fields`: A list of fields to include in the response (optional).
+
+**Returns**
+
+- The response from the API as a JSON object.
+
+## `prompt_completion(prompt: str, model: int = None)`
+
+Runs the `prompt_completion` step with the given prompt and model.
+
+**Arguments**
+
+- `prompt`: The prompt to complete.
+- `model`: The model to use for completion (optional).
+
+**Returns**
+
+- The response from the API as a JSON object.
+
+## `insert_temp_file(file_path_or_bytes: str, ext: str = None)`
+
+Uploads a temporary file to Relevance.
+
+**Arguments**
+
+- `file_path_or_bytes`: The path to the file or the file contents as bytes.
+- `ext`: The file extension (optional).
+
+**Returns**
+
+- A dictionary containing the download URL of the uploaded file.
+
+## **Usage Examples**
+
+## Run a step
+
+`response = run_step("my_step", {"param1": "value1", "param2": "value2"})`
+
+## Insert data
+
+`data = [{"field1": "value1", "field2": "value2"}, {"field1": "value3", "field2": "value4"}]
+response = insert_data("my_dataset", data)`
+
+## Retrieve data
+
+`response = retrieve_data("my_dataset", page_size=10, include_fields=["field1", "field2"])`
+
+## Prompt completion
+
+`response = prompt_completion("My prompt", model="openai-gpt35")`
+
+## Upload a temporary file
+
+`file_path = "path/to/file.txt"
+response = insert_temp_file(file_path)`
+
+Note: Make sure to replace the `region` variable with your actual region.

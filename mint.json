@@ -1,296 +1,275 @@
 {
-    "$schema": "https://mintlify.com/schema.json",
-    "name": "Relevance AI Documentation",
-    "logo": {
-        "dark": "/images/logo/dark.png",
-        "light": "/images/logo/light.png"
-    },
-    "favicon": "/favicon.png",
-    "colors": {
-        "primary": "#4F46E5",
-        "light": "#a5b4fc",
-        "dark": "#3730a3"
-    },
-    "topbarLinks": [
-        {
-            "name": "Log In",
-            "url": "https://auth.relevanceai.com/login/"
-        }
-    ],
-    "topbarCtaButton": {
-        "name": "Sign Up",
-        "url": "https://auth.relevanceai.com/signup/"
-    },
-    "tabs": [],
-    "feedback": {
-        "thumbsRating": true
-    },
-    "anchors": [
-        {
-            "name": "Community",
-            "icon": "discord",
-            "url": "https://discord.gg/8VHJJrQZMM"
-        },
-        {
-            "name": "Developer Docs & SDK",
-            "icon": "python",
-            "url": "https://sdk.relevanceai.com/"
-        }
-    ],
-    "navigation": [
-        {
-            "group": "Get started",
-            "pages": [
-                "get-started/introduction",
-                {
-                    "group": "Key concepts",
-                    "pages": [
-                        "get-started/key-concepts/agent",
-                        "get-started/key-concepts/tools",
-                        "get-started/key-concepts/data",
-                        "get-started/key-concepts/templates",
-                        "get-started/key-concepts/api-keys",
-                        "get-started/key-concepts/run-a-tool",
-                        "get-started/key-concepts/llm"
-                    ]
-                },
-                "get-started/quickstart/templates",
-                "get-started/quickstart/agent",
-                "security",
-                "get-started/plans",
-                "get-started/system_limits"
-            ]
-        },
-        {
-            "group": "Agents",
-            "pages": [
-                "agent/introduction",
-                "agent/agent-configuration",
-                {
-                    "group": "API Calls",
-                    "pages": [
-                        "agent/agent-api",
-                        "agent/api-call-to-list-conversation"
-                    ]
-                },
-                "agent/faq"
-            ]
-        },
-        {
-            "group": "Tools and Templates",
-            "pages": [
-                "templates/introduction",
-                {
-                    "group": "Run",
-                    "pages": [
-                        "templates/single-run",
-                        "templates/bulk-run"
-                    ]
-                },
-                "templates/export",
-                "templates/faq",
-                {
-                    "group": "Advance",
-                    "pages": [
-                        "templates/long-running-tools"
-                    ]
-                }
-            ]
-        },
-        {
-            "group": "Use cases",
-            "pages": [
-                {
-                    "group": "General",
-                    "pages": [
-                        "templates/gpt-on-my-files",
-                        "templates/gpt-on-my-website",
-                        "example-use-cases/knowledge-retrieval",
-                        "templates/extract-data-from-pdf",
-                        "templates/text-categorizer-classifier",
-                        "templates/summarize-meeting-transcript"
-                    ]
-                },
-                {
-                    "group": "Research",
-                    "pages": [
-                        "templates/category-tag-suggester",
-                        "templates/sentiment-analysis",
-                        "templates/anonymize-text",
-                        {
-                            "group": "Interview analysis",
-                            "pages": [
-                                "templates/audio-transcription-high-level-summary",
-                                "templates/audio-to-utterance-mark-sections",
-                                "templates/audio-to-utterance-data-table",
-                                "templates/category-suggester-for-transcript",
-                                "templates/focused-summarization-quote",
-                                "templates/analyze-responses-in-focus-groups"
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "group": "Sales",
-                    "pages": [
-                        "example-use-cases/few-shot-prompting"
-                    ]
-                }
-            ]
-        },
-        {
-            "group": "How to build a custom Tool",
-            "pages": [
-                "build-custom-tools/introduction",
-                "build-custom-tools/create-a-tool",
-                {
-                    "group": "User inputs",
-                    "pages": [
-                        "build-custom-tools/user-inputs/getting_started",
-                        "build-custom-tools/user-inputs/text-input",
-                        "build-custom-tools/user-inputs/long-text-input",
-                        "build-custom-tools/user-inputs/options-drop-down",
-                        "build-custom-tools/user-inputs/numeric-input",
-                        "build-custom-tools/user-inputs/text-list",
-                        "build-custom-tools/user-inputs/json",
-                        "build-custom-tools/user-inputs/list-of-jsons",
-                        "build-custom-tools/user-inputs/file-to-text",
-                        "build-custom-tools/user-inputs/file-to-url",
-                        "build-custom-tools/user-inputs/table",
-                        "build-custom-tools/user-inputs/check-box",
-                        "build-custom-tools/what-are-chains"
-                    ]
-                },
-                {
-                    "group": "Tool steps",
-                    "pages": [
-                        "build-custom-tools/tool-steps/getting_started",
-                        {
-                            "group": "LLM",
-                            "pages": [
-                                "build-custom-tools/tool-steps/llms/llm",
-                                "build-custom-tools/tool-steps/llms/llm-advance-setting",
-                                "build-custom-tools/tool-steps/llms/validators",
-                                "build-custom-tools/tool-steps/llms/how-to-handle-too-much-text",
-                                "build-custom-tools/tool-steps/llms/prompt",
-                                "build-custom-tools/tool-steps/llms/llm-output"
-                            ]
-                        },
-                        "build-custom-tools/tool-steps/convert-pdf-to-text",
-                        "build-custom-tools/tool-steps/extract-website-content",
-                        "build-custom-tools/tool-steps/knowledge-search",
-                        "build-custom-tools/tool-steps/convert-audio-video-to-text",
-                        "build-custom-tools/tool-steps/insert-in-ds",
-                        "build-custom-tools/tool-steps/split-text",
-                        "build-custom-tools/tool-steps/vectorize-and-search",
-                        "build-custom-tools/tool-steps/convert-spreadsheet-to-json",
-                        "build-custom-tools/tool-steps/convert-string-to-json",
-                        "build-custom-tools/tool-steps/json-filtered",
-                        "build-custom-tools/tool-steps/combine-string-array",
-                        "build-custom-tools/tool-steps/code-javascript",
-                        "build-custom-tools/tool-steps/code-python",
-                        "build-custom-tools/tool-steps/export-data-to-a-temporary-downloadable-file",
-                        "build-custom-tools/tool-steps/api"
-                    ]
-                },
-                {
-                    "group": "Knowledge",
-                    "pages": [
-                        "build-custom-tools/knowledge/knowledge"
-                    ]
-                },
-                {
-                    "group": "Advanced setup",
-                    "pages": [
-                        "build-custom-tools/advanced-setup/conditions",
-                        "build-custom-tools/advanced-setup/loops",
-                        "build-custom-tools/advanced-setup/output-configuration",
-                        "build-custom-tools/advanced-setup/string-conversion"
-                    ]
-                },
-                {
-                    "group": "Provider setup",
-                    "pages" : [
-                        "build-custom-tools/provider-setup/azure-openai"
-                    ]
-                },
-                "build-custom-tools/faq"
-            ]
-        },
-        {
-            "group": "Data",
-            "pages": [
-                {
-                    "group": "Data",
-                    "pages": [
-                        "data/data-tables",
-                        "data/data-table"
-                    ]
-                },
-                "data/faq"
-            ]
-        },
-        {
-            "group": "Notebook",
-            "pages": [
-                "notebook/introduction"
-            ]
-        },
-        {
-            "group": "Integrations",
-            "pages": [
-                "integrations/zoom",
-                {
-                    "group": "Vector database",
-                    "pages": [
-                        "integrations/vector-databases/redis"
-                    ]
-                }
-            ]
-        },
-        {
-            "group": "SDK",
-            "pages": [
-                "sdk/quickstart",
-                {
-                    "group": "Building chains",
-                    "pages": [
-                        "sdk/reference/creating-chain",
-                        "sdk/reference/setup",
-                        "sdk/reference/params"
-                    ]
-                },
-                "sdk/reference/transformation-steps",
-                "sdk/reference/deploying-chain",
-                "sdk/dashboard/notebook",
-                {
-                    "group": "Guides",
-                    "pages": [
-                        "sdk/guides/pdf-qa",
-                        "sdk/guides/charting-agent"
-                    ]
-                }
-            ]
-        },
-        {
-            "group": "Datasets",
-            "pages": [
-                "datasets/introduction",
-                "datasets/reference"
-            ]
-        }
-    ],
-    "footerSocials": {
-        "twitter": "https://twitter.com/relevanceai_",
-        "github": "https://github.com/relevanceai",
-        "linkedin": "https://linkedin.com/company/relevanceai"
-    },
-    "analytics": {
-        "ga4": {
-            "measurementId": "G-HZ1VEVP01K"
-        },
-        "posthog": {
-            "apiKey": "phc_f3YHtchuTCLwrunsQCKtzQlUPbfy7yyKLezua95UIH"
-        }
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Relevance AI Documentation",
+  "logo": {
+    "dark": "/images/logo/dark.png",
+    "light": "/images/logo/light.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#4F46E5",
+    "light": "#a5b4fc",
+    "dark": "#3730a3"
+  },
+  "topbarLinks": [
+    {
+      "name": "Log In",
+      "url": "https://auth.relevanceai.com/login/"
     }
+  ],
+  "topbarCtaButton": {
+    "name": "Sign Up",
+    "url": "https://auth.relevanceai.com/signup/"
+  },
+  "tabs": [],
+  "feedback": {
+    "thumbsRating": true
+  },
+  "anchors": [
+    {
+      "name": "Community",
+      "icon": "discord",
+      "url": "https://discord.gg/8VHJJrQZMM"
+    },
+    {
+      "name": "Developer Docs & SDK",
+      "icon": "python",
+      "url": "https://sdk.relevanceai.com/"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get started",
+      "pages": [
+        "get-started/introduction",
+        {
+          "group": "Key concepts",
+          "pages": [
+            "get-started/key-concepts/agent",
+            "get-started/key-concepts/tools",
+            "get-started/key-concepts/data",
+            "get-started/key-concepts/templates",
+            "get-started/key-concepts/api-keys",
+            "get-started/key-concepts/run-a-tool",
+            "get-started/key-concepts/llm"
+          ]
+        },
+        "get-started/quickstart/templates",
+        "get-started/quickstart/agent",
+        "security",
+        "get-started/plans",
+        "get-started/system_limits"
+      ]
+    },
+    {
+      "group": "Agents",
+      "pages": [
+        "agent/introduction",
+        "agent/agent-configuration",
+        {
+          "group": "API Calls",
+          "pages": ["agent/agent-api", "agent/api-call-to-list-conversation"]
+        },
+        "agent/faq"
+      ]
+    },
+    {
+      "group": "Tools and Templates",
+      "pages": [
+        "templates/introduction",
+        {
+          "group": "Run",
+          "pages": ["templates/single-run", "templates/bulk-run"]
+        },
+        "templates/export",
+        "templates/faq",
+        {
+          "group": "Advance",
+          "pages": ["templates/long-running-tools"]
+        }
+      ]
+    },
+    {
+      "group": "Use cases",
+      "pages": [
+        {
+          "group": "General",
+          "pages": [
+            "templates/gpt-on-my-files",
+            "templates/gpt-on-my-website",
+            "example-use-cases/knowledge-retrieval",
+            "templates/extract-data-from-pdf",
+            "templates/text-categorizer-classifier",
+            "templates/summarize-meeting-transcript"
+          ]
+        },
+        {
+          "group": "Research",
+          "pages": [
+            "templates/category-tag-suggester",
+            "templates/sentiment-analysis",
+            "templates/anonymize-text",
+            {
+              "group": "Interview analysis",
+              "pages": [
+                "templates/audio-transcription-high-level-summary",
+                "templates/audio-to-utterance-mark-sections",
+                "templates/audio-to-utterance-data-table",
+                "templates/category-suggester-for-transcript",
+                "templates/focused-summarization-quote",
+                "templates/analyze-responses-in-focus-groups"
+              ]
+            }
+          ]
+        },
+        {
+          "group": "Sales",
+          "pages": ["example-use-cases/few-shot-prompting"]
+        }
+      ]
+    },
+    {
+      "group": "How to build a custom Tool",
+      "pages": [
+        "build-custom-tools/introduction",
+        "build-custom-tools/create-a-tool",
+        {
+          "group": "User inputs",
+          "pages": [
+            "build-custom-tools/user-inputs/getting_started",
+            "build-custom-tools/user-inputs/text-input",
+            "build-custom-tools/user-inputs/long-text-input",
+            "build-custom-tools/user-inputs/options-drop-down",
+            "build-custom-tools/user-inputs/numeric-input",
+            "build-custom-tools/user-inputs/text-list",
+            "build-custom-tools/user-inputs/json",
+            "build-custom-tools/user-inputs/list-of-jsons",
+            "build-custom-tools/user-inputs/file-to-text",
+            "build-custom-tools/user-inputs/file-to-url",
+            "build-custom-tools/user-inputs/table",
+            "build-custom-tools/user-inputs/check-box",
+            "build-custom-tools/what-are-chains"
+          ]
+        },
+        {
+          "group": "Tool steps",
+          "pages": [
+            "build-custom-tools/tool-steps/getting_started",
+            {
+              "group": "LLM",
+              "pages": [
+                "build-custom-tools/tool-steps/llms/llm",
+                "build-custom-tools/tool-steps/llms/llm-advance-setting",
+                "build-custom-tools/tool-steps/llms/validators",
+                "build-custom-tools/tool-steps/llms/how-to-handle-too-much-text",
+                "build-custom-tools/tool-steps/llms/prompt",
+                "build-custom-tools/tool-steps/llms/llm-output"
+              ]
+            },
+            "build-custom-tools/tool-steps/convert-pdf-to-text",
+            "build-custom-tools/tool-steps/extract-website-content",
+            "build-custom-tools/tool-steps/knowledge-search",
+            "build-custom-tools/tool-steps/convert-audio-video-to-text",
+            "build-custom-tools/tool-steps/insert-in-ds",
+            "build-custom-tools/tool-steps/split-text",
+            "build-custom-tools/tool-steps/vectorize-and-search",
+            "build-custom-tools/tool-steps/convert-spreadsheet-to-json",
+            "build-custom-tools/tool-steps/convert-string-to-json",
+            "build-custom-tools/tool-steps/json-filtered",
+            "build-custom-tools/tool-steps/combine-string-array",
+            "build-custom-tools/tool-steps/code-javascript",
+            {
+              "group": "Code - Python",
+              "pages": [
+                "build-custom-tools/tool-steps/python-code/code-python",
+                "build-custom-tools/tool-steps/python-code/code-python-helper-functions"
+              ]
+            },
+            "build-custom-tools/tool-steps/export-data-to-a-temporary-downloadable-file",
+            "build-custom-tools/tool-steps/api"
+          ]
+        },
+        {
+          "group": "Knowledge",
+          "pages": ["build-custom-tools/knowledge/knowledge"]
+        },
+        {
+          "group": "Advanced setup",
+          "pages": [
+            "build-custom-tools/advanced-setup/conditions",
+            "build-custom-tools/advanced-setup/loops",
+            "build-custom-tools/advanced-setup/output-configuration",
+            "build-custom-tools/advanced-setup/string-conversion"
+          ]
+        },
+        {
+          "group": "Provider setup",
+          "pages": ["build-custom-tools/provider-setup/azure-openai"]
+        },
+        "build-custom-tools/faq"
+      ]
+    },
+    {
+      "group": "Data",
+      "pages": [
+        {
+          "group": "Data",
+          "pages": ["data/data-tables", "data/data-table"]
+        },
+        "data/faq"
+      ]
+    },
+    {
+      "group": "Notebook",
+      "pages": ["notebook/introduction"]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/zoom",
+        {
+          "group": "Vector database",
+          "pages": ["integrations/vector-databases/redis"]
+        }
+      ]
+    },
+    {
+      "group": "SDK",
+      "pages": [
+        "sdk/quickstart",
+        {
+          "group": "Building chains",
+          "pages": [
+            "sdk/reference/creating-chain",
+            "sdk/reference/setup",
+            "sdk/reference/params"
+          ]
+        },
+        "sdk/reference/transformation-steps",
+        "sdk/reference/deploying-chain",
+        "sdk/dashboard/notebook",
+        {
+          "group": "Guides",
+          "pages": ["sdk/guides/pdf-qa", "sdk/guides/charting-agent"]
+        }
+      ]
+    },
+    {
+      "group": "Datasets",
+      "pages": ["datasets/introduction", "datasets/reference"]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/relevanceai_",
+    "github": "https://github.com/relevanceai",
+    "linkedin": "https://linkedin.com/company/relevanceai"
+  },
+  "analytics": {
+    "ga4": {
+      "measurementId": "G-HZ1VEVP01K"
+    },
+    "posthog": {
+      "apiKey": "phc_f3YHtchuTCLwrunsQCKtzQlUPbfy7yyKLezua95UIH"
+    }
+  }
 }
