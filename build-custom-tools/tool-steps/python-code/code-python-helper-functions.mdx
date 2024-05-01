@@ -8,7 +8,7 @@ This client provides an interface to interact with the Relevance API. It include
 
 ## **Functions**
 
-## Insert data
+### Insert data
 
 ```python Python
 insert_data(dataset_id: str, data: List[Dict[str, Any]])
@@ -25,7 +25,7 @@ Inserts data into a Relevance dataset.
 
 - The response from the API as a JSON object.
 
-## Retrieve data
+### Retrieve data
 
 ```python Python
 retrieve_data(dataset_id: str, page_size: int = None, include_fields: List[str] = None)
@@ -43,7 +43,7 @@ Retrieves data from a Relevance dataset.
 
 - The response from the API as a JSON object.
 
-## Upload a temporary file
+### Upload a temporary file
 
 ```python
 insert_temp_file(file_path_or_bytes: str, ext: str = None)
@@ -60,7 +60,7 @@ Uploads a temporary file to Relevance.
 
 - A dictionary containing the download URL of the uploaded file.
 
-## Prompt completion
+### Prompt completion
 
 ```
 python Python
@@ -78,7 +78,7 @@ Runs the `prompt_completion` step with the given prompt and model.
 
 - The response from the API as a JSON object.
 
-## Run a step
+### Run a step
 
 ```python Python
 run_step(step_name: str, params: Dict[str, Any])
