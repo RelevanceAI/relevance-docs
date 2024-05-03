@@ -43,9 +43,29 @@ Retrieves data from a Relevance dataset.
 
 - The response from the API as a JSON object.
 
+### Retrieve All Data
+
+```python Python
+retrieve_all(dataset_id: str, page_size: int = 1000, include_fields: List[str] = None) -> List[Dict[str, Any]]:
+```
+
+Retrieves all data from a Relevance dataset, paginated to handle large datasets.
+
+**Arguments**
+
+- `dataset_id`: The ID of the dataset to retrieve from.
+- `page_size`: The number of results to return per page. Defaults to 1000 (optional).
+- `include_fields`: A list of fields to include in the response. Defaults to None (optional).
+
+**Returns**
+
+- A list of dictionaries containing the retrieved data. Each dictionary represents a document from the dataset.
+
+Example
+
 ### Upload a temporary file
 
-```python
+```python Python
 insert_temp_file(file_path_or_bytes: str, ext: str = None)
 ```
 
@@ -62,8 +82,7 @@ Uploads a temporary file to Relevance.
 
 ### Prompt completion
 
-```
-python Python
+```python Python
 prompt_completion(prompt: str, model: int = None)
 ```
 
@@ -108,6 +127,12 @@ response = insert_data("my_dataset", data)
 
 ```python Python
 response = retrieve_data("my_dataset", page_size=10, include_fields=["field1", "field2"])
+```
+
+### Retrieve all
+
+```python Python
+response = retrieve_all("my_dataset", page_size=500, include_fields=["field1", "field2"])
 ```
 
 ### Upload a temporary file
