@@ -49,9 +49,7 @@
             "get-started/key-concepts/tools",
             "get-started/key-concepts/data",
             "get-started/key-concepts/templates",
-            "get-started/key-concepts/api-keys",
-            "get-started/key-concepts/run-a-tool",
-            "get-started/key-concepts/llm"
+            "get-started/key-concepts/api-keys"
           ]
         },
         "get-started/quickstart/templates",
@@ -74,19 +72,99 @@
       ]
     },
     {
-      "group": "Tools and Templates",
+      "group": "Tools",
       "pages": [
+        "notebook/introduction",
         "templates/introduction",
-        {
-          "group": "Run",
-          "pages": ["templates/single-run", "templates/bulk-run"]
-        },
-        "templates/export",
-        "templates/faq",
-        {
-          "group": "Advance",
-          "pages": ["templates/long-running-tools"]
-        }
+          "build-custom-tools/create-a-tool",
+          {
+            "group": "User inputs",
+            "pages": [
+              "build-custom-tools/user-inputs/getting_started",
+              "build-custom-tools/user-inputs/text-input",
+              "build-custom-tools/user-inputs/long-text-input",
+              "build-custom-tools/user-inputs/options-drop-down",
+              "build-custom-tools/user-inputs/numeric-input",
+              "build-custom-tools/user-inputs/text-list",
+              "build-custom-tools/user-inputs/json",
+              "build-custom-tools/user-inputs/list-of-jsons",
+              "build-custom-tools/user-inputs/file-to-text",
+              "build-custom-tools/user-inputs/file-to-url",
+              "build-custom-tools/user-inputs/table",
+              "build-custom-tools/user-inputs/check-box",
+              "build-custom-tools/what-are-chains"
+            ]
+          },
+          {
+            "group": "Tool steps",
+            "pages": [
+              "build-custom-tools/tool-steps/getting_started",
+              {
+                "group": "LLM",
+                "pages": [
+                  "build-custom-tools/tool-steps/llms/llm",
+                  "build-custom-tools/tool-steps/llms/llm-advance-setting",
+                  "build-custom-tools/tool-steps/llms/validators",
+                  "build-custom-tools/tool-steps/llms/how-to-handle-too-much-text",
+                  "build-custom-tools/tool-steps/llms/prompt",
+                  "build-custom-tools/tool-steps/llms/llm-output"
+                ]
+              },
+              "build-custom-tools/tool-steps/convert-pdf-to-text",
+              "build-custom-tools/tool-steps/extract-website-content",
+              "build-custom-tools/tool-steps/knowledge-search",
+              "build-custom-tools/tool-steps/convert-audio-video-to-text",
+              "build-custom-tools/tool-steps/insert-in-ds",
+              "build-custom-tools/tool-steps/split-text",
+              "build-custom-tools/tool-steps/vectorize-and-search",
+              "build-custom-tools/tool-steps/convert-spreadsheet-to-json",
+              "build-custom-tools/tool-steps/convert-string-to-json",
+              "build-custom-tools/tool-steps/json-filtered",
+              "build-custom-tools/tool-steps/combine-string-array",
+              "build-custom-tools/tool-steps/code-javascript",
+              {
+                "group": "Code - Python",
+                "pages": [
+                  "build-custom-tools/tool-steps/python-code/code-python",
+                  "build-custom-tools/tool-steps/python-code/code-python-helper-functions"
+                ]
+              },
+              "build-custom-tools/tool-steps/export-data-to-a-temporary-downloadable-file",
+              "build-custom-tools/tool-steps/api"
+            ]
+          },
+          {
+            "group": "Knowledge",
+            "pages": ["build-custom-tools/knowledge/knowledge"]
+          },
+          {
+            "group": "Run",
+            "pages": ["templates/single-run", "templates/bulk-run"]
+          },
+          "templates/export",
+          {
+            "group": "Advanced setup",
+            "pages": [
+              "build-custom-tools/advanced-setup/conditions",
+              "build-custom-tools/advanced-setup/loops",
+              "build-custom-tools/advanced-setup/output-configuration",
+              "build-custom-tools/advanced-setup/string-conversion",
+              "templates/long-running-tools"
+            ]
+          },
+          {
+            "group": "Provider setup",
+            "pages": ["build-custom-tools/provider-setup/azure-openai"]
+          },
+          "build-custom-tools/faq"
+      ]
+    },
+    {
+      "group": "Data",
+      "pages": [
+        "data/data-tables", 
+        "data/data-table",
+        "data/faq"
       ]
     },
     {
@@ -129,101 +207,6 @@
       ]
     },
     {
-      "group": "How to build a custom Tool",
-      "pages": [
-        "build-custom-tools/introduction",
-        "build-custom-tools/create-a-tool",
-        {
-          "group": "User inputs",
-          "pages": [
-            "build-custom-tools/user-inputs/getting_started",
-            "build-custom-tools/user-inputs/text-input",
-            "build-custom-tools/user-inputs/long-text-input",
-            "build-custom-tools/user-inputs/options-drop-down",
-            "build-custom-tools/user-inputs/numeric-input",
-            "build-custom-tools/user-inputs/text-list",
-            "build-custom-tools/user-inputs/json",
-            "build-custom-tools/user-inputs/list-of-jsons",
-            "build-custom-tools/user-inputs/file-to-text",
-            "build-custom-tools/user-inputs/file-to-url",
-            "build-custom-tools/user-inputs/table",
-            "build-custom-tools/user-inputs/check-box",
-            "build-custom-tools/what-are-chains"
-          ]
-        },
-        {
-          "group": "Tool steps",
-          "pages": [
-            "build-custom-tools/tool-steps/getting_started",
-            {
-              "group": "LLM",
-              "pages": [
-                "build-custom-tools/tool-steps/llms/llm",
-                "build-custom-tools/tool-steps/llms/llm-advance-setting",
-                "build-custom-tools/tool-steps/llms/validators",
-                "build-custom-tools/tool-steps/llms/how-to-handle-too-much-text",
-                "build-custom-tools/tool-steps/llms/prompt",
-                "build-custom-tools/tool-steps/llms/llm-output"
-              ]
-            },
-            "build-custom-tools/tool-steps/convert-pdf-to-text",
-            "build-custom-tools/tool-steps/extract-website-content",
-            "build-custom-tools/tool-steps/knowledge-search",
-            "build-custom-tools/tool-steps/convert-audio-video-to-text",
-            "build-custom-tools/tool-steps/insert-in-ds",
-            "build-custom-tools/tool-steps/split-text",
-            "build-custom-tools/tool-steps/vectorize-and-search",
-            "build-custom-tools/tool-steps/convert-spreadsheet-to-json",
-            "build-custom-tools/tool-steps/convert-string-to-json",
-            "build-custom-tools/tool-steps/json-filtered",
-            "build-custom-tools/tool-steps/combine-string-array",
-            "build-custom-tools/tool-steps/code-javascript",
-            {
-              "group": "Code - Python",
-              "pages": [
-                "build-custom-tools/tool-steps/python-code/code-python",
-                "build-custom-tools/tool-steps/python-code/code-python-helper-functions"
-              ]
-            },
-            "build-custom-tools/tool-steps/export-data-to-a-temporary-downloadable-file",
-            "build-custom-tools/tool-steps/api"
-          ]
-        },
-        {
-          "group": "Knowledge",
-          "pages": ["build-custom-tools/knowledge/knowledge"]
-        },
-        {
-          "group": "Advanced setup",
-          "pages": [
-            "build-custom-tools/advanced-setup/conditions",
-            "build-custom-tools/advanced-setup/loops",
-            "build-custom-tools/advanced-setup/output-configuration",
-            "build-custom-tools/advanced-setup/string-conversion"
-          ]
-        },
-        {
-          "group": "Provider setup",
-          "pages": ["build-custom-tools/provider-setup/azure-openai"]
-        },
-        "build-custom-tools/faq"
-      ]
-    },
-    {
-      "group": "Data",
-      "pages": [
-        {
-          "group": "Data",
-          "pages": ["data/data-tables", "data/data-table"]
-        },
-        "data/faq"
-      ]
-    },
-    {
-      "group": "Notebook",
-      "pages": ["notebook/introduction"]
-    },
-    {
       "group": "Integrations",
       "pages": [
         "integrations/zoom",
@@ -232,31 +215,6 @@
           "pages": ["integrations/vector-databases/redis"]
         }
       ]
-    },
-    {
-      "group": "SDK",
-      "pages": [
-        "sdk/quickstart",
-        {
-          "group": "Building chains",
-          "pages": [
-            "sdk/reference/creating-chain",
-            "sdk/reference/setup",
-            "sdk/reference/params"
-          ]
-        },
-        "sdk/reference/transformation-steps",
-        "sdk/reference/deploying-chain",
-        "sdk/dashboard/notebook",
-        {
-          "group": "Guides",
-          "pages": ["sdk/guides/pdf-qa", "sdk/guides/charting-agent"]
-        }
-      ]
-    },
-    {
-      "group": "Datasets",
-      "pages": ["datasets/introduction", "datasets/reference"]
     }
   ],
   "footerSocials": {

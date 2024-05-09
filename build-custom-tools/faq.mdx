@@ -1,71 +1,90 @@
 ---
-title: 'Frequently Asked Questions'
-sidebarTitle: 'FAQ'
-description: 'Frequently asked questions about building Tools'
+title: "Frequently Asked Questions"
+sidebarTitle: "FAQ"
+description: "Frequently asked questions about building Tools"
 ---
+
 ### How do I set default values for input parameters?
+
 Click on the setting icon, located on the bottom right of the input component. Set the values, and click on "Set current value".
 
 ![Input default values](/images/build-custom-tools/tool-step/set-default-value.png)
 
 ### How do I insert variables into CODE step?
+
 Access to variables is possible via the `params` parameter. For instance, to access a variable called `name`,
 use `params.name` is Javascript or `params["name"]` in Python.
 
 ### How do I insert variables into the API step?
+
 On your [API](/build-custom-tools/tool-steps/api) component, change the body to edit as string and use `{{}}` to access variables.
 
 ### How to make running a step conditional?
+
 Click on the three vertical dot on the top right of the step and select "Add conditions".
 See the full guide at [Adding condition](/build-custom-tools/tool-steps/getting_started#run-a-step-if-a-condition-is-met) to a step.
 
 ### Why do I have to use single or double quotations around variables in my prompts?
-Such marks (e.g. single, double, triple quote marks) are not required nor have a direct functional utility. 
+
+Such marks (e.g. single, double, triple quote marks) are not required nor have a direct functional utility.
 It is a prompting technique that has been found to work well with LLMs.
 Keep in mind that an LLM prompt is a long piece of text composed of instructions, examples, etc.
 single or double or triple quote marks around a varible X are just to specify the scope of X (i.e. the beginning and end of the string X within the prompt).
 A side note that the whole `{{X}}` brings the variable X into the prompt, meaning there won't be `{{}}` around it when passed to the LLM.
 
 ### How do I use the [Checkbox input](/build-custom-tools/user-inputs/check-box) component as a condition for running a step?
-[Add a condition](/build-custom-tools/advanced-setup/conditions) to your step. 
+
+[Add a condition](/build-custom-tools/advanced-setup/conditions) to your step.
 And use the `{{checkbox variable name}}` as the value for the condition. For example, under the default step name:
 
-* `{{checkbox}}` when checkbox is ticked
-* `{{!checkbox}}` when checkbox is not ticked
+- `{{checkbox}}` when checkbox is ticked
+- `{{!checkbox}}` when checkbox is not ticked
 
   <p align="center">
-  <img width="450" height="250" align="center" src="/images/build-custom-tools/checkbox-condition.png" />
+    <img
+      width="450"
+      height="250"
+      align="center"
+      src="/images/build-custom-tools/checkbox-condition.png"
+    />
   </p>
-  
+
 ### How to run a step multiple time like a loop?
+
 Click on the three vertical dot on the top right of the step and select "Enable foreach".
 See the full guide at [Loop through a step](/build-custom-tools/tool-steps/getting_started#run-a-step-multiple-times-in-a-loop).
 
 ### How to reduce hallucination for LLM?
+
 Here are a list of steps to take to improve your experience with LLMs:
-* Providing good and precise [system prompt](/build-custom-tools/tool-steps/llms/llm-advance-setting#system-prompt)
-* providing good prompt [Tips on a good prompt](/build-custom-tools/tool-steps/llms/prompt#tips-on-writing-a-good-prompt-prompt-engineering)
-* Providing data as a background [knowledge](/build-custom-tools/knowledge/knowledge)
-* More experiment with LLMs
+
+- Providing good and precise [system prompt](/build-custom-tools/tool-steps/llms/llm-advance-setting#system-prompt)
+- providing good prompt [Tips on a good prompt](/build-custom-tools/tool-steps/llms/prompt#tips-on-writing-a-good-prompt-prompt-engineering)
+- Providing data as a background [knowledge](/build-custom-tools/knowledge/knowledge)
+- More experiment with LLMs
 
 ### Why is the LLM output cut off in the middle of a sentence and how to fix it?
+
 LLMs have the capacity for a limited number of tokens. At Relevance, we use ~90% for the prompt (including knowledge) and the rest for the output.
 This means, if your prompt/knowledge are very rich in the number of tokens, there will be not enough room for the full output.
 
-In almost all such cases, the most relevant pieces of knowledge are fetched from the knowledge 
+In almost all such cases, the most relevant pieces of knowledge are fetched from the knowledge
 [How to handle large text](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text).
-Most relevant is a vector search applied to your knowledge to only select the best matching entries within the context to be fed to LLM. 
-By default the top 100 matching entries are fetched. Decrease the page size parameter under advanced option in 
+Most relevant is a vector search applied to your knowledge to only select the best matching entries within the context to be fed to LLM.
+By default the top 100 matching entries are fetched. Decrease the page size parameter under advanced option in
 [most relevant](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text#most-relevant-data).
 
 ### How do I set multiple outputs?
+
 In the last step of your Tool, click on `Configure output` button. Disable "Infer output from the last step".
-* Using the `Add new output key` you can add outputs
-* Using `{{}}` you can access to variables and steps' outputs
+
+- Using the `Add new output key` you can add outputs
+- Using `{{}}` you can access to variables and steps' outputs
 
 More details are provided at [Output configuration](/build-custom-tools/advanced-setup/output-configuration)
 
 ### Error: Wrong chat history setup
+
 Below errors can occur when "Conversation history" is not set correctly.
 
 ![LLM - conversation History](/images/build-custom-tools/tool-step/llm-conversation-history.png)
@@ -73,14 +92,17 @@ Below errors can occur when "Conversation history" is not set correctly.
 ```
 Studio transformation prompt_completion input validation error: must be array {"type":"array"} /history
 ```
+
 Provide values for the conversation or use the `x` to remove it
 
 ```
 Studio transformation prompt_completion input validation error: must be equal to one of the allowed values {"allowedValues":["user","ai","function"]} /history/0/role
 ```
+
 Note that the only allowed roles are `ai` and `user`.
 
 ### Error: Rate limit
+
 ```
 429:
       {"message":"Rate limit reached for default-gpt-3.5-turbo-16k
@@ -90,16 +112,17 @@ Note that the only allowed roles are `ai` and `user`.
       issues.","type":"tokens","param":null,"code":"rate_limit_exceeded"}
 ```
 
-This error happens when the used API key is set to a different rate limit compared to what Relevance uses by default. 
+This error happens when the used API key is set to a different rate limit compared to what Relevance uses by default.
 Trying again with different intervals of pause helps with this issue.
 
 ### Error: URL issue
+
 This error occurs when the input to "Extract website content" receives an input parameter that is not of type string (e.g. a URL).
 
 ```
 Studio transformation browserless_scrape input validation error: must be string {"type":"string"} /website_url
 ```
- 
+
 ![Extract website content](/images/build-custom-tools/tool-step/extract-website-content.png)
 
 A common situation where this happens is when the output of another step (e.g. Google search as shown below) is used as the input to "Extract website content".
@@ -111,32 +134,104 @@ In our example, we can access the string URLs in three ways:
 
 <Tabs>
   <Tab title="Access one URL in the results">
-    If the above result is the output of a `google search` step, accessing the first link is via `google.organic[0].link`
+    If the above result is the output of a `google search` step, accessing the
+    first link is via `google.organic[0].link`
   </Tab>
   <Tab title="For Loop">
-    If you wish to check all the items in the returned results, enable `foreach` options
-    ![Enable foreach](/images/build-custom-tools/tool-step/for-each-access.png)
-    And specify the source list and the name of the field you wish to access in each item of the list.
-    ![list access](/images/build-custom-tools/tool-step/extract-website-content-for-each.png)
+    If you wish to check all the items in the returned results, enable `foreach`
+    options ![Enable
+    foreach](/images/build-custom-tools/tool-step/for-each-access.png) And
+    specify the source list and the name of the field you wish to access in each
+    item of the list. ![list
+    access](/images/build-custom-tools/tool-step/extract-website-content-for-each.png)
   </Tab>
   <Tab title="LLM to extract URL">
-    The output of Google search can be used as the input to a LLM instructed to extract and return only the first URL.
+    The output of Google search can be used as the input to a LLM instructed to
+    extract and return only the first URL.
   </Tab>
 </Tabs>
 
 ### Error: Validators
 
-At Relevance, you can [set up validators](build-custom-tools/tool-steps/llms/validators) for your LLM component to ensure that the output 
-follows the desired format. The below error happens when the LLM's output does not meet the criteria. Prompt engineering is the best way to 
-handle such as situation. Try rewording your prompt and providing examples. 
+At Relevance, you can [set up validators](build-custom-tools/tool-steps/llms/validators) for your LLM component to ensure that the output
+follows the desired format. The below error happens when the LLM's output does not meet the criteria. Prompt engineering is the best way to
+handle such as situation. Try rewording your prompt and providing examples.
 
 ```
 Prompt completion did not pass validation
 ```
 
 ### Error: Credits
+
 The following error indicates that the credits are below zero and you need to top up to be able to continue using the platform.
 
 ```
 Organization Entitlement setting negative_credits : {"limit":-10000} does not allow this action.
 ```
+
+### How long my bulk run can take?
+
+Under current setup, each run gets terminated after 4 hours. If your data table is large and 4 hours does not cover all the rows,
+you can rerun your enrichment using the "Run on rows that haven't run" option. "Run on rows that haven't run" resumes the execution
+from where it stopped.
+
+### How do I access the bulk-run analysis results?
+
+Each output variable iof your AI Tool will be added to your data table as a new column.
+You can see the results on the data table or [export](/templates/export) to a CSV.
+
+### Can an AI Tool have multiple outputs?
+
+Yes!
+You can configure multiple outputs for your AI Tool. Each output will have its corresponding column in the data table.
+
+### Can I run a Tool multiple times on a data table?
+
+Yes!
+There is no limitation on the number of times you run a Tool. Just keep in mind that to avoid overwriting the existing results, you
+should name the output colum for each run.
+
+### If my dataset contains more than one column to be analyzed, do I need to upload the dataset multiple times?
+
+No!
+There is no limitation on the number of times you run a Tool. You can use the same data table while configure the bulk run, as many
+times as needed.
+Just keep in mind that to avoid overwriting the existing results, you should name the output colum for each run.
+
+### Can I leave the page after starting a bulk-run?
+
+Yes!
+Bulk AI-powered data enrichment (i.e. bulk-run) is executed in the background. So rows of data will be added to your dataset even
+if you leave or refresh the page.
+
+### Is there a cap on the number of rows AI Tools can process?
+
+Technically, no - however, you will be limited by the number of credits you have.
+
+### What format is supported for the data table?
+
+The enhancement of your dataset executes across a dataset, which can be created from CSVs and Excel files or from files
+such as PDFs, audio and Word which are automatically converted into a dataset.
+
+### How does bulk run (enrichment) pricing work?
+
+Bulk runs are charged the same as individual triggers of a chain. Each row in your dataset will be the equivalent of one execution
+of the chain (for example 2 credits per row).
+
+### How is credits consumption calculated?
+
+At Relevance, we have a fixed fee per tier and a variable fee for certain steps. If you provide your own key we don’t charge the variable.
+
+### What if I exceed the credit limit for my plan?
+
+Depending on what plan you are on, you might need to top up before further using the platform or have a buffer when your credits are negative but can
+still use the platform before topping up.
+
+### Will there be a price difference between using GPT 3.5 VS GPT4 or other models?
+
+Different models have their own pricing, at Relevance we pass on the cost. Keep in mind that if you provide your own key we don’t charge the variable.
+
+### Can I use my own API key?
+
+Absolutely!
+Set up your own keys at the [API key](/get-started/key-concepts/api-keys) page.
