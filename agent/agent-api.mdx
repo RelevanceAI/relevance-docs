@@ -1,10 +1,8 @@
 ---
-title: 'Conversation with an Agent via and API call'
+title: 'Conversation API for Agents'
 sidebarTitle: 'Conversation'
-description: 'How to make an API call to have a conversation with an Agent'
+description: 'How to create a task/conversation with an Agent'
 ---
-
-This page explains all the required steps to successfully make an API call to your Agent.
 
 ## Relevance Keys
 
@@ -12,157 +10,157 @@ This page explains all the required steps to successfully make an API call to yo
 
 ## Agent Id
 
-<Snippet file="agent-id.mdx" />
+Currently, the easiest way to access Agent Ids is from URLs.
+For instance, when on the "Edit agent" page, the last piece after project id and before `/edit` shows the Agent Id.
+The URL is structured as
 
-## Studio Id and Job Id
+`https://app.relevanceai.com/agents/REGION/Project-Id/Agent-Id/edit`
+## Set up
 
-<Snippet file="agent-studio-job-id.mdx" />
+  Either directly copy the `Authorization token` from the API page (see above for instructions) or use the 
+  `Project id` and `API key` combination as shown in the snippet below:
 
-## Conversation with the Agent
+  ```Python
+  project_id = YOUR_PROJECT_ID # Can be found in the API Keys page
+  authorization_token = f"{YOUR_PROJECT_ID}:{YOUR_API_KEY}"   # Both values can be found in the API Keys page
+  region = YOUR_REGION       # Can be found in the API Keys page
+  agent_id = YOUR_AGENT_ID   # Can be found in the Agent page URL
+  base_url = f"https://api-{region}.stack.tryrelevance.com/latest"
+  headers = {
+    "Authorization": authorization_token,
+  }
+  ```
 
-To start a conversation with your Agent, provide the corresponding values for `Region` and `Authorization token` in the
-code snippet below and that's all :)
-
+## Trigger an agent / Start a conversation
+  
+  Agents are async and poll based so to interact with it you'll need to trigger a `job` to converse with an agent then continuously poll for updaes.
     ```Python
-    authorization_token = f"{project_id}:{api_key}"  # Or copy directly from the API Keys page
-    region = Region                                  # Can be found in the API Keys page
+    import requests
+    
+    trigger_response = requests.post(url + "/agents/trigger", headers=headers, json={
+      "message":{
+        "role":"user",
+        "content":"Hello"
+      },
+      "agent_id":agent_id
+    })
 
+    if response.status_code == 200:
+        print("Request was successful!")
+    else:
+        print("Request failed with status code:", response.status_code)
+
+    job = trigger_response.json()
     ```
 
-<Tip>
-**The endpoint to trigger a conversation with an agent**:
+## Poll the job for updates and replies from the agent.
 
-`https://api-{region}.stack.tryrelevance.com/latest/studios/{studio_id}/async_poll/{job_id}`
+  This will poll the job every 3 minutes for updates.
+  ```Python
+  import time
+  studio_id = job["job_info"]["studio_id"]
+  job_id = job["job_info"]["job_id"]
 
-See above for instructions to access \<region\>, \<studio_id\> and \<job_id\>.
+  done = False
+  status = None
 
-</Tip>
+  while not done:
+    response = requests.get(
+      base_url + f"/studios/{studio_id}/async_poll/{job_id}", 
+      headers=headers
+    )
 
-```Python
-# Replace these with the actual values obtained from the previous response
-studio_id = agent_details["job_info"]["studio_id"]
-job_id = agent_details["job_info"]["job_id"]
+    status = response.json()
 
-done = False
-message = None
+    for update in status['updates']:
+      if update['type'] == "chain-success":
+        done = True
 
-while True:
-  # Define the URL with placeholders for studio_id and job_id
-  url = f"https://api-{region}.stack.tryrelevance.com/latest/studios/{studio_id}/async_poll/{job_id}"
+    if done:
+      break
 
-  # Define the authorization header
-  headers = {
-      "Authorization": authorization_token
-  }
+    time.sleep(3)
+  status
+  ```
 
-  # Send the POST request
-  response = requests.get(url, headers=headers)
+## Continue the conversation
 
-  message = response.json()
+  To continue the conversation just call the trigger endpoint again with the `conversation_id`. This conversation id can also be found in the url on the agents page `https://app.relevanceai.com/agents/{region}/{project_id}/{agent_id}/{conversation_id}`.
+  ```Python
+  conversation_id = job["job_info"]["conversation_id"]
 
-  for update in message['updates']:
-    if update['type'] == "chain-success":
-      done = True
-
-  if done == True:
-    break
-
-  time.sleep(1000)
-```
+  reply_response = requests.post(
+    base_url + "agents/trigger", 
+    headers=headers, 
+    json={
+      "message": {
+        "role": "user",
+        "content": "Hello again"
+      },
+      "agent_id": agent_id,
+      "conversation_id": conversation_id
+    }
+  )
+  reply_response.json()
+  ```
 
 ## List messages in a conversation
 
-To list all the messages in a conversation, you can use the following code snippet. The messages
-will be reverse chronological order, i.e. the newest message will be the first in the list.
+  To list all the messages in a conversation, you can use the following code snippet. The messages will be reverse chronological order, i.e. the newest message will be the first in the list.
 
-```py
-# Define the authorization header
-headers = {
-  "Authorization": authorization_token
-}
+  ```Python
+  messages = requests.post(base_url + "knowledge/list", headers=headers, json={
+    "knowledge_set": conversation_id,
+    "page_size": 20,
+    "sort": [
+      {
+        "insert_date_": "desc"
+      }
+    ]
+  }).json()['results']
+  ```
 
-conversation_id = agent_details["conversation_id"]
+  The messages follow this general structure:
 
-# Define the URL with placeholders for studio_id and job_id
-url = f"https://api-{region}.stack.tryrelevance.com/latest/knowledge/list"
+  ```json
 
-payload = {
-  "knowledge_set": conversation_id,
-  "page_size": 20,
-  "sort": [
-    {
-      "insert_date_": "desc"
-    }
-  ]
-}
-
-messages = requests.post(url, headers=headers, json=payload).json()['results']
-```
-
-The messages follow this general structure:
-
-```json
-
-{
-  "data": {
-    "message": {
-      "role": "" // the type of message in the conversation history. e.g. "user", "agent", "action-request"
-      // ...other details dependent on the "role" above
+  {
+    "data": {
+      "message": {
+        "role": "" // the type of message in the conversation history. e.g. "user", "agent", "action-request"
+        // ...other details dependent on the "role" above
+      }
     }
   }
-}
 
-```
+  ```
 
-
-## Continue a conversation
-
-To continue a conversation, you'll need the `conversation_id` returned when you triggered the agent,
-e.g. `agent_details["conversation_id"]` in the [Conversation with the agent](#conversation-with-the-agent) section above.
-Then, you can trigger the agent as before, but with the `conversation_id` provided in the payload.
-
-```py
-# ... previous code same as before
-
-payload = {
-  "message": {
-    "role": "user",
-    "content": "Hello"
-  },
-  "agent_id": agent_id
-  "conversation_id": agent_details["conversation_id"]
-}
-
-# ... subsequent code same as before
-```
-
-You can then follow the 
 
 # Confirm or reject a tool run
 
-As above, you'll need the `conversation_id` returned when you triggered the agent.
-You'll also need the `action_request_id` and `action` of the tool run that you want to confirm or reject.
-You can find it using the api request [here](#list-messages-in-a-conversation) and it should
-be the newest (first) message in your conversation.
+  As above, you'll need the `conversation_id` returned when you triggered the agent.
+  You'll also need the `action_request_id` and `action` of the tool run that you want to confirm or reject.
+  You can find it using the api request [here](#list-messages-in-a-conversation) and it should
+  be the newest (first) message in your conversation.
 
-```py
+  ```Python
 
-# ... previous code same as before
+  action_request_message = messages[0]['data']['message']
+  action = action_request_message['action']
+  action_request_id = action_request_message['action_request_id']
 
-action_request_message = message[0]['data']['message']
-action = action_request_message['action']
-action_request_id = action_request_message['action_request_id']
-
-payload = {
-  "message": {
-    "role": "action-confirm", # or "action-reject"!
-    "action": action,
-    "action_request_id": action_request_id
-  },
-  "agent_id": agent_id
-  "conversation_id": agent_details["conversation_id"]
-}
-
-# ... previous code same as before
-
-```
+  reply_response = requests.post(
+    base_url + "agents/trigger", 
+    headers=headers, 
+    json={
+      "message": {
+        "role": "action-confirm", # or "action-reject"!
+        "action": action,
+        "action_request_id": action_request_id
+      },
+      "agent_id": agent_id
+      "conversation_id": conversation_id
+    }
+  )
+  reply_response.json()
+  ```
