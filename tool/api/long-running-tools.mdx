@@ -30,7 +30,6 @@ response = requests.post(
   json=body
 )
 
-
 # Extract the tools job id, so we can check its progress
 job = response.json()
 job_id = job['job_id']
