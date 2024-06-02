@@ -18,24 +18,24 @@ description: 'How to list all conversations with an Agent'
 ```Python
 
 filters = [
-    {
-        "filter_type": "exact_match",
-        "field": "type",
-        "condition_value": "conversation",
-    },
-    {
-        "filter_type": "exact_match",
-        "field": "conversation.agent_id",
-        "condition_value": agent_id
-    }
+  {
+    "filter_type": "exact_match",
+    "field": "type",
+    "condition_value": "conversation",
+  },
+  {
+    "filter_type": "exact_match",
+    "field": "conversation.agent_id",
+    "condition_value": agent_id
+  }
 ]
 # Send the POST request
 response = requests.post(
-    base_url+"/knowledge/sets/list", 
-    headers=headers, 
-    json={
-        "filters":filters, "include_hidden":True
-    }
+  base_url+"/knowledge/sets/list", 
+  headers=headers, 
+  json={
+    "filters":filters, "include_hidden":True
+  }
 )
 
 response.json()["results"]
@@ -52,17 +52,17 @@ In the sample below, `041157d4-61bb-4855-8202-cdf8fab7202a` is a conversation th
 
 # Send the POST request
 response = requests.post(
-    base_url + "knowledge/list", 
-    headers=headers, 
-    json={
-        "knowledge_set": conversation_id,
-        "filters": [],
-        "sort": [
-            {
-                "insert_date_": "desc"
-            }
-        ]
-    }
+  base_url + "knowledge/list", 
+  headers=headers, 
+  json={
+    "knowledge_set": conversation_id,
+    "filters": [],
+    "sort": [
+      {
+        "insert_date_": "desc"
+      }
+    ]
+  }
 )
 
 conversation_messages = response.json()["results"]
