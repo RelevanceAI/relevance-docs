@@ -35,7 +35,6 @@ job = response.json()
 job_id = job['job_id']
 
 poll_url = base_url + f"/studios/{tool_id}/async_poll/{job_id}?ending_update_only=true"
-tool_output = {}
 
 done = False
 # Every 3 seconds, check if the tool had finished by calling the poll endpoint
