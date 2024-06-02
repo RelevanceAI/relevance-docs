@@ -4,19 +4,11 @@ sidebarTitle: 'Conversation'
 description: 'How to create a task/conversation with an Agent'
 ---
 
+## API authorization set up
 <Snippet file="api-auth-setup.mdx" />
 
 ## Agent Id
-
-Currently, the easiest way to access Agent Ids is from URLs.
-For instance, when on the "Edit agent" page, the last piece after project id and before `/edit` shows the Agent Id.
-The URL is structured as
-
-`https://app.relevanceai.com/agents/{region}/{project_id}/{agent_id}/edit`
-
-  ```Python
-  agent_id = YOUR_AGENT_ID   # Can be found in the Agent page URL
-  ```
+<Snippet file="agent-id.mdx" />
 
 ## Trigger an agent / Start a conversation
   
@@ -123,7 +115,7 @@ The URL is structured as
   ```
 
 
-# Confirm or reject a tool run
+## Confirm or reject a tool run
 
   As above, you'll need the `conversation_id` returned when you triggered the agent.
   You'll also need the `action_request_id` and `action` of the tool run that you want to confirm or reject.
