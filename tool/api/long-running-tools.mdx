@@ -12,12 +12,7 @@ description: 'How to run async calls for long running tools'
 
 ### Make async call for long running tool
 
-Provide `studio_id` in the code below to trigger a task and check the progress:
-
-<Info>
-* Synchronous triggers last for 30 seconds
-* Asynchronous triggers last for 15 minutes
-</Info>
+Provide `tool_id` in the code below to trigger a task and check the progress:
 
 ```Python
 import requests
@@ -30,7 +25,7 @@ body = {
 }
 
 response = requests.post(
-  base_url + f"studios/{studio_id}/trigger_async", 
+  base_url + f"studios/{tool_id}/trigger_async", 
   headers=headers, 
   json=body
 )
@@ -40,17 +35,17 @@ response = requests.post(
 job = response.json()
 job_id = job['job_id']
 
-# Every 5 seconds, check if the tool had finished by calling the poll endpoint
-poll_url = f"https://api-{region}.stack.tryrelevance.com/latest/studios/{studio_id}/async_poll/{job_id}?ending_update_only=true"
+poll_url = base_url + f"/studios/{tool_id}/async_poll/{job_id}?ending_update_only=true"
 tool_output = {}
-for _ in range(100):
-  poll_response = requests.get(
-    base_url + "studios/{tool_id}/async_poll/{job_id}?ending_update_only=true",
-    headers=headers
-  ).json()
-  if poll_response['type'] == "complete" or poll_response['type'] == 'failed':
-    break
-  time.sleep(5)
 
-print(poll_response)
+done = False
+# Every 3 seconds, check if the tool had finished by calling the poll endpoint
+while not done:
+    poll_response = requests.get(poll_url, headers=headers).json()
+    if poll_response['type'] == "complete" or poll_response['type'] == 'failed':
+        done = True
+        break
+    time.sleep(3)
+
+poll_response
 ```
