@@ -1,0 +1,63 @@
+---
+title: 'Asynchronous Execution'
+sidebarTitle: 'Asynchronous'
+description: 'How to run async calls for long running tools'
+---
+
+<Snippet file="api-auth-setup.mdx" />
+
+## Tool ID
+There are different ways to find the ID of a Tool. The easiest way is to use the URL. For example 
+when on the Tool and Use tab, the component before `use/app` and after project ID is the tool ID. The string 
+below shows the URL structure:
+
+`https://app.relevanceai.com/notebook/{region}/{project_id}/{tool_id}/use/app`
+
+```Python
+tool_id = "YOUR_TOOL_ID"
+```
+
+### Make async call for long running tool
+
+Provide `studio_id` in the code below to trigger a task and check the progress:
+
+<Info>
+* Synchronous triggers last for 30 seconds
+* Asynchronous triggers last for 15 minutes
+</Info>
+
+```Python
+import requests
+
+body = {
+  "params":{
+    "blog_request":"hello"
+  },
+  "project":project_id
+}
+
+response = requests.post(
+  base_url + f"studios/{studio_id}/trigger_async", 
+  headers=headers, 
+  json=body
+)
+
+
+# Extract the tools job id, so we can check its progress
+job = response.json()
+job_id = job['job_id']
+
+# Every 5 seconds, check if the tool had finished by calling the poll endpoint
+poll_url = f"https://api-{region}.stack.tryrelevance.com/latest/studios/{studio_id}/async_poll/{job_id}?ending_update_only=true"
+tool_output = {}
+for _ in range(100):
+  poll_response = requests.get(
+    base_url + "studios/{tool_id}/async_poll/{job_id}?ending_update_only=true",
+    headers=headers
+  ).json()
+  if poll_response['type'] == "complete" or poll_response['type'] == 'failed':
+    break
+  time.sleep(5)
+
+print(poll_response)
+```

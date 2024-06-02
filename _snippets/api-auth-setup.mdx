@@ -1,0 +1,33 @@
+## API authorization set up
+
+  When on [API keys](/get-started/key-concepts/api-keys) page, scroll down and you will see the Region code and your Project Id.
+  ![Region](/images/api-keys/region-project-id.png)
+
+  To generate your Relevance API key, click on "Create new secret key", with the role "Admin". 
+  Click on "Generate API key".
+  Copy the values shown on the modal.
+      * Authorization token
+      * API key
+      * Region
+      * Project
+
+      <p align="center">
+      <img width="500" height="300" align="center" src="/images/api-keys/key-info.png" />
+      </p>
+
+      <Tip>
+      Authorization tokens are formed by combining `Project Id:API Key`.
+      </Tip>
+
+  Either directly copy the `Authorization token` from the API page or use the 
+  `Project id` and `API key` combination as shown in the snippet below:
+
+  ```Python
+  project_id = "YOUR_PROJECT_ID" # Can be found in the API Keys page
+  authorization_token = f"{YOUR_PROJECT_ID}:{YOUR_API_KEY}"   # Both values can be found in the API Keys page
+  region = "YOUR_REGION"       # Can be found in the API Keys page
+  base_url = f"https://api-{region}.stack.tryrelevance.com/latest"
+  headers = {
+    "Authorization": authorization_token,
+  }
+  ```
