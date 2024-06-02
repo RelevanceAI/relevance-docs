@@ -4,9 +4,7 @@ sidebarTitle: 'Conversation'
 description: 'How to create a task/conversation with an Agent'
 ---
 
-## Relevance Keys
-
-<Snippet file="relevance-keys.mdx" />
+<Snippet file="api-auth-setup.mdx" />
 
 ## Agent Id
 
@@ -14,21 +12,10 @@ Currently, the easiest way to access Agent Ids is from URLs.
 For instance, when on the "Edit agent" page, the last piece after project id and before `/edit` shows the Agent Id.
 The URL is structured as
 
-`https://app.relevanceai.com/agents/REGION/Project-Id/Agent-Id/edit`
-## Set up
-
-  Either directly copy the `Authorization token` from the API page (see above for instructions) or use the 
-  `Project id` and `API key` combination as shown in the snippet below:
+`https://app.relevanceai.com/agents/{region}/{project_id}/{agent_id}/edit`
 
   ```Python
-  project_id = YOUR_PROJECT_ID # Can be found in the API Keys page
-  authorization_token = f"{YOUR_PROJECT_ID}:{YOUR_API_KEY}"   # Both values can be found in the API Keys page
-  region = YOUR_REGION       # Can be found in the API Keys page
   agent_id = YOUR_AGENT_ID   # Can be found in the Agent page URL
-  base_url = f"https://api-{region}.stack.tryrelevance.com/latest"
-  headers = {
-    "Authorization": authorization_token,
-  }
   ```
 
 ## Trigger an agent / Start a conversation
