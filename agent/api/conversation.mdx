@@ -16,18 +16,17 @@ description: 'How to create a task/conversation with an Agent'
     ```Python
     import requests
     
-    trigger_response = requests.post(url + "/agents/trigger", headers=headers, json={
-      "message":{
-        "role":"user",
-        "content":"Hello"
-      },
-      "agent_id":agent_id
-    })
-
-    if response.status_code == 200:
-        print("Request was successful!")
-    else:
-        print("Request failed with status code:", response.status_code)
+    trigger_response = requests.post(
+      url + "/agents/trigger", 
+      headers=headers, 
+      json={
+        "message":{
+          "role":"user",
+          "content":"Hello"
+        },
+        "agent_id":agent_id
+      }
+    )
 
     job = trigger_response.json()
     ```
