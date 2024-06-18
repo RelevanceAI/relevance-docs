@@ -95,7 +95,7 @@ description: "Relevance AI Tool Builder Transformations as Helper Functions"
 
 All transformations available in our tool builder are also supported from our python code step.
 
-## **Studio Transformation**
+## **Studio Transformations**
 """
     for transformation_schema in transformations["results"]:
         if not transformation_schema.get("hidden", False):
