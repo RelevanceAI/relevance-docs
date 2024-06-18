@@ -93,7 +93,7 @@ sidebardTitle: "Tool Builder Transformations (Advanced)"
 description: "Relevance AI Tool Builder Transformations as Helper Functions"
 ---
 
-All transformations available in our tool builder are also supported from the our python code step.
+All transformations available in our tool builder are also supported from our python code step.
 
 ## **Studio Transformation**
 """
