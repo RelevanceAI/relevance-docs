@@ -1,6 +1,5 @@
 import os
 import requests
-import sentence_splitter
 
 API_KEY = os.getenv("API_KEY")
 PYTHON_TYPE_LOOKUP = {
@@ -38,14 +37,10 @@ def generate_docstring_from_schema(transformation_schema):
             key_type = "Any"
 
         metadata = value.get("metadata", {})
-        description = metadata.get("description")
+        description: str = metadata.get("description")
         info_line = f"- `{key}`: {key_type}"
 
         if description is not None:
-            # description = sentence_splitter.split_text_into_sentences(
-            #     description, "en"
-            # )[0]
-
             description = description.translate(
                 str.maketrans(
                     {
