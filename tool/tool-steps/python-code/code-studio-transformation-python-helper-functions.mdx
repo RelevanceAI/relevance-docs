@@ -1,0 +1,3095 @@
+---
+title: "Tool Builder Transformations in the Python Code Step"
+sidebardTitle: "Tool Builder Transformations (Advanced)"
+description: "Relevance AI Tool Builder Transformations as Helper Functions"
+---
+
+All transformations available in our tool builder are also supported from the our python code step.
+
+## **Studio Transformation**
+
+### Prompt Completion
+
+Use a large language model such as GPT
+
+**Arguments**
+    
+- `prompt`: str
+	The prompt that is fed to the model.
+- `model`: str
+	The model to use for completion. If using gpt3.5, if you do not set your own API Key you will be charged credits for usage. For other models, Make sure to set an API key.
+- `fallback_model`: str
+	The model to use for completion if the model selected in the main window fails for whatever reason. If using gpt3.5, if you do not set your own API Key you will be charged credits for usage. For other models, Make sure to set an API key.
+- `history`: Any
+	Conversation history to be passed into the prompt. For example, \[\{role: 'user', message: 'Hello, my name is Bob.'\}, \{role: 'ai', message: 'Hello Bob, how are you?'\}\].
+- `history_only`: bool
+	If true, prompt isn't included in what gets sent to the llm. mostly useful for re-prompting an llm after an function call
+- `system_prompt`: str
+	System prompt to be passed into the GPT chat completion prompts.
+- `strip_linebreaks`: bool
+	Whether to strip linebreaks from the output.
+- `temperature`: int | float
+	Temperature of the selected model. Typically, higher temperature means more random output.
+- `response_format`: str
+	For certain models such as OpenAI, response format can be forced through this field.
+- `max_tokens`: int | float
+	How many tokens would you like the output to be?
+- `seed`: int | float
+	Seed for generated output. The seed value stores the nature of randomly generated output, the same seed with generated the same response regardless of other parameters
+- `validators`: Any
+	Validate that the LLM produces output in the expected format, and re-prompts to fix issues if not. Note: the LLM still outputs text, this only validates the shape of that text.
+- `split_and_map`: bool
+	If a prompt variable is too long, split the variable into chunks, and run the entire prompt on each chunk. Very helpful for processing large pdfs.
+- `memory`: Any
+	Define how variables should be handled if they're too long. Choose from extracting the most relevant part, a summary of it or whether to use it all.
+- `functions`: Any
+- `function_to_force_gpt_to_call`: str
+	The name of the function to force GPT to call. This is useful if you want force GPT to call a specific function.
+- `timeout_ms`: int | float
+	Timeout in milliseconds, request will timeout after this much time if it runs for too long.
+- `debug`: bool
+- `mock_llm_response`: dict
+- `token_logging`: dict
+	When provided, tokens will be logged based on these properties,   and aggregatable by agent and use case.
+- `stream`: bool
+	Streams the output as it is generated. Only implemented when running an agent.
+- `azure_model`: str
+	The Azure OpenAI Deployment Id to use when picking the azure-openai custom deployment model.
+
+**Returns**
+    
+- `answer`: str
+- `prompt`: str
+- `validation_history`: Any
+	Conversation history to be passed into the prompt. For example, \[\{role: 'user', message: 'Hello, my name is Bob.'\}, \{role: 'ai', message: 'Hello Bob, how are you?'\}\].
+- `split_answers`: Any
+- `user_key_used`: bool
+- `credits_cost`: int | float
+- `errors`: Any
+- `debug`: dict
+- `history_items`: Any
+	Conversation history to be passed into the prompt. For example, \[\{role: 'user', message: 'Hello, my name is Bob.'\}, \{role: 'ai', message: 'Hello Bob, how are you?'\}\].
+- `model_used`: str
+
+
+```python Python
+response = run_step(
+    "prompt_completion",
+	{
+		"prompt": ...,
+		"model": ...,
+		"fallback_model": ...,
+		"history": ...,
+		"history_only": ...,
+		"system_prompt": ...,
+		"strip_linebreaks": ...,
+		"temperature": ...,
+		"response_format": ...,
+		"max_tokens": ...,
+		"seed": ...,
+		"validators": ...,
+		"split_and_map": ...,
+		"memory": ...,
+		"functions": ...,
+		"function_to_force_gpt_to_call": ...,
+		"timeout_ms": ...,
+		"debug": ...,
+		"mock_llm_response": ...,
+		"token_logging": ...,
+		"stream": ...,
+		"azure_model": ...,
+	}
+)
+```
+
+### Api Call
+
+Run an API request
+
+**Arguments**
+    
+- `method`: str
+	The HTTP method to use.
+- `url`: str
+	The URL to make the request to.
+- `headers`: dict
+	The headers to send with the request.
+- `body`: Any
+	The body to send with the request.
+- `url_params`: dict
+	Enter any key-value pairs to append to the base URL as query parameters. It'll be formatted like key1=value1&key2=value2. Useful for specifying attributes of data you're requesting.
+- `response_type`: str
+	The format of the response.
+- `cookies`: dict
+	The cookies to send with the request.
+
+**Returns**
+    
+- `response_body`: Any
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "api_call",
+	{
+		"method": ...,
+		"url": ...,
+		"headers": ...,
+		"body": ...,
+		"url_params": ...,
+		"response_type": ...,
+		"cookies": ...,
+	}
+)
+```
+
+### Js Code Transformation
+
+Run JavaScript code
+
+**Arguments**
+    
+- `code`: str
+	The JS code to execute, returning the value to be used as the output of this transformation.
+- `backend`: str
+	Pick the runtime to use for this code.
+
+**Returns**
+    
+- `transformed`: Any
+- `duration`: int | float
+
+
+```python Python
+response = run_step(
+    "js_code_transformation",
+	{
+		"code": ...,
+		"backend": ...,
+	}
+)
+```
+
+### Search
+
+Retrieve data that best match a provided query
+
+**Arguments**
+    
+- `dataset_id`: str
+	The dataset to use as knowledge. If the list is empty, please upload a dataset, and check to vectorize it when prompted.
+- `query`: str
+	Items that best match the query will be retrieved from the knowledge source.
+- `query_type`: str
+	The type of search to perform. Keyword search is better at finding names, and proper nouns, while vector search is better at finding synonyms and related ideas.
+- `vector_field`: str
+	The name of the field that contains the vector. Only applicable for vector search.
+- `model`: str
+	The model name to use.
+- `content_field`: str
+- `output_all_fields`: bool
+	If set to true, will always output all fields. If set to false, this setting will have no behaviour.
+- `page_size`: int | float
+	The number of results to return.
+- `raw_filters`: Any
+	Raw relevance filters to filter results searched on.
+
+**Returns**
+    
+- `results`: Any
+- `documents`: dict
+
+
+```python Python
+response = run_step(
+    "search",
+	{
+		"dataset_id": ...,
+		"query": ...,
+		"query_type": ...,
+		"vector_field": ...,
+		"model": ...,
+		"content_field": ...,
+		"output_all_fields": ...,
+		"page_size": ...,
+		"raw_filters": ...,
+	}
+)
+```
+
+### Search Array
+
+Vectorise an array of strings and do similarity search
+
+**Arguments**
+    
+- `array`: Any
+	The array of data to search. If it is an object, it will be stringified when searching.
+- `query`: str
+	The query to search for.
+- `page_size`: int | float
+	The number of results to return.
+- `field`: str
+	The field to search in if array includes objects.
+
+**Returns**
+    
+- `results`: Any
+- `scores`: Any
+
+
+```python Python
+response = run_step(
+    "search_array",
+	{
+		"array": ...,
+		"query": ...,
+		"page_size": ...,
+		"field": ...,
+	}
+)
+```
+
+### Bulk Update
+
+Insert data into a knowledge set.
+
+**Arguments**
+    
+- `dataset_id`: str
+	The knowledge set to insert data to.
+- `documents`: Any
+- `clean_field_names`: bool
+	If set to true, field names will be cleaned before inserting. This is recommended to avoid issues with special characters in field names.
+- `ingest_in_background`: bool
+	If set to true, the step will immediately continue, without waiting for documents to be inserted and available.
+
+**Returns**
+    
+- `inserted`: int | float
+- `failed_documents`: Any
+
+
+```python Python
+response = run_step(
+    "bulk_update",
+	{
+		"dataset_id": ...,
+		"documents": ...,
+		"clean_field_names": ...,
+		"ingest_in_background": ...,
+	}
+)
+```
+
+### Apify
+
+Run a custom Apify Job, and optionally save results to Knowledge
+
+**Arguments**
+    
+- `input`: dict
+	The input object for the Apify Job
+- `actor`: str
+	The actor to use, for example apify/web-scraper
+- `knowledge_set`: str
+	If provided, write results to a knowledge set
+- `output_settings`: dict
+	Controls the output options for the apify job, based on https://docs.apify.com/api/client/js/reference/interface/DatasetClientListItemOptions
+- `dont_use_personal_key`: bool
+- `cost_target`: int | float
+	This is a cost target for the transformation to aim for. 
+We use a rough linear approximation to estimate how much the step will cost. 
+The true cost may be slightly over or under depending how noisy the sampling method is. 
+Does not apply to those who use their own Apify key.
+
+**Returns**
+    
+- `credits_cost`: int | float
+- `items`: Any
+
+
+```python Python
+response = run_step(
+    "apify",
+	{
+		"input": ...,
+		"actor": ...,
+		"knowledge_set": ...,
+		"output_settings": ...,
+		"dont_use_personal_key": ...,
+		"cost_target": ...,
+	}
+)
+```
+
+### Scrape Glassdoor
+
+
+
+**Arguments**
+    
+- `urls`: Any
+	URLs of Companies on Glassdoor
+- `knowledge_set`: str
+	Did you want to insert the results of the transformation into a knowledge set?
+- `search_keyword`: str
+	Search Keyword
+- `max_items`: int | float
+	Number of results per Glassdoor search page
+- `end_page`: int | float
+	Number of search pages
+- `scrape_salary`: bool
+	Do you want to scrape salary information?
+- `custom_map_function`: str
+	A custom map function for scraping each page.
+- `extended_output_function`: str
+	A custom extended output function for scraping each page.
+
+**Returns**
+    
+- `documents`: Any
+- `credits_cost`: int | float
+
+
+```python Python
+response = run_step(
+    "scrape_glassdoor",
+	{
+		"urls": ...,
+		"knowledge_set": ...,
+		"search_keyword": ...,
+		"max_items": ...,
+		"end_page": ...,
+		"scrape_salary": ...,
+		"custom_map_function": ...,
+		"extended_output_function": ...,
+	}
+)
+```
+
+### Multiple File Upload
+
+
+
+**Arguments**
+    
+- `urls`: Any
+	URLs of Companies on Glassdoor
+- `knowledge_set`: str
+	Did you want to insert the results of the transformation into a knowledge set?
+- `should_chunk_text`: bool
+	Should the text fields be chunked?
+
+**Returns**
+    
+- `status`: str
+- `documents_url`: str
+
+
+```python Python
+response = run_step(
+    "multiple_file_upload",
+	{
+		"urls": ...,
+		"knowledge_set": ...,
+		"should_chunk_text": ...,
+	}
+)
+```
+
+### Generate Vector Embedding
+
+Generate a vector embedding from a given input with a choice of models.
+
+**Arguments**
+    
+- `input`: str
+	The input to generate a vector embedding with.
+- `model`: str
+	The model name to use.
+
+**Returns**
+    
+- `vector`: Any
+
+
+```python Python
+response = run_step(
+    "generate_vector_embedding",
+	{
+		"input": ...,
+		"model": ...,
+	}
+)
+```
+
+### Send Email Step
+
+Send an email with subject and body
+
+**Arguments**
+    
+- `recipientEmails`: Any
+	The recipient emails
+- `subject`: str
+	What is the subject of the email you would like to send?
+- `body`: Any
+	What is the body of the email?
+
+**Returns**
+    
+- `result`: str
+- `status_code`: int | float
+
+
+```python Python
+response = run_step(
+    "send_email_step",
+	{
+		"recipientEmails": ...,
+		"subject": ...,
+		"body": ...,
+	}
+)
+```
+
+### Join Array
+
+Combine an array of strings into a single string
+
+**Arguments**
+    
+- `array`: Any
+	The array of strings to join.
+- `sep`: str
+	The separator to use between each element when joining the array.
+
+**Returns**
+    
+- `text`: str
+
+
+```python Python
+response = run_step(
+    "join_array",
+	{
+		"array": ...,
+		"sep": ...,
+	}
+)
+```
+
+### Pdf To Text
+
+Extract text from PDF without OCR. Doesn't support handwritting and scans.
+
+**Arguments**
+    
+- `pdf_url`: str
+	The URL of the PDF to convert to text.
+- `use_ocr`: bool
+	whether to use Microsofts ocr recognition model to extract text from the page. If no custom azure key and domain are provided in project keys, it will charge 100 credits per page.
+- `ocr_type`: str
+- `return_as_documents`: bool
+	Toggling this will either return the PDF text as an aggregated text or as a list of texts.
+
+**Returns**
+    
+- `text`: str
+- `number_of_pages`: int | float
+- `documents`: Any
+
+
+```python Python
+response = run_step(
+    "pdf_to_text",
+	{
+		"pdf_url": ...,
+		"use_ocr": ...,
+		"ocr_type": ...,
+		"return_as_documents": ...,
+	}
+)
+```
+
+### Advanced Retrieval
+
+Retrieve knowledge given a query and source.
+
+**Arguments**
+    
+- `query`: str
+	Enter your question here. Tip: keep it terse to avoid ambiguity for clearer answers.
+- `top_k`: Any
+	No. of results to retrieve.
+- `knowledge_set`: str
+	Select the knowledge source. If empty, will run retrieval on your entire knowledge base.
+- `text_field`: Any
+	Select the text fields/columns to vectorize and run retrieval on. It will vectorize all fields, if unspecified.
+- `use_files`: bool
+	Select this if you want to run retrieval on raw files instead of pre-extracted text. Note: Set a knowledge set when using this.
+- `custom_prompt`: str
+	Enter a custom prompt to generate the response, or use the default prompt below.
+- `temperature`: int | float
+	The higher the temperature, the more random the output. Lower temperatures give more predictable results.
+- `llm_model`: str
+	The LLM model to use for generation.
+- `embed_provider`: str
+	The embedding model to use for retrieval.
+- `reranker_model`: str
+	The reranking model to use post-retrieval.
+- `chunking_strategy`: str
+	The strategy to use for chunking the input text.
+- `retrieval_strategy`: str
+	The strategy to use for retrieval. Use hybrid for best results.
+
+**Returns**
+    
+- `response`: str
+- `sources`: Any
+- `citations`: Any
+- `duration`: int | float
+
+
+```python Python
+response = run_step(
+    "advanced_retrieval",
+	{
+		"query": ...,
+		"top_k": ...,
+		"knowledge_set": ...,
+		"text_field": ...,
+		"use_files": ...,
+		"custom_prompt": ...,
+		"temperature": ...,
+		"llm_model": ...,
+		"embed_provider": ...,
+		"reranker_model": ...,
+		"chunking_strategy": ...,
+		"retrieval_strategy": ...,
+	}
+)
+```
+
+### Audio To Text
+
+Extract text from an audio file using OpenAI.
+
+**Arguments**
+    
+- `audio_url`: str
+	URL of the audio to transcribe.
+- `response_type`: str
+	Whether to return the transcript only, or also advanced metadata such as timestamps and confidence scores. If returning advanced metadata, the keys 'language', 'duration' and 'segments' can be accessed on the output object.
+
+**Returns**
+    
+- `text`: str
+- `language`: str
+- `duration`: int | float
+- `segments`: Any
+
+
+```python Python
+response = run_step(
+    "audio_to_text",
+	{
+		"audio_url": ...,
+		"response_type": ...,
+	}
+)
+```
+
+### Audio To Text V2
+
+Transcribe an audio/video file, including speakers, timestamps and automatic grammar correction, with Deepgram.
+
+**Arguments**
+    
+- `audio_url`: str
+	URL of the audio to transcribe.
+- `diarize`: bool
+	Identify when different people speak. Each word in the transcript will be assigned a speaker ID, starting from 0.
+
+**Returns**
+    
+- `metadata`: dict
+- `results`: dict
+
+
+```python Python
+response = run_step(
+    "audio_to_text_v2",
+	{
+		"audio_url": ...,
+		"diarize": ...,
+	}
+)
+```
+
+### Audio To Text V3
+
+Transcribe an audio/video file, including speakers, timestamps and automatic grammar correction, with AssemblyAI.
+
+**Arguments**
+    
+- `audio_url`: str
+	URL of the audio to transcribe.
+
+**Returns**
+    
+- `id`: str
+	The unique identifier for the transcription.
+- `language_model`: str
+	The language model used for transcription.
+- `acoustic_model`: str
+	The acoustic model used for transcription.
+- `language_code`: str
+	The language code representing the language of the transcription.
+- `status`: str
+	The status of the transcription.
+- `audio_url`: str
+	The URL of the audio file being transcribed.
+- `text`: str
+	The full transcription text.
+- `words`: Any
+- `utterances`: Any
+- `confidence`: int | float
+- `audio_duration`: Any
+- `punctuate`: bool
+- `format_text`: bool
+- `dual_channel`: bool
+- `webhook_url`: Any
+- `webhook_status_code`: Any
+- `webhook_auth`: bool
+- `webhook_auth_header_name`: Any
+- `speed_boost`: bool
+- `auto_highlights_result`: Any
+- `auto_highlights`: bool
+- `audio_start_from`: Any
+- `audio_end_at`: Any
+- `word_boost`: Any
+- `boost_param`: Any
+- `filter_profanity`: bool
+- `redact_pii`: bool
+- `redact_pii_audio`: bool
+- `redact_pii_audio_quality`: Any
+- `redact_pii_policies`: Any
+- `redact_pii_sub`: Any
+- `speaker_labels`: bool
+- `content_safety`: bool
+- `iab_categories`: bool
+- `content_safety_labels`: dict
+- `iab_categories_result`: dict
+- `language_detection`: bool
+- `custom_spelling`: Any
+- `throttled`: Any
+- `auto_chapters`: bool
+- `summarization`: bool
+- `summary_type`: Any
+- `summary_model`: Any
+- `custom_topics`: bool
+- `topics`: Any
+- `speech_threshold`: Any
+- `disfluencies`: bool
+- `sentiment_analysis`: bool
+- `chapters`: Any
+- `sentiment_analysis_results`: Any
+- `entity_detection`: bool
+- `entities`: Any
+- `summary`: Any
+- `speakers_expected`: Any
+
+
+```python Python
+response = run_step(
+    "audio_to_text_v3",
+	{
+		"audio_url": ...,
+	}
+)
+```
+
+### Anonymize Text
+
+Using Text Anonymization, you can remove personal / private information from your tool.
+
+**Arguments**
+    
+- `input`: str
+	The text you would like to process
+
+**Returns**
+    
+- `output`: str
+
+
+```python Python
+response = run_step(
+    "anonymize_text",
+	{
+		"input": ...,
+	}
+)
+```
+
+### Nemo Guardrails
+
+Using NeMo Guard Rails content filter, you can ensure that your content is profanity free.
+
+**Arguments**
+    
+- `input`: str
+	The text you would like to process
+- `usecase`: str
+	The usecase for which you want to moderate the output of you LLM
+- `documents`: Any
+	If you have selected `Topic Control`, these are the texts that will be used.
+- `colang_content`: str
+	For examples, see the `sample_rails` folder in any of these examples: https://github.com/NVIDIA/NeMo-Guardrails/tree/main/examples
+- `yaml_content`: str
+	For examples, see the `sample_rails` folder in any of these examples: https://github.com/NVIDIA/NeMo-Guardrails/tree/main/examples
+
+**Returns**
+    
+- `output`: str
+
+
+```python Python
+response = run_step(
+    "nemo_guardrails",
+	{
+		"input": ...,
+		"usecase": ...,
+		"documents": ...,
+		"colang_content": ...,
+		"yaml_content": ...,
+	}
+)
+```
+
+### Markdown
+
+Insert markdown notes
+
+**Arguments**
+    
+- `markdown`: str
+
+**Returns**
+    
+
+
+```python Python
+response = run_step(
+    "markdown",
+	{
+		"markdown": ...,
+	}
+)
+```
+
+### Relevance Api Call
+
+Run a Relevance API request
+
+**Arguments**
+    
+- `path`: str
+	Path to call for api method
+- `method`: str
+	The HTTP method to use.
+- `body`: dict
+	The body to send with the request.
+
+**Returns**
+    
+- `response_body`: dict
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "relevance_api_call",
+	{
+		"path": ...,
+		"method": ...,
+		"body": ...,
+	}
+)
+```
+
+### Get Linkedin Profile
+
+Fetch a linkedin profile with rapid API
+
+**Arguments**
+    
+- `url`: str
+	The URL of the linkedin profile you'd like to scrape
+- `method`: str
+	The type of request to make to LinkedIn
+
+**Returns**
+    
+- `data`: Any
+
+
+```python Python
+response = run_step(
+    "get_linkedin_profile",
+	{
+		"url": ...,
+		"method": ...,
+	}
+)
+```
+
+### Summarize Knowledge
+
+Pick from a variety of methods to extract a useful summary of information from knowledge.
+
+**Arguments**
+    
+- `knowledge`: str
+- `optimization`: dict
+- `token_limit`: int | float
+	The Summary generated will be limited to less than this many words.
+
+**Returns**
+    
+- `answer`: str
+- `credits_cost`: int | float
+- `optimization`: dict
+
+
+```python Python
+response = run_step(
+    "summarize_knowledge",
+	{
+		"knowledge": ...,
+		"optimization": ...,
+		"token_limit": ...,
+	}
+)
+```
+
+### Prompt Completion Vision
+
+Use a large multimodal model such as GPTV or Gemini-Vision
+
+**Arguments**
+    
+- `prompt`: str
+	The prompt that is fed to the model.
+- `model`: str
+	The model to use for completion. If using gpt3.5, if you do not set your own API Key you will be charged credits for usage. For other models, Make sure to set an API key.
+- `images`: Any
+	The list of images that the model has acces to.
+- `temperature`: int | float
+	Temperature of the selected model. Typically, higher temperature means more random output.
+- `timeout_ms`: int | float
+	Timeout in milliseconds, request will timeout after this much time if it runs for too long.
+
+**Returns**
+    
+
+
+```python Python
+response = run_step(
+    "prompt_completion_vision",
+	{
+		"prompt": ...,
+		"model": ...,
+		"images": ...,
+		"temperature": ...,
+		"timeout_ms": ...,
+	}
+)
+```
+
+### To Json
+
+Convert a string to a JSON object.
+
+**Arguments**
+    
+- `text`: str
+	The string to convert to JSON.
+
+**Returns**
+    
+- `output`: Any
+
+
+```python Python
+response = run_step(
+    "to_json",
+	{
+		"text": ...,
+	}
+)
+```
+
+### Export To File
+
+Export data to a temporary downloadable file. It will be deleted after 1 hour automatically.
+
+**Arguments**
+    
+- `data`: Any
+	Data to store in the file. This could be csv, json content etc.
+- `extension`: str
+	Extension of the file to save to. Defaults to csv
+
+**Returns**
+    
+- `export_url`: str
+
+
+```python Python
+response = run_step(
+    "export_to_file",
+	{
+		"data": ...,
+		"extension": ...,
+	}
+)
+```
+
+### Object Key Filter
+
+Filter & extract data from JSON
+
+**Arguments**
+    
+- `haystack`: dict
+	The JSON object to filter.
+- `needle`: Any
+	Fields to keep in the JSON object.
+
+**Returns**
+    
+- `filtered`: Any
+
+
+```python Python
+response = run_step(
+    "object_key_filter",
+	{
+		"haystack": ...,
+		"needle": ...,
+	}
+)
+```
+
+### Regex
+
+Filter & extract data from string
+
+**Arguments**
+    
+- `regex`: str
+	The regex to use for extraction, in JS flavor.
+- `string`: str
+	The string to search for matches.
+
+**Returns**
+    
+- `match`: Any
+- `found`: bool
+
+
+```python Python
+response = run_step(
+    "regex",
+	{
+		"regex": ...,
+		"string": ...,
+	}
+)
+```
+
+### Run Transformation
+
+Executes a transformation dynamically by a passed in ID. Useful for creating agents.
+
+**Arguments**
+    
+- `transformation_id`: str
+	The ID of the transformation to run.
+- `params`: Any
+	The parameters to pass to the transformation.
+
+**Returns**
+    
+- `output`: Any
+
+
+```python Python
+response = run_step(
+    "run_transformation",
+	{
+		"transformation_id": ...,
+		"params": ...,
+	}
+)
+```
+
+### Run Chain
+
+Executes any one of your other tools.
+
+**Arguments**
+    
+- `studio_id`: str
+	The tool to run.
+- `project`: str
+	The ID of the project the tool belongs to.
+- `region`: str
+	The ID of the region the tool belongs to.
+- `version`: str
+- `raise_subtool_errors`: bool
+	When true, errors from the subtool being called will also will also be raised in the current tool.
+- `params`: dict
+	The parameters to pass to the tool.
+- `studio_override`: dict
+- `wait_for_completion`: bool
+	If checked this step will wait until the tool completes, and return its output and errors. Otherwise this step will start the tool, and immediately return tool run information for polling.
+
+**Returns**
+    
+- `output`: dict
+- `state`: dict
+- `status`: str
+- `errors`: Any
+- `cost`: int | float
+- `credits_used`: Any
+- `executionTime`: int | float
+- `job_info`: dict
+
+
+```python Python
+response = run_step(
+    "run_chain",
+	{
+		"studio_id": ...,
+		"project": ...,
+		"region": ...,
+		"version": ...,
+		"raise_subtool_errors": ...,
+		"params": ...,
+		"studio_override": ...,
+		"wait_for_completion": ...,
+	}
+)
+```
+
+### Split Text
+
+Split text into an array of strings.
+
+**Arguments**
+    
+- `text`: str
+	The text to split.
+- `method`: str
+	Separator will split the text by the separator. Tokens will split the text into chunks of a given number of tokens.
+- `num_tokens`: int | float
+	The number of tokens to split the text into.
+- `num_tokens_to_slide_window`: int | float
+	When using number of tokens, this param allow overlap between each sliced result, often improving accuracy for Ask Relevance.
+- `sep`: str
+	The separator to split the text by.
+
+**Returns**
+    
+- `chunks`: Any
+
+
+```python Python
+response = run_step(
+    "split_text",
+	{
+		"text": ...,
+		"method": ...,
+		"num_tokens": ...,
+		"num_tokens_to_slide_window": ...,
+		"sep": ...,
+	}
+)
+```
+
+### Combine Array
+
+Combine an array of strings into a single array.
+
+**Arguments**
+    
+- `array`: Any
+- `method`: str
+
+**Returns**
+    
+- `combined`: Any
+
+
+```python Python
+response = run_step(
+    "combine_array",
+	{
+		"array": ...,
+		"method": ...,
+	}
+)
+```
+
+### Python Code Transformation
+
+Run Python code
+
+**Arguments**
+    
+- `code`: str
+	The python code to execute, returning the value to be used as the output of this transformation.
+- `backend`: str
+	Which backend service should run the code?
+- `packages`: Any
+	The python packages you would like to install to run your code
+- `run_commands`: Any
+	A list of linux terminal commands to be run prior to executing code
+- `session_id`: str
+	Define a custom session that saves all local variables between python executions. This only applies when the backend is Modal Labs.
+- `num_gpus`: str
+	Should the code use a GPU?
+This only applies when the backend is Modal Labs.
+- `num_cpus`: str
+	How many CPU cores should the code use?
+This only applies when the backend is Modal Labs.
+- `memory`: int | float
+	The Amount of Memory (RAM) in MBs the code will use.
+This only applies when the backend is Modal Labs.
+- `timeout`: int | float
+	How long before the code times out in seconds?
+This only applies when the backend is Modal Labs.
+- `raise_error`: str
+	Should python Step error
+
+**Returns**
+    
+- `transformed`: Any
+	Return value of provided code
+- `duration`: int | float
+	Duration of provided code in milliseconds
+- `stdout`: Any
+	Return stdout of provided code
+- `stderr`: Any
+	Return stderr of provided code
+- `session_id`: str
+	The session ID used to run the execution
+- `credits_cost`: int | float
+	Extra calculated credits based on image used
+
+
+```python Python
+response = run_step(
+    "python_code_transformation",
+	{
+		"code": ...,
+		"backend": ...,
+		"packages": ...,
+		"run_commands": ...,
+		"session_id": ...,
+		"num_gpus": ...,
+		"num_cpus": ...,
+		"memory": ...,
+		"timeout": ...,
+		"raise_error": ...,
+	}
+)
+```
+
+### Upload File S3
+
+Upload to a temporary file in S3.
+
+**Arguments**
+    
+- `blob`: Any
+- `extension`: str
+
+**Returns**
+    
+- `url`: str
+
+
+```python Python
+response = run_step(
+    "upload_file_s3",
+	{
+		"blob": ...,
+		"extension": ...,
+	}
+)
+```
+
+### Serper Google Search
+
+Run Google search via serper.dev
+
+**Arguments**
+    
+- `search_query`: str
+	Query to search for
+- `country_code`: str
+	Which region would you like to google search from?
+- `locale`: str
+	Which locale would you like to google search from?
+
+**Returns**
+    
+- `peopleAlsoAsk`: Any
+- `relatedSearches`: Any
+- `organic`: Any
+- `user_key_used`: bool
+
+
+```python Python
+response = run_step(
+    "serper_google_search",
+	{
+		"search_query": ...,
+		"country_code": ...,
+		"locale": ...,
+	}
+)
+```
+
+### Analyse Image
+
+Tag or extract information from images
+
+**Arguments**
+    
+- `image_url`: str
+	URL of the image to analyse. JPEG/JPG, PNG and WebP are supported.
+- `prompt`: str
+	The question(s) to answer about the image.
+
+**Returns**
+    
+- `output`: str
+
+
+```python Python
+response = run_step(
+    "analyse_image",
+	{
+		"image_url": ...,
+		"prompt": ...,
+	}
+)
+```
+
+### Text To Image
+
+Generate image via Stable Diffusion
+
+**Arguments**
+    
+- `prompt`: str
+	What do you want to see? You can use a single word or a full sentence.
+- `num_outputs`: int | float
+	Select the number of images you would like to generate.
+
+**Returns**
+    
+- `images`: Any
+
+
+```python Python
+response = run_step(
+    "text_to_image",
+	{
+		"prompt": ...,
+		"num_outputs": ...,
+	}
+)
+```
+
+### Text To Speech
+
+Generate Speech from text
+
+**Arguments**
+    
+- `prompt`: str
+	What do you want to hear? You can use a single word or a full sentence.
+- `voice`: str
+
+**Returns**
+    
+- `audio_url`: str
+
+
+```python Python
+response = run_step(
+    "text_to_speech",
+	{
+		"prompt": ...,
+		"voice": ...,
+	}
+)
+```
+
+### Elevenlabs
+
+Generate audio from text with ElevenLabs
+
+**Arguments**
+    
+- `prompt`: str
+	What do you want to hear? You can use a single word or a full sentence.
+- `voice_id`: str
+- `model_id`: str
+- `pronounciation_dictionary_locators`: Any
+- `similarity_boost`: int | float
+	Voice settings: similarity boost
+- `stability`: int | float
+	Voice settings: stability
+- `style`: int | float
+	Voice settings: style
+- `use_speaker_boost`: bool
+	Voice settings: speaker boost
+
+**Returns**
+    
+- `audio_url`: str
+
+
+```python Python
+response = run_step(
+    "elevenlabs",
+	{
+		"prompt": ...,
+		"voice_id": ...,
+		"model_id": ...,
+		"pronounciation_dictionary_locators": ...,
+		"similarity_boost": ...,
+		"stability": ...,
+		"style": ...,
+		"use_speaker_boost": ...,
+	}
+)
+```
+
+### Blandai Send Call
+
+Send an AI phone call with Bland.AI
+
+**Arguments**
+    
+- `phone_number`: str
+	The phone number to call. Country code defaults to +1 (US) if not specified. Formatting is flexible, however for the most predictable results use the E.164 format.
+- `task`: str
+	Provide instructions, relevant information, and examples of the ideal conversation flow.
+- `transfer_list`: dict
+	Give your agent the ability to transfer calls to a set of phone numbers. Overrides transfer_phone_number if a transfer_list.default is specified. Will default to transfer_list.default, or the chosen phone number
+- `model`: str
+	Select a model to use for your call. In nearly all cases, enhanced is the best choice for now.
+- `transfer_phone_number`: str
+	A phone number that the agent can transfer to under specific conditions - such as being asked to speak to a human or supervisor.
+- `answered_by_enabled`: bool
+	Enables machine detection when the call starts to determine whether the call was answered by a person or a voicemail.
+- `from`: str
+	Specify a purchased Outbound Number to call from. Country code is required, spaces or parentheses must be excluded. By default, calls are initiated from a separate pool of numbers owned by Bland.
+- `voice_id`: str
+	Determines the voice of the AI agent, in conjunction with reduce_latency.
+- `voice_preset_id`: str
+	Use a voice preset instead of specifying individual voice settings.
+- `start_time`: str
+	The time you want the call to start. If you don't specify a time (or the time is in the past), the call will send immediately. Set your time in the format YYYY-MM-DD HH:MM:SS -HH:MM (ex. 2021-01-01 12:00:00 -05:00). The timezone is optional, and defaults to UTC if not specified.
+- `webhook`: str
+	The webhook should be a http / https callback url. We will send the call_id and transcript to this URL after the call completes. This can be useful if you want to have real time notifications when calls finish.
+- `wait_for_greeting`: bool
+	Should the AI speak first or wait for someone else to talk? Creates more realistic conversations when answered with “Hello?”, “This is \{name\} speaking.” and so on.
+- `first_sentence`: str
+	A phrase that your call will start with instead of a generating one on the fly. This works both with and without wait_for_greeting. Can be more than one sentence, but must be less than 200 characters.
+- `record`: bool
+	To record your phone call, set record to true. When your call completes, you can access the recording by requesting the /call/recording endpoint.
+- `language`: str
+	Select a supported language of your choice. Optimizes every part of our API for that language - transcription, speech, and other inner workings.
+- `max_duration`: int | float
+	Set the longest you want the call to possibly go in minutes. After the max_duration minutes have passed, the call will automatically end.
+- `amd`: bool
+	AMD mode helps our AI navigate phone trees and IVR systems. If you know your call will hit an automated system you should switch it on. NOTE: AMD mode causes increased delay for the first response, even if answered by a human. Highly recommended to set to false in the majority of cases.
+- `interruption_threshold`: dict
+
+**Returns**
+    
+- `status`: str
+- `call_id`: str
+
+
+```python Python
+response = run_step(
+    "blandai_send_call",
+	{
+		"phone_number": ...,
+		"task": ...,
+		"transfer_list": ...,
+		"model": ...,
+		"transfer_phone_number": ...,
+		"answered_by_enabled": ...,
+		"from": ...,
+		"voice_id": ...,
+		"voice_preset_id": ...,
+		"start_time": ...,
+		"webhook": ...,
+		"wait_for_greeting": ...,
+		"first_sentence": ...,
+		"record": ...,
+		"language": ...,
+		"max_duration": ...,
+		"amd": ...,
+		"interruption_threshold": ...,
+	}
+)
+```
+
+### Blandai Call Details
+
+Retrieve the call details for a Bland AI call
+
+**Arguments**
+    
+- `call_id`: str
+	The call id to fetch the transcript for.
+
+**Returns**
+    
+- `response`: dict
+
+
+```python Python
+response = run_step(
+    "blandai_call_details",
+	{
+		"call_id": ...,
+	}
+)
+```
+
+### Heygen
+
+Generate professional avatar videos with HeyGen
+
+**Arguments**
+    
+- `prompt`: str
+	What do you want to hear? You can use a single word or a full sentence.
+- `voice_id`: str
+- `avatar_id`: str
+- `avatar_style`: str
+- `scale`: int | float
+- `offset_x`: int | float
+- `offset_y`: int | float
+- `background`: str
+- `ratio`: str
+- `test`: bool
+	Set the test flag to true to use test mode. Generation in test mode will not cost your credits and will contain a watermark on your video.
+
+**Returns**
+    
+- `video_url`: str
+
+
+```python Python
+response = run_step(
+    "heygen",
+	{
+		"prompt": ...,
+		"voice_id": ...,
+		"avatar_id": ...,
+		"avatar_style": ...,
+		"scale": ...,
+		"offset_x": ...,
+		"offset_y": ...,
+		"background": ...,
+		"ratio": ...,
+		"test": ...,
+	}
+)
+```
+
+### D Id
+
+Generate professional avatar videos with D-ID
+
+**Arguments**
+    
+- `prompt`: str
+	What do you want to hear? You can use a single word or a full sentence.
+- `voice_id`: str
+- `avatar_id`: str
+
+**Returns**
+    
+- `video_url`: str
+
+
+```python Python
+response = run_step(
+    "d_id",
+	{
+		"prompt": ...,
+		"voice_id": ...,
+		"avatar_id": ...,
+	}
+)
+```
+
+### Stable Diffusion Xl
+
+Generate image via Stable Diffusion XL
+
+**Arguments**
+    
+- `prompt`: Any
+	What do you want to see? You can use a single word or multiple sentences.
+- `negative_prompt`: Any
+	What do you not want to see? You can use a single word or multiple sentences.
+- `height`: int | float
+	What should the height of the generated images be?
+- `width`: int | float
+	What should the height of the generated images be?
+- `guidance_scale`: int | float
+	Higher guidance scale encourages to generate images that are closely linked to the text prompts usually at the expense of lower image quality
+- `num_images_per_prompt`: int | float
+	How many images do you want to generate per prompt?
+- `eta`: int | float
+	Corresponds to parameter eta (η) in the DDIM paper: https://arxiv.org/abs/2010.02502.
+- `steps`: int | float
+	The number of denoising steps. More denoising steps usually lead to a higher quality image at the expense of slower inference.
+
+**Returns**
+    
+- `images`: Any
+- `credits_used`: int | float
+
+
+```python Python
+response = run_step(
+    "stable_diffusion_xl",
+	{
+		"prompt": ...,
+		"negative_prompt": ...,
+		"height": ...,
+		"width": ...,
+		"guidance_scale": ...,
+		"num_images_per_prompt": ...,
+		"eta": ...,
+		"steps": ...,
+	}
+)
+```
+
+### Truncate Text
+
+Truncate text based on a specified token count.
+
+**Arguments**
+    
+- `text`: Any
+	The text to truncate.
+- `num_tokens`: int | float
+	The number of tokens to truncate the text or array by.
+
+**Returns**
+    
+- `chunks`: Any
+
+
+```python Python
+response = run_step(
+    "truncate_text",
+	{
+		"text": ...,
+		"num_tokens": ...,
+	}
+)
+```
+
+### Browserless Scrape
+
+Scrape and access website content
+
+**Arguments**
+    
+- `website_url`: str
+	URL of the website to scrape.
+- `method`: str
+- `model`: dict
+	Type of service to use when scraping the website
+
+**Returns**
+    
+- `output`: dict
+- `outputs`: Any
+- `user_key_used`: bool
+- `credits_cost`: int | float
+
+
+```python Python
+response = run_step(
+    "browserless_scrape",
+	{
+		"website_url": ...,
+		"method": ...,
+		"model": ...,
+	}
+)
+```
+
+### Slack Message
+
+Send a Slack message
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Slack channel to post message to.
+- `message`: str
+- `blocks`: Any
+
+**Returns**
+    
+- `status`: int | float
+
+
+```python Python
+response = run_step(
+    "slack_message",
+	{
+		"oauth_account_id": ...,
+		"message": ...,
+		"blocks": ...,
+	}
+)
+```
+
+### Whatsapp Message
+
+Send a WhatsApp message
+
+**Arguments**
+    
+- `from_phone_number_id`: str
+	The from phone number ID (not to be confused with the actual phone number)
+- `to`: str
+	The phone number to message
+- `message`: str
+
+**Returns**
+    
+- `status`: int | float
+- `contact_id`: str
+- `details`: str
+
+
+```python Python
+response = run_step(
+    "whatsapp_message",
+	{
+		"from_phone_number_id": ...,
+		"to": ...,
+		"message": ...,
+	}
+)
+```
+
+### Whatsapp Template Message
+
+Send a WhatsApp template message
+
+**Arguments**
+    
+- `from_phone_number_id`: str
+	The from phone number ID (not to be confused with the actual phone number)
+- `to`: str
+	The phone number to message
+- `template_name`: str
+	The name of the template you wish to send
+- `template_language`: str
+	The language for this template
+- `content_parameters`: dict
+
+**Returns**
+    
+- `status`: int | float
+- `contact_id`: str
+- `details`: str
+
+
+```python Python
+response = run_step(
+    "whatsapp_template_message",
+	{
+		"from_phone_number_id": ...,
+		"to": ...,
+		"template_name": ...,
+		"template_language": ...,
+		"content_parameters": ...,
+	}
+)
+```
+
+### Zendesk Ticket
+
+Create a Zendesk Ticket
+
+**Arguments**
+    
+- `email`: str
+	The email address you use to access your Zendesk account
+- `subdomain`: str
+	https://\{subdomain\}.zendesk.com/
+- `ticket`: str
+
+**Returns**
+    
+- `status`: int | float
+
+
+```python Python
+response = run_step(
+    "zendesk_ticket",
+	{
+		"email": ...,
+		"subdomain": ...,
+		"ticket": ...,
+	}
+)
+```
+
+### Create Linear Ticket
+
+Create a linear ticket
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Linear Account used to create the ticket.
+- `team`: str
+- `title`: str
+- `description`: str
+- `project`: str
+- `priority`: str
+	The priority of the linear ticket
+- `teamLabels`: Any
+	The labels specific to the Linear team.
+- `workspaceLabels`: Any
+	The labels specific to the Linear workspace.
+
+**Returns**
+    
+- `status`: int | float
+
+
+```python Python
+response = run_step(
+    "create_linear_ticket",
+	{
+		"oauth_account_id": ...,
+		"team": ...,
+		"title": ...,
+		"description": ...,
+		"project": ...,
+		"priority": ...,
+		"teamLabels": ...,
+		"workspaceLabels": ...,
+	}
+)
+```
+
+### Apollo Api Call
+
+Make an authenticated request to an Apollo API using credentials saved in Relevance
+
+**Arguments**
+    
+- `method`: str
+	The HTTP method to use.
+- `path`: str
+	Path to make the request to. e.g. /v1/auth/health
+- `body`: dict
+	The body to send with the request.
+
+**Returns**
+    
+- `response_body`: Any
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "apollo_api_call",
+	{
+		"method": ...,
+		"path": ...,
+		"body": ...,
+	}
+)
+```
+
+### Apollo People Search
+
+Search for users on apollo for people enrichment. Makes an authenticated request to Apollo API using credentials saved in Relevance
+
+**Arguments**
+    
+- `searchType`: dict
+	How you want to retrieve your information from Apollo.
+
+**Returns**
+    
+- `response_body`: Any
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "apollo_people_search",
+	{
+		"searchType": ...,
+	}
+)
+```
+
+### Postgres Sql
+
+Execute postgres SQL. Setup details in the api keys section.
+
+**Arguments**
+    
+- `sql`: str
+	The SQL Query you want to perform
+- `rejectUnauthorized`: bool
+	Whether to verify the server's identity. Strongly suggested to be true outside of development
+
+**Returns**
+    
+- `rows`: Any
+- `metadata`: dict
+
+
+```python Python
+response = run_step(
+    "postgres_sql",
+	{
+		"sql": ...,
+		"rejectUnauthorized": ...,
+	}
+)
+```
+
+### Hubspot Api Call
+
+Make an authenticated request to a Hubspot API using credentials saved in Relevance
+
+**Arguments**
+    
+- `method`: str
+	The HTTP method to use.
+- `oauth_account_id`: str
+	The Hubspot account.
+- `path`: str
+	Path to make the request to. e.g. /v1/auth/health
+- `body`: dict
+	The body to send with the request.
+
+**Returns**
+    
+- `response_body`: Any
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "hubspot_api_call",
+	{
+		"method": ...,
+		"oauth_account_id": ...,
+		"path": ...,
+		"body": ...,
+	}
+)
+```
+
+### Freshdesk Api Call
+
+Make an authenticated request to a Freshdesk REST API using your api key
+
+**Arguments**
+    
+- `freshdesk_portal_domain`: str
+	The domain of your freshdesk portal. e.g. relevance.freshdesk.com
+- `method`: str
+	The HTTP method to use.
+- `path`: str
+	Path to make the request to. e.g. /api/v2/tickets
+- `body`: dict
+	The body to send with the request.
+
+**Returns**
+    
+- `response_body`: Any
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "freshdesk_api_call",
+	{
+		"freshdesk_portal_domain": ...,
+		"method": ...,
+		"path": ...,
+		"body": ...,
+	}
+)
+```
+
+### Translate
+
+Translate 100+ languages via Google Translate
+
+**Arguments**
+    
+- `text`: str
+	Text to translate.
+- `sourceLanguageCode`: str
+	Language of the input text. Determined automatically if no language is selected.
+- `targetLanguageCode`: str
+	Language to translate the input text to.
+
+**Returns**
+    
+- `result`: str
+
+
+```python Python
+response = run_step(
+    "translate",
+	{
+		"text": ...,
+		"sourceLanguageCode": ...,
+		"targetLanguageCode": ...,
+	}
+)
+```
+
+### Excel To Text
+
+Extract text from an Excel document.
+
+**Arguments**
+    
+- `excel_url`: str
+	The URL of the Excel document to convert to text.
+
+**Returns**
+    
+- `text`: Any
+
+
+```python Python
+response = run_step(
+    "excel_to_text",
+	{
+		"excel_url": ...,
+	}
+)
+```
+
+### Word To Text
+
+Extract text from a Word document.
+
+**Arguments**
+    
+- `doc_url`: str
+	The URL of the Word document to convert to text.
+
+**Returns**
+    
+- `text`: str
+
+
+```python Python
+response = run_step(
+    "word_to_text",
+	{
+		"doc_url": ...,
+	}
+)
+```
+
+### File To Text Llm Friendly
+
+Extract text from a file. Supports JSON, CSV, PDF and Word files.
+
+**Arguments**
+    
+- `llm_friendly_format`: bool
+	Set to false to not transform text into an llm friendly format.
+- `file_url`: str
+	The URL of the file to convert to text.
+
+**Returns**
+    
+- `text`: str
+- `detected_type`: str
+- `metadata`: dict
+
+
+```python Python
+response = run_step(
+    "file_to_text_llm_friendly",
+	{
+		"llm_friendly_format": ...,
+		"file_url": ...,
+	}
+)
+```
+
+### Echo
+
+This transformation is useful for testing and debugging. It simply returns whatever you input.
+
+**Arguments**
+    
+- `data`: Any
+
+**Returns**
+    
+- `data`: Any
+
+
+```python Python
+response = run_step(
+    "echo",
+	{
+		"data": ...,
+	}
+)
+```
+
+### Spreadsheet To Json
+
+Converts an XLSX or CSV file to a list of JSON objects, with one object per row.
+
+**Arguments**
+    
+- `file_url`: str
+
+**Returns**
+    
+- `rows`: Any
+
+
+```python Python
+response = run_step(
+    "spreadsheet_to_json",
+	{
+		"file_url": ...,
+	}
+)
+```
+
+### Fuzzy Search
+
+Search for a string in a document and return a match with start and end indices if found.
+
+**Arguments**
+    
+- `query`: str
+	The substring to search for in the text. Uses fuzzy search.
+- `text`: str
+	The text to search in.
+
+**Returns**
+    
+- `text`: str
+- `match`: str
+- `start`: int | float
+- `end`: int | float
+
+
+```python Python
+response = run_step(
+    "fuzzy_search",
+	{
+		"query": ...,
+		"text": ...,
+	}
+)
+```
+
+### Google Api Call
+
+Make an authenticated request to a Google API using credentials saved in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Google account to use for authentication. Any API requests will be made on behalf of this account.
+- `oauth_permission_type`: str
+- `url`: str
+	Full url to make the request to. e.g. https://gmail.googleapis.com/gmail/v1/users/me/messages
+- `method`: str
+	The HTTP method to use.
+- `body`: dict
+	The body to send with the request.
+
+**Returns**
+    
+- `response_body`: dict
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "google_api_call",
+	{
+		"oauth_account_id": ...,
+		"oauth_permission_type": ...,
+		"url": ...,
+		"method": ...,
+		"body": ...,
+	}
+)
+```
+
+### Salesforce Api Call
+
+Make an authenticated request to a Salesforce REST API using credentials saved in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Salesforce account to use for authentication. Any API requests will be made on behalf of this account.
+- `api_version`: str
+	The Salesforce REST API version to use e.g. 59.0. By default we will use the latest version.
+- `path`: str
+	Path to make the request to. e.g. /sobjects/Account
+- `method`: str
+	The HTTP method to use.
+- `body`: dict
+	The body to send with the request.
+
+**Returns**
+    
+- `response_body`: dict
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "salesforce_api_call",
+	{
+		"oauth_account_id": ...,
+		"api_version": ...,
+		"path": ...,
+		"method": ...,
+		"body": ...,
+	}
+)
+```
+
+### Microsoft Api Call
+
+Make an authenticated request to a Microsoft Graph API endpoint using credentials saved in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Microsoft account to use for authentication. Any API requests will be made on behalf of this account.
+- `oauth_permission_type`: str
+- `path`: str
+	Path to make the request to. e.g. /v1.0/me/messages. See \[Microsoft's Graph Explorer\](https://developer.microsoft.com/en-us/graph/graph-explorer/) for a list of endpoints
+- `method`: str
+	The HTTP method to use.
+- `body`: dict
+	The body to send with the request.
+- `headers`: dict
+	The headers to send with the request. The 'Authorization' header is always sent and cannot be overwritten.
+
+**Returns**
+    
+- `response_body`: Any
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "microsoft_api_call",
+	{
+		"oauth_account_id": ...,
+		"oauth_permission_type": ...,
+		"path": ...,
+		"method": ...,
+		"body": ...,
+		"headers": ...,
+	}
+)
+```
+
+### Send Gmail Email
+
+Send an email using a Google / Gmail account stored in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Gmail account from which to send emails.
+- `to`: Any
+	The email address to send the email to.
+- `cc`: Any
+	The email addresses to cc.
+- `bcc`: Any
+	The email addresses to blind cc.
+- `subject`: str
+	The subject of the email.
+- `body`: str
+	The text or html body of the email.
+- `gmail_thread_id`: str
+	The gmail thread in which to send this message.
+- `reply_to_message`: str
+	The message id to reply to. If blank, the email will be sent as a new message.
+- `draft`: bool
+	If true, the email will be saved as a draft instead of sent immediately.
+
+**Returns**
+    
+- `gmail_thread_id`: str
+- `gmail_message_id`: str
+- `message_id`: str
+- `raw_email`: str
+
+
+```python Python
+response = run_step(
+    "send_gmail_email",
+	{
+		"oauth_account_id": ...,
+		"to": ...,
+		"cc": ...,
+		"bcc": ...,
+		"subject": ...,
+		"body": ...,
+		"gmail_thread_id": ...,
+		"reply_to_message": ...,
+		"draft": ...,
+	}
+)
+```
+
+### Message Agent
+
+Send a message to an agent
+
+**Arguments**
+    
+- `agent_id`: str
+	The agent to message
+- `agent_override`: dict
+- `override`: dict
+- `message`: str
+	The text message to send to the agent.
+- `conversation_id`: str
+	The conversation to send the message to. If blank, a new conversation will be created.
+- `wait_for_reply`: bool
+	Deprecated - If true, this step will wait until the agent replies before continuing. Otherwise, the message will be sent, and the step will continue immediately.
+- `metadata`: dict
+	Information to store in message metadata.
+- `params`: dict
+	Params to set in the agent before running
+
+**Returns**
+    
+- `job_info`: dict
+- `conversation_id`: str
+- `agent_id`: str
+- `state`: str
+- `message`: dict
+
+
+```python Python
+response = run_step(
+    "message_agent",
+	{
+		"agent_id": ...,
+		"agent_override": ...,
+		"override": ...,
+		"message": ...,
+		"conversation_id": ...,
+		"wait_for_reply": ...,
+		"metadata": ...,
+		"params": ...,
+	}
+)
+```
+
+### Check Google Calendar
+
+Check Google calendar availability
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Google account of the calendar to check.
+- `start_date`: str
+	ISO formatted string for start date. e.g. 2023-12-06T19:00:00+00:00
+- `end_date`: str
+	ISO formatted string for start date. e.g. 2023-12-06T19:00:00+00:00
+- `slot_duration`: int | float
+	Duration of booking in minutes
+- `start_working_time`: str
+- `end_working_time`: str
+- `timezone`: str
+- `calendars`: Any
+	If not defined, the Google account's primary calendar is used
+
+**Returns**
+    
+- `calendars`: dict
+
+
+```python Python
+response = run_step(
+    "check_google_calendar",
+	{
+		"oauth_account_id": ...,
+		"start_date": ...,
+		"end_date": ...,
+		"slot_duration": ...,
+		"start_working_time": ...,
+		"end_working_time": ...,
+		"timezone": ...,
+		"calendars": ...,
+	}
+)
+```
+
+### Create Google Calendar Event
+
+Create a calendar event using a Google account stored in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Google account of the calendar to check.
+- `event_title`: str
+- `event_description`: str
+- `start_datetime`: str
+	ISO formatted string for start date. e.g. 2023-12-06T19:00:00+00:00
+- `end_datetime`: str
+	ISO formatted string for start date. e.g. 2023-12-06T19:00:00+00:00
+- `attendees`: Any
+- `calendar`: str
+	If not defined, the Google account's primary calendar is used
+- `location`: str
+	Location for the meeting. Can be a physical location, or a link to a virtual meeting
+- `guests_can_modify`: bool
+	Boolean that gives event guests the ability to modify the event
+
+**Returns**
+    
+- `event_id`: str
+
+
+```python Python
+response = run_step(
+    "create_google_calendar_event",
+	{
+		"oauth_account_id": ...,
+		"event_title": ...,
+		"event_description": ...,
+		"start_datetime": ...,
+		"end_datetime": ...,
+		"attendees": ...,
+		"calendar": ...,
+		"location": ...,
+		"guests_can_modify": ...,
+	}
+)
+```
+
+### Send Outlook Email
+
+Send an email using a Microsoft account stored in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Microsoft account from which to send emails.
+- `to`: Any
+	The email address to send the email to.
+- `cc`: Any
+	The email addresses to cc.
+- `bcc`: Any
+	The email addresses to blind cc.
+- `subject`: str
+	The subject of the email.
+- `body`: str
+	The text or html body of the email.
+- `reply_to_message`: str
+	The outlook message id to reply to. If blank, the email will be sent as a new message.
+- `draft`: bool
+	If true, the email will be saved as a draft instead of sent immediately.
+
+**Returns**
+    
+- `outlook_thread_id`: str
+- `outlook_message_id`: str
+- `message_id`: str
+- `raw_email`: str
+
+
+```python Python
+response = run_step(
+    "send_outlook_email",
+	{
+		"oauth_account_id": ...,
+		"to": ...,
+		"cc": ...,
+		"bcc": ...,
+		"subject": ...,
+		"body": ...,
+		"reply_to_message": ...,
+		"draft": ...,
+	}
+)
+```
+
+### Check Outlook Calendar
+
+Check calendar availability using a Microsoft Outlook account stored in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Microsoft account from which to send emails.
+- `start_date`: str
+	ISO formatted string for start date. e.g. 2023-12-06T19:00:00+00:00
+- `end_date`: str
+	ISO formatted string for start date. e.g. 2023-12-06T19:00:00+00:00
+- `slot_duration`: int | float
+	Duration of booking in minutes
+- `start_working_time`: str
+- `end_working_time`: str
+- `timezone`: str
+- `calendars`: Any
+	Calendars must be a Microsoft 365 work or school email in your organisation
+- `is_organizer_optional`: bool
+	If there are no calendars to query, organizer is required by default
+
+**Returns**
+    
+- `calendars`: dict
+
+
+```python Python
+response = run_step(
+    "check_outlook_calendar",
+	{
+		"oauth_account_id": ...,
+		"start_date": ...,
+		"end_date": ...,
+		"slot_duration": ...,
+		"start_working_time": ...,
+		"end_working_time": ...,
+		"timezone": ...,
+		"calendars": ...,
+		"is_organizer_optional": ...,
+	}
+)
+```
+
+### Create Outlook Calendar Event
+
+Create a calendar event using a Microsoft Outlook account stored in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Microsoft account from which to send emails.
+- `subject`: str
+- `body`: str
+- `start_datetime`: str
+	ISO formatted string for start date. e.g. 2023-12-06T19:00:00+00:00
+- `end_datetime`: str
+	ISO formatted string for start date. e.g. 2023-12-06T19:00:00+00:00
+- `attendees`: Any
+- `calendar`: str
+	If not defined, the Microsoft account's primary calendar is used
+- `location`: str
+	Location for the meeting. Can be a physical location, or a link to a virtual meeting
+
+**Returns**
+    
+- `event_id`: str
+
+
+```python Python
+response = run_step(
+    "create_outlook_calendar_event",
+	{
+		"oauth_account_id": ...,
+		"subject": ...,
+		"body": ...,
+		"start_datetime": ...,
+		"end_datetime": ...,
+		"attendees": ...,
+		"calendar": ...,
+		"location": ...,
+	}
+)
+```
+
+### Delay
+
+Delay for specified amount of time.
+
+**Arguments**
+    
+- `delay`: int | float
+	Delay amount in seconds
+
+**Returns**
+    
+- `delay`: int | float
+
+
+```python Python
+response = run_step(
+    "delay",
+	{
+		"delay": ...,
+	}
+)
+```
+
+### Retrieve Data
+
+Retrive data from your dataset.
+
+**Arguments**
+    
+- `knowledge_set`: str
+- `include_fields`: Any
+- `page_size`: int | float
+
+**Returns**
+    
+- `results`: Any
+
+
+```python Python
+response = run_step(
+    "retrieve_data",
+	{
+		"knowledge_set": ...,
+		"include_fields": ...,
+		"page_size": ...,
+	}
+)
+```
+
+### Zoom Api Call
+
+Make a call to the Zoom API
+
+**Arguments**
+    
+- `oauth_account_id`: str
+- `path`: str
+	Path to make the request to, and must include the API version. e.g. /v2/users/me
+- `method`: str
+	The HTTP method to use.
+- `body`: dict
+	The body to send with the request.
+
+**Returns**
+    
+- `response_body`: dict
+- `status`: int | float
+- `body`: str
+- `url`: str
+- `response_headers`: dict
+
+
+```python Python
+response = run_step(
+    "zoom_api_call",
+	{
+		"oauth_account_id": ...,
+		"path": ...,
+		"method": ...,
+		"body": ...,
+	}
+)
+```
+
+### Vapiai Send Call Managed
+
+Make a phone call with AI
+
+**Arguments**
+    
+- `phone_number`: str
+- `assistant_model`: str
+- `assistant_system_prompt`: str
+- `assistant_prompt`: str
+- `assistant_first_message`: str
+- `assistant_final_message`: str
+- `voice_id`: str
+	What kind of spoken voice do you want your assistant to have?
+- `configuration`: dict
+	See https://docs.vapi.ai/api-reference/calls/create-phone-call for total list of parameters
+- `wait_for_finish`: bool
+	Do we want this step to return once the call has been sent or once the call has concluded?
+
+**Returns**
+    
+- `status`: str
+- `call_id`: str
+- `credits_used`: int | float
+
+
+```python Python
+response = run_step(
+    "vapiai_send_call_managed",
+	{
+		"phone_number": ...,
+		"assistant_model": ...,
+		"assistant_system_prompt": ...,
+		"assistant_prompt": ...,
+		"assistant_first_message": ...,
+		"assistant_final_message": ...,
+		"voice_id": ...,
+		"configuration": ...,
+		"wait_for_finish": ...,
+	}
+)
+```
+
+### Vapiai Send Call Custom
+
+Make a phone call with AI using Vapi AI
+
+**Arguments**
+    
+- `phone_number_id`: str
+- `assistant_id`: str
+- `customer_phone_number`: str
+	See https://docs.vapi.ai/api-reference/calls/create-phone-call for total list of parameters
+- `phone_number`: dict
+	See https://docs.vapi.ai/api-reference/calls/create-phone-call for total list of parameters
+- `assistant`: dict
+	See https://docs.vapi.ai/api-reference/calls/create-phone-call for total list of parameters
+- `customer`: dict
+	See https://docs.vapi.ai/api-reference/calls/create-phone-call for total list of parameters
+- `wait_for_finish`: bool
+	Do we want this step to return once the call has been sent or once the call has concluded?
+
+**Returns**
+    
+- `status`: str
+- `call_id`: str
+- `credits_used`: int | float
+
+
+```python Python
+response = run_step(
+    "vapiai_send_call_custom",
+	{
+		"phone_number_id": ...,
+		"assistant_id": ...,
+		"customer_phone_number": ...,
+		"phone_number": ...,
+		"assistant": ...,
+		"customer": ...,
+		"wait_for_finish": ...,
+	}
+)
+```
+
+### Vapiai Call Details
+
+Retrieve the call details for a call made with Vapi AI
+
+**Arguments**
+    
+- `use_user_key`: bool
+- `call_id`: str
+	The call id to fetch the transcript for.
+
+**Returns**
+    
+- `response`: dict
+
+
+```python Python
+response = run_step(
+    "vapiai_call_details",
+	{
+		"use_user_key": ...,
+		"call_id": ...,
+	}
+)
+```
+
+### Qr Code Art
+
+codes Art & Legible Text Art directly in your products. Request a free API key to get started.
+
+**Arguments**
+    
+- `qrContent`: str
+- `prompt`: str
+- `workflow`: str
+- `qrStrength`: int | float
+- `qrImage`: str
+- `qrSteps`: int | float
+- `qrCodePattern`: str
+	https://docs.quickqr.art/user-guide/qr-pattern-list
+- `seed`: int | float
+- `negativePrompt`: str
+
+**Returns**
+    
+- `image_url`: str
+- `response_body`: dict
+
+
+```python Python
+response = run_step(
+    "qr_code_art",
+	{
+		"qrContent": ...,
+		"prompt": ...,
+		"workflow": ...,
+		"qrStrength": ...,
+		"qrImage": ...,
+		"qrSteps": ...,
+		"qrCodePattern": ...,
+		"seed": ...,
+		"negativePrompt": ...,
+	}
+)
+```
+
+### Linkedin People Search
+
+Search linkedin profiles with rapid API
+
+**Arguments**
+    
+- `geo_codes`: Any
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `geo_codes_exclude`: Any
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `title_keywords`: Any
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `title_keywords_exclude`: Any
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `current_company_ids`: Any
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `past_company_ids`: Any
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `functions`: Any
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `keywords`: str
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `limit`: int | float
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+
+**Returns**
+    
+- `data`: Any
+
+
+```python Python
+response = run_step(
+    "linkedin_people_search",
+	{
+		"geo_codes": ...,
+		"geo_codes_exclude": ...,
+		"title_keywords": ...,
+		"title_keywords_exclude": ...,
+		"current_company_ids": ...,
+		"past_company_ids": ...,
+		"functions": ...,
+		"keywords": ...,
+		"limit": ...,
+	}
+)
+```
+
+### Linkedin Company Search
+
+Search linkedin companies with rapid API
+
+**Arguments**
+    
+- `company_headcounts`: str
+- `headquarters_location`: Any
+- `industry_codes`: Any
+- `hiring_on_linkedin`: bool
+- `recent_activities`: Any
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `keywords`: str
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+- `limit`: int | float
+	https://rapidapi.com/freshdata-freshdata-default/api/fresh-linkedin-profile-data/tutorials/search-employees-endpoint-payload-references
+
+**Returns**
+    
+- `data`: Any
+
+
+```python Python
+response = run_step(
+    "linkedin_company_search",
+	{
+		"company_headcounts": ...,
+		"headquarters_location": ...,
+		"industry_codes": ...,
+		"hiring_on_linkedin": ...,
+		"recent_activities": ...,
+		"keywords": ...,
+		"limit": ...,
+	}
+)
+```
+
+### Linkedin Job Search
+
+Search LinkedIn Jobs with rapid API
+
+**Arguments**
+    
+- `keywords`: str
+	Keywords to search for in job postings.
+- `geo_code`: str
+	Param to target jobs in specific region/country. To search worldwide, use 92000000. Find other geo codes via the provided link.
+- `date_posted`: str
+	Filter by the date when jobs were posted.
+- `experience_level`: str
+	Filter by the level of experience required for the job.
+- `company_id`: int | float
+	Filter by the ID of the company posting the job.
+- `title_id`: str
+	Filter by the ID of the job title. Find title IDs via the provided link.
+- `onsite_remote`: str
+	Filter by the working arrangement of the job.
+- `function_id`: str
+	Get the function ID of your choice following the provided instruction.
+- `industry_code`: str
+	Filter by the industry code of the job.
+- `sort_by`: str
+	Specify the sorting criteria for the job listings.
+- `start`: str
+	Specify the starting point for retrieving job listings.
+- `easy_apply`: str
+	Filter by whether the job offers easy application process.
+- `under_10_applicants`: bool
+	Filter by whether the job has less than 10 applicants.
+
+**Returns**
+    
+- `data`: Any
+
+
+```python Python
+response = run_step(
+    "linkedin_job_search",
+	{
+		"keywords": ...,
+		"geo_code": ...,
+		"date_posted": ...,
+		"experience_level": ...,
+		"company_id": ...,
+		"title_id": ...,
+		"onsite_remote": ...,
+		"function_id": ...,
+		"industry_code": ...,
+		"sort_by": ...,
+		"start": ...,
+		"easy_apply": ...,
+		"under_10_applicants": ...,
+	}
+)
+```
+
+### Webflow List Collection Items
+
+Choose which of your collections to list.
+
+**Arguments**
+    
+- `collection_id`: str
+- `cms_locale_id`: str
+- `offset`: int | float
+- `limit`: int | float
+
+**Returns**
+    
+
+
+```python Python
+response = run_step(
+    "webflow_list_collection_items",
+	{
+		"collection_id": ...,
+		"cms_locale_id": ...,
+		"offset": ...,
+		"limit": ...,
+	}
+)
+```
+
+### Webflow Create Collection Item
+
+Create or Update a webflow collection item
+
+**Arguments**
+    
+- `collection_id`: str
+- `item_id`: str
+- `cms_locale_id`: str
+- `is_archived`: bool
+- `is_draft`: bool
+- `field_data`: dict
+
+**Returns**
+    
+
+
+```python Python
+response = run_step(
+    "webflow_create_collection_item",
+	{
+		"collection_id": ...,
+		"item_id": ...,
+		"cms_locale_id": ...,
+		"is_archived": ...,
+		"is_draft": ...,
+		"field_data": ...,
+	}
+)
+```
+
+### Webflow Get Collection Item
+
+Get a webflow collection item
+
+**Arguments**
+    
+- `collection_id`: str
+- `item_id`: str
+- `cms_locale_id`: str
+
+**Returns**
+    
+
+
+```python Python
+response = run_step(
+    "webflow_get_collection_item",
+	{
+		"collection_id": ...,
+		"item_id": ...,
+		"cms_locale_id": ...,
+	}
+)
+```
+
+### Webflow Delete Collection Item
+
+Delete a webflow collection item
+
+**Arguments**
+    
+- `collection_id`: str
+- `cms_locale_id`: str
+- `item_id`: str
+
+**Returns**
+    
+
+
+```python Python
+response = run_step(
+    "webflow_delete_collection_item",
+	{
+		"collection_id": ...,
+		"cms_locale_id": ...,
+		"item_id": ...,
+	}
+)
+```
+
+### Jforce Convert Lead
+
+Make an authenticated request to a Salesforce REST API using credentials saved in Relevance
+
+**Arguments**
+    
+- `oauth_account_id`: str
+	The Salesforce account to use for authentication. Any API requests will be made on behalf of this account.
+- `ids_to_convert`: Any
+
+**Returns**
+    
+
+
+```python Python
+response = run_step(
+    "jforce_convert_lead",
+	{
+		"oauth_account_id": ...,
+		"ids_to_convert": ...,
+	}
+)
+```
