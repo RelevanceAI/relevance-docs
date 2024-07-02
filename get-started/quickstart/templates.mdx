@@ -1,12 +1,12 @@
 ---
 title: 'Getting Started with Tools'
 sidebarTitle: 'Tools quickstart'
-description: 'Tools are powerful components that allow you to create custom automations and workflows powered by Large Language Models (LLMs). They provide a flexible, low-code environment for building AI-driven solutions tailored to your specific needs.'
+description: 'Give your agents the ability to use your tech stack the way you would.'
 ---
 
 ## What are Tools?
 
-Tools are capabilities that you can equip your agent with, so that they can interact with external systems like the ones you use during your day-to-day workflows. Some of our most popular tools include:
+Tools allow your agents to use your tech stack much like a human would. One of our key philosophies is that subject matter or domain experts need to be the ones to distill their skills into agents. The way we do this is through our low-code tools.
 
 <CardGroup cols={2}>
   <Card title="Website scraping" icon="plug-circle-bolt" iconType="duotone" href="https://relevanceai.com/templates/website-scraping-5e6ae">
@@ -23,86 +23,35 @@ Tools are capabilities that you can equip your agent with, so that they can inte
   </Card>
 </CardGroup>
 
-You can see the full list of no-code tools that are available under the agents section on our [templates page](https://relevanceai.com/templates), or within the Tools page of our platform.
+You can see the full list of no-code tools that are available under the agents section on our [templates page](https://relevanceai.com/templates) (scroll to the AI Tools section), or within the Tools page of our platform.
 
-## How to use Tools?
+<Frame caption="Screenshot of the Tools Templates page on Relevance AI Platform">
+ <img src="/images/tools_templates.png" />
+</Frame>
 
-You have two options when it comes to using Tools:
+## Tool-building concepts
 
-1. Use a [ready-to-use tool template](https://relevanceai.com/templates) designed and maintained by Relevance.
-2. Create your own custom tool from scratch.
+There are three key concepts to understand when creating tools:
 
-We recommend that you follow the quickstart tutorial below for creating a tool from scratch, and using it once it has been built, in order to fully understand how to use our tool template library.
+- **Knowledge**: Tools can leverage external knowledge and domain expertise that you have added to the platform via knowledge (or created a tool that does it that for you).
 
-The way you define a tool is different to how you guide an agent to use a tool in practice. For example, we have a tool for checking calendar availability. It requires that dates are provided to it in a specific format, the ISO format.
+<Frame caption="Example of giving tool access to existing knowledge">
+ <img src="/images/tool-knowledge.png" />
+</Frame>
 
-![Tool Definition](/images/tool-definition.png)
+- **Inputs**: Tools can accept external input. Make sure the name and description is describes the data and purpose of the data well, so that the agent can figure out what information it needs to pass on to a tool.
 
-However, once you give your agent access to the tool, you won't have to worry about providing dates in a specific format. Your agent will be smart enough to convert any date you give it into the correct iso format for you. The same thing happens for other input types too.
+<Frame caption="Example of describing inputs a tool receives">
+ <img src="/images/tool-inputs.png" />
+</Frame>
 
-After equipping an agent with the check calendar availability tool above, I asked it to "tell me what my availability is for the rest of the week for meetings that are an hour and a half long."
+- **Tool Steps**: You can chain together many different tool steps to get a specific task done.
 
-![Tool usage](/images/cal-availability-nlq.png)
-
-They were smart enough to give the tool the correct inputs for that: start date and end date in iso format, and converting hour and a half to minutes for the meeting duration input.
-
-It also converted the timestamp list output by the tool into a human-readable way that was easy for me to understand (you can see the original output by clicking on the tool step after it has run in chat).
-
-### Core concepts for tools
-
-Tools have four key concepts that you need to understand to be able to unlock their full magic:
-
-- **Knowledge**: Text.
-- **User Inputs**: Text.
-- **Tool chaining**: Text.
-- **Running tools**: Text.
-
+<Frame caption="Example of describing inputs a tool receives">
+ <img src="/images/tool-steps.png" />
+</Frame>
 
 ## How to create a Tool
-
-### Knowledge
-
-### User Inputs
-
-### Tool Steps
-
-
-
-
-
-## No-code Tool Quickstart
-
-The best way to learn how to create tools and give your agents access to them, is to build one with us. No code is required for this tutorial.
-
-### Check calendar availability
-
-We're going to build a tool that checks your calendar for your upcoming availability. We'll also equip an agent with that tool, then ask it something like: What is my availability like over the next 2 weeks. It will then use the tool we create to answer that question for you.
-
-The reason we are taking you through a calendar availability tool example, is because it highlights some very powerful capabilities of AI Agents ability to reason.
-
-
-
-
-
-
-
-
-
-
-
-
-## What are Tools?
-
-Tools in Relevance are designed to be:
-
-1. **Zero to low code**: Easily create Tools without extensive programming knowledge.
-2. **Flexible**: Build custom analysis flows and workflows as desired.
-3. **Customizable**: Tailor Tools to your specific use case and requirements.
-4. **Accurate**: Leverage the power of LLMs for precise results.
-5. **Safe and secure**: Ensure data privacy and security within the Relevance platform.
-6. **Easy to maintain**: Simplify Tool management and updates.
-
-## Creating a Tool
 
 To create a new Tool, navigate to the [Tools](/get-started/key-concepts/tools) page and click on the `+ Create tool` button in the top right corner.
 
@@ -111,44 +60,127 @@ You have two options when creating a Tool:
 1. Use a [ready-to-use template](/templates/introduction) designed and maintained by Relevance.
 2. [Create your own custom Tool](/build-custom-tools/create-a-tool) from scratch.
 
+Below are some demos for some tools you might want to create for your own workflows:
+
+<CardGroup cols={2}>
+  <Card>
+    <div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/clxjx5jw32kh0t2oeazi7xj5z"
+    frameBorder="0"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+  </div>
+  </Card>
+    <Card>
+    <div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/clxl5taei33ait2oec8gs8587"
+    frameBorder="0"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+</Card>
+    <Card>
+    <div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/clxo7u90i3ulat2oeyifng8eh"
+    frameBorder="0"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+</Card>
+    <Card>
+    <div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/clxwwd1jo106f12o2drwu7ljq"
+    frameBorder="0"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+</Card>
+</CardGroup>
+
 <Tip>
 Tools that you create are saved under the [Tools](/get-started/key-concepts/tools) menu and also listed on the [Home](/get-started/key-concepts/home) page for easy access.
 </Tip>
 
-## Building a Tool
+## How to use a tool
 
-The Tool Notebook consists of three main tabs:
+Your agents will use the tools you create to get work done. The supademo below will show you how to create an email follow-up agent. You can see how to create the individual tools from the interactive demos on the FAQ follow-up agent page.
 
-1. **Use**: Provides an interface to run and test your Tool. Inputs are displayed as a form, and outputs are presented in a viewer supporting Markdown, HTML, and media.
+But for now, this will show you the idea of equipping an agent with tools and instructing your agent at a higher level on how to use them and when.
 
-2. **Build**: Where you create your LLM chains. Select from a library of transformations and add them as steps in the chain. Define the expected inputs, such as file or text inputs. Each step can be run individually for testing and debugging.
-
-3. **Logs**: View the execution logs of your Tool to monitor its performance and troubleshoot any issues.
-
-<Frame caption="Screenshot of the Build page in the Notebook">
- <img src="/images/notebook-chain.png" />
-</Frame>
-
-## Using a Tool
-
-There are several ways to use an LLM-powered Tool:
-
-1. **App**: Run the Tool directly from the Notebook interface.
-2. **Run in bulk**: Process multiple inputs simultaneously.
-3. **Chat**: Integrate the Tool into a conversational interface.
-4. **Schedule**: Set up automated runs of the Tool at specific intervals.
-5. **API**: Access the Tool programmatically through an API.
-
-<Frame caption="Screenshot of the App page in the Notebook">
- <img src="/images/notebook-app.png" />
-</Frame>
-
-## Next Steps
-
-Now that you have a basic understanding of Tools in Relevance, you can:
-
-- Explore the [ready-to-use templates](/templates/introduction) to get started quickly.
-- Learn how to [create your own custom Tool](/build-custom-tools/create-a-tool) step-by-step.
-- Dive deeper into the available components and configurations for building powerful AI-driven solutions.
-
-If you have any questions or need assistance, reach out to our support team or join our community forums for further guidance.
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cly2jywfz00v1wagmquy74wgv"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
