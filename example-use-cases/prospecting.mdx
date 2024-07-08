@@ -1,0 +1,144 @@
+---
+title: 'Prospecting'
+sidebarTitle: 'Prospecting'
+description: 'How to use Relevance to build a lead prospecting workflow.'
+---
+
+Prospecting in sales refers to the process of identifying and reaching out to potential customers or clients who have a need for your product or service. It involves actively searching for and qualifying leads, building rapport and trust with the prospect oer time, understanding their challenges, and demonstrating how your offering can provide value.
+
+In this guide, we'll explore how to build a prospecting workflow.
+
+We also have a flagship agent, BDR Bosh that is a best-in-class example of a Business Development Rep (BDR), based on human BDR standards, not software standards. 
+
+[Learn more about BDR Bosh here](https://relevanceai.com/bosh-sales-agent).
+
+## Determine your Ideal Customer Profile (ICP)
+
+The first thing you need to do is define your ideal customer profile (ICP). Identify the characteristics of the businesses or people who are most likely to benefit from your product or service. It can help to consider factors like industry, company size, geographic location, and specific needs.
+
+Once you know your ICP, you can start searching for leads that match this criteria. You can get an agent to automate this process by building custom tools that integrate with external lead collection/enrichment tools like Apollo,Salesforce, Zoominfo and more.
+
+## Lead collection and enrichment
+
+Lead collection is where you gather information about potential customers who might be a good fit for your products or services. Some leads might land in your inbox as a result of forms (like demo requests or networking events), while others might be obtained through a more proactive search. We'll show you a few ways to handle both scenarios with Relevance below:
+
+### Apollo lead collection and enrichment
+
+Using Relevance's in-build API tool step, you can connect to Apollo's database to retrieve a list of potential leads that match your ICP. You can filter by industry, company size, revenue, location and other relevant criteria.
+
+You can use the same process for lead enrichment too. With just a name, email and organisation, Apollo was able to retrieve contact information (phone, email, address etc), funding information, seniority (decision making power) and much more.
+
+<Frame>
+ <img src="/images/apollo_api_step.png" />
+</Frame>
+
+### LinkedIn lead collection and enrichment
+
+You can use Relevance AI's built-in LinkedIn tools to automate the process of both lead collection and enrichment. With these, you'll be able to search for specific LinkedIn profiles, search for Companies, Get posts for individuals or companies, searh LinkedIn job postings and more.
+
+<Frame>
+ <img src="/images/linkedin_tools.png" />
+</Frame>
+
+### Google Search and Web Scraping news/event collection
+
+You can also use the [Google Search](https://relevanceai.com/templates/google-search) and [Web Scraping](https://relevanceai.com/templates/website-scraping-5e6ae) steps to search for even more information about your prospect or their company. For example, you could search for and scrape recent events or news for use in a more tailored and thoughtful cold outreach email.
+
+## Qualifying prospects
+
+Lead qualification is where you evaluate your leads and determine which ones are the best fit, and best able to make a decision to purchase the products or services that you are offering.
+
+To qualify a prospect, you can develop a lead scoring system that assigns points based on criteria That is aligned with your original ICP characteristics:
+
+- **Need**: Do they experience pain points or challenges that your services can directly solve?
+- **Authority**: Does the lead have decision-making authority to purchase your product or services?
+- **Budget**: Are they able to purchase your product or service within your price range?
+
+You can get your agent to score each lead based on your criteria and the information it has collected in the lead collection and enrichment processes.
+
+Then you can ask it to rank leads according to how hot/cold they are.
+
+You can do this by writing a lead scoring prompt in your agent's core instructions, or by instructing your agent to use a lead scoring table saved to [knowledge](/get-started/quickstart/knowledge). It's up to you.
+
+---
+
+Once you've collected, enriched and qualified all of your leads, you can get your agent to create and send out a cold outreach email, as well as handle follow-up replies.
+
+The following supademo shows you how to:
+
+- Create a "Send email tool" leveraging the built-in Relevance AI send email via Outlook or Gmail tool steps.
+- Check knowledge for answer to a question asked in an email.
+- Escalate unknown answers to a Slack account (you can escalate to email tool).
+- Create a tool to update knowledge with new question/answer pair.
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cly2o539t01ot13r4vax49h8c"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+You can use these building blocks to handle your cold outreach, pain point and objection extraction, and building up a bank of objection handling responses/case studies etc.
+
+## Now you can focus on bottom-of-funnel activities
+
+By getting your agent to handle the time-consuming and effort-intensive lead collection, enrichment and qualification steps, your sales team will have far more time to focus on the more interesting and highest impact face-to-face steps of the sales process: calls, demos and relationship nurturing.
+
+## Agent-Building Tips
+
+We recommend that you manually go through the process of searching for leads, enriching and qualifying them a few times before you start to build an agent to automate this process.
+
+Then, identify what tools you use at each step and how you use them. After that, follow our tool quickstart guide to try building a tool that replicates one of these tasks. It helps to start with the task that is most time-consuming and least interesting to you to complete manually.
+
+If the tool you want to integrate with isn't already built-into Relevance, check to see if it has an API you can interact with. Then use the API tool step to connect with it.
+
+Once you've build one tool that you're happy with, equip an agent with it, then ask it to do the thing the tool was designed to do, whether that's collecting leads, enriching them or scraping company/person profile information or news.
+
+## Serious about outsourcing your BDR work to an agent?
+
+Bosh is a best-in-class example of a Business Development Rep (BDR), based on human BDR standards, not software standards. BDR Bosh mimics and amplifies the skills of our two in-house, world-class BDR experts, Rosh and Bedi (Bosh’s namesake). Every single part of this complex multi-agent system can be customised to match your companies operating procedures, knowledge and tech-stack.
+
+<div style={{ width: '100%', textAlign: 'center' }}>
+  <div
+    style={{
+      width: '100%',
+      position: 'relative',
+      paddingTop: '56.25%',
+    }}
+  >
+    <iframe
+      src="//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Ffast.wistia.net%2Fembed%2Fiframe%2Fio7e2z54el&amp;display_name=Wistia%2C+Inc.&amp;url=https%3A%2F%2Frelevanceai.wistia.com%2Fmedias%2Fio7e2z54el&amp;image=https%3A%2F%2Fembed-ssl.wistia.com%2Fdeliveries%2F1e7d3994910488ea83ef35422bea7832.jpg%3Fimage_crop_resized%3D960x540&amp;key=c4e54deccf4d4ec997a64902e9a30300&amp;type=text%2Fhtml&amp;schema=wistia"
+      frameBorder="0"
+      scrolling="no"
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        border: '3px solid #5E43CE',
+        borderRadius: '10px',
+      }}
+    />
+  </div>
+  <p style={{ marginTop: '8px', fontSize: '14px', color: '#5E43CE' }}>
+    This is one of our flagship agent templates, BDR Bosh (enterprise only).
+  </p>
+</div>
+
+Learn more about [Bosh, and how to book a demo here](https://relevanceai.com/bosh-sales-agent).
