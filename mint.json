@@ -54,6 +54,8 @@
         },
         "get-started/quickstart/agent",
         "get-started/quickstart/templates",
+        "get-started/quickstart/knowledge",
+        "get-started/quickstart/integrations",
         "security",
         "get-started/plans",
         "get-started/system-limits"
@@ -65,12 +67,10 @@
         "agent/introduction",
         "agent/templates",
         "agent/agent-configuration",
+        "agent/bosh-bdr-agent",
         {
           "group": "API",
-          "pages": [
-            "agent/api/conversation",
-            "agent/api/list-conversations"
-          ]
+          "pages": ["agent/api/conversation", "agent/api/list-conversations"]
         },
         "agent/faq"
       ]
@@ -119,7 +119,8 @@
               "group": "Code - Python",
               "pages": [
                 "tool/tool-steps/python-code/code-python",
-                "tool/tool-steps/python-code/code-python-helper-functions"
+                "tool/tool-steps/python-code/code-python-helper-functions",
+                "tool/tool-steps/python-code/code-studio-transformation-python-helper-functions"
               ]
             },
             "tool/tool-steps/convert-pdf-to-text",
@@ -137,16 +138,11 @@
         },
         {
           "group": "Knowledge",
-          "pages": [
-            "tool/knowledge/knowledge"
-          ]
+          "pages": ["tool/knowledge/knowledge"]
         },
         {
           "group": "Run",
-          "pages": [
-            "tool/single-run",
-            "tool/bulk-run"
-          ]
+          "pages": ["tool/single-run", "tool/bulk-run"]
         },
         "tool/export",
         {
@@ -160,15 +156,11 @@
         },
         {
           "group": "Provider setup",
-          "pages": [
-            "tool/provider-setup/azure-openai"
-          ]
+          "pages": ["tool/provider-setup/azure-openai"]
         },
         {
           "group": "API",
-          "pages": [
-            "tool/api/long-running-tools"
-          ]
+          "pages": ["tool/api/long-running-tools"]
         },
         "tool/errors",
         "tool/faq"
@@ -176,11 +168,7 @@
     },
     {
       "group": "Data",
-      "pages": [
-        "data/introduction",
-        "data/data-table",
-        "data/faq"
-      ]
+      "pages": ["data/introduction", "data/data-table", "data/faq"]
     },
     {
       "group": "Use cases",
@@ -218,8 +206,10 @@
         {
           "group": "Sales",
           "pages": [
-            "example-use-cases/few-shot-prompting"
+            "example-use-cases/few-shot-prompting",
+            "example-use-cases/prospecting"
           ]
+
         }
       ]
     },
@@ -228,11 +218,10 @@
       "pages": [
         "integrations/zoom",
         "integrations/outlook",
+        "integrations/email-warmups",
         {
           "group": "Vector database",
-          "pages": [
-            "integrations/vector-databases/redis"
-          ]
+          "pages": ["integrations/vector-databases/redis"]
         }
       ]
     },
@@ -253,19 +242,13 @@
         "sdk/dashboard/notebook",
         {
           "group": "Guides",
-          "pages": [
-            "sdk/guides/pdf-qa",
-            "sdk/guides/charting-agent"
-          ]
+          "pages": ["sdk/guides/pdf-qa", "sdk/guides/charting-agent"]
         }
       ]
     },
     {
       "group": "Datasets",
-      "pages": [
-        "datasets/introduction",
-        "datasets/reference"
-      ]
+      "pages": ["datasets/introduction", "datasets/reference"]
     }
   ],
   "footerSocials": {
@@ -292,7 +275,7 @@
     },
     {
       "source": "/agent/api-call-to-list-conversation",
-      "destination": "agent/api/list-conversations"
+      "destination": "/agent/api/list-conversations"
     },
     {
       "source": "/notebook/introduction",

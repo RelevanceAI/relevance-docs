@@ -54,3 +54,16 @@ If you have multiple knowledge datasets selected, you can reference them individ
 LLMs have a limit on the amount of context you can feed them into them, based on the modal you use. Because of this, if a dataset is too large it must be edited to fit into the context size. This is managed by a feature of relevance that gives you a number of options on how this is configured. You can read about this feature [here](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text).
 
 <Tip>You can check the context limit of models [here](/build-custom-tools/tool-steps/llms/llm#model).</Tip>
+
+## How is data embedded into the knowledge base?
+
+For the Advanced Knowledge tool step specifically, we use:
+
+- **Embedding model:** `text-embedding-3-large` (3072-Dimensions) and `embed-english-v3.0` (1024-Dimensions; default) from OpenAI and Cohere, respectively as we've found that they perform the best.
+- **Large-Language-Model (LLM):** We use Command-R Plus (Cohere's flagship model) due to its ability to extract citations (legal domains should benefit from this ideally). You can change the LLM used in advanced options by selecting `gpt-4o` and other models.
+
+The basic vector search uses the `all-mpnet-base-v2` (768-Dimensions) open source model and will use the same by default for both embedding and retrieval. You can specify both at runtime with the advanced knowledge tool step.
+
+For other default knowledge interactions like uploading knowledge or using the 'knowledge search' tool, it will use the `all-mpnet-base-v2` model by default.
+
+The vectorization happens at the stage of uploading knowlege by default. However, the advanced knowledge embeds on the fly and then caches.
