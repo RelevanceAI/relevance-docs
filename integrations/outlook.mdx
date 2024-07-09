@@ -11,7 +11,7 @@ The Outlook integration allows your agent to emails that are received to a speci
 
 In the agent settings page, you can add Outlook as a trigger by clicking on the Outlook button under "Integrations > Triggers", and following the process to connect your Outlook account.
 
-After that, you can choose whether or not you want to filter the kinds of emails that are sent to your agent from your Outlook account. Without a search filter, your agent will receive every single email that is sent to your connected account.
+After that, you can choose whether or not you want to filter emails that are sent to your agent from your Outlook account. Without a search filter, your agent will receive every single email that is sent to your connected account.
 
 <div
   style={{
@@ -37,7 +37,7 @@ After that, you can choose whether or not you want to filter the kinds of emails
 
 ### Filter options
 
-If you don't add a search filter, your agent will receive every email that is sent to the connected Outlook account, which might me what you want if your agent has a dedicated email account.
+If you don't add a search filter, your agent will receive every email that is sent to the connected Outlook account, which might be what you want if your agent has a dedicated email account.
 
 Below is a table of different search filters you can use, which is also how you filter emails in your Outlook search field. Full docs for this can be found in Microsoft's [Search Query Parameter page](https://learn.microsoft.com/en-us/graph/search-query-parameter?tabs=http):
 
@@ -51,7 +51,7 @@ This is how you would use them in the Relevance Filter emails by search field:
 - "body: book a demo" - The body of the email contains the phrase "book a demo".
 - "from:*apple.com" - Only emails sent from the apple.com domain.
 - "hasAttachments: true" - Only emails that have attachments.
-- "receiived: 07/23/2018 - Only emails received on this date.
+- "received: 07/23/2018" - Only emails received on this date.
 
 ## How to respond to emails received from Outlook?
 
@@ -81,7 +81,7 @@ Once your agent has started receiving emails (it can take up to half an hour for
 
 Once you have created this tool, equip your agent with it by opening your agent settings, clicking on "Tools" -> "Add tools", then search for the send email tool you created and add it. 
 
-We recommend setting the tool permissions to "approval mode" so that your agent always asks for permission before it sends a message to your customers. You can set it to autopilot once you're happy with how it responds, which will usually take a few rounds of iterating your prompt.
+We recommend setting the tool permissions to "approval mode" so that your agent always asks for permission before it sends a message to your customers. You can set it to autopilot once you're happy with how it responds, which will usually take a few rounds of prompt iteration.
 
 <img src="/images/send-email-outlook.png" />
 
