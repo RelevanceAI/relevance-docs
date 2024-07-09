@@ -3,15 +3,14 @@ title: 'Create an Agent'
 sidebarTitle: 'Create an Agent'
 description: 'How to create AI Agents at Relevance'
 ---
-## Overview
-On this page, we will learn how to create Agents, equip them with the required Tools
-and communicate with them.
-* Creating Agents involves giving the Agent information about who they are, what they are
-capable of and what is expected from them.
-* Using Agents is as easy as a normal communication in a chat window.
+
+## What are agents?
+
+Agents are AI team members that can work alone, or as part of a team of other agents and real people. Agents have clearly defined roles and responsibilities, and they can choose how best to get their work done using the domain-specific knowledge you teach them, and the tools you equip them with.
 
 ## Create a new agent
-You can create a brand new agent, or use one of our existing [agent templates](/agents/agent-templates). Here's how to create an agent from scratch!
+
+You can use one of our existing [agent templates](/agents/agent-templates), or create an agent from scratch.
 
 1. Login to your [Relevance AI](https://relevanceai.com/) account ([app.relevanceai.com](https://relevanceai.com/)).
 2. Go to the [Agents](/agents) page (in the sidebar).
@@ -36,106 +35,48 @@ You can create a brand new agent, or use one of our existing [agent templates](/
     }}/>
 </div>
 
-## Instruct your Agent
+## Configure your agent
 
-Every Agent has a resume that describes their skills and experience. For best results, it is very important to
-think through what we want from an Agent and to include precise instructions while in the configuration phase.
+You can customise every part of your agent, from giving it unique roles and responsibilities, tools, abilities, knowledge, large-language models and much more. In this guide, we'll walk you through the different options available to you.
 
-<Tip>
-* The more precise you are in the Agents configuration step, the closer the Agents' behavior will be to the desired outcome
-* Try your Agent, and come back to the configuration step to improve your setting towards your goal
-</Tip>
+### Agent profile settings
 
-Marco is a market research coding expert. So, the system prompt describes the company he is working for and what he does. His skill is in coding, sentiment analysis and handling the full analysis workflow. That is helpful :)  
+In the agent profile page, you can give your agent a name, profile image, description and set up custom triggers which let the agent know when to start working.
 
-However, to take Marco to the next level, we need to give him some Tools to be able to achieve his goals - just like us,
-Marco would not be able to conduct market research without access to data sources and analysis tools.  
-Let's make sure he has the right Tools for the job.
+The name and description are especially important when it comes to building multi-agent teams, because your other agents will read these to decide which agent is the right one for delegating specific tasks to.
 
-## Equip your agent with tools
+<img src="/images/agent-profile.png" />
 
-You can equip your agent with any of our [in-built tools](#), or with [tools you have created from scratch](#).
+In the above example, we have cretaed an agent called "Email Follow-Up FAQ Agent", whose responsible for handling customer queries over email, and escalating to Slack (a person) when it doesn't know the answer to a question.
 
-For example, In less than 10m, you can create an agent that writes SEO-optimised FAQs (Frequently Asked Questions), just by equipping an agent with built-in Google Search and Website Scraping tools: 
+For our more complex agents, we personify them with a name because they complete their work as well as a human can. Our flagship agent [BDR Bosh](https://relevanceai.com/bosh-sales-agent) is a good example of this.
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://player.vimeo.com/video/949374650"
-    frameBorder="0"
-    scrolling="no"
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
-</div>
+We have also connect our agent to Outlook, via the Outlook integration trigger, which means it will receive all incoming emails that are sent to that specific Outlook account. You can learn how to do this too in our [Outlook integration guide](/integrations/outlook).
 
-Some of our most popular superpowers ([tools](https://relevanceai.com/templates)):
+### Agent Tools
 
-- [**Web Scraping**](https://relevanceai.com/templates/website-scraping-5e6ae): Scrape content from a website by providing a link to the site.
-- [**Google Search**](https://relevanceai.com/templates/google-search): Get the top 10 SERPs, People Also Asked or etc for a given query.
-- [**Extract data from PDFs**](https://relevanceai.com/templates/extract-data-from-pdf): Extract complex data from PDFs.
-- [**Retrieve messages from Slack**](https://relevanceai.com/templates/slack-retrieve-messages-89e0a): Get recent massages from any Slack channel.
+You can equip your agents with tools, which allows them to interact with external systems, like sending messages over LinkedIn, Web Scraping, Querying a Database, Extracting data from a PDF and so much more.
 
-You can see all of our [public tools here](https://relevanceai.com/templates) (updated daily by one of our [in-house agents](https://relevanceai.com/blog/agent-teddy-the-tool-webpage-writer)).
+You can see all of the tools that are publicly available on [this page](https://relevanceai.com/templates), but there are also some extra capabilities inside tool-steps, which you can access when you create a new tool from scratch.
 
-## Working with the Agent
+If you are technical, you can use the JavaScript, Python, or API Block steps to interact with any software you can write code to interact with.
 
-### Conversation
-We can talk with Agents on the conversation view page.
-The current conversation can be seen and followed on the right side of tha page.
+<img src="/images/agent-tools.png" />
 
-There is a list of all conversation on the left. 
-Click on `+ new chat` button to start a new chat.
+In this case, we have given our agent access to three custom tools we built, leveraging some in-built tool steps like sending an email via outlook, or inserting data to knowledge. We have interactive demos for building this entire agent end-to-end on our [FAQ email follow up agent template page](https://relevanceai.com/agent-templates/email-faq-follow-up-agent).
 
-<Frame>
- <img src="/images/agent/talk-agent.png" />
-</Frame>
+Once you have equipped your agent with tools, it can decide which one is most appropriate for helping it reach the goals and objectives you provide via "Core instructions" (after sub-agent section). You can help it choose more effectively by making sure that tool names, descriptions, and [internal tool knowledge and inputs](/get-started/quickstart/templates) have descriptive names and descriptions.
 
-### Check Tools
+### Sub-agents
 
-Clicking on the `<N> tools` button in the chat window, we can see the list of Tools with which the agent is equipped.
-<Tip>
-Use `Edit` at the bottom of the shown list as a shortcut to the configuration step for Tools.
-</Tip>
+Much like you can equip agents with tools, you can also equip them with subagent team members. You can do this in the "Subagents" section in your agent settings:
 
-### Provide an input file
-Click on the paperclip icon and follow the upload wizard. This works by uploading your file to Relevance in a temporary
-location and sending the temporary file URL to the Agent in the conversation.
-The Agent knows how to pass the URL to Tools for analyzing the data.
+<img src="/images/sub-agents.png" />
 
-<Tip>
-When an input file is required, simply upload a file to the chat window using the paperclip icon. The Agent knows how 
-to pass the URL to Tools for analyzing the data.
-</Tip>
+Just like you can write core instructions for how you'd like your agents to use tools, you can also instruct your agent on how to work with it's connected team members.
 
-### Tools execution
-When permission for auto-run is granted, a notification indicating what Tool is being used/executed is shown.
-When a Tool requires permission to run, a question appears in the conversation asking you whether it can be 
-executed or not.
+### Instruct your agent
 
-<Frame>
- <img width="400" height="200" align="center" src="/images/agent/agent-skill-permission.png" />
-</Frame>
+There are two main ways you can guide your agent in completing it's work: Core instructions, the Flow builder (or both).
 
-And that's it, with your conversation you can quickly achieve tasks that previously would have taken hours.
-
-If you have any questions reach out to our team on in-app live chat or join our Discord community.
-
-<Frame>
- <img src="/images/agent/agent-response.png" />  
-</Frame>
-
-## Coming soon
-
-- Updates to copy of whole page.
-- Equip your agents with other agents (multi-agent systems)
-- Agent settings (waiting on new edit agent page to be released, new design).
-- Autopilot (triggers etc)
-- Approvals, escalations etc.
+[coming soon]
