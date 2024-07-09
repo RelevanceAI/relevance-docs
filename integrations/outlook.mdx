@@ -1,0 +1,107 @@
+---
+title: 'Outlook'
+description: 'Adding support for recieving and responding to Outlook emails.'
+---
+
+## What does the Outlook integration do?
+
+The Outlook integration allows your agent to emails that are received to a specific Outlook account. For customer support agents that handle email equiries, we recommend setting up a dedicated email account for them, much like you would for a human employee.
+
+## How to connect your agent to Outlook?
+
+In the agent settings page, you can add Outlook as a trigger by clicking on the Outlook button under "Integrations > Triggers", and following the process to connect your Outlook account.
+
+After that, you can choose whether or not you want to filter emails that are sent to your agent from your Outlook account. Without a search filter, your agent will receive every single email that is sent to your connected account.
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/clxwqnw9o0yzg12o20k8u7wdf"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+### Filter options
+
+If you don't add a search filter, your agent will receive every email that is sent to the connected Outlook account, which might be what you want if your agent has a dedicated email account.
+
+Below is a table of different search filters you can use, which is also how you filter emails in your Outlook search field. Full docs for this can be found in Microsoft's [Search Query Parameter page](https://learn.microsoft.com/en-us/graph/search-query-parameter?tabs=http):
+
+<img src="/images/search-query-params.png" />
+
+This is how you would use them in the Relevance Filter emails by search field:
+
+<img src="/images/search-filter-agent.png" />
+
+- "subject: ask us anything" - The subject line contains the phrase "ask us anything".
+- "body: book a demo" - The body of the email contains the phrase "book a demo".
+- "from:*apple.com" - Only emails sent from the apple.com domain.
+- "hasAttachments: true" - Only emails that have attachments.
+- "received: 07/23/2018" - Only emails received on this date.
+
+## How to respond to emails received from Outlook?
+
+Once your agent has started receiving emails (it can take up to half an hour for the first one to come through), you can build a tool that uses the built-in "Send Email (Outlook)" tool to get your agent to start responding to them.
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/clxo7u90i3ulat2oeyifng8eh"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+Once you have created this tool, equip your agent with it by opening your agent settings, clicking on "Tools" -> "Add tools", then search for the send email tool you created and add it. 
+
+We recommend setting the tool permissions to "approval mode" so that your agent always asks for permission before it sends a message to your customers. You can set it to autopilot once you're happy with how it responds, which will usually take a few rounds of prompt iteration.
+
+<img src="/images/send-email-outlook.png" />
+
+### Tell your agent how it should respond
+
+Once your agent is receiving emails, and has been equipped with your custom "Send email" tool, it's time for you to tell your agent how you want it to respond. You can do this by writing a prompt in the "core instructions" section of your agent settings.
+
+This is an example of a prompt that guides our agent to handle customer questions over email, using four custom tools we built:
+
+<img src="/images/email-follow-up-prompt.png" />
+
+<Tip>
+You can use the "/" command to reference specific tools you want your agent to use within your prompt.
+</Tip>
+
+This entire FAQ follow-up email agent is available for you to [clone as a template, or build from scratch here](https://relevanceai.com/agent-templates/email-faq-follow-up-agent).
+
+
+## How to remove the integration?
+
+You can remove the Outlook integration by opening your agent settings, clicking the 3 dots menu next to your connected Outlook trigger, and clicking "Remove". Once you've done that, your agent will no longer receive emails.
+
+<img src="/images/remove-outlook-integration.png" />
