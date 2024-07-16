@@ -75,8 +75,48 @@ Much like you can equip agents with tools, you can also equip them with subagent
 
 Just like you can write core instructions for how you'd like your agents to use tools, you can also instruct your agent on how to work with it's connected team members.
 
-### Instruct your agent
+## Instruct your agent
 
 There are two main ways you can guide your agent in completing it's work: Core instructions, the Flow builder (or both).
 
-[coming soon]
+### Core Instructions & Flow Builder
+
+Core instructions allow you to guide your agent and provide instructions for how you want it to work. You can be very specific and reference the exact tools you want it to use and when, or you can describe the workflow at a higher level and let the agent use it's own reasoning to decide what tools/agents to use and when.
+
+The flow builder allows you to construct prompt workflows that look more like a flow-diagram. This is helpful especially for workflows that can branch off depending on a specific scenario (more on this coming soon).
+
+#### Markdown support
+
+We offer markdown support for any area that accepts LLM prompts, like the core instructions, the flow builder and the LLM Tool/Tool Steps.
+
+LLMs are well-trained on markdown and can draw meaning from your headings and bullet points to improve how they interpret your prompt. 
+
+If you use markdown to create your prompts, then you'll will be creating a prompt that is visually easier for humans to read, and also easier for an LLM to understand and execute.  This is because LLMs are well-trained on Markdown ad can draw meaning from your headings and bullet points.
+
+Here is a table of markdown formatting options you can use when writing your prompts. If you're using windows, swap `Cmd` with `Ctrl` and `Opt` with `Alt`.
+
+| Feature            | Shortcut             | Markdown Syntax                        |
+|--------------------|----------------------|----------------------------------------|
+| **Bold**           | Cmd + B              | `**bold**`                             |
+| *Italics*          | Cmd + I              | `*italic*`, `_italic_`                 |
+| `code`             | Cmd + E              | `` `code` ``                           |
+| Heading (1-6)      | Cmd + Opt + [1-6]    | `# heading1` .. `###### heading6`      |
+| Blockquote         | Cmd + Shift + B      | `> blockquote`                         |
+| Bullet lists       | Cmd + Shift + 8      | `* item`, `- item`, `+ item`           |
+|                    |                      | ```markdown                            |
+|                    |                      | * item                                 |
+|                    |                      |   * sub-item (prefixed by 2 spaces)    |
+|                    |                      | ```                                    |
+| Numbered lists     | Cmd + Shift + 7      | `1. item`                              |
+|                    |                      | ```markdown                            |
+|                    |                      | 1. item                                |
+|                    |                      |   1. sub-item (prefixed by tab)        |
+|                    |                      | ```                                    |
+| Horizontal rule    |                      | `---` or `___`                         |
+| Code block         | Cmd + Opt + C        | ````` (three backticks and a space)    |
+|                    |                      | or `~~~` (three tildes and a space)    |
+
+You can also select variables and reference tools and sub agents using the following options:
+
+- Select a variable: Type in `{{` to bring up the variable picker name. This is a `{{selected_variable}}`.
+- Reference (or mention): Type in `/` to bring up the mention picker. Here you will be able to select tools or agents etc that you want to reference in your prompt.
