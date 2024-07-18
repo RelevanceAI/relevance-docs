@@ -87,28 +87,26 @@ The flow builder allows you to construct prompt workflows that look more like a 
 
 #### Markdown support
 
-We will soon offer markdown support for any area that accepts LLM prompts, like the core instructions, the flow builder and the LLM Tool/Tool Steps.
+We offer markdown support for any area that accepts LLM prompts, like the core instructions, the flow builder and the LLM tool steps.
 
-LLMs are well-trained on markdown and can draw meaning from your headings and bullet points to improve how they interpret your prompt. 
+LLMs are well-trained on markdown and can draw meaning from your headings and bullet points to improve how they interpret your prompt. Using Markdown to create your prompts allows you to create a prompt that is easier for humans to read, and also easier for an LLM to understand.
 
-If you use markdown to create your prompts, then you'll will be creating a prompt that is visually easier for humans to read, and also easier for an LLM to understand and execute.  This is because LLMs are well-trained on Markdown ad can draw meaning from your headings and bullet points.
-
-Here is a table of markdown formatting options you can use when writing your prompts. If you're using windows, swap `Cmd` with `Ctrl` and `Opt` with `Alt`.
+Here is a table of markdown formatting options you can use when writing your prompts. If you're using windows, replace `Cmd` with `Ctrl` and `Opt` with `Alt`.
 
 | Element           | Shortcut               | Markdown Syntax                                             |
 |-------------------|------------------------|-------------------------------------------------------------|
 | Bold              | `Cmd+B`                | `**bold text**`                                             |
 | Italics           | `Cmd+I`                | `*italicized text*`                                         |
-| Heading 1-6       | `Cmd+1` to `Cmd+6`     | `# H1`... `###### H6`             |
+| Heading 1-6       | `Cmd+1`, ... `Cmd+6`   | `# Large heading`, `###### Small heaidng`             |
 | Blockquote        | `Cmd+Shift+Q`          | `> blockquote`                                              |
-| Bullet Lists      | `Cmd+Shift+8`          | `- List item start with a dash`, or a `*` or `+`. Nest sub-items with 2 spaces or tabs.                   |
+| Bullet Lists      | `Cmd+Shift+8`          | `- List items start with a dash`, or a `*` or `+`. Nest sub-items with 2 spaces or tabs.                   |
 | Numbered Lists    | `Cmd+Shift+7`          | `1. List items start with a number`                |
 | Horizontal Rule   | `Cmd+Shift+-`          | `---`                                                       |
-| Code              | `Cmd+E`                | `` `code` ``                                                |
-| Code Block        | `Cmd+Shift+E`          | \``` code block \```                                        |
+| Code              | `Cmd+E`                | \`code\`                                                |
+| Code Block        | `Cmd+Shift+E`          | \`\`\` code block \`\`\`                                        |
 
 
-You can also select variables and reference tools and sub agents using the following options:
+You can also select variables and reference tools and sub agents:
 
-- Select a variable: Type in `{{` to bring up the variable picker name. This is a `{{selected_variable}}`.
-- Reference (or mention): Type in `/` to bring up the mention picker. Here you will be able to select tools or agents etc that you want to reference in your prompt.
+- Select a variable: Type in `{{` to bring up the variable picker name. Variables appear in your document surrounded in curly braces, like this: `{{selected_variable}}`.
+- Reference a tool: Type in `/` to bring up the reference picker. Here you will be able to select tools or agents etc that you want to reference in your prompt.
