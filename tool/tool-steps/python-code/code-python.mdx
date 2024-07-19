@@ -18,21 +18,24 @@ Enter your code in the code section as you would in any other IDE (e.g. VS Code,
 
 You can access tool input variables, other tool step outputs, and api_keys you've created in Relevance using the following syntax:
 
-[PYTHON VARIABLE ACCESSING EXAMPLE]
+![Python step](/images/python-variables.png)
 
-- **Access input varibles** via `params`: This is a dictionary, and the names of input variables are the dictionary keys. For example, if there is an input parameter called "name", you can access the value using `params.name`.
-- **Access other steps' output** via `steps`: This is a dictionary, and the names of the steps are the dictionary keys. For example, if there is a step called "summary", you can access its output using `steps.summary.output`. Or, if there is a code step, you can access its produced output using `steps.python.transformed`, where 'python' represents the default variable name for the python code step, which you can change.
+- **Access input varibles** via `params`: This is a dictionary, and the names of input variables are the dictionary keys. For example, if there is an input parameter called "name", you can access the value using `params["name"]`.
+- **Access other steps' output** via `steps`: This is a dictionary, and the names of the steps are the dictionary keys. For example, if there is a step called "summary", you can access its output using `steps.summary.output`. Or, if there is a code step, you can access its produced output using `steps["python"]["output"]["transformed"]`, where 'python' represents the default variable name for the python code step, which you can change.
 - **Access api keys**: You can access API keys you have added to the platform via the integrations page, with `{{secrets.chains_name_of_your_api_key}}`.
 
 ### Installing & using packages
 
-[UPDATE COPY]
+To install custom packages and import them into your custom python tool-step, you need to:
 
-You can specify all the required Python packages (e.g. pandas) under `Packages` and all the
-Runtime commands (apt-get install cuda) under `Runtime Commands`.
+1. Click on the cog icon next to "Run step" in your python tool step.
+2. Click on "New item" under the "Runtime Commands" field.
+3. Enter the installation command for your package, e.g. `pip install requests`.
+4. Import your package as you would normally, e.g. `import requests`.
 
-Enter your code in the code section as you do in any other IDE (e.g. VS code, PyCharm)
+Below is a screenshot of installing, importing and running the requests package, where we make a get request to GitHubs API:
 
+![Python step](/images/python-installing-packages.png)
 
 ## Common errors
 
