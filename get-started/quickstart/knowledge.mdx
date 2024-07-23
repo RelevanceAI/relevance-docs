@@ -86,6 +86,32 @@ In this demo, we show you how to create a table by uploading an Excel spreadshee
     }}/>
 </div>
 
+### Create a knowledge table from JSON
+
+Here is a video showing you how to create a knowledge table from a JSON file:
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://fast.wistia.com/embed/medias/9y772qky8d/"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
 ### Create or update knowledge dynamically with tools and agents
 
 In this power user demo, we show you how to build a custom tool that will automatically create or update knowledge for you based on uploading a spreadsheet. You can change the steps to create knowledge from other formats if you prefer.
@@ -111,3 +137,17 @@ In this power user demo, we show you how to build a custom tool that will automa
       borderRadius: '10px',
     }}/>
 </div>
+
+### Delete knowledge
+
+To delete a knowledge table, you need to use an api tool step to make a call to our DeleteKnowledge endpoint. We don't have another way to delete them at the moment. Below is a screenshot of what this looks like:
+
+![delete knowledge from table](/images/delete-knowledge-table-api-call.png)
+
+1. Generate your Relevance API key via the integrations page.
+2. Replace the 6 digit number in the endpoint url after `https//api-LNLLNL` with your region code. You'll see this in a pop-up after generating your API key.
+3. Replace [AUTH-TOKEN] with your authorization token, which is formatted with this: `project:api_key`.
+4. Replace [YOUR-KNOWLEDGE-TABLE-NAME] with the name of the knowledge table you want to delete.
+5. Run the step.
+
+You can use this in combination with the create or update knowledge table step above when you want to replace an existing knowledge set with another one that has the same name.
