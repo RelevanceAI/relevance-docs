@@ -137,3 +137,17 @@ In this power user demo, we show you how to build a custom tool that will automa
       borderRadius: '10px',
     }}/>
 </div>
+
+### Delete knowledge
+
+To delete a knowledge table, you need to use an api tool step to make a call to our DeleteKnowledge endpoint. We don't have another way to delete them at the moment. Below is a screenshot of what this looks like:
+
+![delete knowledge from table](/images/delete-knowledge-table-api-call.png)
+
+1. Generate your Relevance API key via the integrations page.
+2. Replace the 6 digit number in the endpoint url after `https//api-LNLLNL` with your region code. You'll see this in a pop-up after generating your API key.
+3. Replace [AUTH-TOKEN] with your authorization token, which is formatted with this: `project:api_key`.
+4. Replace [YOUR-KNOWLEDGE-TABLE-NAME] with the name of the knowledge table you want to delete.
+5. Run the step.
+
+You can use this in combination with the create or update knowledge table step above when you want to replace an existing knowledge set with another one that has the same name.
