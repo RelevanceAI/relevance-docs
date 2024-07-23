@@ -59,6 +59,46 @@ Here's a quick demo of how you create an account and invite team members:
     }}/>
 </div>
 
+### User roles
+
+Members in your organisation can be assigned the following roles: Admin, Editor and Viewer. These roles determine what they can do inside of the platform, and what they can do when using the API.
+
+<AccordionGroup>
+  <Accordion title="Admin" icon="user-tie-hair-long" iconType="duotone">
+    Has all read and write permissions.
+  </Accordion>
+  <Accordion title="Editor" icon="typewriter" iconType="duotone">
+    **Has read permissions for:**
+
+    - All datasets
+    - All knowledge sets
+    - All agents
+    - Users
+
+    **Has write permissions for:**
+
+    - All datasets
+    - All knowledge sets
+    - All agents
+
+    **Other permissions:**
+
+    - Can run agents and tools.
+  </Accordion>
+  <Accordion title="Viewer" icon="book-open-reader" iconType="duotone">
+    **Has read permissions for:**
+
+    - All datasets
+    - All knowledge sets
+    - All agents
+    - Users
+
+    **Other permissions:**
+
+    - Can run agents.
+  </Accordion>
+</AccordionGroup>
+
 ## Create an Agent
 
 Creating agents involves giving the agent information about who they are, what they are capable of and what is expected of them. You can create a brand new agent, or use one of our existing [agent templates](/agents/agent-templates).
