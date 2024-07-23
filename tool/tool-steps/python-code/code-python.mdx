@@ -4,45 +4,42 @@ sidebarTitle: "Code - Python"
 description: "A component to run Python"
 ---
 
-Although Relevance in general is a zero or low code platform, the functionality of adding Python code snippets to your Tools is
-available and fully supported.
-Code snippets can be useful in tasks such as pre or post processing of data or analysis at which LLMs are not good.
+Although Relevance in general is a zero or low-code platform, you can still code your own features using the Python tool step if you want to.
 
 ## How to use a Python step
 
-### Add the component
+You can add a Python tool-step to any tool by creating a new tool, clicking on the "Add step" button under the tool steps section, searching for "Python" and clicking on the "Python Code" tool  step as shown below.
 
-To use Python, you need to add a "Code-Python" step to your Tool (check how to get started with
-[creating a tool](/build-custom-tools/tool-steps/getting-started.mdx)).
-![Python step](/images/build-custom-tools/tool-step/python-code-get-started.png)
+![Python step](/images/python-tool-step.png)
 
-### Python packages and runtime commands
+Enter your code in the code section as you would in any other IDE (e.g. VS Code, Webstorm).
 
-![Python step](/images/build-custom-tools/tool-step/python-code-fields.png)
+### Access input variables , other steps' output and api keys
 
-You can specify all the required Python packages (e.g. pandas) under `Packages` and all the
-Runtime commands (apt-get install cuda) under `Runtime Commands`.
+You can access tool input variables, other tool step outputs, and api_keys you've created in Relevance using the following syntax:
 
-Enter your code in the code section as you do in any other IDE (e.g. VS code, PyCharm)
+![Python step](/images/python-variables.png)
 
-### Access to input variables and other steps' output
+- **Access input varibles** via `params`: This is a dictionary, and the names of input variables are the dictionary keys. For example, if there is an input parameter called "name", you can access the value using `params["name"]`.
+- **Access other steps' output** via `steps`: This is a dictionary, and the names of the steps are the dictionary keys. For example, if there is a step called "summary", you can access its output using `steps.summary.output`. Or, if there is a code step, you can access its produced output using `steps["python"]["output"]["transformed"]`, where 'python' represents the default variable name for the python code step, which you can change.
+- **Access api keys**: You can access API keys you have added to the platform via the integrations page, with `{{secrets.chains_name_of_your_api_key}}`.
 
-- **Access to input variables** is via `params`. `params` is a dictionary and the names of variables are the dictionary keys. For example,
-  if there is an input parameter named "title" you can access to title value using `params["title"]`.
+### Installing & using packages
 
-- **Access to other steps' output** is via `steps`. `steps` is a dictionary and the names of steps are the dictionary keys. For example,
-  if there is a step named "summary" you can access its produced value using `steps["summary"]["output"]`.
+To install custom packages and import them into your custom python tool-step, you need to:
 
-<Snippet file="components/tools/step-general.mdx" />
+1. Click on the cog icon next to "Run step" in your python tool step.
+2. Click on "New item" under the "Runtime Commands" field.
+3. Enter the installation command for your package, e.g. `pip install requests`.
+4. Import your package as you would normally, e.g. `import requests`.
 
-## Access the step output
+Below is a screenshot of installing, importing and running the requests package, where we make a get request to GitHubs API:
 
-If the name of a Python step is `python`, you can access the step output using `python.transformed`.
-Note that a step name is different from the step title. Step titles can be found on the top left
-of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
+![Python step](/images/python-installing-packages.png)
 
 ## Common errors
 
 The most common errors seen in our logs are Python coding related errors to which there are millions of resources available online.
-However, occasionally, users encounter the `Code execution timed out` error. Keep in mind that Python snippet execution time
-cannot exceed 4 hours.
+
+However, occasionally, users encounter the `Code execution timed out` error. Keep in mind that Python snippet execution time cannot exceed 4 hours.
+
