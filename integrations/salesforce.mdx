@@ -1,0 +1,100 @@
+---
+title: 'Salesforce'
+description: 'Interact with your Salesforce CRM with Relevance.'
+---
+
+Salesforce is designed to help businesses manage their sales pipeline, primarily through customer relationship tracking activities. With Relevance AI, your agents can interact with Salesforce much like your human sales team would.
+
+Below, we'll show you how to get started with the Salesforce integration, including how to connect your Salesforce account, how to trigger agentic workflows based on Salesforce events, and how to complete common CRM activities with your agents.
+
+## 1. How to connect your Salesforce account
+
+To add Salesforce as an integration, all you need to do is sign-into your Salesforce account via the integrations page:
+
+1. Go to the "Integrations" page in the sidebar.
+2. Click on "Salesforce".
+3. Click on the Add Integration button.
+4. Sign-in to your Salesforce account.
+5. Click "Allow access" to Relevance AI.
+
+## 2. Setup Salesforce as an Agent Trigger
+
+A trigger is an event that triggers your agent to start working. In the case of Salesforce, a trigger might be new leads added to your CRM, demos have been booked, a lead has moved down the sales funnel (e.g. Prospect -> Qualified lead) or other events unique to your sales workflows.
+
+### Add a Salesforce trigger to your agent.
+
+After you have created a new agent, you can add Salesforce as a trigger:
+
+1. Open your agent settings (Agent profile tab).
+2. Scroll down to Integrations > Triggers.
+3. Click on Salesforce.
+4. Select your connected Salesforce account, or sign-in if not already added via the integrations page (previous section).
+5. Click "Allow access" to Relevance AI.
+6. Write an SOQL query to retrieve the data you want to pull in from your Salesforce account. 
+
+Here is an example on an SOQL query that pulls in new leads:
+
+**Pull in New Leads**
+
+The following SOQL query pulls in Lead objects with the selected properties, where the "Relevance_Outreached__c" custom object has been set to "true".
+
+```SOQL
+SELECT Id, Name, Email, Phone, AccountId, Account.Name, Title
+FROM Lead
+WHERE Relevance_Outreached__c = true
+```
+
+Now, any new Leads that are added to the CRM since the last time we checked that meet the query conditions, will be sent to the agent.
+
+<Info>Make sure that you are writing [Salesforce Object Query Language (SOQL) queries](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm), and not SQL queries here. SQL queries that use order-by statements for example, will fail.</Info>
+
+7. Advanced option (Optional): Specify a frequency, which is how often you want to fetch data from Salesforce. If you don't specify a frequency, it'll check every 1 minute.
+
+8. Set a Cadence (Optional): Specificy a cadence, which is how often one of the items fetched from Salesforce triggers the agent (if 100 new leads are added, you might not want your agent to outreach to them all the same day, especially if you're in the middle of warming up your inboxes). The rest will wait in a queue.
+
+## 3. Get your agent to complete common Salesforce activities
+
+Once your account is connected, you can use the Salesforce API call step in the Tool builder. This tool step allows you to complete Salesforce-specific activities, like managing Leads, Contacts, Notes, Tasks and more.
+
+### 3.0. Use Salesforce API tool-step
+
+You can build custom tools that perform Salesforce activities, by using the Salesforce API Call tool-step:
+
+1. Create a new tool.
+2. Scroll down to Tool-steps.
+3. Add Salesforce API tool-step.
+4. Select your connected Salesforce account in the dropdown.
+
+Below are examples of common Salesforce activities your agents can perform.
+
+### 3.1. Get an existing Contact's details.
+
+<img src="/images/get_contact.png" />
+
+### 3.2. Create a new Lead.
+
+<img src="/images/create_new_lead.png" />
+
+### 3.3. Create a note (e.g. lead qual research).
+
+<img src="/images/create_note.png" />
+
+### 3.4. Create a task
+
+<img src="/images/create_task.png" />
+
+### 3.5. Mark a task as complete
+
+<img src="/images/complete_task.png" />
+
+
+## 4. Remove Salesforce integration
+
+You can remove Salesforce as a Trigger in your agent settings, by clicking the three dots next to your connected account, and then "Remove".
+
+If you want to remove the Salesforce integration completely, you can:
+
+1. Go to the "Integrations" page from the sidebar
+2. Select Zoom from the list
+3. Click "..." on the account you want to remove
+4. Click remove
