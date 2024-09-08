@@ -69,6 +69,14 @@ In the next pages, we will explain about more advanced settings for your LLM com
 * [Validators](/build-custom-tools/tool-steps/llms/llm-advance-setting#validators)
 * [How to handle large amount of text/context](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text)
 
+## LLM cost with and without credits
+
+You will not be charged credits for LLM steps that use your own LLM API keys (OpenAI API key for example). If you do not provide your own API key, then the LLM step will use Relevance's model accounts instead.
+
+In the screenshots below, you can see the difference in credit usage for using your own API key or not. In this case, it cost 2 credits to retrieve a company profile using the LinkedIn step. The LLM step itself for this task cost 10 credits (it varies depending on input/output length), which were not accrued when using your own API key.
+
+![LLM step](/images/build-custom-tools/tool-step/llm-api-key-cost-comparison.png)
+
 ## Common errors
 ### Prompt is too long. Please reduce prompt in length.
 The error message below indicate that the provided prompt includes more tokens than what the choses model allows. To resolve the issue, you can
