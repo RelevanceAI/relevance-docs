@@ -1,0 +1,186 @@
+---
+title: 'HubSpot'
+description: 'Interact with your HubSpot CRM with Relevance.'
+---
+
+HubSpot is designed to help your manage and grow your customer relationships through a wide range of tools for marketing, sales and customer service. With Relevance AI, your agents can interact with HubSpot much like your human team would.
+
+Below, we'll show you how to get started with the HubSpot integration, including how to connect your HubSpot account, how to trigger agentic workflows based on HubSpot workflow triggers, and how to complete common HubSpot activities with your agents.
+
+## 1. How to connect your HubSpot account
+
+To add HubSpot as an integration, all you need to do is sign-into your HubSpot account via the integrations page:
+
+1. Go to the "Integrations" page in the sidebar.
+2. Click on "HubSpot".
+3. Click on the Add Integration button.
+4. In the pop-up window, sign-into your HubSpot account.
+
+## 2. Setup HubSpot as an Agent Trigger
+
+A trigger is an event that triggers your agent to start working. Once you have create a new agent, you can add HubSpot as a trigger:
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/clyxv4dq500wph5yzeoxmkrsd"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+### 2.1. Trigger your agent to start working from a HubSpot workflow
+
+Next, we need to create a workflow in HubSpot, which will send a message to your connected agent every time an event you care about happens.
+
+There are three parts to this process:
+
+1. Create a HubSpot workflow.
+2. Create a HubSpot trigger.
+3. Create an action which sends a message to your Relevance AI agent.
+
+**Step 1: Create a HubSpot workflow.**
+
+In HubSpot, a workflow is made up of a series of automated actions that are perform every time a specific event happens. In this example, we'll create a Contact-based workflow which sends a message to your agent when a new contact added to your HubSpot CRM meets some criteria you define (HubSpot trigger).
+
+Let's create a contact-based workflow:
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cm0owdw6201ts22ctzppfm2ag"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+**Step 2: Create a HubSpot workflow trigger.**
+
+A HubSpot trigger is an event or condition that starts the automated workflow. In the case of a contact-based workflow, a trigger is a condition related to a contact. It can be based on a contact filling out a form, clicking a link in an email, acheiving a specific lead score, or one of their properties being updated. It's entirely up to you.
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cm0owgxrc01w022ct6shjkp6s"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+**Step 3: Add Relevance AI Trigger action.**
+
+Once your workflow and trigger is setup, you can add an action that will send a message to your agent from HubSpot (triggering your agentic workflow):
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cm0owkg2v020u22ct11q82wxg"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+## 3. Get your agent to complete common HubSpot activities
+
+Besides triggering your agent to start working from HubSpot, you can also use the HubSpot API call step in the Tool builder. This tool step allows your agent to complete HubSpot-specific activities, like managing Contacts, Notes, Tasks and more.
+
+### 3.0. Use HubSpot API tool-step
+
+You can build custom tools that perform HubSpot activities, by using the HubSpot API Call tool-step:
+
+1. Create a new tool.
+2. Scroll down to Tool-steps.
+3. Add HubSpot API tool-step.
+4. Select your connected HubSpot account in the dropdown.
+
+Below are examples of common HubSpot activities your agents can perform.
+
+### 3.1. Get an existing Contact's details.
+
+<img src="/images/get_hubspot_contact_details.png" />
+
+### 3.2. Update a contact's properties.
+
+<img src="/images/update_hubspot_contact_properties.png" />
+
+### 3.4. Create a note (e.g. lead qual research).
+
+<img src="/images/create_hubspot_note.png" />
+
+### 3.5. Create a task
+
+<img src="/images/create_hubspot_task.png" />
+
+### 3.6. Mark a task as complete
+
+<img src="/images/complete_hubspot_task.png" />
+
+### 3.7. Retrieve HubSpot engagements (all activities a customer has performed)
+
+<img src="/images/retrieve_hubspot_contact.png" />
+
+<img src="/images/get_hubspot_engagements.png" />
+
+
+## 4. Remove HubSpot integration
+
+You can remove HubSpot as a Trigger in your agent settings, by clicking the three dots next to your connected account, and then "Remove".
+
+If you want to remove the HubSpot integration completely, you can:
+
+1. Go to the "Integrations" page from the sidebar.
+2. Select Zoom from the list.
+3. Click "..." on the account you want to remove.
+4. Click remove.
