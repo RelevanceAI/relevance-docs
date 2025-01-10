@@ -3,6 +3,9 @@ title: 'Plans and Credits'
 sidebarTitle: 'Plans & Credits'
 description: 'Different user plans at Relevance'
 ---
+
+## Understanding Credits
+
 Relevance provides a variety of plans enabling you to choose the best option according to your needs.
 Each plan supports a certain number of users, credits per execution, specific data size and certain Large Language Models.
 
@@ -10,3 +13,86 @@ Below is a brief overview of the available plans and their specification.
 For the most updated list, please visit Relevance's [pricing](https://relevanceai.com/pricing) page.
 
 Note that it is always possible to upgrade or downgrade your plan based on your usage and workload.
+
+## Base Credits Costs
+
+The base cost for running any tool or agent is 4 credits. However, this cost varies depending on your plan.
+
+| Plan          | Credits per run                       |
+| ------------- | ------------------------------------- |
+| Free          | 4                                     |
+| Starter       | 4                                     |
+| Basic         | 4                                     |
+| Team          | 3                                     |
+| Business      | 2                                     |
+| Enterprise    | 2                                     |
+| Custom        | 2                                     |
+
+### What affects total credit cost?
+
+Your total credit consumption depends on several factors:
+
+#### Tool Steps
+
+- When using integrations without your own API key, additional credits are charged since you're using our API keys.
+- If you provide your own API key, no additional credits are charged for integrations.
+
+#### LLM Model Selection
+- Different models have different credit costs.
+- Specific costs can be found in the `model` selector within the platform.
+
+<Frame>
+ <img src="/images/model-selector.png" />
+</Frame>
+
+#### Knowledge Sync
+- Knowledge is our RAG (Retrieval-Augmented Generation) solution that enables you to provide additional context to your agents and tools.
+- When syncing knowledge, yourdata is vectorized to enable search capabilities.
+- Knowledge sync operations have the same base credit cost as a tool run.
+
+## Credit Allocation and Reset 
+
+### Reset Schedule
+
+- **Free Plan:** Credits reset daily.
+- **Paid Plans:** Credits reset monthly.
+
+### Purchasing Additional Credits
+
+- Only available for paid plan users (because on a free plan credits reset daily).
+- Extra credits do not roll over to the next billing cycle.
+- When a new cycle begins, credits reset to your plan's default amount.
+- Pricing: 1000 credits = $2USD
+- Minimum purchase: 4000 credits ($4USD)
+    - This minimum exists due to Stripe transaction fees.
+
+Here is how you can manage your plan and purchase credits:
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://relevanceai.wistia.com/embed/medias/d8hkniv8nv"
+    frameBorder="0"
+    title="Create an agent from scratch on Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+### Monitoring Credit Usage
+
+To check your credit consumption:
+
+1. Click "Manage organization" in the settings menu.
+2. Navigate to Plan & Billing.
