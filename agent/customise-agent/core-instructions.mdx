@@ -1,0 +1,52 @@
+---
+title: 'Core instructions'
+sidebarTitle: 'Core instructions'
+---
+
+Core instructions guide your agent's behavior and decision-making process.
+
+When writing instructions, clearly state the agent's role and primary objectives, and outline step-by-step procedures for it's tasks.
+
+It can also be helpful to give your agent examples of scenarios it might encounter, and examples of it's expected responses. 
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '61.46%',
+  }}>
+  <iframe
+    src="https://fast.wistia.com/embed/medias/eu9t9i1kna"
+    frameBorder="0"
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+
+#### Markdown support
+
+We offer markdown support for any area that accepts LLM prompts, like the core instructions, the flow builder and the LLM tool steps.
+
+LLMs are well-trained on markdown and can draw meaning from your headings and bullet points to improve how they interpret your prompt. Using Markdown to create your prompts allows you to create a prompt that is easier for humans to read, and also easier for an LLM to understand.
+
+Here is a table of markdown formatting options you can use when writing your prompts. If you're using windows, replace `Cmd` with `Ctrl` and `Opt` with `Alt`.
+
+| Element           | Shortcut               | Markdown Syntax                                             |
+|-------------------|------------------------|-------------------------------------------------------------|
+| Bold              | `Cmd+B`                | `**bold text**`                                             |
+| Italics           | `Cmd+I`                | `*italicized text*`                                         |
+| Heading 1-6       | `Cmd+1`, ... `Cmd+6`   | `# Large heading`, `###### Small heaidng`             |
+| Bullet Lists      | `Cmd+Shift+8`          | `- List items start with a dash`, or a `*` or `+`. Nest sub-items with 2 spaces or tabs.                   |
+| Numbered Lists    | `Cmd+Shift+7`          | `1. List items start with a number`                |
+| Horizontal Rule   | `Cmd+Shift+-`          | `---`                                                       |
+| Code              | `Cmd+E`                | \`code\`                                                |
+| Code Block        | `Cmd+Shift+E`          | \`\`\` code block \`\`\`                                        |
+
+
+You can also select variables and reference tools and sub agents:
+
+- Select a variable: Type in `{{` to bring up the variable picker name. Variables appear in your document surrounded in curly braces, like this: `{{selected_variable}}`.
+- Reference a tool: Type in `/` to bring up the reference picker. Here you will be able to select tools or agents etc that you want to reference in your prompt.
