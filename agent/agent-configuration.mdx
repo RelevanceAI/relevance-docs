@@ -1,22 +1,18 @@
 ---
-title: 'Create an Agent'
-sidebarTitle: 'Create an Agent'
-description: 'How to create AI Agents at Relevance'
+title: 'Create an agent'
+sidebarTitle: 'Create an agent'
+description: 'How to create AI agents with Relevance'
 ---
 
-## What are agents?
+## Create an agent
 
-Agents are reasoning bots powered by LLMs that plan and complete tasks on autopilot. They are given tools, and decide how to use tools to achieve their goals and complete work.
-
-## Create a new agent
-
-You can use one of our existing [agent templates](/agents/agent-templates), or create an agent from scratch.
+Creating agents involves giving the agent information about who they are, what they are capable of and what is expected of them. You can create a brand new agent, or use one of our existing agent templates.
 
 1. Login to your [Relevance AI](https://relevanceai.com/) account ([app.relevanceai.com](https://relevanceai.com/)).
 2. Go to the [Agents](/agents) page (in the sidebar).
-3. Click "**+ New**" in the top right-hand corner of the page.
-4. Click "**+ Create Agent**" under "Blank agent" to create a new agent from scratch.
-5. Give your agent a name, description and optional profile image.
+3. Click `Build from scratch` in the top right-hand corner of the page.
+4. Give your agent a name, description and profile image.
+5. Click `Confirm` to save your agent.
 
 <div
   style={{
@@ -25,8 +21,13 @@ You can use one of our existing [agent templates](/agents/agent-templates), or c
     paddingTop: '56.25%',
   }}>
   <iframe
-    src="https://app.supademo.com/embed/clwomcw5605gpdmfh8kvuhebc"
+    src="https://app.supademo.com/embed/cm7a5p74i0rk111on7yxdr2p2"
     frameBorder="0"
+    title="Build an AI agent from scratch in Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
     style={{
       position: 'absolute',
       top: 0,left: 0, width: '100%', height: '100%',
@@ -35,89 +36,4 @@ You can use one of our existing [agent templates](/agents/agent-templates), or c
     }}/>
 </div>
 
-## Configure your agent
-
-You can customise every part of your agent, from giving it unique roles and responsibilities, tools, abilities, knowledge, large-language models and much more. In this guide, we'll walk you through the different options available to you.
-
-### Agent profile settings
-
-In the agent profile page, you can give your agent a name, profile image, description and set up custom triggers which let the agent know when to start working.
-
-The name and description are especially important when it comes to building multi-agent teams, because your other agents will read these to decide which agent is the right one for delegating specific tasks to.
-
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '61.46%',
-  }}>
-  <iframe
-    src="https://fast.wistia.com/embed/medias/ky49ox4ifk"
-    frameBorder="0"
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      borderRadius: '10px',
-    }}/>
-</div>
-
-For our more complex agents, we personify them with a name because they complete their work as well as a human can. Our flagship agent [BDR Bosh](https://relevanceai.com/bosh-sales-agent) is a good example of this.
-
-We have also connect our agent to Outlook, via the Outlook integration trigger, which means it will receive all incoming emails that are sent to that specific Outlook account. You can learn how to do this too in our [Outlook integration guide](/integrations/outlook).
-
-### Agent Tools
-
-You can equip your agents with tools, which allows them to interact with external systems, like sending messages over LinkedIn, Web Scraping, Querying a Database, Extracting data from a PDF and so much more.
-
-You can see all of the tools that are publicly available on [this page](https://relevanceai.com/templates), but there are also some extra capabilities inside tool-steps, which you can access when you create a new tool from scratch.
-
-If you are technical, you can use the Python, JavaScript or API Block steps to interact with any software you can write code to interact with.
-
-<img src="/images/agent-tools.png" />
-
-In this case, we have given our agent access to three custom tools we built, leveraging some in-built tool steps like sending an email via outlook, or inserting data to knowledge. We have interactive demos for building this entire agent end-to-end on our [FAQ email follow up agent template page](https://relevanceai.com/agent-templates/email-faq-follow-up-agent).
-
-Once you have equipped your agent with tools, it can decide which one is most appropriate for helping it reach the goals and objectives you provide via "Core instructions" (after sub-agent section). You can help it choose more effectively by making sure that tool names, descriptions, and [internal tool knowledge and inputs](/get-started/quickstart/templates) have descriptive names and descriptions.
-
-### Sub-agents
-
-Much like you can equip agents with tools, you can also equip them with subagent team members. You can do this in the "Subagents" section in your agent settings:
-
-<img src="/images/sub-agents.png" />
-
-Just like you can write core instructions for how you'd like your agents to use tools, you can also instruct your agent on how to work with it's connected team members.
-
-## Instruct your agent
-
-There are two main ways you can guide your agent in completing it's work: Core instructions, the Flow builder (or both).
-
-### Core Instructions & Flow Builder
-
-Core instructions allow you to guide your agent and provide instructions for how you want it to work. You can be very specific and reference the exact tools you want it to use and when, or you can describe the workflow at a higher level and let the agent use it's own reasoning to decide what tools/agents to use and when.
-
-The flow builder allows you to construct prompt workflows that look more like a flow-diagram. This is helpful especially for workflows that can branch off depending on a specific scenario (more on this coming soon).
-
-#### Markdown support
-
-We offer markdown support for any area that accepts LLM prompts, like the core instructions, the flow builder and the LLM tool steps.
-
-LLMs are well-trained on markdown and can draw meaning from your headings and bullet points to improve how they interpret your prompt. Using Markdown to create your prompts allows you to create a prompt that is easier for humans to read, and also easier for an LLM to understand.
-
-Here is a table of markdown formatting options you can use when writing your prompts. If you're using windows, replace `Cmd` with `Ctrl` and `Opt` with `Alt`.
-
-| Element           | Shortcut               | Markdown Syntax                                             |
-|-------------------|------------------------|-------------------------------------------------------------|
-| Bold              | `Cmd+B`                | `**bold text**`                                             |
-| Italics           | `Cmd+I`                | `*italicized text*`                                         |
-| Heading 1-6       | `Cmd+1`, ... `Cmd+6`   | `# Large heading`, `###### Small heaidng`             |
-| Bullet Lists      | `Cmd+Shift+8`          | `- List items start with a dash`, or a `*` or `+`. Nest sub-items with 2 spaces or tabs.                   |
-| Numbered Lists    | `Cmd+Shift+7`          | `1. List items start with a number`                |
-| Horizontal Rule   | `Cmd+Shift+-`          | `---`                                                       |
-| Code              | `Cmd+E`                | \`code\`                                                |
-| Code Block        | `Cmd+Shift+E`          | \`\`\` code block \`\`\`                                        |
-
-
-You can also select variables and reference tools and sub agents:
-
-- Select a variable: Type in `{{` to bring up the variable picker name. Variables appear in your document surrounded in curly braces, like this: `{{selected_variable}}`.
-- Reference a tool: Type in `/` to bring up the reference picker. Here you will be able to select tools or agents etc that you want to reference in your prompt.
+[Create your first AI agent!](https://auth.relevanceai.com/signup/)
