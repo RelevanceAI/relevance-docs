@@ -1,0 +1,35 @@
+---
+title: 'Knowledge'
+sidebarTitle: 'Advanced'
+description: "Advanced knowledge retrieval"
+---
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '61.46%',
+  }}>
+  <iframe
+    src="https://fast.wistia.com/embed/medias/6ptgbgeqyd"
+    frameBorder="0"
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+## Better knowledge retrieval
+
+Relevance provides a knowledge search step in our tool builder, but advanced users may want more control over the process to achieve more precise results.
+
+For more advanced knowledge retrieval, you can implement a series of steps in your tool.
+
+- **Query Refinement:** add a LLM step and give it a prompt that asks it to refine a user's free-form query into a more effective search query. This process removes filler words and focuses on the core intent of the question.
+- **Vector Search:** Add a knowledge search step where the refined query can be used in a vector search of a knowledge table. Vector search goes beyond simple text matching, looking for semantic similarities. This allows for more flexible and intelligent matching of queries to relevant information.
+- **Result Validation and Summarization:** Add a final LLM step to process to validate and summarize the search results. This filters out irrelevant information that might have been returned by the vector search, and synthesizes the relevant information into a coherent answer. You can also provide instructions for handling cases where no relevant information is found.
+
+This advanced technique addresses a key limitation of vector search: while vector search is excellent at finding semantically similar content, it always returns results, even if none are truly relevant. The validation step ensures that the final output is both relevant and accurate.
+
+By implementing this multi-step process, you can create AI tools capable of handling complex queries with high accuracy, even when dealing with ambiguous user inputs or incomplete knowledge bases. This reduces the risk of irrelevant or hallucinated responses.
