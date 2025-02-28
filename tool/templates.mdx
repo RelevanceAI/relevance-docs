@@ -1,91 +1,37 @@
 ---
 title: "Tool Templates"
-sidebarTitle: "Templates"
-description: "Ready-to-use Tools designed and maintained by Relevance"
+sidebarTitle: "Tool templates"
+description: "Ready-to-use tools"
 ---
 
-One of the missions at Relevance is to design and maintain Tools that can be widely beneficial
-across different use-cases. Such Tools are available under Templates.
-![Home page](/images/templates/templates-page.png)
+## What are tool templates?
 
-Tools under templates are categorized based on their most frequent use-case. You can scroll on the page
-or directly go to any of the below categories:
+Tool templates are pre-built tools made by the Relevance team and our builder community. We encourage you to use these as a starting point when creating agents and equipping them with tools to complete tasks. 
 
-- Featured
-- Operations
-- Marketing
-- Research
-- Sales
-- Other
+## Use a tool template
 
-### Clone a template: Create a copy of a Tool in your account
+You can clone a tool template to make a copy of the desired template in your account, where you can modify it to better suit your needs.
 
-Cloning makes a copy of the desired template in your account and you will have full permission to modify them
-to better suit your needs.
-When opening a ready-to-use template that does not belong to your account, you will see the
-`Clone template` button on the top right.
-![Clone a template](/images/general/clone-template1.png)
+Go to **Templates** and select the tool you want to clone.
 
-## How to use a template?
-### Try a Template on an individual data entry
-Locate the desired template on the [Template](/get-started/key-concepts/templates) page and click on `Use template`. This will open the Tool's App page.
-App is where you provide the required information and try the Tool. Such information could be 
-a file to upload, typing text or numbers, selecting values from a drop-down, etc.
-
-For instance, `GPT on my Files` is a Tool able to answer questions relevant to an input file.
-![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files-form.png)
-The Tool requires two inputs: 1) a file to look at and 2) a question to answer.
-Provide the data and hit `Run once`, you will see the LLM response in a few seconds.
-![GPT on my Files](/images/templates/gpt-on-my-files/GPT-on-my-files-answer.png)
-
-### Try a Template on a whole dataset (Run in Bulk)
-Under App, we try the Tool on one data sample. It is why sometimes App is referred to as a play-ground.
-As the name suggests, Bulk run is to apply the analysis on many data entries. For instance, 
-* a dataset of research findings and applying a summarization Tool on every single entry
-* a dataset of survey responses and applying a sentiment analysis Tool on every single response
-
-On the rest of this page, we'll show you how to use a spreadsheet full of responses and apply LLMs to label each response with its corresponding sentiment.
-
-#### Bulk run Sentiment analysis
-1. **Prepare data and upload data**
-
-    Begin with preparing your CSV with the data you wish to classify. Ensure to include a column header for us to reference the correct field. 
-    Upload your CSV file and enable the knowledge as explained on [this page](/data/data-tables).
-    <Tip>
-    Your CSV file can have more than one field containing text to be analyzed. In the bulk run flow, you can specify the desired colum using the header.
-    </Tip>
-
-2. **Sentiment analysis Template**
-
-    Use Relevance's [sentiment analysis](/templates/sentiment-analysis) Template that receives an input text and outputs a sentiment label.
-    
-    <Snippet file="clone-tip.mdx" />
-
-    Set up an enrichment for sentiment analysis:
-    * Select your data table and on the [Data table](/get-started/key-concepts/data) page, click on the `Enrich` button on the top left
-    
-    * Select sentiment analysis from Relevance Templates or from your own Tools if you have created or cloned one
-    ![Enrich](/images/example-use-cases/sentiment-analysis-1.png)
-    
-    * Configure the enrichment by selecting the targeted column from the menu (i.e. the column to be analyzed) and a name for the output
-    column
-    ![Enrich](/images/example-use-cases/sentiment-analysis-2.png)
-    You will see a new column gets added to your data table indicating the configuration has been done. 
-    <Tip>
-    1. Configure an output column if you wish to run the analysis on multiple input fields. Otherwise, the first outputs will
-    be overwritten when running the analysis for the second time.
-    2. If your table is wide and the Enrichment column is not displayed after configuration, scroll to the right side of the table.
-    </Tip>
-    
-    * Run the analysis on single entries (e.g. hover over the first row and click on play) or on the whole table by clicking on the 
-    play button on the header.
-    More detailed explanation about bulk run can be found [here](/templates/bulk-run)
-
-3. **Bulk run**
-
-    Apply the sentiment analysis tool not just to one entry (i.e. one row of your CSV file) but to all rows
-
-4. **Export the results**
-
-Export the results by clicking on the `Download` button and continue with the standard format. A CSV copy of the data table will
-be downloaded to your computer download folder in a few seconds (more details available at [Export results](/templates/export))
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cm7obklxq03m5hilg1w65f3lz"
+    frameBorder="0"
+    title="Build an AI agent from scratch in Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>

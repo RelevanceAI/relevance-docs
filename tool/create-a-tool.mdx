@@ -1,97 +1,33 @@
 ---
-title: 'Create a Tool - Step 1'
-sidebarTitle: 'Create a Tool'
-description: 'Getting started with creating my first Tool'
+title: 'Create a tool'
+sidebarTitle: 'Create a tool'
+description: 'Create your first tool'
 ---
 
-## Creating a Tool
+## Create a tool
 
-The easiest way to get started with creating a tool is to start at the 
-[Tools page](/get-started/key-concepts/tools).
-Once on the page, click on `+ Create tool` on the top right of the page.
+Navigate to **Tools** in the left sidebar and click `Build from scratch`.
 
-You will be presented with an empty state where you can:
-![Empty state of new Tools](/images/build-custom-tools/tool2.png)
-1. add knowledge
-2. add inputs
-3. add tool steps
-4. access some video tutorials
+Give your tool a name and description, then click on `Edit agent prompt` and provide some information about how an agent should use the tool.
 
-### Add knowledge
-Knowledge is defined as any information that a language model might not already have.
-For instance, a chain of conversation in emails is a knowledge for a Tool scripting
-email responses.
-
-Adding knowledge to a Tool is done by clicking on the `+ Add data` button. Relevance takes
-care of all the required steps, from storing the data to vectorizing all or specified
-fields; details are fully explained at [knowledge](/build-custom-tools/knowledge/knowledge).
-
-### Add inputs
-Every Tool has inputs. 
-Inputs are used to pass data or instruction on how to analyze the data into the Tool. 
-
-Adding inputs to a Tool is done by clicking on the `+ Add input` button. Relevance has
-provided you with variety of input types and takes care of all the required steps; 
-details are fully explained at [User inputs](/build-custom-tools/user-inputs/getting-started). 
-
-### Add desired steps
-Steps are analysis components. The most frequently used step at Relevance is 
-[LLM](/build-custom-tools/tool-steps/llms/llm), which allows you to
-communicate with a Large Language Model (LLM) of choice. However, it is not
-limited to that. 
-Relevance has provided you with variety of steps from rather simple ones such as an
-API call to more complicated ones such as vectorizing and knowledge search.
-
-Adding analysis steps to a Tool is done by clicking on the `+ Add step` button. For
-more information on the available steps visit 
-[Tool steps](/build-custom-tools/tool-steps/getting-started).
-
-
-## Example
-1. On your new Tool page, click on `+ Add input` and then on `+ Text input` 
-to add a new input that accepts short pieces of text. 
-A [Text input](/build-custom-tools/user-inputs/text-input) component will now appear on the page.
-
-    Next, 
-    * Add a title (optional)
-    * Add a description (optional)
-    * Change the variable name, shown in green, from `text` to `topic`.
-        Note that this variable name will be used further down on the guide.
-
-    <Tip>
-    Every input has a title, description, variable name and setup. 
-    All these are accessible to you to define and use the component as you desire.
-    </Tip>
-
-    ![Text inputs](/images/build-custom-tools/user-input/text-input-details1.png)
-
-2. Click on `+ Add step` and then choose [LLM](/build-custom-tools/tool-steps/llms/llm) from the 
-available options. This will add an LLM component to the Tool. We are going to 
-experiment with text generation relying on LLMs such as GPT. 
-
-    We are ready to write our prompt (i.e. our way of communication with a large 
-    language model). Enter the text below, in the Prompt section of the LLM component.
-    ```text 
-    Create an engaging Instagram caption based on the following: "{{topic}}"
-    ```
-    
-    ![LLM](/images/build-custom-tools/tool-step/llm-get-started.png)
-
-    <Tip>
-    Using `{{}}` and variable names, you can access the variables and their values.
-    </Tip>
-
-3. Hit save from the top right. 
-4. Run your Tool. You can either go to the `Use` tab or give your tool a try on the current page.
-    Enter the text below, in the user input component. This will be used in the prompt. 
-    ```text
-    AI is changing the way teams work
-    ``` 
-
-    Click on `Run once` (on the App page) or on the run icon (on the Build page) on the LLM step 
-    and you will see the LLM output. In my execution, the GPT 3.5 wrote:
-    ```
-    🚀 Embrace the future of teamwork! AI is revolutionizing the way teams collaborate, 
-    innovate, and achieve extraordinary results. Say goodbye to traditional work methods 
-    and hello to a whole new era of efficiency and creativity! 💡✨ #AIRevolution #TeamworkEvolved
-    ```
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cm7obxeh703xihilguwnkradd"
+    frameBorder="0"
+    title="Build an AI agent from scratch in Relevance AI"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>

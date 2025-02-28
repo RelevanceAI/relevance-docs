@@ -1,0 +1,206 @@
+---
+title: "Tool style guide"
+sidebarTitle: "Tool style guide"
+description: "Make tools perform better with agents"
+---
+
+## Tool style guide
+
+**Workflow considerations**
+
+Single responsibility - each tool should perform one task exceptionally well.
+
+**Tool naming conventions**
+
+The names you give your tools are crucial, as they are added to the LLM prompt that powers the agent using your tool. Names significantly impact performance, as agents consider these strongly when deciding how and when to use your tools.
+
+**Best practices**
+
+Use clear, concise and descriptive names.
+Focus on the intent of the tool, not its implementation or how it performs its action.
+Be specific about the tool's purpose.
+Include an action and object, and system if using an integration.
+
+**Good examples**
+
+'Get LinkedIn company posts'
+
+'Summarize Glassdoor interviews'
+
+**Bad examples**
+
+'Search LinkedIn' (too vague)
+
+'LinkedIn scraper' (implementation-focused)
+
+**Tool description guidelines**
+
+Tool descriptions should let users know what a tool will do.
+
+Purpose statement: Clearly describe the tool's objective using active voice. Explain what the tool does, not how it does it. Include the primary use case or purpose of your tool.
+
+**Good examples**
+
+"Get a set of recent LinkedIn posts by a company or person."
+
+"Scrape and summarize company interview reviews from a provided Glassdoor interview review URL."
+
+**Using LLMs to optimize tool names and descriptions**
+
+If you're unsure how to create the optimal name and description for your tool, we recommend that you use ChatGPT-4o to help you write.
+
+Enter what you currently have for a tool name and description and provide some information about the agent that will use your tool.
+
+Example prompt: "You are being provided a tool name and description that might be used by an AI agent to perform research on various prospects.
+
+Tool name: Google search
+
+Description: Search the internet
+
+When given the tool name and description, provide a better name and description that will allow the agent to use this tool correctly. The tool searches Google for given a query.
+
+The tool name needs to be more action based and focused."
+
+**Agent prompt**
+
+The agent prompt for your tool serves as a crucial guide to help AI agents use it effectively, as agents are powered by LLMs.
+
+It is vitally important you include an agent prompt when setting up your tool.
+
+**Best practices for agent prompts**
+
+Explain usage: Clearly outline when and how the agent should use the tool.
+Provide context: Include any necessary background information or assumptions the agent might need to make informed decisions.
+
+**Good example of an agent prompt**
+
+Tool name: Get LinkedIn company posts
+
+Tool description: Get a set of recent LinkedIn posts by a company or person.
+
+**Prompt for agent to use:**
+
+"Use this tool when the user requests information about recent LinkedIn activity for a specific company or person. Provide accurate results by ensuring you input a valid LinkedIn profile URL and only return posts from the past three months."
+
+**Variables**
+
+There are three key places you will use variables in Tool Builder:
+
+Inputs
+Steps
+Referencing outputs
+
+**Naming conventions**
+
+Descriptive and concise: Names should describe the variable's purpose or content. Avoid vague or overly long names. 
+
+Use snake_case: Use a consistent format across all tools (e.g., recent_posts).
+
+Avoid generic terms: Replace terms like data, info, or results with more specific identifiers.
+
+**Good examples**
+
+company_name – Identifies the target company for a query.
+
+blog_post_titles – A collection of titles extracted from a blog, indicating the specific content being stored.
+
+**Bad examples:**
+
+name – Too vague.
+
+link – Does not specify the type of link.
+
+**Input parameters**
+
+There are three things to consider when creating inputs:
+
+- Input names
+
+- Input descriptions
+
+- Input variables
+
+**Input names**
+
+Use clear, actionable, and descriptive input names. The input name should be self-explanatory, enabling users or agents to understand what the input is for.
+
+**Input descriptions**
+
+When writing input descriptions, make sure they provide clear, concise and actionable guidance for the user or agent. Good input descriptions should reflect:
+
+Context: Explain how the input is relevant to the tool's goal.
+
+Example: "Provide the URL of the blog page to extract content from."
+Requirements: Specify what format or type of input is needed.
+
+Example: "Enter a full URL, including https://, to ensure proper parsing."
+
+Scope: Define the boundaries or constraints for the input.
+
+Example: "Include only URLs from the company’s official domain."
+
+Purpose: Indicate why the input is essential and what it will achieve.
+
+Example: "This helps identify the blog content relevant to your analysis."
+
+**Input variables**
+
+Input variables should be written in snake_case, matching the input name closely to ensure consistency. The variable name should be:
+
+Descriptive: A clear, concise representation of the input it corresponds to.
+
+Example: If the input name is Company name , the variable would be company_name.
+
+Readable and Scalable: It should be easy to read, maintain, and scale, especially when you have multiple inputs.
+
+Example
+
+You want to scrape the latest blog post content, titles and publication dates from a tech company’s blog page to track their content strategy trends.
+
+**Tool setup**
+
+Tool name: Scrape website content
+
+Description: Extract website content as markdown including title and publication date given a specific website url.
+
+Input parameters:
+
+Input name: Blog URL
+
+Description: The official blog URL of the company you’re analyzing.
+
+Variable: blog_url
+
+Input name: Objective of scraping
+
+Description: Extract content, titles and publication dates of all blog posts published in the last six months. Ignore promotional or sponsored articles.
+
+Variable: objective_of_scraping
+
+**Steps**
+
+Step names act as function identifiers. You should prioritize clarity and simplicity. Like tool names, include an action and object, and system if using an integration.
+
+**Good examples**
+
+Send email via Gmail
+
+Create new Notion page
+
+**Benefits of standardized step names**
+
+Clarity and readability: Immediately understand the workflow purpose.
+
+Consistency: Create a cohesive experience.
+
+Easy debugging and documentation: Troubleshooting and self-documentation become simpler.
+
+**Step variable naming**
+
+Step variables should be descriptive and use snake_case.
+
+**Good example:**
+
+Step name: Send email via Gmail
+
+Variable: send_email
