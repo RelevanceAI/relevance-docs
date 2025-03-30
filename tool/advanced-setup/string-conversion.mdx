@@ -13,7 +13,7 @@ the content applies to any string conversion.
 
 
 ### String to JSON
-You can use a [Convert string to json](/build-custom-tools/tool-steps/convert-string-to-json) step to convert a JSON string
+You can use a [Convert string to json](/tool/tool-steps/convert-string-to-json) step to convert a JSON string
 to a JSON object. 
 In the image below, we pass in the LLM step answer as input into the convertor step and the output is the corresponding
 JSON object.
@@ -21,8 +21,8 @@ JSON object.
 ![String to json](/images/build-custom-tools/tool-step/convert-string-to-json-fields.png)
 
 ### String to list
-Use a ([JavaScript](/build-custom-tools/tool-steps/code-javascript) Code step or 
-[Python](/build-custom-tools/tool-steps/code-python)) Code step to handle the conversion.
+Use a ([JavaScript](/tool/tool-steps/code-javascript) Code step or 
+[Python](/tool/tool-steps/python-code/code-python)) Code step to handle the conversion.
 
 All you need to do is to feed the string source value (e.g. LLM step answer) to your code step, apply the change
 (e.g. `split(separator)` in JavaScript) and return the value.
@@ -37,8 +37,8 @@ return llm.answer.split(',');
 ![String to list](/images/build-custom-tools/tool-step/llm-output-str-to-list.png)
 
 ### String to Numbers or Booleans
-Use a ([JavaScript](/build-custom-tools/tool-steps/code-javascript) Code step or 
-[Python](/build-custom-tools/tool-steps/code-python)) Code step to handle the conversion.
+Use a ([JavaScript](/tool/tool-steps/code-javascript) Code step or 
+[Python](/tool/tool-steps/python-code/code-python)) Code step to handle the conversion.
 
 All you need to do is to feed the string version of the input (e.g. LLM step answer) to your code step.
 

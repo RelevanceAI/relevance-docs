@@ -22,9 +22,9 @@ You can use few-shot prompting to train your LLM to generate responses that alig
 For instance, LinkedIn messages tend to be shorter and more specific.
 
 ### 1. Create the build sales response automation Tool
-To start, [create](/build-custom-tools/create-a-tool) a new tool. 
-Add a [long text](/build-custom-tools/user-inputs/long-text-input) input, to present the message to which we want to respond. Next, add an
-[LLM](/build-custom-tools/tool-steps/llms/llm) component.
+To start, [create](/tool/create-a-tool) a new tool. 
+Add a [long text](/tool/user-inputs/long-text-input) input, to present the message to which we want to respond. Next, add an
+[LLM](/tool/tool-steps/llms/llm) component.
 Don't forget to hit "Save" on the top right to save your Tool.
 
 <Tip>
@@ -56,13 +56,13 @@ A few samples are beneficial in altering how the LLM produces messages. But what
 By using a database of responses and replies that have been proven to be effective in the past, you can train your LLM to generate similar responses. 
 </Tip>
 
-[Upload](/data/data-tables) a CSV file containing samples of received messages and your corresponding replies. 
-Make sure to [enable knowledge](/data/data-tables#enable-knowledge).
-See our short guide on [best practice to prepare my CSV data](/data/faq#what-is-the-best-practice-when-preparing-a-csv-file).
+[Upload](/knowledge) a CSV file containing samples of received messages and your corresponding replies. 
+Make sure to [enable knowledge](/knowledge).
+See our short guide on [best practice to prepare my CSV data](/knowledge/).
 
 ### 4. Search in knowledge
 We want to create our own few-shot prompting technique based on an entire dataset. This can be achieved by using a search step to find the most similar 
-past response(s) to the current input. So, we need to add a [Knowledge search](/build-custom-tools/tool-steps/knowledge-search) component to our Tool and
+past response(s) to the current input. So, we need to add a [Knowledge search](/tool/tool-steps/knowledge-search) component to our Tool and
 configure the step:
 
 ![knowledge search](/images/example-use-cases/few-shot-prompt-knowledge-search.png)
@@ -75,7 +75,7 @@ configure the step:
 Running the step, we will get a set of responses that we've previously received and that are most similar to your input.
 
 ### 5. Add a ‘Truncate text’ step
-We need to add a [truncate text](/build-custom-tools/tool-steps/truncate-text) step to truncate the results. This allows us to specify an array, which is derived from the result 
+We need to add a [truncate text](/tool/tool-steps/truncate-text) step to truncate the results. This allows us to specify an array, which is derived from the result 
 of our previous search step, and limit the size of objects within the result to a certain number of tokens. Tokens can be 
 roughly defined as words and LLMs have limitations on the number of tokens they can receive. 
 In this example, we set it to 2000.
