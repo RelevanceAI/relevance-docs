@@ -66,23 +66,21 @@ There is only 1 LLM component under the Tool steps in this analysis flow.
     ![LLM](/images/templates/sentiment/sentiment-build-llm.png)
     <Snippet file="components/tools/llm.mdx" />
 
-    **[A Good Prompt](/build-custom-tools/tool-steps/llms/prompt)**
+    **[A Good Prompt](/tool/tool-steps/llms/prompt)**
     1. Be short and precise with your instruction/request from the LLM
     2. Explicitly note constraints and goals
     3. Include a few examples when possible
 
 ## Modify the Tool: Extracting the reason behind the given sentiment
 The existing Tool conducts sentiment analysis using large language models. You might want to modify the Tool to receive
-other analysis results. This can be easily achieved by [cloning](/templates/introduction#clone-a-template-create-a-copy-of-a-tool-in-your-account)
-the existing tool and customizing it in your account.
+other analysis results. This can be easily achieved by cloning the existing tool and customizing it in your account.
 
 In this tutorial, we're going to enhance the existing sentiment analyzer by configuring multiple outputs to our Tool and 
 adding them back to our original spreadsheet as two new columns - we're extracting the reason behind the given sentiment as well.
 You'll learn how you can have a single LLM prompt produces multiple pieces of information.
 
 ### Copy the existing Tool
-[Cloning](/templates/introduction#clone-a-template-create-a-copy-of-a-tool-in-your-account) the Tool creates a copy of the 
-Tool in your account and enables you to modify the components.
+Clone the Tool creates a copy of the Tool in your account and enables you to modify the components.
 After cloning the Tool, select it from the [Tools](/get-started/key-concepts/tools) page and go to the Build tab.
 
 ### Extracting Sentiment and Reason Simultaneously
@@ -137,5 +135,4 @@ This can be achieved by clicking on `Configure` on the output component (i.e. la
 
 ![Configure output.svg](/images/templates/sentiment/sentiment-tool-output.svg)
 
-Save all the changes and you are ready for [running](/templates/sentiment-analysis#tool-execution) your Tool and 
-[exporting](/templates/export) the results.
+Save all the changes and you are ready for [running](/templates/sentiment-analysis#tool-execution) your Tool and export the results.

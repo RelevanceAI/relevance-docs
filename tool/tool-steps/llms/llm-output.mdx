@@ -40,24 +40,24 @@ To be able to further work with the output, you will need to convert it to the d
 
 ### String to JSON
 When instructing an LLM to generate a JSON object, it is recommended to also set up the 
-[is_json](/build-custom-tools/tool-steps/llms/validators#is-json) validator.
-Next, use a [Convert string to json](/build-custom-tools/tool-steps/convert-string-to-json).
+[is_json](/tool/tool-steps/llms/validators#is-json) validator.
+Next, use a [Convert string to json](/tool/tool-steps/convert-string-to-json).
 All you need to do is to feed the LLM answer to the convertor component that generates the
 mapping JSON.
 
 ![String to json](/images/build-custom-tools/tool-step/convert-string-to-json-fields.png)
 
 ### String to list
-Use a coding step ([JavaScript](/build-custom-tools/tool-steps/code-javascript) or 
-[Python](/build-custom-tools/tool-steps/code-python)) to take care of the conversion.
+Use a coding step ([JavaScript](/tool/tool-steps/code-javascript) or 
+[Python](/tool/tool-steps/python-code/code-python)) to take care of the conversion.
 All you need to do is to feed the llm answer to your code step, apply the change
 (e.g. `split(separator)` in JavaScript) and return the value.
 
 ![String to list](/images/build-custom-tools/tool-step/llm-output-str-to-list.png)
 
 ### String to Numbers or Booleans
-Use a coding step ([JavaScript](/build-custom-tools/tool-steps/code-javascript) or 
-[Python](/build-custom-tools/tool-steps/code-python)) to take care of the conversion.
+Use a coding step ([JavaScript](/tool/tool-steps/code-javascript) or 
+[Python](/tool/tool-steps/python-code/code-python)) to take care of the conversion.
 All you need to do is to feed the llm answer to your code step.
 For numbers apply the parser (e.g. `parseInt(string-value)` in JavaScript) and return
 the results.

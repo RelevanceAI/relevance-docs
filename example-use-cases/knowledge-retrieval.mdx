@@ -30,18 +30,18 @@ even embed it to a websites.
 
 ## Let's build a knowledge retrieval Tool
 1. Start with clicking on `+ Create tool` located on top right of the [Tools](/get-started/key-concepts/tools) page.
-For more information see [how to create a tool](/build-custom-tools/introduction).
-2. Click on `+ Add data` on the knowledge section to [add knowledge](/build-custom-tools/knowledge/knowledge) to your Tool. 
+For more information see [how to create a tool](/tool).
+2. Click on `+ Add data` on the knowledge section to [add knowledge](/tool/knowledge/knowledge) to your Tool. 
 Note that you can upload knowledge sources to your Tool directly from the add knowledge window, or select already 
 existing data tables on your accounts.
 <Tip>
-Make sure to [enable knowledge](/data/data-tables#enable-knowledge) (i.e. vectorize your data). Vectors allow semantic 
+Make sure to [enable knowledge](/knowledge) (i.e. vectorize your data). Vectors allow semantic 
 search (as opposed to word-matching) and increase the accuracy of knowledge retrieval. 
 </Tip>
-3. Add a [text input](/build-custom-tools/user-inputs/text-input) component which will carry the query/question. Lets call
+3. Add a [text input](/tool/user-inputs/text-input) component which will carry the query/question. Lets call
 it `query`. Your Tool must be similar to the image below.
 ![knowledge and input](/images/example-use-cases/knowledge-retrieval-1.png)
-4. Add an [LLM](/build-custom-tools/tool-steps/llms/llm) component.
+4. Add an [LLM](/tool/tool-steps/llms/llm) component.
 * **The prompt**
     
     Use `{{}}` and the component names (i.e. `knowledge` and `query` in our current example) to bring the knowledge and the 
@@ -65,7 +65,7 @@ it `query`. Your Tool must be similar to the image below.
     ![knowledge and input](/images/example-use-cases/knowledge-retrieval-2.png)
     With `Most relevant data` selected, click on "Advanced options" and type `{{query}}` (i.e. name of the component
     containing our question) to filter out any non-relevant information to the query. More details are provided at
-    [How to handle too much text](/build-custom-tools/tool-steps/llms/how-to-handle-too-much-text).
+    [How to handle too much text](/tool/tool-steps/llms/how-to-handle-too-much-text).
 
 * **System prompt**
 

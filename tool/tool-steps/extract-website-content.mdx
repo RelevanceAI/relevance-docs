@@ -10,7 +10,7 @@ and context generation. Relevance provides you with an easy-to-use component for
 
 ### Add the component
 You need to add the "Extract website content" step to your Tool (check how to get started with 
-[creating a tool](/build-custom-tools/tool-steps/getting-started)).
+[creating a tool](/tool/tool-steps/getting-started)).
 ![Extract website content step](/images/build-custom-tools/tool-step/web-scraping-get-started.png)
 
 ### Website URL
@@ -19,7 +19,7 @@ You need to add the "Extract website content" step to your Tool (check how to ge
 
 Directly enter a URL in the box or use the `{{` to activate the variable mode. For instance, if the URL is in an input
 component called `my_url`, use `{{my_url}}`. Or if the URL is the output of a Google-Search step, use `{{google.organic[0].link}}`
-to access the url in the first search results ([FAQ](/build-custom-tools/faq#error-url-issue)).
+to access the url in the first search results ([FAQ](/tool/faq#error-url-issue)).
 
 ### Method
 You can specify if you wish to scrape data as Text or HTML. By default, Relevance scraps the Text.
@@ -56,7 +56,7 @@ scrape.output.selectors
 ## Common errors
 ### Wrong URL formatting
 This error occurs when the URL field is set to a value that is not of type string. When using the output of another
-step make sure, you access the URL field. Read more at [URL must be a string](/build-custom-tools/faq#error-url-issue).
+step make sure, you access the URL field. Read more at [URL must be a string](/tool/faq#error-url-issue).
 
 ### Non-array Elements
 When setting up specific elements to be scrapped, make sure to use `+ Add new` to have more than one Element. And if the
