@@ -1,0 +1,112 @@
+---
+title: 'Confluence'
+description: "Confluence is a powerful collaboration platform that helps teams organize, create, and share knowledge."
+sidebarTitle: 'Confluence'
+---
+
+
+# Confluence Integration
+
+Confluence is a powerful collaboration platform that helps teams organize, create, and share knowledge. With Relevance AI's Confluence integration, you can seamlessly connect your Confluence workspace to your AI agents, enabling them to access, create, and update Confluence content, making your knowledge management workflows more efficient and intelligent.
+
+## 1. Connect the integration
+
+Connecting your Confluence account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Confluence" from the available integrations.
+3. Click on the "Add Integration" button.
+4. In the pop-up window, sign into your Atlassian account.
+5. Grant the necessary permissions for Relevance AI to access your Confluence workspace.
+6. Once authenticated, your Confluence account will appear as a connected integration.
+
+## 2. Setting up triggers
+
+You can configure your AI agents to be triggered by specific events in Confluence, allowing them to respond automatically to changes in your knowledge base.
+
+### Create a Confluence trigger *(coming soon)*
+
+1. Create a new agent or select an existing one you want to connect to Confluence.
+2. Navigate to the "Triggers" section in your agent's settings ("Agent profile").
+3. Select "Confluence" from the list of available triggers.
+4. Configure the trigger conditions based on Confluence events such as:
+   * Page created
+   * Page updated
+   * Comment added
+   * Space created
+   * Content labeled
+5. Specify any additional filters to narrow down when your agent should be triggered (e.g., only trigger for pages in a specific space or with certain labels).
+6. Save your trigger configuration.
+
+Now, whenever the specified event occurs in your Confluence workspace, your agent will be automatically triggered to perform its designated tasks.
+
+## 3. Tools & Tool Steps
+
+The Confluence integration provides a rich set of actions that your agents can use to interact with your Confluence workspace. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated knowledge management capabilities.
+
+### Common Confluence actions
+
+Here are some of the powerful actions available through the Confluence integration:
+
+* Create Page: Create new pages in your Confluence workspace with specified content, title, and space.
+* Update Page: Modify existing pages with new or updated content.
+* Get Page Content: Retrieve the content of a specific page for analysis or reference.
+* Search Content: Find relevant pages, blogs, or comments based on keywords or criteria.
+* Add Comment: Add comments to pages or blogs.
+* Get Comments: Retrieve comments from a specific page.
+* Create Blog Post: Publish blog posts to your Confluence workspace.
+* Get Space Information: Retrieve details about a specific Confluence space.
+* List Spaces: Get a list of all available spaces in your Confluence instance.
+* Add Labels: Apply labels to Confluence content for better organization.
+* Get Labels: Retrieve labels associated with specific content.
+* Get Page History: Access the revision history of a page.
+
+These are just a few examples of the many actions available. The Confluence integration offers extensive capabilities to manage and interact with your Confluence content programmatically through your AI agents.
+
+### Example use cases
+
+Here are some ways you can leverage the Confluence integration with your agents:
+
+1. Documentation Assistant: Create an agent that automatically updates technical documentation in Confluence when new features are released or code changes are made.
+2. Knowledge Summarizer: Build an agent that monitors specific Confluence spaces and creates executive summaries of new content added during the week.
+
+3. Content Organizer: Deploy an agent that automatically adds appropriate labels to new Confluence pages based on their content analysis.
+4. Meeting Notes Processor: Create an agent that takes meeting notes, formats them according to your team's template, and posts them to the relevant Confluence space.
+5. Knowledge Gap Identifier: Build an agent that analyzes your Confluence content and identifies areas where documentation is missing or outdated.
+
+## 4. Use the integration's API tool step (advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Confluence-specific activities using the Confluence API Call tool step:
+
+1. Create a new tool in Relevance AI.
+2. Scroll down to Tool-steps.
+3. Add the Confluence API tool-step.
+4. Select your connected Confluence account in the dropdown.
+5. Configure the API endpoint, method, and parameters according to your needs.
+
+This advanced approach gives you full access to the Confluence REST API, allowing you to implement custom functionality beyond what's available in the standard actions.
+
+### Example: Custom API call to retrieve page restrictions
+```json
+{
+  "method": "GET",
+  "endpoint": "/wiki/rest/api/content/{pageId}/restriction",
+  "parameters": {
+    "pageId": "{{page_id}}"
+  }
+}
+```
+
+## Related Features
+
+* Knowledge Integration - Use Confluence as a knowledge source for your agents, enabling them to access and reference your team's documentation when responding to queries.
+* Slack Integration - Combine Confluence and Slack integrations to create powerful workflows where agents can update documentation and notify team members about changes.
+* Document Processing - Leverage document processing tools alongside Confluence integration to extract, analyze, and organize information from various sources into your knowledge base.
+
+## FAQs
+
+**Q: What permissions does the Confluence integration require?**  
+A: The integration requires permissions to read and write content, access spaces, and manage page properties in your Confluence workspace. You can review the specific permissions during the authentication process.
+
+**Q: Can I restrict my agent to only access certain spaces in Confluence?**  
+A: Yes, you can configure your tools and triggers to only interact with specific spaces by setting the appropriate filters and parameters.
