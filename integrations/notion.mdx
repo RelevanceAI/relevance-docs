@@ -1,0 +1,176 @@
+---
+title: 'Notion'
+description: "Seamlessly connect your AI agents with Notion workspaces to automate document creation, information retrieval, and workspace management."
+sidebarTitle: 'Notion'
+---
+
+
+## Connecting the Integration
+
+To connect the Notion integration with Relevance AI:
+
+1. Navigate to the Integrations section in your Relevance AI dashboard
+2. Select "Notion" from the available integrations
+3. Click "Connect"
+4. You'll be redirected to Notion to authorize the connection
+5. Select the Notion workspace you want to connect
+6. Review the permissions requested and click "Allow access"
+7. You'll be redirected back to Relevance AI with the integration now connected
+
+Once connected, your Notion workspace will be available for your agents to access through various tools and actions.
+
+## Notion API Authentication
+
+To use Notion tools with your agent, you'll need to:
+
+1. Create a Notion integration at https://www.notion.so/my-integrations
+2. Generate an API key for your integration
+3. Share specific pages or databases with your integration
+4. Provide the API key when configuring Notion tools in Relevance AI
+
+### Creating a Notion Integration
+
+1. Go to https://www.notion.so/my-integrations
+2. Click "New integration"
+3. Enter a name for your integration (e.g., "Relevance AI Assistant")
+
+4. Select the workspace where you want to use the integration
+5. Upload an icon (optional)
+6. Configure the capabilities your integration needs:
+   - Read content: Required for retrieving information from Notion
+   - Update content: Required for modifying existing pages
+   - Insert content: Required for creating new pages or database entries
+7. Click "Submit" to create your integration
+
+### Generating and Managing API Keys
+
+After creating your integration:
+
+1. Navigate to the "Secrets" tab in your integration settings
+2. You'll see your "Internal Integration Token" (API key)
+3. Copy this token to use with Relevance AI tools
+4. For security, you can regenerate this token at any time if needed
+
+### Sharing Pages with Your Integration
+
+For your integration to access specific Notion content:
+
+1. Open the Notion page or database you want to share
+2. Click the "..." menu in the top-right corner
+3. Select "Add connections"
+4. Find and select your integration from the list
+5. Click "Confirm" to grant access
+
+Remember that you must explicitly share each page or database you want your integration to access. Parent pages do not automatically grant access to child pages.
+
+## Setting Up Triggers
+
+The Notion integration can be configured to trigger your AI agents when specific events occur in your Notion workspace. This allows your agents to respond automatically to changes in your documentation.
+
+To set up a Notion trigger *(coming soon)*:
+
+1. Navigate to your "agent's profile" page
+2. Under "Triggers", select "Notion"
+3. Choose the trigger type:
+   - New Page Created
+   - Page Updated
+   - Database Entry Added
+   - Comment Added
+   - Mention in Page
+4. Configure the specific conditions for the trigger (e.g., which database to monitor)
+5. Save your trigger configuration
+
+With triggers configured, your agent will automatically activate when the specified events occur in your Notion workspace, allowing for real-time responses to documentation changes.
+
+## Tools & Tool Steps
+
+The Notion integration provides a rich set of tools and actions that your agents can use to interact with your Notion workspace. These actions can be incorporated into your agent's workflows to automate various documentation tasks.
+
+### Available Notion Actions
+
+Your agents can leverage these powerful Notion actions:
+
+- **Create Notion Page**: Generate new pages with formatted content, including headings, lists, tables, and more
+- **Update Notion Page**: Modify existing page content while preserving structure
+- **Get Notion Page Content**: Retrieve and analyze the content of specific pages
+- **Create Database Entry**: Add new items to Notion databases with structured properties
+- **Query Database**: Search and filter database entries based on specific criteria
+- **Get Database Structure**: Retrieve the schema of a database to understand its properties
+- **Add Comments**: Post comments on pages for collaborative feedback
+- **Create To-Do Items**: Generate actionable tasks within Notion pages
+- **Get User Details**: Retrieve information about Notion workspace members
+- **Search Notion**: Find relevant content across your entire workspace
+
+And many more! These actions can be combined in powerful ways to create sophisticated documentation workflows.
+
+### Example Use Cases
+
+Here are some examples of how your agents can use Notion actions:
+
+- **Meeting Documentation**: Automatically create meeting notes in Notion after calendar events
+- **Knowledge Base Management**: Update documentation when new information becomes available
+- **Project Tracking**: Create and update project status pages based on progress
+- **Content Creation**: Generate draft documents for review based on specific requirements
+- **Research Compilation**: Gather information from various sources and organize it in Notion pages
+
+## Using the Notion API Tool Step (Advanced)
+
+For advanced users who need more customized functionality, the Notion API tool step provides direct access to the Notion API. This allows you to build custom tools that perform specialized Notion operations beyond the standard actions.
+
+To use the Notion API tool step:
+
+1. Create a new tool in Relevance AI
+2. Scroll down to Tool-steps
+3. Add "Notion API" tool-step
+4. Select your connected Notion account in the dropdown
+5. Configure the API endpoint, method, and parameters
+6. Test your custom API call
+7. Save your tool configuration
+
+The Notion API tool step gives you the flexibility to create highly customized Notion interactions tailored to your specific needs.
+
+## Best Practices
+
+To get the most out of the Notion integration:
+
+- **Structure Your Workspace**: Organize your Notion workspace with clear hierarchies to make it easier for agents to navigate
+- **Use Templates**: Create templates for common document types to ensure consistency
+- **Set Clear Permissions**: Configure appropriate access levels for your agents in Notion
+- **Monitor Activity**: Regularly review the actions your agents are taking in your Notion workspace
+- **Start Simple**: Begin with basic documentation tasks before implementing more complex workflows
+- **Secure Your API Keys**: Store your Notion API keys securely and rotate them periodically
+- **Test Thoroughly**: Always test your integration in a controlled environment before deploying to production
+
+## Troubleshooting
+
+**Connection Issues**
+- Ensure your Notion authorization hasn't expired
+- Verify you've granted all necessary permissions
+- Check that your Notion workspace is accessible
+- Confirm your API key is valid and has not been revoked
+
+**Content Creation Problems**
+- Review the formatting in your agent's instructions
+- Ensure the agent has access to the parent pages where content is being created
+- Check for any API rate limits that might be affecting performance
+
+**Trigger Reliability**
+
+- Verify that your trigger conditions are correctly configured
+- Ensure the monitored pages or databases are accessible to the integration
+- Check that webhook notifications are enabled in your Notion workspace settings
+
+**API Authentication Errors**
+- Verify that your API key is correctly entered in the tool configuration
+- Ensure the pages you're trying to access have been shared with your integration
+- Check that your integration has the necessary capabilities enabled
+
+For additional assistance, contact Relevance AI support or consult the detailed API documentation.
+
+## Related Features
+
+[Knowledge Integration](https://relevanceai.com/docs/knowledge/create-knowledge) - Connect your Notion workspace as a knowledge source for your agents, allowing them to reference your documentation when responding to queries.
+
+[Document Processing Tools](https://relevanceai.com/docs/tool/templates) - Combine Notion integration with document processing capabilities to extract, analyze, and organize information from various sources.
+
+[Workflow Automation](https://relevanceai.com/docs/agent/customise-agent/flowbuilder) - Create sophisticated workflows that incorporate Notion actions alongside other integrations for end-to-end process automation.

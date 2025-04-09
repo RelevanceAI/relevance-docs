@@ -1,0 +1,128 @@
+---
+title: 'Slack'
+description: "Slack Integration allows you to connect your Relevance AI agents with Slack, enabling seamless communication between your AI workforce and your team's Slack workspace."
+sidebarTitle: 'Slack'
+---
+
+
+
+## Connect the integration
+
+To add Slack as an integration, follow these simple steps:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Slack" from the available integrations.
+3. Click on the "Add Integration" button.
+4. In the pop-up window, sign into your Slack workspace and authorize Relevance AI to access your Slack account.
+5. Select the channels you want to grant access to.
+6. Click "Allow" to complete the connection.
+
+Once connected, your Slack integration will be available for use with your agents and tools.
+
+## Setting up triggers
+
+You can configure your agents to be triggered by specific Slack events, allowing them to respond automatically to messages or actions in your Slack workspace.
+
+### Create a Slack trigger for your agent *(coming soon):*
+
+1. Navigate to the "Agents" page and select the agent you want to configure.
+2. Click "Edit Agent" and go to the "Triggers" section.
+3. Select "Slack" from the list of available triggers.
+4. Configure the trigger settings:
+   - Channel: Select the Slack channel(s) where you want your agent to be active.
+   - Event Type: Choose what events should trigger your agent (e.g., direct messages, channel messages, mentions, reactions).
+   - Keywords: Optionally specify keywords that will activate your agent when mentioned in messages.
+5. Click "Save" to activate the trigger.
+
+With this setup, your agent will automatically start working whenever the specified Slack events occur, such as when someone mentions your agent in a channel or sends it a direct message.
+
+## Tools & Tool Steps
+
+Slack integration provides a variety of powerful actions that your agents can use to interact with your Slack workspace. These actions can be incorporated into your agent's workflow to automate communication and information sharing.
+
+### Common Slack actions available:
+
+1. Send Message to Channel: Post messages to specific Slack channels.
+   - Channel: #general
+
+   - Message: "The weekly report is now available. You can view it here: [link]"
+2. Send Direct Message: Send private messages to specific Slack users.
+   - User: @johndoe
+   - Message: "Your requested analysis is complete. Here are the results..."
+3. Create a Thread Reply: Respond to existing messages in a thread.
+   - Channel: #support
+   - Thread TS: "1647359102.003200"
+   - Message: "I've looked into this issue and found a solution..."
+4. Upload File: Share files directly to Slack channels.
+   - Channel: #reports
+   - File: quarterly_results.pdf
+   - Comment: "Here's the quarterly financial report"
+5. React to Message: Add emoji reactions to messages.
+   - Channel: #ideas
+   - Message TS: "1647359102.003200"
+   - Reaction: "thumbsup"
+6. Create Slack Poll: Generate interactive polls in channels.
+   - Channel: #team
+   - Question: "When should we schedule the next team meeting?"
+   - Options: ["Monday 2pm", "Tuesday 10am", "Wednesday 3pm"]
+7. Get Channel History: Retrieve recent messages from a channel.
+   - Channel: #project-alpha
+   - Count: 10
+8. Search Messages: Find specific messages across channels.
+   - Query: "budget approval"
+
+These are just a few examples of the many Slack actions available. Your agents can combine these actions with their reasoning capabilities to create sophisticated workflows that enhance team communication and productivity.
+
+## Use the integration's API tool step (advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Slack-specific activities using the Slack API Call tool step:
+
+1. Create a new tool in the Tool Builder.
+2. Scroll down to Tool-steps.
+3. Add "Slack API" tool-step.
+4. Select your connected Slack account in the dropdown.
+5. Configure the API endpoint and parameters based on your specific needs.
+
+This advanced approach allows you to access the full range of Slack API capabilities, enabling custom integrations tailored to your organization's unique requirements.
+
+### Example: Custom Slack API call to create a channel
+```json
+{
+  "method": "POST",
+  "endpoint": "conversations.create",
+  "params": {
+    "name": "project-{{project_name}}",
+    "is_private": false
+  }
+}
+```
+
+### Example: Custom Slack API call to invite users to a channel
+
+```json
+{
+  "method": "POST",
+  "endpoint": "conversations.invite",
+  "params": {
+    "channel": "{{channel_id}}",
+    "users": "{{user_ids}}"
+  }
+}
+```
+
+## Related Features
+
+* Outlook Integration - Combine Slack and Outlook integrations to create comprehensive communication workflows that span both platforms.
+* HubSpot Integration - Connect your Slack communications with your CRM data to provide context-aware responses and updates.
+* Knowledge Base - Import Slack conversations into your knowledge base to train your agents on your team's communication patterns and frequently discussed topics.
+
+## Remove Slack integration
+
+If you need to remove the Slack integration:
+
+1. Go to the "Integrations" page from the sidebar.
+2. Select Slack from the list.
+3. Click "..." on the account you want to remove.
+4. Click "Remove" and confirm your choice.
+
+This will disconnect your Slack workspace from Relevance AI, and your agents will no longer be able to interact with Slack until you reconnect the integration.
