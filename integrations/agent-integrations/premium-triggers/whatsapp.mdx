@@ -1,0 +1,136 @@
+---
+title: 'WhatsApp Personal'
+description: "Connect your WhatsApp account to Relevance AI and enable your agents to communicate directly with customers through one of the world's most popular messaging platforms."
+sidebarTitle: 'WhatsApp'
+---
+
+## Connect the integration
+
+Connecting your WhatsApp account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar.
+2. Click on "WhatsApp".
+3. Click on the "Add Integration" button.
+4. In the pop-up window, add your phone number.
+5. Once connected, you'll see your WhatsApp phone number account listed under active integrations.
+
+## Setting up triggers
+
+WhatsApp Integration can be configured as a trigger for your AI agents, allowing them to automatically respond when messages are received through WhatsApp.
+
+To set up WhatsApp as a trigger:
+
+1. Create a new agent or edit an existing one.
+2. Navigate to the "Triggers" section in "Agent Profile".
+3. Select "WhatsApp" from the available triggers.
+4. Choose the WhatsApp account you want to connect to this agent.
+5. Configure trigger conditions (optional):
+   - Respond to all incoming messages
+   - Respond only to specific contacts or groups
+   - Respond based on message content filters
+6. Save your trigger configuration.
+
+Once set up, your agent will automatically activate when new WhatsApp messages that match your trigger conditions are received, enabling real-time customer engagement.
+
+## Tools & Tool Steps
+
+WhatsApp integration provides powerful tools and actions that your agents can use to engage with customers. These actions can be incorporated into your agent's workflow at any point, not just as triggers.
+
+Here are some of the key WhatsApp actions available:
+
+### Send WhatsApp Message
+Send text messages to individual contacts or groups.
+
+Input parameters:
+- Recipient phone number or group ID
+- Message content
+- Optional: Attachments
+
+### Send WhatsApp Media
+
+Share images, documents, or other media files with your contacts.
+
+Input parameters:
+- Recipient phone number or group ID
+- Media type (image, document, audio, video)
+- Media URL or file
+- Optional: Caption
+
+### Send WhatsApp Template Message
+Use pre-approved message templates for business communications.
+
+Input parameters:
+- Recipient phone number
+- Template name
+- Template parameters
+
+### Get WhatsApp Conversation History
+Retrieve previous messages from a specific conversation.
+
+Input parameters:
+- Contact phone number
+- Optional: Time range
+
+### Mark WhatsApp Message as Read
+Update the read status of messages.
+
+Input parameters:
+- Message ID
+
+These are just a few examples of the many WhatsApp actions available. Your agents can leverage these tools to create sophisticated customer engagement workflows, from automated support responses to personalized marketing campaigns.
+
+## Use the integration's API tool step (advanced)
+
+In addition to the tools and actions available in the directory, you can build custom tools that perform WhatsApp activities by using the WhatsApp API Call tool step:
+
+1. Create a new tool.
+2. Scroll down to Tool-steps.
+3. Add WhatsApp API tool-step.
+4. Select your connected WhatsApp account in the dropdown.
+
+This advanced approach gives you direct access to the WhatsApp Business API, allowing for more complex and customized interactions:
+
+### Example API call:
+```json
+{
+  "endpoint": "/messages",
+  "method": "POST",
+  "body": {
+    "to": "{{recipient_number}}",
+    "type": "text",
+    "text": {
+      "body": "{{message_content}}"
+    }
+  }
+}
+```
+
+## Premium Trigger Information
+
+WhatsApp Integration is available as a **Premium Trigger** exclusively for Teams and Business plan users. As a premium integration:
+
+- This trigger is only accessible on Teams and Business plans
+- Each connected WhatsApp account in your organization incurs an additional 5000 credits per month
+
+## Related Features
+
+[Outlook Integration](https://relevanceai.com/docs/integrations/outlook) - Use WhatsApp alongside email communications for a comprehensive customer engagement strategy. Coordinate messaging across both channels for consistent customer experiences.
+
+[HubSpot Integration](https://relevanceai.com/docs/integrations/hubspot) - Connect your WhatsApp conversations with your CRM to maintain customer context across all touchpoints. Track WhatsApp interactions in your customer records for better relationship management.
+
+## FAQs
+
+### What types of WhatsApp accounts are supported?
+Relevance AI supports WhatsApp Business accounts. Personal WhatsApp accounts are not supported for this integration.
+
+### Are there message volume limitations?
+Message volumes are subject to WhatsApp's own policies and rate limits. The Relevance AI platform itself doesn't impose additional limits beyond your plan's credit allocation.
+
+### Can I use WhatsApp for bulk messaging?
+Yes, but you must comply with WhatsApp's business policies regarding bulk messaging and ensure you have proper opt-ins from recipients.
+
+### How secure are WhatsApp conversations through Relevance AI?
+All WhatsApp communications maintain end-to-end encryption. Relevance AI adheres to strict security protocols to ensure your conversation data remains protected.
+
+### Can multiple agents use the same WhatsApp account?
+Yes, you can connect multiple agents to the same WhatsApp account, but you should configure triggers carefully to avoid conflicts.
