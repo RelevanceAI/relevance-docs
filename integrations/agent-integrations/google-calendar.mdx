@@ -1,0 +1,113 @@
+---
+title: 'Google Calendar'
+description: 'Connect to Google Calendar from Relevance AI.'
+---
+
+## Overview
+
+The Google Calendar integration allows you to seamlessly connect your AI agents with your Google Calendar, enabling powerful automation for scheduling, event management, and calendar-based workflows. This integration bridges the gap between your AI agents and your calendar, allowing for intelligent scheduling assistance, automated event creation, and calendar-based decision making.
+
+## Connecting the Google Calendar Integration
+
+To connect the Google Calendar integration to Relevance AI:
+
+1. Select "Integrations" from the left sidebar
+2. Find and click on "Google Calendar" in the integrations directory
+3. Click "Connect"
+4. You'll be redirected to Google's authentication page
+5. Select the Google account you want to connect
+6. Review and approve the requested permissions
+7. Once authenticated, you'll be redirected back to Relevance AI with your Google Calendar now connected
+
+Your Google Calendar integration will now be available for use with your AI agents. You can connect multiple Google Calendar accounts if needed, and manage all connections from the Integrations dashboard.
+
+## Setting Up Triggers with Google Calendar
+
+Google Calendar can serve as a powerful trigger for your AI agents, initiating workflows based on calendar events. Here's how to set up calendar-based triggers:
+
+1. Navigate to your Agent Profile
+2. In the trigger section, select "Google Calendar"
+3. Configure trigger settings:
+   - Select which calendar(s) to monitor
+
+   - Set any filtering criteria (e.g., only events with specific keywords)
+   - For time-based triggers, specify the advance notice period
+
+4. Save your trigger configuration
+
+Once set up, your AI agent will automatically activate when the specified calendar events occur, enabling workflows like:
+- Sending meeting preparation materials before scheduled calls
+- Following up after appointments with summary notes
+- Blocking focus time when calendar shows you're busy
+- Rescheduling conflicting appointments
+
+## Tools & Tool Steps
+
+The Google Calendar integration provides a rich set of actions that your AI agents can use throughout their workflows. These actions allow your agents to interact with your calendar in sophisticated ways:
+
+### Event Management Actions
+- **Create Event**: Schedule new events on your calendar with customizable details
+- **Update Event**: Modify existing events (time, location, description, etc.)
+- **Delete Event**: Remove events from your calendar
+- **Get Event Details**: Retrieve comprehensive information about specific events
+
+### Calendar Query Actions
+- **List Events**: Retrieve events within a specified date range
+- **Find Available Time**: Identify open slots in your calendar for scheduling
+- **Check Availability**: Determine if a specific time period is free or busy
+- **Search Events**: Find events matching specific criteria (keywords, attendees, etc.)
+
+### Attendee Management
+- **Add Attendees**: Invite participants to calendar events
+- **Remove Attendees**: Update event guest list
+- **Check Attendee Responses**: View who has accepted, declined, or not responded
+
+### Calendar Management
+- **List Calendars**: View all calendars in your Google account
+- **Create Calendar**: Set up new calendars for specific purposes
+- **Update Calendar Settings**: Modify calendar properties and sharing settings
+
+These actions can be combined in powerful ways to create sophisticated calendar management workflows. For example, your agent could:
+
+- Find available time slots, create a meeting, and send invitations
+- Reschedule conflicting appointments based on priority rules
+- Create follow-up tasks after calendar events conclude
+- Generate meeting agendas based on event descriptions and attendees
+
+## Using the Google Calendar API Tool Step (Advanced)
+
+For advanced use cases requiring deeper integration with Google Calendar, you can leverage the Google Calendar API directly:
+
+1. Create a new tool in your agent profile
+2. Scroll down to Tool-steps
+3. Add "Google Calendar API" tool-step
+4. Select your connected Google Calendar account from the dropdown
+5. Configure the API request:
+   - Specify the API endpoint (e.g., `/calendars/{calendarId}/events`)
+   - Set the HTTP method (GET, POST, PUT, DELETE)
+   - Define request parameters and body as needed
+   - Configure response handling
+
+This approach gives you full access to the Google Calendar API capabilities, allowing for custom implementations beyond the standard actions. Some advanced use cases include:
+
+- Creating recurring events with complex patterns
+- Setting up conference solutions (Google Meet, Zoom) with custom parameters
+- Managing calendar resources and room bookings
+- Implementing custom notification schemes
+- Working with secondary calendars and calendar groups
+
+## Best Practices
+
+- **Permission Management**: Only request the minimum calendar permissions needed for your agent's functionality
+- **Error Handling**: Implement robust error handling for calendar conflicts and availability issues
+- **User Confirmation**: For critical calendar changes, consider adding user confirmation steps
+- **Time Zone Awareness**: Always account for time zone differences when scheduling across regions
+- **Privacy Considerations**: Be mindful of calendar data sensitivity and implement appropriate safeguards
+
+## Related Features
+
+[Email Integrations](https://relevanceai.com/docs/integrations/email) - Combine email and calendar workflows to create comprehensive meeting management solutions, including sending calendar invites via email and following up on scheduled events.
+
+[Slack Integration](https://relevanceai.com/docs/integrations/slack) - Connect your calendar events with Slack notifications to keep teams informed about upcoming meetings and schedule changes.
+
+[Task Management Integrations](https://relevanceai.com/docs/integrations/task-management) - Link calendar events with task management systems to automatically create follow-up tasks based on meeting outcomes.

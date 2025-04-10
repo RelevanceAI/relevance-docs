@@ -1,0 +1,99 @@
+---
+title: 'Zoominfo'
+description: 'Interact with your Salesforce CRM with Relevance.'
+---
+
+# ZoomInfo Integration
+
+ZoomInfo is a powerful B2B database and intelligence platform that provides comprehensive company and contact information to help sales and marketing teams identify and connect with their ideal prospects. With the Relevance AI ZoomInfo integration, you can leverage this valuable data directly within your AI agents' workflows, enabling more effective prospecting, lead qualification, and account-based marketing initiatives.
+
+## 1. Connect the integration
+
+Connecting ZoomInfo to Relevance AI is a straightforward process that gives your agents access to valuable B2B data:
+
+1. Go to the "Integrations" page in the sidebar.
+2. Click on "ZoomInfo".
+3. Click on the Add Integration button.
+4. In the pop-up window, sign into your ZoomInfo account.
+5. Authorize Relevance AI to access your ZoomInfo data.
+6. Once connected, you'll see your ZoomInfo account listed under connected accounts.
+
+## 2. Setting up triggers
+
+ZoomInfo can serve as a powerful trigger for your AI agents, automatically initiating workflows when specific events occur in your ZoomInfo account. This is particularly valuable for sales teams who want to act quickly on intent signals and prospect activities.
+
+### Set up ZoomInfo as an Agent Trigger
+
+1. Create a new agent or edit an existing one.
+2. Navigate to the "Triggers" section in the “Agent profile”.
+3. Select "ZoomInfo" from the available triggers.
+4. Configure your trigger settings based on the ZoomInfo events you want to monitor:
+   - **Intent Topics**: Trigger your agent when ZoomInfo detects buying intent for specific topics relevant to your business.
+   - **New Prospects**: Activate your agent when new prospects matching your criteria are added to ZoomInfo.
+   - **Account Updates**: Start workflows when there are significant updates to target accounts in your ZoomInfo instance.
+
+For example, you could create a trigger that activates your agent whenever ZoomInfo detects new buying intent signals for "data analytics" from companies in your target market. Your agent can then automatically research these companies, prepare personalized outreach, and even initiate contact through your preferred channels.
+
+## 3. Tools & Tool Steps
+
+The ZoomInfo integration provides a rich set of actions (tool steps) that your agents can use to access and leverage B2B data. These actions can be incorporated into your agent's workflows to automate prospecting, enrichment, and research tasks.
+
+### Common ZoomInfo Actions
+
+Your agents can perform a wide range of ZoomInfo-related tasks, including:
+
+- **Search Companies**: Find companies matching specific criteria such as industry, size, location, or technologies used.
+- **Search Contacts**: Identify decision-makers and key stakeholders at target accounts.
+- **Get Company Details**: Retrieve comprehensive information about a specific company, including firmographics, technographics, and recent news.
+- **Get Contact Details**: Access detailed information about specific contacts, including job roles, contact information, and professional background.
+- **Track Intent Signals**: Monitor buying intent signals for specific topics across your target accounts.
+- **Export Lists**: Create and export lists of companies or contacts for use in marketing campaigns or sales outreach.
+- **Update Records**: Keep your ZoomInfo data current by updating records with new information.
+
+These are just a few examples of the many ZoomInfo actions available. The integration provides a comprehensive set of tools that allow your agents to leverage the full power of ZoomInfo's B2B intelligence platform.
+
+### How to Add ZoomInfo Actions to Your Agent
+
+1. Create or edit a tool in your Relevance AI workspace.
+2. Add a new tool step.
+3. Search for "ZoomInfo" in the tool step library.
+4. Select the desired ZoomInfo action from the available options.
+
+5. Configure the action parameters according to your needs.
+6. Connect this tool to your agent to enable ZoomInfo data access.
+
+## 4. Use the ZoomInfo API tool step (advanced)
+
+In addition to the pre-built actions available in the tool library, advanced users can create custom ZoomInfo integrations using the ZoomInfo API Call tool step:
+
+1. Create a new tool.
+2. Scroll down to Tool-steps.
+3. Add ZoomInfo API tool-step.
+4. Select your connected ZoomInfo account in the dropdown.
+5. Configure the API endpoint, parameters, and authentication details.
+
+This approach gives you maximum flexibility to create custom ZoomInfo integrations tailored to your specific business needs. You can access any endpoint available in the ZoomInfo API, allowing for advanced use cases beyond what's available in the standard action library.
+
+### Example: Custom Company Enrichment
+
+Here's an example of how you might use the ZoomInfo API tool step to create a custom company enrichment workflow:
+
+
+```json
+{
+  "endpoint": "/companies/enrich",
+  "method": "POST",
+  "body": {
+    "company_name": "{{input.company_name}}",
+    "domain": "{{input.domain}}",
+    "include_attributes": ["industry", "revenue", "employee_count", "technologies", "location"]
+  }
+}
+```
+
+This custom API call would retrieve specific company attributes that are most relevant to your qualification process, allowing your agent to make more informed decisions about prospect fit.
+
+## Related Features
+
+- [HubSpot Integration](https://relevanceai.com/docs/integrations/hubspot) - Combine ZoomInfo's rich B2B data with HubSpot's CRM capabilities to create powerful sales and marketing workflows that leverage both platforms.
+- [Salesforce Integration](https://relevanceai.com/docs/integrations/salesforce) - Enrich your Salesforce records with ZoomInfo data and trigger automated workflows based on changes in either system.

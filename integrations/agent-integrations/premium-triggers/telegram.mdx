@@ -1,0 +1,129 @@
+---
+title: 'Telegram'
+description: 'Interact with your Telegram account with Relevance.'
+sidebarTitle: 'Telegram'
+---
+
+# Telegram Integration
+
+Connect your AI agents with Telegram to automate conversations and workflows directly through the popular messaging platform. The Telegram integration allows your agents to receive messages, respond intelligently, and execute actions based on user interactions.
+
+## Connect the integration
+
+Setting up the Telegram integration with Relevance AI is straightforward:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard
+2. Click on "Telegram" from the available integrations
+3. Click the "Add Integration" button
+4. You'll be prompted to authenticate with your Telegram account
+5. Follow the on-screen instructions to authorize the connection
+6. Once connected, you'll see your Telegram account listed under connected accounts
+
+## Setting up triggers
+
+The Telegram integration can be configured as a trigger for your AI agents, allowing them to automatically respond when messages are received.
+
+### Create a Telegram trigger
+
+1. Navigate to your agent's profile page and "Triggers" 
+2. Choose "Telegram" from the list of available triggers
+3. Select your connected Telegram account
+4. Configure the trigger settings:
+   - **Chat Type**: Choose between private chats, group chats, or both
+   - **Message Filter**: Optionally set up filters to only trigger on specific message types or content
+   - **Response Mode**: Select whether your agent should respond automatically or require approval
+
+### Common trigger use cases
+
+- **Customer Support**: Automatically respond to customer inquiries received via Telegram
+- **Lead Qualification**: Trigger an agent to qualify leads that reach out through Telegram
+- **Information Requests**: Set up an agent to provide information when users ask specific questions
+- **Appointment Scheduling**: Allow users to schedule appointments through Telegram conversations
+
+- **Order Processing**: Process orders and transactions initiated through Telegram messages
+
+## Tools & Tool Steps
+
+The Telegram integration provides several powerful actions that your agents can use as part of their workflows. These actions enable your agents to interact with Telegram in various ways.
+
+### Available Telegram actions
+
+- **Send Message**: Send a text message to a specific chat or user
+- **Send Photo**: Share images with optional captions
+- **Send Document**: Share files and documents of various formats
+- **Send Location**: Share geographical locations
+- **Create Poll**: Create and send polls to gather feedback
+- **Get Chat Information**: Retrieve details about a specific chat
+- **Get User Profile**: Retrieve information about a Telegram user
+- **Pin Message**: Pin important messages in a chat
+- **Delete Message**: Remove messages from a conversation
+- **Forward Message**: Forward messages between chats
+- **Create Chat Invite Link**: Generate invitation links for groups or channels
+
+These are just some of the many actions available. The Telegram integration offers a comprehensive set of tools that allow your agents to leverage the full functionality of the Telegram platform.
+
+### Example workflow
+
+Here's an example of how you might use Telegram actions in a customer support workflow:
+
+1. **Trigger**: Agent is triggered by an incoming Telegram message
+2. **Analysis**: Agent analyzes the message content to determine the customer's intent
+3. **Response**: Agent uses the "Send Message" action to respond with an appropriate greeting
+4. **Information Gathering**: If additional information is needed, agent asks follow-up questions
+5. **Resolution**: Once the issue is understood, agent provides a solution
+6. **Documentation**: Agent uses "Send Document" action to share relevant documentation if needed
+7. **Follow-up**: Agent schedules a follow-up message for later if the issue requires monitoring
+
+## Use the integration's API tool step (advanced)
+
+In addition to the pre-built actions, advanced users can access the full Telegram API for custom functionality:
+
+1. Create a new tool
+2. Scroll down to Tool-steps
+3. Add Telegram API tool-step
+4. Select your connected Telegram account in the dropdown
+5. Configure the API endpoint and parameters according to your needs
+
+The Telegram API tool step gives you access to all Telegram Bot API methods, allowing for highly customized interactions beyond the standard actions.
+
+### Example API usage
+
+```json
+{
+  "method": "sendMessage",
+  "chat_id": "{{chatId}}",
+  "text": "This is a custom formatted message with *bold* and _italic_ text",
+  "parse_mode": "Markdown"
+}
+```
+
+## Premium Trigger Information
+
+Telegram Integration is available as a **Premium Trigger** exclusively for Teams and Business plan users. As a premium integration:
+
+- This trigger is only accessible on Teams and Business plans
+- Each connected Telegram account in your organization incurs an additional 5000 credits per month
+
+## Related Features
+
+- [Outlook Integration](https://relevanceai.com/docs/integrations/outlook): Connect your agents with email communications for a comprehensive messaging strategy that spans both email and instant messaging platforms.
+- [WhatsApp Personal Integration](https://relevanceai.com/docs/integrations/whatsapp-personal): Extend your messaging capabilities to WhatsApp alongside Telegram for a multi-channel communication approach.
+- [Knowledge Base Access](https://relevanceai.com/docs/knowledge/access-knowledge): Enhance your Telegram-connected agents by giving them access to your organization's knowledge base for more informed responses.
+
+## FAQs
+
+**Q: Can I connect multiple Telegram accounts to Relevance AI?**  
+A: Yes, you can connect multiple Telegram accounts, but each connection will incur additional credits as per the premium trigger pricing.
+
+**Q: Does the Telegram integration work with both personal and business Telegram accounts?**  
+
+A: Yes, the integration works with both personal accounts and business accounts on Telegram.
+
+**Q: Can my agent respond to messages in Telegram groups?**  
+A: Yes, your agent can be configured to respond to messages in private chats, groups, or both, depending on your trigger settings.
+
+**Q: Is there a limit to how many messages my agent can process through Telegram?**  
+A: Message processing is counted against your overall credit usage. The specific limits depend on your subscription plan.
+
+**Q: Can I customize how my agent appears in Telegram conversations?**  
+A: Yes, you can customize the name and profile picture of your Telegram bot that represents your agent in conversations.

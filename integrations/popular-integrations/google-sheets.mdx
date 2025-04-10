@@ -1,0 +1,123 @@
+---
+title: 'Google Sheets'
+description: 'Connect to Google Sheets from Relevance AI.'
+---
+
+## Overview
+
+The Google Sheets integration allows you to connect your Relevance AI agents with Google Sheets, enabling powerful data workflows between your spreadsheets and AI agents. This integration empowers you to automate data extraction, analysis, and manipulation tasks directly from your Google Sheets documents, as well as use spreadsheet data to trigger agent workflows.
+
+## Connecting the Google Sheets Integration
+
+To connect the Google Sheets integration with Relevance AI:
+
+1. Click on "Integrations" in the left sidebar
+2. Find and select "Google Sheets" from the available integrations
+3. Click "Connect"
+4. You'll be redirected to Google's authentication page
+5. Grant Relevance AI permission to access your Google Sheets
+6. Once authenticated, you'll be redirected back to Relevance AI with the integration now connected
+
+## Setting Up Triggers with Google Sheets *(coming soon)*
+
+The Google Sheets integration can be configured to trigger your AI agents based on specific spreadsheet events or conditions:
+
+### Trigger Types
+
+- **New Row Added**: Activate your agent when a new row is added to a specified sheet
+- **Cell Value Changed**: Trigger your agent when values in specific cells or columns are modified
+- **Threshold Reached**: Start your agent when a numeric value in your sheet crosses a defined threshold
+- **Scheduled Updates**: Configure your agent to process sheet data at regular intervals
+
+### Setting Up a Trigger 
+
+1. Navigate to your agent's profile
+2. Select "Google Sheets" from the trigger options
+3. Choose the specific Google Sheet you want to monitor
+4. Select the trigger type (e.g., New Row Added)
+5. Configure any additional parameters specific to your chosen trigger
+6. Save your trigger configuration
+
+Your agent will now automatically activate when the specified condition is met in your Google Sheets document.
+
+## Tools & Tool Steps
+
+The Google Sheets integration provides a variety of powerful actions that your agents can perform. These actions can be incorporated into your agent's workflow as tool steps, allowing for seamless interaction with your spreadsheet data.
+
+### Available Actions
+
+- **Read Sheet Data**: Extract data from specific sheets, ranges, or cells
+- **Write to Sheet**: Add or update data in your spreadsheets
+- **Create New Sheet**: Generate new spreadsheets with specified data
+- **Format Cells**: Apply formatting to cells based on conditions or data analysis
+- **Create Charts**: Generate visual representations of your data
+- **Apply Formulas**: Insert Google Sheets formulas based on AI analysis
+- **Filter Data**: Extract specific information based on custom criteria
+- **Sort Data**: Organize spreadsheet information in meaningful ways
+- **Append Rows**: Add new rows of data to existing sheets
+- **Delete Data**: Remove specific cells, rows, or columns
+
+These actions represent just a small sample of what's possible with the Google Sheets integration. The tool library contains many more specialized actions to help you build powerful data workflows.
+
+### Using Google Sheets Actions in Your Workflow
+
+1. In your agent's workflow, add a new tool step
+2. Search for "Google Sheets" in the tool library
+3. Browse the available actions and select the one you need
+4. Configure the action parameters (sheet ID, range, data to write, etc.)
+5. Connect this action to other steps in your workflow
+
+## Using the Google Sheets API Tool Step (Advanced)
+
+For advanced users who need custom functionality beyond the pre-built actions, you can leverage the Google Sheets API directly:
+
+1. Create a new tool in your agent's workflow
+2. Scroll down to Tool-steps
+3. Add "Google Sheets API" tool-step
+4. Select your connected Google Sheets account from the dropdown
+5. Specify the API endpoint and parameters for your custom request
+6. Configure how the response data should be processed
+
+This approach gives you full access to the Google Sheets API capabilities, allowing for highly customized interactions with your spreadsheet data.
+
+## Use Cases
+
+### Data Analysis and Reporting
+
+- Extract data from multiple sheets for comprehensive analysis
+- Generate automated reports based on spreadsheet data
+- Create visualizations and summaries of key metrics
+
+### Data Collection and Management
+
+- Automatically organize and categorize incoming data
+- Clean and standardize information across multiple sheets
+- Maintain data integrity through automated validation
+
+### Workflow Automation
+
+- Trigger notifications when important spreadsheet values change
+- Automatically update related systems when data is modified
+- Create approval workflows based on spreadsheet entries
+
+### Customer and Lead Management
+
+- Track customer interactions in spreadsheets and trigger follow-ups
+- Analyze lead data to prioritize high-value prospects
+- Generate personalized communications based on spreadsheet data
+
+## Best Practices
+
+- **Use Descriptive Names**: When setting up Google Sheets actions, use clear names that describe what the action does
+- **Handle Errors Gracefully**: Configure error handling for cases where sheets might be unavailable or data formats unexpected
+- **Limit Data Access**: Only request access to the specific sheets and data ranges your agent needs
+- **Test Thoroughly**: Before deploying in production, test your Google Sheets integration with sample data
+- **Monitor Usage**: Keep track of API usage to stay within Google's rate limits
+
+## Related Features
+
+[Data Visualization Tools](https://relevanceai.com/docs/features/data-visualization) - Combine Google Sheets data with powerful visualization capabilities to create compelling visual representations of your insights.
+
+[Workflow Automation](https://relevanceai.com/docs/features/workflow-automation) - Learn how to build complex workflows that incorporate Google Sheets data alongside other integrations.
+
+[Data Processing](https://relevanceai.com/docs/features/data-processing) - Discover techniques for cleaning, transforming, and analyzing data from Google Sheets within your AI workflows.

@@ -1,0 +1,136 @@
+---
+title: 'Gmail'
+description: 'Interact with your HubSpot CRM with Relevance.'
+---
+
+## Overview
+Connect your Gmail account to Relevance AI and supercharge your email workflow with AI agents that can read, respond to, and take action on your emails. The Gmail integration enables you to automate email-related tasks, create powerful workflows, and save valuable time.
+
+## Connect the integration
+
+Setting up the Gmail integration with Relevance AI is straightforward:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Gmail" from the available integrations.
+3. Click the "Add Integration" button.
+4. In the pop-up window, sign into your Gmail account and authorize Relevance AI to access your emails.
+5. Follow any additional prompts to complete the connection process.
+6. Once connected, you'll see your Gmail account listed under connected integrations.
+
+## Setting up triggers
+
+The Gmail integration allows you to set up triggers that automatically activate your AI agents when specific email events occur. This enables your agents to respond to emails in real-time without manual intervention.
+
+To set up Gmail as a trigger:
+
+1. Create or edit an agent in Relevance AI.
+2. Navigate to the "Triggers" section in “Agent Profile”.
+3. Select "Gmail" as the trigger source.
+4. Configure the trigger conditions based on your needs:
+   - **New Email**: Trigger when any new email arrives in your inbox
+   - **Emails with Specific Labels**: Trigger only for emails with certain Gmail labels
+   - **Emails from Specific Senders**: Trigger for emails from particular email addresses
+   - **Emails with Specific Subject Lines**: Trigger based on keywords in subject lines
+   - **Unread Emails**: Trigger only for unread messages
+5. Set the frequency of checking for new emails (e.g., immediately, every 5 minutes, hourly).
+6. Save your trigger configuration.
+
+Once set up, your agent will automatically start working whenever the specified email conditions are met, allowing for seamless email automation.
+
+## Tools & Tool Steps
+
+The Gmail integration provides a rich set of actions that your AI agents can use to interact with your email account. These actions can be incorporated into your agent's workflow to perform various email-related tasks.
+
+Here are some of the key Gmail actions available:
+
+### Read Emails
+- **Get Email Content**: Retrieve the full content of specific emails
+- **Search Emails**: Find emails matching specific criteria
+- **Get Email Attachments**: Access files attached to emails
+- **Get Email Metadata**: Extract information like sender, recipients, date, etc.
+- **Get Email Thread**: Retrieve entire conversation threads
+
+### Compose and Send Emails
+- **Send Email**: Create and send new emails
+- **Reply to Email**: Respond to existing email threads
+- **Forward Email**: Forward messages to other recipients
+- **Draft Email**: Create draft emails without sending
+- **Schedule Email**: Compose emails to be sent at a later time
+
+### Email Management
+- **Apply Labels**: Organize emails with Gmail labels
+- **Mark as Read/Unread**: Change the read status of emails
+- **Archive Email**: Move emails out of the inbox
+- **Move to Folder**: Organize emails into different folders
+- **Delete Email**: Remove unwanted emails
+- **Star/Flag Email**: Mark important emails for follow-up
+
+### Advanced Actions
+- **Extract Information**: Parse email content for specific data
+- **Analyze Sentiment**: Determine the tone and sentiment of emails
+- **Categorize Emails**: Automatically sort emails by type or priority
+- **Set Reminders**: Create follow-up reminders for important emails
+- **Create Tasks**: Generate tasks based on email content
+
+These are just some examples of the many actions available. The Gmail integration is highly versatile, allowing your agents to perform virtually any task you would normally do manually in your Gmail account.
+
+## Use the integration's API tool step (advanced)
+
+For more advanced use cases, you can leverage the Gmail API directly using the Gmail API Call tool step:
+
+1. Create a new tool in Relevance AI.
+2. Scroll down to Tool-steps.
+3. Add the Gmail API tool-step.
+4. Select your connected Gmail account in the dropdown.
+
+With the Gmail API tool step, you can:
+
+1. **Access Advanced Gmail Features**: Utilize Gmail API endpoints not covered by standard actions
+2. **Custom Email Processing**: Create specialized workflows for unique email handling requirements
+3. **Batch Operations**: Perform actions on multiple emails simultaneously
+4. **Complex Filtering**: Implement sophisticated email filtering logic
+5. **Integration with Other Services**: Connect your email workflows with other tools and platforms
+
+### Example: Custom Email Processing with Gmail API
+
+Here's an example of using the Gmail API tool step to implement a custom email processing workflow:
+
+```json
+// Example of using Gmail API to process emails with specific criteria
+{
+  "method": "GET",
+  "endpoint": "users/me/messages",
+  "params": {
+    "q": "is:unread from:important-client@example.com",
+    "maxResults": 10
+  }
+}
+```
+
+This API call retrieves up to 10 unread emails from a specific sender, which your agent can then process according to your business rules.
+
+## Related Features
+
+[Outlook Integration](https://relevanceai.com/docs/integrations/outlook) - Similar to Gmail integration, the Outlook integration allows you to connect your Microsoft email account to Relevance AI for automated email processing.
+
+[Email Warmups](https://relevanceai.com/docs/integrations/email-warmups) - Complement your Gmail integration with email warmup capabilities to improve email deliverability for your outreach campaigns.
+
+[HubSpot Integration](https://relevanceai.com/docs/integrations/hubspot) - Connect your email workflows with your CRM to create seamless customer communication processes.
+
+## FAQs
+
+### What permissions does Relevance AI need for the Gmail integration?
+
+Relevance AI requires permission to read, send, and manage your emails to provide full functionality. You can review these permissions during the connection process.
+
+### Can I use multiple Gmail accounts with Relevance AI?
+Yes, you can connect multiple Gmail accounts to Relevance AI and configure different agents to work with specific accounts.
+
+### Is my email data secure?
+Yes, Relevance AI maintains strict security protocols. Your email data is encrypted and only accessed as needed for the functions you authorize.
+
+### Can I limit which emails my agent can access?
+Yes, you can configure triggers and actions to work only with specific labels, senders, or other criteria to limit the scope of emails your agent processes.
+
+### Will my agent's actions appear in my sent folder?
+Yes, emails sent by your agent will appear in your Gmail sent folder, maintaining a complete record of all communications.
