@@ -1,0 +1,97 @@
+---
+title: 'Communication'
+description: 'Communication is a fundamental aspect of Workforce that defines how agents interact with each other within your AI workforce.'
+sidebarTitle: 'Communication'
+---
+
+
+## One-way Communication
+
+Currently, Workforce supports one-way communication between agents. This means that when one agent communicates with another, the information flows in a single direction. Bidirectional communication is not yet available in the current version.
+
+### How One-way Communication Works
+
+When you connect two agents in your workforce, the communication follows a unidirectional path:
+- The source agent sends information, instructions, or requests to the target agent
+- The target agent receives this information and acts upon it
+- The target agent cannot automatically send information back to the source agent through the same connection
+
+This one-way communication model creates clear workflows and responsibility chains within your workforce, making it easier to track how information and tasks flow through your system.
+
+## Setting Up Communication Between Agents
+
+When connecting agents in your workforce, you have two communication style options that determine how agents interact with each other:
+
+### Let Agent Decide
+
+This option gives the agent autonomy to determine when to communicate with another agent based on natural language instructions.
+
+**Configuration Steps:**
+1. Connect two agents in your workforce
+2. Select "Let agent decide" as the communication style
+3. Complete the "When to call this agent" field with natural language instructions
+4. Configure behavior settings:
+
+**Communication Settings:**
+In the "When to call this agent" field, provide clear instructions about when the source agent should delegate to the target agent. For example:
+
+> Call this agent when you need to analyze customer sentiment data or when you need to summarize large volumes of customer feedback. This agent specializes in data analysis and can provide insights that will help with decision-making.
+
+**Behavior Settings:**
+Choose one of the following approval modes:
+- **Auto run**: The target agent will complete the task without requiring approval
+- **Approval required**: The target agent will draft the task but ask for human approval before completing it
+- **Let agent decide**: The target agent will complete the task if it has sufficient context and confidence; otherwise, it will ask for human approval or clarification
+
+**Additional Settings:**
+- **Max auto runs**: Set a limit on the number of times the agent can auto-run (no limit or a specific number)
+- **Task continuation**: Choose between 'always start a new task' or 'always continue with one task'
+
+### Forced Handover
+
+This option creates a mandatory connection where the source agent must pass the task to the target agent.
+
+**Configuration Steps:**
+1. Connect two agents in your workforce
+2. Select "Forced handover" as the communication style
+3. Configure task continuation:
+   - Choose between 'always start a new task' or 'always continue with one task'
+
+With forced handover, the source agent will always transfer control to the target agent when the connection is triggered, regardless of the context or the agent's assessment of the situation.
+
+## Best Practices for Agent Communication
+
+To maximize the effectiveness of agent communication in your workforce:
+
+1. **Define Clear Responsibilities**: Ensure each agent has well-defined roles and responsibilities to avoid confusion about which agent should handle specific tasks.
+2. **Use Descriptive Instructions**: When using "Let agent decide," provide detailed instructions about when and why the source agent should communicate with the target agent.
+
+3. **Create Logical Workflows**: Design your communication paths to follow natural workflows, where information and tasks flow in a logical sequence from one agent to the next.
+4. **Balance Autonomy and Control**: Use "Let agent decide" for situations requiring judgment and "Forced handover" for mandatory steps in a process.
+5. **Monitor Communication Patterns**: Regularly review how agents are communicating to identify any bottlenecks or inefficiencies in your workforce.
+6. **Implement Appropriate Approval Mechanisms**: Use approval settings to maintain quality control while allowing agents to work autonomously when appropriate.
+
+## Related Features
+
+[Edge Settings](https://relevanceai.com/docs/workforce-builder/edge-settings) - Configure the connections between nodes in your workforce, including communication styles and behavior settings.
+
+[Configurations](https://relevanceai.com/docs/workforce-builder/configurations) - Learn about the different types of connections you can create between nodes in your workforce.
+
+[Workforce Task View](https://relevanceai.com/docs/workforce-builder/task-view) - Monitor your workforce's activities, including communication between agents and approval requests.
+
+## FAQs
+
+**Q: Can agents communicate bidirectionally?**  
+A: Currently, Workforce Builder only supports one-way communication between agents. Bidirectional communication is planned for future updates.
+
+**Q: How do I know if an agent has communicated with another agent?**  
+A: You can monitor agent communication in the Workforce Task View, which shows the timeline of activities and interactions between agents.
+
+**Q: Can I set conditions for when an agent should communicate with another agent?**  
+A: Yes, when using the "Let agent decide" communication style, you can provide natural language instructions in the "When to call this agent" field to guide the source agent's decision-making.
+
+**Q: What happens if an agent tries to communicate with another agent but lacks necessary information?**  
+A: Depending on your behavior settings, the agent may ask for human approval or clarification before proceeding with the communication.
+
+**Q: Can I create complex communication chains involving multiple agents?**  
+A: Yes, you can connect multiple agents in sequence or in parallel to create sophisticated workflows where information passes through several agents.

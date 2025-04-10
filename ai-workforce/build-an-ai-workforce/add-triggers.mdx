@@ -1,0 +1,121 @@
+---
+title: 'Add Triggers'
+description: 'Triggers are the starting points that initiate workflows in your AI Workforce. They determine when and how your agents begin their work, serving as the entry points to your entire workflow system.'
+sidebarTitle: 'Add Triggers'
+---
+
+
+## Understanding Triggers
+
+Triggers are specialized nodes in the Workforce that activate your agents based on specific events or conditions. They function as the initial connection point in your workflow, determining when your AI agents should start performing their tasks.
+
+### Types of Triggers
+
+#### Manual Triggers
+
+When you first create a workforce, a manual trigger is automatically added to your workspace. This allows you to directly initiate your workflow by sending a message to your agent, similar to how you would interact with a standalone agent in Relevance AI.
+
+Manual triggers are ideal for:
+- Testing your workflow during development
+- On-demand tasks that require human initiation
+- Workflows that need to begin with specific human input or context
+
+#### Integration Triggers
+
+Integration triggers connect your workforce to external systems, allowing your agents to automatically respond to events from those systems. These triggers enable your AI Workforce to monitor and react to activities in your connected tools and platforms.
+
+Common integration triggers include:
+- Email triggers that activate when new messages arrive
+- Calendar triggers that respond to meeting invitations or reminders
+- CRM triggers that react to new lead creation or status changes
+- Webhook triggers that respond to custom events from any system
+
+## Adding Triggers to Your Workforce
+
+### Adding Your First Trigger
+
+1. When you open your workforce, you'll see a manual trigger already available in your workspace.
+2. Connect this trigger to an agent by dragging a line from the trigger to your chosen agent.
+3. This connection establishes the entry point for your workflow.
+
+### Adding Additional Triggers
+
+To add more triggers to your workforce:
+
+1. Navigate to the Workforce interface.
+
+2. Locate the "Triggers" section in the node palette.
+3. Drag your desired trigger type onto the workspace.
+4. Position it appropriately in your workflow diagram.
+5. Connect the trigger to the agent that should respond first when the trigger activates.
+
+## Configuring Triggers
+
+Each trigger type has specific configuration options that determine its behavior:
+
+### Manual Trigger Configuration
+
+To trigger your workforce manually:
+
+1. Switch to the "Task" tab in the Relevance AI interface.
+2. Use the message input field to send a manual message to your workforce.
+3. Provide natural language instructions that will initiate your workflow.
+4. Your connected agent will receive this message and begin processing according to your workflow configuration.
+
+This manual interaction allows you to start your workflow with specific context and instructions whenever needed.
+
+### Integration Trigger Configuration
+
+Integration triggers require specific setup to connect with external systems:
+
+1. Select the integration trigger in your workspace.
+2. Complete the authentication process for the connected service.
+3. Configure trigger conditions (e.g., specific email subjects, calendar event types).
+4. Set any filters to ensure the trigger only activates for relevant events.
+5. Test the connection to verify proper setup.
+
+## Best Practices for Using Triggers
+
+### Strategic Trigger Placement
+
+- **Start with clarity**: Position triggers at the logical beginning points of your workflows.
+- **Minimize redundancy**: Avoid having multiple triggers that serve the same purpose.
+- **Consider user experience**: For manual triggers, ensure they're intuitive and provide clear guidance.
+
+### Trigger Maintenance
+
+- Regularly test triggers to ensure they're functioning correctly.
+- Monitor trigger activity to identify any performance issues.
+- Update trigger configurations when connected systems change.
+
+### Security Considerations
+
+- Review authentication settings for integration triggers regularly.
+
+- Implement appropriate access controls for manual triggers.
+- Consider data privacy implications when configuring trigger conditions.
+
+## Troubleshooting Triggers
+
+### Common Issues
+
+- **Trigger not activating**: Verify connection settings and authentication.
+- **Duplicate activations**: Check for overlapping trigger conditions.
+- **Delayed responses**: Examine workflow complexity and agent configuration.
+
+### Diagnostic Steps
+
+1. Test the trigger in isolation to confirm it's working properly.
+2. Verify that connected agents have appropriate permissions.
+3. Check system logs for any error messages related to the trigger.
+4. Ensure all necessary API keys and credentials are current.
+
+## Related Features
+
+The "Add Triggers" functionality works closely with other components of the Workforce Builder:
+
+- **Edge Settings**: After connecting a trigger to an agent, you can configure how information flows between them using Edge Settings.
+- **Agent Configuration**: Ensure your agents are properly configured to handle the input they'll receive from triggers.
+- **Conditions**: Use conditions alongside triggers to create more sophisticated workflow logic.
+
+By effectively utilizing triggers in your Workforce, you create the foundation for responsive, event-driven AI systems that can work autonomously while integrating seamlessly with your existing tools and processes.

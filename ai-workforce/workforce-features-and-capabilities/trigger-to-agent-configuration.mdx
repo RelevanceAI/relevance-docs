@@ -1,0 +1,103 @@
+---
+title: 'Trigger to Agent Configuration'
+description: 'Connecting triggers to agents is a fundamental aspect of building effective AI workforces in Relevance AI.'
+sidebarTitle: 'Trigger to Agent Configuration'
+---
+
+## Overview
+
+Trigger to Agent configurations define the relationship between a trigger event and the agent that responds to it. This connection is the starting point of any workflow in Workforce, allowing you to specify exactly how your agents are activated and what information they receive.
+
+## Types of Triggers
+
+When connecting triggers to agents, you can utilize several trigger types:
+
+- **Manual Triggers**: Allow you to manually initiate an agent through the Task View interface
+- **Scheduled Triggers**: Activate agents at predetermined times or intervals
+- **Integration Triggers**: Connect external services (like email, Slack, or CRM systems) to automatically activate agents when specific events occur
+
+## Setting Up a Trigger to Agent Connection
+
+### Basic Setup
+
+1. Open your workforce in the Build section
+2. Locate the trigger node you want to connect (or add a new one by dragging it from the sidebar)
+3. Click and drag from the trigger node's output point to connect it to your desired agent
+4. Configure the connection settings in the panel that appears
+
+### Configuration Options
+
+When establishing a Trigger to Agent connection, you'll need to configure these important settings:
+
+#### Communication Settings
+
+In the connection settings panel, you can specify:
+
+- **Message Format**: Define how the trigger information is formatted before being sent to the agent
+- **Context Passing**: Choose what contextual information from the trigger should be included
+- **Variable Mapping**: Map specific trigger data fields to variables the agent can use
+
+#### Behavior Settings
+
+Control how the agent responds to the trigger:
+
+- **Auto Run**: Enable the agent to automatically process the trigger without human approval
+- **Approval Required**: Require human approval before the agent acts on the trigger
+- **Let Agent Decide**: Allow the agent to determine whether it needs approval based on confidence level
+
+#### Task Management
+
+Configure how tasks are created and managed:
+
+- **Always Start New Task**: Each trigger creates a new, separate task
+- **Continue with One Task**: Multiple triggers can feed into a single ongoing task
+- **Max Auto Runs**: Set limits on how many times an agent can auto-run to prevent infinite loops
+
+## Best Practices
+
+### Effective Trigger to Agent Design
+
+- **Clear Trigger Definition**: Ensure your triggers have well-defined conditions to avoid unintended activations
+- **Appropriate Agent Selection**: Match triggers with agents that have the right skills and tools for the triggered task
+- **Contextual Information**: Configure triggers to provide sufficient context for the agent to understand the task
+- **Error Handling**: Include fallback paths for when triggers fail or agents cannot process the request
+
+### Common Patterns
+
+- **Filtering Triggers**: Use conditions before triggers to filter out unnecessary activations
+- **Multi-Agent Dispatch**: Connect a trigger to a dispatcher agent that routes tasks to specialized agents
+- **Escalation Paths**: Configure triggers to activate different agents based on priority or complexity
+
+## Example: Email Response Workflow
+
+Here's how a typical email response workflow might be configured:
+
+1. Create an email integration trigger that activates when new emails arrive
+2. Connect this trigger to a triage agent
+3. Configure the connection to:
+   - Pass the email subject, body, and sender information
+   - Allow auto-run for initial triage
+   - Create a new task for each email
+4. The triage agent can then analyze the email and route it to the appropriate specialized agent
+
+## Troubleshooting
+
+### Common Issues
+
+- **Trigger Not Activating**: Verify the trigger conditions and integration settings
+- **Agent Not Receiving Context**: Check the connection configuration to ensure proper data mapping
+- **Multiple Unintended Activations**: Review trigger conditions and consider adding filters
+
+### Debugging Tips
+
+- Use the Task View to monitor trigger activations and agent responses
+- Check connection logs to identify any data transmission issues
+- Test triggers manually before enabling auto-run
+
+## Related Features
+
+The Trigger to Agent configuration works seamlessly with other Workforce Builder components:
+
+- [Agent to Agent Configuration](https://relevanceai.com/docs/workforce-builder/configurations/agent-to-agent): Connect agents to create multi-step workflows
+- [Agent to Tool Configuration](https://relevanceai.com/docs/workforce-builder/configurations/agent-to-tool): Enable agents to use tools to complete tasks
+- [Workforce Task View](https://relevanceai.com/docs/workforce-builder/workforce-task-view): Monitor and manage tasks initiated by triggers

@@ -1,0 +1,137 @@
+---
+title: 'Agent to Tool Configuration'
+description: 'Agent to Tool configuration is a powerful feature within Workforce that enables you to establish connections between your AI agents and the tools they need to complete tasks. '
+sidebarTitle: 'Agent to Tool Configuration'
+---
+
+
+## Understanding Agent to Tool Connections
+
+When you connect an agent to a tool in Workforce, you're creating a pathway for your agent to access specific functionality. This connection allows your agent to:
+
+- Make decisions about when to use particular tools
+- Pass relevant information to tools for processing
+- Receive and interpret results from tool operations
+- Continue workflows based on tool outputs
+
+## Setting Up Agent to Tool Configurations
+
+To configure an Agent to Tool connection in your workforce:
+
+1. Open your workforce in the Workforce interface
+2. Locate the agent node you want to connect to a tool
+3. Click and drag from the agent's output connector to the input connector of your desired tool
+4. Once connected, click on the connecting line (edge) to access configuration settings
+
+## Configuration Options
+
+### Communication Style
+
+When configuring an Agent to Tool connection, you have two primary communication style options:
+
+#### Let Agent Decide
+
+This option gives your agent autonomy to determine when to use the connected tool based on context and need.
+
+- **Communication Settings**: Provide natural language instructions explaining when and how the agent should use this tool. For example: "Use this email tool when you need to send important updates to clients or when follow-up communication is required."
+  
+- **Behavior Settings**: Configure how the agent makes decisions about tool usage:
+  - **Auto run**: The agent will use the tool without requiring approval
+
+  - **Approval required**: The agent will draft the tool request but wait for human approval before execution
+  - **Let agent decide**: The agent will determine whether to auto-run or request approval based on confidence level
+  - **Max auto runs**: Set limits on how many times the agent can automatically use the tool without intervention
+
+#### Forced Handover
+
+This option creates a mandatory connection where the agent must pass information to the tool as part of the workflow.
+
+- **Task Continuity**: Choose between:
+  - **Always start a new task**: Each tool execution begins a fresh task instance
+  - **Always continue with one task**: The tool execution remains part of the original task flow
+
+## Best Practices for Agent to Tool Configuration
+
+### 1. Clear Instructions
+
+When using "Let agent decide" mode, provide specific, unambiguous instructions about when the tool should be used. For example:
+
+> Use this data analysis tool when:
+> - The user requests statistical insights
+> - Raw data needs to be transformed into visualizations
+> - Patterns or trends need to be identified in datasets
+
+### 2. Appropriate Permission Levels
+
+Match permission settings to the sensitivity and impact of the tool:
+
+- Use "Approval required" for tools that:
+  - Make external communications
+  - Modify important data
+  - Incur costs or use credits
+  - Make decisions with business impact
+
+- Use "Auto run" for tools that:
+  - Perform internal data retrieval
+  - Execute low-risk, repetitive tasks
+  - Enhance the agent's knowledge without external effects
+
+### 3. Workflow Optimization
+
+Consider how tool connections affect the overall workflow:
+
+- **Sequential Processing**: Connect tools in a logical sequence when tasks need to follow a specific order
+- **Conditional Branching**: Use agent decision points before tools when different scenarios require different tool selections
+- **Feedback Loops**: Create connections from tools back to agents when results need evaluation before proceeding
+
+## Troubleshooting Agent to Tool Connections
+
+### Common Issues and Solutions
+
+1. **Agent not using connected tool**
+   - Check that the connection line is properly established
+   - Review the communication instructions for clarity
+   - Ensure the agent has the necessary context to recognize when to use the tool
+
+2. **Tool execution failing**
+   - Verify the tool's configuration and required inputs
+   - Check that the agent is passing data in the expected format
+   - Review tool logs for specific error messages
+
+3. **Excessive tool usage**
+   - Set appropriate "Max auto runs" limits
+   - Make instructions more specific about when to use the tool
+   - Consider changing to "Approval required" mode temporarily
+
+## Advanced Agent to Tool Configurations
+
+### Chaining Multiple Tools
+
+You can create sophisticated workflows by connecting an agent to multiple tools in sequence:
+
+1. Connect your agent to the first tool
+2. Connect the output of the first tool to a second agent or directly to another tool
+3. Configure each connection with appropriate settings
+
+This approach allows for complex multi-step processes where each tool performs a specific function in the overall workflow.
+
+### Dynamic Tool Selection
+
+When an agent needs to choose between multiple tools based on context:
+
+1. Connect the agent to each potential tool
+2. Use "Let agent decide" mode for all connections
+3. Provide clear, distinctive instructions for when to use each tool
+
+The agent will evaluate the situation and select the appropriate tool based on your instructions.
+
+## Related Features
+
+- [Trigger to Agent Configuration](https://relevanceai.com/docs/workforce-builder/configurations/trigger-to-agent): Learn how to configure the initial triggers that activate your agents
+- [Tool to Tool Configuration](https://relevanceai.com/docs/workforce-builder/configurations/tool-to-tool): Discover how to connect tools directly to other tools for automated workflows
+
+- [Condition to Tool Configuration](https://relevanceai.com/docs/workforce-builder/configurations/condition-to-tool): Explore how to add conditional logic to your tool executions
+
+## Conclusion
+
+Agent to Tool configuration is a fundamental aspect of building effective AI workforces. By thoughtfully designing these connections, you can create intelligent workflows where agents leverage tools appropriately to accomplish complex tasks. Whether you prefer giving your agents autonomy with "Let agent decide" or creating structured processes with "Forced handover," the configuration options in Workforce Builder provide the flexibility to match your specific business needs.

@@ -1,0 +1,145 @@
+---
+title: 'Approvals and Escalations'
+description: 'Approvals and escalations are essential components of Workforce that ensure your AI agents operate with appropriate oversight and can effectively handle situations requiring human intervention.'
+sidebarTitle: 'Approvals and Escalations'
+---
+
+## Overview
+
+The approvals and escalations system in Workforce allows you to:
+
+- Configure when and how agents should seek approval before taking actions
+- Establish clear escalation paths when agents encounter situations beyond their scope
+- Monitor approval requests through the Workforce Task View
+- Set up automated alerts for escalations requiring human attention
+
+By implementing proper approval and escalation processes, you can maintain quality control while allowing your AI workforce to operate with appropriate autonomy.
+
+## Setting Up Approval Modes
+
+When connecting agents to tools or other agents in your workforce, you can configure different approval modes that determine how actions are authorized:
+
+### Auto Run
+
+In this mode, the agent will execute actions automatically without requiring approval. This is ideal for:
+
+- Low-risk, routine tasks
+- Well-defined processes with predictable outcomes
+- Situations where speed is prioritized over verification
+
+To configure auto run:
+
+1. Select the edge connecting an agent to a tool or another agent
+2. In the Edge Settings panel, select "Auto run" under Behavior Settings
+3. Optionally, set "Max auto runs" to limit the number of automatic executions
+
+### Approval Required
+
+This mode forces the agent to seek explicit approval before executing an action. Use this for:
+
+- High-stakes decisions
+- Actions that commit resources or make external communications
+- New workflows that need monitoring before being fully automated
+
+To set up approval required:
+
+1. Select the edge connecting an agent to a tool or another agent
+
+2. In the Edge Settings panel, select "Approval required" under Behavior Settings
+3. The agent will now draft its intended action and wait for human approval before proceeding
+
+### Let Agent Decide
+
+This balanced approach allows the agent to determine whether approval is needed based on its confidence and context. The agent will:
+
+- Complete tasks autonomously when it has sufficient context and confidence
+- Request approval when facing uncertainty or high-risk situations
+- Escalate to humans when it needs clarification or additional information
+
+To implement this mode:
+
+1. Select the edge connecting an agent to a tool or another agent
+2. In the Edge Settings panel, select "Let agent decide" under Behavior Settings
+3. Complete the "When to call this agent" box with natural language instructions explaining the decision logic
+
+## Monitoring Approvals in Workforce Task View
+
+The Workforce Task View serves as your central dashboard for monitoring and managing approval requests:
+
+1. Navigate to the "Task" view to see your workforce
+2. Review pending approval requests from your agents
+3. Examine the agent's proposed action and supporting reasoning
+4. Choose to approve, reject, or provide additional guidance
+5. Track the history of approvals and their outcomes
+
+This interface provides complete visibility into your approval workflow, allowing you to maintain oversight while empowering your AI workforce.
+
+## Implementing Escalation Strategies
+
+Escalations occur when an agent encounters a situation it cannot handle independently. Effective escalation strategies ensure these situations are properly addressed:
+
+### Agent-Initiated Escalations
+
+Agents can be configured to recognize their limitations and escalate appropriately:
+
+1. Configure agent settings under Agent Settings > Abilities
+2. Define clear criteria for when an agent should escalate issues
+3. Specify the escalation path (to specific human roles or other agents)
+
+4. Provide templates for how the agent should format escalation requests
+
+### Escalation Tools
+
+You can connect agents to specific tools designed for escalation:
+
+1. Create dedicated escalation tools (e.g., Slack notifications, email alerts)
+2. Connect these tools to your agents in the Workforce Builder
+3. Configure the tools to route escalations to the appropriate team members
+4. Include relevant context and information in the escalation
+
+### Escalation Monitoring
+
+Track and manage escalations through:
+
+1. The Workforce Task View, which displays all active escalations
+2. Notification systems that alert relevant team members
+3. Escalation logs that maintain a history of issues and resolutions
+
+## Best Practices for Approvals and Escalations
+
+To maximize the effectiveness of your approval and escalation processes:
+
+### For Approvals:
+
+- Start with more restrictive approval requirements and gradually relax them as confidence in the agent grows
+- Use "Max auto runs" settings as guardrails when transitioning to more autonomous operation
+- Provide clear criteria for what constitutes an approvable action
+- Review approval patterns regularly to identify opportunities for process improvement
+
+### For Escalations:
+
+- Define clear escalation thresholds based on risk, complexity, and agent capabilities
+- Create detailed documentation for human responders to handle escalated issues
+- Implement a feedback loop where escalation resolutions inform agent improvements
+- Establish service level agreements (SLAs) for responding to different types of escalations
+
+## Related Features
+
+- [Edge Settings](https://relevanceai.com/docs/workforce-builder/edge-settings) - Configure the connections between nodes in your workforce, including approval settings
+- [Workforce Task View](https://relevanceai.com/docs/workforce-builder/workforce-task-view) - Monitor and manage your workforce's activities, including approvals and escalations
+
+- [Agent Abilities](https://relevanceai.com/docs/agent/customise-agent/escalate) - Configure how agents handle situations requiring escalation
+
+## FAQs
+
+**Q: Can I set different approval requirements for different tools?**  
+A: Yes, approval settings are configured on a per-edge basis, allowing you to require approval for sensitive tools while allowing automatic execution for routine ones.
+
+**Q: What happens if an approval request isn't addressed?**  
+A: The task will remain in a pending state until approved or rejected. You can configure timeout actions or notifications for approval requests that remain unaddressed for a specified period.
+
+**Q: Can escalations be routed to specific team members?**  
+A: Yes, you can configure escalation tools to direct issues to specific individuals or teams based on the nature of the escalation, time of day, or other factors.
+
+**Q: How do I balance autonomy with oversight?**  
+A: Start with higher oversight (approval required) for new workflows, then gradually transition to "let agent decide" and eventually "auto run" as you build confidence in the agent's performance for specific tasks.
