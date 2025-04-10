@@ -1,0 +1,126 @@
+---
+title: 'Introduction to Nodes'
+description: 'Nodes are the fundamental building blocks of a workforce in Relevance AI. They represent all the components you can place on your workspace to create automated workflows. '
+sidebarTitle: 'Introduction to Nodes'
+---
+
+## What Are Nodes?
+
+Nodes are the technical term for all the elements you can place and connect in the Workforce interface. They come from graph theory, where a graph consists of nodes (points) and edges (connections between points). In Workforce Builder:
+
+- **Nodes** are the individual components you place on the workspace
+- **Edges** are the connections between nodes that define how they interact
+
+## Types of Nodes
+
+There are four main types of nodes in Workforce:
+
+### 1. Triggers
+
+Triggers are the starting points of your workflows. They initiate the execution of your workforce when specific conditions are met.
+
+**Examples of triggers include:**
+- Manual triggers (allowing you to message an agent directly)
+- Integration triggers (such as when an email is received)
+- Scheduled triggers (running at specific times)
+
+Triggers are essential because they determine when and how your workforce begins its work.
+
+### 2. Agents
+
+Agents are AI-powered entities that can reason, make decisions, and complete tasks. In Workforce, agents are the same as those you've configured elsewhere in Relevance AI, but now they can be visually connected to other components.
+
+Agents can:
+- Process information from triggers
+- Make decisions about next steps
+- Use tools to accomplish tasks
+- Hand over work to other agents
+
+### 3. Tools
+
+Tools are specific capabilities that perform defined actions. Unlike in the previous system where tools were tightly coupled to specific agents, in Workforce, tools exist independently and can be connected to multiple agents or other tools.
+
+This modular approach offers several advantages:
+- One tool can be used by multiple agents
+- Tools can be connected to other tools in sequence
+- Tools can be easily substituted (e.g., changing from Notion to Confluence) without having to reconfigure each agent
+
+### 4. Conditions
+
+Conditions act as decision points in your workflow, similar to IF statements in programming. They evaluate specific criteria and direct the flow based on whether those criteria are met.
+
+**For example:**
+- A condition might check if the current day is a weekday
+- If true, it might trigger an email tool
+- If false, the workflow might end or take a different path
+
+Conditions help create more sophisticated, branching workflows that respond dynamically to different situations.
+
+## Working with Nodes in Workforce
+
+### Placing Nodes
+
+To add nodes to your workspace:
+1. Open your workforce and navigating to "Build"
+2. Drag the desired node type (trigger, agent, tool, or condition) from the sidebar onto the workspace
+3. Position it where you want it to appear in your workflow
+
+### Connecting Nodes
+
+To establish relationships between nodes:
+1. Click on the source node
+2. Drag a connection line to the target node
+3. Configure the connection settings (such as communication style)
+
+### Node Configuration
+
+Each node type has specific settings that can be configured:
+
+- **Triggers**: Configure when and how they activate
+- **Agents**: Set communication preferences, approval requirements, and behavior settings
+- **Tools**: Define inputs, steps, and outputs
+- **Conditions**: Specify the criteria to evaluate and the paths to take based on results
+
+## Best Practices for Working with Nodes
+
+1. **Start Simple**: Begin with a manual trigger connected to a single agent to test functionality
+2. **Plan Your Workflow**: Before adding many nodes, sketch out the desired workflow to understand the necessary components
+3. **Use Meaningful Names**: Give your nodes descriptive names that indicate their purpose
+
+4. **Test Incrementally**: Add and test nodes in small batches rather than building the entire workflow at once
+5. **Consider Approval Settings**: For critical actions, configure nodes to require human approval before proceeding
+
+## Common Node Configurations
+
+### Trigger → Agent
+This is the most basic configuration, where a trigger initiates an agent. For example, a manual trigger allows you to message an agent directly.
+
+### Agent → Agent
+This configuration enables one agent to communicate with another. There are two communication styles:
+- **Let agent decide**: The agent determines when to involve another agent based on natural language instructions
+- **Forced handover**: The first agent always passes the task to the second agent
+
+### Agent → Tool
+This allows an agent to use a specific tool to complete a task, such as sending a message in a Slack channel.
+
+### Tool → Tool
+This creates a workflow-like sequence where one tool's output becomes another tool's input, without requiring agent intervention between steps.
+
+### Condition → Tool
+This setup evaluates a condition before deciding whether to execute a tool, adding logic to your workflows.
+
+## Limitations and Considerations
+
+- Currently, communication between agents is limited to one-way communication. Bidirectional communication is not yet supported.
+- When designing complex workflows, consider the approval settings carefully to maintain appropriate human oversight.
+- The more nodes in a workflow, the more important it becomes to monitor performance in the Task View.
+
+## Related Features
+
+For more information on how to use nodes effectively in your workforce, refer to these related features:
+
+- [Edge Settings](https://relevanceai.com/docs/) - Configure how nodes connect to each other
+- [Workforce Task View](https://relevanceai.com/docs/) - Monitor and manage your workforce's activities
+- [Approvals and Escalations](https://relevanceai.com/docs/) - Set up human oversight for your automated workflows
+
+By understanding and effectively utilizing nodes, you can create powerful, flexible workflows that automate complex tasks while maintaining appropriate control and oversight.

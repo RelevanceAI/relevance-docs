@@ -1,0 +1,102 @@
+---
+title: 'Condition to Tool Configuration'
+description: 'Condition to Tool connections in Workforce allow you to create intelligent workflows that execute tools only when specific conditions are met.'
+sidebarTitle: 'Condition to Tool Configuration'
+---
+
+
+## How Condition to Tool Works
+
+A Condition to Tool connection acts as an IF statement in your workforce flow. When a condition evaluates to true, the connected tool executes; when false, the tool is skipped. This creates branching logic in your workflows, making your AI workforce more adaptable and responsive to different scenarios.
+
+## Setting Up a Condition to Tool Connection
+
+To create a Condition to Tool connection in your workforce:
+
+1. Navigate to Workforce and "Build" in the main navigation
+2. Add a condition node to your workspace by dragging it from the node palette
+3. Write your condition using natural language (e.g., "Go down this path if it's a weekday" or "Follow this route if the customer priority is high")
+4. Add a tool node to your workspace
+5. Connect the condition node to the tool node by clicking and dragging from the condition's output connector to the tool's input connector
+
+## Condition Examples Using Natural Language
+
+You can create various types of conditions using simple, natural language instructions:
+
+### Time-Based Conditions
+- "Go down this path if today is Monday or Tuesday"
+- "Follow this route if the current time is between 9 AM and 5 PM"
+- "Use this tool if it's a weekday"
+
+### Data-Based Conditions
+- "Go down this path if the customer priority is high"
+- "Follow this route if the email contains the word 'urgent'"
+- "Use this tool if the sentiment score is greater than 0.7"
+
+### Tool Output Conditions
+- "Go down this path if the previous tool completed successfully"
+
+- "Follow this route if the data validation passed"
+- "Use this tool if we received a response from the API"
+
+## Best Practices for Condition to Tool Connections
+
+1. **Use clear, descriptive language**: Make your conditions easy to understand at a glance
+2. **Keep conditions focused**: Each condition should evaluate a single concept for clarity
+3. **Be specific**: Provide clear criteria for when the condition should be true
+4. **Test thoroughly**: Verify your conditions work as expected with different inputs
+5. **Consider edge cases**: Think about unusual scenarios that might affect your condition
+
+## Advanced Condition to Tool Patterns
+
+### Chaining Multiple Conditions
+
+You can create sophisticated decision trees by chaining multiple conditions together:
+
+1. Create several condition nodes that evaluate different aspects of your data
+2. Connect each condition to the appropriate tool
+3. Tools will only execute when their specific conditions are met
+
+### Parallel Condition Evaluation
+
+For more complex scenarios, you can have multiple conditions evaluating the same data simultaneously:
+
+1. Create several condition nodes that check different aspects of the same data
+2. Connect each condition to different tools
+3. Multiple tools may execute in parallel depending on which conditions are met
+
+## Practical Use Cases
+
+### Email Routing Based on Content
+
+Create conditions like "Go down this path if the email contains a support request" or "Follow this route if the message mentions billing issues."
+
+### Time-Sensitive Workflows
+
+Build conditions such as "Use this tool only during business hours" or "Go down this path if it's the first day of the month."
+
+### Data Quality Control
+
+Implement conditions like "Follow this route if all required fields are filled" or "Use this tool if the data passes validation."
+
+### Approval Workflows
+
+Design conditions such as "Go down this path if the request has been approved" or "Use this tool if the manager has given permission."
+
+## Troubleshooting Condition to Tool Connections
+
+If your condition to tool connections aren't working as expected:
+
+1. **Review your condition language**: Make sure your natural language condition is clear and specific
+2. **Check the flow**: Confirm the connections between nodes are correctly established
+3. **Test with simpler conditions**: Try a very basic condition to verify the connection works
+4. **Monitor execution**: Watch how the workflow behaves when the condition is evaluated
+5. **Refine your language**: If needed, make your condition more explicit or detailed
+
+## Related Features
+
+- **Agent to Tool connections**: Direct connections from agents to tools without conditional logic
+- **Tool to Tool connections**: Sequential execution of tools in a workflow
+- **Trigger to Agent connections**: Starting points for your workforce flows
+
+By using Condition to Tool connections with natural language in the Workforce Builder, you can create intelligent, adaptive workflows that respond dynamically to changing circumstances, making your AI workforce more efficient and effective.

@@ -1,0 +1,105 @@
+---
+title: 'Add Tools'
+description: 'Tools are essential components in your AI Workforce that enable agents to perform specific actions and complete tasks.'
+sidebarTitle: 'Add Tools'
+---
+
+
+## What Are Tools in Workforce?
+
+In the Workforce, tools function as independent nodes that can be connected to agents, triggers, and even other tools. Unlike the traditional approach where tools are tightly coupled to specific agents, Workforce allows for a more flexible and modular design:
+
+- Tools exist as standalone components on the workspace
+- Multiple agents can access the same tool
+- Tools can be connected to other tools to create sequential workflows
+- Tools can be easily substituted without having to reconfigure each agent
+
+## How to Add Tools to Your Workforce
+
+Adding tools to your Workforce is a straightforward process:
+
+1. Open your Workforce and navigate to the "Build" section
+2. Locate the tools panel in the Workforce interface
+3. Drag any tool from your project onto the workspace
+4. Position the tool where you want it on the canvas
+
+## Connecting Tools in Your Workforce
+
+Once you've added tools to your workspace, you can create powerful connections:
+
+### Agent to Tool Connections
+
+To connect an agent to a tool:
+
+1. Click on the agent node to reveal connection points
+2. Drag a connection line from the agent to your desired tool
+3. Configure the connection settings:
+   - **Let agent decide**: The agent will determine when to use the tool based on natural language instructions
+   - **Forced handover**: The agent will always use the tool when the connection is triggered
+
+### Tool to Tool Connections
+
+One of the most powerful features of the Workforce Builder is the ability to connect tools to other tools:
+
+1. Click on the source tool to reveal connection points
+2. Drag a connection line to the destination tool
+
+3. This creates a workflow where the output of one tool becomes the input for the next
+
+For example, you might connect a tool that sends an email to another tool that summarizes responses, creating an automated follow-up workflow.
+
+## Edge Settings for Tool Connections
+
+When connecting tools in your Workforce, you can configure the following edge settings:
+
+### Communication Style
+
+- **Let agent decide**: Use natural language to explain when the tool should be used
+- **Forced handover**: Always execute the tool when the connection is triggered
+
+### Behavior Settings
+
+- **Auto run**: The tool will execute without requiring approval
+- **Approval required**: The tool will draft the action but ask for human approval before executing
+- **Let agent decide**: The agent will determine whether to auto-run or request approval based on context
+- **Max auto runs**: Set limits on how many times a tool can auto-run as a safety guardrail
+
+## Tool to Tool Workflows
+
+The ability to connect tools directly to other tools is what makes the Workforce Builder so powerful. This workflow-style approach allows you to:
+
+1. Create sequential processes where each tool performs a specific function
+2. Build complex automations without writing code
+3. Easily modify or replace individual components without disrupting the entire workflow
+4. Maintain a visual representation of your business processes
+
+For example, after sending an email with one tool, you could automatically hand over to another tool that monitors for responses, and then to a third tool that generates appropriate follow-ups.
+
+## Using Conditions with Tools
+
+For more advanced workflows, you can add conditions to your tool connections:
+
+1. Add a condition node to your workspace
+2. Connect a tool to the condition
+3. Connect the condition to other tools
+4. Configure the condition logic (e.g., "only send email if day of week is weekday")
+
+Conditions act as IF statements in your workflow, allowing for branching logic and more sophisticated automations.
+
+## Best Practices for Tools in Workforce Builder
+
+To get the most out of tools in your Workforce:
+
+1. **Keep tools focused**: Each tool should perform a specific, well-defined function
+2. **Use descriptive names**: Name your tools clearly to understand their purpose at a glance
+3. **Document connections**: Use the description fields to explain how tools should work together
+4. **Test thoroughly**: Before deploying, test your tool connections with various inputs
+5. **Monitor performance**: Regularly review how your tools are performing and refine as needed
+
+## Related Features
+
+- [Workforce Task View](https://relevanceai.com/docs/workforce-features-and-capabilities/workforce-task-view): Monitor and manage your workforce tasks and tool executions
+- [Edge Settings](https://relevanceai.com/docs/build-an-ai-workforce/edge-settings): Configure how nodes connect and communicate in your workforce
+- [Add Conditions](https://relevanceai.com/docs/build-an-ai-workforce/add-conditions): Learn how to add conditional logic to your workforce flows
+
+By effectively utilizing tools in the Workforce Builder, you can create sophisticated, autonomous workflows that handle complex business processes with minimal human intervention.

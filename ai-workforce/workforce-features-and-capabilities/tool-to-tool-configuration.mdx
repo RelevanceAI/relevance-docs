@@ -1,0 +1,94 @@
+---
+title: 'Tool to Tool Configuration'
+description: 'Tool to Tool configuration is a powerful feature in Workforce that allows you to connect tools directly to other tools, creating automated workflows without requiring agent intervention.'
+sidebarTitle: 'Tool to Tool Configuration'
+---
+
+## How Tool to Tool Connections Work
+
+When you connect tools directly to each other in Workforce, you're establishing a direct pathway for data to flow from one tool to the next. This creates a streamlined process where:
+
+1. The first tool completes its operation
+2. Its output is automatically passed to the connected tool
+3. The second tool processes this data without requiring human or agent approval (unless configured otherwise)
+
+This approach is particularly valuable for creating multi-step automations that handle routine processes efficiently.
+
+## Setting Up Tool to Tool Connections
+
+### Prerequisites
+- At least two tools added to your Workforce Builder canvas
+- Understanding of the input/output requirements for each tool
+
+### Step-by-Step Configuration
+
+1. **Add Tools to Your Workspace**: Drag the tools you want to connect from your project onto the Workforce Builder canvas.
+
+2. **Create the Connection**: 
+   - Click on the first tool (source)
+   - Look for the connection point (usually appears as a dot or node on the edge of the tool)
+   - Click and drag to create a line to the second tool (destination)
+   - Release to establish the connection
+
+3. **Configure Connection Settings**:
+   - After creating the connection, click on the connecting line to access the edge settings
+   - Choose between "Auto run" or "Approval required" modes:
+     - **Auto run**: The second tool will automatically execute when it receives data from the first tool
+
+     - **Approval required**: The system will wait for human approval before the second tool processes the data
+
+4. **Map Data Fields** (if applicable):
+   - Some tools may require you to specify how data from the first tool maps to the input fields of the second tool
+   - Use the mapping interface to connect output fields from the first tool to input fields of the second tool
+
+5. **Save Your Configuration**: Click "Save changes" to apply your Tool to Tool configuration
+
+## Use Cases for Tool to Tool Configuration
+
+### Email Processing Workflow
+Connect an "Email Receiver" tool to an "Email Classifier" tool, then to either a "Customer Support" tool or "Sales Lead" tool based on classification results.
+
+### Data Enrichment Chain
+Link a "Data Extraction" tool to a "Data Enrichment" tool, followed by a "Database Update" tool to automatically enhance and store information.
+
+### Document Processing Pipeline
+Connect a "Document Analyzer" tool to a "Summary Generator" tool, then to a "Notification" tool to alert team members about important documents.
+
+### Conditional Workflows
+When combined with condition nodes, Tool to Tool connections can create branching workflows that take different paths based on specific criteria.
+
+## Best Practices
+
+1. **Start Simple**: Begin with straightforward two-tool connections before building more complex chains.
+
+2. **Test Thoroughly**: Always test your Tool to Tool configurations with sample data before deploying them in production.
+
+3. **Consider Approval Points**: For critical operations, insert approval requirements at key points in the workflow.
+
+4. **Document Your Flows**: Create documentation for your Tool to Tool configurations to help team members understand the automated processes.
+
+5. **Monitor Performance**: Regularly check the execution logs to ensure your Tool to Tool connections are functioning as expected.
+
+6. **Error Handling**: Plan for potential failures by considering what should happen if a tool in the chain encounters an error.
+
+## Limitations and Considerations
+
+- **Data Compatibility**: Ensure that the output format of the first tool is compatible with the input requirements of the second tool.
+
+- **Execution Time**: Be aware that complex Tool to Tool chains may take longer to execute, especially if tools perform resource-intensive operations.
+
+- **Debugging Challenges**: Troubleshooting issues in Tool to Tool connections can be more complex than single-tool setups.
+
+- **Versioning Impact**: Updating a tool in a chain may affect downstream tools if the output format changes.
+
+## Related Features
+
+Tool to Tool configuration works seamlessly with other Workforce Builder features:
+
+- **Conditions**: Add conditional logic to determine whether a tool connection should be followed
+- **Agent to Tool**: Combine agent decision-making with automated tool chains
+- **Triggers**: Initiate Tool to Tool workflows based on external events
+
+## Conclusion
+
+Tool to Tool configuration in the Workforce Builder represents a significant advancement in workflow automation capabilities. By connecting tools directly to each other, you can create sophisticated process chains that handle routine tasks efficiently while maintaining the flexibility to incorporate human oversight where needed. This feature empowers you to build more autonomous, intelligent workflows that save time and reduce the need for manual intervention.
