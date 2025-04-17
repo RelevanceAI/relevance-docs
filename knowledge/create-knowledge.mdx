@@ -4,73 +4,205 @@ sidebarTitle: 'Create knowledge'
 description: "Our Retrieval Augmented Generation (RAG) solution"
 ---
 
-Knowledge is our RAG solution in Relevance AI, which allows you to provide additional context and relevant information to your agents and tools.
+# Create and Organize Knowledge
 
-## How to create a knowledge table
+Knowledge in Relevance AI serves as the foundation for your AI agents' intelligence, enabling them to access relevant information when responding to queries or performing tasks. This guide will walk you through the process of creating and organizing knowledge in Relevance AI, empowering your agents with the context they need to deliver accurate, helpful responses.
 
-There are a couple of ways to create a knowledge table.
+## Understanding Knowledge in Relevance AI
 
-**Blank:** Start with an empty table and manually input your data.
-Click on `Blank` and name your table. 
+Knowledge in Relevance AI is a powerful Retrieval Augmented Generation (RAG) solution that provides your AI agents with access to specific information beyond their pre-trained knowledge. By creating well-organized knowledge bases, you can:
 
-**Upload from CSV:** Import structured data from a CSV file.
-Select `Upload from CSV`. Choose your CSV file and hit `Upload data to table`.
+- Ground your agents' responses in factual information
+- Reduce hallucinations and inaccuracies
+- Provide domain-specific expertise to your agents
+- Keep your agents updated with the latest information
 
+Knowledge in Relevance AI can take many forms - from small snippets of information that guide your agents on what "good" looks like, to comprehensive databases of support FAQs, to connections with external tools and integrations that retrieve information from specific websites or documentation.
 
-**Import from website:** Automatically extract and structure data from a specified website.
-Enter the name of your table, and URL of the website you want to import from. Select the type of content to extract (text or HTML).
+## Creating Knowledge Sources
 
-**Import from 3rd party:** Connect to third-party services to import relevant data.
-Choose from available third-party integrations.
-For example, if you select **Slack**, then enter your API key, select the channel you want to important from, and the number of messages.
+Relevance AI offers multiple flexible approaches to create knowledge, accommodating various information types and sources:
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '61.46%',
-  }}>
-  <iframe
-    src="https://fast.wistia.com/embed/medias/f8ptogwfln"
-    frameBorder="0"
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      borderRadius: '10px',
-    }}/>
-</div>
+### Manual Input
 
-## Sync your knowledge
+When you have specific information that isn't contained in existing documents, you can manually create and structure your knowledge:
 
-Sync the knowledge your agents and tools use. This is helpful if you have recently enriched your data with a tool and want to add those new outputs to your knowledge. (Soon you will also be able to change the model used to create embeddings).
+1. Navigate to the Knowledge section in your Relevance AI dashboard
+2. Click "Create Knowledge"
+3. Select "Empty Table" as your source
+4. Name your knowledge base
+5. Add columns to structure your information (e.g., Question, Answer, Category)
+6. Enter your information directly into the table
+7. Click "Create" to save your knowledge base
 
-`Sync new data` will create new chunks and vectors for recently added data.
+This approach gives you complete control over the structure and content of your knowledge base, allowing you to create precisely tailored information resources.
 
-`Sync all data` will create new chunks and vectors for all data in your knowledge set making sure everything is up to date.
+### Upload Documents
 
-## Show/hide columns
-Click on the `n Hidden` button will provide you with a list of columns included in your table and an on/off toggle. Another way to 
-Hide a column is to click on the header and choose "Hide".
+When your information already exists in document form, you can quickly import it:
 
-## Download
-You can export your data and the analysis results in [standard format](/tool/export) (i.e. as seen in the table)
-or wide format (i.e. flattened categorical fields).
+1. Navigate to the Knowledge section
+2. Click "Create Knowledge"
+3. Select "Upload Files" as your source
+4. Choose the file(s) you want to upload (supported formats include CSV, PDF, Excel, JSON, and audio files)
+5. Configure parsing options if needed
+6. Name your knowledge base
+7. Click "Create" to process and import your documents
 
-## Add rows
-If you wish to manually add new rows to your data table, click on `Add rows` located under the table. When hovering over a cell in 
-the newly added row, the "full screen" icon (i.e. square with 4 arrows) appears which provides you with edit mode to type in values.
+Relevance AI automatically processes these documents, extracting the relevant information and making it searchable for your agents.
 
-## Add columns
-If you wish to manually add new columns to your data table, click on `Add column` located to the right of your table. 
+### Extract Website Content
 
-<Tip>
-When modifying rows or columns in a table:
-* Do not forget to hit save which appears on the top right of the table.
-* You can use the "Clear changes" button that appears on the top, to undo your changes to the latest saved state.
-</Tip>
+To incorporate information from websites:
 
-## Delete a column
-Click on the header and select `Delete` from the appeared list. Keep in mind that this action is not reversible.
+1. Navigate to the Knowledge section
+2. Click "Create Knowledge"
+3. Select "Website" as your source
+4. Enter the URL(s) you want to extract content from
+5. Configure crawling options (depth, specific pages, etc.)
+6. Name your knowledge base
+7. Click "Create" to fetch and process the website content
 
-## Rename a column
-Click on the header and select and you can see that the header appears in a text-box. Simply modify the text to rename a column.
+This method is perfect for incorporating information from your company website, documentation sites, or other online resources without manually copying information.
+
+### Connect Third-Party Integrations
+
+To sync data from external platforms:
+
+1. Navigate to the Knowledge section
+2. Click "Create Knowledge"
+3. Select "Integrations" as your source
+4. Choose the integration you want to use
+5. Authenticate and configure the connection
+6. Select the data you want to import
+7. Name your knowledge base
+8. Click "Create" to establish the connection and import data
+
+By connecting to third-party platforms, you ensure your agents have access to the most current information across your entire technology stack.
+
+## Organizing Your Knowledge
+
+Effective knowledge organization is crucial for ensuring your agents can quickly find and use the right information. Here are strategies for organizing your knowledge in Relevance AI:
+
+### Structured Tables
+
+For FAQ-style knowledge or structured data:
+
+1. Create clear column headers that describe the information (e.g., "Question," "Answer," "Category")
+2. Use consistent formatting within each column
+3. Include metadata columns to help with filtering and organization
+4. Consider adding tags or categories to group related information
+
+### Document Chunking
+
+When importing documents:
+
+1. Configure appropriate chunking settings to break down large documents into manageable pieces
+2. Balance chunk size - too small may lose context, too large may dilute relevance
+3. Consider overlapping chunks to maintain context across sections
+4. Use metadata to maintain relationships between chunks from the same source
+
+### Knowledge Collections
+
+Group related knowledge bases into collections:
+
+1. Create separate knowledge bases for different domains or purposes
+2. Use consistent naming conventions for your knowledge bases
+3. Consider the scope of each knowledge base - more focused bases often yield more precise results
+4. Document the purpose and contents of each knowledge base for team reference
+
+## Enhancing Knowledge Quality
+
+To maximize the effectiveness of your knowledge bases:
+
+### Metadata Enrichment
+
+Add contextual metadata to your knowledge entries:
+
+1. Include creation and update dates to track freshness
+2. Add author information for accountability
+3. Tag entries with relevant categories or topics
+4. Include confidence scores or verification status where applicable
+
+### Knowledge Verification
+
+Implement processes to ensure accuracy:
+
+1. Regularly review and update your knowledge bases
+2. Set up workflows for subject matter experts to verify information
+3. Track usage patterns to identify frequently accessed or potentially problematic entries
+4. Implement version control for important knowledge bases
+
+### Semantic Organization
+
+Enhance retrievability with semantic approaches:
+
+1. Use consistent terminology throughout your knowledge bases
+2. Consider adding synonyms or alternative phrasings for important concepts
+
+3. Structure information in a question-answer format where appropriate
+4. Include examples and use cases to illustrate concepts
+
+## Connecting Knowledge to Agents
+
+Once your knowledge is created and organized, connect it to your agents:
+
+1. Navigate to your agent's configuration page
+2. Go to the "Connected Resources" section
+3. Select "Knowledge"
+4. Click "+ Add knowledge"
+5. Select the knowledge base(s) you want to connect to your agent
+6. Configure retrieval settings (number of results, relevance threshold, etc.)
+7. Save your changes
+
+Your agent can now access this knowledge when responding to queries or performing tasks.
+
+## Advanced Knowledge Configuration
+
+Fine-tune how your agents interact with knowledge:
+
+### Retrieval Settings
+
+Adjust how your agent searches for information:
+
+1. Configure the number of results returned for each query
+2. Set relevance thresholds to ensure only highly relevant information is used
+3. Adjust search algorithms between keyword-based and semantic approaches
+4. Configure whether the agent should use knowledge for all queries or only specific types
+
+### Knowledge Prioritization
+
+When using multiple knowledge bases:
+
+1. Set priority levels for different knowledge sources
+2. Configure fallback behavior when information isn't found in primary sources
+3. Set up rules for resolving conflicts between different knowledge sources
+4. Consider creating specialized knowledge bases for specific query types
+
+### Query Transformation
+
+Enhance retrieval effectiveness:
+
+1. Configure query preprocessing to improve match quality
+2. Set up query expansion to include related terms
+3. Implement query classification to route different types of questions to appropriate knowledge bases
+4. Use feedback loops to improve retrieval quality over time
+
+## Best Practices for Knowledge Management
+
+To maintain effective knowledge bases over time:
+
+1. **Regular Updates**: Schedule periodic reviews to keep information current
+
+2. **Version Control**: Track changes to your knowledge bases, especially for critical information
+3. **Usage Analytics**: Monitor how your agents use knowledge to identify gaps or improvement opportunities
+4. **Feedback Integration**: Create processes to incorporate user feedback into your knowledge bases
+5. **Documentation**: Maintain clear documentation about your knowledge structure and organization
+6. **Quality Control**: Implement validation processes for new knowledge entries
+7. **Scalable Structure**: Design your knowledge organization to accommodate growth
+
+## Related Features
+
+- [Access Knowledge](https://relevanceai.com/docs/knowledge/access-knowledge): Learn how to configure how your agents and tools access and use your knowledge bases.
+- [Enrich with Tool](https://relevanceai.com/docs/knowledge/enrich-with-tool): Discover how to enhance your knowledge bases with additional context using tools.
+- [Advanced Knowledge Retrieval](https://relevanceai.com/docs/knowledge/advanced-knowledge-retrieval): Explore advanced techniques for optimizing how your agents retrieve and use knowledge.
