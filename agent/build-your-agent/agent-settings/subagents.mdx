@@ -3,51 +3,85 @@ title: 'Subagents'
 sidebarTitle: 'Subagents'
 ---
 
-Sometimes one agent isn't enough to handle complex tasks, and that's where subagents come in. Subagents are specialized agents that work under a main 'manager' agent, creating a hierarchical structure that allows for more sophisticated and diverse task handling. This feature in Relevance enables you to build advanced multi-agent systems, mimicking the structure of human teams.
+## Sub-Agent Settings
 
+### Approval Mode
 
-## Why use subagents?
+Choose how your parent Agent gets permission to use this Sub-agent:
 
-**Specialization:** Just as human teams have members with different expertise, subagents can be designed to excel in specific domains or tasks. For example, you might have one subagent specialized in data analysis, another in customer communication, and a third in scheduling.
+* **Auto Run**: The Sub-agent runs automatically whenever needed, with no interruptions
+* **Approval Required**: You'll be asked for permission each time before the Sub-agent runs
 
-**Scalability:** Complex workflows can be broken down into manageable parts, each handled by a different subagent. This modular approach allows you to tackle intricate processes more efficiently and makes it easier to scale your AI operations as needs grow.
+**When to use each option:**
+* Choose **Auto Run** for routine, low-risk tasks you're comfortable automating completely
+* Choose **Approval Required** when you need oversight for sensitive operations or actions with significant impact
 
-**Flexibility:** By combining different subagents, you can create versatile AI systems capable of handling a wide range of tasks without the need to build a single, overly complex agent.
+### Max Auto-runs Before Approval
 
-### How to set up subagents
+Set a limit on consecutive automatic runs before requiring your approval:
 
-Navigate to the "Subagents" section in your main agent's settings. This is where you'll manage your AI team.
+* **No limit**: The Sub-agent can run as many times as needed without stopping for approval
+* **Custom number**: After reaching this number of runs within one task, the system will pause and ask for your permission
 
-Click "Add Subagent" to select from existing agents. You can choose agents you've already created or build new ones specifically for this purpose.
+This setting helps you maintain control over resource usage and repetitive actions while still allowing automation where appropriate.
 
-For each subagent, you have three options for how your manager agent interacts with them:
+### Error Handling Behavior
 
-**Autorun:** The subagent is automatically activated when needed, without requiring approval.
+Decide how errors should be managed when they occur:
 
-**Approval required:** The manager agent must get permission before activating the subagent.
+* **Use Default Settings**: Follow your workspace's standard error handling rules
+* **Use Custom Settings**: Create specific error handling instructions just for this Sub-agent
 
-**Let agent decide:** The manager agent uses its judgment to determine whether to autorun or seek approval.
+Custom settings are particularly useful when a Sub-agent needs special treatment for retries, escalations, or alternative workflows when something goes wrong.
 
-These options allow you to balance autonomy and control in your multi-agent system.
+## Communication Settings
 
-When adding subagents, consider the following best practices:
+### Usage Instructions
 
-- Clearly define the role and responsibilities of each subagent.
-- Ensure efficient communication protocols between the manager agent and subagents.
-- Regularly review and optimize your agent hierarchy to improve overall performance.
+Write clear directions for when and how the parent Agent should use this Sub-agent:
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '61.46%',
-  }}>
-  <iframe
-    src="https://fast.wistia.com/embed/medias/r6sl28mi95"
-    frameBorder="0"
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      borderRadius: '10px',
-    }}/>
-</div>
+```
+Example: "Use this Research Sub-agent whenever you need to gather competitive information or market data. Provide specific search terms and the type of information needed."
+```
+
+Good instructions ensure the parent Agent knows exactly when to call on this Sub-agent and what information to provide.
+
+### Message Template
+
+Create a standardized format for requests sent to the Sub-agent:
+
+```
+Example: "Please research {{topic}} and focus on {{specific_aspect}}. The information will be used for {{purpose}}."
+```
+
+Variables like `{{topic}}` will be filled in by the parent Agent when making requests. This creates consistency and ensures all necessary context is included with each request.
+
+## Task View Settings
+
+### View Title
+
+Name your custom dashboard view with a clear, descriptive title:
+
+```
+Examples: "Customer Support Interactions" or "Document Processing Tasks"
+```
+
+A good title helps you quickly identify and switch between different monitoring views.
+
+### Information to Include
+
+Select which tools or actions you want to track in this view:
+
+* Search for specific tools (like "Send Email" or "Generate Report")
+* Only tasks using these selected tools will appear in this view
+* This filtering helps you focus on the specific workflows you need to monitor
+
+**Pro tip:** Create separate views for different workflows to avoid information overload and make monitoring more efficient.
+
+## Why Task Views Matter
+
+Task Views help you organize and monitor complex Agent workflows by:
+* Separating different types of work into focused dashboards
+* Reducing noise from unrelated activities
+* Making it easier to track progress on specific processes
+* Allowing different team members to monitor the aspects most relevant to them

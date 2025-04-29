@@ -3,37 +3,152 @@ title: 'Triggers'
 sidebarTitle: 'Triggers'
 ---
 
-## Understand triggers
+### Integrations
 
-Triggers are ways to initiate an agent's task. Relevance AI offers several ways to activate your agent:
+Connect your agent to the tools and platforms it needs to access to perform its tasks effectively. These integrations might include:
 
-Manual Trigger: send a message to your agent via the Relevance AI interface.
-Integration Triggers: select from one of our prebuilt integrations triggers.
-Webhook Trigger: handle incoming webhooks to trigger your agent.
-API Trigger: programmatically initiate tasks using the Relevance AI API.
+- Email services for communication
+- CRM systems for customer data
+- Knowledge bases for information retrieval
+- Custom APIs for specialized functions
 
-## Set up triggers
+Select only the integrations that are relevant to your agent's purpose to maintain focus and efficiency.
 
-In the left side bar, click **Integrations**. Here, you'll see a list of options to connect. Once you've added an account to your chosen integration, head back to your agent's edit interface.
+### Triggers
 
-In **Agent profile** under the **Integrations** section, you'll find available triggers. Select the one you need, and configure the the trigger settings.
+Define how and when your agent will be activated:
 
-You'll be able to customize how and when your agent processes events from this trigger to align with your work habits.
+- **Scheduled Events**: Set your agent to run at specific times or intervals
+- **External Actions**: Configure your agent to respond to specific events or inputs
+- **Manual Activation**: Allow users to directly engage with the agent when needed
 
-While Relevance has many built in triggers, if you don't see the third party service you want to use in our list of options, you can try using custom webhook, Zapier or API to build your own trigger.
+Properly configured triggers ensure your agent works autonomously when needed while respecting operational boundaries.
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '61.46%',
-  }}>
-  <iframe
-    src="https://fast.wistia.com/embed/medias/vv6pgbgdhv"
-    frameBorder="0"
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      borderRadius: '10px',
-    }}/>
-</div>
+## Overview
+
+Triggers are ways to initiate an agent’s task. Relevance AI offers several ways to activate your agent: Why should you use a trigger? 
+
+### A Simple Example
+
+Let’s say you setup a Gmail trigger: Your agent can now listen to any new email from your Gmail email that’s connected. You can now talk to your Agent and ask if it’s seen any emails from a specific person, or you can say ask it something useful. Congratulations, you now have created an executive assistant by reading your emails and sending you an hourly update as to what’s important. “But, How?!” Well, remember the “Prompt” screen allows you to give the agent instructions for how to handle your emails - if creating an EA that does everything for you.
+
+### Triggers you can Connect to
+- Triggers you can currently with your Agent
+  1.![Outlook](integrations/agent-integrations/outlook.mdx)
+  2. Gmail
+  3. Google Calendar
+  4. Hubspot
+  5. Freshdesk
+  6. Salesforce
+  7. Zoominfo
+  8. Relevance Meeting Bot
+  9. WhatsApp for Business
+  10. Recurring Schedule
+- Premium Triggers
+  1. LinkedIn
+  2. Telegram
+  3. WhatsApp
+- Build your own triggers
+  1. Webhook
+  2. Zapier
+  3. API
+
+## How to use Triggers
+
+In the left side bar, click **Integrations**. Here, you’ll see a list of options to connect. Once you’ve added an account to your chosen integration, head back to your agent’s edit interface.
+
+In **Agent profile** under the **Integrations** section, you’ll find available triggers. Select the one you need, and configure the the trigger settings.
+
+You’ll be able to customize how and when your agent processes events from this trigger to align with your work habits.
+
+While Relevance has many built in triggers, if you don’t see the third party service you want to use in our list of options, you can try using custom Webhook, Zapier or API to build your own trigger.
+
+---
+
+# Scheduled Messages
+
+### What are Scheduled Messages?
+
+Scheduled Messages let your AI agents send messages in the future without you having to do anything. Instead of just responding when someone talks to them, your agents can now reach out at specific times you choose.
+
+With the latest update, you can easily edit or reschedule these messages directly in Task View - no need to start over if plans change!
+
+### Why Use Scheduled Messages?
+
+Your agents can now:
+
+- Send follow-ups automatically (like "How did that meeting go?")
+- Set reminders for deadlines or events
+- Create step-by-step communication sequences
+- Send information exactly when it's needed
+- Stay in touch with people across different time zones
+
+### Setting Up Scheduled Messages
+
+It's easy to get started:
+
+1. Go to your agent's settings
+2. Look for the **Abilities** section
+3. Turn on the **Scheduled messages** toggle
+4. Add instructions in your agent's core instructions about when to schedule messages
+
+Once turned on, your agent will understand time-based requests like "send a follow-up tomorrow at 9 AM" or "remind me about this next Tuesday."
+
+## Making the Most of Scheduled Messages
+
+### In Your Agent's Instructions
+
+Tell your agent when to schedule messages by adding instructions like:
+
+```
+When someone asks about upcoming events, schedule a reminder 24 hours before each event.
+
+If someone has a deadline, schedule a check-in halfway to the deadline.
+
+For multi-step processes, schedule messages at each milestone to keep people on track.
+
+```
+
+### During Conversations
+
+Your agent can understand scheduling requests in normal conversation:
+
+- "Can you remind me about this tomorrow morning?"
+- "Please send me a summary next week"
+- "Check in on my progress on Friday"
+
+## Editing Your Scheduled Messages
+
+The newest feature makes managing scheduled messages much easier:
+
+### How to Make Changes
+
+1. Go to Task View in your agent interface
+2. Find the message you want to change
+3. Edit the content or timing
+4. Save your changes
+
+This means you don't have to delete and recreate messages - just edit them directly!
+
+### Benefits of This Update
+
+- **Fix Content**: Update what the message says anytime before it's sent
+- **Change Timing**: Easily move the send time if plans change
+- **Save Time**: Make all changes in one place
+- **Prevent Mistakes**: Fix any errors before messages go out
+
+## Related Features
+
+[Bulk Scheduling](https://relevanceai.com/docs/agent/customise-agent/bulk-schedule) - Set up multiple scheduled tasks at once for larger communication plans.
+
+[Task Template](https://relevanceai.com/docs/agent/customise-agent/task-template) - Create reusable templates for common scheduled messages.
+
+## Tips for Success
+
+1. **Be clear about timing**: "Tomorrow at 3 PM EST" is better than just "tomorrow"
+2. **Remember time zones**: Specify which time zone you're using
+3. **Review before sending**: Use the edit feature to check scheduled messages
+4. **Create message sequences**: Schedule related messages for complex processes
+5. **Track results**: See which scheduled times get the best response
+
+Scheduled Messages turns your AI agents into proactive helpers that can reach out at exactly the right moment - without you having to remember to do it yourself!

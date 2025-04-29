@@ -1,0 +1,99 @@
+---
+title: 'Escalate to Slack or Email'
+sidebarTitle: 'Escalations'
+---
+
+
+## Notifications
+
+If your Agent ever gets stuck or needs a decision it can’t make on its own, you can set up notifications to stay in the loop. Add your email address or connect a Slack channel, and the Agent will ping you when something needs human attention. This is especially helpful for Agents handling critical tasks where you don't want silent failures.
+
+## Connect to Email
+
+
+## Connect to Slack
+
+### How It Works
+
+When your AI agent encounters a question it can't confidently answer, it automatically sends the query to your designated Slack channels. Your team members can then quickly jump in to provide expert assistance without disrupting the customer experience.
+
+### Key Benefits
+
+### Real-Time Team Alerts
+
+Your team receives instant Slack notifications when the AI needs human expertise, ensuring urgent customer needs are addressed promptly.
+
+### One-Click Response
+
+Team members can join the conversation directly from Slack with a single click—no need to navigate through multiple systems.
+
+### Continuous Learning
+
+Human responses are stored to improve your AI's knowledge base, creating a cycle where each human intervention makes your AI smarter.
+
+### Custom Routing
+
+Direct different types of questions to specific Slack channels based on expertise (technical support, billing, product features, etc.).
+
+### Seamless Customer Experience
+
+Customers enjoy a smooth conversation flow even when human expertise is needed—the transition happens behind the scenes.
+
+### Setting Up Slack Escalation
+
+1. Go to Integration Settings in your Relevance AI dashboard
+2. Select "Slack" from the menu
+3. Connect your Slack workspace (if not already connected)
+4. Open your agent, click "Edit agent", then under "Tools" choose "Send Message to Slack Channel"
+5. Select the Slack account authorized to post to your channel
+6. Save your settings
+
+### Best Practices
+
+- **Channel Organization**: Create dedicated Slack channels for different types of questions
+- **Response Templates**: Develop standardized responses for common scenarios
+- **Escalation Thresholds**: Fine-tune when your AI should escalate questions
+- **Knowledge Integration**: Regularly review escalated queries to identify and fill knowledge gaps
+- **Team Training**: Ensure your team understands how to effectively respond to escalations
+
+### Common Use Cases
+
+- Complex technical support issues requiring specialized knowledge
+- Sensitive customer service situations needing human empathy
+- Detailed product feedback that should reach product managers
+- High-value sales opportunities requiring personalized attention
+
+### Related Features
+
+[Agent Customization](https://relevanceai.com/docs/agent/customise-agent/core-instructions) - Learn how to optimize when and how escalations occur.
+
+[Knowledge Management](https://relevanceai.com/docs/knowledge/create-knowledge) - Build your knowledge base to reduce escalation needs over time.
+---
+
+### Tool Approvals
+
+Sometimes, you might want the Agent to double-check with you before it runs certain tools — especially if they involve sensitive actions like sending emails or updating databases. Turning on Tool Approvals lets the Agent pause, explain what it plans to do, and ask for your OK before moving forward. It's a simple way to keep oversight without slowing everything down unnecessarily.
+
+---
+
+### Default Fail Behavior
+
+---
+
+#### Always Retry Errored Tool/Subagent
+
+Some failures are just bad luck — like a tool timing out or a service being briefly unavailable. By turning this setting on, you’re telling the Agent to automatically retry failed actions a few times before giving up. If you leave it off, the Agent will decide on its own whether it's worth retrying. For most users, enabling retries is a safe way to handle occasional hiccups without manual intervention.
+
+---
+
+#### Maximum Number of Tools/Subagents Retries
+
+This setting controls how many times the Agent will retry a failed tool before calling it quits. A few retries (like 3) usually strikes a good balance — it gives your Agent a second chance without risking long loops or extra costs. You can raise or lower the number depending on how critical task success is for you.
+
+---
+
+#### Behavior After Max Tool/Subagent Retries
+
+Once the Agent hits the maximum retries and still can’t succeed, you decide what happens next: either **Terminate the Task** immediately or (if available) **Escalate** it to a human for help. Terminating is faster and simpler, but escalation gives you a chance to fix things manually when it matters most.
+
+---
