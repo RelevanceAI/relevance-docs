@@ -7,6 +7,11 @@ sidebarTitle: 'Tools'
 
 Tools enable your agent to go beyond simple conversation by performing actions such as searching the web, accessing databases, sending emails, or interacting with other systems. When properly configured, tools transform your agent from a conversational interface into a powerful digital assistant that can take meaningful actions on behalf of users.
 
+<img 
+  height="200"  
+  src="/images/agent/agent-tools.png" 
+/>
+
 ## Adding Tools to Your Agent
 
 In the edit agent interface, navigate to the **Tools** section to begin enhancing your agent's capabilities:
@@ -17,36 +22,36 @@ In the edit agent interface, navigate to the **Tools** section to begin enhancin
 
 ## Tool Usage Configuration Options
 
-When adding tools to your agent, you can choose from three different usage modes:
+<img 
+  height="200"  
+  src="/images/agent/tool-configuration.png" 
+/>
 
-### Auto Run
-
-With this setting, the tool runs automatically whenever the agent determines it should be used. This provides the smoothest user experience as the agent can seamlessly incorporate tool functionality without interrupting the conversation flow.
-
-**Best for:** Tools that are low-risk, frequently used, or where immediate action is beneficial.
-
-### Approval Required
-
-In this mode, the agent will ask for explicit permission before using the tool. When the agent determines a tool would be helpful, it will first explain what it wants to do and why, then wait for user confirmation before proceeding.
-
-**Best for:** Tools that perform sensitive actions, have potential costs associated with them, or where user oversight is important.
+When adding tools to your agent, you can choose from two different usage modes:
 
 ### Let Agent Decide
 
-This balanced approach gives your agent the flexibility to determine when approval is necessary based on context. The agent will use its judgment about when to ask for permission versus when to proceed automatically.
+This balanced approach gives your agent the flexibility to determine how the tool is used based on context. The agent will use its judgement about what inputs to give your tools.
 
-**Best for:** A mix of tool types where you want to balance convenience with appropriate caution.
+**Best for:** A mix of tool types where you want to get things up and running quickly.
+
+### Set Manually  
+This option allows you to explicitly specify the inputs for each tool or action. You have full control over which settings are used for your tools.
+
+**Best for**: Scenarios where strict oversight or compliance is needed, and you want to minimize any ambiguity in approval processes.
+
+
+
 
 ## Guiding Your Agent's Tool Usage
 
 For optimal results, provide your agent with clear guidance about how and when to use its tools:
 
-1. **Core Instructions**: Include specific directions about tool usage in your agent's core instructions. For example:
+ **Core Instructions**: Include specific directions about tool usage in your agent's core instructions. For example:
    - When to prioritize certain tools over others
    - How to interpret and present tool results
    - What circumstances warrant tool use versus simple conversation
 
-2. **Flow Builder**: Use the Flow Builder to create structured decision paths that incorporate tool usage at appropriate points in conversations.
 
 ## Best Practices for Tool Implementation
 
@@ -55,26 +60,6 @@ For optimal results, provide your agent with clear guidance about how and when t
 - **Monitor Usage**: Review how your agent is using tools in real conversations to identify opportunities for improvement
 - **Refine Gradually**: Adjust tool configurations and instructions based on actual usage patterns
 - **Combine Tools Strategically**: Create powerful workflows by combining multiple tools in sequence
-
-## Video Tutorial
-
-The following video demonstrates how to add and configure tools for your agent:
-
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '61.46%',
-  }}>
-  <iframe
-    src="https://fast.wistia.com/embed/medias/wljsikc7w4"
-    frameBorder="0"
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      borderRadius: '10px',
-    }}/>
-</div>
 
 
 ## Common Tool Categories
