@@ -1,0 +1,84 @@
+---
+title: 'Escalate to Slack or Email'
+sidebarTitle: 'Escalations'
+---
+
+<img 
+  height="200"  
+  src="/images/agent/escalations.png" 
+/>
+
+## Notifications
+
+If your Agent ever gets stuck or needs a decision it can’t make on its own, you can set up notifications to stay in the loop. Add your email address or connect a Slack channel, and the Agent will ping you when something needs human attention. This is especially helpful for Agents handling critical tasks where you don't want silent failures.
+
+
+### Key Benefits
+
+### Real-Time Team Alerts
+
+Your team receives instant Slack notifications when the AI needs human expertise, ensuring urgent customer needs are addressed promptly.
+
+
+### Seamless Customer Experience
+
+Customers enjoy a smooth conversation flow even when human expertise is needed—the transition happens behind the scenes.
+
+
+### Common Use Cases
+
+- Complex technical support issues requiring specialized knowledge
+- Sensitive customer service situations needing human empathy
+- Detailed product feedback that should reach product managers
+- High-value sales opportunities requiring personalized attention
+
+### Escalate to manager
+
+<img 
+  height="200"  
+  src="/images/agent/escalate.png" 
+/>
+
+The Escalate to Manager feature will add a tool into your agent. You can configure your tool by adding it into your prompt with the "/" command and clicking on it.
+
+## Tool Approvals
+
+### Auto Run
+ 
+ With this setting, the tool runs automatically whenever the agent determines it should be used. This provides the smoothest user experience as the agent can seamlessly incorporate tool functionality without interrupting the conversation flow.
+ 
+ **Best for:** Tools that are low-risk, frequently used, or where immediate action is beneficial.
+ 
+ ### Approval Required
+ 
+ In this mode, the agent will ask for explicit permission before using the tool. When the agent determines a tool would be helpful, it will first explain what it wants to do and why, then wait for user confirmation before proceeding.
+ 
+ **Best for:** Tools that perform sensitive actions, have potential costs associated with them, or where user oversight is important.
+ 
+ ### Let Agent Decide
+ 
+ This balanced approach gives your agent the flexibility to determine when approval is necessary based on context. The agent will use its judgment about when to ask for permission versus when to proceed automatically.
+ 
+ **Best for:** A mix of tool types where you want to balance convenience with appropriate caution.
+ 
+
+## Behavior if Tool Errors
+---
+### Use Custom Settings
+#### Always Retry Errored Tool/Subagent
+
+Some failures are just bad luck — like a tool timing out or a service being briefly unavailable. By turning this setting on, you’re telling the Agent to automatically retry failed actions a few times before giving up. If you leave it off, the Agent will decide on its own whether it's worth retrying. For most users, enabling retries is a safe way to handle occasional hiccups without manual intervention.
+
+---
+
+#### Maximum Number of Tools/Subagents Retries
+
+This setting controls how many times the Agent will retry a failed tool before calling it quits. A few retries (like 3) usually strikes a good balance — it gives your Agent a second chance without risking long loops or extra costs. You can raise or lower the number depending on how critical task success is for you.
+
+---
+
+#### Behavior After Max Tool/Subagent Retries
+
+Once the Agent hits the maximum retries and still can’t succeed, you decide what happens next: either **Terminate the Task** immediately or (if available) **Escalate** it to a human for help. Terminating is faster and simpler, but escalation gives you a chance to fix things manually when it matters most.
+
+---

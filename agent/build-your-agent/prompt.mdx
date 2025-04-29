@@ -1,0 +1,181 @@
+---
+title: 'Prompt'
+sidebarTitle: 'Prompt'
+description: 'Crafting a prompt to instruct your Agent'
+---
+
+<img 
+  height="200"  
+  src="/images/agent/agent-build-page.png" 
+/>
+
+### Overview
+
+The prompt is the core set of instructions that your agent follows every time it works on a task. Think of it like the instructions you'd provide to an employee about how they should work. You might tell them about their responsibilities and expectations, rules and guidelines, common processes and ways to communicate (do's and don'ts).
+
+---
+
+## Agent Profile
+
+<img 
+  height="200"  
+  src="/images/agent/agent-profile-zoomed.png" 
+/>
+
+### Agent Name
+
+Your agent's name serves as its identity throughout the platform. Choose a name that:
+
+- Clearly reflects the agent's purpose or role
+- Is memorable and easy to reference
+- Distinguishes it from other agents in your workspace
+
+For example, "Sales Qualification Assistant" immediately communicates the agent's function, while "ResponseBot" might be too vague.
+
+<Tip>Fun fact: We like to give our Agents names — for example, **Samuel, the Sales Qualification Assistant.**</Tip>
+
+### Agent Summary
+
+The summary is a descriptive explanation of what your agent does and its area of expertise. This information:
+
+- Guides the agent's behavior and responses
+- Sets expectations for users (you) interacting with the agent
+- Helps the underlying AI model understand its purpose
+
+---
+
+## Model Selection
+
+Choosing the right model powers how your Agent thinks, responds, and performs tasks. You can either let Relevance AI automatically optimize the model for you, or manually choose a specific provider and model type.
+
+### Pick For Me
+Relevance AI automatically selects the best model for your Agent based on performance or cost, no action needed. You're more than welcome to choose the model the suits your Agent's needs.
+
+<CardGroup cols={2}>
+  <Card title="Cost-optimized">
+    Prioritizes cheaper models if you want to minimize token costs/credit costs. (e.g., GPT 4o mini - or whichever model is cheaper at the time)
+  </Card>
+  <Card title="Peformance-optimized">
+  Prioritizes the best-performing model available for quality responses (e.g., Claude v3.5 Sonnet - or whichever is more performant at the time).
+  </Card>
+</CardGroup>
+
+### Choose Your Own Model
+You can manually choose from different model families depending on your needs. Each option charges based on your Relevance AI credits per 1,000 tokens — tokens are pieces of text (words/characters) your Agent processes when sending and receiving messages. See each option in the dropdown for current credit/token costs.
+
+1. More credits = more complex, detailed tasks.
+2. Fewer credits = cheaper, lighter interactions.
+
+<AccordionGroup>
+  <Accordion title="OpenAI Models">
+    Advanced conversational abilities, creative writing, and broad general knowledge.
+    Good for: Versatile agents, customer support, brainstorming.
+    Cost: Credits charged per 1,000 tokens used for prompts + replies.
+  </Accordion>
+
+  <Accordion title="Anthropic's Claude Models">
+    Focused on safe, reliable, and ethical AI responses. Often better at reasoning and "thoughtful" tasks.
+    Good for: Detailed explanations, structured outputs, sensitive industries.
+    Cost: Credits charged per 1,000 tokens processed.
+  </Accordion>
+
+  <Accordion title="Azure OpenAI Models">
+    Custom deployments hosted on Azure with higher context limits — ideal for large and detailed inputs.
+    Good for: Enterprises needing private deployment, security, or very large tasks.
+    Cost: Credits charged per 1,000 tokens sent or received.
+  </Accordion>
+  
+  <Accordion title="Google's Gemini Models">
+    Strong coding ability and task complexity handling (especially Google Gemini 2.5 models).
+    Good for: Software development agents, complex task execution.
+    Cost: Credits charged per 1,000 tokens processed.
+  </Accordion>
+
+  <Accordion title="OpenRouter Models">
+    Unified access point to a wide variety of open models like Meta’s LLaMA family, Google Gemini models, and others.
+    Good for: Exploring experimental or emerging models.
+    Cost: Credits charged per 1,000 tokens used, depending on selected model. [Create an OpenRouter account here](https://openrouter.ai/)
+  </Accordion>
+</AccordionGroup>
+
+<Tip>If you're choosing a specific model, we recommend doing a quick search up the model to qualify the best fit for your use case. [Search model comparisons here](https://artificialanalysis.ai/models/) </Tip>
+
+---
+
+## Prompt instructions
+
+<img 
+  height="200"  
+  src="/images/agent/prompt-instructions.png" 
+/>
+
+### Invent a Prompt
+
+<img 
+  height="200"  
+  src="/images/agent/invent-prompt.png" 
+/>
+
+Use the **Invent** feature to automatically generate a smart, structured prompt based on a few words you provide. Perfect for getting started quickly if you're not sure how to write detailed instructions.
+
+
+### Write Your Own Prompt
+
+You can also manually type your prompt from scratch if you want full control over how your Agent behaves and what tasks it focuses on. Clear, specific prompts produce the best results.
+
+
+### Reference Tools in Your Prompt
+
+While writing your instructions, you can reference specific Tools (e.g., "Use the **Extract Text from PDF** tool to pull invoice data."). This lets the Agent know exactly _which_ tools to use when completing tasks.
+
+### Use the Slash ( / ) Menu
+
+<img 
+  height="200"  
+  src="/images/agent/slash-menu.png" 
+/>
+
+Type **/** to open the Slash menu and quickly insert shortcuts like:
+- Referencing available Tools
+- Adding Tool Placeholders
+- Adding Markdown Styles for your Prompt
+
+This speeds up writing structured and action-driven prompts.
+
+### Create or Invent New Tools from the Slash Menu
+
+If you insert a **Tool Placeholder** using the Slash menu, you can immediately **Invent** a new tool or **create one manually** — no need to leave the prompt!  
+(Note: Currently, Invented Tools will still need to be customized in the separate **Tool Builder** section)
+
+---
+
+## Connect Tools Conveniently
+
+### Add Tools to Your Agent
+
+Tools allow your Agent to perform real-world actions like searching the web, sending emails, extracting data, or connecting with other systems — expanding your Agent’s capabilities far beyond simple conversation.
+
+When writing your Prompt, you can reference specific Tools directly to guide how your Agent should complete tasks. You can also insert Tool Placeholders to invent new tools or connect existing ones as needed.
+
+For a full guide on adding, configuring, and best practices for using Agent Tools, check out the [Tools article](agent/build-your-agent/tools.mdx).
+
+
+## FAQs
+
+<AccordionGroup>
+  <Accordion title="Do I need coding knowledge to use Invent?">
+    No, Invent is specifically designed to make agent creation accessible to users without technical expertise. You only need to describe what you want your agent to do in plain English.
+  </Accordion>
+
+  <Accordion title="Can I modify the agent after it's been created with Invent?">
+    Yes, the agent blueprint generated by Invent is fully customizable. You can adjust any aspect of the configuration, instructions, or tools to better suit your needs.
+  </Accordion>
+
+  <Accordion title="What types of agents can I create with Invent?">
+    Invent is flexible and can help you create a wide variety of agents, from customer support assistants to research tools, data analysts, and more. The possibilities are limited only by your imagination and the capabilities of the underlying AI models.
+  </Accordion>
+  
+  <Accordion title="How does Invent compare to using agent templates?">
+    While templates provide pre-configured agents for specific use cases, Invent creates custom agent blueprints based on your unique description. Templates are ideal when your needs align with existing patterns, while Invent offers more flexibility for novel or specialized requirements.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,85 @@
+---
+title: 'Bulk scheduling'
+sidebarTitle: 'Bulk scheduling'
+description: 'For Team Plan Users and above'
+---
+
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '61.46%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cma23sbtv21fs13m0ux9tdj8n?embed_v=2"
+    frameBorder="0"
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+Bulk Scheduling is a feature available to Team Plus users on the Relevance AI platform. This functionality allows you to set up and schedule multiple tasks for your agent to run automatically.
+
+## How to access bulk scheduling
+
+1. Navigate to your agent's interface.
+
+2. Look for the dropdown menu next to the `+ New Task` button.
+
+3. Select `Schedule in bulk` from the options.
+
+## Setting up a batch schedule
+
+When setting up a batch schedule, you'll need to:
+
+1. Select the knowledge table that contains the data you want your agent to process.
+
+2. Name your batch job.
+
+
+## Using the agent message template
+
+The Agent Message template is where you define how your agent should interact with each entry in your knowledge table. This is done using a templating system that allows you to dynamically insert values from your table into the agent's instructions.
+
+**Key points:**
+
+- Double Brace Syntax: to insert values from your table, use double braces around the column name.
+
+- Column Names: you can use any column from your selected knowledge table.
+
+- Example Usage: if you have a column named "company" in your table, you could create a template like this: "Please analyze the performance of company based on the provided data."
+
+## Using the cadence contract
+
+A key feature of bulk scheduling is the cadence contract, which allows you to fine-tune how and when tasks are distributed. This ensures that your automated workflows align perfectly with your team's schedule and work patterns.
+
+**Key components:**
+
+- Timezone: Select your preferred timezone to ensure tasks are scheduled according to your local time, for example: Australia - Sydney.
+
+- Work Days: Specify which days of the week tasks should be scheduled.
+
+- Work Hours: Set the time range during which tasks should be executed. You also have the option to select "All day" for 24/7 task execution.
+
+- Task Distribution: Define the number of tasks to be sent per interval. For example, set a specific number of tasks per day. The actual number of tasks your agent can execute may vary due to factors like conflicting contract conditions and rate limiting.
+
+- Override Mode: This give you the option to run all created tasks in override mode, which can be useful for testing or when you need to maintain specific inputs/outputs across all tasks.
+
+### Best practices for cadence contract
+
+- Align with team availability: Set work days and hours that match your team's actual working schedule to ensure timely handling of task outputs.
+
+- Consider task complexity: Adjust the number of tasks per interval based on the complexity of each task and your team's capacity.
+
+- Start conservative: Begin with a lower number of tasks per interval and gradually increase as you assess your team's capacity and the agent's performance.
+
+
+**In summary**
+
+Once you've configured the cadence contract, hit `Schedule`.
+
+You can check which bulk schedules you have set up by navigating to the three dots in the top right corner of your agent chat interface and selecting “Bulk schedules”.
+

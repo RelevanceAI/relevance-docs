@@ -1,0 +1,54 @@
+---
+title: 'Zapier'
+description: 'Connect to a Zapier Trigger'
+sidebarTitle: 'Zapier Trigger'
+---
+
+## Webhook Triggers
+
+Webhook triggers enable you to initiate agent tasks through HTTP requests from external systems. This powerful integration method allows you to connect virtually any third-party service to your Relevance AI agents without requiring native support.
+
+### Key Features
+
+- **Custom Webhook URLs**: Each webhook trigger provides a unique URL that receives incoming requests and activates your agent.
+- **Flexible Payload Formatting**: You have complete control over how incoming data is processed. Use template variables with double brackets (e.g., `{{first_name}}`) to personalize messages or include the entire payload with `{{$}}`.
+- **Thread ID Mapping**: For continuous conversations, map a specific field from your payload to serve as a Thread ID. This ensures new information is added to the same agent conversation, perfect for chatbot implementations.
+- **Duplicate Prevention**: Map a Unique ID field to prevent processing the same event multiple times, ensuring data integrity and avoiding redundant operations.
+
+### Setting Up a Webhook Trigger
+
+1. Navigate to your agent's settings and select the Triggers section
+2. Choose "Webhook Trigger" from the available options
+3. Configure your webhook settings:
+    - Customize the message template using variable placeholders
+    - Map Thread ID and Unique ID fields as needed
+    - Copy your unique webhook URL for integration with external systems
+
+### Implementation Examples
+
+Webhook triggers can be used for various automation scenarios:
+
+- Trigger customer support responses when new tickets are created
+- Process form submissions from your website
+- Respond to events from third-party platforms
+- Create automated workflows between different systems
+
+## Related Features
+
+[Core Instructions](https://relevanceai.com/docs/agent/customise-agent/core-instructions) - Define how your agent should process and respond to webhook triggers by setting up comprehensive instructions that guide its behavior when receiving external data.
+
+[Flow Builder](https://relevanceai.com/docs/agent/customise-agent/flowbuilder) - Create sophisticated workflows that can be initiated by webhook triggers, allowing for complex multi-step processes that combine different tools and decision points.
+
+## FAQs
+
+**Q: Can I use webhook triggers with any external system?**
+
+A: Yes, any system capable of sending HTTP requests can integrate with Relevance AI's webhook triggers, making them extremely versatile for various integration scenarios.
+
+**Q: How secure are webhook triggers?**
+
+A: Webhook triggers use unique URLs that are difficult to guess. For additional security, you can implement Unique ID mapping to prevent duplicate processing and validate incoming requests.
+
+**Q: What happens if the same webhook is triggered multiple times?**
+
+A: By mapping a Unique ID field, you can prevent duplicate processing. If an event with the same Unique ID is received again, it will be ignored, ensuring data integrity.
