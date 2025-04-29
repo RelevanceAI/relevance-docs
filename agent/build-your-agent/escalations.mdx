@@ -3,19 +3,15 @@ title: 'Escalate to Slack or Email'
 sidebarTitle: 'Escalations'
 ---
 
+<img 
+  height="200"  
+  src="/images/agent/escalations.png" 
+/>
 
 ## Notifications
 
 If your Agent ever gets stuck or needs a decision it can’t make on its own, you can set up notifications to stay in the loop. Add your email address or connect a Slack channel, and the Agent will ping you when something needs human attention. This is especially helpful for Agents handling critical tasks where you don't want silent failures.
 
-## Connect to Email
-
-
-## Connect to Slack
-
-### How It Works
-
-When your AI agent encounters a question it can't confidently answer, it automatically sends the query to your designated Slack channels. Your team members can then quickly jump in to provide expert assistance without disrupting the customer experience.
 
 ### Key Benefits
 
@@ -23,38 +19,11 @@ When your AI agent encounters a question it can't confidently answer, it automat
 
 Your team receives instant Slack notifications when the AI needs human expertise, ensuring urgent customer needs are addressed promptly.
 
-### One-Click Response
-
-Team members can join the conversation directly from Slack with a single click—no need to navigate through multiple systems.
-
-### Continuous Learning
-
-Human responses are stored to improve your AI's knowledge base, creating a cycle where each human intervention makes your AI smarter.
-
-### Custom Routing
-
-Direct different types of questions to specific Slack channels based on expertise (technical support, billing, product features, etc.).
 
 ### Seamless Customer Experience
 
 Customers enjoy a smooth conversation flow even when human expertise is needed—the transition happens behind the scenes.
 
-### Setting Up Slack Escalation
-
-1. Go to Integration Settings in your Relevance AI dashboard
-2. Select "Slack" from the menu
-3. Connect your Slack workspace (if not already connected)
-4. Open your agent, click "Edit agent", then under "Tools" choose "Send Message to Slack Channel"
-5. Select the Slack account authorized to post to your channel
-6. Save your settings
-
-### Best Practices
-
-- **Channel Organization**: Create dedicated Slack channels for different types of questions
-- **Response Templates**: Develop standardized responses for common scenarios
-- **Escalation Thresholds**: Fine-tune when your AI should escalate questions
-- **Knowledge Integration**: Regularly review escalated queries to identify and fill knowledge gaps
-- **Team Training**: Ensure your team understands how to effectively respond to escalations
 
 ### Common Use Cases
 
@@ -63,18 +32,36 @@ Customers enjoy a smooth conversation flow even when human expertise is needed�
 - Detailed product feedback that should reach product managers
 - High-value sales opportunities requiring personalized attention
 
-### Related Features
+### Escalate to manager
 
-[Agent Customization](https://relevanceai.com/docs/agent/customise-agent/core-instructions) - Learn how to optimize when and how escalations occur.
+<img 
+  height="200"  
+  src="/images/agent/escalate.png" 
+/>
 
-[Knowledge Management](https://relevanceai.com/docs/knowledge/create-knowledge) - Build your knowledge base to reduce escalation needs over time.
----
+The Escalate to Manager feature will add a tool into your agent. You can configure your tool by adding it into your prompt with the "/" command and clicking on it.
 
-### Tool Approvals
+## Tool Approvals
 
-Sometimes, you might want the Agent to double-check with you before it runs certain tools — especially if they involve sensitive actions like sending emails or updating databases. Turning on Tool Approvals lets the Agent pause, explain what it plans to do, and ask for your OK before moving forward. It's a simple way to keep oversight without slowing everything down unnecessarily.
+### Auto Run
+ 
+ With this setting, the tool runs automatically whenever the agent determines it should be used. This provides the smoothest user experience as the agent can seamlessly incorporate tool functionality without interrupting the conversation flow.
+ 
+ **Best for:** Tools that are low-risk, frequently used, or where immediate action is beneficial.
+ 
+ ### Approval Required
+ 
+ In this mode, the agent will ask for explicit permission before using the tool. When the agent determines a tool would be helpful, it will first explain what it wants to do and why, then wait for user confirmation before proceeding.
+ 
+ **Best for:** Tools that perform sensitive actions, have potential costs associated with them, or where user oversight is important.
+ 
+ ### Let Agent Decide
+ 
+ This balanced approach gives your agent the flexibility to determine when approval is necessary based on context. The agent will use its judgment about when to ask for permission versus when to proceed automatically.
+ 
+ **Best for:** A mix of tool types where you want to balance convenience with appropriate caution.
+ 
 
----
 
 ### Default Fail Behavior
 
