@@ -4,45 +4,139 @@ sidebarTitle: "Inputs"
 description: "Inputs for tools"
 ---
 
-## Inputs
+## What Are Inputs?
 
-Inputs are the data that your tool needs to perform its action. They're provided by the user of the tool, be that a human, an agent or another tool.
+Inputs are the essential data your tool needs to do its job. Think of them as the information your tool asks for before it can perform its magic - whether that information comes from a human user, an AI agent, or another tool.
 
-### Types
 
-An input has a content 'type'. For example you may want an 'age' input to be a number or a 'name' input to be text.
+## Basic Input Types
 
-**Text input:** This is a basic text field. Use this for short answers, names, or simple queries. Think of it as a single-line text box.
+### Text input
 
-**Long text input:** Use this for paragraphs, like detailed descriptions or long-form content.
+A simple single-line text field for short answers like names, IDs, or brief responses
 
-**Options dropdown:** A classic dropdown menu. Great for when you want users to pick from a predefined list of options.
+### Long text input
+A multi-line text area perfect for detailed descriptions, paragraphs, or longer content
 
-**Numeric input:** For when you need numbers. It might look like a text input, but it'll only accept digits.
+### Numeric input
+Accepts only numbers, ideal for quantities, ages, or any numerical data
 
-**Checkbox:** This is a yes/no, true/false, on/off input. Perfect for simple toggles or confirmations.
+### Checkbox
+A simple yes/no toggle for binary choices (true/false, on/off)
 
-**Text list:** This allows users to input multiple text items, usually one per line.
+---
 
-**JSON:** This accepts JSON-formatted data, great for structured information.
+## Selection Input Types
 
-**List of JSONs:** For when you need multiple JSON objects in a list format.
+### Options dropdown
+A menu with predefined choices for users to select from
 
-**File to text:** This takes a file upload and converts its content to text. Handy for processing document contents.
+### Text list
+Allows entering multiple text items, typically one per line
 
-**File to URL:** Upload a file, get a URL. It's like giving your file a web address.
+### Table
+Structured data organized in rows and columns, similar to a spreadsheet
 
-**Multiple files to URLs:** Same as above, but for multiple files. Each file gets its own URL.
+---
 
-**Table:** This input type allows for structured data in rows and columns, like a spreadsheet.
+## Advanced Input Types
 
-**API key:** A secure way to input API keys.
+### JSON
 
-**Knowledge table:** A way to input or select from predefined knowledge bases.
+When you specify a JSON input, you can optionally provide a [JSON Schema](https://json-schema.org/) in the advanced options to describe the format of the JSON input. This schema describes the expected structure of the JSON input, and is used to help guide the agent to provide data in the correct format. Providing a schema helps to improve the accuracy of calling the tool.
 
-**OAuth account:** For when you need to connect to other services securely. It handles the 'Allow access' dance with other platforms.
+<Tip>The structure outlined in `schema.json` corresponds the data format used in `example.json`.</Tip>
 
-To create an input select an input type. Give your input a name and a description, and variable name.
+<CodeGroup>
+```json example.json
+{
+  "timestamp": 1948832903,
+  "response": {
+    "name": "Pierre Vinken",
+    "age": 30,
+    "bio": "Pierre Vinken, 61 years old, joined the board as a nonexecutive director Nov. 29th"
+  },
+  "is_prospect": true,
+  "status": "inactive"
+}
+```
+
+```json schema.json
+{
+  "properties": {
+    "timestamp": {
+      "type": "number"
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "name": {
+           "type": "string"
+        },
+        "age": {
+           "type": "number"
+        },
+        "bio": {
+           "type": "string"
+        }
+      }
+    },
+    "is_prospect": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["inactive", "active", "archived"]
+    }
+  }
+}
+```
+</CodeGroup>
+
+
+The schema describes the overall structure of the data and the types that each item can be. Use the documentation at [json-schema.org](https://json-schema.org/) for more options.
+
+<Warning> Note that the only supported keywords are `properties` - all other schema keywords (e.g. `additionalProperties`, `examples`, etc.) will be ignored.</Warning>
+
+### List of JSONs 
+
+Handles multiple JSON objects in a list structure
+
+### Knowledge table 
+For inputting or selecting from predefined knowledge bases
+
+## File Handling
+
+### File to text
+Uploads a file and converts its contents to text
+
+### File to URL
+Uploads a file and provides a URL to access it
+
+
+### Multiple files to URLs
+Same as above but for multiple files at once
+
+---
+
+## Authentication Types
+
+### API key 
+Securely input API keys for external services
+
+### OAuth account 
+Handles secure connection to third-party services with proper authorization
+
+---
+
+## Creating an Input
+
+To add an input to your tool:
+
+1. Select the appropriate input type from the options
+2. Give your input a descriptive name
+3. Add a helpful description so users know what to enter
+4. Assign a variable name (this is how your tool will reference this input)
 
 <div
   style={{
@@ -66,23 +160,25 @@ To create an input select an input type. Give your input a name and a descriptio
     }}/>
 </div>
 
-### Using default values to create constants
+---
 
-In the Relevance Tool Builder, default values allow you to pre-set inputs for your tools, offering a way to establish constants, streamline testing, and improve overall tool efficiency.
+## Using Default Values as Constants
 
-**What are default values?**
+Default values are pre-filled inputs that make your tools more efficient and easier to use.
 
-Default values are predetermined inputs that you can set for any parameter in your tool. When a tool runs, these values will be automatically filled in unless explicitly overridden.
+### Why Use Default Values?
 
-**Key uses of default values**
+* **Create constants** - Set values that stay the same across multiple runs (API endpoints, base URLs)
+* **Provide examples** - Show realistic sample data to demonstrate how the tool works
+* **Save time** - Pre-fill common inputs to reduce repetitive typing and potential errors
 
-Establishing constants: Create values that remain consistent across multiple tool runs. This is useful for API keys, base URLs, or any standard parameters your tool frequently uses.
-Providing example inputs: Set up realistic sample data for testing purposes. This helps in quickly demonstrating how the tool works without manual input each time.
-Setting up frequently used values: Streamline tool usage by pre-filling common inputs. This reduces the chance of user error in repetitive tasks.
+### How to Set Default Values
 
-**Setting default values**
+1. Find the input field you want to set a default for
+2. Enter your desired default value
+3. Click "Set value as default"
 
-In the Tool Builder interface, locate the input field you want to set a default for. Enter or select the desired default value, then click set “Set value as default”.
+Once set, these values will automatically appear whenever the tool runs, unless specifically changed by the user.
 
 <div
   style={{
