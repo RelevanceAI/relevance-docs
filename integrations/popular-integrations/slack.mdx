@@ -62,43 +62,6 @@ Slack integration provides a variety of powerful actions that your agents can us
 
 These are just a few examples of the many Slack actions available. Your agents can combine these actions with their reasoning capabilities to create sophisticated workflows that enhance team communication and productivity.
 
-## Use the integration's API tool step (advanced)
-
-In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Slack-specific activities using the Slack API Call tool step:
-
-1. Create a new tool in the Tool Builder.
-2. Scroll down to Tool-steps.
-3. Add "Slack API" tool-step.
-4. Select your connected Slack account in the dropdown.
-5. Configure the API endpoint and parameters based on your specific needs.
-
-This advanced approach allows you to access the full range of Slack API capabilities, enabling custom integrations tailored to your organization's unique requirements.
-
-### Example: Custom Slack API call to create a channel
-```json
-{
-  "method": "POST",
-  "endpoint": "conversations.create",
-  "params": {
-    "name": "project-{{project_name}}",
-    "is_private": false
-  }
-}
-```
-
-### Example: Custom Slack API call to invite users to a channel
-
-```json
-{
-  "method": "POST",
-  "endpoint": "conversations.invite",
-  "params": {
-    "channel": "{{channel_id}}",
-    "users": "{{user_ids}}"
-  }
-}
-```
-
 ## Related Features
 
 * Outlook Integration - Combine Slack and Outlook integrations to create comprehensive communication workflows that span both platforms.
@@ -110,7 +73,7 @@ This advanced approach allows you to access the full range of Slack API capabili
 If you need to remove the Slack integration:
 
 1. Go to the "Integrations" page from the sidebar.
-2. Select Slack from the list.
+2. Search for Slack from the list.
 3. Click "..." on the account you want to remove.
 4. Click "Remove" and confirm your choice.
 
