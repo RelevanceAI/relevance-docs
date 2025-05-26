@@ -1,5 +1,5 @@
 ---
-title: "Add, create, edit and connect Agents"
+title: "Add, create, edit and connect Agents to your Workforce"
 description: "Adding agents to your Workforce allows you to create powerful multi-agent systems where specialized AI agents work together to accomplish complex tasks. "
 sidebarTitle: "Add, create, edit and connect Agents"
 ---
@@ -52,8 +52,10 @@ Once you've added two or more Agents to your Workforce, you can connect them tog
 
 1. Click and drag from one Agent to create a connection line to another Agent
 2. When connecting Agents, you'll be prompted to select a connection type:
-  - **Agent Decide**: The Agent makes its own decision on whether to talk to another Agent
-  - **Forced Handover**: An Agent will always hand over what it was doing to the next Agent, regardless of its finished state
+
+- **Agent Decide**: The Agent makes its own decision on whether to talk to another Agent
+- **Forced Handover**: An Agent will always hand over what it was doing to the next Agent, regardless of its finished state
+
 3. After creating a connection, click on the connecting line to configure edge settings
    - For '**Let agent decide**' connections:
      - Complete the "When to call this agent" box with natural language instructions
@@ -62,7 +64,7 @@ Once you've added two or more Agents to your Workforce, you can connect them tog
      - Choose between 'always start a new task' or 'always continue with one task'
    - For '**Forced handover**' connections:
      - Choose between 'always start a new task' or 'always continue with one task'
-4. Click the 'Save' button to save your configuration 
+4. Click the 'Save' button to save your configuration
 
 ## Communication Settings
 
@@ -113,7 +115,15 @@ After adding Agents to your Workforce:
 ## Troubleshooting
 
 <AccordionGroup>
-  <Accordion title="Agents aren't communicating as expected">Check the connection settings between Agents and ensure the instructions are clear and specific.</Accordion>
-  <Accordion title="Workflow stops unexpectedly">Check if an Agent is waiting for approval in the Task View.</Accordion>
-  <Accordion title="Agent makes incorrect decisions about when to delegate">Refine the natural language instructions in the "When to call this agent" field.</Accordion>
+  <Accordion title="Agents aren't communicating as expected">
+    Check the connection settings between Agents and ensure the instructions are clear and specific.
+  </Accordion>
+  
+  <Accordion title="Workflow stops unexpectedly">
+    Check if an Agent is waiting for approval in the Task View.
+  </Accordion>
+  
+  <Accordion title="Agent makes incorrect decisions about when to delegate">
+    Refine the natural language instructions in the "When to call this agent" field.
+  </Accordion>
 </AccordionGroup>
