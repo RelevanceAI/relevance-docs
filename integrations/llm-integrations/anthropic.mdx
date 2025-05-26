@@ -1,0 +1,167 @@
+---
+title: "Anthropic LLM models"
+description: "Learn more about Anthropic LLM models and how to connect your AWS Bedrock account to access Anthropic models"
+---
+
+Anthropic's Claude LLM models are focused on safe, reliable, and ethical AI responses. They are often better at reasoning and 'thoughtful' tasks.
+
+<AccordionGroup>
+  <Accordion title="What are they good for?">
+    They're good for detailed explanations, structured outputs, and sensitive industries.
+  </Accordion>
+  <Accordion title="How much do they cost?">
+    Credits charged per 1,000 tokens processed.
+  </Accordion>
+</AccordionGroup>
+
+## Setting Up AWS Bedrock with Relevance
+
+Relevance supports two secure methods for connecting your AWS Bedrock account to access Anthropic models. Choose the option that best fits your organization's security requirements.
+
+### Key Benefits
+
+**Cross-Region Inference**: Relevance automatically distributes requests across AWS regions to ensure consistent service availability and performance, even during high-demand periods.
+
+**Usage Oversight**: Both setup methods provide access to all supported Anthropic Claude models available in your selected AWS regions. You will be able to have increased cost control and insight into model usage.
+
+### Option 1: IAM Credentials (Quick Setup)
+
+**Best for**: Testing, proof-of-concepts, and organizations with flexible security policies.
+
+#### Prerequisites
+
+- AWS account with Anthropic models enabled in Bedrock
+- Administrative access to create IAM users and policies
+
+### Setup Steps
+
+<Steps>
+  <Step title="1. Create IAM Policy">
+    In your AWS console, create a new policy with these permissions:
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "bedrock:InvokeModel*"
+          ],
+          "Resource": [
+            "arn:aws:bedrock:*:*:inference-profile/*",
+            "arn:aws:bedrock:*::foundation-model/anthropic.*"
+          ]
+        }
+      ]
+    }
+    ```
+  </Step>
+  <Step title="2. Create IAM user">
+    - Create a new IAM user in your AWS account
+    - Attach the policy created in step 1
+    - Generate access keys for this user
+  </Step>
+  <Step title="3. Configure Relevance">
+    In your Relevance dashboard:
+
+    1. Navigate to **Integrations & App Keys** → **AWS Bedrock**
+    2. Enter your credentials:
+       - **Access Key ID**
+       - **Secret Access Key**
+       - **Region** (your preferred AWS region)
+    3. Select your desired Claude model
+  </Step>
+</Steps>
+
+### Option 2: Role Assumption (Enterprise Security)
+
+**Best for**: Enterprise organisations requiring enhanced security, short-lived credentials, and detailed usage tracking.
+
+#### Prerequisites
+
+- Enterprise Relevance plan
+- AWS account with Anthropic models enabled in Bedrock
+- Administrative access to create IAM roles and policies
+
+<Steps>
+  <Step title="1. Contact your account team">
+    Reach out to your Relevance Account Executive to initiate the role assumption setup. They will coordinate with our implementation team to exchange the necessary account details.
+  </Step>
+  <Step title="2. Create AWS role">
+    Create an IAM role in your AWS account with this trust policy:
+
+    ```json
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::<RELEVANCE_ACCOUNT_ID>:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+              "StringEquals": {
+                "sts:ExternalId": "relevance:<YOUR_PROJECT_ID>"
+              }
+            }
+          }
+        ]
+      }
+    ```
+  </Step>
+  <Step title="3. Create and attach permissions policy">
+    Create a policy with Bedrock permissions and attach it to your role:
+
+    ```json
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "bedrock:InvokeModel*"
+            ],
+            "Resource": [
+              "arn:aws:bedrock:*:*:inference-profile/*",
+              "arn:aws:bedrock:*::foundation-model/anthropic.*"
+            ]
+          }
+        ]
+      }
+    ```
+  </Step>
+  <Step title="4. Configure Relevance">
+    In your Relevance dashboard:
+
+    1. Navigate to **Integrations** → **AWS Bedrock**
+    2. Enter your configuration:
+       - **Region** (your preferred AWS region)
+       - **Role ARN** (the ARN of the role you created)
+  </Step>
+</Steps>
+
+<Note>
+  If you run into any issues with either of these options, please reach out to your Account Executive or [our support team](https://relevanceai.com/docs/get-started/support).
+</Note>
+
+### Important considerations
+
+#### Multi-Region Support
+
+For optimal performance and availability, ensure your AWS policies include permissions for multiple regions. Use `*` in the region field or explicitly list all regions where you want Bedrock access.
+
+#### Model Availability
+
+Different Claude models are available in different AWS regions. Verify model availability in your chosen region using the [AWS Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
+
+#### Security Precedence
+
+If both IAM credentials and role ARN are configured, Relevance will automatically use the more secure role assumption method.
+
+### Additional Resources
+
+- [AWS Bedrock Inference Profiles Prerequisites](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-prereq.html)
+- [Cross-Region Inference Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html)
+- [Supported Models by Region](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html)
