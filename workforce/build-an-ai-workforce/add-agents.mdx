@@ -1,116 +1,119 @@
 ---
-title: 'Add Agents'
-description: 'Adding agents to your Workforce allows you to create powerful multi-agent systems where specialized AI agents work together to accomplish complex tasks. '
-sidebarTitle: 'Add Agents'
+title: "Add, create, edit and connect Agents"
+description: "Adding agents to your Workforce allows you to create powerful multi-agent systems where specialized AI agents work together to accomplish complex tasks. "
+sidebarTitle: "Add, create, edit and connect Agents"
 ---
-
 
 ## Adding Agents to Your Workforce
 
-### Prerequisites
-Before adding agents to your workforce, ensure you have:
-- Created at least two agents in your project
-- Access to Workforce
+You can add Agents you've already created to your Workforce by following these instructions
 
-### Step-by-Step Instructions
+1. Open your Workforce, and drag or click an Agent onto your Workforce
+2. Using the right-hand sidebar, select the Agent you want to add to your Workforce
 
-1. **Access Workforce**
-   - Select your workforce or create a new one
-   - Navigate to the "Build" section in your workforce
+## Create Agents within your Workforce
 
-2. **Add Your First Agent**
-   - When you first open your workforce, you'll see a manual trigger already in place
-   - Connect an agent to this trigger by dragging an agent from the sidebar onto the workspace
-   - This initial connection allows you to message that particular agent (similar to the existing agent flow in Agents)
+You can also create Agents within the Workforce builder by following these instructions:
 
-3. **Add Additional Agents**
-   - Drag additional agents from the sidebar onto the workspace
-   - Position them strategically based on your workflow requirements
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmb4jv9bp2c84ppkp6qe4p412" frameBorder="0" title="How to create Agents from the Workforce builder in Relevance AI" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-4. **Connect Agents Together**
-   - Click and drag from one agent to create a connection line to another agent
-   - When connecting agents, you'll be prompted to select a connection type:
-   - **Agent Decide**: The agent makes its own decision on whether to talk to another agent
-   - **Forced Handover**: An agent will always hand over what it was doing to the next agent, regardless of its finished state
+</div>
 
-5. **Configure Connection Settings**
-   - After creating a connection, click on the connecting line to configure edge settings
-   - For "Let agent decide" connections:
+1. Open your Workforce, and drag or click an Agent onto your Workforce
+2. Then, when the right-hand sidebar opens, click 'Create new agent'
+3. You should then be able to name, describe and change the icon of your Agent
+4. Afterwards, you can change your Agent's Prompt, add Tools, and access all sections of your Agent aside from the ones mentioned below from the Workforce builder\!
+
+<Warning>
+  You cannot edit your Agent's triggers from the Workforce builder, as Workforce's have their own Triggers. You also cannot access your Agent's Advanced Settings.
+</Warning>
+
+## Edit Agents within your Workforce
+
+You can also edit your Agents by clicking on them within the Workforce.
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmb4kb3vz2ca6ppkpuvhwcpo1" frameBorder="0" title="How to edit Agents in the Workforce builder in Relevance AI" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+
+</div>
+
+1. First, click on the Agent you want to edit
+2. Then, the right-hand sidebar should open, allowing you to make any edits you need
+3. After you've made an edit, you will need to save your Agent before continuing to make edits to other parts of your Workforce
+
+<Warning>
+  When you edit an Agent from the Workforce builder, it changes the settings for that Agent everywhere. We do not have Workforce-specific Agent settings.
+</Warning>
+
+## Connect Agents in your Workforce together
+
+Once you've added two or more Agents to your Workforce, you can connect them together by following these instructions:
+
+1. Click and drag from one Agent to create a connection line to another Agent
+2. When connecting Agents, you'll be prompted to select a connection type:
+  - **Agent Decide**: The Agent makes its own decision on whether to talk to another Agent
+  - **Forced Handover**: An Agent will always hand over what it was doing to the next Agent, regardless of its finished state
+3. After creating a connection, click on the connecting line to configure edge settings
+   - For '**Let agent decide**' connections:
      - Complete the "When to call this agent" box with natural language instructions
-
      - Set behavior settings (auto run, approval required, or let agent decide)
      - Configure max auto runs as a guardrail
      - Choose between 'always start a new task' or 'always continue with one task'
-   - For "Forced handover" connections:
+   - For '**Forced handover**' connections:
      - Choose between 'always start a new task' or 'always continue with one task'
-
-6. **Save Your Configuration**
-   - Click the "Save" button to preserve your workforce configuration
+4. Click the 'Save' button to save your configuration 
 
 ## Communication Settings
 
-When connecting agents, you can configure how they communicate with each other:
+When connecting Agents, you can configure how they communicate with each other:
 
 ### Let Agent Decide
-Use natural language to explain how the agent should behave. The agent will follow your instructions but will escalate if it needs help or clarification.
 
-- **Communication Settings**: Explain in natural language when this agent should be called. For example, if a manager agent is delegating to another agent, explain the logic for when to delegate to that specific agent.
+Use natural language to explain how the Agent should behave. The Agent will follow your instructions but will escalate if it needs help or clarification.
+
+- **Communication Settings**: Explain in natural language when this Agent should be called. For example, if a manager Agent is delegating to another Agent, explain the logic for when to delegate to that specific Agent.
 - **Behavior Settings**:
-  - **Auto run**: The agent will complete the task without approval
-  - **Approval required**: The agent will draft the task but ask for approval before completing
-  - **Let agent decide**: The agent will complete the task if confident, otherwise will ask for approval
-  - **Max auto runs**: Set a limit on the number of times the agent auto runs
+  - **Auto run**: The Agent will complete the task without approval
+  - **Approval required**: The Agent will draft the task but ask for approval before completing
+  - **Let Agent decide**: The Agent will complete the task if confident, otherwise will ask for approval
+  - **Max auto runs**: Set a limit on the number of times the Agent auto runs
 
 ### Forced Handover
-This setting forces one agent to pass the task to another agent. The handover must happen regardless of the first agent's state.
+
+This setting forces one Agent to pass the task to another Agent. The handover must happen regardless of the first Agent's state.
 
 ## Best Practices for Adding Agents
 
 1. **Define Clear Roles**
-   - Give each agent a specific role and responsibility within your workforce
+   - Give each Agent a specific role and responsibility within your workforce
    - Avoid overlapping responsibilities that could cause confusion
-
 2. **Create Logical Workflows**
-   - Arrange agents in a way that follows a natural progression of tasks
-   - Consider the information flow between agents when designing your workforce
-
+   - Arrange Agents in a way that follows a natural progression of tasks
+   - Consider the information flow between Agents when designing your workforce
 3. **Use Descriptive Connection Instructions**
-
    - When using "Let agent decide" connections, provide clear, detailed instructions about when to delegate
    - Include specific criteria or conditions that should trigger the handover
-
 4. **Test Incrementally**
-   - Add and test agents one at a time to ensure each connection works as expected
-   - Use the Task View to monitor how agents interact with each other
-
+   - Add and test Agents one at a time to ensure each connection works as expected
+   - Use the Task View to monitor how Agents interact with each other
 5. **Set Appropriate Approval Levels**
    - For critical tasks, use "Approval required" to maintain human oversight
    - For routine tasks, consider "Auto run" to maximize efficiency
 
 ## Monitoring Your Multi-Agent Workforce
 
-After adding agents to your workforce:
+After adding Agents to your Workforce:
 
-1. Go to the "Task" view to see your workforce in action
-2. Here you can trigger your workforce via manual messages/conversation
-3. Monitor when specific agents need approvals
-4. Observe how agents communicate and hand off tasks to each other
-
-## Related Features
-
-[Workforce Task View](https://relevanceai.com/docs/workforce/task-view) - Learn how to monitor and interact with your multi-agent workforce after it's built.
-
-[Edge Settings](https://relevanceai.com/docs/workforce/edge-settings) - Discover more about configuring the connections between nodes in your workforce.
-
-[Add Tools](https://relevanceai.com/docs/workforce/add-tools) - Explore how to enhance your workforce by adding tools that agents can use.
+1. Go to the 'Task' view to see your Workforce in action
+2. Here you can trigger your Workforce via manual messages/conversation
+3. Monitor when specific Agents need approvals
+4. Observe how Agents communicate and hand off tasks to each other
 
 ## Troubleshooting
 
-**Issue**: Agents aren't communicating as expected  
-**Solution**: Check the connection settings between agents and ensure the instructions are clear and specific.
-
-**Issue**: Workflow stops unexpectedly  
-**Solution**: Check if an agent is waiting for approval in the Task View.
-
-**Issue**: Agent makes incorrect decisions about when to delegate  
-**Solution**: Refine the natural language instructions in the "When to call this agent" field.
+<AccordionGroup>
+  <Accordion title="Agents aren't communicating as expected">Check the connection settings between Agents and ensure the instructions are clear and specific.</Accordion>
+  <Accordion title="Workflow stops unexpectedly">Check if an Agent is waiting for approval in the Task View.</Accordion>
+  <Accordion title="Agent makes incorrect decisions about when to delegate">Refine the natural language instructions in the "When to call this agent" field.</Accordion>
+</AccordionGroup>
