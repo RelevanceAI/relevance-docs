@@ -53,35 +53,35 @@ Once you've added two or more Agents to your Workforce, you can connect them tog
 1. Click and drag from one Agent to create a connection line to another Agent
 2. When connecting Agents, you'll be prompted to select a connection type:
 
-- **Agent Decide**: The Agent makes its own decision on whether to talk to another Agent
-- **Forced Handover**: An Agent will always hand over what it was doing to the next Agent, regardless of its finished state
+- **Decide when to use**: The Agent makes its own decision on whether to talk to another Agent
+- **Next step**: An Agent will always hand over what it was doing to the next Agent, regardless of its finished state
 
 3. After creating a connection, click on the connecting line to configure edge settings
-   - For '**Let agent decide**' connections:
+   - For '**Decide when to use**' connections:
      - Complete the "When to call this agent" box with natural language instructions
-     - Set behavior settings (auto run, approval required, or let agent decide)
+     - Set approval mode (auto run, approval required, or let agent decide)
      - Configure max auto runs as a guardrail
      - Choose between 'always start a new task' or 'always continue with one task'
-   - For '**Forced handover**' connections:
+   - For '**Next step**' connections:
      - Choose between 'always start a new task' or 'always continue with one task'
 4. Click the 'Save' button to save your configuration
 
-## Communication Settings
+## Connection type
 
 When connecting Agents, you can configure how they communicate with each other:
 
-### Let Agent Decide
+### Decide when to use
 
 Use natural language to explain how the Agent should behave. The Agent will follow your instructions but will escalate if it needs help or clarification.
 
 - **Communication Settings**: Explain in natural language when this Agent should be called. For example, if a manager Agent is delegating to another Agent, explain the logic for when to delegate to that specific Agent.
-- **Behavior Settings**:
+- **Approval mode**:
   - **Auto run**: The Agent will complete the task without approval
   - **Approval required**: The Agent will draft the task but ask for approval before completing
   - **Let Agent decide**: The Agent will complete the task if confident, otherwise will ask for approval
   - **Max auto runs**: Set a limit on the number of times the Agent auto runs
 
-### Forced Handover
+### Next step
 
 This setting forces one Agent to pass the task to another Agent. The handover must happen regardless of the first Agent's state.
 
@@ -94,7 +94,7 @@ This setting forces one Agent to pass the task to another Agent. The handover mu
    - Arrange Agents in a way that follows a natural progression of tasks
    - Consider the information flow between Agents when designing your workforce
 3. **Use Descriptive Connection Instructions**
-   - When using "Let agent decide" connections, provide clear, detailed instructions about when to delegate
+   - When using "Decide when to use" connections, provide clear, detailed instructions about when to delegate
    - Include specific criteria or conditions that should trigger the handover
 4. **Test Incrementally**
    - Add and test Agents one at a time to ensure each connection works as expected
@@ -118,11 +118,9 @@ After adding Agents to your Workforce:
   <Accordion title="Agents aren't communicating as expected">
     Check the connection settings between Agents and ensure the instructions are clear and specific.
   </Accordion>
-  
   <Accordion title="Workflow stops unexpectedly">
     Check if an Agent is waiting for approval in the Task View.
   </Accordion>
-  
   <Accordion title="Agent makes incorrect decisions about when to delegate">
     Refine the natural language instructions in the "When to call this agent" field.
   </Accordion>
