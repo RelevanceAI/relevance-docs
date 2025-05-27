@@ -1,9 +1,8 @@
 ---
-title: 'Agent to Tool Configuration'
-description: 'Agent to Tool configuration is a powerful feature within Workforce that enables you to establish connections between your AI agents and the tools they need to complete tasks. '
-sidebarTitle: 'Agent to Tool Configuration'
+title: "Agent to Tool Configuration"
+description: "Agent to Tool configuration is a powerful feature within Workforce that enables you to establish connections between your AI agents and the tools they need to complete tasks. "
+sidebarTitle: "Agent to Tool Configuration"
 ---
-
 
 ## Understanding Agent to Tool Connections
 
@@ -25,30 +24,28 @@ To configure an Agent to Tool connection in your workforce:
 
 ## Configuration Options
 
-### Communication Style
+### Connection type
 
 When configuring an Agent to Tool connection, you have two primary communication style options:
 
-#### Let Agent Decide
+#### Decide when to use
 
 This option gives your agent autonomy to determine when to use the connected tool based on context and need.
 
 - **Communication Settings**: Provide natural language instructions explaining when and how the agent should use this tool. For example: "Use this email tool when you need to send important updates to clients or when follow-up communication is required."
-  
-- **Behavior Settings**: Configure how the agent makes decisions about tool usage:
+- **Approval mode**: Configure how the agent makes decisions about tool usage:
   - **Auto run**: The agent will use the tool without requiring approval
-
   - **Approval required**: The agent will draft the tool request but wait for human approval before execution
   - **Let agent decide**: The agent will determine whether to auto-run or request approval based on confidence level
   - **Max auto runs**: Set limits on how many times the agent can automatically use the tool without intervention
 
-#### Forced Handover
+#### Next step
 
 This option creates a mandatory connection where the agent must pass information to the tool as part of the workflow.
 
 - **Task Continuity**: Choose between:
-  - **Always start a new task**: Each tool execution begins a fresh task instance
-  - **Always continue with one task**: The tool execution remains part of the original task flow
+  - **Create new task**: Each tool execution begins a fresh task instance
+  - **Continue same task**: The tool execution remains part of the original task flow
 
 ## Best Practices for Agent to Tool Configuration
 
@@ -57,6 +54,7 @@ This option creates a mandatory connection where the agent must pass information
 When using "Let agent decide" mode, provide specific, unambiguous instructions about when the tool should be used. For example:
 
 > Use this data analysis tool when:
+>
 > - The user requests statistical insights
 > - Raw data needs to be transformed into visualizations
 > - Patterns or trends need to be identified in datasets
@@ -70,7 +68,6 @@ Match permission settings to the sensitivity and impact of the tool:
   - Modify important data
   - Incur costs or use credits
   - Make decisions with business impact
-
 - Use "Auto run" for tools that:
   - Perform internal data retrieval
   - Execute low-risk, repetitive tasks
@@ -92,12 +89,10 @@ Consider how tool connections affect the overall workflow:
    - Check that the connection line is properly established
    - Review the communication instructions for clarity
    - Ensure the agent has the necessary context to recognize when to use the tool
-
 2. **Tool execution failing**
    - Verify the tool's configuration and required inputs
    - Check that the agent is passing data in the expected format
    - Review tool logs for specific error messages
-
 3. **Excessive tool usage**
    - Set appropriate "Max auto runs" limits
    - Make instructions more specific about when to use the tool
@@ -129,7 +124,6 @@ The agent will evaluate the situation and select the appropriate tool based on y
 
 - [Trigger to Agent Configuration](https://relevanceai.com/docs/workforce-builder/configurations/trigger-to-agent): Learn how to configure the initial triggers that activate your agents
 - [Tool to Tool Configuration](https://relevanceai.com/docs/workforce-builder/configurations/tool-to-tool): Discover how to connect tools directly to other tools for automated workflows
-
 - [Condition to Tool Configuration](https://relevanceai.com/docs/workforce-builder/configurations/condition-to-tool): Explore how to add conditional logic to your tool executions
 
 ## Conclusion
