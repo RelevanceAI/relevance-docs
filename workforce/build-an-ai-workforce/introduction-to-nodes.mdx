@@ -1,7 +1,7 @@
 ---
-title: 'Introduction to Nodes'
-description: 'Nodes are the fundamental building blocks of a workforce in Relevance AI. They represent all the components you can place on your workspace to create automated workflows. '
-sidebarTitle: 'Introduction to Nodes'
+title: "Introduction to Nodes"
+description: "Nodes are the fundamental building blocks of a workforce in Relevance AI. They represent all the components you can place on your workspace to create automated workflows. "
+sidebarTitle: "Introduction to Nodes"
 ---
 
 ## What Are Nodes?
@@ -20,6 +20,7 @@ There are four main types of nodes in Workforce:
 Triggers are the starting points of your workflows. They initiate the execution of your workforce when specific conditions are met.
 
 **Examples of triggers include:**
+
 - Manual triggers (allowing you to message an agent directly)
 - Integration triggers (such as when an email is received)
 - Scheduled triggers (running at specific times)
@@ -31,6 +32,7 @@ Triggers are essential because they determine when and how your workforce begins
 Agents are AI-powered entities that can reason, make decisions, and complete tasks. In Workforce, agents are the same as those you've configured elsewhere in Relevance AI, but now they can be visually connected to other components.
 
 Agents can:
+
 - Process information from triggers
 - Make decisions about next steps
 - Use tools to accomplish tasks
@@ -41,6 +43,7 @@ Agents can:
 Tools are specific capabilities that perform defined actions. Unlike in the previous system where tools were tightly coupled to specific agents, in Workforce, tools exist independently and can be connected to multiple agents or other tools.
 
 This modular approach offers several advantages:
+
 - One tool can be used by multiple agents
 - Tools can be connected to other tools in sequence
 - Tools can be easily substituted (e.g., changing from Notion to Confluence) without having to reconfigure each agent
@@ -50,6 +53,7 @@ This modular approach offers several advantages:
 Conditions act as decision points in your workflow, similar to IF statements in programming. They evaluate specific criteria and direct the flow based on whether those criteria are met.
 
 **For example:**
+
 - A condition might check if the current day is a weekday
 - If true, it might trigger an email tool
 - If false, the workflow might end or take a different path
@@ -61,6 +65,7 @@ Conditions help create more sophisticated, branching workflows that respond dyna
 ### Placing Nodes
 
 To add nodes to your workspace:
+
 1. Open your workforce and navigating to "Build"
 2. Drag the desired node type (trigger, agent, tool, or condition) from the sidebar onto the workspace
 3. Position it where you want it to appear in your workflow
@@ -68,6 +73,7 @@ To add nodes to your workspace:
 ### Connecting Nodes
 
 To establish relationships between nodes:
+
 1. Click on the source node
 2. Drag a connection line to the target node
 3. Configure the connection settings (such as communication style)
@@ -86,27 +92,32 @@ Each node type has specific settings that can be configured:
 1. **Start Simple**: Begin with a manual trigger connected to a single agent to test functionality
 2. **Plan Your Workflow**: Before adding many nodes, sketch out the desired workflow to understand the necessary components
 3. **Use Meaningful Names**: Give your nodes descriptive names that indicate their purpose
-
 4. **Test Incrementally**: Add and test nodes in small batches rather than building the entire workflow at once
 5. **Consider Approval Settings**: For critical actions, configure nodes to require human approval before proceeding
 
 ## Common Node Configurations
 
 ### Trigger → Agent
+
 This is the most basic configuration, where a trigger initiates an agent. For example, a manual trigger allows you to message an agent directly.
 
 ### Agent → Agent
+
 This configuration enables one agent to communicate with another. There are two communication styles:
-- **Let agent decide**: The agent determines when to involve another agent based on natural language instructions
-- **Forced handover**: The first agent always passes the task to the second agent
+
+- **Decide when to use**: The agent determines when to involve another agent based on natural language instructions
+- **Next step**: The first agent always passes the task to the second agent
 
 ### Agent → Tool
+
 This allows an agent to use a specific tool to complete a task, such as sending a message in a Slack channel.
 
 ### Tool → Tool
+
 This creates a workflow-like sequence where one tool's output becomes another tool's input, without requiring agent intervention between steps.
 
 ### Condition → Tool
+
 This setup evaluates a condition before deciding whether to execute a tool, adding logic to your workflows.
 
 ## Limitations and Considerations
