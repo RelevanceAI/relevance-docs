@@ -1,9 +1,8 @@
 ---
-title: 'Agent to Agent Configuration'
-description: 'Agent to Agent configuration is a powerful capability within Workforce that enables you to create sophisticated multi-agent systems where agents can collaborate, delegate tasks, and work together to solve complex problems.'
-sidebarTitle: 'Agent to Agent Configuration'
+title: "Agent to Agent Configuration"
+description: "Agent to Agent configuration is a powerful capability within Workforce that enables you to create sophisticated multi-agent systems where agents can collaborate, delegate tasks, and work together to solve complex problems."
+sidebarTitle: "Agent to Agent Configuration"
 ---
-
 
 ## How Agent to Agent Configuration Works
 
@@ -22,26 +21,27 @@ To create an Agent to Agent connection in your workforce:
 
 When configuring Agent to Agent connections, you have two primary communication style options:
 
-### Let Agent Decide
+### Decide when to use
 
 This option gives the first agent autonomy to determine when it should involve the second agent. The agent uses natural language understanding to follow your instructions about when to delegate.
 
 To configure this option:
-1. Select "Let agent decide" in the edge settings
+
+1. Select "Decide when to use" in the edge settings
 2. Complete the "When to call this agent" field with clear instructions
 3. For example: "Call this agent when you need specialized knowledge about financial regulations" or "Delegate to this agent when the customer asks about technical product specifications"
 
-#### Behavior Settings
+#### Approval mode
 
 When using "Let agent decide," you can further refine the behavior:
 
-* **Auto run**: The second agent will automatically execute its task without approval
-* **Approval required**: The second agent will draft its response but wait for human approval before proceeding
-* **Let agent decide**: The second agent will determine whether it has sufficient context to proceed or needs human input
+- **Auto run**: The second agent will automatically execute its task without approval
+- **Approval required**: The second agent will draft its response but wait for human approval before proceeding
+- **Let agent decide**: The second agent will determine whether it has sufficient context to proceed or needs human input
 
 You can also set **Max auto runs** as a guardrail to limit automatic executions.
 
-### Forced Handover
+### Next step
 
 This option creates a mandatory transition from one agent to another. When the first agent completes its work, it will always pass control to the second agent.
 
@@ -54,35 +54,35 @@ To configure this option:
 
 For both communication styles, you can specify how the task should be handled:
 
-* **Always start a new task**: The second agent begins a fresh task with its own context
-* **Always continue with one task**: The second agent continues within the same task, maintaining context and history
+- **Create new task**: The second agent begins a fresh task with its own context
+- **Continue same task**: The second agent continues within the same task, maintaining context and history
 
 ## Best Practices for Agent to Agent Configuration
 
-### When to Use "Let Agent Decide"
+### When to Use "Decide when to use"
 
-* For complex workflows where conditional routing is needed
-* When you want the first agent to make intelligent decisions about escalation
-* In scenarios where not every interaction requires the specialized knowledge of the second agent
+- For complex workflows where conditional routing is needed
+- When you want the first agent to make intelligent decisions about escalation
+- In scenarios where not every interaction requires the specialized knowledge of the second agent
 
-### When to Use "Forced Handover"
+### When to Use "Next step"
 
-* For linear workflows with clear handoff points
-* When you want to ensure every interaction passes through a specific sequence of agents
-* For quality control processes where a second agent should always review the work
+- For linear workflows with clear handoff points
+- When you want to ensure every interaction passes through a specific sequence of agents
+- For quality control processes where a second agent should always review the work
 
 ### Creating Effective Agent Instructions
 
-When using "Let agent decide," the quality of your instructions in the "When to call this agent" field is crucial:
+When using "Decide when to use", the quality of your instructions in the "When to call this agent" field is crucial:
 
-* Be specific about the conditions that should trigger delegation
-* Include examples of scenarios where the second agent should be involved
-* Define clear boundaries of responsibility between agents
+- Be specific about the conditions that should trigger delegation
+- Include examples of scenarios where the second agent should be involved
+- Define clear boundaries of responsibility between agents
 
 ## Limitations
 
-* Currently, only one-way communication is supported between agents
-* Bidirectional communication (where agents can have back-and-forth conversations) is not yet available
+- Currently, only one-way communication is supported between agents
+- Bidirectional communication (where agents can have back-and-forth conversations) is not yet available
 
 ## Example Use Cases
 
@@ -102,9 +102,9 @@ Connect a data collection agent to an analysis agent, where the first agent gath
 
 If your Agent to Agent configuration isn't working as expected:
 
-* Verify that the connection line is properly established between agents
-* Check that your "When to call this agent" instructions are clear and specific
-* Ensure that both agents have the necessary tools and permissions to complete their tasks
-* Review the task history in the Workforce Task View to identify where the workflow might be breaking down
+- Verify that the connection line is properly established between agents
+- Check that your "When to call this agent" instructions are clear and specific
+- Ensure that both agents have the necessary tools and permissions to complete their tasks
+- Review the task history in the Workforce Task View to identify where the workflow might be breaking down
 
 By effectively configuring Agent to Agent connections, you can create sophisticated AI workflows that leverage the specialized capabilities of different agents, resulting in more powerful and flexible automation solutions.
