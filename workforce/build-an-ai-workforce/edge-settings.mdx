@@ -1,45 +1,40 @@
 ---
-title: 'Edge Settings'
-description: 'Edge Settings control how nodes are connected to each other in your AI Workforce.'
-sidebarTitle: 'Edge Settings'
+title: "Edge Settings"
+description: "Edge Settings control how nodes are connected to each other in your AI Workforce."
+sidebarTitle: "Edge Settings"
 ---
 
+## Connection types
 
-## Communication Styles
+When connecting nodes in your workforce, you can choose between two primary connection types:
 
-When connecting nodes in your workforce, you can choose between two primary communication styles:
-
-### Let Agent Decide
+### Decide when to use
 
 This option gives your agent autonomy to determine when to use a connection based on natural language instructions.
 
 **Configuration Options:**
 
 - **Communication Settings**: Provide natural language instructions explaining when and how the agent should use this connection. For example, if you're connecting a manager agent to a specialist agent, you might write: "Delegate to this agent when a customer inquiry requires technical expertise about our enterprise product features."
-
-- **Behavior Settings**: Control how the agent executes tasks through this connection:
+- **Approval mode**: Control how the agent executes tasks through this connection:
   - **Auto run**: The agent will automatically execute the task without requiring approval.
   - **Approval required**: The agent will draft the task but wait for your approval before completing it.
   - **Let agent decide**: The agent will complete the task if it has sufficient context and confidence; otherwise, it will ask for human approval or clarification.
-
 - **Max auto runs**: Set a limit on the number of times the agent can automatically execute this connection without human intervention:
   - **No limit**: The agent can use this connection as many times as needed.
   - **Custom limit**: Specify a maximum number of automatic executions as a guardrail.
+- **Task behaviour**: Choose how tasks flow through this connection:
+  - **Create new task**: Each time this connection is used, it creates a separate task instance.
+  - **Continue same task**: Maintain continuity by keeping all work within the same task context.
 
-- **Task Handling**: Choose how tasks flow through this connection:
-  - **Always start a new task**: Each time this connection is used, it creates a separate task instance.
-
-  - **Always continue with one task**: Maintain continuity by keeping all work within the same task context.
-
-### Forced Handover
+### Next step
 
 This option creates a mandatory connection where one node always passes control to another node when triggered.
 
 **Configuration Options:**
 
-- **Task Handling**: Choose how tasks flow through this forced connection:
-  - **Always start a new task**: Each handover creates a separate task instance.
-  - **Always continue with one task**: Maintain continuity by keeping all work within the same task context.
+- **Task behaviour**: Choose how tasks flow through this forced connection:
+  - **Create new task**: Each handover creates a separate task instance.
+  - **Continue same task**: Maintain continuity by keeping all work within the same task context.
 
 ## Practical Applications
 
@@ -47,44 +42,35 @@ This option creates a mandatory connection where one node always passes control 
 
 When connecting agents, edge settings determine how they collaborate:
 
-- **Manager-Specialist Relationship**: Configure a manager agent to delegate specific types of inquiries to specialist agents using "Let agent decide" with clear instructions about when to delegate.
-
-- **Sequential Processing**: Use "Forced handover" to create a workflow where one agent always passes work to another after completing its part, such as having a research agent always pass findings to a content creation agent.
+- **Manager-Specialist Relationship**: Configure a manager agent to delegate specific types of inquiries to specialist agents using "Decide when to use" with clear instructions about when to delegate.
+- **Sequential Processing**: Use "Next step" to create a workflow where one agent always passes work to another after completing its part, such as having a research agent always pass findings to a content creation agent.
 
 ### Agent-to-Tool Communication
 
 Edge settings control how agents interact with tools:
 
-- **Conditional Tool Usage**: With "Let agent decide," an agent can determine when a particular tool is appropriate based on the context.
-
+- **Conditional Tool Usage**: With "Decide when to use", an agent can determine when a particular tool is appropriate based on the context.
 - **Approval Workflows**: For sensitive operations like sending emails or making purchases, configure "Approval required" to ensure human oversight.
-
-- **Automated Sequences**: Use "Forced handover" to ensure an agent always follows a specific process, such as always logging customer interactions after completing a support conversation.
+- **Automated Sequences**: Use "Next step" to ensure an agent always follows a specific process, such as always logging customer interactions after completing a support conversation.
 
 ### Tool-to-Tool Communication
 
 Create sophisticated automation workflows:
 
 - **Data Processing Pipelines**: Connect tools in sequence to transform, analyze, and act on data without requiring agent intervention at each step.
-
 - **Conditional Branching**: Use conditions between tools to create decision trees that process information differently based on specific criteria.
 
 ## Best Practices
 
 1. **Start Simple**: Begin with basic connections and gradually increase complexity as you understand how your workforce operates.
-
-2. **Use Clear Instructions**: When using "Let agent decide," provide specific, unambiguous instructions about when and how to use connections.
-
+2. **Use Clear Instructions**: When using "Decide when to use" provide specific, unambiguous instructions about when and how to use connections.
 3. **Implement Guardrails**: Use approval requirements and auto-run limits for critical operations to maintain control while allowing automation.
-
 4. **Test Thoroughly**: Verify that your edge settings produce the expected behavior across different scenarios before deploying to production.
-
 5. **Monitor Performance**: Regularly review how your connections are being used and refine edge settings based on actual performance.
 
 ## Limitations
 
 - **One-way Communication**: Currently, connections in the Workforce Builder are limited to one-way communication. Bidirectional communication between nodes is not supported.
-
 - **Decision Complexity**: While conditions can create branching workflows, complex decision trees may require careful planning and potentially multiple condition nodes.
 
 ## Related Features
@@ -97,14 +83,14 @@ The Edge Settings functionality works closely with other Workforce Builder compo
 
 ## FAQs
 
-**Q: Can I change edge settings after creating a connection?**  
+**Q: Can I change edge settings after creating a connection?**\
 A: Yes, you can modify edge settings at any time by selecting the connection in the Workforce Builder interface.
 
-**Q: How do I know if I should use "Let agent decide" or "Forced handover"?**  
+**Q: How do I know if I should use "Decide when to use" or "Next step"?**\
 A: Use "Let agent decide" when you want contextual, intelligent routing based on content. Use "Forced handover" when a connection should always occur regardless of context.
 
-**Q: What happens if I set a limit on auto runs and the limit is reached?**  
+**Q: What happens if I set a limit on auto runs and the limit is reached?**\
 A: Once the auto run limit is reached, the agent will request human approval before using that connection again.
 
-**Q: Can I create conditional connections based on specific data values?**  
+**Q: Can I create conditional connections based on specific data values?**\
 A: Yes, you can use condition nodes to create branches in your workflow based on specific criteria or data values.
