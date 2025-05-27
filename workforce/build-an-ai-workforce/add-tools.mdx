@@ -1,9 +1,8 @@
 ---
-title: 'Add Tools'
-description: 'Tools are essential components in your AI Workforce that enable agents to perform specific actions and complete tasks.'
-sidebarTitle: 'Add Tools'
+title: "Add Tools"
+description: "Tools are essential components in your AI Workforce that enable agents to perform specific actions and complete tasks."
+sidebarTitle: "Add Tools"
 ---
-
 
 ## What Are Tools in Workforce?
 
@@ -33,9 +32,9 @@ To connect an agent to a tool:
 
 1. Click on the agent node to reveal connection points
 2. Drag a connection line from the agent to your desired tool
-3. Configure the connection settings:
-   - **Let agent decide**: The agent will determine when to use the tool based on natural language instructions
-   - **Forced handover**: The agent will always use the tool when the connection is triggered
+3. Configure the connection type:
+   - **Decide when to use**: The agent will determine when to use the tool based on natural language instructions
+   - **Next step**: The agent will always use the tool when the connection is triggered
 
 ### Tool to Tool Connections
 
@@ -43,7 +42,6 @@ One of the most powerful features of the Workforce Builder is the ability to con
 
 1. Click on the source tool to reveal connection points
 2. Drag a connection line to the destination tool
-
 3. This creates a workflow where the output of one tool becomes the input for the next
 
 For example, you might connect a tool that sends an email to another tool that summarizes responses, creating an automated follow-up workflow.
@@ -52,12 +50,12 @@ For example, you might connect a tool that sends an email to another tool that s
 
 When connecting tools in your Workforce, you can configure the following edge settings:
 
-### Communication Style
+### Connection type
 
-- **Let agent decide**: Use natural language to explain when the tool should be used
-- **Forced handover**: Always execute the tool when the connection is triggered
+- **Decide when to use**: Use natural language to explain when the tool should be used
+- **Next step**: Always execute the tool when the connection is triggered
 
-### Behavior Settings
+### Approval mode
 
 - **Auto run**: The tool will execute without requiring approval
 - **Approval required**: The tool will draft the action but ask for human approval before executing
