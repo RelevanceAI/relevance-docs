@@ -5,121 +5,66 @@ description: "Learn how to share your agent with others using different UI optio
 ---
 
 ## Overview
+
 Easily share your AI agent with others by choosing how they can interact with it. Whether you want to send a live chat link, embed a support widget, showcase tasks in an iframe, or allow full template cloning, you have flexible options to fit any use case.
 
 ## Chat UI
+
 Let others interact with your Agent through a clean, conversation-style interface — just like a chatbot. You can share it via a link or embed it as an iframe. This is perfect for letting people experience your Agent without modifying anything. All usage is billed to your account, and others can use the Agent without needing to set it up themselves.
 
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cma28o7c025yi13m0vky5wvrg?embed_v=2" frameBorder="0" title="Relevanceai Demo" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/cma28o7c025yi13m0vky5wvrg?embed_v=2"
-    frameBorder="0"
-    title="Relevanceai Demo"
-    allow="clipboard-write"
-    webkitallowfullscreen="true"
-    mozallowfullscreen="true"
-    allowfullscreen
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
 </div>
+
+#### Developer Notes
+
+<Note>
+  Target the `.relevanceai-chat-bubble-app` class to style the chat bubble. Adjust its `z-index` property to position the bubble above or below other UI elements such as cookie popups and toast messages.
+</Note>
 
 ## Chat Widget
+
 Turn your Agent into a pop-up chat interface you can embed on any website with a simple script tag. It behaves like a support chat window and is ideal for customer-facing use cases like answering questions, handling requests, or collecting feedback directly on your site.
 
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cma29ej0x26k313m03yp169lg?embed_v=2" frameBorder="0" title="Relevanceai Demo" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/cma29ej0x26k313m03yp169lg?embed_v=2"
-    frameBorder="0"
-    title="Relevanceai Demo"
-    allow="clipboard-write"
-    webkitallowfullscreen="true"
-    mozallowfullscreen="true"
-    allowfullscreen
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
 </div>
 
+#### Developer Notes
+
+<Note>
+  The `iframe` inherits `100%` of its parent container by default. Configure your container’s dimensions carefully to ensure the iframe displays correctly within your page layout without causing layout issues.
+</Note>
+
+| URL parameter              | Type      | Values                                                                                                                                                                                                   | Description                                         | Examples                                               |
+| -------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- | ------------------------------------------------------ |
+| `primary_color`            | `string`  |                                                                                                                                                                                                          | A valid CSS color for your form.                    | `#685fff`                                              |
+| `bubble_style`             | `enum`    | `agent, icon`                                                                                                                                                                                            | Use an agents avatar or the `bubble_icon`.          | `agent`                                                |
+| `bubble_icon`              | `enum`    | `pd/ai-agent, notebook/deploy, pencil, star, sparkle, sparkles, pd/lightning-filled, pd/chat, pd/send-diagonal, stack, duration, pd/check, pd/play, arrow-r, pd/search, share, plus, pd/question-filled` | The icon to use if `bubble_style` is set to `icon`. |                                                        |
+| `input_placeholder_text`   | `string`  |                                                                                                                                                                                                          | Set the message input placeholder text.             | `Type your question here…`                             |
+| `hide_file_uploads`        | `boolean` |                                                                                                                                                                                                          | Toggle file uploads.                                | `true`                                                 |
+| `hide_conversation_list`   | `boolean` |                                                                                                                                                                                                          | Toggle tool steps.                                  | `true`                                                 |
+| `hide_tool_steps`          | `boolean` |                                                                                                                                                                                                          | Toggle multiple conversations.                      | `true`                                                 |
+| `starting_message_prompts` | `string`  |                                                                                                                                                                                                          | Add starting prompts.                               | `["I need help with my billing", "Write me an email"]` |
+| `hide_logo`                | `boolean` |                                                                                                                                                                                                          | Toggle Relevance AI branding.                       | `false`                                                |
+| `hide_description`         | `boolean` |                                                                                                                                                                                                          | Toggle agent description.                           | `true`                                                 |
+
 ## Task UI
+
 This gives users access to a task-focused version of your Agent via an iframe. Users can view past task runs, pick from existing tasks, and even interact with outputs — all within a self-contained UI. It’s great for operational dashboards, workflow demos, or giving others visibility into what your Agent is doing.
 
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cma29kkqd26vk13m0oed5ldml?embed_v=2" frameBorder="0" title="Relevanceai Demo" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/cma29kkqd26vk13m0oed5ldml?embed_v=2"
-    frameBorder="0"
-    title="Relevanceai Demo"
-    allow="clipboard-write"
-    webkitallowfullscreen="true"
-    mozallowfullscreen="true"
-    allowfullscreen
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
 </div>
 
 ## Clonable Template
+
 Let others clone your Agent - complete with its instructions and setup - into their own workspace. This makes it easy to share best practices, pre-built use cases, or workflows without needing to rebuild from scratch. Cloned agents use the recipient’s credits, not yours, making this perfect for scalable distribution.
 
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cma29kkqd26vk13m0oed5ldml?embed_v=2" frameBorder="0" title="Relevanceai Demo" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/cma29kkqd26vk13m0oed5ldml?embed_v=2"
-    frameBorder="0"
-    title="Relevanceai Demo"
-    allow="clipboard-write"
-    webkitallowfullscreen="true"
-    mozallowfullscreen="true"
-    allowfullscreen
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
 </div>
