@@ -94,4 +94,18 @@ For certain models such as OpenAI, response format can be forced using this fiel
     Data is too large for the 'Most relevant data'. Consider adding the data to knowledge.
     ```
   </Accordion>
+  <Accordion title="Rate limit">
+    This error happens when the used API key is set to a different rate limit compared to what Relevance uses by default. Trying again with different intervals of pause helps with this issue.
+    ```
+    429: {"message":"Rate limit reached for default-gpt-4 in organization org-... on tokens per min. Limit: 40000 / min. 
+    Please try again in 1ms. Contact us through our help center at help.openai.com if you continue to have issues.",
+    "type":"tokens","param":null,"code":"rate_limit_exceeded"}
+    ```
+  </Accordion>
+  <Accordion title="Temperature errors">
+    There is a temperature parameter under LLM advanced settings. The below error occurs if the entered value is out of the accepted (0,1) range.
+    ```
+    400: {"message":"-0.5 is less than the minimum of 0 - 'temperature'","type":"invalid_request_error","param":null,"code":null}
+    ```
+  </Accordion>
 </AccordionGroup>
