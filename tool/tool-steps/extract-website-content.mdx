@@ -1,36 +1,64 @@
 ---
-title: 'Extract Website Content'
-sidebarTitle: 'Extract Website Content'
-description: 'Extract Website Content'
+title: "Extract Website Content Tool step"
+sidebarTitle: "Extract Website Content"
+description: "Use the Extract Website Content Tool step to turn websites into text and HTML for your Agents and Tools"
 ---
-There is a large amount of text data available on the net which can be an amazing source for tasks such as Q/A, research,
-and context generation. Relevance provides you with an easy-to-use component for scraping website contents
 
-## How to use the Extract website content step
+The Extract Website Content Tool step will allow you to scrape and convert a website into text or HTML files for your Agents and Tools. 
 
-### Add the component
-You need to add the "Extract website content" step to your Tool (check how to get started with 
-[creating a tool](/tool/tool-steps/getting-started)).
-![Extract website content step](/images/build-custom-tools/tool-step/web-scraping-get-started.png)
+## Add the Extract Website Content Tool step to your Tool
 
-### Website URL
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmbq55ecgb7cgsn1rkh2mq039" frameBorder="0" title="Add the Firecrawl Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-![Extract website content step](/images/build-custom-tools/tool-step/web-scraping-fields.png)
+</div>
 
-Directly enter a URL in the box or use the `{{` to activate the variable mode. For instance, if the URL is in an input
-component called `my_url`, use `{{my_url}}`. Or if the URL is the output of a Google-Search step, use `{{google.organic[0].link}}`
-to access the url in the first search results ([FAQ](/tool/faq#error-url-issue)).
+You can add the Firecrawl Tool step to your Tool by:
 
-### Method
-You can specify if you wish to scrape data as Text or HTML. By default, Relevance scraps the Text.
+1. Creating a new Tool, then searching for the 'Extract Website Content' Tool step
+2. Click 'Expand' to see the full Tool step
+3. Enter the URL of the website you want to scrape and extract content from in 'Website URL'
+4. Under 'Method', select 'Text' or 'HTML' based on what format you want to have your website content be extracted as
+5. Click 'Run step' to test out your Tool step with your inputs!
 
-### Element Selector
-You can specify which element from the HTML components to scrape. By default, it is set to `body`.
-Note that using `+ Add new`, you can specify a list of elements to be scrapped.
+## Advanced Settings
 
-### Extra headers
-If you need to provide special information to be able to scrape a website, provide the data as a JSON object.
-The below object shows an example where an authentication token called `auth-token` and a `user-id` are required.
+### Model
+You can choose between two models to use for this Tool step:
+- Apify
+- Browserless
+
+The following Advanced Settings will then vary based on which Model you choose.
+
+### Apify Advanced Settings
+
+#### Scrape Type
+
+You can select between two scrape types:
+- Simple HTML (cheaper)
+- Full Web Page (expensive)
+
+#### Use proxies
+
+You can use proxies to scrape the website - this is more expensive.
+
+#### Max depth
+
+The maximum number of links starting from the start URL that the crawler will recursively follow. The start URLs have a depth of 0. Capped at 10. 
+
+#### Max pages
+
+The maximum number of pages to crawl. Capped at 100. 
+
+### Browserless Advanced Settings
+
+These Advanced Settings can only be used if you select 'Text' as your 'Method' in the Tool step. 
+
+#### Element selector
+You can specify which element from the HTML components to scrape. By default, it is set to `body`. Note that using '+ New item', you can specify a list of elements to be scrapped.
+
+#### Extra headers
+If you need to provide special information to be able to scrape a website, provide the data as a JSON object. The below object shows an example where an authentication token called `auth-token` and a `user-id` are required.
 
 ```
 {
@@ -39,41 +67,22 @@ The below object shows an example where an authentication token called `auth-tok
 }
 ```
 
-<Snippet file="components/tools/step-general.mdx" />
-
-## Access the step output
-The output is a dictionary with two keys `page` and `selectors` containing the extracted text and if any selectors were used.
-Below you can see samples where the default name assigned to the step `scrape` is used.
-Note that a step name is different from the step title. Step titles can be found on the top left
-of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
-
-```
-scrape.output.page
-scrape.output.selectors
-```
-
-
 ## Common errors
-### Wrong URL formatting
-This error occurs when the URL field is set to a value that is not of type string. When using the output of another
-step make sure, you access the URL field. Read more at [URL must be a string](/tool/faq#error-url-issue).
 
-### Non-array Elements
-When setting up specific elements to be scrapped, make sure to use `+ Add new` to have more than one Element. And if the
-button is clicked do not leave it as an empty list. Use the `x` icon to the right of the row to remove the extra line.
+<AccordionGroup>
+  <Accordion title="Over max depth">
+    The error message below indicates that the 'Max depth' value has been set to under 0 or over 10. 
 
-```
-Studio transformation browserless_scrape input validation error: must be array {"type":"array"} /element_selector
-```
+    ```
+    Studio transformation browserless_scrape input validation error: must be <= 10 {"comparison":"<=","limit":10} /model/max_depth
+    ```
+  </Accordion>
+  <Accordion title="Over max pages">
+    The error message below indicates that the 'Max pages' value has been set to over 100.
 
-### Invalid URL
-This error occurs when the provided URL is not valid.
-```Protocol error (Page.navigate): Cannot navigate to invalid URL```
+    ```
+    Studio transformation browserless_scrape input validation error: must be <= 100 {"comparison":"<=","limit":100} /model/max_pages
 
-### Network issue
-This error normally occurs when there are network issues. Make sure your connection is strong, refresh the page and try again.
-```Navigation failed because browser has disconnected!```
-
-### Time output
-This happens wh
-```Navigation timeout of 30000 ms exceeded```
+    ```
+  </Accordion>
+</AccordionGroup>
