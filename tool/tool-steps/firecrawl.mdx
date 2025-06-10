@@ -45,9 +45,20 @@ You can add the Firecrawl Tool step to your Tool by:
 5. Check or uncheck 'Extract Main Content Only' based on whether or not you want to include nav, header, footers, etc.
 6. Add paths you want to include here under 'Include Paths'
 7. If 'Scrape Only' is unchecked, you can specify how many pages you want to crawl under 'Number of Pages'
-8. 
+8. Run the Tool step to see if works with your configuration!
 
 ## Advanced Settings
+
+### Output Formats
+You can select from the following Output Formats for your scrapes:
+- Markdown (default)
+- HTML
+- Raw HTML
+- Links
+- Screenshot
+- Screenshot of the full page
+- JSON
+- Change Tracking
 
 ## Common errors
 <AccordionGroup>
@@ -55,6 +66,12 @@ You can add the Firecrawl Tool step to your Tool by:
     The error message below indicates that you have run out of credits, or do not have enough credits, in your Firecrawl account to perform the Tool step you're running. You will need to upgrade your plan at Firecrawl to get more credits. 
     ```
     {"success":false,"error":"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value."}
+    ```
+  </Accordion>
+  <Accordion title="Invalid token">
+    The error message below indicates that your Firecrawl API Key is either incorrect or missing. You will need to add / replace this API Key in 'Integrations & App Keys'.
+    ```
+    {"error":"Unauthorized: Invalid token"}
     ```
   </Accordion>
 </AccordionGroup>
