@@ -1,0 +1,60 @@
+---
+title: 'Firecrawl Tool step'
+sidebarTitle: 'Firecrawl'
+description: 'Use Firecrawl as a step in your Tools to turn websites into
+LLM-ready data'
+---
+
+The Firecrawl Tool step allows you to turn websites of your choosing into LLM-ready data that you can then feed into an LLM as part of your Tools and Agents. 
+
+## Integrating with Firecrawl
+
+In order to use the Firecrawl Tool step, you need to sign up for Firecrawl at [firecrawl.dev](https://www.firecrawl.dev/) and get an API key. You then need to add this API key to Relevance AI.
+
+
+
+## Add the Firecrawl Tool step to your Tool
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cmbq23afyb6gtsn1rjlutkcvp"
+    frameBorder="0"
+    title="Add the Firecrawl Tool step to your Tool"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowfullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+You can add the Firecrawl Tool step to your Tool by:
+1. Creating a new Tool, then searching for the 'Firecrawl Web Scraper' Tool step
+2. Click 'Expand' to see the full Tool step
+3. Add the URL you want to scrape in 'URL'
+4. Check or uncheck 'Scrape Only' based on whether or not you want to scrape the URL you've added only
+5. Check or uncheck 'Extract Main Content Only' based on whether or not you want to include nav, header, footers, etc.
+6. Add paths you want to include here under 'Include Paths'
+7. If 'Scrape Only' is unchecked, you can specify how many pages you want to crawl under 'Number of Pages'
+8. 
+
+## Advanced Settings
+
+## Common errors
+<AccordionGroup>
+  <Accordion title="Insufficient credits">
+    The error message below indicates that you have run out of credits, or do not have enough credits, in your Firecrawl account to perform the Tool step you're running. You will need to upgrade your plan at Firecrawl to get more credits. 
+    ```
+    {"success":false,"error":"Insufficient credits to perform this request. For more credits, you can upgrade your plan at https://firecrawl.dev/pricing or try changing the request limit to a lower value."}
+    ```
+  </Accordion>
+</AccordionGroup>
