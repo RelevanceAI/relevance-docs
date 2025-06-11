@@ -1,50 +1,43 @@
 ---
-title: 'Convert spreadsheet to JSON'
-sidebarTitle: 'Spreadsheet to JSON'
-description: 'Convert data in spreadsheet to their corresponding JSON format'
+title: "Convert spreadsheet to JSON Tool step"
+sidebarTitle: "Convert Spreadsheet to JSON"
+description: "Use a Tool step to convert CSVs and XLSXs into JSON"
 ---
 
-"Spreadsheet to JSON" allows you to convert a table like data (e.g. a CSV file) to its corresponding JSON format.
-JSONs are very easy to use in code steps.
+The 'Convert a spreadsheet to JSON' Tool step allows you to convert a CSV or XLSX file into JSON for your Tools to use. 
 
-## How to use Convert a spreadsheet to JSON
+## Add the 'Convert a spreadsheet to JSON' Tool step to your Tool
 
-### Add the component
-Add the Spreadsheet to JSON converter step to your Tool (check how to get started with 
-[creating a tool](/tool/tool-steps/getting-started)).
-![Spreadsheet to JSON](/images/build-custom-tools/tool-step/spreadsheet-to-json-get-started.png)
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmbrf6vyscbn6sn1r1drty9ln" frameBorder="0" title="Add the Convert a Spreadsheet to JSON Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-### File URL
-A "Spreadsheet to JSON" converter requires a file as an input. If your file is publicly accessible on the web (i.e. with no 
-authentication or sign-up requirement), simply provide the URL directly or as a 
-[text input](/tool/user-inputs/text-input). Otherwise, you will need to add a 
-[File-to-URL](/tool/user-inputs/file-to-url) input.
-In either situation, use the `{{variable name}}` to provide the data to the converter.
+</div>
 
-![Spreadsheet to JSON](/images/build-custom-tools/tool-step/spreadsheet-to-json-fields.png)
+You can add the 'Convert a spreadsheet to JSON' Tool step to your Tool by:
 
-<Snippet file="components/tools/step-general.mdx" />
+1. Creating a new Tool, then searching for the 'Convert a spreadsheet to JSON' Tool step
+2. Click 'Expand' to see the full Tool step
+3. Add the CSV or XLSX file you want to convert to JSON
+4. Click 'Run step' to run the Tool step
+5. Your output will be formatted - click 'Formatted' to see the JSON output if needed
 
-## Access the step output
-The output is a dictionary with a key `rows`. 
-* `spreadsheet_to_json[rows]` is a list containing as many rows as included in the uploaded file.
-* Each row is a dictionary representing one row of data (i.e. keys are column headers in the uploaded spreadsheet).
+## Using the Tool output
+
+The output is a dictionary with a key `rows`.
+
+- `spreadsheet_to_json[rows]` is a list containing as many rows as included in the uploaded file.
+- Each row is a dictionary representing one row of data (i.e. keys are column headers in the uploaded spreadsheet).
 
 Below you can see samples where the default name assigned to the step `spreadsheet_to_json` is used.
-Note that a step name is different from the step title. Step titles can be found on the top left
-of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
 
 ```
 spreadsheet_to_json.rows
 spreadsheet_to_json.rows[0]
 ```
 
-
 ## Common errors
-### Unsupported file type
-An error similar to the one noted below indicates that the provided input is not a valid spreadsheet.
 
-```
-Error:
-Unsupported file type: 
-```
+<Accordion title="Unsupported file type">
+  The error message similar to the one below indicates that a non-spreadsheet file was uploaded to the Tool step. Only CSV and XLSX files are supported. 
+  `Unsupported file type: pdf`
+</Accordion>
