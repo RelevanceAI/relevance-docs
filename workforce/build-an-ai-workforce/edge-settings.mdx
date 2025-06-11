@@ -8,7 +8,7 @@ sidebarTitle: "Edge Settings"
 
 When connecting nodes in your workforce, you can choose between two primary connection types:
 
-### Decide when to use
+### AI connection
 
 This option gives your agent autonomy to determine when to use a connection based on natural language instructions.
 
@@ -42,14 +42,14 @@ This option creates a mandatory connection where one node always passes control 
 
 When connecting agents, edge settings determine how they collaborate:
 
-- **Manager-Specialist Relationship**: Configure a manager agent to delegate specific types of inquiries to specialist agents using "Decide when to use" with clear instructions about when to delegate.
+- **Manager-Specialist Relationship**: Configure a manager agent to delegate specific types of inquiries to specialist agents using "AI connection" with clear instructions about when to delegate.
 - **Sequential Processing**: Use "Next step" to create a workflow where one agent always passes work to another after completing its part, such as having a research agent always pass findings to a content creation agent.
 
 ### Agent-to-Tool Communication
 
 Edge settings control how agents interact with tools:
 
-- **Conditional Tool Usage**: With "Decide when to use", an agent can determine when a particular tool is appropriate based on the context.
+- **Conditional Tool Usage**: With "AI connection", an agent can determine when a particular tool is appropriate based on the context.
 - **Approval Workflows**: For sensitive operations like sending emails or making purchases, configure "Approval required" to ensure human oversight.
 - **Automated Sequences**: Use "Next step" to ensure an agent always follows a specific process, such as always logging customer interactions after completing a support conversation.
 
@@ -63,7 +63,7 @@ Create sophisticated automation workflows:
 ## Best Practices
 
 1. **Start Simple**: Begin with basic connections and gradually increase complexity as you understand how your workforce operates.
-2. **Use Clear Instructions**: When using "Decide when to use" provide specific, unambiguous instructions about when and how to use connections.
+2. **Use Clear Instructions**: When using "AI connection", provide specific, unambiguous instructions about when and how to use connections.
 3. **Implement Guardrails**: Use approval requirements and auto-run limits for critical operations to maintain control while allowing automation.
 4. **Test Thoroughly**: Verify that your edge settings produce the expected behavior across different scenarios before deploying to production.
 5. **Monitor Performance**: Regularly review how your connections are being used and refine edge settings based on actual performance.
