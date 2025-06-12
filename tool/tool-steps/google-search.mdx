@@ -1,0 +1,49 @@
+---
+title: "Google Search Tool step"
+sidebarTitle: "Google Search"
+description: "Add a Google Search step to your Tools"
+---
+
+The Google Search Tool step allows you to run a Google Search within your Tool, and use the outputs of this search in your LLM Tool steps. 
+
+## Add the Google Search Tool step to your Tool
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmbt2atv9dqp7sn1rd6nr9vxx" frameBorder="0" title="Add the Google Search Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+
+</div>
+
+You can add the Google Search Tool step to your Tool by:
+
+1. Creating a new Tool, then click 'Google' under 'Steps'
+2. Click 'Expand' to see the full Tool step
+3. Add a Search Query to the field 
+4. Run the Tool step to see if works with your configuration\!
+
+## Advanced Settings
+
+### Country
+You can select which country / region you would like to search Google from. 
+
+### Locale
+You can select which language is set for the Google Search. 
+
+## Tool step outputs
+
+The Google Search Tool step allows you to access the organic search (as an array) completed on the search query entered, as well as:
+- **People Also Ask**: you can access an array of questions searchers also ask about the query, as well as a snippet, title and link for each question
+- **Related searches**: you can also access an array of related searches to the search query
+
+If you wanted to use an LLM Tool step to then analyse these results, here is an example of how you could prompt engineer this, where `search_query` is the input variable used for the Google Search, and `google` is the variable for the Google Search Tool step. 
+
+```markdown
+You are analysing the Google results for the following query: {{search_query}}
+
+A Google Search has already been completed for this query, and Google has returned the following info:
+
+* People Also Ask: {{google.peopleAlsoAsk}}
+* Related Searches: {{google.relatedSearches}}
+* All of the latest search results: {{google.organic}}
+
+Analyse these to give me a run down of the top results from the {{search_query}}, as well as what people are asking about this query, and related searches. Keep this analysis between 1 - 3 paragraphs. 
+```
