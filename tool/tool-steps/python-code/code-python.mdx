@@ -1,45 +1,142 @@
 ---
-title: "Code - Python"
-sidebarTitle: "Code - Python"
-description: "A component to run Python"
+title: "Python Tool step"
+sidebarTitle: 'Python'
+description: "Use the Python Tool step to run a custom API call to another product / service"
 ---
 
-Although Relevance in general is a zero or low-code platform, you can still code your own features using the Python tool step if you want to.
+The Python Tool step allows you to use Python to take outputs from other Tool steps and manipulate data for other Tool steps and LLMs. 
 
-## How to use a Python step
+## What is Python?
 
-You can add a Python tool-step to any tool by creating a new tool, clicking on the "Add step" button under the tool steps section, searching for "Python" and clicking on the "Python Code" tool  step as shown below.
+Python is a widely used programming language known for its clarity and simplicity. It’s popular among beginners and experts alike because it’s easy to read, quick to write, and versatile enough for tasks ranging from web development and automation to data analysis and machine learning. With a massive library ecosystem and strong community support, Python is a powerful tool for solving real-world problems efficiently.
 
-![Python step](/images/python-tool-step.png)
+<Warning>In order to use this Tool step, we would recommend having a beginner level of understanding of Python programming.</Warning>
 
-Enter your code in the code section as you would in any other IDE (e.g. VS Code, Webstorm).
+## Add the Python Tool step to your Tool
 
-### Access input variables , other steps' output and api keys
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmbyqj44egw7vsn1rldrjxvxh" frameBorder="0" title="Add the Python Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-You can access tool input variables, other tool step outputs, and api_keys you've created in Relevance using the following syntax:
+</div>
 
-![Python step](/images/python-variables.png)
+You can add the Python Tool step to your Tool by:
 
-- **Access input varibles** via `params`: This is a dictionary, and the names of input variables are the dictionary keys. For example, if there is an input parameter called "name", you can access the value using `params["name"]`.
-- **Access other steps' output** via `steps`: This is a dictionary, and the names of the steps are the dictionary keys. For example, if there is a step called "summary", you can access its output using `steps.summary.output`. Or, if there is a code step, you can access its produced output using `steps["python"]["output"]["transformed"]`, where 'python' represents the default variable name for the python code step, which you can change.
-- **Access api keys**: You can access API keys you have added to the platform via the integrations page, with `{{secrets.chains_name_of_your_api_key}}`.
+1. Creating a new Tool, then searching for the 'Convert PDF to text' Tool step
+2. Click 'Expand' to see the full Tool step
+3. Enter your code in the 'Code' field
+4. Click '+ New item' under 'PyPl Packages' if you need to install any packages
+5. Click 'Run step' to run the Tool step
 
-### Installing & using packages
+<Info>In order to access the output of this codeblock, you will need to return a value in the return statement.</Info>
 
-To install custom packages and import them into your custom python tool-step, you need to:
+## Accessing variables 
 
-1. Click on the cog icon next to "Run step" in your python tool step.
-2. Click on "New item" under the "Runtime Commands" field.
-3. Enter the installation command for your package, e.g. `pip install requests`.
-4. Import your package as you would normally, e.g. `import requests`.
+You can access Tool input variables, other Tool step outputs, and API keys you've created in Relevance in your Python Tool step. 
 
-Below is a screenshot of installing, importing and running the requests package, where we make a get request to GitHubs API:
+### Input variables
 
-![Python step](/images/python-installing-packages.png)
+You can access Input variables by following this syntax, where 'name' is the variable for your input. 
+
+```python3
+  params['name']
+```
+
+### Other Tool step outputs
+
+You can access other Tool step outputs by following this syntax, where 'tool_step' is the variable for the Tool step you're trying to access the output of. 
+
+```python3
+  steps['tool_step']
+```
+
+You can then access a specific output of that Tool step by adding another variable.
+
+```python3
+  steps['tool_step']['output']
+```
+
+### API keys
+
+You can access one of your saved API keys by using this syntax, where 'api_key' is the variable for the key you're trying to access.
+
+```python3
+  '{{api_key}}'
+```
+
+## Advanced Settings
+
+### Backend
+You can choose between two backend services to run the code, 'Modal Labs' or 'e2b.dev'.
+
+### Runtime Commands
+You can include a list of Linux terminal commands to be run before running your code.
+
+### Session ID
+Define a custom session that saves all local variables between Python executions.
+
+<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
+
+### Enable 'Long Output' Mode
+
+Allow the output to be longer than 127,000 characters, in exchange for 2-4 seconds of extra latency. 
+
+### Number of GPUs
+
+Allows you to specify a number of GPUs for your code to use. 
+
+<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
+
+### Number of CPU Cores
+
+Allows you to specify a number of CPU cores for your code to use. 
+
+<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
+
+### Memory Size
+
+Allows you to specify an amount of RAM for your code to use. 
+
+<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
+
+### Session Timeout
+
+Allows you to specify (in seconds) how long the code should run before timing out. 
+
+<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
+
+### Raise Error
+
+Allows you to specify how errors are raised:
+- Error with Full Traceback
+- Error
+- Print Error to Stderr
+
+### Enable fallback
+
+If the selected backend fails, when this is selected, your code will attempt to run via the other backend. 
 
 ## Common errors
 
-The most common errors seen in our logs are Python coding related errors to which there are millions of resources available online.
+<AccordionGroup>
+  <Accordion title="Code execution timed out">
+    This error indicates that the code took longer than the seconds allowed in the 'Session timeout' Advanced Setting, or exceeded our hard limit of four hours. 
+  </Accordion>
+  <Accordion title="No return statement">
+    This error indicates that there is no return statement in the code. You will not be able to access the output of this codeblock unless you pass data in a return statement. 
+    ```
+    WARNING: There is no return statement in this code. To access the output of this codeblock, return a value.
+    ```
+  </Accordion>
+</AccordionGroup>
 
-However, occasionally, users encounter the `Code execution timed out` error. Keep in mind that Python snippet execution time cannot exceed 4 hours.
+## Additional resources
 
+<Columns cols={2}>
+  <Card title="Helper Functions" href="/tool/tool-steps/python-code/code-python-helper-functions">
+    Access functions that can help you code Python Tool steps
+  </Card>
+
+  <Card title="Transformations" href="/tool/tool-steps/python-code/code-studio-transformation-python-helper-functions">
+    Use in-built Tool steps in Python
+  </Card>
+</Columns>
