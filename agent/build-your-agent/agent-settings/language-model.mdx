@@ -1,0 +1,60 @@
+---
+title: "Language Model"
+description: "Access advanced settings related to the Language Model for your Agent"
+---
+
+### Language Model
+
+**What it is:** The AI engine that powers your agent's thinking and communication.
+
+**How to choose:**
+
+- **Default model:** Best for most use cases - balanced performance and cost
+- **Advanced models:** May offer improved reasoning but at higher cost
+- **Specialized models:** Optimized for specific tasks like coding or creative writing
+
+**Tip:** If you're just getting started, stick with the default model. You can always upgrade later as your needs evolve.
+
+---
+
+### Maximum Output Tokens
+
+**What it is:** Override how much content an agent's model can generate as part of its reasoning, decision making, and text generation. Explicitly setting a larger limit (8,000 or higher) may be required for agents performing complex tasks with many tools and large inputs.
+
+**How to configure:**
+
+- **Lower limits:** More concise responses, faster performance, lower cost
+- **Higher limits:** More detailed responses, but may increase processing time
+
+Adjust based on whether you need brief updates or comprehensive explanations from your agent.
+
+<Warning>
+  Higher limits may incur more cost, and setting a value that exceeds the model's limit may cause the agent to fail.
+</Warning>
+
+---
+
+### Temperature
+
+**What it is:** A slider that controls how creative versus predictable your agent's responses will be.
+
+**How to set it:**
+
+- **Low (0-0.3):** More focused, consistent responses - ideal for factual tasks, customer support, or data analysis
+- **Medium (0.4-0.7):** Balanced creativity and precision - good for general conversation
+- **High (0.8-1.0):** More varied, creative responses - better for brainstorming, storytelling, or generating diverse ideas
+
+**Example:** A sales agent might use lower temperature for explaining product specs, but higher temperature when brainstorming marketing ideas.
+
+---
+
+### Reasoning / Thinking
+
+**What it is:** For supported models (OpenAI, Google, Anthropic), you can configure your models to use output tokens to 'reason'. Decisions will be slower and cost more, but improves performance on complex problems. Ignored unless your selected agent model supports reasoning and you choose a consistent config, e.g. use OpenAI reasoning effort for OpenAI o-series models.
+
+**How to set it:**
+
+Using the 'Provider' dropdown, set this to match the model you've chosen for your Agent (OpenAI, Google, Anthropic)
+- For **OpenAI**, you can then select 'Reasoning Effort'. The default is Medium, and you can also select Low or High.
+- For **Google**, you can enter a 'Thinking Budget', which can be set at any positive value to enable thinking
+- For **Anthropic**, you can enter a 'Thinking Budget', which can be set at any value above 1024 to enable thinking
