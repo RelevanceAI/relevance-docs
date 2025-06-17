@@ -25,13 +25,17 @@ API Triggers function by exposing endpoints in the Relevance AI API that allow y
 
 When you make an API call to trigger an agent, the agent processes the provided information according to its configuration and instructions, then performs the appropriate actions based on its capabilities and the data received.
 
+<Note>
+  When you trigger an agent via API, it starts a task but does not return the result directly. Instead, you must configure where the output goes — e.g., a Google Sheet or Knowledge Table. The agent will complete its task and send the result to your specified destination, not back through the API response.
+</Note>
+
 ## Setting Up API Triggers in your Agent
 
 To set up and use API Triggers for your agents:
 
 1. Navigate to the Agents page and choose the specific agent you want to setup the custom API trigger for.
 2. In the Build tab, click on "Triggers"
-3. Look for the the "API trigger" section, locate the "Customer Triggers" area
+3. Look for the "API trigger" section, locate the "Customer Triggers" area
 4. Select "API Trigger" from the available trigger options
 5. Configure the API Trigger settings according to your requirements
 6. Save your configuration
