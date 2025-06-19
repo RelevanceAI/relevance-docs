@@ -1,7 +1,7 @@
 ---
-title: 'API Triggers'
-description: 'Build your own API Triggers'
-sidebarTitle: 'API Triggers'
+title: "API Triggers"
+description: "Build your own API Triggers"
+sidebarTitle: "API Triggers"
 ---
 
 ## API Triggers for Agents
@@ -25,177 +25,92 @@ API Triggers function by exposing endpoints in the Relevance AI API that allow y
 
 When you make an API call to trigger an agent, the agent processes the provided information according to its configuration and instructions, then performs the appropriate actions based on its capabilities and the data received.
 
-## Setting Up API Triggers
+## Setting Up API Triggers in your Agent
+
+## Setting Up API Triggers in your Agent
 
 To set up and use API Triggers for your agents:
 
-1. Navigate to your agent's profile in the Relevance AI interface
-2. In the left sidebar, click on "Integrations"
-3. Under the "Agent profile" section, locate the "Integrations" area
+1. Navigate to the Agents page and choose the specific agent you want to setup the custom API trigger for.
+2. In the Build tab, click on "Triggers"
+3. Look for the the "API trigger" section, locate the "Customer Triggers" area
 4. Select "API Trigger" from the available trigger options
 5. Configure the API Trigger settings according to your requirements
 6. Save your configuration
 
-Once configured, you'll receive the necessary API credentials and endpoint information to begin making API calls to your agent.
+### Setting up your API trigger in your Codebase
 
-## Using API Triggers
+```http
+POST https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
+```
 
-To use API Triggers in your applications or scripts:
+### Save your API key somewhere safe
 
-### Authentication
+<Warning>
+  You'll need to **generate an API key** (Authorization Token) to authenticate your requests. Make sure to save your API key somewhere safe. Once generated, you won't be able to view it again. However, you can regenerate one at any time.
+</Warning>
 
-First, authenticate your API requests using your Relevance AI API key:
+<Tip>
+  To find your **Agent ID**, you can ask your agent directly in the chat ("What is your agent ID?"). Or, you can check the URL. When your agent is open, look at the URL in your browser. The agent ID is the second long code after the region code in the URL structure: Example: https://app.relevanceai.com/agents/{region}/{project_id}/{agent_id}/edit
+</Tip>
 
-```python
-import requests
+## Request Body
 
-headers = {
-    "Authorization": "Bearer YOUR_API_KEY",
-    "Content-Type": "application/json"
+```json
+{
+  "message": {
+    "role": "user",
+    "content": "Hello"
+  },
+  "agent_id": "[YOUR_AGENT_ID_GOES_HERE]"
 }
 ```
 
-### Triggering an Agent
+## Example Usage (Choose a method your prefer)
 
-To trigger an agent via the API:
+### cURL
 
-```python
-# Example: Initiating a new conversation with an agent
-response = requests.post(
-    "https://api.relevanceai.com/v1/agents/{agent_id}/conversations",
-    headers=headers,
-    json={
-        "message": "Process this customer inquiry",
-        "context": {
-            "customer_id": "12345",
-            "inquiry_type": "billing_question",
-            "priority": "high"
-        }
-    }
-)
-
-conversation_id = response.json()["conversation_id"]
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: [YOUR_API_KEY]" \
+  -d '{"message":{"role":"user","content":"Hello"},"agent_id":"[YOUR_AGENT_ID_GOES_HERE]"}' \
+  https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
 ```
 
-### Continuing a Conversation
+### JavaScript (Fetch)
 
-To send additional messages to an existing conversation:
+```js
+fetch('https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger', {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "[YOUR_API_KEY]"
+  },
+  body: JSON.stringify({
+    message: { role: "user", content: "Hello" },
+    agent_id: "[YOUR_AGENT_ID_GOES_HERE]"
+  })
+});
+```
+
+### Python (requests)
 
 ```python
-# Example: Sending a follow-up message to an existing conversation
+import requests
+import json
+
 requests.post(
-    f"https://api.relevanceai.com/v1/agents/{agent_id}/conversations/{conversation_id}/messages",
-    headers=headers,
-    json={
-        "message": "Here's the additional information you requested",
-        "attachments": [
-            {
-                "type": "file",
-                "url": "https://example.com/customer_records.pdf"
-            }
-        ]
-    }
+  'https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger',
+  headers={
+    "Content-Type": "application/json",
+    "Authorization": "[YOUR_API_KEY]"
+  },
+  data=json.dumps({
+    "message": { "role": "user", "content": "Hello" },
+    "agent_id": "[YOUR_AGENT_ID_GOES_HERE]"
+  })
 )
-```
-
-## Customizing API Trigger Behavior
-
-When configuring API Triggers, you can customize how your agent processes the incoming data:
-
-- **Input Mapping**: Define how data fields in your API request map to variables the agent can use
-- **Context Handling**: Specify how contextual information should be processed and presented to the agent
-- **Response Formatting**: Configure how the agent's responses should be structured in API responses
-- **Workflow Integration**: Define specific workflows the agent should follow based on API request parameters
-
-These customization options ensure your agent aligns perfectly with your application's requirements and business processes.
-
-## Advanced API Trigger Features
-
-### Batch Processing
-
-For scenarios requiring processing of multiple items, you can use batch API calls:
-
-```python
-# Example: Batch processing multiple customer inquiries
-requests.post(
-    f"https://api.relevanceai.com/v1/agents/{agent_id}/batch",
-    headers=headers,
-    json={
-        "items": [
-            {
-                "customer_id": "12345",
-                "inquiry": "Billing question about my recent invoice"
-            },
-            {
-                "customer_id": "67890",
-                "inquiry": "Need to update shipping address"
-            }
-        ],
-        "options": {
-            "priority": "normal",
-            "notification_email": "admin@example.com"
-        }
-    }
-)
-```
-
-### Webhook Callbacks
-
-Configure your API Trigger to send webhook callbacks when the agent completes tasks:
-
-```python
-# Example: Setting up webhook callbacks
-requests.post(
-    f"https://api.relevanceai.com/v1/agents/{agent_id}/conversations",
-    headers=headers,
-    json={
-        "message": "Process this customer inquiry",
-        "context": {
-            "customer_id": "12345"
-        },
-        "callback": {
-            "url": "https://your-server.com/webhook",
-            "headers": {
-                "X-Custom-Header": "value"
-            }
-        }
-    }
-)
-```
-
-## Integration Examples
-
-### CRM Integration
-
-```python
-# Example: Triggering an agent when a high-value lead is created in your CRM
-def on_new_lead(lead_data):
-    if lead_data["score"] > 80:  # High-value lead
-        requests.post(
-            f"https://api.relevanceai.com/v1/agents/{agent_id}/conversations",
-            headers=headers,
-            json={
-                "message": "Research this high-value lead",
-                "context": lead_data
-            }
-        )
-```
-
-### Customer Support System
-
-```python
-# Example: Triggering an agent for urgent support tickets
-def on_new_support_ticket(ticket):
-    if ticket["priority"] == "urgent":
-        requests.post(
-
-            f"https://api.relevanceai.com/v1/agents/{agent_id}/conversations",
-            headers=headers,
-            json={
-                "message": "Handle this urgent support ticket",
-                "context": ticket
-            }
-        )
 ```
 
 ## Best Practices for API Triggers
@@ -220,15 +135,12 @@ def on_new_support_ticket(ticket):
   <Accordion title="What programming languages can I use with API Triggers?">
     You can use any programming language capable of making HTTP requests. Our examples use Python, but the API is language-agnostic.
   </Accordion>
-
   <Accordion title="Are there rate limits for API Triggers?">
     Yes, API usage is subject to rate limits based on your subscription plan. Please refer to your plan details for specific limitations.
   </Accordion>
-
   <Accordion title="Can I use API Triggers with serverless functions?">
-    Absolutely! API Triggers work well with serverless architectures like AWS Lambda, Google Cloud Functions, or Azure Functions.
+    Absolutely\! API Triggers work well with serverless architectures like AWS Lambda, Google Cloud Functions, or Azure Functions.
   </Accordion>
-  
   <Accordion title="How secure are API Triggers?">
     API Triggers use industry-standard authentication and encryption. All API requests must be authenticated with your API key, and all data is transmitted over HTTPS.
   </Accordion>
