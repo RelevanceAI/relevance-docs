@@ -1,114 +1,55 @@
 ---
-title: 'Convert audio/video to text'
-sidebarTitle: 'Audio/Video to Text'
-description: 'Extract text from an audio/video file'
+title: "'Convert audio/video to text' Tool steps"
+sidebarTitle: "Convert audio/video to text"
+description: "Use three different Tool steps to convert audio/video to text"
 ---
 
-Audio/Video to text helps save us time when the source data is in audio/video format. When the data is transcribed, it is easy to
-apply any text processing tool such as summarization, quote extraction and theme and topic identification. More importantly, we 
-will no longer need to listen to the file over and over again when we require some information.
+Relevance AI supports three different models for converting audio to text, and two for converting video to text. You can use one of these Tool steps which use different models:
+- Deepgram (audio and video)
+- AssemblyAI (audio and video)
+- OpenAI (only audio)
 
-On this page, we will introduce three available Tool steps at Relevance to convert audio/video to text.
+By using these steps, you can convert your audio and video into readable text for other Tools to use. 
 
-<Tip>
-Relevance is currently more focused on text analysis. As a result, the supported upload size does not need to be massive. 
-Keep in mind that audio is all needed for transcription. So, if you are working with large video files that might not be
-possible to upload to the platform, you can use tools such as QuickTime to export the audio from and audio file.
-</Tip>
+## Add a 'Convert audio/video to text' Tool step to your Tool
 
-## How to use Convert audio/video to text step
-### Available converters
-* Open AI audio-to-text converter: only supports audio input and you will need your API key to use this converter
-* Deepgram audio/video-to-text converter: Relevance AI's default audio and video-to-text converter
-* Assembly AI audio/video to text converter: Supports both audio and video, highly accurate and the most expensive option
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmc2ujaa3kt4ysn1rfs88zyu5" frameBorder="0" title="Add the 'Convert audio/video to text' Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-### Add the component
-Add the desired audio (video) to text converter step to your Tool (check how to get started with 
-[creating a tool](/tool/tool-steps/getting-started)).
-![Audio to text](/images/build-custom-tools/tool-step/audio-to-text-get-started.png)
+</div>
 
-### File URL
-All the aforementioned converters require a file as an input. If your file is publicly accessible on the web (i.e. with no 
-authentication or sign-up requirement), simply provide the URL directly or as a 
-[text input](/tool/user-inputs/text-input). Otherwise, you will need to add a 
-[File-to-URL](/tool/user-inputs/file-to-url) input.
-In either situation, use the `{{variable name}}` to provide the data to the converter.
+You can add the 'Convert audio/video to text' Tool step to your Tool by:
 
-![Audio to text](/images/build-custom-tools/tool-step/audio-to-text-fields.png)
+1. Creating a new Tool, then searching for one of the 'Convert audio/video to text' Tool step
+2. Click 'Expand' to see the full Tool step
+3. Upload the file you want to convert
+4. Click 'Run step' to see the Tool step's output! 
 
-<Snippet file="components/tools/step-general.mdx" />
+### Deepgram steps
 
-## Access the step output
-<Tip>
-The output produced by different audio/video processing tools follows different structure. You might want to experiment with
-the structure in a code step.
-</Tip>
-### Deepgram
-The output is a dictionary. Below you can see samples where the default name assigned to the step `audio_to_text_v2` is used.
-Note that a step name is different from the step title. Step titles can be found on the top left
-of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
+If you use the Deepgram Tool step, you can select an option to recognise speaker changes. 
 
-* To access the transcription in a JavaScript code step:
+### OpenAI steps
+<Warning>Using this tool step requires an OpenAI API Key.</Warning>
 
-```
-audio_to_text_v2.results.channels[0].alternatives[0].transcript;
-```
-
-* To access utterances and metadata such as speaker label and start and end time of each utterance in a JavaScript code step:
-
-```
-let paragraphs = steps.audio_to_text_v2.output.results.channels[0].alternatives[0].paragraphs.paragraphs;
-
-for (let p of paragraphs){
-  let speaker = p.speaker;
-  let start = p.start;
-  let end = p.end;
-  let text = "";
-  for (let s of p.sentences){
-    text = text + s.text;
-  }
-```
-
-### AssemblyAI
-The output is a dictionary. Below you can see samples where the default name assigned to the step `audio_to_text_v3` is used.
-Note that a step name is different from the step title. Step titles can be found on the top left
-of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
-
-* To access the transcription in a JavaScript code step:
- 
-```
-steps.audio_to_text_v3.output.text
-```
-
-* To access utterances and metadata such as speaker label and start and end time of each utterance in a JavaScript code step:
-
-```
-let utterances = steps.audio_to_text_v3.output.utterances;
-
-for (let p of utterances){
-  let speaker = p.speaker;
-  let start = p.start;
-  let end = p.end;
-  let text = "";
-  for (let t of p.text){
-    text = text + t.text;
-  }
-```
+If you use the OpenAI Tool step, you can select a Response Type. There are two options, `Transcript only` and `Transcript + advanced metadata`. 
 
 ## Common errors
-### Unsupported file format
-An error similar to the one noted below indicates that the provided input file is not of the supported formats.
 
-```
-"err_code":"Unsupported Media Type","err_msg":"..
-```
-
-Use an audio/video editor to export your file to common audio/video formats and try again.
-
-### File size
-This error only occurs for too large files (60+ MB). If you are working with large video files, use video editing tools such
+<AccordionGroup>
+  <Accordion title="Unsupported file format">
+    An error similar to the one noted below indicates that the provided input file is not of the supported formats.
+    ```
+    "err_code":"Unsupported Media Type","err_msg":"..
+    ```
+    Use an audio/video editor to export your file to common audio/video formats and try again.
+  </Accordion>
+  <Accordion title="File size">
+    This error only occurs for too large files (60+ MB). If you are working with large video files, use video editing tools such
 as Quicktime to extract the audio.
-
-```
-Request body larger than maxBodyLength limit
-```
+    
+    ```
+    Request body larger than maxBodyLength limit
+    ```
+  </Accordion>
+</AccordionGroup>
