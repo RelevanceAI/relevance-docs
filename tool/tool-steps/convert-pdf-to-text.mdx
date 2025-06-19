@@ -1,57 +1,48 @@
 ---
-title: 'Convert PDF to text'
-sidebarTitle: 'PDF to Text'
-description: 'Extract text from a PDF - Supports OCR'
+title: "'Convert PDF to text' Tool step"
+sidebarTitle: 'Convert PDF to Text'
+description: "Use a Tool step to convert PDFs into text for your Agents and Tools to read"
 ---
 
-PDF-to-Text allows you to extract all the text data from PDF files and further analyze the text or use the text in applications
-such as question answering.
-Note that you can save the extracted text into a knowledge-set to avoid redoing the PDF-to-Text step.
+The 'Convert PDF to text' Tool step allows you to convert a PDF into text for your tools and Agents to use. 
 
-On this page, we will introduce the Tool step at Relevance to convert PDF to text.
-## How to use Convert PDF to text step
+## Add the 'Convert PDF to text' Tool step to your Tool
 
-### Add the component
-Add the PDF to text converter step to your Tool (check how to get started with 
-[creating a tool](/tool/tool-steps/getting-started)).
-![PDF to text](/images/build-custom-tools/tool-step/pdf-to-text-get-started.png)
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmbrl86lmceh2sn1ruioz8hbb" frameBorder="0" title="Add the Convert a Spreadsheet to JSON Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-### File URL
-A PDF-to-text converter requires a file as an input. If your file is publicly accessible on the web (i.e. with no 
-authentication or sign-up requirement), simply provide the URL directly or as a 
-[text input](/tool/user-inputs/text-input). Otherwise, you will need to add a 
-[File-to-URL](/images/build-custom-tools/user-input/file-to-url-1.png) input.
-In either situation, use the `{{variable name}}` to provide the data to the converter.
+</div>
 
-![PDF to text](/images/build-custom-tools/tool-step/pdf-to-text-fields.png)
+You can add the 'Convert PDF to text' Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the 'Convert PDF to text' Tool step
+2. Click 'Expand' to see the full Tool step
+3. Add the PDF you want to convert to text
+4. Click 'Run step' to run the Tool step
+
+## Advanced Settings
 
 ### Use OCR
-OCR (Optical character recognition or optical character reader) is needed for image PDFs (e.g. scanned data).
-This option uses more credits. So, only activate it for image PDFs.
 
-### Available converters
-* Fast converter: Relevance AI's default audio and video-to-text converter which is fast and reasonably accurate
-* Quality converter: Slower and more accurate compared to the previous option
+OCR (Optical character recognition or optical character reader) is needed for image PDFs (e.g. scanned data). This option uses more credits and therefore should only be activated for image PDFs.
 
-<Snippet file="components/tools/step-general.mdx" />
+<Warning>This will not return images in the PDFs you upload, but will convert text in images to text for you to use in your Tools.</Warning>
 
-## Access the step output
-The output is a dictionary with two keys `text` and `number_of_pages` containing the extracted text and the number 
-of pages in the file respectively. Below you can see samples where the default name assigned to the step `pdf_to_text` is used.
-Note that a step name is different from the step title. Step titles can be found on the top left
-of steps. A step name is shown on the bottom left, in smaller font and highlighted green.
+### OCR Type
 
-```
-pdf_to_text.text
-pdf_to_text.number_of_pages
-```
+This allows you to choose the model used if 'Use OCR' is selected. The options available are:
+- Fast model (~95% accuracy)
+- Quality model (~99% accuracy but slow)
 
+### Return PDF Text as Documents (List of Texts)
+
+This can only be selected if 'Use OCR is selected'. 
+
+Toggling this will either return the PDF text as an aggregated text or as a list of texts. 
 
 ## Common errors
-### Unsupported protocol
-An error similar to the one noted below indicates that the provided input is not a valid URL.
 
-```
-Error:
-Only HTTP(S) protocols are supported
-```
+<Accordion title="Unsupported file type">
+  The error message similar to the one below indicates that a non-PDF file was uploaded to the Tool step. Only PDF files are supported. 
+  `Unsupported file type: xlsx`
+</Accordion>
