@@ -5,7 +5,7 @@ description: "Connect your Relevance AI tools to Claude, Cursor, and other AI cl
 
 ## Overview
 
-The MCP Server integration enables you to use your Relevance AI tools in external AI clients that support the MCP (Model Control Protocol) standard. This powerful feature creates a seamless connection between your Relevance AI workspace and popular AI assistants like Claude and development environments like Cursor.
+The MCP Server integration enables you to use your Relevance AI Agents and tools in external AI clients that support the MCP (Model Control Protocol) standard. This powerful feature creates a seamless connection between your Relevance AI workspace and popular AI assistants like Claude and development environments like Cursor.
 
 With MCP Server integration, you maintain a single source of truth for your tools while extending their availability across your entire AI ecosystem. This means the specialized tools you've built in Relevance AI can now be accessed and utilized by your favorite AI assistants outside our platform.
 
@@ -26,6 +26,24 @@ Once configured, your external AI assistant can access and execute the selected 
 ## Setting Up MCP Server Integration
 
 Setting up the MCP Server integration is straightforward:
+
+### For Agents
+
+Agents can now connect to and run tools from remote MCP servers.
+
+1. Open the Agent you want to connect
+2. Head to Advanced Settings by clicking "Advanced" in the sidebar
+3. Click "MCP Server"
+4. Click "+ Add remote MCP tools"
+5. Add the details of your MCP Server here (URL and authentication details)
+
+Once connected, the agent will automatically fetch and display the available tools from the remote MCP server. These tools can be referenced in the agent’s core instructions and will appear in the conversation task view. When a tool is run, the agent communicates with the remote MCP server and returns the result directly in the conversation.
+
+<Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
+
+### For Tools
+
+You can export your Relevance AI tools to an MCP Server. 
 
 1. Go to your Relevance AI workspace
 2. Under "Tools", navigate to "Export Tools" → "MCP Server"

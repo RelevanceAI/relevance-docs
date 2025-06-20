@@ -20,15 +20,15 @@ This one-way communication model creates clear workflows and responsibility chai
 
 ## Setting Up Communication Between Agents
 
-When connecting agents in your workforce, you have two communication style options that determine how agents interact with each other:
+When connecting agents in your workforce, you have two connection type options that determine how agents interact with each other:
 
-### Let Agent Decide
+### AI connection
 
 This option gives the agent autonomy to determine when to communicate with another agent based on natural language instructions.
 
 **Configuration Steps:**
 1. Connect two agents in your workforce
-2. Select "Let agent decide" as the communication style
+2. Select "AI connection" as the connection type
 3. Complete the "When to call this agent" field with natural language instructions
 4. Configure behavior settings:
 
@@ -47,13 +47,13 @@ Choose one of the following approval modes:
 - **Max auto runs**: Set a limit on the number of times the agent can auto-run (no limit or a specific number)
 - **Task continuation**: Choose between 'always start a new task' or 'always continue with one task'
 
-### Forced Handover
+### Next step
 
 This option creates a mandatory connection where the source agent must pass the task to the target agent.
 
 **Configuration Steps:**
 1. Connect two agents in your workforce
-2. Select "Forced handover" as the communication style
+2. Select "Next step" as the connection type
 3. Configure task continuation:
    - Choose between 'always start a new task' or 'always continue with one task'
 
@@ -64,10 +64,9 @@ With forced handover, the source agent will always transfer control to the targe
 To maximize the effectiveness of agent communication in your workforce:
 
 1. **Define Clear Responsibilities**: Ensure each agent has well-defined roles and responsibilities to avoid confusion about which agent should handle specific tasks.
-2. **Use Descriptive Instructions**: When using "Let agent decide," provide detailed instructions about when and why the source agent should communicate with the target agent.
-
+2. **Use Descriptive Instructions**: When using "AI connection", provide detailed instructions about when and why the source agent should communicate with the target agent.
 3. **Create Logical Workflows**: Design your communication paths to follow natural workflows, where information and tasks flow in a logical sequence from one agent to the next.
-4. **Balance Autonomy and Control**: Use "Let agent decide" for situations requiring judgment and "Forced handover" for mandatory steps in a process.
+4. **Balance Autonomy and Control**: Use "AI connection" for situations requiring judgment and "Forced handover" for mandatory steps in a process.
 5. **Monitor Communication Patterns**: Regularly review how agents are communicating to identify any bottlenecks or inefficiencies in your workforce.
 6. **Implement Appropriate Approval Mechanisms**: Use approval settings to maintain quality control while allowing agents to work autonomously when appropriate.
 
@@ -88,7 +87,7 @@ A: Currently, Workforce Builder only supports one-way communication between agen
 A: You can monitor agent communication in the Workforce Task View, which shows the timeline of activities and interactions between agents.
 
 **Q: Can I set conditions for when an agent should communicate with another agent?**  
-A: Yes, when using the "Let agent decide" communication style, you can provide natural language instructions in the "When to call this agent" field to guide the source agent's decision-making.
+A: Yes, when using the "AI connection" communication style, you can provide natural language instructions in the "When to call this agent" field to guide the source agent's decision-making.
 
 **Q: What happens if an agent tries to communicate with another agent but lacks necessary information?**  
 A: Depending on your behavior settings, the agent may ask for human approval or clarification before proceeding with the communication.

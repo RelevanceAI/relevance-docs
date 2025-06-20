@@ -1,0 +1,60 @@
+---
+title: "API Tool step"
+sidebarTitle: 'API'
+description: "Use the API Tool step to run a custom API call to another product / service"
+---
+
+The API Tool step allows you to run a custom API call to any another product / service. These are best used to integrate with products / services that Relevance AI doesn't have dedicated integrations for, but can be used for any product / service.
+
+## What is an API?
+
+Think of an API like a waiter in a restaurant. You (the user) look at the menu (a list of what’s possible), place your order with the waiter (the API), and then the kitchen (the system or server) prepares the food and the waiter brings it back to you.
+
+In the tech world, an API is a set of rules that allows one piece of software (like an app) to talk to another (like a server).
+
+<Warning>In order to use this Tool step, we would recommend having a beginner level of understanding of what an API is, and how to use them. You can also use the Invent feature to help you use this Tool step to integrate with different products and services.</Warning>
+
+## Add the API Tool step to your Tool
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmbrnltuicghjsn1rf9edki66" frameBorder="0" title="Add the API Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+
+</div>
+
+You can add the API Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the 'Convert PDF to text' Tool step
+2. Click 'Expand' to see the full Tool step
+3. Select the method you wish to use for your API call
+4. Enter the URL / pathway / endpoint you want to call
+5. Add headers, body and URL parameters as needed for your API call
+6. Click 'Run step' to run the Tool step
+
+## Advanced Settings
+
+### Response format
+
+Allows you to select the format of the response. You can choose from:
+- string
+- json
+- arrayBuffer
+- blob
+
+### Cookies
+
+Allows you to add cookies to send with the request.
+
+### Throw error on 4xx/5xx response
+
+When checked, throws an error when the API response contains a 4xx/5xx response code.
+
+## Common errors
+
+<AccordionGroup>
+  <Accordion title="Missing scopes">
+    The "missing scopes" API error code generally indicates that the access token or credentials used in the API request do not include the necessary permissions (scopes) required to perform the requested action. This usually indicates your API key / token is missing, or you may not have the access to perform the call you're attempting.
+  </Accordion>
+  <Accordion title="Invalid values">
+    An "invalid values" API error generally occurs when one or more of the parameters or fields in your API request contain data that doesn’t conform to the expected format, type, or allowed range defined by the API. This can also occur when your request hasn't filled out a mandatory / required field for the API call. To fix this, make sure all required fields have been added to your call, and your parameters match the expected format (e.g. strings, booleans).
+  </Accordion>
+</AccordionGroup>
