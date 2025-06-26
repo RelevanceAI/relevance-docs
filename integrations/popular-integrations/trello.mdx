@@ -5,6 +5,10 @@ description: 'Enhance your day-to-day team and personal coordination with the Tr
 
 Trello is a flexible personal productivity and work management tool that helps individuals and teams visually organize tasks, ideas, and workflows using boards, lists, and cards. It’s designed to adapt to a wide range of use cases — from planning daily to-dos and tracking habits to managing team coordination or creative pipelines. With its drag-and-drop interface, customizable labels, and integrations with tools like Slack, Google Drive, and now Relevance AI, Trello makes it easy to stay on top of work, whether you’re managing solo projects or collaborating asynchronously.
 
+<Warning>
+  The Trello integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Atlassian (Trello's parent company). If you have a question / issue with using Trello in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question / issue that is only about Trello, you can [reach out to Atlassian support](https://support.atlassian.com/contact/).
+</Warning>
+
 ## Connect the Integration
 
 Setting up the Trello integration with Relevance AI is straightforward:
@@ -21,6 +25,22 @@ After connecting, your Relevance AI agents will be able to interact with your Tr
 
 ## Tool steps for Trello
 
-The Trello integration provides a rich set of actions that your agents can use to interact with Trello. These actions can be incorporated into your agent’s workflows to automate design-related tasks.
+The Trello integration provides a rich set of actions that your agents can use to interact with Trello. These actions can be incorporated into your agent’s workflows to automate tasks.
 
 <Snippet file="components/integrations/trello-tool-steps.mdx"/>
+
+## Use the integration's API tool step (advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Confluence-specific activities using the Trello API Call tool step:
+
+1. Create a new tool in Relevance AI.
+2. Scroll down to Tool steps.
+3. Add the Trello API Tool step.
+4. Select your connected Confluence account in the dropdown.
+5. Configure the API endpoint, method, and parameters according to your needs.
+
+This advanced approach gives you full access to the Trello REST API, allowing you to implement custom functionality beyond what's available in the standard actions.
+
+<Info>
+  You can find Trello's API documentation [here](https://developer.atlassian.com/cloud/trello/rest/).
+</Info>
