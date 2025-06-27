@@ -1,0 +1,114 @@
+---
+title: "Insert Knowledge"
+description: "Insert data into your knowledge table"
+---
+
+![image.png](/images/image.png)
+
+## Key Benefits
+
+Snippets deliver several important advantages that enhance your workflow:
+
+- **Centralized Text Management** – Store common strings (company names, greetings, standard messages) in one accessible location.
+- **Universal Availability** – Use snippets anywhere a variable is accepted, including agents and tool inputs.
+- **Single-Source Updates** – Edit once and update everywhere, eliminating the need to manually change the same text across multiple tools.
+- **Simplified Architecture** – Eliminate 'prop-drilling' by making shared text easily accessible throughout your workspace.
+
+## Insert knowledge
+
+Snippets integrate seamlessly into your existing workflow:
+
+1. **Define a Snippet**: Create a named text variable in the Snippets section.
+2. **Reference in Tools and Agents**: Use the `snippets.` prefix followed by your snippet name to reference it anywhere variables are accepted.
+3. **Update Centrally**: When you need to change the text, update it once in the Snippets section, and the change propagates everywhere it's used.
+
+For example, you can reference a snippet using this syntax: `{{ snippets.company_name }}`
+
+## Getting Started
+
+Accessing and using Snippets is straightforward:
+
+1. Navigate to the Snippets section in the left sidebar of your Relevance AI workspace
+2. Click "Create New Snippet"
+3. Provide a descriptive name and the text content for your snippet
+4. Save your snippet
+5. Reference your snippet in tools and agents using the `{{ snippets.your_snippet_name }}` syntax
+
+## Best Practices
+
+To get the most out of Snippets, consider these recommended practices:
+
+- **Use Descriptive Names**: Choose clear, intuitive names that indicate the snippet's purpose (e.g., `company_name`, `support_email`, `legal_disclaimer`).
+- **Categorize Related Snippets**: Use naming conventions to group related snippets (e.g., `email_header`, `email_signature`).
+- **Document Usage**: Add comments within your tools and agents to indicate where snippets are being used.
+- **Audit Regularly**: Periodically review your snippets to ensure they contain up-to-date information.
+- **Consider Scope**: Create snippets for text that appears in multiple places or might need updating across tools.
+
+## Use Cases
+
+Snippets are particularly valuable in these scenarios:
+
+- **Brand Consistency**: Maintain consistent company names, taglines, and messaging across all AI interactions.
+- **Contact Information**: Store email addresses, phone numbers, and URLs that might change over time.
+- **Standard Messages**: Create reusable templates for common responses, greetings, or disclaimers.
+- **Compliance Text**: Manage legal disclaimers, privacy statements, or terms of service that must be consistent.
+- **Personalization Elements**: Store reusable personalization templates that can be combined with dynamic data.
+
+## Implementation Examples
+
+### Example 1: Company Information
+
+```
+// Define snippets
+snippets.company_name = "Acme Corporation"
+snippets.support_email = "support@acmecorp.com"
+snippets.company_tagline = "Innovating for tomorrow, today."
+
+// Use in agent prompt
+"Thank you for contacting {{ snippets.company_name }}.
+Our mission is {{ snippets.company_tagline }}
+For additional support, please email {{ snippets.support_email }}."
+```
+
+### Example 2: Email Templates
+
+```
+// Define snippets
+snippets.email_greeting = "Hello and thank you for reaching out,"
+snippets.email_signature = "Best regards,\\nThe Customer Success Team\\nAcme Corporation"
+
+// Use in email tool
+"{{ snippets.email_greeting }}
+
+[Personalized response goes here]
+
+{{ snippets.email_signature }}"
+```
+
+## Related Features
+
+[Agent Settings](https://relevanceai.com/docs/agent-settings) - Centralize your agent configurations for easier management, complementing snippets by providing a single source of truth for agent details.
+
+[Tool Version Control](https://relevanceai.com/docs/tool-version-control) - Save and track changes to your tools, working alongside snippets to create more maintainable and professional tool experiences.
+
+## FAQs
+
+**Q: Can snippets contain formatting like bold or italics?**
+
+A: Yes, snippets can contain Markdown formatting that will be rendered appropriately when used.
+
+**Q: Is there a size limit for snippets?**
+
+A: While there's no strict character limit, snippets are designed for reusable text elements rather than entire documents.
+
+**Q: Can I use variables within snippets?**
+
+A: Snippets are primarily for static text, but you can combine them with other variables in your tools and agents.
+
+**Q: How many snippets can I create?**
+
+A: There's no practical limit to the number of snippets you can create in your workspace.
+
+**Q: Can I organize snippets into folders or categories?**
+
+A: Currently, snippets are organized in a flat structure, but you can use naming conventions to create logical groupings.
