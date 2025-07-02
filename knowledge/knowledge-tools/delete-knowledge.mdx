@@ -80,14 +80,17 @@ description: "The Delete Knowledge feature allows your agent to remove informati
 
 ### **FAQs**
 
-**1. What happens if I don’t enable “Sync on Upload”?**
+**1. What’s the difference between using “AND” and “OR”?**
 
-If “Sync on Upload” is disabled, the data will be stored but not vectorized. This means your agents won’t be able to semantically search or reference that data until you manually vectorize it.
+- Use **AND** when _all_ filter conditions must be true for a row to be deleted.
+- Use **OR** when _any_ one of the conditions can match.
 
-**2. Can I update or delete rows later?**
+  This only applies when you include more than one object in the filter array.
 
-Yes. After inserting data, you can manage your knowledge set using the available tools this includes updating or deleting rows as needed.
+**2. Can I delete multiple rows at once?**
 
-**3. What data types can I insert?**
+Yes. Any row that matches the filter condition you have specified will be deleted.
 
-You can insert text, numbers, booleans, or any JSON-serializable value. Just make sure each object in the array follows the correct formatting.
+**3. What if my filters don’t match any rows?**
+
+If no rows match the provided conditions, no data will be deleted. Make sure your filter values exactly match the data in the knowledge set (e.g., casing, field names, etc.).
