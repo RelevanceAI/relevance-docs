@@ -10,33 +10,66 @@ description: "The Delete Knowledge feature allows your agent to remove informati
 ## Getting Started
 
 1. Select the knowledge set you would like to use.
-2. 
-3. New data to insert: Accepts an array of objects, where each object corresponds to a row. Add additional objects to insert multiple rows at once.
+2. Filter condition: “and” vs “or” when matching data to delete:
+   - Use **_and_** when all specified conditions must match for a row to be deleted. 
+   - Use **_or_** when any of the conditions can match.
+
+   <Note>
+     Filter condition only applies if you include more than one object in the filter
+   </Note>
+3. Filters: Accepts an array of objects, where each object corresponds to a row. Add more objects to delete multiple rows at once.
 
 ## Formatting Examples
 
-### Example 1: Insert single row
+### Example 1: Delete single condition
 
 ```json
+// All poodles will be deleted
 [
   {
-    "breed": "poodle",
-    "size": "small"
+    "breed": "poodle"
   }
 ]
 ```
 
-### Example 2: Insert multiple rows
+### Example 2: Delete single condition
 
 ```json
+// All small poodles will be deleted
+[
+  {
+    "breed": "poodle",
+	"size": "small"
+  }
+]
+```
+
+### Example 3: Delete multiple conditions (_or_)
+
+```json
+// All small poodles will be deleted AND any dog aged 4 will be deleted
 [
   {
     "breed": "poodle",
     "size": "small"
   }, 
   {
-    "breed": "great dane",
-    "size": "large"
+    "age": 4
+  }
+]
+```
+
+### Example 3: Delete multiple conditions (_and_)
+
+```json
+// Only small poodles that are aged 4 will be deleted
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }, 
+  {
+    "age": 4
   }
 ]
 ```
