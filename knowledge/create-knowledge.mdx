@@ -1,6 +1,6 @@
 ---
-title: 'Knowledge'
-sidebarTitle: 'Create knowledge'
+title: "Knowledge"
+sidebarTitle: "Create knowledge"
 description: "Our Retrieval Augmented Generation (RAG) solution"
 ---
 
@@ -139,7 +139,6 @@ Enhance retrievability with semantic approaches:
 
 1. Use consistent terminology throughout your knowledge bases
 2. Consider adding synonyms or alternative phrasings for important concepts
-
 3. Structure information in a question-answer format where appropriate
 4. Include examples and use cases to illustrate concepts
 
@@ -148,14 +147,16 @@ Enhance retrievability with semantic approaches:
 Once your knowledge is created and organized, connect it to your agents:
 
 1. Navigate to your agent's configuration page
-2. Go to the "Connected Resources" section
-3. Select "Knowledge"
-4. Click "+ Add knowledge"
-5. Select the knowledge base(s) you want to connect to your agent
-6. Configure retrieval settings (number of results, relevance threshold, etc.)
-7. Save your changes
-
-Your agent can now access this knowledge when responding to queries or performing tasks.
+2. Select "Add existing knowledge"
+3. Select the knowledge set you would like to add
+4. Select how the agent should use this knowledge
+   1. Add all to prompt: this option adds the entire knowledge set directly into the prompt every time the agent runs.
+      - _Best for small or simple data sets_
+      - _Easier to use with no extra configuration needed_
+   2. Allow agent to search: this uses Retrieval-Augmented Generation (RAG), where the agent searches the knowledge set using a tool.
+      - _Best for large or complex data sets_
+      - _More flexible and scalable_
+5. Depending on the option you chose, you can now see the name of your knowledge set as a  tool or knowledge set variable in your agent prompt.
 
 ## Advanced Knowledge Configuration
 
@@ -193,7 +194,6 @@ Enhance retrieval effectiveness:
 To maintain effective knowledge bases over time:
 
 1. **Regular Updates**: Schedule periodic reviews to keep information current
-
 2. **Version Control**: Track changes to your knowledge bases, especially for critical information
 3. **Usage Analytics**: Monitor how your agents use knowledge to identify gaps or improvement opportunities
 4. **Feedback Integration**: Create processes to incorporate user feedback into your knowledge bases
