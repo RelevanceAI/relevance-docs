@@ -5,7 +5,7 @@ description: "The Insert Knowledge feature lets your agent save information by a
 
 ![image.png](/images/image.png)
 
-### **Add the ‘Insert Knowledge’ Tool step to your Tool**
+## **Add the ‘Insert Knowledge’ Tool step to your Tool**
 
 <div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
 <iframe src="https://app.supademo.com/embed/cmcmw93ah1o3u16b6jdjavpf5" frameBorder="0" title="Add the Convert a Spreadsheet to JSON Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
@@ -16,6 +16,10 @@ You can add the ‘Insert Knowledge’ Tool step to your Tool by:
 
 1. Creating a new Tool, then searching for the ‘Insert Knowledge’ Tool step
 2. Click ‘Expand’ to see the full Tool step
+3. Select the Knowledge table you would like to use
+4. Use the **New data to insert** field to enter an array of objects, where each object corresponds to a row. Add additional objects to insert multiple rows at once.
+5. Use the **Sync on upload** field to determines whether the data should be vectorized when added to the knowledge set. In most cases, you’ll want this enabled as it allows your agents to semantically search and retrieve relevant information from your knowledge table.
+6. Click 'Run step' to test out the Tool
 
 ## Common errors
 
@@ -26,12 +30,6 @@ You can add the ‘Insert Knowledge’ Tool step to your Tool by:
 <Accordion title="Incorrect data type">
   This means the data being inserted into the knowledge table is not a JSON. `Invalid JSON`
 </Accordion>
-
-## Getting Started
-
-1. Select the knowledge set you would like to use.
-2. New data to insert: Accepts an array of objects, where each object corresponds to a row. Add additional objects to insert multiple rows at once.
-3. Sync on upload: Determines whether the data should be vectorized when added to the knowledge set. In most cases, you’ll want this enabled as it allows your agents to semantically search and retrieve relevant information from your knowledge table.
 
 ## Formatting Examples
 
@@ -65,16 +63,16 @@ You can add the ‘Insert Knowledge’ Tool step to your Tool by:
   Ensure to separate each object with a comma if inserting multiple rows.
 </Note>
 
-### **Frequently asked questions**
+## Frequently asked questions
 
-**What happens if I don’t enable “Sync on Upload”?**
+### What happens if I don’t enable “Sync on Upload”?
 
 If “Sync on Upload” is disabled, the data will be stored but not vectorized. This means your agents won’t be able to semantically search or reference that data until you manually vectorize it.
 
-**Can I update or delete rows later?**
+### Can I update or delete rows later?
 
 Yes. After inserting data, you can manage your knowledge set using the available tools this includes updating or deleting rows as needed.
 
-**What data types can I insert?**
+### What data types can I insert?
 
 You can insert text, numbers, booleans, or any JSON-serializable value. Just make sure each object in the array follows the correct formatting.
