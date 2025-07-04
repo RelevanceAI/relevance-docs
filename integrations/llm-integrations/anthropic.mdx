@@ -174,3 +174,43 @@ If both IAM credentials and role ARN are configured, Relevance will automaticall
 - [AWS Bedrock Inference Profiles Prerequisites](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-prereq.html)
 - [Cross-Region Inference Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html)
 - [Supported Models by Region](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html)
+
+## Accessing Claude models using Vertex AI on Google Cloud Platform
+
+If you use Google Cloud Platform, you can connect your Vertex AI API key to Relevance AI, which will allow you to use your Google Cloud Platform credits as opposed to your Relevance AI credits for Claude models. 
+
+You can do this by following these steps:
+
+<Steps>
+  <Step title="Enable your Vertex AI API key">
+    In Google Cloud Console, enable the Vertex AI API by following the instructions [here](https://cloud.google.com/vertex-ai/docs/featurestore/setup#configure_project).
+  </Step>
+  <Step title="Enable the Claude models you wish to access">
+    Enable the Claude model you want to use via https://cloud.google.com/vertex-ai/generative-ai/docs/partner-models/claude (click on the model card, then Enable)
+  </Step>
+  <Step title="Create a service account">
+    Create a service account in the Google Cloud Console following the instructions at https://cloud.google.com/iam/docs/service-accounts-create. **Make note of the project ID used to create the account.** The service account can have any name and description desired.
+    ![Screenshot of creating a Gemini service account](/images/gemini_service_account.png)
+  </Step>
+  <Step title="Add IAM role">
+    Give the service account the Vertex AI Service Agent IAM role. This means the service account is permitted to use Vertex AI and call LLMs in Google Cloud.
+  </Step>
+  <Step title="Create private key">
+    Create a JSON private key for the service account, and download the key file.
+  </Step>
+  <Step title="Extract the client_email and private_key fields">
+    In the key file, extract the client_email and private_key fields exactly as they are written, removing the quotation marks.
+
+    The client_email should be an email address that normally ends with iam.gserviceaccount.com.
+
+    The private_key should be formatted as follows:
+    ```shell
+    -----BEGIN PRIVATE KEY-----\nLOTS OF LETTERS AND NUMBERS HERE\n-----END PRIVATE KEY-----\n
+    ```
+  </Step>
+  <Step title="Add details to Relevance AI">
+    Log into Relevance AI and head to 'Integrations & App Keys'. Search for Google Cloud Platform, and add the Client Email and Private Key, and the Project ID from earlier in step 3.
+  </Step>
+</Steps>
+
+Once your Google Cloud Platform details are added correctly, you will not be charged Relevance AI credits for Anthropic Claude models under the `gcp-vertexai` group of models. 
