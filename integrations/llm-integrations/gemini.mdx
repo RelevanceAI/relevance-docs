@@ -1,7 +1,7 @@
 ---
 title: "Google's Gemini LLM models"
 sidebarTitle: "Gemini"
-description: "Learn more about Google's Gemini LLM models"
+description: "Learn more about Google's Gemini LLM models and how to access them via Google AI Studio and Google Cloud Platform"
 ---
 
 Google's Gemini LLM models are known for strong coding ability and task complexity handling (especially Google Gemini 2.5 models).
@@ -37,3 +37,29 @@ Google's Gemini LLM models are known for strong coding ability and task complexi
     - .wmv
   </Accordion>
 </AccordionGroup>
+
+## Accessing Gemini models using Google AI Studio
+
+If you use Google AI Studio, you can add your API key to Relevance AI, which will allow you to use your Google AI Studio credits as opposed to your Relevance AI credits. 
+
+You can add your Google AI Studio API key to Relevance AI by following these steps:
+1. Generate your API key at [Google AI Studio](https://aistudio.google.com/welcome)
+2. Log into Relevance AI and head to 'Integrations & App Keys'
+3. Search for 'Google AI Studio Gemini API Key' and add your API key
+
+Once you've successfully added your API key, you will not be charged Relevance AI credits when you use Google Gemini models in your LLM Tool steps and Agents. 
+
+## Accessing Gemini models using Vertex AI on Google Cloud Platform
+
+If you use Google Cloud Platform, you can connect your Vertex AI API key to Relevance AI, which will allow you to use your Google Cloud Platform credits as opposed to your Relevance AI credits. 
+
+You can do this by following these steps:
+
+<Steps>
+  <Step title="Enable your Vertex AI API key">
+    In Google Cloud Console, enable the Vertex AI API by following the instructions [here](https://cloud.google.com/vertex-ai/docs/featurestore/setup#configure_project).
+  </Step>
+  <Step title="Create a service account">
+    Create a service account in the Google Cloud Console following the instructions at https://cloud.google.com/iam/docs/service-accounts-create. Make note of the project ID used to create the account. The service account can have any name and description desired.
+  </Step>
+</Steps>
