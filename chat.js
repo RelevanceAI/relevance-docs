@@ -7,10 +7,10 @@ script.setAttribute('data-share-styles', 'hide_tool_steps=true&hide_file_uploads
 document.body.appendChild(script);
 
 // Auto-open the chat widget after 3 seconds
-script.onload = function() {
-  setTimeout(function() {
-    if (window.relevanceai && typeof window.relevanceai.open === 'function') {
-      window.relevanceai.open();
-    }
-  }, 3000);
-};
+// script.onload = function() {
+//   setTimeout(function() {
+//     if (window.relevanceai && typeof window.relevanceai.open === 'function') {
+//       window.relevanceai.open();
+//     }
+//   }, 3000);
+// };
