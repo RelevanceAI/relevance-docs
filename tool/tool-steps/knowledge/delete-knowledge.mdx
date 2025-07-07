@@ -1,0 +1,116 @@
+---
+title: "Delete knowledge"
+description: "The Delete Knowledge feature allows your agent to remove information from your knowledge table—making it easy to manage and keep your data relevant and up to date."
+---
+
+---
+
+## Add the ‘Delete Knowledge’ Tool step to your Tool
+
+<div style={{ width:"100%",position:"relative",paddingTop:"75%" }}>
+<iframe src="https://app.supademo.com/embed/cmcsl75ju0e0e9st8xzau7o3z?embed_v=2" frameBorder="0" title="Add the Convert a Spreadsheet to JSON Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+
+</div>
+
+
+You can add the ‘Delete Knowledge’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Delete Knowledge’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Select the knowledge set you would like to use.
+4. Filter condition: “and” vs “or” when matching data to delete:
+   - Use **_and_** when all specified conditions must match for a row to be deleted.
+   - Use **_or_** when any of the conditions can match.
+
+   <Note>
+     Filter condition only applies if you include more than one object in the filter
+   </Note>
+5. Filters: Accepts an array of objects, where each object corresponds to a row. Add more objects to delete multiple rows at once.
+
+## Common errors
+
+<Accordion title="Formatting issues">
+  This indicates that there is a formatting issue in the "Filters" input field. Make sure your object is formatted correctly. `Expected property name or '}' in JSON at...`
+</Accordion>
+
+<Accordion title="Incorrect data type">
+  This means the Filter being used is not a JSON. `Invalid JSON`
+</Accordion>
+
+## Formatting Examples
+
+### Example 1: Delete single condition
+
+```json
+// All poodles will be deleted
+[
+  {
+    "breed": "poodle"
+  }
+]
+```
+
+### Example 2: Delete single condition
+
+```json
+// All small poodles will be deleted
+[
+  {
+    "breed": "poodle",
+	"size": "small"
+  }
+]
+```
+
+### Example 3: Delete multiple conditions (_or_)
+
+```json
+// All small poodles will be deleted AND any dog aged 4 will be deleted
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }, 
+  {
+    "age": 4
+  }
+]
+```
+
+### Example 3: Delete multiple conditions (_and_)
+
+```json
+// Only small poodles that are aged 4 will be deleted
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }, 
+  {
+    "age": 4
+  }
+]
+```
+
+<Note>
+  Ensure to separate each object with a comma if inserting multiple rows.
+</Note>
+
+## Frequently asked questions
+
+### What’s the difference between using “AND” and “OR”?
+
+- Use **AND** when _all_ filter conditions must be true for a row to be deleted.
+- Use **OR** when _any_ one of the conditions can match.
+
+<Note>
+  This only applies when you include more than one object in the filter array. 
+</Note>
+
+### Can I delete multiple rows at once?
+
+Yes. Any row that matches the filter condition you have specified will be deleted.
+
+### What if my filters don’t match any rows?
+
+If no rows match the provided conditions, no data will be deleted. Make sure your filter values exactly match the data in the knowledge set (e.g., casing, field names, etc.).
