@@ -1,0 +1,125 @@
+---
+title: "Update Knowledge"
+description: "The Update Knowledge feature lets you update existing rows in your knowledge table—making it easy to keep your data current and accurate."
+---
+
+## Add the 'Update Knowledge’ Tool step to your Tool
+
+<div style={{ width:"95%",position:"relative",paddingTop:"62.5%" }}>
+<iframe src="https://app.supademo.com/embed/cmcu7bc9z1pd69st851b05iwu" frameBorder="0" title="Add the Update Knowledge Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+
+</div>
+
+
+
+You can add the ‘Update Knowledge’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Update Knowledge’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Select the knowledge set you would like to use.
+4. Filter condition: “and” vs “or” when matching data to update:
+   - Use **_and_** when all specified conditions must match for a row to be deleted.
+   - Use **_or_** when any of the conditions can match.
+   <Note>
+     Filter condition only applies if you include more than one object in the filter
+   </Note>
+5. Filters: Accepts an array of objects, where each object corresponds to a row. Add more objects to delete multiple rows at once.
+6. Update value: Provide an object with the new values to update. Each key should match a column name in your knowledge set, and its corresponding value will replace the current value in the matching row.
+7. Use the **Sync on upload** field to determine whether the data should be vectorized when added to the knowledge set. In most cases, you’ll want this enabled as it allows your agents to semantically search and retrieve relevant information from your knowledge table.
+
+
+## Common errors
+
+<Accordion title="Formatting issues">
+  This indicates that there is a formatting issue in the "New data to insert" input field. Make sure your object is formatted correctly. `Expected property name or '}' in JSON at...`
+</Accordion>
+
+<Accordion title="Incorrect data type">
+  This means the data being inserted into the knowledge table is not a JSON. `Invalid JSON`
+</Accordion>
+
+## Formatting Examples
+
+### Example 1: Replace all poodles with bulldogs
+
+```json
+// Filters
+[
+  {
+    "breed": "poodle"
+  }
+]
+```
+
+```json
+// Update value
+[
+  {
+    "breed": "bulldog"
+  }
+]
+```
+
+### Example 2: Replace all small poodles with large bulldogs
+
+```json
+// Filters
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }
+]
+```
+
+```json
+// Update value
+[
+  {
+    "breed": "bulldog",
+    "size": "large"
+  }
+]
+```
+
+
+### Example 3: Replace all poodles *and* bulldogs with cats
+
+```json
+// Filters
+[
+  {
+    "breed": "poodle"
+  },
+  {
+    "breed": "bulldog"
+  }
+]
+```
+
+```json
+// Update value
+[
+  {
+    "breed": "cat"
+  }
+]
+```
+
+<Note>
+  Ensure to separate each object with a comma if filtering multiple rows.
+</Note>
+
+## Frequently asked questions
+
+### What happens if I don’t enable “Sync on Upload”?
+
+If “Sync on Upload” is disabled, the data will be stored but not vectorized. This means your agents won’t be able to semantically search or reference that data until you manually vectorize it.
+
+### How do I update a field to be empty/blank?
+
+You can update a field to be empty/blank by setting the value to empty quote marks `""`.
+
+### What data types can I update with?
+
+You can use text, numbers, booleans, or any JSON-serializable value. Just make sure each object in the array follows the correct formatting.
