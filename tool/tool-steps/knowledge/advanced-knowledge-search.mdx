@@ -10,9 +10,6 @@ description: "The Advanced knowledge search tool allows for searching knowledge 
 
 </div>
 
-
-
-
 You can add the ‘Advanced Knowledge Search (2m context)’ Tool step to your Tool by:
 
 1. Creating a new Tool, then searching for the Advanced Knowledge Search (2m context) Tool step.
@@ -43,19 +40,13 @@ The temperature setting controls how “creative” or “random” the model’
 ### LLM model
 The model that will be used to generate the response. By default this model is `command-r-plus`.
 
-
 ### Embedding Model
 This is the model used to turn your text into a format the AI can understand and search through effectively. By default this model is `embed-english-v3.0`.
 
 <Note>For multilingual support, you can use `embed-multilingual-v3.0`</Note>
 
-
-
 ### Reranker Model
 Improves your search results by reordering them to show the most relevant information first. This is off by default but enabling it will boost performance in most cases.
-
-
-
 
 ### Chunk Size
 Chunking size decides how much text is grouped together at once when the system processes your content. It’s measured in tokens, which are like small pieces of words. 
@@ -66,26 +57,27 @@ Common values are: `[128, 256, 512, 1024]`
 - Smaller chunks means less context but more precise results—ideal for pinpointing specific information or short facts.
 </Tip>
 
-
 ### Chunking Strategy
 
-<Accordion title="Base">
-    This is the standard chunking method. It simply splits your text into fixed-sized chunks without adding any extra context. It’s fast and works well for straightforward content.
-
-    <Tip>Best for: Clean, well-structured documents where each section makes sense on its own.</Tip>
-</Accordion>
-
-<Accordion title="Window">
-    This strategy adds some overlap between chunks, meaning parts of the text are repeated across neighboring chunks. This helps preserve context between sections.
-
-    <Tip>Best for: Text where ideas span multiple paragraphs—helps avoid losing important connections.</Tip>
-</Accordion>
-
-<Accordion title="Contextual">
-    This method intelligently adjusts how chunks are created based on the structure and meaning of the content. It uses more advanced logic to split text at natural breaks (like headings or sentences).
-
-    <Tip>Best for: Complex or unstructured content where preserving meaning and flow is important.</Tip>
-</Accordion>
+<AccordionGroup>
+    <Accordion title="Base">
+        This is the standard chunking method. It simply splits your text into fixed-sized chunks without adding any extra context. It’s fast and works well for straightforward content.
+    
+        <Tip>Best for: Clean, well-structured documents where each section makes sense on its own.</Tip>
+    </Accordion>
+    
+    <Accordion title="Window">
+        This strategy adds some overlap between chunks, meaning parts of the text are repeated across neighboring chunks. This helps preserve context between sections.
+    
+        <Tip>Best for: Text where ideas span multiple paragraphs—helps avoid losing important connections.</Tip>
+    </Accordion>
+    
+    <Accordion title="Contextual">
+        This method intelligently adjusts how chunks are created based on the structure and meaning of the content. It uses more advanced logic to split text at natural breaks (like headings or sentences).
+    
+        <Tip>Best for: Complex or unstructured content where preserving meaning and flow is important.</Tip>
+    </Accordion>
+</AccordionGroup>
 
 ### Use Raw Files
 
