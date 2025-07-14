@@ -1,0 +1,97 @@
+---
+title: "Get Knowledge"
+description: "The Get Knowledge feature allows you to search and retrieve information directly from your knowledge table without RAG"
+---
+
+## Add the ‘Insert Knowledge’ Tool step to your Tool
+
+<div style={{ width:"90%",position:"relative",paddingTop:"75%" }}>
+<iframe src="https://app.supademo.com/embed/cmd2oyxum341oc4kj3skjizmf" frameBorder="0" title="Add the Get Knowledge Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+
+</div>
+
+
+You can add the ‘Insert Knowledge’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Insert Knowledge’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Select the Knowledge table you would like to use
+4. Filter condition: “and” vs “or” when matching data to update:
+   - Use **_and_** when all specified conditions must match for a row to be deleted.
+   - Use **_or_** when any of the conditions can match.
+   <Note>
+     Filter condition only applies if you include more than one object in the filter
+   </Note>
+6. Click 'Run step' to test out the Tool
+
+## Advanced settings
+
+### Fields to include
+
+This is the fields (columns)that will be included in the response. By default, all fields are included.
+
+### Number of records to retrieve
+
+This is the number of records to retrieve. By default, **20** records are retrieved.
+
+## Common errors
+
+<Accordion title="Formatting issues">
+  This indicates that there is a formatting issue in the "New data to insert" input field. Make sure your object is formatted correctly. `Expected property name or '}' in JSON at...`
+</Accordion>
+
+<Accordion title="Incorrect data type">
+  This means the data being inserted into the knowledge table is not a JSON. `Invalid JSON`
+</Accordion>
+
+## Formatting Examples
+
+### Example 1: Retrieve all large dogs
+
+```json
+[
+  {
+    "size": "large"
+  }
+]
+```
+
+### Example 2: Retrieve all large French Bulldogs
+
+```json
+[
+  {
+    "breed": "French Bulldog",
+    "size": "large"
+  },
+]
+```
+
+### Example 3: Retrieve all large dogs OR small poodles
+```json
+[
+  {
+    "size": "large",
+    "breed": "French Bulldog"
+  },
+  {
+    "size": "small",
+    "breed": "poodle"
+  }
+]
+```
+
+
+<Note>
+  Ensure to separate each object with a comma if inserting multiple rows.
+</Note>
+
+## Frequently asked questions
+
+### What is the difference between get knowledge and advanced knowledge search?
+
+Get knowledge allows you to search and retrieve information directly from your knowledge table without RAG.
+
+### What format should I use for the filter?
+
+The filter should be a JSON array of objects. Each object should have the field name and the value you want to filter by.
