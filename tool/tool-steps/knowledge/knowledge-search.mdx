@@ -1,0 +1,58 @@
+---
+title: "Knowledge Search"
+description: "The Knowledge Search tool allows you to search knowledge tables with RAG"
+---
+
+## Add the 'Knowledge Search Tool step to your Tool
+
+<div style={{ width:"90%",position:"relative",paddingTop:"55%" }}>
+<iframe src="https://app.supademo.com/embed/cmd7198g26fevc4kjjsus430b?embed_v=2" frameBorder="0" title="Add the Knowledge Search tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+
+</div>
+
+
+
+You can add the Knowledge Search Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the Knowledge Search Tool step.
+2. Click "Expand" to see the full Tool step.
+3. Select the Knowledge set to use.
+4. Enter your search query in the **Query** field. 
+5. Select the search type:
+    - 	**Vector**: Finds results based on meaning (semantic similarity). Great when you want answers even if the exact words don’t match.
+    - 	**Keyword**: Finds results based on exact word match. Useful when looking for specific terms or phrases.
+
+
+## Advanced settings
+
+### Vector field
+The vector field is the column used for searching your knowledge set using semantic similarity. By default, all fields are included unless you choose specific ones.
+
+### Output all fields
+- When enabled, all fields from your knowledge set will be shown - including the similarity score. 
+- When disabled, only the main content field is returned.
+
+
+### Page size
+The number of results to return.
+
+### Similarity threshold
+All results are given a score between 0 and 1 based on how similar the result is to your query. This threshold is the minimum score for a result to be returned.
+
+<Tip>Increase this value to get fewer but more accurate results. Lower it to be more inclusive.</Tip>
+
+
+
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+    <Accordion title="What is the difference between Knowledge Search and Advanced Knowledge Search?">
+        - Knowledge Search is easier to use out of the box, with sensible default options that work well for most use cases.
+        -   Advanced Knowledge Search gives you greater control and fine-tuning capabilities for more precise retrieval — but may be slower in comparison. 
+    </Accordion>
+    <Accordion title="When should I use Advanced Knowledge Search instead of the regular one?">
+        - If you’re unsure which to choose, start with Knowledge Search.
+        - Knowledge search works better out of the box, whilst advanced knowledge search gives you more control and fine-tuning options.
+    </Accordion>
+</AccordionGroup>
