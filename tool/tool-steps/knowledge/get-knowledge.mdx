@@ -86,12 +86,21 @@ This is the number of records to retrieve. By default, **20** records are retrie
   Ensure to separate each object with a comma if inserting multiple rows.
 </Note>
 
-## Frequently asked questions
+## Frequently asked questions (FAQs)
 
-### What is the difference between get knowledge and advanced knowledge search?
+<AccordionGroup>
+    <Accordion title="What is the difference between get knowledge and advanced knowledge search?">
+        Get knowledge allows you to search and retrieve information directly from your knowledge table without RAG.
+    </Accordion>
+    <Accordion title="What format should I use for the filter?">
+        The filter should be a JSON array of objects. Each object should have the field name and the value you want to filter by.
+    </Accordion>
+    <Accordion title="What's the difference between using 'AND' and 'OR'?">
+        - Use **AND** when _all_ filter conditions must be true for a row to be retrieved.
+        - Use **OR** when _any_ one of the conditions can match.
 
-Get knowledge allows you to search and retrieve information directly from your knowledge table without RAG.
-
-### What format should I use for the filter?
-
-The filter should be a JSON array of objects. Each object should have the field name and the value you want to filter by.
+        <Note>
+          This only applies when you include more than one object in the filter array. 
+        </Note>
+    </Accordion>
+</AccordionGroup>
