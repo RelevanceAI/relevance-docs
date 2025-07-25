@@ -1,0 +1,53 @@
+---
+title: "Check Google Calendar Availability"
+description: "The Check Google Calendar Availability tool step allows you to check the availability of a calendar"
+---
+
+## Add the ‘Check Google Calendar Availability’ Tool step to your Tool
+
+<div style={{ width:"90%",position:"relative",paddingTop:"75%" }}>
+<iframe src="https://app.supademo.com/embed/cmdibna7z0gjc1c4clx7m3qd2?embed_v=2" frameBorder="0" title="Add the Check Google Calendar Availability Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+
+</div>
+
+
+
+You can add the ‘Check Google Calendar Availability’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Check Google Calendar Availability’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Select the Google account you would like to use
+4. Input the event start date<Tooltip tip="Example: 2025-07-23">(ISO 8601 format)</Tooltip>
+5. Input the event end date<Tooltip tip="Example: 2025-07-23">(ISO 8601 format)</Tooltip>
+6. Input the slot duration. This is the duration of the time slot you want to check for in minutes
+7. Enter the start time of your workday in 24-hour format (e.g. 09:00)
+8. Enter the end time of your workday in 24-hour format (e.g. 17:00)
+9. Select your timezone
+10. Click 'Run step' to test out the Tool
+
+
+
+## Advanced settings
+
+### Calendars and/or groups to query
+Select the calendar/s you want to check the availability for. If nothing is selected the primary calendar will be used. 
+<Note>To get your calendar ID, open the settings of the calendar you want to use, then go to “Integrate calendar” and copy the Calendar ID.</Note>
+
+
+
+
+## Common errors
+<AccordionGroup>
+<Accordion title="Incorrect start/end date format">
+  The start and end date must be in ISO 8601 format (YYYY-MM-DD). 
+
+  `EG: 2025-07-23`
+</Accordion>
+<Accordion title="End date is earlier than start date">
+  The end date must be on or after the start date. Reversing the order will result in an error.
+</Accordion>
+<Accordion title="Calendar ID is incorrect or not found">
+  Double-check that the Calendar ID is copied correctly from your calendar settings page. Invalid Calendar IDs will cause the tool to fail.
+</Accordion>
+
+</AccordionGroup>
