@@ -103,6 +103,15 @@
                   "agent/build-your-agent/prompt",
                   "agent/build-your-agent/tools",
                   "agent/build-your-agent/triggers",
+                  {
+                    "group": "Triggers",
+                    "pages": [
+                      "agent/build-your-agent/agent-triggers/custom-webhook",
+                      "agent/build-your-agent/agent-triggers/zapier",
+                      "agent/build-your-agent/agent-triggers/api",
+                      "agent/build-your-agent/agent-triggers/tools-as-triggers"
+                    ]
+                  },
                   "agent/build-your-agent/escalations",
                   "agent/build-your-agent/metadata",
                   "agent/build-your-agent/variables",
@@ -258,50 +267,26 @@
                 ]
               },
               {
-                "group": "Agent Integrations",
-                "pages": [
-                  {
-                    "group": "Triggers",
-                    "pages": [
-                      "integrations/agent-integrations/freshdesk",
-                      "integrations/agent-integrations/gmail",
-                      "integrations/agent-integrations/google-calendar", 
-                      "integrations/agent-integrations/hubspot",
-                      "integrations/agent-integrations/outlook",
-                      "integrations/agent-integrations/salesforce",
-                      "integrations/agent-integrations/whatsapp-for-business",
-                      "integrations/agent-integrations/zoominfo"
-                    ]
-                  },
-                  {
-                    "group": "Premium Triggers",
-                    "pages": [
-                      "integrations/agent-integrations/premium-triggers/linkedin",
-                      "integrations/agent-integrations/premium-triggers/telegram",
-                      "integrations/agent-integrations/premium-triggers/whatsapp"
-                    ]
-                  },
-                  {
-                    "group": "Build your own Triggers",
-                    "pages": [
-                      "integrations/agent-integrations/build-your-own-triggers/custom-webhook",
-                      "integrations/agent-integrations/build-your-own-triggers/zapier",
-                      "integrations/agent-integrations/build-your-own-triggers/api",
-                      "integrations/agent-integrations/build-your-own-triggers/tools-as-triggers"
-                    ]
-                  }
-                ]
-              },
-              {
                 "group": "Popular Integrations",
                 "pages": [
-                  "integrations/popular-integrations/slack",
                   "integrations/popular-integrations/canva",
                   "integrations/popular-integrations/confluence",
+                  "integrations/popular-integrations/freshdesk",
+                  "integrations/popular-integrations/gmail",
+                  "integrations/popular-integrations/google-calendar",
                   "integrations/popular-integrations/google-sheets",
+                  "integrations/popular-integrations/hubspot",
+                  "integrations/popular-integrations/linkedin",
+                  "integrations/popular-integrations/outlook",
                   "integrations/popular-integrations/notion",
-                  "integrations/popular-integrations/zoom",
+                  "integrations/popular-integrations/salesforce",
+                  "integrations/popular-integrations/slack",
+                  "integrations/popular-integrations/telegram",
                   "integrations/popular-integrations/trello",
+                  "integrations/popular-integrations/whatsapp",
+                  "integrations/popular-integrations/whatsapp-for-business",
+                  "integrations/popular-integrations/zoom",
+                  "integrations/popular-integrations/zoominfo",
                   "integrations/popular-integrations/Model-context-protocol"
                 ]
               },
@@ -435,7 +420,19 @@
     },
     {
       "source": "/build-custom-tools/tool-steps/code-python",
-      "destination": "tool/tool-steps/python-code/code-python"
+      "destination": "/tool/tool-steps/python-code/code-python"
+    },
+    {
+      "source": "/integrations/agent-integrations/build-your-own-triggers/*",
+      "destination": "/agent/build-your-agent/agent-triggers/*"
+    },
+    {
+      "source": "/integrations/agent-integrations/premium-triggers/*",
+      "destination": "/integrations/popular-integrations/*"
+    },
+    {
+      "source": "/integrations/agent-integrations/*",
+      "destination": "/integrations/popular-integrations/*"
     }
   ]
 }
