@@ -1,0 +1,50 @@
+---
+title: "Get Events from Google Calendar"
+description: "The Get Events from Google Calendar tool step allows you to get your upcoming events from your Google Calendar"
+---
+
+## Add the ‘Get Events from Google Calendar’ Tool step to your Tool
+
+<div style={{ width:"100%",position:"relative",paddingTop:"62.5%" }}>
+<iframe src="https://app.supademo.com/embed/cmdif2elm0hs91c4cusaosgwn?embed_v=2" frameBorder="0" title="Add the Get Events from Google Calendar Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+
+</div>
+
+
+
+You can add the ‘Get Events from Google Calendar’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Get Events from Google Calendar’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Select the Google account you would like to use
+4. Input the time to search from<Tooltip tip="Example: 2025-07-23T10:00:00Z">(ISO 8601 format)</Tooltip>
+5. Input the time to search to<Tooltip tip="Example: 2025-07-24T10:00:00Z">(ISO 8601 format)</Tooltip>
+6. Check whether your would like to include attendees and links
+7. Click 'Run step' to test out the Tool
+
+
+
+## Advanced settings
+
+### Google Calendar ID
+Select the calendar you want to check the availability for. If nothing is selected the primary calendar will be used. 
+<Note>To get your calendar ID, open the settings of the calendar you want to use, then go to “Integrate calendar” and copy the Calendar ID.</Note>
+
+
+
+
+## Common errors
+<AccordionGroup>
+<Accordion title="Incorrect start/end date format">
+  The start and end date must be in ISO 8601 format (YYYY-MM-DD). 
+
+  `EG: 2025-07-23`
+</Accordion>
+<Accordion title="End date is earlier than start date">
+  The end date must be on or after the start date. Reversing the order will result in an error.
+</Accordion>
+<Accordion title="Calendar ID is incorrect or not found">
+  Double-check that the Calendar ID is copied correctly from your calendar settings page. Invalid Calendar IDs will cause the tool to fail.
+</Accordion>
+
+</AccordionGroup>
