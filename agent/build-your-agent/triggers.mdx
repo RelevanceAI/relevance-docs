@@ -1,48 +1,59 @@
 ---
-title: 'Triggers'
-sidebarTitle: 'Triggers'
+title: "Triggers"
+sidebarTitle: "Triggers"
 ---
 
-<img 
-  height="200"  
-  src="/images/agent/triggers.png" 
+<img
+  height="200"
+  src="/images/agent/triggers.png"
 />
 
-
 ### Triggers Overview
- 
-Triggers allow your Agent to start workflows automatically based on specific events.  
+
+Triggers allow your Agent to start workflows automatically based on specific events.\
 For example, connecting a Gmail trigger will let your Agent process each new email as soon as it arrives in your inbox. Based on your **Prompt** instructions, the Agent can then take action whenever an email is "triggered."
 
-
-Ways to Activate or Trigger Your Agent
+You can trigger your Agent through three different methods:
 
 - **Scheduled Events**: Set your agent to run at specific times or intervals
 - **External Actions**: Configure your agent to respond to specific events or inputs
 - **Manual Activation**: Allow users to directly engage with the agent when needed
 
-
 ## A Simple Example
 
-Imagine you set up a Gmail trigger for your Agent.  
+Imagine you set up a Gmail trigger for your Agent.
 
 Now, every time a new email arrives in your connected Gmail account, your Agent can automatically process it in real-time.
 
 You can then ask your Agent questions like, "Did I get any emails from [specific person] today?" or "Summarize the important messages from this morning."
 
-With just a trigger and the right instructions, you've effectively created a basic Executive Assistant:  
+With just a trigger and the right instructions, you've effectively created a basic Executive Assistant:\
 an Agent that monitors your inbox, understands what’s important, and can send you updates every hour — all without you having to manually check.
 
-How does this work?  
-It all comes down to the **Prompt Instructions** you gave your Agent earlier — where you tell it exactly how to read, prioritize, and act on new emails.
+How does this work? It all comes down to the **Prompt Instructions** you gave your Agent earlier — where you tell it exactly how to read, prioritize, and act on new emails.
 
 ## How to use Triggers
 
 For each Trigger, connect to the integration using your associated credentials. For more information about setting up specific triggers, refer to the integration-specific documentation.
 
+### Integration Triggers
+
+### Build Your Own Triggers
+
+We also have a number of Triggers you can use to connect to custom webhooks, APIs, and other Tools. 
+
+<Columns cols={2}>
+  <Card title="Webhook" href="/agent/build-your-agent/agent-triggers/custom-webhook">Trigger your Agent from a custom webhook.</Card>
+  <Card title="Zapier" href="/agent/build-your-agent/agent-triggers/zapier">Use Zapier to trigger your Agent.</Card>
+</Columns>
+<Columns cols={2}>
+  <Card title="API" href="/agent/build-your-agent/agent-triggers/api">Use the Relevance AI API to trigger your Agent.</Card>
+  <Card title="Tools as a Trigger" href="/agent/build-your-agent/agent-triggers/tools-as-triggers">Use a specific Tool to trigger your Agent.</Card>
+</Columns>
+
 ### Triggers you can Connect to
 
-We have many different ways you can trigger your Agent, with 200+ integrations supported. Some of our most popular triggers include:
+We have many different ways you can trigger your Agent, with 200\+ integrations supported. Some of our most popular triggers include:
 
 - **Standard Triggers**
   1. [Outlook](../../integrations/agent-integrations/outlook)
@@ -65,18 +76,17 @@ We have many different ways you can trigger your Agent, with 200+ integrations s
 
 ---
 
-<img 
-  height="200"  
-  src="/images/agent/scheduled-messages.png" 
+<img
+  height="200"
+  src="/images/agent/scheduled-messages.png"
 />
 
-# Scheduled Messages Overview
-
+## Scheduled Messages
 ### What are Scheduled Messages?
 
 Scheduled Messages let your AI agents send messages in the future without you having to do anything. Instead of just responding when someone talks to them, your agents can now reach out at specific times you choose.
 
-With the latest update, you can easily edit or reschedule these messages directly in Task View - no need to start over if plans change!
+With the latest update, you can easily edit or reschedule these messages directly in Task View - no need to start over if plans change\!
 
 ### Why Use Scheduled Messages?
 
@@ -111,29 +121,28 @@ When someone asks about upcoming events, schedule a reminder 24 hours before eac
 If someone has a deadline, schedule a check-in halfway to the deadline.
 
 For multi-step processes, schedule messages at each milestone to keep people on track.
-
 ```
 
 # Scheduled Messages Settings
 
 ## Enabled Scheduled Messages (Toggle)
 
-Turn this on to allow your Agent to schedule actions or messages for the future.  
+Turn this on to allow your Agent to schedule actions or messages for the future.\
 Without this enabled, your Agent can only respond in real-time and won't be able to set future reminders, follow-ups, or scheduled notifications.
 
 ---
 
 ## Max Daily Scheduled Triggers (Textbox)
 
-Set a limit on how many scheduled actions your Agent can process in a single day.  
-Leaving it at "No limit" means the Agent can schedule and send as many future messages as needed.  
+Set a limit on how many scheduled actions your Agent can process in a single day.\
+Leaving it at "No limit" means the Agent can schedule and send as many future messages as needed.\
 If you want to control costs, manage system load, or prevent overactivity, you can set a specific maximum number.
 
 ---
 
-## Prevent Scheduled Messages from Interrupting a Task (Toggle + Time Setting)
+## Prevent Scheduled Messages from Interrupting a Task (Toggle \+ Time Setting)
 
-When this is enabled, your Agent won't interrupt an active task (like when it's waiting for approvals or processing another action) just to send a scheduled message.  
+When this is enabled, your Agent won't interrupt an active task (like when it's waiting for approvals or processing another action) just to send a scheduled message.\
 Instead, the scheduled message will wait and be delayed by at least the time you specify (default is 1,440 minutes, or 24 hours).
 
 This prevents your Agent from getting confused, stuck, or behaving unpredictably when juggling multiple actions.
@@ -142,10 +151,11 @@ This prevents your Agent from getting confused, stuck, or behaving unpredictably
 
 ## Schedule Message (Tool)
 
-A built-in tool your Agent can use when writing prompts.  
+A built-in tool your Agent can use when writing prompts.\
 Use the `/schedule message` shortcut inside your Agent's instructions to tell it exactly when and what to schedule automatically during conversations.
 
-Example:  
+Example:
+
 > "After summarizing today's emails, schedule a check-in message tomorrow at 10 AM."
 
 ---
