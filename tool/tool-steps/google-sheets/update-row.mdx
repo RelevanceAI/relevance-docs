@@ -1,23 +1,23 @@
 ---
-title: "Get Values in Range"
-description: "The Get Values in Range tool step allows you to retrieve data from your Google Sheet"
+title: "Update Row"
+description: "The Update Row tool step allows you to update any row in your Google Sheet"
 ---
 
-## Add the ‘Get Values in Range’ Tool step to your Tool
+## Add the ‘Update Row’ Tool step to your Tool
 
 
 <div style={{
   position: "relative",
   boxSizing: "content-box",
-  maxHeight: "80vh",
+  maxHeight: "100vh",
   width: "100%",
-  aspectRatio: "2.06",
+  aspectRatio: "1.8057022175290391",
   padding: "24px 0"
 }}>
   <iframe
-    src="https://app.supademo.com/embed/cmdqy9zvy3xa09f96yt3tx1gl?embed_v=2&utm_source=embed"
+    src="https://app.supademo.com/embed/cmdy38zor86g29f96trqqyfz1?embed_v=2&utm_source=embed"
     loading="lazy"
-    title="Google Sheets Get Values in Range"
+    title="Google Sheets Update Row"
     allow="clipboard-write"
     webkitallowfullscreen="true"
     mozallowfullscreen="true"
@@ -37,17 +37,19 @@ description: "The Get Values in Range tool step allows you to retrieve data from
 
 
 
-You can add the ‘Get Values in Range’ Tool step to your Tool by:
+You can add the ‘Update Row’ Tool step to your Tool by:
 
-1. Creating a new Tool, then searching for the ‘Get Values in Range’ Tool step
+1. Creating a new Tool, then searching for the ‘Update Row’ Tool step
 2. Click ‘Expand’ to see the full Tool step
 3. Using the dropdown menu:
     - Select the Google account you would like to use.
     - Select the Drive you would like to use (defaults to "My Drive").
-    - Select the Spreadsheet you would like to get the values from.
-    - Select the worksheet you would like to get the values from.
-4. Select the range of cells you would like to get the values from (e.g. `A1:B2`).
-5. Click 'Run step' to test out the Tool
+    - Select the Spreadsheet you would like to update.
+    - Select the worksheet you would like to update.
+4. Select the row number you would like to update.
+5. Select whether the first row has headers.
+6. Enter the values you would like to update.
+7. Click 'Run step' to test out the Tool
 
 
 ## Using in an Agent
@@ -58,20 +60,20 @@ There are 3 ways to configure the tool step when using in an agent
   <Tab title="Using dropdown menus">
     This is the easiest way to configure the tool step. You can select the Drive, Spreadsheet and Worksheet from a list of options via the dropdown menu. 
 
-        ![Google Sheets Get Values in Range](/images/gs-get-values-in-range-eg-1.png)
+        ![Google Sheets Update Row](/images/gs-update-row-eg-1.png)
         
 
   </Tab>
   <Tab title="Using input variables">
   This option offers the most flexibility - you can use the same tool step for multiple Google Sheets, however you will need to manually provide the necessary Google Sheet IDs.
 
-    ![Google Sheets Get Values in Range](/images/gs-get-values-in-range-eg-2.png)
+    ![Google Sheets Update Row](/images/gs-update-row-eg-2.png)
 
   </Tab>
   <Tab title="Mix of dropdown menus and input variables">
-  This option offers the best of both worlds. You can use the dropdown menu to select the Drive, Spreadsheet and Worksheet, and then use an input variable for "Range" to allow the agent to dynamically retrieve data to your Google sheet.
+  This option offers the best of both worlds. You can use the dropdown menu to select the Drive, Spreadsheet and Worksheet, and then use an input variable for "Row Number" and "Values" to allow the agent to dynamically update different rows in your Google sheet.
 
-    ![Google Sheets Get Values in Range](/images/gs-get-values-in-range-eg-3.png)
+    ![Google Sheets Update Row](/images/gs-update-row-eg-3.png)
   </Tab>
 </Tabs>
 
@@ -92,15 +94,18 @@ There are 3 ways to configure the tool step when using in an agent
   <Tip> [You can also use this tool to parse the worksheet, spreadsheet and drive IDs from a url](https://app.relevanceai.com/notebook/f1db6c/d64db999bc25-4ea0-b926-30b350f69243/01e4918b-6c0a-423d-8daa-a625ced25e23)</Tip>
 </ParamField>
 
-<ParamField path="Range" type="string">
-  Specify the range of cells to retrieve, starting from the top-left cell to the bottom-right cell.
-
-    <img src="/images/gs-get-values-in-range-eg-4.png" alt="Google Sheets Add Single Row" width="400" />
-  `A2:B3` will return a 2x2 block containing `Bella`, `Luna`, `Dog`, and `Cat`.
-  <Note>Leave the "Range" field empty to retrieve the entire sheet.</Note>
+<ParamField path="Row Number" type="number" required>
+  The row number you want to update.
 </ParamField>
 
+<ParamField path="Does the first row have headers?" type="boolean">
+  When this option is checked, each column will appear as a separate input field in the tool step for you to fill in. **This option will be ignored when using dynamic input fields**.
+</ParamField>
 
+<ParamField path="Values" type="array" required>
+  The data being inserted will need to be in an array format.
+  <Note>Example: `["John Doe", "john.doe@example.com", "123 Main St"]`</Note>
+</ParamField>
 
 
 
