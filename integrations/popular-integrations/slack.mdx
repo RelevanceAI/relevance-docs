@@ -8,7 +8,6 @@ sidebarTitle: "Slack"
   Note: This integration for Slack was developed by our team and is not affiliated with Slack. Please contact our Support for any questions/queries you may have.
 </Note>
 
-
 To add Slack as an integration, follow these simple steps:
 
 1. Log into Relevance AI: https://app.relevanceai.com
@@ -48,17 +47,17 @@ To escalate your agent to Slack, follow these steps:
   This feature is currently in beta for some users
 </Warning>
 
- 5. Under "Agent Notifications", click "Add agent notification"
- 6. Configure your notification settings:
-    1. Select "Slack" as the platform
-    2. Choose the specific task statuses you want to trigger the notifications with (e.g., "Running" to trigger whenever the agent runs)
-    3. Select a Slack account that you have previously authed or add a new Slack account
-    4. Select a Slack channel you want to notify with new agent messages
- 7. Invite the Relevance AI agent to the Slack channel you want to notify by typing "/invite @RelevanceAI" in the channel.
- 8. Publish changes to your agent by clicking "Publish changes"
- 9. Run your agent by selecting "Run" at the top of the page.
-10. Prompt the agent with some text, e.g. "Give me a summary of what Slack does".
-11. You can reply to the agent's notification directly in Slack, or if you'd prefer you can click on “View task” to navigate back to the task in Relevance AI and perform further actions.
+1. Under "Agent Notifications", click "Add agent notification"
+2. Configure your notification settings:
+   - Select "Slack" as the platform
+   - Choose the specific task statuses you want to trigger the notifications with (e.g., "Running" to trigger whenever the agent runs)
+   - Select a Slack account that you have previously authed or add a new Slack account
+   - Select a Slack channel you want to notify with new agent messages
+3. Invite the Relevance AI agent to the Slack channel you want to notify by typing "/invite @RelevanceAI" in the channel.
+4. Publish changes to your agent by clicking "Publish changes"
+5. Run your agent by selecting "Run" at the top of the page.
+6. Prompt the agent with some text, e.g. "Give me a summary of what Slack does".
+7. You can reply to the agent's notification directly in Slack, or if you'd prefer you can click on “View task” to navigate back to the task in Relevance AI and perform further actions.
 
 <div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
 <iframe src="https://app.supademo.com/embed/cmb77jbof4hqnppkpc1k339xb?v_email=EMAIL&embed_v=2" frameBorder="0" title="Connect Slack Agent Notifications" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
@@ -67,7 +66,31 @@ To escalate your agent to Slack, follow these steps:
 
 Once connected, your integration for Slack will be available for use with your Agents and Tools.
 
-## Making API Calls With Slack Using Tool Steps
+## Triggering Agents from Slack
+
+You can trigger your Agents directly from Slack. This will start your Agent in Relevance AI based on a keyword of your choice, and then will reply to your message in Slack.
+
+To get started, first **invite Relevance AI to the Slack channel you want to trigger Agents from** by typing `/invite @Relevance AI` into the channel.
+
+Then, set up your Trigger from Relevance AI. 
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cme12y0di08sig56jgsky0owk?v_email=EMAIL&embed_v=2" frameBorder="0" title="How to set up the Slack trigger" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+
+</div>
+
+1. Enter your Triggers page in your Agent, and create a new Trigger
+2. Select Slack
+3. Connect or select your Slack account, then click 'Continue'
+4. Select the channel you want your Agent to be triggered on
+5. Enter the keyword you want the Agent to be triggered on - if you want the Agent to be triggered on all messages that tag `@Relevance AI`, leave this blank
+6. Click 'Continue'
+7. Queue work hours if needed
+8. Click 'Setup trigger'
+
+Once you've done this, you can trigger your Agent from Slack by tagging `@Relevance AI` and mentioning the keyword you've set (if you set a keyword)!
+
+## Making API calls with Slack using Tool steps
 
 You can configure your Slack agent to make API calls to Slack via Relevance AI's tool builder. This allows you to perform actions such as posting Slack messages to channels, or reading messages from channels. These are just a few examples of the many Slack actions available. Your agents can combine these actions with their reasoning capabilities to create sophisticated workflows that enhance team communication and productivity.
 
@@ -84,8 +107,7 @@ You can configure your Slack agent to make API calls to Slack via Relevance AI's
 
 You can learn more about each of the Slack Tool steps on the following pages.
 
-<Snippet file="components/integrations/slack-tool-steps.mdx"/>
-
+<Snippet file="components/integrations/slack-tool-steps.mdx" />
 
 ## Remove integration for Slack
 
@@ -98,38 +120,10 @@ If you need to remove the integration for Slack:
 
 This will disconnect your Slack workspace from Relevance AI, and your agents will no longer be able to interact with Slack until you reconnect the integration for Slack.
 
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmb77zw534ib9ppkp4md1nple?v_email=EMAIL&embed_v=2" frameBorder="0" title="Remove an Integration for Slack" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/cmb77zw534ib9ppkp4md1nple?v_email=EMAIL&embed_v=2"
-    frameBorder="0"
-    title="Remove an Integration for Slack"
-    allow="clipboard-write"
-    webkitallowfullscreen="true"
-    mozallowfullscreen="true"
-    allowfullscreen
-    style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
 </div>
-
-## Related Features
-
-
-- Outlook Integration - Combine Slack and Outlook integrations to create comprehensive communication workflows that span both platforms.
-- HubSpot Integration - Connect your Slack communications with your CRM data to provide context-aware responses and updates.
-- Knowledge Base - Import Slack conversations into your knowledge base to train your agents on your team's communication patterns and frequently discussed topics.
 
 ## Disclaimer
 
