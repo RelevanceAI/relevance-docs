@@ -1,0 +1,126 @@
+---
+title: "Find Row"
+description: "The Find Row tool step allows you to find a row in your Google Sheet"
+---
+
+## Add the ‘Find Row’ Tool step to your Tool
+
+
+<div style={{
+  position: "relative",
+  boxSizing: "content-box",
+  maxHeight: "100vh",
+  width: "100%",
+  aspectRatio: "1.8057022175290391",
+  padding: "24px 0"
+}}>
+  <iframe
+    src="https://app.supademo.com/embed/cme0y7g3d05l8g56jly8y883z?embed_v=2&utm_source=embed"
+    loading="lazy"
+    title="Google Sheets Find Row"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowFullScreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px",
+      objectFit: "cover"
+    }}
+  />
+</div>
+
+
+
+You can add the ‘Find Row’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Find Row’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Using the dropdown menu:
+    - Select the Google account you would like to use.
+    - Select the Drive you would like to use (defaults to "My Drive").
+    - Select the Spreadsheet you would like to find the row in.
+    - Select the worksheet you would like to find the row in.
+4. Enter the letter of the column you want to search in.
+5. Enter the value you want to find.
+    <Note>The value you enter will be case-sensitive.</Note>
+6. Click 'Run step' to test out the Tool
+
+
+
+## Using in an Agent
+
+There are 3 ways to configure the tool step when using in an agent
+
+<Tabs>
+  <Tab title="Using dropdown menus">
+    This is the easiest way to configure the tool step. You can select the Drive, Spreadsheet and Worksheet from a list of options via the dropdown menu. 
+
+        ![Google Sheets Find Row](/images/gs-find-row-eg-1.png)
+        
+
+  </Tab>
+  <Tab title="Using input variables">
+  This option offers the most flexibility - you can use the same tool step for multiple Google Sheets, however you will need to manually provide the necessary Google Sheet IDs.
+
+    ![Google Sheets Find Row](/images/gs-find-row-eg-2.png)
+
+  </Tab>
+  <Tab title="Mix of dropdown menus and input variables">
+  This option offers the best of both worlds. You can use the dropdown menu to select the Drive, Spreadsheet and Worksheet, and then use an input variable for "Column Letter" and "Value" to allow the agent to work for different values.
+
+    ![Google Sheets Find Row](/images/gs-find-row-eg-3.png)
+  </Tab>
+</Tabs>
+
+
+## Parameters
+
+<ParamField path="Drive" type="string">
+  The Drive you want to use. By default, the tool uses "My Drive".
+</ParamField>
+
+<ParamField path="Spreadsheet ID" type="string" required>
+  To get the spreadsheet ID, navigate to your Google Sheet and copy the ID from the URL (the long string between `/d/` and `/edit`).
+  <Tip> [You can use this tool to parse the worksheet, spreadsheet and drive IDs from a url](https://app.relevanceai.com/notebook/f1db6c/d64db999bc25-4ea0-b926-30b350f69243/01e4918b-6c0a-423d-8daa-a625ced25e23)</Tip>
+</ParamField>
+
+<ParamField path="Worksheet ID" type="string" required>
+  To get the worksheet ID, open the specific worksheet you want to use and copy the ID from the URL (appears after `#gid=`).
+  <Tip> [You can also use this tool to parse the worksheet, spreadsheet and drive IDs from a url](https://app.relevanceai.com/notebook/f1db6c/d64db999bc25-4ea0-b926-30b350f69243/01e4918b-6c0a-423d-8daa-a625ced25e23)</Tip>
+</ParamField>
+
+<ParamField path="Column Letter" type="string" required>
+  The letter of the column of the sheet you are searching in.
+</ParamField>
+
+<ParamField path="Value" type="string" required>
+  The value you want to search for in the column.
+</ParamField>
+
+<ParamField path="Export Row" type="boolean">
+  When this option is checked, the tool will return the entire row in the results.
+</ParamField>
+
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+<Accordion title="What is the difference between using the green input variables and the dropdown menu?">
+    **The dropdown menu is the easiest way to configure the tool step**. You can select the Drive, Spreadsheet and Worksheet from a list of options via the dropdown menu. 
+    
+    **The input variables offer more flexibility** e.g. you can use the same tool step for multiple Google Sheets, however you will need to manually provide the necessary Google Sheet IDs.
+</Accordion>
+<Accordion title="Can I use a mix of both dropdown menu and green input variables?">
+    If you are using the tool in an agent, this is the recommended approach. You can use the dropdown menu to select the Drive, Spreadsheet and Worksheet that don't need to change, and then use the green input variables for "Column Letter" and "Value" to allow the agent to dynamically search for different values in your Google sheet.
+    <Warning>If you are only using the input variables, you will need to provide the necessary Google Sheet IDs for the tool step to function properly.</Warning>
+</Accordion>
+</AccordionGroup>
+
+
+
