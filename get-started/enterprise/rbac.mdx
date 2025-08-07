@@ -1,0 +1,106 @@
+---
+title: "Role-based access controls (RBAC)"
+description: "Enhancing security, collaboration, and control for Enterprise teams"
+---
+
+<Warning>
+  RBAC is gradually being rolled out to our Enterprise customers. If you have an Enterprise subscription with Relevance AI and do not have access to this feature yet, please reach out to your sales representative to share your interest in this feature.
+
+  You will not be able to access this feature if you are not on an Enterprise subscription.
+</Warning>
+
+Role-based access controls (RBAC) in Relevance AI is a security and governance feature that allows organisations to manage user access based on predefined roles and responsibilities. It ensures that individuals only have access to the data, tools, and platform functions necessary for their role, supporting operational control, collaboration, and compliance across teams.
+
+These new controls are designed to enhance security for our Enterprise clients by providing granular permissions at different levels.
+
+There are three main levels: org-level roles (Owner, Admin, Member, Viewer), project-level roles (Admin, Editor, Member, Viewer), and asset-level roles (Admin, Member, Viewer).
+
+Each role has specific permissions that dictate what users can do within the platform, such as managing credits, using agents, and accessing integrations.
+
+This means you can tailor access based on the needs of your team, ensuring that sensitive information and functionalities are only available to those who need them.
+
+## Organization level controls
+
+New organization members will be given viewer permissions by default. If invited, their role will be selected during invite.
+
+### Roles
+
+| **Role**   | **Capabilities**                                                                                 |
+| ---------- | ------------------------------------------------------------------------------------------------ |
+| **Owner**  | Full control of organization, billing, security, users and all projects                          |
+| **Admin**  | Manage users, projects, organization-level API keys and OAuths                                   |
+| **Member** | Access only assigned projects, can create private projects and assets (agents, tools, knowledge) |
+| **Viewer** | View-only access to agent and tool audit logs, usage data and compliance reports                 |
+
+### Permissions
+
+| **Permission**                                         | **Owner** | **Admin** | **Member** | **Viewer** |
+| :----------------------------------------------------- | :-------- | :-------- | :--------- | :--------- |
+| Manage billing                                         | ✅         | ❌         | ❌          | ❌          |
+| Manage organization settings (name, logo, domain etc.) | ✅         | ✅         | ❌          | ❌          |
+| Manage organization users                              | ✅         | ✅         | ❌          | ❌          |
+| Manage API keys & OAuths (Org-level connections)       | ✅         | ✅         | ❌          | ❌          |
+| View global audit logs                                 | ✅         | ✅         | ❌          | ❌          |
+| View all projects and agents                           | ✅         | ✅         | ❌          | ❌          |
+| Delete any asset                                       | ✅         | ✅         | ❌          | ❌          |
+| Edit project roles                                     | ✅         | ✅         | ❌          | ❌          |
+| View credit information                                | ✅         | ✅         | ❌          | ❌          |
+| Create projects                                        | ✅         | ✅         | ✅          | ❌          |
+| View organization members / admins                     | ✅         | ✅         | ✅          | ✅          |
+
+----
+
+## Project level controls
+
+Project admins will be able to set a users role upon invite. Organization admins can also set this for any project.
+
+### Roles
+
+| **Role**   | **Capabilities**                                                                           |
+| ---------- | ------------------------------------------------------------------------------------------ |
+| **Admin**  | Manage users, agents, tools, knowledge and project-level integrations. Can create assets   |
+| **Editor** | Can edit and create assets, does not manage users                                          |
+| **Member** | Use shared assets, provide inputs and view outputs. Can create assets, private by default. |
+| **Viewer** | View agents, tools, and knowledge outputs only, cannot run or edit anything                |
+
+### Permissions
+
+| **Permission**                         | **Admin** | **Editor** | **Member** | **Viewer** |
+| :------------------------------------- | :-------- | :--------- | :--------- | :--------- |
+| Delete project                         | ✅         | ❌          | ❌          | ❌          |
+| Assign project roles to users          | ✅         | ❌          | ❌          | ❌          |
+| Delete agents                          | ✅         | ✅          | ❌          | ❌          |
+| View all assets by default             | ✅         | ✅          | ❌          | ❌          |
+| Edit/run assets they did not create    | ✅         | ✅          | ❌          | ❌          |
+| View project activity logs             | ✅         | ✅          | ❌          | ❌          |
+| Manage project-level API keys & OAuths | ✅         | ✅          | ❌          | ❌          |
+| Create assets                          | ✅         | ✅          | ✅          | ❌          |
+| View Project                           | ✅         | ✅          | ✅          | ✅          |
+
+----
+
+## Asset level controls
+
+Upon asset creation, the creator becomes the admin. An asset can have multiple admins (project admin is by default).
+
+### Roles
+
+| **Role**   | **Capabilities**                                                          |
+| ---------- | ------------------------------------------------------------------------- |
+| **Admin**  | Manage asset configuration, tools, knowledge and assign asset-level users |
+| **Member** | Use asset only, provide inputs and view outputs                           |
+| **Viewer** | View asset configuration and outputs only, cannot run or edit anything    |
+
+### Permissions
+
+| **Permission**                       | **Admin** | **Member** | **Viewer** |
+| :----------------------------------- | :-------- | :--------- | :--------- |
+| Edit asset                           | ✅         | ❌          | ❌          |
+| Delete asset                         | ✅         | ❌          | ❌          |
+| Assign roles on asset                | ✅         | ❌          | ❌          |
+| Assign auth per tool                 | ✅         | ❌          | ❌          |
+| Enable cloning/sharing of asset      | ✅         | ❌          | ❌          |
+| Run asset (if executable e.g. agent) | ✅         | ✅          | ❌          |
+| View asset configuration             | ✅         | ✅          | ✅          |
+| View asset outputs                   | ✅         | ✅          | ✅          |
+| View asset audit logs                | ✅         | ✅          | ✅          |
