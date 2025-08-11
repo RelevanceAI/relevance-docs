@@ -1,0 +1,122 @@
+---
+title: "Delete Rows"
+description: "The Delete Rows tool step allows you to delete rows in your Google Sheet"
+---
+
+## Add the ‘Delete Rows’ Tool step to your Tool
+
+
+<div style={{
+  position: "relative",
+  boxSizing: "content-box",
+  maxHeight: "100vh",
+  width: "100%",
+  aspectRatio: "1.8057022175290391",
+  padding: "24px 0"
+}}>
+  <iframe
+    src=""
+    loading="lazy"
+    title="Google Sheets Delete Rows"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowFullScreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px",
+      objectFit: "cover"
+    }}
+  />
+</div>
+
+
+
+You can add the ‘Delete Rows’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Delete Rows’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Using the dropdown menu:
+    - Select the Google account you would like to use.
+    - Select the Drive you would like to use (defaults to "My Drive").
+    - Select the Spreadsheet you would like to delete the rows in.
+    - Select the worksheet you would like to delete the rows in.
+4. Enter the row number you want to start deleting from.
+5. Enter the row number you want to stop deleting at.
+6. Click 'Run step' to test out the Tool
+
+
+
+## Using in an Agent
+
+There are 3 ways to configure the tool step when using in an agent
+
+<Tabs>
+  <Tab title="Using dropdown menus">
+    This is the easiest way to configure the tool step. You can select the Drive, Spreadsheet and Worksheet from a list of options via the dropdown menu. 
+
+        ![Google Sheets Delete Rows](/images/gs-delete-rows-eg-1.png)
+        
+
+  </Tab>
+  <Tab title="Using input variables">
+  This option offers the most flexibility - you can use the same tool step for multiple Google Sheets, however you will need to manually provide the necessary Google Sheet IDs.
+
+    ![Google Sheets Delete Rows](/images/gs-delete-rows-eg-2.png)
+
+  </Tab>
+  <Tab title="Mix of dropdown menus and input variables">
+  This option offers the best of both worlds. You can use the dropdown menu to select the Drive, Spreadsheet and Worksheet, and then use an input variable for "Start Index" and "End Index" to allow the agent to delete different rows.
+
+    ![Google Sheets Delete Rows](/images/gs-delete-rows-eg-3.png)
+  </Tab>
+</Tabs>
+
+
+## Parameters
+
+<ParamField path="Drive" type="string">
+  The Drive you want to use. By default, the tool uses "My Drive".
+</ParamField>
+
+<ParamField path="Spreadsheet ID" type="string" required>
+  To get the spreadsheet ID, navigate to your Google Sheet and copy the ID from the URL (the long string between `/d/` and `/edit`).
+  <Tip> [You can use this tool to parse the worksheet, spreadsheet and drive IDs from a url](https://app.relevanceai.com/notebook/f1db6c/d64db999bc25-4ea0-b926-30b350f69243/01e4918b-6c0a-423d-8daa-a625ced25e23)</Tip>
+</ParamField>
+
+<ParamField path="Worksheet ID" type="string" required>
+  To get the worksheet ID, open the specific worksheet you want to use and copy the ID from the URL (appears after `#gid=`).
+  <Tip> [You can also use this tool to parse the worksheet, spreadsheet and drive IDs from a url](https://app.relevanceai.com/notebook/f1db6c/d64db999bc25-4ea0-b926-30b350f69243/01e4918b-6c0a-423d-8daa-a625ced25e23)</Tip>
+</ParamField>
+
+<ParamField path="Start Row" type="number" required>
+  The row number you want to start deleting from (inclusive).
+</ParamField>
+
+<ParamField path="End Row" type="number" required>
+  The row number you want to stop deleting at (exclusive). 
+</ParamField>
+
+<Tip>Example: If you want to delete rows 1 to 5, you would enter 1 for "Start Row" and 6 for "End Row".</Tip>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+<Accordion title="What is the difference between using the green input variables and the dropdown menu?">
+    **The dropdown menu is the easiest way to configure the tool step**. You can select the Drive, Spreadsheet and Worksheet from a list of options via the dropdown menu. 
+    
+    **The input variables offer more flexibility** e.g. you can use the same tool step for multiple Google Sheets, however you will need to manually provide the necessary Google Sheet IDs.
+</Accordion>
+<Accordion title="Can I use a mix of both dropdown menu and green input variables?">
+    If you are using the tool in an agent, this is the recommended approach. You can use the dropdown menu to select the Drive, Spreadsheet and Worksheet that don't need to change, and then use the green input variables for "Start Row" and "End Row" to allow the agent to dynamically delete different rows in your Google sheet.
+    <Warning>If you are only using the input variables, you will need to provide the necessary Google Sheet IDs for the tool step to function properly.</Warning>
+</Accordion>
+</AccordionGroup>
+
+
+
