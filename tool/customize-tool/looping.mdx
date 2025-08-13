@@ -1,0 +1,42 @@
+---
+title: 'Looping'
+description: 'Loop through Tool steps in your Tools'
+---
+
+Looping allows you to loop through a list of Tool steps in your Tools, based on a list outputted from previous steps, or an input from the Tool.
+
+## How to set up Looping in a Tool
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cme9w2yuj4k2ah3py1j36pvo5" frameBorder="0" title="How to set up Looping in a Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+1. Add a Loop by clicking the button to create a new Tool step, then navigate to the Flow Controls tab to select a Loop
+2. Select the list you want to loop over in 'List to loop'
+3. Choose how to process list items, either at the same time or one by one
+4. Add Tool steps inside the loop
+5. Once you've done that, run the Tool to test the loop
+
+## Advanced Settings
+
+### How should errors be handled?
+
+Specifies how the loop should handle errors. Defaults to continue (skip item), but you can also choose to throw an error.
+
+### Index of item to test loop on
+
+You can also choose a specific index to test with. This is helpful for debugging and also for testing your overall flow with a single item to reduce credit costs.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I set up a Loop in a Loop?">
+    Absolutely! You can add loops within loops if your workflow requires it. This flexibility allows you to create more complex processes tailored to your specific needs. Just keep in mind that nesting can increase complexity, so ensure it aligns with your overall flow.
+  </Accordion>
+  <Accordion title="Can I run the loop steps in parallel, and how does that work?">
+    Yes, you can choose to process items in your list either in parallel or sequentially. If you select parallel processing, all items will be processed at the same time, which can speed up execution. If you prefer to handle them one at a time, you can opt for sequential processing.
+  </Accordion>
+  <Accordion title="How do I handle errors when using the loop step?">
+    By default, if an item in the loop errors, it will be skipped, and you can view the errored items in the errors tab of the loop step results. If you prefer to be notified of errors instead, you can adjust the error handling settings to throw a tool error. This way, you can address issues as they arise.
+  </Accordion>
+</AccordionGroup>

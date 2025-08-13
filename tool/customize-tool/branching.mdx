@@ -1,0 +1,41 @@
+---
+title: "Branching"
+description: "Add conditional branches to Tool steps in your Tools"
+---
+
+Conditional branching allows users to create different paths in their tool steps based on specific conditions. When you set up a branch, you can define criteria using rules, code, AI prompts, or fallback options. Each branch is assessed independently, meaning multiple branches can run if their conditions are met. This feature enhances the flexibility of your tools, allowing for more complex workflows.
+
+## How to set up Branching in a Tool
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cme9wswjq4keoh3pyasu0s8mm" frameBorder="0" title="How to set up Branching in a Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+
+</div>
+
+1. Add a Branch by clicking the button to create a new Tool step, then navigate to the Flow Controls tab to select a Branch
+2. Add new branches by clicking '\+ Add branch'
+3. For each branch, choose the Assessment mode for your branch
+
+  - **Rules**: allows you to make a logical assessment between inputs, such as contains, greater than, etc.
+  - **Code expression**: will run based on whether the code returns true or false
+  - **Let AI decide**: lets you write a plain text prompt, which returns true or false to run the branch based on your instructions. You can include variables using the variable selector menu.
+
+4. Include a branch with the Assessment mode set to 'Fallback', this means the step will run if no other steps return true.
+5. Add Tool steps to each of your branches, then run the Tool to test
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens if there's an error in one of the branches?">
+    If there's an error in any node within a branch, the system will throw an error just like it does with standard Tool steps. It's important to ensure that each node is functioning correctly to avoid disruptions in your workflow.
+  </Accordion>
+  <Accordion title="How many branches can I have at once?">
+    You can set a maximum of four branches. 
+  </Accordion>
+  <Accordion title="Can multiple branches run for one input?">
+    All branches are assessed individually, so multiple branches can run if the assessment returns true.
+  </Accordion>
+  <Accordion title="Can branches access nodes from other branches?">
+    No, nodes within a branch cannot access nodes from different branches. Each branch operates independently, which helps maintain clarity and organisation in your tool's logic.
+  </Accordion>
+</AccordionGroup>
