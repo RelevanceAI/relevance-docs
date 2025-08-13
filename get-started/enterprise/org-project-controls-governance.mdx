@@ -1,0 +1,152 @@
+---
+title: "Organization / project controls and governance"
+description: "Use the API to automate project controls and governance"
+---
+
+Relevance AI has APIs for teams to automate their project controls and governance. For up-to-date API docs, please visit the API documentation for the region your organization is hosted in:
+
+- **AU**: https://api-f1db6c.stack.tryrelevance.com/latest/documentation
+- **EU**: https://api-d7b62b.stack.tryrelevance.com/latest/documentation
+- **US**: https://api-bcbe5a.stack.tryrelevance.com/latest/documentation
+
+In order to use these APIs, you must create an Relevance AI API Key which will have access to your full account. You can generate this from 'Integrations & API Keys'.
+
+<Info>All API references on this page will reference the AU endpoint. Please change the endpoint if your organization is hosted in EU or US.</Info>
+
+## Projects
+
+### Create Projects
+
+Creates a project in the specified organization.
+
+```bash
+curl https://api-f1db6c.stack.tryrelevance.com/latest/projects/create \
+  --request POST \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer :<api_key>' \
+  --data '{
+  "name": "",
+  "description": "",
+  "organization_id": ""
+}'
+```
+
+#### Response
+
+```bash
+{
+  "project_id": "string"
+}
+```
+
+---
+
+### Delete Projects
+
+This API endpoint is currently being worked on and is not yet available.
+
+---
+
+## Invites
+
+### Invite User to Project
+
+**Permissions Required**: Admin
+
+The available actions are:
+
+- `role:editor` for editor permissions
+- `role:viewer` for viewer permissions
+- `admin` for admin permissions
+
+#### Notes
+
+- In order to update the roles on the user invite, it must first be deleted and then recreated.
+- If a user is already part of the organization, the invite will be automatically accepted.
+
+```bash
+curl https://api-f1db6c.stack.tryrelevance.com/latest/auth/invite/create \
+  --request POST \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer <project_id>:<api_key>' \
+  --data '{
+  "permissions": {
+    "items": {
+      "relevanceDefault": {
+        "actions": {
+          "role:editor": true
+        }
+      }
+    },
+  },
+  "email": ""
+}'
+```
+
+#### Response
+
+```bash
+{
+  "invite_code": "string"
+}
+```
+
+---
+
+### Update User Role On Project
+
+**Permissions Required**: Admin
+
+```bash
+curl 'https://api-f1db6c.stack.tryrelevance.com/latest/auth/users/<user_id>/update' \
+  --request POST \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: <project_id>:<api_key>' \
+  --data '{
+  "permissions": {
+    "items": {
+	    "relevanceDefault": {
+        "actions": {
+          "role:editor": true
+        }
+      }
+    }
+  }
+}'
+```
+
+---
+
+### Delete Project Invite
+
+**Permissions Required**: Admin
+
+```bash
+curl https://api-f1db6c.stack.tryrelevance.com/latest/auth/invite/delete \
+  --request POST \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer <project id>:<api_key>' \
+  --data '{
+  "invite_code": ""
+}'
+```
+
+---
+
+### Remove User From Project
+
+**Permissions Required**: Admin
+
+```bash
+curl 'https://api-f1db6c.stack.tryrelevance.com/latest/auth/users/{user_id}/delete' \
+  --request POST \
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: Bearer <project id>:<api_key>' \
+  --data '{}'
+```
+
+---
+
+## SCIM - Enterprise User Management
+
+Enterprises can deactivate users using the WorkOS Dashboard or SCIM API. If a user is marked as deactivated in WorkOS, their accounts and associated API keys will be deactivated immediately. Please see the [SCIM docs for WorkOS](https://workos.com/docs/integrations/scim) for documentation on how to use the PI.
