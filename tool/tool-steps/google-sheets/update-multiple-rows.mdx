@@ -1,9 +1,9 @@
 ---
-title: "Add Multiple Rows"
-description: "The Add Multiple Rows tool step allows you to add multiple rows to your Google Sheet"
+title: "Update Multiple Rows"
+description: "The Update Multiple Rows tool step allows you to update multiple rows in your Google Sheet"
 ---
 
-## Add the ‘Add Multiple Rows’ Tool step to your Tool
+## Add the ‘Update Multiple Rows’ Tool step to your Tool
 
 <div style={{
   position: "relative",
@@ -14,9 +14,9 @@ description: "The Add Multiple Rows tool step allows you to add multiple rows to
   padding: "24px 0"
 }}>
   <iframe
-    src="https://app.supademo.com/embed/cmecd5qc86ma0h3py6qr0t7to?embed_v=2&utm_source=embed"
+    src="https://app.supademo.com/embed/cmego9gny884xh3pyme82l1vx?embed_v=2&utm_source=embed"
     loading="lazy"
-    title="Google Sheets Add Multiple Rows"
+    title="Google Sheets Update Multiple Rows"
     allow="clipboard-write"
     webkitallowfullscreen="true"
     mozallowfullscreen="true"
@@ -35,18 +35,19 @@ description: "The Add Multiple Rows tool step allows you to add multiple rows to
 </div>
 
 
-You can add the ‘Add Multiple Rows’ Tool step to your Tool by:
 
-1. Creating a new Tool, then searching for the ‘Add Multiple Rows’ Tool step
+You can add the ‘Update Multiple Rows’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Update Multiple Rows’ Tool step
 2. Click ‘Expand’ to see the full Tool step
 3. Using the dropdown menu:
     - Select the Google account you would like to use.
     - Select the Drive you would like to use (defaults to "My Drive").
-    - Select the Spreadsheet you would like to add the row to.
-    - Select the worksheet you would like to add the row to.
-4. Enter the new Row Values. This should be an array of arrays.
+    - Select the Spreadsheet you would like to update rows in.
+    - Select the worksheet you would like to update rows in.
+4. Enter the range you would like to update. This should be in the format of `A1:C5`.
+5. Enter the new Row Values. This should be an array of arrays.
     <Note>Example: `[["John Doe", "john.doe@example.com", "123 Main St"], ["Jane Doe", "jane.doe@example.com", "456 Main St"]]`</Note>
-5. Check whether to reset the row formatting.
 6. Click 'Run step' to test out the Tool
 
 
@@ -58,20 +59,20 @@ There are 3 ways to configure the tool step when using in an agent
   <Tab title="Using dropdown menus">
     This is the easiest way to configure the tool step. You can select the Drive, Spreadsheet and Worksheet from a list of options via the dropdown menu. 
 
-        ![Google Sheets Add multiple rows](/images/gs-add-multiple-rows-eg-1.png)
+        ![Google Sheets Update multiple rows](/images/gs-update-multiple-rows-eg-1.png)
         
 
   </Tab>
   <Tab title="Using input variables">
   This option offers the most flexibility - you can use the same tool step for multiple Google Sheets, however you will need to manually provide the necessary Google Sheet IDs.
 
-    ![Google Sheets Add multiple rows](/images/gs-add-multiple-rows-eg-2.png)
+    ![Google Sheets Update multiple rows](/images/gs-update-multiple-rows-eg-2.png)
 
   </Tab>
   <Tab title="Mix of dropdown menus and input variables">
-  This option offers the best of both worlds. You can use the dropdown menu to select the Drive, Spreadsheet and Worksheet, and then use an input variable for "Row Values" to allow the agent to dynamically insert data to your Google sheet.
+  This option offers the best of both worlds. You can use the dropdown menu to select the Drive, Spreadsheet and Worksheet, and then use an input variable for "Range" and "Row Values" to allow the agent to dynamically update data in your Google sheet.
 
-    ![Google Sheets Add multiple rows](/images/gs-add-multiple-rows-eg-3.png)
+    ![Google Sheets Update multiple rows](/images/gs-update-multiple-rows-eg-3.png)
   </Tab>
 </Tabs>
 
@@ -92,8 +93,15 @@ There are 3 ways to configure the tool step when using in an agent
   <Tip> [You can also use this tool to parse the worksheet, spreadsheet and drive IDs from a url](https://app.relevanceai.com/notebook/f1db6c/d64db999bc25-4ea0-b926-30b350f69243/01e4918b-6c0a-423d-8daa-a625ced25e23)</Tip>
 </ParamField>
 
+<ParamField path="Range" type="string" required>
+  The range of cells to update. The update will begin at the starting cell of the range (e.g., if the range is `A10:C20`, updates begin at `A10`).
+  <Warning>
+  Make sure the specified range fully covers the rows and columns you are updating.  
+  For example, if you are updating 3 columns across the first 5 rows, the range should be at least `A1:C5`.
+</Warning></ParamField>
+
 <ParamField path="Row Values" type="array of arrays" required>
-  The data being inserted will need to be in an array of arrays format.
+  The data being updated will need to be in an array of arrays format.
   
   **Example:** 
   ```json
@@ -105,9 +113,6 @@ There are 3 ways to configure the tool step when using in an agent
   ```
 </ParamField>
 
-<ParamField path="Reset Row Formatting" type="boolean">
-  If this option is unchecked, the format will be preserved when inserting data. If this option is checked, the data will be inserted as plain text.
-</ParamField>
 
 ## What is an array of arrays?
 
@@ -161,11 +166,9 @@ When you combine multiple arrays together, you can see that the data is structur
 </Accordion>
 <Accordion title="Can I use a mix of both dropdown menu and green input variables?">
 
-    If you are using the tool in an agent, this is the recommended approach. You can use the dropdown menu to select the fields that don't need to change (the ID fields), and then use the green input variables for "Row Values" to allow the agent to dynamically retrieve data from your Google sheet.
+    If you are using the tool in an agent, this is the recommended approach. You can use the dropdown menu to select the fields that don't need to change (the ID fields), and then use the green input variables for "Range" and "Row Values" to allow the agent to dynamically update data in your Google sheet.
 
     <Warning>If you are only using the input variables, you will need to provide the necessary Google Sheet IDs for the tool step to function properly. At the minimum, this includes the spreadsheet ID and the worksheet ID.</Warning>
 </Accordion>
 </AccordionGroup>
-
-
 
