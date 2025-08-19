@@ -26,7 +26,7 @@ You can add the 'Unipile - LinkedIn Action' Tool step to your Tool by:
 
 ## Parameters
 
-Parameters differ for each action in this Tool step.
+Parameters differ for each action in this Tool step, but the LinkedIn account is always required. 
 
 <Tabs>
   <Tab title="Get All Chats">
@@ -60,12 +60,72 @@ Parameters differ for each action in this Tool step.
       The maximum number of results to return. This can be between 1 to 250.
     </ParamField>
   </Tab>
+  <Tab title="Get User Profile">
+    <ParamField path="Username" type="string" required>
+      The username of who you wish to message. This can be found in their profile URL after https://www.linkedin.com/in/
+    </ParamField>
+    <ParamField path="Notify" type="checkbox">
+      Whether the profile visit should be notified to the viewee or not. Default is false.
+    </ParamField>
+  </Tab>
+  <Tab title="Create A Post">
+    <ParamField path="Caption" type="string">
+      The caption to your post.
+    </ParamField>
+    <ParamField path="Attachments" type="string">
+      The attachments to your post.
+    </ParamField>
+  </Tab>
+  <Tab title="Send Comment">
+    <ParamField path="Post ID" type="string" required>
+      The ID of the post to comment on
+    </ParamField>
+    <ParamField path="Text" type="string" required>
+      The caption for your comment.
+    </ParamField>
+  </Tab>
+  <Tab title="Get InMail Balance">
+    No parameters are available for this action.
+  </Tab>
+  <Tab title="Send Invitation">
+    <ParamField path="Username" type="string" required>
+      The username of who you wish to message. This can be found in their profile URL after https://www.linkedin.com/in/
+    </ParamField>
+    <ParamField path="Message" type="string" required>
+      A message to go with the invitation. This is max. 200 characters for free accounts, and max. 300 characters for Premium accounts.
+    </ParamField>
+    <ParamField path="Conversation ID" type="string">
+      The conversation you would like messages sent to.
+    </ParamField>
+  </Tab>
+  <Tab title="Send Message In A Chat">
+    <ParamField path="Chat ID" type="string" required>
+      The ID of the chat.
+    </ParamField>
+    <ParamField path="Text" type="string" required>
+      The message you wish to send.
+    </ParamField>
+  </Tab>
+  <Tab title="Start New Chat">
+    <ParamField path="Account Type" type="dropdown" required>
+      Choose from Classic, Recruiter and Sales Navigator.
+    </ParamField>
+    <ParamField path="Username" type="string" required>
+      The username of who you wish to message. This can be found in their profile URL after https://www.linkedin.com/in/
+    </ParamField>
+    <ParamField path="Title" type="string">
+      Add a title to the message.
+    </ParamField>
+    <ParamField path="Text" type="string" required>
+      The message you wish to send.
+    </ParamField>
+  </Tab>
 </Tabs>
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
   <Accordion title="Why are LinkedIn Tools so expensive?">
-    This Tool uses [Crustdata](https://crustdata.com/) to search through LinkedIn profiles. The credits charged are to cover the cost of this service through CrustData. We recommend upgrading to a subscription in order to use this Tool.
+    This Tool uses [Unipile](https://unipile.com/) to perform actions in LinkedIn. The credits charged are to cover the cost of this service through Unipile. We recommend upgrading to a subscription in order to use this Tool.
   </Accordion>
 </AccordionGroup>
