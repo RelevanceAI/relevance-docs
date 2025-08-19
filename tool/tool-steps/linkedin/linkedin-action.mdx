@@ -1,11 +1,13 @@
 ---
 title: "'Unipile - LinkedIn Action' Tool step"
-description: 'Search through LinkedIn profiles using this Tool step'
+description: "Search through LinkedIn profiles using this Tool step"
 ---
 
 The 'Unipile - LinkedIn Action' Tool step allows you to search through LinkedIn profiles through Relevance AI.
 
-<Note>You can learn more about the LinkedIn integration [here](/integrations/popular-integrations/linkedin).</Note>
+<Note>
+  You can learn more about the LinkedIn integration [here](/integrations/popular-integrations/linkedin).
+</Note>
 
 ## Add the 'Unipile - LinkedIn Action' Tool step to your Tool
 
@@ -22,10 +24,48 @@ You can add the 'Unipile - LinkedIn Action' Tool step to your Tool by:
 4. Connect or select your LinkedIn account in the 'LinkedIn Account' field
 5. Enter the parameters for the action you selected, and then click 'Run step' to run the Tool step
 
+## Parameters
+
+Parameters differ for each action in this Tool step.
+
+<Tabs>
+  <Tab title="Get All Chats">
+    <ParamField path="Before" type="string">
+      A filter to target items created before the datetime (exclusive). Must be an ISO 8601 UTC datetime (YYYY-MM-DDTHH:MM:SS.sssZ).
+    </ParamField>
+    <ParamField path="After" type="string">
+      A filter to target items created after the datetime (exclusive). Must be an ISO 8601 UTC datetime (YYYY-MM-DDTHH:MM:SS.sssZ).
+    </ParamField>
+    <ParamField path="Cursor" type="string">
+      A cursor for pagination purposes. To get the next page of entries, you need to make a new request and fulfill this field with the cursor received in the previous request. This process should be repeated until all entries have been retrieved.
+    </ParamField>
+    <ParamField path="Limit" type="string">
+      The maximum number of results to return. This can be between 1 to 250.
+    </ParamField>
+  </Tab>
+  <Tab title="Get All Messages From Chat">
+    <ParamField path="Chat ID" type="string">
+      The ID of the chat.
+    </ParamField>
+    <ParamField path="Before" type="string">
+      A filter to target items created before the datetime (exclusive). Must be an ISO 8601 UTC datetime (YYYY-MM-DDTHH:MM:SS.sssZ).
+    </ParamField>
+    <ParamField path="After" type="string">
+      A filter to target items created after the datetime (exclusive). Must be an ISO 8601 UTC datetime (YYYY-MM-DDTHH:MM:SS.sssZ).
+    </ParamField>
+    <ParamField path="Cursor" type="string">
+      A cursor for pagination purposes. To get the next page of entries, you need to make a new request and fulfill this field with the cursor received in the previous request. This process should be repeated until all entries have been retrieved.
+    </ParamField>
+    <ParamField path="Limit" type="string">
+      The maximum number of results to return. This can be between 1 to 250.
+    </ParamField>
+  </Tab>
+</Tabs>
+
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
   <Accordion title="Why are LinkedIn Tools so expensive?">
-    This Tool uses [Crustdata](https://crustdata.com/) to search through LinkedIn profiles. The credits charged are to cover the cost of this service through CrustData. We recommend upgrading to a subscription in order to use this Tool. 
+    This Tool uses [Crustdata](https://crustdata.com/) to search through LinkedIn profiles. The credits charged are to cover the cost of this service through CrustData. We recommend upgrading to a subscription in order to use this Tool.
   </Accordion>
 </AccordionGroup>
