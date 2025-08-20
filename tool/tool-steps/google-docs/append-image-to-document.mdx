@@ -1,0 +1,57 @@
+---
+title: "Append Image to Document"
+description: "The Append Image to Document tool step allows you to add an image to your doc"
+---
+
+## Add the ‘Append Image to Document’ Tool step to your Tool
+
+<div style={{ width:"96%",position:"relative",paddingTop:"60%" }}>
+<iframe src="https://app.supademo.com/embed/cmejfzt4i07we5gz3x8t074ff?embed_v=2&utm_source=embed" frameBorder="0" title="Add the Append Text Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+
+</div>
+
+
+You can add the ‘Append Image to Document’ Tool step to your Tool by:
+
+1. Create a ["File to URL"](/tool/customize-tool/inputs#file-to-url) input field
+2. Create a "Append Image to Document" tool step
+3. Select the account you would like to use
+4. Select the document you would like to append an image to.
+5. Select the "File to URL" input variable you created in step 1.
+6. Upload an image to the "File to URL" input field by dragging and dropping the image into the input field.
+6. Check whether you would like to append at the beginning of the document.
+7. Click 'Run step' to test out the Tool
+
+
+## Parameters
+
+<ParamField path="Document" type="string" required>
+  The document you would like to append an image to. You can get the document ID from the URL of the document between `/d/` and `/edit`.
+</ParamField>
+
+<ParamField path="Image URL" type="string" required>
+  The URL of the image you would like to append to the document. 
+  <Warning>
+    You must upload the image using the "File to URL" input field
+  </Warning>
+</ParamField>
+
+<ParamField path="Append at beginning" type="boolean">
+  When this option is checked, the image will be prepended to the document.
+</ParamField>
+
+
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I append an image to a specific section of the document?">
+    Currently, you can only append an image to the beginning or end of the document.
+  </Accordion>
+  <Accordion title="I keep getting an error when I try to append an image to the document?">
+    Please ensure that the image is being uploaded to the "File to URL" input field.
+  </Accordion>
+</AccordionGroup>
+
+
+
