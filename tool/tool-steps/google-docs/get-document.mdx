@@ -1,0 +1,99 @@
+---
+title: "Get Document"
+description: "Get Document tool step allows you to retrieve the contents of a file in your Google Drive"
+---
+
+## Add the ’Get Document’ Tool step to your Tool
+
+
+<div style={{
+  position: "relative",
+  boxSizing: "content-box",
+  maxHeight: "100vh",
+  width: "100%",
+  aspectRatio: "1.7431192660550459",
+  padding: "24px 0"
+}}>
+  <iframe
+    src="https://app.supademo.com/embed/cmekur1eh07cav9kqa63v6uk2?embed_v=2&utm_source=embed"
+    loading="lazy"
+    title="Google Docs Get Document"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowFullScreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px",
+      objectFit: "cover"
+    }}
+  />
+</div>
+
+
+
+You can add the ‘Get Document’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Get Document’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Select the Google account you would like to use.
+4. Select the Document you would like to fetch.
+5. Check whether you want to include content from all tabs.
+6. Select which tabs you want to include.
+7. Click 'Run step' to test out the Tool
+
+## Parameters
+
+<ParamField path="Document" type="string" required>
+  The document you would like to append text to. You can get the document ID from the URL of the document between `/d/` and `/edit`.
+</ParamField>
+
+<ParamField path="Include Tabs Content" type="boolean">
+  If this option is unchecked, only the content from the main tab will be included in the output.
+  When this option is checked, the content from all tabs will be included in the output.
+  <Warning> This option must be enabled if Tab IDs are being provided. </Warning>
+</ParamField>
+
+<ParamField path="Tab IDs" type="array">
+      Specify which tabs should appear in the output.
+</ParamField>
+
+
+
+## Playground
+<div style={{
+  position: "relative",
+  width: "100%",
+  height: "50vh",
+  minHeight:"300px",
+  border: "3px solid #5E43CE",
+  borderRadius: "10px",
+}}>
+  <iframe src="https://app.relevanceai.com/form/f1db6c/4dd16f28-6362-48e9-9ee9-a8a12d28f9c0?version=latest&hideLogo=true&guidanceTipText=👆+Input+your+Google+doc+URL+here" 
+  style={{ 
+    width: "100%", 
+    height: "100%",
+    border: "none",
+  }}/>
+</div>
+
+
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+    <Accordion title="How do I get the document ID?">
+        To get the document ID, navigate to the document you want to include in the output and copy the ID from the URL (the long string between `/d/` and `/edit`).
+    </Accordion>   
+    <Accordion title="How do I get the Tab IDs?">
+        To locate the Tab ID, navigate to the specific tab you're interested in. You can find the tab ID in the URL after `tab=`.
+    </Accordion>
+</AccordionGroup>
+
+
+
