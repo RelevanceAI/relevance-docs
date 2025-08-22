@@ -1,0 +1,75 @@
+---
+title: "Create a New Document"
+description: "The Create a New Document tool step allows you to create a new document with preexisting content"
+---
+
+## Add the ‘Create a New Document’ Tool step to your Tool
+
+<div style={{
+  position: "relative",
+  boxSizing: "content-box",
+  maxHeight: "100vh",
+  width: "100%",
+  aspectRatio: "1.7431192660550459",
+  padding: "24px 0"
+}}>
+  <iframe
+    src="https://app.supademo.com/embed/cmembyhop1iyvv9kq0os7ja64?embed_v=2&utm_source=embed"
+    loading="lazy"
+    title="Google Docs Create a New Document"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowFullScreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px",
+      objectFit: "cover"
+    }}
+  />
+</div>
+
+You can add the ‘Create a New Document’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Create a New Document’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Select the account you would like to use
+4. Enter the title of the document you would like to create.
+5. Enter the content you would like to add to the document.
+6. Select the folder you would like to create the document in.
+7. Click 'Run step' to test out the Tool  
+
+
+## Parameters
+
+<ParamField path="Title" type="string" required>
+  The name of the file to create.
+</ParamField>
+
+<ParamField path="Text" type="string">
+  The content you would like to create the document with.
+</ParamField>
+
+<ParamField path="Folder" type="string">
+  The folder you would like to create the document in. If no folder is specified, the document will be created in the root folder.
+</ParamField>
+
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I create a document with formatted text?">
+    Currently, you can only create a new document with a blank template. However you can use this tool [Add/Update any content to Google Doc](https://app.relevanceai.com/marketplace/f1db6c/d64db999bc25-4ea0-b926-30b350f69243/search?search=Add/Update+any+content+to+Google+Doc&listing=e0a51c06-dccc-4eea-b8bc-40331ec41fbd) as a workaround to create a document with formatted text.
+  </Accordion>
+  <Accordion title="How can I get the folder ID?">
+    You can get the folder ID by going to the folder in Google Docs and copying the ID from the URL. It should be the string after `folders/` in the URL.
+  </Accordion>
+</AccordionGroup>
+
+
+
