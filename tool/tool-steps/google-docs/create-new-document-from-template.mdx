@@ -1,0 +1,80 @@
+---
+title: "Create New Document from Template"
+description: "The Create New Document from Template tool step allows you to create new documents using existing documents as templates"
+---
+
+## Add the ‘Create New Document from Template’ Tool step to your Tool
+
+<div style={{
+  position: "relative",
+  boxSizing: "content-box",
+  maxHeight: "100vh",
+  width: "100%",
+  aspectRatio: "1.7431192660550459",
+  padding: "24px 0"
+}}>
+  <iframe src="https://app.supademo.com/embed/cmeuyd7r36nm3v9kqztgiu3aa?embed_v=2&utm_source=embed" loading="lazy" title="Create New Document From Template" allow="clipboard-write" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+</div>
+
+
+
+You can add the ‘Create New Document from Template’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Create New Document from Template’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Select the account you would like to use
+4. Select the template you would like to use (this is just any existing document in your Google Drive)
+5. Select the folder to save the new document in
+6. Pick a name for the new document
+7. Select the output file type (PDF, DOCX or both)
+8. Enter the text you want to replace the placeholders with
+8. Click 'Run step' to test out the Tool
+
+## Parameters
+
+<ParamField path="Template" type="string" required>
+  Select the document you would like to use as a template. 
+</ParamField>
+
+<ParamField path="Folder" type="string" required>
+  Specify the folder where the new document will be saved.  
+</ParamField>
+
+<ParamField path="Name" type="string" required>
+  This will be the name of the new file.
+</ParamField>
+
+<ParamField path="Mode" type="options" required>
+  This is the file type of the new document. Choose from PDF, DOCX or both.
+</ParamField>
+
+<ParamField path="Replace Text Placeholders" type="json" required>
+  This is a JSON object that contains the text placeholders and the text to replace them with.
+</ParamField>
+
+```json
+{
+  // This will replace all instances of {{Name}} with "John Doe"
+  "Name": "John Doe",
+  // This will replace all instances of {{Date}} with "2025-01-01"
+  "Date": "2025-01-01"
+}
+```
+
+
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Where do I get a template from?">
+    You can use any existing document as a template. Add custom text to the template by using placeholders. Then, in the "Replace Text Placeholders" field, specify what each placeholder should be replaced with in the new document.
+  </Accordion>
+<Accordion title="What are placeholders?">
+  Placeholders are special markers in your template that get replaced with custom text when the document is created.  
+  <Tip>To add a placeholder, wrap the name in double curly braces. For example: `{{Name}}` or `{{Date}}`.</Tip>
+</Accordion>
+<Accordion title="What happens if there is more than one instance of the same placeholder?">
+  All instances of the same placeholder will be replaced.
+</Accordion>
+</AccordionGroup>
+
