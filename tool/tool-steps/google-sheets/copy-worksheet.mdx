@@ -1,0 +1,89 @@
+---
+title: "Copy Worksheet"
+description: "The Copy Worksheet tool step allows you to copy a worksheet from one Google Sheet to another"
+---
+
+## Add the ‘Copy Worksheet’ Tool step to your Tool
+
+
+
+<div style={{
+  position: "relative",
+  boxSizing: "content-box",
+  maxHeight: "80vh",
+  width: "100%",
+  aspectRatio: "1.7431192660550459",
+  padding: "24px 0"
+}}>
+  <iframe
+    src="https://app.supademo.com/embed/cmewcrxj47sj1v9kqudqh9i9j?embed_v=2&utm_source=embed"
+    loading="lazy"
+    title="Google Sheets Copy Worksheet"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowFullScreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px",
+      objectFit: "cover"
+    }}
+  />
+</div>
+
+
+
+You can add the ‘Copy Worksheet’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Copy Worksheet’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Using the dropdown menu:
+    - Select the account you would like to use.
+    - Select the Drive you would like to use.
+    - Select the Spreadsheet that the worksheet is in.
+    - Select the worksheet you would like to copy.
+    - Select the Spreadsheet you would like to copy the worksheet to.
+4. Click 'Run step' to test out the Tool
+
+
+
+
+## Parameters
+
+<ParamField path="Drive" type="string">
+  The Drive you want to use. By default, the tool uses "My Drive".
+</ParamField>
+
+<ParamField path="Spreadsheet ID (Template)" type="string" required>
+    Enter the ID of the spreadsheet where the original worksheet is located.
+</ParamField>
+
+<ParamField path="Worksheet ID" type="string" required>
+  Enter the ID of the worksheet you want to copy.
+</ParamField>
+
+<ParamField path="Spreadsheet ID (Target)" type="string" required>
+  Enter the ID of the spreadsheet where you want to copy the worksheet to.
+</ParamField>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+<Accordion title="Can I copy a worksheet to the same spreadsheet?">
+    Yes, you can copy a worksheet to the same spreadsheet. This behaviour would be the same as duplicating a worksheet.
+</Accordion>   
+<Accordion title="Will the formatting be preserved?">
+    Yes, all cell values, formulas, and formatting in the original worksheet will be copied to the new one.
+</Accordion>
+<Accordion title="Does this tool copy scripts, macros, or protected ranges?">
+    No, this tool only copies the worksheet contents (data and formatting). Scripts, macros, and protected ranges will not be copied.
+</Accordion>
+</AccordionGroup>
+
+
+
