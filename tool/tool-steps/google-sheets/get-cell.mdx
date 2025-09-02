@@ -1,0 +1,74 @@
+---
+title: "Get Cell"
+description: "The Get Cell tool step allows you to retrieve a cell from your Google Sheet"
+---
+
+## Add the ‘Get Cell’ Tool step to your Tool
+
+
+<div style={{
+  position: "relative",
+  boxSizing: "content-box",
+  maxHeight: "100vh",
+  width: "100%",
+  aspectRatio: "1.7448979591836735",
+  padding: "24px 0"
+}}>
+  <iframe
+    src="https://app.supademo.com/embed/cmf20vnhu019h39ozr1kj9qc7?embed_v=2&utm_source=embed"
+    loading="lazy"
+    title="Google Sheets Get Cell"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowFullScreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px",
+      objectFit: "cover"
+    }}
+  />
+</div>
+
+
+
+You can add the ‘Get Cell’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Get Cell’ Tool step
+2. Click ‘Expand’ to see the full Tool step
+3. Using the dropdown menu:
+    - Select the Google account you would like to use.
+    - Select the Drive you would like to use (defaults to "My Drive").
+    - Select the Spreadsheet you would like to fetch from.
+    - Select the worksheet you would like to fetch from.
+    - Select the Cell you would like to fetch.
+4. Click 'Run step' to test out the Tool
+
+
+## Parameters
+
+<ParamField path="Drive" type="string">
+  The Drive you want to use. By default, the tool uses "My Drive".
+</ParamField>
+
+<ParamField path="Spreadsheet ID" type="string" required>
+  The ID of the spreadsheet you want to fetch from.
+</ParamField>
+
+<ParamField path="Worksheet ID" type="string" required>
+  The ID of the worksheet you want to fetch from.
+</ParamField>
+
+<ParamField path="Cell" type="string" required>
+  The coordinates of the cell you want to fetch. For example, "A1", "B2", etc.
+</ParamField>
+
+
+
+
+
