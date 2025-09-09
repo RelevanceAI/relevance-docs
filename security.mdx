@@ -3,18 +3,32 @@ title: 'Security overview'
 description: 'Relevance AI is SOC 2 Type II compliant and works with trusted vendors.'
 ---
 
-This page provides a security overview of our product and its key features. We are committed to ensuring the security and privacy of our users' data, and we are proud to be a SOC 2 Type II compliant company. 
+This page provides a security overview of our product and its key features. We are committed to ensuring the security and privacy of our users' data, and we are proud to be a SOC 2 Type II compliant company. We take your data and security seriously. Here’s how we keep your information safe, private, and under your control.
 
+## Data ownership and privacy
 
-## SOC2 compliant and multi-region
+### You own your data
 
-Relevance AI is compliant with strict enterprise-grade security and governance standards. Relevance AI is SOC 2 type 2 compliant, and we operate in a multi-region environment. As part of SOC 2, only executive management has any kind of visibility into your customer data.
+- All data you upload to Relevance AI remains your property
+- We do not use your data to train our models or improve our services unless you have a specific partnership agreement with us
+- Metadata may be used to improve your experience (e.g., better search), but never for model training
 
-You are free to voluntarily invite our success team to help you check that the messaging is okay and escalations are working okay, with freedom to revoke that access at any time.
+### Data export and deletion
 
-### Regions
+- You can export your data at any time in standard formats (CSV, Excel, JSON)
+- You can request account deletion, and we’ll process it within 60 days
+- Knowledge bases, agent logs, and files are all under your control for retention and deletion
 
-Relevance AI is available in three regions to cater to users around the world:
+### Data retention 
+
+- **Agent and tool run logs**: 30 days (free tier). For other tiers, the data is stored until you choose to delete it
+- **API keys**: Fully self-managed. Relevance will store certs, service accounts, API keys etc securely and encrypted
+
+## Data Residency & Storage
+
+### Choose your region
+
+Data is stored in Australia, the US, or the EU/UK, based on your selection at signup.
 
 - US (N. Virginia)
 - EU (London)
@@ -22,7 +36,99 @@ Relevance AI is available in three regions to cater to users around the world:
 
 You can choose the region that best suits your needs when setting up your Relevance AI account.
 
-## Self-hosted models that are also multi-region
+### Tenant isolation
+
+- Relevance operates on a multi-tenanted architecture where customer data is logically separated
+- A separate service and database exists for Enterprise customers with FGA (Fine Grained Access) controls enabled to further manage access
+- Access is restricted to invited users and can be further locked down with SSO
+- Single-tenant options are currently in the works
+
+### Network security 
+
+- Relevance has network level isolation, utilizing custom VPCs and private subnets
+- Restrictive firewall, rate limiting and concurrency rules are in place to protect customer data
+- Our infrastructure is continuously scanned for vulnerabilities and patched within strict SLAs
+
+### Endpoint security
+
+- All Relevance issued hardware is pre-configured to comply with our standards of security
+- Workstations are configured with encryption by default, data exfiltration prevention and lock when idle
+- Up to date software is enforced to prevent malware
+
+## Security Certifications and Compliance 
+
+### SOC2 Type II compliant
+
+Relevance AI is compliant with strict enterprise-grade security and governance standards. Relevance AI is SOC2 Type II compliant, and we operate in a multi-region environment. As part of SOC2, only executive management has any kind of visibility into your customer data.
+
+You are free to voluntarily invite our support / success team to help you check that the messaging is okay and escalations are working okay, with freedom to revoke that access at any time.
+
+### GDPR compliant
+
+Relevance AI is compliant with the General Data Protection Regulation (GDPR) and other relevant data protection laws. We take your data privacy seriously and ensure that all data is processed in accordance with GDPR regulations.
+
+### Security questionnaire and documentation
+
+We offer security questionnaire completion for Enterprise customers. We only share documentation on our compliance to Enterprise customers upon request under NDA.
+
+### Third-party assessments
+
+We regularly undergo third-party assessments to ensure that we are compliant with the latest security standards. These are performed by independent security firms. Reports are available to Enterprise customers under NDA.
+
+## Encryption & Key Management
+
+### Encryption everywhere
+
+- All data is encrypted in transit and at rest using industry-standard cryptography (TLS 1.2+ for data in transit and AES 256 for data at rest)
+- SOC 2 Type II policies define accepted algorithms and key management
+
+### Customer-managed keys
+
+- Relevance provides a mechanism to securely store keys
+- Customers must manage the scope of the keys at the underlying integration
+
+## Access Management
+
+### Authentication
+
+- We support SSO and MFA supported via your identity provider for Enterprise customers
+- [Role-based access control (RBAC)](https://relevanceai.com/docs/get-started/enterprise/rbac) for organizations and projects is available for Enterprise customers
+- [Fine-grained access control (FGA)](https://relevanceai.com/docs/get-started/enterprise/asset-controls) is available for Enterprise customers
+
+### Administrative controls
+
+- Fine-grained RBAC and escalation features for sensitive actions is available for Enterprise customers
+- Least-privilege access by default
+
+## AI Agent Security
+
+### Preventing data leaks and monitoring Agent behavior:
+
+- You control data sources and can pre-scrub for PII
+- Human-in-the-loop escalation and monitoring features are available
+- Governance agents can be built to pro-actively manage Agent security
+- S3 Audit events can be used to reactively manage Agent security
+
+### Prompt injection protection
+
+We have multiple controls, including prompt management, escalation, and parameterized inputs to protect you from prompt injection.
+
+## Vendor & Supply Chain Security
+
+### Third-party risk management
+
+- All subprocessors are listed at https://trust.relevanceai.com/subprocessors
+- We conduct annual reviews and risk assessments for all vendors
+
+## Disaster Recovery & Business Continuity
+
+### Resilience
+
+- Relevance has automatic, encrypted backups across multiple availability zones
+- Backups are regularly tested with failover procedures
+- Relevance can operate globally and remotely to minimize disruption to services
+
+## Self-hosted models that are multi-region
 
 We don't train any models on your data, ever. Similarly, usually when you access API endpoints for LLMs, the processing agreement states that they don't train on that data. We take it one step further and host our own OpenAI models, and open source ones like LAMA and fireworks that we host within our own AWS and Azure environments which are multi-region as well.
 
@@ -44,8 +150,6 @@ Knowledge is a feature in Relevance AI that allows you to store data in a table,
 
 ### LLM Models
 
-Relevance AI offers a number of LLM models to enhance your AI applications. Our GPT models are hosted on our own Azure OpenAI deployment within the same region you have chosen. It's important to note that no data is stored or trained on in this process.
-
 If you provide an OpenAI API Key, it will be passed through OpenAI's API service. No data is stored or trained on during this process. You can review the Data Processing Agreement (DPA) on our website for more information.
 
 Anthropic models are offered through their API, and once again, no data is stored or trained on during this process. You can review the DPA on our website for further details.
@@ -54,9 +158,6 @@ The below table describes the LLM models available in Relevance AI and their res
 
 | LLM Model   | Vendor    | Data Logged | Used for Training | DPA                 |
 |-------------|-----------|-------------|------------------|---------------------|
-| GPT         | Azure     | No          | No               | Yes    |
+| GPT         | OpenAI    | No          | No               | Yes    |
 | Claude      | Anthropic | No          | No               | Yes    |
 
-## Security Questions
-
-We offer security questionnaire completion for Business plans and above.
