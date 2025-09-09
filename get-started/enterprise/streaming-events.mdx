@@ -1,0 +1,113 @@
+---
+title: "Setting up streaming events to self-hosted S3 bucket"
+sidebarTitle: "Streaming events to S3 buckets"
+description: "Configure streaming events to your own S3 bucket"
+---
+
+This guide explains how to configure streaming events from Relevance to your own S3 bucket for audit logs and business intelligence analytics.
+
+<Note>We currently only support S3 buckets as blob stores for streaming events.</Note>
+
+Streaming events provide detailed audit logs and business intelligence data about platform usage, executions, and system events. These events are automatically streamed to your S3 bucket in a structured format for analysis and compliance reporting.
+
+## Prerequisites
+
+- AWS account permissions to create policies and S3 buckets
+- A Relevance AI account on the Enterprise plan
+
+## Instructions
+
+### 1. Create an S3 bucket
+
+Create an S3 bucket in the same region where your Relevance data is stored. Use the following region mapping:
+
+- **Australia**: `ap-southeast-2` (Sydney)
+- **Europe**: `eu-west-2` (London)
+- **US**: `us-east-1` (N. Virginia)
+
+<Warning>Ensure the bucket is created in the correct region.</Warning>
+
+### 2. Add Bucket policy
+
+Add the following policy statement to your bucket policy. You'll need to customize the placeholders:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowRelevanceEventConsumer",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "RELEVANCE_EVENT_CONSUMER_ROLE_ARN"
+      },
+      "Action": ["s3:PutObject", "s3:GetBucketLocation"],
+      "Resource": [
+        "arn:aws:s3:::YOUR_BUCKET_NAME",
+        "arn:aws:s3:::YOUR_BUCKET_NAME/*"
+      ]
+    }
+  ]
+}
+```
+
+Replace the following placeholders in the policy:
+- **`YOUR_BUCKET_NAME`**: Replace with your actual S3 bucket name in both the Resource ARNs
+- **`RELEVANCE_EVENT_CONSUMER_ROLE_ARN`**: Replace with Relevance's IAM role ARN for your region
+
+<Note>The IAM role ARN is region-specific. Contact your Relevance team for this.</Note>
+
+### 3. Provide Configuration Information
+
+Once your S3 bucket is configured, provide your Account Manager or our support team with the following information:
+
+1. **Bucket Name**: The name of your S3 bucket
+2. **Region**: The AWS region where your bucket is located
+3. **Prefix**: The S3 prefix where you want events to be stored (e.g., `relevance-events/`)
+
+## Event Structure
+
+Once configured, events will start flowing into your bucket under the specified prefix. The folder structure follows this pattern:
+
+```
+YOUR_PREFIX/
+├── event_type/
+│   └── dt=YYYY-MM-DD/
+│       └── unique_id.gz
+```
+### Example Structure
+
+```
+relevance-events/
+├── billing_events/
+│   └── dt=2025-01-15/
+│       ├── event-consumer-billing-events-production-1-2025-01-15-06-33-27-cfb28614-c6ce-38ca-9ecd-51225887e256.gz
+│       └── event-consumer-billing-events-production-1-2025-01-15-08-45-12-a1b2c3d4-e5f6-7890-abcd-ef1234567890.gz
+├── execution_event/
+│   └── dt=2025-01-15/
+│       └── event-consumer-execution-events-production-1-2025-01-15-07-22-15-98765432-1a2b-3c4d-5e6f-789012345678.gz
+├── i_a_m_event/
+│   └── dt=2025-01-15/
+│       └── event-consumer-iam-events-production-1-2025-01-15-09-15-42-fedcba98-7654-3210-fedc-ba9876543210.gz
+└── asset_event/
+    └── dt=2025-01-15/
+        └── event-consumer-asset-events-production-1-2025-01-15-10-30-55-11223344-5566-7788-9900-aabbccddeeff.gz
+```
+
+### Event Types
+
+- **`billing_events`**: Usage and billing-related events
+- **`execution_event`**: Execution and performance events
+- **`i_a_m_event`**: Identity and access management events
+- **`asset_event`**: Asset creation, modification, and deletion events
+
+### File Format
+
+- All event files are stored as **gzip-compressed** json objects
+- The `dt=` parameter uses **UTC date format** (YYYY-MM-DD)
+- File names follow the pattern: `event-consumer-{event-type}-{environment}-{instance}-{timestamp}-{uuid}.gz`
+- Each file contains a unique identifier (UUID) to prevent conflicts
+
+## Support and troubleshooting
+
+If you are having issues with this process, please reach out to your Account Manager or our support team via your dedicated Slack channel for support. 
