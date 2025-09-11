@@ -1,0 +1,71 @@
+---
+title: "Add Label to Email"
+description: "The Add Label to Email tool step allows you to add a tag to an email"
+---
+
+## Add the ‘Add Label to Email’ Tool step to your Tool
+
+<div style={{
+  position: "relative",
+  boxSizing: "content-box",
+  maxHeight: "100vh",
+  width: "100%",
+  aspectRatio: "1.7431192660550459",
+  padding: "24px 0"
+}}>
+  <iframe
+    src="https://app.supademo.com/embed/cmfeyaz6oa83v39ozwqkg6mii?embed_v=2&utm_source=embed"
+    loading="lazy"
+    title="Gmail Add Label to Email"
+    allow="clipboard-write"
+    webkitallowfullscreen="true"
+    mozallowfullscreen="true"
+    allowFullScreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px",
+      objectFit: "cover"
+    }}
+  />
+</div>
+
+
+
+
+You can add the ‘Add Label to Email’ Tool step to your Tool by:
+
+1. Creating a new Tool, then searching for the ‘Add Label to Email’ Tool step.
+2. Click ‘Expand’ to see the full Tool step.
+3. Select the account you would like to use.
+4. Select the your target email to label.
+5. Select the label you would like to use.
+6. Click 'Run step' to test out the Tool.  
+
+
+## Parameters
+
+<ParamField path="Message" type="string" required>
+  The unique identifier for the email conversation you want to label.
+  <Note> For automated workflows: Use the GMAIL_THREAD_ID from your trigger event to target the specific email. </Note>
+</ParamField>
+
+<ParamField path="Labels" type="string" required>
+  The label you would like to add to an email. If you are using this tool with input variable, you can retrieve your label IDs using the **List Labels** tool step.
+</ParamField>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="How can I use this with an Agent trigger?">
+    Use the `GMAIL_THREAD_ID` from the Gmail trigger as the value for the Message parameter.
+  </Accordion>
+  <Accordion title="How do I get a Label ID?">
+    Use the “List Labels” tool step to fetch your available labels and their IDs, then select the appropriate one.
+  </Accordion>
+</AccordionGroup>
+
