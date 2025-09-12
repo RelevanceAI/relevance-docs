@@ -71,27 +71,32 @@ Once configured, events will start flowing into your bucket under the specified 
 
 ```
 YOUR_PREFIX/
-├── event_type/
-│   └── dt=YYYY-MM-DD/
-│       └── unique_id.gz
+├── entity=event_type/
+│   └── org_id=organization_id/
+│       └── dt=YYYY-MM-DD/
+│           └── unique_id.gz
 ```
 ### Example Structure
 
 ```
 relevance-events/
-├── billing_events/
-│   └── dt=2025-01-15/
-│       ├── event-consumer-billing-events-production-1-2025-01-15-06-33-27-cfb28614-c6ce-38ca-9ecd-51225887e256.gz
-│       └── event-consumer-billing-events-production-1-2025-01-15-08-45-12-a1b2c3d4-e5f6-7890-abcd-ef1234567890.gz
-├── execution_event/
-│   └── dt=2025-01-15/
-│       └── event-consumer-execution-events-production-1-2025-01-15-07-22-15-98765432-1a2b-3c4d-5e6f-789012345678.gz
-├── i_a_m_event/
-│   └── dt=2025-01-15/
-│       └── event-consumer-iam-events-production-1-2025-01-15-09-15-42-fedcba98-7654-3210-fedc-ba9876543210.gz
-└── asset_event/
-    └── dt=2025-01-15/
-        └── event-consumer-asset-events-production-1-2025-01-15-10-30-55-11223344-5566-7788-9900-aabbccddeeff.gz
+├── entity=billing_events/
+│   └── org_id=12345/
+│       └── dt=2025-01-15/
+│           ├── event-consumer-billing-events-production-1-2025-01-15-06-33-27-abc123.gz
+│           └── event-consumer-billing-events-production-1-2025-01-15-08-45-12-def456.gz
+├── entity=execution_events/
+│   └── org_id=12345/
+│       └── dt=2025-01-15/
+│           └── event-consumer-execution-events-production-1-2025-01-15-07-22-15-ghi789.gz
+├── entity=i_a_m_events/
+│   └── org_id=12345/
+│       └── dt=2025-01-15/
+│           └── event-consumer-iam-events-production-1-2025-01-15-09-15-42-jkl012.gz
+└── entity=asset_events/
+    └── org_id=12345/
+        └── dt=2025-01-15/
+            └── event-consumer-asset-events-production-1-2025-01-15-10-30-55-mno345.gz
 ```
 
 ### Event Types
