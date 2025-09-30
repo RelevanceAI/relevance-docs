@@ -1,0 +1,80 @@
+---
+title: "Organization, project and agent IDs"
+description: "Learn how to find your organization, project and agent IDs"
+---
+
+You may need to know your organization, project and agent IDs for various reasons. Here's how to find them.
+
+## URL structure
+
+Relevance AI URLs generally follow this pattern:
+
+```
+https://app.relevanceai.com/[SECTION]/[REGION_ID]/[PROJECT_ID]/[AGENT_ID]/...
+```
+
+You can also tell what region your organization is in by looking at the URL. 
+
+* **AU**: `f1db6c`
+* **EU**: `d7b62b`
+* **US**: `bcbe5a`
+
+Here is an example of a Relevance AI URL, broken down into its sections:
+
+```
+https://app.relevanceai.com/agents/f1db6c/123456789012-46bf-9cf4-a98611e97a41/43c3a067-0734-4f31-b4c9-3c72dc816519/edit/instructions
+```
+
+* **Section**: `agents`
+* **Region**: `f1db6c`
+* **Project ID**: `123456789012-46bf-9cf4-a98611e97a41`
+* **Agent ID**: `43c3a067-0734-4f31-b4c9-3c72dc816519`
+
+## How to find each ID
+
+### Organization ID
+
+<Warning>You'll only be able to see your organization ID if you're an organization admin by heading to Settings. This section is not available to non-organization admins.</Warning>
+
+To find your organization ID, head to the Settings page in the sidebar of Relevance AI. The settings page will show a URL like the following below:
+
+```
+https://app.relevanceai.com/settings/organization/REGION_ID/ORG_ID/
+```
+
+From here, you should be able get your organization ID.
+
+### Project ID
+
+To find your project ID, head to any page in your project in Relevance AI. The URL will show a URL like the following below:
+
+```
+https://app.relevanceai.com/agents/REGION_ID/PROJECT_ID/AGENT_ID/...
+```
+
+From here, you should be able get your project ID.
+
+### Agent ID
+
+To find your agent ID, head to any page in your agent in Relevance AI. The URL will show a URL like the following below:
+
+```
+https://app.relevanceai.com/agents/REGION_ID/PROJECT_ID/AGENT_ID/...
+```
+
+From here, you should be able get your agent ID.
+
+## Use a Tool in Relevance AI to grab your IDs
+
+You can use this tool to get IDs from an Agent or Tool URL. 
+
+<Note>This Tool will not access your data or enter your project - it'll just return IDs from the URL you provide.</Note>
+
+<iframe src="https://app.relevanceai.com/form/f1db6c/d47cbb0c-afcb-4a05-9931-474604c3ea47?version=latest&hideGuidanceTip=true" width="100%" height="400px" frameborder="0"></iframe>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Are IDs case sensitive?">Yes, they are.</Accordion>
+  <Accordion title="Are forward slashes a valid character in an ID?">No, these are just part of the URL structure.</Accordion>
+</AccordionGroup>
