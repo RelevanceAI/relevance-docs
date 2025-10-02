@@ -5,7 +5,7 @@ description: "Connect your Relevance AI tools to Claude, Cursor, and other AI cl
 
 ## Overview
 
-The MCP Server integration enables you to use your Relevance AI Agents and tools in external AI clients that support the MCP (Model Control Protocol) standard. This powerful feature creates a seamless connection between your Relevance AI workspace and popular AI assistants like Claude and development environments like Cursor.
+The MCP Server integration enables you to use your Relevance AI tools in external AI clients that support the MCP (Model Control Protocol) standard and allow your agents to run external tools available from an MCP Server connection. This powerful feature creates a seamless connection between your Relevance AI workspace and popular AI assistants like Claude and development environments like Cursor.
 
 With MCP Server integration, you maintain a single source of truth for your tools while extending their availability across your entire AI ecosystem. This means the specialized tools you've built in Relevance AI can now be accessed and utilized by your favorite AI assistants outside our platform.
 
@@ -16,6 +16,7 @@ With MCP Server integration, you maintain a single source of truth for your tool
 - **Customizable integration**: Select exactly which tools to expose to external clients
 - **Simple configuration**: Generate MCP server settings with just a few clicks
 - **Seamless workflow integration**: Access your specialized tools wherever you work with AI
+- **External tool integration**: Allow your agents to run external tools available from an MCP Server connection
 
 ## How It Works
 
@@ -29,13 +30,19 @@ Setting up the MCP Server integration is straightforward:
 
 ### For Agents
 
-Agents can now connect to and run tools from remote MCP servers.
+Agents can connect to and run tools from remote MCP servers.
+
+<div style={{ width:"100%",position:"relative"}}>
+<iframe src="https://app.supademo.com/embed/cmg8tiu3h23ii2nomxtqolybm" frameBorder="0" title="How to set up an MCP Server connection for an agent" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
 1. Open the Agent you want to connect
 2. Head to Advanced Settings by clicking "Advanced" in the sidebar
 3. Click "MCP Server"
 4. Click "+ Add remote MCP tools"
-5. Add the details of your MCP Server here (URL and authentication details)
+5. Add the URL of the remote hosted MCP server
+6. Label your MCP Server connection
+7. Add any authentication details required for the MCP server
 
 Once connected, the agent will automatically fetch and display the available tools from the remote MCP server. These tools can be referenced in the agent’s core instructions and will appear in the conversation task view. When a tool is run, the agent communicates with the remote MCP server and returns the result directly in the conversation.
 
@@ -43,13 +50,17 @@ Once connected, the agent will automatically fetch and display the available too
 
 ### For Tools
 
-You can export your Relevance AI tools to an MCP Server. 
+You can access and use your Relevance AI tools via an MCP Server connection. 
+
+<div style={{ width:"100%",position:"relative"}}>
+<iframe src="https://app.supademo.com/embed/cmg8u5ozl23oq2nomk1ojh7yr" frameBorder="0" title="How to set up an MCP Server connection for a tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
 1. Go to your Relevance AI workspace
-2. Under "Tools", navigate to "Export Tools" → "MCP Server"
+2. Click "More" on the left-side navigation menu, navigate to "MCP servers"
 3. Select the tools you want to share with external clients
 4. Click "Generate MCP Server Configuration"
-5. Copy your MCP configuration into your preferred client:
+5. Copy your MCP configuration into your preferred client
 
 <Tip>
   For Cursor: Open Cursor settings → MCP tab → "Add new MCP server" → Paste into your mcp.json file
@@ -108,4 +119,4 @@ If you encounter issues with the MCP Server integration:
 
 ## Conclusion
 
-The MCP Server integration represents a significant step forward in creating a unified AI ecosystem. By allowing your Relevance AI tools to be used in external AI clients, you can maintain consistency across platforms while leveraging the unique strengths of each environment. This integration maximizes your investment in tool development and ensures that your specialized capabilities are available wherever you work with AI.
+The MCP Server integration is a significant step forward in creating a unified AI ecosystem. By allowing your Relevance AI tools to be used in external AI clients, you can maintain consistency across platforms while leveraging the unique strengths of each environment. This integration maximizes your investment in tool development and ensures that your specialized capabilities are available wherever you work with AI.
