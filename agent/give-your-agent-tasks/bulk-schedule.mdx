@@ -4,39 +4,25 @@ sidebarTitle: 'Bulk scheduling'
 description: 'For Team Plan Users and above'
 ---
 
-
-<div
-  style={{
-    width: '100%',
-    position: 'relative'
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/cma23sbtv21fs13m0ux9tdj8n?embed_v=2"
-    frameBorder="0"
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      borderRadius: '10px',
-    }}/>
-</div>
-
 Bulk Scheduling is a feature available to Team Plus users on the Relevance AI platform. This functionality allows you to set up and schedule multiple tasks for your agent to run automatically.
+
+<div style={{ width:"100%",position:"relative"}}>
+<iframe src="https://app.supademo.com/embed/cmgh7yfdl0001wl0iaprn24sv" frameBorder="0" title="How to set up an MCP Server connection for a tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
 ## How to access bulk scheduling
 
 1. Navigate to your agent's interface.
-
-2. Look for the dropdown menu next to the `+ New Task` button.
-
-3. Select `Schedule in bulk` from the options.
+2. Click on the `Run` tab.
+3. Look for the dropdown menu next to the `+ New Task` button.
+4. Select `Schedule in bulk` from the options.
 
 ## Setting up a batch schedule
 
 When setting up a batch schedule, you'll need to:
-
-1. Select the knowledge table that contains the data you want your agent to process.
-
-2. Name your batch job.
+1. Select a spreadsheet or knowledge table that contains the data you want your agent to process.
+2. Enter a message template for your agent to use. This should include your data's column names, which are automatically added as variables accessible using double curly braces: **\{\{variable_name}}**.
+3. Queue working hours for the batch schedule as desired to ensure that tasks are being run at the appropriate time.
 
 
 ## Using the agent message template
@@ -49,11 +35,11 @@ The Agent Message template is where you define how your agent should interact wi
 
 - Column Names: you can use any column from your selected knowledge table.
 
-- Example Usage: if you have a column named "company" in your table, you could create a template like this: "Please analyze the performance of company based on the provided data."
+- Example Usage: if you have a column named "company" in your table, you could create a template like this: "Please analyze the performance of **\{\{company\}\}** based on the provided data."
 
-## Using the cadence contract
+## Using the working hours
 
-A key feature of bulk scheduling is the cadence contract, which allows you to fine-tune how and when tasks are distributed. This ensures that your automated workflows align perfectly with your team's schedule and work patterns.
+A key feature of bulk scheduling is the ability to queue working hours, which allows you to fine-tune how and when tasks are distributed. This ensures that your automated workflows align perfectly with your team's schedule and work patterns.
 
 **Key components:**
 
@@ -67,7 +53,7 @@ A key feature of bulk scheduling is the cadence contract, which allows you to fi
 
 - Override Mode: This give you the option to run all created tasks in override mode, which can be useful for testing or when you need to maintain specific inputs/outputs across all tasks.
 
-### Best practices for cadence contract
+### Best practices for working hours
 
 - Align with team availability: Set work days and hours that match your team's actual working schedule to ensure timely handling of task outputs.
 
@@ -78,7 +64,7 @@ A key feature of bulk scheduling is the cadence contract, which allows you to fi
 
 **In summary**
 
-Once you've configured the cadence contract, hit `Schedule`.
+Once you've configured the desired working hours, hit `Schedule`.
 
-You can check which bulk schedules you have set up by navigating to the three dots in the top right corner of your agent chat interface and selecting “Bulk schedules”.
+You can check the statuses of bulk schedules you have set up by navigating to the `Run` tab in the agent builder and clicking `Agent queue` in the task list view on the left.
 
