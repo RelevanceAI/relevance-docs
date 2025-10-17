@@ -30,6 +30,16 @@ Common integration triggers include:
 - CRM triggers that react to new lead creation or status changes
 - Webhook triggers that respond to custom events from any system
 
+#### Recurring Schedule Triggers
+
+Recurring schedule triggers allow your AI Workforce to run automatically at set times without manual intervention. This is perfect for automating repetitive tasks that need to happen on a regular basis.
+
+Use recurring schedules for:
+- Daily reports that need to be generated every morning
+- Weekly data processing tasks
+- Monthly analytics and summaries
+- Periodic system checks and maintenance tasks
+
 ## Adding Triggers to Your Workforce
 
 ### Adding Your First Trigger
@@ -74,6 +84,68 @@ Integration triggers require specific setup to connect with external systems:
 4. Set any filters to ensure the trigger only activates for relevant events.
 5. Test the connection to verify proper setup.
 
+### Recurring Schedule Trigger Configuration
+
+Recurring schedules can be configured using either simple schedule options or advanced cron expressions:
+
+#### Simple Schedule Options
+
+| Schedule Type | What It Does | Perfect For |
+| --- | --- | --- |
+| **Daily** | Runs every day at a time you choose | Morning reports, daily check-ins |
+| **Weekly** | Runs on specific days each week | Team updates, weekly newsletters |
+| **Monthly** | Runs on chosen dates each month | Monthly reports, regular maintenance |
+| **Custom** | Runs on specific dates you select | One-off tasks or irregular schedules |
+
+#### Advanced: Cron Expressions
+
+For more precise control over scheduling, you can use **Cron expressions**. Relevance AI uses **AWS EventBridge cron format**, which requires **six fields**:
+
+```
+minute hour day-of-month month day-of-week year
+```
+
+**Cron Expression Format:**
+
+| Field | Values | Wildcards |
+| --- | --- | --- |
+| **Minute** | 0-59 | , - * / |
+| **Hour** | 0-23 | , - * / |
+| **Day-of-month** | 1-31 | , - * ? / L W |
+| **Month** | 1-12 or JAN-DEC | , - * / |
+| **Day-of-week** | 1-7 or SUN-SAT | , - * ? L # |
+| **Year** | 1970-2199 | , - * / |
+
+**Special Characters:**
+
+- `*` (asterisk) - all values
+- `?` (question mark) - no specific value (used in day-of-month or day-of-week)
+- `-` (dash) - range of values
+- `,` (comma) - additional values
+- `/` (forward slash) - increments
+- `L` - last day of month or week
+- `W` - nearest weekday
+- `#` - nth occurrence of a day in a month
+
+**Common Cron Expression Examples:**
+
+```
+0 10 * * ? *        # Every day at 10:00 AM
+0 0 * * MON *       # Every Monday at midnight
+0 9 1 * ? *         # First day of every month at 9:00 AM
+0 0 * * MON-FRI *   # Weekdays at midnight
+*/15 * * * ? *      # Every 15 minutes
+0 9,17 * * ? *      # Daily at 9:00 AM and 5:00 PM
+0 0 1,15 * ? *      # 1st and 15th of every month at midnight
+0 8 ? * 2 *         # Every Monday (day 2) at 8:00 AM
+0 10 L * ? *        # Last day of every month at 10:00 AM
+0 9 ? * 2#1 *       # First Monday of every month at 9:00 AM
+```
+
+<Note>
+AWS EventBridge cron expressions use 6 fields, unlike traditional Unix cron which uses 5 fields. Always include the year field, and use `?` for either day-of-month or day-of-week when specifying the other.
+</Note>
+
 ## Best Practices for Using Triggers
 
 ### Strategic Trigger Placement
@@ -88,6 +160,14 @@ Integration triggers require specific setup to connect with external systems:
 - Monitor trigger activity to identify any performance issues.
 - Update trigger configurations when connected systems change.
 
+### Recurring Schedule Best Practices
+
+- **Start small**: Begin with one simple recurring task before setting up complex schedules.
+- **Test thoroughly**: Run your workforce manually first to ensure it works as expected.
+- **Monitor initially**: Check the first few automated runs to confirm everything works correctly.
+- **Use cron for precision**: When you need exact timing control, use cron expressions instead of simple schedules.
+- **Consider dependencies**: Ensure your workforce can complete within the scheduled interval to avoid overlapping runs.
+
 ### Security Considerations
 
 - Review authentication settings for integration triggers regularly.
@@ -95,20 +175,28 @@ Integration triggers require specific setup to connect with external systems:
 - Implement appropriate access controls for manual triggers.
 - Consider data privacy implications when configuring trigger conditions.
 
-## Troubleshooting Triggers
+## Frequently asked questions (FAQs)
 
-### Common Issues
-
-- **Trigger not activating**: Verify connection settings and authentication.
-- **Duplicate activations**: Check for overlapping trigger conditions.
-- **Delayed responses**: Examine workflow complexity and agent configuration.
-
-### Diagnostic Steps
-
-1. Test the trigger in isolation to confirm it's working properly.
-2. Verify that connected agents have appropriate permissions.
-3. Check system logs for any error messages related to the trigger.
-4. Ensure all necessary API keys and credentials are current.
+<AccordionGroup>
+  <Accordion title="Why is my trigger not activating?">
+    Verify connection settings and authentication. For integration triggers, check that the connected service has the proper permissions. For recurring schedules, ensure the cron expression or schedule configuration is correct.
+  </Accordion>
+  <Accordion title="How do I prevent duplicate activations?">
+    Check for overlapping trigger conditions. Review all triggers in your workforce to ensure they don't respond to the same events. For recurring schedules, verify that you don't have multiple schedules set for the same time.
+  </Accordion>
+  <Accordion title="Why are my workflow responses delayed?">
+    Examine workflow complexity and agent configuration. Complex workflows with multiple agents may take longer to complete. Check your agent settings and consider optimizing the workflow structure.
+  </Accordion>
+  <Accordion title="Can I temporarily pause a recurring schedule?">
+    Yes, you can disable recurring schedule triggers without deleting them. Simply toggle off the schedule in your workforce's trigger settings when you need a pause.
+  </Accordion>
+  <Accordion title="What timezone are scheduled runs based on?">
+    Scheduled runs use your account's configured timezone. You can adjust this in your workforce settings to ensure tasks run at the correct local time.
+  </Accordion>
+  <Accordion title="How do I test my triggers?">
+    Test triggers in isolation by: 1) Verifying that connected agents have appropriate permissions, 2) Checking system logs for any error messages related to the trigger, 3) Ensuring all necessary API keys and credentials are current, and 4) Running a test activation manually.
+  </Accordion>
+</AccordionGroup>
 
 ## Related Features
 

@@ -13,8 +13,12 @@ Trigger to Agent configurations define the relationship between a trigger event 
 When connecting triggers to agents, you can utilize several trigger types:
 
 - **Manual Triggers**: Allow you to manually initiate an agent through the Task View interface
-- **Scheduled Triggers**: Activate agents at predetermined times or intervals
+- **Recurring Schedule Triggers**: Activate agents at predetermined times or intervals using simple schedules (daily, weekly, monthly) or advanced cron expressions for precise timing control
 - **Integration Triggers**: Connect external services (like email, Slack, or CRM systems) to automatically activate agents when specific events occur
+
+<Note>
+For detailed information on configuring recurring schedules and cron expressions, see [Add Triggers](/workforce/build-an-ai-workforce/add-triggers).
+</Note>
 
 ## Setting Up a Trigger to Agent Connection
 
@@ -61,6 +65,7 @@ Configure how tasks are created and managed:
 - **Appropriate Agent Selection**: Match triggers with agents that have the right skills and tools for the triggered task
 - **Contextual Information**: Configure triggers to provide sufficient context for the agent to understand the task
 - **Error Handling**: Include fallback paths for when triggers fail or agents cannot process the request
+- **Schedule Timing**: For recurring schedules, ensure your agent can complete its work before the next scheduled run to avoid overlap
 
 ### Common Patterns
 
@@ -68,7 +73,9 @@ Configure how tasks are created and managed:
 - **Multi-Agent Dispatch**: Connect a trigger to a dispatcher agent that routes tasks to specialized agents
 - **Escalation Paths**: Configure triggers to activate different agents based on priority or complexity
 
-## Example: Email Response Workflow
+## Examples
+
+### Example 1: Email Response Workflow
 
 Here's how a typical email response workflow might be configured:
 
@@ -80,19 +87,37 @@ Here's how a typical email response workflow might be configured:
    - Create a new task for each email
 4. The triage agent can then analyze the email and route it to the appropriate specialized agent
 
-## Troubleshooting
+### Example 2: Daily Report Generation
 
-### Common Issues
+Here's how a recurring schedule workflow might be configured:
 
-- **Trigger Not Activating**: Verify the trigger conditions and integration settings
-- **Agent Not Receiving Context**: Check the connection configuration to ensure proper data mapping
-- **Multiple Unintended Activations**: Review trigger conditions and consider adding filters
+1. Create a recurring schedule trigger set to run every weekday at 9:00 AM (using cron: `0 9 * * MON-FRI *`)
+2. Connect this trigger to a reporting agent
+3. Configure the connection to:
+   - Always start a new task for each scheduled run
+   - Enable auto-run since this is a routine task
+   - Pass the current date as context to the agent
+4. The reporting agent can then gather data from the previous day and generate a summary report
 
-### Debugging Tips
+## Frequently asked questions (FAQs)
 
-- Use the Task View to monitor trigger activations and agent responses
-- Check connection logs to identify any data transmission issues
-- Test triggers manually before enabling auto-run
+<AccordionGroup>
+  <Accordion title="Why is my trigger not activating my agent?">
+    Verify the trigger conditions and integration settings. For recurring schedules, check that the cron expression or schedule configuration is correct. Ensure the trigger is properly connected to the agent node.
+  </Accordion>
+  <Accordion title="Why is my agent not receiving context from the trigger?">
+    Check the connection configuration to ensure proper data mapping. Review the Communication Settings in the connection panel and verify that variable mapping is set up correctly.
+  </Accordion>
+  <Accordion title="Why am I getting multiple unintended activations?">
+    Review trigger conditions and consider adding filters. For recurring schedules, verify you don't have overlapping schedules. Check the Task Management settings to ensure "Always Start New Task" is configured appropriately.
+  </Accordion>
+  <Accordion title="How do I test my trigger configuration before enabling auto-run?">
+    Use the Task View to monitor trigger activations and agent responses. Test triggers manually first, check connection logs to identify any data transmission issues, and verify the configuration with a few test runs before enabling auto-run for production use.
+  </Accordion>
+  <Accordion title="Can a recurring schedule trigger activate multiple agents at once?">
+    Yes, you can connect a single recurring schedule trigger to multiple agents. Each agent will receive the trigger activation and can be configured independently with different connection settings.
+  </Accordion>
+</AccordionGroup>
 
 ## Related Features
 
