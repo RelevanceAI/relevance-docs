@@ -9,7 +9,7 @@ description: "Enhancing security, collaboration, and control for Enterprise team
   You will not be able to access this feature if you are not on an Enterprise subscription.
 </Warning>
 
-Role-based access controls (RBAC) in Relevance AI is a security and governance feature that allows organisations to manage user access based on predefined roles and responsibilities. It ensures that individuals only have access to the data, tools, and platform functions necessary for their role, supporting operational control, collaboration, and compliance across teams.
+Role-based access controls (RBAC) in Relevance AI is a security and governance feature that allows organizations to manage user access based on predefined roles and responsibilities. It ensures that individuals only have access to the data, tools, and platform functions necessary for their role, supporting operational control, collaboration, and compliance across teams.
 
 These new controls are designed to enhance security for our Enterprise clients by providing granular permissions at different levels.
 
@@ -18,6 +18,33 @@ There are three main levels: org-level roles (Owner, Admin, Member, Viewer), pro
 Each role has specific permissions that dictate what users can do within the platform, such as managing credits, using agents, and accessing integrations.
 
 This means you can tailor access based on the needs of your team, ensuring that sensitive information and functionalities are only available to those who need them.
+
+## Best Practices
+
+Keep permissions simple. Assign roles based on who needs to build, who needs to view, and who needs to govern.
+
+### Organization Level
+
+- **Admins** — set up and manage teams, projects, and authentication. Usually your workspace or IT leads.
+- **Members** — have autonomy to create their own projects and assets. Best for power users or builders.
+- **Viewers** — should not create anything until they're assigned to a project. Use this for early access or external collaborators.
+
+### Project Level
+
+- **Admins** — own the project setup and governance. They control permission and authentication accounts.
+- **Editors** — build, edit, and run all assets in the project. Treat them as your core contributors.
+- **Members** — can build their own assets but don't automatically see or edit others'. Great for independent work within shared projects.
+- **Viewers** — can't build or edit. Add them only to the specific assets they need to see.
+
+<Tip>Keep admin/editor access limited to people actively managing or building. Everyone else should be a member or viewer by default.</Tip>
+
+### Asset Level
+
+- Project admins and editors automatically have full control.
+- Members can run assets but can't modify them unless granted edit rights.
+- Viewers can only see results or outputs — they can't run or trigger anything.
+
+<Tip>Default to least privilege. Grant edit rights intentionally, not by habit.</Tip>
 
 ## Organization level controls
 
