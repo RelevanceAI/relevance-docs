@@ -8,20 +8,34 @@ description: "Extract and recall metadata from your Agent's task output"
 
 ## Overview
 
-Memory in Relevance AI helps you extract and organize key information from conversations. These structured data points act as smart labels that make your conversations:
+Memory in Relevance AI allows your agent to remember and recall information during and across conversations. There are two types of memory that serve different purposes:
 
-- **Searchable** - Find exactly what you need
-- **Filterable** - Sort conversations by specific criteria
-- **Consistent** - Ensure the same data is used throughout conversations
-- **Intuitive** - Easily recall and update memorized data when needed
+<Columns cols={2}>
+  <Card title="Short-Term Memory" icon="list" href="#short-term-memory">
+    Also known as **Metadata**
+    
+    What your agent remembers during a **single conversation** or agent run. This information is used to maintain context and consistency throughout that specific interaction.
+  </Card>
+  <Card title="Long-Term Memory" icon="brain" href="#long-term-memory">
+    Persistent across all conversations
+    
+    What your agent remembers across **all conversations and agent runs** moving forward. This persistent memory allows your agent to build upon previous interactions and provide personalized experiences over time.
+  </Card>
+</Columns>
 
-For example, you might add short-term memory like "customer_segment," "sentiment_score," or "product_category" to categorize and later analyze patterns in your conversations.
+These memory systems help make your conversations:
+- **Searchable** - Find exactly what you need
+- **Filterable** - Sort conversations by specific criteria  
+- **Consistent** - Ensure the same data is used throughout conversations
+- **Intuitive** - Easily recall and update memorized data when needed
 
-## Features
+## Short-Term Memory
 
-### Add Short-term Memory
+<Info>Short-Term Memory is also known as Metadata.</Info>
 
-Adding Short-term Memory allows you to enrich and recall your data with additional context:
+Short-Term Memory allows your agent to remember information throughout one conversation. Setup organized memory metadata that your agent can recognize and update as each conversation progresses. This not only can improve the effectiveness of an agent but also can be used to filter, search and analyze tasks.
+
+Adding Short-Term Memory allows you to enrich and recall your data with additional context:
 
 1. Navigate to the Build tab located at the top of your screen, adjacent to Tasks
 2. Click on "Memory" in the left sidebar navigation menu
@@ -57,49 +71,44 @@ To modify an existing memory field:
 
 Relevance AI offers two approaches for extracting memory metadata:
 
-### Let Agent Decide
+#### Let Agent Decide
 
-With this option, you provide instructions to your agent about how and when to extract fields from memory:
+With this option, you provide instructions to your agent about how and when to extract fields from memory. You define guidelines for the agent to follow when determining memory values, making it ideal for complex scenarios where context-aware judgment is needed.
 
-- **How it works**: You define guidelines for the agent to follow when determining memory values
-- **Best for**: Complex scenarios where context-aware judgment is needed
-- **Example**: "Extract customer sentiment as 'positive', 'neutral', or 'negative' based on the overall tone of the conversation"
+#### Rule Based
 
-### Rule Based
+Improve memory accuracy by defining specific conditions based on tools & triggers. This approach is either triggered to update after tool run or after trigger received, making it perfect for consistent, predictable data points that follow clear patterns.
 
-This approach uses predefined conditions to automatically extract memory metadata:
+### Data Formats for Short-Term Memory
 
-- **How it works**: You set specific triggers or patterns that, when detected, will populate memory fields
-- **Best for**: Consistent, predictable data points that follow clear patterns
-- **Example**: If a conversation contains the phrase "interested in pricing," set lead_status = "pricing inquiry"
+You can add the following data formats as metadata:
 
-### Data Formats for Short-term Memory
-
-Relevance AI supports various data formats to accommodate different types of information:
-
-1. **Text**
-    - Free-form text entries
-    - Useful for descriptions, notes, or other unstructured information
-    - Example: "Customer mentioned competitor Product X"
-2. **Number**
-    - Numerical values for quantitative data
-    - Supports integers and decimal values
-    - Example: Customer satisfaction score (1-10)
-3. **True/False (Boolean)**
-    - Binary values for yes/no or true/false conditions
-    - Example: "is_existing_customer": true
-4. **Single Option**
-    - Predefined list where only one value can be selected
-    - Example: Lead status: ["New", "Qualified", "Opportunity", "Customer"]
-5. **Multiple Option**
-    - Predefined list where multiple values can be selected
-    - Example: Products of interest: ["Product A", "Product B", "Product C"]
+1. **Text** - Free-form text entries for descriptions, notes, or other unstructured information
+2. **Number** - Numerical values for quantitative data, supporting integers and decimal values
+3. **True/False** - Binary values for yes/no or true/false conditions
+4. **Single Option** - Predefined list where only one value can be selected
+5. **Multiple Option** - Predefined list where multiple values can be selected
 
 <Tip>
 Choose the appropriate data format based on how you plan to use the metadata later. For example, if you want to calculate averages or totals, use the number format. If you need to filter by specific categories, single or multiple option formats work best.
 </Tip>
 
-## Best Practices
+### Built-in Tools
+
+When metadata is added to the Agent, the following built-in tools will be automatically added:
+
+- **Add conversation metadata** - Allows you to add conversation metadata during agent interactions
+- **Read conversation metadata** - Enables reading existing conversation metadata
+
+This then allows you to add to the Prompt when you want to add conversation metadata, giving you more control over when and how metadata is captured and used.
+
+### Filtering by Short-Term Memory
+
+You can filter your Workforces and Agent conversations/runs by Short-Term Memory metadata. For example, if you've built an agent that uses metadata like an email or user ID for each person, you can filter agent runs by a person's email or ID to see all their interactions.
+
+![](/images/filter-by-metadata.png)
+
+### Best Practices
 
 - **Be consistent**: Use standardized naming conventions and values for your memory fields
 - **Start small**: Begin with a few key memory fields and expand as needed
@@ -108,4 +117,36 @@ Choose the appropriate data format based on how you plan to use the metadata lat
 
 By effectively utilizing memory, you can transform raw conversation data into structured, actionable insights that drive better decision-making and agent performance.
 
-## Long-term Memory documentation coming soon...
+----
+
+## Long-Term Memory 
+
+Long-Term Memory allows your agent to remember information across different conversations. This is great for use cases like storing user preferences, frequently asked questions, and other persistent information that should be available in future interactions.
+
+When Long-Term Memory is enabled, your agent will be able to read Long-Term Memory added to the agent as it goes.
+
+### Built-in Tools
+
+Two built-in tools will be automatically added to the agent:
+
+- **Save to Memory**: Save important information to your Long-Term Memory for future conversations
+- **Delete from Memory**: Remove information from your Long-Term Memory
+
+<Info>
+You don't have to use these tools, but they provide a good way to be more granular and control when to save Long-Term Memory based on certain conditions, after specific tools, or following particular workflows.
+</Info>
+
+You can view and manage stored memories from the Memory section of your agent.
+
+### Advanced Settings
+
+From the Advanced Settings in Long-Term Memory, you can:
+
+- **Override the system prompt for saving to memory**: Customize how the agent decides what information to save
+- **Override the system prompt for deleting from memory**: Control how the agent determines what to remove from memory
+- **Disable delete memory tool**: When disabled, the agent cannot delete items from Long-Term Memory. This is useful when you want to ensure your agent can't accidentally lose important context by deleting memories
+
+<Info>
+Long-Term Memory is particularly valuable for maintaining context across multiple conversations, ensuring your agent can build upon previous interactions and provide more personalized experiences.
+</Info>
+
