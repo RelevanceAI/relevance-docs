@@ -4,10 +4,15 @@ sidebarTitle: 'Delete a tool or tool step'
 description: 'How to delete tools and individual tool steps'
 ---
 
+## Differences between deleting a tool and deleting a tool step
+
+**Tool deletion vs. tool step deletion:**
+- **Delete tool** (Tools section): Permanently removes the tool from your project and all agents
+- **Delete a tool step** (Agent Builder → Tools): Removes a single action within an existing tool's workflow
+
 # Delete a tool
 
 When you no longer need a tool, you can permanently delete it from your project. 
-
 
 <Warning>
 Deleting a tool is permanent and cannot be undone. If an agent or workflow is using this tool, removing it will cause those agents to lose access and may result in errors during task execution. Consider checking which agents use this tool before deleting.
@@ -22,21 +27,16 @@ Before deleting a tool, check if any agents are using it:
 3. Go to the **Tools** section in the Agent Builder
 4. Check if your tool appears in the agent's tool list
 
-If agents are using the tool, you'll need to remove it from those agents first or assign alternative tools.
+If agents are using the tool, you'll need to remove it from those agents first or assign alternative tools to avoid possible execution errors within the agent.
 
 ## Steps to delete a tool
 
-
 1. Navigate to **Tools** in the left sidebar (not the Tools section within an agent)
 2. Find the tool you want to delete
-3. Click on the tool to open it
-4. Click on the three-dot menu (⋮) in the top right corner
-5. Select **Delete**
-6. Confirm the deletion when prompted
+3. Click on the three-dot menu (⋮) in the top right corner
+4. Select **Delete**
+5. Confirm the deletion when prompted
 
-<Warning>
-Tool deletion happens in the main **Tools** section, not within the Agent Builder. Deleting from the main Tool section, permanently removes the tool from your entire project.
-</Warning>
 
 ## What happens when you delete a tool
 
@@ -54,15 +54,16 @@ When you delete a tool:
 You can remove specific steps from a tool without deleting the entire tool. This is useful when refining your tool's workflow or removing unnecessary steps.
 
 ## Steps to delete a tool step
-<Tip>
-Before deleting a step, check if other steps reference its output. If they do, you'll need to update those references to avoid errors.
-</Tip>
 
 1. Open your tool in the **Build** tab
 2. Find the step you want to remove
 3. Click on the three-dot menu (⋮) in the top right corner of the step
 4. Select **Delete step**
 5. The step will be removed immediately
+
+<Tip>
+Before deleting a step, check if other steps reference its output. If they do, you'll need to update those references to avoid errors.
+</Tip>
 
 
 ## What happens when you delete a tool step
@@ -74,12 +75,6 @@ When you delete an individual tool step:
 - You'll need to update or remove references to the deleted step
 - The deletion takes effect immediately upon saving the tool
 
-
-# Differences between deleting a tool and deleting a tool step
-
-**Tool deletion vs. removing from agent:**
-- **Delete tool** (Tools section): Permanently removes the tool from your project and all agents
-- **Remove from agent** (Agent Builder → Tools): Only removes the tool from that specific agent; tool remains available in your project
 
 
 
