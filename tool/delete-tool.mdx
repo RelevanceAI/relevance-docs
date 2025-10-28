@@ -1,0 +1,89 @@
+---
+title: 'Delete a tool or tool step'
+sidebarTitle: 'Delete a tool or tool step'
+description: 'How to delete tools and individual tool steps'
+---
+
+## Differences between deleting a tool and deleting a tool step
+
+**Tool deletion vs. tool step deletion:**
+- **Delete tool** (Tools section): Permanently removes the tool from your project and all agents
+- **Delete a tool step** (Agent Builder → Tools): Removes a single action within an existing tool's workflow
+
+# Delete a tool
+
+When you no longer need a tool, you can permanently delete it from your project. 
+
+<Warning>
+Deleting a tool is permanent and cannot be undone. If an agent or workflow is using this tool, removing it will cause those agents to lose access and may result in errors during task execution. Consider checking which agents use this tool before deleting.
+</Warning>
+
+## Before you delete
+
+Before deleting a tool, check if any agents are using it:
+
+1. Navigate to **Agents** in the left sidebar
+2. Open each agent that might use this tool
+3. Go to the **Tools** section in the Agent Builder
+4. Check if your tool appears in the agent's tool list
+
+If agents are using the tool, you'll need to remove it from those agents first or assign alternative tools to avoid possible execution errors within the agent.
+
+## Steps to delete a Tool
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
+<iframe src="https://app.supademo.com/embed/cmha1blw10kko6kif6439pa2n" frameBorder="0" title="Invite a user to a project in Relevance AI" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+1. Navigate to **Tools** in the left sidebar (not the Tools section within an agent)
+2. Find the tool you want to delete
+3. Click on the three-dot menu (⋮) in the top right corner
+4. Select **Delete**
+5. Confirm the deletion when prompted
+
+
+## What happens when you delete a tool
+
+When you delete a tool:
+
+- The tool is permanently removed from your project
+- Any agents using this tool will no longer have access to it
+- Bulk runs in progress using this tool may fail
+- Shared links to the tool will stop working
+- The tool cannot be recovered
+
+
+# Delete individual tool steps
+
+You can remove specific steps from a tool without deleting the entire tool. This is useful when refining your tool's workflow or removing unnecessary steps.
+
+## Steps to delete a tool step
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
+<iframe src="https://app.supademo.com/embed/cmha1uf040kvo6kifackvn7eg" frameBorder="0" title="Invite a user to a project in Relevance AI" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+1. Open your tool in the **Build** tab
+2. Find the step you want to remove
+3. Click on the three-dot menu (⋮) in the top right corner of the step
+4. Select **Delete step**
+5. The step will be removed immediately
+
+<Tip>
+Before deleting a step, check if other steps reference its output. If they do, you'll need to update those references to avoid errors.
+</Tip>
+
+
+## What happens when you delete a tool step
+
+When you delete an individual tool step:
+
+- The step is immediately removed from the tool's workflow
+- Any subsequent steps that reference this step's output will show an error
+- You'll need to update or remove references to the deleted step
+- The deletion takes effect immediately upon saving the tool
+
+
+
+
+
