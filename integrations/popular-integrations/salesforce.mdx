@@ -85,6 +85,41 @@ Below are examples of common Salesforce activities your agents can perform.
 
 <img src="/images/complete_task.png" />
 
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="OAuth approval error when connecting">
+    If you encounter an `OAUTH_APPROVAL_ERROR_GENERIC` error when authenticating with Salesforce, this is typically due to Salesforce security updates implemented in September 2024 that require explicit installation of connected apps.
+
+    This issue commonly occurs with:
+
+    - Sandbox environments created before September 8th, 2024
+    - New Salesforce instances
+    - Users without System Administrator permissions
+
+    To resolve this issue:
+
+    1. **Verify System Administrator access**
+        - The first user to authenticate must have System Administrator permissions or the "Approve Uninstalled Connected Apps" permission
+        - Have a System Administrator complete the initial authentication with Relevance AI
+    2. **For Sandbox environments created before September 8th:**
+        - Go to **Setup** → **Company Information**
+        - Click **"Match Production Licenses"** to update the sandbox with the necessary infrastructure
+    3. **Install the Relevance AI connected app:**
+        - After a System Administrator successfully authenticates once, go to **Setup**
+        - In Quick Find, type **"OAuth"**
+        - Navigate to **Connected Apps OAuth Usage**
+        - Locate the Relevance AI app in the list
+        - Click **"Install"** to approve the connected app for your organization
+    4. **Grant permissions to other users (optional):**
+        - System Administrators can grant the **"Approve Uninstalled Connected Apps"** permission to other users who need to authenticate
+
+    <Note>Scratch orgs created before September 8th, 2024 cannot have connected apps added and must be recreated. If issues persist after following these steps, contact Salesforce support for assistance with connected app authentication in your organization.</Note>
+
+    For more information, see the [Salesforce documentation](https://help.salesforce.com/s/articleView?id=005132365&type=1).
+  </Accordion>
+</AccordionGroup>
+
 ## Remove Salesforce integration
 
 You can remove Salesforce as a Trigger in your agent settings, by clicking the three dots next to your connected account, and then "Remove".
