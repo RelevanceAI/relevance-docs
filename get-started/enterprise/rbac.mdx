@@ -13,15 +13,15 @@ Role-based access controls (RBAC) in Relevance AI is a security and governance f
 
 These new controls are designed to enhance security for our Enterprise clients by providing granular permissions at different levels.
 
-There are three main levels: org-level roles (Owner, Admin, Member, Viewer), project-level roles (Admin, Editor, Member, Viewer), and asset-level roles (Admin, Member, Viewer).
+There are three main levels: org-level roles (Owner, Admin, Member, Viewer), project-level roles (Admin, Editor, Member, Chat, Viewer), and asset-level roles (Admin, Member, Viewer).
 
-Each role has specific permissions that dictate what users can do within the platform, such as managing credits, using agents, and accessing integrations.
+Each role has specific permissions that dictate what users can do within the platform, such as managing credits, using agents, accessing integrations, and using Chat.
 
 This means you can tailor access based on the needs of your team, ensuring that sensitive information and functionalities are only available to those who need them.
 
 ## Best Practices
 
-Keep permissions simple. Assign roles based on who needs to build, who needs to view, and who needs to govern.
+Keep permissions simple. Assign roles based on who needs to build, who needs to view, who needs to chat, and who needs to govern.
 
 ### Organization Level
 
@@ -34,6 +34,7 @@ Keep permissions simple. Assign roles based on who needs to build, who needs to 
 - **Admins** — own the project setup and governance. They control permission and authentication accounts.
 - **Editors** — build, edit, and run all assets in the project. Treat them as your core contributors.
 - **Members** — can build their own assets but don't automatically see or edit others'. Great for independent work within shared projects.
+- **Chat** — access [Relevance Chat](/chat/intro-to-chat) only, cannot access the web app. Perfect for users who only need to interact with agents through chat. Requires asset-level permissions to run specific agents.
 - **Viewers** — can't build or edit. Add them only to the specific assets they need to see.
 
 <Tip>Keep admin/editor access limited to people actively managing or building. Everyone else should be a member or viewer by default.</Tip>
@@ -88,21 +89,40 @@ Project admins will be able to set a users role upon invite. Organization admins
 | **Admin**  | Manage users, agents, tools, knowledge and project-level integrations. Can create assets   |
 | **Editor** | Can edit and create assets, does not manage users                                          |
 | **Member** | Use shared assets, provide inputs and view outputs. Can create assets, private by default. |
+| **Chat**   | Access [Relevance Chat](/chat/intro-to-chat) only - cannot access the web app. Requires asset-level permissions to run agents. |
 | **Viewer** | View agents, tools, and knowledge outputs only, cannot run or edit anything                |
 
 ### Permissions
 
-| **Permission**                         | **Admin** | **Editor** | **Member** | **Viewer** |
-| :------------------------------------- | :-------- | :--------- | :--------- | :--------- |
-| Delete project                         | ✅         | ❌          | ❌          | ❌          |
-| Assign project roles to users          | ✅         | ❌          | ❌          | ❌          |
-| Delete agents                          | ✅         | ✅          | ❌          | ❌          |
-| View all assets by default             | ✅         | ✅          | ❌          | ❌          |
-| Edit/run assets they did not create    | ✅         | ✅          | ❌          | ❌          |
-| View project activity logs             | ✅         | ✅          | ❌          | ❌          |
-| Manage project-level API keys & OAuths | ✅         | ✅          | ❌          | ❌          |
-| Create assets                          | ✅         | ✅          | ✅          | ❌          |
-| View Project                           | ✅         | ✅          | ✅          | ✅          |
+| **Permission**                         | **Admin** | **Editor** | **Member** | **Viewer** | **Chat** |
+| :------------------------------------- | :-------- | :--------- | :--------- | :--------- | :------- |
+| Delete project                         | ✅         | ❌          | ❌          | ❌          | ❌        |
+| Assign project roles to users          | ✅         | ❌          | ❌          | ❌          | ❌        |
+| Delete agents                          | ✅         | ✅          | ❌          | ❌          | ❌        |
+| View all assets by default             | ✅         | ✅          | ❌          | ❌          | ❌        |
+| Edit/run assets they did not create    | ✅         | ✅          | ❌          | ❌          | ❌        |
+| View project activity logs             | ✅         | ✅          | ❌          | ❌          | ❌        |
+| Manage project-level API keys & OAuths | ✅         | ✅          | ❌          | ❌          | ❌        |
+| Create assets                          | ✅         | ✅          | ✅          | ❌          | ❌        |
+| View Project                           | ✅         | ✅          | ✅          | ✅          | ❌        |
+| Trigger Chat                           | ✅         | ✅          | ✅          | ✅          | ✅        |
+
+### Chat Role Details
+
+<Warning>
+  The Chat role is a new feature being gradually rolled out to Enterprise customers. If you have an Enterprise subscription with Relevance AI and do not have access to this feature yet, please reach out to your sales representative to share your interest in this feature.
+</Warning>
+
+The **Chat** role is designed for users who only need to interact with AI agents through [Relevance Chat](/chat/intro-to-chat) without accessing the main web application. Key characteristics:
+
+- **Chat-only access**: Users with this role are automatically redirected to Chat and cannot access the web app
+- **Asset-level permissions required**: To run specific agents in Chat, users still need Member or higher permissions on those individual assets
+- **No asset creation**: Cannot create new agents, tools, or knowledge bases
+- **LLM conversations**: Can have conversations with LLMs and in-built Chat Agents directly without agents
+- **More powerful than Viewer**: Can trigger Chat and interact with agents (with proper asset permissions)
+- **Less powerful than Member**: Cannot create assets or access the web app
+
+This role is ideal for end users, external collaborators, or team members who only need to use pre-built agents through the chat interface.
 
 ----
 
@@ -141,4 +161,5 @@ Upon asset creation, the creator becomes the admin. An asset can have multiple a
 <AccordionGroup>
   <Accordion title="Can I access role-based access controls without upgrading to Enterprise?">No. This feature is available for Enterprise subscriptions only.</Accordion>
   <Accordion title="I'm on an Enterprise subscription but do not have access to this feature yet. How do I get access?">This feature is gradually being rolled out to Enterprise customers. Please reach out to your sales representative to express your interest in receiving this feature.</Accordion>
+  <Accordion title="How do I limit someone to only access Chat?">To limit a user to only access [Relevance Chat](/chat/intro-to-chat), assign them the **Chat** role at the project level. Users with the Chat role are automatically redirected to Chat and cannot access the main web application. They can still interact with agents and have LLM conversations, but will need appropriate asset-level permissions (Member or higher) on specific agents to run them in Chat.</Accordion>
 </AccordionGroup>
