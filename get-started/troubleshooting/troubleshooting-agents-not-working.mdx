@@ -1,0 +1,194 @@
+---
+title: "Troubleshooting agents not working"
+sidebarTitle: "Agents not working"
+description: "Troubleshoot agents that are failing or not working properly"
+---
+
+When your agents aren't working as expected, there are several common causes and solutions. This guide will help you identify and resolve the most frequent issues that prevent agents from functioning properly.
+
+## Common causes of agent failures
+
+### 1. Insufficient credits or actions
+
+If your agent is failing, the most common cause is running out of credits or actions.
+
+#### Understanding credits and actions
+
+Relevance AI uses two types of consumption:
+
+- **Actions**: Each time a tool runs, it counts as one action — whether it's a simple task like sending one email or running a complex workflow with many steps
+- **Vendor Credits**: The cost of running the AI model (LLM costs) and the tools you use
+
+<Info>
+  If you're on the new billing model, you'll see both Actions and Vendor Credits. If you're on the old billing model, you'll only see credits.
+</Info>
+
+#### How to check your usage
+
+Learn how to monitor your credit and action usage at both the [organization level](/get-started/subscriptions/plans#monitoring-actions-and-vendor-credits-usage) and [individual agent level](/get-started/subscriptions/plans#at-an-individual-agent-level).
+
+#### Solutions for insufficient credits/actions
+
+- **Upgrade your plan**: Consider upgrading to a higher plan with more credits/actions
+- **Purchase additional credits**: If you have a paid plan, you can purchase extra credits to use before your next renewal
+- **Bring your own API keys**: Use your own API keys to bypass Vendor Credits entirely (available on paid plans only)
+
+### 2. Tool failures
+
+When agents fail, it's often because one of their tools is not working properly. Here's how to troubleshoot tool issues:
+
+#### Step 1: Test the tool independently
+
+1. Go to the [Tools page](https://app.relevanceai.com/tools)
+2. Find the tool your agent is using
+3. Click on the tool and go to the "Use" tab
+4. Run the tool with test inputs to see if it works on its own
+
+If the tool fails independently, the issue is with the tool itself, not the agent. To fix tool issues:
+
+1. Go to the "Build" tab of the tool
+2. Run each tool step individually by clicking the play icon next to each step
+3. Identify which specific step is failing
+4. Check the step configuration and fix any issues:
+   - Verify API keys are correct
+   - Check input formats and data types
+   - Review step settings and parameters
+   - Remove or reconfigure problematic steps
+
+#### Step 2: Check agent-to-tool communication
+
+If the tool works independently but fails when used by the agent:
+
+1. **Verify input data types**: Ensure the agent is sending the tool the correct data types (string, array, number, etc.)
+2. **Check input format**: Make sure the agent is providing inputs in the expected format
+3. **Review tool input descriptions**: Ensure each tool input has a clear description explaining what the agent should provide
+4. **Review tool configuration**: Go to your agent's tools section and check:
+   - Input configuration mode (Let agent decide, Set manually, or Tool output)
+   - Whether the agent has the right context to use the tool
+   - If approval settings are preventing tool execution
+
+#### Common tool input issues
+
+**Data type mismatches:**
+- Tool expects a string but receives an array
+- Tool expects a number but receives text
+- Tool expects JSON but receives plain text
+
+**Format issues:**
+- Missing required fields
+- Incorrect field names
+- Wrong data structure
+
+**Solution**: Review your agent's instructions and tool configuration to ensure the agent understands what data to send to each tool.
+
+### 3. Agent configuration issues
+
+#### Check agent settings
+
+1. **Review agent prompt**: Ensure your agent has clear, specific instructions about when and how to use tools
+2. **Verify tool approval settings**: Check if tools are set to "Auto Run", "Approval Required", or "Let Agent Decide"
+3. **Check escalation settings**: Review retry settings and error handling behavior
+
+#### Common configuration problems
+
+- **Vague prompt**: Agent doesn't understand when to use tools
+- **Wrong approval mode**: Tools require approval but agent doesn't ask
+- **Missing context**: Agent lacks information needed to use tools effectively
+- **Conflicting settings**: Multiple tools with overlapping purposes
+
+### 4. Integration and API issues
+
+#### Check integrations
+
+1. Go to [Integrations & API Keys](https://app.relevanceai.com/integrations) in Relevance AI
+2. Verify all required integrations are connected
+3. Check if API keys are valid and have proper permissions
+4. Test integration connections
+
+#### Common integration problems
+
+- **Expired API keys**: Update or refresh your API keys
+- **Insufficient permissions**: Ensure API keys have the required scopes
+- **Rate limiting**: Check if you've hit API rate limits
+- **Service outages**: Verify the external service is operational
+
+## Agent not working as expected
+
+If your agent is running but not producing the results you want, this is often a prompt engineering issue.
+
+### Understanding agent behavior
+
+Agents are designed to make their own decisions and aren't end-to-end workflows. They use reasoning to determine the best approach to complete tasks, which means they may not always follow the exact path you expect.
+
+### Improving your agent prompt
+
+To get better results from your agent:
+
+1. **Be as clear and specific as possible** in your agent prompt
+2. **Provide detailed instructions** about what you want the agent to do
+3. **Include examples** of good responses or behaviors
+4. **Specify the format** you want outputs in
+5. **Set clear boundaries** about what the agent should and shouldn't do
+
+### Key prompt engineering principles
+
+- **Be explicit**: Don't assume the agent will understand implicit requirements
+- **Use clear language**: Avoid ambiguous terms and provide specific criteria
+- **Provide context**: Give the agent relevant background information
+- **Set expectations**: Clearly define what success looks like
+- **Iterate and test**: Refine your prompt based on the agent's performance
+
+<Info>
+  For a deeper understanding of when to use AI agents vs workflows, read our co-founder's [comprehensive guide on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7336149777472024593/).
+</Info>
+
+### Model performance issues
+
+If your agent isn't performing well, consider upgrading to a more capable language model.
+
+#### When to upgrade your model
+
+- **Complex reasoning tasks**: Advanced models handle multi-step reasoning better
+- **Tool usage**: Some models are better at understanding when and how to use tools
+- **Large context**: If you need to process large amounts of information
+- **Specialized tasks**: Some models excel at specific types of work
+
+#### Available models and their strengths
+
+**OpenAI models:**
+- Advanced conversational abilities and creative writing
+- Broad general knowledge and versatility
+- Best for: Versatile agents, customer support, brainstorming
+- Learn more: [OpenAI LLM models](/integrations/llm-integrations/openai)
+
+**Google Gemini models:**
+- Strong coding ability and complex task handling
+- Excellent at processing multiple file types (PDF, images, audio, video)
+- Best for: Software development agents, complex task execution
+- Learn more: [Google's Gemini LLM models](/integrations/llm-integrations/gemini)
+
+**Anthropic Claude models:**
+- Focused on safe, reliable, and ethical AI responses
+- Excellent at reasoning and thoughtful tasks
+- Best for: Detailed explanations, structured outputs, sensitive industries
+- Learn more: [Anthropic LLM models](/integrations/llm-integrations/anthropic)
+
+<Warning>
+  More advanced models are more expensive but often provide significantly better results. Consider your use case and budget when choosing a model.
+</Warning>
+
+<Warning>
+  If you're experiencing configuration issues where your agent isn't working as expected, our support team has limited ability to provide guidance to customers on Team or below as this is considered implementation support, which we only offer to Enterprise customers.
+  
+  If you're interested in an Enterprise subscription with dedicated implementation support to build agents for your use cases, you can [book a demo](https://relevanceai.com/book-a-demo). You can also reach out to our [Partners](https://partners.relevanceai.com) for implementation support.
+</Warning>
+
+## Still need help?
+
+If you've tried all the troubleshooting steps above and your agent is still not working, please [contact our support team](/get-started/support) and include:
+
+- Your agent configuration details
+- Error messages you're seeing
+- Steps you've already tried
+- A description of the specific issue you're experiencing
+- **Screen recording**: Attach a [Loom](https://loom.com) or [jam.dev](https://jam.dev) recording of the issue to help us understand the problem better
