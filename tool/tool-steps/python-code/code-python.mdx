@@ -1,18 +1,74 @@
 ---
 title: "Python Tool step"
 sidebarTitle: 'Python'
-description: "Use the Python Tool step to run a custom API call to another product / service"
+description: "Empower your agent with custom code using one of the world's most popular and beginner-friendly languages"
 ---
 
 The Python Tool step allows you to use Python to take outputs from other Tool steps and manipulate data for other Tool steps and LLMs. 
 
+<Warning>In order to use this Tool step, we would recommend having a beginner level of understanding of Python programming, or use our Chat to walk you through implementing it at [chat.relevanceai.com](https://chat.relevanceai.com).</Warning>
+
 ## What is Python?
 
-Python is a widely used programming language known for its clarity and simplicity. It’s popular among beginners and experts alike because it’s easy to read, quick to write, and versatile enough for tasks ranging from web development and automation to data analysis and machine learning. With a massive library ecosystem and strong community support, Python is a powerful tool for solving real-world problems efficiently.
+Python is a widely used programming language known for its clarity and simplicity. It's popular among beginners and experts alike because it's easy to read, quick to write, and versatile enough for tasks ranging from web development and automation to data analysis and machine learning. With a massive library ecosystem and strong community support, Python is a powerful tool for solving real-world problems efficiently.
 
-<Warning>In order to use this Tool step, we would recommend having a beginner level of understanding of Python programming.</Warning>
+## Python Package Ecosystem
 
-## Add the Python Tool step to your Tool
+One of Python's greatest strengths is its extensive package ecosystem. You can install and use any package available on the [Python Package Index (PyPI)](https://pypi.org/), which hosts over 693,000 projects with millions of releases. This means you have access to virtually any functionality you need across countless domains.
+
+### Popular Packages by Use Case
+
+<AccordionGroup>
+  <Accordion title="Data Analysis & Manipulation">
+    - `pandas` - Data manipulation and analysis
+    - `numpy` - Numerical computing and arrays
+    - `matplotlib` - Data visualization and plotting
+    - `seaborn` - Statistical data visualization
+    - `plotly` - Interactive data visualization
+  </Accordion>
+
+  <Accordion title="Web Scraping & HTTP Requests">
+    - `requests` - HTTP library for making web requests
+    - `beautifulsoup4` - Web scraping and HTML parsing
+    - `scrapy` - Web crawling framework
+    - `selenium` - Browser automation and testing
+  </Accordion>
+
+  <Accordion title="Machine Learning & AI">
+    - `scikit-learn` - Machine learning library
+    - `tensorflow` - Deep learning framework
+    - `pytorch` - Deep learning and neural networks
+    - `transformers` - Pre-trained language models
+    - `openai` - OpenAI API client
+  </Accordion>
+
+  <Accordion title="Data Processing & File Handling">
+    - `openpyxl` - Excel file manipulation
+    - `python-docx` - Word document processing
+    - `PyPDF2` - PDF file manipulation
+    - `pillow` - Image processing library
+    - `csv` - Built-in CSV file handling
+  </Accordion>
+
+  <Accordion title="API Integration & Communication">
+    - `flask` - Lightweight web framework
+    - `fastapi` - Modern web API framework
+    - `requests-oauthlib` - OAuth authentication
+    - `twilio` - SMS and communication APIs
+    - `stripe` - Payment processing
+  </Accordion>
+
+  <Accordion title="Database & Storage">
+    - `sqlalchemy` - SQL toolkit and ORM
+    - `psycopg2` - PostgreSQL adapter
+    - `pymongo` - MongoDB driver
+    - `redis` - Redis database client
+  </Accordion>
+</AccordionGroup>
+
+To find and explore available packages, visit [PyPI.org](https://pypi.org/) where you can search through the vast collection of Python packages. Simply add any package you need to your Python Tool step using the 'PyPI Packages' section.
+
+## Adding the Python Tool step into your Tool
 
 <div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
 <iframe src="https://app.supademo.com/embed/cmbyqj44egw7vsn1rldrjxvxh" frameBorder="0" title="Add the Python Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
@@ -21,13 +77,12 @@ Python is a widely used programming language known for its clarity and simplicit
 
 You can add the Python Tool step to your Tool by:
 
-1. Creating a new Tool, then searching for the 'Convert PDF to text' Tool step
-2. Click 'Expand' to see the full Tool step
-3. Enter your code in the 'Code' field
-4. Click '+ New item' under 'PyPl Packages' if you need to install any packages
-5. Click 'Run step' to run the Tool step
+1. Creating a new Tool, then clicking or searching for the Python Tool step
+2. Click '+ New item' under 'PyPI Packages' if you need to install any packages, and enter the package name you need.
+3. Enter your code in the 'Code' field, including any imports you need.
+4. Click 'Run step' to run the Tool step
 
-<Info>In order to access the output of this codeblock, you will need to return a value in the return statement.</Info>
+<Info>In order to access the output of this codeblock, you will need to return a value in the `return` statement.</Info>
 
 ## Accessing variables 
 
@@ -35,46 +90,50 @@ You can access Tool input variables, other Tool step outputs, and API keys you'v
 
 ### Input variables
 
-You can access Input variables by following this syntax, where 'name' is the variable for your input. 
+You can access Input variables by simply using the variable name directly, where 'name' is the variable for your input. 
 
 ```python3
-  params['name']
+name
 ```
 
 ### Other Tool step outputs
 
-You can access other Tool step outputs by following this syntax, where 'tool_step' is the variable for the Tool step you're trying to access the output of. 
+You can access other Tool step outputs by using the variable name directly, where 'llm' is the variable for the Tool step you're trying to access the output of. 
 
 ```python3
-  steps['tool_step']
+llm
 ```
 
-You can then access a specific output of that Tool step by adding another variable.
+This returns the full output object. To access a specific field within that output, use dictionary notation:
 
 ```python3
-  steps['tool_step']['output']
+llm["answer"]
 ```
+
+For example, if an LLM step returns `{"answer": "Hello!"}`, then:
+- `llm` returns `{"answer": "Hello!"}`
+- `llm["answer"]` returns `"Hello!"`
 
 ### API keys
 
-You can access one of your saved API keys by using this syntax, where 'api_key' is the variable for the key you're trying to access.
+You can access one of your saved API keys by using this syntax, where 'api_key' is the title of your API key.
 
 ```python3
-  '{{api_key}}'
+"{{secrets.chains_api_key}}"
 ```
 
 ## Advanced Settings
 
+<Note>Several advanced settings (Session ID, Number of GPUs, Number of CPU Cores, Memory Size, and Session Timeout) are only available when the backend is set to 'Modal Labs'.</Note>
+
 ### Backend
-You can choose between two backend services to run the code, 'Modal Labs' or 'e2b.dev'.
+You can choose between two backend services to run the code, 'Modal Labs' or 'Daytona'.
 
 ### Runtime Commands
 You can include a list of Linux terminal commands to be run before running your code.
 
 ### Session ID
 Define a custom session that saves all local variables between Python executions.
-
-<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
 
 ### Enable 'Long Output' Mode
 
@@ -84,32 +143,24 @@ Allow the output to be longer than 127,000 characters, in exchange for 2-4 secon
 
 Allows you to specify a number of GPUs for your code to use. 
 
-<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
-
 ### Number of CPU Cores
 
 Allows you to specify a number of CPU cores for your code to use. 
-
-<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
 
 ### Memory Size
 
 Allows you to specify an amount of RAM for your code to use. 
 
-<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
-
 ### Session Timeout
 
-Allows you to specify (in seconds) how long the code should run before timing out. 
-
-<Note>This setting is only available when the backend is set to 'Modal Labs'.</Note>
+Allows you to specify (in seconds) how long the code should run before timing out.
 
 ### Raise Error
 
 Allows you to specify how errors are raised:
-- Error with Full Traceback
-- Error
-- Print Error to Stderr
+- **Error with Full Traceback** - Shows the complete error traceback including file names, line numbers, and the full call stack. This is useful for debugging complex issues.
+- **Error** - Shows only the error message without the detailed traceback. This provides a cleaner output for production use.
+- **Print Error to Stderr** - Prints the error to stderr instead of raising it, allowing your code to continue execution even when errors occur.
 
 ### Enable fallback
 
@@ -122,7 +173,7 @@ If the selected backend fails, when this is selected, your code will attempt to 
     This error indicates that the code took longer than the seconds allowed in the 'Session timeout' Advanced Setting, or exceeded our hard limit of four hours. 
   </Accordion>
   <Accordion title="No return statement">
-    This error indicates that there is no return statement in the code. You will not be able to access the output of this codeblock unless you pass data in a return statement. 
+    This error indicates that there is no return statement in the code. You will not be able to access the output of this codeblock unless you pass data in a return statement. If the transformed section of the output is showing `null`, it means that there is nothing being returned from your code.
     ```
     WARNING: There is no return statement in this code. To access the output of this codeblock, return a value.
     ```
