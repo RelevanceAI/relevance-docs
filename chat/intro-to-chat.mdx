@@ -21,9 +21,21 @@ You can select the LLM you want to use in Chat:
 2. Search for and select the model you wish to use 
 3. Select 'Auto' to allow Chat to select the best LLM for your request
 
+---
+
 ## Using Agents in Chat
 
-You can use chat to call a singular Agent, multiple Agents, or even a Workforce. 
+Chat provides flexible ways to work with AI Agents in your conversations. You can:
+
+- **Call individual Agents** - Use a single Agent for specific tasks
+- **Use multiple Agents** - Combine different Agents in the same conversation for complex workflows
+- **Deploy Workforces** - Leverage teams of Agents working together
+- **Access Marketplace Agents** - Use pre-built Agents cloned from the [Marketplace](/get-started/marketplace)
+- **Use custom Agents** - Deploy Agents you've created and configured yourself (see our [Quick Start Guide](/agent/quickstart-guide))
+
+Simply @ mention any Agent you have access to in your project, and Chat will seamlessly integrate their capabilities into your conversation. 
+
+---
 
 ## Chat agents
 
@@ -39,7 +51,102 @@ You can also @ mention Agents built specifically for Chat.
     <Card title="Image Generator" href="/chat/chat-agents/image-generator" icon="image">
         Generate images with our Image Generator Agent
     </Card>
+    <Card title="Slide Builder" href="/chat/chat-agents/slide-builder" icon="presentation">
+        Create presentations with our in-built Slide Builder
+    </Card>
 </Columns>
+
+---
+
+## Supported file types in Chat
+
+Chat empowers you to work with a wide range of file types, both for input and output. Upload documents, images, and data files to provide context to your conversations, and generate new files based on your Agent's responses or built-in Agent outputs. Whether you're analyzing spreadsheets, processing PDFs, or creating presentations, Chat seamlessly handles file operations across different model providers.
+
+Here's a comprehensive breakdown of supported file types by model provider:
+
+<Warning>
+File export is not supported for organizations in the AU region.
+</Warning>
+
+### File capabilities
+
+<Info>
+**Reading** - Upload and process files to provide context to your conversations \
+**Create/Export** - Generate new files or export content based on Chat responses
+</Info>
+
+<AccordionGroup>
+    <Accordion title="OpenAI">
+    **Document files:**
+    - `.docx` (5MB max) - Reading available, create/export available
+    - `.docx` with images (5MB max) - Reading not available, create/export available
+    - `.xlsx` (5MB max) - Reading available (converted to text), create/export available
+    - `.csv` (5MB max) - Reading available, create/export available
+    - `.pdf` (10MB max) - Reading available, create/export available
+    - `.pdf` with images (10MB max) - Reading available, create/export available
+    - `.txt` (5MB max) - Reading available, create/export available
+    - `.md` (5MB max) - Reading available, create/export not available (available on request)
+
+    **Image files:**
+    - `.png` (10MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (10MB max) - Reading available, create/export available (exported as PNG)
+
+    **Not available:**
+    - `.pptx` - Reading not available, create/export not available
+    </Accordion>
+
+    <Accordion title="Anthropic">
+    **Document files:**
+    - `.docx` (5MB max) - Reading available, create/export available
+    - `.docx` with images (5MB max) - Reading not available, create/export available
+    - `.xlsx` (5MB max) - Reading available (converted to text), create/export available
+    - `.csv` (5MB max) - Reading available, create/export available
+    - `.pdf` (10MB max) - Reading available, create/export available
+    - `.pdf` with images (10MB max) - Reading available, create/export available
+    - `.txt` (5MB max) - Reading available, create/export available
+    - `.md` (5MB max) - Reading available (limited), create/export not available (available on request)
+
+    **Image files:**
+    - `.png` (10MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (10MB max) - Reading available, create/export available (exported as PNG)
+
+    **Not available:**
+    - `.pptx` - Reading not available, create/export not available
+    </Accordion>
+
+    <Accordion title="Gemini">
+    **Document files:**
+    - `.docx` (5MB max) - Reading available, create/export available
+    - `.docx` with images (5MB max) - Reading not available, create/export available
+    - `.xlsx` (5MB max) - Reading available (converted to text), create/export available
+    - `.csv` (5MB max) - Reading available, create/export available
+    - `.pdf` (10MB max) - Reading available, create/export available
+    - `.pdf` with images (10MB max) - Reading available, create/export available
+    - `.txt` (5MB max) - Reading available, create/export available
+    - `.md` (5MB max) - Reading available, create/export not available (available on request)
+
+    **Image files:**
+    - `.png` (10MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (10MB max) - Reading available, create/export available (exported as PNG)
+
+    **Video & Audio files (Gemini Pro only):**
+    - Video: `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`
+    - Audio: `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac`
+
+    **Not available:**
+    - `.pptx` - Reading not available, create/export not available
+    </Accordion>
+</AccordionGroup>
+
+### Additional information
+
+If a file contains textual information, we convert it to a text file before uploading to the model.
+
+<Info>
+For more detailed information about which models can process which files in agents, see our [LLM integrations](http://localhost:3000/integrations/llm-integrations/openai) pages.
+</Info>
+
+---
 
 ## Frequently asked questions (FAQs)
 
