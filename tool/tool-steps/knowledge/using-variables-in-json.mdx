@@ -1,0 +1,72 @@
+---
+title: "Using Variables in JSON"
+description: "Learn how to use variables from Tool inputs and other Tool steps in JSON fields for Knowledge Tool steps"
+---
+
+When building Tools with Knowledge Tool steps (Insert, Update, Get, Delete Knowledge), you can reference inputs from Tool inputs or outputs from other Tool steps using variable syntax `{{variable_name}}`. This allows you to dynamically insert data from previous steps or user inputs into your knowledge operations.
+
+## Variable Syntax
+
+You can reference:
+- **Tool inputs**: `{{input_variable_name}}`
+- **Previous Tool step outputs**: `{{steps.step_name.output.variable_name}}`
+
+Press the **{}** button next to any JSON input field to switch to variable mode and reference these values.
+
+## Variable Typing for Knowledge Tool Steps
+
+For Knowledge Tool steps (Insert, Update, Get, Delete), **all variables should be wrapped in quotes** in the JSON format: `"{{variable_name}}"`. 
+
+The type of the inserted value is determined by the column type defined in your knowledge table. The system will automatically convert the value to match the column type during insertion.
+
+Make sure the column types in your knowledge table match the data types you want to store:
+- **Number columns**: Values will be converted to numbers on insert, even though they're quoted in the JSON
+- **Text/String columns**: Values will be stored as text
+- **Boolean columns**: Values will be stored as booleans
+
+## Examples
+
+### Example: Using Variables in Filters
+
+```json
+[
+  {
+    "breed": "{{user_breed_input}}",
+    "size": "{{user_size_input}}",
+    "age": "{{previous_step.output.age}}"
+  }
+]
+```
+
+### Example: Using Variables in Data Objects
+
+```json
+[
+  {
+    "breed": "{{user_breed_input}}",
+    "size": "{{user_size_input}}",
+    "age": "{{user_age_input}}",
+    "weight": "{{previous_step.output.weight}}",
+    "is_active": "{{previous_step.output.is_active}}"
+  }
+]
+```
+
+In these examples, all variables are wrapped in quotes as required for Knowledge Tool steps. The final type depends on your knowledge table column types:
+- If the `breed` and `size` columns are text columns, the values will be inserted as strings
+- If the `age` and `weight` columns are number columns, the values will be converted to numbers on insert, even though they're quoted in the JSON
+- The `is_active` column type determines whether the value is stored as a boolean
+
+## Variable Typing for Other Tool Steps
+
+**Note**: When passing values to other Tool steps that accept JSON input (not Knowledge Tool steps), the typing works differently:
+- `"{{variable}}"` will be passed as a string
+- `{{variable}}` (without quotes) will be passed as a number or boolean. The JSON input box may show a syntax error, but it will still run correctly.
+
+## See Also
+
+- [Insert Knowledge](/tool/tool-steps/knowledge/insert-knowledge)
+- [Update Knowledge](/tool/tool-steps/knowledge/update-knowledge)
+- [Get Knowledge](/tool/tool-steps/knowledge/get-knowledge)
+- [Delete Knowledge](/tool/tool-steps/knowledge/delete-knowledge)
+

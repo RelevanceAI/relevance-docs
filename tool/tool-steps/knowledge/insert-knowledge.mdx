@@ -13,12 +13,13 @@ description: "The 'Insert Knowledge' Tool step lets your agent save information 
 
 You can add the 'Insert Knowledge' Tool step to your Tool by:
 
-1. Creating a new Tool, then searching for the Insert Knowledge Tool step
-2. Click ‘Expand’ to see the full Tool step
-3. Select the Knowledge table you would like to use
-4. Use the **New data to insert** field to enter an array of objects, where each object corresponds to a row. Add additional objects to insert multiple rows at once.
-5. Use the **Sync on upload** field to determine whether the data should be vectorized when added to the knowledge set. In most cases, you’ll want this enabled as it allows your agents to semantically search and retrieve relevant information from your knowledge table.
-6. Click 'Run step' to test out the Tool
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Insert Knowledge' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. Selecting the Knowledge table you would like to access
+5. New data to insert: Accepts a JSON selection of objects, where each object corresponds to a row. Add more objects as outlined in the formatting examples below to insert multiple rows at once.
+6. Use the **Sync on upload** field to determine whether the data should be vectorized when added to the knowledge set. In most cases, you'll want this enabled as it allows your agents to semantically search and retrieve relevant information from your knowledge table.
+7. Click `Run step` to test out the Tool
 
 ## Common errors
 
@@ -28,6 +29,17 @@ You can add the 'Insert Knowledge' Tool step to your Tool by:
 
 <Accordion title="Incorrect data type">
   This means the data being inserted into the knowledge table is not a JSON. `Invalid JSON`
+</Accordion>
+
+<Accordion title="Tool input type mismatch">
+  When creating a Tool that wraps the Insert Knowledge Tool step for use with AI agents, ensure the Tool input for new data is configured as a **JSON input type** rather than a Text input. The Insert Knowledge Tool step expects a JSON array of objects (as shown in the formatting examples above), so the Tool input should match this format to properly pass data from agents to the step.
+  
+  When setting up the Tool input:
+  - Use the **JSON** input type (not Text)
+  - Optionally provide a JSON Schema that matches the structure of your knowledge table to guide agents on the expected format
+  - Reference the Tool input variable in the Insert Knowledge Tool step's **New data to insert** field using variable mode (`{{input_variable_name}}`)
+  
+  This ensures that the data format passed from the Tool input to the Tool step remains consistent and properly structured.
 </Accordion>
 
 ## Formatting Examples
@@ -61,6 +73,12 @@ You can add the 'Insert Knowledge' Tool step to your Tool by:
 <Note>
   Ensure to separate each object with a comma if inserting multiple rows.
 </Note>
+
+## Using Variables in JSON
+
+You can use variables from Tool inputs and other Tool steps in the **New data to insert** field. For detailed information on how to use variables in JSON for Knowledge Tool steps, including variable syntax and typing, see [Using Variables in JSON](/tool/tool-steps/knowledge/using-variables-in-json).
+
+For Knowledge Tool steps, all variables should be wrapped in quotes in the JSON format: `"{{variable_name}}"`. The type of the inserted value is determined by the column type defined in your knowledge table.
 
 ## Frequently asked questions (FAQs)
 
