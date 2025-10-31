@@ -14,17 +14,19 @@ description: "The 'Delete Knowledge' Tool step allows your agent to remove infor
 
 You can add the 'Delete Knowledge' Tool step to your Tool by:
 
-1. Creating a new Tool, then searching for the Delete Knowledge Tool step
-2. Click ‘Expand’ to see the full Tool step
-3. Select the knowledge set you would like to use.
-4. Filter condition: “and” vs “or” when matching data to delete:
-   - Use **_and_** when all specified conditions must match for a row to be deleted.
-   - Use **_or_** when any of the conditions can match.
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Delete Knowledge' Tool step
+3. Clicking ‘Expand’ to see the full Tool step
+4. Selecting the knowledge table you would like to access
+5. Filter condition: “and” vs “or” when matching data to delete:
+   - Use `and` when all specified conditions must match for a row to be deleted.
+   - Use `or` when any of the conditions can match.
 
    <Note>
      Filter condition only applies if you include more than one object in the filter
    </Note>
-5. Filters: Accepts an array of objects, where each object corresponds to a row. Add more objects to delete multiple rows at once.
+6. Filters: Accepts a JSON selection of objects, where each object corresponds to a row. Add more objects as outlined in the formatting examples below to delete multiple rows at once.
+7. Click `Run step` to test out the Tool
 
 ## Common errors
 
@@ -94,6 +96,12 @@ You can add the 'Delete Knowledge' Tool step to your Tool by:
 <Note>
   Ensure to separate each object with a comma if inserting multiple rows.
 </Note>
+
+## Using Variables in JSON
+
+You can use variables from Tool inputs and other Tool steps in the **Filters** field. For detailed information on how to use variables in JSON for Knowledge Tool steps, including variable syntax and typing, see [Using Variables in JSON](/tool/tool-steps/knowledge/using-variables-in-json).
+
+For Knowledge Tool steps, all variables should be wrapped in quotes in the JSON format: `"{{variable_name}}"`. The filter values will be matched against your knowledge table data based on the column types.
 
 ## Frequently asked questions (FAQs)
 

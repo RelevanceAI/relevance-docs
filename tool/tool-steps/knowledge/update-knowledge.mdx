@@ -14,18 +14,20 @@ description: "The 'Update Knowledge' Tool step lets you update existing rows in 
 
 You can add the 'Update Knowledge' Tool step to your Tool by:
 
-1. Creating a new Tool, then searching for the Update Knowledge Tool step
-2. Click ‘Expand’ to see the full Tool step
-3. Select the knowledge set you would like to use.
-4. Filter condition: “and” vs “or” when matching data to update:
-   - Use **_and_** when all specified conditions must match for a row to be deleted.
-   - Use **_or_** when any of the conditions can match.
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Update Knowledge' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. Selecting the knowledge table you would like to access
+5. Filter condition: "and" vs "or" when matching data to update:
+   - Use `and` when all specified conditions must match for a row to be updated.
+   - Use `or` when any of the conditions can match.
    <Note>
      Filter condition only applies if you include more than one object in the filter
    </Note>
-5. Filters: Accepts an array of objects, where each object corresponds to a row. Add more objects to delete multiple rows at once.
-6. Update value: Provide an object with the new values to update. Each key should match a column name in your knowledge set, and its corresponding value will replace the current value in the matching row.
-7. Use the **Sync on upload** field to determine whether the data should be vectorized when added to the knowledge set. In most cases, you’ll want this enabled as it allows your agents to semantically search and retrieve relevant information from your knowledge table.
+6. Filters: Accepts a JSON selection of objects, where each object corresponds to a row. Add more objects as outlined in the formatting examples below to match multiple rows at once.
+7. Update value: Provide an object with the new values to update. Each key should match a column name in your knowledge table, and its corresponding value will replace the current value in the matching row.
+8. Use the **Sync on upload** field to determine whether the data should be vectorized when added to the knowledge set. In most cases, you'll want this enabled as it allows your agents to semantically search and retrieve relevant information from your knowledge table.
+9. Click `Run step` to test out the Tool
 
 
 ## Common errors
@@ -109,6 +111,12 @@ You can add the 'Update Knowledge' Tool step to your Tool by:
 <Note>
   Ensure to separate each object with a comma if filtering multiple rows.
 </Note>
+
+## Using Variables in JSON
+
+You can use variables from Tool inputs and other Tool steps in the **Filters** and **Update value** fields. For detailed information on how to use variables in JSON for Knowledge Tool steps, including variable syntax and typing, see [Using Variables in JSON](/tool/tool-steps/knowledge/using-variables-in-json).
+
+For Knowledge Tool steps, all variables should be wrapped in quotes in the JSON format: `"{{variable_name}}"`. The type of the updated value is determined by the column type defined in your knowledge table, and values will be automatically converted to match the column type during the update.
 
 ## Frequently asked questions (FAQs)
 
