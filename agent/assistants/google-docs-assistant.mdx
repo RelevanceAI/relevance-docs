@@ -1,0 +1,467 @@
+---
+title: "Google Docs Assistant"
+description: "Create, edit, and manage Google Docs automatically using simple natural language"
+---
+
+# Google Docs Assistant
+
+The Google Docs Assistant helps you manage your Google Docs through simple, natural language instructions. Create documents, add content, format text, and organize your docs—all without manually typing and formatting.
+
+<Card title="Clone Google Docs Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
+  Get started by cloning from the Marketplace → Search "Google Docs"
+</Card>
+
+---
+
+## What Can It Do?
+
+The Google Docs Assistant can handle any task supported by the Google Docs API, including:
+
+<CardGroup cols={2}>
+  <Card title="Create Documents" icon="file-plus">
+    Create new documents with content and structure
+  </Card>
+  
+  <Card title="Edit Content" icon="pen">
+    Add, update, and replace text in existing documents
+  </Card>
+  
+  <Card title="Format Text" icon="text">
+    Apply headings, bold, italic, and basic formatting
+  </Card>
+  
+  <Card title="Manage Documents" icon="folder-open">
+    List, copy, and organize your Google Docs
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Setup
+
+<Steps>
+  <Step title="Clone from Marketplace">
+    Search "Google Docs" in the Marketplace and click Clone
+  </Step>
+  
+  <Step title="Connect Your Google Account">
+    Google Docs uses **OAuth**, which means you don't need to manually find API keys!
+    
+    **Setup Steps:**
+    1. After cloning, click the **Add Account** or **Connect** button
+    2. Sign in with your Google account
+    3. Grant permissions for Google Docs and Drive access
+    4. Done!
+    
+    The connection is secure and you can revoke access anytime from your Google Account settings.
+    
+    ![Google OAuth connection flow](/images/google-oauth-connect.png)
+  </Step>
+  
+  <Step title="Test It">
+    Try: "Create a blank document called 'Test Document'"
+    
+    If successful, you'll see confirmation with the document link!
+  </Step>
+</Steps>
+
+<Note>
+Google Docs uses OAuth authentication, so setup is simple. Just sign in and you're ready!
+</Note>
+
+---
+
+## Example Tasks
+
+### Simple Tasks
+
+<AccordionGroup>
+  <Accordion title="Create Documents">
+    - "Create a blank document called 'Meeting Notes'"
+    - "Make a new document titled 'Project Proposal'"
+    - "Create a document called 'Weekly Report' with placeholder text"
+  </Accordion>
+  
+  <Accordion title="Add Content">
+    - "Add the text 'Hello World' to document 'Test Document'"
+    - "Append 'Meeting adjourned at 3pm' to 'Meeting Notes'"
+    - "Add a heading 'Introduction' to my document"
+  </Accordion>
+  
+  <Accordion title="Document Management">
+    - "List all my Google Docs"
+    - "Make a copy of 'Template Document' and name it 'New Project Doc'"
+    - "Find the document titled 'Q1 Report'"
+  </Accordion>
+</AccordionGroup>
+
+### Medium Tasks
+
+<AccordionGroup>
+  <Accordion title="Create Structured Documents">
+    - "Create a meeting notes document with sections for Date, Attendees, Agenda, Discussion, and Action Items"
+    - "Make a project proposal with sections: Executive Summary, Background, Objectives, Approach, Timeline, Budget"
+    - "Create a weekly status report with sections for Completed, In Progress, Blockers, and Next Week"
+  </Accordion>
+  
+  <Accordion title="Content Updates">
+    - "In document 'Project Plan', replace 'March' with 'April' wherever it appears"
+    - "Add a new section called 'Conclusions' at the end of 'Research Report'"
+    - "Update the 'Status' section in 'Weekly Report' to say 'On Track'"
+  </Accordion>
+  
+  <Accordion title="Template Creation">
+    - "Create a template for meeting notes with Date, Attendees, Agenda (numbered list), Notes, and Action Items (table)"
+    - "Make a document template for project proposals with all standard sections and placeholder text"
+    - "Create a weekly report template with consistent formatting"
+  </Accordion>
+</AccordionGroup>
+
+### Complex Tasks
+
+<AccordionGroup>
+  <Accordion title="Formatted Document Creation">
+    **Request:** "Create a comprehensive project proposal document with proper formatting: Title page with 'Website Redesign Proposal', Executive Summary section, Background (2 paragraphs of placeholder), Objectives (bullet list of 5 items), Timeline (table with phases and dates), and Budget section"
+    
+    **What it does:**
+    - Creates the document structure
+    - Adds formatted title page
+    - Creates sections with proper heading styles
+    - Inserts bullet lists and tables
+    - Applies consistent formatting
+    - Returns document link
+    
+    **Use case:** Professional document creation
+    
+    <Note>
+    For complex formatting like tables and lists, some assistants include a special HTML formatting tool that works through Google Drive API for better results.
+    </Note>
+  </Accordion>
+  
+  <Accordion title="Document Generation from Data">
+    **Request:** "Create a report document titled 'Q1 Sales Summary' with sections for each region (North, South, East, West), populate with sample sales data, include a summary table at the end, and apply professional formatting"
+    
+    **What it does:**
+    - Creates structured document
+    - Generates regional sections
+    - Populates with data
+    - Creates summary table
+    - Applies formatting
+    - Returns link with preview
+    
+    **Use case:** Automated report generation
+  </Accordion>
+  
+  <Accordion title="Document Series Creation">
+    **Request:** "Create a series of 4 weekly report documents for January (weeks 1-4), each with the same structure: header with week dates, sections for Completed Tasks, Current Tasks, Next Week, and Blockers"
+    
+    **What it does:**
+    - Creates 4 separate documents
+    - Names them appropriately (Week 1, Week 2, etc.)
+    - Applies consistent structure to all
+    - Adds appropriate date headers
+    - Returns links to all documents
+    
+    **Use case:** Recurring document setup
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common Use Cases
+
+### Document Creation
+
+**Meeting Notes:**
+```
+"Create a meeting notes document for the Q1 Planning Meeting with sections: Date, 
+Attendees, Agenda, Discussion Points, Decisions Made, Action Items (with owner and 
+due date columns)"
+```
+
+**Project Documentation:**
+```
+"Create a project brief document with: Project Name, Overview, Objectives (numbered 
+list), Timeline (table), Team Members, Success Metrics, and Next Steps"
+```
+
+**Report Templates:**
+```
+"Create a monthly status report template with: Executive Summary, Highlights (bullet 
+points), Metrics (table), Risks & Issues, Next Month Focus"
+```
+
+### Content Management
+
+**Document Updates:**
+```
+"In the 'Product Roadmap' document, add a new section called 'Q2 Features' after 
+the Q1 section, and list 5 placeholder feature names"
+```
+
+**Find and Replace:**
+```
+"In document 'Company Policy', replace all instances of 'remote work' with 'hybrid 
+work' and update the last modified date"
+```
+
+**Content Appending:**
+```
+"Add a new entry to the 'Meeting Log' document with today's date, attendees 
+(John, Sarah, Mike), and brief notes"
+```
+
+### Document Organization
+
+**Batch Creation:**
+```
+"Create project folders for 5 clients (ACME, TechCorp, DataViz, GlobalCo, StartupX) 
+and in each folder, create initial documents: Project Brief, Timeline, and Notes"
+```
+
+**Template Copying:**
+```
+"Make copies of the 'Weekly Template' document for the next 4 weeks, naming them 
+'Week of [date]' and organizing them in the 'Weekly Reports' folder"
+```
+
+---
+
+## Built-in Helper Tools
+
+Some Google Docs Assistants include specialized tools:
+
+### HTML Formatting Tool
+
+For complex formatting like tables, headers, and formatted lists:
+- Converts your request to HTML
+- Uploads via Google Drive API
+- Creates properly formatted documents
+- Handles tables with multiple columns
+- Manages nested lists
+
+**When to use:** If your assistant has this tool, you can request complex formatted content like:
+- "Create a document with a 3-column table showing tasks, owners, and deadlines"
+- "Make a document with headers, bullet points, and numbered sections"
+
+<Note>
+Not all Google Docs assistants have the HTML formatting tool. Check your assistant's tool list. If it doesn't have this tool, focus on simpler text-based operations.
+</Note>
+
+---
+
+## Tips for Best Results
+
+<Tip>
+**Provide document names or IDs:**
+
+Good: "Add text to the document called 'Project Notes'"
+
+Better: "Add text to document 'Project Notes' (ID: 1abc...)" if you have the ID
+</Tip>
+
+<Tip>
+**Be specific about placement:**
+
+"Add at the end of the document..."
+"Insert before the Conclusion section..."
+"Replace the second paragraph..."
+</Tip>
+
+<Tip>
+**Use clear section names:**
+
+When referring to sections, use exact names:
+"In the 'Executive Summary' section..." (not "in the summary part")
+</Tip>
+
+<Tip>
+**Break complex formatting into steps:**
+
+Instead of one massive request:
+1. "Create the document with basic structure"
+2. "Add the table to the Timeline section"
+3. "Format the headings"
+</Tip>
+
+---
+
+## What the Assistant Can't Do
+
+Due to Google Docs API limitations, the assistant may have limitations with:
+
+- Complex visual layouts (columns, text boxes, etc.)
+- Images and embedded media (can add image URLs in some cases)
+- Comments and suggestions mode
+- Version history access
+- Sharing and permission management
+- Page setup (margins, page size, orientation)
+- Styles and themes (limited formatting support)
+
+<Note>
+The assistant works best for **text content and basic structure**. For complex visual design, you'll need to use Google Docs directly.
+</Note>
+
+---
+
+## Troubleshooting
+
+### "Document not found"
+
+**Cause:** Document name incorrect or you don't have access
+
+**Solution:**
+- First list your documents: "Show me all my Google Docs"
+- Use the exact document name from the list
+- Or provide the document ID from the URL
+
+### "Permission denied"
+
+**Cause:** OAuth connection doesn't have sufficient permissions
+
+**Solution:**
+1. Reconnect your Google account
+2. Ensure you grant all requested permissions (Docs + Drive)
+3. Check that you own or have edit access to the document
+
+### Can't find recently created document
+
+**Cause:** Document was created but not appearing in search
+
+**Solution:**
+- Wait a few seconds for Google's index to update
+- Search by exact title used during creation
+- Check your Google Drive directly
+- Use the document ID provided in the creation response
+
+### Formatting doesn't work as expected
+
+**Cause:** API limitations or missing HTML formatting tool
+
+**Solution:**
+- If your assistant has HTML formatting tool, specify you want "formatted content"
+- Otherwise, stick to basic text operations
+- Apply complex formatting manually in Google Docs after creation
+
+---
+
+## Working with Document IDs
+
+Google Docs can be referenced by name or ID:
+
+**Document ID Location:**
+The ID is in the URL:
+```
+https://docs.google.com/document/d/DOCUMENT_ID_HERE/edit
+```
+
+**When to use IDs:**
+- When you have multiple documents with similar names
+- For more reliable document targeting
+- When working with documents programmatically
+
+**Example:**
+```
+"Add content to document ID 1a2b3c4d5e6f7g8h9i0j"
+```
+
+---
+
+## Document Sharing & Permissions
+
+The assistant can work with documents you own or have edit access to:
+
+**What you can do:**
+- Create new documents (always owned by you)
+- Edit documents you own
+- Edit shared documents where you have edit permission
+
+**What you can't do:**
+- Edit documents where you only have view/comment access
+- Access documents not shared with your Google account
+- Modify sharing settings programmatically
+
+---
+
+## Pricing & Credits
+
+The Google Docs Assistant uses credits based on:
+- Task complexity
+- Document size
+- Number of operations
+
+**Typical credit costs:**
+- Simple tasks (create blank doc, add text): ~10-30 credits
+- Medium tasks (structured documents): ~30-80 credits
+- Complex tasks (formatted documents with tables): ~80-150 credits
+
+<Tip>
+Document operations are generally efficient. Even creating complex formatted documents typically costs less than 200 credits.
+</Tip>
+
+---
+
+## Google Drive Integration
+
+Google Docs Assistant works in conjunction with Google Drive:
+
+**Folder Operations:**
+While the Docs Assistant focuses on document content, document organization (folders, sharing) is typically handled by a Google Drive Assistant.
+
+**Finding Documents:**
+Documents are stored in your Google Drive. You can reference them by:
+- Document name (searches your Drive)
+- Document ID (direct access)
+- Folder location (if using Drive Assistant)
+
+---
+
+## Best Practices
+
+**Document Naming:**
+- Use clear, descriptive names
+- Include dates for recurring documents
+- Use consistent naming conventions
+
+**Template Strategy:**
+- Create master templates once
+- Copy templates for new instances
+- Don't modify the master template directly
+
+**Content Organization:**
+- Create documents with clear sections
+- Use consistent heading styles
+- Keep structure simple for easier updates
+
+**Batch Operations:**
+- Create multiple similar documents in one request
+- Use consistent structure across batch
+- Verify one document before creating many
+
+---
+
+## Need More Help?
+
+<CardGroup cols={2}>
+  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Troubleshooting" icon="tools" href="/agent/assistants/assistants-troubleshooting">
+    Fix common errors
+  </Card>
+  
+  <Card title="Support" icon="headset" href="/get-started/support">
+    Contact our team
+  </Card>
+</CardGroup>
+
+---
+
+## Related Resources
+
+- [Google Docs API Documentation](https://developers.google.com/docs/api) - Official Google Docs API reference
+- [Google Docs Help](https://support.google.com/docs) - Learn about Google Docs features
+- [Google Account Permissions](https://myaccount.google.com/permissions) - Manage connected apps
+- [Relevance AI Marketplace](https://app.relevanceai.com/marketplace) - Explore more assistants
+

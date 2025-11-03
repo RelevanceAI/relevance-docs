@@ -1,11 +1,11 @@
 ---
-title: "Quick Start Guide"
-description: "Clone, configure, and start using your AI assistant in under 5 minutes"
+title: "Setting up your Assistant"
+description: "Clone and configure your AI assistant"
 ---
 
-# Quick Start Guide
+# Setting up your Assistant
 
-Get your AI assistant up and running in three simple steps. No technical knowledge required.
+Get your AI assistant up and running in two simple steps. No technical knowledge required.
 
 <Steps>
   <Step title="Find Your Assistant">
@@ -15,36 +15,38 @@ Get your AI assistant up and running in three simple steps. No technical knowled
   <Step title="Configure Credentials">
     Add your API key and settings
   </Step>
-  
-  <Step title="Test It Out">
-    Run your first task
-  </Step>
 </Steps>
 
 ---
 
 ## Step 1: Find Your Assistant
 
-1. Navigate to the **Marketplace** in Relevance AI
-2. Use the search bar to find your integration (e.g., "Webflow", "Notion", "HubSpot")
-3. Look for assistants marked with 🤖 or labeled as "AI Assistant"
+1. Navigate to the [**Marketplace**](https://app.relevanceai.com/marketplace/f1db6c/0fff163c-daae-4d17-b878-0b4b4d4d902c) in Relevance AI
+2. Search for "assistant" in the search bar to view all available Relevance AI Assistants
+3. Look for the platform name with "Assistant" in the title (e.g., "Webflow Assistant", "Notion Assistant")
 4. Click the **Clone** button
 
 <Tip>
-**Can't find the Marketplace?** Click the main menu and select "Marketplace" or [visit directly](https://app.relevanceai.com/marketplace)
+**Can't find the Marketplace?** Relevance AI dashboard --> Marketplace
 </Tip>
-
-![Marketplace search showing AI assistants](/images/marketplace-assistants-search.png)
 
 ---
 
 ## Step 2: Configure Your Assistant
 
 <Warning>
-**⚠️ CRITICAL SETUP - Complete this BEFORE first use**
+**CRITICAL SETUP - Complete this BEFORE first use**
 
 You must add your API credentials before using your assistant, otherwise you'll see authentication errors.
 </Warning>
+
+### Configuration Checklist
+
+After cloning your assistant, you'll need to provide:
+
+- **API Key** - A special access token from your integration (see instructions below)
+- **Site/Account ID** - Your specific workspace or site identifier
+- **Documentation** - Pre-loaded (leave as-is, don't modify)
 
 ### What is an API Key?
 
@@ -55,13 +57,11 @@ Think of an API key as a **secure password** that lets the AI assistant access y
 - API keys are safer than sharing your password
 - You can revoke the key anytime if needed
 
-### Configuration Checklist
+**How to Find Your API Key:**
 
-After cloning your assistant, you'll need to provide:
-
-- ✅ **API Key** - A special access token from your integration (see instructions below)
-- ✅ **Site/Account ID** - Your specific workspace or site identifier
-- ✅ **Documentation** - Pre-loaded (leave as-is, don't modify)
+<Note>
+**API keys are managed by the external platform provider** (Webflow, Notion, HubSpot, etc.), not within Relevance AI. You'll need to navigate to your account on the respective platform to generate or locate your API key. Each platform has its own API documentation and guides—if you need additional help, search for "[Platform Name] API key" (e.g., "Webflow API key") to find official setup guides and support resources.
+</Note>
 
 ### Where to Add These
 
@@ -71,261 +71,41 @@ After cloning your assistant, you'll need to provide:
    - Fill in the required fields
    - Click **Save**
 
-![Variables tab with configuration fields](/images/assistant-variables-tab.png)
-
----
-
-## How to Find Your API Key
-
-<Tabs>
-  <Tab title="Webflow">
-    ### Webflow API Key
-    
-    **Finding Your API Key:**
-    1. Log into your Webflow account
-    2. Click your **profile icon** (top-right corner)
-    3. Go to **Account Settings**
-    4. Navigate to the **Integrations** tab
-    5. Scroll to **API Access** section
-    6. Click **Generate API Token** (or use existing token)
-    7. **Copy the token** - you won't be able to see it again!
-    8. Paste into the `webflow_api_key` field in Variables tab
-    
-    <Warning>
-    Copy your API token immediately! Webflow only shows it once for security.
-    </Warning>
-    
-    ![Webflow API key location](/images/webflow-api-key-location.png)
-    
-    ### Webflow Site ID
-    
-    **Finding Your Site ID:**
-    1. In Webflow, open the site you want to work with
-    2. Go to **Project Settings** (gear icon)
-    3. Click **General** tab
-    4. Find your **Site ID** (long string of letters/numbers)
-    5. Copy and paste into `site_id` field in Variables tab
-    
-    **Alternative:** Your Site ID is also visible in your browser URL when viewing your site
-    
-    ![Webflow Site ID location](/images/webflow-site-id-location.png)
-  </Tab>
-  
-  <Tab title="Notion">
-    ### Notion Integration Token
-    
-    **Creating Your Integration:**
-    1. Go to [www.notion.so/my-integrations](https://www.notion.so/my-integrations)
-    2. Click **+ New Integration**
-    3. Give it a name (e.g., "Relevance AI Assistant")
-    4. Select the workspace you want to connect
-    5. Click **Submit**
-    6. Copy the **Internal Integration Token** (starts with `secret_`)
-    7. Paste into `notion_api_key` field in Variables tab
-    
-    <Warning>
-    **Important Extra Step:** You must share pages/databases with your integration!
-    
-    - Open the page/database in Notion
-    - Click **Share** (top-right)
-    - Invite your integration by name
-    - Without this step, the assistant can't access your content
-    </Warning>
-    
-    ![Notion integration creation](/images/notion-create-integration.png)
-  </Tab>
-  
-  <Tab title="HubSpot">
-    ### HubSpot API Key
-    
-    **Finding Your API Key:**
-    1. Log into your HubSpot account
-    2. Click the **Settings** icon (gear, top-right)
-    3. In the left sidebar, navigate to **Integrations** → **API Key**
-    4. Click **Create API Key** (or view existing key)
-    5. Click **Show** to reveal your key
-    6. Copy and paste into `hubspot_api_key` field in Variables tab
-    
-    <Note>
-    Some HubSpot features require Private App access tokens instead. If your standard API key doesn't work, you may need to create a Private App in Settings → Integrations → Private Apps.
-    </Note>
-    
-    ![HubSpot API key settings](/images/hubspot-api-key-location.png)
-  </Tab>
-  
-  <Tab title="Salesforce">
-    ### Salesforce Credentials
-    
-    Salesforce requires multiple pieces of information:
-    
-    **1. Security Token:**
-    - Go to Salesforce Setup
-    - Navigate to **Personal Information** → **Reset My Security Token**
-    - Check your email for the token
-    
-    **2. Username:** Your Salesforce login email
-    
-    **3. Password:** Your Salesforce login password
-    
-    **4. Domain:** Your instance URL (e.g., `yourcompany.my.salesforce.com`)
-    
-    Add all of these to the respective fields in the Variables tab.
-    
-    ![Salesforce security token reset](/images/salesforce-security-token.png)
-  </Tab>
-  
-  <Tab title="Gmail / Google Workspace">
-    ### OAuth Connection (Easy!)
-    
-    Gmail and Google Workspace assistants use **OAuth**, which means you don't need to manually find API keys!
-    
-    **Setup Steps:**
-    1. After cloning, click the **Add Account** or **Connect** button
-    2. Sign in with your Google account
-    3. Grant the requested permissions
-    4. Done! ✅
-    
-    The connection is secure and you can revoke access anytime from your Google Account settings.
-    
-    ![Google OAuth connection flow](/images/google-oauth-connect.png)
-  </Tab>
-</Tabs>
-
----
-
-## General Tips for Finding API Keys
-
-**Common locations across platforms:**
-- Settings → Integrations → API
-- Settings → Developer → API Keys  
-- Settings → Security → API Access
-- Account Settings → API & Integrations
-- Developer Portal → API Credentials
-
-**What to look for:**
-- Usually called "API Key", "API Token", "Access Token", or "Secret Key"
-- Long string of random letters, numbers, and symbols
-- Often starts with a prefix (e.g., `sk_`, `secret_`, `Bearer `)
-
-**Security best practices:**
-- ✅ Never share your API key publicly
-- ✅ Copy it immediately - some platforms only show it once
-- ✅ Store it securely (Relevance AI encrypts it automatically)
-- ✅ Revoke old keys if you're no longer using them
-- ❌ Don't commit API keys to GitHub or public code
-
-**Troubleshooting:**
-- Can't find API settings? Look for "Developer", "Advanced", or "Integrations" sections
-- Key not working? Check if it has the right permissions/scopes
-- Still stuck? Contact the integration's support team for help locating API settings
-
----
-
-## Step 3: Test Your Assistant
-
-Start with a simple task to verify your setup is working correctly.
-
-<Tabs>
-  <Tab title="Webflow">
-    **Test Commands:**
-    
-    ✅ "List all collections on my site"  
-    ✅ "Show me my site information"  
-    ✅ "Create a new blog post titled 'Welcome'"
-    
-    **Expected Result:** The assistant completes the task and provides confirmation with details or links
-  </Tab>
-  
-  <Tab title="Notion">
-    **Test Commands:**
-    
-    ✅ "Create a blank page called 'Test Notes'"  
-    ✅ "List all my databases"  
-    ✅ "Create a new database called 'Tasks' with a title field"
-    
-    **Expected Result:** Success message with page/database ID and link
-  </Tab>
-  
-  <Tab title="HubSpot">
-    **Test Commands:**
-    
-    ✅ "Show me my last 5 contacts"  
-    ✅ "Create a test company called 'ACME Corp'"  
-    ✅ "List my recent deals"
-    
-    **Expected Result:** Data returned in a clear format
-  </Tab>
-  
-  <Tab title="Salesforce">
-    **Test Commands:**
-    
-    ✅ "Show me my recent accounts"  
-    ✅ "Create a test lead for John Smith at ACME Corp"  
-    ✅ "List opportunities closing this month"
-    
-    **Expected Result:** Task completed with record IDs and details
-  </Tab>
-  
-  <Tab title="Gmail">
-    **Test Commands:**
-    
-    ✅ "Show me my last 3 emails"  
-    ✅ "Search for emails from [specific sender]"  
-    ✅ "List all labels in my inbox"
-    
-    **Expected Result:** Email summaries or requested information
-  </Tab>
-  
-  <Tab title="Google Docs">
-    **Test Commands:**
-    
-    ✅ "Create a blank document called 'Test Document'"  
-    ✅ "List all my documents"  
-    ✅ "Add text 'Hello World' to a document called 'Test Document'"
-    
-    **Expected Result:** Document created with shareable link
-  </Tab>
-</Tabs>
-
-<Success>
-**Success!** If your test task completes without errors, you're ready to start using your assistant for real work.
-</Success>
-
----
-
-## What If I See Errors?
-
-If you encounter authentication or setup errors, check out the [Troubleshooting Guide](/agent/assistants/assistants-troubleshooting) for solutions.
-
-**Most common issues:**
-- 🔑 API key not entered correctly → Check Variables tab
-- 🔒 API key lacks permissions → Regenerate with full access
-- 🆔 Incorrect Site/Account ID → Verify the ID matches your workspace
-
 ---
 
 ## Next Steps
 
-<CardGroup cols={2}>
-  <Card title="Learn What Your Assistant Can Do" icon="graduation-cap" href="/agent/assistants/assistants-usage-guide">
-    See example tasks and use cases
+**View integration-specific guides for detailed setup and examples:**
+
+<CardGroup cols={3}>
+  <Card title="Webflow Assistant" icon="globe" href="/agent/assistants/webflow-assistant">
+    Manage your Webflow site
   </Card>
   
-  <Card title="Browse Integration-Specific Guides" icon="book">
-    View detailed guides for your specific assistant:
-    - [Webflow Assistant](/agent/assistants/webflow-assistant)
-    - [Notion Assistant](/agent/assistants/notion-assistant)
-    - [HubSpot Wizard](/agent/assistants/hubspot-assistant)
-    - [Salesforce Assistant](/agent/assistants/salesforce-assistant)
-    - [Gmail Assistant](/agent/assistants/gmail-assistant)
+  <Card title="Notion Assistant" icon="note" href="/agent/assistants/notion-assistant">
+    Build databases and pages
   </Card>
   
-  <Card title="Discover Memory Features" icon="brain" href="/agent/assistants/assistants-memory-feature">
-    Learn how HubSpot and Salesforce assistants get smarter over time
+  <Card title="HubSpot Wizard" icon="chart-network" href="/agent/assistants/hubspot-assistant">
+    Manage contacts and deals
   </Card>
   
-  <Card title="Get Help" icon="life-ring" href="/agent/assistants/assistants-troubleshooting">
-    Troubleshoot common issues
+  <Card title="Salesforce Assistant" icon="cloud" href="/agent/assistants/salesforce-assistant">
+    Handle accounts and leads
+  </Card>
+  
+  <Card title="Gmail Assistant" icon="envelope" href="/agent/assistants/gmail-assistant">
+    Manage your emails
+  </Card>
+  
+  <Card title="Google Docs Assistant" icon="file-text" href="/agent/assistants/google-docs-assistant">
+    Create and edit documents
   </Card>
 </CardGroup>
+
+**Need help?**
+
+<Card title="Troubleshooting Guide" icon="life-ring" href="/agent/assistants/assistants-troubleshooting">
+  Common errors and how to fix them
+</Card>
 

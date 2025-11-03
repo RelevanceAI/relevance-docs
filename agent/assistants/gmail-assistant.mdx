@@ -1,0 +1,483 @@
+---
+title: "Gmail Assistant"
+description: "Search, organize, and manage your Gmail inbox with AI using simple natural language"
+---
+
+# Gmail Assistant
+
+The Gmail Assistant helps you manage your email through simple, natural language instructions. Search emails, organize your inbox, manage labels, and handle messages—all without manually clicking through Gmail.
+
+<Card title="Clone Gmail Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
+  Get started by cloning from the Marketplace → Search "Gmail"
+</Card>
+
+---
+
+## What Can It Do?
+
+The Gmail Assistant can handle any task supported by the Gmail API, including:
+
+<CardGroup cols={2}>
+  <Card title="Search" icon="magnifying-glass">
+    Find emails by sender, subject, date, or content
+  </Card>
+  
+  <Card title="Labels" icon="tags">
+    Create, apply, and manage email labels
+  </Card>
+  
+  <Card title="Organization" icon="folder">
+    Archive, mark as read/unread, star emails
+  </Card>
+  
+  <Card title="Filters" icon="filter">
+    Find emails matching complex criteria
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Setup
+
+<Steps>
+  <Step title="Clone from Marketplace">
+    Search "Gmail" in the Marketplace and click Clone
+  </Step>
+  
+  <Step title="Connect Your Google Account">
+    Gmail uses **OAuth**, which means you don't need to manually find API keys!
+    
+    **Setup Steps:**
+    1. After cloning, click the **Add Account** or **Connect** button
+    2. Sign in with your Google account
+    3. Grant the requested permissions
+    4. Done!
+    
+    The connection is secure and you can revoke access anytime from your Google Account settings.
+    
+    ![Google OAuth connection flow](/images/google-oauth-connect.png)
+  </Step>
+  
+  <Step title="Test It">
+    Try: "Show me my last 5 emails"
+    
+    If successful, you'll see your recent emails listed!
+  </Step>
+</Steps>
+
+<Note>
+Gmail uses OAuth authentication, so setup is much simpler than integrations requiring manual API keys. Just sign in and you're ready!
+</Note>
+
+---
+
+## Example Tasks
+
+### Simple Tasks
+
+<AccordionGroup>
+  <Accordion title="Search Emails">
+    - "Show me my last 10 emails"
+    - "Find emails from john@example.com"
+    - "Search for emails with subject containing 'invoice'"
+    - "Show me unread emails from this week"
+    - "Find emails with attachments from last month"
+  </Accordion>
+  
+  <Accordion title="Email Organization">
+    - "Mark all unread emails from 'newsletter@example.com' as read"
+    - "Archive emails older than 6 months from 'promotions@store.com'"
+    - "Star emails from my manager from this week"
+    - "Mark email with subject 'Q1 Report' as important"
+  </Accordion>
+  
+  <Accordion title="Label Management">
+    - "List all my labels"
+    - "Create a new label called 'Project Alpha'"
+    - "Add label 'Urgent' to emails from boss@company.com from today"
+    - "Show me all emails with the 'Follow Up' label"
+  </Accordion>
+</AccordionGroup>
+
+### Medium Tasks
+
+<AccordionGroup>
+  <Accordion title="Advanced Search">
+    - "Find all emails from 'sarah@example.com' sent in January with attachments"
+    - "Search for emails containing 'meeting' in the subject, unread, from this week"
+    - "Show me starred emails from the last 30 days that haven't been replied to"
+    - "Find all emails from my team (list of addresses) from this quarter"
+  </Accordion>
+  
+  <Accordion title="Bulk Organization">
+    - "Archive all emails from 'notifications@app.com' older than 3 months"
+    - "Mark all emails with label 'To Review' as read"
+    - "Add label 'Q1 2024' to all emails from January through March"
+    - "Remove 'Inbox' label from all emails older than 1 year"
+  </Accordion>
+  
+  <Accordion title="Label Organization">
+    - "Create labels for each project: 'Website', 'Marketing', 'Sales' and apply them to relevant emails based on subject keywords"
+    - "Find all emails about 'Budget' and add them to label 'Finance'"
+    - "Create a 'VIP' label and apply it to emails from key clients (list of addresses)"
+  </Accordion>
+  
+  <Accordion title="Inbox Cleanup">
+    - "Find promotional emails older than 6 months and archive them"
+    - "Identify emails with large attachments (>10MB) from this year and list them"
+    - "Find all calendar invites from last month and remove them from inbox"
+  </Accordion>
+</AccordionGroup>
+
+### Complex Tasks
+
+<AccordionGroup>
+  <Accordion title="Intelligent Organization">
+    **Request:** "Organize my inbox by creating labels for different senders: create 'Clients' label for emails from client domains, 'Team' for internal emails, 'Vendors' for our suppliers, and 'Personal' for non-work emails, then apply labels to all emails from last 3 months"
+    
+    **What it does:**
+    - Creates the label structure
+    - Analyzes email addresses and domains
+    - Categorizes based on domain patterns
+    - Applies appropriate labels to matching emails
+    - Provides summary of emails organized by category
+    
+    **Use case:** Bulk inbox organization and categorization
+  </Accordion>
+  
+  <Accordion title="Follow-up System">
+    **Request:** "Find all emails I sent asking for information or feedback in the last 2 weeks where I haven't received a reply, mark them with 'Needs Follow Up' label, and list them with the original subject and recipient"
+    
+    **What it does:**
+    - Searches sent emails with question patterns
+    - Checks for replies in threads
+    - Identifies emails without responses
+    - Creates and applies follow-up label
+    - Generates actionable follow-up list
+    
+    **Use case:** Email follow-up tracking
+  </Accordion>
+  
+  <Accordion title="Newsletter Management">
+    **Request:** "Find all newsletter/marketing emails from the last year (emails with 'unsubscribe' link), group them by sender, show me the top 10 senders by volume, and archive all except the top 3"
+    
+    **What it does:**
+    - Identifies marketing emails using unsubscribe link pattern
+    - Groups by sender domain
+    - Counts volume per sender
+    - Ranks senders by frequency
+    - Archives emails from lower-volume senders
+    - Returns report with sender statistics
+    
+    **Use case:** Newsletter cleanup and subscription management
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common Use Cases
+
+### Inbox Management
+
+**Daily Inbox Review:**
+```
+"Show me all unread emails from today, grouped by: urgent (from VIPs), team 
+(internal emails), external (clients and partners), and other"
+```
+
+**Email Cleanup:**
+```
+"Archive all read emails older than 90 days except those with labels 'Important' 
+or 'Reference'"
+```
+
+**Zero Inbox System:**
+```
+"Find all emails in inbox without labels and suggest appropriate labels based on 
+sender and subject, then apply the labels"
+```
+
+### Email Search & Retrieval
+
+**Find Specific Emails:**
+```
+"Find the email from john@example.com about the Q4 budget that was sent around 
+December 15th and had a spreadsheet attachment"
+```
+
+**Research Past Conversations:**
+```
+"Show me all email threads with sarah@client.com from the last 6 months about 
+the website project"
+```
+
+**Attachment Search:**
+```
+"Find all PDF attachments sent to me in the last month that contain 'invoice' or 
+'receipt' in the filename"
+```
+
+### Project Organization
+
+**Project-Based Labels:**
+```
+"Create a label structure for 'Project Phoenix' with sub-labels 'Planning', 'Execution', 
+'Review' and organize all related emails by phase based on date and keywords"
+```
+
+**Client Communication Tracking:**
+```
+"For each major client (list of domains), create a dedicated label and apply it to 
+all correspondence, then show me communication frequency per client"
+```
+
+### Bulk Operations
+
+**Promotional Email Cleanup:**
+```
+"Find all emails from shopping/retail sites (containing 'sale', 'discount', 'offer' in 
+subject) older than 3 months and archive them"
+```
+
+**Notification Management:**
+```
+"Identify all automated notification emails (from 'no-reply', 'noreply', 'automated' 
+addresses) and create auto-archive rules"
+```
+
+---
+
+## Built-in Helper Tools
+
+The Gmail Assistant includes a specialized tool for certain operations:
+
+### Base64 Email Encoder
+
+Required for sending emails through Gmail API:
+- Converts email content to proper format
+- Handles attachments encoding
+- Manages MIME type formatting
+
+<Note>
+Currently, the Gmail Assistant is optimized for **reading and organizing** emails. Sending/composing is available but may require additional configuration. Focus on search, label management, and organization tasks for best results.
+</Note>
+
+---
+
+## Tips for Best Results
+
+<Tip>
+**Use specific search criteria:**
+
+Good: "Find emails from john@example.com sent last week with 'proposal' in subject"
+
+This is more effective than: "Find John's emails"
+</Tip>
+
+<Tip>
+**Leverage Gmail's search syntax:**
+
+The assistant understands natural language, but can also work with Gmail operators:
+- "Emails from:john@example.com after:2024/01/01"
+- "Larger than 10MB with attachments"
+</Tip>
+
+<Tip>
+**Organize with labels, not folders:**
+
+Gmail uses labels (tags) not folders. You can apply multiple labels to one email.
+</Tip>
+
+<Tip>
+**Break down bulk operations:**
+
+Instead of "organize my entire inbox," try:
+1. "Find and label client emails from last quarter"
+2. "Archive old promotional emails"
+3. "Create project-based labels for active projects"
+</Tip>
+
+---
+
+## What the Assistant Can't Do
+
+Due to Gmail API limitations and current implementation, the assistant may have limitations with:
+
+- Composing and sending complex formatted emails (plain text works better)
+- Modifying Gmail settings (filters, forwarding, etc.)
+- Accessing Google Chat messages
+- Creating automated rules/filters (can suggest them)
+- Permanently deleting emails (can move to trash)
+- Modifying email content after sending
+
+<Note>
+The assistant excels at **searching, organizing, and managing** existing emails. These are the primary use cases it's optimized for.
+</Note>
+
+---
+
+## Troubleshooting
+
+### "Authentication failed" or "Permission denied"
+
+**Cause:** OAuth connection expired or insufficient permissions
+
+**Solution:**
+1. Reconnect your Google account in the assistant
+2. Ensure you granted all requested permissions
+3. Try disconnecting and reconnecting if issues persist
+
+### "Email not found"
+
+**Cause:** Search criteria too specific or email doesn't exist
+
+**Solution:**
+- Broaden your search criteria
+- Try searching by sender email instead of name
+- Check if email is in trash or spam
+
+### "Too many results"
+
+**Cause:** Search returned more emails than can be processed at once
+
+**Solution:**
+- Add more specific criteria (date range, sender, subject keywords)
+- Break into smaller searches: "emails from January" then "emails from February"
+
+### Rate limiting errors
+
+**Cause:** Too many API requests in short time
+
+**Solution:**
+- Wait a few minutes before trying again
+- Break bulk operations into smaller batches
+- Reduce scope of search/organization tasks
+
+---
+
+## Gmail Search Syntax Reference
+
+The assistant understands both natural language and Gmail's search operators:
+
+**By Sender/Recipient:**
+- `from:john@example.com` - From specific sender
+- `to:sarah@example.com` - Sent to specific recipient
+- `cc:team@company.com` - CC'd to address
+
+**By Date:**
+- `after:2024/01/01` - After specific date
+- `before:2024/12/31` - Before specific date
+- `older_than:6m` - Older than 6 months
+
+**By Content:**
+- `subject:invoice` - Subject contains word
+- `has:attachment` - Has any attachment
+- `filename:pdf` - Has PDF attachment
+- `larger:10M` - Larger than 10MB
+
+**By Status:**
+- `is:unread` - Unread emails
+- `is:starred` - Starred emails
+- `is:important` - Marked important
+- `label:follow-up` - Has specific label
+
+**Combinations:**
+```
+"from:client@example.com after:2024/01/01 has:attachment subject:proposal"
+```
+
+---
+
+## Privacy & Security
+
+### What the Assistant Can Access
+
+With your permission, the assistant can:
+- Read email content and metadata
+- Search your mailbox
+- Create and manage labels
+- Archive and organize emails
+
+### What the Assistant Cannot Access
+
+- Your Google account password
+- Other Google services (unless separately connected)
+- Emails you've permanently deleted
+- Draft emails (unless specifically requested)
+
+### Revoking Access
+
+You can revoke the assistant's access anytime:
+1. Go to [myaccount.google.com/permissions](https://myaccount.google.com/permissions)
+2. Find Relevance AI
+3. Click "Remove Access"
+
+---
+
+## Best Practices
+
+**Regular Inbox Maintenance:**
+- Set up weekly organization tasks
+- Create consistent label structure
+- Archive old emails regularly
+
+**Search Efficiency:**
+- Use specific date ranges
+- Include sender information when known
+- Combine multiple criteria for precision
+
+**Label Organization:**
+- Create clear, descriptive label names
+- Use nested labels for hierarchies (Project/Subproject)
+- Apply labels consistently
+
+**Bulk Operations Safety:**
+- Test on small batch first
+- Review results before large-scale changes
+- Keep important emails labeled to prevent accidental archiving
+
+---
+
+## Pricing & Credits
+
+The Gmail Assistant uses credits based on:
+- Number of emails searched
+- Complexity of operations
+- Bulk operation size
+
+**Typical credit costs:**
+- Simple search (list recent emails): ~10-30 credits
+- Label management (create/apply labels): ~20-50 credits
+- Bulk operations (archive/organize): ~50-150 credits depending on volume
+
+<Tip>
+Searching and organizing are very efficient operations. Even bulk tasks with hundreds of emails typically cost less than 200 credits.
+</Tip>
+
+---
+
+## Need More Help?
+
+<CardGroup cols={2}>
+  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Troubleshooting" icon="tools" href="/agent/assistants/assistants-troubleshooting">
+    Fix common errors
+  </Card>
+  
+  <Card title="Support" icon="headset" href="/get-started/support">
+    Contact our team
+  </Card>
+</CardGroup>
+
+---
+
+## Related Resources
+
+- [Gmail API Documentation](https://developers.google.com/gmail/api) - Official Gmail API reference
+- [Gmail Help Center](https://support.google.com/mail) - Learn about Gmail features
+- [Google Account Permissions](https://myaccount.google.com/permissions) - Manage connected apps
+- [Relevance AI Marketplace](https://app.relevanceai.com/marketplace) - Explore more assistants
+

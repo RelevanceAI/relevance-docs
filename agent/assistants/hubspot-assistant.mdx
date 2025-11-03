@@ -1,0 +1,484 @@
+---
+title: "HubSpot Wizard"
+description: "Manage HubSpot contacts, deals, and workflows with an AI assistant that learns and improves over time"
+---
+
+# HubSpot Wizard
+
+The HubSpot Wizard helps you manage your HubSpot CRM through simple, natural language instructions. Handle contacts, deals, companies, workflows, and more—all while the assistant learns from your usage patterns and gets faster over time.
+
+<Info>
+**Memory Feature Enabled**
+
+This assistant has memory capabilities and learns from successful tasks. The more you use it, the faster and more accurate it becomes!
+</Info>
+
+<Card title="Clone HubSpot Wizard" icon="copy" href="https://app.relevanceai.com/marketplace">
+  Get started by cloning from the Marketplace → Search "HubSpot"
+</Card>
+
+---
+
+## What Can It Do?
+
+The HubSpot Wizard can handle any task supported by the HubSpot API, including:
+
+<CardGroup cols={2}>
+  <Card title="Contacts" icon="user">
+    Create, update, search, and manage contact records
+  </Card>
+  
+  <Card title="Companies" icon="building">
+    Manage company records and associations
+  </Card>
+  
+  <Card title="Deals" icon="handshake">
+    Create and track deals through your pipeline
+  </Card>
+  
+  <Card title="Lists & Segments" icon="list">
+    Build and manage contact lists for campaigns
+  </Card>
+  
+  <Card title="Properties" icon="tags">
+    Update custom properties and tags
+  </Card>
+  
+  <Card title="Workflows" icon="diagram-project">
+    Enroll contacts in workflows and sequences
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Setup
+
+<Steps>
+  <Step title="Clone from Marketplace">
+    Search "HubSpot" in the Marketplace and click Clone
+  </Step>
+  
+  <Step title="Get Your HubSpot API Key">
+    **Finding your API key:**
+    1. Log into your HubSpot account
+    2. Click the **Settings** icon (gear, top-right)
+    3. In the left sidebar, navigate to **Integrations** → **API Key**
+    4. Click **Create API Key** (or click **Show** for existing key)
+    5. Copy the API key
+    6. Paste into `hubspot_api_key` field in Variables tab
+    
+    ![HubSpot API key location](/images/hubspot-api-key-location.png)
+    
+    <Note>
+    Some HubSpot features may require a Private App access token instead of a standard API key. If certain operations don't work, you may need to create a Private App in Settings → Integrations → Private Apps.
+    </Note>
+  </Step>
+  
+  <Step title="Test It">
+    Try: "Show me my last 5 contacts"
+    
+    If successful, you'll see your recent contacts listed!
+  </Step>
+</Steps>
+
+<Note>
+For detailed setup instructions, see the [Quick Start Guide](/agent/assistants/assistants-quickstart#hubspot)
+</Note>
+
+---
+
+## Memory in Action
+
+Because the HubSpot Wizard has memory enabled, it gets significantly faster and more efficient as you use it.
+
+### First Time Example
+
+**Your request:** "Create a contact for Sarah Johnson at TechCorp with job title 'VP of Sales' and add her to the 'Q1 Prospects' list"
+
+**What happens:**
+- Attempt 1: Creates contact with basic info
+- Attempt 2: Finds correct property name for job title
+- Attempt 3: Locates the Q1 Prospects list
+- Attempt 4: Adds contact to list successfully
+- **Saves the successful workflow to memory**
+
+**Time:** ~18 seconds | **Credits:** ~180
+
+### After Learning
+
+**Your request:** "Create a contact for Michael Chen at DataCo with job title 'Director of IT' and add him to the 'Q1 Prospects' list"
+
+**What happens:**
+- Retrieves the learned pattern from memory
+- Executes the entire workflow successfully in one pass
+
+**Time:** ~4 seconds | **Credits:** ~55
+
+**Improvement:** 78% faster, 69% cheaper!
+
+---
+
+## Example Tasks
+
+### Simple Tasks
+
+<AccordionGroup>
+  <Accordion title="Retrieve Information">
+    - "Show me my last 10 contacts"
+    - "List all my contact lists"
+    - "Get details for contact 'John Smith'"
+    - "Show me all companies in the tech industry"
+    - "What deals are in the 'Proposal Sent' stage?"
+  </Accordion>
+  
+  <Accordion title="Create Records">
+    - "Create a contact for Jane Doe with email jane@example.com"
+    - "Add a company called 'ACME Corp' with industry 'Technology'"
+    - "Create a deal for 'Website Redesign Project' valued at $25,000"
+  </Accordion>
+  
+  <Accordion title="Simple Updates">
+    - "Update John Smith's phone number to 555-1234"
+    - "Change the deal stage for 'ACME Project' to 'Closed Won'"
+    - "Add the tag 'VIP' to contact sarah@example.com"
+  </Accordion>
+</AccordionGroup>
+
+### Medium Tasks
+
+<AccordionGroup>
+  <Accordion title="Contact Management">
+    - "Create a contact for Sarah Chen at GlobalTech, email sarah@globaltech.com, job title 'CTO', phone 555-9876"
+    - "Find all contacts with job title containing 'Director' and add them to the 'Leadership' list"
+    - "Update all contacts from company 'TechCorp' to add the tag 'Enterprise Account'"
+  </Accordion>
+  
+  <Accordion title="Deal Pipeline">
+    - "Create a deal for 'ACME Corp Annual License' worth $50,000, closing next month, stage 'Proposal Sent', associated with contact 'John Smith'"
+    - "Find all deals in stage 'Negotiation' and update their close date to end of quarter"
+    - "List all deals over $25,000 created this month"
+  </Accordion>
+  
+  <Accordion title="List & Segmentation">
+    - "Create a list called 'Q1 Webinar Attendees' and add all contacts with the property 'attended_webinar_jan' set to true"
+    - "Find all contacts who haven't been contacted in 60 days and add them to 'Re-engagement Campaign' list"
+    - "Create a list of all contacts in California with job title containing 'Manager'"
+  </Accordion>
+  
+  <Accordion title="Company Management">
+    - "Create a company 'DataViz Inc' with industry 'Software', employee count 150, website 'dataviz.com'"
+    - "Associate contact 'Jane Smith' with company 'DataViz Inc'"
+    - "Find all companies with annual revenue over $1M and add tag 'Enterprise'"
+  </Accordion>
+</AccordionGroup>
+
+### Complex Tasks
+
+<AccordionGroup>
+  <Accordion title="Multi-Stage Workflows">
+    **Request:** "Find all contacts who attended the March webinar, haven't been contacted since, and enroll them in the 'Webinar Follow-up' workflow with personalized tags"
+    
+    **What it does:**
+    - Searches for contacts with webinar attendance property
+    - Filters for last contact date before webinar
+    - Creates or identifies the follow-up workflow
+    - Enrolls matching contacts
+    - Adds tags: 'March Webinar', 'Follow-up Needed'
+    - Provides summary with count and list of enrolled contacts
+    
+    **Use case:** Automated marketing follow-up
+  </Accordion>
+  
+  <Accordion title="Lead Scoring & Qualification">
+    **Request:** "Find all leads from tech companies with 50-200 employees, who opened at least 3 emails in the last month, and move them to 'Sales Qualified Lead' stage"
+    
+    **What it does:**
+    - Queries contacts by industry and company size
+    - Filters by email engagement metrics
+    - Updates lifecycle stage to SQL
+    - Adds 'High Engagement' tag
+    - Creates task for sales rep to follow up
+    - Returns list of qualified leads
+    
+    **Use case:** Automated lead qualification
+  </Accordion>
+  
+  <Accordion title="Pipeline Management">
+    **Request:** "Generate a report of all deals by stage, showing count, total value, and average deal size, then create tasks for sales reps to follow up on any deal in 'Proposal Sent' stage for more than 2 weeks"
+    
+    **What it does:**
+    - Queries all deals grouped by stage
+    - Calculates metrics for each stage
+    - Identifies stale proposals (>14 days)
+    - Creates follow-up tasks assigned to deal owners
+    - Returns comprehensive report
+    
+    **Use case:** Sales pipeline health monitoring
+  </Accordion>
+  
+  <Accordion title="Data Enrichment">
+    **Request:** "For all contacts without a 'Lead Source', check their creation date and update Lead Source to 'Website' if created after Jan 1, 'Import' if before, then add them to appropriate nurture lists"
+    
+    **What it does:**
+    - Finds contacts missing Lead Source property
+    - Applies date-based logic to determine source
+    - Updates all matching contacts
+    - Segments into Website Leads vs Import Leads lists
+    - Provides summary of changes made
+    
+    **Use case:** Data cleanup and segmentation
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common Use Cases
+
+### Lead Management
+
+**Inbound Lead Routing:**
+```
+"Find all new leads from the healthcare industry created today and assign them 
+to Sarah, add to 'Healthcare Prospects' list, and create follow-up task"
+```
+
+**Lead Nurturing:**
+```
+"Identify contacts with lifecycle stage 'Marketing Qualified Lead' who haven't 
+engaged in 30 days and enroll them in the 'Re-engagement Campaign'"
+```
+
+**Lead Scoring:**
+```
+"Update lead score to +10 for all contacts who downloaded the whitepaper and 
+opened the follow-up email"
+```
+
+### Deal Management
+
+**Opportunity Creation:**
+```
+"Create a deal for 'TechCorp Enterprise Package', amount $75,000, close date 
+end of Q2, stage 'Discovery', associated with company TechCorp and contact John Smith"
+```
+
+**Pipeline Cleanup:**
+```
+"Find all deals in 'Proposal Sent' stage with no activity in 14 days and create 
+urgent follow-up tasks for their owners"
+```
+
+**Win/Loss Analysis:**
+```
+"Show me all deals closed this quarter, grouped by outcome (won/lost), 
+with total values and average deal cycle length"
+```
+
+### Campaign Management
+
+**List Building:**
+```
+"Create a list of all contacts who are Directors or above, work at companies 
+with 200+ employees, and are in the technology sector"
+```
+
+**Engagement Tracking:**
+```
+"Find contacts who opened at least 3 of the last 5 email campaigns and tag 
+them as 'Highly Engaged'"
+```
+
+**Event Follow-up:**
+```
+"For all contacts who attended the Q1 Summit, update their Last Contacted date 
+to today, add tag 'Q1 Summit Attendee', and enroll in post-event nurture sequence"
+```
+
+### Data Management
+
+**Duplicate Cleanup:**
+```
+"Find contacts with duplicate email addresses and merge them, keeping the 
+most recently updated record"
+```
+
+**Property Standardization:**
+```
+"Update all contacts where 'Country' is 'USA' or 'United States' or 'US' to 
+standardize as 'United States'"
+```
+
+**Bulk Updates:**
+```
+"For all companies in the 'Customer' lifecycle stage, update the 'Account Tier' 
+property based on annual revenue: >$100k = Enterprise, $50-100k = Growth, 
+<$50k = Starter"
+```
+
+---
+
+## Built-in Helper Tools
+
+The HubSpot Wizard includes specialized tools for common challenges:
+
+### Date Range Formatter
+
+Handles HubSpot's specific date format requirements:
+- Converts natural language dates ("last 30 days", "this quarter") to HubSpot timestamp format
+- Manages timezone conversions
+- Calculates date ranges for reporting
+
+### Math & Calculations
+
+Performs calculations needed for:
+- Lead scoring updates
+- Revenue calculations
+- Date arithmetic (days since last contact, etc.)
+- Threshold comparisons
+
+### Property Name Mapping
+
+- Finds correct internal property names from natural language
+- Handles custom property lookups
+- Manages standard vs. custom property differences
+
+<Note>
+These tools work automatically in the background. You don't need to use them directly—the assistant calls them when needed.
+</Note>
+
+---
+
+## Tips for Best Results
+
+<Tip>
+**Be specific about property names:**
+
+Good: "Update the 'Lead Score' property to 85"
+
+Better: If you're not sure of exact names, describe what you want and let the assistant find the right property
+</Tip>
+
+<Tip>
+**Use consistent terminology:**
+
+For memory to work best, always refer to lists, properties, and stages the same way:
+- "Q1 Prospects" not sometimes "First Quarter Prospects"
+- "Marketing Qualified Lead" not "MQL" or "Marketing Lead"
+</Tip>
+
+<Tip>
+**Leverage memory for repeated tasks:**
+
+If you frequently create contacts with the same custom properties, do it 2-3 times. The assistant will learn the pattern and subsequent tasks will be much faster.
+</Tip>
+
+<Tip>
+**Break down very complex operations:**
+
+Instead of one giant request with 10 steps, break into logical phases:
+1. "Find and tag the contacts"
+2. "Enroll tagged contacts in workflow"
+3. "Create follow-up tasks"
+</Tip>
+
+---
+
+## What the Assistant Can't Do
+
+Due to HubSpot API limitations, the assistant currently cannot:
+
+- Modify certain locked system properties
+- Delete objects (can archive instead)
+- Access some reporting features (use HubSpot Reports for complex analytics)
+- Modify workflow configurations (can enroll/unenroll but not edit workflows)
+- Send emails directly (can create drafts or trigger workflows)
+- Import files or attachments
+
+<Note>
+Most CRM operations ARE supported. The assistant excels at managing contacts, deals, companies, and automating routine tasks.
+</Note>
+
+---
+
+## Troubleshooting
+
+### "Property not found" errors
+
+**Cause:** Using display name instead of internal property name, or property doesn't exist
+
+**Solution:**
+- First ask: "What properties are available for contacts?"
+- Use the exact property name from the results
+- Or describe what you want and let the assistant find the right property
+
+### "Insufficient permissions" errors
+
+**Cause:** API key or Private App doesn't have required scopes
+
+**Solution:**
+1. Check your HubSpot subscription includes the feature
+2. Verify API key has necessary permissions
+3. For advanced features, create a Private App with specific scopes
+4. Go to Settings → Integrations → Private Apps → Configure scopes
+
+### "Contact/Company not found"
+
+**Solution:**
+- Use email address for contacts (most reliable identifier)
+- Use exact company name or company ID
+- Try searching first: "Find contact with name 'John Smith'" then reference the ID
+
+### Tasks take longer than expected
+
+**First time is normal:** The assistant is learning your HubSpot setup (custom properties, lists, etc.)
+
+**After several uses:** Memory kicks in and tasks become much faster
+
+---
+
+## Pricing & Credits
+
+The HubSpot Wizard uses credits based on:
+- Task complexity
+- Number of API calls required
+- Memory usage (minimal)
+
+**Typical credit costs:**
+- Simple tasks (get contact, list deals): ~10-50 credits
+- Medium tasks (create with properties): ~50-150 credits
+- Complex tasks (multi-stage workflows): ~150-400 credits
+
+**With memory learning:**
+- First time: Higher cost (150-200 credits)
+- After learning: 60-70% reduction (40-80 credits)
+
+<Tip>
+The more you use the assistant for similar tasks, the more efficient it becomes through memory learning!
+</Tip>
+
+---
+
+## Need More Help?
+
+<CardGroup cols={2}>
+  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Troubleshooting" icon="tools" href="/agent/assistants/assistants-troubleshooting">
+    Fix common errors
+  </Card>
+  
+  <Card title="Support" icon="headset" href="/get-started/support">
+    Contact our team
+  </Card>
+</CardGroup>
+
+---
+
+## Related Resources
+
+- [HubSpot API Documentation](https://developers.hubspot.com/docs/api/overview) - Official HubSpot API reference
+- [HubSpot Knowledge Base](https://knowledge.hubspot.com/) - Learn about HubSpot features
+- [Relevance AI Marketplace](https://app.relevanceai.com/marketplace) - Explore more assistants
+
