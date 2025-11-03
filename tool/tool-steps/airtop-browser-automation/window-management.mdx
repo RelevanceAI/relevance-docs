@@ -1,0 +1,79 @@
+---
+title: "Airtop - Window Management"
+sidebarTitle: "Window Management"
+description: "Manage browser windows with Airtop - create windows, load URLs, and close windows for browser automation"
+---
+
+<Note>
+  Before using Airtop browser automation tool steps, you need to configure the Airtop integration. See the [Airtop integration setup guide](/integrations/popular-integrations/airtop) for instructions on connecting your Airtop account.
+</Note>
+
+The Airtop Window Management tool steps allow you to control browser windows for automation workflows. These steps include creating new browser windows, loading URLs, and closing windows.
+
+## Add the 'Airtop - Create Window' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmheavygd3mcmfatif4mfcsds" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Create Window' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Create Window' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Initial URL** (Optional): Enter a URL to load immediately when the window is created. Type `{{` to select a variable, or leave blank to create an empty window.
+5. Clicking `Run step` to test out the Tool
+
+The step creates a new browser window that can be referenced using the returned window ID, session ID, and live view URL in subsequent steps.
+
+## Add the 'Airtop - Load URL' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmhebd3i43mhjfati9f5lsw25" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Load URL' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Load URL' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window where you want to load the URL. Type `{{` to select a variable from a previous step (e.g., the window ID returned from 'Create Window').
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **URL** (Required): Enter the website URL you want to navigate to. Type `{{` to select a variable, or enter the URL directly (e.g., `https://example.com`).
+7. Clicking `Run step` to test out the Tool
+
+The step navigates the specified browser window to the provided URL.
+
+## Add the 'Airtop - Close Window' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmhebocut3mltfatieuyq6fsz" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Close Window' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Close Window' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window you want to close. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. Clicking `Run step` to test out the Tool
+
+The step closes the specified browser window. Make sure the window ID exists before attempting to close it.
+
+## Common use cases
+
+- Opening multiple browser windows for parallel automation tasks
+- Navigating to specific pages before performing actions
+- Cleaning up browser windows after completing automation workflows
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I manage multiple windows simultaneously?">
+    Yes, you can create multiple windows by using different Window IDs and managing them independently throughout your automation workflow.
+  </Accordion>
+  <Accordion title="Do I need to create a window before loading a URL?">
+    Yes, you need to create a window first using 'Airtop - Create Window' before attempting to load a URL in that window.
+  </Accordion>
+</AccordionGroup>

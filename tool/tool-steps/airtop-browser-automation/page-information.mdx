@@ -1,0 +1,85 @@
+---
+title: "Airtop - Page Information & Monitoring"
+sidebarTitle: "Page Information & Monitoring"
+description: "Query page content, capture screenshots, and monitor page conditions with Airtop browser automation"
+---
+
+<Note>
+  Before using Airtop browser automation tool steps, you need to configure the Airtop integration. See the [Airtop integration setup guide](/integrations/popular-integrations/airtop) for instructions on connecting your Airtop account.
+</Note>
+
+The Airtop Page Information & Monitoring tool steps allow you to extract information from web pages, capture visual representations, and monitor pages for specific conditions.
+
+## Add the 'Airtop - Query Page' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmheetwsr3onffatido9cv2qf" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Query Page' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Query Page' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Prompt to query the page** (Required): Enter a natural language prompt describing what information you want to extract from the page (e.g., "extract all product names and prices"). Type `{{` to select a variable.
+7. **Use paginated extraction** (Optional): Check this box if the page contains paginated content and you want to extract data from multiple pages automatically.
+8. Clicking `Run step` to test out the Tool
+
+The step extracts information from the page based on your prompt. The extracted data is returned and can be used in subsequent steps.
+
+## Add the 'Airtop - Screenshot Page' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmhef3f553p8pfati4tpvummu" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Screenshot Page' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Screenshot Page' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. Clicking `Run step` to test out the Tool
+
+The step captures a screenshot of the current page. The screenshot is returned as image data that can be used in subsequent steps or stored for later use.
+
+## Add the 'Airtop - Monitor Page for Condition' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmheffjvk3pdufati74xdced0" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Monitor Page for Condition' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Monitor Page for Condition' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Condition Description** (Required): Enter a description of the condition you want to monitor (e.g., "when the submit button becomes visible" or "when the text 'Success' appears on the page"). Type `{{` to select a variable.
+7. **Timeout Seconds** (Optional): Enter the maximum time in seconds to wait for the condition to be met. If the condition is not met within this time, the step will fail.
+8. **Check Interval Seconds** (Optional): Enter how frequently (in seconds) to check for the condition. Smaller intervals check more frequently but may use more resources.
+9. Clicking `Run step` to test out the Tool
+
+The step continuously monitors the page for the specified condition. Once the condition is met (or the timeout is reached), the step completes. This is useful for waiting for dynamic content to load or for specific page states to occur.
+
+## Common use cases
+
+- Extracting data from web pages for processing or storage
+- Capturing visual proof of automation actions
+- Waiting for dynamic content to load before proceeding with automation
+- Monitoring pages for specific states or changes
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I use screenshots in subsequent steps?">
+    Screenshots are returned as image data that can be used in other tool steps or stored for later use.
+  </Accordion>
+  <Accordion title="What conditions can I monitor for?">
+    Common conditions include element visibility, text content, and element count.
+  </Accordion>
+</AccordionGroup>
