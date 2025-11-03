@@ -1,0 +1,500 @@
+---
+title: "Troubleshooting AI Assistants"
+description: "Common errors and solutions for AI assistants"
+---
+
+# Troubleshooting AI Assistants
+
+Having issues with your AI assistant? This guide covers the most common problems and how to fix them quickly.
+
+<Tip>
+**Most issues are setup-related** and can be resolved in under 2 minutes by checking your API key configuration.
+</Tip>
+
+---
+
+## Setup & Authentication Errors
+
+These are the most common issues users face when first setting up their assistant.
+
+### "Authentication Failed" / "401 Unauthorized"
+
+<Warning>
+**This is the #1 most common error** - it means your API key is missing, incorrect, or expired.
+</Warning>
+
+![Authentication error example](/images/assistant-auth-error.png)
+
+**Cause:** API key not configured correctly
+
+**Solutions:**
+
+<Steps>
+  <Step title="Check the Variables tab">
+    1. Open your assistant
+    2. Click the **Variables** tab at the top
+    3. Verify the API key field is filled in (not empty)
+    4. Check for extra spaces or characters
+  </Step>
+  
+  <Step title="Verify the API key is valid">
+    1. Go to your integration's dashboard (Webflow, Notion, etc.)
+    2. Navigate to API settings
+    3. Check if the key still exists and is active
+    4. Copy the key again and paste into Variables tab
+  </Step>
+  
+  <Step title="Generate a new API key">
+    If the key is old or you're not sure it's correct:
+    1. Generate a new API key in your integration's settings
+    2. Copy it immediately (most platforms only show it once!)
+    3. Paste into the Variables tab
+    4. Save and test again
+  </Step>
+</Steps>
+
+**Still not working?** See integration-specific guides:
+- [Webflow API Key Setup](/agent/assistants/webflow-assistant#quick-setup)
+- [Notion Integration Token](/agent/assistants/assistants-quickstart#notion)
+- [HubSpot API Key](/agent/assistants/assistants-quickstart#hubspot)
+
+---
+
+### "Site Not Found" / "Workspace Not Found" / "404 Error"
+
+**Cause:** Site ID, Account ID, or Workspace ID is incorrect or missing
+
+**Solutions:**
+
+<Tabs>
+  <Tab title="Webflow">
+    **Check your Site ID:**
+    1. Open Webflow → Your site → Project Settings
+    2. Go to **General** tab
+    3. Copy the **Site ID** (long alphanumeric string)
+    4. Paste into `site_id` field in Variables tab
+    5. Make sure it matches the account your API key belongs to
+  </Tab>
+  
+  <Tab title="Notion">
+    **Verify page/database sharing:**
+    
+    Notion requires an extra step beyond the API key!
+    
+    1. Open the page or database in Notion
+    2. Click **Share** (top-right)
+    3. Invite your integration by name
+    4. Grant it access
+    
+    Without sharing, the assistant can't see your content even with a valid API key.
+  </Tab>
+  
+  <Tab title="Salesforce">
+    **Check your domain:**
+    
+    The domain should match your Salesforce instance:
+    - Format: `yourcompany.my.salesforce.com`
+    - Don't include `https://`
+    - Find it in your browser URL when logged into Salesforce
+  </Tab>
+</Tabs>
+
+---
+
+### "Permission Denied" / "403 Forbidden"
+
+**Cause:** API key doesn't have the necessary permissions/scopes
+
+**Solutions:**
+
+1. **Regenerate API key with full permissions:**
+   - Most integrations let you specify permissions when creating keys
+   - Ensure "full access" or "read/write" permissions are granted
+   
+2. **Check your plan:**
+   - Some features require specific subscription tiers
+   - Example: Webflow CMS API requires a CMS plan
+   - Verify your account has access to the features you're trying to use
+
+3. **For Notion:** Make sure pages/databases are shared with the integration
+
+4. **For HubSpot:** You may need a Private App token instead of a standard API key for certain operations
+
+---
+
+### "Invalid Credentials" / "Login Failed"
+
+**For Salesforce specifically:**
+
+**Cause:** Username, password, or security token is incorrect
+
+**Solutions:**
+
+<Steps>
+  <Step title="Reset your security token">
+    1. Go to Salesforce Setup
+    2. Navigate to **Personal Information**
+    3. Click **Reset My Security Token**
+    4. Check your email for the new token
+    5. Update in Variables tab
+  </Step>
+  
+  <Step title="Verify username and password">
+    - Username: Your Salesforce login email
+    - Password: Your Salesforce password (not security token)
+    - These should be the same credentials you use to log in
+  </Step>
+  
+  <Step title="Check your domain">
+    - Should be: `yourcompany.my.salesforce.com`
+    - Or your custom domain if you have one
+  </Step>
+</Steps>
+
+---
+
+## Task Execution Errors
+
+These errors happen when the assistant tries to complete your task but encounters issues.
+
+### "Could not complete task after multiple attempts"
+
+**What's happening:** The assistant tried several approaches but couldn't figure out how to complete your request
+
+**Common causes:**
+- Task is too vague or ambiguous
+- Task requires capabilities not available in the API
+- Task is technically possible but complex
+
+**Solutions:**
+
+<Accordion title="For Non-Technical Users">
+  **1. Simplify your request**
+  
+  Break complex tasks into smaller, specific steps:
+  
+  ❌ "Set up my entire website"  
+  ✅ "Create a blog collection with title and content fields"
+  
+  ❌ "Update all my content"  
+  ✅ "Update the heading on my homepage to say 'Welcome to ACME Corp'"
+  
+  **2. Add more details**
+  
+  Be specific about what you want:
+  
+  ❌ "Create a page"  
+  ✅ "Create a Notion page called 'Weekly Meeting Notes' with sections for attendees, agenda, and action items"
+  
+  **3. Ask first, then act**
+  
+  If you're not sure what's possible:
+  
+  Step 1: "What fields are in my Blog collection?"  
+  Step 2: "Add a blog post with [specific field values]"
+  
+  **4. Contact support**
+  
+  If you're stuck, [reach out to our team](/get-started/support) with:
+  - What you asked the assistant to do
+  - The error message you received
+  - Your integration type (Webflow, Notion, etc.)
+</Accordion>
+
+<Accordion title="For Technical Users">
+  **1. Review the system prompt**
+  
+  - Go to your assistant settings
+  - View the system instructions
+  - Check if the documentation includes the endpoints you need
+  
+  **2. Check integration API documentation**
+  
+  - Visit the integration's official API docs
+  - Verify the operation you're requesting is supported
+  - Some features may not be available via API
+  
+  **3. Update the documentation variable**
+  
+  If you discover endpoints not in the docs:
+  - Go to Variables tab
+  - Find the `documentation` variable
+  - Add the missing API endpoint information
+  
+  **4. Use ChatGPT to improve prompts**
+  
+  Copy your task + error message → Ask ChatGPT:
+  "How can I rephrase this task for an AI assistant for better clarity?"
+  
+  **5. Check API limits**
+  
+  Some integrations have rate limits or restrictions:
+  - Too many requests in a short time
+  - File size limits
+  - Character/content limits
+</Accordion>
+
+---
+
+### "Timeout" / "Request took too long"
+
+**Cause:** Task is taking longer than expected to complete
+
+**Solutions:**
+
+1. **Break down the task:** Split bulk operations into smaller batches
+   - Instead of: "Update all 500 blog posts"
+   - Try: "Update the first 50 blog posts where category is 'News'"
+
+2. **Simplify the request:** Remove unnecessary complexity
+   - Ask for what you need, not everything
+
+3. **Try again:** Sometimes temporary network or API issues cause timeouts
+
+---
+
+### "Rate limit exceeded"
+
+**Cause:** Too many API requests in a short time period
+
+**Solutions:**
+
+1. **Wait a few minutes** before trying again
+2. **Reduce batch sizes** if doing bulk operations
+3. **Spread out requests** over time
+4. **Check your integration's rate limits** in their documentation
+
+---
+
+## Integration-Specific Issues
+
+### Webflow
+
+<Accordion title="Can't modify page design or styles">
+  **This is expected behavior.**
+  
+  The Webflow Assistant uses the CMS API, which handles content only—not visual design.
+  
+  **Can do:** Manage collections, items, and content  
+  **Can't do:** Change layouts, styles, fonts, or visual design
+  
+  For design changes, use the Webflow Designer directly.
+</Accordion>
+
+<Accordion title="Collection not found">
+  **Solution:**
+  1. Ask: "List all my collections"
+  2. Use the exact collection name from the results
+  3. Collection names are case-sensitive
+</Accordion>
+
+### Notion
+
+<Accordion title="Can't access my pages or databases">
+  **Most common issue:** Pages not shared with the integration
+  
+  **Solution:**
+  1. Open the page/database in Notion
+  2. Click **Share** (top-right)
+  3. Find your integration by name
+  4. Add it to the page
+  
+  You must do this for each page/database the assistant needs to access.
+</Accordion>
+
+<Accordion title="Can't create certain field types">
+  Some advanced Notion field types have limited API support.
+  
+  Try creating the database manually in Notion first, then use the assistant to populate it.
+</Accordion>
+
+### Google Docs
+
+<Accordion title="Can't add formatted content (tables, headers, etc.)">
+  The standard Google Docs API has limitations with complex formatting.
+  
+  Some Google Docs assistants include a special **HTML formatting tool** to work around this.
+  
+  If your assistant has this tool, you can request:
+  - "Create a document with a table showing [data]"
+  - "Add a header and bullet list to [document]"
+  
+  The assistant will use the HTML tool automatically when needed.
+</Accordion>
+
+### Gmail
+
+<Accordion title="Can't send emails">
+  Gmail requires emails to be base64 encoded before sending.
+  
+  Most Gmail assistants include a **base64 encoding tool** that handles this automatically.
+  
+  If emails aren't sending, verify your assistant has this tool included.
+</Accordion>
+
+### HubSpot
+
+<Accordion title="Date or calculation errors">
+  HubSpot APIs have specific requirements for date formats and calculations.
+  
+  Advanced HubSpot assistants may include helper tools for:
+  - Date range formatting
+  - Mathematical calculations
+  - Property value transformations
+  
+  These tools help the assistant handle complex data correctly.
+</Accordion>
+
+---
+
+## When to Build a Custom Tool
+
+<Note>
+**Situation:** You keep asking the assistant to do the exact same task repeatedly, and it works every time.
+
+**Consider:** Converting that workflow into a dedicated custom tool.
+</Note>
+
+### Benefits of Custom Tools
+
+✅ **Faster execution** - No reasoning needed, runs immediately  
+✅ **Lower credit costs** - More efficient than agent reasoning  
+✅ **More reliable** - Consistent results every time  
+✅ **Simpler inputs** - Just fill in a form  
+
+### When to Use the Assistant Instead
+
+✅ **Tasks vary each time** - Different parameters or approach needed  
+✅ **Exploratory work** - Figuring out what's possible  
+✅ **One-off tasks** - Not worth building a custom tool  
+✅ **Complex decision-making** - Requires intelligence and adaptation  
+
+### How to Convert to a Custom Tool
+
+<Steps>
+  <Step title="Complete the task successfully">
+    Use your assistant to complete the task at least once successfully
+  </Step>
+  
+  <Step title="View the task history">
+    Open the completed task and review the API calls the assistant made
+  </Step>
+  
+  <Step title="Create a new tool">
+    In Relevance AI, create a new tool/chain
+  </Step>
+  
+  <Step title="Replicate the API calls">
+    Copy the successful API call sequence into your new tool
+  </Step>
+  
+  <Step title="Add user inputs">
+    Create input fields for the parts that change (e.g., title, content, etc.)
+  </Step>
+  
+  <Step title="Test and save">
+    Run your new tool to verify it works consistently
+  </Step>
+</Steps>
+
+<Card title="Learn More About Building Tools" icon="wrench" href="/tool/create-a-tool">
+  See our guide on creating custom tools
+</Card>
+
+---
+
+## Getting More Help
+
+### For Non-Technical Users
+
+If you're stuck and can't resolve the issue:
+
+1. **Check this troubleshooting guide** for your specific error
+2. **Try simplifying your request** to see if that works
+3. **Contact support** with details:
+   - What you asked the assistant to do
+   - The error message or behavior
+   - Screenshots if helpful
+   - Your integration name
+
+<Card title="Contact Support" icon="headset" href="/get-started/support">
+  Get help from our team
+</Card>
+
+### For Technical Users
+
+Additional resources for debugging:
+
+1. **Review task execution logs** - See what API calls were attempted
+2. **Check integration API docs** - Verify endpoint availability
+3. **Update documentation variable** - Add missing API information
+4. **Test API calls manually** - Use Postman or curl to verify behavior
+5. **Share detailed logs with support** - Include API responses and error codes
+
+---
+
+## Error Reference
+
+Quick reference for common error codes:
+
+| Error Code | Meaning | Typical Solution |
+|------------|---------|------------------|
+| 401 | Unauthorized | Check API key in Variables tab |
+| 403 | Forbidden | Verify API key permissions |
+| 404 | Not Found | Check Site/Account ID |
+| 429 | Rate Limited | Wait and try again |
+| 500 | Server Error | Try again later or contact integration support |
+| Timeout | Request too slow | Simplify or break down the task |
+
+---
+
+## Prevention Tips
+
+Avoid common issues by following these best practices:
+
+<Tip>
+**✅ Test with simple tasks first** before trying complex operations
+</Tip>
+
+<Tip>
+**✅ Keep API keys secure** and update them in Variables tab only
+</Tip>
+
+<Tip>
+**✅ Be specific in your requests** - clarity helps the assistant succeed
+</Tip>
+
+<Tip>
+**✅ Break down complex tasks** into smaller, manageable steps
+</Tip>
+
+<Tip>
+**✅ Verify setup before blaming the assistant** - 80% of issues are configuration
+</Tip>
+
+<Tip>
+**✅ Save successful task patterns** for reuse in the future
+</Tip>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Usage Guide" icon="book" href="/agent/assistants/assistants-usage-guide">
+    Learn how to work effectively with assistants
+  </Card>
+  
+  <Card title="Webflow Assistant" icon="globe" href="/agent/assistants/webflow-assistant">
+    Webflow-specific troubleshooting
+  </Card>
+  
+  <Card title="Get Support" icon="life-ring" href="/get-started/support">
+    Contact our support team
+  </Card>
+</CardGroup>
+

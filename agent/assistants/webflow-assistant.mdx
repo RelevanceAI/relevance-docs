@@ -1,0 +1,387 @@
+---
+title: "Webflow Assistant"
+description: "Automate Webflow tasks with AI - create collections, update content, and manage your site using plain English"
+---
+
+# Webflow Assistant
+
+The Webflow Assistant helps you manage your Webflow site through simple, natural language instructions. Create collections, update content, manage items, and configure your site—all without manually clicking through the Webflow interface.
+
+<Card title="Clone Webflow Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
+  Get started by cloning from the Marketplace → Search "Webflow"
+</Card>
+
+---
+
+## What Can It Do?
+
+The Webflow Assistant can handle any task supported by the Webflow API, including:
+
+<CardGroup cols={2}>
+  <Card title="Collections" icon="database">
+    Create, update, list, and delete CMS collections and fields
+  </Card>
+  
+  <Card title="Collection Items" icon="file">
+    Add, edit, publish, and manage items in your collections
+  </Card>
+  
+  <Card title="Site Info" icon="globe">
+    Get site details, domains, and configuration
+  </Card>
+  
+  <Card title="Assets" icon="image">
+    Upload and manage images and files
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Setup
+
+<Steps>
+  <Step title="Clone from Marketplace">
+    Search "Webflow" in the Marketplace and click Clone
+  </Step>
+  
+  <Step title="Add Your Webflow API Key">
+    **Finding your API key:**
+    1. Log into Webflow
+    2. Click profile icon → **Account Settings**
+    3. Navigate to **Integrations** tab
+    4. Scroll to **API Access**
+    5. Click **Generate API Token**
+    6. Copy the token (you won't see it again!)
+    7. Paste into `webflow_api_key` field in Variables tab
+    
+    ![Webflow API key location](/images/webflow-api-key-location.png)
+    
+    <Warning>
+    ⚠️ **Important:** Copy your API token immediately! Webflow only displays it once for security reasons.
+    </Warning>
+  </Step>
+  
+  <Step title="Add Your Site ID">
+    **Finding your Site ID:**
+    1. Open your site in Webflow
+    2. Go to **Project Settings** (gear icon)
+    3. Click **General** tab
+    4. Copy the **Site ID**
+    5. Paste into `site_id` field in Variables tab
+    
+    **Tip:** Your Site ID is also in the browser URL when viewing your site
+    
+    ![Webflow Site ID location](/images/webflow-site-id-location.png)
+  </Step>
+  
+  <Step title="Test It">
+    Try: "List all collections on my site"
+    
+    If successful, you'll see your collections listed!
+  </Step>
+</Steps>
+
+<Note>
+For detailed setup instructions, see the [Quick Start Guide](/agent/assistants/assistants-quickstart)
+</Note>
+
+---
+
+## Example Tasks
+
+### Simple Tasks
+
+<AccordionGroup>
+  <Accordion title="List All Collections">
+    **Prompt:** "Show me all the collections on my Webflow site"
+    
+    **What it does:** Returns a list of all CMS collections with their names and IDs
+    
+    **Use case:** Understanding your site structure or finding collection IDs
+  </Accordion>
+  
+  <Accordion title="Get Site Information">
+    **Prompt:** "What's the information about my Webflow site?"
+    
+    **What it does:** Returns site name, domains, timezone, and other configuration details
+    
+    **Use case:** Verifying site settings or getting site metadata
+  </Accordion>
+  
+  <Accordion title="List Collection Items">
+    **Prompt:** "Show me all items in my Blog Posts collection"
+    
+    **What it does:** Returns all published and draft items in the specified collection
+    
+    **Use case:** Auditing content or finding specific items
+  </Accordion>
+</AccordionGroup>
+
+### Medium Tasks
+
+<AccordionGroup>
+  <Accordion title="Create a New Collection">
+    **Prompt:** "Create a blog collection with fields for title, author, content, published date, and featured image"
+    
+    **What it does:** 
+    - Creates a new CMS collection called "Blog"
+    - Adds all specified fields with appropriate field types
+    - Returns the collection ID and structure
+    
+    **Use case:** Setting up a new content type on your site
+  </Accordion>
+  
+  <Accordion title="Add Collection Item">
+    **Prompt:** "Add a new blog post to my Blog collection with title 'Getting Started with Webflow' and content 'Welcome to our blog...'"
+    
+    **What it does:**
+    - Creates a new item in the Blog collection
+    - Populates it with the provided data
+    - Returns the item ID and details
+    
+    **Use case:** Adding content programmatically
+  </Accordion>
+  
+  <Accordion title="Update Collection Item">
+    **Prompt:** "Update the blog post titled 'Getting Started' to change the author to 'Jane Smith'"
+    
+    **What it does:**
+    - Finds the specified blog post
+    - Updates the author field
+    - Publishes the changes
+    
+    **Use case:** Bulk content updates or corrections
+  </Accordion>
+  
+  <Accordion title="Publish Draft Items">
+    **Prompt:** "Publish all draft blog posts"
+    
+    **What it does:**
+    - Finds all draft items in the blog collection
+    - Publishes each one
+    - Returns confirmation of published items
+    
+    **Use case:** Batch publishing scheduled content
+  </Accordion>
+</AccordionGroup>
+
+### Complex Tasks
+
+<AccordionGroup>
+  <Accordion title="Create Multi-Field Collection">
+    **Prompt:** "Create a Portfolio collection with project name, client name, project date, description, featured image, gallery images (multiple), category tags, and a published checkbox"
+    
+    **What it does:**
+    - Creates the Portfolio collection
+    - Sets up each field with the appropriate type (text, date, image, multi-image, reference, etc.)
+    - Configures field settings
+    - Returns the complete collection structure
+    
+    **Use case:** Building complex content types with relationships
+  </Accordion>
+  
+  <Accordion title="Create Contact Form Collection">
+    **Prompt:** "Create a contact form collection with fields for name, email, phone number, message, submission date, and status dropdown (options: New, In Progress, Resolved)"
+    
+    **What it does:**
+    - Creates the collection with validation rules
+    - Sets up the dropdown with specified options
+    - Configures date field to auto-populate
+    - Returns form configuration
+    
+    **Use case:** Building custom form backends
+  </Accordion>
+  
+  <Accordion title="Bulk Update Items">
+    **Prompt:** "Find all blog posts with category 'Uncategorized' and update them to category 'General'"
+    
+    **What it does:**
+    - Queries items matching the criteria
+    - Updates each item's category field
+    - Publishes the changes
+    - Returns summary of items updated
+    
+    **Use case:** Data cleanup and standardization
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Built-in Tools
+
+The Webflow Assistant includes one main tool:
+
+### Generic API Call Tool
+A flexible tool that can make any API call to the Webflow API. The assistant dynamically determines:
+- Which endpoint to call
+- What HTTP method to use (GET, POST, PUT, PATCH, DELETE)
+- What data to include in the request body
+- How to handle the response
+
+You don't need to know anything about these technical details—just describe what you want!
+
+---
+
+## Common Use Cases
+
+### Content Management
+- **Blog management:** Create posts, update content, publish drafts
+- **Portfolio updates:** Add new projects with images and details
+- **Product catalogs:** Manage e-commerce collections
+- **Team pages:** Update staff bios and photos
+
+### Site Administration
+- **Collection setup:** Create new content types and structures
+- **Bulk operations:** Update multiple items at once
+- **Data migration:** Move content between collections
+- **Quality assurance:** Find and fix inconsistent data
+
+### Workflow Automation
+- **Scheduled publishing:** Publish content on a schedule
+- **Content backups:** Export collection data
+- **Multi-site management:** Update multiple Webflow sites
+- **Integration workflows:** Connect Webflow with other tools
+
+---
+
+## Tips for Best Results
+
+<Tip>
+**Be specific with collection names:** 
+- ✅ Good: "Add a blog post to my 'Company News' collection"
+- ❌ Vague: "Add a post"
+</Tip>
+
+<Tip>
+**Provide all required field data:**
+- ✅ Good: "Create a blog post with title 'Hello World', author 'Jane', and content 'Welcome...'"
+- ❌ Incomplete: "Create a blog post"
+</Tip>
+
+<Tip>
+**Use clear field names:**
+If you're not sure what fields exist, ask first: "What fields are in my Blog collection?"
+</Tip>
+
+<Tip>
+**Break complex tasks into steps:**
+For very complex operations, you can either describe everything at once or break it into multiple requests:
+1. "Create the collection structure"
+2. "Now add items to it"
+</Tip>
+
+---
+
+## What the Assistant Can't Do
+
+Due to Webflow API limitations, the assistant currently cannot:
+
+❌ Design or modify page layouts visually  
+❌ Change styles, fonts, or CSS  
+❌ Modify the Designer canvas  
+❌ Configure hosting or domain settings  
+❌ Access Webflow Editor mode  
+
+<Note>
+The assistant works with the **Webflow CMS API**, which focuses on content management. For visual design changes, you'll need to use the Webflow Designer directly.
+</Note>
+
+---
+
+## Troubleshooting
+
+### "Authentication failed" or "401 Unauthorized"
+
+**Cause:** API key is missing, incorrect, or expired
+
+**Solution:**
+1. Go to Variables tab in your assistant
+2. Verify `webflow_api_key` is filled in correctly
+3. Check that your API key is still active in Webflow
+4. Generate a new key if needed and update in Variables tab
+
+### "Site not found" or "404 Error"
+
+**Cause:** Site ID is incorrect or doesn't match your API key
+
+**Solution:**
+1. Verify your Site ID in Webflow Project Settings
+2. Ensure you're using the Site ID that matches the API key's account
+3. Update `site_id` in Variables tab
+
+### "Permission denied" or "403 Forbidden"
+
+**Cause:** API key doesn't have sufficient permissions
+
+**Solution:**
+1. Check your Webflow plan - some features require specific plans
+2. Verify the API key has full access permissions
+3. Try generating a new API key with full permissions
+
+### Assistant can't find a collection
+
+**Solution:**
+1. First ask: "List all my collections"
+2. Use the exact collection name returned
+3. Or provide the collection ID directly
+
+### Task fails after multiple attempts
+
+**Solution:**
+1. Simplify your request - break it into smaller steps
+2. Check if the task is supported by Webflow API
+3. Review the [Webflow API documentation](https://developers.webflow.com/reference/cms)
+4. Contact support for assistance
+
+<Card title="Full Troubleshooting Guide" icon="life-ring" href="/agent/assistants/assistants-troubleshooting">
+  See solutions for common issues across all assistants
+</Card>
+
+---
+
+## Pricing & Credits
+
+The Webflow Assistant uses credits based on:
+- Complexity of the task
+- Number of API calls required
+- Length of API responses
+
+**Typical credit costs:**
+- Simple tasks (list collections): ~10-50 credits
+- Medium tasks (create item): ~50-150 credits  
+- Complex tasks (bulk operations): ~150-500 credits
+
+<Tip>
+The assistant automatically optimizes API responses to minimize credit usage while maintaining accuracy.
+</Tip>
+
+---
+
+## Need More Help?
+
+<CardGroup cols={2}>
+  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Usage Guide" icon="book" href="/agent/assistants/assistants-usage-guide">
+    Learn how to work with AI assistants
+  </Card>
+  
+  <Card title="Troubleshooting" icon="tools" href="/agent/assistants/assistants-troubleshooting">
+    Fix common errors
+  </Card>
+  
+  <Card title="Support" icon="headset" href="/get-started/support">
+    Contact our team
+  </Card>
+</CardGroup>
+
+---
+
+## Related Resources
+
+- [Webflow API Documentation](https://developers.webflow.com/reference/cms) - Official Webflow API reference
+- [Webflow CMS Guide](https://university.webflow.com/lesson/intro-to-the-cms) - Learn about Webflow CMS
+- [Relevance AI Marketplace](https://app.relevanceai.com/marketplace) - Explore more assistants
+
