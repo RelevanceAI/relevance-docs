@@ -1,0 +1,98 @@
+---
+title: "Airtop - Page Interaction"
+sidebarTitle: "Page Interaction"
+description: "Interact with web pages using Airtop - click elements, type text, and scroll pages for browser automation"
+---
+
+<Note>
+  Before using Airtop browser automation tool steps, you need to configure the Airtop integration. See the [Airtop integration setup guide](/integrations/popular-integrations/airtop) for instructions on connecting your Airtop account.
+</Note>
+
+The Airtop Page Interaction tool steps allow you to interact with web page elements, including clicking buttons, typing text, and scrolling through pages.
+
+## Add the 'Airtop - Click Element' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmhecnx2i3nczfati4w6aqt43" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Click Element' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Click Element' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Element Description** (Required): Enter a description of the element you want to click. This can be a natural language description (e.g., "the submit button") or a CSS selector/XPath. Type `{{` to select a variable.
+7. **Wait Until Timeout Seconds** (Optional): Enter the maximum time in seconds to wait for the element to become clickable.
+8. **Wait For Navigation** (Optional): Check this box if you want the step to wait for page navigation after clicking the element (useful when clicking links or buttons that cause page loads).
+9. Clicking `Run step` to test out the Tool
+
+The step clicks the specified element on the page. If the element is not found or not clickable within the timeout period, the step will fail.
+
+## Add the 'Airtop - Type Text' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmhedzpg43nuffatiatv4l6bx" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Type Text' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Type Text' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Element Description** (Required): Enter a description of the input field where you want to type. This can be a natural language description (e.g., "the email input field") or a CSS selector/XPath. Type `{{` to select a variable.
+7. **Text to Type** (Required): Enter the text you want to type into the element. Type `{{` to select a variable, or enter the text directly.
+8. **Press Enter Key** (Optional): Check this box if you want to press the Enter key after typing the text (useful for submitting forms or triggering search).
+9. **Wait Until Timeout Seconds** (Required): Enter the maximum time in seconds to wait for the element to become available.
+10. **Wait For Navigation** (Optional): Check this box if you want the step to wait for page navigation after typing (useful when typing triggers a page load).
+11. Clicking `Run step` to test out the Tool
+
+The step types the specified text into the target element. If the element is not found within the timeout period, the step will fail.
+
+## Add the 'Airtop - Scroll Page' Tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmheef3bi3o39fati8hrr5u3y" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can add the 'Airtop - Scroll Page' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Scroll Page' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **X Scroll Amount in pixels** (Required): Enter the number of pixels to scroll horizontally. Use positive numbers to scroll right, negative numbers to scroll left, or `0` for no horizontal scrolling.
+7. **Y Scroll Amount in pixels** (Required): Enter the number of pixels to scroll vertically. Use positive numbers to scroll down, negative numbers to scroll up, or `0` for no vertical scrolling.
+8. Clicking `Run step` to test out the Tool
+
+The step scrolls the page by the specified pixel amounts. This is useful for loading dynamic content or reaching specific sections of a page.
+
+## Common use cases
+
+- Filling out forms automatically
+- Clicking buttons and links to navigate through a website
+- Scrolling to load dynamic content or reach specific page sections
+- Automating repetitive user interactions
+
+## Common errors
+
+<AccordionGroup>
+  <Accordion title="Element not clickable">
+    This error occurs when trying to click an element that is not currently visible or clickable. You may need to wait for the element to load or scroll to make it visible.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I wait for an element to appear before clicking?">
+    For dynamic content that loads asynchronously, consider using the 'Airtop - Monitor page for condition' step to wait for elements before interacting with them.
+  </Accordion>
+  <Accordion title="How do I type special characters or keyboard shortcuts?">
+    The Type Text step handles standard text input. For special keys or keyboard shortcuts, you may need to use additional automation steps.
+  </Accordion>
+</AccordionGroup>
