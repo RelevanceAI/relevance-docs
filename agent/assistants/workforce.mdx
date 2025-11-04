@@ -15,6 +15,45 @@ An AI Assistant Workforce is when multiple AI Assistants work together to comple
 
 ---
 
+## AI Assistant Workforce vs. Regular Workforce
+
+<CardGroup cols={2}>
+  <Card title="AI Assistant Workforce" icon="store">
+    Uses pre-built AI Assistants from the Marketplace designed for specific platforms
+    
+    • Ready-to-use assistants (Notion, Gmail, HubSpot, etc.)
+    
+    • No setup required beyond connecting integrations
+    
+    • Optimized for common platform tasks
+    
+    • Best for cross-platform workflows
+  </Card>
+  
+  <Card title="Regular Workforce" icon="hammer">
+    Uses custom agents you build yourself for specific business needs
+    
+    • Tailored to your unique processes
+    
+    • Can include custom tools and logic
+    
+    • Requires agent building and configuration
+    
+    • Best for specialized workflows
+  </Card>
+</CardGroup>
+
+<Note>
+**Can you mix and match?** 
+
+Yes! You can combine AI Assistants with your custom agents in the same workforce:
+- Use both pre-built assistants and custom agents together
+- Create hybrid workflows that leverage the best of both
+- Example: Use a custom research agent to gather data, then have the Gmail Assistant send results to your team
+</Note>
+
+---
+
 ## How It Works
 
 Each assistant in your workforce specializes in one platform (Notion, Gmail, Google Docs, etc.) and has access to that platform's full API capabilities. When you give a complex task that requires multiple platforms, the assistants automatically:
@@ -24,11 +63,40 @@ Each assistant in your workforce specializes in one platform (Notion, Gmail, Goo
 3. **Pass information** between assistants as needed
 4. **Deliver the complete result** - all steps handled automatically
 
+### The Technology Behind It
+
+<CardGroup cols={2}>
+  <Card title="Flexible API Tools" icon="screwdriver-wrench">
+    Each assistant uses adaptable tools that work across different tasks and platforms
+  </Card>
+  
+  <Card title="Comprehensive Documentation" icon="book">
+    Assistants have full API documentation to understand their platform's capabilities
+  </Card>
+  
+  <Card title="Advanced AI Models" icon="brain">
+    Uses models like GPT-4 to reason through tasks and make intelligent decisions
+  </Card>
+  
+  <Card title="Self-Healing" icon="arrows-rotate">
+    Learns from mistakes and automatically retries operations for better results
+  </Card>
+</CardGroup>
+
+<Note>
+**What this means for you:**
+
+- Assistants can handle tasks they weren't explicitly programmed for
+- New capabilities emerge as APIs are updated
+- Complex workflows work automatically without custom integration code
+- Performance is optimized for efficiency
+</Note>
+
 ---
 
 ## Workforce Example
 
-Here's a real example of multiple assistants working together:
+Here's an example of multiple assistants working together:
 
 ### The Task
 
@@ -128,27 +196,29 @@ This single request automatically coordinates **4 different AI Assistants**:
 
 ## Tips for Workforce Tasks
 
-<Tip>
-**Be explicit about the complete workflow** - Mention each platform and what should happen in each step
-
-*Example: "Get my recent contacts from HubSpot, create a summary document in Google Docs, and email it to my team"*
-</Tip>
-
-<Tip>
-**Specify the order when it matters** - Use sequential language like "first", "then", "finally"
-
-*Example: "First create the Notion database, then add sample projects, finally send me a summary email"*
-</Tip>
-
-<Tip>
-**Include necessary identifiers** - Provide file names, email addresses, collection names, etc.
-
-*Example: "Save to folder 'Q1 Reports'" or "Email to team@company.com"*
-</Tip>
-
-<Tip>
-**Test individual steps first** - Before running a complex workflow, test that each assistant can handle its part independently
-</Tip>
+<AccordionGroup>
+  <Accordion title="Be Explicit About the Workflow" icon="list-check">
+    Mention each platform and what should happen in each step to ensure the workforce understands the complete task.
+    
+    **Example:** *"Get my recent contacts from HubSpot, create a summary document in Google Docs, and email it to my team"*
+  </Accordion>
+  
+  <Accordion title="Specify the Order" icon="arrow-down-1-9">
+    Use sequential language like "first", "then", "finally" when the order of operations matters for your workflow.
+    
+    **Example:** *"First create the Notion database, then add sample projects, finally send me a summary email"*
+  </Accordion>
+  
+  <Accordion title="Include Identifiers" icon="tag">
+    Provide specific file names, email addresses, folder names, or collection names so assistants know exactly where to work.
+    
+    **Example:** *"Save to folder 'Q1 Reports'" or "Email to team@company.com"*
+  </Accordion>
+  
+  <Accordion title="Test Individual Steps" icon="flask">
+    Before running a complex multi-assistant workflow, test that each assistant can handle its part independently. This helps identify issues early and ensures smoother execution.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
@@ -159,23 +229,6 @@ This single request automatically coordinates **4 different AI Assistants**:
   
   **Example search:** "Notion Assistant" or "Gmail Assistant"
 </Card>
-
----
-
-## How Workforce Technology Works
-
-AI Assistant Workforces use advanced architecture to enable dynamic task completion:
-
-- Each assistant uses **flexible API tools** that adapt to different tasks
-- They have **comprehensive API documentation** to understand their platform's capabilities
-- They use **advanced AI models** (like GPT-4) to reason through tasks dynamically
-- They can **self-heal** - learning from mistakes and retrying operations
-
-This architecture means:
-- ✅ Assistants can handle tasks they weren't explicitly programmed for
-- ✅ New capabilities emerge as APIs are updated
-- ✅ Complex workflows work automatically without custom integration code
-- ✅ Performance is optimized for efficiency
 
 ---
 
