@@ -8,7 +8,7 @@ description: "Build databases, create pages, and organize your Notion workspace 
 The Notion Assistant helps you manage your Notion workspace through simple, natural language instructions. Build complex databases, create linked structures, organize pages, and manage content—all without manually clicking through Notion.
 
 <Card title="Clone Notion Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
-  Get started by cloning from the Marketplace → Search "Notion"
+  Get started by cloning from the Marketplace → Search "Notion Assistant"
 </Card>
 
 ---
@@ -41,299 +41,108 @@ The Notion Assistant can handle any task supported by the Notion API, including:
 
 <Steps>
   <Step title="Clone from Marketplace">
-    Search "Notion" in the Marketplace and click Clone
+    Search "Notion Assistant" in the Marketplace and click Clone
   </Step>
   
-  <Step title="Create Notion Integration">
-    **Creating your integration token:**
-    1. Go to [www.notion.so/my-integrations](https://www.notion.so/my-integrations)
-    2. Click **+ New Integration**
-    3. Give it a name (e.g., "Relevance AI Assistant")
-    4. Select the workspace you want to connect
-    5. Click **Submit**
-    6. Copy the **Internal Integration Token** (starts with `secret_`)
-    7. Paste into `notion_api_key` field in Variables tab
-    
-    ![Notion integration creation](/images/notion-create-integration.png)
+  <Step title="Ignore the API setup popup">
+    After cloning, a popup will appear asking for Notion API information. You can ignore and close this popup.
   </Step>
   
-  <Step title="Share Pages with Integration">
-    **CRITICAL STEP:** You must share pages/databases with your integration!
+  <Step title="Connect Notion Integration">
+    **Relevance AI has a direct Notion integration - no API key needed!**
     
-    For each page or database you want the assistant to access:
-    1. Open the page/database in Notion
-    2. Click **Share** (top-right corner)
-    3. Search for your integration name
-    4. Click to add it
+    1. Go to the **Tools** tab in your assistant
+    2. Click **Add account** on the Notion tool
+    3. Sign in to your Notion account
+    4. Authorize Relevance AI to access your workspace
     
-    **Without this step, the assistant cannot see or modify your content.**
-    
-    ![Sharing Notion page with integration](/images/notion-share-integration.png)
-  </Step>
-  
-  <Step title="Test It">
-    Try: "Create a blank page called 'Test Notes'"
-    
-    If successful, you'll see confirmation with the page ID!
+    That's it! The integration is now connected.
   </Step>
 </Steps>
 
-<Warning>
-**Important:** Notion requires you to explicitly share pages/databases with your integration. The assistant can only access what you've shared with it.
-</Warning>
-
-<Note>
-For detailed setup instructions, see the [Quick Start Guide](/agent/assistants/assistants-quickstart#notion)
-</Note>
-
 ---
 
-## Showcase: Task Management System
+## What Can the Notion Assistant Build?
 
-One of the most impressive demonstrations of the Notion Assistant is its ability to create complete systems from a single instruction.
+Here's a real example of what the assistant created from a single, simple request—no technical knowledge required.
 
-**Request:** "Create a project management system with linked databases for projects and tasks"
-
-**What it creates:**
-
-### Projects Database
-- Name (Title)
-- Status (Select: Not Started, In Progress, Completed, On Hold)
-- Owner (Person)
-- Start Date (Date)
-- End Date (Date)
-- Related Tasks (Relation to Tasks database)
-
-### Tasks Database
-- Task Name (Title)
-- Description (Text)
-- Assignee (Person)
-- Due Date (Date)
-- Status (Select: To Do, In Progress, Done)
-- Priority (Select: Low, Medium, High, Urgent)
-- Project (Relation to Projects database)
-
-**Time to create:** Under 30 seconds  
-**What you'd have built:** A complete, functional project management system with bidirectional relationships
-
----
-
-## Example Tasks
-
-### Simple Tasks
-
-<AccordionGroup>
-  <Accordion title="Create Pages">
-    - "Create a blank page called 'Meeting Notes'"
-    - "Create a page titled 'Q1 Planning' under the 'Projects' page"
-    - "Make a new page called 'Ideas' with a bullet list of 3 placeholder items"
-  </Accordion>
+<Accordion title="See the complete example: Task Management System">
+  ### The Request
   
-  <Accordion title="List Information">
-    - "List all my databases"
-    - "Show me all pages in my workspace"
-    - "What databases are shared with this integration?"
-  </Accordion>
+  "Build a complete task management system in Notion. Create a page called 'Task Management System'. Inside that, create a 'Projects' database with properties: Name (title), Status (select: 'Active', 'On Hold', 'Completed'), Owner (person), and Due Date (date). Then create a 'Tasks' database with properties: Task Name (title), Status (select: 'Not Started', 'In Progress', 'Blocked', 'Done'), Priority (select), Project (relation to 'Projects'), and Assignee (person). Link the two databases via a relation, and create three sample projects and 10 tasks distributed among them."
   
-  <Accordion title="Update Pages">
-    - "Rename the page 'Test' to 'Archive'"
-    - "Archive the page called 'Old Notes'"
-    - "Add text 'Hello World' to the page 'Test Notes'"
-  </Accordion>
-</AccordionGroup>
-
-### Medium Tasks
-
-<AccordionGroup>
-  <Accordion title="Create Databases">
-    - "Create a Tasks database with fields for title, assignee, due date, and status"
-    - "Make a Contacts database with name, email, phone, company, and notes"
-    - "Build a Reading List with title, author, status (to read/reading/finished), and rating"
-  </Accordion>
+  ---
   
-  <Accordion title="Add Database Items">
-    - "Add a task to my Tasks database: 'Complete project proposal', assigned to John, due next Friday, status To Do"
-    - "Create a contact in my Contacts database for Sarah Chen, email sarah@example.com, company TechCorp"
-    - "Add 3 sample books to my Reading List database"
-  </Accordion>
+  ### What the Notion Assistant Created
   
-  <Accordion title="Update Database Items">
-    - "Update the task 'Complete proposal' to status 'Done'"
-    - "Change the due date for all tasks assigned to John to next Monday"
-    - "Mark all books by author 'Malcolm Gladwell' as status 'To Read'"
-  </Accordion>
+  #### Projects Database
   
-  <Accordion title="Database Properties">
-    - "Add a 'Priority' select property to my Tasks database with options High, Medium, Low"
-    - "Create a 'Category' multi-select property in my Reading List"
-    - "Add a relation property linking Tasks to Projects"
-  </Accordion>
-</AccordionGroup>
-
-### Complex Tasks
-
-<AccordionGroup>
-  <Accordion title="Complete Systems">
-    **Request:** "Create a CRM system with companies, contacts, and deals databases"
-    
-    **What it creates:**
-    - Companies database (name, industry, size, website, status)
-    - Contacts database (name, email, title, phone, company relation)
-    - Deals database (name, value, stage, close date, contact relation)
-    - Bidirectional relationships between all three
-    - Sample data in each database
-  </Accordion>
+  | Project | Status | Due Date |
+  |---------|---------|----------|
+  | Marketing Campaign | Completed | July 31, 2025 |
+  | Mobile App Launch | On Hold | September 1, 2025 |
+  | Website Redesign | Active | August 15, 2025 |
   
-  <Accordion title="Content Structures">
-    **Request:** "Create a documentation hub with nested pages for Getting Started, Tutorials, and API Reference"
-    
-    **What it creates:**
-    - Main "Documentation" page
-    - "Getting Started" page with subpages for Installation, Configuration, First Steps
-    - "Tutorials" page with subpages for Basic, Intermediate, Advanced
-    - "API Reference" page with subpages for Authentication, Endpoints, Examples
-    - Template content in each page
-  </Accordion>
+  #### Tasks Database (Sample)
   
-  <Accordion title="Team Workspace">
-    **Request:** "Set up a team workspace with meeting notes database, action items tracker, and project wiki structure"
-    
-    **What it creates:**
-    - Meeting Notes database (date, attendees, agenda, decisions, action items)
-    - Action Items database (task, owner, due date, status, related meeting)
-    - Project Wiki pages (structure, templates, linking)
-    - Relations connecting meetings to action items
-    - Sample entries demonstrating the system
-  </Accordion>
-</AccordionGroup>
+  | Task | Project | Priority | Status |
+  |------|---------|----------|---------|
+  | QA review | Website Redesign | Medium | Not Started |
+  | Design email template | Marketing Campaign | Low | Not Started |
+  | Schedule social posts | Marketing Campaign | Medium | Done |
+  | Create ad copy | Marketing Campaign | High | Done |
+  | Beta testing | Mobile App Launch | Medium | In Progress |
+  | App store submission | Mobile App Launch | High | Not Started |
+  | Write user documentation | Website Redesign | Low | Blocked |
+  | Develop login system | Website Redesign | Medium | Not Started |
+  | Design homepage | Website Redesign | High | In Progress |
+  
+  **Plus:** All databases are linked with bidirectional relationships, so projects show their related tasks and tasks link back to their projects.
+  
+  ---
+  
+  ### Behind the Scenes
+  
+  The assistant made **16 API calls** in the background to build this complete system—all automatically figured out and executed.
+  
+  **Manual time saved:** 15-20 minutes of clicking through Notion's interface
+</Accordion>
 
----
-
-## Common Use Cases
-
-### Project Management
-
-**Team Task Board:**
-```
-"Create a sprint planning board with tasks database including story points, 
-sprint number, assignees, status, and labels"
-```
-
-**Roadmap Planning:**
-```
-"Build a product roadmap database with features, priority (high/medium/low), 
-quarter (Q1/Q2/Q3/Q4), status, and owner"
-```
-
-**Bug Tracking:**
-```
-"Create a bug tracker with severity levels, reported date, assigned developer, 
-status, and resolution notes"
-```
-
-### Knowledge Management
-
-**Documentation System:**
-```
-"Set up a knowledge base with categories for processes, guidelines, and FAQs, 
-each with searchable tags"
-```
-
-**Meeting Management:**
-```
-"Create a meeting notes database with date, attendees (people property), 
-agenda items, decisions made, and action items with owners"
-```
-
-**Resource Library:**
-```
-"Build a resources database with title, URL, description, category 
-(design/development/marketing), tags, and usefulness rating"
-```
-
-### Personal Productivity
-
-**Habit Tracker:**
-```
-"Create a daily habit tracker with date, checkboxes for exercise/reading/meditation, 
-notes, and streak counter"
-```
-
-**Goal Tracking:**
-```
-"Set up a goals database with goal name, category (health/career/learning), 
-target date, progress percentage, milestones, and status"
-```
-
-**Content Planning:**
-```
-"Create a content calendar with post title, platform (blog/social/email), 
-scheduled date, status (draft/scheduled/published), and performance metrics"
-```
-
-### Business Operations
-
-**Client Management:**
-```
-"Build a client tracker with company name, contact person, project status, 
-next action, last contact date, and revenue"
-```
-
-**Inventory System:**
-```
-"Create an inventory database with item name, SKU, quantity, reorder level, 
-supplier, and last updated date"
-```
-
-**Event Planning:**
-```
-"Set up an events database with event name, date, location, attendee count, 
-budget, status, and task checklist"
-```
+**What makes this impressive:**
+- The assistant understood the complex request and broke it into logical steps
+- Made 16 sequential API calls automatically to build everything
+- Created both databases with proper field types and configurations
+- Generated realistic sample data (3 projects, 10 tasks)
+- Established relationships between the databases automatically
+- Saved significant manual work—all from a single natural language instruction
 
 ---
 
 ## Tips for Best Results
 
-<Tip>
-**Be explicit about property types:**
+---
 
-Good: "Create a database with Name (title), Status (select with options: New/Active/Done), and Due Date (date property)"
-
-This ensures the assistant creates exactly the structure you need.
-</Tip>
-
-<Tip>
-**Specify relationships clearly:**
-
-Good: "Link the Tasks database to Projects database with a relation property called 'Project'"
-
-This helps the assistant set up bidirectional links correctly.
-</Tip>
-
-<Tip>
-**Include sample data when useful:**
-
-"...and add 3 sample tasks to show how it works"
-
-Sample data helps you see the structure immediately.
-</Tip>
-
-<Tip>
-**Break down very complex requests:**
-
-Instead of: "Build my entire workspace"
-
-Try: 
-1. "Create the main databases"
-2. "Add the relationships between them"
-3. "Create the page structure"
-4. "Add sample content"
-</Tip>
+**Be explicit about property types** - Specify field types to ensure accuracy  
+*Example: "Create a database with Name (title), Status (select: New/Active/Done), and Due Date (date property)"*
 
 ---
 
-## What the Assistant Can't Do
+**Specify relationships clearly** - Describe how databases should connect  
+*Example: "Link the Tasks database to Projects with a relation property called 'Project'"*
+
+---
+
+**Include sample data** - Ask for examples to see the structure immediately  
+*Example: "...and add 3 sample tasks to show how it works"*
+
+---
+
+**Break down complex requests** - Split large projects into steps  
+*Example: First "Create the main databases" then "Add relationships" then "Add sample content"*
+
+---
+
+## What the Notion Assistant Can't Do
 
 Due to Notion API limitations, the assistant currently cannot:
 
@@ -347,106 +156,6 @@ Due to Notion API limitations, the assistant currently cannot:
 <Note>
 Most content and structure operations ARE supported. The assistant excels at creating databases, managing data, and organizing information.
 </Note>
-
----
-
-## Troubleshooting
-
-### "Page not found" / "Database not found"
-
-**Cause:** The page/database hasn't been shared with your integration
-
-**Solution:**
-1. Open the page/database in Notion
-2. Click **Share** (top-right)
-3. Add your integration to the page
-4. Try the task again
-
-This is the most common Notion-specific issue!
-
-### "Insufficient permissions"
-
-**Cause:** Integration doesn't have the right capabilities
-
-**Solution:**
-1. Go to [notion.so/my-integrations](https://www.notion.so/my-integrations)
-2. Click on your integration
-3. Check capabilities: "Read content", "Update content", "Insert content"
-4. Save changes and try again
-
-### "Cannot create database"
-
-**Cause:** Trying to create inline database or in unshared location
-
-**Solution:**
-- Specify creating a "full-page database" in your workspace root
-- Or share the parent page where you want the database created
-
-### Can't find recently created items
-
-**Cause:** Items were created but page not refreshed
-
-**Solution:**
-- Refresh Notion in your browser
-- Items may take a few seconds to appear in Notion's UI
-
----
-
-## Advanced Features
-
-### Relational Databases
-
-The Notion Assistant excels at creating complex relational structures:
-
-**Example:**
-```
-"Create a project management system with Projects, Tasks, and Team Members databases. 
-Link tasks to projects, and tasks to team members (assignee). 
-Add properties for start/end dates, status, and priority."
-```
-
-The assistant will:
-- Create all three databases
-- Set up bidirectional relations
-- Configure properties correctly
-- Demonstrate with sample data
-
-### Bulk Operations
-
-Process multiple items efficiently:
-
-**Examples:**
-- "Update all tasks assigned to John to change assignee to Sarah"
-- "Archive all completed projects from 2023"
-- "Add a 'Q1' tag to all tasks with due dates in January-March"
-
-### Template Creation
-
-Build reusable page templates:
-
-**Example:**
-```
-"Create a meeting notes template with sections for Date, Attendees, Agenda, 
-Discussion Points, Decisions, and Action Items with placeholders"
-```
-
----
-
-## Pricing & Credits
-
-The Notion Assistant uses credits based on:
-- Complexity of the task
-- Number of API calls required
-- Amount of content created
-
-**Typical credit costs:**
-- Simple tasks (create page, list databases): ~10-50 credits
-- Medium tasks (create database with properties): ~50-150 credits
-- Complex tasks (complete systems with relations): ~150-500 credits
-
-<Tip>
-The assistant automatically optimizes API responses to minimize credit usage while maintaining accuracy.
-</Tip>
 
 ---
 
@@ -465,12 +174,3 @@ The assistant automatically optimizes API responses to minimize credit usage whi
     Contact our team
   </Card>
 </CardGroup>
-
----
-
-## Related Resources
-
-- [Notion API Documentation](https://developers.notion.com/) - Official Notion API reference
-- [Notion Help Center](https://www.notion.so/help) - Learn about Notion features
-- [Relevance AI Marketplace](https://app.relevanceai.com/marketplace) - Explore more assistants
-

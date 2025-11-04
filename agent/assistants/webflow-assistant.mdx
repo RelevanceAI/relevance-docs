@@ -1,6 +1,6 @@
 ---
 title: "Webflow Assistant"
-description: "Automate Webflow tasks with AI - create collections, update content, and manage your site using plain English"
+description: "Manage your Webflow site with simple instructions: create collections, update content, and build pages"
 ---
 
 # Webflow Assistant
@@ -8,7 +8,7 @@ description: "Automate Webflow tasks with AI - create collections, update conten
 The Webflow Assistant helps you manage your Webflow site through simple, natural language instructions. Create collections, update content, manage items, and configure your site—all without manually clicking through the Webflow interface.
 
 <Card title="Clone Webflow Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
-  Get started by cloning from the Marketplace → Search "Webflow"
+  Get started by cloning from the Marketplace → Search "Webflow Assistant"
 </Card>
 
 ---
@@ -39,51 +39,35 @@ The Webflow Assistant can handle any task supported by the Webflow API, includin
 
 ## Quick Setup
 
+<Card title="Cloning and Setting up Assistant" icon="rocket" href="/agent/assistants/assistants-quickstart">
+  Follow our step-by-step guide to clone the Webflow Assistant and configure your API credentials
+</Card>
+
+---
+
+## How to Get Your Webflow Site ID
+
+Your Site ID is required to configure the Webflow Assistant. Here's how to find it:
+
 <Steps>
-  <Step title="Clone from Marketplace">
-    Search "Webflow" in the Marketplace and click Clone
+  <Step title="Log in to Webflow">
+    Go to [webflow.com](https://webflow.com) and sign in to your account
   </Step>
   
-  <Step title="Add Your Webflow API Key">
-    **Finding your API key:**
-    1. Log into Webflow
-    2. Click profile icon → **Account Settings**
-    3. Navigate to **Integrations** tab
-    4. Scroll to **API Access**
-    5. Click **Generate API Token**
-    6. Copy the token (you won't see it again!)
-    7. Paste into `webflow_api_key` field in Variables tab
-    
-    ![Webflow API key location](/images/webflow-api-key-location.png)
-    
-    <Warning>
-    **Important:** Copy your API token immediately! Webflow only displays it once for security reasons.
-    </Warning>
+  <Step title="Open Your Site Dashboard">
+    Select the site you want to connect to the assistant
   </Step>
   
-  <Step title="Add Your Site ID">
-    **Finding your Site ID:**
-    1. Open your site in Webflow
-    2. Go to **Project Settings** (gear icon)
-    3. Click **General** tab
-    4. Copy the **Site ID**
-    5. Paste into `site_id` field in Variables tab
-    
-    **Tip:** Your Site ID is also in the browser URL when viewing your site
-    
-    ![Webflow Site ID location](/images/webflow-site-id-location.png)
-  </Step>
-  
-  <Step title="Test It">
-    Try: "List all collections on my site"
-    
-    If successful, you'll see your collections listed!
+  <Step title="Find the Site ID">
+    Your Site ID is in the URL when viewing your site dashboard: `webflow.com/dashboard/sites/YOUR_SITE_ID_HERE/...`
   </Step>
 </Steps>
 
-<Note>
-For detailed setup instructions, see the [Quick Start Guide](/agent/assistants/assistants-quickstart)
-</Note>
+**Alternative Method:** Go to **Site Settings** → **General** tab, and you'll see your Site ID displayed there.
+
+<Tip>
+The Site ID is a unique identifier that looks like: `5f8a1b2c3d4e5f6g7h8i9j0k`
+</Tip>
 
 ---
 
@@ -246,29 +230,59 @@ You don't need to know anything about these technical details—just describe wh
 
 ## Tips for Best Results
 
-<Tip>
-**Be specific with collection names:** 
-- Good: "Add a blog post to my 'Company News' collection"
-- Vague: "Add a post"
-</Tip>
-
-<Tip>
-**Provide all required field data:**
-- Good: "Create a blog post with title 'Hello World', author 'Jane', and content 'Welcome...'"
-- Incomplete: "Create a blog post"
-</Tip>
-
-<Tip>
-**Use clear field names:**
-If you're not sure what fields exist, ask first: "What fields are in my Blog collection?"
-</Tip>
-
-<Tip>
-**Break complex tasks into steps:**
-For very complex operations, you can either describe everything at once or break it into multiple requests:
-1. "Create the collection structure"
-2. "Now add items to it"
-</Tip>
+<Tabs>
+  <Tab title="Writing Requests">
+    **1. Be specific with collection names**
+    
+    Always include the exact collection name in your request to avoid confusion.
+    
+    **Example:**
+    - Good: "Add a blog post to my 'Company News' collection"
+    - Avoid: "Add a post"
+    
+    ---
+    
+    **2. Use clear field names**
+    
+    If you're not sure what fields exist in a collection, ask the assistant first.
+    
+    **Example:** "What fields are in my Blog collection?"
+  </Tab>
+  
+  <Tab title="Data Requirements">
+    **1. Provide all required field data**
+    
+    Include all the information needed to complete the task in one request. This helps the assistant create complete records without back-and-forth.
+    
+    **Example:**
+    - Good: "Create a blog post with title 'Hello World', author 'Jane', and content 'Welcome to our blog...'"
+    - Avoid: "Create a blog post" (missing required fields)
+    
+    ---
+    
+    **2. Check required fields first**
+    
+    If you're unsure what data is needed, ask the assistant about required fields before creating items.
+    
+    **Example:** "What are the required fields for the Blog collection?"
+  </Tab>
+  
+  <Tab title="Complex Tasks">
+    **1. Break tasks into manageable steps**
+    
+    For very complex operations, split them into multiple sequential requests. This makes troubleshooting easier and improves success rates.
+    
+    **Example workflow:**
+    - First: "Create a Portfolio collection with project name, client, and date fields"
+    - Then: "Now add a new project to the Portfolio collection..."
+    
+    ---
+    
+    **2. Test before bulk operations**
+    
+    When working with multiple items, test your request on a single item first to ensure the format is correct.
+  </Tab>
+</Tabs>
 
 ---
 
@@ -290,51 +304,18 @@ The assistant works with the **Webflow CMS API**, which focuses on content manag
 
 ## Troubleshooting
 
-### "Authentication failed" or "401 Unauthorized"
+### Collection names are case-sensitive
 
-**Cause:** API key is missing, incorrect, or expired
+When referencing collections, use the exact name (including capitalization) as it appears in Webflow.
 
-**Solution:**
-1. Go to Variables tab in your assistant
-2. Verify `webflow_api_key` is filled in correctly
-3. Check that your API key is still active in Webflow
-4. Generate a new key if needed and update in Variables tab
+**Tip:** If you're unsure, ask: "List all my collections" to see the exact names.
 
-### "Site not found" or "404 Error"
+### Webflow API documentation
 
-**Cause:** Site ID is incorrect or doesn't match your API key
-
-**Solution:**
-1. Verify your Site ID in Webflow Project Settings
-2. Ensure you're using the Site ID that matches the API key's account
-3. Update `site_id` in Variables tab
-
-### "Permission denied" or "403 Forbidden"
-
-**Cause:** API key doesn't have sufficient permissions
-
-**Solution:**
-1. Check your Webflow plan - some features require specific plans
-2. Verify the API key has full access permissions
-3. Try generating a new API key with full permissions
-
-### Assistant can't find a collection
-
-**Solution:**
-1. First ask: "List all my collections"
-2. Use the exact collection name returned
-3. Or provide the collection ID directly
-
-### Task fails after multiple attempts
-
-**Solution:**
-1. Simplify your request - break it into smaller steps
-2. Check if the task is supported by Webflow API
-3. Review the [Webflow API documentation](https://developers.webflow.com/reference/cms)
-4. Contact support for assistance
+For advanced troubleshooting or to verify what's possible via the API, see the [Webflow API documentation](https://developers.webflow.com/reference/cms).
 
 <Card title="Full Troubleshooting Guide" icon="life-ring" href="/agent/assistants/assistants-troubleshooting">
-  See solutions for common issues across all assistants
+  For authentication errors, setup issues, and common problems, see our complete AI Assistants troubleshooting guide
 </Card>
 
 ---
@@ -362,10 +343,6 @@ The assistant automatically optimizes API responses to minimize credit usage whi
 <CardGroup cols={2}>
   <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
     Setup instructions for all assistants
-  </Card>
-  
-  <Card title="Troubleshooting" icon="tools" href="/agent/assistants/assistants-troubleshooting">
-    Fix common errors
   </Card>
   
   <Card title="Support" icon="headset" href="/get-started/support">

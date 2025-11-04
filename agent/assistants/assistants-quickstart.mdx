@@ -1,11 +1,11 @@
 ---
-title: "Setting up your Assistant"
+title: "Cloning and Setting up Assistant"
 description: "Clone and configure your AI assistant"
 ---
 
-# Setting up your Assistant
+# Cloning and Setting up Assistant
 
-Get your AI assistant up and running in two simple steps. No technical knowledge required.
+Get your AI assistant up and running in two simple steps.
 
 <Steps>
   <Step title="Find Your Assistant">
@@ -13,7 +13,7 @@ Get your AI assistant up and running in two simple steps. No technical knowledge
   </Step>
   
   <Step title="Configure Credentials">
-    Add your API key and settings
+    Add your API key and settings (some assistants use direct integrations and don't need API keys)
   </Step>
 </Steps>
 
@@ -26,10 +26,6 @@ Get your AI assistant up and running in two simple steps. No technical knowledge
 3. Look for the platform name with "Assistant" in the title (e.g., "Webflow Assistant", "Notion Assistant")
 4. Click the **Clone** button
 
-<Tip>
-**Can't find the Marketplace?** Relevance AI dashboard --> Marketplace
-</Tip>
-
 ---
 
 ## Step 2: Configure Your Assistant
@@ -37,16 +33,35 @@ Get your AI assistant up and running in two simple steps. No technical knowledge
 <Warning>
 **CRITICAL SETUP - Complete this BEFORE first use**
 
-You must add your API credentials before using your assistant, otherwise you'll see authentication errors.
+For assistants requiring API keys (Webflow, HubSpot, etc.), you must add your API credentials before using your assistant, otherwise you'll see authentication errors.
 </Warning>
 
-### Configuration Checklist
+### Direct Integrations (No API Key Required)
 
-After cloning your assistant, you'll need to provide:
+Some assistants have direct integrations and don't require API keys:
+- **Notion Assistant** - Connect with one click
+- **Salesforce Assistant** - Uses direct integration
+- **Gmail Assistant** - Uses OAuth authentication
+- **Google Docs Assistant** - Uses OAuth authentication
+- **Google Slides Assistant** - Uses OAuth authentication
+
+For these assistants, simply go to the **Tools** tab after cloning and click **Add Account** to sign in and authorize access.
+
+### API Key Required
+
+The following assistants require API keys from their respective platforms:
+- **Webflow Assistant** - Requires Webflow API key
+- **HubSpot Wizard** - Requires HubSpot API key or Private App token
+
+For these assistants, follow the configuration steps below to add your API key.
+
+### Configuration Checklist (For API-Key Based Assistants)
+
+For assistants that require API keys, you'll need to provide:
 
 - **API Key** - A special access token from your integration (see instructions below)
-- **Site/Account ID** - Your specific workspace or site identifier
-- **Documentation** - Pre-loaded (leave as-is, don't modify)
+- **Site/Account ID** - Your specific workspace or site identifier (only for some assistants)
+  - **Webflow:** Requires Site ID → [How to get your Site ID](/agent/assistants/webflow-assistant#how-to-get-your-webflow-site-id)
 
 ### What is an API Key?
 
@@ -60,16 +75,23 @@ Think of an API key as a **secure password** that lets the AI assistant access y
 **How to Find Your API Key:**
 
 <Note>
-**API keys are managed by the external platform provider** (Webflow, Notion, HubSpot, etc.), not within Relevance AI. You'll need to navigate to your account on the respective platform to generate or locate your API key. Each platform has its own API documentation and guides—if you need additional help, search for "[Platform Name] API key" (e.g., "Webflow API key") to find official setup guides and support resources.
+**API keys are managed by the external platform provider** (Webflow, HubSpot, etc.), not within Relevance AI. You'll need to navigate to your account on the respective platform to generate or locate your API key. Each platform has its own API documentation and guides—if you need additional help, search for "[Platform Name] API key" (e.g., "Webflow API key") to find official setup guides and support resources.
 </Note>
 
-### Where to Add These
+### Adding Your Configuration
 
+**For API-key based assistants:**
 1. After cloning, a setup popup should appear automatically → Fill in the values
 2. If the popup doesn't appear: 
    - Go to the **Variables** tab at the top of your assistant
    - Fill in the required fields
+   - You'll also see a **Documentation** field that's already pre-loaded—leave this unchanged
    - Click **Save**
+
+**For direct integration assistants (Notion, Salesforce, Gmail, Google Docs, Google Slides):**
+1. Go to the **Tools** tab in your assistant
+2. Click **Add account** on the integration tool
+3. Sign in and authorize access
 
 ---
 
