@@ -7,6 +7,14 @@ description: "Combine multiple AI Assistants to complete complex, cross-platform
 
 An AI Assistant Workforce is when multiple AI Assistants work together to complete complex tasks that span across different platforms and tools. Instead of using a single assistant, you orchestrate several assistants to collaborate on a unified goal.
 
+<video
+  controls
+  className="w-full aspect-video rounded-xl"
+  src="https://raw.githubusercontent.com/RelevanceAI/relevance-docs/week43/creation-of-support-MRP-docs/videos/mrp-workforce.mp4"
+></video>
+
+---
+
 ## How It Works
 
 Each assistant in your workforce specializes in one platform (Notion, Gmail, Google Docs, etc.) and has access to that platform's full API capabilities. When you give a complex task that requires multiple platforms, the assistants automatically:
@@ -15,10 +23,6 @@ Each assistant in your workforce specializes in one platform (Notion, Gmail, Goo
 2. **Execute in sequence** - each assistant completes its part
 3. **Pass information** between assistants as needed
 4. **Deliver the complete result** - all steps handled automatically
-
-<Note>
-Workforce capabilities are built on the **MRP (Model Relevance Protocol)** methodology, which allows assistants to dynamically figure out complex tasks using simple, low-level API tools and thinking models like GPT-4.1.
-</Note>
 
 ---
 
@@ -56,131 +60,25 @@ This single request automatically coordinates **4 different AI Assistants**:
   </Step>
 </Steps>
 
-**Result:** A complete workflow that would take 20-30 minutes manually is handled in minutes through natural language.
+**Result:** Simply describe what you need in plain English, and it all happens automatically.
 
 ---
 
 ## Benefits of AI Assistant Workforces
 
-### Cross-Platform Workflows
-
-Connect tools that don't normally integrate:
-- Research in one platform → Document creation in another → Sharing via email
-- CRM data extraction → Presentation generation → Team collaboration setup
-- Content management → Publishing → Notification distribution
-
-### Complex Multi-Step Tasks
-
-Handle sophisticated workflows that require:
-- Sequential operations across platforms
-- Data transformation between tools
-- Coordination of multiple API calls per assistant
-- Context passing between different systems
-
-### Natural Language Orchestration
-
-No need to:
-- Build custom integrations
-- Write code or scripts
-- Manually coordinate between platforms
-- Remember specific API endpoints or parameters
-
-Simply describe what you want in plain English, and the workforce figures out how to achieve it.
-
----
-
-## Common Workforce Patterns
-
-### Content Creation Pipeline
-
-**Assistants involved:** Google Docs, Google Slides, Gmail, Notion
-
-**Example task:**
-```
-"Create a weekly report doc with last week's metrics from Notion, 
-generate a summary slide deck, and email both to the team"
-```
-
-### CRM to Communication
-
-**Assistants involved:** HubSpot/Salesforce, Gmail, Google Docs
-
-**Example task:**
-```
-"Find all leads created this month, create a prospect list document, 
-and send personalized intro emails to each one"
-```
-
-### Cross-Platform Data Migration
-
-**Assistants involved:** Multiple platform assistants
-
-**Example task:**
-```
-"Export all projects from Notion, create corresponding deals in HubSpot, 
-and send me a summary of what was migrated"
-```
-
-### Workflow Automation
-
-**Assistants involved:** Any combination of assistants
-
-**Example task:**
-```
-"Every time a deal closes in Salesforce, create a project in Notion 
-and send a kickoff email to the team"
-```
-
----
-
-## Available Assistants for Your Workforce
-
 <CardGroup cols={3}>
-  <Card title="Notion Assistant" icon="note" href="/agent/assistants/notion-assistant">
-    Databases, pages, and content management
+  <Card title="Connect Any Platform" icon="link">
+    Work across tools that don't normally integrate together
   </Card>
   
-  <Card title="Gmail Assistant" icon="envelope" href="/agent/assistants/gmail-assistant">
-    Email composition and management
+  <Card title="Handle Complex Tasks" icon="layer-group">
+    Complete sophisticated workflows automatically
   </Card>
   
-  <Card title="Google Docs Assistant" icon="file-text" href="/agent/assistants/google-docs-assistant">
-    Document creation and editing
-  </Card>
-  
-  <Card title="Google Slides Assistant" icon="presentation" href="/agent/assistants/google-slides-assistant">
-    Presentation creation and formatting
-  </Card>
-  
-  <Card title="HubSpot Wizard" icon="chart-network" href="/agent/assistants/hubspot-assistant">
-    CRM contacts, deals, and workflows
-  </Card>
-  
-  <Card title="Salesforce Assistant" icon="cloud" href="/agent/assistants/salesforce-assistant">
-    CRM accounts, opportunities, and leads
-  </Card>
-  
-  <Card title="Webflow Assistant" icon="globe" href="/agent/assistants/webflow-assistant">
-    Website CMS and content management
+  <Card title="Use Plain English" icon="message">
+    No technical skills required—just describe what you want
   </Card>
 </CardGroup>
-
----
-
-## How MRP Powers Workforces
-
-AI Assistant Workforces are powered by the **Model Relevance Protocol (MRP)**:
-
-- Each assistant uses **1-3 low-level API tools** (not hundreds of pre-built tools)
-- They have **API documentation** to understand their platform
-- They use **thinking models** (like GPT-4.1) to reason through tasks dynamically
-- They can **self-heal** - learning from mistakes and retrying operations
-
-This architecture means:
-- ✅ Assistants can handle tasks they weren't explicitly programmed for
-- ✅ New capabilities emerge as APIs are updated (just update documentation)
-- ✅ Complex workflows work automatically without custom integration code
-- ✅ Token usage is optimized through API result minification
 
 ---
 
@@ -192,7 +90,7 @@ This architecture means:
   </Step>
   
   <Step title="Configure Each Assistant">
-    Follow the [Quick Start Guide](/agent/assistants/assistants-quickstart) to set up API keys or direct integrations for each assistant
+    Follow the [Cloning and Setting up Assistant](/agent/assistants/assistants-quickstart) guide to set up API keys or direct integrations for each assistant
   </Step>
   
   <Step title="Create Your Workforce">
@@ -203,6 +101,28 @@ This architecture means:
     Describe your complete workflow in natural language - the workforce will coordinate the assistants automatically
   </Step>
 </Steps>
+
+---
+
+## Common Workforce Patterns
+
+<CardGroup cols={2}>
+  <Card title="Content Creation Pipeline" icon="file-lines">
+    Google Docs, Google Slides, Gmail, Notion working together to create reports, presentations, and distribute to teams
+  </Card>
+  
+  <Card title="CRM to Communication" icon="envelope-open-text">
+    HubSpot/Salesforce, Gmail, Google Docs coordinating to manage leads and send personalized communications
+  </Card>
+  
+  <Card title="Cross-Platform Data Migration" icon="right-left">
+    Multiple assistants syncing data between platforms and providing migration summaries
+  </Card>
+  
+  <Card title="Workflow Automation" icon="arrows-spin">
+    Any combination of assistants automating recurring tasks across your tools
+  </Card>
+</CardGroup>
 
 ---
 
@@ -229,6 +149,33 @@ This architecture means:
 <Tip>
 **Test individual steps first** - Before running a complex workflow, test that each assistant can handle its part independently
 </Tip>
+
+---
+
+## Available Assistants for Your Workforce
+
+<Card title="Browse the Marketplace" icon="store" href="https://app.relevanceai.com/marketplace">
+  Clone assistants from the Marketplace and add them to your workforce
+  
+  **Example search:** "Notion Assistant" or "Gmail Assistant"
+</Card>
+
+---
+
+## How Workforce Technology Works
+
+AI Assistant Workforces use advanced architecture to enable dynamic task completion:
+
+- Each assistant uses **flexible API tools** that adapt to different tasks
+- They have **comprehensive API documentation** to understand their platform's capabilities
+- They use **advanced AI models** (like GPT-4) to reason through tasks dynamically
+- They can **self-heal** - learning from mistakes and retrying operations
+
+This architecture means:
+- ✅ Assistants can handle tasks they weren't explicitly programmed for
+- ✅ New capabilities emerge as APIs are updated
+- ✅ Complex workflows work automatically without custom integration code
+- ✅ Performance is optimized for efficiency
 
 ---
 
