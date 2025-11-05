@@ -1,11 +1,11 @@
 ---
 title: "Google Docs Assistant"
-description: "Create, edit, and manage Google Docs automatically using simple natural language"
+description: "Create, edit, and manage Google Docs—just use plain English"
 ---
 
 # Google Docs Assistant
 
-The Google Docs Assistant helps you manage your Google Docs through simple, natural language instructions. Create documents, add content, format text, and organize your docs—all without manually typing and formatting.
+Create, edit, and manage your Google Docs through simple conversation.
 
 <Card title="Clone Google Docs Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
   Get started by cloning from the Marketplace → Search "Google Docs Assistant"
@@ -15,25 +15,32 @@ The Google Docs Assistant helps you manage your Google Docs through simple, natu
 
 ## What Can It Do?
 
-The Google Docs Assistant can handle any task supported by the Google Docs API, including:
+The Google Docs Assistant can handle any Google Docs-related task:
 
 <CardGroup cols={2}>
-  <Card title="Create Documents" icon="file-plus">
-    Create new documents with content and structure
+  <Card title="Create & Structure" icon="file-plus">
+    Create documents with complex structures, sections, and formatting
   </Card>
   
-  <Card title="Edit Content" icon="pen">
-    Add, update, and replace text in existing documents
+  <Card title="Edit & Update" icon="pen">
+    Add, replace, and update text in existing documents
   </Card>
   
-  <Card title="Format Text" icon="text">
-    Apply headings, bold, italic, and basic formatting
+  <Card title="Add Images" icon="image">
+    Insert images with automatic sizing (600px width by default)
   </Card>
   
-  <Card title="Manage Documents" icon="folder-open">
-    List, copy, and organize your Google Docs
+  <Card title="Find & Locate" icon="search">
+    Search for documents by name or automatically find file IDs
   </Card>
 </CardGroup>
+
+**Key Features:**
+- **Research-first approach**: Reviews Google Docs API documentation before taking action
+- **Intelligent error handling**: Automatically retries failed operations up to 3 times with adjustments
+- **Smart file location**: Searches for documents automatically, only asks for IDs when necessary
+- **Safety confirmations**: Always asks for explicit confirmation before destructive actions (deletions)
+- **Careful execution**: Plans API calls in logical sequences and verifies results
 
 ---
 
@@ -41,33 +48,26 @@ The Google Docs Assistant can handle any task supported by the Google Docs API, 
 
 <Steps>
   <Step title="Clone from Marketplace">
-    Search "Google Docs" in the Marketplace and click Clone
+    Search "Google Docs Assistant" in the Marketplace and click Clone
   </Step>
   
-  <Step title="Connect Your Google Account">
-    Google Docs uses **OAuth**, which means you don't need to manually find API keys!
-    
-    **Setup Steps:**
-    1. After cloning, click the **Add Account** or **Connect** button
-    2. Sign in with your Google account
-    3. Grant permissions for Google Docs and Drive access
-    4. Done!
-    
-    The connection is secure and you can revoke access anytime from your Google Account settings.
-    
-    ![Google OAuth connection flow](/images/google-oauth-connect.png)
+  <Step title="Ignore the Agent Variables Popup">
+    After cloning, a Popup will appear showing agent variables. This information is already configured and helps the agent form APIs in the background. You don't need to do anything—simply close this Popup.
   </Step>
   
-  <Step title="Test It">
-    Try: "Create a blank document called 'Test Document'"
+  <Step title="Connect Google Docs Integration">
+    **Relevance AI has a direct Google Docs integration - no API key needed!**
     
-    If successful, you'll see confirmation with the document link!
+    After cloning, you may be automatically prompted to connect your account. If not:
+    
+    1. Go to the **Tools** tab in your assistant
+    2. Click **Add account** on the Google Docs tool
+    3. Sign in to your Google account
+    4. Grant the requested permissions (Docs + Drive access)
+    
+    That's it! The integration is now connected.
   </Step>
 </Steps>
-
-<Note>
-Google Docs uses OAuth authentication, so setup is simple. Just sign in and you're ready!
-</Note>
 
 ---
 
@@ -168,162 +168,42 @@ Google Docs uses OAuth authentication, so setup is simple. Just sign in and you'
 
 ---
 
-## Built-in Helper Tools
+## How It Works
 
-Some Google Docs Assistants include specialized tools:
+The Google Docs Assistant does all the heavy lifting in the background—you just describe what you need in plain English, and it handles the rest.
 
-### HTML Formatting Tool
+**Automatic Research & Execution**
+- Reviews Google Docs API documentation automatically before taking action
+- Figures out the right sequence of API calls without you needing to know anything technical
+- Retries failed operations up to 3 times with adjustments (you won't even notice)
+- Verifies results after each operation
 
-For complex formatting like tables, headers, and formatted lists:
-- Converts your request to HTML
-- Uploads via Google Drive API
-- Creates properly formatted documents
-- Handles tables with multiple columns
-- Manages nested lists
+**Finds Documents For You**
+- Automatically searches for documents by name—no need to hunt for IDs
+- Only asks for document IDs if it can't locate files on its own
+- Includes clickable document/folder links in responses
 
-**When to use:** If your assistant has this tool, you can request complex formatted content like:
-- "Create a document with a 3-column table showing tasks, owners, and deadlines"
-- "Make a document with headers, bullet points, and numbered sections"
-
-<Note>
-Not all Google Docs assistants have the HTML formatting tool. Check your assistant's tool list. If it doesn't have this tool, focus on simpler text-based operations.
-</Note>
+**Built-In Safety**
+- Always asks for confirmation before deleting or making irreversible changes
+- Asks every time to keep your documents safe, even if you previously gave permission
+- Sets image width to 600px by default to prevent overflow
 
 ---
 
 ## What the Assistant Can't Do
 
-Due to Google Docs API limitations, the assistant may have limitations with:
+Due to Google Docs API limitations, the assistant cannot:
 
-- Complex visual layouts (columns, text boxes, etc.)
-- Images and embedded media (can add image URLs in some cases)
-- Comments and suggestions mode
-- Version history access
-- Sharing and permission management
-- Page setup (margins, page size, orientation)
-- Styles and themes (limited formatting support)
+- **Complex visual layouts**: Cannot create columns, text boxes, or advanced layouts
+- **Comments and suggestions**: Cannot add comments or use suggestion mode
+- **Version history**: Cannot access or restore previous versions
+- **Sharing and permissions**: Cannot modify document sharing settings or permissions
+- **Page setup**: Cannot change margins, page size, or orientation
+- **Advanced formatting**: Limited support for styles, themes, and complex formatting
 
 <Note>
-The assistant works best for **text content and basic structure**. For complex visual design, you'll need to use Google Docs directly.
+The assistant excels at **content creation, text editing, and basic structure**. For complex visual design and formatting, you may need to use Google Docs directly after the assistant creates the initial document.
 </Note>
-
----
-
-## Troubleshooting
-
-### "Document not found"
-
-**Cause:** Document name incorrect or you don't have access
-
-**Solution:**
-- First list your documents: "Show me all my Google Docs"
-- Use the exact document name from the list
-- Or provide the document ID from the URL
-
-### "Permission denied"
-
-**Cause:** OAuth connection doesn't have sufficient permissions
-
-**Solution:**
-1. Reconnect your Google account
-2. Ensure you grant all requested permissions (Docs + Drive)
-3. Check that you own or have edit access to the document
-
-### Can't find recently created document
-
-**Cause:** Document was created but not appearing in search
-
-**Solution:**
-- Wait a few seconds for Google's index to update
-- Search by exact title used during creation
-- Check your Google Drive directly
-- Use the document ID provided in the creation response
-
-### Formatting doesn't work as expected
-
-**Cause:** API limitations or missing HTML formatting tool
-
-**Solution:**
-- If your assistant has HTML formatting tool, specify you want "formatted content"
-- Otherwise, stick to basic text operations
-- Apply complex formatting manually in Google Docs after creation
-
----
-
-## Working with Document IDs
-
-Google Docs can be referenced by name or ID:
-
-**Document ID Location:**
-The ID is in the URL:
-```
-https://docs.google.com/document/d/DOCUMENT_ID_HERE/edit
-```
-
-**When to use IDs:**
-- When you have multiple documents with similar names
-- For more reliable document targeting
-- When working with documents programmatically
-
-**Example:**
-```
-"Add content to document ID 1a2b3c4d5e6f7g8h9i0j"
-```
-
----
-
-## Document Sharing & Permissions
-
-The assistant can work with documents you own or have edit access to:
-
-**What you can do:**
-- Create new documents (always owned by you)
-- Edit documents you own
-- Edit shared documents where you have edit permission
-
-**What you can't do:**
-- Edit documents where you only have view/comment access
-- Access documents not shared with your Google account
-- Modify sharing settings programmatically
-
----
-
-## Google Drive Integration
-
-Google Docs Assistant works in conjunction with Google Drive:
-
-**Folder Operations:**
-While the Docs Assistant focuses on document content, document organization (folders, sharing) is typically handled by a Google Drive Assistant.
-
-**Finding Documents:**
-Documents are stored in your Google Drive. You can reference them by:
-- Document name (searches your Drive)
-- Document ID (direct access)
-- Folder location (if using Drive Assistant)
-
----
-
-## Best Practices
-
-**Document Naming:**
-- Use clear, descriptive names
-- Include dates for recurring documents
-- Use consistent naming conventions
-
-**Template Strategy:**
-- Create master templates once
-- Copy templates for new instances
-- Don't modify the master template directly
-
-**Content Organization:**
-- Create documents with clear sections
-- Use consistent heading styles
-- Keep structure simple for easier updates
-
-**Batch Operations:**
-- Create multiple similar documents in one request
-- Use consistent structure across batch
-- Verify one document before creating many
 
 ---
 
@@ -334,13 +214,7 @@ Documents are stored in your Google Drive. You can reference them by:
     Setup instructions for all assistants
   </Card>
   
-  <Card title="Troubleshooting" icon="tools" href="/agent/assistants/assistants-troubleshooting">
-    Fix common errors
-  </Card>
-  
   <Card title="Support" icon="headset" href="/get-started/support">
     Contact our team
   </Card>
 </CardGroup>
-
----

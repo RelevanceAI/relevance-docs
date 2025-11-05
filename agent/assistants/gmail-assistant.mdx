@@ -1,11 +1,11 @@
 ---
 title: "Gmail Assistant"
-description: "Search, organize, and manage your Gmail inbox with AI using simple natural language"
+description: "Search, send, and organize your Gmail—just use plain English"
 ---
 
 # Gmail Assistant
 
-The Gmail Assistant helps you manage your email through simple, natural language instructions. Search emails, organize your inbox, manage labels, and handle messages—all without manually clicking through Gmail.
+Search, send, organize, and manage your inbox—all through simple conversation without manually clicking through Gmail.
 
 <Card title="Clone Gmail Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
   Get started by cloning from the Marketplace → Search "Gmail Assistant"
@@ -18,22 +18,28 @@ The Gmail Assistant helps you manage your email through simple, natural language
 The Gmail Assistant can handle any task supported by the Gmail API, including:
 
 <CardGroup cols={2}>
-  <Card title="Search" icon="magnifying-glass">
-    Find emails by sender, subject, date, or content
+  <Card title="Send & Compose" icon="paper-plane">
+    Send emails, create drafts, reply to threads with attachments
+  </Card>
+  
+  <Card title="Search & Retrieve" icon="magnifying-glass">
+    Find emails by sender, subject, date, or content with full email body
   </Card>
   
   <Card title="Labels" icon="tags">
-    Create, apply, and manage email labels
+    Create, apply, and manage email labels intelligently
   </Card>
   
   <Card title="Organization" icon="folder">
-    Archive, mark as read/unread, star emails
-  </Card>
-  
-  <Card title="Filters" icon="filter">
-    Find emails matching complex criteria
+    Archive, mark as read/unread, star emails, bulk operations
   </Card>
 </CardGroup>
+
+**Key Features:**
+- **Automatic retry logic**: Up to 3 retry attempts with modifications based on error responses
+- **Smart label management**: Checks if labels exist before applying, creates them if needed
+- **Full email retrieval**: Gets complete email content including body, not just thread IDs
+- **Safety confirmations**: Always asks before performing destructive operations (deletions, permanent modifications)
 
 ---
 
@@ -41,33 +47,26 @@ The Gmail Assistant can handle any task supported by the Gmail API, including:
 
 <Steps>
   <Step title="Clone from Marketplace">
-    Search "Gmail" in the Marketplace and click Clone
+    Search "Gmail Assistant" in the Marketplace and click Clone
   </Step>
   
-  <Step title="Connect Your Google Account">
-    Gmail uses **OAuth**, which means you don't need to manually find API keys!
-    
-    **Setup Steps:**
-    1. After cloning, click the **Add Account** or **Connect** button
-    2. Sign in with your Google account
-    3. Grant the requested permissions
-    4. Done!
-    
-    The connection is secure and you can revoke access anytime from your Google Account settings.
-    
-    ![Google OAuth connection flow](/images/google-oauth-connect.png)
+  <Step title="Ignore the Agent Variables Popup">
+    After cloning, a Popup will appear showing agent variables. This information is already configured and helps the agent form APIs in the background. You don't need to do anything—simply close this Popup.
   </Step>
   
-  <Step title="Test It">
-    Try: "Show me my last 5 emails"
+  <Step title="Connect Gmail Integration">
+    **Relevance AI has a direct Gmail integration - no API key needed!**
     
-    If successful, you'll see your recent emails listed!
+    After cloning, you may be automatically prompted to connect your account. If not:
+    
+    1. Go to the **Tools** tab in your assistant
+    2. Click **Add account** on the Gmail tool
+    3. Sign in to your Google account
+    4. Grant the requested permissions
+    
+    That's it! The integration is now connected.
   </Step>
 </Steps>
-
-<Note>
-Gmail uses OAuth authentication, so setup is much simpler than integrations requiring manual API keys. Just sign in and you're ready!
-</Note>
 
 ---
 
@@ -76,16 +75,23 @@ Gmail uses OAuth authentication, so setup is much simpler than integrations requ
 ### Simple Tasks
 
 <AccordionGroup>
+  <Accordion title="Send & Compose">
+    - "Send an email to john@example.com with subject 'Quick question'"
+    - "Create a draft reply to thread [message id] with the message 'I'll review this and get back to you by Friday'"
+    - "Send an email with an attachment to sarah@company.com"
+    - "Reply to the latest email from my manager saying I'll have it done today"
+  </Accordion>
+  
   <Accordion title="Search Emails">
-    - "Show me my last 10 emails"
+    - "Get my last 5 emails"
     - "Find emails from john@example.com"
-    - "Search for emails with subject containing 'invoice'"
-    - "Show me unread emails from this week"
-    - "Find emails with attachments from last month"
+    - "Search for emails containing 'budget approval' in the subject or body"
+    - "Find all unread emails from sarah@company.com that have attachments and were received in the last 30 days"
+    - "Get the full content of the most recent email in thread [id]"
   </Accordion>
   
   <Accordion title="Email Organization">
-    - "Mark all unread emails from 'newsletter@example.com' as read"
+    - "Mark message [message id] as read"
     - "Archive emails older than 6 months from 'promotions@store.com'"
     - "Star emails from my manager from this week"
     - "Mark email with subject 'Q1 Report' as important"
@@ -95,17 +101,18 @@ Gmail uses OAuth authentication, so setup is much simpler than integrations requ
     - "List all my labels"
     - "Create a new label called 'Project Alpha'"
     - "Add label 'Urgent' to emails from boss@company.com from today"
-    - "Show me all emails with the 'Follow Up' label"
+    - "Create a draft reply to thread [message id] and add the 'Follow-up' label"
   </Accordion>
 </AccordionGroup>
 
 ### Medium Tasks
 
 <AccordionGroup>
-  <Accordion title="Advanced Search">
+  <Accordion title="Advanced Search with Content">
     - "Find all emails from 'sarah@example.com' sent in January with attachments"
     - "Search for emails containing 'meeting' in the subject, unread, from this week"
-    - "Show me starred emails from the last 30 days that haven't been replied to"
+    - "When is my [x] meeting? Find relevant emails including full email content"
+    - "Search for emails containing 'budget approval' that are not in trash"
     - "Find all emails from my team (list of addresses) from this quarter"
   </Accordion>
   
@@ -175,159 +182,48 @@ Gmail uses OAuth authentication, so setup is much simpler than integrations requ
 
 ---
 
-## Built-in Helper Tools
+## How It Works
 
-The Gmail Assistant includes a specialized tool for certain operations:
+The Gmail Assistant handles complex email operations automatically:
 
-### Base64 Email Encoder
+**Smart Email Sending**
+- Automatically retrieves your sender email address using your Gmail account ID
+- Converts email content to base64-encoded format for Gmail API compatibility
+- Handles HTML formatting for subject lines and email bodies
+- Manages attachment encoding and MIME types seamlessly
 
-Required for sending emails through Gmail API:
-- Converts email content to proper format
-- Handles attachments encoding
-- Manages MIME type formatting
+**Intelligent Label Management**
+- Checks if labels exist before applying them
+- Creates missing labels automatically when needed
+- Uses actual label names (not IDs) for natural interactions
 
-<Note>
-Currently, the Gmail Assistant is optimized for **reading and organizing** emails. Sending/composing is available but may require additional configuration. Focus on search, label management, and organization tasks for best results.
-</Note>
+**Built-In Error Recovery**
+- Consults Gmail API documentation to ensure accuracy
+- Automatically retries failed operations up to 3 times
+- Adapts approach based on error messages
+- Provides clear feedback on what went wrong and how it's being fixed
+
+**Full Content Retrieval**
+- Gets complete email bodies, not just thread IDs
+- Retrieves all metadata and headers
+- Handles query strings as URL parameters automatically
 
 ---
 
 ## What the Assistant Can't Do
 
-Due to Gmail API limitations and current implementation, the assistant may have limitations with:
+Due to Gmail API limitations, the assistant cannot:
 
-- Composing and sending complex formatted emails (plain text works better)
-- Modifying Gmail settings (filters, forwarding, etc.)
-- Accessing Google Chat messages
-- Creating automated rules/filters (can suggest them)
-- Permanently deleting emails (can move to trash)
-- Modifying email content after sending
+- **Modify Gmail settings**: Cannot change filters, forwarding rules, or account settings
+- **Access Google Chat messages**: Only Gmail emails are accessible
+- **Create automated rules/filters**: Can suggest them but cannot implement auto-filters
+- **Permanently delete emails**: Can move to trash, but cannot bypass trash (safety feature)
+- **Modify email content after sending**: Sent emails cannot be edited
+- **Access other Google Workspace apps**: Limited to Gmail only (unless separately integrated)
 
 <Note>
-The assistant excels at **searching, organizing, and managing** existing emails. These are the primary use cases it's optimized for.
+The assistant excels at the complete email workflow: **searching with full content retrieval, organizing, labeling, composing, and sending emails**. HTML formatting and attachments are fully supported.
 </Note>
-
----
-
-## Troubleshooting
-
-### "Authentication failed" or "Permission denied"
-
-**Cause:** OAuth connection expired or insufficient permissions
-
-**Solution:**
-1. Reconnect your Google account in the assistant
-2. Ensure you granted all requested permissions
-3. Try disconnecting and reconnecting if issues persist
-
-### "Email not found"
-
-**Cause:** Search criteria too specific or email doesn't exist
-
-**Solution:**
-- Broaden your search criteria
-- Try searching by sender email instead of name
-- Check if email is in trash or spam
-
-### "Too many results"
-
-**Cause:** Search returned more emails than can be processed at once
-
-**Solution:**
-- Add more specific criteria (date range, sender, subject keywords)
-- Break into smaller searches: "emails from January" then "emails from February"
-
-### Rate limiting errors
-
-**Cause:** Too many API requests in short time
-
-**Solution:**
-- Wait a few minutes before trying again
-- Break bulk operations into smaller batches
-- Reduce scope of search/organization tasks
-
----
-
-## Gmail Search Syntax Reference
-
-The assistant understands both natural language and Gmail's search operators:
-
-**By Sender/Recipient:**
-- `from:john@example.com` - From specific sender
-- `to:sarah@example.com` - Sent to specific recipient
-- `cc:team@company.com` - CC'd to address
-
-**By Date:**
-- `after:2024/01/01` - After specific date
-- `before:2024/12/31` - Before specific date
-- `older_than:6m` - Older than 6 months
-
-**By Content:**
-- `subject:invoice` - Subject contains word
-- `has:attachment` - Has any attachment
-- `filename:pdf` - Has PDF attachment
-- `larger:10M` - Larger than 10MB
-
-**By Status:**
-- `is:unread` - Unread emails
-- `is:starred` - Starred emails
-- `is:important` - Marked important
-- `label:follow-up` - Has specific label
-
-**Combinations:**
-```
-"from:client@example.com after:2024/01/01 has:attachment subject:proposal"
-```
-
----
-
-## Privacy & Security
-
-### What the Assistant Can Access
-
-With your permission, the assistant can:
-- Read email content and metadata
-- Search your mailbox
-- Create and manage labels
-- Archive and organize emails
-
-### What the Assistant Cannot Access
-
-- Your Google account password
-- Other Google services (unless separately connected)
-- Emails you've permanently deleted
-- Draft emails (unless specifically requested)
-
-### Revoking Access
-
-You can revoke the assistant's access anytime:
-1. Go to [myaccount.google.com/permissions](https://myaccount.google.com/permissions)
-2. Find Relevance AI
-3. Click "Remove Access"
-
----
-
-## Best Practices
-
-**Regular Inbox Maintenance:**
-- Set up weekly organization tasks
-- Create consistent label structure
-- Archive old emails regularly
-
-**Search Efficiency:**
-- Use specific date ranges
-- Include sender information when known
-- Combine multiple criteria for precision
-
-**Label Organization:**
-- Create clear, descriptive label names
-- Use nested labels for hierarchies (Project/Subproject)
-- Apply labels consistently
-
-**Bulk Operations Safety:**
-- Test on small batch first
-- Review results before large-scale changes
-- Keep important emails labeled to prevent accidental archiving
 
 ---
 
@@ -336,10 +232,6 @@ You can revoke the assistant's access anytime:
 <CardGroup cols={2}>
   <Card title="Setup Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
     Setup instructions for all assistants
-  </Card>
-  
-  <Card title="Troubleshooting" icon="tools" href="/agent/assistants/assistants-troubleshooting">
-    Fix common errors
   </Card>
   
   <Card title="Support" icon="headset" href="/get-started/support">

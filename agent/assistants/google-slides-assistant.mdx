@@ -1,11 +1,11 @@
 ---
 title: "Google Slides Assistant"
-description: "Create and manage Google Slides presentations automatically using simple natural language"
+description: "Create and manage Google Slides presentations—just use plain English"
 ---
 
 # Google Slides Assistant
 
-The Google Slides Assistant helps you create and manage presentations through simple, natural language instructions. Build slide decks, add content, format slides, and organize your presentations—all without manually clicking through Google Slides.
+Create, find, analyze, and manage your Google Slides presentations through simple conversation.
 
 <Card title="Clone Google Slides Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
   Get started by cloning from the Marketplace → Search "Google Slides Assistant"
@@ -15,25 +15,32 @@ The Google Slides Assistant helps you create and manage presentations through si
 
 ## What Can It Do?
 
-The Google Slides Assistant can handle any task supported by the Google Slides API, including:
+The Google Slides Assistant can handle any Google Slides-related task:
 
 <CardGroup cols={2}>
-  <Card title="Create Presentations" icon="presentation">
-    Create new presentations with slides and content
+  <Card title="Create & Build" icon="presentation">
+    Create presentations with slides, content, and branded title pages
   </Card>
   
-  <Card title="Add Slides" icon="plus">
-    Add new slides with different layouts
+  <Card title="Find & Analyze" icon="search">
+    Find presentations across all drives, analyze content, and read slides
   </Card>
   
-  <Card title="Add Content" icon="text">
-    Insert text, titles, and content on slides
+  <Card title="Format & Style" icon="palette">
+    Update colors, backgrounds, and text formatting
   </Card>
   
-  <Card title="Manage Presentations" icon="folder">
-    List, copy, and organize your presentations
+  <Card title="Add Images" icon="image">
+    Generate and insert images with proper layout (max 1 per request)
   </Card>
 </CardGroup>
+
+**Key Features:**
+- **Intelligent error handling**: Automatically retries failed operations up to 3 times with adjustments
+- **Smart search**: Searches all drives for presentations unless specified, distinguishes between created vs shared
+- **Branded title pages**: Automatically creates title pages with brand background and white text
+- **Safety confirmations**: Always asks for explicit confirmation before destructive actions (deletions)
+- **Efficient retries**: Re-uses existing content without recreating from scratch
 
 ---
 
@@ -41,33 +48,26 @@ The Google Slides Assistant can handle any task supported by the Google Slides A
 
 <Steps>
   <Step title="Clone from Marketplace">
-    Search "Google Slides" in the Marketplace and click Clone
+    Search "Google Slides Assistant" in the Marketplace and click Clone
   </Step>
   
-  <Step title="Connect Your Google Account">
-    Google Slides uses **OAuth**, which means you don't need to manually find API keys!
-    
-    **Setup Steps:**
-    1. After cloning, click the **Add Account** or **Connect** button
-    2. Sign in with your Google account
-    3. Grant permissions for Google Slides and Drive access
-    4. Done!
-    
-    The connection is secure and you can revoke access anytime from your Google Account settings.
-    
-    ![Google OAuth connection flow](/images/google-oauth-connect.png)
+  <Step title="Ignore the Agent Variables Popup">
+    After cloning, a Popup will appear showing agent variables. This information is already configured and helps the agent form APIs in the background. You don't need to do anything—simply close this Popup.
   </Step>
   
-  <Step title="Test It">
-    Try: "Create a blank presentation called 'Test Presentation'"
+  <Step title="Connect Google Slides Integration">
+    **Relevance AI has a direct Google Slides integration - no API key needed!**
     
-    If successful, you'll see confirmation with the presentation link!
+    After cloning, you may be automatically prompted to connect your account. If not:
+    
+    1. Go to the **Tools** tab in your assistant
+    2. Click **Add account** on the Google Slides tool
+    3. Sign in to your Google account
+    4. Grant the requested permissions (Slides + Drive access)
+    
+    That's it! The integration is now connected.
   </Step>
 </Steps>
-
-<Note>
-Google Slides uses OAuth authentication, so setup is simple. Just sign in and you're ready!
-</Note>
 
 ---
 
@@ -76,28 +76,30 @@ Google Slides uses OAuth authentication, so setup is simple. Just sign in and yo
 ### Simple Tasks
 
 <AccordionGroup>
+  <Accordion title="Find & Analyze Presentations">
+    - "List all presentations"
+    - "What presentations did I create?" (not shared with me)
+    - "Most recent all hands meeting slides"
+    - "Slides that can be used as sales collateral?"
+    - "Analyze the presentation on [topic] and summarize it"
+  </Accordion>
+  
   <Accordion title="Create Presentations">
     - "Create a blank presentation called 'Q1 Review'"
     - "Make a new presentation titled 'Product Demo'"
     - "Create a presentation called 'Team Meeting' with 5 blank slides"
   </Accordion>
   
-  <Accordion title="Add Slides">
-    - "Add a title slide to presentation 'Q1 Review'"
-    - "Add 3 blank slides to 'Product Demo'"
-    - "Add a section header slide with title 'Key Metrics'"
+  <Accordion title="Update Formatting">
+    - "Update the title page so the background is purple and the text is white"
+    - "Change the first slide background to our brand color"
+    - "Make the text on slide 1 bold and larger"
   </Accordion>
   
-  <Accordion title="Add Content">
-    - "Add title 'Welcome' to the first slide of 'Team Meeting'"
-    - "Add bullet points to slide 2: Point 1, Point 2, Point 3"
-    - "Insert text 'Thank You' on the last slide"
-  </Accordion>
-  
-  <Accordion title="Presentation Management">
-    - "List all my presentations"
-    - "Make a copy of 'Template Deck' and name it 'Client Presentation'"
-    - "Find the presentation titled 'Sales Pitch'"
+  <Accordion title="Add Content & Images">
+    - "Add a new slide with image list layout"
+    - "Add title 'Welcome' to the first slide"
+    - "Create a presentation with an image on one slide"
   </Accordion>
 </AccordionGroup>
 
@@ -168,161 +170,41 @@ Google Slides uses OAuth authentication, so setup is simple. Just sign in and yo
 
 ---
 
+## How It Works
+
+The Google Slides Assistant does all the heavy lifting in the background—you just describe what you need in plain English, and it handles the rest.
+
+**Automatic Operations**
+- Constructs precise API calls using documentation (doesn't guess)
+- Retries failed operations up to 3 times with adjustments
+- Searches all drives for presentations and distinguishes between created vs shared
+- Returns clickable links to presentations
+
+**Smart Features**
+- Generates max 1 image per request, never on title pages unless asked
+- Re-uses content when retrying to avoid recreating from scratch
+- Creates branded title pages with brand background and white text automatically
+
+**Built-In Safety**
+- Always asks for explicit confirmation before destructive operations
+- Prevents incomplete presentations from being returned if creation fails
+
+---
+
 ## What the Assistant Can't Do
 
-Due to Google Slides API limitations, the assistant may have limitations with:
+Due to Google Slides API limitations, the assistant cannot:
 
-- Complex visual designs and themes
-- Images and media (can add image URLs in some cases)
-- Charts and graphs (can create placeholders)
-- Animations and transitions
-- Speaker notes (limited support)
-- Master slide editing
-- Advanced formatting (colors, fonts beyond basics)
+- **Complex visual designs**: Cannot create advanced themes or custom layouts
+- **Animations and transitions**: Cannot add slide animations or transitions
+- **Charts and graphs**: Limited to creating placeholders, not functional charts
+- **Speaker notes**: Limited support for adding speaker notes
+- **Master slide editing**: Cannot modify master slide templates
+- **Advanced formatting**: Limited support for complex colors, fonts, and styling beyond basics
 
 <Note>
-The assistant works best for **creating structure and adding text content**. For complex visual design and branding, you'll need to use Google Slides directly.
+The assistant excels at **creating structured presentations and adding text content**. For complex visual design, custom themes, and advanced formatting, you may need to use Google Slides directly after the assistant creates the initial presentation.
 </Note>
-
----
-
-## Troubleshooting
-
-### "Presentation not found"
-
-**Cause:** Presentation name incorrect or you don't have access
-
-**Solution:**
-- First list presentations: "Show me all my presentations"
-- Use the exact presentation name from the list
-- Or provide the presentation ID from the URL
-
-### "Permission denied"
-
-**Cause:** OAuth connection doesn't have sufficient permissions
-
-**Solution:**
-1. Reconnect your Google account
-2. Ensure you grant all requested permissions (Slides + Drive)
-3. Check that you own or have edit access to the presentation
-
-### Slides don't have expected layout
-
-**Cause:** API creates basic layouts by default
-
-**Solution:**
-- Focus on content rather than complex layouts
-- Use Google Slides directly for layout adjustments
-- The assistant creates functional slides that you can format manually
-
-### Content not appearing correctly
-
-**Cause:** Text placement limitations in API
-
-**Solution:**
-- Keep text content simple and structured
-- Use bullet points and headings
-- Avoid complex multi-column layouts
-- Format manually after creation if needed
-
----
-
-## Working with Presentation IDs
-
-Google Slides can be referenced by name or ID:
-
-**Presentation ID Location:**
-The ID is in the URL:
-```
-https://docs.google.com/presentation/d/PRESENTATION_ID_HERE/edit
-```
-
-**When to use IDs:**
-- When you have multiple presentations with similar names
-- For more reliable targeting
-- When working programmatically
-
-**Example:**
-```
-"Add a slide to presentation ID 1a2b3c4d5e6f7g8h9i0j"
-```
-
----
-
-## Credit Cost Optimization
-
-The Google Slides Assistant saw massive cost reductions through API result minification:
-
-**Before optimization:**
-- Creating a presentation: ~1,830 credits
-- High token consumption from full API responses
-
-**After optimization:**
-- Creating a presentation: ~41 credits
-- 98% reduction in costs!
-
-<Tip>
-Slides operations are now very efficient. Even creating complex multi-slide presentations typically costs under 100 credits.
-</Tip>
-
----
-
-## Presentation Sharing & Permissions
-
-The assistant can work with presentations you own or have edit access to:
-
-**What you can do:**
-- Create new presentations (always owned by you)
-- Edit presentations you own
-- Edit shared presentations where you have edit permission
-
-**What you can't do:**
-- Edit presentations where you only have view/comment access
-- Access presentations not shared with your Google account
-- Modify sharing settings programmatically
-
----
-
-## Best Practices
-
-**Presentation Planning:**
-- Plan slide structure before creating
-- Use consistent naming conventions
-- Create templates for recurring presentation types
-
-**Content Strategy:**
-- Keep text concise and bullet-pointed
-- Use clear slide titles
-- One main idea per slide
-
-**Template Usage:**
-- Create master templates for common needs
-- Copy templates rather than recreating structure
-- Maintain template library in organized folder
-
-**Batch Creation:**
-- Create multiple similar presentations in one request
-- Use consistent structure across batch
-- Customize after creation if needed
-
----
-
-## Google Drive Integration
-
-Google Slides Assistant works with Google Drive:
-
-**Storage:**
-All presentations are stored in your Google Drive
-
-**Organization:**
-- Presentations can be organized in Drive folders
-- Use Drive Assistant for folder operations
-- Reference by name or ID
-
-**Collaboration:**
-- Presentations can be shared like any Drive file
-- Sharing is managed in Google Drive/Slides
-- Assistant works with any presentation you can edit
 
 ---
 
@@ -333,13 +215,7 @@ All presentations are stored in your Google Drive
     Setup instructions for all assistants
   </Card>
   
-  <Card title="Troubleshooting" icon="tools" href="/agent/assistants/assistants-troubleshooting">
-    Fix common errors
-  </Card>
-  
   <Card title="Support" icon="headset" href="/get-started/support">
     Contact our team
   </Card>
 </CardGroup>
-
----

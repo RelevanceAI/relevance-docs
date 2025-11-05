@@ -21,25 +21,19 @@ An AI Assistant Workforce is when multiple AI Assistants work together to comple
   <Card title="AI Assistant Workforce" icon="store">
     Uses pre-built AI Assistants from the Marketplace designed for specific platforms
     
-    • Ready-to-use assistants (Notion, Gmail, HubSpot, etc.)
-    
-    • No setup required beyond connecting integrations
-    
-    • Optimized for common platform tasks
-    
-    • Best for cross-platform workflows
+    - Ready-to-use assistants (Notion, Gmail, HubSpot, etc.)
+    - No setup required beyond connecting integrations
+    - Optimized for common platform tasks
+    - Best for cross-platform workflows
   </Card>
   
   <Card title="Regular Workforce" icon="hammer">
     Uses custom agents you build yourself for specific business needs
     
-    • Tailored to your unique processes
-    
-    • Can include custom tools and logic
-    
-    • Requires agent building and configuration
-    
-    • Best for specialized workflows
+    - Tailored to your unique processes
+    - Can include custom tools and logic
+    - Requires agent building and configuration
+    - Best for specialized workflows
   </Card>
 </CardGroup>
 
@@ -96,7 +90,7 @@ Each assistant in your workforce specializes in one platform (Notion, Gmail, Goo
 
 ## Workforce Example
 
-Here's an example of multiple assistants working together:
+Here's an example of multiple assistants and agents working together:
 
 ### The Task
 
@@ -108,22 +102,26 @@ email the slides to 'colleague@company.com'"
 
 ### What Happens Behind the Scenes
 
-This single request automatically coordinates **4 different AI Assistants**:
+This single request automatically coordinates **a mix of Assistants and Agents**:
+
+<Note>
+This workforce combines **3 pre-built Assistants** (Google Slides, Google Drive, Gmail) with **1 research Agent** to complete the task.
+</Note>
 
 <Steps>
-  <Step title="Research Agent">
+  <Step title="Research Agent (Agent)">
     Searches for relevant information about dinosaurs from knowledge sources or the web
   </Step>
   
-  <Step title="Google Slides Assistant">
+  <Step title="Google Slides Assistant (Assistant)">
     Creates a presentation with the researched content, formats slides, adds structure
   </Step>
   
-  <Step title="Google Drive Assistant">
+  <Step title="Google Drive Assistant (Assistant)">
     Creates the "DinosaurFacts" folder and saves the presentation to it
   </Step>
   
-  <Step title="Gmail Assistant">
+  <Step title="Gmail Assistant (Assistant)">
     Composes and sends an email with the presentation link to the specified recipient
   </Step>
 </Steps>
@@ -235,7 +233,11 @@ This single request automatically coordinates **4 different AI Assistants**:
 ## Need More Help?
 
 <CardGroup cols={2}>
-  <Card title="AI Assistants Overview" icon="robot" href="/agent/assistants/assistants-overview">
+  <Card title="Agents Overview" icon="robot" href="/agent/agent-overview/introduction">
+    Learn about building custom agents
+  </Card>
+  
+  <Card title="AI Assistants Overview" icon="store" href="/agent/assistants/assistants-overview">
     Learn about individual AI Assistants
   </Card>
   
