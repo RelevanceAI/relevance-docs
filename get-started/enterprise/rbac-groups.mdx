@@ -206,8 +206,16 @@ The following features are not yet supported in the current version of RBAC Grou
     Automatic user removal is not currently available. Users must be manually removed from the organization when they leave.
   </Accordion>
   
-  <Accordion title="Project Page User List">
+  <Accordion title="Assigning Individual Roles to Group Members">
     Users who have access only through groups (with no direct access) will not appear in the project user list. They will still have access based on their group membership.
+    
+    If you want to give a specific user a different role than their group, you must:
+    1. Invite them directly to the project (even if they already have access through a group)
+    2. Assign them the desired role
+    
+    <Note>
+      The user will always receive the **highest permission level** from all their sources. For example, if they have Admin access through a group and you assign them Viewer access directly, they will retain Admin permissions because the highest permission always prevails.
+    </Note>
   </Accordion>
   
   <Accordion title="Group Membership Visibility">
