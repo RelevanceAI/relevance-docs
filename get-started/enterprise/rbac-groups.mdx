@@ -26,7 +26,7 @@ This feature dramatically simplifies user management for large teams by leveragi
     Set permissions at the group level for efficient access control across your organization
   </Card>
   <Card title="Automatic Synchronization" icon="arrows-rotate">
-    Groups sync from your IDP every 60 minutes and refresh on SSO login
+    Groups sync from your IDP approximately every 60 minutes
   </Card>
   <Card title="Read-Only Groups" icon="lock">
     IDP groups are managed at the source and cannot be edited within Relevance AI
@@ -37,7 +37,7 @@ This feature dramatically simplifies user management for large teams by leveragi
 </Columns>
 
 <Info>
-  Groups are managed through your identity provider and sync automatically to Relevance AI. Changes made in your IDP will be reflected in Relevance AI within 60 minutes or on the next SSO login.
+  Groups are managed through your identity provider and sync automatically to Relevance AI. Changes made in your IDP will be reflected in Relevance AI approximately every 60 minutes.
 </Info>
 
 ## Setting Up RBAC Groups
@@ -133,10 +133,10 @@ RBAC Groups maintains synchronization with your identity provider to ensure acce
 
 <Columns cols={3}>
   <Card title="Hourly Sync" icon="clock">
-    Groups automatically sync from your IDP every 60 minutes
+    Groups automatically sync from your IDP approximately every 60 minutes
   </Card>
-  <Card title="Login Refresh" icon="arrow-right-to-bracket">
-    Group membership refreshes when users log in via SSO (if group claims are present)
+  <Card title="New User Sign-Up" icon="user-plus">
+    Group permissions are applied automatically during the sign-up process for new users
   </Card>
   <Card title="Background Processing" icon="gears">
     Syncs happen automatically without user intervention
@@ -147,16 +147,20 @@ RBAC Groups maintains synchronization with your identity provider to ensure acce
 
 When a user is added to an IDP group:
 
-1. The change is detected during the next sync (within 60 minutes) or on their next SSO login
+1. The change is detected during the next sync (approximately every 60 minutes)
 2. The user automatically gains access to all projects and assets assigned to that group
 3. The user inherits the group's role and permissions for each resource
 4. No manual intervention is required in Relevance AI
+
+<Note>
+  For users not yet signed up to the platform, their group permissions will be applied during the sign-up process. Once they sign up, the user will be reflected as a member in the group.
+</Note>
 
 ### Removing users from groups
 
 When a user is removed from an IDP group:
 
-1. The change is detected during the next sync or on login
+1. The change is detected during the next sync (approximately every 60 minutes)
 2. The user's group-based access to projects and assets is revoked
 3. If the user has individual (direct) permissions, those are retained
 4. If the user only had group-based access, they lose access to the resource
@@ -202,8 +206,16 @@ The following features are not yet supported in the current version of RBAC Grou
     Automatic user removal is not currently available. Users must be manually removed from the organization when they leave.
   </Accordion>
   
-  <Accordion title="Project Page User List">
+  <Accordion title="Assigning Individual Roles to Group Members">
     Users who have access only through groups (with no direct access) will not appear in the project user list. They will still have access based on their group membership.
+    
+    If you want to give a specific user a different role than their group, you must:
+    1. Invite them directly to the project (even if they already have access through a group)
+    2. Assign them the desired role
+    
+    <Note>
+      The user will always receive the **highest permission level** from all their sources. For example, if they have Admin access through a group and you assign them Viewer access directly, they will retain Admin permissions because the highest permission always prevails.
+    </Note>
   </Accordion>
   
   <Accordion title="Group Membership Visibility">
