@@ -8,7 +8,7 @@ description: "Search, organize, and manage your Gmail inbox with AI using simple
 The Gmail Assistant helps you manage your email through simple, natural language instructions. Search emails, organize your inbox, manage labels, and handle messages—all without manually clicking through Gmail.
 
 <Card title="Clone Gmail Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
-  Get started by cloning from the Marketplace → Search "Gmail"
+  Get started by cloning from the Marketplace → Search "Gmail Assistant"
 </Card>
 
 ---
@@ -175,78 +175,6 @@ Gmail uses OAuth authentication, so setup is much simpler than integrations requ
 
 ---
 
-## Common Use Cases
-
-### Inbox Management
-
-**Daily Inbox Review:**
-```
-"Show me all unread emails from today, grouped by: urgent (from VIPs), team 
-(internal emails), external (clients and partners), and other"
-```
-
-**Email Cleanup:**
-```
-"Archive all read emails older than 90 days except those with labels 'Important' 
-or 'Reference'"
-```
-
-**Zero Inbox System:**
-```
-"Find all emails in inbox without labels and suggest appropriate labels based on 
-sender and subject, then apply the labels"
-```
-
-### Email Search & Retrieval
-
-**Find Specific Emails:**
-```
-"Find the email from john@example.com about the Q4 budget that was sent around 
-December 15th and had a spreadsheet attachment"
-```
-
-**Research Past Conversations:**
-```
-"Show me all email threads with sarah@client.com from the last 6 months about 
-the website project"
-```
-
-**Attachment Search:**
-```
-"Find all PDF attachments sent to me in the last month that contain 'invoice' or 
-'receipt' in the filename"
-```
-
-### Project Organization
-
-**Project-Based Labels:**
-```
-"Create a label structure for 'Project Phoenix' with sub-labels 'Planning', 'Execution', 
-'Review' and organize all related emails by phase based on date and keywords"
-```
-
-**Client Communication Tracking:**
-```
-"For each major client (list of domains), create a dedicated label and apply it to 
-all correspondence, then show me communication frequency per client"
-```
-
-### Bulk Operations
-
-**Promotional Email Cleanup:**
-```
-"Find all emails from shopping/retail sites (containing 'sale', 'discount', 'offer' in 
-subject) older than 3 months and archive them"
-```
-
-**Notification Management:**
-```
-"Identify all automated notification emails (from 'no-reply', 'noreply', 'automated' 
-addresses) and create auto-archive rules"
-```
-
----
-
 ## Built-in Helper Tools
 
 The Gmail Assistant includes a specialized tool for certain operations:
@@ -261,41 +189,6 @@ Required for sending emails through Gmail API:
 <Note>
 Currently, the Gmail Assistant is optimized for **reading and organizing** emails. Sending/composing is available but may require additional configuration. Focus on search, label management, and organization tasks for best results.
 </Note>
-
----
-
-## Tips for Best Results
-
-<Tip>
-**Use specific search criteria:**
-
-Good: "Find emails from john@example.com sent last week with 'proposal' in subject"
-
-This is more effective than: "Find John's emails"
-</Tip>
-
-<Tip>
-**Leverage Gmail's search syntax:**
-
-The assistant understands natural language, but can also work with Gmail operators:
-- "Emails from:john@example.com after:2024/01/01"
-- "Larger than 10MB with attachments"
-</Tip>
-
-<Tip>
-**Organize with labels, not folders:**
-
-Gmail uses labels (tags) not folders. You can apply multiple labels to one email.
-</Tip>
-
-<Tip>
-**Break down bulk operations:**
-
-Instead of "organize my entire inbox," try:
-1. "Find and label client emails from last quarter"
-2. "Archive old promotional emails"
-3. "Create project-based labels for active projects"
-</Tip>
 
 ---
 
@@ -438,28 +331,10 @@ You can revoke the assistant's access anytime:
 
 ---
 
-## Pricing & Credits
-
-The Gmail Assistant uses credits based on:
-- Number of emails searched
-- Complexity of operations
-- Bulk operation size
-
-**Typical credit costs:**
-- Simple search (list recent emails): ~10-30 credits
-- Label management (create/apply labels): ~20-50 credits
-- Bulk operations (archive/organize): ~50-150 credits depending on volume
-
-<Tip>
-Searching and organizing are very efficient operations. Even bulk tasks with hundreds of emails typically cost less than 200 credits.
-</Tip>
-
----
-
 ## Need More Help?
 
 <CardGroup cols={2}>
-  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
+  <Card title="Setup Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
     Setup instructions for all assistants
   </Card>
   
@@ -471,13 +346,3 @@ Searching and organizing are very efficient operations. Even bulk tasks with hun
     Contact our team
   </Card>
 </CardGroup>
-
----
-
-## Related Resources
-
-- [Gmail API Documentation](https://developers.google.com/gmail/api) - Official Gmail API reference
-- [Gmail Help Center](https://support.google.com/mail) - Learn about Gmail features
-- [Google Account Permissions](https://myaccount.google.com/permissions) - Manage connected apps
-- [Relevance AI Marketplace](https://app.relevanceai.com/marketplace) - Explore more assistants
-

@@ -1,11 +1,11 @@
 ---
 title: "Webflow Assistant"
-description: "Manage your Webflow site with simple instructions: create collections, update content, and build pages"
+description: "Manage your Webflow site content with simple instructions: create collections, manage items, and upload assets"
 ---
 
 # Webflow Assistant
 
-The Webflow Assistant helps you manage your Webflow site through simple, natural language instructions. Create collections, update content, manage items, and configure your site—all without manually clicking through the Webflow interface.
+The Webflow Assistant is a research-first problem solver that handles any Webflow CMS task through natural language. It reviews documentation before taking action, intelligently matches patterns in your existing content, and automatically recovers from errors. Whether you're creating collections, managing content, or performing bulk operations, the assistant handles the technical API details while you focus on what you want to accomplish.
 
 <Card title="Clone Webflow Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
   Get started by cloning from the Marketplace → Search "Webflow Assistant"
@@ -15,25 +15,41 @@ The Webflow Assistant helps you manage your Webflow site through simple, natural
 
 ## What Can It Do?
 
-The Webflow Assistant can handle any task supported by the Webflow API, including:
+The Webflow Assistant uses a research-first approach to handle Webflow CMS and site management tasks through natural language requests.
+
+### Core CMS Capabilities
 
 <CardGroup cols={2}>
   <Card title="Collections" icon="database">
-    Create, update, list, and delete CMS collections and fields
+    Create, update, list, and delete CMS collections and custom fields
   </Card>
   
   <Card title="Collection Items" icon="file">
-    Add, edit, publish, and manage items in your collections
+    Add, edit, publish, and manage content items with pattern matching
   </Card>
   
-  <Card title="Site Info" icon="globe">
-    Get site details, domains, and configuration
+  <Card title="Site Configuration" icon="globe">
+    Access site details, domains, and configuration settings
   </Card>
   
   <Card title="Assets" icon="image">
-    Upload and manage images and files
+    Upload and manage images and files in your Webflow site
   </Card>
 </CardGroup>
+
+### Intelligent Content Creation
+
+When creating content, the assistant can:
+- **Pattern match existing content** - Replicates the style and length of existing items
+- **Auto-fill fields** - Intelligently populates all available collection fields
+- **Maintain consistency** - Ensures new content matches your site's existing patterns
+
+### Built-In Safety
+
+The assistant includes smart protections:
+- **Read operations** happen instantly without confirmation
+- **Destructive actions** (deleting content) always require confirmation
+- **Self-healing** - Automatically attempts to fix errors up to 3 times before asking for help
 
 ---
 
@@ -76,116 +92,106 @@ The Site ID is a unique identifier that looks like: `5f8a1b2c3d4e5f6g7h8i9j0k`
 ### Simple Tasks
 
 <AccordionGroup>
-  <Accordion title="List All Collections">
-    **Prompt:** "Show me all the collections on my Webflow site"
+  <Accordion title="List Collections and Fields">
+    **Prompt:** "Show me all the collections on my site and their fields"
     
-    **What it does:** Returns a list of all CMS collections with their names and IDs
+    **What it does:** 
+    - Researches your site structure
+    - Returns all collections with field details
+    - No confirmation needed (read-only operation)
     
-    **Use case:** Understanding your site structure or finding collection IDs
+    **Use case:** Understanding your CMS structure before making changes
   </Accordion>
   
-  <Accordion title="Get Site Information">
-    **Prompt:** "What's the information about my Webflow site?"
-    
-    **What it does:** Returns site name, domains, timezone, and other configuration details
-    
-    **Use case:** Verifying site settings or getting site metadata
-  </Accordion>
-  
-  <Accordion title="List Collection Items">
+  <Accordion title="View Collection Items">
     **Prompt:** "Show me all items in my Blog Posts collection"
     
-    **What it does:** Returns all published and draft items in the specified collection
+    **What it does:**
+    - Lists all items with their field values
+    - Shows both published and draft status
+    - Returns item IDs for future reference
     
-    **Use case:** Auditing content or finding specific items
+    **Use case:** Auditing existing content before updates
   </Accordion>
 </AccordionGroup>
 
 ### Medium Tasks
 
 <AccordionGroup>
-  <Accordion title="Create a New Collection">
-    **Prompt:** "Create a blog collection with fields for title, author, content, published date, and featured image"
-    
-    **What it does:** 
-    - Creates a new CMS collection called "Blog"
-    - Adds all specified fields with appropriate field types
-    - Returns the collection ID and structure
-    
-    **Use case:** Setting up a new content type on your site
-  </Accordion>
-  
-  <Accordion title="Add Collection Item">
-    **Prompt:** "Add a new blog post to my Blog collection with title 'Getting Started with Webflow' and content 'Welcome to our blog...'"
+  <Accordion title="Create Item with Pattern Matching">
+    **Prompt:** "Create a new blog post in the style of my existing posts with title 'New Product Launch'"
     
     **What it does:**
-    - Creates a new item in the Blog collection
-    - Populates it with the provided data
-    - Returns the item ID and details
+    - Analyzes existing blog post structure and style
+    - Replicates the length and format of existing content
+    - Auto-fills all available fields intelligently
+    - Returns the new item with all fields populated
     
-    **Use case:** Adding content programmatically
+    **Use case:** Maintaining content consistency across your site
   </Accordion>
   
-  <Accordion title="Update Collection Item">
-    **Prompt:** "Update the blog post titled 'Getting Started' to change the author to 'Jane Smith'"
+  <Accordion title="Update Multiple Fields">
+    **Prompt:** "Update the blog post 'Getting Started' with author 'Jane Smith', category 'Tutorial', and featured image from my assets"
     
     **What it does:**
-    - Finds the specified blog post
-    - Updates the author field
-    - Publishes the changes
+    - Locates the specific post
+    - Updates all specified fields
+    - Publishes changes automatically
+    - Returns confirmation with updated values
     
-    **Use case:** Bulk content updates or corrections
+    **Use case:** Comprehensive content updates in one request
   </Accordion>
   
-  <Accordion title="Publish Draft Items">
-    **Prompt:** "Publish all draft blog posts"
+  <Accordion title="Create Collection with Fields">
+    **Prompt:** "Create a Team Members collection with name, role, bio, photo, and LinkedIn URL fields"
     
     **What it does:**
-    - Finds all draft items in the blog collection
-    - Publishes each one
-    - Returns confirmation of published items
+    - Reviews Webflow documentation for best practices
+    - Creates collection with appropriate field types
+    - Configures field settings (required, unique, etc.)
+    - Returns collection structure for verification
     
-    **Use case:** Batch publishing scheduled content
+    **Use case:** Setting up new content types quickly
   </Accordion>
 </AccordionGroup>
 
 ### Complex Tasks
 
 <AccordionGroup>
-  <Accordion title="Create Multi-Field Collection">
-    **Prompt:** "Create a Portfolio collection with project name, client name, project date, description, featured image, gallery images (multiple), category tags, and a published checkbox"
+  <Accordion title="Bulk Content Creation">
+    **Prompt:** "Create 5 portfolio items following the pattern of my existing projects. Use these project names: [list]"
     
     **What it does:**
-    - Creates the Portfolio collection
-    - Sets up each field with the appropriate type (text, date, image, multi-image, reference, etc.)
-    - Configures field settings
-    - Returns the complete collection structure
+    - Analyzes existing portfolio items for structure and style
+    - Matches content length and formatting
+    - Auto-fills all required and optional fields
+    - Creates all items maintaining consistency
     
-    **Use case:** Building complex content types with relationships
+    **Use case:** Scaling content production efficiently
   </Accordion>
   
-  <Accordion title="Create Contact Form Collection">
-    **Prompt:** "Create a contact form collection with fields for name, email, phone number, message, submission date, and status dropdown (options: New, In Progress, Resolved)"
+  <Accordion title="Safe Deletion with Confirmation">
+    **Prompt:** "Delete all blog posts with category 'Test'"
     
     **What it does:**
-    - Creates the collection with validation rules
-    - Sets up the dropdown with specified options
-    - Configures date field to auto-populate
-    - Returns form configuration
+    - Finds matching items
+    - **Asks for explicit confirmation** before deletion
+    - Only proceeds after you approve
+    - Returns summary of deleted items
     
-    **Use case:** Building custom form backends
+    **Use case:** Safe cleanup of test or outdated content
   </Accordion>
   
-  <Accordion title="Bulk Update Items">
-    **Prompt:** "Find all blog posts with category 'Uncategorized' and update them to category 'General'"
+  <Accordion title="Multi-Step Content Migration">
+    **Prompt:** "Find all draft blog posts, update their status to published, and add today's date to their published field"
     
     **What it does:**
-    - Queries items matching the criteria
-    - Updates each item's category field
-    - Publishes the changes
-    - Returns summary of items updated
+    - Researches documentation for correct API sequence
+    - Executes steps in proper order
+    - Self-corrects if errors occur (tries up to 3 times)
+    - Returns detailed results for each item
     
-    **Use case:** Data cleanup and standardization
+    **Use case:** Batch publishing with automatic error recovery
   </Accordion>
 </AccordionGroup>
 
@@ -203,102 +209,6 @@ A flexible tool that can make any API call to the Webflow API. The assistant dyn
 - How to handle the response
 
 You don't need to know anything about these technical details—just describe what you want!
-
----
-
-## Common Use Cases
-
-### Content Management
-- **Blog management:** Create posts, update content, publish drafts
-- **Portfolio updates:** Add new projects with images and details
-- **Product catalogs:** Manage e-commerce collections
-- **Team pages:** Update staff bios and photos
-
-### Site Administration
-- **Collection setup:** Create new content types and structures
-- **Bulk operations:** Update multiple items at once
-- **Data migration:** Move content between collections
-- **Quality assurance:** Find and fix inconsistent data
-
-### Workflow Automation
-- **Scheduled publishing:** Publish content on a schedule
-- **Content backups:** Export collection data
-- **Multi-site management:** Update multiple Webflow sites
-- **Integration workflows:** Connect Webflow with other tools
-
----
-
-## Tips for Best Results
-
-<Tabs>
-  <Tab title="Writing Requests">
-    **1. Be specific with collection names**
-    
-    Always include the exact collection name in your request to avoid confusion.
-    
-    **Example:**
-    - Good: "Add a blog post to my 'Company News' collection"
-    - Avoid: "Add a post"
-    
-    ---
-    
-    **2. Use clear field names**
-    
-    If you're not sure what fields exist in a collection, ask the assistant first.
-    
-    **Example:** "What fields are in my Blog collection?"
-  </Tab>
-  
-  <Tab title="Data Requirements">
-    **1. Provide all required field data**
-    
-    Include all the information needed to complete the task in one request. This helps the assistant create complete records without back-and-forth.
-    
-    **Example:**
-    - Good: "Create a blog post with title 'Hello World', author 'Jane', and content 'Welcome to our blog...'"
-    - Avoid: "Create a blog post" (missing required fields)
-    
-    ---
-    
-    **2. Check required fields first**
-    
-    If you're unsure what data is needed, ask the assistant about required fields before creating items.
-    
-    **Example:** "What are the required fields for the Blog collection?"
-  </Tab>
-  
-  <Tab title="Complex Tasks">
-    **1. Break tasks into manageable steps**
-    
-    For very complex operations, split them into multiple sequential requests. This makes troubleshooting easier and improves success rates.
-    
-    **Example workflow:**
-    - First: "Create a Portfolio collection with project name, client, and date fields"
-    - Then: "Now add a new project to the Portfolio collection..."
-    
-    ---
-    
-    **2. Test before bulk operations**
-    
-    When working with multiple items, test your request on a single item first to ensure the format is correct.
-  </Tab>
-</Tabs>
-
----
-
-## What the Assistant Can't Do
-
-Due to Webflow API limitations, the assistant currently cannot:
-
-- Design or modify page layouts visually  
-- Change styles, fonts, or CSS  
-- Modify the Designer canvas  
-- Configure hosting or domain settings  
-- Access Webflow Editor mode  
-
-<Note>
-The assistant works with the **Webflow CMS API**, which focuses on content management. For visual design changes, you'll need to use the Webflow Designer directly.
-</Note>
 
 ---
 
@@ -320,28 +230,10 @@ For advanced troubleshooting or to verify what's possible via the API, see the [
 
 ---
 
-## Pricing & Credits
-
-The Webflow Assistant uses credits based on:
-- Complexity of the task
-- Number of API calls required
-- Length of API responses
-
-**Typical credit costs:**
-- Simple tasks (list collections): ~10-50 credits
-- Medium tasks (create item): ~50-150 credits  
-- Complex tasks (bulk operations): ~150-500 credits
-
-<Tip>
-The assistant automatically optimizes API responses to minimize credit usage while maintaining accuracy.
-</Tip>
-
----
-
 ## Need More Help?
 
 <CardGroup cols={2}>
-  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
+  <Card title="Setup Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
     Setup instructions for all assistants
   </Card>
   
@@ -349,12 +241,3 @@ The assistant automatically optimizes API responses to minimize credit usage whi
     Contact our team
   </Card>
 </CardGroup>
-
----
-
-## Related Resources
-
-- [Webflow API Documentation](https://developers.webflow.com/reference/cms) - Official Webflow API reference
-- [Webflow CMS Guide](https://university.webflow.com/lesson/intro-to-the-cms) - Learn about Webflow CMS
-- [Relevance AI Marketplace](https://app.relevanceai.com/marketplace) - Explore more assistants
-

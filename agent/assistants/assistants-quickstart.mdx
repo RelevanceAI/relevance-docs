@@ -33,25 +33,27 @@ Get your AI assistant up and running in two simple steps.
 <Warning>
 **CRITICAL SETUP - Complete this BEFORE first use**
 
-For assistants requiring API keys (Webflow, HubSpot, etc.), you must add your API credentials before using your assistant, otherwise you'll see authentication errors.
+For assistants requiring API keys (Webflow, etc.), you must add your API credentials before using your assistant, otherwise you'll see authentication errors.
 </Warning>
 
 ### Direct Integrations (No API Key Required)
 
 Some assistants have direct integrations and don't require API keys:
-- **Notion Assistant** - Connect with one click
-- **Salesforce Assistant** - Uses direct integration
-- **Gmail Assistant** - Uses OAuth authentication
-- **Google Docs Assistant** - Uses OAuth authentication
-- **Google Slides Assistant** - Uses OAuth authentication
 
-For these assistants, simply go to the **Tools** tab after cloning and click **Add Account** to sign in and authorize access.
+<CardGroup cols={3}>
+  <Card title="Notion" icon="note" />
+  <Card title="HubSpot" icon="chart-network" />
+  <Card title="Gmail" icon="envelope" />
+  <Card title="Google Docs" icon="file-text" />
+  <Card title="Google Slides" icon="presentation" />
+</CardGroup>
+
+See [setup instructions below](#adding-your-configuration) for how to connect these assistants.
 
 ### API Key Required
 
 The following assistants require API keys from their respective platforms:
 - **Webflow Assistant** - Requires Webflow API key
-- **HubSpot Wizard** - Requires HubSpot API key or Private App token
 
 For these assistants, follow the configuration steps below to add your API key.
 
@@ -81,14 +83,14 @@ Think of an API key as a **secure password** that lets the AI assistant access y
 ### Adding Your Configuration
 
 **For API-key based assistants:**
-1. After cloning, a setup popup should appear automatically → Fill in the values
-2. If the popup doesn't appear: 
+1. After cloning, a setup Popup should appear automatically → Fill in the values
+2. If the Popup doesn't appear: 
    - Go to the **Variables** tab at the top of your assistant
    - Fill in the required fields
    - You'll also see a **Documentation** field that's already pre-loaded—leave this unchanged
    - Click **Save**
 
-**For direct integration assistants (Notion, Salesforce, Gmail, Google Docs, Google Slides):**
+**For direct integration assistants (Notion, HubSpot, Gmail, Google Docs, Google Slides):**
 1. Go to the **Tools** tab in your assistant
 2. Click **Add account** on the integration tool
 3. Sign in and authorize access
@@ -108,12 +110,8 @@ Think of an API key as a **secure password** that lets the AI assistant access y
     Build databases and pages
   </Card>
   
-  <Card title="HubSpot Wizard" icon="chart-network" href="/agent/assistants/hubspot-assistant">
+  <Card title="HubSpot Assistant" icon="chart-network" href="/agent/assistants/hubspot-assistant">
     Manage contacts and deals
-  </Card>
-  
-  <Card title="Salesforce Assistant" icon="cloud" href="/agent/assistants/salesforce-assistant">
-    Handle accounts and leads
   </Card>
   
   <Card title="Gmail Assistant" icon="envelope" href="/agent/assistants/gmail-assistant">

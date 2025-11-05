@@ -5,7 +5,7 @@ description: "Build databases, create pages, and organize your Notion workspace 
 
 # Notion Assistant
 
-The Notion Assistant helps you manage your Notion workspace through simple, natural language instructions. Build complex databases, create linked structures, organize pages, and manage content—all without manually clicking through Notion.
+The Notion Assistant translates plain-language instructions into precise Notion API operations. It validates database schemas before making changes, handles multi-step workflows intelligently, and can even ingest existing Notion pages from URLs to answer questions or provide summaries. Whether you're creating databases, managing pages, or organizing content, the assistant ensures execution-grade accuracy while preventing destructive actions through built-in safety protocols.
 
 <Card title="Clone Notion Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
   Get started by cloning from the Marketplace → Search "Notion Assistant"
@@ -15,25 +15,43 @@ The Notion Assistant helps you manage your Notion workspace through simple, natu
 
 ## What Can It Do?
 
-The Notion Assistant can handle any task supported by the Notion API, including:
+The Notion Assistant interprets natural language and executes structured Notion API operations with intelligent validation and safety protocols.
+
+### Core Capabilities
 
 <CardGroup cols={2}>
-  <Card title="Pages" icon="file">
-    Create, update, archive, and organize pages in your workspace
+  <Card title="Pages & Content" icon="file">
+    Create, update, and organize pages with blocks (paragraphs, headings, lists, toggles)
   </Card>
   
   <Card title="Databases" icon="database">
-    Build databases with custom properties, relationships, and views
+    Build databases with validated schemas, custom properties, and relationships
   </Card>
   
-  <Card title="Content" icon="text">
-    Add and update text, headings, lists, and other content blocks
+  <Card title="Page Ingestion" icon="link">
+    Extract content from Notion URLs to answer questions, summarize, or analyze
   </Card>
   
-  <Card title="Properties" icon="sliders">
-    Manage database properties: text, numbers, dates, relations, and more
+  <Card title="Smart Time Handling" icon="calendar">
+    Converts relative dates ("next Monday", "EOD", "in 2 weeks") to proper format
+  </Card>
+  
+  <Card title="Schema Validation" icon="check-circle">
+    Retrieves and validates database schemas before making changes
+  </Card>
+  
+  <Card title="Works With Casual Language" icon="wand-magic-sparkles">
+    Use everyday terms - say "deadline" and it finds "Due Date"
   </Card>
 </CardGroup>
+
+### Built-In Safety
+
+The assistant includes protective guardrails:
+- **Destructive actions require confirmation** - Never deletes or archives without explicit approval
+- **Schema validation** - Verifies all property types match before creating or updating
+- **Preview before deletion** - Shows affected pages/items before removing them
+- **Auto-retry with recovery** - Attempts failed operations up to 3 times with intelligent error handling
 
 ---
 
@@ -44,12 +62,14 @@ The Notion Assistant can handle any task supported by the Notion API, including:
     Search "Notion Assistant" in the Marketplace and click Clone
   </Step>
   
-  <Step title="Ignore the API setup popup">
-    After cloning, a popup will appear asking for Notion API information. You can ignore and close this popup.
+  <Step title="Ignore the Agent Variables Popup">
+    After cloning, a Popup will appear showing agent variables. This information is already configured and helps the agent form APIs in the background. You don't need to do anything—simply close this Popup.
   </Step>
   
   <Step title="Connect Notion Integration">
     **Relevance AI has a direct Notion integration - no API key needed!**
+    
+    After cloning, you may be automatically prompted to connect your account. If not:
     
     1. Go to the **Tools** tab in your assistant
     2. Click **Add account** on the Notion tool
@@ -118,51 +138,10 @@ Here's a real example of what the assistant created from a single, simple reques
 
 ---
 
-## Tips for Best Results
-
----
-
-**Be explicit about property types** - Specify field types to ensure accuracy  
-*Example: "Create a database with Name (title), Status (select: New/Active/Done), and Due Date (date property)"*
-
----
-
-**Specify relationships clearly** - Describe how databases should connect  
-*Example: "Link the Tasks database to Projects with a relation property called 'Project'"*
-
----
-
-**Include sample data** - Ask for examples to see the structure immediately  
-*Example: "...and add 3 sample tasks to show how it works"*
-
----
-
-**Break down complex requests** - Split large projects into steps  
-*Example: First "Create the main databases" then "Add relationships" then "Add sample content"*
-
----
-
-## What the Notion Assistant Can't Do
-
-Due to Notion API limitations, the assistant currently cannot:
-
-- Create or modify visual layouts (column arrangements, etc.)
-- Work with pages/databases not shared with the integration
-- Access inline databases within pages (must be full-page databases)
-- Modify workspace settings or permissions
-- Create views within databases (default view only)
-- Add images or files directly (can add URLs)
-
-<Note>
-Most content and structure operations ARE supported. The assistant excels at creating databases, managing data, and organizing information.
-</Note>
-
----
-
 ## Need More Help?
 
 <CardGroup cols={2}>
-  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
+  <Card title="Setup Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
     Setup instructions for all assistants
   </Card>
   

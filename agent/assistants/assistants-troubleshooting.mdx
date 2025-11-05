@@ -88,15 +88,6 @@ These are the most common issues users face when first setting up their assistan
     
     Without sharing, the assistant can't see your content even with a valid API key.
   </Tab>
-  
-  <Tab title="Salesforce">
-    **Check your domain:**
-    
-    The domain should match your Salesforce instance:
-    - Format: `yourcompany.my.salesforce.com`
-    - Don't include `https://`
-    - Find it in your browser URL when logged into Salesforce
-  </Tab>
 </Tabs>
 
 ---
@@ -119,37 +110,6 @@ These are the most common issues users face when first setting up their assistan
 3. **For Notion:** Make sure pages/databases are shared with the integration
 
 4. **For HubSpot:** You may need a Private App token instead of a standard API key for certain operations
-
----
-
-### "Invalid Credentials" / "Login Failed"
-
-**For Salesforce specifically:**
-
-**Cause:** Username, password, or security token is incorrect
-
-**Solutions:**
-
-<Steps>
-  <Step title="Reset your security token">
-    1. Go to Salesforce Setup
-    2. Navigate to **Personal Information**
-    3. Click **Reset My Security Token**
-    4. Check your email for the new token
-    5. Update in Variables tab
-  </Step>
-  
-  <Step title="Verify username and password">
-    - Username: Your Salesforce login email
-    - Password: Your Salesforce password (not security token)
-    - These should be the same credentials you use to log in
-  </Step>
-  
-  <Step title="Check your domain">
-    - Should be: `yourcompany.my.salesforce.com`
-    - Or your custom domain if you have one
-  </Step>
-</Steps>
 
 ---
 
@@ -475,22 +435,3 @@ Avoid common issues by following these best practices:
 <Tip>
 **Save successful task patterns** for reuse in the future
 </Tip>
-
----
-
-## Related Resources
-
-<CardGroup cols={2}>
-  <Card title="Quick Start Guide" icon="rocket" href="/agent/assistants/assistants-quickstart">
-    Setup instructions for all assistants
-  </Card>
-  
-  <Card title="Webflow Assistant" icon="globe" href="/agent/assistants/webflow-assistant">
-    Webflow-specific troubleshooting
-  </Card>
-  
-  <Card title="Get Support" icon="life-ring" href="/get-started/support">
-    Contact our support team
-  </Card>
-</CardGroup>
-
