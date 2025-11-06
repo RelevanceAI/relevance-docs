@@ -46,28 +46,9 @@ The Google Slides Assistant can handle any Google Slides-related task:
 
 ## Quick Setup
 
-<Steps>
-  <Step title="Clone from Marketplace">
-    Search "Google Slides Assistant" in the Marketplace and click Clone
-  </Step>
-  
-  <Step title="Ignore the Agent Variables Popup">
-    After cloning, a Popup will appear showing agent variables. This information is already configured and helps the agent form APIs in the background. You don't need to do anything—simply close this Popup.
-  </Step>
-  
-  <Step title="Connect Google Slides Integration">
-    **Relevance AI has a direct Google Slides integration - no API key needed!**
-    
-    After cloning, you may be automatically prompted to connect your account. If not:
-    
-    1. Go to the **Tools** tab in your assistant
-    2. Click **Add account** on the Google Slides tool
-    3. Sign in to your Google account
-    4. Grant the requested permissions (Slides + Drive access)
-    
-    That's it! The integration is now connected.
-  </Step>
-</Steps>
+<Card title="Clone and Set Up This Assistant" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+  Follow our step-by-step guide with video walkthrough to clone the Google Slides Assistant and connect your account
+</Card>
 
 ---
 
@@ -167,27 +148,6 @@ The Google Slides Assistant can handle any Google Slides-related task:
     **Use case:** Batch presentation creation
   </Accordion>
 </AccordionGroup>
-
----
-
-## How It Works
-
-The Google Slides Assistant does all the heavy lifting in the background—you just describe what you need in plain English, and it handles the rest.
-
-**Automatic Operations**
-- Constructs precise API calls using documentation (doesn't guess)
-- Retries failed operations up to 3 times with adjustments
-- Searches all drives for presentations and distinguishes between created vs shared
-- Returns clickable links to presentations
-
-**Smart Features**
-- Generates max 1 image per request, never on title pages unless asked
-- Re-uses content when retrying to avoid recreating from scratch
-- Creates branded title pages with brand background and white text automatically
-
-**Built-In Safety**
-- Always asks for explicit confirmation before destructive operations
-- Prevents incomplete presentations from being returned if creation fails
 
 ---
 

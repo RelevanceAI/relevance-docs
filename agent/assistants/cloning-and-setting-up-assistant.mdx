@@ -1,19 +1,19 @@
 ---
 title: "Cloning and Setting up Assistant"
-description: "Clone and configure your AI assistant"
+description: "Clone and configure your AI Assistant"
 ---
 
 # Cloning and Setting up Assistant
 
-Get your AI assistant up and running in two simple steps.
+Get your AI Assistant up and running in two simple steps.
 
 <Steps>
   <Step title="Find Your Assistant">
-    Clone the assistant from the Marketplace
+    Clone the Assistant from the Marketplace
   </Step>
   
   <Step title="Configure Credentials">
-    Add your API key and settings (some assistants use direct integrations and don't need API keys)
+    Add your API key and settings (some Assistants use direct integrations and don't need API keys)
   </Step>
 </Steps>
 
@@ -37,71 +37,75 @@ Get your AI assistant up and running in two simple steps.
 <Warning>
 **CRITICAL SETUP - Complete this BEFORE first use**
 
-For assistants requiring API keys (Webflow, etc.), you must add your API credentials before using your assistant, otherwise you'll see authentication errors.
+For assistants with direct integrations (Notion, Gmail, etc.), you'll connect your account via OAuth.
+
+For API-key assistants (Webflow), you must add your API credentials before using your assistant, otherwise you'll see authentication errors.
 </Warning>
 
-### Direct Integrations (No API Key Required)
+Choose your setup path based on which assistant you cloned:
 
-Some assistants have direct integrations and don't require API keys:
-
-<CardGroup cols={3}>
-  <Card title="Notion" icon="note" />
-  <Card title="HubSpot" icon="chart-network" />
-  <Card title="Gmail" icon="envelope" />
-  <Card title="Google Docs" icon="file-text" />
-  <Card title="Google Slides" icon="presentation" />
-</CardGroup>
-
-See [setup instructions below](#adding-your-configuration) for how to connect these assistants.
-
-### API Key Required
-
-The following assistants require API keys from their respective platforms:
-- **Webflow Assistant** - Requires Webflow API key
-
-For these assistants, follow the configuration steps below to add your API key.
-
-### Configuration Checklist (For API-Key Based Assistants)
-
-For assistants that require API keys, you'll need to provide:
-
-- **API Key** - A special access token from your integration (see instructions below)
-- **Site/Account ID** - Your specific workspace or site identifier (only for some assistants)
-  - **Webflow:** Requires Site ID → [How to get your Site ID](/agent/assistants/webflow-assistant#how-to-get-your-webflow-site-id)
-
-### What is an API Key?
-
-Think of an API key as a **secure password** that lets the AI assistant access your account on your behalf. It's like giving the assistant a special key to your workspace so it can create, update, and manage things for you—without needing your actual login password.
-
-**Why you need it:**
-- The assistant needs permission to make changes in your account
-- API keys are safer than sharing your password
-- You can revoke the key anytime if needed
-
-**How to Find Your API Key:**
-
-<Note>
-**API keys are managed by the external platform provider** (Webflow, HubSpot, etc.), not within Relevance AI. You'll need to navigate to your account on the respective platform to generate or locate your API key. Each platform has its own API documentation and guides—if you need additional help, search for "[Platform Name] API key" (e.g., "Webflow API key") to find official setup guides and support resources.
-</Note>
-
-### Adding Your Configuration
-
-**For API-key based assistants:**
-1. After cloning, a setup Popup should appear automatically → Fill in the values
-2. If the Popup doesn't appear: 
-   - Go to the **Variables** tab at the top of your assistant
-   - Fill in the required fields
-   - You'll also see a **Documentation** field that's already pre-loaded—leave this unchanged
-   - Click **Save**
-
-**For direct integration assistants (Notion, HubSpot, Gmail, Google Docs, Google Slides):**
-<div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
-<iframe src="https://app.supademo.com/embed/cmhlkrbw80gg5la10v1na0qm7" frameBorder="0" title="Invite a user to a project in Relevance AI" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
-</div>
-
-1. Go to the **Variables** tab in your assistant
-2. Click **Configure** 
-3. Connect your account
+<Tabs>
+  <Tab title="Direct Integrations">
+    **For example:** Notion, HubSpot, Gmail, Google Docs, Google Slides
+    
+    <div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
+    <iframe src="https://app.supademo.com/embed/cmhlkrbw80gg5la10v1na0qm7" frameBorder="0" title="Connect direct integration assistant" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+    </div>
+    
+    **Setup Steps:**
+    
+    1. Go to the **Tools** tab in your assistant
+    2. Click **Add account** on the integration tool
+    3. Sign in with your account (e.g., Google, Notion, HubSpot)
+    4. Grant the requested permissions
+    
+    **That's it! ✓** Your assistant is ready to use.
+  </Tab>
+  
+  <Tab title="API Key Setup">
+    **For example:** Webflow
+    
+    <div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
+    <iframe src="https://app.supademo.com/embed/cmhmn3zp7094edqxay6trr9uj" frameBorder="0" title="Configure API key assistant" allow="clipboard-write" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+    </div>
+    
+    **Setup Steps:**
+    
+    1. Get your API key from the platform (see accordion below for help)
+    2. After cloning, a setup popup should appear → Fill in the values
+    3. If the popup doesn't appear:
+       - Go to the **Variables** tab at the top of your assistant
+       - Fill in the required fields (API Key, Site ID, etc.)
+       - Leave the **Documentation** field unchanged (it's pre-loaded)
+       - Click **Save**
+    
+    <AccordionGroup>
+      <Accordion title="What is an API Key?" icon="key">
+        Think of an API key as a **secure password** that lets the AI assistant access your account on your behalf. It's like giving the assistant a special key to your workspace so it can create, update, and manage things for you—without needing your actual login password.
+        
+        **Why you need it:**
+        - The assistant needs permission to make changes in your account
+        - API keys are safer than sharing your password
+        - You can revoke the key anytime if needed
+      </Accordion>
+      
+      <Accordion title="How to Find Your API Key" icon="magnifying-glass">
+        **API keys are managed by the external platform provider** (Webflow, etc.), not within Relevance AI. You'll need to navigate to your account on the respective platform to generate or locate your API key.
+        
+        Each platform has its own API documentation and guides. For additional help, search for "[Platform Name] API key" (e.g., "Webflow API key") to find official setup guides and support resources.
+      </Accordion>
+      
+      <Accordion title="Configuration Checklist for Webflow" icon="list-check">
+        For Webflow Assistant, you'll need to provide:
+        
+        - **API Key** - Your Webflow API token
+        - **Site ID** - Your specific Webflow site identifier
+        
+        → [How to get your Webflow Site ID](/agent/assistants/webflow-assistant#how-to-get-your-webflow-site-id)
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
 
 ---
 

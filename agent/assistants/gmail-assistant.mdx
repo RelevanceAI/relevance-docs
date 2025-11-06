@@ -45,28 +45,9 @@ The Gmail Assistant can handle any task supported by the Gmail API, including:
 
 ## Quick Setup
 
-<Steps>
-  <Step title="Clone from Marketplace">
-    Search "Gmail Assistant" in the Marketplace and click Clone
-  </Step>
-  
-  <Step title="Ignore the Agent Variables Popup">
-    After cloning, a Popup will appear showing agent variables. This information is already configured and helps the agent form APIs in the background. You don't need to do anything—simply close this Popup.
-  </Step>
-  
-  <Step title="Connect Gmail Integration">
-    **Relevance AI has a direct Gmail integration - no API key needed!**
-    
-    After cloning, you may be automatically prompted to connect your account. If not:
-    
-    1. Go to the **Tools** tab in your assistant
-    2. Click **Add account** on the Gmail tool
-    3. Sign in to your Google account
-    4. Grant the requested permissions
-    
-    That's it! The integration is now connected.
-  </Step>
-</Steps>
+<Card title="Clone and Set Up This Assistant" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+  Follow our step-by-step guide with video walkthrough to clone the Gmail Assistant and connect your account
+</Card>
 
 ---
 
@@ -179,34 +160,6 @@ The Gmail Assistant can handle any task supported by the Gmail API, including:
     **Use case:** Newsletter cleanup and subscription management
   </Accordion>
 </AccordionGroup>
-
----
-
-## How It Works
-
-The Gmail Assistant handles complex email operations automatically:
-
-**Smart Email Sending**
-- Automatically retrieves your sender email address using your Gmail account ID
-- Converts email content to base64-encoded format for Gmail API compatibility
-- Handles HTML formatting for subject lines and email bodies
-- Manages attachment encoding and MIME types seamlessly
-
-**Intelligent Label Management**
-- Checks if labels exist before applying them
-- Creates missing labels automatically when needed
-- Uses actual label names (not IDs) for natural interactions
-
-**Built-In Error Recovery**
-- Consults Gmail API documentation to ensure accuracy
-- Automatically retries failed operations up to 3 times
-- Adapts approach based on error messages
-- Provides clear feedback on what went wrong and how it's being fixed
-
-**Full Content Retrieval**
-- Gets complete email bodies, not just thread IDs
-- Retrieves all metadata and headers
-- Handles query strings as URL parameters automatically
 
 ---
 
