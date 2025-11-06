@@ -1,0 +1,132 @@
+---
+title: "Notion Assistant"
+description: "Build databases, create pages, and organize your Notion workspace using plain English"
+---
+
+# Notion Assistant
+
+Tell the Notion Assistant what you want in simple instructions, and it handles the technical details. It validates your requests before making changes, handles complex workflows, and can even read existing Notion pages to answer questions.
+
+<Card title="Clone Notion Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
+  Get started by cloning from the Marketplace → Search "Notion Assistant"
+</Card>
+
+---
+
+## What Can It Do?
+
+The Notion Assistant interprets natural language and executes structured Notion API operations with intelligent validation and safety protocols.
+
+### Core Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Pages & Content" icon="file">
+    Create, update, and organize pages with blocks (paragraphs, headings, lists, toggles)
+  </Card>
+  
+  <Card title="Databases" icon="database">
+    Build databases with validated schemas, custom properties, and relationships
+  </Card>
+  
+  <Card title="Page Ingestion" icon="link">
+    Extract content from Notion URLs to answer questions, summarize, or analyze
+  </Card>
+  
+  <Card title="Smart Time Handling" icon="calendar">
+    Converts relative dates ("next Monday", "EOD", "in 2 weeks") to proper format
+  </Card>
+  
+  <Card title="Schema Validation" icon="check-circle">
+    Retrieves and validates database schemas before making changes
+  </Card>
+  
+  <Card title="Works With Casual Language" icon="wand-magic-sparkles">
+    Use everyday terms - say "deadline" and it finds "Due Date"
+  </Card>
+</CardGroup>
+
+### Built-In Safety
+
+The assistant includes protective guardrails:
+- **Destructive actions require confirmation** - Never deletes or archives without explicit approval
+- **Schema validation** - Verifies all property types match before creating or updating
+- **Preview before deletion** - Shows affected pages/items before removing them
+- **Auto-retry with recovery** - Attempts failed operations up to 3 times with intelligent error handling
+
+---
+
+## Quick Setup
+
+<Card title="Clone and Set Up This Assistant" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+  Follow our step-by-step guide with video walkthrough to clone the Notion Assistant and connect your account
+</Card>
+
+---
+
+## What Can the Notion Assistant Build?
+
+Here's a real example of what the assistant created from a single, simple request—no technical knowledge required.
+
+<Accordion title="See the complete example: Task Management System">
+  ### The Request
+  
+  "Build a complete task management system in Notion. Create a page called 'Task Management System'. Inside that, create a 'Projects' database with properties: Name (title), Status (select: 'Active', 'On Hold', 'Completed'), Owner (person), and Due Date (date). Then create a 'Tasks' database with properties: Task Name (title), Status (select: 'Not Started', 'In Progress', 'Blocked', 'Done'), Priority (select), Project (relation to 'Projects'), and Assignee (person). Link the two databases via a relation, and create three sample projects and 10 tasks distributed among them."
+  
+  ---
+  
+  ### What the Notion Assistant Created
+  
+  #### Projects Database
+  
+  | Project | Status | Due Date |
+  |---------|---------|----------|
+  | Marketing Campaign | Completed | July 31, 2025 |
+  | Mobile App Launch | On Hold | September 1, 2025 |
+  | Website Redesign | Active | August 15, 2025 |
+  
+  #### Tasks Database (Sample)
+  
+  | Task | Project | Priority | Status |
+  |------|---------|----------|---------|
+  | QA review | Website Redesign | Medium | Not Started |
+  | Design email template | Marketing Campaign | Low | Not Started |
+  | Schedule social posts | Marketing Campaign | Medium | Done |
+  | Create ad copy | Marketing Campaign | High | Done |
+  | Beta testing | Mobile App Launch | Medium | In Progress |
+  | App store submission | Mobile App Launch | High | Not Started |
+  | Write user documentation | Website Redesign | Low | Blocked |
+  | Develop login system | Website Redesign | Medium | Not Started |
+  | Design homepage | Website Redesign | High | In Progress |
+  
+  **Plus:** All databases are linked with bidirectional relationships, so projects show their related tasks and tasks link back to their projects.
+  
+  ---
+  
+  ### Behind the Scenes
+  
+  The assistant made **16 API calls** in the background to build this complete system—all automatically figured out and executed.
+  
+  **Manual time saved:** 15-20 minutes of clicking through Notion's interface
+</Accordion>
+
+**What makes this impressive:**
+- The assistant understood the complex request and broke it into logical steps
+- Made 16 sequential API calls automatically to build everything
+- Created both databases with proper field types and configurations
+- Generated realistic sample data (3 projects, 10 tasks)
+- Established relationships between the databases automatically
+- Saved significant manual work—all from a single natural language instruction
+
+---
+
+## Need More Help?
+
+<CardGroup cols={2}>
+  <Card title="Setup Guide" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Support" icon="headset" href="/get-started/support">
+    Contact our team
+  </Card>
+</CardGroup>

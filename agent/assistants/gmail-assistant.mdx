@@ -1,0 +1,193 @@
+---
+title: "Gmail Assistant"
+description: "Search, send, and organize your Gmail—just use plain English"
+---
+
+# Gmail Assistant
+
+Search, send, organize, and manage your inbox—all through simple conversation without manually clicking through Gmail.
+
+<Card title="Clone Gmail Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
+  Get started by cloning from the Marketplace → Search "Gmail Assistant"
+</Card>
+
+---
+
+## What Can It Do?
+
+The Gmail Assistant can handle any task supported by the Gmail API, including:
+
+<CardGroup cols={2}>
+  <Card title="Send & Compose" icon="paper-plane">
+    Send emails, create drafts, reply to threads with attachments
+  </Card>
+  
+  <Card title="Search & Retrieve" icon="magnifying-glass">
+    Find emails by sender, subject, date, or content with full email body
+  </Card>
+  
+  <Card title="Labels" icon="tags">
+    Create, apply, and manage email labels intelligently
+  </Card>
+  
+  <Card title="Organization" icon="folder">
+    Archive, mark as read/unread, star emails, bulk operations
+  </Card>
+</CardGroup>
+
+**Key Features:**
+- **Automatic retry logic**: Up to 3 retry attempts with modifications based on error responses
+- **Smart label management**: Checks if labels exist before applying, creates them if needed
+- **Full email retrieval**: Gets complete email content including body, not just thread IDs
+- **Safety confirmations**: Always asks before performing destructive operations (deletions, permanent modifications)
+
+---
+
+## Quick Setup
+
+<Card title="Clone and Set Up This Assistant" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+  Follow our step-by-step guide with video walkthrough to clone the Gmail Assistant and connect your account
+</Card>
+
+---
+
+## Example Tasks
+
+### Simple Tasks
+
+<AccordionGroup>
+  <Accordion title="Send & Compose">
+    - "Send an email to john@example.com with subject 'Quick question'"
+    - "Create a draft reply to thread [message id] with the message 'I'll review this and get back to you by Friday'"
+    - "Send an email with an attachment to sarah@company.com"
+    - "Reply to the latest email from my manager saying I'll have it done today"
+  </Accordion>
+  
+  <Accordion title="Search Emails">
+    - "Get my last 5 emails"
+    - "Find emails from john@example.com"
+    - "Search for emails containing 'budget approval' in the subject or body"
+    - "Find all unread emails from sarah@company.com that have attachments and were received in the last 30 days"
+    - "Get the full content of the most recent email in thread [id]"
+  </Accordion>
+  
+  <Accordion title="Email Organization">
+    - "Mark message [message id] as read"
+    - "Archive emails older than 6 months from 'promotions@store.com'"
+    - "Star emails from my manager from this week"
+    - "Mark email with subject 'Q1 Report' as important"
+  </Accordion>
+  
+  <Accordion title="Label Management">
+    - "List all my labels"
+    - "Create a new label called 'Project Alpha'"
+    - "Add label 'Urgent' to emails from boss@company.com from today"
+    - "Create a draft reply to thread [message id] and add the 'Follow-up' label"
+  </Accordion>
+</AccordionGroup>
+
+### Medium Tasks
+
+<AccordionGroup>
+  <Accordion title="Advanced Search with Content">
+    - "Find all emails from 'sarah@example.com' sent in January with attachments"
+    - "Search for emails containing 'meeting' in the subject, unread, from this week"
+    - "When is my [x] meeting? Find relevant emails including full email content"
+    - "Search for emails containing 'budget approval' that are not in trash"
+    - "Find all emails from my team (list of addresses) from this quarter"
+  </Accordion>
+  
+  <Accordion title="Bulk Organization">
+    - "Archive all emails from 'notifications@app.com' older than 3 months"
+    - "Mark all emails with label 'To Review' as read"
+    - "Add label 'Q1 2024' to all emails from January through March"
+    - "Remove 'Inbox' label from all emails older than 1 year"
+  </Accordion>
+  
+  <Accordion title="Label Organization">
+    - "Create labels for each project: 'Website', 'Marketing', 'Sales' and apply them to relevant emails based on subject keywords"
+    - "Find all emails about 'Budget' and add them to label 'Finance'"
+    - "Create a 'VIP' label and apply it to emails from key clients (list of addresses)"
+  </Accordion>
+  
+  <Accordion title="Inbox Cleanup">
+    - "Find promotional emails older than 6 months and archive them"
+    - "Identify emails with large attachments (>10MB) from this year and list them"
+    - "Find all calendar invites from last month and remove them from inbox"
+  </Accordion>
+</AccordionGroup>
+
+### Complex Tasks
+
+<AccordionGroup>
+  <Accordion title="Intelligent Organization">
+    **Request:** "Organize my inbox by creating labels for different senders: create 'Clients' label for emails from client domains, 'Team' for internal emails, 'Vendors' for our suppliers, and 'Personal' for non-work emails, then apply labels to all emails from last 3 months"
+    
+    **What it does:**
+    - Creates the label structure
+    - Analyzes email addresses and domains
+    - Categorizes based on domain patterns
+    - Applies appropriate labels to matching emails
+    - Provides summary of emails organized by category
+    
+    **Use case:** Bulk inbox organization and categorization
+  </Accordion>
+  
+  <Accordion title="Follow-up System">
+    **Request:** "Find all emails I sent asking for information or feedback in the last 2 weeks where I haven't received a reply, mark them with 'Needs Follow Up' label, and list them with the original subject and recipient"
+    
+    **What it does:**
+    - Searches sent emails with question patterns
+    - Checks for replies in threads
+    - Identifies emails without responses
+    - Creates and applies follow-up label
+    - Generates actionable follow-up list
+    
+    **Use case:** Email follow-up tracking
+  </Accordion>
+  
+  <Accordion title="Newsletter Management">
+    **Request:** "Find all newsletter/marketing emails from the last year (emails with 'unsubscribe' link), group them by sender, show me the top 10 senders by volume, and archive all except the top 3"
+    
+    **What it does:**
+    - Identifies marketing emails using unsubscribe link pattern
+    - Groups by sender domain
+    - Counts volume per sender
+    - Ranks senders by frequency
+    - Archives emails from lower-volume senders
+    - Returns report with sender statistics
+    
+    **Use case:** Newsletter cleanup and subscription management
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## What the Assistant Can't Do
+
+Due to Gmail API limitations, the assistant cannot:
+
+- **Modify Gmail settings**: Cannot change filters, forwarding rules, or account settings
+- **Access Google Chat messages**: Only Gmail emails are accessible
+- **Create automated rules/filters**: Can suggest them but cannot implement auto-filters
+- **Permanently delete emails**: Can move to trash, but cannot bypass trash (safety feature)
+- **Modify email content after sending**: Sent emails cannot be edited
+- **Access other Google Workspace apps**: Limited to Gmail only (unless separately integrated)
+
+<Note>
+The assistant excels at the complete email workflow: **searching with full content retrieval, organizing, labeling, composing, and sending emails**. HTML formatting and attachments are fully supported.
+</Note>
+
+---
+
+## Need More Help?
+
+<CardGroup cols={2}>
+  <Card title="Setup Guide" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Support" icon="headset" href="/get-started/support">
+    Contact our team
+  </Card>
+</CardGroup>

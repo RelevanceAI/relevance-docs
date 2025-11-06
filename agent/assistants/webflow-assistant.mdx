@@ -1,0 +1,249 @@
+---
+title: "Webflow Assistant"
+description: "Manage your Webflow site content with simple instructions: create collections, manage items, and upload assets"
+---
+
+# Webflow Assistant
+
+Tell the Webflow Assistant what you want in plain English, and the Assistant handles the technical details. It researches the right API calls, matches your content patterns, and auto-fixes errors along the way.
+
+<Card title="Clone Webflow Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
+  Get started by cloning from the Marketplace → Search "Webflow Assistant"
+</Card>
+
+---
+
+## What Can It Do?
+
+The Webflow Assistant uses a research-first approach to handle Webflow CMS and site management tasks through natural language requests.
+
+### Core CMS Capabilities
+
+<CardGroup cols={2}>
+  <Card title="Collections" icon="database">
+    Create, update, list, and delete CMS collections and custom fields
+  </Card>
+  
+  <Card title="Collection Items" icon="file">
+    Add, edit, publish, and manage content items with pattern matching
+  </Card>
+  
+  <Card title="Site Configuration" icon="globe">
+    Access site details, domains, and configuration settings
+  </Card>
+  
+  <Card title="Assets" icon="image">
+    Upload and manage images and files in your Webflow site
+  </Card>
+</CardGroup>
+
+### Intelligent Content Creation
+
+When creating content, the assistant can:
+- **Pattern match existing content** - Replicates the style and length of existing items
+- **Auto-fill fields** - Intelligently populates all available collection fields
+- **Maintain consistency** - Ensures new content matches your site's existing patterns
+
+### Built-In Safety
+
+The assistant includes smart protections:
+- **Read operations** happen instantly without confirmation
+- **Destructive actions** (deleting content) always require confirmation
+- **Self-healing** - Automatically attempts to fix errors up to 3 times before asking for help
+
+---
+
+## Quick Setup
+
+<Steps>
+  <Step title="Gather Your Credentials">
+    Before setting up, you'll need:
+    - **Webflow API Key** → [How to get it](https://developers.webflow.com/reference/authorization)
+    - **Site ID** → [How to find it](#how-to-get-your-webflow-site-id)
+  </Step>
+  
+  <Step title="Clone and Configure">
+    <Card title="Clone and Set Up This Assistant" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+      Follow our step-by-step guide with video walkthrough to clone and configure the assistant (use the "API Key Setup" tab)
+    </Card>
+  </Step>
+</Steps>
+
+---
+
+## How to Get Your Webflow Site ID
+
+Your Site ID is required to configure the Webflow Assistant. Here's how to find it:
+
+<Steps>
+  <Step title="Log in to Webflow">
+    Go to [webflow.com](https://webflow.com) and sign in to your account
+  </Step>
+  
+  <Step title="Open Your Site Dashboard">
+    Select the site you want to connect to the assistant
+  </Step>
+  
+  <Step title="Find the Site ID">
+    Your Site ID is in the URL when viewing your site dashboard: `webflow.com/dashboard/sites/YOUR_SITE_ID_HERE/...`
+  </Step>
+</Steps>
+
+**Alternative Method:** Go to **Site Settings** → **General** tab, and you'll see your Site ID displayed there.
+
+<Tip>
+The Site ID is a unique identifier that looks like: `5f8a1b2c3d4e5f6g7h8i9j0k`
+</Tip>
+
+---
+
+## Example Tasks
+
+### Simple Tasks
+
+<AccordionGroup>
+  <Accordion title="List Collections and Fields">
+    **Prompt:** "Show me all the collections on my site and their fields"
+    
+    **What it does:** 
+    - Researches your site structure
+    - Returns all collections with field details
+    - No confirmation needed (read-only operation)
+    
+    **Use case:** Understanding your CMS structure before making changes
+  </Accordion>
+  
+  <Accordion title="View Collection Items">
+    **Prompt:** "Show me all items in my Blog Posts collection"
+    
+    **What it does:**
+    - Lists all items with their field values
+    - Shows both published and draft status
+    - Returns item IDs for future reference
+    
+    **Use case:** Auditing existing content before updates
+  </Accordion>
+</AccordionGroup>
+
+### Medium Tasks
+
+<AccordionGroup>
+  <Accordion title="Create Item with Pattern Matching">
+    **Prompt:** "Create a new blog post in the style of my existing posts with title 'New Product Launch'"
+    
+    **What it does:**
+    - Analyzes existing blog post structure and style
+    - Replicates the length and format of existing content
+    - Auto-fills all available fields intelligently
+    - Returns the new item with all fields populated
+    
+    **Use case:** Maintaining content consistency across your site
+  </Accordion>
+  
+  <Accordion title="Update Multiple Fields">
+    **Prompt:** "Update the blog post 'Getting Started' with author 'Jane Smith', category 'Tutorial', and featured image from my assets"
+    
+    **What it does:**
+    - Locates the specific post
+    - Updates all specified fields
+    - Publishes changes automatically
+    - Returns confirmation with updated values
+    
+    **Use case:** Comprehensive content updates in one request
+  </Accordion>
+  
+  <Accordion title="Create Collection with Fields">
+    **Prompt:** "Create a Team Members collection with name, role, bio, photo, and LinkedIn URL fields"
+    
+    **What it does:**
+    - Reviews Webflow documentation for best practices
+    - Creates collection with appropriate field types
+    - Configures field settings (required, unique, etc.)
+    - Returns collection structure for verification
+    
+    **Use case:** Setting up new content types quickly
+  </Accordion>
+</AccordionGroup>
+
+### Complex Tasks
+
+<AccordionGroup>
+  <Accordion title="Bulk Content Creation">
+    **Prompt:** "Create 5 portfolio items following the pattern of my existing projects. Use these project names: [list]"
+    
+    **What it does:**
+    - Analyzes existing portfolio items for structure and style
+    - Matches content length and formatting
+    - Auto-fills all required and optional fields
+    - Creates all items maintaining consistency
+    
+    **Use case:** Scaling content production efficiently
+  </Accordion>
+  
+  <Accordion title="Safe Deletion with Confirmation">
+    **Prompt:** "Delete all blog posts with category 'Test'"
+    
+    **What it does:**
+    - Finds matching items
+    - **Asks for explicit confirmation** before deletion
+    - Only proceeds after you approve
+    - Returns summary of deleted items
+    
+    **Use case:** Safe cleanup of test or outdated content
+  </Accordion>
+  
+  <Accordion title="Multi-Step Content Migration">
+    **Prompt:** "Find all draft blog posts, update their status to published, and add today's date to their published field"
+    
+    **What it does:**
+    - Researches documentation for correct API sequence
+    - Executes steps in proper order
+    - Self-corrects if errors occur (tries up to 3 times)
+    - Returns detailed results for each item
+    
+    **Use case:** Batch publishing with automatic error recovery
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Built-in Tools
+
+The Webflow Assistant includes one main tool:
+
+### Generic API Call Tool
+A flexible tool that can make any API call to the Webflow API. The assistant dynamically determines:
+- Which endpoint to call
+- What HTTP method to use (GET, POST, PUT, PATCH, DELETE)
+- What data to include in the request body
+- How to handle the response
+
+You don't need to know anything about these technical details—just describe what you want!
+
+---
+
+## Troubleshooting
+
+### Collection names are case-sensitive
+
+When referencing collections, use the exact name (including capitalization) as it appears in Webflow.
+
+**Tip:** If you're unsure, ask: "List all my collections" to see the exact names.
+
+### Webflow API documentation
+
+For advanced troubleshooting or to verify what's possible via the API, see the [Webflow API documentation](https://developers.webflow.com/reference/cms).
+
+---
+
+## Need More Help?
+
+<CardGroup cols={2}>
+  <Card title="Setup Guide" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Support" icon="headset" href="/get-started/support">
+    Contact our team
+  </Card>
+</CardGroup>

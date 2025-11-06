@@ -1,0 +1,179 @@
+---
+title: "Google Docs Assistant"
+description: "Create, edit, and manage Google Docs—just use plain English"
+---
+
+# Google Docs Assistant
+
+Create, edit, and manage your Google Docs through simple conversation.
+
+<Card title="Clone Google Docs Assistant" icon="copy" href="https://app.relevanceai.com/marketplace">
+  Get started by cloning from the Marketplace → Search "Google Docs Assistant"
+</Card>
+
+---
+
+## What Can It Do?
+
+The Google Docs Assistant can handle any Google Docs-related task:
+
+<CardGroup cols={2}>
+  <Card title="Create & Structure" icon="file-plus">
+    Create documents with complex structures, sections, and formatting
+  </Card>
+  
+  <Card title="Edit & Update" icon="pen">
+    Add, replace, and update text in existing documents
+  </Card>
+  
+  <Card title="Add Images" icon="image">
+    Insert images with automatic sizing (600px width by default)
+  </Card>
+  
+  <Card title="Find & Locate" icon="search">
+    Search for documents by name or automatically find file IDs
+  </Card>
+</CardGroup>
+
+**Key Features:**
+- **Research-first approach**: Reviews Google Docs API documentation before taking action
+- **Intelligent error handling**: Automatically retries failed operations up to 3 times with adjustments
+- **Smart file location**: Searches for documents automatically, only asks for IDs when necessary
+- **Safety confirmations**: Always asks for explicit confirmation before destructive actions (deletions)
+- **Careful execution**: Plans API calls in logical sequences and verifies results
+
+---
+
+## Quick Setup
+
+<Card title="Clone and Set Up This Assistant" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+  Follow our step-by-step guide with video walkthrough to clone the Google Docs Assistant and connect your account
+</Card>
+
+---
+
+## Example Tasks
+
+### Simple Tasks
+
+<AccordionGroup>
+  <Accordion title="Create Documents">
+    - "Create a blank document called 'Meeting Notes'"
+    - "Make a new document titled 'Project Proposal'"
+    - "Create a document called 'Weekly Report' with placeholder text"
+  </Accordion>
+  
+  <Accordion title="Add Content">
+    - "Add the text 'Hello World' to document 'Test Document'"
+    - "Append 'Meeting adjourned at 3pm' to 'Meeting Notes'"
+    - "Add a heading 'Introduction' to my document"
+  </Accordion>
+  
+  <Accordion title="Document Management">
+    - "List all my Google Docs"
+    - "Make a copy of 'Template Document' and name it 'New Project Doc'"
+    - "Find the document titled 'Q1 Report'"
+  </Accordion>
+</AccordionGroup>
+
+### Medium Tasks
+
+<AccordionGroup>
+  <Accordion title="Create Structured Documents">
+    - "Create a meeting notes document with sections for Date, Attendees, Agenda, Discussion, and Action Items"
+    - "Make a project proposal with sections: Executive Summary, Background, Objectives, Approach, Timeline, Budget"
+    - "Create a weekly status report with sections for Completed, In Progress, Blockers, and Next Week"
+  </Accordion>
+  
+  <Accordion title="Content Updates">
+    - "In document 'Project Plan', replace 'March' with 'April' wherever it appears"
+    - "Add a new section called 'Conclusions' at the end of 'Research Report'"
+    - "Update the 'Status' section in 'Weekly Report' to say 'On Track'"
+  </Accordion>
+  
+  <Accordion title="Template Creation">
+    - "Create a template for meeting notes with Date, Attendees, Agenda (numbered list), Notes, and Action Items (table)"
+    - "Make a document template for project proposals with all standard sections and placeholder text"
+    - "Create a weekly report template with consistent formatting"
+  </Accordion>
+</AccordionGroup>
+
+### Complex Tasks
+
+<AccordionGroup>
+  <Accordion title="Formatted Document Creation">
+    **Request:** "Create a comprehensive project proposal document with proper formatting: Title page with 'Website Redesign Proposal', Executive Summary section, Background (2 paragraphs of placeholder), Objectives (bullet list of 5 items), Timeline (table with phases and dates), and Budget section"
+    
+    **What it does:**
+    - Creates the document structure
+    - Adds formatted title page
+    - Creates sections with proper heading styles
+    - Inserts bullet lists and tables
+    - Applies consistent formatting
+    - Returns document link
+    
+    **Use case:** Professional document creation
+    
+    <Note>
+    For complex formatting like tables and lists, some assistants include a special HTML formatting tool that works through Google Drive API for better results.
+    </Note>
+  </Accordion>
+  
+  <Accordion title="Document Generation from Data">
+    **Request:** "Create a report document titled 'Q1 Sales Summary' with sections for each region (North, South, East, West), populate with sample sales data, include a summary table at the end, and apply professional formatting"
+    
+    **What it does:**
+    - Creates structured document
+    - Generates regional sections
+    - Populates with data
+    - Creates summary table
+    - Applies formatting
+    - Returns link with preview
+    
+    **Use case:** Automated report generation
+  </Accordion>
+  
+  <Accordion title="Document Series Creation">
+    **Request:** "Create a series of 4 weekly report documents for January (weeks 1-4), each with the same structure: header with week dates, sections for Completed Tasks, Current Tasks, Next Week, and Blockers"
+    
+    **What it does:**
+    - Creates 4 separate documents
+    - Names them appropriately (Week 1, Week 2, etc.)
+    - Applies consistent structure to all
+    - Adds appropriate date headers
+    - Returns links to all documents
+    
+    **Use case:** Recurring document setup
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## What the Assistant Can't Do
+
+Due to Google Docs API limitations, the assistant cannot:
+
+- **Complex visual layouts**: Cannot create columns, text boxes, or advanced layouts
+- **Comments and suggestions**: Cannot add comments or use suggestion mode
+- **Version history**: Cannot access or restore previous versions
+- **Sharing and permissions**: Cannot modify document sharing settings or permissions
+- **Page setup**: Cannot change margins, page size, or orientation
+- **Advanced formatting**: Limited support for styles, themes, and complex formatting
+
+<Note>
+The assistant excels at **content creation, text editing, and basic structure**. For complex visual design and formatting, you may need to use Google Docs directly after the assistant creates the initial document.
+</Note>
+
+---
+
+## Need More Help?
+
+<CardGroup cols={2}>
+  <Card title="Setup Guide" icon="rocket" href="/agent/assistants/cloning-and-setting-up-assistant">
+    Setup instructions for all assistants
+  </Card>
+  
+  <Card title="Support" icon="headset" href="/get-started/support">
+    Contact our team
+  </Card>
+</CardGroup>
