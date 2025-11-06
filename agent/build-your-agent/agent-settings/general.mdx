@@ -41,82 +41,102 @@ Consider the complexity of your agent's typical tasks when setting this value.
 
 #### How It Works
 
-When your agent creates a new task, it uses the LLM to generate a task name based on the instructions you provide here. The agent considers the full context of what it's doing—including trigger data, the workflow it's executing, and the tools it's using—to create a meaningful name.
-
-Think of these instructions as a prompt template that guides the LLM's naming decision. The clearer and more specific your instructions, the more consistent and useful your task names will be.
+When your agent creates a task, it uses the LLM to generate a name based on your instructions. The agent considers the full context—trigger data, workflow, and tools—to create meaningful names. These instructions act as a prompt template guiding the LLM's naming decision.
 
 #### Writing Effective Instructions
 
-When crafting your naming instructions, consider these key factors:
-
-- **Think about scanning:** What information do you need to see at a glance when reviewing your task list? Put the most important details first.
-- **Consider your workflow:** What naming convention makes sense for how you organize and track work? Align task names with your existing processes.
-- **Be consistent:** Use the same format across similar agent types to make it easier to find and filter tasks.
-- **Include key identifiers:** Customer names, dates, action types, or outcomes help you quickly identify what each task is about.
-- **Test and iterate:** Run a few tasks, see how they're named, and adjust your instructions based on what works best for your needs.
+- **Think about scanning:** Put the most important information first
+- **Consider your workflow:** Align names with how you organize work
+- **Be consistent:** Use the same format across similar agents
+- **Include key identifiers:** Customer names, dates, action types, or outcomes
+- **Test and iterate:** Run a few tasks and refine based on results
 
 #### Examples by Use Case
 
-**For Customer Support Agents:**
-```
-Name tasks using this format: [Customer Name] - [Request Type] - [Status]
-Example: John Smith - Refund Request - Completed
-```
+<AccordionGroup>
+  <Accordion title="Customer Support Agents">
+    ```
+    Name tasks using this format: [Customer Name] - [Request Type] - [Status]
+    Example: John Smith - Refund Request - Completed
+    ```
+  </Accordion>
 
-**For Content Creation Agents:**
-```
-Start with the content type, followed by the topic and date.
-Example: Blog Post: AI Agents Guide - 2024-11-06
-```
+  <Accordion title="Content Creation Agents">
+    ```
+    Start with the content type, followed by the topic and date.
+    Example: Blog Post: AI Agents Guide - 2024-11-06
+    ```
+  </Accordion>
 
-**For Data Processing Agents:**
-```
-Include the data source and action performed.
-Example: Processed: LinkedIn Data Export - 150 records
-```
+  <Accordion title="Data Processing Agents">
+    ```
+    Include the data source and action performed.
+    Example: Processed: LinkedIn Data Export - 150 records
+    ```
+  </Accordion>
 
-**For Sales/Lead Management:**
-```
-Use format: [Company Name] - [Action] - [Outcome]
-Example: Acme Corp - Outreach Email - Sent
-```
+  <Accordion title="Sales/Lead Management">
+    ```
+    Use format: [Company Name] - [Action] - [Outcome]
+    Example: Acme Corp - Outreach Email - Sent
+    ```
+  </Accordion>
+</AccordionGroup>
 
 #### Best Practices
 
-**DO:**
-- ✅ Provide a clear format or structure
-- ✅ Include the most important identifying information first
-- ✅ Use consistent terminology that matches your workflow
-- ✅ Keep instructions concise but specific
-- ✅ Test with a few tasks and refine based on results
+<Columns cols={2}>
+  <Card title="DO" icon="circle-check" color="#10b981">
+    - Provide a clear format or structure
+    - Include the most important information first
+    - Use consistent terminology
+    - Keep instructions concise but specific
+    - Test and refine based on results
+  </Card>
 
-**DON'T:**
-- ❌ Make instructions too vague ("Name it something good")
-- ❌ Include too many variables that might not always be available
-- ❌ Use complex conditional logic (keep it simple)
-- ❌ Forget to specify the order of information
+  <Card title="DON'T" icon="circle-xmark" color="#ef4444">
+    - Make instructions too vague
+    - Include variables that might not be available
+    - Use complex conditional logic
+    - Forget to specify information order
+  </Card>
+</Columns>
 
 #### Common Naming Patterns
 
-Here are proven patterns you can adapt for your use case:
+<AccordionGroup>
+  <Accordion title="Chronological">
+    **Format:** `[Date] - [Action] - [Subject]`
+    
+    **Example:** "2024-11-06 - Email Sent - Product Demo"
+    
+    **Best for:** Time-sensitive workflows, audit trails, sequential processes
+  </Accordion>
 
-- **Chronological:** `[Date] - [Action] - [Subject]`  
-  Example: "2024-11-06 - Email Sent - Product Demo"
+  <Accordion title="Hierarchical">
+    **Format:** `[Project] > [Phase] > [Task]`
+    
+    **Example:** "Website Redesign > Development > API Integration"
+    
+    **Best for:** Complex projects with multiple levels, nested workflows
+  </Accordion>
 
-- **Hierarchical:** `[Project] > [Phase] > [Task]`  
-  Example: "Website Redesign > Development > API Integration"
+  <Accordion title="Status-based">
+    **Format:** `[Status] [Subject] - [Details]`
+    
+    **Example:** "Completed: Customer Onboarding - Acme Corp"
+    
+    **Best for:** Task tracking, progress monitoring, filtering by completion
+  </Accordion>
 
-- **Status-based:** `[Status] [Subject] - [Details]`  
-  Example: "Completed: Customer Onboarding - Acme Corp"
-
-- **Actor-focused:** `[Who] - [What] - [When]`  
-  Example: "Sarah Johnson - Contract Review - Nov 6"
-
-#### Related Resources
-
-- **[Task views](/agent/tasks):** Learn how good naming helps with filtering and organizing tasks
-- **[Agent triggers](/agent/build-your-agent/triggers):** Understand when tasks are created and what context is available
-- **[Tool configuration](/tools/tool-builder/tool-settings):** Similar naming principles apply to tools
+  <Accordion title="Actor-focused">
+    **Format:** `[Who] - [What] - [When]`
+    
+    **Example:** "Sarah Johnson - Contract Review - Nov 6"
+    
+    **Best for:** Team collaboration, assignment tracking, accountability
+  </Accordion>
+</AccordionGroup>
 
 ---
 
