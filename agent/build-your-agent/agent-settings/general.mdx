@@ -39,13 +39,97 @@ Consider the complexity of your agent's typical tasks when setting this value.
 
 **What it is:** Guidelines that help your agent create clear, consistent names for new tasks.
 
-**Example instructions:**
+#### How It Works
 
-- "Include the customer name and request type in each task name"
-- "Use the format: [Project]-[Action]-[Date]"
-- "Start with the main goal followed by the specific action needed"
+When your agent creates a task, it uses the LLM to generate a name based on your instructions. The agent considers the full context—trigger data, workflow, and tools—to create meaningful names. These instructions act as a prompt template guiding the LLM's naming decision.
 
-Well-named tasks make your workspace more organized and easier to navigate.
+#### Writing Effective Instructions
+
+- **Think about scanning:** Put the most important information first
+- **Consider your workflow:** Align names with how you organize work
+- **Be consistent:** Use the same format across similar agents
+- **Include key identifiers:** Customer names, dates, action types, or outcomes
+- **Test and iterate:** Run a few tasks and refine based on results
+
+#### Examples by Use Case
+
+<AccordionGroup>
+  <Accordion title="Customer Support Agents">
+    ```
+    Name tasks using this format: [Customer Name] - [Request Type] - [Status]
+    Example: John Smith - Refund Request - Completed
+    ```
+  </Accordion>
+
+  <Accordion title="Content Creation Agents">
+    ```
+    Start with the content type, followed by the topic and date.
+    Example: Blog Post: AI Agents Guide - 2024-11-06
+    ```
+  </Accordion>
+
+  <Accordion title="Data Processing Agents">
+    ```
+    Include the data source and action performed.
+    Example: Processed: LinkedIn Data Export - 150 records
+    ```
+  </Accordion>
+
+  <Accordion title="Sales/Lead Management">
+    ```
+    Use format: [Company Name] - [Action] - [Outcome]
+    Example: Acme Corp - Outreach Email - Sent
+    ```
+  </Accordion>
+</AccordionGroup>
+
+#### Best Practices
+
+<Columns cols={2}>
+  <Card title="Do" icon="circle-check" color="#10b981">
+    Provide a clear format or structure for your task names, and make sure to include the most important identifying information first. Use consistent terminology that matches your workflow, and keep your instructions concise but specific. Don't forget to test with a few tasks and refine your instructions based on what works best for your needs.
+  </Card>
+
+  <Card title="Don't" icon="circle-xmark" color="#ef4444">
+    Avoid making your instructions too vague or generic—the agent needs clear guidance to create useful names. Don't include variables that might not always be available in your workflow, and steer clear of complex conditional logic that could confuse the naming process. Remember to specify the order of information so your task names stay consistent.
+  </Card>
+</Columns>
+
+#### Common Naming Patterns
+
+<AccordionGroup>
+  <Accordion title="Chronological">
+    **Format:** `[Date] - [Action] - [Subject]`
+    
+    **Example:** "2024-11-06 - Email Sent - Product Demo"
+    
+    **Best for:** Time-sensitive workflows, audit trails, sequential processes
+  </Accordion>
+
+  <Accordion title="Hierarchical">
+    **Format:** `[Project] > [Phase] > [Task]`
+    
+    **Example:** "Website Redesign > Development > API Integration"
+    
+    **Best for:** Complex projects with multiple levels, nested workflows
+  </Accordion>
+
+  <Accordion title="Status-based">
+    **Format:** `[Status] [Subject] - [Details]`
+    
+    **Example:** "Completed: Customer Onboarding - Acme Corp"
+    
+    **Best for:** Task tracking, progress monitoring, filtering by completion
+  </Accordion>
+
+  <Accordion title="Actor-focused">
+    **Format:** `[Who] - [What] - [When]`
+    
+    **Example:** "Sarah Johnson - Contract Review - Nov 6"
+    
+    **Best for:** Team collaboration, assignment tracking, accountability
+  </Accordion>
+</AccordionGroup>
 
 ---
 
