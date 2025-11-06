@@ -39,13 +39,84 @@ Consider the complexity of your agent's typical tasks when setting this value.
 
 **What it is:** Guidelines that help your agent create clear, consistent names for new tasks.
 
-**Example instructions:**
+#### How It Works
 
-- "Include the customer name and request type in each task name"
-- "Use the format: [Project]-[Action]-[Date]"
-- "Start with the main goal followed by the specific action needed"
+When your agent creates a new task, it uses the LLM to generate a task name based on the instructions you provide here. The agent considers the full context of what it's doing—including trigger data, the workflow it's executing, and the tools it's using—to create a meaningful name.
 
-Well-named tasks make your workspace more organized and easier to navigate.
+Think of these instructions as a prompt template that guides the LLM's naming decision. The clearer and more specific your instructions, the more consistent and useful your task names will be.
+
+#### Writing Effective Instructions
+
+When crafting your naming instructions, consider these key factors:
+
+- **Think about scanning:** What information do you need to see at a glance when reviewing your task list? Put the most important details first.
+- **Consider your workflow:** What naming convention makes sense for how you organize and track work? Align task names with your existing processes.
+- **Be consistent:** Use the same format across similar agent types to make it easier to find and filter tasks.
+- **Include key identifiers:** Customer names, dates, action types, or outcomes help you quickly identify what each task is about.
+- **Test and iterate:** Run a few tasks, see how they're named, and adjust your instructions based on what works best for your needs.
+
+#### Examples by Use Case
+
+**For Customer Support Agents:**
+```
+Name tasks using this format: [Customer Name] - [Request Type] - [Status]
+Example: John Smith - Refund Request - Completed
+```
+
+**For Content Creation Agents:**
+```
+Start with the content type, followed by the topic and date.
+Example: Blog Post: AI Agents Guide - 2024-11-06
+```
+
+**For Data Processing Agents:**
+```
+Include the data source and action performed.
+Example: Processed: LinkedIn Data Export - 150 records
+```
+
+**For Sales/Lead Management:**
+```
+Use format: [Company Name] - [Action] - [Outcome]
+Example: Acme Corp - Outreach Email - Sent
+```
+
+#### Best Practices
+
+**DO:**
+- ✅ Provide a clear format or structure
+- ✅ Include the most important identifying information first
+- ✅ Use consistent terminology that matches your workflow
+- ✅ Keep instructions concise but specific
+- ✅ Test with a few tasks and refine based on results
+
+**DON'T:**
+- ❌ Make instructions too vague ("Name it something good")
+- ❌ Include too many variables that might not always be available
+- ❌ Use complex conditional logic (keep it simple)
+- ❌ Forget to specify the order of information
+
+#### Common Naming Patterns
+
+Here are proven patterns you can adapt for your use case:
+
+- **Chronological:** `[Date] - [Action] - [Subject]`  
+  Example: "2024-11-06 - Email Sent - Product Demo"
+
+- **Hierarchical:** `[Project] > [Phase] > [Task]`  
+  Example: "Website Redesign > Development > API Integration"
+
+- **Status-based:** `[Status] [Subject] - [Details]`  
+  Example: "Completed: Customer Onboarding - Acme Corp"
+
+- **Actor-focused:** `[Who] - [What] - [When]`  
+  Example: "Sarah Johnson - Contract Review - Nov 6"
+
+#### Related Resources
+
+- **[Task views](/agent/tasks):** Learn how good naming helps with filtering and organizing tasks
+- **[Agent triggers](/agent/build-your-agent/triggers):** Understand when tasks are created and what context is available
+- **[Tool configuration](/tools/tool-builder/tool-settings):** Similar naming principles apply to tools
 
 ---
 
