@@ -1,0 +1,436 @@
+---
+title: "Analytics"
+description: "Comprehensive usage insights and performance metrics for Enterprise teams"
+---
+
+<Warning>
+  Analytics is an Enterprise-only feature. If you have an Enterprise subscription with Relevance AI and do not have access to this feature yet, please reach out to your sales representative to share your interest in this feature.
+
+  You will not be able to access this feature if you are not on an Enterprise subscription.
+</Warning>
+
+Analytics in Relevance AI provides comprehensive visibility into your AI operations, helping Enterprise teams track performance, optimize costs, and identify opportunities for improvement. With detailed metrics across tasks, actions, and credits, you can make data-driven decisions about your AI workforce deployment.
+
+The Analytics dashboard offers real-time insights into agent performance, task volume, credit consumption, and error rates across your entire organization. Whether you're managing costs, optimizing performance, or planning capacity, Analytics gives you the metrics you need to succeed.
+
+## Accessing Analytics
+
+To access the Analytics dashboard:
+
+1. Navigate to your **Dashboard**
+2. Look in the **Account** section of the left sidebar
+3. Click on **Analytics** (located above Integrations and APIs)
+
+<Note>
+  Analytics is only available to users on Enterprise subscriptions. If you don't see the Analytics option in your dashboard, contact your sales representative.
+</Note>
+
+## Overview Metrics
+
+At the top of the Analytics dashboard, you'll see four key performance indicators that provide an at-a-glance view of your platform usage:
+
+<Columns cols={2}>
+  <Card title="Tasks" icon="list-check">
+    Total number of tasks executed across all agents and workforces during the selected time period. Shows percentage change compared to the previous period.
+  </Card>
+  <Card title="Tasks to Review" icon="clipboard-check">
+    Number of tasks that require human review or approval. Helps you monitor workload for your team and identify bottlenecks in automated workflows.
+  </Card>
+  <Card title="Actions Used" icon="bolt">
+    Total number of action executions across all tasks. Actions include tool steps, API calls, knowledge searches, and other operations performed by your agents.
+  </Card>
+  <Card title="Credits Used" icon="coins">
+    Total credits consumed during the selected period. Essential for budget tracking and cost management across your AI operations.
+  </Card>
+</Columns>
+
+Each metric displays a percentage change indicator (e.g., "+15%" or "-8%") showing the trend compared to the previous period of equal length. Green indicates growth, red indicates decline.
+
+## Filtering Your Data
+
+The Analytics dashboard provides flexible filtering options to help you focus on specific time periods and agents:
+
+### Date Range Selector
+
+Use the date range picker to analyze data for specific periods:
+- Select predefined ranges (Last 7 days, Last 30 days, Last 90 days)
+- Choose custom date ranges for detailed analysis
+- Compare performance across different time periods
+
+**Example:** "Oct 9 - Nov 7" shows a 30-day analysis window
+
+### Agent Filter
+
+Filter analytics by specific agents or view aggregate data:
+- **All agents** (default): Shows combined metrics across your entire AI workforce
+- **Individual agents**: Select a specific agent to analyze its performance in isolation
+- Useful for comparing agent efficiency or troubleshooting specific implementations
+
+<Tip>
+  Use date range filtering to identify seasonal trends or measure the impact of recent changes to your agents or workflows.
+</Tip>
+
+## Performance Charts
+
+Three interactive time-series charts visualize your usage trends over the selected date range:
+
+### Tasks Chart
+
+Displays daily task volume over time, helping you:
+- Identify peak usage periods
+- Spot unusual activity patterns
+- Plan capacity for high-demand periods
+- Track adoption trends across your organization
+
+### Actions Chart
+
+Shows daily action executions, useful for:
+- Understanding workflow complexity
+- Monitoring tool usage patterns
+- Identifying opportunities to optimize agent configurations
+- Tracking the impact of new integrations or tools
+
+### Credits Chart
+
+Visualizes daily credit consumption, essential for:
+- Budget forecasting and cost management
+- Identifying cost spikes or anomalies
+- Understanding the relationship between activity and costs
+- Planning credit purchases and allocation
+
+<Note>
+  Hover over any point on the charts to see exact values for that specific day. This helps you investigate specific dates when you notice unusual patterns.
+</Note>
+
+## Workforce Breakdown
+
+The Workforce Breakdown table provides detailed metrics for each workforce in your organization:
+
+| Column | Description |
+|--------|-------------|
+| **Workforce** | Name of the workforce |
+| **Workforce Tasks** | Total tasks executed by this workforce |
+| **Agent Tasks** | Tasks executed by individual agents within the workforce |
+| **Error %** | Percentage of tasks that resulted in errors |
+| **Actions** | Total number of actions executed |
+| **Credits** | Total credits consumed by this workforce |
+| **Credits/Task** | Average credits consumed per task (efficiency metric) |
+
+### Summary Statistics
+
+At the bottom of the table, you'll find aggregate statistics:
+- Total number of workforces
+- Combined workforce tasks
+- Combined agent tasks
+- Overall error rate
+- Total actions executed
+- Total credits consumed
+- Average credits per task across all workforces
+
+<Tip>
+  Compare Credits/Task across workforces to identify which are most cost-efficient. Lower values indicate better efficiency.
+</Tip>
+
+## Agent Breakdown
+
+The Agent Breakdown table shows performance metrics for individual agents:
+
+| Column | Description |
+|--------|-------------|
+| **Agent** | Name of the agent |
+| **Tasks** | Total number of tasks executed by this agent |
+| **Error %** | Percentage of tasks that encountered errors |
+| **Actions** | Total number of actions executed |
+| **Actions/Task** | Average actions per task (complexity metric) |
+| **Credits** | Total credits consumed |
+| **Credits/Task** | Average credits per task (cost efficiency) |
+
+### Summary Statistics
+
+The table footer displays:
+- Total number of agents
+- Combined tasks across all agents
+- Total action executions
+
+### Interpreting Agent Metrics
+
+**High Error %**: Agents with error rates above 5% may need attention:
+- Review recent task failures in [Task View](/agent/build-your-agent/agent-settings/task-view)
+- Check if integrations are properly configured
+- Verify that tools have correct permissions
+- Review agent prompts for clarity
+
+**High Actions/Task**: Agents with many actions per task may indicate:
+- Complex workflows (expected for sophisticated agents)
+- Inefficient tool usage (opportunity for optimization)
+- Redundant steps that could be consolidated
+
+**High Credits/Task**: Agents consuming many credits per task might benefit from:
+- Using more efficient LLM models for simple tasks
+- Optimizing knowledge search queries
+- Reducing unnecessary API calls
+- Reviewing tool step configurations
+
+<Warning>
+  An agent with a sudden spike in error rate or credit consumption may indicate a configuration issue or integration problem. Investigate immediately to prevent ongoing issues.
+</Warning>
+
+## Action Breakdown
+
+The Action Breakdown table provides insights into individual action performance:
+
+| Column | Description |
+|--------|-------------|
+| **Action** | Name or ID of the action/tool step |
+| **Executions** | Number of times this action was executed |
+| **Error %** | Percentage of executions that failed |
+| **Tasks** | Number of unique tasks that used this action |
+| **Credits** | Total credits consumed by this action |
+| **Credits/Exec** | Average credits per execution |
+
+### Summary Statistics
+
+The table footer shows:
+- Total number of unique actions
+- Combined executions across all actions
+- Total credits consumed by actions
+
+### Optimizing Action Usage
+
+**High-frequency actions**: Actions with many executions are good candidates for:
+- Caching strategies to reduce redundant calls
+- Batch processing to improve efficiency
+- Performance optimization to reduce latency
+
+**High-error actions**: Actions with error rates above 10% need investigation:
+- Check API credentials and permissions
+- Verify input data formats
+- Review rate limits and quotas
+- Test with sample data to reproduce errors
+
+**High-cost actions**: Actions with high Credits/Exec values:
+- Consider alternative tools or approaches
+- Optimize query parameters
+- Use more efficient models where appropriate
+- Implement result caching
+
+<Tip>
+  Focus optimization efforts on actions that appear in the top 10 by both executions and credits consumed. These have the highest impact on your overall costs.
+</Tip>
+
+## Use Cases
+
+### Performance Optimization
+
+Use Analytics to identify and improve underperforming agents:
+
+1. **Identify high-error agents** in the Agent Breakdown table
+2. **Review specific failures** in Task View
+3. **Optimize prompts and tools** based on error patterns
+4. **Monitor improvements** over time using the date range filter
+
+### Cost Management
+
+Track and control your AI spending:
+
+1. **Monitor daily credit consumption** in the Credits Chart
+2. **Identify cost drivers** in the Agent and Action Breakdown tables
+3. **Compare efficiency** using Credits/Task metrics
+4. **Set budgets** based on historical usage patterns
+5. **Forecast future costs** using trend analysis
+
+### Capacity Planning
+
+Plan for growth and scale your AI operations:
+
+1. **Analyze usage trends** in the Tasks Chart
+2. **Identify peak periods** requiring additional capacity
+3. **Forecast future demand** based on growth rates
+4. **Plan credit purchases** to avoid interruptions
+5. **Allocate resources** to high-priority workforces
+
+### Quality Assurance
+
+Maintain high-quality AI outputs:
+
+1. **Monitor error rates** across agents and actions
+2. **Identify problematic integrations** with high failure rates
+3. **Track Tasks to Review** to ensure timely human oversight
+4. **Compare agent performance** to identify best practices
+5. **Validate improvements** after making changes
+
+### Team Productivity
+
+Understand how your team uses AI:
+
+1. **Track adoption** through increasing task volumes
+2. **Identify power users** and successful implementations
+3. **Share best practices** from high-performing agents
+4. **Measure ROI** by comparing tasks completed to credits spent
+5. **Plan training** based on usage patterns
+
+## Best Practices
+
+### Interpreting Error Rates
+
+<AccordionGroup>
+  <Accordion title="What's a normal error rate?" icon="chart-line">
+    - **0-2%**: Excellent - typical for well-configured agents
+    - **2-5%**: Good - acceptable for complex workflows
+    - **5-10%**: Needs attention - investigate common failure patterns
+    - **10%+**: Critical - immediate action required
+    
+    Error rates vary by use case. Agents with many external API calls may naturally have higher error rates due to network issues or rate limits.
+  </Accordion>
+  
+  <Accordion title="When should I investigate errors?" icon="magnifying-glass">
+    Investigate immediately when you see:
+    - Sudden spikes in error rate (>5% increase)
+    - Consistent errors above 10%
+    - Errors concentrated in specific actions
+    - Errors affecting critical workflows
+    
+    Use Task View to examine individual failed tasks and identify root causes.
+  </Accordion>
+  
+  <Accordion title="How do I reduce error rates?" icon="wrench">
+    Common solutions:
+    - Verify integration credentials and permissions
+    - Add error handling and retry logic to tools
+    - Improve prompt clarity to reduce LLM confusion
+    - Validate input data before processing
+    - Implement fallback strategies for external API failures
+    - Add timeouts to prevent hanging operations
+  </Accordion>
+</AccordionGroup>
+
+### Identifying Optimization Opportunities
+
+**Look for these patterns:**
+
+1. **High Actions/Task with low success rates**: Agent may be struggling with complex instructions
+2. **High Credits/Task compared to similar agents**: Opportunity to use more efficient models or tools
+3. **Declining task volume**: May indicate user experience issues or competition from other solutions
+4. **Increasing error rates over time**: Suggests degrading integration health or changing external APIs
+5. **Uneven usage across agents**: Some agents may need better promotion or documentation
+
+### Regular Monitoring Cadence
+
+Establish a routine for reviewing Analytics:
+
+**Daily** (for high-volume operations):
+- Check overview metrics for anomalies
+- Review error rates for critical agents
+- Monitor credit consumption against budget
+
+**Weekly**:
+- Analyze trends in the performance charts
+- Review top agents and actions by volume
+- Identify optimization opportunities
+- Plan improvements for the coming week
+
+**Monthly**:
+- Comprehensive performance review across all workforces
+- Cost analysis and budget planning
+- Capacity planning for the next quarter
+- Share insights with stakeholders
+
+<Tip>
+  Set up a recurring calendar event for your Analytics review. Consistent monitoring helps you catch issues early and maintain optimal performance.
+</Tip>
+
+### Benchmarking and Goals
+
+Use Analytics to set and track performance goals:
+
+1. **Establish baselines**: Record current metrics as your starting point
+2. **Set targets**: Define specific, measurable goals (e.g., "Reduce error rate to <3%")
+3. **Track progress**: Use date range filtering to compare periods
+4. **Celebrate wins**: Share improvements with your team
+5. **Iterate**: Continuously refine based on data
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Plans & Billing" icon="credit-card" href="/get-started/subscriptions/plans">
+    View your current credit balance, purchase additional credits, and manage your subscription plan.
+  </Card>
+  
+  <Card title="Streaming Events" icon="stream" href="/get-started/enterprise/streaming-events">
+    Export raw event data for custom analytics, compliance reporting, or integration with external BI tools.
+  </Card>
+  
+  <Card title="Task View" icon="list" href="/agent/build-your-agent/agent-settings/task-view">
+    Examine individual task executions in detail, including inputs, outputs, and step-by-step execution logs.
+  </Card>
+  
+  <Card title="RBAC" icon="shield" href="/get-started/enterprise/rbac">
+    Control who can access Analytics and other sensitive features using role-based access controls.
+  </Card>
+</CardGroup>
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Can I access Analytics without an Enterprise subscription?" icon="lock">
+    No. Analytics is exclusively available for Enterprise subscriptions. If you're interested in upgrading to access Analytics and other Enterprise features, contact your sales representative.
+  </Accordion>
+  
+  <Accordion title="How far back does Analytics data go?" icon="clock">
+    Analytics retains data for the duration of your Enterprise subscription. You can analyze historical data from any date range since Analytics was enabled for your organization.
+  </Accordion>
+  
+  <Accordion title="Can I export Analytics data?" icon="download">
+    While the Analytics dashboard doesn't have a direct export feature, you can use [Streaming Events](/get-started/enterprise/streaming-events) to export raw event data for custom analysis in your preferred BI tools.
+  </Accordion>
+  
+  <Accordion title="Why don't my metrics match my billing?" icon="calculator">
+    Analytics shows operational metrics (tasks, actions, errors) while billing is based on credit consumption. The Credits metric in Analytics should align with your billing, but may show slight differences due to:
+    - Different time zone calculations
+    - Pending transactions not yet reflected in billing
+    - Credits from different billing periods
+    
+    For billing questions, refer to your invoice or contact support.
+  </Accordion>
+  
+  <Accordion title="What counts as an 'action'?" icon="bolt">
+    An action is any operation performed by an agent or tool, including:
+    - Tool step executions (API calls, knowledge searches, etc.)
+    - LLM completions
+    - Integration operations (sending emails, updating databases, etc.)
+    - Data transformations
+    - Conditional logic evaluations
+    
+    Complex agents naturally have higher action counts per task.
+  </Accordion>
+  
+  <Accordion title="How do I share Analytics with my team?" icon="users">
+    All users with appropriate [RBAC permissions](/get-started/enterprise/rbac) can access the Analytics dashboard. Organization Owners and Admins have full access by default. You can grant access to other users by adjusting their organization-level role.
+  </Accordion>
+  
+  <Accordion title="Can I set up alerts for unusual activity?" icon="bell">
+    Analytics currently provides visual insights but doesn't include automated alerting. We recommend:
+    - Checking Analytics regularly (daily for critical operations)
+    - Using [Streaming Events](/get-started/enterprise/streaming-events) to build custom alerting
+    - Monitoring the overview metrics for significant percentage changes
+    
+    Automated alerting is on our roadmap for future releases.
+  </Accordion>
+  
+  <Accordion title="Why is my error rate higher than expected?" icon="triangle-exclamation">
+    Common causes of elevated error rates:
+    - **Integration issues**: Expired credentials, changed APIs, or rate limits
+    - **Data quality**: Invalid inputs or unexpected data formats
+    - **Network problems**: Timeouts or connectivity issues with external services
+    - **Configuration changes**: Recent updates that introduced bugs
+    - **External dependencies**: Third-party service outages
+    
+    Use Task View to examine specific failures and identify patterns. Most error rate issues can be resolved by updating credentials, improving error handling, or adjusting agent configurations.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Note>
+  Analytics is continuously evolving. We regularly add new metrics and capabilities based on customer feedback. If you have suggestions for additional analytics features, please share them with your sales representative or contact support.
+</Note>
