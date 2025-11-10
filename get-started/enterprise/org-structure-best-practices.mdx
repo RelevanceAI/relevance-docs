@@ -1,0 +1,713 @@
+---
+title: "Organization Structure Best Practices"
+description: "Design an effective organizational structure for your Enterprise deployment"
+---
+
+<Note>
+This guide is designed for Enterprise customers planning their Relevance AI deployment. These best practices help you scale efficiently and maintain governance as your AI workforce grows.
+</Note>
+
+A well-planned organizational structure is critical for Enterprise success with Relevance AI. The right structure makes it easier to manage permissions, track usage, maintain governance, and scale your AI workforce as your team grows.
+
+## Understanding the hierarchy
+
+Relevance AI uses a three-level hierarchy for organizing resources:
+
+<Steps>
+  <Step title="Organization" icon="building">
+    The top-level container for your entire company. All users, projects, and assets belong to one organization.
+    
+    **Key characteristics**:
+    - One organization per company
+    - Organization-level billing and credits
+    - Organization-level SSO and security settings
+    - Organization-level admins manage everything
+  </Step>
+
+  <Step title="Projects" icon="folder-tree">
+    Containers for related agents, tools, knowledge bases, and workforces. Projects are the primary way to organize work and control access.
+    
+    **Key characteristics**:
+    - Multiple projects per organization
+    - Project-level permissions and access control
+    - Project-level usage tracking and limits
+    - Project-level integrations and API keys
+  </Step>
+
+  <Step title="Assets" icon="cube">
+    Individual agents, tools, knowledge bases, and workforces. Assets are the building blocks of your AI workforce.
+    
+    **Key characteristics**:
+    - Assets belong to one project
+    - Asset-level permissions for granular control
+    - Assets can be shared across projects (with proper permissions)
+    - Assets can be organized into folders within projects
+  </Step>
+</Steps>
+
+---
+
+## Project organization strategies
+
+There are three main strategies for organizing projects. Most organizations use a combination of these approaches.
+
+<Tabs>
+  <Tab title="By Team">
+    ### Organize by Team or Department
+    
+    Organize projects around your organizational structure (teams, departments, or business units).
+    
+    **Best for:** Companies with distinct teams that work independently
+    
+    **Example structure:**
+    ```
+    Organization: Acme Corp
+    ├── Project: Marketing Team
+    ├── Project: Sales Team
+    ├── Project: Customer Support
+    ├── Project: Product Team
+    ├── Project: Finance & Operations
+    └── Project: Executive Team
+    ```
+    
+    **Advantages:**
+    - Aligns with existing organizational structure
+    - Easy to assign permissions based on team membership
+    - Clear ownership and accountability
+    - Simple usage tracking per team
+    
+    **Considerations:**
+    - May lead to duplicate agents across teams
+    - Harder to share resources across teams
+    - Can create silos if not managed carefully
+    
+    **When to use:**
+    - You have 3+ distinct teams using Relevance AI
+    - Teams work independently with different use cases
+    - You want to track usage and costs per team
+    - Teams need different integration access or security policies
+  </Tab>
+  
+  <Tab title="By Use Case">
+    ### Organize by Use Case or Function
+    
+    Organize projects around specific use cases, workflows, or business functions.
+    
+    **Best for:** Companies with cross-functional teams working on shared use cases
+    
+    **Example structure:**
+    ```
+    Organization: Acme Corp
+    ├── Project: Lead Generation & Qualification
+    ├── Project: Customer Onboarding
+    ├── Project: Support Automation
+    ├── Project: Content Creation
+    ├── Project: Data Enrichment
+    └── Project: Internal Operations
+    ```
+    
+    **Advantages:**
+    - Encourages collaboration across teams
+    - Reduces duplication of similar agents
+    - Easier to share knowledge and best practices
+    - Clear purpose for each project
+    
+    **Considerations:**
+    - Requires cross-team coordination
+    - May need more complex permission management
+    - Harder to track usage per team
+    
+    **When to use:**
+    - Multiple teams collaborate on the same use cases
+    - You want to centralize similar workflows
+    - You have dedicated AI/automation team managing projects
+    - Use cases span multiple departments
+  </Tab>
+  
+  <Tab title="By Environment">
+    ### Organize by Environment or Stage
+    
+    Organize projects by development stage (development, staging, production).
+    
+    **Best for:** Companies with formal development and deployment processes
+    
+    **Example structure:**
+    ```
+    Organization: Acme Corp
+    ├── Project: Development Sandbox
+    ├── Project: Testing & QA
+    ├── Project: Staging
+    └── Project: Production
+    ```
+    
+    **Advantages:**
+    - Clear separation between development and production
+    - Safer testing without affecting live agents
+    - Easier to manage deployment pipelines
+    - Better governance and change control
+    
+    **Considerations:**
+    - Requires discipline to maintain separation
+    - May need to duplicate assets across environments
+    - More complex for non-technical users
+    
+    **When to use:**
+    - You have strict change management requirements
+    - You need to test agents before deploying to production
+    - You have compliance or regulatory requirements
+    - You have a dedicated DevOps or platform team
+  </Tab>
+  
+  <Tab title="Hybrid (Recommended)">
+    ### Hybrid Approach
+    
+    Most successful Enterprise deployments use a **hybrid approach** combining multiple strategies.
+    
+    **Example structure:**
+    ```
+    Organization: Acme Corp
+    ├── Project: Marketing - Production
+    ├── Project: Marketing - Development
+    ├── Project: Sales - Production
+    ├── Project: Sales - Development
+    ├── Project: Support - Production
+    ├── Project: Support - Development
+    ├── Project: Shared Resources
+    └── Project: Sandbox (for experimentation)
+    ```
+    
+    **This approach provides:**
+    - Team-based organization for clear ownership
+    - Environment separation for safe development
+    - Shared resources project for common tools and knowledge
+    - Sandbox for experimentation without affecting production
+    
+    **Why it works:**
+    
+    The hybrid approach combines the best aspects of all strategies. Teams get their own projects for clear ownership and usage tracking, while environment separation (production/development) provides safety and governance. Shared resources prevent duplication, and a sandbox encourages innovation without risk.
+    
+    This is the most scalable approach and works well for organizations from 20 to 1000+ users.
+  </Tab>
+</Tabs>
+
+---
+
+## Structure by company size
+
+Choose your team size to see recommended structures and best practices:
+
+<Tabs>
+  <Tab title="Small (5-20)">
+    ### Small Teams (5-20 users)
+    
+    **Recommended structure:** Simple, minimal projects
+    
+    ```
+    Organization: Acme Corp
+    ├── Project: Production
+    ├── Project: Development
+    └── Project: Sandbox
+    ```
+    
+    **Key recommendations:**
+    
+    Start simple with 2-3 projects. Use folders within projects to organize assets. Assign most users as Project Members or Editors. Use asset-level permissions for sensitive agents. Focus on getting value quickly, not perfect structure.
+    
+    <Warning>
+    **Common mistakes to avoid:**
+    - Creating too many projects too early
+    - Over-engineering permissions
+    - Spending too much time on structure instead of building
+    </Warning>
+  </Tab>
+  
+  <Tab title="Medium (20-100)">
+    ### Medium Teams (20-100 users)
+    
+    **Recommended structure:** Team-based with shared resources
+    
+    ```
+    Organization: Acme Corp
+    ├── Project: Marketing
+    ├── Project: Sales
+    ├── Project: Customer Success
+    ├── Project: Product & Engineering
+    ├── Project: Shared Resources
+    ├── Project: Development Sandbox
+    └── Project: Executive & Leadership
+    ```
+    
+    **Key recommendations:**
+    
+    Organize by team or department. Create a "Shared Resources" project for common tools and knowledge. Use RBAC Groups to assign teams to projects. Implement project-level usage limits. Designate project admins for each team. Use folders extensively within projects.
+    
+    <Warning>
+    **Common mistakes to avoid:**
+    - Creating a project for every small team or sub-team
+    - Not using groups for bulk permission management
+    - Allowing unlimited project creation by all users
+    </Warning>
+  </Tab>
+  
+  <Tab title="Large (100+)">
+    ### Large Teams (100+ users)
+    
+    **Recommended structure:** Hybrid with governance
+    
+    ```
+    Organization: Acme Corp
+    ├── Project: Marketing - Production
+    ├── Project: Marketing - Development
+    ├── Project: Sales - Production
+    ├── Project: Sales - Development
+    ├── Project: Customer Success - Production
+    ├── Project: Customer Success - Development
+    ├── Project: Product - Production
+    ├── Project: Product - Development
+    ├── Project: Shared Libraries
+    ├── Project: Shared Knowledge Bases
+    ├── Project: Compliance & Audit
+    └── Project: Innovation Sandbox
+    ```
+    
+    **Key recommendations:**
+    
+    Separate production and development environments. Create dedicated projects for shared resources. Implement strict governance and approval processes. Use RBAC Groups extensively. Set up usage limits and monitoring. Designate a platform team to manage structure. Create naming conventions and documentation. Regular audits of projects and permissions.
+    
+    <Warning>
+    **Common mistakes to avoid:**
+    - Allowing uncontrolled project proliferation
+    - Not documenting structure and policies
+    - Inconsistent naming conventions
+    - Not having a platform team or governance process
+    </Warning>
+  </Tab>
+</Tabs>
+
+---
+
+## Asset organization within projects
+
+Once you've structured your projects, organize assets within them using folders and naming conventions.
+
+<AccordionGroup>
+  <Accordion title="Folder structure best practices">
+    Use folders to organize assets in ways that make sense for your workflow:
+    
+    **By asset type:**
+    ```
+    Project: Marketing
+    ├── 📁 Agents
+    │   ├── Content Writer Agent
+    │   ├── SEO Optimizer Agent
+    │   └── Social Media Agent
+    ├── 📁 Tools
+    │   ├── Content Analysis Tool
+    │   └── Keyword Research Tool
+    ├── 📁 Knowledge
+    │   ├── Brand Guidelines
+    │   └── Product Information
+    └── 📁 Workforces
+        └── Content Production Workforce
+    ```
+    
+    **By use case or workflow:**
+    ```
+    Project: Sales
+    ├── 📁 Lead Generation
+    │   ├── Lead Finder Agent
+    │   ├── Lead Enrichment Tool
+    │   └── Company Database (Knowledge)
+    ├── 📁 Lead Qualification
+    │   ├── Lead Scorer Agent
+    │   └── Qualification Criteria (Knowledge)
+    └── 📁 Outreach
+        ├── Email Writer Agent
+        └── Outreach Workforce
+    ```
+    
+    **By status or stage:**
+    ```
+    Project: Customer Success
+    ├── 📁 Active / Production
+    ├── 📁 In Development
+    ├── 📁 Testing
+    └── 📁 Archived
+    ```
+  </Accordion>
+  
+  <Accordion title="Naming conventions">
+    Establish clear naming conventions for consistency across your organization:
+    
+    **For projects:**
+    - Use descriptive names: `Marketing - Production` not `Mktg Prod`
+    - Include environment if applicable: `Sales - Development`
+    - Use consistent separators: `-` or `|`
+    
+    **For assets:**
+    - Start with asset type: `Agent: Lead Qualifier` or `Tool: Data Enrichment`
+    - Include purpose: `Agent: Customer Support - Tier 1`
+    - Use version numbers if needed: `Agent: Content Writer v2`
+    - Avoid special characters that may cause issues
+    
+    **For folders:**
+    - Use emojis for visual clarity: `📁 Active Agents`, `🔧 Tools`, `📚 Knowledge`
+    - Keep names short and clear
+    - Use consistent capitalization
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Permission management
+
+<AccordionGroup>
+  <Accordion title="Organization-level roles">
+    **Owner role:**
+    
+    Assign to 1-2 people maximum (CEO, CTO, or Head of Operations). These users have full control including billing.
+    
+    **Admin role:**
+    
+    Assign to IT leads, platform team, or workspace admins. Typically 2-5 people depending on company size. These users manage projects, users, and security.
+    
+    **Member role:**
+    
+    Default role for most users. Can create their own projects and assets. Good for power users and builders.
+    
+    **Viewer role:**
+    
+    For external collaborators or users in onboarding. Cannot create anything until assigned to a project. Good for stakeholders who need visibility only.
+  </Accordion>
+  
+  <Accordion title="Project-level roles">
+    **Admin role:**
+    
+    Assign to project owners (1-2 per project). These users manage project permissions and settings.
+    
+    **Editor role:**
+    
+    Assign to core contributors and builders. Can create and edit all assets in the project. Typically 20-40% of project users.
+    
+    **Member role:**
+    
+    Default role for most project users. Can create their own assets but don't see others' by default. Good for independent contributors.
+    
+    **Chat role:**
+    
+    For users who only need to interact with agents via Chat. Cannot access the web app. Perfect for end users and external users.
+    
+    **Viewer role:**
+    
+    For stakeholders who need visibility only. Cannot run or edit anything. Add only to specific assets they need to see.
+  </Accordion>
+  
+  <Accordion title="Asset-level permissions">
+    **Default approach:** Let project-level permissions handle most access control.
+    
+    **When to use asset-level permissions:**
+    - Sensitive agents with confidential data
+    - Agents that should only be run by specific users
+    - Shared agents that need different permissions than project default
+    - Agents used by external collaborators
+    
+    **Best practice:** Start with project-level permissions and add asset-level permissions only when needed. Over-complicating permissions makes administration harder and can cause confusion.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Common organizational patterns
+
+Choose the pattern that best fits your organization's governance model:
+
+<AccordionGroup>
+  <Accordion title="Center of Excellence (CoE)" icon="building-columns">
+    A centralized team manages the platform and creates shared resources.
+    
+    **Structure:**
+    ```
+    Organization: Acme Corp
+    ├── Project: CoE - Shared Agents (managed by platform team)
+    ├── Project: CoE - Shared Tools (managed by platform team)
+    ├── Project: CoE - Knowledge Libraries (managed by platform team)
+    ├── Project: Marketing (uses shared resources)
+    ├── Project: Sales (uses shared resources)
+    └── Project: Support (uses shared resources)
+    ```
+    
+    **Best for:**
+    - Companies with dedicated AI/automation team
+    - Organizations wanting centralized governance
+    - Companies with compliance requirements
+    
+    **Why this works:**
+    
+    The CoE model ensures consistency and quality across the organization. A centralized team becomes experts in the platform, creates reusable resources, and maintains governance standards. Teams benefit from professionally-built shared resources without needing deep platform expertise.
+  </Accordion>
+  
+  <Accordion title="Federated Model" icon="network-wired">
+    Each team manages their own projects with light central governance.
+    
+    **Structure:**
+    ```
+    Organization: Acme Corp
+    ├── Project: Marketing (self-managed)
+    ├── Project: Sales (self-managed)
+    ├── Project: Support (self-managed)
+    ├── Project: Product (self-managed)
+    └── Project: Shared Resources (light governance)
+    ```
+    
+    **Best for:**
+    - Companies with autonomous teams
+    - Organizations with distributed decision-making
+    - Companies prioritizing speed over standardization
+    
+    **Why this works:**
+    
+    The federated model empowers teams to move quickly and innovate independently. Each team controls their own destiny while a lightweight shared resources project prevents complete duplication. This works well for organizations that value team autonomy over centralized control.
+  </Accordion>
+  
+  <Accordion title="Hybrid Model (Recommended)" icon="layer-group">
+    Combines centralized shared resources with team autonomy.
+    
+    **Structure:**
+    ```
+    Organization: Acme Corp
+    ├── Project: Platform - Shared Agents (centrally managed)
+    ├── Project: Platform - Shared Tools (centrally managed)
+    ├── Project: Platform - Knowledge Libraries (centrally managed)
+    ├── Project: Marketing - Production (team-managed)
+    ├── Project: Marketing - Development (team-managed)
+    ├── Project: Sales - Production (team-managed)
+    ├── Project: Sales - Development (team-managed)
+    └── Project: Innovation Sandbox (open to all)
+    ```
+    
+    **Best for:**
+    - Most Enterprise organizations
+    - Companies wanting balance between governance and autonomy
+    - Organizations with both shared and team-specific use cases
+    
+    **Why this works:**
+    
+    The hybrid model combines the best of both worlds. Teams get autonomy for their specific needs while benefiting from centrally-managed shared resources. This prevents duplication, maintains quality standards, and still allows teams to innovate. It's the most scalable and flexible approach for growing organizations.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Migration and restructuring
+
+### When to restructure
+
+Consider restructuring when:
+- Projects have become too large or complex
+- Permission management is becoming difficult
+- Usage tracking doesn't align with business needs
+- Teams are duplicating work across projects
+- Compliance or security requirements change
+
+### How to restructure safely
+
+<Steps>
+  <Step title="Plan the new structure">
+    Document your current structure and design the new structure. Get buy-in from stakeholders.
+  </Step>
+
+  <Step title="Create new projects">
+    Set up new projects with proper permissions before moving assets.
+  </Step>
+
+  <Step title="Move assets gradually">
+    Move assets in phases, starting with non-critical ones. Test after each phase.
+  </Step>
+
+  <Step title="Update permissions">
+    Ensure all users have appropriate access in the new structure.
+  </Step>
+
+  <Step title="Communicate changes">
+    Notify all users about the new structure and any changes to their access.
+  </Step>
+
+  <Step title="Archive old projects">
+    Once migration is complete, archive (don't delete) old projects for reference.
+  </Step>
+</Steps>
+
+<Warning>
+Restructuring can temporarily disrupt access. Plan migrations during low-usage periods and communicate clearly with all users.
+</Warning>
+
+---
+
+## Governance and maintenance
+
+<AccordionGroup>
+  <Accordion title="Establish clear policies">
+    Document policies for:
+    - Who can create new projects
+    - Naming conventions for projects and assets
+    - Approval process for new integrations
+    - Usage limits and escalation procedures
+    - Asset archival and deletion policies
+    
+    Share these policies in a central location that's easy to find and keep them updated as your deployment evolves.
+  </Accordion>
+  
+  <Accordion title="Conduct regular audits">
+    Conduct quarterly audits to:
+    - Review project structure and usage
+    - Remove inactive users and projects
+    - Verify permissions are still appropriate
+    - Identify duplicate or unused assets
+    - Check compliance with policies
+    
+    Regular audits prevent organizational drift and keep your structure aligned with your business needs.
+  </Accordion>
+  
+  <Accordion title="Designate clear ownership">
+    Every project should have:
+    - **Primary owner** (Project Admin) — responsible for day-to-day management
+    - **Secondary owner** (Project Admin) — backup for primary owner
+    - **Executive sponsor** — business stakeholder who approves major changes
+    
+    Clear ownership ensures accountability and makes it easy for users to know who to contact for access or questions.
+  </Accordion>
+  
+  <Accordion title="Monitor and optimize">
+    **Track these metrics:**
+    - Number of active projects and assets
+    - Users per project
+    - Usage per project (credits consumed)
+    - Permission changes and access requests
+    - Asset creation and deletion rates
+    
+    **Use these metrics to identify:**
+    - Projects that should be merged or split
+    - Users who need training or support
+    - Opportunities to create shared resources
+    - Potential security or compliance issues
+    
+    Data-driven optimization keeps your structure efficient as your organization grows.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Industry examples
+
+See how organizations in different industries structure their Relevance AI deployments:
+
+<Tabs>
+  <Tab title="Technology / SaaS">
+    ```
+    Organization: TechCorp
+    ├── Project: Product - Production
+    ├── Project: Product - Development
+    ├── Project: Engineering - Production
+    ├── Project: Engineering - Development
+    ├── Project: Customer Success
+    ├── Project: Sales & Marketing
+    ├── Project: Shared - Documentation & Knowledge
+    └── Project: Sandbox
+    ```
+    
+    **Key characteristics:**
+    - Separate production and development environments
+    - Engineering and Product have their own projects
+    - Shared documentation project for company knowledge
+  </Tab>
+  
+  <Tab title="Professional Services">
+    ```
+    Organization: ConsultingCo
+    ├── Project: Client Services - Active Projects
+    ├── Project: Client Services - Templates
+    ├── Project: Business Development
+    ├── Project: Internal Operations
+    ├── Project: Knowledge Management
+    └── Project: Training & Onboarding
+    ```
+    
+    **Key characteristics:**
+    - Client-facing work separated from internal operations
+    - Templates project for reusable client deliverables
+    - Dedicated knowledge management project
+  </Tab>
+  
+  <Tab title="Financial Services">
+    ```
+    Organization: FinanceCorp
+    ├── Project: Compliance & Audit (restricted access)
+    ├── Project: Risk Management (restricted access)
+    ├── Project: Client Services - Production
+    ├── Project: Client Services - Development
+    ├── Project: Operations - Production
+    ├── Project: Operations - Development
+    └── Project: Shared Resources
+    ```
+    
+    **Key characteristics:**
+    - Compliance and risk projects with restricted access
+    - Strict production/development separation
+    - Emphasis on governance and audit trails
+  </Tab>
+  
+  <Tab title="E-commerce / Retail">
+    ```
+    Organization: RetailCo
+    ├── Project: Customer Experience
+    ├── Project: Marketing & Growth
+    ├── Project: Operations & Fulfillment
+    ├── Project: Merchandising
+    ├── Project: Customer Support
+    └── Project: Analytics & Insights
+    ```
+    
+    **Key characteristics:**
+    - Customer-centric project organization
+    - Separate projects for different customer touchpoints
+    - Analytics project for data-driven insights
+  </Tab>
+</Tabs>
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="How many projects should I create?">
+    Start with 3-5 projects and add more as needed. Most organizations have 5-15 projects. If you have more than 20 projects, consider consolidating.
+  </Accordion>
+  
+  <Accordion title="Can I move assets between projects?">
+    Yes, but this requires proper permissions. Contact support for assistance with bulk asset moves.
+  </Accordion>
+  
+  <Accordion title="Should I create separate projects for production and development?">
+    For Enterprise deployments, yes. This provides safer testing and better governance. For smaller teams, you can use folders within a single project.
+  </Accordion>
+  
+  <Accordion title="How do I handle shared resources across teams?">
+    Create a "Shared Resources" or "Platform" project that all teams can access. Use asset-level permissions to control who can edit vs. use shared resources.
+  </Accordion>
+  
+  <Accordion title="What's the best way to organize a project with 50+ agents?">
+    Use folders extensively to organize by use case, status, or team. Consider splitting into multiple projects if agents serve very different purposes.
+  </Accordion>
+  
+  <Accordion title="Can users be in multiple projects?">
+    Yes, users can be members of multiple projects with different roles in each project.
+  </Accordion>
+  
+  <Accordion title="How do I prevent project sprawl?">
+    Require approval for new projects, conduct regular audits, and establish clear criteria for when a new project is needed vs. using an existing one.
+  </Accordion>
+  
+  <Accordion title="Should I use asset-level permissions or project-level permissions?">
+    Start with project-level permissions for simplicity. Add asset-level permissions only for sensitive or special-case assets.
+  </Accordion>
+</AccordionGroup>

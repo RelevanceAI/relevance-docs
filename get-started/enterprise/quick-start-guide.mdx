@@ -1,0 +1,395 @@
+---
+title: "Quick Start Guide for Enterprise"
+description: "Your complete guide to setting up and configuring Relevance AI for Enterprise teams"
+---
+
+<Note>
+This guide is designed for Enterprise customers. If you're not on an Enterprise subscription, [contact our sales team](https://relevanceai.com/contact) to learn more about Enterprise features.
+</Note>
+
+Welcome to Relevance AI for Enterprise! This guide will walk you through the recommended setup process to get your organization up and running with enterprise-grade security, governance, and collaboration features.
+
+Enterprise features in Relevance AI provide your organization with advanced security controls, bulk user management, compliance capabilities, and granular access controls across your AI workforce.
+
+## What You'll Set Up
+
+<Columns cols={2}>
+  <Card title="Single Sign-On (SSO)" icon="key">
+    Secure authentication through your identity provider (Okta, Azure AD/Entra ID, or Google Workspace)
+  </Card>
+  <Card title="Directory Sync & Groups" icon="users">
+    Automatic user provisioning and bulk access management from your IDP
+  </Card>
+  <Card title="Organization Structure" icon="sitemap">
+    Projects, teams, and workspace organization best practices
+  </Card>
+  <Card title="Role-Based Access Controls" icon="shield-halved">
+    Granular permissions at organization, project, and asset levels
+  </Card>
+  <Card title="Usage Controls" icon="gauge-high">
+    Credit limits, monitoring, and usage alerts across your organization
+  </Card>
+  <Card title="Event Streaming" icon="database">
+    Audit logs and compliance data streamed to your S3 bucket
+  </Card>
+  <Card title="Integration Governance" icon="plug">
+    Control which third-party integrations your teams can use
+  </Card>
+  <Card title="API Key Management" icon="code">
+    Organization and project-level API keys for secure automation
+  </Card>
+</Columns>
+
+## Prerequisites
+
+<Warning>
+Before you begin, ensure you have all of these prerequisites. Missing any of these may prevent you from completing the setup process.
+</Warning>
+
+**Required for setup:**
+- An active Enterprise subscription with Relevance AI
+- Organization Owner or Admin access in Relevance AI
+- Access to your identity provider (Okta, Azure AD/Entra ID, or Google Workspace)
+- Admin credentials for your identity provider
+
+<Info>
+If you don't have these prerequisites, contact your Relevance AI sales representative or [reach out to support](/docs/get-started/support).
+</Info>
+
+---
+
+## Recommended Setup Order
+
+Follow these steps in order for the smoothest Enterprise onboarding experience. Each step builds on the previous one to create a secure, well-governed AI platform for your organization.
+
+<Steps>
+  <Step title="Connect Single Sign-On (SSO)" icon="key">
+    **Why this matters**: SSO is the foundation of Enterprise security. It ensures all users authenticate through your identity provider, enabling centralized access control and compliance.
+    
+    **What you'll do**:
+    - Configure SSO with your identity provider (Okta, Azure AD/Entra ID, or Google Workspace)
+    - Test SSO login flow
+    - Enforce SSO for all organization members
+    
+    **Time required**: 30-45 minutes
+    
+    [View SSO setup guide →](/docs/get-started/enterprise/sso-setup)
+  </Step>
+
+  <Step title="Enable Directory Sync & Groups" icon="users">
+    **Why this matters**: Directory Sync automatically provisions users and syncs groups from your identity provider, eliminating manual user management and enabling bulk access control.
+    
+    **What you'll do**:
+    - Connect your identity provider directory to Relevance AI
+    - Configure which groups to sync
+    - Verify group synchronization
+    
+    **Time required**: 20-30 minutes
+    
+    <Info>
+    **Feature Status**: Directory Sync & RBAC Groups are in Beta with full rollout by **November 20, 2025**. Contact your sales representative to enable this feature.
+    </Info>
+    
+    [View Directory Sync setup guide →](/docs/get-started/enterprise/rbac-groups)
+  </Step>
+
+  <Step title="Plan Your Organization & Project Structure" icon="sitemap">
+    **Why this matters**: A well-planned organizational structure makes it easier to manage permissions, track usage, and scale your AI workforce as your team grows.
+    
+    **What you'll do**:
+    - Decide how to organize projects (by team, department, or use case)
+    - Plan folder structure for agents and assets
+    - Determine project ownership and admin assignments
+    
+    **Time required**: 15-30 minutes (planning)
+    
+    [View organization structure best practices →](/docs/get-started/enterprise/org-structure-best-practices)
+  </Step>
+
+  <Step title="Configure Role-Based Access Controls (RBAC)" icon="shield-halved">
+    **Why this matters**: RBAC ensures users only have access to what they need, supporting security, compliance, and operational control.
+    
+    **What you'll do**:
+    - Assign organization-level roles (Owner, Admin, Member, Viewer)
+    - Set project-level permissions (Admin, Editor, Member, Chat, Viewer)
+    - Configure asset-level access for sensitive agents and tools
+    - Assign groups to projects and assets (if using Directory Sync)
+    
+    **Time required**: 30-60 minutes
+    
+    [View RBAC configuration guide →](/docs/get-started/enterprise/rbac)
+  </Step>
+
+  <Step title="Set Usage Limits & Monitoring" icon="gauge-high">
+    **Why this matters**: Usage controls help you manage costs, prevent overuse, and ensure fair resource allocation across teams.
+    
+    **What you'll do**:
+    - Set organization-wide credit limits
+    - Configure project-level usage caps
+    - Set up usage alerts and notifications
+    - Review usage dashboards
+    
+    **Time required**: 15-20 minutes
+    
+    [View usage limits setup guide →](/docs/get-started/project-management/usage-limits)
+  </Step>
+
+  <Step title="Connect S3 Bucket for Event Streaming (Optional)" icon="database">
+    **Why this matters**: Streaming events to your own S3 bucket provides audit logs, compliance data, and usage analytics for your security and data teams.
+    
+    **What you'll do**:
+    - Create and configure an S3 bucket
+    - Set up IAM permissions
+    - Connect your bucket to Relevance AI
+    - Verify event streaming
+    
+    **Time required**: 20-30 minutes
+    
+    <Info>
+    **Feature Status**: S3 Event Streaming will be fully available by **November 20, 2025**, with self-serve setup by end of year. Contact your sales representative for early access.
+    </Info>
+    
+    [View event streaming setup guide →](/docs/get-started/enterprise/streaming-events)
+  </Step>
+
+  <Step title="Configure Integration Controls" icon="plug">
+    **Why this matters**: Integration controls let you govern which third-party services your teams can connect, supporting security policies and compliance requirements.
+    
+    **What you'll do**:
+    - Review available integration controls
+    - Set organization-level integration policies
+    - Configure project-level integration restrictions
+    
+    **Time required**: 15-20 minutes
+    
+    [View integration controls guide →](/docs/get-started/enterprise/integration-controls)
+  </Step>
+
+  <Step title="Set Up API Key Management (Optional)" icon="code">
+    **Why this matters**: Organization and project-level API keys allow you to centrally manage credentials for integrations, ensuring consistent authentication across your teams and simplifying key rotation.
+    
+    **What you'll do**:
+    - Configure organization-level API keys for company-wide integrations
+    - Set project-level API keys to override organization defaults when needed
+    - Understand key precedence (project-level overrides organization-level)
+    
+    **Time required**: 10-15 minutes
+    
+    <Info>
+    **Feature Status**: Organization and project-level API keys are gradually being rolled out to Enterprise customers. Contact your sales representative to enable this feature.
+    </Info>
+    
+    <Note>
+    If you set an API key at the organization level, all projects will use it unless a project-level key is specified. Project-level keys always take precedence over organization-level keys.
+    </Note>
+    
+    [View API key management guide →](/docs/get-started/enterprise/org-project-level-api-keys)
+  </Step>
+</Steps>
+
+---
+
+## Feature Rollout Timeline
+
+Some Enterprise features are being gradually rolled out. Here's what to expect:
+
+| Feature | Status | Availability |
+|---------|--------|--------------|
+| SSO (Okta, Azure AD/Entra ID) | ✅ Available | Now |
+| RBAC (Organization, Project, Asset) | ✅ Available | Now |
+| Directory Sync & Groups | 🔄 Beta | Full rollout by Nov 20, 2025 |
+| Integration Controls | 🔄 Gradual rollout | Rolling out to Enterprise customers |
+| S3 Event Streaming | 🔄 Beta | Full availability Nov 20, 2025; Self-serve by EOY |
+| Organization & Project-level API Keys | 🔄 Gradual rollout | Rolling out to Enterprise customers |
+| Asset-level Authentication Controls | ✅ Available | Now |
+
+<Info>
+If you have an Enterprise subscription but don't have access to a feature marked as "Beta" or "Gradual rollout," contact your sales representative to express interest and get early access.
+</Info>
+
+---
+
+## Best Practices for Enterprise Deployment
+
+<Tabs>
+  <Tab title="Security First">
+    ### Configure Security Before Inviting Users
+    
+    Set up SSO and RBAC before inviting your entire organization. This ensures users have appropriate access from day one and prevents security gaps during onboarding.
+    
+    **Initial security setup**
+    
+    Complete SSO setup and test with a pilot group before enforcing it organization-wide. Configure organization and project-level roles thoughtfully, ensuring that sensitive resources have additional asset-level permissions.
+    
+    **Multi-factor authentication**
+    
+    Work with your identity provider team to enable multi-factor authentication (MFA) for an additional security layer. This is especially important for Admin and Owner roles.
+    
+    **The cost of shortcuts**
+    
+    The security foundation you build now will scale with your organization. Taking shortcuts during initial setup often leads to security remediation work later, which is more disruptive and time-consuming than getting it right from the start.
+  </Tab>
+  
+  <Tab title="Scale with Groups">
+    ### Use Directory Sync for Teams of 20+
+    
+    If you have more than 20 users, use Directory Sync and Groups instead of managing individual user permissions. This approach saves time, reduces errors, and scales effortlessly as your organization grows.
+    
+    **Leverage existing structure**
+    
+    Enable Directory Sync with your identity provider and organize users into logical groups based on your existing structure—whether by team, department, or function. Assign entire groups to projects instead of managing hundreds of individual users.
+    
+    **Automatic synchronization**
+    
+    This approach leverages the organizational structure you've already built in your identity provider and keeps access control synchronized automatically. When someone joins the Marketing team in your IDP, they automatically get access to Marketing projects in Relevance AI.
+    
+    **Naming conventions matter**
+    
+    Document your group naming conventions early. As your deployment grows, consistent naming makes it easy for project admins to find and assign the right groups. The time invested in setting up Directory Sync properly pays dividends as your organization scales.
+  </Tab>
+  
+  <Tab title="Plan Structure">
+    ### Design Before You Build
+    
+    Take time to plan your organization structure before creating projects and assets. Restructuring later is more difficult than getting it right from the start.
+    
+    **Start with strategy**
+    
+    Map out your project structure before creating anything in Relevance AI. Decide whether to organize by team, use case, environment, or a hybrid approach. Establish clear naming conventions for projects and assets, and define ownership models.
+    
+    **Think ahead**
+    
+    Consider both your current needs and how you expect the platform to grow over the next 12-24 months. Will you need separate production and development environments? How will you handle shared resources? Where will experimental work live?
+    
+    **Organize within projects**
+    
+    Plan folder structures within projects to keep assets organized. A well-designed structure makes it easier to manage permissions, track usage, and scale operations as adoption grows.
+  </Tab>
+  
+  <Tab title="Access Control">
+    ### Follow Least Privilege Principle
+    
+    Grant users the minimum permissions they need to do their work. You can always expand access later, but restricting access after the fact is harder and may disrupt workflows.
+    
+    **Start restrictive, expand as needed**
+    
+    Start by assigning users to the Viewer role and escalate permissions based on demonstrated need. Use project-level permissions as your default access control mechanism, adding asset-level permissions only for sensitive resources that require additional restrictions.
+    
+    **Careful with admin access**
+    
+    Assign project Admin roles carefully—typically just one or two people per project who are responsible for managing that project's resources and access. Too many admins create confusion about ownership and accountability.
+    
+    **Regular audits**
+    
+    Regularly audit permissions during growth phases, especially when teams reorganize or people change roles. The principle of least privilege isn't just about security—it also reduces confusion by ensuring users only see the resources relevant to their work.
+  </Tab>
+  
+  <Tab title="Governance">
+    ### Establish Clear Policies
+    
+    Create and document governance policies before scaling your deployment. This prevents confusion, ensures consistency, and helps maintain security standards.
+    
+    **Document your rules**
+    
+    Document who can create projects, what approval processes exist for new integrations, and how teams should name their projects and assets. Establish regular permission audits—quarterly is a good starting point—and create clear workflows for requesting access.
+    
+    **Enable, don't block**
+    
+    Good governance doesn't mean slowing teams down. It means providing clear guidelines that help teams move quickly while maintaining security and compliance. When people know the rules and understand why they exist, they're more likely to follow them.
+    
+    **Make it accessible**
+    
+    Share your policies in a central location that's easy to find and update them as your deployment evolves. Consider creating a dedicated project or knowledge base for governance documentation.
+  </Tab>
+  
+  <Tab title="Pilot & Monitor">
+    ### Test with a Pilot Team
+    
+    Before rolling out to your entire organization, test your setup with a small pilot team (5-10 users). This helps you identify issues and refine your configuration without impacting everyone.
+    
+    **Choose diverse pilot users**
+    
+    Select pilot users from different teams and use cases to get diverse feedback. Test SSO login flows thoroughly, verify that permissions work as expected, and ensure usage monitoring is capturing the data you need.
+    
+    **Set up monitoring early**
+    
+    Set up usage alerts during the pilot so you can understand consumption patterns before opening access widely. This helps you set realistic usage limits and identify potential cost issues before they become problems.
+    
+    **Learn and iterate**
+    
+    Gather feedback from pilot users about what's working and what's confusing. Use this input to refine your setup, update documentation, and improve onboarding materials. Monitor usage patterns closely for the first 30 days after full rollout—this is when you'll learn the most about how your organization uses the platform.
+  </Tab>
+</Tabs>
+
+---
+
+## Next Steps
+
+Once you've completed the setup steps above, you're ready to start building your AI workforce:
+
+<CardGroup cols={2}>
+  <Card title="Build Your First Agent" icon="robot" href="/docs/agent/quickstart-guide">
+    Create an AI agent to automate tasks and workflows
+  </Card>
+  
+  <Card title="Create a Workforce" icon="users-gear" href="/docs/workforce/workforce-overview/quick-start-guide">
+    Build multi-agent teams for complex workflows
+  </Card>
+  
+  <Card title="Start Using Chat" icon="messages" href="/docs/chat/intro-to-chat">
+    Interact with AI agents through conversational chat
+  </Card>
+  
+  <Card title="Browse the Marketplace" icon="store" href="/docs/get-started/marketplace">
+    Discover pre-built agents, tools, and templates
+  </Card>
+  
+  <Card title="Add Knowledge" icon="brain" href="/docs/knowledge/introduction">
+    Connect your data sources to power your agents
+  </Card>
+  
+  <Card title="Explore Integrations" icon="puzzle-piece" href="/docs/integrations/introduction">
+    Connect your favorite tools and services
+  </Card>
+</CardGroup>
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="How long does Enterprise setup take?">
+    Most organizations complete the core setup (Steps 1-5) in 2-3 hours. The optional steps (S3 streaming, integration controls) add another 30-60 minutes. If you're planning your organization structure carefully, allow additional time for that planning phase.
+  </Accordion>
+  
+  <Accordion title="Can I skip steps in the recommended order?">
+    While you can technically skip steps, we strongly recommend following the order. SSO and Directory Sync should always come first, as they affect how users access the platform. Skipping these steps may require you to reconfigure access later, which can disrupt your users.
+  </Accordion>
+  
+  <Accordion title="What if I don't have an identity provider?">
+    Enterprise features require an identity provider (Okta, Azure AD/Entra ID, or Google Workspace). If you don't have one, you'll need to set one up before using SSO and Directory Sync features. Most organizations already have an IDP for email and other services.
+  </Accordion>
+  
+  <Accordion title="How do I get help during setup?">
+    Enterprise customers have access to dedicated support. Contact your sales representative or [reach out to our support team](/docs/get-started/support) via your Slack channel or other support methods. We can also provide setup assistance for complex deployments.
+  </Accordion>
+  
+  <Accordion title="What happens if I don't complete all setup steps?">
+    You can use Relevance AI without completing all steps, but you won't have full Enterprise security and governance capabilities. We recommend completing at least Steps 1-4 (SSO, Directory Sync, Organization Structure, and RBAC) for a secure deployment.
+  </Accordion>
+  
+  <Accordion title="Do I need Directory Sync if I only have a small team?">
+    For teams under 20 users, Directory Sync is optional but still recommended. Manual user management works fine for small teams, but Directory Sync makes it easier to scale and ensures your access control stays in sync with your organization's identity provider.
+  </Accordion>
+  
+  <Accordion title="Can I use Relevance AI without SSO?">
+    Yes, but it's not recommended for Enterprise customers. SSO provides centralized access control, enhanced security, and is required for features like Directory Sync. For Enterprise deployments, SSO should be considered essential.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Note>
+**Need help?** Enterprise customers have access to dedicated support channels. Contact your sales representative or [reach out to our support team](/docs/get-started/support) for assistance with your Enterprise setup.
+</Note>
+
