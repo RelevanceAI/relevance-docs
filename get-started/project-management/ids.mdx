@@ -30,6 +30,61 @@ https://app.relevanceai.com/agents/f1db6c/123456789012-46bf-9cf4-a98611e97a41/43
 * **Project ID**: `123456789012-46bf-9cf4-a98611e97a41`
 * **Agent ID**: `43c3a067-0734-4f31-b4c9-3c72dc816519`
 
+## Organization Region
+
+Your organization's region is selected when you sign up to Relevance AI and create your organization. This determines where your data is stored and **cannot be changed after creation**.
+
+### How to identify your region
+
+You can identify your organization's region in two ways:
+
+<Steps>
+  <Step title="From the URL">
+    Look at any Relevance AI URL while logged in. The region code appears immediately after the section name:
+    
+    ```
+    https://app.relevanceai.com/agents/[REGION_CODE]/...
+    ```
+    
+    The region code will be one of:
+    - **US (N. Virginia)**: `bcbe5a`
+    - **EU (London)**: `d7b62b`
+    - **AU (Sydney)**: `f1db6c`
+  </Step>
+  
+  <Step title="From the organization switcher">
+    The region code is also visible in the organization switcher in the Relevance AI interface.
+    
+    <Frame caption="Your organization's region code appears in the URL and organization switcher, and determines where your data is stored">
+      <img src="/images/placeholder-org-region.png" alt="Organization switcher showing region code" />
+    </Frame>
+    
+    <Note>Screenshot placeholder - actual image to be added by Alex</Note>
+  </Step>
+</Steps>
+
+### Available regions
+
+Relevance AI operates in three regions:
+
+<CardGroup cols={3}>
+  <Card title="US (N. Virginia)" icon="flag-usa">
+    **Region code**: `bcbe5a`
+  </Card>
+  <Card title="EU (London)" icon="landmark">
+    **Region code**: `d7b62b`
+  </Card>
+  <Card title="AU (Sydney)" icon="earth-oceania">
+    **Region code**: `f1db6c`
+  </Card>
+</CardGroup>
+
+<Warning>
+  **Region cannot be changed after creation**
+  
+  If you need to change your organization's region, you must contact support. This cannot be done through the UI. Changing regions requires creating a new organization in the desired region.
+</Warning>
+
 ## How to find each ID
 
 ### Organization ID
@@ -77,4 +132,10 @@ You can use this tool to get IDs from an Agent or Tool URL.
 <AccordionGroup>
   <Accordion title="Are IDs case sensitive?">Yes, they are.</Accordion>
   <Accordion title="Are forward slashes a valid character in an ID?">No, these are just part of the URL structure.</Accordion>
+  <Accordion title="Can I change my organization's region after signup?">
+    No, your organization's region is permanent and cannot be changed after creation. If you need to use a different region, you must contact support to create a new organization in the desired region.
+  </Accordion>
+  <Accordion title="How do I know which region my organization is in?">
+    You can identify your region by looking at the region code in your URL or in the organization switcher. See the [Organization Region](#organization-region) section above for details.
+  </Accordion>
 </AccordionGroup>
