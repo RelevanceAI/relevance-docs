@@ -30,11 +30,62 @@ https://app.relevanceai.com/agents/f1db6c/123456789012-46bf-9cf4-a98611e97a41/43
 * **Project ID**: `123456789012-46bf-9cf4-a98611e97a41`
 * **Agent ID**: `43c3a067-0734-4f31-b4c9-3c72dc816519`
 
+## Organization Region
+
+Your organization's region is selected when you sign up to Relevance AI and create your organization. This determines where your data is stored and **cannot be changed after creation**.
+
+### How to identify your region
+
+You can identify your organization's region in two ways:
+
+<Steps>
+  <Step title="From the URL">
+    Look at any Relevance AI URL while logged in. The region code appears immediately after the section name:
+    
+    ```
+    https://app.relevanceai.com/agents/[REGION_CODE]/...
+    ```
+    
+    The region code will be one of:
+    - **US (N. Virginia)**: `bcbe5a`
+    - **EU (London)**: `d7b62b`
+    - **AU (Sydney)**: `f1db6c`
+  </Step>
+  
+  <Step title="From the organization switcher">
+    Your region is also displayed in the organization switcher in the Relevance AI interface, shown as a two-letter abbreviation (AU, EU, or US).
+    
+    <Frame caption="The organization switcher displays your region as a two-letter code. The full region code also appears in your URL.">
+      <img src="/images/placeholder-org-region.png" alt="Organization switcher showing region abbreviation" />
+    </Frame>
+  </Step>
+</Steps>
+
+### Available regions
+
+Relevance AI operates in three regions:
+
+<CardGroup cols={3}>
+  <Card title="US (N. Virginia)" icon="flag-usa">
+    Region code: bcbe5a
+  </Card>
+  <Card title="EU (London)" icon="landmark">
+    Region code: d7b62b
+  </Card>
+  <Card title="AU (Sydney)" icon="earth-oceania">
+    Region code: f1db6c
+  </Card>
+</CardGroup>
+
+<Warning>
+Your organization's region cannot be changed after creation. If you need to change regions, [contact support](/support) to discuss your options.
+</Warning>
+
 ## How to find each ID
 
 ### Organization ID
 
-<Warning>You'll only be able to see your organization ID if you're an organization admin by heading to Settings. This section is not available to non-organization admins.</Warning>
+<Note>You'll only be able to see your organization ID if you're an organization admin. This section is not available to non-organization admins.</Note>
 
 To find your organization ID, head to the Settings page in the sidebar of Relevance AI. The settings page will show a URL like the following below:
 
@@ -77,4 +128,10 @@ You can use this tool to get IDs from an Agent or Tool URL.
 <AccordionGroup>
   <Accordion title="Are IDs case sensitive?">Yes, they are.</Accordion>
   <Accordion title="Are forward slashes a valid character in an ID?">No, these are just part of the URL structure.</Accordion>
+  <Accordion title="Can I change my organization's region after signup?">
+    No, your organization's region is permanent and cannot be changed after creation. If you need to use a different region, you must contact support to create a new organization in the desired region.
+  </Accordion>
+  <Accordion title="How do I know which region my organization is in?">
+    You can identify your region by looking at the region code in your URL or in the organization switcher. See the [Organization Region](#organization-region) section above for details.
+  </Accordion>
 </AccordionGroup>
