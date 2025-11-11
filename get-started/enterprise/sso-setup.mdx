@@ -1,6 +1,6 @@
 ---
 title: "Single Sign-On (SSO) Setup"
-description: "Configure secure authentication with Okta, Azure AD/Entra ID, or Google Workspace"
+description: "Configure secure authentication with your identity provider using SAML 2.0 or OIDC protocols"
 ---
 
 <Note>
@@ -11,13 +11,15 @@ Single Sign-On (SSO) enables your organization to authenticate users through you
 
 ## Supported Identity Providers
 
-Relevance AI supports SSO through the following identity providers:
+Relevance AI supports SSO through a wide range of identity providers via WorkOS, including:
 
 - **Okta**
 - **Azure AD / Microsoft Entra ID** 
 - **Google Workspace**
+- **Auth0**
+- And many more
 
-All SSO integrations use industry-standard SAML 2.0 protocols via WorkOS.
+We support both SAML 2.0 and OIDC protocols. For a complete list of supported identity providers, see [WorkOS Integrations](https://workos.com/docs/integrations).
 
 ---
 
@@ -43,23 +45,27 @@ Setting up SSO requires coordination between your Relevance AI representative an
     
     - Your organization's email domain
     - Contact information for your IT administrator
-    - Your preferred identity provider (Okta, Azure AD, or Google Workspace)
+    - Your preferred identity provider (e.g., Okta, Azure AD, Google Workspace, Auth0, or others)
   </Step>
 
   <Step title="Receive Setup Link" icon="envelope">
-    Your IT administrator will receive an email with a setup link and instructions for completing the SAML configuration through WorkOS.
+    Your IT administrator will receive an email with a setup link and instructions for completing the SSO configuration through WorkOS.
     
     <Info>
-    For detailed setup instructions, your IT admin should refer to: [WorkOS - What You Will Need](https://workos.com/docs/integrations/okta-saml/what-you-will-need)
+    Your IT admin should refer to the WorkOS integration guide for your specific identity provider. Visit [WorkOS Integrations](https://workos.com/docs/integrations) and select your provider for detailed setup instructions. Don't worry if you select the wrong one - the configuration can be redone.
     </Info>
   </Step>
 
-  <Step title="Complete SAML Configuration" icon="gear">
+  <Step title="Complete SSO Configuration" icon="gear">
     Your IT administrator will:
     
     1. Click the setup link provided in the email
-    2. Complete the SAML configuration through the WorkOS interface
+    2. Complete the SSO configuration through the WorkOS interface
     3. Follow the WorkOS process: [Using Admin Portal](https://workos.com/docs/admin-portal/c-using-admin-portal)
+    
+    <Warning>
+    **Important:** When clicking the setup link, your IT admin will be directed to your organization's WorkOS environment (created by Relevance AI). They should **not** create a new WorkOS account. If they see a billing screen or are prompted to pay, they are in the wrong organization. Contact your Relevance AI representative if this occurs.
+    </Warning>
     
     <Note>
     Admin permissions in your identity provider are required to complete this step.
@@ -81,6 +87,22 @@ Setting up SSO requires coordination between your Relevance AI representative an
 
 ---
 
+## Next Steps
+
+Once SSO is configured, you can enhance your organization's access management with these additional Enterprise features:
+
+<CardGroup cols={2}>
+  <Card title="Role-Based Access Controls (RBAC)" icon="shield-halved" href="/get-started/enterprise/rbac">
+    Control user permissions at organization, project, and asset levels with granular role-based access controls.
+  </Card>
+  
+  <Card title="Directory Sync and Groups" icon="arrows-rotate" href="/get-started/enterprise/rbac-groups">
+    Sync your identity provider groups to Relevance AI for bulk user management and automated provisioning.
+  </Card>
+</CardGroup>
+
+---
+
 ## Troubleshooting
 
 <AccordionGroup>
@@ -99,7 +121,7 @@ Setting up SSO requires coordination between your Relevance AI representative an
   </Accordion>
   
   <Accordion title="What is WorkOS?">
-    WorkOS is the SSO infrastructure provider that handles the secure connection between Relevance AI and your identity provider. You don't need a WorkOS account - your IT admin will use it only during the setup process.
+    WorkOS is the SSO infrastructure provider that handles the secure connection between Relevance AI and your identity provider. You don't need a WorkOS account - your IT admin will use it only during the setup process. When your IT admin clicks the setup link, they'll be directed to your organization's WorkOS environment that Relevance AI has already created. They should not see any billing screens or be prompted to create a new account.
   </Accordion>
   
   <Accordion title="Can I use multiple identity providers?">
