@@ -34,10 +34,18 @@ To add Slack as an integration, follow these simple steps:
 
 You can trigger your Agents or Workforces directly from Slack channels or your own DM. This will start your Agent or Workforce in Relevance AI based on a keyword of your choice, and then will reply to your message in Slack.
 
-To get started, first **invite Relevance AI to the Slack channel or your DM** that you want to trigger Agents or Workforces from by typing `/invite @Relevance AI` into the channel or DM.
+### Setting up triggers for channels
+
+To trigger from a **channel**, first **invite Relevance AI to the Slack channel** by typing `/invite @Relevance AI` into the channel.
+
+### Setting up triggers for DMs
+
+To trigger from your **own DM**, open a DM with the Relevance AI bot in Slack and **send it any message**. This establishes the DM connection and makes your DM appear in the channel selection dropdown.
 
 <Tip>
-  The `/invite @Relevance AI` command works the same way in both channels and DMs. Once you invite the bot to your DM, it will appear in the channel selection dropdown when setting up triggers.
+  **Channel vs DM setup:**
+  - **For channels:** Use `/invite @Relevance AI` in the channel
+  - **For your DM:** Send a message to the Relevance AI bot (any message works)
 </Tip>
 
 Then, set up your Trigger from Relevance AI by following the steps below:
@@ -150,13 +158,13 @@ This will disconnect your Slack workspace from Relevance AI, and your agents wil
 
 <AccordionGroup>
   <Accordion title="Can I use my own Slack DM as a trigger?">
-    Yes! You can use your own Slack DM as a trigger source, just like channels. To do this:
+    Yes! You can use your own Slack DM as a trigger source. Here's how to set it up:
     
-    1. Open your DM with yourself in Slack
-    2. Type `/invite @Relevance AI` in the DM to invite the bot
-    3. Once invited, your DM will appear in the channel selection dropdown when setting up triggers in Relevance AI
+    1. Open a DM with the Relevance AI bot in Slack
+    2. Send the bot any message (this establishes the DM connection)
+    3. Your DM will then appear in the channel selection dropdown when setting up triggers in Relevance AI
     
-    The process works exactly the same way as inviting the bot to a channel. If your DM doesn't appear in the channel list, make sure you've completed the `/invite @Relevance AI` step first.
+    **Note:** For DMs, you don't use the `/invite` command. Simply sending a message to the bot is enough to establish the connection. If your DM doesn't appear in the channel list, make sure you've sent at least one message to the Relevance AI bot first.
   </Accordion>
   <Accordion title="How do I send specific messages to someone on Slack?">
     If you want to be able to send a message to a specific person in Slack, that person will first need to send a message to the Relevance AI bot in Slack. Once they do this, their name will appear as a destination option when sending Slack messages.
