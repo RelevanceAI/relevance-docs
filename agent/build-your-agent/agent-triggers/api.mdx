@@ -8,6 +8,10 @@ sidebarTitle: "API Triggers"
 
 API Triggers empower developers to programmatically activate Relevance AI agents through the Relevance AI API, enabling you to integrate AI agents into your applications, services, and automated workflows.
 
+<Warning>
+The Relevance AI API is officially supported for triggering Agents and Tools only. All other API usage is currently unsupported, though we're working to bring more functionality into our agents over time.
+</Warning>
+
 ### Key Features
 
 - **Programmatic Control**: Initiate agent tasks directly through HTTP requests
@@ -41,6 +45,10 @@ The API trigger configuration popup displays the endpoint, a button to generate 
 ```http
 POST https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
 ```
+
+<Info>
+The endpoint URL differs based on your organization's region. The example above shows the AU region endpoint. When you set up your API trigger in the UI, the correct endpoint for your region will be displayed in the configuration popup.
+</Info>
 
 **Request Body:**
 ```json
