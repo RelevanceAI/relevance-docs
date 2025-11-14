@@ -4,57 +4,53 @@ description: "Build your own API Triggers"
 sidebarTitle: "API Triggers"
 ---
 
-## API Triggers for Agents
+## API Triggers
 
-API Triggers empower developers to programmatically activate Relevance AI agents, creating powerful automation workflows that integrate seamlessly with your existing systems and applications.
+API Triggers empower developers to programmatically activate Relevance AI agents through the Relevance AI API, enabling you to integrate AI agents into your applications, services, and automated workflows.
 
-## Overview
+<Warning>
+The Relevance AI API is officially supported for triggering Agents and Tools only. All other API usage is currently unsupported.
+</Warning>
 
-API Triggers allow you to initiate agent tasks directly through the Relevance AI API, enabling programmatic control over when and how your agents are activated. This capability is particularly valuable for developers and technical teams who want to incorporate AI agents into their applications, services, or automated workflows.
+### Key Features
 
-With API Triggers, you can build sophisticated systems where your agents respond to events in your custom applications, process data from proprietary systems, or execute tasks based on complex business logic that you define.
+- **Programmatic Control**: Initiate agent tasks directly through HTTP requests
+- **Flexible Integration**: Works with any programming language capable of making HTTP requests
+- **Custom Workflows**: Build sophisticated systems where agents respond to events in your custom applications
+- **Context Management**: Send messages to new or existing conversations with full context control
 
-## How API Triggers Work
+### How API Triggers Work
 
-API Triggers function by exposing endpoints in the Relevance AI API that allow you to:
-
-1. Initiate a new conversation with an agent
-2. Send messages to an existing conversation
-3. Provide context and data for the agent to process
-4. Receive responses and actions taken by the agent
+API Triggers expose an endpoint that accepts HTTP POST requests. When you send a request with a message and your agent ID, the agent processes the message and executes its configured tasks. The agent can initiate new conversations or continue existing ones based on the context you provide.
 
 <Note>
   When triggering an agent via API, the response is not returned directly. Instead, the result must be sent to a specified destination, such as uploading the final output to Google Sheets.
 </Note>
 
-## Setting Up API Triggers in your Agent
+### Setting Up API Triggers
 
-To set up and use API Triggers for your agents:
+1. Navigate to the Agents page and select the agent you want to configure
+2. In the sidebar on the left, go to "Triggers" and click the "Add trigger" button
+3. Under the "Build your own triggers" section, click the "API" trigger
 
-1. Navigate to the Agents page and choose the specific agent you want to setup the custom API trigger for.
-2. In the Build tab, click on "Triggers"
-3. Select "API Trigger" from the available trigger options
-4. Configure the API Trigger settings according to your requirements
-5. Save your configuration
+The API trigger configuration popup displays the endpoint, a button to generate your API key, and a pre-filled request body with your `agent_id`. Code examples in cURL, JavaScript, and Python are also provided.
 
-### Setting up your API trigger in your Codebase
+<Warning>
+  Make sure to save your API key somewhere safe - once generated, you won't be able to view it again. However, you can regenerate one at any time.
+</Warning>
 
+### API Reference
+
+**Endpoint:**
 ```http
 POST https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
 ```
 
-### Save your API key somewhere safe
+<Info>
+The endpoint URL differs based on your organization's region. The example above shows the AU region endpoint. When you set up your API trigger in the UI, the correct endpoint for your region will be displayed in the configuration popup.
+</Info>
 
-<Warning>
-  You'll need to **generate an API key** (Authorization Token) to authenticate your requests. Make sure to save your API key somewhere safe. Once generated, you won't be able to view it again. However, you can regenerate one at any time.
-</Warning>
-
-<Tip>
-  To find your **Agent ID**, you can ask your agent directly in the chat ("What is your agent ID?"). Or, you can check the URL. When your agent is open, look at the URL in your browser. The agent ID is the second long code after the region code in the URL structure: Example: https://app.relevanceai.com/agents/{region}/{project_id}/{agent_id}/edit
-</Tip>
-
-## Request Body
-
+**Request Body:**
 ```json
 {
   "message": {
@@ -65,10 +61,9 @@ POST https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
 }
 ```
 
-## Example Usage (Choose a method your prefer)
+### Code Examples
 
-### cURL
-
+**cURL**
 ```bash
 curl -X POST \
   -H "Content-Type: application/json" \
@@ -77,8 +72,7 @@ curl -X POST \
   https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
 ```
 
-### JavaScript (Fetch)
-
+**JavaScript (Fetch)**
 ```js
 fetch('https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger', {
   method: "POST",
@@ -93,8 +87,7 @@ fetch('https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger', {
 });
 ```
 
-### Python (requests)
-
+**Python (requests)**
 ```python
 import requests
 import json
@@ -112,25 +105,25 @@ requests.post(
 )
 ```
 
-## Best Practices for API Triggers
+### Best Practices
 
-1. **Error Handling**: Implement robust error handling in your API integration code
-2. **Rate Limiting**: Be mindful of API rate limits and implement appropriate throttling
-3. **Security**: Store API keys securely and use environment variables rather than hardcoding them
-4. **Monitoring**: Set up monitoring for your API trigger usage to detect issues early
-5. **Testing**: Thoroughly test your API trigger implementation in a development environment before deploying to production
+- **Error Handling**: Implement robust error handling in your API integration code
+- **Rate Limiting**: Be mindful of API rate limits and implement appropriate throttling
+- **Security**: Store API keys securely and use environment variables rather than hardcoding them
+- **Monitoring**: Set up monitoring for your API trigger usage to detect issues early
+- **Testing**: Thoroughly test your API trigger implementation in a development environment before deploying to production
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
   <Accordion title="What programming languages can I use with API Triggers?">
-    You can use any programming language capable of making HTTP requests. Our examples use Python, but the API is language-agnostic.
+    You can use any programming language capable of making HTTP requests - the API is language-agnostic.
   </Accordion>
   <Accordion title="Are there rate limits for API Triggers?">
     Yes, API usage is subject to rate limits based on your subscription plan. Please refer to your plan details for specific limitations.
   </Accordion>
   <Accordion title="Can I use API Triggers with serverless functions?">
-    Absolutely\! API Triggers work well with serverless architectures like AWS Lambda, Google Cloud Functions, or Azure Functions.
+    Absolutely! API Triggers work well with serverless architectures like AWS Lambda, Google Cloud Functions, or Azure Functions.
   </Accordion>
   <Accordion title="How secure are API Triggers?">
     API Triggers use industry-standard authentication and encryption. All API requests must be authenticated with your API key, and all data is transmitted over HTTPS.
