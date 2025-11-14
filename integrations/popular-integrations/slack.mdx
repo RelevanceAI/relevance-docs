@@ -32,9 +32,21 @@ To add Slack as an integration, follow these simple steps:
 
 ![Slack Triggers New Pn](/images/slack_triggers_new.png)
 
-You can trigger your Agents or Workforces directly from Slack. This will start your Agent or Workforce in Relevance AI based on a keyword of your choice, and then will reply to your message in Slack.
+You can trigger your Agents or Workforces directly from Slack channels or your own DM. This will start your Agent or Workforce in Relevance AI based on a keyword of your choice, and then will reply to your message in Slack.
 
-To get started, first **invite Relevance AI to the Slack channel you want to trigger Agents or Workforces from** by typing `/invite @Relevance AI` into the channel.
+### Setting up triggers for channels
+
+To trigger from a **channel**, first **invite Relevance AI to the Slack channel** by typing `/invite @Relevance AI` into the channel.
+
+### Setting up triggers for DMs
+
+To trigger from your **own DM**, open a DM with the Relevance AI bot in Slack and **send it any message**. This establishes the DM connection and makes your DM appear in the channel selection dropdown.
+
+<Tip>
+  **Channel vs DM setup:**
+  - **For channels:** Use `/invite @Relevance AI` in the channel
+  - **For your DM:** Send a message to the Relevance AI bot (any message works)
+</Tip>
 
 Then, set up your Trigger from Relevance AI by following the steps below:
 
@@ -47,7 +59,7 @@ Then, set up your Trigger from Relevance AI by following the steps below:
 
 2. Select Slack.
 3. Connect or select your Slack account, then click 'Continue'.
-4. Select the channel you want your Agent to be triggered on.
+4. Select the channel or DM you want your Agent to be triggered on.
 5. Enter the keyword you want the Agent to be triggered on - if you want the Agent to be triggered on all messages that tag `@Relevance AI`, leave this blank.
 6. Click 'Continue'.
 7. Queue work hours if needed.
@@ -97,7 +109,7 @@ To escalate your agent to Slack, follow these steps:
 4. Publish changes to your agent by clicking "Publish changes"
 5. Run your agent by selecting "Run" at the top of the page.
 6. Prompt the agent with some text, e.g. "Give me a summary of what Slack does".
-7. You can reply to the agent's notification directly in Slack, or if you'd prefer you can click on “View task” to navigate back to the task in Relevance AI and perform further actions.
+7. You can reply to the agent's notification directly in Slack, or if you'd prefer you can click on "View task" to navigate back to the task in Relevance AI and perform further actions.
 
 <div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
 <iframe src="https://app.supademo.com/embed/cmb77jbof4hqnppkpc1k339xb?v_email=EMAIL&embed_v=2" frameBorder="0" title="Connect Slack Agent Notifications" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
@@ -145,6 +157,15 @@ This will disconnect your Slack workspace from Relevance AI, and your agents wil
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
+  <Accordion title="Can I use my own Slack DM as a trigger?">
+    Yes! You can use your own Slack DM as a trigger source. Here's how to set it up:
+    
+    1. Open a DM with the Relevance AI bot in Slack
+    2. Send the bot any message (this establishes the DM connection)
+    3. Your DM will then appear in the channel selection dropdown when setting up triggers in Relevance AI
+    
+    **Note:** For DMs, you don't use the `/invite` command. Simply sending a message to the bot is enough to establish the connection. If your DM doesn't appear in the channel list, make sure you've sent at least one message to the Relevance AI bot first.
+  </Accordion>
   <Accordion title="How do I send specific messages to someone on Slack?">
     If you want to be able to send a message to a specific person in Slack, that person will first need to send a message to the Relevance AI bot in Slack. Once they do this, their name will appear as a destination option when sending Slack messages.
   </Accordion>
