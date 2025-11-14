@@ -115,12 +115,31 @@ Project admins will be able to set a users role upon invite. Organization admins
 
 The **Chat** role is designed for users who only need to interact with AI agents through [Relevance Chat](/chat/intro-to-chat) without accessing the main web application. Key characteristics:
 
-- **Chat-only access**: Users with this role are automatically redirected to Chat and cannot access the web app
-- **Asset-level permissions required**: To run specific agents in Chat, users still need Member or higher permissions on those individual assets
-- **No asset creation**: Cannot create new agents, tools, or knowledge bases
-- **LLM conversations**: Can have conversations with LLMs and in-built Chat Agents directly without agents
-- **More powerful than Viewer**: Can trigger Chat and interact with agents (with proper asset permissions)
-- **Less powerful than Member**: Cannot create assets or access the web app
+<AccordionGroup>
+  <Accordion title="Controlled agent visibility">
+    Chat role users can only see and run agents they have Member or higher permissions on. They won't be able to see any other agents in Chat. This allows you to control exactly which agents each Chat user can access by assigning asset-level permissions.
+  </Accordion>
+  
+  <Accordion title="Chat-only access">
+    Users with this role are automatically redirected to Chat and cannot access the web app.
+  </Accordion>
+  
+  <Accordion title="No asset creation">
+    Cannot create new agents, tools, or knowledge bases.
+  </Accordion>
+  
+  <Accordion title="LLM conversations">
+    Can have conversations with LLMs and in-built Chat Agents directly without agents.
+  </Accordion>
+  
+  <Accordion title="More powerful than Viewer">
+    Can trigger Chat and interact with agents (with proper asset permissions).
+  </Accordion>
+  
+  <Accordion title="Less powerful than Member">
+    Cannot create assets or access the web app.
+  </Accordion>
+</AccordionGroup>
 
 This role is ideal for end users, external collaborators, or team members who only need to use pre-built agents through the chat interface.
 
