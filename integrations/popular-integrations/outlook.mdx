@@ -1,107 +1,171 @@
 ---
-title: 'Outlook'
-description: 'Use Outlook to have your Agents receive and respond to Outlook emails'
+title: "Outlook"
+description: "Connect and automate your Outlook email, calendar, and contacts with Relevance AI"
 ---
 
 ## Overview
 
-The Outlook integration allows your agent to emails that are received to a specific Outlook account. For customer support agents that handle email equiries, we recommend setting up a dedicated email account for them, much like you would for a human employee.
+Connect your Microsoft Outlook account to Relevance AI and supercharge your email workflow with AI agents that can read, respond to, and take action on your emails, manage your calendar, and organize your contacts. The Outlook integration enables you to automate email-related tasks, schedule meetings, manage contacts, create powerful workflows, and save valuable time.
 
-## How to connect your agent to Outlook?
+## Connect the integration
 
-In the agent settings page, you can add Outlook as a trigger by clicking on the Outlook button under "Integrations > Triggers", and following the process to connect your Outlook account.
+Setting up the Outlook integration with Relevance AI is straightforward:
 
-After that, you can choose whether or not you want to filter emails that are sent to your agent from your Outlook account. Without a search filter, your agent will receive every single email that is sent to your connected account.
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Outlook" from the available integrations.
+3. Click the "Add Integration" button.
+4. In the pop-up window, sign into your Microsoft account and authorize Relevance AI to access your Outlook data.
+5. Follow any additional prompts to complete the connection process.
+6. Once connected, you'll see your Outlook account listed under connected integrations.
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/clxwqnw9o0yzg12o20k8u7wdf"
-    frameBorder="0"
-    title="Create an agent from scratch on Relevance AI"
-    allow="clipboard-write; fullscreen"
-    webkitAllowFullscreen="true"
-    mozAllowFullscreen="true"
-    allowFullscreen
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
-</div>
+## Setting up triggers
+
+The Outlook integration allows you to set up triggers that automatically activate your AI agents when specific email events occur. This enables your agents to respond to emails in real-time without manual intervention.
+
+To set up Outlook as a trigger:
+
+1. Create or edit an agent in Relevance AI.
+2. Navigate to the "Triggers" section in "Agent Profile".
+3. Select "Outlook" as the trigger source.
+4. Configure the trigger conditions based on your needs using search filters.
 
 ### Filter options
 
 If you don't add a search filter, your agent will receive every email that is sent to the connected Outlook account, which might be what you want if your agent has a dedicated email account.
 
-Below is a table of different search filters you can use, which is also how you filter emails in your Outlook search field. Full docs for this can be found in Microsoft's [Search Query Parameter page](https://learn.microsoft.com/en-us/graph/search-query-parameter?tabs=http):
+Below are different search filters you can use, which is also how you filter emails in your Outlook search field. Full documentation can be found in Microsoft's [Search Query Parameter page](https://learn.microsoft.com/en-us/graph/search-query-parameter?tabs=http):
 
-<img src="/images/search-query-params.png" />
+- **`subject: ask us anything`** - The subject line contains the phrase "ask us anything"
+- **`body: book a demo`** - The body of the email contains the phrase "book a demo"
+- **`from:*apple.com`** - Only emails sent from the apple.com domain
+- **`hasAttachments: true`** - Only emails that have attachments
+- **`received: 07/23/2018`** - Only emails received on this date
 
-This is how you would use them in the Relevance Filter emails by search field:
+Once set up, your agent will automatically start working whenever the specified email conditions are met, allowing for seamless email automation.
 
-<img src="/images/search-filter-agent.png" />
+## Tools & Tool Steps
 
-- "subject: ask us anything" - The subject line contains the phrase "ask us anything".
-- "body: book a demo" - The body of the email contains the phrase "book a demo".
-- "from:*apple.com" - Only emails sent from the apple.com domain.
-- "hasAttachments: true" - Only emails that have attachments.
-- "received: 07/23/2018" - Only emails received on this date.
+The Outlook integration provides a comprehensive set of actions that your AI agents can use to interact with your email account, calendar, and contacts. These actions can be incorporated into your agent's workflow to perform various tasks.
 
-## How to respond to emails received from Outlook?
+### Email Management
 
-Once your agent has started receiving emails (it can take up to half an hour for the first one to come through), you can build a tool that uses the built-in "Send Email (Outlook)" tool to get your agent to start responding to them.
+Manage your Outlook emails with these powerful tools:
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/clxo7u90i3ulat2oeyifng8eh"
-    frameBorder="0"
-    title="Create an agent from scratch on Relevance AI"
-    allow="clipboard-write; fullscreen"
-    webkitAllowFullscreen="true"
-    mozAllowFullscreen="true"
-    allowFullscreen
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
-</div>
+- **Find Email**: Search for specific emails based on criteria like sender, subject, date, or content
+- **List Folders**: Retrieve all email folders in your Outlook account
+- **List Labels**: Get all labels/categories applied to your emails
+- **Add Label to Email**: Organize emails by applying labels or categories
+- **Remove Label from Email**: Remove labels or categories from emails
+- **Move Email to Folder**: Organize emails by moving them to different folders
+- **Send Email (Outlook)**: Create and send new emails to recipients
 
-Once you have created this tool, equip your agent with it by opening your agent settings, clicking on "Tools" -> "Add tools", then search for the send email tool you created and add it. 
+### Calendar Management
 
-We recommend setting the tool permissions to "approval mode" so that your agent always asks for permission before it sends a message to your customers. You can set it to autopilot once you're happy with how it responds, which will usually take a few rounds of prompt iteration.
+Automate your scheduling and calendar management:
 
-<img src="/images/send-email-outlook.png" />
+- **Check Outlook calendar availability**: Verify if specific time slots are available
+- **Create Outlook calendar event**: Schedule new meetings and appointments
+- **Create Calendar Event**: Add events to your Outlook calendar
+- **Delete Calendar Event**: Remove scheduled events from your calendar
+- **Get Free/Busy Schedule**: Retrieve availability information for scheduling
+- **List Events**: View all calendar events within a specified time range
+- **Update Calendar Event**: Modify existing calendar appointments
 
-### Tell your agent how it should respond
+### Contact Management
 
-Once your agent is receiving emails, and has been equipped with your custom "Send email" tool, it's time for you to tell your agent how you want it to respond. You can do this by writing a prompt in the "core instructions" section of your agent settings.
+Organize and manage your Outlook contacts:
 
-This is an example of a prompt that guides our agent to handle customer questions over email, using four custom tools we built:
+- **Create Contact**: Add new contacts to your Outlook address book
+- **Find Contacts**: Search for specific contacts based on criteria
+- **List Contacts**: Retrieve all contacts from your Outlook account
+- **Update Contact**: Modify existing contact information
 
-<img src="/images/email-follow-up-prompt.png" />
+### Advanced
 
-<Tip>
-You can use the "/" command to reference specific tools you want your agent to use within your prompt.
-</Tip>
+For more complex use cases:
 
-This entire FAQ follow-up email agent is available for you to [clone as a template, or build from scratch here](https://relevanceai.com/agent-templates/email-faq-follow-up-agent).
+- **Microsoft Outlook API call**: Make direct API calls to access advanced Outlook features not covered by standard tools
 
+These are just some examples of the many actions available. The Outlook integration is highly versatile, allowing your agents to perform virtually any task you would normally do manually in your Outlook account.
 
-## How to remove the integration?
+## Use the integration's API tool step (advanced)
 
-You can remove the Outlook integration by opening your agent settings, clicking the 3 dots menu next to your connected Outlook trigger, and clicking "Remove". Once you've done that, your agent will no longer receive emails.
+For more advanced use cases, you can leverage the Microsoft Graph API directly using the Microsoft Outlook API Call tool step:
 
-<img src="/images/remove-outlook-integration.png" />
+1. Create a new tool in Relevance AI.
+2. Scroll down to Tool-steps.
+3. Add the Microsoft Outlook API tool-step.
+4. Select your connected Outlook account in the dropdown.
+
+With the Outlook API tool step, you can:
+
+1. **Access Advanced Outlook Features**: Utilize Microsoft Graph API endpoints not covered by standard actions
+2. **Custom Email Processing**: Create specialized workflows for unique email handling requirements
+3. **Batch Operations**: Perform actions on multiple emails, events, or contacts simultaneously
+4. **Complex Filtering**: Implement sophisticated filtering logic across emails, calendar, and contacts
+5. **Integration with Other Microsoft Services**: Connect your workflows with Teams, OneDrive, and other Microsoft 365 services
+
+### Example: Custom Email Processing with Outlook API
+
+Here's an example of using the Outlook API tool step to implement a custom email processing workflow:
+
+```json
+// Example of using Microsoft Graph API to process emails with specific criteria
+{
+  "method": "GET",
+  "endpoint": "me/messages",
+  "params": {
+    "$filter": "isRead eq false and from/emailAddress/address eq 'important-client@example.com'",
+    "$top": 10,
+    "$orderby": "receivedDateTime DESC"
+  }
+}
+```
+
+This API call retrieves up to 10 unread emails from a specific sender, ordered by most recent first, which your agent can then process according to your business rules.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="I converted my account input to an input variable but can't see my account. What should I do?">
+    When using Microsoft Outlook tools (like "send outlook email"), if you convert the account input to an input variable and cannot see your connected account in the dropdown, you need to update the permission type filter:
+
+    1. Go to input settings
+    2. Click the permission type filter
+    3. Select the **Microsoft Teams** option
+
+    This is necessary because new scopes were added (`OnlineMeetingTranscript.Read.All` and `MailBoxSettings.Read`) that require the Microsoft Teams permission type to be selected.
+  </Accordion>
+  
+  <Accordion title="What permissions does Relevance AI need for the Outlook integration?">
+    Relevance AI requires permissions to read, send, and manage your emails, access your calendar, and manage your contacts to provide full functionality. This includes scopes for:
+    
+    - Email management (read, send, organize)
+    - Calendar access (read, create, update events)
+    - Contact management (read, create, update)
+    - Online meeting transcripts (for Teams integration)
+    - Mailbox settings
+    
+    You can review these permissions during the connection process.
+  </Accordion>
+  
+  <Accordion title="Can I use multiple Outlook accounts with Relevance AI?">
+    Yes, you can connect multiple Outlook accounts to Relevance AI and configure different agents to work with specific accounts.
+  </Accordion>
+  
+  <Accordion title="Is my email data secure?">
+    Yes, Relevance AI maintains strict security protocols. Your email data is encrypted and only accessed as needed for the functions you authorize. All communications with Microsoft services use secure, encrypted connections.
+  </Accordion>
+  
+  <Accordion title="Can I limit which emails my agent can access?">
+    Yes, you can configure triggers with search filters to work only with specific senders, subjects, folders, or other criteria to limit the scope of emails your agent processes.
+  </Accordion>
+  
+  <Accordion title="Will my agent's actions appear in my sent folder?">
+    Yes, emails sent by your agent will appear in your Outlook sent folder, maintaining a complete record of all communications.
+  </Accordion>
+  
+  <Accordion title="Can my agent manage calendar events for other people?">
+    Your agent can manage calendar events for the connected Outlook account. To manage calendars for other users, you would need appropriate delegated permissions configured in your Microsoft 365 environment.
+  </Accordion>
+</AccordionGroup>
