@@ -39,9 +39,96 @@ In addition to the pre-built actions available in the tool directory, you can bu
 
 This advanced approach gives you full access to the Confluence REST API, allowing you to implement custom functionality beyond what's available in the standard actions.
 
+<Warning>
+  **Check API Documentation for Required Headers**
+  
+  The Confluence API Call Tool step does **not** automatically add headers to your requests. Many Confluence REST API v2 endpoints require the `accept: application/json` header to function properly. 
+  
+  **Always check the [Confluence API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/) for your specific endpoint** to see which headers are required, and add them manually in the Headers section of the API Call Tool step.
+</Warning>
+
+### Adding Required Headers
+
+When using the Confluence API Call Tool step, you must manually add any headers required by the endpoint you're calling. The tool does not add these automatically.
+
+<Steps>
+  <Step title="Check the API documentation">
+    Before configuring your API call, visit the [Confluence REST API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/) and find your specific endpoint. Look for the "Request" section to see which headers are required.
+    
+    Many endpoints require the `accept: application/json` header, but requirements vary by endpoint.
+  </Step>
+  
+  <Step title="Add the API Call Tool step">
+    In your tool configuration, add the Confluence API Call Tool step and select your connected Confluence account.
+  </Step>
+  
+  <Step title="Configure the endpoint">
+    Set up your API endpoint and method. For example, to get a page by ID:
+    - **Method**: GET
+    - **Endpoint**: `/wiki/api/v2/pages/{id}?body-format=storage`
+  </Step>
+  
+  <Step title="Add required headers manually">
+    In the Headers section of the API Call Tool step, add any headers specified in the API documentation. For most Confluence REST API v2 endpoints, this includes:
+    
+    ```json
+    {
+      "accept": "application/json"
+    }
+    ```
+    
+    This header tells the Confluence API to return responses in JSON format. Without it, many endpoints will fail with errors.
+  </Step>
+</Steps>
+
 <Info>
-  You can find Confluence's API documentation [here](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/).
+  **Why is this header needed?**
+  
+  The `accept: application/json` header tells the Confluence API what format you want the response in. Most REST API v2 endpoints require this header to return data in JSON format, which the tool can then process. Without this header, the API may return an error or data in an unexpected format.
 </Info>
+
+### Example API Call Configuration
+
+Here's a complete example of calling the Confluence API to retrieve a page by ID. This endpoint requires the `accept: application/json` header according to the [Atlassian documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/#api-pages-id-get):
+
+<Tabs>
+  <Tab title="Configuration">
+    **API Method**: GET
+    
+    **Endpoint**: `/wiki/api/v2/pages/{id}?body-format=storage`
+    
+    **Headers** (must be added manually):
+    ```json
+    {
+      "accept": "application/json"
+    }
+    ```
+    
+    **Path Parameters**:
+    - `id`: The ID of the Confluence page you want to retrieve
+  </Tab>
+  
+  <Tab title="Expected Response">
+    ```json
+    {
+      "id": "123456",
+      "status": "current",
+      "title": "Page Title",
+      "spaceId": "789012",
+      "body": {
+        "storage": {
+          "value": "<p>Page content here</p>",
+          "representation": "storage"
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Tip>
+  **Best Practice**: Always consult the [Confluence API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/) for your specific endpoint before configuring your API call. The documentation will specify all required headers, parameters, and request body formats.
+</Tip>
 
 ## Example use cases
 
@@ -67,5 +154,23 @@ Here are some ways you can leverage the Confluence integration with your agents:
   </Accordion>
   <Accordion title="Can I restrict my Agent to only access certain spaces in Confluence?">
     Yes, you can configure your tools and triggers to only interact with specific spaces by setting the appropriate filters and parameters.
+  </Accordion>
+  <Accordion title="Why am I getting errors when using the Confluence API Call Tool?">
+    The most common issue is missing required headers. The API Call Tool does **not** automatically add headers to your requests.
+    
+    To troubleshoot:
+    1. **Check the API documentation**: Visit the [Confluence API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/) for your specific endpoint and verify which headers are required. Most REST API v2 endpoints require `accept: application/json`.
+    2. **Add headers manually**: In the Headers section of the API Call Tool step, add all required headers as specified in the documentation.
+    3. **Verify your connection**: Ensure your Confluence account is properly connected in Relevance AI.
+    4. **Check permissions**: Confirm you have the necessary permissions for the endpoint you're calling.
+    5. **Validate the endpoint**: Make sure your endpoint URL and parameters are correctly formatted according to the API documentation.
+    6. **Use the correct API version**: The REST API v2 is recommended for new integrations.
+  </Accordion>
+  <Accordion title="Do I need to add the accept header for all Confluence API endpoints?">
+    Not necessarily. While many Confluence REST API v2 endpoints require the `accept: application/json` header, requirements vary by endpoint. 
+    
+    **Always check the official [Confluence API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/)** for your specific endpoint to see which headers are required. The documentation will clearly specify all required headers in the "Request" section of each endpoint.
+    
+    Remember: The API Call Tool does not add any headers automatically, so you must manually add all required headers specified in the documentation.
   </Accordion>
 </AccordionGroup>
