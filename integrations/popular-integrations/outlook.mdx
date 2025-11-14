@@ -1,10 +1,10 @@
 ---
 title: "Outlook"
-description: "Connect and automate your Outlook email, calendar, and contacts with Relevance AI"
+description: "Microsoft Outlook is a comprehensive email and calendar management platform used by millions of professionals worldwide."
 sidebarTitle: "Outlook"
 ---
 
-Microsoft Outlook is one of the world's leading email and productivity platforms. With Relevance AI's Outlook integration, you can seamlessly connect your Outlook account to your AI agents, enabling them to manage emails, schedule meetings, organize contacts, and automate workflows, making your communication and productivity processes more efficient and intelligent.
+Microsoft Outlook is a comprehensive email and calendar management platform used by millions of professionals worldwide. With Relevance AI's Outlook integration, you can seamlessly connect your Outlook account to your AI agents, enabling them to manage emails, calendar events, contacts, and more, making your communication workflows more efficient and intelligent.
 
 <Warning>
   The Outlook integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Microsoft. If you have a question or issue with using Outlook in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Outlook, you can [reach out to Microsoft support](https://support.microsoft.com/).
@@ -14,36 +14,90 @@ Microsoft Outlook is one of the world's leading email and productivity platforms
 
 Connecting your Outlook account to Relevance AI is a straightforward process:
 
-1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+1. Go to the "Integrations & API Keys" page in the sidebar of your Relevance AI dashboard.
 2. Click on "Outlook" from the available integrations.
 3. Click on the "Add Integration" button.
 4. In the pop-up window, sign into your Microsoft account.
-5. Grant the necessary permissions for Relevance AI to access your Outlook data (email, calendar, contacts).
+5. Grant the necessary permissions for Relevance AI to access your Outlook data.
 6. Once authenticated, your Outlook account will appear as a connected integration.
+
+<Note>
+  After connecting, you can use Outlook as a trigger for your agents to automatically respond to incoming emails, or use Outlook tool steps in your custom tools to manage emails, calendar events, and contacts.
+</Note>
 
 ## Tool steps for Outlook
 
-The Outlook integration provides a comprehensive set of actions that your agents can use to interact with your email, calendar, and contacts. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated communication and productivity automation capabilities.
+The Outlook integration provides a comprehensive set of actions that your agents can use to interact with your emails, calendar, and contacts. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated communication automation capabilities.
 
 ### Email Management
-
-Manage your Outlook emails with powerful tools for reading, sending, organizing, and searching messages.
+<CardGroup cols={2}>
+  <Card title="Find Email" icon="magnifying-glass">
+    Search for specific emails in your mailbox
+  </Card>
+  <Card title="List Folders" icon="folder">
+    Retrieve all email folders in your account
+  </Card>
+  <Card title="List Labels" icon="tags">
+    Get all email labels/categories
+  </Card>
+  <Card title="Add Label" icon="tag">
+    Add a label or category to an email
+  </Card>
+  <Card title="Remove Label" icon="xmark">
+    Remove a label or category from an email
+  </Card>
+  <Card title="Move Email to Folder" icon="folder-arrow-up">
+    Move an email to a different folder
+  </Card>
+  <Card title="Send Email" icon="paper-plane">
+    Send an email from your Outlook account
+  </Card>
+</CardGroup>
 
 ### Calendar Management
-
-Automate your scheduling and calendar operations with tools for checking availability, creating events, and managing meetings.
+<CardGroup cols={2}>
+  <Card title="Check Availability" icon="calendar-check">
+    Check if a time slot is available
+  </Card>
+  <Card title="Create Event" icon="calendar-plus">
+    Create a new calendar event
+  </Card>
+  <Card title="Delete Event" icon="calendar-xmark">
+    Delete an existing calendar event
+  </Card>
+  <Card title="List Events" icon="calendar-days">
+    List calendar events within a date range
+  </Card>
+  <Card title="Update Event" icon="calendar-pen">
+    Update an existing calendar event
+  </Card>
+  <Card title="Get Free/Busy Schedule" icon="clock">
+    Retrieve free/busy schedule information
+  </Card>
+</CardGroup>
 
 ### Contact Management
-
-Organize and maintain your professional network with tools for creating, searching, and updating contacts.
-
-### Workflow Automation
-
-Streamline your email and calendar workflows with automated actions for intelligent routing and responses.
+<CardGroup cols={2}>
+  <Card title="Create Contact" icon="user-plus">
+    Create a new contact in your address book
+  </Card>
+  <Card title="Find Contact" icon="address-book">
+    Search for a specific contact
+  </Card>
+  <Card title="List Contacts" icon="users">
+    List all contacts in your address book
+  </Card>
+  <Card title="Update Contact" icon="user-pen">
+    Update an existing contact's information
+  </Card>
+</CardGroup>
 
 ### Advanced Operations
-
-Access the full power of Microsoft Graph API for custom integrations and advanced scenarios.
+<CardGroup cols={2}>
+  <Card title="Microsoft Outlook API Call" icon="code">
+    Make custom API calls to Microsoft Graph API
+  </Card>
+</CardGroup>
 
 <Tip>
   Type "Outlook" in the tool step search bar to see all available Outlook actions when building your tools.
@@ -51,9 +105,9 @@ Access the full power of Microsoft Graph API for custom integrations and advance
 
 ## Use the integration's API tool step (Advanced)
 
-In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Outlook-specific activities using the Microsoft Outlook API Call tool step.
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Outlook-specific activities using the Microsoft Outlook API Call tool step. This gives you access to the full Microsoft Graph API for advanced email, calendar, and contact operations.
 
-### How to use the Outlook API Call tool step
+### How to use the Microsoft Outlook API Call tool step
 
 <Steps>
   <Step title="Create a new tool">
@@ -75,7 +129,7 @@ In addition to the pre-built actions available in the tool directory, you can bu
     - **Method**: Select the HTTP method (GET, POST, PUT, DELETE, PATCH)
     - **Endpoint**: Enter the API endpoint path (e.g., `/me/messages`, `/me/calendar/events`)
     - **Body**: Add any required request body data
-    - **Query Parameters**: Add filters, sorting, or pagination parameters
+    - **Headers**: Add any custom headers if needed
   </Step>
   
   <Step title="Test your API call">
@@ -83,40 +137,60 @@ In addition to the pre-built actions available in the tool directory, you can bu
   </Step>
 </Steps>
 
-### Example: Processing Unread Emails from Important Contacts
+### Example: Creating a Calendar Event with Custom Properties
 
-Here's a practical example of using the Outlook API Call tool step to retrieve and process unread emails from specific senders:
+Here's a practical example of using the Microsoft Outlook API Call tool step to create a calendar event with custom properties:
 
-**API Endpoint**: `GET /me/messages`
+**API Endpoint**: `POST /me/calendar/events`
 
 **Configuration**:
 ```json
 {
-  "method": "GET",
-  "endpoint": "/me/messages",
-  "params": {
-    "$filter": "isRead eq false and from/emailAddress/address eq 'important-client@example.com'",
-    "$top": 10,
-    "$orderby": "receivedDateTime DESC",
-    "$select": "subject,from,receivedDateTime,bodyPreview"
+  "method": "POST",
+  "endpoint": "/me/calendar/events",
+  "body": {
+    "subject": "Team Sync Meeting",
+    "body": {
+      "contentType": "HTML",
+      "content": "Discuss Q4 objectives and team priorities"
+    },
+    "start": {
+      "dateTime": "2024-12-01T14:00:00",
+      "timeZone": "Pacific Standard Time"
+    },
+    "end": {
+      "dateTime": "2024-12-01T15:00:00",
+      "timeZone": "Pacific Standard Time"
+    },
+    "location": {
+      "displayName": "Conference Room A"
+    },
+    "attendees": [
+      {
+        "emailAddress": {
+          "address": "colleague@example.com",
+          "name": "Colleague Name"
+        },
+        "type": "required"
+      }
+    ]
   }
 }
 ```
 
 This configuration:
-- Uses the GET method to retrieve messages
-- Filters for unread emails from a specific sender
-- Limits results to the 10 most recent emails
-- Orders by received date (newest first)
-- Selects only the fields you need to reduce response size
+- Uses the POST method to create a new event
+- Specifies the event details including subject, body, and location
+- Sets the start and end times with timezone information
+- Adds attendees to the meeting
 
 <Info>
   You can find Microsoft Graph API's complete documentation at [https://learn.microsoft.com/en-us/graph/api/overview](https://learn.microsoft.com/en-us/graph/api/overview).
 </Info>
 
-### Common Outlook API Endpoints
+### Common Microsoft Graph API Endpoints for Outlook
 
-Here are some commonly used Microsoft Graph API endpoints you can use with the Outlook API Call tool step:
+Here are some commonly used Microsoft Graph API endpoints you can use with the API Call tool step:
 
 <AccordionGroup>
   <Accordion title="Email Operations" icon="envelope">
@@ -124,8 +198,9 @@ Here are some commonly used Microsoft Graph API endpoints you can use with the O
     - **Get message**: `GET /me/messages/{id}`
     - **Send email**: `POST /me/sendMail`
     - **Reply to email**: `POST /me/messages/{id}/reply`
-    - **Move email**: `POST /me/messages/{id}/move`
+    - **Forward email**: `POST /me/messages/{id}/forward`
     - **Delete email**: `DELETE /me/messages/{id}`
+    - **Mark as read**: `PATCH /me/messages/{id}` with `{"isRead": true}`
     
     [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/message)
   </Accordion>
@@ -136,12 +211,12 @@ Here are some commonly used Microsoft Graph API endpoints you can use with the O
     - **Create event**: `POST /me/calendar/events`
     - **Update event**: `PATCH /me/events/{id}`
     - **Delete event**: `DELETE /me/events/{id}`
-    - **Get free/busy**: `POST /me/calendar/getSchedule`
+    - **Get schedule**: `POST /me/calendar/getSchedule`
     
     [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/event)
   </Accordion>
   
-  <Accordion title="Contact Operations" icon="address-book">
+  <Accordion title="Contact Operations" icon="address-card">
     - **List contacts**: `GET /me/contacts`
     - **Get contact**: `GET /me/contacts/{id}`
     - **Create contact**: `POST /me/contacts`
@@ -151,60 +226,120 @@ Here are some commonly used Microsoft Graph API endpoints you can use with the O
     [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/contact)
   </Accordion>
   
-  <Accordion title="Folder Operations" icon="folder">
+  <Accordion title="Folder Operations" icon="folder-tree">
     - **List folders**: `GET /me/mailFolders`
     - **Get folder**: `GET /me/mailFolders/{id}`
     - **Create folder**: `POST /me/mailFolders`
-    - **List messages in folder**: `GET /me/mailFolders/{id}/messages`
+    - **Move message**: `POST /me/messages/{id}/move`
+    - **Copy message**: `POST /me/messages/{id}/copy`
     
     [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/mailfolder)
   </Accordion>
   
-  <Accordion title="Search & Filter" icon="magnifying-glass">
-    - **Search messages**: `GET /me/messages?$search="subject:project"`
-    - **Filter by date**: `GET /me/messages?$filter=receivedDateTime ge 2024-01-01`
-    - **Filter by sender**: `GET /me/messages?$filter=from/emailAddress/address eq 'user@example.com'`
-    - **Complex filters**: Combine multiple conditions with `and`, `or`, `not`
+  <Accordion title="Search & Filter" icon="filter">
+    - **Search messages**: `GET /me/messages?$search="subject:meeting"`
+    - **Filter messages**: `GET /me/messages?$filter=from/emailAddress/address eq 'user@example.com'`
+    - **Order results**: `GET /me/messages?$orderby=receivedDateTime desc`
+    - **Select fields**: `GET /me/messages?$select=subject,from,receivedDateTime`
     
-    [View Search Documentation](https://learn.microsoft.com/en-us/graph/search-query-parameter)
+    [View API Documentation](https://learn.microsoft.com/en-us/graph/query-parameters)
   </Accordion>
 </AccordionGroup>
+
+<Tip>
+  Use the `$filter`, `$search`, `$orderby`, and `$select` query parameters to refine your API calls and retrieve exactly the data you need.
+</Tip>
+
+## Set up Outlook as a trigger
+
+You can configure your agents to automatically respond to incoming Outlook emails by setting up Outlook as a trigger.
+
+### How to set up the Outlook trigger
+
+<Steps>
+  <Step title="Open agent settings">
+    Navigate to your agent's settings page.
+  </Step>
+  
+  <Step title="Add Outlook trigger">
+    1. Click on "Integrations & API Keys" in the sidebar
+    2. Under "Triggers", click on the Outlook button
+    3. Select your connected Outlook account
+  </Step>
+  
+  <Step title="Configure email filters (optional)">
+    Choose whether to filter emails that trigger your agent. Without a search filter, your agent will receive every email sent to your connected account.
+    
+    You can use Microsoft Graph search query syntax to filter emails:
+    - `subject:ask us anything` - Subject contains "ask us anything"
+    - `body:book a demo` - Body contains "book a demo"
+    - `from:*apple.com` - Only emails from apple.com domain
+    - `hasAttachments:true` - Only emails with attachments
+    - `received:07/23/2018` - Only emails received on this date
+    
+    [View full search syntax documentation](https://learn.microsoft.com/en-us/graph/search-query-parameter)
+  </Step>
+  
+  <Step title="Create a response tool">
+    Build a tool that uses the "Send Email (Outlook)" tool step to respond to emails. Equip your agent with this tool in the agent settings.
+  </Step>
+  
+  <Step title="Configure tool permissions">
+    Set the tool permissions to "approval mode" initially so your agent asks for permission before sending emails. Switch to autopilot once you're confident in the responses.
+  </Step>
+  
+  <Step title="Write agent instructions">
+    In the "Core Instructions" section of your agent settings, write a prompt that guides your agent on how to respond to emails.
+  </Step>
+</Steps>
+
+<Note>
+  It can take up to 30 minutes for the first email to come through after setting up the trigger.
+</Note>
 
 ## Example use cases
 
 Here are some ways you can leverage the Outlook integration with your agents:
 
 <AccordionGroup>
-  <Accordion title="Automated Email Support Agent" icon="headset">
-    Create an agent that monitors your support inbox, categorizes incoming emails, extracts key information, searches your knowledge base for relevant answers, and drafts personalized responses. The agent can handle common inquiries automatically while escalating complex issues to human team members.
+  <Accordion title="Customer Support Email Agent" icon="headset">
+    Create an agent that automatically responds to customer support emails, categorizes inquiries, searches your knowledge base for relevant information, and provides helpful responses. The agent can escalate complex issues to human team members and track response times.
   </Accordion>
   
   <Accordion title="Meeting Scheduler Assistant" icon="calendar-check">
-    Build an agent that coordinates meeting schedules by checking calendar availability across multiple participants, finding optimal time slots, sending meeting invitations, and handling rescheduling requests. The agent can also prepare meeting agendas and send reminders.
+    Build an agent that manages your calendar by finding available time slots, scheduling meetings with attendees, sending calendar invites, and handling rescheduling requests. The agent can check multiple calendars for conflicts and suggest optimal meeting times.
   </Accordion>
   
-  <Accordion title="Email Triage and Prioritization" icon="filter">
-    Deploy an agent that automatically sorts incoming emails by priority, applies labels based on content and sender, moves messages to appropriate folders, and flags urgent items requiring immediate attention. The agent can learn from your email management patterns.
+  <Accordion title="Email Triage & Organization" icon="inbox">
+    Deploy an agent that automatically organizes incoming emails by moving them to appropriate folders, adding labels based on content, flagging urgent messages, and archiving newsletters or promotional emails according to your preferences.
   </Accordion>
   
-  <Accordion title="Follow-up Reminder System" icon="bell">
-    Create an agent that tracks emails requiring follow-up, monitors for responses, sends reminder notifications when deadlines approach, and automatically drafts follow-up messages based on the original conversation context.
+  <Accordion title="Lead Qualification Agent" icon="user-check">
+    Create an agent that qualifies leads from incoming emails, extracts key information (company size, budget, timeline), updates your CRM, and schedules follow-up calls with qualified prospects while sending polite responses to unqualified leads.
   </Accordion>
   
-  <Accordion title="Contact Management Automation" icon="users">
-    Build an agent that maintains your contact database by extracting contact information from email signatures, updating existing contacts with new details, removing duplicates, and enriching contact records with additional information from other sources.
+  <Accordion title="Meeting Notes & Follow-up" icon="clipboard-list">
+    Build an agent that sends meeting summaries and action items to attendees after calendar events, tracks follow-up tasks, and sends reminders for pending action items. The agent can integrate with your project management tools.
   </Accordion>
   
-  <Accordion title="Email Analytics and Reporting" icon="chart-line">
-    Deploy an agent that analyzes your email patterns, generates reports on response times, tracks email volume by category, identifies trends in customer inquiries, and provides insights to improve communication efficiency.
+  <Accordion title="Email Newsletter Manager" icon="newspaper">
+    Deploy an agent that manages your email newsletter by collecting subscriber information, organizing contact lists, scheduling newsletter sends, and tracking engagement metrics like open rates and click-throughs.
   </Accordion>
   
-  <Accordion title="Onboarding Email Sequences" icon="paper-plane">
-    Create an agent that manages automated onboarding email sequences for new customers or employees, personalizes content based on recipient information, tracks engagement, and adjusts follow-up timing based on responses.
+  <Accordion title="Out-of-Office Assistant" icon="plane-departure">
+    Create an agent that handles emails while you're away by sending personalized auto-responses, forwarding urgent messages to colleagues, categorizing emails for later review, and scheduling follow-ups for when you return.
   </Accordion>
   
-  <Accordion title="Calendar Conflict Resolution" icon="triangle-exclamation">
-    Build an agent that detects scheduling conflicts, proposes alternative meeting times, automatically reschedules non-critical meetings, and notifies affected participants with updated calendar invitations.
+  <Accordion title="Invoice & Receipt Processor" icon="file-invoice-dollar">
+    Build an agent that automatically processes invoices and receipts received via email, extracts key information (amount, date, vendor), saves attachments to cloud storage, and updates your accounting system or expense tracking tools.
+  </Accordion>
+  
+  <Accordion title="Event Registration Manager" icon="ticket">
+    Deploy an agent that handles event registrations via email, confirms attendance, sends calendar invites with event details, manages waitlists, and sends reminder emails before the event.
+  </Accordion>
+  
+  <Accordion title="Contact Sync & Management" icon="address-book">
+    Create an agent that keeps your contacts synchronized across platforms, enriches contact information from email signatures, updates contact details when changes are detected, and removes duplicate entries.
   </Accordion>
 </AccordionGroup>
 
@@ -212,60 +347,66 @@ Here are some ways you can leverage the Outlook integration with your agents:
 
 <AccordionGroup>
   <Accordion title="I converted my account input to an input variable but can't see my account. What should I do?">
-    When using Microsoft Outlook tools (like "send outlook email"), if you convert the account input to an input variable and cannot see your connected account in the dropdown, you need to update the permission type filter:
-
-    1. Go to input settings
-    2. Click the permission type filter
-    3. Select the **Microsoft Teams** option
-
-    This is necessary because new scopes were added (`OnlineMeetingTranscript.Read.All` and `MailBoxSettings.Read`) that require the Microsoft Teams permission type to be selected.
-  </Accordion>
-  
-  <Accordion title="What permissions does Relevance AI need for the Outlook integration?">
-    The integration requires permissions to read, send, and manage your emails, access your calendar, and manage your contacts to provide full functionality. This includes scopes for:
+    This issue occurs because new Microsoft Teams scopes have been added to the Outlook integration (`OnlineMeetingTranscript.Read.All` and `MailBoxSettings.Read`). 
     
-    - Email management (read, send, organize)
-    - Calendar access (read, create, update events)
-    - Contact management (read, create, update)
-    - Online meeting transcripts (for Teams integration)
-    - Mailbox settings
+    **Solution**: Update the permission type filter to select the **Microsoft Teams** option. This will allow you to see and select your Outlook account that now includes the expanded Microsoft Teams permissions.
     
-    You can review the specific permissions during the authentication process.
+    If you continue to experience issues, try reconnecting your Outlook account through the Integrations & API Keys page to ensure all the latest permissions are granted.
   </Accordion>
   
-  <Accordion title="Can I use multiple Outlook accounts with Relevance AI?">
-    Yes, you can connect multiple Outlook accounts to Relevance AI and configure different agents or tools to work with specific accounts. Simply add each account through the Integrations page and select the appropriate account when configuring your tool steps.
+  <Accordion title="What permissions does the Outlook integration require?">
+    The integration requires permissions to read and write emails, manage calendar events, access contacts, and read mailbox settings. This includes Microsoft Teams scopes for meeting transcripts and mailbox settings. You can review the specific permissions during the authentication process.
   </Accordion>
   
-  <Accordion title="Is my email data secure?">
-    Yes, Relevance AI maintains strict security protocols. Your email data is encrypted in transit and at rest, and is only accessed as needed for the functions you authorize. All communications with Microsoft services use secure, encrypted connections. We follow industry best practices for data protection and compliance.
+  <Accordion title="How long does it take for the email trigger to start working?">
+    After setting up the Outlook trigger, it can take up to 30 minutes for the first email to come through to your agent. Subsequent emails should be processed more quickly, typically within a few minutes.
   </Accordion>
   
-  <Accordion title="How do I troubleshoot connection issues?">
-    If you're experiencing connection issues:
+  <Accordion title="Can I filter which emails trigger my agent?">
+    Yes! You can use Microsoft Graph search query syntax to filter emails. For example:
+    - Filter by subject: `subject:customer inquiry`
+    - Filter by sender: `from:*company.com`
+    - Filter by attachments: `hasAttachments:true`
+    - Combine filters: `subject:urgent AND from:*vip.com`
     
-    1. Verify your Outlook account is properly connected in the Integrations page
-    2. Check that you've granted all necessary permissions during authentication
-    3. Try disconnecting and reconnecting your account
-    4. Ensure your Microsoft account credentials are up to date
-    5. Check if your organization has any restrictions on third-party app access
-    
-    If issues persist, contact our support team with details about the error messages you're seeing.
+    [View full search syntax documentation](https://learn.microsoft.com/en-us/graph/search-query-parameter)
   </Accordion>
   
-  <Accordion title="Can I restrict my agent to only access certain emails or folders?">
-    Yes, you can configure your tools to only interact with specific folders, senders, or email criteria using filters in the Microsoft Graph API. Use the `$filter` parameter to limit which emails your agent can access based on folder, sender, subject, date, or other properties.
+  <Accordion title="Can I use multiple Outlook accounts with my agents?">
+    Yes, you can connect multiple Outlook accounts through the Integrations & API Keys page. When building tools or setting up triggers, you can select which account to use from the dropdown menu. This is useful for managing different email addresses or separating personal and business communications.
   </Accordion>
   
-  <Accordion title="Will my agent's actions appear in my Outlook account?">
-    Yes, all actions performed by your agent (such as sending emails, creating calendar events, or adding contacts) will appear in your Outlook account as if you performed them yourself. Sent emails will be in your Sent folder, calendar events will appear on your calendar, etc.
+  <Accordion title="How do I prevent my agent from sending emails automatically?">
+    Set your email-sending tools to "approval mode" in the agent settings. This ensures your agent will always ask for permission before sending an email. You can review the draft, make edits if needed, and then approve or reject the send action.
+  </Accordion>
+  
+  <Accordion title="Can my agent access shared mailboxes or distribution lists?">
+    Yes, if you have the appropriate permissions, your agent can access shared mailboxes. You'll need to use the Microsoft Graph API Call tool step with endpoints like `/users/{userId}/messages` instead of `/me/messages`. Make sure your connected account has delegated access to the shared mailbox.
+  </Accordion>
+  
+  <Accordion title="What's the difference between the pre-built Outlook tool steps and the API Call tool step?">
+    Pre-built tool steps (like "Send Email" or "Create Event") are designed for specific, common tasks and have simplified interfaces with guided inputs. The Microsoft Outlook API Call tool step gives you full access to Microsoft Graph API, allowing you to implement any functionality available in the API, including advanced operations not covered by pre-built steps.
   </Accordion>
   
   <Accordion title="Are there rate limits for Outlook API calls?">
-    Yes, Microsoft Graph API enforces rate limits on API calls. The specific limits depend on your Microsoft 365 subscription and the type of requests being made. Your agents should be designed to handle rate limiting gracefully. For most scenarios, the limits are generous enough for typical automation needs.
+    Yes, Microsoft Graph API enforces rate limits. The specific limits depend on your Microsoft 365 subscription and the type of requests being made. Your agents should be designed to handle rate limiting gracefully. Microsoft typically returns a `429 Too Many Requests` status code when limits are exceeded.
   </Accordion>
   
-  <Accordion title="Can I use this integration with Microsoft 365 Business accounts?">
-    Yes, the Outlook integration works with both personal Microsoft accounts and Microsoft 365 Business/Enterprise accounts. However, some features may require specific Microsoft 365 licenses or administrator permissions in your organization.
+  <Accordion title="Can I access email attachments with the Outlook integration?">
+    Yes, you can access email attachments using the Microsoft Graph API. Use the endpoint `GET /me/messages/{id}/attachments` to list attachments, and `GET /me/messages/{id}/attachments/{attachmentId}` to download specific attachments. The attachment content is returned as base64-encoded data.
+  </Accordion>
+  
+  <Accordion title="How do I remove the Outlook integration?">
+    To remove the Outlook integration:
+    1. Open your agent settings
+    2. Navigate to "Integrations & API Keys"
+    3. Click the three dots menu next to your connected Outlook trigger
+    4. Click "Remove"
+    
+    Once removed, your agent will no longer receive emails or have access to your Outlook data. You can also disconnect the integration entirely from the main Integrations & API Keys page.
+  </Accordion>
+  
+  <Accordion title="Can I use the Outlook integration with Office 365 or Microsoft 365?">
+    Yes! The Outlook integration works with Outlook.com, Office 365, and Microsoft 365 accounts. All these services use the same Microsoft Graph API, so the integration functions identically across all Microsoft email platforms.
   </Accordion>
 </AccordionGroup>
