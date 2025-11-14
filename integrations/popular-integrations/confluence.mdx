@@ -39,8 +39,85 @@ In addition to the pre-built actions available in the tool directory, you can bu
 
 This advanced approach gives you full access to the Confluence REST API, allowing you to implement custom functionality beyond what's available in the standard actions.
 
+<Warning>
+  **Required Headers for API Calls**
+  
+  When using the Confluence API Call Tool step, you must include the `accept: application/json` header in your requests. Without this header, your API calls will fail with errors.
+</Warning>
+
+### Adding Required Headers
+
+To ensure your Confluence API calls work properly, follow these steps:
+
+<Steps>
+  <Step title="Add the API Call Tool step">
+    In your tool configuration, add the Confluence API Call Tool step and select your connected Confluence account.
+  </Step>
+  
+  <Step title="Configure the endpoint">
+    Set up your API endpoint and method. For example, to get a page by ID:
+    - **Method**: GET
+    - **Endpoint**: `/wiki/api/v2/pages/{id}?body-format=storage`
+  </Step>
+  
+  <Step title="Add the required header">
+    In the Headers section of the API Call Tool step, add the following header:
+    
+    ```json
+    {
+      "accept": "application/json"
+    }
+    ```
+    
+    This header tells the Confluence API to return responses in JSON format, which is required for the tool to process the response correctly.
+  </Step>
+</Steps>
+
+<Tip>
+  The `accept: application/json` header is required for most Confluence REST API v2 endpoints. Always include this header when making custom API calls to avoid errors.
+</Tip>
+
+### Example API Call Configuration
+
+Here's a complete example of calling the Confluence API to retrieve a page by ID:
+
+<Tabs>
+  <Tab title="Configuration">
+    **API Method**: GET
+    
+    **Endpoint**: `/wiki/api/v2/pages/{id}?body-format=storage`
+    
+    **Headers**:
+    ```json
+    {
+      "accept": "application/json"
+    }
+    ```
+    
+    **Path Parameters**:
+    - `id`: The ID of the Confluence page you want to retrieve
+  </Tab>
+  
+  <Tab title="Expected Response">
+    ```json
+    {
+      "id": "123456",
+      "status": "current",
+      "title": "Page Title",
+      "spaceId": "789012",
+      "body": {
+        "storage": {
+          "value": "<p>Page content here</p>",
+          "representation": "storage"
+        }
+      }
+    }
+    ```
+  </Tab>
+</Tabs>
+
 <Info>
-  You can find Confluence's API documentation [here](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/).
+  You can find Confluence's API documentation [here](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/). Each endpoint's documentation will specify any additional headers or parameters required.
 </Info>
 
 ## Example use cases
@@ -67,5 +144,12 @@ Here are some ways you can leverage the Confluence integration with your agents:
   </Accordion>
   <Accordion title="Can I restrict my Agent to only access certain spaces in Confluence?">
     Yes, you can configure your tools and triggers to only interact with specific spaces by setting the appropriate filters and parameters.
+  </Accordion>
+  <Accordion title="Why am I getting errors when using the Confluence API Call Tool?">
+    The most common issue is missing the required `accept: application/json` header. Make sure to include this header in all your API calls. If you're still experiencing issues, verify that:
+    - Your Confluence account is properly connected
+    - You have the necessary permissions for the endpoint you're calling
+    - Your endpoint URL and parameters are correctly formatted
+    - You're using the correct API version (v2 is recommended)
   </Accordion>
 </AccordionGroup>
