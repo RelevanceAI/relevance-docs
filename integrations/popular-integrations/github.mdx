@@ -137,18 +137,7 @@ The GitHub integration provides a comprehensive set of actions that your agents 
 In addition to the pre-built actions available in the tool directory, you can build custom tools that perform GitHub-specific activities using the GitHub API Call tool step.
 
 <Warning>
-  **IMPORTANT: Required Header for GitHub API Calls**
-  
-  When using the GitHub API Call tool step, you **must** include the following header for the API calls to work properly:
-  
-  ```
-  accept: application/vnd.github+json
-  ```
-  
-  Without this header, you may encounter errors such as:
-  - `'Please enter a value for 'response_body' field'`
-  - Failed API responses
-  - Missing or incomplete data
+  **Required Header:** When using the GitHub API Call tool step, you must include the header `accept: application/vnd.github+json` or you may encounter errors like `'Please enter a value for 'response_body' field'`.
 </Warning>
 
 ### How to use the GitHub API Call tool step
@@ -315,12 +304,6 @@ Here are some ways you can leverage the GitHub integration with your agents:
   </Accordion>
 </AccordionGroup>
 
-## Related Features
-
-- **Knowledge Integration** - Use GitHub repositories as a knowledge source for your agents, enabling them to access and reference your codebase and documentation when responding to queries.
-- **Slack Integration** - Combine GitHub and Slack integrations to create powerful workflows where agents can notify team members about pull requests, issues, and deployments.
-- **API Tool Step** - Learn more about making custom API calls in the [API Tool Step documentation](/tool/tool-steps/api).
-
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
@@ -363,11 +346,3 @@ Here are some ways you can leverage the GitHub integration with your agents:
     The GitHub integration is designed to work with GitHub.com. For GitHub Enterprise Server installations, you may need to use the generic API Tool step with custom authentication. Contact our support team for assistance with GitHub Enterprise configurations.
   </Accordion>
 </AccordionGroup>
-
-## Disclaimer
-
-Relevance AI enables users to access verified and genuine generative models from secure and trusted vendors. However, generative AI technologies still leave the potential for hallucinations leading to potentially inaccurate responses. Please review and verify the agent's output and use a combination of deterministic and agentic behaviour to achieve the most reliable results.
-
-## Privacy Policy
-
-To find out more about how Relevance AI handles your data, please see our [Privacy Policy](https://relevanceai.com/privacy-policy).
