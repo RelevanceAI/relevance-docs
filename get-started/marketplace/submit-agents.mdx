@@ -1,0 +1,170 @@
+---
+title: "Submit Agents to the Marketplace"
+description: "Learn how to submit Agents and Tools to the Marketplace and meet approval requirements"
+---
+
+Once your Relevance Builders profile is set up and ready to go, you can start submitting Agents!
+
+<iframe
+  src="https://app.supademo.com/embed/cmegw3od18dwrh3pyjse80wi1"
+  allow="clipboard-write"
+  allowFullScreen
+  width="100%"
+  height="400"
+  frameBorder="0"
+  webkitallowfullscreen="true"
+  mozallowfullscreen="true"
+></iframe>
+
+## Is there an approval process for submitted agents?
+
+All agents submitted to the marketplace will be reviewed by the internal Relevance team. Agents must follow our agent building best practices to ensure all listed agents are usable, reliable, and valuable to the community. If your agent requires updating, the Relevance team will reach out with specific and actionable feedback to update your submission so that your agent can be approved the next time you submit it.
+
+### Can I push changes and updates to your Agents and Tools once they are approved?
+
+Yes you can!
+
+To do this, head to the Agent / Workforce / Tool that has been submitted to Marketplace, make changes and then click 'Update Marketplace listing'.
+
+The new changes will be sent for approval, and once approved, your Marketplace listing will point to the new version of your Agent / Workforce / Tool.
+
+---
+
+## Approval requirements for submitting marketplace Agents
+
+You can use the below list as a checklist to tick off before submitting your agent, to make sure it meets the approval criteria.
+
+### ❌ Do not include Sub-Agents
+
+Agents that use Sub-Agents will not be approved, as Sub-Agents is now a legacy feature. Instead, we suggest that you wait until Workforces can be submitted (coming soon).
+
+### Listing title and description
+
+When you submit an Agent, you will enter a custom title and description.
+
+<AccordionGroup>
+  <Accordion title="Title requirements" icon="heading">
+    The title of your Agent must clearly describe what the focus of the Agent is. This should not be longer than 50 characters. You can give the Agent a name if you like, but this is not required.
+
+    **Examples**: "Atlas, the Account Analyst", "Google Calendar Meeting Notetaker"
+  </Accordion>
+  <Accordion title="Description requirements" icon="align-left">
+    Your description should start with a short paragraph outlining exactly what your agent does and how it works. After the initial paragraph, you can add some more detail on how the agent works if you would like. You can also link to publicly accessible help docs (e.g. public Notion pages) if you would like - this will help with your agent's supportability and help get it approved.
+  </Accordion>
+</AccordionGroup>
+
+### Agent core prompt
+
+In order to help the user understand what the agent is doing, we recommend you leave comments throughout your core prompt to explain what the agent is doing. You can also leave comments detailing how the user can edit, change, or extend their agent, such as by adding knowledge or suggested triggers.
+
+The agent core prompt should be optimised to ensure reliable accuracy and performance. This responsibility is up to you to ensure the agent is performing well and the core prompt following prompt engineering best practices.
+
+You can also use comments to link to publicly accessible help docs, or video demos, about how to use the Agent.
+
+### Guide for using Agent
+
+All Marketplace Agents should have a 'Guide for using agent'. This is displayed to the user on an empty task in the 'Run' tab, and should tell the user how to use the agent, or outline some examples to test the agent with. You can find this field in the Advanced Settings tab.
+
+### OAuth - Using tools that require OAuth
+
+If your agent has tools that require OAuth to run, you *must* make sure these settings are surfaced as **required tool inputs**. This will allow the user to fill these out when the 'missing tool inputs' modal is shown while setting up the agent.
+
+Agents that use tools that require OAuth within tool steps that are not surfaced as inputs will not be approved.
+
+### Using API keys
+
+If you have a tool that requires an API key to work, and we do not have a native OAuth solution for that API key, you will need to create a tool input of type 'Text', leave it empty, and provide instructions in the input description on where and how the user can create the API key. For example, you can include a link to relevant docs from the 3rd party tool explaining how to create an API key.
+
+### Tool inputs
+
+<AccordionGroup>
+  <Accordion title="Excluded types" icon="ban">
+    At this stage we do not accept tools which use:
+    - The Knowledge feature (in the left side menu in tool builder)
+    - Have knowledge table type input fields
+  </Accordion>
+  <Accordion title="Descriptions" icon="circle-info">
+    Please make sure that the description fields for all tool inputs clearly describe exactly how a user or agent should fill in this input. These descriptions are used by the agent to know how to fill a field reliably, so make sure any critical requirements or guidelines are included in the input description.
+  </Accordion>
+</AccordionGroup>
+
+### Agent variables
+
+Agent variables will be copied over when a marketplace listing is cloned, as long as they are not knowledge tables, API keys or OAuth accounts.
+
+It is best practice to save any information in the agent core prompt that can be customised for each user as a variable. Good examples include company name, company descriptions, output formatting guidelines, etc.
+
+---
+
+## What do I do if my agent is not approved?
+
+If your agent requires updating, the Relevance team will reach out with specific and actionable feedback to update your submission so that your agent can be approved.
+
+<Warning>
+**We currently do not support the ability to push updates to a listing. If your agent is not approved, you will need to resubmit your agent.**
+</Warning>
+
+---
+
+## Current limitations - Things that are not carried over for marketplace listings
+
+<AccordionGroup>
+  <Accordion title="Knowledge" icon="brain">
+    We currently do not copy over any knowledge tables along with your listing. We plan to add this soon, but in the meantime, we suggest creating a variable and add the knowledge content to that variable. You can then add that variable to the agent's core instructions.
+  </Accordion>
+  <Accordion title="Triggers" icon="bolt">
+    Triggers will not get carried over, but we will suggest triggers for the user to set up based on the triggers attached to the agent when you submit it - so make sure you have triggers set up when you submit if you think the agent needs them.
+  </Accordion>
+  <Accordion title="Snippets" icon="scissors">
+    Please use agent variables rather than global snippets, as global snippets don't copy over.
+  </Accordion>
+  <Accordion title="Secrets" icon="key">
+    If you have an agent that uses secrets, these should be surfaced as tool inputs of type API key or OAuth so the user can fill them out when setting up the agent. Do not use secrets.
+  </Accordion>
+  <Accordion title="Default values for specific tool input / variable types" icon="sliders">
+    The following tool input or variable types will not have their default values carried over:
+    - Knowledge table (avoid using this input type)
+    - API key (the user will have to fill this in)
+    - OAuth account (the user will have to fill this in)
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Submission checklist
+
+Before submitting your Agent, make sure you've completed the following:
+
+<Steps>
+  <Step title="No Sub-Agents">
+    ✅ Confirmed your Agent doesn't use Sub-Agents
+  </Step>
+  <Step title="Clear title and description">
+    ✅ Written a clear, descriptive title (under 50 characters)
+    ✅ Created a comprehensive description with usage instructions
+  </Step>
+  <Step title="Optimized core prompt">
+    ✅ Added comments explaining what the Agent does
+    ✅ Included instructions for customization
+    ✅ Followed prompt engineering best practices
+  </Step>
+  <Step title="Usage guide">
+    ✅ Added a 'Guide for using agent' in Advanced Settings
+  </Step>
+  <Step title="OAuth and API keys">
+    ✅ Surfaced all OAuth requirements as required tool inputs
+    ✅ Provided clear instructions for any API keys needed
+  </Step>
+  <Step title="Tool inputs">
+    ✅ Avoided using Knowledge or knowledge table inputs
+    ✅ Written clear descriptions for all tool inputs
+  </Step>
+  <Step title="Variables">
+    ✅ Used agent variables for customizable information
+    ✅ Avoided using global snippets or secrets
+  </Step>
+</Steps>
+
+## Next steps
+
+Once your Agent is approved, you can start earning from your listings! Learn more about [getting paid for your Agents](/get-started/marketplace/getting-paid).
