@@ -39,4 +39,26 @@ This will remove the user from your project.
 
 ## Remove members from your organization
 
-At this time, the only way to remove users from your organization is to remove them from all projects they've been added to in your organization. 
+At this time, the only way to remove users from your organization is to remove them from all projects they've been added to in your organization.
+
+<Warning>
+**Removing users with admin permissions**
+
+If you need to remove a user who has admin permissions (either at the organization or project level), you must first change their role from admin to member before you can remove them. This is a required two-step process due to the platform's permission architecture and role inheritance model.
+</Warning>
+
+### How to remove an admin user
+
+<Steps>
+  <Step title="Change admin permissions to member">
+    Navigate to the project or organization settings where the user has admin permissions. Edit their role and change it from **Admin** to **Member**.
+  </Step>
+  
+  <Step title="Remove the user">
+    Once the permission change is complete, you can now remove the user following the standard removal process outlined above.
+  </Step>
+</Steps>
+
+<Tip>
+For more information about roles and permissions in Relevance AI, see our [Role-based access controls (RBAC)](/get-started/enterprise/rbac) documentation.
+</Tip>
