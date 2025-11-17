@@ -42,6 +42,8 @@ The summary is a descriptive explanation of what your agent does and its area of
 
 Choosing the right model powers how your Agent thinks, responds, and performs tasks. You can either let Relevance AI automatically optimize the model for you, or manually choose a specific provider and model type.
 
+![](/images/agent/agent-select-llm-modal.png)
+
 ### Pick For Me
 
 Relevance AI automatically selects the best model for your Agent based on performance or cost, no action needed. You're more than welcome to choose the model the suits your Agent's needs.
@@ -84,9 +86,47 @@ You can manually choose from different model families depending on your needs. E
     Cost: Credits charged per 1,000 tokens processed.
   </Accordion>
   <Accordion title="OpenRouter Models">
-    Unified access point to a wide variety of open models like Meta’s LLaMA family, Google Gemini models, and others.
+    Unified access point to a wide variety of open models like Meta's LLaMA family, Google Gemini models, and others.
     Good for: Exploring experimental or emerging models.
     Cost: Credits charged per 1,000 tokens used, depending on selected model. [Create an OpenRouter account here](https://openrouter.ai/)
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  **Not all models available in the LLM Tool step can be selected as a model for an Agent.** Agents require models with strong tool-calling capabilities to autonomously use Tools and make decisions. Some models (like DeepSeek) excel at reasoning, coding, and text analysis within LLM Tool steps but may not have the robust function-calling abilities needed for Agent operation. If you need to use these models, consider using them in an LLM Tool step that your Agent calls, rather than as the Agent's primary model.
+</Note>
+
+### Exploring Available Models
+
+When selecting a model for your Agent, you can use the model selection modal to find the perfect fit for your needs. The interface provides powerful filtering, sorting, and search capabilities to help you compare models at a glance.
+
+<AccordionGroup>
+  <Accordion title="Filter Options" icon="filter">
+    Narrow down your model choices based on specific criteria:
+    
+    - **Credits per 1k tokens** - Filter by cost to stay within budget
+    - **Context Window** - Find models that can handle your required input size
+    - **Max Output Tokens** - Ensure the model can generate responses of the length you need
+    - **Model Provider** - Select from OpenAI, Anthropic, Google, Azure, OpenRouter, and more
+    - **Additional Capabilities** - Filter by special features like vision, function calling, or streaming
+    - **Supported File Types** - Find models that can process specific file formats
+  </Accordion>
+  
+  <Accordion title="Sort Options" icon="arrow-down-wide-short">
+    Organize models to prioritize what matters most:
+    
+    - **Recommended** - Models suggested based on your use case and performance
+    - **Context Window** - Sort by maximum input size (largest to smallest)
+    - **Credits Cost** - Sort by price per 1,000 tokens (cheapest to most expensive)
+    - **Max Output Tokens** - Sort by maximum response length
+  </Accordion>
+  
+  <Accordion title="View & Search" icon="magnifying-glass">
+    Customize how you browse available models:
+    
+    - **Grid View** - See model cards with key specs at a glance
+    - **List View** - View detailed information in a compact list format
+    - **Search** - Quickly find specific models by name or provider
   </Accordion>
 </AccordionGroup>
 
@@ -137,7 +177,7 @@ If you insert a **Tool Placeholder** using the Slash menu, you can immediately *
 
 ### Add Tools to Your Agent
 
-Tools allow your Agent to perform real-world actions like searching the web, sending emails, extracting data, or connecting with other systems — expanding your Agent’s capabilities far beyond simple conversation.
+Tools allow your Agent to perform real-world actions like searching the web, sending emails, extracting data, or connecting with other systems — expanding your Agent's capabilities far beyond simple conversation.
 
 When writing your Prompt, you can reference specific Tools directly to guide how your Agent should complete tasks. You can also insert Tool Placeholders to invent new tools or connect existing ones as needed.
 
