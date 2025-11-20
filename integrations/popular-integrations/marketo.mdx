@@ -1,0 +1,355 @@
+---
+title: "Marketo"
+description: "Marketo is a leading marketing automation platform for lead management, email marketing, and campaign analytics."
+sidebarTitle: "Marketo"
+---
+
+Marketo is a leading marketing automation platform that helps businesses manage leads, execute email campaigns, and analyze marketing performance. With Relevance AI's Marketo integration, you can seamlessly connect your Marketo instance to your AI agents, enabling them to retrieve campaign metrics, manage leads, access email statistics, and automate marketing workflows.
+
+<Warning>
+  The Marketo integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Marketo. If you have a question or issue with using Marketo in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Marketo, you can [reach out to Adobe Marketo support](https://experienceleague.adobe.com/en/docs/marketo/using/home).
+</Warning>
+
+## Connect the integration
+
+Connecting your Marketo account to Relevance AI uses API Tool Steps with 2-legged OAuth 2.0 authentication. Follow these steps to set up the connection:
+
+<Steps>
+  <Step title="Get your Marketo API credentials">
+    You'll need three pieces of information from your Marketo instance:
+    
+    1. **Client ID**
+    2. **Client Secret**
+    3. **REST API Endpoint**
+    
+    To obtain these credentials:
+    
+    1. Log into your Marketo instance as an administrator
+    2. Navigate to **Admin** > **Integration** > **LaunchPoint**
+    3. Click **New** > **New Service**
+    4. Configure the service:
+       - **Display Name**: Enter a name (e.g., "Relevance AI Integration")
+       - **Service**: Select "Custom"
+       - **Description**: Optional description
+       - **API Only User**: Select an API-only user (or create one in Admin > Users & Roles)
+    5. Click **Create**
+    6. Click **View Details** on your newly created service
+    7. Copy the **Client ID** and **Client Secret**
+    
+    To get your REST API Endpoint:
+    1. Navigate to **Admin** > **Integration** > **Web Services**
+    2. Find the **REST API** section
+    3. Copy the **Endpoint** URL (e.g., `https://123-ABC-456.mktorest.com/rest`)
+  </Step>
+  
+  <Step title="Store credentials in Relevance AI">
+    When configuring the Marketo API Call tool step in your tools, you'll need to provide these credentials for authentication. Keep them secure and accessible for when you build your Marketo-connected tools.
+  </Step>
+  
+  <Step title="Test your connection">
+    Once you've added the credentials to a tool step, test the connection by making a simple API call (e.g., retrieving leads or campaigns) to ensure everything is configured correctly.
+  </Step>
+</Steps>
+
+<Info>
+  **Authentication Method**: Marketo uses 2-legged OAuth 2.0. As of June 2025, authentication requires a Bearer token in the Authorization header. The Marketo API Call tool step handles token generation and refresh automatically.
+</Info>
+
+## Tool steps for Marketo
+
+The Marketo integration provides access to Marketo's comprehensive REST API through the API Call tool step, enabling you to interact with all Marketo endpoints and functionality.
+
+### Marketo API Call
+
+<Card title="Marketo API Call" icon="plug">
+  Make custom API calls to any Marketo REST API endpoint. This tool step provides full access to Marketo's API, allowing you to retrieve campaign metrics, manage leads, access email statistics, and more.
+</Card>
+
+<Tip>
+  Type "Marketo" in the tool step search bar to find the Marketo API Call action when building your tools.
+</Tip>
+
+## Use the Marketo API Call tool step (Advanced)
+
+The Marketo API Call tool step gives you complete access to Marketo's REST API, allowing you to implement any functionality available in the API, including lead management, campaign operations, email program analytics, and more.
+
+<Warning>
+  **Authentication Required**: As of June 2025, Marketo API calls require a Bearer token in the Authorization header. The Marketo API Call tool step handles this automatically when you provide your Client ID, Client Secret, and REST API Endpoint.
+</Warning>
+
+### How to use the Marketo API Call tool step
+
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add Marketo functionality to.
+  </Step>
+  
+  <Step title="Add the Marketo API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "Marketo API Call" in the tool step search bar
+    3. Add the Marketo API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Configure authentication">
+    Provide your Marketo credentials:
+    - **Client ID**: Your Marketo API Client ID
+    - **Client Secret**: Your Marketo API Client Secret
+    - **REST API Endpoint**: Your Marketo REST API endpoint URL
+    
+    The tool step will automatically handle OAuth token generation and include the Bearer token in the Authorization header.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters according to your needs:
+    - **Method**: Select the HTTP method (GET, POST, DELETE)
+    - **Endpoint**: Enter the API endpoint path (e.g., `/rest/v1/leads.json`)
+    - **Query Parameters**: Add any required query parameters
+    - **Body**: Add any required request body data (for POST requests)
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying. Verify that you're receiving the expected data from Marketo.
+  </Step>
+</Steps>
+
+### Example: Get Leads from Marketo
+
+Here's a practical example of using the Marketo API Call tool step to retrieve leads:
+
+**API Endpoint**: `GET /rest/v1/leads.json`
+
+**Configuration**:
+```json
+{
+  "method": "GET",
+  "endpoint": "/rest/v1/leads.json",
+  "query_parameters": {
+    "filterType": "email",
+    "filterValues": "user@example.com"
+  }
+}
+```
+
+This configuration:
+- Uses the GET method to retrieve leads
+- Filters leads by email address
+- Returns lead information including custom fields
+
+### Example: Trigger a Campaign
+
+**API Endpoint**: `POST /rest/v1/campaigns/{campaignId}/trigger.json`
+
+**Configuration**:
+```json
+{
+  "method": "POST",
+  "endpoint": "/rest/v1/campaigns/1234/trigger.json",
+  "body": {
+    "input": {
+      "leads": [
+        {
+          "id": 5678
+        }
+      ]
+    }
+  }
+}
+```
+
+This configuration:
+- Uses the POST method to trigger a campaign
+- Specifies the campaign ID in the endpoint
+- Provides lead IDs to trigger the campaign for
+
+<Info>
+  You can find Marketo's complete API documentation at [https://developer.adobe.com/marketo-apis/](https://developer.adobe.com/marketo-apis/).
+</Info>
+
+## Common Marketo API endpoints
+
+Here are some commonly used Marketo API endpoints you can use with the Marketo API Call tool step:
+
+<AccordionGroup>
+  <Accordion title="Leads" icon="user">
+    - **Get leads**: `GET /rest/v1/leads.json?filterType={filterType}&filterValues={filterValues}`
+    - **Create/update leads**: `POST /rest/v1/leads.json`
+    - **Get lead by filter type**: `GET /rest/v1/leads.json?filterType=id&filterValues=1,2,3`
+    - **Get lead activities**: `GET /rest/v1/activities/leadchanges.json`
+    
+    [View API Documentation](https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/lead-database/leads)
+  </Accordion>
+  
+  <Accordion title="Campaigns" icon="bullhorn">
+    - **Get campaigns**: `GET /rest/v1/campaigns.json`
+    - **Trigger campaign**: `POST /rest/v1/campaigns/{id}/trigger.json`
+    - **Schedule campaign**: `POST /rest/v1/campaigns/{id}/schedule.json`
+    - **Get campaign by ID**: `GET /rest/v1/campaigns/{id}.json`
+    
+    [View API Documentation](https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/assets/smart-campaigns)
+  </Accordion>
+  
+  <Accordion title="Email Programs" icon="envelope">
+    - **Get email programs**: `GET /rest/asset/v1/programs.json?type=email`
+    - **Get email content**: `GET /rest/asset/v1/email/{id}/content.json`
+    - **Get email by name**: `GET /rest/asset/v1/email/byName.json?name={name}`
+    - **Approve email**: `POST /rest/asset/v1/email/{id}/approveDraft.json`
+    
+    [View API Documentation](https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/assets/emails)
+  </Accordion>
+  
+  <Accordion title="Statistics & Analytics" icon="chart-line">
+    - **Get email program stats**: `GET /rest/asset/v1/program/{id}/stats.json`
+    - **Get landing page stats**: `GET /rest/asset/v1/landingPage/{id}/stats.json`
+    - **Get email performance**: `GET /rest/v1/activities/emailbounced.json`
+    - **Get email opens**: `GET /rest/v1/activities/emailopened.json`
+    
+    [View API Documentation](https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/endpoint-reference)
+  </Accordion>
+  
+  <Accordion title="Lists" icon="list">
+    - **Get lists**: `GET /rest/v1/lists.json`
+    - **Add leads to list**: `POST /rest/v1/lists/{listId}/leads.json`
+    - **Remove leads from list**: `DELETE /rest/v1/lists/{listId}/leads.json`
+    - **Check list membership**: `GET /rest/v1/lists/{listId}/leads.json`
+    
+    [View API Documentation](https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/lead-database/static-lists)
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  For a complete list of available endpoints, visit the [Marketo REST API Endpoint Reference](https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/endpoint-reference).
+</Tip>
+
+## Example use cases
+
+Here are some ways you can leverage the Marketo integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="Campaign Performance Monitoring" icon="chart-bar">
+    Create an agent that automatically retrieves campaign metrics, calculates average open rates, tracks click-through rates, and generates performance reports. The agent can monitor email program statistics and alert your team when campaigns exceed or fall below performance thresholds.
+  </Accordion>
+  
+  <Accordion title="Lead Database Analytics" icon="database">
+    Build an agent that retrieves the number of leads in your database, segments them by criteria, tracks lead growth over time, and provides insights into lead quality and distribution across different campaigns and programs.
+  </Accordion>
+  
+  <Accordion title="Email Metrics Dashboard" icon="envelope-open-text">
+    Deploy an agent that accesses campaign email metrics including open rates, click rates, bounce rates, and unsubscribe rates. The agent can compile this data into regular reports or dashboards for marketing team review.
+  </Accordion>
+  
+  <Accordion title="Lead Scoring Automation" icon="star">
+    Create an agent that automatically updates lead scores based on engagement activities, campaign interactions, and behavioral data. The agent can retrieve lead activities, calculate scores using custom logic, and update lead records in Marketo.
+  </Accordion>
+  
+  <Accordion title="Campaign Trigger Automation" icon="play">
+    Build an agent that triggers Marketo campaigns based on external events or conditions. For example, trigger a welcome campaign when a lead is created in your CRM, or launch a re-engagement campaign when leads meet specific criteria.
+  </Accordion>
+  
+  <Accordion title="Lead Enrichment Workflow" icon="user-plus">
+    Deploy an agent that enriches lead data by retrieving information from external sources, updating lead records in Marketo with additional fields, and ensuring data consistency across your marketing stack.
+  </Accordion>
+  
+  <Accordion title="Marketing ROI Calculator" icon="calculator">
+    Create an agent that retrieves campaign costs, performance metrics, and conversion data to calculate marketing ROI. The agent can track revenue attribution, cost per lead, and campaign effectiveness across different channels.
+  </Accordion>
+  
+  <Accordion title="Automated Reporting Agent" icon="file-chart-column">
+    Build an agent that generates weekly or monthly marketing reports by pulling data from multiple Marketo endpoints, combining statistics, and formatting them into comprehensive reports for stakeholders.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="How do I get Marketo API credentials?">
+    To get your Marketo API credentials:
+    
+    1. Log into Marketo as an administrator
+    2. Go to **Admin** > **Integration** > **LaunchPoint**
+    3. Create a new service with type "Custom"
+    4. Assign an API-only user to the service
+    5. View the service details to get your Client ID and Client Secret
+    6. Get your REST API Endpoint from **Admin** > **Integration** > **Web Services**
+    
+    You'll need all three pieces of information (Client ID, Client Secret, and REST API Endpoint) to authenticate with the Marketo API.
+  </Accordion>
+  
+  <Accordion title="What are Marketo's API rate limits?">
+    Marketo enforces rate limits on API calls:
+    
+    - **Standard limit**: 100 calls per 20 seconds
+    - **Daily quota**: Varies by subscription (typically 10,000-50,000 calls per day)
+    
+    Your agents should be designed to handle rate limiting gracefully. The Marketo API will return a 606 error code when rate limits are exceeded. Consider implementing retry logic with exponential backoff for production workflows.
+  </Accordion>
+  
+  <Accordion title="How does authentication work with the Marketo API?">
+    Marketo uses 2-legged OAuth 2.0 authentication. When you provide your Client ID, Client Secret, and REST API Endpoint to the Marketo API Call tool step, it automatically:
+    
+    1. Requests an access token from Marketo's identity service
+    2. Includes the Bearer token in the Authorization header of API requests
+    3. Handles token refresh when tokens expire (typically after 3600 seconds)
+    
+    You don't need to manage tokens manually - the tool step handles this automatically.
+  </Accordion>
+  
+  <Accordion title="Why am I getting authentication errors?">
+    Common authentication issues include:
+    
+    - **Invalid credentials**: Double-check your Client ID, Client Secret, and REST API Endpoint
+    - **API user permissions**: Ensure the API user assigned to your LaunchPoint service has appropriate permissions
+    - **Expired tokens**: The tool step should handle token refresh automatically, but network issues can sometimes cause problems
+    - **Incorrect endpoint URL**: Make sure you're using the correct REST API endpoint for your Marketo instance
+    
+    If problems persist, try creating a new LaunchPoint service with a fresh set of credentials.
+  </Accordion>
+  
+  <Accordion title="Can I retrieve historical campaign data?">
+    Yes! You can retrieve historical campaign data using various Marketo API endpoints:
+    
+    - Use the Activities API to get historical lead activities
+    - Retrieve email program statistics for past campaigns
+    - Access landing page performance data
+    - Query lead changes and updates over time
+    
+    Note that data retention policies may vary based on your Marketo subscription level.
+  </Accordion>
+  
+  <Accordion title="What's the difference between Smart Campaigns and Email Programs?">
+    - **Smart Campaigns**: Automated workflows that can include multiple steps, triggers, and actions. Use the Campaigns API endpoints to trigger or schedule these.
+    - **Email Programs**: Specifically designed for email marketing with built-in A/B testing and reporting. Use the Email Programs API endpoints to retrieve content and statistics.
+    
+    Both can be accessed through the Marketo API Call tool step using their respective endpoints.
+  </Accordion>
+  
+  <Accordion title="How do I handle pagination in API responses?">
+    Many Marketo API endpoints return paginated results. To handle pagination:
+    
+    1. Check the response for `nextPageToken` in the result
+    2. Use the token in subsequent requests with the `nextPageToken` parameter
+    3. Continue until no `nextPageToken` is returned
+    
+    Consider using looping in your tools to automatically retrieve all pages of results.
+  </Accordion>
+  
+  <Accordion title="Can I create custom fields through the API?">
+    Yes, you can create and manage custom fields using the Lead Database API. However, custom field creation requires specific API permissions. Ensure your API user has the necessary permissions in Marketo's role settings under **Admin** > **Users & Roles**.
+  </Accordion>
+</AccordionGroup>
+
+## Additional resources
+
+<CardGroup cols={2}>
+  <Card title="Marketo Developer Portal" icon="code" href="https://developer.adobe.com/marketo-apis/">
+    Access the complete Marketo API documentation and developer resources
+  </Card>
+  <Card title="REST API Documentation" icon="book" href="https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api">
+    Detailed REST API reference and guides
+  </Card>
+  <Card title="Authentication Guide" icon="key" href="https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication">
+    Learn about Marketo's OAuth 2.0 authentication
+  </Card>
+  <Card title="Endpoint Reference" icon="list" href="https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/endpoint-reference">
+    Complete list of available API endpoints
+  </Card>
+</CardGroup>
