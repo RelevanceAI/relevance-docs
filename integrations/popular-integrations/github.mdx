@@ -1,0 +1,346 @@
+---
+title: "GitHub"
+description: "GitHub is the world's leading platform for version control and collaborative software development."
+sidebarTitle: "GitHub"
+---
+
+GitHub is the world's leading platform for version control and collaborative software development. With Relevance AI's GitHub integration, you can seamlessly connect your GitHub repositories to your AI agents, enabling them to manage code, issues, pull requests, and workflows, making your development processes more efficient and intelligent.
+
+<Warning>
+  The GitHub integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not GitHub. If you have a question or issue with using GitHub in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about GitHub, you can [reach out to GitHub support](https://support.github.com/).
+</Warning>
+
+## Connect the integration
+
+Connecting your GitHub account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "GitHub" from the available integrations.
+3. Click on the "Add Integration" button.
+4. In the pop-up window, sign into your GitHub account.
+5. Grant the necessary permissions for Relevance AI to access your GitHub repositories.
+6. Once authenticated, your GitHub account will appear as a connected integration.
+
+## Tool steps for GitHub
+
+The GitHub integration provides a comprehensive set of actions that your agents can use to interact with your repositories and development workflows. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated development automation capabilities.
+
+### Repository Management
+<CardGroup cols={2}>
+  <Card title="Create Repository" icon="folder-plus">
+    Create a new GitHub repository
+  </Card>
+  <Card title="Get Repository Info" icon="circle-info">
+    Retrieve information about a repository
+  </Card>
+  <Card title="Get Repository Content" icon="file-code">
+    Access files and folders in a repository
+  </Card>
+  <Card title="Star Repo" icon="star">
+    Star a repository
+  </Card>
+</CardGroup>
+
+### Branch & Commit Operations
+<CardGroup cols={2}>
+  <Card title="Create Branch" icon="code-branch">
+    Create a new branch in a repository
+  </Card>
+  <Card title="Get Commit" icon="code-commit">
+    Retrieve details about a specific commit
+  </Card>
+  <Card title="List Commits" icon="list">
+    List commits in a repository
+  </Card>
+  <Card title="Create or Update File Contents" icon="file-pen">
+    Create new files or update existing ones
+  </Card>
+</CardGroup>
+
+### Issue Management
+<CardGroup cols={2}>
+  <Card title="Create Issue" icon="circle-exclamation">
+    Create a new issue in a repository
+  </Card>
+  <Card title="Create Issue Comment" icon="comment">
+    Add a comment to an existing issue
+  </Card>
+  <Card title="Update Issue" icon="pen-to-square">
+    Update an existing issue
+  </Card>
+  <Card title="Get Issue Assignees" icon="users">
+    Retrieve assignees for an issue
+  </Card>
+  <Card title="Search Issues and Pull Requests" icon="magnifying-glass">
+    Search for issues and PRs across repositories
+  </Card>
+</CardGroup>
+
+### Pull Request Operations
+<CardGroup cols={2}>
+  <Card title="Create Pull Request" icon="code-pull-request">
+    Create a new pull request
+  </Card>
+  <Card title="Get Reviewers" icon="user-check">
+    Get reviewers for a pull request
+  </Card>
+  <Card title="Update Project (V2) Item Status" icon="list-check">
+    Update the status of a project item
+  </Card>
+</CardGroup>
+
+### Workflow Automation
+<CardGroup cols={2}>
+  <Card title="Create Workflow Dispatch" icon="play">
+    Trigger a workflow run
+  </Card>
+  <Card title="Enable Workflow" icon="toggle-on">
+    Enable a GitHub Actions workflow
+  </Card>
+  <Card title="Disable Workflow" icon="toggle-off">
+    Disable a GitHub Actions workflow
+  </Card>
+  <Card title="Get Workflow Run" icon="circle-info">
+    Get details about a workflow run
+  </Card>
+  <Card title="List Workflow Runs" icon="list">
+    List workflow runs for a repository
+  </Card>
+</CardGroup>
+
+### Gist Management
+<CardGroup cols={2}>
+  <Card title="Create Gist" icon="note-sticky">
+    Create a new gist
+  </Card>
+  <Card title="Update Gist" icon="pen">
+    Update an existing gist
+  </Card>
+  <Card title="List Gists for a User" icon="list">
+    List all gists for a user
+  </Card>
+</CardGroup>
+
+### Release Management
+<CardGroup cols={2}>
+  <Card title="List Releases" icon="tags">
+    List releases for a repository
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "GitHub" in the tool step search bar to see all available GitHub actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform GitHub-specific activities using the GitHub API Call tool step.
+
+<Warning>
+  **Required Header:** When using the GitHub API Call tool step, you must include the header `accept: application/vnd.github+json` or you may encounter errors like `'Please enter a value for 'response_body' field'`.
+</Warning>
+
+### How to use the GitHub API Call tool step
+
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add GitHub functionality to.
+  </Step>
+  
+  <Step title="Add the GitHub API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "GitHub API Call" in the tool step search bar
+    3. Add the GitHub API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your GitHub account">
+    Select your connected GitHub account from the dropdown menu.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters according to your needs:
+    - **Method**: Select the HTTP method (GET, POST, PUT, DELETE, PATCH)
+    - **Endpoint**: Enter the API endpoint path (e.g., `/repos/{owner}/{repo}/collaborators/{username}`)
+    - **Body**: Add any required request body data
+  </Step>
+  
+  <Step title="Add the required header">
+    **This is the critical step!** In the Headers section, add:
+    
+    ```json
+    {
+      "accept": "application/vnd.github+json"
+    }
+    ```
+    
+    This header tells GitHub's API what format to return the response in. Without it, the API may not return a properly formatted response, causing errors in your tool.
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
+
+### Example: Managing Repository Collaborators
+
+Here's a practical example of using the GitHub API Call tool step to add a collaborator to a repository:
+
+**API Endpoint**: `PUT /repos/{owner}/{repo}/collaborators/{username}`
+
+**Configuration**:
+```json
+{
+  "method": "PUT",
+  "endpoint": "/repos/myorg/myrepo/collaborators/johndoe",
+  "headers": {
+    "accept": "application/vnd.github+json"
+  },
+  "body": {
+    "permission": "push"
+  }
+}
+```
+
+This configuration:
+- Uses the PUT method to add or update a collaborator
+- Specifies the repository owner, name, and collaborator username
+- **Includes the required `accept` header**
+- Sets the permission level to "push" (can also be "pull", "triage", "maintain", or "admin")
+
+<Info>
+  You can find GitHub's complete API documentation at [https://docs.github.com/en/rest](https://docs.github.com/en/rest).
+</Info>
+
+### Common GitHub API Endpoints
+
+Here are some commonly used GitHub API endpoints you can use with the API Call tool step:
+
+<AccordionGroup>
+  <Accordion title="Repository Collaborators" icon="users">
+    - **Check permissions**: `GET /repos/{owner}/{repo}/collaborators/{username}/permission`
+    - **Add collaborator**: `PUT /repos/{owner}/{repo}/collaborators/{username}`
+    - **Remove collaborator**: `DELETE /repos/{owner}/{repo}/collaborators/{username}`
+    
+    [View API Documentation](https://docs.github.com/en/rest/collaborators/collaborators)
+  </Accordion>
+  
+  <Accordion title="Repository Contents" icon="folder">
+    - **Get contents**: `GET /repos/{owner}/{repo}/contents/{path}`
+    - **Create/update file**: `PUT /repos/{owner}/{repo}/contents/{path}`
+    - **Delete file**: `DELETE /repos/{owner}/{repo}/contents/{path}`
+    
+    [View API Documentation](https://docs.github.com/en/rest/repos/contents)
+  </Accordion>
+  
+  <Accordion title="Issues" icon="circle-exclamation">
+    - **List issues**: `GET /repos/{owner}/{repo}/issues`
+    - **Get issue**: `GET /repos/{owner}/{repo}/issues/{issue_number}`
+    - **Create issue**: `POST /repos/{owner}/{repo}/issues`
+    - **Update issue**: `PATCH /repos/{owner}/{repo}/issues/{issue_number}`
+    
+    [View API Documentation](https://docs.github.com/en/rest/issues/issues)
+  </Accordion>
+  
+  <Accordion title="Pull Requests" icon="code-pull-request">
+    - **List PRs**: `GET /repos/{owner}/{repo}/pulls`
+    - **Get PR**: `GET /repos/{owner}/{repo}/pulls/{pull_number}`
+    - **Create PR**: `POST /repos/{owner}/{repo}/pulls`
+    - **Update PR**: `PATCH /repos/{owner}/{repo}/pulls/{pull_number}`
+    - **Merge PR**: `PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge`
+    
+    [View API Documentation](https://docs.github.com/en/rest/pulls/pulls)
+  </Accordion>
+  
+  <Accordion title="Branches" icon="code-branch">
+    - **List branches**: `GET /repos/{owner}/{repo}/branches`
+    - **Get branch**: `GET /repos/{owner}/{repo}/branches/{branch}`
+    - **Create branch**: `POST /repos/{owner}/{repo}/git/refs`
+    
+    [View API Documentation](https://docs.github.com/en/rest/branches/branches)
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  **Remember**: Always include the `accept: application/vnd.github+json` header in your API calls!
+</Tip>
+
+## Example use cases
+
+Here are some ways you can leverage the GitHub integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="Automated Code Review Assistant" icon="magnifying-glass-chart">
+    Create an agent that automatically reviews pull requests, checks for common issues, adds comments with suggestions, and requests changes when necessary. The agent can analyze code quality, security vulnerabilities, and adherence to coding standards.
+  </Accordion>
+  
+  <Accordion title="Issue Triage Bot" icon="filter">
+    Build an agent that monitors new issues, categorizes them based on content, adds appropriate labels, assigns them to the right team members, and even provides initial responses to common questions.
+  </Accordion>
+  
+  <Accordion title="Release Notes Generator" icon="newspaper">
+    Deploy an agent that automatically generates comprehensive release notes by analyzing commits, pull requests, and issues between releases, formatting them according to your team's standards.
+  </Accordion>
+  
+  <Accordion title="Repository Maintenance Agent" icon="broom">
+    Create an agent that performs routine maintenance tasks like closing stale issues, updating dependencies, archiving old branches, and ensuring repository settings comply with organizational policies.
+  </Accordion>
+  
+  <Accordion title="Onboarding Automation" icon="user-plus">
+    Build an agent that automates developer onboarding by creating repositories from templates, setting up branch protection rules, adding team members with appropriate permissions, and creating initial issues for setup tasks.
+  </Accordion>
+  
+  <Accordion title="Documentation Sync Agent" icon="book">
+    Deploy an agent that keeps documentation in sync across multiple repositories, automatically updates README files when changes are detected, and ensures documentation standards are maintained.
+  </Accordion>
+  
+  <Accordion title="Security Compliance Monitor" icon="shield-halved">
+    Create an agent that monitors repositories for security compliance, checks for exposed secrets, ensures branch protection is enabled, and alerts teams when security policies are violated.
+  </Accordion>
+  
+  <Accordion title="Workflow Orchestrator" icon="diagram-project">
+    Build an agent that orchestrates complex GitHub Actions workflows, triggers deployments based on specific conditions, monitors workflow runs, and handles failures with automatic retries or notifications.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What permissions does the GitHub integration require?">
+    The integration requires permissions to read and write to repositories, manage issues and pull requests, and access workflow information. You can review the specific permissions during the authentication process. You can also configure fine-grained access tokens in GitHub to limit access to specific repositories.
+  </Accordion>
+  
+  <Accordion title="Why am I getting 'Please enter a value for response_body field' error?">
+    This error typically occurs when the required `accept: application/vnd.github+json` header is missing from your GitHub API Call tool step. Make sure to add this header in the Headers section of your API call configuration.
+    
+    **Solution**: Add the following header to your API call:
+    ```json
+    {
+      "accept": "application/vnd.github+json"
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Can I restrict my Agent to only access certain repositories?">
+    Yes, you can configure your tools and triggers to only interact with specific repositories by setting the appropriate repository parameters. Additionally, you can use GitHub's fine-grained personal access tokens to limit access at the GitHub level.
+  </Accordion>
+  
+  <Accordion title="How do I authenticate with GitHub for API calls?">
+    When you connect your GitHub account through the Integrations page, Relevance AI handles authentication automatically. When using the GitHub API Call tool step, simply select your connected GitHub account from the dropdown, and authentication will be handled for you.
+  </Accordion>
+  
+  <Accordion title="What's the difference between the pre-built GitHub tool steps and the API Call tool step?">
+    Pre-built tool steps (like "Create Issue" or "Create Pull Request") are designed for specific, common tasks and have simplified interfaces with guided inputs. The GitHub API Call tool step gives you full access to GitHub's REST API, allowing you to implement any functionality available in the API, including advanced or custom operations not covered by pre-built steps.
+  </Accordion>
+  
+  <Accordion title="Can I use GitHub webhooks to trigger my agents?">
+    Yes! You can set up GitHub webhooks to trigger your agents when specific events occur in your repositories (like new pull requests, issues, or commits). Configure webhooks in your GitHub repository settings to point to your agent's webhook URL in Relevance AI.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits for GitHub API calls?">
+    Yes, GitHub enforces rate limits on API calls. For authenticated requests, the limit is typically 5,000 requests per hour. Your agents should be designed to handle rate limiting gracefully. You can check your current rate limit status using the `/rate_limit` endpoint.
+  </Accordion>
+  
+  <Accordion title="Can I work with GitHub Enterprise?">
+    The GitHub integration is designed to work with GitHub.com. For GitHub Enterprise Server installations, you may need to use the generic API Tool step with custom authentication. Contact our support team for assistance with GitHub Enterprise configurations.
+  </Accordion>
+</AccordionGroup>
