@@ -32,7 +32,9 @@ To add Slack as an integration, follow these simple steps:
 
 ![Slack Triggers New Pn](/images/slack_triggers_new.png)
 
-You can trigger your Agents or Workforces directly from Slack channels or your own DM. This will start your Agent or Workforce in Relevance AI based on a keyword of your choice, and then will reply to your message in Slack.
+You can trigger your **Agents** or **Workforces** directly from Slack channels or your own DM. This will start your Agent or Workforce in Relevance AI based on a keyword of your choice, and then will reply to your message in Slack.
+
+You can now trigger entire Workforces from Slack, not just individual Agents. This allows you to kick off complex multi-agent workflows directly from your Slack conversations. Learn more about [Workforce Triggers](/workforce/build-an-ai-workforce/add-triggers).
 
 ### Setting up triggers for channels
 
@@ -67,10 +69,42 @@ Then, set up your Trigger from Relevance AI by following the steps below:
 8. Click 'Setup trigger'.
 
 <Note>
-Once setup, you can trigger your Agent from Slack by tagging `@Relevance AI` and mentioning the keyword you've set (if you set a keyword)! You can also keep the conversation rolling in threads - simply `@Relevance AI` in thread for your agent to respond, with full context of the conversation. If you don't want your Agent  to respond to any messages, simply turn off Agent replies in the advanced settings of the trigger setup.
+Once setup, you can trigger your Agent from Slack by tagging `@Relevance AI` and mentioning the keyword you've set (if you set a keyword)! You can also keep the conversation rolling in threads - simply `@Relevance AI` in thread for your agent to respond, with full context of the conversation.
 </Note>
 
-### Customised Message Formatting
+### Advanced Trigger Settings
+
+#### Live Status Updates
+
+When your Agent or Workforce is triggered from Slack, you'll receive live status updates as it progresses through tasks. These updates are automatically enabled and appear directly in the Slack thread, showing you what your Agent is doing in real-time.
+
+#### Exclude Keywords
+
+You can specify keywords that will prevent your Agent from triggering, even when messages mention your trigger keyword or tag `@Relevance AI`.
+
+**To configure:**
+1. In your Slack trigger settings, expand **Advanced Settings**
+2. Find the **Exclude Keywords** field
+3. Enter keywords or phrases (comma-separated)
+4. Save your configuration
+
+If a message contains any of your exclude keywords, the Agent will not trigger. Keywords are case-insensitive.
+
+#### No Agent Reply
+
+Enable this setting to have your Agent process Slack messages without posting a response back to the channel. This is useful for background processing, data collection, or triggering workflows that complete elsewhere.
+
+**To enable:**
+1. In your Slack trigger settings, expand **Advanced Settings**
+2. Toggle on **"No Agent Reply"** or **"Disable Agent responses"**
+3. Save your configuration
+
+<Warning>
+When "No Agent Reply" is enabled, you won't receive confirmation in Slack that your Agent processed the message. Monitor your Agent's task history in Relevance AI to verify it's working correctly.
+</Warning>
+
+### Customize Message Formatting
+
 When using the Send Message (advanced) tool step, you can send messages through Slack with enhanced formatting. This includes:
 1. **Emojis:** Add emojis to make your messages more engaging and expressive.
 2. **Bolded text:** Use bold formatting to highlight important information.
@@ -167,10 +201,30 @@ This will disconnect your Slack workspace from Relevance AI, and your agents wil
     
     **Note:** For DMs, you don't use the `/invite` command. Simply sending a message to the bot is enough to establish the connection. If your DM doesn't appear in the channel list, make sure you've sent at least one message to the Relevance AI bot first.
   </Accordion>
+  
   <Accordion title="How do I send specific messages to someone on Slack?">
     If you want to be able to send a message to a specific person in Slack, that person will first need to send a message to the Relevance AI bot in Slack. Once they do this, their name will appear as a destination option when sending Slack messages.
   </Accordion>
-  <Accordion title="How do I trigger my Workforce via Slack?">Follow the steps under section **Triggering Agents or Workforce from Slack** </Accordion>
+  
+  <Accordion title="How do I trigger my Workforce via Slack?">
+    Follow the steps under section **Triggering Agents or Workforce from Slack**. The process is the same as setting up an Agent trigger, but you'll select your Workforce instead of an individual Agent. Learn more about [Workforce Triggers](/workforce/build-an-ai-workforce/add-triggers).
+  </Accordion>
+  
+  <Accordion title="Can I see what my Agent is doing when triggered from Slack?">
+    Yes! Live status updates are automatically enabled for all Slack triggers. You'll see real-time progress updates posted in the Slack thread as your Agent works through its tasks.
+  </Accordion>
+  
+  <Accordion title="How do I prevent my Agent from responding to certain messages?">
+    Use the **Exclude Keywords** feature in your Slack trigger's advanced settings. Add keywords or phrases that should prevent your Agent from triggering, even if the message mentions your trigger keyword or tags `@Relevance AI`.
+  </Accordion>
+  
+  <Accordion title="Can my Agent process Slack messages without replying?">
+    Yes! Enable the **"No Agent Reply"** setting in your trigger's advanced settings. This allows your Agent to process messages without posting a response back to Slack.
+  </Accordion>
+  
+  <Accordion title="What's the difference between Agent triggers and Workforce triggers in Slack?">
+    Agent triggers start a single AI Agent, while Workforce triggers kick off an entire multi-agent workflow with multiple Agents working together. Use Workforce triggers for complex, multi-step processes that require different specialized Agents to collaborate.
+  </Accordion>
 </AccordionGroup>
 
 ## Disclaimer
