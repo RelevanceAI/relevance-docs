@@ -194,7 +194,37 @@ AWS EventBridge cron expressions use 6 fields, unlike traditional Unix cron whic
     Scheduled runs use your account's configured timezone. You can adjust this in your workforce settings to ensure tasks run at the correct local time.
   </Accordion>
   <Accordion title="How do I test my triggers?">
-    Test triggers in isolation by: 1) Verifying that connected agents have appropriate permissions, 2) Checking system logs for any error messages related to the trigger, 3) Ensuring all necessary API keys and credentials are current, and 4) Running a test activation manually.
+    Test triggers based on their type:
+
+    **For Manual and Integration Triggers:**
+    1. Navigate to the "Task" tab in your Workforce
+    2. For manual triggers: Send a test message to initiate the workflow
+    3. For integration triggers: Trigger a test event from the connected service
+    4. Monitor the execution in the [Workforce Task View](https://relevanceai.com/docs/workforce/workforce-features/workforce-task-view) to verify proper activation
+
+    **For Recurring Schedule Triggers:**
+    - **Note:** Test activations are not currently supported for recurring schedule triggers
+    - **Best practice:** Test your workflow manually first using a manual trigger before setting up the recurring schedule
+    - Monitor the first few automated runs after activation
+    - Check the Task View after scheduled runs to verify execution
+
+    **Checking Logs and Error Messages:**
+    
+    1. **Workforce Task View:** Navigate to the "Task" section in your Workforce to view:
+       - All current and recent activities
+       - Failed tasks with error messages
+       - Agent notes and execution details
+       - Complete conversation histories
+       - [Learn more about Workforce Task View](https://relevanceai.com/docs/workforce/workforce-features/workforce-task-view)
+
+    2. **Tool Logs:** Within individual tools, access the "Logs" tab to view execution details. [Learn more about Tools](https://relevanceai.com/docs/tool/introduction)
+
+    3. **Agent Task History:** For agents with recurring schedules, view error details in the agent's task history. [Learn more about Agent Triggers](https://relevanceai.com/docs/agent/build-your-agent/triggers)
+
+    **Additional Verification Steps:**
+    - Verify that connected agents have appropriate permissions
+    - Ensure all necessary API keys and credentials are current
+    - Check trigger configuration settings (filters, conditions, authentication)
   </Accordion>
 </AccordionGroup>
 
