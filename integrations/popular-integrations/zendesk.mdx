@@ -16,7 +16,7 @@ Follow these steps to connect your Zendesk account to Relevance AI:
 
 <Steps>
   <Step title="Navigate to Integrations">
-    Go to the **Integrations** page in your Relevance AI dashboard.
+    Go to the **Integrations & API Keys** page in your Relevance AI dashboard.
   </Step>
   
   <Step title="Select Zendesk">
@@ -43,13 +43,7 @@ Follow these steps to connect your Zendesk account to Relevance AI:
 ## Setting Up Triggers
 
 <Warning>
-**Enterprise Plan Required for Triggers**
-
-Zendesk triggers are only available on Enterprise plans. If you want to automatically activate your agents when new support tickets are created in Zendesk, you'll need to upgrade to an Enterprise plan.
-
-[Contact our sales team](https://relevanceai.com/contact) or [book a demo](https://relevanceai.com/book-demo) to learn more about Enterprise features.
-
-**Note:** Zendesk tool steps (actions) are available on all plans - only the trigger functionality requires an Enterprise plan.
+**Enterprise Plan Required for Triggers** - Zendesk triggers are only available on Enterprise plans. Tool steps (actions) are available on all plans. [Contact sales](https://relevanceai.com/book-a-demo) to learn more.
 </Warning>
 
 Zendesk triggers allow you to automatically activate agents when specific events occur in your Zendesk account, such as:
@@ -91,27 +85,27 @@ Zendesk tool steps allow you to incorporate Zendesk actions into your agent work
 ### Ticket Management
 
 <AccordionGroup>
-  <Accordion title="Zendesk - Create Ticket" icon="ticket">
+  <Accordion title="Create Ticket" icon="ticket">
     Create a new support ticket in Zendesk with specified details including subject, description, priority, type, and assignee.
   </Accordion>
   
-  <Accordion title="Zendesk - Get Ticket Info" icon="circle-info">
+  <Accordion title="Get Ticket Info" icon="circle-info">
     Retrieve detailed information about a specific ticket using its ticket ID, including status, priority, assignee, requester, and all comments.
   </Accordion>
   
-  <Accordion title="Zendesk - List Tickets" icon="list">
+  <Accordion title="List Tickets" icon="list">
     Retrieve a list of tickets from your Zendesk account with optional filtering by status, priority, assignee, or date range.
   </Accordion>
   
-  <Accordion title="Zendesk - Search Tickets" icon="magnifying-glass">
+  <Accordion title="Search Tickets" icon="magnifying-glass">
     Search for tickets using Zendesk's search query language to find tickets matching specific criteria.
   </Accordion>
   
-  <Accordion title="Zendesk - Update Ticket" icon="pen-to-square">
+  <Accordion title="Update Ticket" icon="pen-to-square">
     Update an existing ticket's properties such as status, priority, assignee, tags, or add internal notes and public comments.
   </Accordion>
   
-  <Accordion title="Zendesk - Delete Ticket" icon="trash">
+  <Accordion title="Delete Ticket" icon="trash">
     Delete a ticket from your Zendesk account. Note that this permanently removes the ticket.
   </Accordion>
 </AccordionGroup>
@@ -123,15 +117,6 @@ To find these tool steps when building your agent or tool, search for "Zendesk" 
 ## Use the Integration's API Tool Step (Advanced)
 
 For advanced use cases, you can use the **Zendesk API Call** tool step to make custom API requests to any Zendesk endpoint. This gives you access to the full Zendesk API beyond the pre-built tool steps.
-
-<Info>
-**Required Headers**
-
-When using the Zendesk API Call tool step, the authentication headers are automatically included. You only need to specify:
-- **Method**: GET, POST, PUT, PATCH, or DELETE
-- **Endpoint**: The API endpoint path (e.g., `/api/v2/tickets.json`)
-- **Body**: Request body for POST, PUT, or PATCH requests (optional)
-</Info>
 
 ### How to use the Zendesk API Call tool step
 
@@ -246,10 +231,6 @@ For complete API documentation, visit the [Zendesk API Reference](https://develo
     The integration requires an API token with appropriate permissions. For full functionality, your Zendesk user should have Admin or Agent permissions. You can configure specific API token scopes in your Zendesk Admin Center.
   </Accordion>
   
-  <Accordion title="Do I need an Enterprise plan to use Zendesk with Relevance AI?" icon="crown">
-    Zendesk tool steps (actions) are available on all Relevance AI plans. However, **Zendesk triggers** (automatic activation when events occur in Zendesk) are only available on Enterprise plans. Contact our sales team to learn more about Enterprise features.
-  </Accordion>
-  
   <Accordion title="Can I access tickets from multiple Zendesk accounts?" icon="building">
     Yes, you can connect multiple Zendesk accounts by adding separate integrations for each account. Each integration will appear with its account name in your integrations list.
   </Accordion>
@@ -266,10 +247,6 @@ For complete API documentation, visit the [Zendesk API Reference](https://develo
   
   <Accordion title="Can I use custom ticket fields?" icon="sliders">
     Yes! When using the Zendesk API Call tool step, you can access and update custom ticket fields by including them in your API requests. Reference your custom field IDs from your Zendesk Admin Center.
-  </Accordion>
-  
-  <Accordion title="What's the difference between pre-built tool steps and the API Call tool step?" icon="code-compare">
-    Pre-built tool steps provide a simplified interface for common Zendesk actions with guided inputs. The API Call tool step gives you direct access to the full Zendesk API for advanced use cases and custom workflows that aren't covered by pre-built steps.
   </Accordion>
   
   <Accordion title="Are there rate limits for Zendesk API calls?" icon="gauge-high">
