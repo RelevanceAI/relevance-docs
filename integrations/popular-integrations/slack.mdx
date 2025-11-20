@@ -32,7 +32,13 @@ To add Slack as an integration, follow these simple steps:
 
 ![Slack Triggers New Pn](/images/slack_triggers_new.png)
 
-You can trigger your Agents or Workforces directly from Slack channels or your own DM. This will start your Agent or Workforce in Relevance AI based on a keyword of your choice, and then will reply to your message in Slack.
+You can trigger your **Agents** or **Workforces** directly from Slack channels or your own DM. This will start your Agent or Workforce in Relevance AI based on a keyword of your choice, and then will reply to your message in Slack.
+
+<Tip>
+  **New: Workforce Triggers**
+  
+  You can now trigger entire Workforces from Slack, not just individual Agents! This allows you to kick off complex multi-agent workflows directly from your Slack conversations. Learn more about [Workforce Triggers](/workforce/build-an-ai-workforce/add-triggers).
+</Tip>
 
 ### Setting up triggers for channels
 
@@ -67,10 +73,156 @@ Then, set up your Trigger from Relevance AI by following the steps below:
 8. Click 'Setup trigger'.
 
 <Note>
-Once setup, you can trigger your Agent from Slack by tagging `@Relevance AI` and mentioning the keyword you've set (if you set a keyword)! You can also keep the conversation rolling in threads - simply `@Relevance AI` in thread for your agent to respond, with full context of the conversation. If you don't want your Agent  to respond to any messages, simply turn off Agent replies in the advanced settings of the trigger setup.
+Once setup, you can trigger your Agent from Slack by tagging `@Relevance AI` and mentioning the keyword you've set (if you set a keyword)! You can also keep the conversation rolling in threads - simply `@Relevance AI` in thread for your agent to respond, with full context of the conversation.
+</Note>
+
+### Advanced Trigger Settings
+
+Slack triggers come with powerful advanced settings that give you fine-grained control over how your Agents and Workforces respond to messages.
+
+#### Live Status Updates
+
+<Info>
+  **Real-time visibility into your Agent's progress**
+  
+  When your Agent or Workforce is triggered from Slack, you'll now receive live status updates as it progresses through tasks. No more wondering if your Agent is still working - you'll see exactly what it's doing in real-time!
+</Info>
+
+Live status updates are **automatically enabled** for all Slack triggers. As your Agent works through its tasks, you'll see updates posted directly in the Slack thread, such as:
+
+- "Starting task..."
+- "Processing your request..."
+- "Searching knowledge base..."
+- "Generating response..."
+- "Task completed!"
+
+**Benefits:**
+- **Transparency**: Know exactly what your Agent is doing at any moment
+- **Confidence**: See that your request is being processed without having to check back manually
+- **Context**: Understand which step is taking time if there are delays
+
+<Note>
+  **Screenshot placeholder**: Add a screenshot showing live status updates appearing in a Slack thread as an Agent processes a request.
+</Note>
+
+#### Exclude Keywords
+
+Control which messages should **NOT** trigger your Agent, even when they mention the trigger keyword or tag `@Relevance AI`.
+
+**How to set up:**
+
+1. When configuring your Slack trigger, look for the **Advanced Settings** section
+2. Find the **Exclude Keywords** field
+3. Enter keywords or phrases that should prevent triggering (comma-separated)
+4. Save your trigger configuration
+
+**Example use cases:**
+
+<AccordionGroup>
+  <Accordion title="Filter out test messages" icon="flask">
+    Add "test", "testing", "ignore" to your exclude keywords to prevent your Agent from responding to test messages in your channel.
+    
+    **Example:** `@Relevance AI test this feature` → Agent will NOT trigger
+  </Accordion>
+  
+  <Accordion title="Prevent responses to specific topics" icon="ban">
+    If your Agent handles customer inquiries but shouldn't respond to internal discussions, add keywords like "internal", "team-only", "private".
+    
+    **Example:** `@Relevance AI internal discussion about pricing` → Agent will NOT trigger
+  </Accordion>
+  
+  <Accordion title="Avoid duplicate processing" icon="copy">
+    Add "already handled", "resolved", "done" to prevent your Agent from re-processing completed requests.
+    
+    **Example:** `@Relevance AI this is already handled` → Agent will NOT trigger
+  </Accordion>
+</AccordionGroup>
+
+**How it works:**
+
+- If a message contains ANY of your exclude keywords, the Agent will not trigger
+- Exclude keywords are case-insensitive
+- Works with both keyword triggers and `@Relevance AI` mentions
+- Helps reduce noise and prevent unwanted Agent activations
+
+<Tip>
+  **Pro tip:** Use exclude keywords to create "safe zones" in your Slack channels where team members can discuss the Agent without accidentally triggering it. For example, add "discuss", "about", "regarding" to your exclude list.
+</Tip>
+
+<Note>
+  **Screenshot placeholder**: Add a screenshot showing the Exclude Keywords field in the Slack trigger advanced settings configuration.
+</Note>
+
+#### Control Agent Replies (No Agent Reply)
+
+Sometimes you want your Agent to process information or trigger workflows **without posting a response back to Slack**. The "No Agent Reply" setting gives you this control.
+
+**How to enable:**
+
+1. When setting up or editing your Slack trigger, expand the **Advanced Settings** section
+2. Toggle on **"No Agent Reply"** or **"Disable Agent responses"**
+3. Save your trigger configuration
+
+**When to use this:**
+
+<Columns cols={2}>
+  <Card title="Background Processing" icon="gears">
+    Your Agent collects data, updates databases, or performs calculations without cluttering the Slack channel with responses.
+  </Card>
+  
+  <Card title="Data Collection" icon="database">
+    Gather information from Slack messages for analysis or reporting without sending confirmation messages.
+  </Card>
+</Columns>
+
+<Columns cols={2}>
+  <Card title="Workflow Triggers" icon="diagram-project">
+    Use Slack messages to kick off complex Workforce processes that complete elsewhere (like updating CRMs or generating reports).
+  </Card>
+  
+  <Card title="Silent Monitoring" icon="eye">
+    Monitor conversations and log information without the Agent participating in the discussion.
+  </Card>
+</Columns>
+
+**Example scenarios:**
+
+**Scenario 1: CRM Updates**
+```
+Team member: @Relevance AI log meeting with Acme Corp - very interested in Enterprise plan
+
+Agent behavior with "No Agent Reply" enabled:
+- Extracts meeting details
+- Updates CRM with notes
+- Tags opportunity as "hot lead"
+- Does NOT post a confirmation message in Slack
+```
+
+**Scenario 2: Data Aggregation**
+```
+Team member: @Relevance AI track sale $5000 from TechStart Inc
+
+Agent behavior with "No Agent Reply" enabled:
+- Records sale in database
+- Updates revenue dashboard
+- Triggers notification to finance team (via different channel)
+- Does NOT reply in the original Slack thread
+```
+
+<Warning>
+  **Important:** When "No Agent Reply" is enabled, you won't receive any confirmation in Slack that your Agent processed the message. Make sure to monitor your Agent's task history in Relevance AI to verify it's working correctly.
+</Warning>
+
+<Tip>
+  **Combine with Live Status Updates:** Even with "No Agent Reply" enabled, you can still see live status updates while the Agent is processing. The Agent simply won't post a final response message.
+</Tip>
+
+<Note>
+  **Screenshot placeholder**: Add a screenshot showing the "No Agent Reply" toggle in the advanced settings section of the Slack trigger configuration.
 </Note>
 
 ### Customised Message Formatting
+
 When using the Send Message (advanced) tool step, you can send messages through Slack with enhanced formatting. This includes:
 1. **Emojis:** Add emojis to make your messages more engaging and expressive.
 2. **Bolded text:** Use bold formatting to highlight important information.
@@ -167,10 +319,33 @@ This will disconnect your Slack workspace from Relevance AI, and your agents wil
     
     **Note:** For DMs, you don't use the `/invite` command. Simply sending a message to the bot is enough to establish the connection. If your DM doesn't appear in the channel list, make sure you've sent at least one message to the Relevance AI bot first.
   </Accordion>
+  
   <Accordion title="How do I send specific messages to someone on Slack?">
     If you want to be able to send a message to a specific person in Slack, that person will first need to send a message to the Relevance AI bot in Slack. Once they do this, their name will appear as a destination option when sending Slack messages.
   </Accordion>
-  <Accordion title="How do I trigger my Workforce via Slack?">Follow the steps under section **Triggering Agents or Workforce from Slack** </Accordion>
+  
+  <Accordion title="How do I trigger my Workforce via Slack?">
+    Follow the steps under section **Triggering Agents or Workforce from Slack**. The process is the same as setting up an Agent trigger, but you'll select your Workforce instead of an individual Agent. Learn more about [Workforce Triggers](/workforce/build-an-ai-workforce/add-triggers).
+  </Accordion>
+  
+  <Accordion title="Can I see what my Agent is doing when triggered from Slack?">
+    Yes! Live status updates are automatically enabled for all Slack triggers. You'll see real-time progress updates posted in the Slack thread as your Agent works through its tasks. This gives you full visibility into what's happening without needing to check the Relevance AI dashboard.
+  </Accordion>
+  
+  <Accordion title="How do I prevent my Agent from responding to certain messages?">
+    Use the **Exclude Keywords** feature in your Slack trigger's advanced settings. Add any keywords or phrases that should prevent your Agent from triggering, even if the message mentions your trigger keyword or tags `@Relevance AI`. This is perfect for filtering out test messages, internal discussions, or other content you don't want your Agent to process.
+  </Accordion>
+  
+  <Accordion title="Can my Agent process Slack messages without replying?">
+    Yes! Enable the **"No Agent Reply"** setting in your trigger's advanced settings. This allows your Agent to process messages, update databases, trigger workflows, or perform other actions without posting a response back to Slack. This is useful for background processing, data collection, or silent monitoring scenarios.
+  </Accordion>
+  
+  <Accordion title="What's the difference between Agent triggers and Workforce triggers in Slack?">
+    - **Agent triggers** start a single AI Agent to handle the request
+    - **Workforce triggers** kick off an entire multi-agent workflow with multiple Agents working together
+    
+    Use Workforce triggers when you need complex, multi-step processes that require different specialized Agents to collaborate. For example, a customer inquiry might trigger a Workforce where one Agent qualifies the lead, another searches your knowledge base, and a third drafts a personalized response.
+  </Accordion>
 </AccordionGroup>
 
 ## Disclaimer
