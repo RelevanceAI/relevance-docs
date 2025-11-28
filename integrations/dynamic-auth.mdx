@@ -154,5 +154,12 @@ To protect privacy and security:
   <Accordion title="Where can I use Dynamic Auth - just in Chat or everywhere?">
     Dynamic Auth applies to both Chat and in-app functionality (the Run tab). Whether you're using an agent through Chat or running it directly in the web application, Dynamic Auth will ensure each user's individual credentials are used when configured.
   </Accordion>
+  
+  <Accordion title="When I first add a tool to an agent, what setting does it use?">
+    It will use the agent input setting from the tool. When the user changes the input setting on the agent tool section page, it will no longer use the setting on the tool but will use the value set on the agent.
+  </Accordion>
+  
+  <Accordion title="If I have a default value set on the tool and the agent, what value will it use?">
+    If the agent input setting is `let agent decide` or `set manually`, it will prioritise using the default value set on the agent. If there is none, it will fallback to the tool default value. This is different for `Per-user authentication` which does not fall back to the tool default value. It will only use the value the current user in session has set for that agent.
+  </Accordion>
 </AccordionGroup>
-
