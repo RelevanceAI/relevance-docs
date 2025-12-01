@@ -1,0 +1,391 @@
+---
+title: "Data Retention"
+sidebarTitle: "Data Retention"
+description: "Control how long sensitive data is stored in your Relevance AI organization"
+---
+
+<Warning>
+Data Retention is an Enterprise feature that must be enabled by the Relevance AI team. If you have an Enterprise subscription and would like to use this feature, please contact your sales representative or [reach out to support](/get-started/support).
+
+You will not be able to access this feature if you are not on an Enterprise subscription.
+</Warning>
+
+Data Retention is an Enterprise feature that allows organizations to automatically manage the lifecycle of sensitive data stored in Relevance AI. By configuring retention policies, you can ensure that data is automatically deleted after a specified period, supporting compliance requirements, security best practices, and storage optimization.
+
+This feature gives organization admins control over how long different types of data—including tool runs, agent conversations, workforce tasks, and asset versions—are retained before being permanently deleted.
+
+<Frame>
+  <img 
+    src="/images/enterprise/data-retention-settings.png" 
+    alt="Data Retention configuration interface showing enable toggle and retention period settings"
+    noZoom
+  />
+</Frame>
+
+## Why Use Data Retention?
+
+<CardGroup cols={2}>
+  <Card title="Compliance & Governance" icon="scale-balanced">
+    Meet regulatory requirements for data retention limits (GDPR, HIPAA, industry-specific regulations) and demonstrate compliance with data minimization principles
+  </Card>
+  
+  <Card title="Security & Risk Management" icon="shield-check">
+    Reduce your organization's data exposure by automatically removing old, potentially sensitive information that's no longer needed
+  </Card>
+  
+  <Card title="Storage Optimization" icon="database">
+    Manage storage costs and platform performance by automatically cleaning up historical data that's no longer actively used
+  </Card>
+  
+  <Card title="Operational Control" icon="gears">
+    Establish consistent data lifecycle policies across your entire organization without manual intervention
+  </Card>
+</CardGroup>
+
+---
+
+## What Data Is Covered?
+
+Data Retention policies apply to four main categories of data in Relevance AI. Each category has specific conditions that determine when data is eligible for deletion.
+
+<AccordionGroup>
+  <Accordion title="Tool Runs & Sync Items" icon="wrench">
+    **What's included:**
+    - Individual tool execution records
+    - Sync items from integrated data sources
+    - Input and output data from tool runs
+    
+    **Deletion condition:**
+    - The run or sync item is older than your configured retention period
+    
+    **Example:** If you set a 90-day retention period, any tool run older than 90 days will be automatically deleted.
+  </Accordion>
+
+  <Accordion title="Agent Conversations" icon="messages">
+    **What's included:**
+    - Complete conversation threads with agents
+    - All messages within conversations
+    - Conversation metadata and context
+    
+    **Deletion conditions (ALL must be met):**
+    - The conversation is older than the retention period
+    - All messages in the conversation are older than the retention period
+    
+    **Example:** A conversation started 100 days ago with a message added 50 days ago will NOT be deleted if your retention period is 90 days. The conversation is only deleted when both the conversation AND all its messages exceed the retention period.
+  </Accordion>
+
+  <Accordion title="Workforce Tasks" icon="list-check">
+    **What's included:**
+    - Workforce task records
+    - All conversations within workforce tasks
+    - Task execution history and outputs
+    
+    **Deletion conditions (ALL must be met):**
+    - The workforce task is older than the retention period
+    - All conversations in the workforce task are older than the retention period (following the conversation conditions above)
+    
+    **Example:** A workforce task from 100 days ago with an associated conversation that has a recent message will NOT be deleted until both the task and all its conversations (including all messages) exceed the retention period.
+  </Accordion>
+
+  <Accordion title="Agent, Tool & Workforce Versions" icon="code-branch">
+    **What's included:**
+    - Historical versions of agents
+    - Historical versions of tools
+    - Historical versions of workforces
+    
+    **Deletion conditions (ALL must be met):**
+    - The version is older than the retention period
+    - The version is NOT currently the active version
+    - The version is NOT currently the draft version
+    
+    **Protection:** Your current active and draft versions are always protected from deletion, regardless of age. Only old, inactive versions are eligible for deletion.
+    
+    **Example:** If you have 10 versions of an agent and the retention period is 60 days, only versions older than 60 days that are neither active nor draft will be deleted. Your current working versions remain safe.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+**What's NOT covered:** Data Retention policies do not affect knowledge bases, integrations, API keys, or organization/project settings. These remain under your manual control.
+</Note>
+
+---
+
+## How to Configure Data Retention
+
+<Info>
+To configure Data Retention, you must have an Enterprise subscription, the feature must be enabled by Relevance AI, and you must be an organization admin or owner.
+</Info>
+
+<Steps>
+  <Step title="Request Feature Enablement" icon="envelope">
+    Contact the Relevance AI team to enable Data Retention for your organization. This is not a self-serve feature and must be activated by our team.
+    
+    Reach out to your sales representative or [contact support](/get-started/support) to request enablement.
+  </Step>
+
+  <Step title="Navigate to Data Management" icon="gear">
+    Once enabled, click **"Settings"** in the sidebar, then select **"Manage organization"** to access organization-level settings.
+    
+    Navigate to the **"Data management"** section where you'll find Data Retention controls.
+  </Step>
+
+  <Step title="Create Configuration" icon="plus">
+    Click **"Create configuration"** to set up your organization's data retention policy.
+    
+    This opens the configuration interface where you can define your retention settings.
+  </Step>
+
+  <Step title="Enable and Set Retention Period" icon="clock">
+    Toggle the **"Enable"** slider to activate data retention for your organization.
+    
+    Set your desired **retention period in days**. This determines how long data is kept before being automatically deleted.
+    
+    **Common retention periods:**
+    - 30 days - Short-term retention for highly sensitive data
+    - 90 days - Standard retention for most use cases
+    - 180 days - Extended retention for compliance requirements
+    - 365 days - Annual retention for long-term records
+  </Step>
+
+  <Step title="Save Configuration" icon="floppy-disk">
+    Click **"Save"** to apply your data retention policy.
+    
+    The policy takes effect immediately and will begin automatically deleting data that exceeds the retention period.
+  </Step>
+</Steps>
+
+<Warning>
+**Data deletion is permanent and cannot be undone.** Once data is deleted through retention policies, it cannot be recovered. Ensure your retention period aligns with your organization's compliance, legal, and operational requirements before enabling this feature.
+</Warning>
+
+---
+
+## Use Cases & Compliance Considerations
+
+<Tabs>
+  <Tab title="Compliance Requirements" icon="scale-balanced">
+    ### Meeting Regulatory Standards
+    
+    Data Retention helps organizations comply with various regulatory frameworks that mandate data retention limits:
+    
+    **GDPR (General Data Protection Regulation)**
+    - Supports data minimization principles
+    - Ensures personal data isn't kept longer than necessary
+    - Demonstrates compliance with storage limitation requirements
+    
+    **HIPAA (Healthcare)**
+    - Helps manage Protected Health Information (PHI) lifecycle
+    - Supports minimum necessary standard
+    - Aligns with organizational retention policies
+    
+    **Industry-Specific Regulations**
+    - Financial services: SOX, PCI-DSS compliance
+    - Legal: eDiscovery and litigation hold considerations
+    - Government: FISMA and agency-specific requirements
+    
+    <Tip>
+    Consult with your legal and compliance teams to determine the appropriate retention period for your organization's specific regulatory requirements.
+    </Tip>
+  </Tab>
+  
+  <Tab title="Security Best Practices" icon="shield-check">
+    ### Reducing Data Exposure
+    
+    Implementing data retention policies reduces your organization's security risk profile:
+    
+    **Minimize Attack Surface**
+    - Less historical data means less potential exposure in a breach
+    - Reduces the volume of sensitive information stored
+    - Limits the scope of data that could be compromised
+    
+    **Data Hygiene**
+    - Automatically removes outdated information
+    - Prevents accumulation of unnecessary sensitive data
+    - Supports "need to know" access principles
+    
+    **Incident Response**
+    - Smaller data footprint simplifies breach investigations
+    - Reduces scope of potential data breach notifications
+    - Limits liability exposure
+    
+    <Note>
+    Balance security benefits with operational needs. Ensure your retention period allows sufficient time for auditing, troubleshooting, and business continuity.
+    </Note>
+  </Tab>
+  
+  <Tab title="Operational Efficiency" icon="gauge-high">
+    ### Optimizing Platform Performance
+    
+    Data Retention supports operational efficiency and cost management:
+    
+    **Storage Optimization**
+    - Automatically manages storage consumption
+    - Prevents unlimited data accumulation
+    - Supports predictable storage costs
+    
+    **Performance Benefits**
+    - Smaller datasets improve query performance
+    - Faster search and retrieval operations
+    - Better platform responsiveness
+    
+    **Simplified Management**
+    - Automated cleanup eliminates manual deletion tasks
+    - Consistent policies across the organization
+    - Reduces administrative overhead
+    
+    **Cost Control**
+    - Predictable storage requirements
+    - Prevents runaway data growth
+    - Aligns storage costs with business value
+  </Tab>
+  
+  <Tab title="Planning Your Policy" icon="clipboard-list">
+    ### Determining the Right Retention Period
+    
+    Consider these factors when setting your retention period:
+    
+    **Legal & Compliance Requirements**
+    - What are your industry's minimum retention requirements?
+    - Do you have specific regulatory obligations?
+    - What are your litigation hold considerations?
+    
+    **Business Needs**
+    - How long do teams need access to historical data?
+    - What's your typical audit or review timeframe?
+    - Do you need data for trend analysis or reporting?
+    
+    **Security Posture**
+    - What's your organization's risk tolerance?
+    - How sensitive is the data you're processing?
+    - What are your data breach notification obligations?
+    
+    **Operational Considerations**
+    - How often do you reference historical data?
+    - What's your troubleshooting and debugging timeframe?
+    - Do you need data for training or quality assurance?
+    
+    <Tip>
+    Start with a longer retention period (e.g., 180 days) and adjust based on actual usage patterns and requirements. It's easier to shorten retention periods than to recover deleted data.
+    </Tip>
+  </Tab>
+</Tabs>
+
+---
+
+## Important Considerations
+
+<AccordionGroup>
+  <Accordion title="Data deletion is permanent" icon="triangle-exclamation">
+    Once data is deleted through retention policies, it **cannot be recovered**. There is no "recycle bin" or backup of deleted data.
+    
+    **Before enabling Data Retention:**
+    - Review your organization's data retention requirements
+    - Consult with legal, compliance, and security teams
+    - Consider exporting critical data for long-term archival
+    - Test with a longer retention period initially
+  </Accordion>
+
+  <Accordion title="Organization-wide impact" icon="building">
+    Data Retention policies apply to your **entire organization**, not individual projects or teams.
+    
+    All projects within your organization will follow the same retention period. If different teams have different requirements, you'll need to coordinate on a retention period that satisfies all stakeholders.
+  </Accordion>
+
+  <Accordion title="Active versions are protected" icon="shield">
+    Your current **active and draft versions** of agents, tools, and workforces are always protected from deletion, regardless of age.
+    
+    Only old, inactive versions that exceed the retention period are eligible for deletion. This ensures your production assets remain safe while cleaning up historical versions.
+  </Accordion>
+
+  <Accordion title="No automatic notifications" icon="bell">
+    The system does not send notifications before deleting data. Deletion happens automatically based on your configured retention period.
+    
+    Ensure your teams understand the retention policy and plan accordingly for any data they need to preserve long-term.
+  </Accordion>
+
+  <Accordion title="Export data before deletion" icon="download">
+    If you need to preserve specific data beyond the retention period, export it before it's deleted.
+    
+    Use Relevance AI's export features to download conversation logs, tool run results, or other data you need to retain for longer periods.
+  </Accordion>
+
+  <Accordion title="Audit and compliance records" icon="file-lines">
+    Consider your audit and compliance requirements when setting retention periods. Some regulations require specific retention periods for audit trails.
+    
+    If you use [S3 Event Streaming](/get-started/enterprise/streaming-events), those audit logs are stored in your own S3 bucket and are not affected by Data Retention policies in Relevance AI.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Frequently Asked Questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I access Data Retention without upgrading to Enterprise?">
+    No. Data Retention is available exclusively for Enterprise subscriptions. Additionally, the feature must be enabled by the Relevance AI team—it's not automatically available even for Enterprise customers.
+  </Accordion>
+
+  <Accordion title="Can I set different retention periods for different projects?">
+    No. Data Retention policies are set at the organization level and apply uniformly across all projects within your organization. All teams must follow the same retention period.
+  </Accordion>
+
+  <Accordion title="What happens to data that's currently older than my retention period?">
+    When you first enable Data Retention, any existing data that already exceeds your configured retention period will be deleted according to the deletion conditions for each data type. This cleanup happens automatically after you save your configuration.
+  </Accordion>
+
+  <Accordion title="Can I recover data after it's been deleted?">
+    No. Data deletion through retention policies is permanent and cannot be undone. There is no backup or recovery mechanism for deleted data. Export any data you need to preserve before it's deleted.
+  </Accordion>
+
+  <Accordion title="Does Data Retention affect my knowledge bases?">
+    No. Data Retention policies do not affect knowledge bases. Knowledge data remains under your manual control and must be deleted explicitly if needed.
+  </Accordion>
+
+  <Accordion title="Will my active agent versions be deleted?">
+    No. Your current active and draft versions of agents, tools, and workforces are always protected from deletion, regardless of age. Only old, inactive versions are eligible for deletion.
+  </Accordion>
+
+  <Accordion title="How do I know what data will be deleted?">
+    Data is deleted based on the conditions outlined in the "What Data Is Covered?" section above. Review those conditions carefully to understand what data is eligible for deletion based on your retention period.
+  </Accordion>
+
+  <Accordion title="Can I temporarily disable Data Retention?">
+    Yes. You can toggle the "Enable" slider off at any time to pause automatic data deletion. Your retention period configuration is saved, so you can re-enable it later without reconfiguring.
+  </Accordion>
+
+  <Accordion title="Does this affect my S3 Event Streaming data?">
+    No. If you use [S3 Event Streaming](/get-started/enterprise/streaming-events), audit logs and events stored in your own S3 bucket are not affected by Data Retention policies in Relevance AI. You control the lifecycle of data in your own S3 bucket.
+  </Accordion>
+
+  <Accordion title="Who can configure Data Retention settings?">
+    Only organization admins and owners can configure Data Retention settings. Members, viewers, and other roles cannot access or modify these settings.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related Enterprise Features
+
+<CardGroup cols={2}>
+  <Card title="S3 Event Streaming" icon="database" href="/get-started/enterprise/streaming-events">
+    Stream audit logs and compliance data to your own S3 bucket for long-term retention
+  </Card>
+  
+  <Card title="Role-Based Access Controls" icon="shield-halved" href="/get-started/enterprise/rbac">
+    Control who can access and manage data with granular permissions
+  </Card>
+  
+  <Card title="Analytics" icon="chart-line" href="/get-started/enterprise/analytics">
+    Monitor usage patterns to inform your retention policy decisions
+  </Card>
+  
+  <Card title="Integration Controls" icon="plug" href="/get-started/enterprise/integration-controls">
+    Govern which integrations can access your organization's data
+  </Card>
+</CardGroup>
+
+---
+
+<Note>
+**Need help?** Enterprise customers have access to dedicated support channels. Contact your sales representative or [reach out to our support team](/get-started/support) for assistance with Data Retention configuration.
+</Note>
