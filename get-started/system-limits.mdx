@@ -26,22 +26,17 @@ Below is a brief overview of maximum system resource allocations:
 | Bulk run                       |  24 hours  |
 
 ## Concurrent Tasks
-In the context of Relevance AI, task concurrency refers to the number of tasks that can be executed simultaneously by the system. This is a critical aspect of performance, especially when dealing with webhooks, multi-agent systems, and high-volume scenarios.
+In the context of Relevance AI, task concurrency refers to the number of tasks that can be executed simultaneously by an agent. This is an important consideration for performance, especially when dealing with webhooks, multi-agent systems, and high-volume scenarios.
 
-Understanding concurrent agent tasks is essential for optimizing performance. When multiple users interact with your application at the same time, the ability to handle these requests efficiently can significantly impact user experience. 
-
-Concurrency limits are determined by your subscription tier. Each tier has different limits on the number of concurrent agent tasks that can be processed simultaneously.
+Concurrency limits are determined by your subscription tier. Each tier provides different capacity for concurrent agent tasks, with higher tiers offering increased capacity to support more simultaneous operations. Enterprise plans can include custom concurrency limits tailored to your specific needs.
 
 <Note>
-If you're experiencing issues related to task concurrency, consider upgrading your subscription tier. If you are considering an Enterprise plan, please [book a demo](https://relevanceai.com/book-a-demo) with our sales team to discuss your unique needs.
+Each subscription tier includes a specific concurrent task capacity. If you need higher capacity for your use case, upgrading your subscription tier provides increased concurrent task limits. For Enterprise plans with custom requirements, please [book a demo](https://relevanceai.com/book-a-demo) with our sales team to discuss your specific needs.
 </Note>
 
 ### How It Works
 - The number of concurrent tasks you are allowed is determined by your subscription tier, **not** the type of trigger (webhook, API, or scheduled).
-- When the concurrency limit is reached, additional tasks will be queued until resources become available.
-
-When you hit your concurrency limits, users may experience delays in task execution. For example, if you have a chatbot with multiple simultaneous users and your tier's concurrency limit is reached, additional requests will be queued, leading to slower response times.
+- When your tier's capacity is reached, additional tasks will be queued until resources become available.
 
 ### Additional Resources
 For a detailed comparison of subscription tiers and their respective features, please refer to our [Pricing Page](https://relevanceai.com/pricing).
-
