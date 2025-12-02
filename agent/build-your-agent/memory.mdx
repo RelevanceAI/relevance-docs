@@ -35,6 +35,10 @@ These memory systems help make your conversations:
 
 Short-Term Memory allows your agent to remember information throughout one conversation. Setup organized memory metadata that your agent can recognize and update as each conversation progresses. This not only can improve the effectiveness of an agent but also can be used to filter, search and analyze tasks.
 
+<Note>
+When using short-term memory in a Workforce with multiple agents, the metadata persists throughout the entire workforce run as long as agents are configured to "continue same task" (rather than "create new task"). This means all agents in the workflow can read and update the same metadata, making it useful for tracking information across your entire multi-agent process.
+</Note>
+
 Adding Short-Term Memory allows you to enrich and recall your data with additional context:
 
 1. Navigate to the Build tab located at the top of your screen, adjacent to Tasks
@@ -117,6 +121,14 @@ You can filter your Workforces and Agent conversations/runs by Short-Term Memory
 
 By effectively utilizing memory, you can transform raw conversation data into structured, actionable insights that drive better decision-making and agent performance.
 
+### Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Does short-term memory persist across agents in a Workforce?">
+    Yes. When agents in a Workforce are configured to 'continue same task,' short-term memory persists across all agents involved in that workforce run. This allows metadata to be shared and updated by multiple agents working on the same task. If agents are configured to 'create new task,' each agent will have its own separate short-term memory.
+  </Accordion>
+</AccordionGroup>
+
 ----
 
 ## Long-Term Memory 
@@ -149,4 +161,3 @@ From the Advanced Settings in Long-Term Memory, you can:
 <Info>
 Long-Term Memory is particularly valuable for maintaining context across multiple conversations, ensuring your agent can build upon previous interactions and provide more personalized experiences.
 </Info>
-
