@@ -25,5 +25,18 @@ Below is a brief overview of maximum system resource allocations:
 | Agents after each user action  | 15 minutes |
 | Bulk run                       |  24 hours  |
 
+## Concurrent Tasks
+In the context of Relevance AI, task concurrency refers to the number of tasks that can be executed simultaneously by an agent. This is an important consideration for performance, especially when dealing with webhooks, multi-agent systems, and high-volume scenarios.
 
+Concurrency limits are determined by your subscription tier. Each tier provides different capacity for concurrent agent tasks, with higher tiers offering increased capacity to support more simultaneous operations. Enterprise plans can include custom concurrency limits tailored to your specific needs.
 
+<Note>
+Each subscription tier includes a specific concurrent task capacity. If you need higher capacity for your use case, upgrading your subscription tier provides increased concurrent task limits. For Enterprise plans with custom requirements, please [book a demo](https://relevanceai.com/book-a-demo) with our sales team to discuss your specific needs.
+</Note>
+
+### How It Works
+- The number of concurrent tasks you are allowed is determined by your subscription tier, **not** the type of trigger (webhook, API, or scheduled).
+- When your tier's capacity is reached, additional tasks will be queued until resources become available.
+
+### Additional Resources
+For a detailed comparison of subscription tiers and their respective features, please refer to our [Pricing Page](https://relevanceai.com/pricing).
