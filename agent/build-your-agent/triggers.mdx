@@ -195,66 +195,15 @@ Create monthly inventory reports that run automatically on the 1st of each month
 
 ## Scheduled Messages
 
-![](/images/agent/scheduled-messages.png)
+<Card 
+  title="Scheduled Messages" 
+  icon="clock" 
+  href="/agent/build-your-agent/scheduled-messages"
+  horizontal
+>
+  Enable your agents to schedule future messages and restart conversations at specific times. Unlike other triggers that start new runs, Scheduled Messages restart existing conversations with full context. Perfect for follow-ups, reminders, and multi-step sequences. **Available on Pro plan and above.**
+</Card>
 
-### What are Scheduled Messages?
-
-Scheduled Messages let your AI agents send messages in the future without you having to do anything. Instead of just responding when someone talks to them, your agents can now reach out at specific times you choose.
-
-With the latest update, you can easily edit or reschedule these messages directly in Task View - no need to start over if plans change!
-
-### Why Use Scheduled Messages?
-
-Your agents can now:
-
-- Send follow-ups automatically (like "How did that meeting go?")
-- Set reminders for deadlines or events
-- Create step-by-step communication sequences
-- Send information exactly when it's needed
-- Stay in touch with people across different time zones
-
-### Setting Up Scheduled Messages
-
-It's easy to get started:
-
-1. Navigate to the **Build** page
-2. Look for the **Triggers** section
-3. Scroll to the bottom and turn on the **Enabled Scheduled Messages** toggle
-4. Add instructions in your agent's core instructions about when to schedule messages
-
-Once turned on, your agent will understand time-based requests like "send a follow-up tomorrow at 9 AM" or "remind me about this next Tuesday."
-
-### Making the Most of Scheduled Messages
-
-Tell your agent when to schedule messages by adding instructions to your agent's **Prompt** like:
-
-```
-When someone asks about upcoming events, schedule a reminder 24 hours before each event.
-
-If someone has a deadline, schedule a check-in halfway to the deadline.
-
-For multi-step processes, schedule messages at each milestone to keep people on track.
-```
-
-### Scheduled Messages Settings
-
-#### Enabled Scheduled Messages (Toggle)
-
-Turn this on to allow your Agent to schedule actions or messages for the future. Without this enabled, your Agent can only respond in real-time and won't be able to set future reminders, follow-ups, or scheduled notifications.
-
-#### Max Daily Scheduled Triggers
-
-Set a limit on how many scheduled actions your Agent can process in a single day. Leaving it at "No limit" means the Agent can schedule and send as many future messages as needed. If you want to control costs, manage system load, or prevent overactivity, you can set a specific maximum number.
-
-#### Prevent Scheduled Messages from Interrupting a Task
-
-When this is enabled, your Agent won't interrupt an active task (like when it's waiting for approvals or processing another action) just to send a scheduled message. Instead, the scheduled message will wait and be delayed by at least the time you specify (default is 1,440 minutes, or 24 hours).
-
-This prevents your Agent from getting confused, stuck, or behaving unpredictably when juggling multiple actions.
-
-#### Schedule Message Tool
-
-A built-in tool your Agent can use when writing prompts. Use the `/schedule message` shortcut inside your Agent's instructions to tell it exactly when and what to schedule automatically during conversations.
-
-**Example:**
-> "After summarizing today's emails, schedule a check-in message tomorrow at 10 AM."
+<Tip>
+**New to Scheduled Messages?** Check out our [comprehensive guide](/agent/build-your-agent/scheduled-messages) to learn how to set up proactive follow-ups, reminders, and time-based communication sequences.
+</Tip>
