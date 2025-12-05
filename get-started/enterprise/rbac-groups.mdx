@@ -143,6 +143,45 @@ RBAC Groups maintains synchronization with your identity provider to ensure acce
   </Card>
 </Columns>
 
+### New User Sign-Up Process
+
+When onboarding new users with Directory Sync and Groups enabled, follow this workflow:
+
+<Steps>
+  <Step title="Enable SSO for the user">
+    Add the user to your identity provider and assign them access to the Relevance AI SSO application.
+  </Step>
+
+  <Step title="Verify required attributes">
+    Ensure the user has the following required attributes correctly configured in your identity provider:
+    - First name
+    - Last name
+    - Email address
+    
+    These attributes are required for successful SSO sign-up. See the [SSO Setup documentation](/get-started/enterprise/sso-setup) for more details.
+  </Step>
+
+  <Step title="Add user to groups">
+    Assign the user to the appropriate groups in your identity provider.
+  </Step>
+
+  <Step title="Wait for sync">
+    The sync worker runs approximately every 60 minutes. Wait for the next sync cycle to complete.
+  </Step>
+
+  <Step title="User signs up">
+    The user can now sign up to Relevance AI through SSO. Their group-based permissions will be automatically applied during the sign-up process.
+  </Step>
+
+  <Step title="User appears in Relevance AI">
+    Only after the user completes sign-up and is officially created in the Relevance AI platform will their email address appear in the users list within groups in Relevance AI.
+  </Step>
+</Steps>
+
+<Warning>
+**Important**: Users will not appear in your Relevance AI groups or user lists until they have completed their first SSO sign-up. Group membership and permissions are configured during the sign-up process, not before.
+</Warning>
+
 ### Adding users to groups
 
 When a user is added to an IDP group:
@@ -172,6 +211,10 @@ When a user is removed from an IDP group:
 ## Setting Up Directory Sync
 
 To use RBAC Groups, you need to configure directory sync between your identity provider and Relevance AI through WorkOS. This guide walks you through the complete setup process.
+
+### Prerequisites
+
+Before setting up Directory Sync, you must first configure [Single Sign-On (SSO)](/get-started/enterprise/sso-setup) for your organization. Directory Sync builds on top of SSO to enable automated user provisioning and group management.
 
 ### Setup Process
 
@@ -264,4 +307,3 @@ The following features are not yet supported in the current version of RBAC Grou
     RBAC (Role-Based Access Control) provides the permission framework and roles at organization, project, and asset levels. RBAC Groups extends this by allowing you to assign those roles to entire groups of users at once, rather than individually.
   </Accordion>
 </AccordionGroup>
-
