@@ -1,0 +1,238 @@
+---
+title: "Vercel"
+description: "Vercel is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration."
+sidebarTitle: "Vercel"
+---
+
+Vercel is the platform for frontend developers, providing the speed and reliability innovators need to create at the moment of inspiration. With Relevance AI's Vercel integration, you can seamlessly connect your Vercel projects to your AI agents, enabling them to manage deployments, monitor project status, and automate your development workflows, making your deployment processes more efficient and intelligent.
+
+<Warning>
+  The Vercel integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Vercel. If you have a question or issue with using Vercel in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Vercel, you can [reach out to Vercel support](https://vercel.com/support).
+</Warning>
+
+## Connect the integration
+
+Connecting your Vercel account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Vercel" from the available integrations.
+3. Click on the "Add Integration" button.
+4. In the pop-up window, sign into your Vercel account.
+5. Grant the necessary permissions for Relevance AI to access your Vercel projects and deployments.
+6. Once authenticated, your Vercel account will appear as a connected integration.
+
+## Tool steps for Vercel
+
+The Vercel integration provides a comprehensive set of actions that your agents can use to interact with your deployments and development workflows. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated deployment automation capabilities.
+
+### Deployment Management
+<CardGroup cols={2}>
+  <Card title="Create Deployment" icon="rocket">
+    Create a new deployment for a Vercel project with custom configurations
+  </Card>
+  <Card title="List Deployments" icon="list">
+    Retrieve a list of deployments with filtering options
+  </Card>
+  <Card title="Cancel Deployment" icon="circle-xmark">
+    Cancel an ongoing or queued deployment
+  </Card>
+</CardGroup>
+
+### Advanced Operations
+<CardGroup cols={2}>
+  <Card title="Vercel API Call" icon="code">
+    Make authorized requests to any Vercel API endpoint
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Vercel" in the tool step search bar to see all available Vercel actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Vercel-specific activities using the Vercel API Call tool step.
+
+### How to use the Vercel API Call tool step
+
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add Vercel functionality to.
+  </Step>
+  
+  <Step title="Add the Vercel API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "Vercel API Call" in the tool step search bar
+    3. Add the Vercel API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your Vercel account">
+    Select your connected Vercel account from the dropdown menu.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters according to your needs:
+    - **Method**: Select the HTTP method (GET, POST, PUT, DELETE, PATCH)
+    - **Path**: Enter the API endpoint path (e.g., `/v13/deployments`)
+    - **Body**: Add any required request body data
+    - **Headers**: Add any custom headers if needed
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
+
+### Example: Getting Deployment Details
+
+Here's a practical example of using the Vercel API Call tool step to retrieve details about a specific deployment:
+
+**API Endpoint**: `GET /v13/deployments/{id}`
+
+**Configuration**:
+```json
+{
+  "method": "GET",
+  "path": "/v13/deployments/dpl_ABC123xyz",
+  "headers": {}
+}
+```
+
+This configuration:
+- Uses the GET method to retrieve deployment information
+- Specifies the deployment ID in the path
+- Returns comprehensive details about the deployment including status, creator, and metadata
+
+<Info>
+  You can find Vercel's complete API documentation at [https://vercel.com/docs/rest-api](https://vercel.com/docs/rest-api).
+</Info>
+
+### Common Vercel API Endpoints
+
+Here are some commonly used Vercel API endpoints you can use with the API Call tool step:
+
+<AccordionGroup>
+  <Accordion title="Deployments" icon="rocket">
+    - **List deployments**: `GET /v6/deployments`
+    - **Get deployment**: `GET /v13/deployments/{id}`
+    - **Create deployment**: `POST /v13/deployments`
+    - **Cancel deployment**: `PATCH /v12/deployments/{id}/cancel`
+    - **Delete deployment**: `DELETE /v13/deployments/{id}`
+    
+    [View API Documentation](https://vercel.com/docs/rest-api/endpoints/deployments)
+  </Accordion>
+  
+  <Accordion title="Projects" icon="folder">
+    - **List projects**: `GET /v9/projects`
+    - **Get project**: `GET /v9/projects/{id}`
+    - **Create project**: `POST /v10/projects`
+    - **Update project**: `PATCH /v9/projects/{id}`
+    - **Delete project**: `DELETE /v9/projects/{id}`
+    
+    [View API Documentation](https://vercel.com/docs/rest-api/endpoints/projects)
+  </Accordion>
+  
+  <Accordion title="Domains" icon="globe">
+    - **List domains**: `GET /v5/domains`
+    - **Get domain**: `GET /v5/domains/{domain}`
+    - **Add domain**: `POST /v10/projects/{id}/domains`
+    - **Remove domain**: `DELETE /v9/projects/{id}/domains/{domain}`
+    
+    [View API Documentation](https://vercel.com/docs/rest-api/endpoints/domains)
+  </Accordion>
+  
+  <Accordion title="Environment Variables" icon="key">
+    - **List env variables**: `GET /v9/projects/{id}/env`
+    - **Create env variable**: `POST /v10/projects/{id}/env`
+    - **Update env variable**: `PATCH /v9/projects/{id}/env/{id}`
+    - **Delete env variable**: `DELETE /v9/projects/{id}/env/{id}`
+    
+    [View API Documentation](https://vercel.com/docs/rest-api/endpoints/projects#environment-variables)
+  </Accordion>
+  
+  <Accordion title="Teams" icon="users">
+    - **List teams**: `GET /v2/teams`
+    - **Get team**: `GET /v2/teams/{id}`
+    - **List team members**: `GET /v2/teams/{id}/members`
+    
+    [View API Documentation](https://vercel.com/docs/rest-api/endpoints/teams)
+  </Accordion>
+</AccordionGroup>
+
+## Example use cases
+
+Here are some ways you can leverage the Vercel integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="Automated Deployment Pipeline" icon="diagram-project">
+    Create an agent that automatically triggers deployments when specific conditions are met, such as successful test runs, code reviews, or scheduled times. The agent can monitor your repository, validate changes, and deploy to the appropriate environment (production, staging, or preview) based on your workflow rules.
+  </Accordion>
+  
+  <Accordion title="Multi-Environment Deployment Manager" icon="layer-group">
+    Build an agent that manages deployments across multiple environments simultaneously. The agent can coordinate staging deployments for testing, automatically promote successful builds to production, and maintain environment-specific configurations and variables.
+  </Accordion>
+  
+  <Accordion title="Deployment Status Monitor" icon="chart-line">
+    Deploy an agent that continuously monitors deployment status, tracks build times, and alerts your team when deployments fail or take longer than expected. The agent can provide detailed reports on deployment health and performance metrics.
+  </Accordion>
+  
+  <Accordion title="Rollback Automation Agent" icon="clock-rotate-left">
+    Create an agent that automatically detects deployment issues through error monitoring or performance degradation and initiates rollbacks to the last stable version. The agent can analyze logs, monitor error rates, and make intelligent decisions about when to rollback.
+  </Accordion>
+  
+  <Accordion title="Performance-Based Deployment Scheduler" icon="calendar-clock">
+    Build an agent that analyzes traffic patterns and schedules deployments during low-traffic periods to minimize user impact. The agent can optimize deployment timing based on historical data and current system load.
+  </Accordion>
+  
+  <Accordion title="CI/CD Integration Agent" icon="arrows-spin">
+    Deploy an agent that bridges your CI/CD pipeline with Vercel deployments, automatically triggering builds when tests pass, managing preview deployments for pull requests, and coordinating multi-stage deployment workflows.
+  </Accordion>
+  
+  <Accordion title="Deployment Notification System" icon="bell">
+    Create an agent that sends customized notifications to different stakeholders (developers, QA, product managers) about deployment events. The agent can provide context-aware updates via Slack, email, or other channels based on deployment status and team preferences.
+  </Accordion>
+  
+  <Accordion title="Preview Deployment Manager" icon="eye">
+    Build an agent that automatically creates and manages preview deployments for feature branches, assigns unique URLs, notifies reviewers, and cleans up old preview deployments to optimize resource usage.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What permissions does the Vercel integration require?">
+    The integration requires permissions to manage deployments, access project information, and read deployment logs. You can review the specific permissions during the authentication process. Vercel uses OAuth for secure authentication, ensuring your credentials are never stored directly.
+  </Accordion>
+  
+  <Accordion title="Can I restrict my Agent to only access certain projects?">
+    Yes, you can configure your tools and triggers to only interact with specific projects by setting the appropriate project parameters. Additionally, you can use Vercel's team-based access controls to limit which projects are accessible through the integration.
+  </Accordion>
+  
+  <Accordion title="How do I authenticate with Vercel for API calls?">
+    When you connect your Vercel account through the Integrations page, Relevance AI handles authentication automatically using OAuth. When using the Vercel API Call tool step, simply select your connected Vercel account from the dropdown, and authentication will be handled for you.
+  </Accordion>
+  
+  <Accordion title="What's the difference between the pre-built Vercel tool steps and the API Call tool step?">
+    Pre-built tool steps (like "Create Deployment" or "List Deployments") are designed for specific, common tasks and have simplified interfaces with guided inputs. The Vercel API Call tool step gives you full access to Vercel's REST API, allowing you to implement any functionality available in the API, including advanced or custom operations not covered by pre-built steps.
+  </Accordion>
+  
+  <Accordion title="Can I use webhooks to trigger my agents based on Vercel events?">
+    Yes! You can set up Vercel webhooks to trigger your agents when specific events occur in your projects (like deployment started, deployment completed, or deployment failed). Configure webhooks in your Vercel project settings to point to your agent's webhook URL in Relevance AI.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits for Vercel API calls?">
+    Yes, Vercel enforces rate limits on API calls. The specific limits depend on your Vercel plan. Your agents should be designed to handle rate limiting gracefully. You can check your current rate limit status in the API response headers.
+  </Accordion>
+  
+  <Accordion title="Can I manage environment variables through the integration?">
+    Yes! You can use the Vercel API Call tool step to create, update, and delete environment variables for your projects. This allows your agents to dynamically manage configuration across different environments.
+  </Accordion>
+  
+  <Accordion title="How do I cancel a deployment that's already in progress?">
+    Use the "Cancel Deployment" tool step or the Vercel API Call with the `PATCH /v12/deployments/{id}/cancel` endpoint. You'll need the deployment ID, which you can obtain from the "List Deployments" tool step or from deployment creation responses.
+  </Accordion>
+  
+  <Accordion title="Can I deploy to specific branches or environments?">
+    Yes! When creating a deployment, you can specify the branch, environment (production, preview, or development), and other configuration options. This allows your agents to manage multi-environment deployment strategies effectively.
+  </Accordion>
+</AccordionGroup>
