@@ -1,0 +1,143 @@
+---
+title: "Recurring Schedules"
+sidebarTitle: "Recurring Schedules"
+description: "Set your AI agents to run automatically at specific times or intervals"
+---
+
+<img 
+  height="200"  
+  src="/images/agent/recurring-schedule.png" 
+/>
+
+## What are Recurring Schedules?
+
+Recurring Schedules let your AI agents run automatically at set times without you having to start them manually. This is perfect for automating repetitive tasks that need to happen on a regular basis.
+
+## Why Use Recurring Schedules?
+
+- **Save time** by automating repetitive tasks
+- **Never miss important processes** - they run even if you forget
+- **Maintain consistency** in your workflows
+- **Keep things running** outside business hours
+
+## Setting Up a Recurring Schedule
+
+Setting up is simple:
+
+1. Go to your agent in the Relevance AI dashboard
+2. Click 'Edit Agent'
+3. Navigate to the 'Triggers' section
+4. Select 'Recurring Schedule'
+5. Choose your schedule type
+
+## Schedule Types
+
+You have two options for configuring recurring schedules:
+
+### Simple Schedule Options
+
+| Schedule Type | What It Does | Perfect For |
+| --- | --- | --- |
+| **Daily** | Runs every day at a time you choose | Morning reports, daily check-ins |
+| **Weekly** | Runs on specific days each week | Team updates, weekly newsletters |
+| **Monthly** | Runs on chosen dates each month | Monthly reports, regular maintenance |
+| **Custom** | Runs on specific dates you select | One-off tasks or irregular schedules |
+
+### Advanced: Cron Expressions
+
+For more precise control over scheduling, you can use **Cron expressions**. Relevance AI uses **AWS EventBridge cron format**, which requires **six fields**:
+
+```
+minute hour day-of-month month day-of-week year
+```
+
+**Cron Expression Format:**
+
+| Field | Values | Wildcards |
+| --- | --- | --- |
+| **Minute** | 0-59 | , - * / |
+| **Hour** | 0-23 | , - * / |
+| **Day-of-month** | 1-31 | , - * ? / L W |
+| **Month** | 1-12 or JAN-DEC | , - * / |
+| **Day-of-week** | 1-7 or SUN-SAT | , - * ? L # |
+| **Year** | 1970-2199 | , - * / |
+
+**Special Characters:**
+
+- `*` (asterisk) - all values
+- `?` (question mark) - no specific value (used in day-of-month or day-of-week)
+- `-` (dash) - range of values
+- `,` (comma) - additional values
+- `/` (forward slash) - increments
+- `L` - last day of month or week
+- `W` - nearest weekday
+- `#` - nth occurrence of a day in a month
+
+**Common Cron Expression Examples:**
+
+```
+0 10 * * ? *        # Every day at 10:00 AM
+0 0 * * MON *       # Every Monday at midnight
+0 9 1 * ? *         # First day of every month at 9:00 AM
+0 0 * * MON-FRI *   # Weekdays at midnight
+*/15 * * * ? *      # Every 15 minutes
+0 9,17 * * ? *      # Daily at 9:00 AM and 5:00 PM
+0 0 1,15 * ? *      # 1st and 15th of every month at midnight
+0 8 ? * 2 *         # Every Monday (day 2) at 8:00 AM
+0 10 L * ? *        # Last day of every month at 10:00 AM
+0 9 ? * 2#1 *       # First Monday of every month at 9:00 AM
+```
+
+<Note>
+AWS EventBridge cron expressions use 6 fields, unlike traditional Unix cron which uses 5 fields. Always include the year field, and use `?` for either day-of-month or day-of-week when specifying the other.
+</Note>
+
+## Real-World Examples
+
+**For Marketing Teams:**
+
+Set your agent to gather social media metrics every Monday morning and prepare a weekly performance report.
+
+**For Sales Teams:**
+
+Schedule daily updates on new leads and automatic follow-up messages to prospects who haven't responded in 3 days.
+
+**For Operations:**
+
+Create monthly inventory reports that run automatically on the 1st of each month.
+
+## Pro Tips
+
+- **Start small**: Begin with one simple recurring task before setting up complex schedules
+- **Test thoroughly**: Run your agent manually first to ensure it works as expected
+- **Monitor initially**: Check the first few automated runs to confirm everything works correctly
+- **Use cron for precision**: When you need exact timing control, use cron expressions instead of simple schedules
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What if my agent encounters an error during a scheduled run?">
+    The system logs errors and can send notifications based on your settings. You can view error details in your agent's task history.
+  </Accordion>
+  <Accordion title="Can I temporarily pause a recurring schedule?">
+    Yes, you can disable schedules without deleting them when you need a pause. Simply toggle off the schedule in your agent's Triggers settings.
+  </Accordion>
+  <Accordion title="How do I change an existing schedule?">
+    Go back to the Recurring Schedule section in your agent's Triggers settings and update the schedule as needed. Changes take effect immediately.
+  </Accordion>
+  <Accordion title="What timezone are scheduled runs based on?">
+    Scheduled runs are based on your device's timezone. Ensure your device is set to the correct timezone for tasks to run at the intended local time.
+  </Accordion>
+</AccordionGroup>
+
+## Related Features
+
+<CardGroup cols={2}>
+  <Card title="Introduction to Triggers" icon="bolt" href="/agent/build-your-agent/agent-triggers/introduction">
+    Learn about all the ways to trigger your agents
+  </Card>
+  <Card title="Scheduled Messages" icon="clock" href="/agent/build-your-agent/agent-triggers/scheduled-messages">
+    Enable agents to send messages at specific times in the future
+  </Card>
+</CardGroup>
+
