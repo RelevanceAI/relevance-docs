@@ -1,0 +1,351 @@
+---
+title: "Lusha"
+description: "Lusha is a leading B2B sales intelligence and lead enrichment platform trusted by over 1.5 million users worldwide."
+sidebarTitle: "Lusha"
+---
+
+Lusha is a leading B2B sales intelligence and lead enrichment platform trusted by over 1.5 million users worldwide. With Relevance AI's Lusha integration, you can seamlessly enrich your leads with accurate contact and company information, enabling your AI agents to automate prospect research, qualify leads, and build comprehensive sales pipelines with verified data.
+
+<Warning>
+  The Lusha integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Lusha. If you have a question or issue with using Lusha in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Lusha, you can [reach out to Lusha support](https://www.lusha.com/contact/).
+</Warning>
+
+<Note>
+  The Lusha integration is currently in **beta**. While fully functional, features may be refined based on user feedback. Please test thoroughly before using in production workflows.
+</Note>
+
+## Connect the integration
+
+Connecting your Lusha account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Lusha" from the available integrations.
+3. Click on the "Add Integration" button.
+4. Enter your Lusha API key when prompted.
+5. Once authenticated, your Lusha account will appear as a connected integration.
+
+<Tip>
+  You can find your Lusha API key in your Lusha account settings under API & Integrations. If you don't have a Lusha account yet, you can [sign up here](https://www.lusha.com/).
+</Tip>
+
+## Tool steps for Lusha
+
+The Lusha integration provides a comprehensive set of actions that your agents can use to enrich leads, find contacts, and gather company intelligence. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated sales automation and prospect research capabilities.
+
+### Contact Enrichment
+<CardGroup cols={2}>
+  <Card title="Enrich Contacts" icon="user-plus">
+    Enrich existing contact records with verified email addresses, phone numbers, and professional details
+  </Card>
+  <Card title="Find Contact" icon="magnifying-glass">
+    Find specific contacts based on name, company, or other identifying information
+  </Card>
+  <Card title="Search Contacts" icon="users">
+    Search for contacts matching specific criteria across Lusha's database
+  </Card>
+</CardGroup>
+
+### Company Intelligence
+<CardGroup cols={2}>
+  <Card title="Enrich Companies" icon="building">
+    Enrich company records with firmographic data, employee counts, and industry information
+  </Card>
+  <Card title="Find Company" icon="magnifying-glass">
+    Find specific companies based on name, domain, or other identifiers
+  </Card>
+  <Card title="Search Companies" icon="buildings">
+    Search for companies matching your ideal customer profile criteria
+  </Card>
+</CardGroup>
+
+### Advanced API Access
+<CardGroup cols={1}>
+  <Card title="Lusha API Call" icon="code">
+    Make custom API calls to access any Lusha API endpoint for advanced use cases
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Lusha" in the tool step search bar to see all available Lusha actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Lusha-specific activities using the Lusha API Call tool step.
+
+### How to use the Lusha API Call tool step
+
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add Lusha functionality to.
+  </Step>
+  
+  <Step title="Add the Lusha API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "Lusha API Call" in the tool step search bar
+    3. Add the Lusha API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your Lusha account">
+    Select your connected Lusha account from the dropdown menu.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters according to your needs:
+    - **Method**: Select the HTTP method (GET, POST)
+    - **Endpoint**: Enter the API endpoint path (e.g., `/person`)
+    - **Body**: Add any required request body data with search criteria
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
+
+### Example: Enriching a Contact by Email
+
+Here's a practical example of using the Lusha API Call tool step to enrich a contact using their email address:
+
+**API Endpoint**: `POST /person`
+
+**Configuration**:
+```json
+{
+  "method": "POST",
+  "endpoint": "/person",
+  "body": {
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+This configuration:
+- Uses the POST method to request contact enrichment
+- Specifies the `/person` endpoint for individual contact lookup
+- Provides the email address as the search parameter
+- Returns verified contact information including phone numbers, job title, company details, and social profiles
+
+<Info>
+  You can find Lusha's complete API documentation at [https://www.lusha.com/api-documentation/](https://www.lusha.com/api-documentation/).
+</Info>
+
+### Common Lusha API Endpoints
+
+Here are some commonly used Lusha API endpoints you can use with the API Call tool step:
+
+<AccordionGroup>
+  <Accordion title="Person Enrichment" icon="user">
+    - **Enrich by email**: `POST /person` with `{"email": "user@example.com"}`
+    - **Enrich by LinkedIn**: `POST /person` with `{"linkedInUrl": "https://linkedin.com/in/username"}`
+    - **Enrich by name & company**: `POST /person` with `{"firstName": "John", "lastName": "Doe", "company": "Acme Corp"}`
+    
+    Returns: Email addresses, phone numbers, job title, company, location, social profiles
+    
+    [View API Documentation](https://www.lusha.com/api-documentation/)
+  </Accordion>
+  
+  <Accordion title="Company Enrichment" icon="building">
+    - **Enrich by domain**: `POST /company` with `{"domain": "example.com"}`
+    - **Enrich by company name**: `POST /company` with `{"name": "Acme Corporation"}`
+    
+    Returns: Company size, industry, location, revenue, technologies used, social profiles
+    
+    [View API Documentation](https://www.lusha.com/api-documentation/)
+  </Accordion>
+  
+  <Accordion title="Bulk Enrichment" icon="layer-group">
+    - **Bulk person enrichment**: `POST /person/bulk` with array of person objects
+    - **Bulk company enrichment**: `POST /company/bulk` with array of company objects
+    
+    Allows you to enrich multiple contacts or companies in a single API call for efficiency.
+    
+    [View API Documentation](https://www.lusha.com/api-documentation/)
+  </Accordion>
+  
+  <Accordion title="Search & Discovery" icon="magnifying-glass">
+    - **Search contacts**: Use search endpoints with filters for job title, company, location, industry
+    - **Find decision makers**: Search for specific roles within target companies
+    
+    Useful for building prospect lists matching your ideal customer profile.
+    
+    [View API Documentation](https://www.lusha.com/api-documentation/)
+  </Accordion>
+</AccordionGroup>
+
+## Example use cases
+
+Here are some ways you can leverage the Lusha integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="Automated Lead Enrichment" icon="user-plus">
+    Create an agent that automatically enriches incoming leads from your CRM or forms with verified contact information. The agent can take an email address or LinkedIn profile, use Lusha to gather phone numbers, job titles, and company details, then update your CRM with the enriched data.
+  </Accordion>
+  
+  <Accordion title="Prospect Research Agent" icon="magnifying-glass-chart">
+    Build an agent that conducts deep research on prospects before sales calls. Given a LinkedIn URL or company name, the agent uses Lusha to gather contact details, company information, and decision-maker profiles, then compiles a comprehensive research brief for your sales team.
+  </Accordion>
+  
+  <Accordion title="Lead Qualification Bot" icon="filter">
+    Deploy an agent that automatically qualifies leads based on enriched data. The agent uses Lusha to gather company size, industry, and contact seniority, then scores and routes leads to the appropriate sales representatives based on your qualification criteria.
+  </Accordion>
+  
+  <Accordion title="Outbound List Builder" icon="list-check">
+    Create an agent that builds targeted prospect lists for outbound campaigns. The agent searches Lusha's database for contacts matching your ideal customer profile (job title, company size, industry, location), enriches the results, and exports them to your sales engagement platform.
+  </Accordion>
+  
+  <Accordion title="CRM Data Enhancement" icon="database">
+    Build an agent that continuously maintains data quality in your CRM. The agent identifies incomplete or outdated contact records, uses Lusha to find current information, and automatically updates your CRM with verified email addresses, phone numbers, and job titles.
+  </Accordion>
+  
+  <Accordion title="Account-Based Marketing (ABM) Research" icon="bullseye">
+    Deploy an agent that supports ABM campaigns by researching target accounts. The agent uses Lusha to identify key decision-makers within target companies, gather their contact information, and map out the organizational structure for strategic outreach.
+  </Accordion>
+  
+  <Accordion title="Recruitment Sourcing Agent" icon="user-tie">
+    Create an agent that helps recruiters find and contact qualified candidates. The agent searches for professionals with specific skills and experience, uses Lusha to find their contact information, and prepares personalized outreach messages.
+  </Accordion>
+  
+  <Accordion title="Partnership Development Bot" icon="handshake">
+    Build an agent that identifies and researches potential business partners. The agent finds companies in complementary industries, uses Lusha to identify partnership decision-makers, and gathers contact information for outreach.
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Data Privacy & Compliance" icon="shield-check">
+    **Always ensure compliance with data privacy regulations:**
+    - Only use Lusha data for legitimate business purposes
+    - Respect GDPR, CCPA, and other privacy regulations in your region
+    - Include proper opt-out mechanisms in your outreach
+    - Store enriched data securely and delete when no longer needed
+    - Review Lusha's terms of service and acceptable use policy
+    
+    Lusha is GDPR and CCPA compliant, but you're responsible for how you use the data.
+  </Accordion>
+  
+  <Accordion title="Credit Management" icon="coins">
+    **Optimize your Lusha credit usage:**
+    - Each enrichment request consumes Lusha credits
+    - Use bulk enrichment endpoints when processing multiple records
+    - Cache enriched data to avoid duplicate lookups
+    - Implement logic to check if data already exists before enriching
+    - Monitor your credit usage through Lusha's dashboard
+    - Set up alerts when credits are running low
+  </Accordion>
+  
+  <Accordion title="Data Quality" icon="star">
+    **Maximize the quality of enriched data:**
+    - Provide as much information as possible in your search queries (email + name + company is better than email alone)
+    - Validate enriched data before using it in outreach
+    - Implement fallback logic when Lusha doesn't find a match
+    - Regularly update enriched data as contact information changes
+    - Use Lusha's confidence scores to assess data reliability
+  </Accordion>
+  
+  <Accordion title="Rate Limiting" icon="gauge">
+    **Handle API rate limits gracefully:**
+    - Lusha enforces rate limits to ensure service quality
+    - Implement retry logic with exponential backoff for rate limit errors
+    - Use bulk endpoints to reduce the number of API calls
+    - Distribute enrichment tasks over time for large datasets
+    - Monitor API response codes and handle errors appropriately
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What is Lusha and why should I use it?">
+    Lusha is a B2B sales intelligence platform that provides verified contact and company information. It helps sales and marketing teams find accurate email addresses, phone numbers, and company details for prospects. Using Lusha with Relevance AI allows you to automate lead enrichment, prospect research, and data quality maintenance at scale.
+  </Accordion>
+  
+  <Accordion title="Do I need a Lusha account to use this integration?">
+    Yes, you need an active Lusha account with API access. You can sign up for Lusha at [https://www.lusha.com/](https://www.lusha.com/). Lusha offers various plans including a free tier with limited credits. You'll need to generate an API key from your Lusha account settings to connect it to Relevance AI.
+  </Accordion>
+  
+  <Accordion title="How do I get my Lusha API key?">
+    To get your Lusha API key:
+    1. Log in to your Lusha account
+    2. Navigate to Settings or Account Settings
+    3. Look for "API & Integrations" or "API Access"
+    4. Generate a new API key or copy your existing key
+    5. Use this key when connecting Lusha to Relevance AI
+    
+    Keep your API key secure and never share it publicly.
+  </Accordion>
+  
+  <Accordion title="What does 'beta' status mean for the Lusha integration?">
+    The beta status indicates that while the Lusha integration is fully functional and available for use, we're still gathering user feedback and may make refinements to improve the experience. We recommend testing your workflows thoroughly before deploying them in production. If you encounter any issues or have suggestions, please contact our support team.
+  </Accordion>
+  
+  <Accordion title="How many Lusha credits does each enrichment use?">
+    Credit usage depends on the type of enrichment and the data returned. Typically:
+    - Contact enrichment: 1-2 credits per successful lookup
+    - Company enrichment: 1 credit per successful lookup
+    - Bulk operations: Credits per record in the batch
+    
+    Check your Lusha plan details for specific credit allocations and pricing. You can monitor your credit usage in your Lusha dashboard.
+  </Accordion>
+  
+  <Accordion title="What happens if Lusha doesn't find a match?">
+    If Lusha doesn't find information for a contact or company, the API will return an empty result or indicate no match was found. Your agent should include logic to handle these cases, such as:
+    - Trying alternative search parameters
+    - Using fallback data sources
+    - Flagging the record for manual research
+    - Skipping to the next record in bulk operations
+    
+    Not all contacts are in Lusha's database, so plan for partial match rates.
+  </Accordion>
+  
+  <Accordion title="Can I use Lusha for cold outreach?">
+    Yes, but you must comply with all applicable laws and regulations:
+    - Follow CAN-SPAM, GDPR, CCPA, and other relevant regulations
+    - Include proper identification and opt-out mechanisms
+    - Only contact people with legitimate business interest
+    - Respect do-not-contact lists and preferences
+    - Review Lusha's acceptable use policy
+    
+    Lusha provides the data, but you're responsible for how you use it.
+  </Accordion>
+  
+  <Accordion title="How accurate is Lusha's data?">
+    Lusha maintains high data accuracy through continuous verification and updates. However, contact information can change over time. Best practices:
+    - Use the most recent enrichment data available
+    - Implement email verification before sending campaigns
+    - Update your records regularly
+    - Use Lusha's confidence scores when available
+    - Have a process for handling bounced emails or wrong numbers
+  </Accordion>
+  
+  <Accordion title="Can I enrich contacts from LinkedIn profiles?">
+    Yes! Lusha specializes in enriching LinkedIn profiles. You can provide a LinkedIn URL to the Lusha enrichment tool steps, and it will return verified contact information including email addresses and phone numbers. This is particularly useful for sales prospecting and recruitment workflows.
+  </Accordion>
+  
+  <Accordion title="What's the difference between 'Find' and 'Search' tool steps?">
+    - **Find** tool steps: Used when you have specific identifying information (email, LinkedIn URL, company domain) and want to retrieve that specific contact or company's details
+    - **Search** tool steps: Used when you want to discover contacts or companies matching certain criteria (job title, industry, location, company size)
+    
+    Use "Find" for enrichment, "Search" for prospecting and list building.
+  </Accordion>
+  
+  <Accordion title="Can I integrate Lusha with my CRM?">
+    Yes! You can build agents that connect Lusha with popular CRMs like Salesforce, HubSpot, and others available in Relevance AI. Your agent can:
+    - Pull contacts from your CRM
+    - Enrich them with Lusha
+    - Update the CRM with enriched data
+    - All automatically on a schedule or trigger
+    
+    Check our [integrations page](/integrations/introduction) for available CRM connections.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits for the Lusha API?">
+    Yes, Lusha enforces rate limits to ensure service quality for all users. The specific limits depend on your Lusha plan. If you hit rate limits:
+    - Your agent will receive a rate limit error
+    - Implement retry logic with delays
+    - Use bulk endpoints when processing many records
+    - Contact Lusha support if you need higher limits
+    
+    Design your workflows to handle rate limits gracefully.
+  </Accordion>
+</AccordionGroup>
