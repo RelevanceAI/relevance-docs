@@ -1,41 +1,62 @@
 ---
 title: 'Bulk scheduling'
 sidebarTitle: 'Bulk scheduling'
-description: 'For Team Plan Users and above'
+description: 'Learn how to schedule batch tasks to run automatically for your agent'
 ---
 
-Bulk Scheduling is a feature available to Team Plus users on the Relevance AI platform. This functionality allows you to set up and schedule multiple tasks for your agent to run automatically.
+<Warning>
+**Team plan or above required**: Bulk scheduling is only available to users on the Team plan or above.
+</Warning>
 
-<div style={{ width:"100%",position:"relative"}}>
+Bulk Scheduling allows you to automate large-scale task execution for your agent by processing data from Excel files or knowledge tables. Instead of manually creating individual tasks, you can import a spreadsheet or knowledge table where each row becomes a separate task that your agent will process automatically.
+
+This feature is ideal for scenarios where you need to:
+- Process many similar tasks automatically
+- Personalize agent interactions using data from spreadsheets
+- Schedule tasks to run during specific working hours
+- Distribute task execution over time to manage workload
+
+With bulk scheduling, you can set up message templates that dynamically pull data from your source files, configure working hours to align with your team's schedule, and control how tasks are distributed over time.
+
+## How to set up bulk scheduling
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
 <iframe src="https://app.supademo.com/embed/cmgh7yfdl0001wl0iaprn24sv" frameBorder="0" title="How to set up an MCP Server connection for a tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 </div>
 
-## How to access bulk scheduling
+To create a bulk schedule for your agent:
 
-1. Navigate to your agent's interface.
-2. Click on the `Run` tab.
-3. Look for the dropdown menu next to the `+ New Task` button.
-4. Select `Schedule in bulk` from the options.
+1. Navigate to the agent builder and click on the `Run` tab.
+2. Look for the dropdown menu next to the `+ New Task` button and select `Schedule in bulk`.
+3. Select a spreadsheet or knowledge table that contains the data you want your agent to process.
+4. Enter a message template for your agent to use. This message will be sent to your agent for every single task run automatically. You can reference variables from your data using double curly braces (e.g., **\{\{variable_name}}**). Read more about how to create message templates [below](#using-the-agent-message-template).
+5. Configure working hours for the batch schedule to ensure that tasks are being run at the appropriate time.
+6. Click `Schedule` to create your bulk schedule.
 
-## Setting up a batch schedule
-
-When setting up a batch schedule, you'll need to:
-1. Select a spreadsheet or knowledge table that contains the data you want your agent to process.
-2. Enter a message template for your agent to use. This should include your data's column names, which are automatically added as variables accessible using double curly braces: **\{\{variable_name}}**.
-3. Queue working hours for the batch schedule as desired to ensure that tasks are being run at the appropriate time.
-
+<Note>
+We recommend using descriptive column names in your spreadsheet or knowledge table, and testing with a small dataset first before scheduling large batches of tasks.
+</Note>
 
 ## Using the agent message template
 
-The Agent Message template is where you define how your agent should interact with each entry in your knowledge table. This is done using a templating system that allows you to dynamically insert values from your table into the agent's instructions.
+The message template you create will be sent to your agent automatically for every single task run. This allows you to personalize each task with data from your spreadsheet or knowledge table.
 
-**Key points:**
+For example, if you want each task to reference a different email address or name, you can use variables in your message template. Variables are referenced using double curly braces with the column name from your data source: **\{\{column_name}}**.
 
-- Double Brace Syntax: to insert values from your table, use double braces around the column name.
+**How it works:**
 
-- Column Names: you can use any column from your selected knowledge table.
+- Each row in your spreadsheet or knowledge table becomes a separate task
+- The message template is sent to your agent for each task
+- Variables in double curly braces (like **\{\{email}}** or **\{\{name}}**) are replaced with the actual values from that row
+- You can use any column from your selected data source as a variable
 
-- Example Usage: if you have a column named "company" in your table, you could create a template like this: "Please analyze the performance of **\{\{company\}\}** based on the provided data."
+**Example:**
+
+If your spreadsheet has columns for "company" and "email", you could create a template like:
+
+"Please research **\{\{company}}** and send the findings to **\{\{email}}**."
+
+When the tasks run, each one will automatically use the specific company and email from that row's data.
 
 ## Using the working hours
 
@@ -53,18 +74,19 @@ A key feature of bulk scheduling is the ability to queue working hours, which al
 
 - Override Mode: This give you the option to run all created tasks in override mode, which can be useful for testing or when you need to maintain specific inputs/outputs across all tasks.
 
-### Best practices for working hours
+<Note>
+We recommend aligning your work days and hours with your team's actual working schedule to ensure timely handling of task outputs. Also, start with a conservative number of tasks per interval and gradually increase as you assess your team's capacity and the agent's performance.
+</Note>
 
-- Align with team availability: Set work days and hours that match your team's actual working schedule to ensure timely handling of task outputs.
+## Monitoring your bulk schedule
 
-- Consider task complexity: Adjust the number of tasks per interval based on the complexity of each task and your team's capacity.
+To view and manage your bulk schedule, navigate to the agent builder, click on the `Run` tab, and then click on `Agent queue` in the top left on the sidebar. From there, you can click on the CSV or knowledge table that you just chose to see your tasks organized by status:
 
-- Start conservative: Begin with a lower number of tasks per interval and gradually increase as you assess your team's capacity and the agent's performance.
+- **Upcoming**: Tasks that are scheduled but haven't started yet
+- **In progress**: Tasks that are currently being processed
+- **Failed**: Tasks that encountered errors during execution
+- **Processed**: Tasks that have completed successfully
+- **Cancelled**: Tasks that have been cancelled
 
-
-**In summary**
-
-Once you've configured the desired working hours, hit `Schedule`.
-
-You can check the statuses of bulk schedules you have set up by navigating to the `Run` tab in the agent builder and clicking `Agent queue` in the task list view on the left.
+Note that you can't cancel specific tasks individually. You can only cancel all tasks within the upcoming view.
 
