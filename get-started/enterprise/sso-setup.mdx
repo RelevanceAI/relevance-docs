@@ -35,20 +35,19 @@ Before setting up SSO, ensure you have:
 Setting up SSO requires coordination between your Relevance AI representative and your IT administrator. Plan to have your IT admin available during setup.
 </Warning>
 
-### Identity Provider Configuration Requirements
-
-<Warning>
-**Important: Required User Attributes**
+### Required User Attributes
 
 Before completing SSO setup, ensure that your identity provider is configured to send the following required user attributes:
-- **First Name** (`firstName` or `first_name`)
-- **Last Name** (`lastName` or `last_name`)  
-- **Email** (`email`)
+
+| Attribute | Accepted Field Names |
+|-----------|---------------------|
+| First Name | `firstName` or `first_name` |
+| Last Name | `lastName` or `last_name` |
+| Email | `email` |
 
 These attributes must be correctly mapped in your identity provider for users to successfully sign up to Relevance AI via SSO. If these attributes are missing or incorrectly mapped, user sign-up will fail or result in incomplete user profiles.
 
 Your IT administrator should verify these attribute mappings during the SSO configuration process in WorkOS.
-</Warning>
 
 ---
 
