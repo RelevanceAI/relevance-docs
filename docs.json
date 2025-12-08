@@ -164,14 +164,12 @@
                   "agent/build-your-agent/build-overview",
                   "agent/build-your-agent/prompt",
                   "agent/build-your-agent/tools",
-                  "agent/build-your-agent/triggers",
-                  "agent/build-your-agent/scheduled-messages",
-                  "agent/build-your-agent/escalations",
-                  "agent/build-your-agent/memory",
-                  "agent/build-your-agent/variables",
                   {
-                    "group": "Agent Triggers",
+                    "group": "Triggers",
                     "pages": [
+                      "agent/build-your-agent/triggers",
+                      "agent/build-your-agent/recurring-schedules",
+                      "agent/build-your-agent/scheduled-messages",
                       "agent/build-your-agent/agent-triggers/integrations",
                       "agent/build-your-agent/agent-triggers/custom-webhook",
                       "agent/build-your-agent/agent-triggers/zapier",
@@ -179,6 +177,9 @@
                       "agent/build-your-agent/agent-triggers/tools-as-triggers"
                     ]
                   },
+                  "agent/build-your-agent/escalations",
+                  "agent/build-your-agent/memory",
+                  "agent/build-your-agent/variables",
                   {
                     "group": "Advanced Settings",
                     "pages": [
@@ -596,7 +597,11 @@
     },
     {
       "source": "/agent/give-your-agent-tasks/recurring-schedule",
-      "destination": "/agent/build-your-agent/triggers"
+      "destination": "/agent/build-your-agent/recurring-schedules"
+    },
+    {
+      "source": "/agent/build-your-agent/triggers#recurring-schedules",
+      "destination": "/agent/build-your-agent/recurring-schedules"
     },
     {
       "source": "/agent/agent-overview/faq",
