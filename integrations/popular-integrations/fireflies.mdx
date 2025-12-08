@@ -1,0 +1,294 @@
+---
+title: "Fireflies.ai"
+description: "Fireflies.ai is an AI-powered meeting assistant that automatically transcribes, summarizes, searches, and analyzes voice conversations."
+sidebarTitle: "Fireflies.ai"
+---
+
+Fireflies.ai is an AI-powered meeting assistant that automatically transcribes, summarizes, searches, and analyzes voice conversations across all major video conferencing platforms including Zoom, Google Meet, Microsoft Teams, Webex, and more. With industry-leading 90%+ transcription accuracy, Fireflies helps teams capture and extract valuable insights from every meeting.
+
+With Relevance AI's Fireflies integration, you can seamlessly connect your meeting data to your AI agents, enabling them to access transcripts, retrieve meeting details, process audio files, and automate post-meeting workflows, making your meeting intelligence more actionable and accessible.
+
+<Warning>
+  The Fireflies integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Fireflies.ai. If you have a question or issue with using Fireflies in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Fireflies.ai, you can [reach out to Fireflies support](https://fireflies.ai/support).
+</Warning>
+
+## Connect the integration
+
+Connecting your Fireflies.ai account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Fireflies" from the available integrations.
+3. Click on the "Add Integration" button.
+4. In the pop-up window, sign into your Fireflies.ai account.
+5. Grant the necessary permissions for Relevance AI to access your Fireflies data.
+6. Once authenticated, your Fireflies account will appear as a connected integration.
+
+## Tool steps for Fireflies
+
+The Fireflies integration provides powerful actions that your agents can use to interact with your meeting data and audio processing capabilities. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated meeting intelligence automation.
+
+<Note>
+  All Fireflies tool steps are currently in **beta**. We're actively improving these features based on user feedback.
+</Note>
+
+### Meeting Retrieval
+
+<CardGroup cols={2}>
+  <Card title="Find Meeting by ID" icon="magnifying-glass">
+    Retrieve specific meeting details and transcripts using a unique meeting ID
+  </Card>
+  <Card title="Find Recent Meeting" icon="clock">
+    Access the most recent meeting transcripts and metadata from your Fireflies account
+  </Card>
+</CardGroup>
+
+### Audio Processing
+
+<CardGroup cols={2}>
+  <Card title="Upload Audio" icon="upload">
+    Upload audio files directly to Fireflies for automatic transcription and analysis
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Fireflies" in the tool step search bar to see all available Fireflies actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Fireflies-specific activities using the Fireflies API Call tool step.
+
+### How to use the Fireflies API Call tool step
+
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add Fireflies functionality to.
+  </Step>
+  
+  <Step title="Add the Fireflies API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "Fireflies API Call" in the tool step search bar
+    3. Add the Fireflies API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your Fireflies account">
+    Select your connected Fireflies account from the dropdown menu.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint and parameters according to your needs using GraphQL queries. Fireflies uses a GraphQL API, so you'll need to structure your requests accordingly.
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
+
+### Example: Retrieving Meeting Transcripts
+
+Here's a practical example of using the Fireflies API Call tool step to retrieve meeting transcripts with summaries:
+
+**GraphQL Query Example**:
+```graphql
+query Transcripts {
+  transcripts {
+    id
+    title
+    date
+    duration
+    transcript_url
+    summary {
+      keywords
+      action_items
+      outline
+      shorthand_bullet
+      overview
+      bullet_gist
+    }
+    participants {
+      name
+      email
+    }
+  }
+}
+```
+
+This query retrieves:
+- Meeting metadata (ID, title, date, duration)
+- Transcript URL for full content access
+- AI-generated summary with keywords, action items, and overview
+- Participant information
+
+<Info>
+  You can find Fireflies' complete API documentation at [https://docs.fireflies.ai/](https://docs.fireflies.ai/).
+</Info>
+
+### Common Fireflies API Use Cases
+
+<AccordionGroup>
+  <Accordion title="Retrieve Specific Meeting" icon="file-lines">
+    Use the `transcript` query to fetch a specific meeting by ID:
+    
+    ```graphql
+    query GetTranscript {
+      transcript(id: "meeting_id_here") {
+        title
+        date
+        sentences {
+          text
+          speaker_name
+          start_time
+        }
+      }
+    }
+    ```
+    
+    [View API Documentation](https://docs.fireflies.ai/)
+  </Accordion>
+  
+  <Accordion title="Search Meetings" icon="magnifying-glass">
+    Search through your meetings using filters:
+    
+    ```graphql
+    query SearchTranscripts {
+      transcripts(
+        limit: 10
+        search: "product roadmap"
+      ) {
+        id
+        title
+        date
+      }
+    }
+    ```
+    
+    [View API Documentation](https://docs.fireflies.ai/)
+  </Accordion>
+  
+  <Accordion title="Extract Action Items" icon="list-check">
+    Retrieve action items from meetings:
+    
+    ```graphql
+    query GetActionItems {
+      transcript(id: "meeting_id") {
+        summary {
+          action_items
+        }
+      }
+    }
+    ```
+    
+    [View API Documentation](https://docs.fireflies.ai/)
+  </Accordion>
+  
+  <Accordion title="Upload Audio for Transcription" icon="microphone">
+    Use the upload mutation to process audio files:
+    
+    ```graphql
+    mutation UploadAudio {
+      uploadAudio(
+        audio_url: "https://example.com/audio.mp3"
+        title: "Sales Call - Q4 2024"
+      ) {
+        success
+        message
+        transcript_id
+      }
+    }
+    ```
+    
+    [View API Documentation](https://docs.fireflies.ai/)
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  Fireflies uses GraphQL for its API. Make sure to structure your queries and mutations according to GraphQL syntax.
+</Tip>
+
+## Example use cases
+
+Here are some ways you can leverage the Fireflies integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="Automated Meeting Notes Distribution" icon="paper-plane">
+    Create an agent that automatically retrieves meeting transcripts and summaries from Fireflies, formats them into professional meeting notes, and distributes them to relevant team members via email or Slack. The agent can identify key discussion points, decisions made, and next steps, ensuring everyone stays informed without manual note-taking.
+  </Accordion>
+  
+  <Accordion title="CRM Update from Sales Calls" icon="database">
+    Build an agent that monitors sales call recordings in Fireflies, extracts important customer information, pain points, and deal details, then automatically updates your CRM (Salesforce, HubSpot, etc.) with relevant notes and action items. This ensures your sales pipeline stays current without manual data entry.
+  </Accordion>
+  
+  <Accordion title="Action Item Extraction and Task Creation" icon="list-check">
+    Deploy an agent that analyzes meeting transcripts to identify action items, assigns them to the appropriate team members, and automatically creates tasks in your project management tools (Trello, Asana, Linear, etc.). The agent can set due dates based on urgency mentioned in the meeting and send reminders.
+  </Accordion>
+  
+  <Accordion title="Meeting Insights Dashboard" icon="chart-line">
+    Create an agent that aggregates data from multiple meetings, analyzes trends in discussion topics, tracks recurring issues, monitors team participation, and generates weekly or monthly insights reports. This helps leadership understand team dynamics and identify areas for improvement.
+  </Accordion>
+  
+  <Accordion title="Compliance and Record-Keeping" icon="shield-check">
+    Build an agent that ensures all client meetings are properly documented, archived, and tagged according to compliance requirements. The agent can flag meetings that need additional documentation, verify that required disclosures were made, and maintain an audit trail for regulatory purposes.
+  </Accordion>
+  
+  <Accordion title="Training and Onboarding Analysis" icon="graduation-cap">
+    Deploy an agent that analyzes training sessions and onboarding meetings to identify common questions, knowledge gaps, and areas where new team members struggle. The agent can compile frequently asked questions, suggest improvements to training materials, and create personalized follow-up resources for new hires.
+  </Accordion>
+  
+  <Accordion title="Customer Feedback Aggregation" icon="comments">
+    Create an agent that monitors customer calls and meetings, extracts feedback, feature requests, and pain points, then categorizes and aggregates this information into actionable insights for product and customer success teams. The agent can identify trending issues and prioritize feature requests based on frequency and impact.
+  </Accordion>
+  
+  <Accordion title="Meeting Preparation Assistant" icon="clipboard-list">
+    Build an agent that reviews past meeting transcripts with specific clients or on specific topics, generates briefing documents with key discussion points, outstanding action items, and relevant context to help team members prepare for upcoming meetings more effectively.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What permissions does the Fireflies integration require?">
+    The integration requires permissions to access your meeting transcripts, upload audio files, and retrieve meeting metadata. You can review the specific permissions during the authentication process. Fireflies respects your privacy settings and only provides access to meetings you have permission to view.
+  </Accordion>
+  
+  <Accordion title="Which meeting platforms are supported?">
+    Fireflies.ai supports all major video conferencing platforms including:
+    - Zoom
+    - Google Meet
+    - Microsoft Teams
+    - Webex
+    - GoToMeeting
+    - Ringcentral
+    - Aircall
+    - And many more
+    
+    The Relevance AI integration works with meetings from any of these platforms once they're processed by Fireflies.
+  </Accordion>
+  
+  <Accordion title="How accurate are the transcriptions?">
+    Fireflies.ai provides industry-leading transcription accuracy of 90%+ across multiple languages and accents. The accuracy can vary based on audio quality, background noise, and speaker clarity. For best results, ensure good audio quality in your meetings.
+  </Accordion>
+  
+  <Accordion title="Can I access historical meetings?">
+    Yes! Once you connect your Fireflies account, you can access all historical meetings that are stored in your Fireflies account. Use the "Find Meeting by ID" or "Find Recent Meeting" tool steps to retrieve past meeting data, or use the API Call tool step to search through your meeting history.
+  </Accordion>
+  
+  <Accordion title="What's the difference between beta and stable integrations?">
+    Beta integrations are fully functional but may receive updates, improvements, or changes based on user feedback. They're safe to use in production but might have occasional updates to their interface or functionality. Stable integrations have been thoroughly tested and have a more established feature set with fewer changes expected.
+  </Accordion>
+  
+  <Accordion title="How long does it take for Fireflies to process uploaded audio?">
+    Processing time depends on the length of the audio file. Typically, Fireflies processes audio at approximately real-time speed (a 30-minute audio file takes about 30 minutes to process). You can check the processing status using the API to know when transcripts are ready.
+  </Accordion>
+  
+  <Accordion title="Can I use Fireflies with phone calls, not just video meetings?">
+    Yes! Fireflies supports phone calls through various integrations and can also process uploaded audio files. You can use the "Upload Audio" tool step to transcribe phone call recordings, or connect Fireflies directly to your phone system if supported.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits for Fireflies API calls?">
+    Yes, Fireflies enforces rate limits on API calls to ensure service quality. The specific limits depend on your Fireflies subscription plan. Your agents should be designed to handle rate limiting gracefully. Check your Fireflies account settings or contact Fireflies support for specific rate limit information.
+  </Accordion>
+  
+  <Accordion title="Can I customize what information is extracted from meetings?">
+    Yes! Using the Fireflies API Call tool step with custom GraphQL queries, you can specify exactly what data you want to retrieve - whether it's full transcripts, specific speakers, time ranges, keywords, action items, or custom fields. This gives you complete control over the data extraction process.
+  </Accordion>
+</AccordionGroup>
