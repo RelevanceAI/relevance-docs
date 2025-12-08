@@ -1,0 +1,141 @@
+---
+title: 'Fireflies.ai'
+description: 'Connect Fireflies.ai to Relevance AI to access meeting transcripts, retrieve meeting data, and upload audio files for transcription'
+---
+
+# Fireflies.ai
+
+Fireflies.ai is an AI-powered meeting assistant that automatically transcribes, summarizes, searches, and analyzes voice conversations. It works across major video conferencing platforms including Zoom, Google Meet, Microsoft Teams, Webex, and more, providing 90%+ accuracy in transcription.
+
+With the Fireflies integration in Relevance AI, you can access meeting transcripts, retrieve meeting data, and upload audio files for transcription directly within your AI workflows.
+
+<Note>
+This integration is built and supported by the Relevance AI team. For support, please contact us through our standard support channels.
+</Note>
+
+## Connect the integration
+
+1. Navigate to the **Integrations** page in your Relevance AI workspace
+2. Search for "Fireflies" or find it in the list of available integrations
+3. Click **Add Integration**
+4. Authenticate with your Fireflies.ai account
+5. Grant the necessary permissions
+6. The integration will now be available in your tool steps
+
+## Tool steps for Fireflies
+
+You can search for "Fireflies" in the tool step search bar to find these available actions:
+
+### Meeting Retrieval
+
+- **Fireflies - Find Meeting by ID**: Retrieve specific meeting details using a meeting ID
+- **Fireflies - Find Recent Meeting**: Access the most recent meeting transcripts
+
+### Audio Processing
+
+- **Fireflies - Upload Audio**: Upload audio files for transcription
+
+<Warning>
+These tool steps are currently in beta. Functionality is stable but may receive updates based on user feedback.
+</Warning>
+
+## Use the integration's API tool step (Advanced)
+
+For advanced use cases, you can use the Fireflies API Call tool step to make custom API requests to Fireflies.ai.
+
+### How to use the API Call tool step
+
+1. Add the **Fireflies - API Call** tool step to your workflow
+2. Configure the endpoint, method, and parameters according to the Fireflies API documentation
+3. Reference the [Fireflies API documentation](https://docs.fireflies.ai/) for available endpoints and parameters
+
+### Example: Retrieve Meeting Transcript
+
+You can retrieve detailed meeting transcripts including speaker identification and timestamps using the Fireflies API.
+
+```javascript
+// Example API call configuration
+{
+  "endpoint": "/graphql",
+  "method": "POST",
+  "body": {
+    "query": "query Transcript($transcriptId: String!) { transcript(id: $transcriptId) { title date sentences { text speaker_name } } }"
+  }
+}
+```
+
+### Common API endpoints
+
+- **GraphQL API**: `/graphql` - Main endpoint for querying transcripts, meetings, and user data
+- Refer to the [Fireflies API documentation](https://docs.fireflies.ai/) for complete endpoint details
+
+## Example use cases
+
+Here are some practical ways to use the Fireflies integration in your workflows:
+
+### Automated meeting notes distribution
+Automatically send meeting summaries and transcripts to team members after calls, ensuring everyone stays informed even if they couldn't attend.
+
+### CRM updates from sales calls
+Extract key information from sales meetings and update your CRM automatically, capturing important details like customer pain points, budget discussions, and next steps.
+
+### Action item extraction
+Identify and create tasks from action items mentioned in meetings, automatically assigning them to the right team members with relevant context.
+
+### Meeting insights dashboard
+Aggregate meeting data to track trends, topics, and team engagement over time, helping you understand communication patterns and improve meeting effectiveness.
+
+### Compliance and record-keeping
+Maintain searchable archives of important meetings for compliance purposes, with easy retrieval of specific conversations when needed.
+
+### Training and onboarding analysis
+Analyze training sessions and onboarding calls to improve processes, identify common questions, and create better training materials.
+
+### Customer feedback aggregation
+Automatically extract and categorize customer feedback from support calls and customer meetings to inform product development.
+
+### Sales call coaching
+Review sales call transcripts to identify successful patterns, coaching opportunities, and best practices to share across the team.
+
+## Frequently asked questions (FAQs)
+
+### What permissions does Fireflies need?
+
+Fireflies requires access to your meeting recordings and transcripts. The specific permissions depend on your video conferencing platform and Fireflies account settings. Typically, you'll need to grant Fireflies permission to join meetings and access recordings.
+
+### Which meeting platforms are supported?
+
+Fireflies.ai supports all major video conferencing platforms including:
+- Zoom
+- Google Meet
+- Microsoft Teams
+- Webex
+- GoToMeeting
+- RingCentral
+- And many others
+
+It can also transcribe uploaded audio files from any source.
+
+### How accurate are the transcriptions?
+
+Fireflies.ai provides 90%+ accuracy in transcription, with support for multiple languages and accents. Accuracy may vary based on audio quality, speaker clarity, background noise, and technical terminology.
+
+### Can I access historical meetings?
+
+Yes, you can access historical meetings stored in your Fireflies.ai account using the "Find Meeting by ID" tool step. All meetings that have been transcribed by Fireflies are available through the integration.
+
+### What's the difference between beta and stable integrations?
+
+Beta integrations are fully functional but may receive updates or changes as we refine the integration based on user feedback. Stable integrations have been thoroughly tested and are less likely to change. Beta status doesn't indicate reduced reliability, just that we're actively improving the integration.
+
+### How do I find a meeting ID?
+
+Meeting IDs can be found in your Fireflies.ai dashboard. Each transcribed meeting has a unique ID that you can use with the "Find Meeting by ID" tool step.
+
+### Are there rate limits?
+
+Rate limits depend on your Fireflies.ai plan. Refer to your Fireflies account settings or contact Fireflies support for specific rate limit information.
+
+### Can I use this integration with multiple Fireflies accounts?
+
+Yes, you can add multiple Fireflies integrations to your Relevance AI workspace, each connected to a different Fireflies account.
