@@ -58,3 +58,26 @@ Using the 'Provider' dropdown, set this to match the model you've chosen for you
 - For **OpenAI**, you can then select 'Reasoning Effort'. The default is Medium, and you can also select Low or High.
 - For **Google**, you can enter a 'Thinking Budget', which can be set at any positive value to enable thinking
 - For **Anthropic**, you can enter a 'Thinking Budget', which can be set at any value above 1024 to enable thinking
+
+---
+
+### Fallback Model
+
+**What it is:** A backup language model that automatically retries failed tasks when your primary model encounters errors or fails to respond. If your agent's primary model fails to complete a task, the fallback model will automatically retry the task **one time**. If the fallback model also fails, the task will fail as usual and follow your configured error handling behavior.
+
+**When to use it:**
+
+- Using models that occasionally have reliability issues (e.g., Gemini)
+- Running critical workflows where you need higher reliability
+- You want to reduce task failures due to temporary LLM provider issues
+
+**How to configure it:**
+
+1. Open your agent
+2. Click **Advanced** in the bottom-left of the agent builder
+3. In Advanced settings, go to the **Language Model** tab
+4. Under **Fallback model**, select a model to rerun failed tasks on
+
+<Tip>
+**Best practice:** Choose a fallback model from a **different provider** than your primary model. For example, if you're using Gemini as your primary model, select an OpenAI model (like GPT-5) as your fallback. This eliminates the chance of another provider-specific error and maximizes reliability.
+</Tip>
