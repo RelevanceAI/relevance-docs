@@ -114,6 +114,43 @@ Runs a Relevance step with the given name and parameters.
 
 - The response from the API as a JSON object.
 
+## **Classes**
+
+### Integration
+
+```python Python
+Integration(provider_name: str, account_id: str)
+```
+
+The `Integration` class provides a convenient way to make authenticated API calls to OAuth-connected services in your Python code. It automatically handles OAuth token management and makes authenticated requests to third-party APIs.
+
+**Constructor Arguments**
+
+- `provider_name`: The name of the OAuth provider/integration (e.g., `'dataforseo'`, `'hubspot'`, `'slack'`).
+- `account_id`: The account ID from your OAuth account input. This is accessed via `params['your_oauth_input_name']` where `your_oauth_input_name` is the variable name of your OAuth account input.
+
+**Methods**
+
+#### api_call()
+
+```python Python
+integration.api_call(method: str, url: str, body: Dict[str, Any] = None, headers: Dict[str, str] = None, params: Dict[str, Any] = None)
+```
+
+Makes an authenticated HTTP request to the specified URL using the OAuth credentials associated with the integration.
+
+**Arguments**
+
+- `method`: The HTTP method to use (e.g., `'GET'`, `'POST'`, `'PUT'`, `'DELETE'`).
+- `url`: The full URL endpoint to make the request to.
+- `body`: Optional dictionary containing the request body (for POST, PUT, etc.). Will be automatically serialized to JSON.
+- `headers`: Optional dictionary of additional HTTP headers to include in the request.
+- `params`: Optional dictionary of query parameters to append to the URL.
+
+**Returns**
+
+- The API response as a parsed JSON object (dictionary). The response is automatically parsed, so you can directly access the data without additional JSON parsing.
+
 ## **Usage Examples**
 
 ### Insert data
@@ -154,4 +191,24 @@ response = prompt_completion("My prompt", model="openai-gpt35")
 
 ```python Python
 response = run_step("my_step", {"param1": "value1", "param2": "value2"})
+```
+
+### Integration
+
+```python Python
+# Get OAuth account ID from input parameter
+account_id = params['my_oauth_account']
+
+# Create Integration instance
+integration = Integration('google', account_id)
+
+# Make authenticated API call
+response = integration.api_call(
+    method='GET',
+    url='https://www.googleapis.com/oauth2/v2/userinfo',
+    params={'limit': 10}
+)
+
+# Access the parsed JSON response
+user_info = response
 ```

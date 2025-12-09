@@ -1,6 +1,6 @@
 ---
 title: "Python Tool step"
-sidebarTitle: 'Python'
+sidebarTitle: 'Python Tool step'
 description: "Empower your agent with custom code using one of the world's most popular and beginner-friendly languages"
 ---
 
@@ -121,6 +121,19 @@ You can access one of your saved API keys by using this syntax, where 'api_key' 
 ```python3
 "{{secrets.chains_api_key}}"
 ```
+
+## OAuth Authentication
+
+Python code steps support OAuth authentication through the `Integration` helper class, allowing you to make authenticated API calls to third-party services without manually managing OAuth tokens.
+
+To use OAuth authentication:
+
+1. Add an OAuth account input to your tool and assign it a variable name
+2. Access the account ID in your Python code via `params['your_oauth_input_name']`
+3. Create an `Integration` instance with the provider name and account ID
+4. Use the `api_call()` method to make authenticated requests
+
+For complete documentation on the `Integration` class, including detailed examples, method parameters, and best practices, see the [Python Helper Functions documentation](/tool/tool-steps/python-code/code-python-helper-functions#integration).
 
 ## Advanced Settings
 
