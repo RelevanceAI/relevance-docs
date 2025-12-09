@@ -23,47 +23,11 @@ Setting up the Trello integration with Relevance AI is straightforward:
 
 After connecting, your Relevance AI agents will be able to interact with your Trello account, accessing boards, creating cards, and managing your Trello workflows.
 
-## Setting up triggers
+## Available triggers
 
 The Trello integration allows you to set up triggers that automatically activate your AI agents when specific events occur in your Trello boards. Most Trello triggers are **instant** (webhook-based), meaning your agents respond in real-time as soon as changes happen — whether it's a new card being created, a comment being added, or a card moving between lists. This enables powerful automation workflows that keep your team productive without manual intervention.
 
-### How to configure Trello triggers
-
-To set up Trello as a trigger source:
-
-<Steps>
-  <Step title="Access trigger settings">
-    Create or edit an agent in Relevance AI, then navigate to the **Triggers** section in **Agent Profile**.
-  </Step>
-  
-  <Step title="Select Trello as trigger source">
-    Click **Add Trigger** and select **Trello** from the available trigger sources.
-  </Step>
-  
-  <Step title="Connect your Trello account">
-    Select your connected Trello account from the dropdown (or connect a new account if needed).
-  </Step>
-  
-  <Step title="Choose your trigger event">
-    Select the specific Trello event that should activate your agent from the available trigger types (see full list below).
-  </Step>
-  
-  <Step title="Configure trigger settings">
-    Depending on the trigger type, configure additional settings such as:
-    - **Board selection**: Choose which Trello board(s) to monitor
-    - **List filtering**: Specify particular lists to watch (for card-related triggers)
-    - **Card filtering**: Set conditions for which cards should trigger the agent
-    - **Frequency settings**: For non-instant triggers, set how often to check for changes
-  </Step>
-  
-  <Step title="Save and activate">
-    Save your trigger configuration. Your agent will now automatically activate when the specified Trello events occur.
-  </Step>
-</Steps>
-
-### Available Trello triggers
-
-The Trello integration provides comprehensive trigger options organized by category:
+The following trigger options are available, organized by category:
 
 <AccordionGroup>
   <Accordion title="Card-Related Triggers" icon="square-check">
@@ -132,7 +96,7 @@ The Trello integration provides comprehensive trigger options organized by categ
   </Accordion>
 </AccordionGroup>
 
-### Practical use cases
+## Practical use cases
 
 Here are some powerful ways to use Trello triggers with Relevance AI:
 
@@ -187,3 +151,45 @@ This advanced approach gives you full access to the Trello REST API, allowing yo
 <Info>
   You can find Trello's API documentation [here](https://developer.atlassian.com/cloud/trello/rest/).
 </Info>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What permissions does the Trello integration require?">
+    The integration requires read and write access to your Trello boards, lists, and cards. When you connect your Trello account, you'll be asked to authorize Relevance AI to access your Trello data. You can review the specific permissions during the OAuth authorization process.
+  </Accordion>
+  
+  <Accordion title="Can I restrict my agent to only access certain boards?">
+    Yes, when configuring triggers, you can specify which boards to monitor. For tool steps, you control which boards your agent interacts with through the board ID parameters in your workflows. Your agent will only access the boards you explicitly configure.
+  </Accordion>
+  
+  <Accordion title="Why isn't my trigger firing when I make changes in Trello?">
+    If your trigger isn't activating, check the following:
+    1. Verify your Trello integration is still connected (re-authenticate if needed)
+    2. Confirm the trigger is configured for the correct board
+    3. Check that the specific event type matches your trigger (e.g., "Card Moved" vs "Card Updated")
+    4. For non-instant triggers, ensure the polling frequency has elapsed
+    
+    If issues persist, try disconnecting and reconnecting your Trello integration.
+  </Accordion>
+  
+  <Accordion title="What's the difference between 'Card Updated' and 'Card Moved' triggers?">
+    **Card Updated** triggers whenever any property of a card changes (title, description, due date, attachments, etc.), including when a card moves. **Card Moved** is more specific and only triggers when a card moves from one list to another. Use Card Moved for stage-based workflows; use Card Updated for comprehensive change monitoring.
+  </Accordion>
+  
+  <Accordion title="Can I use the Trello integration with multiple Trello accounts?">
+    Yes, you can connect multiple Trello accounts by adding separate integrations for each account. Each integration will appear with its account name in your integrations list, and you can select the appropriate account when configuring triggers or tool steps.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits for Trello API calls?">
+    Yes, Trello enforces API rate limits (typically 100 requests per 10 seconds per token). Relevance AI manages these limits automatically for pre-built tool steps. If you're using the API Call tool step for high-volume operations, be mindful of rate limiting and implement appropriate delays in your workflows.
+  </Accordion>
+  
+  <Accordion title="How do I find my board, list, or card IDs for API calls?">
+    The easiest way to find IDs is to open the board, list, or card in Trello and add `.json` to the end of the URL. For example, `https://trello.com/b/abc123/board-name.json` will show the board's data including its ID. Alternatively, use the Trello API to list your boards and retrieve IDs programmatically.
+  </Accordion>
+  
+  <Accordion title="Can I create custom workflows that span multiple Trello boards?">
+    Absolutely! You can configure triggers to monitor one board and use tool steps to create or update cards on different boards. This enables powerful cross-board automation, such as syncing tasks between team boards or escalating items to management boards.
+  </Accordion>
+</AccordionGroup>
