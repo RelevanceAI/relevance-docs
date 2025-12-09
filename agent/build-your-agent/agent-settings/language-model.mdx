@@ -58,3 +58,44 @@ Using the 'Provider' dropdown, set this to match the model you've chosen for you
 - For **OpenAI**, you can then select 'Reasoning Effort'. The default is Medium, and you can also select Low or High.
 - For **Google**, you can enter a 'Thinking Budget', which can be set at any positive value to enable thinking
 - For **Anthropic**, you can enter a 'Thinking Budget', which can be set at any value above 1024 to enable thinking
+
+---
+
+### Fallback Model
+
+**What it is:** A backup language model that automatically retries failed tasks when your primary model encounters errors or fails to respond.
+
+**How it works:** If your agent's primary model fails to complete a task, the fallback model will automatically retry the task ONE time. If the fallback model also fails, the task will fail as usual.
+
+**When to use it:**
+
+- When using models that occasionally have reliability issues (e.g., Gemini)
+- For critical workflows where you need higher reliability
+- To reduce task failures due to temporary LLM provider issues
+
+**How to configure:**
+
+<Steps>
+  <Step title="Open your agent">
+    Navigate to the agent you want to configure
+  </Step>
+  <Step title="Access Advanced settings">
+    Click "Advanced" in the bottom-left of the agent builder
+  </Step>
+  <Step title="Go to Language Model tab">
+    In Advanced settings, navigate to the "Language Model" tab
+  </Step>
+  <Step title="Select fallback model">
+    Under "Fallback model", select a model to rerun failed tasks on
+  </Step>
+</Steps>
+
+<Tip>
+  **Best practice:** Choose a fallback model from a **different provider** than your primary model (e.g., if using Gemini as primary, select an OpenAI model as fallback). This eliminates the chance of another provider-specific error and maximizes reliability.
+</Tip>
+
+**Example:** If you're using Gemini 1.5 Pro as your primary model and it fails, you could set GPT-4 as your fallback to ensure the task completes successfully.
+
+<Note>
+  The fallback model will only retry once. If both the primary and fallback models fail, the task will fail and follow your configured error handling behavior.
+</Note>
