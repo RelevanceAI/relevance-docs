@@ -25,18 +25,50 @@ The LinkedIn Integration offers powerful trigger capabilities that can initiate 
 
 Set up your agents to start working when:
 
-- **New connection request received** - Your agent can automatically evaluate and respond to connection requests
-- **New message received** - Trigger your agent when someone sends you a direct message on LinkedIn
-- **New post engagement** - Activate your agent when someone comments on or reacts to your posts
-- **New profile view** - Have your agent respond when someone views your LinkedIn profile
-- **New job posting match** - Trigger workflows when jobs matching specific criteria are posted
+- **All messages received** - Triggers when any message is received on LinkedIn
+- **Outreach replies only** - Triggers only when replies to outreach messages are received
+
+<Note>Connection accept notifications are only tracked if the connection request was originally sent through Relevance AI's LinkedIn integration. This is a technical limitation of the LinkedIn integration.</Note>
+
+These triggers are available for both agents and workforces.
 
 ### How to set up a LinkedIn trigger
 
-1. Create or edit an agent in Relevance AI
-2. Navigate to the "Agent Profile" and select "LinkedIn" from the available trigger options
-3. Choose your connected LinkedIn account
-4. Select the specific trigger event (e.g., "New message received")
+The setup process differs slightly depending on whether you're configuring a trigger for an agent or a workforce. Follow the instructions below based on your use case.
+
+#### For Agents
+
+1. Navigate to the agent builder by selecting the agent you want to configure with a LinkedIn trigger.
+
+2. In the left sidebar of the agent builder, locate and click on the "Triggers" section.
+
+3. Click the "Add trigger" button, then select "LinkedIn" from the available trigger types.
+
+4. Choose the connected LinkedIn account you want to use for this trigger from the dropdown menu. If you haven't connected a LinkedIn account yet, you'll need to do so first in the Integrations & API Keys page.
+
+5. Select the specific trigger event you want to use:
+   - **All messages received** - Triggers when any message is received on LinkedIn
+   - **Outreach replies only** - Triggers only when replies to outreach messages are received
+
+6. If available on your plan, configure queue work hours to control when your agent should process LinkedIn triggers. This allows you to set specific times when your agent should be active.
+
+#### For Workforces
+
+1. Navigate to the workforce builder by selecting the workforce you want to configure with a LinkedIn trigger.
+
+2. In the Build section of your workforce, locate the "Triggers" section in the node palette on the left side. Drag a trigger node onto your workspace.
+
+3. Click on the trigger node you just added to open its configuration panel, then select "LinkedIn" as the trigger type.
+
+4. Choose the connected LinkedIn account you want to use for this trigger from the dropdown menu. If you haven't connected a LinkedIn account yet, you'll need to do so first in the Integrations & API Keys page.
+
+5. Select the specific trigger event you want to use:
+   - **All messages received** - Triggers when any message is received on LinkedIn
+   - **Outreach replies only** - Triggers only when replies to outreach messages are received
+
+6. If available on your plan, configure queue work hours to control when your workforce should process LinkedIn triggers. This allows you to set specific times when your agents should be active.
+
+7. Drag a connection line from the trigger node to the agent in your workforce that should respond when the trigger activates.
 
 ## Tool steps for LinkedIn
 
