@@ -7,9 +7,41 @@ description: "Auto-assign users to the right organization and project"
 
 Default Organization & Project simplifies enterprise onboarding by automatically placing new users in the correct organization and project when they sign up with their company email. This eliminates manual assignments and ensures immediate access to the right resources from day one.
 
+## Prerequisites
+
+<Warning>
+Before you can set a default organization and project, your company email domain must be configured by the Relevance AI team. This is a required first step.
+</Warning>
+
+Setting up a default organization and project is a **two-step process**:
+
+<Steps>
+  <Step title="Email Domain Configuration" icon="envelope">
+    **Contact the Relevance AI team** to configure your company email domain (e.g., @betacorp.com, @acmecorp.io, @techstartup.com). This step is typically completed during your [SSO setup](/get-started/enterprise/sso-setup) or can be configured separately.
+    
+    <Info>
+    This configuration allows Relevance AI to recognize users signing up with your company email domain and automatically route them to your organization instead of creating separate personal organizations.
+    </Info>
+  </Step>
+  
+  <Step title="Set Default Project" icon="folder">
+    Once your email domain is configured, organization admins can set a default project following the instructions below.
+  </Step>
+</Steps>
+
+### What You'll Need
+
+To complete the setup after email domain configuration:
+
+- **Enterprise subscription** with Relevance AI
+- **Organization Admin** role or higher
+- Your company email domain already configured by Relevance AI (Step 1 above)
+
+---
+
 ## How do I set a default organization and project?
 
-<Info>To set a default organization and project, you must have an Enterprise subscription and be an organization admin.</Info>
+<Info>To set a default organization and project, you must have an Enterprise subscription and be an organization admin. Your company email domain must also be configured by the Relevance AI team (see Prerequisites above).</Info>
 
 <div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
 <iframe src="https://app.supademo.com/embed/cmfqcpkdh0riq130uegfai66y" frameBorder="0" title="How to set default organization and project" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
@@ -22,9 +54,48 @@ Default Organization & Project simplifies enterprise onboarding by automatically
 
 Once you set a default project, new users with your company email domain(s) will be automatically added to this project in your organization when they create a new account.
 
+### User Permissions for New Users
+
+When new users are automatically added to your organization and default project, they receive the following permissions:
+
+- **Organization-level**: Organization Viewer
+- **Project-level**: Project Viewer
+
+<Tip>
+Organization and project admins can adjust these permissions after users join. Learn more about managing user permissions in our [Role-Based Access Controls (RBAC)](/get-started/enterprise/rbac) documentation.
+</Tip>
+
+---
+
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
-    <Accordion title="What if I invite a new user to a project that isn't the default project?">Once they create their account, they'll be added to both the default project and the project they were invited to.</Accordion>
-    <Accordion title="Will new users have new organizations created for them?">No, they'll be added to your organization and the default project in that organization.</Accordion>
+    <Accordion title="Why can't I set a default organization?">
+      If you're unable to set a default organization and project, the most common reason is that your company email domain hasn't been configured yet. Contact the Relevance AI team to have your email domain configured. This is typically done during [SSO setup](/get-started/enterprise/sso-setup) but can also be configured separately.
+      
+      You must also:
+      - Have an Enterprise subscription
+      - Be an organization admin or owner
+    </Accordion>
+    
+    <Accordion title="What permissions do new users get?">
+      New users who are automatically added through the default organization feature receive:
+      
+      - **Organization Viewer** permissions at the organization level
+      - **Project Viewer** permissions at the project level
+      
+      These are the most restrictive permissions, ensuring security by default. Organization and project admins can upgrade permissions as needed. See our [RBAC documentation](/get-started/enterprise/rbac) for details on all available roles and permissions.
+    </Accordion>
+    
+    <Accordion title="What if I invite a new user to a project that isn't the default project?">
+      Once they create their account, they'll be added to both the default project and the project they were invited to.
+    </Accordion>
+    
+    <Accordion title="Will new users have new organizations created for them?">
+      No, they'll be added to your organization and the default project in that organization. This is only possible after your company email domain has been configured by the Relevance AI team.
+    </Accordion>
+    
+    <Accordion title="Can I configure my email domain myself?">
+      No, email domain configuration must be done by the Relevance AI team for security reasons. Contact your Relevance AI representative to request this configuration. If you're setting up SSO, this will typically be handled as part of that process.
+    </Accordion>
 </AccordionGroup>
