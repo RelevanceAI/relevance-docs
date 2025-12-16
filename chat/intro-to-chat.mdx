@@ -129,6 +129,20 @@ Here's a comprehensive breakdown of supported file types by model provider:
 File export is not supported for organizations in the AU region.
 </Warning>
 
+### File size limits by provider
+
+File size limits vary by model provider. Each provider has limits for individual files and combined attachments in a single message.
+
+| Provider | Max per file | Max combined attachments |
+|----------|--------------|--------------------------|
+| **OpenAI** | 32MB | 50MB |
+| **Anthropic** | 32MB | 32MB |
+| **Gemini** | 32MB | 50MB |
+
+<Note>
+**Anthropic** has a lower combined attachment limit (32MB) compared to OpenAI and Gemini (50MB). Keep this in mind when uploading multiple files in a single message.
+</Note>
+
 ### File capabilities
 
 <Info>
@@ -139,18 +153,22 @@ File export is not supported for organizations in the AU region.
 <AccordionGroup>
     <Accordion title="OpenAI">
     **Document files:**
-    - `.docx` (5MB max) - Reading available, create/export available
-    - `.docx` with images (5MB max) - Reading not available, create/export available
-    - `.xlsx` (5MB max) - Reading available (converted to text), create/export available
-    - `.csv` (5MB max) - Reading available, create/export available
-    - `.pdf` (10MB max) - Reading available, create/export available
-    - `.pdf` with images (10MB max) - Reading available, create/export available
-    - `.txt` (5MB max) - Reading available, create/export available
-    - `.md` (5MB max) - Reading available, create/export not available (available on request)
+    - `.docx` (32MB max) - Reading available, create/export available
+    - `.docx` with images (32MB max) - Reading not available, create/export available
+    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
+    - `.csv` (32MB max) - Reading available, create/export available
+    - `.pdf` (32MB max) - Reading available, create/export available
+    - `.pdf` with images (32MB max) - Reading available, create/export available
+    - `.txt` (32MB max) - Reading available, create/export available
+    - `.md` (32MB max) - Reading available, create/export not available (available on request)
 
     **Image files:**
-    - `.png` (10MB max) - Reading available, create/export available
-    - `.jpg` / `.jpeg` (10MB max) - Reading available, create/export available (exported as PNG)
+    - `.png` (32MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
+
+    **File size limits:**
+    - Maximum per file: **32MB**
+    - Maximum combined attachments: **50MB**
 
     **Not available:**
     - `.pptx` - Reading not available, create/export not available
@@ -158,18 +176,26 @@ File export is not supported for organizations in the AU region.
 
     <Accordion title="Anthropic">
     **Document files:**
-    - `.docx` (5MB max) - Reading available, create/export available
-    - `.docx` with images (5MB max) - Reading not available, create/export available
-    - `.xlsx` (5MB max) - Reading available (converted to text), create/export available
-    - `.csv` (5MB max) - Reading available, create/export available
-    - `.pdf` (10MB max) - Reading available, create/export available
-    - `.pdf` with images (10MB max) - Reading available, create/export available
-    - `.txt` (5MB max) - Reading available, create/export available
-    - `.md` (5MB max) - Reading available (limited), create/export not available (available on request)
+    - `.docx` (32MB max) - Reading available, create/export available
+    - `.docx` with images (32MB max) - Reading not available, create/export available
+    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
+    - `.csv` (32MB max) - Reading available, create/export available
+    - `.pdf` (32MB max) - Reading available, create/export available
+    - `.pdf` with images (32MB max) - Reading available, create/export available
+    - `.txt` (32MB max) - Reading available, create/export available
+    - `.md` (32MB max) - Reading available (limited), create/export not available (available on request)
 
     **Image files:**
-    - `.png` (10MB max) - Reading available, create/export available
-    - `.jpg` / `.jpeg` (10MB max) - Reading available, create/export available (exported as PNG)
+    - `.png` (32MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
+
+    **File size limits:**
+    - Maximum per file: **32MB**
+    - Maximum combined attachments: **32MB** ⚠️ *Lower than other providers*
+
+    <Warning>
+    Anthropic has a lower combined attachment limit (32MB) compared to OpenAI and Gemini (50MB).
+    </Warning>
 
     **Not available:**
     - `.pptx` - Reading not available, create/export not available
@@ -177,22 +203,26 @@ File export is not supported for organizations in the AU region.
 
     <Accordion title="Gemini">
     **Document files:**
-    - `.docx` (5MB max) - Reading available, create/export available
-    - `.docx` with images (5MB max) - Reading not available, create/export available
-    - `.xlsx` (5MB max) - Reading available (converted to text), create/export available
-    - `.csv` (5MB max) - Reading available, create/export available
-    - `.pdf` (10MB max) - Reading available, create/export available
-    - `.pdf` with images (10MB max) - Reading available, create/export available
-    - `.txt` (5MB max) - Reading available, create/export available
-    - `.md` (5MB max) - Reading available, create/export not available (available on request)
+    - `.docx` (32MB max) - Reading available, create/export available
+    - `.docx` with images (32MB max) - Reading not available, create/export available
+    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
+    - `.csv` (32MB max) - Reading available, create/export available
+    - `.pdf` (32MB max) - Reading available, create/export available
+    - `.pdf` with images (32MB max) - Reading available, create/export available
+    - `.txt` (32MB max) - Reading available, create/export available
+    - `.md` (32MB max) - Reading available, create/export not available (available on request)
 
     **Image files:**
-    - `.png` (10MB max) - Reading available, create/export available
-    - `.jpg` / `.jpeg` (10MB max) - Reading available, create/export available (exported as PNG)
+    - `.png` (32MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
 
     **Video & Audio files (Gemini Pro only):**
     - Video: `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`
     - Audio: `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac`
+
+    **File size limits:**
+    - Maximum per file: **32MB**
+    - Maximum combined attachments: **50MB**
 
     **Not available:**
     - `.pptx` - Reading not available, create/export not available
