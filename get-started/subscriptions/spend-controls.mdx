@@ -1,0 +1,170 @@
+---
+title: "Spend Controls"
+sidebarTitle: "Spend Controls"
+description: "Configure automatic top-up limits for Actions and Vendor Credits to ensure your account never runs out unexpectedly"
+---
+
+<Frame>
+  <img src="/images/spend-controls-hero.png" alt="Spend Controls dashboard showing automatic top-up configuration" />
+</Frame>
+
+Spend Controls allows you to configure automatic top-up limits for both your Actions and Vendor Credits, ensuring your account never runs out of credits unexpectedly.
+
+## Availability
+
+<Columns cols={2}>
+  <Card title="Available to" icon="circle-check" color="#10b981">
+    - Pro plan users (monthly and annual)
+    - Team plan users (monthly and annual)
+  </Card>
+  <Card title="Not available to" icon="circle-xmark" color="#ef4444">
+    - Free plan users
+    - Enterprise plan users
+  </Card>
+</Columns>
+
+<Warning>
+  You must be on our new pricing model to access this feature. If you're still on the old pricing model with Credits (not Actions and Vendor Credits), you won't have access to Spend Controls yet.
+</Warning>
+
+## How to Access Spend Controls
+
+<Steps>
+  <Step title="Navigate to Settings">
+    Click on **Settings** in the sidebar, then select **Spend controls**
+  </Step>
+  <Step title="Choose your credit type">
+    Click **Start** on either auto-recharge for **Actions** or **Vendor Credits**
+  </Step>
+</Steps>
+
+## Configuration Steps
+
+There are two simple steps to configure Spend Controls for each credit type:
+
+<AccordionGroup>
+  <Accordion title="Step 1: Set a minimum threshold" icon="gauge-min">
+    This is the credit balance that will trigger an automatic top-up when your balance falls below this limit.
+    
+    For example, if you set your minimum threshold to 10,000 credits, the system will automatically top up your account when your balance drops below 10,000.
+  </Accordion>
+  
+  <Accordion title="Step 2: Set a top-up amount" icon="arrow-up">
+    This is the amount **above** the minimum threshold that your balance will be topped up to.
+    
+    For example, if you set your top-up amount to 1,000 credits, your account will be topped up to 1,000 credits above your minimum threshold.
+  </Accordion>
+</AccordionGroup>
+
+## Understanding How the Calculation Works
+
+<Warning>
+  Understanding how Spend Controls calculates your top-up is crucial to avoid unexpected charges.
+</Warning>
+
+The top-up amount is added **above** your minimum threshold, not added to your current balance.
+
+### Example Calculation
+
+Let's walk through a real example:
+
+<Steps>
+  <Step title="Your current settings">
+    - Current balance: **1,000 credits**
+    - Minimum threshold: **10,000 credits**
+    - Top-up amount: **1,000 credits**
+  </Step>
+  
+  <Step title="What happens when you fall below the threshold">
+    When your balance falls below 10,000 credits, the system will automatically top you up to **11,000 credits** (not 2,000 credits).
+  </Step>
+  
+  <Step title="How it's calculated">
+    The system brings you to your **minimum threshold (10,000)** plus the **top-up amount (1,000)** you configured.
+    
+    **Formula:** Final Balance = Minimum Threshold + Top-up Amount
+    
+    **Result:** 10,000 + 1,000 = 11,000 credits
+  </Step>
+</Steps>
+
+<Tip>
+  The top-up amount is added **above** your minimum threshold, ensuring you always have a buffer of credits to work with after the automatic top-up occurs.
+</Tip>
+
+## How to Configure Spend Controls
+
+Follow this interactive guide to set up Spend Controls for your Actions or Vendor Credits:
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/YOUR_SUPADEMO_ID" frameBorder="0" title="How to configure Spend Controls" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+<Note>
+  The same configuration process applies to both Actions and Vendor Credits. You can set up separate limits for each type of credit based on your usage patterns.
+</Note>
+
+## Important Details
+
+<AccordionGroup>
+  <Accordion title="Separate configurations for Actions and Vendor Credits" icon="split">
+    Spend Controls works for both Actions and Vendor Credits independently. You can configure separate limits for each type of credit based on your specific needs and usage patterns.
+  </Accordion>
+  
+  <Accordion title="Payment method" icon="credit-card">
+    Auto top-ups will be charged to your payment method on file. Make sure your payment information is up to date to avoid any interruptions in service.
+  </Accordion>
+  
+  <Accordion title="When top-ups occur" icon="clock">
+    Top-ups are triggered automatically when your balance falls below the minimum threshold you've set. The charge will be processed immediately to ensure uninterrupted service.
+  </Accordion>
+  
+  <Accordion title="Modifying your settings" icon="gear">
+    You can modify your Spend Controls settings at any time by returning to **Settings > Spend controls**. Changes take effect immediately.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Can I set different limits for Actions and Vendor Credits?">
+    Yes! Spend Controls allows you to configure separate minimum thresholds and top-up amounts for Actions and Vendor Credits. This gives you flexibility to manage each credit type based on your usage patterns.
+  </Accordion>
+  
+  <Accordion title="What happens if my payment method fails?">
+    If your payment method fails when an automatic top-up is triggered, you'll receive a notification and your account may be temporarily limited until the payment issue is resolved. Make sure to keep your payment information up to date.
+  </Accordion>
+  
+  <Accordion title="Can I disable Spend Controls after setting it up?">
+    Yes, you can disable Spend Controls at any time by going to **Settings > Spend controls** and turning off the auto-recharge feature for Actions or Vendor Credits.
+  </Accordion>
+  
+  <Accordion title="Will I be notified when a top-up occurs?">
+    Yes, you'll receive a notification when an automatic top-up is triggered and processed. You can also view your top-up history in your billing section.
+  </Accordion>
+  
+  <Accordion title="Is there a limit to how many times I can top up?">
+    There's no limit to the number of automatic top-ups. However, you should monitor your usage and adjust your settings if you're experiencing frequent top-ups to ensure you're on the right plan for your needs.
+  </Accordion>
+  
+  <Accordion title="Can Enterprise customers use Spend Controls?">
+    Spend Controls is currently designed for Pro and Team plan users. Enterprise customers have custom billing arrangements and should contact their account manager for credit management options.
+  </Accordion>
+</AccordionGroup>
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Plans and credits" icon="credit-card" href="/get-started/subscriptions/plans">
+    Learn more about our plans and how to manage your credits manually
+  </Card>
+  <Card title="Usage alerts" icon="bell" href="/get-started/project-management/usage-alerts">
+    Set up email notifications when your usage reaches specific limits
+  </Card>
+  <Card title="Pricing changes" icon="tag" href="/get-started/subscriptions/new-pricing">
+    Understand our new pricing model with Actions and Vendor Credits
+  </Card>
+  <Card title="Support" icon="life-ring" href="/get-started/support">
+    Need help? Contact our support team
+  </Card>
+</CardGroup>
