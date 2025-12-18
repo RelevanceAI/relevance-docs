@@ -208,6 +208,21 @@ When a user is removed from an IDP group:
   Users removed from IDP groups lose their group-based permissions immediately upon sync. Ensure you understand the impact before removing users from groups in your identity provider.
 </Warning>
 
+### Deleting users from your identity provider
+
+When a user is deleted from your identity provider (Entra ID, Okta, Google Workspace, or JumpCloud), Relevance AI will automatically detect this during the next synchronization cycle (approximately every 60 minutes) and perform the following actions:
+
+- **Prevent access:** The user will be immediately prevented from logging in or accessing any endpoints
+- **Remove permissions:** All FGA (Fine-Grained Authorization) permissions will be removed, and the user will be removed from all projects and organizations
+- **Remove from groups:** The user will be removed from all groups they were a member of
+- **Remove OAuth accounts:** All OAuth accounts associated with the user will be removed, which will:
+  - Remove any triggers they had configured
+  - Remove their account from any tools and agents they were connected to
+
+<Warning>
+  **Important distinction:** This is different from simply removing a user from a group. When a user is removed from a group, they lose group-based access but retain any individual permissions. When a user is deleted from your identity provider, their entire account is deactivated and all associated data and permissions are removed.
+</Warning>
+
 ## Setting Up Directory Sync
 
 To use RBAC Groups, you need to configure directory sync between your identity provider and Relevance AI through WorkOS. This guide walks you through the complete setup process.
