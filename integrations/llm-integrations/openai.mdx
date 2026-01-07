@@ -23,3 +23,127 @@ OpenAI's LLM models are known for advanced conversational abilities, creative wr
     - .gif
   </Accordion>
 </AccordionGroup>
+
+## Understanding Pricing & Implicit Caching
+
+OpenAI models include an automatic **implicit caching** feature that significantly reduces costs for repeated content. This section explains how it works and why your actual costs may be lower than expected.
+
+### What is Implicit Caching?
+
+When you make sequential calls to OpenAI models (like in multi-turn agent conversations), OpenAI automatically caches repeated input tokens and charges them at a much lower rate. This happens automatically—no code changes required.
+
+**What gets cached:**
+- Agent instructions (system prompts)
+- Tool definitions
+- Any repeated context in the prompt prefix
+- Previous conversation context
+
+**Cost savings:**
+- Cached input tokens are charged at approximately **10x lower rates** than uncached tokens
+- This can reduce your overall costs by 50-90% in multi-turn conversations
+- The caching works automatically across sequential calls within a short timeframe
+
+### Pricing Example: GPT-4o
+
+Here's how the pricing breaks down for GPT-4o:
+
+| Token Type | Cost per 1,000 tokens | Example |
+|------------|----------------------|---------|
+| **Uncached input tokens** | 0.63 credits | First time the model sees your agent instructions |
+| **Cached input tokens** | 0.063 credits | Subsequent calls reusing the same instructions |
+| **Output tokens** | 5 credits | All generated responses |
+
+<Note>
+Cached tokens cost **90% less** than uncached tokens, dramatically reducing costs for agents that make multiple LLM calls.
+</Note>
+
+### Worked Example: Multi-Turn Agent Conversation
+
+Let's walk through a real example to see how implicit caching reduces costs:
+
+<Steps>
+  <Step title="First Agent Call">
+    Your agent makes its first LLM call with:
+    - 19,000 input tokens (agent instructions + tool definitions + user query)
+    - All tokens are **uncached** on the first call
+    - 2,000 output tokens generated
+    
+    **Cost calculation:**
+    - Input: 19,000 tokens × 0.63 credits / 1,000 = **11.97 credits**
+    - Output: 2,000 tokens × 5 credits / 1,000 = **10 credits**
+    - **Total: 21.97 credits**
+  </Step>
+  
+  <Step title="Second Agent Call">
+    Your agent makes a follow-up call with:
+    - 6,000 new input tokens (new user query + context)
+    - 13,000 cached tokens (agent instructions + tool definitions from first call)
+    - 1,500 output tokens generated
+    
+    **Cost calculation:**
+    - Uncached input: 6,000 tokens × 0.63 credits / 1,000 = **3.78 credits**
+    - Cached input: 13,000 tokens × 0.063 credits / 1,000 = **0.82 credits**
+    - Output: 1,500 tokens × 5 credits / 1,000 = **7.5 credits**
+    - **Total: 12.10 credits**
+  </Step>
+  
+  <Step title="Total Savings">
+    **Without caching**, the second call would have cost:
+    - 19,000 tokens × 0.63 credits / 1,000 = 11.97 credits (input)
+    - 1,500 tokens × 5 credits / 1,000 = 7.5 credits (output)
+    - Total: 19.47 credits
+    
+    **With caching**, the second call costs: 12.10 credits
+    
+    **Savings: 7.37 credits (38% reduction on this call)**
+  </Step>
+</Steps>
+
+### Understanding the UI Display
+
+You may notice that the credit breakdown in the Relevance AI task details shows different numbers than you expect. Here's why:
+
+<Callout icon="info-circle">
+**Important:** The task credit breakdown currently displays **uncached input tokens only**. Cached tokens are charged at the lower cached rate but are not separately displayed in the UI breakdown.
+</Callout>
+
+**What this means:**
+- If you see "6,000 input tokens" in the UI, there may be an additional 13,000 cached tokens charged at the lower rate
+- The **total cost shown is accurate**—it includes both uncached and cached token charges
+- When doing manual calculations, you might expect higher costs because you're calculating all tokens at the uncached rate
+- **Your actual costs are lower** because of the automatic caching discount
+
+**Example of what you might see:**
+```
+Task Credit Breakdown:
+- Input tokens: 6,000 (shown in UI)
+- Output tokens: 1,500
+- Total cost: 12.10 credits
+
+Behind the scenes:
+- Uncached input: 6,000 tokens @ 0.63 credits/1k = 3.78 credits
+- Cached input: 13,000 tokens @ 0.063 credits/1k = 0.82 credits (not shown separately)
+- Output: 1,500 tokens @ 5 credits/1k = 7.5 credits
+- Total: 12.10 credits ✓
+```
+
+### Pricing Transparency
+
+<Tip>
+**No markup policy:** Relevance AI passes through OpenAI's exact pricing, including all caching discounts. We do not add any markup to Vendor Credits.
+</Tip>
+
+**Key points:**
+- Implicit caching is an OpenAI feature, not a Relevance AI pricing decision
+- This feature **benefits you** with significantly lower costs on multi-turn conversations
+- We pass through the exact vendor pricing, including the 90% discount on cached tokens
+- Your actual costs will typically be **lower** than advertised base rates due to automatic caching
+
+### Learn More
+
+For complete technical details about OpenAI's prompt caching implementation, see:
+- [OpenAI Prompt Caching Documentation](https://platform.openai.com/docs/guides/prompt-caching)
+
+<Note>
+If you connect your own OpenAI API key, you'll see the same caching behavior and cost savings directly in your OpenAI billing.
+</Note>
