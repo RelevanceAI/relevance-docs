@@ -1,0 +1,219 @@
+---
+title: "Duplicate or Clone an Agent"
+sidebarTitle: "Duplicate Agent"
+description: "Learn how to duplicate or clone your agents using Copy to Project or Clonable Templates"
+---
+
+## Overview
+
+Want to create a similar agent with slight modifications? Relevance AI offers two methods to duplicate your agents, whether you need a quick copy for testing or want to create variations for different use cases.
+
+## Method 1: Copy to Project (Recommended)
+
+The quickest way to duplicate an agent is using the **"Copy to Project"** feature. This method creates a complete copy of your agent in just a few clicks.
+
+<Steps>
+  <Step title="Navigate to your Agents list">
+    Go to your Agents page in the Relevance AI platform
+  </Step>
+  <Step title="Find the agent you want to duplicate">
+    Locate the agent you want to copy in your agents list
+  </Step>
+  <Step title="Open the agent menu">
+    Click the three-dot menu (⋮) next to the agent name
+  </Step>
+  <Step title="Select Copy to Project">
+    Choose "Copy to Project" from the dropdown menu
+  </Step>
+  <Step title="Choose destination">
+    Select the destination project (can be the same project or a different one)
+  </Step>
+  <Step title="Complete the copy">
+    Click "Copy" to create your duplicate agent
+  </Step>
+</Steps>
+
+### What gets copied?
+
+When you use Copy to Project, the following elements are preserved:
+
+<CardGroup cols={2}>
+  <Card title="Agent Configuration" icon="gear">
+    All settings, prompts, and instructions are copied exactly
+  </Card>
+  <Card title="Tools & Integrations" icon="wrench">
+    Connected tools and their configurations are maintained
+  </Card>
+  <Card title="Privacy Settings" icon="lock">
+    Your agent's privacy and access settings are preserved
+  </Card>
+  <Card title="Variables" icon="code">
+    Custom variables and their default values are included
+  </Card>
+</CardGroup>
+
+<Note>
+**Released:** August 6, 2025. This feature is available on all plans. Learn more in our [changelog](https://relevanceai.com/changelog/private-agent-cloning).
+</Note>
+
+## Method 2: Clonable Template
+
+You can also create a clonable template link and use it yourself to duplicate an agent. This method is particularly useful when you want to share the agent with others AND keep copies for yourself.
+
+<Steps>
+  <Step title="Open your agent">
+    Navigate to the agent you want to duplicate
+  </Step>
+  <Step title="Access the Share menu">
+    Click the "Run" button, then click "Share"
+  </Step>
+  <Step title="Enable clonable template">
+    Toggle on "Create a clonable template"
+  </Step>
+  <Step title="Enable public access">
+    Click "Enable public access" to generate the clone link
+  </Step>
+  <Step title="Copy the link">
+    Copy the clone link provided
+  </Step>
+  <Step title="Use the link to clone">
+    Open the link in your browser to create a copy of your agent
+  </Step>
+</Steps>
+
+### When to use Clonable Templates
+
+This method is ideal when you want to:
+
+- **Share with others**: Distribute your agent to team members or external users
+- **Create multiple copies**: Generate several variations from the same template
+- **Cross-workspace sharing**: Share agents across different workspaces or organizations
+- **Template distribution**: Create a reusable template that can be cloned multiple times
+
+<Tip>
+You can use the clone link yourself to create copies of your own agents. This is useful for creating variations or backups without affecting the original.
+</Tip>
+
+## Comparison: Which Method Should You Use?
+
+<Tabs>
+  <Tab title="Copy to Project" icon="copy">
+    **Best for:**
+    - Quick duplication within your workspace
+    - Creating test versions of agents
+    - Building similar agents with modifications
+    - Maintaining privacy settings
+    
+    **Advantages:**
+    - ✅ Fastest method (single-step process)
+    - ✅ Preserves all configurations
+    - ✅ Works between projects
+    - ✅ Maintains privacy settings
+    - ✅ No public link required
+  </Tab>
+  <Tab title="Clonable Template" icon="share-nodes">
+    **Best for:**
+    - Sharing agents with others
+    - Creating public templates
+    - Cross-workspace distribution
+    - Multiple clones from one source
+    
+    **Advantages:**
+    - ✅ Shareable with external users
+    - ✅ Works across workspaces
+    - ✅ Can be cloned multiple times
+    - ✅ Useful for template distribution
+    - ⚠️ Requires public access
+  </Tab>
+</Tabs>
+
+## Common Use Cases
+
+<AccordionGroup>
+  <Accordion title="Testing changes without affecting the original" icon="flask">
+    Use **Copy to Project** to create a test version of your agent. Make experimental changes to the copy while keeping your production agent running smoothly.
+  </Accordion>
+  
+  <Accordion title="Creating variations for different purposes" icon="clone">
+    Duplicate an agent and modify it for different use cases. For example, create separate versions of a customer support agent for different product lines or regions.
+  </Accordion>
+  
+  <Accordion title="Building similar agents with slight modifications" icon="pen-to-square">
+    Start with a proven agent configuration and duplicate it to create similar agents. Modify the prompts, tools, or settings to adapt it for new purposes.
+  </Accordion>
+  
+  <Accordion title="Backing up agent configurations" icon="floppy-disk">
+    Create backup copies of important agents before making significant changes. This gives you a restore point if needed.
+  </Accordion>
+  
+  <Accordion title="Sharing agents with team members" icon="users">
+    Use **Clonable Template** to share agents with colleagues who can then customize them for their specific needs.
+  </Accordion>
+</AccordionGroup>
+
+## What Happens After Duplication?
+
+After duplicating an agent using either method:
+
+- The **new agent is independent** from the original
+- Changes to the duplicate **don't affect** the original agent
+- Changes to the original **don't affect** the duplicate
+- Both agents can be modified, deleted, or shared separately
+- Each agent uses its own credits and resources
+
+<Warning>
+**Integration credentials are not copied.** If your agent uses integrations (like Gmail, Slack, or Google Sheets), you'll need to reconnect them in the duplicated agent.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="I don't see the 'Copy to Project' option">
+    Make sure you're viewing the agents list (not inside an agent). The three-dot menu with "Copy to Project" appears next to each agent in the list view. If you still don't see it, try refreshing your browser or contact support.
+  </Accordion>
+  
+  <Accordion title="My integrations aren't working in the duplicated agent">
+    Integration credentials are not copied for security reasons. You'll need to reconnect any integrations (Gmail, Slack, etc.) in your duplicated agent's settings.
+  </Accordion>
+  
+  <Accordion title="Can I duplicate an agent from the Marketplace?">
+    Yes! Marketplace agents are designed to be cloned. Click "Clone" on any marketplace agent to add it to your workspace, then you can duplicate it further using either method described above.
+  </Accordion>
+  
+  <Accordion title="The clonable template link isn't working">
+    Ensure that "Enable public access" is toggled on in the Share settings. If the link still doesn't work, try generating a new clone link or use the Copy to Project method instead.
+  </Accordion>
+</AccordionGroup>
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card 
+    title="Share Your Agent" 
+    icon="share-nodes" 
+    href="/agent/share-your-agent"
+  >
+    Learn about all the ways to share agents with others
+  </Card>
+  <Card 
+    title="Introduction to Agents" 
+    icon="robot" 
+    href="/agent/introduction"
+  >
+    Understand the basics of AI agents in Relevance AI
+  </Card>
+  <Card 
+    title="Quick Start Guide" 
+    icon="rocket" 
+    href="/agent/quick-start-guide"
+  >
+    Build your first agent from scratch
+  </Card>
+  <Card 
+    title="Marketplace" 
+    icon="store" 
+    href="/marketplace/intro-to-marketplace"
+  >
+    Explore and clone pre-built agents
+  </Card>
+</CardGroup>
