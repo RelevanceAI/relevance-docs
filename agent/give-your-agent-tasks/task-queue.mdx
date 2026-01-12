@@ -1,0 +1,84 @@
+---
+title: 'Task Queue'
+sidebarTitle: 'Task Queue'
+description: 'Learn how to access and manage your agent task queue, including how to cancel tasks and view task statuses'
+---
+
+## Understanding the Task Queue
+
+When you set up triggers or create bulk schedules for your agent, tasks are organized into queues. The task queue gives you visibility and control over all tasks that are being processed, queued, or have been completed by your agent.
+
+## How to Access the Task Queue
+
+To access your agent's task queue:
+
+1. Navigate to your agent in the agent builder
+2. Click on the **Run** tab
+3. Look at the **left sidebar** (the task list area)
+4. Click on the **Agent queue** button
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmkalnjqr1d1fke4xceyoom3d" frameBorder="0" title="How to access the agent queue" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+The agent queue button will open a view showing all your task queues organized by their source (triggers and bulk schedules).
+
+## Task Statuses
+
+When you open agent queue, you'll see different sections for each operation that creates tasks (per trigger or per bulk schedule). Within each section, tasks are organized by their current status. You can view tasks in the following categories:
+
+- **In Progress**: Tasks that are currently being processed by your agent
+- **Upcoming Queue**: Tasks that are scheduled but haven't started yet
+- **Failed**: Tasks that encountered errors during execution
+- **Processed**: Tasks that have completed successfully
+- **Cancelled**: Tasks that have been cancelled
+
+<img 
+  height="400"  
+  src="/images/agent/task-queue-statuses.png" 
+  alt="Screenshot showing the agent queue view with task statuses: In Progress, Upcoming Queue, Failed, Processed, Cancelled"
+/>
+
+This organization helps you quickly understand what's happening with your agent's workload and identify any issues that need attention.
+
+## Cancelling Tasks
+
+From the agent queue, you can cancel tasks in bulk. You can cancel all tasks within a specific queue section (like all upcoming tasks in a bulk schedule)
+
+To cancel tasks from the agent queue:
+
+1. Navigate to the queue section you want to manage (e.g., a specific bulk schedule)
+2. Go to the **Upcoming Queue** view
+3. Click the **Cancel All** button to cancel all tasks in that queue
+
+<img 
+  height="400"  
+  src="/images/agent/task-queue-cancel.png" 
+  alt="Screenshot showing the Cancel All button in the Upcoming Queue view"
+/>
+
+<Note>
+You can cancel, complete, or pause individual tasks (including tasks in progress) when viewing them in the normal task tab. However, from the agent queue view, you can only cancel tasks in bulk, and only tasks in the "Upcoming Queue" status can be cancelled from the queue.
+</Note>
+
+## Viewing Queue Insights
+
+The task queue provides valuable insights about what's being imported and processed:
+
+- **Import status**: See how many tasks have been imported from your CSV or knowledge table
+- **Processing progress**: Track how many tasks have been processed versus how many are still queued
+- **Trigger activity**: Monitor which triggers are generating tasks and how frequently
+
+These insights help you understand your agent's workload and make informed decisions about scaling or adjusting your task schedules.
+
+## Best Practices
+
+- **Monitor regularly**: Check your task queue regularly to ensure tasks are processing as expected
+- **Review failed tasks**: Pay attention to failed tasks to identify patterns or issues that need addressing
+- **Plan cancellations**: If you need to cancel tasks, do so from the "Upcoming Queue" view before they start processing
+- **Use insights**: Leverage the queue insights to optimize your bulk schedules and trigger configurations
+
+<Note>
+If you notice a high number of failed tasks, review your agent's configuration, tool integrations, or the data format in your bulk schedule to identify and fix the root cause.
+</Note>
+
