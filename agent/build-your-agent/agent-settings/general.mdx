@@ -196,18 +196,15 @@ Your exported file contains all settings, tools, and configurations.
 
 #### How It Works
 
-The autonomy limit counts every single tool execution, including retries. For example:
-
-- **Tool A** runs with a max auto-run limit of 3, and executes 3 times (including retries)
-- **Tool B** then runs 7 times (including retries)
-- **Total autonomy limit used:** 10 (3 + 7 = 10)
-
-Each retry counts as a separate action for both **credit usage** and **autonomy limits**.
+The autonomy limit counts every tool execution, including retries. If a tool is configured to retry on failure, each retry counts as a separate execution toward your limit. For example, if Tool A runs 3 times and Tool B runs 7 times, your agent uses 10 of its autonomy limit. Retries also count toward credit usage.
 
 #### How to Set It
 
-- **Lower values (5-10):** More human oversight, better for critical or sensitive tasks
-- **Higher values (20-50+):** More independence, better for routine or time-sensitive workflows
+Navigate to **Agent settings** → **General** → **Agent Autonomy Limit** to configure this value.
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmkc0llyl37xjke4x0a6y9bwr" frameBorder="0" title="How to set Agent Autonomy Limit" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
 <Tip>
   If your tools have retry settings enabled, factor those potential retries into your autonomy limit. A tool configured to retry 3 times could consume up to 3 executions of your autonomy limit if it continues to fail.
