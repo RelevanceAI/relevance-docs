@@ -22,24 +22,6 @@ description: "Understand different plans at Relevance AI, and learn how to manag
 
     Actions are charged when you run a Tool, or when your Agent / Workforce runs a Tool. If the Tool fails, this will still count as one Action.
 
-    <Warning>
-      **Tool retries count as separate Actions.** If a tool is configured to retry on failure, each retry attempt counts as an additional Action. For example, if a tool fails and retries 3 times, that's 4 Actions total (1 initial attempt + 3 retries).
-    </Warning>
-
-    ### How Retries Affect Action Usage
-
-    When you configure retry settings for your tools or agents:
-
-    - **Each retry is a separate Action:** Every retry attempt consumes one Action from your plan
-    - **Failed attempts still count:** Even if a tool execution fails, it counts as an Action
-    - **Accumulation across tools:** If multiple tools in a workflow retry, all retries count toward your total Action usage
-
-    **Example:** If Tool A retries 2 times and Tool B retries 3 times in a single workflow, that's 5 Actions consumed by retries alone, plus the initial executions.
-
-    <Tip>
-      Monitor your retry patterns in the Plan & Billing section to identify tools that frequently retry. Addressing underlying issues can help reduce unnecessary Action consumption.
-    </Tip>
-
     ## Understanding Vendor Credits
 
     Vendor Credits are the cost of running the AI model. This is the cost of the LLM, and the cost of the tools you use.
@@ -167,11 +149,6 @@ description: "Understand different plans at Relevance AI, and learn how to manag
       <Accordion title="Can I bring my own API keys to bypass Vendor Credits?">
         Yes! You can bring your own API keys to bypass Vendor Credits entirely. This is only available on our paid plans and is not available to free users.
       </Accordion>
-      <Accordion title="Do tool retries count as separate Actions?">
-        Yes, every tool retry counts as a separate Action. If you configure a tool to retry 3 times on failure, and it fails on the first attempt and succeeds on the second retry, that's 2 Actions total (1 initial + 1 retry).
-
-        This also applies to the Agent Autonomy Limit—each retry counts as a separate tool execution toward the autonomy limit.
-      </Accordion>
     </AccordionGroup>
   </Tab>
   <Tab title="Old billing (Credits)">
@@ -238,12 +215,6 @@ description: "Understand different plans at Relevance AI, and learn how to manag
     - Knowledge is our RAG (Retrieval-Augmented Generation) solution that enables you to provide additional context to your agents and tools.
     - When syncing knowledge, yourdata is vectorized to enable search capabilities.
     - Knowledge sync operations have the same base credit cost as a tool run.
-
-    #### Tool retries
-
-    <Warning>
-      **Tool retries count as separate credit charges.** If a tool is configured to retry on failure, each retry attempt consumes additional credits. For example, if a tool fails and retries 3 times, you'll be charged for 4 tool executions (1 initial + 3 retries).
-    </Warning>
 
     ### Credit allocation and reset
 
@@ -344,11 +315,6 @@ description: "Understand different plans at Relevance AI, and learn how to manag
         Check your credit counter to make sure you've read this correctly. Your credits counter will show you **the number of credits you have left to use**, not the number of credits you've used.
 
         If your counter is showing 10100 credits over 10000, for instance, this means you have 10100 credits left to use in your current billing period, not that you've used 10100 credits. 
-      </Accordion>
-      <Accordion title="Do tool retries count as separate credit charges?">
-        Yes, every tool retry counts as a separate credit charge. If you configure a tool to retry 3 times on failure, and it fails on the first attempt and succeeds on the second retry, you'll be charged for 2 tool executions (1 initial + 1 retry).
-
-        This also applies to the Agent Autonomy Limit—each retry counts as a separate tool execution toward the autonomy limit.
       </Accordion>
     </AccordionGroup>
   </Tab>
