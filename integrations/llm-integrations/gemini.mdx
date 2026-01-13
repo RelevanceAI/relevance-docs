@@ -38,6 +38,42 @@ Google's Gemini LLM models are known for strong coding ability and task complexi
   </Accordion>
 </AccordionGroup>
 
+## Understanding pricing & context caching
+
+Gemini models automatically cache repeated input tokens (like agent instructions and tool definitions) in multi-turn conversations, charging them at **90% less** than uncached tokens. This happens automatically with no code changes required.
+
+### Pricing example: Gemini 1.5 Pro
+
+| Token Type | Cost per 1,000 tokens |
+|------------|----------------------|
+| **Uncached input tokens** | 0.315 credits |
+| **Cached input tokens** | 0.0315 credits |
+| **Output tokens** | 1.26 credits |
+
+**Example:** An agent with 19,000 tokens of instructions makes two calls:
+- **First call:** 19,000 input (uncached) + 2,000 output = 8.51 credits
+- **Second call:** 6,000 input (uncached) + 13,000 input (cached) + 1,500 output = 4.19 credits
+- **Without caching**, the second call would cost 7.88 credits
+- **Savings: 47% reduction** on the second call
+
+### Why UI numbers may look different
+
+<Callout icon="info-circle">
+The task credit breakdown displays **uncached input tokens only**. Cached tokens are charged separately at the lower rate but not shown in the breakdown. The **total cost is accurate** and includes both.
+</Callout>
+
+If you see "6,000 input tokens" in the UI, there may be additional cached tokens charged at 90% less. Your actual costs are **lower than expected** because of automatic caching.
+
+<Tip>
+**No markup policy:** Relevance AI passes through Google's exact pricing, including all caching discounts. We do not add any markup to Vendor Credits.
+</Tip>
+
+For technical details about Gemini's context caching implementation, see [Gemini's Context Caching Documentation](https://ai.google.dev/gemini-api/docs/caching).
+
+<Note>
+If you connect your own Google AI Studio or Google Cloud Platform credentials, you'll see the same caching behavior and cost savings directly in your Google billing.
+</Note>
+
 ## Accessing Gemini models using Google AI Studio
 
 If you use Google AI Studio, you can add your API key to Relevance AI, which will allow you to use your Google AI Studio credits as opposed to your Relevance AI credits. 
@@ -76,7 +112,8 @@ You can do this by following these steps:
 
     The private_key should be formatted as follows:
     ```shell
-    -----BEGIN PRIVATE KEY-----\nLOTS OF LETTERS AND NUMBERS HERE\n-----END PRIVATE KEY-----\n
+    -----BEGIN PRIVATE KEY-----\\nLOTS OF LETTERS AND NUMBERS HERE\\n-----END PRIVATE KEY-----\\n
+
 
     ```
   </Step>
@@ -88,4 +125,4 @@ You can do this by following these steps:
   </Step>
 </Steps>
 
-Once your Google Cloud Platform details are added correctly, you will not be charged Relevance AI credits for Google Gemini models. 
+Once your Google Cloud Platform details are added correctly, you will not be charged Relevance AI credits for Google Gemini models.

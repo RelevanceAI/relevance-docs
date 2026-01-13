@@ -23,3 +23,39 @@ OpenAI's LLM models are known for advanced conversational abilities, creative wr
     - .gif
   </Accordion>
 </AccordionGroup>
+
+## Understanding pricing & implicit caching
+
+OpenAI models automatically cache repeated input tokens (like agent instructions and tool definitions) in multi-turn conversations, charging them at **90% less** than uncached tokens. This happens automatically with no code changes required.
+
+### Pricing example: GPT-4o
+
+| Token Type | Cost per 1,000 tokens |
+|------------|----------------------|
+| **Uncached input tokens** | 0.63 credits |
+| **Cached input tokens** | 0.063 credits |
+| **Output tokens** | 5 credits |
+
+**Example:** An agent with 19,000 tokens of instructions makes two calls:
+- **First call:** 19,000 input (uncached) + 2,000 output = 21.97 credits
+- **Second call:** 6,000 input (uncached) + 13,000 input (cached) + 1,500 output = 12.10 credits
+- **Without caching**, the second call would cost 19.47 credits
+- **Savings: 38% reduction** on the second call
+
+### Why UI numbers may look different
+
+<Callout icon="info-circle">
+The task credit breakdown displays **uncached input tokens only**. Cached tokens are charged separately at the lower rate but not shown in the breakdown. The **total cost is accurate** and includes both.
+</Callout>
+
+If you see "6,000 input tokens" in the UI, there may be additional cached tokens charged at 90% less. Your actual costs are **lower than expected** because of automatic caching.
+
+<Tip>
+**No markup policy:** Relevance AI passes through OpenAI's exact pricing, including all caching discounts. We do not add any markup to Vendor Credits.
+</Tip>
+
+For technical details about OpenAI's prompt caching implementation, see [OpenAI's Prompt Caching Documentation](https://platform.openai.com/docs/guides/prompt-caching).
+
+<Note>
+If you connect your own OpenAI API key, you'll see the same caching behavior and cost savings directly in your OpenAI billing.
+</Note>
