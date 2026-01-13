@@ -188,11 +188,29 @@ Your exported file contains all settings, tools, and configurations.
 
 ### Agent Autonomy Limit
 
-**What it is:** The number of consecutive actions your agent can take without human approval.
+**What it is:** The maximum number of consecutive tool executions your agent can perform without human approval.
 
-**How to set it:**
+<Warning>
+  The autonomy limit tracks **all consecutive tool executions**, not distinct tool invocations. This means tool retries count as separate executions toward your autonomy limit.
+</Warning>
 
-- **Lower values:** More human oversight, better for critical or sensitive tasks
-- **Higher values:** More independence, better for routine or time-sensitive workflows
+#### How It Works
+
+The autonomy limit counts every single tool execution, including retries. For example:
+
+- **Tool A** runs with a max auto-run limit of 3, and executes 3 times (including retries)
+- **Tool B** then runs 7 times (including retries)
+- **Total autonomy limit used:** 10 (3 + 7 = 10)
+
+Each retry counts as a separate action for both **credit usage** and **autonomy limits**.
+
+#### How to Set It
+
+- **Lower values (5-10):** More human oversight, better for critical or sensitive tasks
+- **Higher values (20-50+):** More independence, better for routine or time-sensitive workflows
+
+<Tip>
+  If your tools have retry settings enabled, factor those potential retries into your autonomy limit. A tool configured to retry 3 times could consume up to 3 executions of your autonomy limit if it continues to fail.
+</Tip>
 
 **Important:** Higher autonomy limits may require longer timeout settings to allow the agent to complete its work.
