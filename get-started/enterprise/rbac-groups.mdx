@@ -236,13 +236,7 @@ Before setting up Directory Sync, you must first configure [Single Sign-On (SSO)
     </Note>
     
     <Warning>
-      **Important for Microsoft Entra ID users:**
-      
-      The Microsoft Entra user provisioning service can't read or provision users in nested groups. The service can only read and provision users that are immediate members of an explicitly assigned group. This limitation of "group-based assignments to applications" also affects single sign-on.
-      
-      **Best practice:** Directly assign or otherwise scope in the groups that contain the users who need to be provisioned. Avoid using nested group structures for user provisioning.
-      
-      [Learn more about Microsoft Entra provisioning limitations](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/how-provisioning-works)
+      **Important for Microsoft Entra ID users:** The provisioning service cannot read or provision users in nested groups—only immediate group members are supported. This limitation also affects single sign-on. **Best practice:** Directly assign users to groups rather than using nested group structures. [Learn more](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/how-provisioning-works)
     </Warning>
   </Step>
   
