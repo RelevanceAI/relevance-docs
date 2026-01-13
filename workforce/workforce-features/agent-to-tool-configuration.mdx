@@ -47,6 +47,36 @@ This option creates a mandatory connection where the agent must pass information
   - **Create new task**: Each tool execution begins a fresh task instance
   - **Continue same task**: The tool execution remains part of the original task flow
 
+## Understanding Tool Executions and Autonomy Limits
+
+When configuring Agent to Tool connections, it's critical to understand how tool executions accumulate toward your Agent Autonomy Limit:
+
+<Warning>
+  The Agent Autonomy Limit tracks **all consecutive tool executions**, not distinct tool invocations. This means tool retries count as separate executions toward your autonomy limit.
+</Warning>
+
+### How Tool Executions Count
+
+Every tool execution counts toward the autonomy limit, including:
+
+- **Initial tool runs:** The first time a tool executes
+- **Tool retries:** Each retry attempt if the tool is configured to retry on failure
+- **Multiple tools in sequence:** All tool executions accumulate across your workflow
+
+**Example:** If Tool A has a max auto-run limit of 3 and executes 3 times (including retries), then Tool B runs 7 times (including retries), that equals an autonomy limit of 10 (3 + 7 = 10).
+
+### Impact on Credits and Costs
+
+Each tool execution—including retries—also counts as a separate action for billing:
+
+- **Actions/Credits:** Every execution consumes credits or actions from your plan
+- **Vendor Credits:** Each execution that uses an LLM or external API incurs additional costs
+- **Accumulated Costs:** Multiple retries can significantly increase the total cost of a workflow
+
+<Tip>
+  When planning your Agent to Tool configurations, calculate the maximum possible tool executions by considering all potential retries. Set your Agent Autonomy Limit higher than this total to ensure your agent can complete workflows without hitting the limit prematurely.
+</Tip>
+
 ## Best Practices for Agent to Tool Configuration
 
 ### 1. Clear Instructions
@@ -73,7 +103,22 @@ Match permission settings to the sensitivity and impact of the tool:
   - Execute low-risk, repetitive tasks
   - Enhance the agent's knowledge without external effects
 
-### 3. Workflow Optimization
+### 3. Account for Retries in Autonomy Planning
+
+When configuring max auto runs and autonomy limits:
+
+- **Review retry settings:** Check if your tools have retry configurations enabled
+- **Calculate maximum executions:** Add up all potential retries across all tools in your workflow
+- **Set appropriate limits:** Ensure your autonomy limit accommodates all potential executions
+- **Monitor actual usage:** Review your agent's performance to identify tools that frequently retry
+
+**Example calculation:**
+- Tool A: Max 2 retries = up to 2 executions
+- Tool B: Max 3 retries = up to 3 executions
+- Tool C: Max 1 retry = up to 1 execution
+- **Minimum autonomy limit needed:** 6 executions
+
+### 4. Workflow Optimization
 
 Consider how tool connections affect the overall workflow:
 
@@ -97,6 +142,11 @@ Consider how tool connections affect the overall workflow:
    - Set appropriate "Max auto runs" limits
    - Make instructions more specific about when to use the tool
    - Consider changing to "Approval required" mode temporarily
+4. **Hitting autonomy limits unexpectedly**
+   - Review retry configurations for all tools in the workflow
+   - Check if tools are retrying more frequently than expected
+   - Increase the Agent Autonomy Limit to accommodate retries
+   - Address underlying issues causing tool failures and retries
 
 ## Advanced Agent to Tool Configurations
 
@@ -109,6 +159,10 @@ You can create sophisticated workflows by connecting an agent to multiple tools 
 3. Configure each connection with appropriate settings
 
 This approach allows for complex multi-step processes where each tool performs a specific function in the overall workflow.
+
+<Note>
+  When chaining multiple tools, remember that each tool's executions (including retries) accumulate toward the same Agent Autonomy Limit. Plan accordingly to avoid hitting the limit mid-workflow.
+</Note>
 
 ### Dynamic Tool Selection
 
@@ -125,7 +179,11 @@ The agent will evaluate the situation and select the appropriate tool based on y
 - [Trigger to Agent Configuration](/workforce/workforce-features/trigger-to-agent-configuration): Learn how to configure the initial triggers that activate your agents
 - [Tool to Tool Configuration](/workforce/workforce-features/tool-to-tool-configuration): Discover how to connect tools directly to other tools for automated workflows
 - [Condition to Tool Configuration](/workforce/workforce-features/condition-to-tool-configuration): Explore how to add conditional logic to your tool executions
+- [Edge Settings](/workforce/build-an-ai-workforce/edge-settings): Understand how edge settings control connections between nodes
+- [Agent Settings - Autonomy Limit](/agent/build-your-agent/agent-settings/general#agent-autonomy-limit): Learn more about configuring the Agent Autonomy Limit
 
 ## Conclusion
 
-Agent to Tool configuration is a fundamental aspect of building effective AI workforces. By thoughtfully designing these connections, you can create intelligent workflows where agents leverage tools appropriately to accomplish complex tasks. Whether you prefer giving your agents autonomy with "Let agent decide" or creating structured processes with "Forced handover," the configuration options in Workforce Builder provide the flexibility to match your specific business needs.
+Agent to Tool configuration is a fundamental aspect of building effective AI workforces. By thoughtfully designing these connections and understanding how tool executions accumulate toward autonomy limits, you can create intelligent workflows where agents leverage tools appropriately to accomplish complex tasks. 
+
+Whether you prefer giving your agents autonomy with "Let agent decide" or creating structured processes with "Forced handover," the configuration options in Workforce Builder provide the flexibility to match your specific business needs. Remember to account for tool retries when planning your autonomy limits to ensure smooth, uninterrupted workflow execution.
