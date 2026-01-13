@@ -22,6 +22,15 @@ This option gives your agent autonomy to determine when to use a connection base
 - **Max auto runs**: Set a limit on the number of times the agent can automatically execute this connection without human intervention:
   - **No limit**: The agent can use this connection as many times as needed.
   - **Custom limit**: Specify a maximum number of automatic executions as a guardrail.
+
+<Warning>
+  Each tool execution—including retries—counts toward your **Agent Autonomy Limit**. If you set a max auto-run limit of 3 and the tool retries multiple times, those retries accumulate toward the overall autonomy limit for the agent.
+</Warning>
+
+<Tip>
+  **Example:** If Tool A has a max auto-run limit of 3 and runs 3 times (including retries), then Tool B runs 7 times, that equals an autonomy limit of 10 (3 + 7 = 10). Every execution counts, whether it's a first run or a retry.
+</Tip>
+
 - **Task behaviour**: Choose how tasks flow through this connection:
   - **Create new task**: Each time this connection is used, it creates a separate task instance.
   - **Continue same task**: Maintain continuity by keeping all work within the same task context.
@@ -60,13 +69,40 @@ Create sophisticated automation workflows:
 - **Data Processing Pipelines**: Connect tools in sequence to transform, analyze, and act on data without requiring agent intervention at each step.
 - **Conditional Branching**: Use conditions between tools to create decision trees that process information differently based on specific criteria.
 
+## Understanding Autonomy Limits and Tool Executions
+
+When configuring max auto runs and approval modes, it's important to understand how tool executions accumulate:
+
+<AccordionGroup>
+  <Accordion title="How Tool Retries Affect Autonomy Limits">
+    The Agent Autonomy Limit tracks **all consecutive tool executions**, not distinct tool invocations. This means:
+    
+    - Every tool execution counts, including retries
+    - If a tool is configured to retry on failure, each retry counts as a separate execution
+    - Multiple tools running in sequence accumulate their executions toward the same autonomy limit
+    
+    **Impact on Credits:** Each retry also counts as a separate action for credit usage.
+  </Accordion>
+  
+  <Accordion title="Planning for Retries in Your Workflow">
+    When setting max auto runs, consider:
+    
+    - If your tool has retry settings enabled (e.g., max 3 retries), a single tool invocation could consume up to 3 executions
+    - Set your autonomy limit high enough to accommodate potential retries across multiple tools
+    - Monitor your workflow's actual retry patterns and adjust limits accordingly
+    
+    **Example:** If you have 3 tools in sequence, each with 2 potential retries, your autonomy limit should be at least 6 to allow all tools to complete with retries if needed.
+  </Accordion>
+</AccordionGroup>
+
 ## Best Practices
 
 1. **Start Simple**: Begin with basic connections and gradually increase complexity as you understand how your workforce operates.
 2. **Use Clear Instructions**: When using "AI connection", provide specific, unambiguous instructions about when and how to use connections.
 3. **Implement Guardrails**: Use approval requirements and auto-run limits for critical operations to maintain control while allowing automation.
-4. **Test Thoroughly**: Verify that your edge settings produce the expected behavior across different scenarios before deploying to production.
-5. **Monitor Performance**: Regularly review how your connections are being used and refine edge settings based on actual performance.
+4. **Account for Retries**: When setting max auto runs, factor in potential tool retries to avoid hitting autonomy limits prematurely.
+5. **Test Thoroughly**: Verify that your edge settings produce the expected behavior across different scenarios before deploying to production.
+6. **Monitor Performance**: Regularly review how your connections are being used and refine edge settings based on actual performance.
 
 ## Limitations
 
@@ -94,3 +130,6 @@ A: Once the auto run limit is reached, the agent will request human approval bef
 
 **Q: Can I create conditional connections based on specific data values?**\
 A: Yes, you can use condition nodes to create branches in your workflow based on specific criteria or data values.
+
+**Q: Do tool retries count toward my max auto runs limit?**\
+A: Yes, every tool execution—including retries—counts as a separate execution toward both the max auto runs limit and the Agent Autonomy Limit.
