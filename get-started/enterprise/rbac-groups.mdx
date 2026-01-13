@@ -234,6 +234,10 @@ Before setting up Directory Sync, you must first configure [Single Sign-On (SSO)
     <Note>
       Some UI elements in the WorkOS documentation may differ from their current interface.
     </Note>
+    
+    <Warning>
+      **Important for Microsoft Entra ID users:** The provisioning service cannot read or provision users in nested groups—only immediate group members are supported. This limitation also affects single sign-on. **Best practice:** Directly assign users to groups rather than using nested group structures. [Learn more](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/how-provisioning-works)
+    </Warning>
   </Step>
   
   <Step title="Confirm setup with Relevance AI">
