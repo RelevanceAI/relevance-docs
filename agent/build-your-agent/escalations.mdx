@@ -69,10 +69,6 @@ Some failures are just bad luck — like a tool timing out or a service being br
 
 This setting controls how many times the Agent will retry a failed tool before calling it quits. A few retries (like 3) usually strikes a good balance — it gives your Agent a second chance without risking long loops or extra costs. You can raise or lower the number depending on how critical task success is for you.
 
-<Warning>
-  **Important:** Each retry counts as a separate tool execution toward your **Agent Autonomy Limit**. If you set this to 3 retries, a single failed tool could consume up to 3 executions of your autonomy limit.
-</Warning>
-
 ---
 
 #### Behavior After Max Tool/Subagent Retries
@@ -80,42 +76,3 @@ This setting controls how many times the Agent will retry a failed tool before c
 Once the Agent hits the maximum retries and still can't succeed, you decide what happens next: either **Terminate the Task** immediately or (if available) **Escalate** it to a human for help. Terminating is faster and simpler, but escalation gives you a chance to fix things manually when it matters most.
 
 ---
-
-## Understanding Retries and Autonomy Limits
-
-When configuring retry settings, it's important to understand how they interact with your Agent Autonomy Limit:
-
-<AccordionGroup>
-  <Accordion title="How Retries Count Toward Autonomy Limits">
-    The Agent Autonomy Limit tracks **all consecutive tool executions**, not distinct tool invocations. This means:
-    
-    - Every retry counts as a separate execution
-    - If Tool A retries 3 times and Tool B retries 2 times, that's 5 executions toward your autonomy limit
-    - Retries accumulate across all tools in a workflow
-    
-    **Example:** If Tool A has a max retry of 3 and runs 3 times, then Tool B runs 7 times (including retries), that equals an autonomy limit of 10 (3 + 7 = 10).
-  </Accordion>
-  
-  <Accordion title="Impact on Credits and Costs">
-    Each retry is treated as a separate action for billing purposes:
-    
-    - **Credits/Actions:** Every retry consumes credits or actions from your plan
-    - **Vendor Credits:** Each retry that uses an LLM or external API incurs additional vendor costs
-    - **Total Cost:** A tool that retries 3 times will cost 3x the normal amount
-    
-    Consider this when setting your maximum retry limits, especially for tools that use expensive models or APIs.
-  </Accordion>
-  
-  <Accordion title="Best Practices for Retry Configuration">
-    To optimize retry settings while managing autonomy limits:
-    
-    - **Set realistic retry limits:** 2-3 retries is usually sufficient for transient failures
-    - **Increase autonomy limits accordingly:** If you have multiple tools with retries enabled, ensure your autonomy limit can accommodate all potential retries
-    - **Monitor retry patterns:** Review your agent's performance to identify tools that frequently retry and address underlying issues
-    - **Use escalations wisely:** Configure escalations for critical workflows where human intervention is valuable after retries are exhausted
-  </Accordion>
-</AccordionGroup>
-
-<Tip>
-  When planning your agent's configuration, calculate the maximum possible tool executions by adding up all potential retries across your tools. Set your Agent Autonomy Limit higher than this total to ensure your agent can complete its work without hitting the limit prematurely.
-</Tip>
