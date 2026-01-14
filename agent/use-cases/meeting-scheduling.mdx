@@ -1,477 +1,159 @@
 ---
 title: "Meeting Auto-Scheduling Agent"
 sidebarTitle: "Meeting Scheduling"
-description: "Automate meeting coordination with AI-powered scheduling agents"
-icon: "calendar-days"
+description: "Automate meeting coordination with AI-powered scheduling"
 ---
 
-## Overview
+A Meeting Scheduling Agent coordinates meeting times, handles timezones, resolves conflicts, and creates calendar invitations. No more back-and-forth emails.
 
-A Meeting Auto-Scheduling Agent coordinates meeting times across multiple participants, handles timezone differences, resolves conflicts, and optimizes scheduling based on preferences—eliminating the back-and-forth of manual scheduling.
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/tMOS6_hG-N0"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+  className="rounded-xl"
+></iframe>
 
 ## How It Works
 
+1. **Receive request** - "Schedule 30 minutes with John next week"
+2. **Check availability** - Query participant calendars across timezones
+3. **Propose options** - Find optimal times, suggest 2-3 options
+4. **Create meeting** - Send invitations with video conference link
+
+## Prerequisites
+
+- Calendar integration (Google Calendar or Outlook) with read/write access
+- Email integration (Gmail or Outlook) to receive scheduling requests
+
+## Setup
+
 <Steps>
-  <Step title="Receive Scheduling Request">
-    The agent receives a request to schedule a meeting with specific participants and requirements
+  <Step title="Create Agent">
+    Create a new agent named "Meeting Scheduler" or "Demo Scheduler"
   </Step>
-  
-  <Step title="Check Availability">
-    Queries calendar integrations to find available time slots for all participants
+
+  <Step title="Connect Calendar and Email">
+    **For Google:**
+    1. Go to **Integrations**
+    2. Add **Google (Gmail, Calendar, Docs, & API)**
+    3. Grant calendar and email permissions
+    
+    **For Microsoft:**
+    1. Add **Microsoft 365** integration
+    2. Grant calendar and email permissions
   </Step>
-  
-  <Step title="Optimize & Propose">
-    Analyzes options considering timezones, preferences, and priorities, then proposes optimal times
+
+  <Step title="Set Up Email Trigger">
+    1. Go to **Triggers** → **+ Add Trigger**
+    2. Select your email integration
+    3. Configure keyword matching (e.g., `"demo"` to detect demo requests)
+    
+    Your agent triggers when emails containing that keyword arrive.
   </Step>
-  
-  <Step title="Confirm & Create">
-    Once confirmed, creates the calendar event and sends invitations to all participants
+
+  <Step title="Add Calendar Tools">
+    Add these tools:
+    - Check Calendar Availability
+    - Create Calendar Event
+    - Send Calendar Invitation
+    - Add Video Conference Link
+  </Step>
+
+  <Step title="Configure Prompt">
+    ```
+    You are a meeting scheduler. When asked to schedule:
+    1. Extract: participants, duration, timeframe, preferences
+    2. Check everyone's availability
+    3. Propose 2-3 times that work (respect timezones, working hours)
+    4. Once confirmed, create event with video link and invitations
+    ```
+  </Step>
+
+  <Step title="Test">
+    Send an email with your keyword (e.g., "demo") or message your agent:
+    ```
+    Schedule 30 minutes with [colleague] tomorrow
+    ```
   </Step>
 </Steps>
+
+## Marketplace Example: Calendar Bookings Scheduler
+
+<Frame>
+  <img src="/images/calendar-bookings-scheduler.png" alt="Calendar Bookings Scheduler agent" />
+</Frame>
+
+A pre-built agent from the [Relevance AI Marketplace](https://relevanceai.com/agent-templates-tasks/meeting-auto-scheduling) that handles inbound demo requests.
+
+**How It Works:**
+1. Monitors emails for demo requests
+2. Checks calendar for available 30-minute slots
+3. Proposes 3 times per day across 2 different days
+4. Sends professional email with options
+5. Books confirmed time and sends invitation
+
+**Example Response:**
+```
+Hi [Name],
+
+I've checked our calendar and have these times available:
+
+• Wednesday, Jan 22 at 10:00am, 2:00pm or 4:00pm
+• Friday, Jan 24 at 9:00am, 1:00pm or 3:00pm
+
+Let me know which works best.
+
+Cal
+```
+
+<Card title="Clone This Template" icon="clone" href="https://relevanceai.com/agent-templates-tasks/meeting-auto-scheduling">
+  Get the Calendar Bookings Scheduler from the Marketplace
+</Card>
+
+## Advanced Example: Legal Scheduling Coordinator
+
+For complex, high-stakes scheduling across jurisdictions.
+
+**Use Case:** Multi-District Litigation deposition scheduling
+
+**Capabilities:**
+- Monitor deposition requests via email/case management
+- Cross-reference attorney availability across jurisdictions
+- Schedule 4-hour blocks with 1-hour buffers
+- Prevent double-booking across different cases
+- Send 48-hour advance notifications with location and participant details
+- Auto-reschedule when conflicts arise (find alternatives within 5 business days)
+
+**Integrations:** Microsoft Outlook, LawConnect, case management systems
 
 ## Key Features
 
-<CardGroup cols={2}>
-  <Card title="Multi-Timezone Coordination" icon="earth-americas">
-    Automatically handles timezone conversions and finds times that work across regions
-  </Card>
-  <Card title="Conflict Resolution" icon="calendar-xmark">
-    Identifies scheduling conflicts and proposes alternative times
-  </Card>
-  <Card title="Preference Learning" icon="brain">
-    Learns scheduling preferences over time (preferred meeting times, buffer periods, etc.)
-  </Card>
-  <Card title="Automatic Rescheduling" icon="arrows-rotate">
-    Handles rescheduling requests and finds new times when conflicts arise
-  </Card>
-</CardGroup>
-
-## Setting Up Your Scheduling Agent
-
-### Prerequisites
-
-<CardGroup cols={2}>
-  <Card title="Google Calendar" icon="calendar" href="/integrations/popular-integrations/google-calendar">
-    Required for calendar access and event creation
-  </Card>
-  <Card title="Outlook (Optional)" icon="envelope" href="/integrations/popular-integrations/outlook">
-    For Microsoft 365 calendar integration
-  </Card>
-</CardGroup>
-
-### Step 1: Connect Calendar Integration
-
-<Tabs>
-  <Tab title="Google Calendar">
-    1. Navigate to **Integrations & API Keys**
-    2. Find and click on "Google Calendar"
-    3. Click "Connect" and authenticate
-    4. Grant **calendar-read-write** permissions
-  </Tab>
-  
-  <Tab title="Outlook">
-    1. Navigate to **Integrations & API Keys**
-    2. Find and click on "Outlook"
-    3. Click "Connect" and authenticate with Microsoft
-    4. Grant calendar permissions
-  </Tab>
-</Tabs>
-
-### Step 2: Create Your Scheduling Agent
-
-<CardGroup cols={2}>
-  <Card title="Clone Template" icon="copy" href="https://relevanceai.com/agent-templates-tasks/meeting-auto-scheduling">
-    Start with a pre-built Meeting Scheduling template
-  </Card>
-  <Card title="Build Custom" icon="hammer">
-    Create a new agent with calendar tools
-  </Card>
-</CardGroup>
-
-### Step 3: Configure Scheduling Rules
-
-Define your scheduling preferences and constraints:
-
-```json
-{
-  "working_hours": {
-    "start": "09:00",
-    "end": "17:00",
-    "timezone": "America/New_York"
-  },
-  "buffer_time": "15 minutes",
-  "preferred_days": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-  "avoid_times": ["12:00-13:00"],
-  "meeting_duration_default": "30 minutes"
-}
-```
-
-## Triggering Your Scheduling Agent
-
-### Email Trigger
-
-Set up email monitoring to respond to scheduling requests:
-
-1. Connect your email integration (Gmail or Outlook)
-2. Configure the agent to monitor for scheduling keywords
-3. Agent automatically responds with available times
-
-**Example email trigger:**
-```
-Subject: Schedule a meeting
-Body: "Can we schedule a 30-minute call next week to discuss the project?"
-```
-
-### Slack Trigger
-
-Respond to scheduling requests in Slack:
-
-1. Connect Slack integration
-2. Mention the agent in channels or DMs
-3. Agent proposes times and creates events
-
-**Example Slack message:**
-```
-@scheduler Can you find a time for me and @john to meet for 1 hour this week?
-```
-
-### API Trigger
-
-Programmatically trigger scheduling via API:
-
-```javascript
-{
-  "participants": ["john@company.com", "sarah@company.com"],
-  "duration": "60 minutes",
-  "subject": "Project Kickoff",
-  "timeframe": "next 7 days",
-  "preferences": {
-    "timezone": "America/Los_Angeles",
-    "preferred_times": "morning"
-  }
-}
-```
-
-## Scheduling Workflows
-
-### Basic Meeting Scheduling
-
-<Steps>
-  <Step title="Request Received">
-    Agent receives scheduling request with participants and requirements
-  </Step>
-  
-  <Step title="Availability Check">
-    Queries all participants' calendars for available slots
-  </Step>
-  
-  <Step title="Propose Times">
-    Suggests 3-5 optimal time slots considering all constraints
-  </Step>
-  
-  <Step title="Confirmation">
-    Once a time is selected, creates calendar event and sends invitations
-  </Step>
-</Steps>
-
-### Handling Conflicts
-
-When scheduling conflicts arise:
-
-<AccordionGroup>
-  <Accordion title="Automatic Conflict Detection" icon="triangle-exclamation">
-    The agent identifies conflicts by:
-    - Checking existing calendar events
-    - Detecting overlapping meetings
-    - Identifying out-of-office periods
-    - Recognizing blocked time slots
-  </Accordion>
-  
-  <Accordion title="Intelligent Rescheduling" icon="calendar-arrow-up">
-    When conflicts occur, the agent:
-    - Proposes alternative times
-    - Considers meeting priority levels
-    - Suggests rescheduling lower-priority meetings
-    - Notifies affected participants
-  </Accordion>
-  
-  <Accordion title="Escalation to Humans" icon="user">
-    For complex conflicts, the agent:
-    - Escalates to meeting organizer
-    - Provides conflict details and options
-    - Awaits human decision
-    - Executes the chosen resolution
-  </Accordion>
-</AccordionGroup>
-
-### Multi-Timezone Scheduling
-
-For global teams, the agent handles timezone complexity:
-
-<Steps>
-  <Step title="Detect Timezones">
-    Identifies each participant's timezone from their calendar settings
-  </Step>
-  
-  <Step title="Find Overlap">
-    Calculates working hours overlap across all timezones
-  </Step>
-  
-  <Step title="Optimize Fairness">
-    Rotates meeting times to avoid always favoring one timezone
-  </Step>
-  
-  <Step title="Clear Communication">
-    Sends invitations with times in each participant's local timezone
-  </Step>
-</Steps>
-
-**Example:**
-```
-Meeting scheduled for:
-- 9:00 AM PST (Los Angeles)
-- 12:00 PM EST (New York)
-- 5:00 PM GMT (London)
-- 1:00 AM +8 (Singapore - next day)
-```
-
-## Advanced Features
-
-### Preference Learning
-
-Your scheduling agent learns from past behavior:
-
-<CardGroup cols={2}>
-  <Card title="Time Preferences" icon="clock">
-    Learns preferred meeting times (e.g., mornings vs afternoons)
-  </Card>
-  <Card title="Buffer Periods" icon="arrows-left-right">
-    Identifies preferred gaps between meetings
-  </Card>
-  <Card title="Meeting Patterns" icon="chart-line">
-    Recognizes recurring meeting patterns and preferences
-  </Card>
-  <Card title="Participant Preferences" icon="users">
-    Remembers preferences for specific participants or meeting types
-  </Card>
-</CardGroup>
-
-### Smart Scheduling Rules
-
-Configure intelligent scheduling logic:
-
-<Tabs>
-  <Tab title="Priority-Based">
-    Assign priority levels to different meeting types:
-    - **High**: Executive meetings, customer calls
-    - **Medium**: Team meetings, 1-on-1s
-    - **Low**: Optional meetings, social events
-    
-    Higher priority meetings get first choice of time slots.
-  </Tab>
-  
-  <Tab title="Duration-Based">
-    Optimize scheduling based on meeting length:
-    - Short meetings (15-30 min): Fill gaps between longer meetings
-    - Medium meetings (30-60 min): Schedule during core hours
-    - Long meetings (60+ min): Schedule with adequate buffer time
-  </Tab>
-  
-  <Tab title="Participant-Based">
-    Apply rules based on who's attending:
-    - VIP participants: Prioritize their availability
-    - Large groups: Find times that work for majority
-    - External participants: Accommodate their timezones
-  </Tab>
-</Tabs>
-
-### Recurring Meeting Management
-
-Handle recurring meetings intelligently:
-
-- **Series Creation**: Schedule recurring meetings with custom patterns
-- **Exception Handling**: Manage one-off changes to recurring series
-- **Automatic Rescheduling**: Adjust future occurrences when conflicts arise
-- **Attendance Tracking**: Monitor attendance patterns and optimize accordingly
-
-## Integration with Other Tools
-
-### CRM Integration
-
-Connect scheduling to your CRM:
-
-<Steps>
-  <Step title="Salesforce/HubSpot">
-    Automatically log scheduled meetings as activities in your CRM
-  </Step>
-  
-  <Step title="Lead Qualification">
-    Schedule meetings only with qualified leads based on CRM data
-  </Step>
-  
-  <Step title="Follow-Up Automation">
-    Trigger follow-up sequences after meetings are scheduled
-  </Step>
-</Steps>
-
-### Communication Tools
-
-Enhance scheduling with communication integrations:
-
-- **Slack**: Send meeting confirmations and reminders
-- **Email**: Automated confirmation emails with meeting details
-- **SMS**: Text reminders for important meetings
-
-### Video Conferencing
-
-Automatically add video conference links:
-
-- **Google Meet**: Auto-generate Meet links for Google Calendar events
-- **Zoom**: Create Zoom meetings and add links to invitations
-- **Microsoft Teams**: Generate Teams meeting links for Outlook events
-
-## Best Practices
-
-<AccordionGroup>
-  <Accordion title="Set Clear Working Hours" icon="business-time">
-    Define working hours for all team members to avoid scheduling outside preferred times:
-    
-    ```json
-    {
-      "working_hours": {
-        "monday-friday": "09:00-17:00",
-        "timezone": "America/New_York"
-      }
-    }
-    ```
-  </Accordion>
-  
-  <Accordion title="Use Buffer Time" icon="hourglass">
-    Configure buffer time between meetings to avoid back-to-back scheduling:
-    - Minimum 5-10 minutes between meetings
-    - Longer buffers before/after important meetings
-    - Travel time for in-person meetings
-  </Accordion>
-  
-  <Accordion title="Prioritize Meeting Types" icon="ranking-star">
-    Assign priority levels to ensure important meetings get scheduled first:
-    - Customer meetings: High priority
-    - Internal team meetings: Medium priority
-    - Optional meetings: Low priority
-  </Accordion>
-  
-  <Accordion title="Respect Timezones" icon="globe">
-    For global teams:
-    - Rotate meeting times to share timezone burden
-    - Avoid scheduling outside 8 AM - 6 PM local time
-    - Record meetings for those who can't attend live
-  </Accordion>
-  
-  <Accordion title="Provide Context" icon="circle-info">
-    Include relevant information in meeting invitations:
-    - Clear meeting purpose and agenda
-    - Pre-meeting materials or links
-    - Video conference link
-    - Expected outcomes
-  </Accordion>
-</AccordionGroup>
+| Feature | Description |
+|---------|-------------|
+| **Natural language** | "Schedule with Sarah tomorrow afternoon" |
+| **Multi-timezone** | Finds times during working hours for all participants |
+| **Conflict resolution** | Handles hard conflicts, soft conflicts, and priority scheduling |
+| **Rescheduling** | Proposes alternatives when meetings need to move |
 
 ## Troubleshooting
 
-<AccordionGroup>
-  <Accordion title="Agent Can't Find Available Times" icon="calendar-xmark">
-    **Possible causes:**
-    - Participants have conflicting schedules
-    - Timeframe too narrow
-    - Working hours don't overlap
-    
-    **Solutions:**
-    - Expand the timeframe for scheduling
-    - Adjust working hours or timezone preferences
-    - Consider asynchronous alternatives
-    - Escalate to human for manual coordination
-  </Accordion>
-  
-  <Accordion title="Wrong Timezone in Invitations" icon="clock">
-    **Possible causes:**
-    - Calendar timezone settings incorrect
-    - Agent not detecting timezone properly
-    
-    **Solutions:**
-    - Verify calendar timezone settings
-    - Explicitly specify timezone in scheduling request
-    - Update agent configuration with correct timezone
-  </Accordion>
-  
-  <Accordion title="Participants Not Receiving Invitations" icon="envelope-open-text">
-    **Possible causes:**
-    - Email addresses incorrect
-    - Calendar permissions not granted
-    - Invitations going to spam
-    
-    **Solutions:**
-    - Verify email addresses are correct
-    - Check calendar integration permissions
-    - Add sender to safe senders list
-  </Accordion>
-</AccordionGroup>
-
-## Example Use Cases
-
-<Tabs>
-  <Tab title="Sales Meetings">
-    **Scenario**: Schedule discovery calls with qualified leads
-    
-    **Workflow**:
-    1. Lead fills out form requesting a demo
-    2. Scheduling agent checks sales rep availability
-    3. Proposes 3 time slots to lead
-    4. Creates meeting and adds to CRM
-    5. Sends confirmation email with prep materials
-  </Tab>
-  
-  <Tab title="Interview Scheduling">
-    **Scenario**: Coordinate interviews with multiple interviewers
-    
-    **Workflow**:
-    1. Candidate advances to interview stage
-    2. Agent finds times when all interviewers are available
-    3. Proposes times to candidate
-    4. Creates interview panel meeting
-    5. Sends interview details and preparation guide
-  </Tab>
-  
-  <Tab title="Team Sync Meetings">
-    **Scenario**: Schedule recurring team meetings across timezones
-    
-    **Workflow**:
-    1. Agent analyzes team member timezones
-    2. Finds optimal recurring time slot
-    3. Rotates time monthly to share timezone burden
-    4. Creates recurring series
-    5. Sends agenda template before each meeting
-  </Tab>
-</Tabs>
+| Issue | Solution |
+|-------|----------|
+| Can't find times | Expand timeframe or check early/late slots |
+| Calendar access issues | Re-authenticate integration, check OAuth permissions |
+| Timezone confusion | Explicitly state timezones in requests |
+| Double-booking | Force calendar sync, add buffer time |
 
 ## Next Steps
 
 <CardGroup cols={2}>
-  <Card title="Google Calendar Integration" icon="calendar" href="/integrations/popular-integrations/google-calendar">
-    Set up Google Calendar for scheduling
-  </Card>
   <Card title="Meeting Notetaker" icon="microphone" href="/agent/use-cases/meeting-notetaker">
-    Combine with Meeting Notetaker for complete meeting automation
+    Add note-taking to scheduled meetings
   </Card>
-  <Card title="Clone Template" icon="copy" href="https://relevanceai.com/agent-templates-tasks/meeting-auto-scheduling">
-    Start with a pre-built scheduling template
-  </Card>
-  <Card title="Agent Triggers" icon="bolt" href="/agent/build-your-agent/triggers">
-    Learn more about triggering agents
+  <Card title="Clone Template" icon="clone" href="https://relevanceai.com/agent-templates-tasks/meeting-auto-scheduling">
+    Start with a pre-built scheduling agent
   </Card>
 </CardGroup>
-
----
-
-<Tip>
-**Pro Tip**: Combine your Meeting Scheduling Agent with a Meeting Notetaker Agent for end-to-end meeting automation—from scheduling to summaries!
-</Tip>

@@ -1,0 +1,136 @@
+---
+title: "On-Call AI Commands"
+sidebarTitle: "On-Call AI Commands"
+description: "Control your meeting agent in real-time with trigger words"
+---
+
+On-Call AI Commands let meeting participants control your agent by typing keywords in the meeting chat. The agent responds immediately: pausing recording, performing searches, or sending messages.
+
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.loom.com/embed/21f101503e984e9fb61a664ec5abfe27"
+  frameBorder="0"
+  allowFullScreen
+  className="rounded-xl"
+></iframe>
+
+## Example Commands
+
+| Command | Action |
+|---------|--------|
+| `Monty pause` | Stop recording for sensitive discussions |
+| `Monty resume` | Restart recording |
+| `Monty search [query]` | Get instant research during the call |
+| `Monty note: [text]` | Flag important items |
+
+<Note>
+**"Monty" is the trigger word in the demo.** Configure any trigger word you want.
+</Note>
+
+## Setup
+
+<Steps>
+  <Step title="Enable Interaction Webhooks">
+    1. Open your Meeting Notetaker Agent → **Tools**
+    2. Edit the **"Send Meeting Bot"** tool
+    3. Go to **Advanced** tab → **Interaction Webhooks**
+    4. Toggle ON and enter your trigger word (e.g., "Monty")
+  </Step>
+
+  <Step title="Add Required Tools">
+    Add these four tools to your agent:
+    
+    1. **Resume Recording**
+    2. **Pause Recording**
+    3. **Google Search**
+    4. **Send Meeting Bot Message**
+    
+    <Warning>
+    Google Search must ALWAYS be followed by "Send Meeting Bot Message" to display results in chat.
+    </Warning>
+  </Step>
+
+  <Step title="Configure Prompt">
+    Add to your agent prompt:
+    
+    ```
+    You have four tools:
+    - Resume Recording
+    - Pause Recording
+    - Google Search (Always use "Send Meeting Bot Message" after it)
+    - Send Meeting Bot Message (Required after Google Search to show results)
+    
+    Use them when requested.
+    ```
+  </Step>
+
+  <Step title="Test">
+    1. Have your agent join a test meeting
+    2. Type: `Monty search test query`
+    3. Verify response appears in chat
+    4. Test pause/resume commands
+  </Step>
+</Steps>
+
+## Commands
+
+### Recording Control
+
+```
+Monty pause recording  → Recording paused
+Monty resume recording → Recording resumed
+```
+
+Use for sensitive discussions that shouldn't be recorded.
+
+### Live Search
+
+```
+Monty search SOC 2 compliance requirements
+```
+
+Returns search results directly in the meeting chat.
+
+### Notes
+
+```
+Monty note: Follow up with legal by Friday
+```
+
+Adds to priority action items in the meeting summary.
+
+## Extending Functionality
+
+Add more tools for advanced use cases:
+
+| Integration | Command Example |
+|-------------|-----------------|
+| **Notion** | `Monty save to notion: New feature idea` |
+| **Slack** | `Monty notify #engineering about this` |
+| **APIs** | `Monty what's the AAPL stock price` |
+
+## Best Practices
+
+- **Choose distinctive trigger words** - Avoid common words like "um" or "okay"
+- **Announce availability** - Tell participants commands are available at meeting start
+- **Confirm actions** - Agent should acknowledge commands in chat
+
+## Troubleshooting
+
+| Issue | Solution |
+|-------|----------|
+| Agent not responding | Verify Interaction Webhooks is ON, check trigger word spelling |
+| Search results not appearing | Ensure prompt includes "use Send Meeting Bot Message after Google Search" |
+| Recording controls not working | Wait 2-3 seconds between pause/resume commands |
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Meeting Notetaker" icon="microphone" href="/agent/use-cases/meeting-notetaker">
+    Set up a Meeting Notetaker to use with On-Call Commands
+  </Card>
+  <Card title="Watch Demo" icon="play" href="https://www.loom.com/share/21f101503e984e9fb61a664ec5abfe27">
+    See the feature in action
+  </Card>
+</CardGroup>

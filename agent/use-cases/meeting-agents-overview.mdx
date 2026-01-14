@@ -1,416 +1,68 @@
 ---
 title: "Meeting Agents"
-sidebarTitle: "Meeting Agents Overview"
-description: "Automate your meeting workflows with AI-powered meeting agents"
-icon: "video"
+sidebarTitle: "Overview"
+description: "Automate meeting workflows with AI-powered agents"
 ---
 
-## What are Meeting Agents?
-
-Meeting Agents are AI-powered agents that automate meeting workflows from start to finish. They handle everything from scheduling and preparation to note-taking, transcription, and post-meeting follow-ups—freeing your team to focus on the conversation itself rather than administrative tasks.
-
-Unlike traditional meeting tools that simply record or transcribe, Meeting Agents actively participate in your meeting workflows, making intelligent decisions about what to capture, how to summarize, and where to distribute information.
-
-<Frame>
-  <img src="/images/meeting-agents-hero.png" alt="Meeting Agents automating workflows" />
-</Frame>
+Meeting Agents automate your meeting workflows: scheduling, note-taking, transcription, and follow-ups.
 
 ## Types of Meeting Agents
 
-<CardGroup cols={3}>
+<CardGroup cols={2}>
   <Card title="Meeting Notetaker" icon="microphone" href="/agent/use-cases/meeting-notetaker">
-    Automatically join meetings, record conversations, transcribe audio, and generate summaries with action items
+    Join meetings, record, transcribe, and generate summaries with action items
   </Card>
   <Card title="Meeting Scheduler" icon="calendar-days" href="/agent/use-cases/meeting-scheduling">
-    Coordinate meeting times across participants, handle conflicts, and optimize scheduling based on preferences
-  </Card>
-  <Card title="Meeting Preparation" icon="clipboard-list">
-    Research attendees, prepare agendas, gather relevant documents, and brief participants before meetings
+    Coordinate times across participants and handle conflicts
   </Card>
 </CardGroup>
 
-## Key Benefits
+## How It Works
 
-<AccordionGroup>
-  <Accordion title="Save Time on Administrative Tasks" icon="clock">
-    Meeting Agents eliminate hours of manual work each week:
-    - No more manual note-taking during meetings
-    - Automatic scheduling without back-and-forth emails
-    - Instant meeting summaries and action items
-    - Automated distribution of meeting outcomes
-    
-    Teams using Meeting Agents report saving 5-10 hours per week on meeting-related administrative work.
-  </Accordion>
+1. **Agent receives meeting link** from calendar trigger or manual input
+2. **Bot joins meeting** as a visible participant
+3. **Records and transcribes** in real-time (90%+ accuracy)
+4. **Identifies speakers** and attributes quotes
+5. **Generates summaries** and distributes to your channels
 
-  <Accordion title="Never Miss Important Details" icon="brain">
-    With AI-powered transcription and summarization:
-    - Capture every word spoken in meetings
-    - Identify and extract key decisions automatically
-    - Track action items and assign ownership
-    - Preserve institutional knowledge from every conversation
-    
-    Meeting Agents ensure nothing falls through the cracks, even in fast-paced discussions.
-  </Accordion>
+<Note>
+**Recording Consent:** All participants are notified when the bot joins.
+</Note>
 
-  <Accordion title="Improve Meeting Outcomes" icon="chart-line">
-    Better preparation and follow-up lead to better results:
-    - Participants arrive prepared with context and agendas
-    - Clear action items with assigned owners
-    - Automatic follow-ups ensure accountability
-    - Historical meeting data informs future decisions
-  </Accordion>
+## Platform Support
 
-  <Accordion title="Scale Across Your Organization" icon="users">
-    Meeting Agents work consistently across teams:
-    - Standardize meeting practices company-wide
-    - Ensure compliance with recording and documentation policies
-    - Share best practices through agent templates
-    - Handle unlimited meetings simultaneously
-  </Accordion>
-
-  <Accordion title="Integrate with Your Existing Tools" icon="plug">
-    Meeting Agents connect seamlessly with your tech stack:
-    - Google Calendar, Outlook, and other calendar platforms
-    - Zoom, Google Meet, Microsoft Teams for video conferencing
-    - Slack, email, Notion, Google Docs for distribution
-    - CRM systems for customer meeting tracking
-  </Accordion>
-</AccordionGroup>
-
-## How Meeting Agents Work
-
-Meeting Agents operate across three phases of the meeting lifecycle:
-
-<Steps>
-  <Step title="Pre-Meeting Preparation" icon="clipboard-check">
-    **Automatic Triggering**
-    - Monitor your calendar for upcoming meetings
-    - Detect meetings with video conference links
-    - Trigger preparation workflows automatically
-    
-    **Intelligent Preparation**
-    - Research meeting attendees and their backgrounds
-    - Gather relevant documents and context
-    - Generate meeting agendas based on objectives
-    - Send preparation materials to participants
-  </Step>
-
-  <Step title="During the Meeting" icon="video">
-    **Active Participation**
-    - Join meetings as a bot participant
-    - Record audio and video with consent
-    - Transcribe conversations in real-time
-    - Identify speakers automatically
-    
-    **NEW: Realtime "On Call" Commands**
-    - Respond to trigger words mentioned in chat
-    - Pause/resume recording on command
-    - Perform Google searches during meetings
-    - Connect to tools like Notion, Slack, and more
-    - Send messages to meeting participants
-    
-    [Learn more about Realtime Commands →](/agent/advanced-features/interaction-webhooks)
-  </Step>
-
-  <Step title="Post-Meeting Follow-Up" icon="paper-plane">
-    **Intelligent Processing**
-    - Generate comprehensive meeting summaries
-    - Extract action items with owners and deadlines
-    - Identify key decisions and quotes
-    - Create searchable transcripts
-    
-    **Automated Distribution**
-    - Post summaries to Slack channels
-    - Send emails to participants
-    - Update Google Docs or Notion pages
-    - Log activities in CRM systems
-    - Create tasks in project management tools
-  </Step>
-</Steps>
-
-## Powered by RecallAI
-
-Meeting Agents leverage [RecallAI](/integrations/popular-integrations/recallai), an enterprise-grade meeting bot platform that provides:
-
-<CardGroup cols={2}>
-  <Card title="Universal Platform Support" icon="globe">
-    Works with Google Meet, Zoom, Microsoft Teams, and other major video conferencing platforms
+<CardGroup cols={3}>
+  <Card title="Google Meet" icon="google">
+    Full support for recording and transcription
   </Card>
-  <Card title="High-Quality Transcription" icon="waveform">
-    Real-time transcription with speaker identification and high accuracy
+  <Card title="Zoom" icon="video">
+    Complete integration (host may need to admit from waiting room)
   </Card>
-  <Card title="SOC-2 Compliance" icon="shield-check">
-    Enterprise-grade security and compliance for sensitive meeting data
-  </Card>
-  <Card title="Scalable Infrastructure" icon="server">
-    Handle unlimited concurrent meetings without performance degradation
+  <Card title="Microsoft Teams" icon="microsoft">
+    Full support with enterprise accounts
   </Card>
 </CardGroup>
 
-## Common Use Cases
+## Security
 
-<Tabs>
-  <Tab title="Sales & Customer Success">
-    **Customer Calls**
-    - Automatically record and transcribe sales calls
-    - Extract customer pain points and requirements
-    - Generate follow-up emails with next steps
-    - Update CRM with meeting notes and action items
-    
-    **Demo Meetings**
-    - Capture product questions and feedback
-    - Create demo summaries for internal teams
-    - Track feature requests and objections
-    - Generate personalized follow-up materials
-  </Tab>
+- SOC-2 compliant infrastructure
+- Recordings encrypted in transit and at rest
+- GDPR and CCPA compliant
+- Role-based access controls
 
-  <Tab title="Product & Engineering">
-    **Sprint Planning**
-    - Document sprint goals and commitments
-    - Track task assignments and estimates
-    - Create tickets from action items
-    - Share summaries with stakeholders
-    
-    **Design Reviews**
-    - Capture design feedback and decisions
-    - Document technical requirements
-    - Track follow-up tasks for designers
-    - Archive design rationale for future reference
-  </Tab>
-
-  <Tab title="HR & Recruiting">
-    **Candidate Interviews**
-    - Record interviews with candidate consent
-    - Generate interview summaries for hiring teams
-    - Extract key qualifications and concerns
-    - Ensure consistent evaluation criteria
-    
-    **Team Meetings**
-    - Document 1-on-1 discussions
-    - Track employee feedback and concerns
-    - Create action items for managers
-    - Maintain records for performance reviews
-  </Tab>
-
-  <Tab title="Executive & Leadership">
-    **Board Meetings**
-    - Create comprehensive meeting minutes
-    - Track strategic decisions and rationale
-    - Generate action items for leadership team
-    - Maintain governance documentation
-    
-    **All-Hands Meetings**
-    - Transcribe company announcements
-    - Share summaries with remote employees
-    - Answer questions from the transcript
-    - Create searchable knowledge base
-  </Tab>
-</Tabs>
-
-## Security & Privacy Considerations
-
-Meeting Agents handle sensitive information, so security is paramount:
-
-<Warning>
-**Always obtain consent before recording meetings.** Ensure all participants are aware that the meeting is being recorded and transcribed. Meeting Agents can announce their presence when joining.
-</Warning>
-
-<CardGroup cols={2}>
-  <Card title="SOC-2 Compliance" icon="certificate">
-    RecallAI, the underlying meeting bot platform, is SOC-2 compliant, ensuring enterprise-grade security for your meeting data.
-  </Card>
-  <Card title="Data Encryption" icon="lock">
-    All meeting recordings and transcripts are encrypted in transit and at rest, protecting sensitive conversations.
-  </Card>
-  <Card title="Access Controls" icon="user-shield">
-    Configure who can access meeting recordings and transcripts using role-based permissions.
-  </Card>
-  <Card title="Data Retention" icon="clock-rotate-left">
-    Set custom retention policies to automatically delete meeting data after specified periods.
-  </Card>
-</CardGroup>
-
-## Getting Started with Meeting Agents
-
-<Steps>
-  <Step title="Choose Your Meeting Agent Type">
-    Start with the most impactful use case for your team:
-    - **Meeting Notetaker** for automatic transcription and summaries
-    - **Meeting Scheduler** for coordinating complex schedules
-    - **Meeting Preparation** for better-prepared participants
-  </Step>
-
-  <Step title="Connect Your Integrations">
-    Set up the necessary integrations:
-    - Google Calendar or Outlook for calendar access
-    - RecallAI for meeting bot functionality
-    - Slack, email, or other tools for distribution
-    
-    [View all integrations →](/integrations/introduction)
-  </Step>
-
-  <Step title="Configure Your Agent">
-    Customize the agent to match your workflow:
-    - Define which meetings to join automatically
-    - Set up summary templates and formats
-    - Configure distribution channels
-    - Establish escalation rules
-  </Step>
-
-  <Step title="Test and Refine">
-    Start with a pilot group:
-    - Test with internal meetings first
-    - Gather feedback from participants
-    - Refine prompts and workflows
-    - Gradually expand to more teams
-  </Step>
-</Steps>
-
-## Popular Meeting Agent Templates
-
-Explore pre-built Meeting Agent templates in the Relevance AI Marketplace:
-
-<CardGroup cols={2}>
-  <Card title="Meeting Notetaker Agent" icon="microphone" href="https://relevanceai.com/agent-templates-meetings/">
-    Clone a ready-to-use meeting notetaker that joins calls, transcribes conversations, and generates summaries
-  </Card>
-  <Card title="Meeting Auto-Scheduling Agent" icon="calendar-days" href="https://relevanceai.com/agent-templates-tasks/meeting-auto-scheduling">
-    Automate meeting scheduling with an agent that coordinates times and handles conflicts
-  </Card>
-  <Card title="Pre-Meeting Prepper" icon="clipboard-list" href="https://relevanceai.com/agent-templates-meetings/">
-    Prepare participants with research, agendas, and relevant context before meetings
-  </Card>
-  <Card title="Meeting Setter Agent" icon="handshake" href="https://relevanceai.com/agent-templates-meetings/">
-    Qualify leads and schedule sales meetings automatically
-  </Card>
-</CardGroup>
-
-## Advanced Meeting Workflows
-
-Combine Meeting Agents with other agents for powerful workflows:
-
-<AccordionGroup>
-  <Accordion title="Convert Calls to Case Studies" icon="file-lines">
-    **Workflow:**
-    1. Meeting Notetaker records customer success call
-    2. Content Agent extracts success story elements
-    3. Writing Agent drafts case study
-    4. Review Agent sends draft to marketing team
-    
-    **Result:** Customer conversations automatically become marketing assets
-  </Accordion>
-
-  <Accordion title="Meeting Content to Social Media" icon="share-nodes">
-    **Workflow:**
-    1. Meeting Notetaker captures product announcement
-    2. Content Agent identifies key messages
-    3. Social Media Agent creates posts for different platforms
-    4. Scheduling Agent posts at optimal times
-    
-    **Result:** Meeting insights reach your audience immediately
-  </Accordion>
-
-  <Accordion title="Training Session Documentation" icon="graduation-cap">
-    **Workflow:**
-    1. Meeting Notetaker records training session
-    2. Knowledge Agent creates documentation
-    3. Quiz Agent generates assessment questions
-    4. Distribution Agent shares materials with attendees
-    
-    **Result:** Training sessions become reusable learning resources
-  </Accordion>
-
-  <Accordion title="Product Feedback to Roadmap" icon="map">
-    **Workflow:**
-    1. Meeting Notetaker captures customer feedback calls
-    2. Analysis Agent identifies feature requests and pain points
-    3. Prioritization Agent scores requests by frequency and impact
-    4. Integration Agent creates tickets in project management tool
-    
-    **Result:** Customer feedback directly informs product development
-  </Accordion>
-</AccordionGroup>
-
-## Frequently Asked Questions
-
-<AccordionGroup>
-  <Accordion title="Do Meeting Agents work with all video conferencing platforms?">
-    Meeting Agents powered by RecallAI support the most popular platforms:
-    - Google Meet
-    - Zoom
-    - Microsoft Teams
-    
-    The agent joins as a participant bot that can record and transcribe the meeting. Some platforms may require specific permissions or settings.
-  </Accordion>
-
-  <Accordion title="How accurate is the transcription?">
-    Meeting Agents use advanced speech-to-text technology with:
-    - 90%+ accuracy for clear audio in English
-    - Speaker identification to attribute quotes correctly
-    - Support for multiple languages
-    - Improved accuracy with good audio quality
-    
-    Accuracy improves with clear audio, minimal background noise, and distinct speakers.
-  </Accordion>
-
-  <Accordion title="Can I customize what information is captured?">
-    Yes! You can fully customize:
-    - Summary format and structure
-    - What types of information to extract (action items, decisions, questions, etc.)
-    - How detailed the transcript should be
-    - Which parts of the meeting to focus on
-    
-    Use custom prompts to tailor the agent's output to your specific needs.
-  </Accordion>
-
-  <Accordion title="What happens if the agent doesn't understand something?">
-    Meeting Agents can be configured to:
-    - Flag unclear sections for human review
-    - Escalate to team members via Slack or email
-    - Request clarification in follow-up messages
-    - Learn from corrections to improve future performance
-  </Accordion>
-
-  <Accordion title="How much does it cost to run Meeting Agents?">
-    Meeting Agent costs depend on:
-    - Number of meetings recorded per month
-    - Length of meetings
-    - Transcription and AI processing usage
-    - Integration and storage costs
-    
-    Most teams find Meeting Agents cost-effective compared to the time saved on manual note-taking and follow-up.
-  </Accordion>
-
-  <Accordion title="Can Meeting Agents join meetings automatically?">
-    Yes! Meeting Agents can:
-    - Monitor your calendar for upcoming meetings
-    - Automatically join meetings with video conference links
-    - Join only specific types of meetings based on criteria
-    - Require manual triggering for sensitive meetings
-    
-    You have full control over when and how agents join meetings.
-  </Accordion>
-</AccordionGroup>
-
-## Next Steps
+## Getting Started
 
 <CardGroup cols={2}>
   <Card title="Meeting Notetaker Guide" icon="microphone" href="/agent/use-cases/meeting-notetaker">
-    Learn how to set up a Meeting Notetaker Agent with step-by-step instructions
+    Set up automatic transcription and summaries
   </Card>
   <Card title="Meeting Scheduling Guide" icon="calendar-days" href="/agent/use-cases/meeting-scheduling">
-    Automate meeting scheduling with AI-powered coordination
+    Automate meeting coordination
   </Card>
-  <Card title="RecallAI Integration" icon="robot" href="/integrations/popular-integrations/recallai">
-    Connect RecallAI to enable meeting bot functionality
+  <Card title="On-Call AI Commands" icon="bolt" href="/agent/advanced-features/on-call-ai-commands">
+    Control your agent during live meetings
   </Card>
-  <Card title="Realtime Commands" icon="bolt" href="/agent/advanced-features/interaction-webhooks">
-    Enable "On Call" commands for interactive meeting control
+  <Card title="View Templates" icon="clone" href="https://relevanceai.com/agent-templates-meetings/">
+    Clone pre-built meeting agent templates
   </Card>
 </CardGroup>
-
----
-
-<Tip>
-**Ready to get started?** Clone a Meeting Agent template from the [Marketplace](https://relevanceai.com/agent-templates-meetings/) and customize it for your team's needs.
-</Tip>
