@@ -1,0 +1,542 @@
+---
+title: "Meeting Notetaker Agent"
+sidebarTitle: "Meeting Notetaker"
+description: "Automatically join meetings, transcribe conversations, and generate summaries with action items"
+icon: "microphone"
+---
+
+## Overview
+
+A Meeting Notetaker Agent automatically joins your meetings, records and transcribes conversations in real-time, and generates comprehensive summaries with action items. It eliminates manual note-taking and ensures no important details are missed.
+
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.loom.com/embed/2d3d2b0706f94f3d8a3c00710e4b6dd3"
+  frameBorder="0"
+  allowFullScreen
+  className="rounded-xl"
+></iframe>
+
+## How It Works
+
+<Steps>
+  <Step title="Pre-Meeting: Automatic Triggering">
+    The agent monitors your calendar and automatically joins meetings with video conference links
+  </Step>
+  
+  <Step title="During Meeting: Recording & Transcription">
+    A meeting bot joins as a participant, records audio/video, and transcribes in real-time with speaker identification
+  </Step>
+  
+  <Step title="Post-Meeting: Processing & Distribution">
+    The agent generates summaries, extracts action items, and distributes to Slack, email, or other tools
+  </Step>
+</Steps>
+
+## Setting Up Your Meeting Notetaker Agent
+
+### Prerequisites
+
+Before setting up your Meeting Notetaker Agent, ensure you have:
+
+<CardGroup cols={2}>
+  <Card title="RecallAI Integration" icon="robot" href="/integrations/popular-integrations/recallai">
+    Required for meeting bot functionality
+  </Card>
+  <Card title="Google Calendar Integration" icon="calendar" href="/integrations/popular-integrations/google-calendar">
+    Required for automatic meeting detection (optional for manual triggering)
+  </Card>
+</CardGroup>
+
+### Step 1: Connect Integrations
+
+<Tabs>
+  <Tab title="RecallAI">
+    1. Navigate to **Integrations & API Keys** in the left sidebar
+    2. Find and click on "RecallAI"
+    3. Click "Connect" and follow the authentication flow
+    4. Your RecallAI integration is now ready to use
+  </Tab>
+  
+  <Tab title="Google Calendar">
+    1. Navigate to **Integrations & API Keys**
+    2. Find and click on "Google Calendar"
+    3. Click "Connect" and authenticate with Google
+    4. Grant **calendar-read-write** permissions
+    5. Your calendar is now connected
+  </Tab>
+</Tabs>
+
+### Step 2: Create Your Agent
+
+You can either clone a pre-built template or create from scratch:
+
+<CardGroup cols={2}>
+  <Card title="Clone Template" icon="copy" href="https://relevanceai.com/agent-templates-meetings/">
+    Start with a ready-to-use Meeting Notetaker template from the Marketplace
+  </Card>
+  <Card title="Build From Scratch" icon="hammer">
+    Create a new agent and add the "Send Meeting Bot" tool manually
+  </Card>
+</CardGroup>
+
+### Step 3: Configure the Send Meeting Bot Tool
+
+The **Send Meeting Bot** tool (powered by RecallAI) is the core of your Meeting Notetaker Agent.
+
+1. In your agent's **Tools** section, add "Send Meeting Bot"
+2. Configure the tool settings:
+   - **Meeting URL**: The video conference link (Google Meet, Zoom, Teams)
+   - **Bot Name**: How the bot appears in the meeting (e.g., "Notetaker Bot")
+   - **Recording Settings**: Audio, video, or both
+   - **Transcription**: Enable real-time transcription
+   - **Speaker Identification**: Automatically identify who said what
+
+<Note>
+The meeting bot will join as a visible participant. Always ensure participants are aware of the recording.
+</Note>
+
+## Triggering Your Meeting Notetaker
+
+There are two ways to trigger your Meeting Notetaker Agent:
+
+### Option 1: Automatic Calendar Monitoring (Recommended)
+
+Set up automatic triggering so the agent joins meetings without manual intervention:
+
+<Steps>
+  <Step title="Configure Calendar Trigger">
+    1. Go to your agent's **Triggers** section
+    2. Select "Google Calendar" as the trigger
+    3. The agent will check your calendar every **2 minutes** for upcoming meetings
+  </Step>
+  
+  <Step title="Set Meeting Criteria">
+    Define which meetings to join:
+    - Meetings with video conference links (Google Meet, Zoom, Teams)
+    - Specific calendar(s) to monitor
+    - Meeting title keywords (optional)
+    - Time window (e.g., join 1 minute before start)
+  </Step>
+  
+  <Step title="Test the Setup">
+    Create a test meeting in your calendar with a video link and verify the agent joins automatically
+  </Step>
+</Steps>
+
+### Option 2: Manual Triggering
+
+Send a meeting link directly to your agent:
+
+1. Copy the meeting link (Google Meet, Zoom, or Teams)
+2. Send it to your agent via chat or API
+3. The agent will immediately join the meeting
+
+<Tip>
+Manual triggering is useful for ad-hoc meetings or when you want selective control over which meetings to record.
+</Tip>
+
+## NEW: Realtime "On Call" Commands
+
+<Note>
+**This is a powerful new feature!** Your Meeting Notetaker can now respond to commands during live meetings.
+</Note>
+
+### What Are Realtime Commands?
+
+Realtime "On Call" Commands allow meeting participants to interact with your agent during the meeting by mentioning trigger words in the chat. The agent can:
+
+- Pause and resume recording
+- Perform Google searches
+- Send messages to meeting participants
+- Connect to tools like Notion, Slack, Google Docs
+- Execute custom actions
+
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.loom.com/embed/2d3d2b0706f94f3d8a3c00710e4b6dd3"
+  frameBorder="0"
+  allowFullScreen
+  className="rounded-xl"
+></iframe>
+
+### Setting Up Realtime Commands
+
+<Steps>
+  <Step title="Enable Interaction Webhooks">
+    1. Go to your agent's **Advanced Settings**
+    2. Navigate to **Interaction Webhooks**
+    3. Enable the webhook functionality
+  </Step>
+  
+  <Step title="Configure Trigger Words">
+    Set up keywords that activate the agent:
+    
+    ```json
+    {
+      "trigger_words": ["@notetaker", "hey bot", "assistant"],
+      "actions": {
+        "pause": "pause recording",
+        "resume": "resume recording",
+        "search": "search for",
+        "note": "make a note"
+      }
+    }
+    ```
+  </Step>
+  
+  <Step title="Define Actions">
+    Configure what happens when trigger words are detected:
+    - **Pause/Resume**: Control recording during sensitive discussions
+    - **Search**: Perform Google searches and share results
+    - **Note**: Add specific notes or highlights
+    - **Custom Tools**: Connect to any tool in your agent's toolkit
+  </Step>
+</Steps>
+
+### Example Use Cases for Realtime Commands
+
+<AccordionGroup>
+  <Accordion title="Pause Recording for Sensitive Topics" icon="pause">
+    **Scenario**: During a meeting, a sensitive topic comes up that shouldn't be recorded.
+    
+    **Command**: Participant types in chat: "@notetaker pause recording"
+    
+    **Result**: The agent immediately pauses recording until "resume recording" is mentioned.
+  </Accordion>
+  
+  <Accordion title="Live Google Search" icon="magnifying-glass">
+    **Scenario**: Someone mentions a competitor or technology you want to research.
+    
+    **Command**: "@notetaker search for [competitor name] pricing"
+    
+    **Result**: Agent performs a Google search and shares key findings in the meeting chat.
+  </Accordion>
+  
+  <Accordion title="Create Action Items On-the-Fly" icon="list-check">
+    **Scenario**: An important action item is discussed that needs immediate documentation.
+    
+    **Command**: "@notetaker note: Follow up with legal team by Friday"
+    
+    **Result**: Agent adds this to a priority action items list and can send to Slack immediately.
+  </Accordion>
+  
+  <Accordion title="Send Messages to Participants" icon="message">
+    **Scenario**: You want to share a link or document with all participants.
+    
+    **Command**: "@notetaker send link to product roadmap"
+    
+    **Result**: Agent retrieves the link from your knowledge base and posts it in the meeting chat.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+Learn more about configuring Interaction Webhooks in the [Advanced Features documentation](/agent/advanced-features/interaction-webhooks).
+</Tip>
+
+## During the Meeting
+
+### What the Meeting Bot Does
+
+Once the bot joins your meeting:
+
+<CardGroup cols={2}>
+  <Card title="Records Audio/Video" icon="record-vinyl">
+    Captures high-quality audio and video of the entire meeting
+  </Card>
+  <Card title="Transcribes in Real-Time" icon="closed-captioning">
+    Converts speech to text as the conversation happens
+  </Card>
+  <Card title="Identifies Speakers" icon="users">
+    Attributes quotes to specific participants automatically
+  </Card>
+  <Card title="Responds to Commands" icon="bolt">
+    Reacts to trigger words mentioned in the meeting chat
+  </Card>
+</CardGroup>
+
+### Supported Platforms
+
+The Meeting Notetaker works with:
+
+- **Google Meet**: Full support for recording and transcription
+- **Zoom**: Full support (requires host permissions for recording)
+- **Microsoft Teams**: Full support for enterprise accounts
+
+<Warning>
+Some platforms require the meeting host to grant recording permissions. Ensure your bot has the necessary permissions before the meeting starts.
+</Warning>
+
+## Post-Meeting Processing
+
+After the meeting ends, your agent automatically processes the recording:
+
+### 1. Transcript Generation
+
+The agent receives the full transcript with:
+- Speaker identification
+- Timestamps for each statement
+- High accuracy transcription (90%+ for clear audio)
+
+### 2. AI-Powered Summarization
+
+Your agent analyzes the transcript and generates:
+
+<Tabs>
+  <Tab title="Meeting Summary">
+    A concise overview of the meeting including:
+    - Key topics discussed
+    - Main decisions made
+    - Important quotes and insights
+    - Meeting participants
+  </Tab>
+  
+  <Tab title="Action Items">
+    Extracted action items with:
+    - Task description
+    - Assigned owner (if mentioned)
+    - Due date (if mentioned)
+    - Priority level
+  </Tab>
+  
+  <Tab title="Key Decisions">
+    Important decisions including:
+    - What was decided
+    - Who made the decision
+    - Rationale provided
+    - Next steps
+  </Tab>
+  
+  <Tab title="Questions & Answers">
+    Unanswered questions and their responses:
+    - Questions raised
+    - Answers provided
+    - Follow-up items
+  </Tab>
+</Tabs>
+
+### 3. Custom Processing
+
+You can customize what your agent extracts by modifying the prompt:
+
+```
+Analyze this meeting transcript and extract:
+1. All action items with owners and deadlines
+2. Key decisions made and their rationale
+3. Any risks or concerns mentioned
+4. Customer feedback or feature requests
+5. Competitive intelligence discussed
+```
+
+## Distribution Options
+
+After processing, your agent can automatically distribute the meeting summary:
+
+### Slack Integration
+
+<Steps>
+  <Step title="Connect Slack">
+    Add the Slack integration to your agent
+  </Step>
+  
+  <Step title="Configure Channel">
+    Specify which Slack channel(s) to post summaries to
+  </Step>
+  
+  <Step title="Customize Format">
+    Use Slack formatting for rich, interactive summaries with action items as checkboxes
+  </Step>
+</Steps>
+
+### Email Distribution
+
+Send summaries via email to:
+- All meeting participants
+- Specific team members
+- Distribution lists
+
+### Document Creation
+
+Automatically create documents in:
+- **Google Docs**: Full meeting notes with formatting
+- **Notion**: Add to meeting notes database
+- **Confluence**: Create meeting minutes pages
+
+### CRM Integration
+
+For customer meetings, update your CRM:
+- **Salesforce**: Log meeting notes and action items
+- **HubSpot**: Create meeting activities and tasks
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Always Announce the Bot" icon="bullhorn">
+    When the bot joins, have it introduce itself:
+    
+    "Hi everyone, Notetaker Bot has joined to record and transcribe this meeting. All participants will receive a summary afterward."
+    
+    This ensures transparency and consent.
+  </Accordion>
+  
+  <Accordion title="Test Audio Quality" icon="volume">
+    Before important meetings:
+    - Run a test meeting to verify audio quality
+    - Ensure all participants have clear microphones
+    - Check that speaker identification works correctly
+  </Accordion>
+  
+  <Accordion title="Customize Summaries by Meeting Type" icon="sliders">
+    Create different agents or prompts for different meeting types:
+    - **Sales calls**: Focus on customer pain points and objections
+    - **Sprint planning**: Extract tasks and estimates
+    - **1-on-1s**: Capture feedback and development goals
+  </Accordion>
+  
+  <Accordion title="Set Up Escalations" icon="bell">
+    Configure your agent to escalate when:
+    - Transcription quality is poor
+    - Important decisions need human review
+    - Sensitive topics are discussed
+  </Accordion>
+  
+  <Accordion title="Review and Refine" icon="arrows-rotate">
+    Regularly review meeting summaries and:
+    - Adjust prompts to improve extraction
+    - Add custom fields for your use case
+    - Train the agent on your terminology
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Bot Not Joining Meetings" icon="circle-xmark">
+    **Possible causes:**
+    - Calendar integration not properly connected
+    - Meeting link not recognized (ensure it's a valid Google Meet, Zoom, or Teams link)
+    - Agent trigger not configured correctly
+    
+    **Solutions:**
+    - Verify Google Calendar integration has calendar-read-write permissions
+    - Test with a manual trigger first
+    - Check agent logs for error messages
+  </Accordion>
+  
+  <Accordion title="Poor Transcription Quality" icon="microphone-slash">
+    **Possible causes:**
+    - Background noise or poor audio quality
+    - Multiple people speaking simultaneously
+    - Accents or technical jargon
+    
+    **Solutions:**
+    - Encourage participants to use headsets
+    - Request one person speaks at a time
+    - Add custom vocabulary to improve accuracy
+  </Accordion>
+  
+  <Accordion title="Bot Kicked from Meeting" icon="user-xmark">
+    **Possible causes:**
+    - Host didn't grant recording permissions
+    - Platform security settings blocking bots
+    
+    **Solutions:**
+    - Ensure meeting host is aware and approves bot
+    - Check platform settings for bot permissions
+    - Use manual trigger after host joins
+  </Accordion>
+  
+  <Accordion title="Missing Action Items" icon="list">
+    **Possible causes:**
+    - Action items not clearly stated in meeting
+    - Prompt not optimized for extraction
+    
+    **Solutions:**
+    - Encourage explicit action item statements ("Action item: John will...")
+    - Refine agent prompt with examples
+    - Use realtime commands to flag action items during meeting
+  </Accordion>
+</AccordionGroup>
+
+## Advanced Configurations
+
+### Multi-Language Support
+
+Configure your agent to transcribe in different languages:
+- Set the transcription language in RecallAI settings
+- Adjust prompts for language-specific summarization
+- Use translation tools for multilingual teams
+
+### Custom Summary Templates
+
+Create structured summaries with custom sections:
+
+```markdown
+# Meeting Summary: {{meeting_title}}
+**Date**: {{date}}
+**Participants**: {{participants}}
+
+## Executive Summary
+{{executive_summary}}
+
+## Discussion Points
+{{discussion_points}}
+
+## Decisions Made
+{{decisions}}
+
+## Action Items
+{{action_items}}
+
+## Next Steps
+{{next_steps}}
+```
+
+### Integration with Project Management
+
+Automatically create tasks from action items:
+- **Jira**: Create tickets from action items
+- **Asana**: Add tasks to projects
+- **Trello**: Create cards with due dates
+
+## Security & Compliance
+
+<CardGroup cols={2}>
+  <Card title="SOC-2 Compliant" icon="shield-check">
+    RecallAI is SOC-2 certified for enterprise security
+  </Card>
+  <Card title="Data Encryption" icon="lock">
+    All recordings and transcripts are encrypted at rest and in transit
+  </Card>
+  <Card title="Access Controls" icon="user-lock">
+    Configure who can access meeting recordings and transcripts
+  </Card>
+  <Card title="Data Retention" icon="clock-rotate-left">
+    Set custom retention policies to auto-delete after specified periods
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="RecallAI Integration" icon="robot" href="/integrations/popular-integrations/recallai">
+    Learn more about the RecallAI integration
+  </Card>
+  <Card title="Interaction Webhooks" icon="bolt" href="/agent/advanced-features/interaction-webhooks">
+    Deep dive into Realtime "On Call" Commands
+  </Card>
+  <Card title="Google Calendar Setup" icon="calendar" href="/integrations/popular-integrations/google-calendar">
+    Configure calendar integration for automatic triggering
+  </Card>
+  <Card title="Browse Templates" icon="store" href="https://relevanceai.com/agent-templates-meetings/">
+    Clone pre-built Meeting Notetaker templates
+  </Card>
+</CardGroup>
+
+---
+
+<Tip>
+**Ready to get started?** Clone a [Meeting Notetaker template](https://relevanceai.com/agent-templates-meetings/) from the Marketplace and customize it for your team's needs.
+</Tip>
