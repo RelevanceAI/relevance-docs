@@ -1,0 +1,464 @@
+---
+title: "RecallAI"
+description: "Connect RecallAI to enable meeting bot functionality for your agents"
+icon: "robot"
+---
+
+## Overview
+
+RecallAI is an enterprise-grade meeting bot platform that powers Meeting Notetaker Agents in Relevance AI. It enables your agents to join video conferences, record meetings, transcribe conversations in real-time, and identify speakers automatically.
+
+With RecallAI integration, your agents can participate in meetings on Google Meet, Zoom, and Microsoft Teams as bot participants, capturing every detail without manual intervention.
+
+## What is RecallAI?
+
+RecallAI provides the underlying technology that allows AI agents to:
+
+<CardGroup cols={2}>
+  <Card title="Join Video Meetings" icon="video">
+    Automatically join Google Meet, Zoom, and Microsoft Teams meetings as a bot participant
+  </Card>
+  <Card title="Record & Transcribe" icon="microphone">
+    Capture high-quality audio/video and generate real-time transcriptions with speaker identification
+  </Card>
+  <Card title="Enterprise Security" icon="shield-check">
+    SOC-2 compliant infrastructure with encryption at rest and in transit
+  </Card>
+  <Card title="Scalable Platform" icon="server">
+    Handle unlimited concurrent meetings without performance degradation
+  </Card>
+</CardGroup>
+
+## Key Features
+
+### Universal Platform Support
+
+RecallAI works seamlessly with major video conferencing platforms:
+
+- **Google Meet**: Full support for recording and transcription
+- **Zoom**: Complete integration (requires host permissions for recording)
+- **Microsoft Teams**: Full support for enterprise accounts
+
+### Real-Time Transcription
+
+<AccordionGroup>
+  <Accordion title="High Accuracy Transcription" icon="closed-captioning">
+    - 90%+ accuracy for clear audio in English
+    - Support for multiple languages
+    - Improved accuracy with good audio quality
+    - Custom vocabulary for technical terms
+  </Accordion>
+  
+  <Accordion title="Speaker Identification" icon="users">
+    - Automatically identifies and labels different speakers
+    - Attributes quotes to specific participants
+    - Distinguishes between multiple speakers in real-time
+    - Works with varying audio quality
+  </Accordion>
+  
+  <Accordion title="Timestamp Precision" icon="clock">
+    - Timestamps for every statement
+    - Precise timing for action items and decisions
+    - Easy navigation through long transcripts
+    - Searchable by time and speaker
+  </Accordion>
+</AccordionGroup>
+
+### Enterprise-Grade Security
+
+<CardGroup cols={2}>
+  <Card title="SOC-2 Certified" icon="certificate">
+    RecallAI maintains SOC-2 Type II certification for enterprise security standards
+  </Card>
+  <Card title="Data Encryption" icon="lock">
+    All meeting data is encrypted in transit (TLS 1.3) and at rest (AES-256)
+  </Card>
+  <Card title="Access Controls" icon="user-shield">
+    Role-based access controls for meeting recordings and transcripts
+  </Card>
+  <Card title="Compliance Ready" icon="file-shield">
+    GDPR and CCPA compliant data handling and retention policies
+  </Card>
+</CardGroup>
+
+## Connecting RecallAI Integration
+
+<Steps>
+  <Step title="Navigate to Integrations">
+    1. Log in to your Relevance AI account
+    2. Click on **Integrations & API Keys** in the left sidebar
+    3. Find "RecallAI" in the integrations directory
+  </Step>
+  
+  <Step title="Connect Your Account">
+    1. Click the **Connect** button next to RecallAI
+    2. You'll be redirected to RecallAI's authentication page
+    3. Sign in with your RecallAI account or create a new one
+    4. Review and approve the requested permissions
+  </Step>
+  
+  <Step title="Verify Connection">
+    1. You'll be redirected back to Relevance AI
+    2. Verify that RecallAI shows as "Connected" in your integrations list
+    3. Your RecallAI integration is now ready to use
+  </Step>
+</Steps>
+
+<Note>
+If you don't have a RecallAI account, one will be created automatically when you connect the integration.
+</Note>
+
+## Using the Send Meeting Bot Tool
+
+The **Send Meeting Bot** tool is the primary way to use RecallAI in your agents. This tool sends a bot to join and record meetings.
+
+### Tool Configuration
+
+When adding the Send Meeting Bot tool to your agent:
+
+<ParamField path="meeting_url" type="string" required>
+  The video conference URL (Google Meet, Zoom, or Microsoft Teams link)
+</ParamField>
+
+<ParamField path="bot_name" type="string">
+  The name displayed for the bot in the meeting (default: "Notetaker Bot")
+</ParamField>
+
+<ParamField path="recording_mode" type="string">
+  What to record: "audio_only", "video_only", or "audio_and_video" (default)
+</ParamField>
+
+<ParamField path="transcription_enabled" type="boolean">
+  Enable real-time transcription (default: true)
+</ParamField>
+
+<ParamField path="speaker_identification" type="boolean">
+  Enable automatic speaker identification (default: true)
+</ParamField>
+
+<ParamField path="join_at" type="string">
+  When to join: "immediately", "at_scheduled_time", or specific timestamp
+</ParamField>
+
+### Example Tool Usage
+
+In your agent's tool configuration:
+
+```json
+{
+  "tool": "send_meeting_bot",
+  "parameters": {
+    "meeting_url": "{{meeting_link}}",
+    "bot_name": "Meeting Assistant",
+    "recording_mode": "audio_and_video",
+    "transcription_enabled": true,
+    "speaker_identification": true,
+    "join_at": "immediately"
+  }
+}
+```
+
+### Tool Output
+
+After the meeting ends, the tool returns:
+
+<ResponseField name="transcript" type="string">
+  Full transcript of the meeting with speaker labels and timestamps
+</ResponseField>
+
+<ResponseField name="recording_url" type="string">
+  URL to access the meeting recording (audio/video)
+</ResponseField>
+
+<ResponseField name="duration" type="number">
+  Meeting duration in seconds
+</ResponseField>
+
+<ResponseField name="participants" type="array">
+  List of meeting participants identified during the call
+</ResponseField>
+
+<ResponseField name="speakers" type="array">
+  List of speakers with their speaking time and segments
+</ResponseField>
+
+## Meeting Bot Behavior
+
+### Joining Meetings
+
+When your agent sends a meeting bot:
+
+<Steps>
+  <Step title="Bot Enters Meeting">
+    The bot joins as a visible participant with the configured name
+  </Step>
+  
+  <Step title="Announcement (Optional)">
+    Configure the bot to announce itself: "Hi, I'm Meeting Assistant, here to record and transcribe this meeting"
+  </Step>
+  
+  <Step title="Recording Starts">
+    Recording and transcription begin immediately upon joining
+  </Step>
+  
+  <Step title="Continuous Monitoring">
+    Bot remains in the meeting until it ends or is manually removed
+  </Step>
+</Steps>
+
+### During the Meeting
+
+The meeting bot:
+
+- **Appears as a participant** in the participant list
+- **Records audio/video** based on your configuration
+- **Transcribes in real-time** with speaker identification
+- **Responds to commands** if Interaction Webhooks are enabled
+- **Handles interruptions** gracefully (network issues, platform changes)
+
+### After the Meeting
+
+Once the meeting ends:
+
+- **Processing begins** immediately
+- **Transcript is generated** with full speaker attribution
+- **Recording is uploaded** to secure storage
+- **Data is returned** to your agent for further processing
+
+## Platform-Specific Considerations
+
+<Tabs>
+  <Tab title="Google Meet">
+    **Requirements:**
+    - Meeting must be started before bot can join
+    - No special permissions required
+    - Bot appears as regular participant
+    
+    **Best Practices:**
+    - Have host start meeting before bot joins
+    - Ensure meeting link is valid and accessible
+    - Bot name should be descriptive
+  </Tab>
+  
+  <Tab title="Zoom">
+    **Requirements:**
+    - Host must enable recording permissions
+    - Bot needs to be admitted from waiting room (if enabled)
+    - Account settings may restrict bot access
+    
+    **Best Practices:**
+    - Coordinate with meeting host beforehand
+    - Disable waiting room for bot meetings
+    - Configure Zoom settings to allow recording
+  </Tab>
+  
+  <Tab title="Microsoft Teams">
+    **Requirements:**
+    - Works with enterprise Teams accounts
+    - May require admin approval for bot access
+    - Recording permissions must be enabled
+    
+    **Best Practices:**
+    - Verify Teams recording policies
+    - Ensure bot has necessary permissions
+    - Test with internal meetings first
+  </Tab>
+</Tabs>
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Meeting Notetaker Agents" icon="microphone">
+    Automatically join meetings, transcribe conversations, and generate summaries with action items.
+    
+    [Learn more about Meeting Notetaker Agents →](/agent/use-cases/meeting-notetaker)
+  </Accordion>
+  
+  <Accordion title="Sales Call Recording" icon="phone">
+    Record and analyze sales calls to extract customer pain points, objections, and requirements.
+  </Accordion>
+  
+  <Accordion title="Customer Support Quality Assurance" icon="headset">
+    Monitor support calls for quality assurance and training purposes.
+  </Accordion>
+  
+  <Accordion title="Interview Recording" icon="user-tie">
+    Record candidate interviews with consent for hiring team review and evaluation.
+  </Accordion>
+  
+  <Accordion title="Training & Onboarding" icon="graduation-cap">
+    Capture training sessions and create searchable knowledge bases from recorded content.
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Always Obtain Consent" icon="handshake">
+    **Legal Requirement**: Always inform participants that the meeting is being recorded and obtain consent.
+    
+    - Configure bot to announce itself when joining
+    - Include recording notice in meeting invitations
+    - Comply with local recording consent laws
+    - Provide opt-out options when appropriate
+  </Accordion>
+  
+  <Accordion title="Use Descriptive Bot Names" icon="tag">
+    Choose bot names that clearly indicate their purpose:
+    - ✅ "Meeting Notetaker Bot"
+    - ✅ "Sales Call Recorder"
+    - ✅ "Training Session Assistant"
+    - ❌ "Bot" or "Unknown"
+  </Accordion>
+  
+  <Accordion title="Test Before Important Meetings" icon="flask">
+    Always test your meeting bot setup:
+    - Run test meetings to verify audio quality
+    - Check transcription accuracy
+    - Ensure bot joins successfully
+    - Verify recording and transcript delivery
+  </Accordion>
+  
+  <Accordion title="Optimize Audio Quality" icon="volume">
+    Better audio = better transcription:
+    - Encourage participants to use headsets
+    - Minimize background noise
+    - Request one person speaks at a time
+    - Use high-quality microphones when possible
+  </Accordion>
+  
+  <Accordion title="Set Data Retention Policies" icon="clock-rotate-left">
+    Configure how long to retain meeting data:
+    - Define retention periods based on meeting type
+    - Automatically delete recordings after specified time
+    - Comply with data privacy regulations
+    - Archive important meetings separately
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Bot Can't Join Meeting" icon="circle-xmark">
+    **Possible Causes:**
+    - Invalid or expired meeting link
+    - Meeting hasn't started yet
+    - Platform-specific restrictions
+    - Waiting room enabled (Zoom)
+    
+    **Solutions:**
+    - Verify meeting link is correct and active
+    - Ensure meeting has started before bot joins
+    - Check platform settings and permissions
+    - Disable waiting room or admit bot manually
+  </Accordion>
+  
+  <Accordion title="Poor Transcription Quality" icon="microphone-slash">
+    **Possible Causes:**
+    - Background noise or poor audio
+    - Multiple people speaking simultaneously
+    - Accents or technical jargon
+    - Low-quality microphones
+    
+    **Solutions:**
+    - Improve audio quality (use headsets)
+    - Request one speaker at a time
+    - Add custom vocabulary for technical terms
+    - Use higher quality audio equipment
+  </Accordion>
+  
+  <Accordion title="Bot Removed from Meeting" icon="user-xmark">
+    **Possible Causes:**
+    - Host manually removed bot
+    - Platform security settings
+    - Insufficient permissions
+    
+    **Solutions:**
+    - Coordinate with meeting host beforehand
+    - Verify bot has necessary permissions
+    - Check platform security settings
+    - Use manual trigger after host approval
+  </Accordion>
+  
+  <Accordion title="Missing Transcript or Recording" icon="file-slash">
+    **Possible Causes:**
+    - Meeting ended abruptly
+    - Network connectivity issues
+    - Processing errors
+    
+    **Solutions:**
+    - Check agent logs for errors
+    - Verify network connectivity was stable
+    - Contact support if issue persists
+    - Implement retry logic in agent
+  </Accordion>
+</AccordionGroup>
+
+## Pricing & Limits
+
+RecallAI usage is metered based on:
+
+- **Meeting duration**: Charged per minute of recording
+- **Transcription**: Included with recording
+- **Storage**: Recordings stored for configured retention period
+
+<Note>
+Pricing details are available in your Relevance AI billing dashboard. Contact sales for enterprise pricing and volume discounts.
+</Note>
+
+## Security & Compliance
+
+### Data Handling
+
+<CardGroup cols={2}>
+  <Card title="Encryption" icon="lock">
+    - TLS 1.3 for data in transit
+    - AES-256 for data at rest
+    - Encrypted backups
+  </Card>
+  <Card title="Access Control" icon="user-lock">
+    - Role-based permissions
+    - Audit logs for all access
+    - Multi-factor authentication
+  </Card>
+  <Card title="Compliance" icon="file-certificate">
+    - SOC-2 Type II certified
+    - GDPR compliant
+    - CCPA compliant
+  </Card>
+  <Card title="Data Residency" icon="globe">
+    - Choose data storage region
+    - Comply with local regulations
+    - Data sovereignty options
+  </Card>
+</CardGroup>
+
+### Privacy Considerations
+
+- **Consent Management**: Always obtain participant consent before recording
+- **Data Minimization**: Only record what's necessary for your use case
+- **Retention Policies**: Automatically delete recordings after specified periods
+- **Access Restrictions**: Limit who can access meeting recordings and transcripts
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Meeting Notetaker Guide" icon="microphone" href="/agent/use-cases/meeting-notetaker">
+    Build a Meeting Notetaker Agent using RecallAI
+  </Card>
+  <Card title="Google Calendar Integration" icon="calendar" href="/integrations/popular-integrations/google-calendar">
+    Connect Google Calendar for automatic meeting detection
+  </Card>
+  <Card title="Interaction Webhooks" icon="bolt" href="/agent/advanced-features/interaction-webhooks">
+    Enable realtime commands during meetings
+  </Card>
+  <Card title="Browse Templates" icon="store" href="https://relevanceai.com/agent-templates-meetings/">
+    Explore pre-built meeting agent templates
+  </Card>
+</CardGroup>
+
+---
+
+<Tip>
+**Getting Started?** Clone a [Meeting Notetaker template](https://relevanceai.com/agent-templates-meetings/) that includes RecallAI integration pre-configured.
+</Tip>
