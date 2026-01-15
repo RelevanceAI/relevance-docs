@@ -66,60 +66,6 @@ Meeting Auto-Scheduling Agents are digital teammates that actively negotiate opt
   </Card>
 </CardGroup>
 
-<Steps>
-  <Step title="Create Agent">
-    Create a new agent named "Meeting Scheduler" or "Demo Scheduler"
-  </Step>
-
-  <Step title="Connect Calendar and Email">
-    **For Google:**
-    1. Go to **Integrations**
-    2. Add **Google (Gmail, Calendar, Docs, & API)**
-    3. Grant calendar and email permissions
-    
-    **For Microsoft:**
-    1. Add **Microsoft 365** integration
-    2. Grant calendar and email permissions
-  </Step>
-
-  <Step title="Set Up Email Trigger">
-    1. Go to **Triggers** → **+ Add Trigger**
-    2. Select your email integration
-    3. Configure keyword matching (e.g., `"demo"` to detect demo requests)
-    
-    Your agent triggers when emails containing that keyword arrive.
-    
-    <Frame>
-      <img src="/images/agent-scheduler-trigger.png" alt="Email trigger setup with keyword matching" />
-    </Frame>
-  </Step>
-
-  <Step title="Add Calendar Tools">
-    Add these tools:
-    - Check Calendar Availability
-    - Create Calendar Event
-    - Send Calendar Invitation
-    - Add Video Conference Link
-  </Step>
-
-  <Step title="Configure Prompt">
-    ```
-    You are a meeting scheduler. When asked to schedule:
-    1. Extract: participants, duration, timeframe, preferences
-    2. Check everyone's availability
-    3. Propose 2-3 times that work (respect timezones, working hours)
-    4. Once confirmed, create event with video link and invitations
-    ```
-  </Step>
-
-  <Step title="Test">
-    Send an email with your keyword (e.g., "demo") or message your agent:
-    ```
-    Schedule 30 minutes with [colleague] tomorrow
-    ```
-  </Step>
-</Steps>
-
 ## Marketplace Example: Calendar Bookings Scheduler
 
 <Frame>
