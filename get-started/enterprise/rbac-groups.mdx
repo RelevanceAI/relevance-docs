@@ -68,9 +68,19 @@ To view organization-level groups:
 2. Select **Organization**
 3. Click the **User Groups** tab
 
-The groups page displays the name, source (e.g., Entra ID, Okta), and member count for each group synced from your identity provider.
+The groups page displays the name, source (e.g., Entra ID, Okta), and member count for each group synced from your identity provider. **Note: The member count shown represents only users who have logged into Relevance AI, not the total number of users in your IDP group.** As more users from the group sign in for the first time, this count will increase.
 
 To view who is in a group and the permissions they have, simply click on the group. You'll see the complete membership list and group details.
+
+<Info>
+  **Understanding Member Counts**
+  
+  The member count displayed for each group reflects only the users who have already logged into Relevance AI, not the total number of users in your identity provider group.
+  
+  User accounts are created automatically when someone signs in for the first time. Until then, they won't appear in the member count.
+  
+  **Example:** If your IDP group has 1,000 members but Relevance AI shows 100 members, this means only 100 users from that group have logged into Relevance so far. The count will increase as more users sign in.
+</Info>
 
 <Info>
   IDP groups are read-only in Relevance AI. To modify group membership, make changes in your identity provider and they will sync automatically.
