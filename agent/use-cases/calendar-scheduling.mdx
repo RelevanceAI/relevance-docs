@@ -35,22 +35,31 @@ Meeting Auto-Scheduling Agents are digital teammates that actively negotiate opt
   </Card>
 </CardGroup>
 
-## Setup
+## How to Setup
 
-### Critical Triggers for Meeting Scheduling Agents
+### Triggers for Meeting Scheduling Agents
 
-To enable your scheduling agent, you'll need two essential integrations: a calendar provider with read/write access (such as Google Calendar or Outlook) to check availability and create events, and an email trigger (Gmail or Outlook) to monitor your inbox and kick off the agent when scheduling requests arrive. Configure these triggers so your agent can automatically detect scheduling requests and coordinate meetings across your team.
+<Note>
+This example shows tools for Google Calendar. You'll need to follow the same steps if you are using a different calendar provider (Outlook, Apple Calendar, etc.).
+</Note>
 
 **Configure your two essential triggers**
 
 <iframe src="https://app.supademo.com/embed/cmkewuh3y0dv9w7p2l515yatk" 
   frameBorder="0" 
-  title="Meeting Scheduler Critical Triggers Setup" 
+  title="Meeting Scheduler Triggers Setup" 
   allow="clipboard-write; fullscreen" 
   webkitAllowFullscreen="true" 
   mozAllowFullscreen="true" 
   allowFullscreen 
   style={{ position:"relative",top:0,left:0,width:"100%",height:"400px",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+
+To enable your scheduling agent, you'll need two essential integrations:
+
+- **Calendar provider** (Google Calendar or Outlook) with read/write access to check availability and create events
+- **Email trigger** (Gmail or Outlook) to monitor your inbox and kick off the agent when scheduling requests arrive
+
+Configure these triggers so your agent can automatically detect scheduling requests and coordinate meetings across your team.
 
 ### Add Tools to your Scheduling Agent
 
@@ -81,38 +90,50 @@ To build a calendar scheduling agent, you'll need these basic tools to get start
 6. Search for your calendar provider (e.g., "google calendar" or "outlook")
 7. Select the tools you need from the results
 
+<Tip>
+Search for your specific calendar provider to discover available built-in tools.
+</Tip>
+
 <Frame>
   <img src="/images/agent-scheduler-tools.png" alt="Available calendar tools for scheduling agents" />
 </Frame>
 
-<Note>
-This example shows tools for Google Calendar. If you're using a different calendar provider (Outlook, Apple Calendar, etc.), look for similar tools for your platform.
-</Note>
+## Use Case Example: Automating Demo Requests for Sales
 
-## Build a Scheduling Agent Using the Invent Feature
+<Accordion title="Calendar Bookings Scheduler Agent - Clone from Marketplace">
+  
+  **Scenario**
+  
+  Your sales team receives numerous demo requests via email. Instead of manually checking calendars and coordinating schedules, an AI agent can handle the entire process automatically.
+  
+  ---
+  
+  **How it works:**
+  
+  <Steps>
+    <Step title="Monitors Inbox">
+      Automatically detects demo requests from incoming emails
+    </Step>
+    <Step title="Checks Availability">
+      Reviews your calendar in real-time to find open slots
+    </Step>
+    <Step title="Coordinates Timezones">
+      Handles timezone differences automatically to suggest appropriate meeting times
+    </Step>
+    <Step title="Proposes Time Slots">
+      Suggests 30-minute meeting slots across two different days (avoiding weekends)
+    </Step>
+    <Step title="Books & Confirms">
+      - Books immediately if a specific time is requested and available
+      - Proposes 2-3 times per day when flexibility is needed
+      - Sends professional confirmation emails
+    </Step>
+  </Steps>
+  
+  ---
+  
+  **Ready to use this agent?**
+  
+  [Clone from Relevance AI Marketplace →](https://marketplace.relevanceai.com/)
 
-**Example Prompt**
-
-> "Create a Legal Scheduling Coordinator agent that manages multi-district litigation (MDL) deposition schedules using Microsoft Outlook and LawConnect. Monitor incoming deposition requests, cross-reference attorney availability across jurisdictions, and automatically schedule parallel depositions while avoiding conflicts. When scheduling, allocate 4-hour blocks for each deposition, add 1-hour buffer times between sessions, and ensure no attorney is double-booked across jurisdictions. Set up automatic notifications 48 hours before each deposition with location details and participant list. If any attorney becomes unavailable, immediately identify alternative time slots within the next 5 business days and trigger rescheduling notifications to all affected parties."
-
-Use our [Invent feature](/agent/quick-start-guide#invent-an-agent) to adapt this use case to your needs or add your own branded calendar integration.
-
-## Clone Meeting Scheduler Agent from Marketplace
-
-### Calendar Bookings Scheduler
-
-<Frame>
-  <img src="/images/agent-scheduler.png" alt="Calendar Bookings Scheduler agent" />
-</Frame>
-
-This agent monitors your inbox for demo requests, checks your calendar availability, and responds with available time slots. It automatically handles timezone coordination (Australian timezone), suggests 30-minute meeting slots across two different days (avoiding weekends), and sends professional confirmation emails signed as "Cal". If a specific time is requested and available, it books immediately. Otherwise, it proposes 2-3 times per day across different days.
-
-[Relevance AI Marketplace →](https://marketplace.relevanceai.com/)
-
-## Troubleshooting
-
-Need help with your Meeting Auto-Scheduling Agent? Our support team is here to assist with setup issues, integration problems, or any questions you have.
-
-<Card title="Contact Support" icon="headset" href="/get-started/support">
-  Get help with setup, integrations, or any questions
-</Card>
+</Accordion>
