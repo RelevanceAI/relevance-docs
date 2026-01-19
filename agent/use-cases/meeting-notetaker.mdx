@@ -1,0 +1,140 @@
+---
+title: "Meeting Notetaker Agent"
+sidebarTitle: "Meeting Notetaker"
+---
+
+A Meeting Notetaker Agent joins your meetings, records conversations, and generates summaries with action items.
+
+- **Joins automatically**: The agent attends meetings on your behalf
+- **Records everything**: Get video recordings and full transcripts without lifting a finger
+- **No device recording needed**: The agent handles it in the background
+- **Customizable**: Extract insights tailored to your needs, whether product feedback, sales objections, or technical requirements
+
+## Key features
+
+<CardGroup cols={2}>
+  <Card title="Automatic meeting attendance" icon="calendar-check">
+    Agent joins meetings directly from your calendar with no manual intervention required
+  </Card>
+  <Card title="Audio & video recording" icon="video">
+    Captures comprehensive recordings without using your device
+  </Card>
+  <Card title="Speaker-identified transcription" icon="microphone">
+    Creates accurate transcripts with speaker labels and timestamps
+  </Card>
+  <Card title="Intelligent summarization" icon="list-check">
+    Extracts key moments, decisions, and action items automatically
+  </Card>
+  <Card title="Cross-platform support" icon="display">
+    Works with Zoom, Microsoft Teams, and Google Meet
+  </Card>
+  <Card title="Flexible distribution" icon="share-nodes">
+    Send summaries to Slack, email, Google Docs, Notion, or your CRM
+  </Card>
+  <Card title="On-call AI commands" icon="message">
+    Control the agent during live meetings with chat commands
+  </Card>
+  <Card title="Customizable insights" icon="sliders">
+    Tailor outputs to your domain including product feedback, sales objections, and technical requirements
+  </Card>
+</CardGroup>
+
+## How it works
+
+<Steps>
+  <Step title="Pre-meeting" icon="calendar">
+    Agent triggers from your calendar and sends a meeting bot to join.
+  </Step>
+  <Step title="During meeting" icon="video">
+    While you focus on the conversation, the agent works silently:
+    - Capturing comprehensive audio and video recordings
+    - Creating accurate speaker-identified transcription
+    - Detecting key moments, decisions, and actionables
+    - Identifying discussion themes and topic clusters
+  </Step>
+  <Step title="Post-meeting" icon="file-lines">
+    Processes the complete transcript by speaker and timestamp, then extracts domain-specific insights tailored to your needs.
+  </Step>
+</Steps>
+
+## How to setup a Meeting Notetaker Agent
+
+### Step 1: Create your agent
+
+[Create a new agent](/agent/build-your-agent) or clone Nate, a production-ready notetaker from the [Relevance AI Marketplace](https://relevanceai.com/agent-templates-meetings/). If you want to build your own, you can take inspiration from Nate's configuration.
+
+### Step 2: Add critical tools
+
+Your Meeting Notetaker Agent requires these essential tools:
+
+| Tool | Description |
+|------|-------------|
+| **Send meeting bot** | Dispatches the meeting bot to join and record a call |
+| **Send meeting bot message** | Sends a chat message from the meeting bot to participants |
+| **Pause meeting bot recording** | Pauses the recording while staying in the meeting |
+| **Resume meeting bot recording** | Resumes recording after it has been paused |
+| **Turn transcript into text file** | Converts the transcript into a downloadable text file |
+| **Google Search** | Searches the web for keywords during live meetings |
+
+These are pre-built tools available in your agent's tool library.
+
+<Tip>
+Start with **Send meeting bot** and **Turn transcript into text file** for basic functionality. Add the other tools as you expand your agent's capabilities.
+</Tip>
+
+### Step 3: Choose how to run your agent
+
+#### Option A: Automatic (add triggers)
+
+<div style={{ position:"relative",paddingBottom:"56.25%",height:0 }}>
+  <iframe src="https://app.supademo.com/embed/cmkdjwr5c0gx9qm44i9w77ftm" frameBorder="0" title="Setting up Meeting Notetaker triggers" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+Set up triggers if you want your agent to automatically join meetings from your calendar. Connect two triggers:
+
+- **Calendar** (Google Calendar or Outlook): Monitors your schedule and sends the bot to join meetings
+- **Relevance Meeting Bot**: Receives the transcript after the meeting ends
+
+<Note>
+You'll need to admit the bot as a guest into the meeting through your video platform.
+</Note>
+
+#### Option B: manual
+
+If you prefer to run your agent manually, simply send the meeting link directly to your agent:
+
+```
+Join this meeting: https://meet.google.com/abc-def-ghi
+```
+
+## Use cases
+
+Your meeting notes don't have to stay as notes. Connect your Meeting Notetaker to other tools to turn conversations into real deliverables:
+
+<AccordionGroup>
+  <Accordion title="Case studies & testimonials">
+    Had a great customer call? Turn it into a case study or testimonial you can share with prospects.
+  </Accordion>
+  <Accordion title="Product roadmaps">
+    Capture feedback from user interviews and automatically organize it into a product roadmap.
+  </Accordion>
+  <Accordion title="Sales enablement">
+    Use insights from sales calls to improve your pitch. Add a pitch deck tool to automatically create slides from meeting content.
+  </Accordion>
+  <Accordion title="Social content">
+    Record an expert interview and let the agent pull out quotes and highlights for social media posts.
+  </Accordion>
+  <Accordion title="Onboarding docs">
+    Turn training sessions into step-by-step guides for new team members.
+  </Accordion>
+</AccordionGroup>
+
+## Advanced: On-call AI commands
+
+You can control your agent in real-time by typing commands in the meeting chat:
+
+- **Pause recording**: Stop recording during sensitive discussions
+- **Search**: Get instant research while you're still on the call
+- **Add notes**: Flag important items to highlight in the summary
+
+[Learn more →](/agent/advanced-features/on-call-ai-commands)
