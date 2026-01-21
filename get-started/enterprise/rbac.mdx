@@ -181,6 +181,35 @@ Upon asset creation, the creator becomes the admin. An asset can have multiple a
 
 ----
 
+## Workforce Permissions
+
+Workforces are treated as first-class assets in the RBAC system. However, running a workforce requires permissions at two levels:
+
+1. **Workforce permission** - The user must have at least Member (run) access to the workforce itself
+2. **Agent permissions** - The user must have at least Member (run) access to each agent used within the workforce
+
+This means when sharing a workforce, you must:
+- Share the workforce with the user at the desired permission level
+- Share each agent in the workforce at a matching (or higher) permission level
+
+### Example scenarios
+
+| Goal | Workforce Role | Agent Roles |
+|------|----------------|-------------|
+| User can run workforce | Member | Member on all agents |
+| User can edit workforce | Admin | Admin on all agents |
+| User can view but not run | Viewer | Viewer on all agents |
+
+<Info>
+**Note:** If a user has run access to a workforce but lacks permissions on one or more agents, they will see a "Cannot run agent" warning in the workforce builder and will be unable to execute the workflow.
+</Info>
+
+<Tip>
+Learn more about [sharing workforces](/workforce/share-your-workforce) as cloneable templates.
+</Tip>
+
+----
+
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
