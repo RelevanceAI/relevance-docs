@@ -32,6 +32,70 @@ To set up a WhatsApp trigger:
 
 Once configured, your agent will automatically engage with customers through WhatsApp when the trigger conditions are met.
 
+## Understanding Tasks and Conversation Continuity
+
+When your agent receives WhatsApp messages, it's important to understand how tasks are created and how conversation continuity is maintained.
+
+### Task Creation
+
+Each new WhatsApp message creates a new task (execution) for your agent. This happens every time someone sends a message, even in an ongoing conversation. Your agent doesn't run continuously - instead, it executes once per message received.
+
+### Conversation ID Handling
+
+Despite each message creating a new task, conversation continuity is automatically maintained through conversation IDs:
+
+- Messages from the same WhatsApp number (same `wa_id`) will reuse the same conversation ID
+- The system automatically looks up existing conversations based on the sender's WhatsApp ID
+- If a conversation is found, it uses that conversation ID; if not, it creates a new one
+- Your agent will have access to the full conversation history from previous messages
+
+### How It Works
+
+Here's the flow when a WhatsApp message is received:
+
+<Steps>
+  <Step title="Message Received">
+    Person sends WhatsApp message → New task is created
+  </Step>
+  <Step title="Conversation Lookup">
+    System checks: "Have we seen this WhatsApp number before for this agent?"
+  </Step>
+  <Step title="Conversation ID Assignment">
+    - If **YES** → Reuses existing conversation ID (maintains full conversation history)
+    - If **NO** → Creates new conversation ID
+  </Step>
+  <Step title="Agent Execution">
+    Agent executes with access to full conversation context
+  </Step>
+</Steps>
+
+### Key Points
+
+<AccordionGroup>
+  <Accordion title="Each message = New task" icon="bolt">
+    A new execution is triggered for every message received. Your agent doesn't run continuously - it executes once per incoming message.
+  </Accordion>
+  <Accordion title="Same sender = Same conversation ID" icon="messages">
+    Conversation continuity is maintained automatically. Messages from the same WhatsApp number will always use the same conversation ID.
+  </Accordion>
+  <Accordion title="Full history available" icon="clock-rotate-left">
+    Your agent has access to the complete conversation history from previous messages, allowing for contextual responses.
+  </Accordion>
+  <Accordion title="Agent-scoped conversations" icon="user-gear">
+    The conversation ID is scoped per agent. The same WhatsApp number on different agents will have different conversation IDs.
+  </Accordion>
+</AccordionGroup>
+
+### Using Trigger Data for Replies
+
+When building agents that reply to WhatsApp messages, you'll need to use the sender's information from the trigger data:
+
+<Note>
+The `chat_id` parameter (the sender's WhatsApp ID/`wa_id`) is available in the trigger data. This is automatically provided when your agent receives a message. Use this `chat_id` when calling the "Send Message" or "Send Message in Chat" tools to reply to the correct conversation thread.
+</Note>
+
+This ensures your agent's replies are sent to the right person and maintain the conversation thread.
+
 ## Tools & Tool Steps
 
 The WhatsApp Business integration provides a rich set of actions that your agents can use to interact with customers. These actions can be incorporated into your agent's workflow to create sophisticated conversation flows and deliver exceptional customer experiences.
@@ -40,6 +104,10 @@ Here are some of the key actions available:
 
 ### Send Message
 Send text messages to customers through WhatsApp. This action supports rich text formatting, allowing your agent to send well-structured, easy-to-read messages.
+
+<Note>
+**When replying to incoming WhatsApp messages:** Use the `chat_id` (sender's WhatsApp ID/`wa_id`) from the trigger data. This ensures your message is sent to the correct conversation thread and maintains conversation continuity.
+</Note>
 
 ### Send Media
 Share images, documents, videos, or audio files with customers. This is perfect for sending product catalogs, instructional materials, or visual content to enhance the conversation.
