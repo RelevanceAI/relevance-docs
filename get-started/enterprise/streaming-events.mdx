@@ -1,35 +1,50 @@
 ---
-title: "Setting up streaming events to self-hosted S3 bucket"
-sidebarTitle: "Streaming events to S3 buckets"
-description: "Configure streaming events to your own S3 bucket"
+title: "Event Streaming for Observability (OpenTelemetry)"
+sidebarTitle: "Event Streaming (OpenTelemetry)"
+description: "Stream audit logs and execution traces to your own infrastructure for compliance, analytics, and observability"
 ---
 
-This guide explains how to configure streaming events from Relevance to your own S3 bucket for audit logs and business intelligence analytics.
+Stream audit logs and execution traces to your own infrastructure for compliance, analytics, and observability.
 
-<Note>We currently only support S3 buckets as blob stores for streaming events.</Note>
+## Overview
 
-Streaming events provide detailed audit logs and business intelligence data about platform usage, executions, and system events. These events are automatically streamed to your S3 bucket in a structured format for analysis and compliance reporting.
+Relevance AI delivers events in [**OpenTelemetry (OTEL)**](https://opentelemetry.io/) format—an open, vendor-neutral standard for telemetry data. This provides several advantages:
 
-## Prerequisites
+- **Interoperability**: OTEL is supported by most major observability platforms, making it easy to route data to your existing tools
+- **Future-proof**: As an [industry standard backed by CNCF](https://www.cncf.io/projects/opentelemetry/), OTEL ensures your data pipelines won't be locked into proprietary formats
+- **Rich semantics**: Built-in support for traces, logs, and metrics with standardized attribute naming conventions
+- **Correlation**: Trace IDs link related events across agent invocations, LLM calls, and workforce executions
 
-- AWS account permissions to create policies and S3 buckets
-- A Relevance AI account on the Enterprise plan
+You don't need to run an OTEL collector to use this feature. Events are delivered directly to your S3 bucket where you can:
 
-## Instructions
+- Query them directly using Athena, BigQuery, or similar tools
+- Ingest into your data lake (Snowflake, Databricks, etc.)
+- Forward to any OTEL-compatible backend for visualization and alerting
 
-### 1. Create an S3 bucket
+<Note>**S3 is currently the only supported destination**. Support for direct OTEL collector endpoints is on our roadmap.</Note>
 
-Create an S3 bucket in the same region where your Relevance data is stored. Use the following region mapping:
+---
 
-- **Australia**: `ap-southeast-2` (Sydney)
-- **Europe**: `eu-west-2` (London)
-- **US**: `us-east-1` (N. Virginia)
+## Setup
 
-<Warning>Ensure the bucket is created in the correct region.</Warning>
+### Prerequisites
 
-### 2. Add Bucket policy
+- AWS account with permissions to create S3 buckets and bucket policies
+- Relevance AI Enterprise plan
 
-Add the following policy statement to your bucket policy. You'll need to customize the placeholders:
+### 1. Create an S3 Bucket
+
+Create a bucket in the **same AWS region** as your Relevance data:
+
+| Relevance Region | AWS Region |
+| --- | --- |
+| Australia | `ap-southeast-2` (Sydney) |
+| Europe | `eu-west-2` (London) |
+| US | `us-east-1` (N. Virginia) |
+
+### 2. Configure Bucket Policy
+
+Add this policy to allow Relevance to write events to your bucket:
 
 ```json
 {
@@ -51,68 +66,398 @@ Add the following policy statement to your bucket policy. You'll need to customi
 }
 ```
 
-Replace the following placeholders in the policy:
-- **`YOUR_BUCKET_NAME`**: Replace with your actual S3 bucket name in both the Resource ARNs
-- **`RELEVANCE_EVENT_CONSUMER_ROLE_ARN`**: Replace with Relevance's IAM role ARN for your region
+Replace:
 
-<Note>The IAM role ARN is region-specific. Contact your Relevance team for this.</Note>
+- `YOUR_BUCKET_NAME`: Your S3 bucket name
+- `RELEVANCE_EVENT_CONSUMER_ROLE_ARN`: Contact your Relevance team for the region-specific IAM role ARN
 
-### 3. Provide Configuration Information
+### 3. Provide Configuration to Relevance
 
-Once your S3 bucket is configured, provide your Account Manager or our support team with the following information:
+Send your Account Manager or support team:
 
-1. **Bucket Name**: The name of your S3 bucket
-2. **Region**: The AWS region where your bucket is located
-3. **Prefix**: The S3 prefix where you want events to be stored (e.g., `relevance-events/`)
+- **Bucket Name**: Your S3 bucket name
+- **Region**: AWS region of the bucket
+- **Prefix**: S3 prefix for events (e.g., `relevance-events/`)
 
-## Event Structure
+---
 
-Once configured, events will start flowing into your bucket under the specified prefix. The folder structure follows this pattern:
+## Delivery Format
 
-```
-YOUR_PREFIX/
-├── entity=event_type/
-│   └── org_id=organization_id/
-│       └── dt=YYYY-MM-DD/
-│           └── unique_id.gz
-```
-### Example Structure
+**Format**: Gzipped JSON following the OpenTelemetry JSON specification.
+
+**File path pattern**:
 
 ```
-relevance-events/
-├── entity=billing_events/
-│   └── org_id=12345/
-│       └── dt=2025-01-15/
-│           ├── event-consumer-billing-events-production-1-2025-01-15-06-33-27-abc123.gz
-│           └── event-consumer-billing-events-production-1-2025-01-15-08-45-12-def456.gz
-├── entity=execution_events/
-│   └── org_id=12345/
-│       └── dt=2025-01-15/
-│           └── event-consumer-execution-events-production-1-2025-01-15-07-22-15-ghi789.gz
-├── entity=i_a_m_events/
-│   └── org_id=12345/
-│       └── dt=2025-01-15/
-│           └── event-consumer-iam-events-production-1-2025-01-15-09-15-42-jkl012.gz
-└── entity=asset_events/
-    └── org_id=12345/
-        └── dt=2025-01-15/
-            └── event-consumer-asset-events-production-1-2025-01-15-10-30-55-mno345.gz
+{prefix}/customer-otel-{type}-formatted/org_id={org_id}/dt={YYYY-MM-DD}/year={YYYY}/month={MM}/day={DD}/hour={HH}/minute={MM}/{type}_{org_id}_{timestamp}_{uuid}.json.gz
 ```
 
-### Event Types
+**Event types**:
 
-- **`billing_events`**: Usage and billing-related events
-- **`execution_event`**: Execution and performance events
-- **`i_a_m_event`**: Identity and access management events
-- **`asset_event`**: Asset creation, modification, and deletion events
+- `logs` - Audit logs for administrative and lifecycle events
+- `traces` - Execution traces for agents, workforces, and LLM completions
 
-### File Format
+---
 
-- All event files are stored as **gzip-compressed** json objects
-- The `dt=` parameter uses **UTC date format** (YYYY-MM-DD)
-- File names follow the pattern: `event-consumer-{event-type}-{environment}-{instance}-{timestamp}-{uuid}.gz`
-- Each file contains a unique identifier (UUID) to prevent conflicts
+## Logs
 
-## Support and troubleshooting
+Audit logs provide a complete record of activity across your organization for security monitoring, compliance reporting, and operational visibility. Events capture who did what, when, and from where.
 
-If you are having issues with this process, please reach out to your Account Manager or our support team via your dedicated Slack channel for support. 
+<Note>We're actively expanding our event coverage. If there are specific operations or attributes you'd like to see, let your Account Manager know.</Note>
+
+### Structure
+
+```json
+{
+  "resourceLogs": [{
+    "scopeLogs": [{
+      "logRecords": [...]
+    }]
+  }]
+}
+```
+
+### Base Attributes
+
+Included on all log records:
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.organization_id` | string | Yes | Organization ID |
+| `relevance_ai.project_id` | string | Yes | Project ID |
+| `relevance_ai.user_id` | string | No | User ID that performed the action |
+| `relevance_ai.user_email` | string | No | Email of the user |
+| `relevance_ai.user_type` | string | No | Type of user (`user`, `api_key`, etc.) |
+| `relevance_ai.ip_address` | string | No | IP address of the request |
+| `relevance_ai.device_info` | string | No | User agent / device information |
+
+### Log Record Properties
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `timeUnixNano` | int64 | Timestamp in nanoseconds since Unix epoch |
+| `severityNumber` | int | OTEL severity level (9 = Info) |
+| `severityText` | string | `"Info"` |
+| `body.stringValue` | string | The event name |
+| `attributes` | array | Key-value pairs with base + event attributes |
+
+### Supported Events
+
+### Agent Events
+
+**`agent_created`** - Emitted when a new agent is created (from scratch, cloned, or duplicated).
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.agent_id` | string | Yes | ID of the newly created agent |
+| `relevance_ai.event.cloned_from_agent_id` | string | No | Source agent ID if cloned |
+| `relevance_ai.event.cloned_from_region` | string | No | Source region if cloned |
+| `relevance_ai.event.cloned_from_project_id` | string | No | Source project if cloned |
+
+**`agent_updated`** - Emitted when an agent's configuration is updated directly (outside draft/publish workflow).
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.agent_id` | string | Yes | ID of the updated agent |
+
+**`agent_deleted`** - Emitted when an agent is permanently deleted.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.agent_id` | string | Yes | ID of the deleted agent |
+
+**`agent_draft_saved`** - Emitted when work-in-progress changes are saved to an agent.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.agent_id` | string | Yes | ID of the agent being edited |
+| `relevance_ai.event.version_id` | string | Yes | ID of the draft version saved |
+
+**`agent_published`** - Emitted when agent changes are published to make them live.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.agent_id` | string | Yes | ID of the agent being published |
+| `relevance_ai.event.version_id` | string | Yes | ID of the version now live |
+
+### Tool Events
+
+**`tool_created`** - Emitted when a new tool is created (from scratch or cloned).
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.tool_id` | string | Yes | ID of the newly created tool |
+| `relevance_ai.event.cloned_from_tool_id` | string | No | Source tool ID if cloned |
+| `relevance_ai.event.cloned_from_region` | string | No | Source region if cloned |
+| `relevance_ai.event.cloned_from_project_id` | string | No | Source project if cloned |
+
+**`tool_deleted`** - Emitted when a tool is permanently deleted.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.tool_id` | string | Yes | ID of the deleted tool |
+
+**`tool_draft_saved`** - Emitted when work-in-progress changes are saved to a tool.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.tool_id` | string | Yes | ID of the tool being edited |
+| `relevance_ai.event.version_id` | string | No | ID of the draft version saved |
+
+**`tool_published`** - Emitted when tool changes are published to make them live.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.tool_id` | string | Yes | ID of the tool being published |
+| `relevance_ai.event.version_id` | string | Yes | ID of the version now live |
+
+### Workforce Events
+
+**`workforce_created`** - Emitted when a new workforce is created (from scratch, cloned, or duplicated).
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.workforce_id` | string | Yes | ID of the newly created workforce |
+| `relevance_ai.event.cloned_from_workforce_id` | string | No | Source workforce ID if cloned |
+| `relevance_ai.event.cloned_from_region` | string | No | Source region if cloned |
+| `relevance_ai.event.cloned_from_project_id` | string | No | Source project if cloned |
+
+**`workforce_deleted`** - Emitted when a workforce is permanently deleted.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.workforce_id` | string | Yes | ID of the deleted workforce |
+
+**`workforce_draft_saved`** - Emitted when work-in-progress changes are saved to a workforce.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.workforce_id` | string | Yes | ID of the workforce being edited |
+| `relevance_ai.event.version_id` | string | No | ID of the draft version saved |
+
+**`workforce_published`** - Emitted when workforce changes are published to make them live.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.workforce_id` | string | Yes | ID of the workforce being published |
+| `relevance_ai.event.version_id` | string | No | ID of the version now live |
+
+### Permission Events
+
+**`project_user_role_updated`** - Emitted when a user's role within a project is updated. This occurs when an admin changes another user's access level in the project settings.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.target_user_id` | string | Yes | ID of the user whose role was changed |
+| `relevance_ai.event.project_role` | string | Yes | The new project role assigned to the user |
+
+**`organization_user_role_updated`** - Emitted when a user's role within an organization is updated. This occurs when an admin changes another user's organization-level access.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.target_user_id` | string | Yes | ID of the user whose role was changed |
+| `relevance_ai.event.organization_role` | string | Yes | The new organization role assigned to the user |
+
+### Example Log Record
+
+```json
+{
+  "resourceLogs": [{
+    "scopeLogs": [{
+      "logRecords": [{
+        "timeUnixNano": 1768742472616000000,
+        "severityNumber": 9,
+        "severityText": "Info",
+        "body": { "stringValue": "agent_deleted" },
+        "attributes": [
+          { "key": "relevance_ai.organization_id", "value": { "stringValue": "f6fb76a4-..." }},
+          { "key": "relevance_ai.project_id", "value": { "stringValue": "3acde218-..." }},
+          { "key": "relevance_ai.user_id", "value": { "stringValue": "941afb4d-..." }},
+          { "key": "relevance_ai.user_email", "value": { "stringValue": "user@example.com" }},
+          { "key": "relevance_ai.user_type", "value": { "stringValue": "user" }},
+          { "key": "relevance_ai.ip_address", "value": { "stringValue": "119.18.1.156" }},
+          { "key": "relevance_ai.device_info", "value": { "stringValue": "Mozilla/5.0..." }},
+          { "key": "relevance_ai.event.agent_id", "value": { "stringValue": "3d47a9f5-..." }}
+        ],
+        "droppedAttributesCount": 0,
+        "traceId": "",
+        "spanId": ""
+      }]
+    }]
+  }]
+}
+```
+
+---
+
+## Traces
+
+Traces track execution flows for agents, workforces, and LLM completions. Use traces to understand performance, debug issues, and analyze agent behavior.
+
+<Note>We're actively expanding our trace coverage. If there are specific spans or attributes you'd like to see, let your Account Manager know.</Note>
+
+### Structure
+
+```json
+{
+  "resourceSpans": [{
+    "scopeSpans": [{
+      "spans": [...]
+    }]
+  }]
+}
+```
+
+### Base Attributes
+
+Included on all spans:
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.organization_id` | string | Yes | Organization ID |
+| `relevance_ai.project_id` | string | Yes | Project ID |
+| `relevance_ai.user_id` | string | No | User ID that triggered the run |
+| `relevance_ai.user_email` | string | No | Email of the user |
+
+### Span Properties
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `traceId` | string | 32-character hex trace identifier |
+| `spanId` | string | 16-character hex span identifier |
+| `parentSpanId` | string | Parent span ID (if child span) |
+| `name` | string | Span name (e.g., `invoke_agent My Agent`) |
+| `kind` | int | Span kind (3 = CLIENT) |
+| `startTimeUnixNano` | int64 | Start time in nanoseconds |
+| `endTimeUnixNano` | int64 | End time in nanoseconds |
+| `attributes` | array | Key-value pairs with span details |
+| `status.code` | int | 1 = OK, 2 = ERROR |
+
+### Trace Hierarchy
+
+Spans share `traceId` and link via `parentSpanId`:
+
+```
+multi_agent_system_trigger
+├── condition_trigger
+└── invoke_agent
+    ├── llm_completion
+    └── invoke_agent (sub-agent)
+        └── llm_completion
+```
+
+### Supported Spans
+
+### `invoke_agent`
+
+Records a complete agent conversation/invocation.
+
+**Name**: `invoke_agent` or `invoke_agent {agent_name}`
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `gen_ai.operation.name` | string | Yes | `"invoke_agent"` |
+| `gen_ai.agent.id` | string | Yes | Agent UUID |
+| `gen_ai.agent.name` | string | No | Agent name |
+| `gen_ai.agent.description` | string | No | Agent description |
+| `gen_ai.conversation.id` | string | Yes | Conversation/task UUID |
+| `relevance_ai.agent.relevance_model` | string | Yes | Relevance model ID |
+| `relevance_ai.agent.runtime` | string | Yes | `"default"` or `"phone_call"` |
+| `relevance_ai.agent.metadata` | object | Yes | Custom metadata key-value pairs |
+| `relevance_ai.agent.knowledge_used` | array | Yes | Knowledge set IDs used |
+| `relevance_ai.agent.escalation.reason` | string | No | Escalation reason |
+| `relevance_ai.agent.escalation.context` | string | No | Escalation context |
+
+### `llm_completion`
+
+Records a single LLM inference call.
+
+**Name**: `llm_completion {model_name}`
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `gen_ai.operation.name` | string | Yes | `"llm_completion"` |
+| `gen_ai.request.model` | string | Yes | Requested model ID |
+| `gen_ai.request.temperature` | int | No | Temperature setting |
+| `gen_ai.request.max_tokens` | int | No | Max tokens setting |
+| `gen_ai.system_instructions` | string | No | System prompt |
+| `gen_ai.input.messages` | string | Yes | JSON-stringified input messages |
+| `gen_ai.tool.definitions` | array | Yes | JSON-stringified tool definitions |
+| `gen_ai.response.id` | string | Yes | Provider's response ID |
+| `gen_ai.response.model` | string | Yes | Actual model used |
+| `gen_ai.response.finish_reasons` | array | Yes | Finish reasons (e.g., `["stop"]`) |
+| `gen_ai.output.messages` | string | Yes | JSON-stringified output messages |
+| `gen_ai.usage.input_tokens` | int | Yes | Input tokens used |
+| `gen_ai.usage.output_tokens` | int | Yes | Output tokens generated |
+
+### `multi_agent_system_trigger`
+
+Records a complete workforce execution.
+
+**Name**: `multi_agent_system_trigger`
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `gen_ai.operation.name` | string | Yes | `"multi_agent_system_trigger"` |
+| `relevance_ai.workforce.workforce_id` | string | Yes | Workforce UUID |
+| `relevance_ai.workforce.workforce_task_id` | string | Yes | Task UUID (for correlation) |
+| `relevance_ai.workforce.type` | string | Yes | `"chat"` or `"default"` |
+| `relevance_ai.workforce.metadata` | object | Yes | Custom metadata |
+| `relevance_ai.workforce.status` | string | Yes | Final status |
+
+### `condition_trigger`
+
+Records a condition node evaluation in a workforce.
+
+**Name**: `condition_trigger`
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `gen_ai.operation.name` | string | Yes | `"condition_trigger"` |
+| `relevance_ai.condition.workforce_node_id` | string | Yes | Node ID in workforce |
+| `relevance_ai.condition.workforce_node_label` | string | No | Node label/name |
+| `relevance_ai.condition.input` | string | Yes | JSON-stringified condition input |
+| `relevance_ai.condition.decisions` | array | Yes | Decision objects (see below) |
+| `relevance_ai.condition.reasoning` | string | No | LLM reasoning |
+
+**Decision object**:
+
+```json
+{ "node": { "id": "node-id", "name": "Node Name" }, "will_run": true }
+```
+
+---
+
+## Attribute Value Types
+
+| Type | JSON Format |
+| --- | --- |
+| String | `{ "stringValue": "text" }` |
+| Integer | `{ "intValue": 123 }` |
+| Double | `{ "doubleValue": 1.23 }` |
+| Boolean | `{ "boolValue": true }` |
+| Array | `{ "arrayValue": { "values": [...] }}` |
+| Object | `{ "kvlistValue": { "values": [{ "key": "k", "value": {...} }] }}` |
+
+---
+
+## Resources
+
+### Understanding OpenTelemetry
+
+- [What is OpenTelemetry?](https://opentelemetry.io/docs/what-is-opentelemetry/) - Official introduction to OTEL concepts
+
+### Compatible Observability Platforms
+
+OTEL is supported by most major observability platforms. See the [OpenTelemetry Registry](https://opentelemetry.io/ecosystem/registry/) for a full list of compatible vendors and integrations.
+
+For a detailed example of ingesting OTEL data, see [Honeycomb's OpenTelemetry guide](https://docs.honeycomb.io/send-data/opentelemetry/).
+
+### Querying OTEL Data Directly
+
+OTEL JSON files in S3 can be queried directly using SQL tools like [AWS Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html).
+
+---
+
+## Support
+
+For setup assistance or troubleshooting, contact your Account Manager or reach out via your dedicated Slack channel.
