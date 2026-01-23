@@ -208,6 +208,23 @@ When a user is removed from an IDP group:
   Users removed from IDP groups lose their group-based permissions immediately upon sync. Ensure you understand the impact before removing users from groups in your identity provider.
 </Warning>
 
+## User Deprovisioning
+
+User deprovisioning automatically removes user access when they are deprovisioned in your Identity Provider (IdP). This ensures that access control stays synchronized with your organization's user lifecycle management.
+
+### When is a user deprovisioned?
+
+Any of the following actions in your Identity Provider (IdP) will deprovision a user (they lose access via Directory Sync):
+
+- Deprovisioning the user from the SCIM app in the IdP
+- Removing the user from the group that grants access to the SCIM app (when that group controls provisioning to the app)
+- Marking the user as inactive in the IdP
+- Deleting the user in the IdP
+
+<Warning>
+  If your app is assigned to only one group, removing a user from that group (or removing the group itself) will deprovision the user. **Best practice:** Assign the Relevance app to a dedicated group (e.g., "Relevance App Users") to ensure that removing users from other role-based groups like "Marketing" or "Engineering" does not accidentally deprovision them from the application.
+</Warning>
+
 ## Setting Up Directory Sync
 
 To use RBAC Groups, you need to configure directory sync between your identity provider and Relevance AI through WorkOS. This guide walks you through the complete setup process.
@@ -250,10 +267,6 @@ Before setting up Directory Sync, you must first configure [Single Sign-On (SSO)
 The following features are not yet supported in the current version of RBAC Groups:
 
 <AccordionGroup>
-  <Accordion title="User Deprovisioning">
-    Automatic user removal is not currently available. Users must be manually removed from the organization when they leave.
-  </Accordion>
-  
   <Accordion title="Assigning Individual Roles to Group Members">
     Users who have access only through groups (with no direct access) will not appear in the project user list. They will still have access based on their group membership.
     
