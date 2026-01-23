@@ -221,11 +221,8 @@ Any of the following actions in your Identity Provider (IdP) will deprovision a 
 - Marking the user as inactive in the IdP
 - Deleting the user in the IdP
 
-### Common gotcha
-
 <Warning>
-- If your app is assigned to one group, removing the user from that group (or removing the group itself) deprovisions the user.
-- **Best practice**: Assign the Relevance app to a single group (e.g., "Relevance App Users") to ensure that removing the user from other groups like "Marketing" does not deprovision the user accidentally.
+  If your app is assigned to only one group, removing a user from that group (or removing the group itself) will deprovision the user. **Best practice:** Assign the Relevance app to a dedicated group (e.g., "Relevance App Users") to ensure that removing users from other role-based groups like "Marketing" or "Engineering" does not accidentally deprovision them from the application.
 </Warning>
 
 ## Setting Up Directory Sync
