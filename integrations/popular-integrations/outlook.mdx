@@ -254,6 +254,15 @@ Here are some commonly used Microsoft Graph API endpoints you can use with the A
 
 You can configure your agents to automatically respond to incoming Outlook emails by setting up Outlook as a trigger.
 
+<Warning>
+  **Attachment Size Limit**: The Outlook trigger has a **25MB per-attachment limit** due to Microsoft Graph API constraints. Emails with attachments larger than 25MB will not be processed by the trigger.
+  
+  **Workarounds**:
+  - Compress large files before sending (keep attachments under 25MB)
+  - Convert large DOCX files to PDF format (often reduces file size significantly)
+  - Use cloud storage links (OneDrive, SharePoint) instead of large attachments
+</Warning>
+
 ### How to set up the Outlook trigger
 
 <Steps>
@@ -362,6 +371,18 @@ Here are some ways you can leverage the Outlook integration with your agents:
     After setting up the Outlook trigger, it can take up to 30 minutes for the first email to come through to your agent. Subsequent emails should be processed more quickly, typically within a few minutes.
   </Accordion>
   
+  <Accordion title="Why aren't emails with large attachments triggering my agent?">
+    The Outlook trigger has a **25MB per-attachment limit** due to Microsoft Graph API constraints. Emails with attachments larger than 25MB will not be processed by the trigger.
+    
+    **Solutions**:
+    - Ask senders to compress large files before sending (keep attachments under 25MB)
+    - Convert large DOCX files to PDF format, which often reduces file size significantly
+    - Use cloud storage links (OneDrive, SharePoint, Dropbox) instead of attaching large files directly
+    - Set up a separate workflow to handle large file transfers outside of email
+    
+    This is a Microsoft Graph API limitation, not a Relevance AI limitation.
+  </Accordion>
+  
   <Accordion title="Can I filter which emails trigger my agent?">
     Yes! You can use Microsoft Graph search query syntax to filter emails. For example:
     - Filter by subject: `subject:customer inquiry`
@@ -394,6 +415,8 @@ Here are some ways you can leverage the Outlook integration with your agents:
   
   <Accordion title="Can I access email attachments with the Outlook integration?">
     Yes, you can access email attachments using the Microsoft Graph API. Use the endpoint `GET /me/messages/{id}/attachments` to list attachments, and `GET /me/messages/{id}/attachments/{attachmentId}` to download specific attachments. The attachment content is returned as base64-encoded data.
+    
+    **Note**: When using the Outlook trigger, emails with attachments larger than 25MB will not be processed due to Microsoft Graph API limitations.
   </Accordion>
   
   <Accordion title="How do I remove the Outlook integration?">
