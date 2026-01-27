@@ -225,6 +225,13 @@ Any of the following actions in your Identity Provider (IdP) will deprovision a 
   If your app is assigned to only one group, removing a user from that group (or removing the group itself) will deprovision the user. **Best practice:** Assign the Relevance app to a dedicated group (e.g., "Relevance App Users") to ensure that removing users from other role-based groups like "Marketing" or "Engineering" does not accidentally deprovision them from the application.
 </Warning>
 
+### What happens when a user is deprovisioned?
+
+When a user is deprovisioned:
+- The user is soft-deleted for 30 days
+- After 30 days, the user is hard deleted
+- Any authentication account linked to their user will stop working immediately
+
 ## Setting Up Directory Sync
 
 To use RBAC Groups, you need to configure directory sync between your identity provider and Relevance AI through WorkOS. This guide walks you through the complete setup process.
