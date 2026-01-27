@@ -29,7 +29,7 @@ Relevance supports two secure methods for connecting your AWS Bedrock account to
 
 ### Key Benefits
 
-**Cross-Region Inference**: Relevance automatically distributes requests across AWS regions to ensure consistent service availability and performance, even during high-demand periods.
+**Cross-Region Inference**: Ensure that you pick a model that has cross region inferencing available.
 
 **Usage Oversight**: Both setup methods provide access to all supported Anthropic Claude models available in your selected AWS regions. You will be able to have increased cost control and insight into model usage.
 
@@ -155,6 +155,46 @@ Relevance supports two secure methods for connecting your AWS Bedrock account to
   If you run into any issues with either of these options, please reach out to your Account Executive or [our support team](https://relevanceai.com/docs/get-started/support).
 </Note>
 
+## AWS Bedrock Guardrails (Optional)
+
+You can optionally configure AWS Bedrock Guardrails to apply content filtering and safety controls to your model invocations. Guardrails allow you to implement safeguards for your generative AI applications.
+
+### Prerequisites
+
+Before configuring guardrails in Relevance AI, you must:
+1. Create a guardrail in AWS Bedrock console
+2. Note the Guardrail ID or ARN
+3. Optionally note the specific version you want to use
+4. Enable Cross region inferencing on the guard rail
+
+For instructions on creating guardrails, see the [AWS Bedrock Guardrails documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html).
+
+### Configuration
+
+In the Relevance AI dashboard under **Project Settings > API Keys**, add the following:
+
+| Key Name | Value | Required |
+|----------|-------|----------|
+| AWS Bedrock Guardrail Identifier | Your guardrail ID or ARN | Yes (if using guardrails) |
+| AWS Bedrock Guardrail Version | Version number (e.g., "1") | No (defaults to DRAFT if you don't have versions) |
+
+### IAM Policy Update
+
+If you're using guardrails, add the following permission to your IAM policy:
+
+```json
+{
+	"Effect": "Allow",
+	"Action": [
+		"bedrock:ApplyGuardrail"
+	],
+	"Resource": [
+		"arn:aws:bedrock:<REGION>:<ACCOUNT ID>:guardrail/<GUARD RAIL ID>",
+		"arn:aws:bedrock:<REGION>:<ACCOUNT ID>:guardrail-profile/<PROFILE ID>"
+	]
+}
+```
+
 ### Important considerations
 
 #### Multi-Region Support
@@ -206,6 +246,7 @@ You can do this by following these steps:
     The private_key should be formatted as follows:
     ```shell
     -----BEGIN PRIVATE KEY-----\nLOTS OF LETTERS AND NUMBERS HERE\n-----END PRIVATE KEY-----\n
+
 
     ```
   </Step>
