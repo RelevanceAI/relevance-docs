@@ -155,6 +155,8 @@ Relevance supports two secure methods for connecting your AWS Bedrock account to
   If you run into any issues with either of these options, please reach out to your Account Executive or [our support team](https://relevanceai.com/docs/get-started/support).
 </Note>
 
+---
+
 ## AWS Bedrock Guardrails (Optional)
 
 You can optionally configure AWS Bedrock Guardrails to apply content filtering and safety controls to your model invocations. Guardrails allow you to implement safeguards for your generative AI applications.
@@ -162,12 +164,17 @@ You can optionally configure AWS Bedrock Guardrails to apply content filtering a
 ### Prerequisites
 
 Before configuring guardrails in Relevance AI, you must:
+
 1. Create a guardrail in AWS Bedrock console
 2. Note the Guardrail ID or ARN
 3. Optionally note the specific version you want to use
-4. Enable Cross region inferencing on the guard rail
+4. Enable Cross-region inferencing on the guardrail
 
-For instructions on creating guardrails, see the [AWS Bedrock Guardrails documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html).
+<Note>
+  For instructions on creating guardrails, see the [AWS Bedrock Guardrails documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html).
+</Note>
+
+---
 
 ### Configuration
 
@@ -178,22 +185,30 @@ In the Relevance AI dashboard under **Project Settings > API Keys**, add the fol
 | AWS Bedrock Guardrail Identifier | Your guardrail ID or ARN | Yes (if using guardrails) |
 | AWS Bedrock Guardrail Version | Version number (e.g., "1") | No (defaults to DRAFT if you don't have versions) |
 
+---
+
 ### IAM Policy Update
 
 If you're using guardrails, add the following permission to your IAM policy:
 
 ```json
 {
-	"Effect": "Allow",
-	"Action": [
-		"bedrock:ApplyGuardrail"
-	],
-	"Resource": [
-		"arn:aws:bedrock:<REGION>:<ACCOUNT ID>:guardrail/<GUARD RAIL ID>",
-		"arn:aws:bedrock:<REGION>:<ACCOUNT ID>:guardrail-profile/<PROFILE ID>"
-	]
+  "Effect": "Allow",
+  "Action": [
+    "bedrock:ApplyGuardrail"
+  ],
+  "Resource": [
+    "arn:aws:bedrock:<REGION>:<ACCOUNT ID>:guardrail/<GUARD RAIL ID>",
+    "arn:aws:bedrock:<REGION>:<ACCOUNT ID>:guardrail-profile/<PROFILE ID>"
+  ]
 }
 ```
+
+<Warning>
+  Remember to add this permission to both the IAM user policy (Option 1) or the IAM role policy (Option 2) depending on which setup method you're using.
+</Warning>
+
+---
 
 ### Important considerations
 
@@ -214,6 +229,8 @@ If both IAM credentials and role ARN are configured, Relevance will automaticall
 - [AWS Bedrock Inference Profiles Prerequisites](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-prereq.html)
 - [Cross-Region Inference Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html)
 - [Supported Models by Region](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html)
+
+---
 
 ## Accessing Claude models using Vertex AI on Google Cloud Platform
 
