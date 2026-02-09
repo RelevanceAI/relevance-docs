@@ -4,9 +4,7 @@ description: "Enable agents to use individual user authentication for secure, pr
 ---
 
 <Warning>
-  Dynamic Auth is a new feature coming Q1 2026. This feature is not yet available but will be rolling out soon.
-
-  If you have questions about this feature, please reach out to your sales representative if you're on an Enterprise subscription, or [contact our support team](/get-started/support) if you're on another plan.
+  User Level Authentication is an Enterprise-only feature that is gradually being rolled out to Enterprise customers. If you have an Enterprise subscription and don't have access yet, please reach out to your sales representative.
 </Warning>
 
 Dynamic Auth enables agents to operate using each user's individual authentication accounts for integrations, allowing multiple users to safely and privately use the same shared agent (especially in Chat) while only accessing their own data. Builders can configure this behavior per tool input, and users only need to authenticate once per integration.
@@ -17,7 +15,7 @@ Dynamic Auth changes how authentication works when multiple people use the same 
 
 <Columns cols={2}>
   <Card title="Builders configure" icon="wrench">
-    Choose which tool inputs require individual user authentication using simple toggles
+    Choose which tool inputs require user level authentication using simple toggles
   </Card>
   <Card title="Users authenticate" icon="key">
     Connect once per integration when first using the agent - credentials are saved for future use
@@ -52,19 +50,41 @@ This means that when multiple team members use the same agent, each person only 
   </Card>
 </Columns>
 
-## Setting up individual account authentication
+## Where User Level Authentication Works
+
+User Level Authentication is supported in the following contexts:
+
+<Columns cols={3}>
+  <Card title="Chat" icon="message-lines">
+    Users are prompted to connect their own account when an agent requests an authenticated action
+  </Card>
+  <Card title="Run tab" icon="play">
+    Same experience when running an agent directly in the agent builder
+  </Card>
+  <Card title="Workforces" icon="users">
+    When a workforce delegates to an agent with user level authentication configured, the user is prompted to authenticate
+  </Card>
+</Columns>
+
+### Limitations
+
+<Warning>
+  **Embedded chat is NOT currently supported.** Users who embed agents on external sites via the embed widget cannot use user level authentication. For embedded agents, you'll need to use a shared account for those integrations instead.
+</Warning>
+
+## Setting up user level authentication
 
 As a builder, you can configure Dynamic Auth at the tool input level. If you want to enable Dynamic Auth for a tool step that currently has authentication configured directly on the step, you'll need to convert that authentication to a tool input instead.
 
 <div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmhe9r2w33m1bfatipia57zjj" frameBorder="0" title="Enable individual account authentication at tool input level" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<iframe src="https://app.supademo.com/embed/cmhe9r2w33m1bfatipia57zjj" frameBorder="0" title="Enable user level authentication at tool input level" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 </div>
 
-To enable individual account authentication at the tool input level:
+To enable user level authentication at the tool input level:
 
 1. Enter the Tool you want to configure and make sure you're on the Build tab
-2. Navigate to the OAuth Input you want to enable Dynamic Auth on and click the Shield icon
-3. Toggle on the switch next to 'Individual account authentication required'
+2. Navigate to the OAuth Input you want to enable Dynamic Auth on and click the authentication settings icon
+3. Toggle on the switch next to 'User level authentication required'
 
 When this is enabled, any agent using this tool will require each user to authenticate with their own account for this integration.
 
@@ -82,7 +102,7 @@ When users interact with an agent in Chat that has Dynamic Auth enabled, the aut
 
 ### First-time authentication
 
-When a user runs an agent that requires individual account authentication for the first time, they'll see a modal prompt asking them to connect their account:
+When a user runs an agent that requires user level authentication for the first time, they'll see a modal prompt asking them to connect their account:
 
 1. The agent begins running and encounters a tool that requires individual authentication
 2. A modal appears asking the user to **'Connect your account'** for the specific integration (e.g., "Connect your Google Drive account")
@@ -148,11 +168,11 @@ To protect privacy and security:
   </Accordion>
   
   <Accordion title="Is this feature only available on Enterprise plans?">
-    No, Dynamic Auth is available to all users on all plans. While some related features like asset-level authentication controls and shared project accounts are Enterprise-only, the core Dynamic Auth functionality that allows individual user authentication is available to everyone.
+    Yes, User Level Authentication is an Enterprise-only feature. It is currently being rolled out to Enterprise customers. If you have an Enterprise subscription and would like access to this feature, please reach out to your sales representative.
   </Accordion>
   
-  <Accordion title="Where can I use Dynamic Auth - just in Chat or everywhere?">
-    Dynamic Auth applies to both Chat and in-app functionality (the Run tab). Whether you're using an agent through Chat or running it directly in the web application, Dynamic Auth will ensure each user's individual credentials are used when configured.
+  <Accordion title="Where can I use User Level Authentication?">
+    User Level Authentication works in Chat, the Run tab (when running agents directly in the agent builder), and in Workforces (when a workforce delegates to an agent with user level authentication configured). However, it is NOT currently supported in embedded chat widgets on external websites.
   </Accordion>
   
   <Accordion title="When I first add a tool to an agent, what setting does it use?">
