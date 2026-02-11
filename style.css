@@ -1,0 +1,52 @@
+/* Reduce left and right margins for wider layout */
+.max-w-prose {
+  max-width: 90ch;
+}
+
+[class*="max-w-"] {
+  max-width: 100%;
+}
+
+main > div {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Pull left sidebar slightly away from edge */
+div#sidebar {
+  left: 2.5rem !important;
+  padding-left: 0.5rem !important;
+}
+
+/* Pin right sidebar to right edge with padding */
+div#content-side-layout {
+  position: fixed !important;
+  right: 2rem !important;
+  top: 9.5rem !important;
+}
+
+/* Prevent content from extending under the fixed right sidebar (only when sidebar is visible) */
+@media (min-width: 1280px) {
+  div#content-area {
+    padding-right: 20rem !important;
+  }
+}
+
+/* Hide gradient decoration on mobile */
+@media (max-width: 640px) {
+  [class*="gradient"],
+  [class*="decoration"] {
+    display: none !important;
+    opacity: 0 !important;
+  }
+}
+
+/* Center the tab bar */
+.nav-tabs {
+  justify-content: center !important;
+  width: 100% !important;
+}
+
