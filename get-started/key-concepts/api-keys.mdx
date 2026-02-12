@@ -8,30 +8,189 @@ description: "Use your own API keys"
 
 API keys are unique codes that let different software talk to each other. They act as a way to identify who is trying to connect and make sure the connection is secure.
 
-Think of an API key like a special key card you use to enter a building. It tells the system who you are and what you’re allowed to do. Every time an app wants to connect to another app, it shows this key card.
+Think of an API key like a special key card you use to enter a building. It tells the system who you are and what you're allowed to do. Every time an app wants to connect to another app, it shows this key card.
 
 <Warning>
   You can think of API keys as a form of a password so these should never be shared.
 </Warning>
 
-## Relevance API Keys
+## API Key Roles: Default vs Admin
 
+Relevance API keys come in two roles with different permission levels: **Default** and **Admin**. Understanding the difference is important for security and proper access control.
+
+### Permission Comparison
+
+| Feature | Default Key | Admin Key |
+|---------|-------------|-----------|
+| **Tool execution** | ✅ Yes | ✅ Yes |
+| **Agent execution** | ✅ Yes | ✅ Yes |
+| **Project-level operations** | ✅ Yes | ✅ Yes |
+| **Invite users to project** | ❌ No | ✅ Yes |
+| **Update user roles** | ❌ No | ✅ Yes |
+| **Delete project invites** | ❌ No | ✅ Yes |
+| **Remove users from project** | ❌ No | ✅ Yes |
+| **Organization-level endpoints** | ❌ No | ✅ Yes |
+
+### Default API Keys
+
+Default keys are designed for standard project-level operations and are suitable for most use cases.
+
+**What Default keys can do:**
+- Execute tools and agents
+- Access project data and resources
+- Perform standard API operations
+- Run workflows and automations
+
+**Use Default keys when:**
+- Building integrations that execute tools or agents
+- Automating workflows within a project
+- Accessing project data programmatically
+- You don't need user management capabilities
+
+<Tip>
+  Default keys follow the principle of least privilege. Use them for most API operations to minimize security risk.
+</Tip>
+
+### Admin API Keys
+
+Admin keys have elevated permissions for organization and user management operations.
+
+**What Admin keys can do:**
+- Everything Default keys can do, plus:
+- Invite users to projects
+- Update user roles within projects
+- Delete project invitations
+- Remove users from projects
+- Access organization-level endpoints
+
+**Use Admin keys when:**
+- Building user management integrations
+- Automating team onboarding/offboarding
+- Managing project access programmatically
+- You need organization-level administrative control
+
+<Warning>
+  Admin keys have elevated permissions. Store them securely and only use them when administrative operations are required.
+</Warning>
+
+### Security Best Practices
+
+<AccordionGroup>
+  <Accordion title="Use the principle of least privilege" icon="shield-check">
+    Always use Default keys unless you specifically need Admin permissions. This limits potential damage if a key is compromised.
+  </Accordion>
+  
+  <Accordion title="Rotate keys regularly" icon="rotate">
+    Periodically generate new API keys and revoke old ones, especially for Admin keys or if you suspect a key may have been exposed.
+  </Accordion>
+  
+  <Accordion title="Store keys securely" icon="lock">
+    Never commit API keys to version control. Use environment variables or secure secret management systems to store keys.
+  </Accordion>
+  
+  <Accordion title="Monitor key usage" icon="chart-line">
+    Regularly review which keys are being used and for what purposes. Revoke any keys that are no longer needed.
+  </Accordion>
+</AccordionGroup>
+
+## Relevance API Keys
 
 <div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
 <iframe src="https://app.supademo.com/embed/cmbg69nup4eyssn1rt129znrs?embed_v=2" frameBorder="0" title="Create a Relevance API key" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
 </div>
 
+You can generate your own Relevance API key to use tools or agents in other platforms.
 
+### Generating API Keys with Specific Roles
 
-You can also generate your own Relevance API key to use tools or agents in other platforms.
+When creating a new API key in the Relevance dashboard:
+
+<Steps>
+  <Step title="Navigate to API Keys">
+    Go to your project settings and select the API Keys section.
+  </Step>
+  
+  <Step title="Create New Key">
+    Click "Create API Key" to generate a new key.
+  </Step>
+  
+  <Step title="Select Role">
+    Choose between **Default** or **Admin** role based on your needs:
+    - Select **Default** for standard operations (recommended for most use cases)
+    - Select **Admin** only if you need user management or organization-level access
+  </Step>
+  
+  <Step title="Name Your Key">
+    Give your key a descriptive name that indicates its purpose (e.g., "Production Tool Execution" or "User Management Integration").
+  </Step>
+  
+  <Step title="Save Securely">
+    Copy the generated key immediately and store it securely. You won't be able to see it again.
+  </Step>
+</Steps>
+
+### Using API Keys in Your Code
+
+Here's how to use your API keys when making requests to the Relevance API:
+
+<CodeGroup>
+```javascript JavaScript
+const RELEVANCE_API_KEY = process.env.RELEVANCE_API_KEY;
+
+// Using a Default key for tool execution
+const response = await fetch('https://api-bcbe33.stack.tryrelevance.com/latest/studios/YOUR_STUDIO_ID/trigger_limited', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${RELEVANCE_API_KEY}`,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    // Your tool parameters
+  })
+});
+```
+
+```python Python
+import os
+import requests
+
+RELEVANCE_API_KEY = os.environ.get('RELEVANCE_API_KEY')
+
+# Using a Default key for agent execution
+response = requests.post(
+    'https://api-bcbe33.stack.tryrelevance.com/latest/agents/YOUR_AGENT_ID/trigger',
+    headers={
+        'Authorization': f'Bearer {RELEVANCE_API_KEY}',
+        'Content-Type': 'application/json'
+    },
+    json={
+        # Your agent parameters
+    }
+)
+```
+
+```bash cURL
+# Using an Admin key for user management
+curl -X POST \
+  https://api-bcbe33.stack.tryrelevance.com/latest/projects/YOUR_PROJECT_ID/invite \
+  -H 'Authorization: Bearer YOUR_ADMIN_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "email": "user@example.com",
+    "role": "member"
+  }'
+```
+</CodeGroup>
+
+<Note>
+  Replace `YOUR_STUDIO_ID`, `YOUR_AGENT_ID`, `YOUR_PROJECT_ID`, and `YOUR_ADMIN_API_KEY` with your actual values. Always use environment variables to store API keys, never hardcode them.
+</Note>
 
 ## Custom API Keys
-
 
 <div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
 <iframe src="https://app.supademo.com/embed/cmbg0620b4azssn1r2pkbsbvl?embed_v=2" frameBorder="0" title="Create a custom API key" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
 </div>
-
 
 If the integration you would like to use is not on the list, you can add a custom one.
 
