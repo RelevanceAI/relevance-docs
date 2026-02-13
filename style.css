@@ -50,3 +50,80 @@ div#content-side-layout {
   width: 100% !important;
 }
 
+/* Agent suggestion cards */
+.agent-card {
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+
+.agent-card .agent-card-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #111827;
+}
+
+.agent-card .agent-card-desc {
+  display: block;
+  font-size: 14px;
+  margin-top: 8px;
+  color: #6B7280;
+  flex: 1;
+}
+
+.agent-card .agent-card-btn {
+  margin-top: 16px;
+  margin-bottom: 4px;
+  padding: 8px 20px;
+  border-radius: 8px;
+  background: #4F46E5;
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.agent-card .agent-card-btn:hover {
+  background: #3730a3;
+}
+
+.agent-card .agent-card-btn,
+.agent-card .agent-card-btn:hover,
+.agent-card .agent-card-btn:focus,
+.agent-card .agent-card-btn:active {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.agent-card .agent-card-btn::after,
+.agent-card .agent-card-btn::before,
+.agent-card a::after,
+.agent-card a::before {
+  display: none !important;
+  content: none !important;
+  box-shadow: none !important;
+}
+
+.dark .agent-card {
+  border-color: #1F2937;
+}
+
+.dark .agent-card .agent-card-name {
+  color: #E5E7EB;
+}
+
+.dark .agent-card .agent-card-desc {
+  color: #9CA3AF;
+}
+
