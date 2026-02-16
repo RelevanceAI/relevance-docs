@@ -74,6 +74,12 @@ Keep in mind you must form your filters as JSON objects.
 * The `AND` logic is applied when multiple filters are used (i.e. a list of filters).
 </Tip>
 
+**OR Logic with Arrays:** When using `exact_match` filter type, you can pass an array to the `condition_value` field to create OR semantics. This allows you to match records where the field equals ANY value in the array.
+
+**Examples:**
+- Single value: `"condition_value": "x"` → matches records where field equals x
+- Array value: `"condition_value": ["a", "b"]` → matches records where field equals a OR b
+
 #### Filter samples
 <Tabs>
     <Tab title="exact_match">
@@ -84,6 +90,17 @@ Keep in mind you must form your filters as JSON objects.
             "filter_type": "exact_match",
             "condition": "==",
             "condition_value": "Durian Leather 2 Seater Sofa"
+        }
+    ```
+    </Tab>
+    <Tab title="exact_match (OR)">
+    List rows where the `call_id` matches ANY of the provided values (OR logic):
+    ```json
+        {
+            "field": "call_id",
+            "filter_type": "exact_match",
+            "condition": "==",
+            "condition_value": ["45eb244f-5008-4b7f-bfab-6f4db2189d2e", "4a678557-700e-407f-ab62-23d0decf1b52"]
         }
     ```
     </Tab>
@@ -138,7 +155,7 @@ Keep in mind you must form your filters as JSON objects.
             "field": "description",
             "filter_type": "regexp",
             "condition": "==",
-            "condition_value": ".*Durian (\w+)"
+            "condition_value": ".*Durian (\\w+)"
         }
     ```
     </Tab>
