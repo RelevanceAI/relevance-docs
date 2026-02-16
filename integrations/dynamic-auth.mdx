@@ -50,6 +50,21 @@ This means that when multiple team members use the same agent, each person only 
   </Card>
 </Columns>
 
+## Requirements for User Level Authentication
+
+User Level Authentication works with tools that use **OAuth authentication only**. 
+
+**Supported:**
+- Tool steps with OAuth account inputs (e.g., Google Sheets, Slack, HubSpot, Notion, Trello)
+- Any integration that uses OAuth to connect user accounts
+
+**Not supported:**
+- Tools that use API key authentication
+- Python code steps (even when using OAuth via the Integration helper class)
+- Custom API calls with API key or bearer token authentication
+
+If your tool uses API key authentication or Python steps, you'll need to use a shared account instead of User Level Authentication.
+
 ## Where User Level Authentication Works
 
 User Level Authentication is supported in the following contexts:
@@ -85,6 +100,10 @@ To enable user level authentication at the tool input level:
 1. Enter the Tool you want to configure and make sure you're on the Build tab
 2. Navigate to the OAuth Input you want to enable Dynamic Auth on and click the authentication settings icon
 3. Toggle on the switch next to 'User level authentication required'
+
+<Note>
+The shield icon only appears on OAuth account inputs. If you don't see the shield icon, your tool may be using API key authentication, which doesn't support User Level Authentication.
+</Note>
 
 When this is enabled, any agent using this tool will require each user to authenticate with their own account for this integration.
 
@@ -173,6 +192,16 @@ To protect privacy and security:
   
   <Accordion title="Where can I use User Level Authentication?">
     User Level Authentication works in Chat, the Run tab (when running agents directly in the agent builder), and in Workforces (when a workforce delegates to an agent with user level authentication configured). However, it is NOT currently supported in embedded chat widgets on external websites.
+  </Accordion>
+
+  <Accordion title="Why can't I enable User Level Authentication on my tool?">
+    User Level Authentication only works with OAuth-based integrations. If you don't see the shield icon on your tool input, it's likely because:
+
+    - Your tool uses API key authentication instead of OAuth
+    - Your tool uses a Python code step
+    - Your authentication is configured directly on the tool step (not as a tool input)
+
+    To use User Level Authentication, you need to use a tool that supports OAuth authentication (like Google Sheets, Slack, HubSpot, etc.). For tools that use API keys or Python steps, you'll need to use a shared account instead.
   </Accordion>
   
   <Accordion title="When I first add a tool to an agent, what setting does it use?">
