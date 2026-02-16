@@ -1,180 +1,123 @@
 ---
 title: "Quick Start Guide"
 sidebarTitle: "Quickstart"
+description: "Build and test your first AI agent in under 5 minutes."
 ---
 
-## Welcome to building your first Agent
+This guide gets you from zero to a working agent as fast as possible. Pick one of three paths, follow the steps, and see your agent in action.
 
-Welcome to the fastest way to get started with Agents!
+## Step 1: Create your first agent
 
-Whether you're new to our platform or looking to launch your next project quickly, this guide will walk you through creating your first Agent in just a few minutes.
-
-## Three ways to start building your Agent
-
-Choose the approach that best fits your needs. Each method gets you to a working agent, which you can then customize with prompt instructions, tools, and settings to match your specific requirements.
+There are three ways to get started. Pick the one that fits you best.
 
 <CardGroup cols={3}>
-  <Card 
-    title="Invent an Agent" 
+  <Card
+    title="Invent an Agent"
     icon="wand-magic-sparkles"
-    href="#invent-an-agent"
+    href="#option-1-invent-an-agent"
   >
-    Let AI generate your agent from a simple description
+    Describe what you want and let AI build it for you
   </Card>
-  <Card 
-    title="Clone from Marketplace" 
+  <Card
+    title="Clone from Marketplace"
     icon="clone"
-    href="#clone-from-marketplace"
+    href="#option-2-clone-from-marketplace"
   >
-    Start with pre-built templates from domain experts
+    Grab a pre-built agent and make it yours
   </Card>
-  <Card 
-    title="Build from Scratch" 
+  <Card
+    title="Build from Scratch"
     icon="hammer"
-    href="#build-from-scratch"
+    href="#option-3-build-from-scratch"
   >
-    Full control to design your agent exactly how you want
+    Full control over every detail
   </Card>
 </CardGroup>
 
----
+### Option 1: Invent an Agent
 
-### Invent an Agent
+The fastest way to get started. Describe what you need and we'll generate a working agent for you.
 
-Use our Agent Invent feature to instantly create a functional agent. Just describe what you want in plain English, and we'll generate a working draft with a prompt and tool placeholders ready for you to customize.
-
-**Best for:** Getting started quickly with minimal setup
-
-**How it works:**
-1. Describe your agent's purpose and tasks
-2. Our AI generates the initial configuration
-3. Review and customize the generated agent
-4. Deploy and start using it
+1. Click **Agents** in the left sidebar
+2. Click **+ Create Agent**
+3. Select **Invent**
+4. Describe what you want your agent to do — be specific about the task, the output you expect, and any integrations it should use. For example: *"Create an agent that researches a company before a sales call. It should use web search to find recent news, funding, and key contacts, then output a one-page brief with company overview, decision makers, and talking points."*
+5. Review the generated agent — Inventor will set up the prompt and suggest tools
+6. Connect any integrations your tools need (e.g. Gmail, HubSpot, LinkedIn) in the Tools section of the Agent builder, or [add integrations](/integrations/add-integrations) from the sidebar
 
 <Tip>
-  This is the fastest way to get up and running. We highly recommend starting here if you're new to building agents.
+This is the best starting point if you're new. You can always refine the prompt and add more tools later.
 </Tip>
 
----
+### Option 2: Clone from Marketplace
 
-### Clone from Marketplace
+Start with an agent that's already been built and tested by domain experts.
 
-Pick from a library of ready-made agents built by domain experts in our Marketplace. Cloning lets you skip the hard setup and quickly tweak agents to fit your needs, saving you time and effort.
+1. Go to [Marketplace](https://marketplace.relevanceai.com/) or click **Marketplace** in the left sidebar
+2. Browse or search for an agent that matches your use case
+3. Click on the agent to view its details
+4. Click **Clone** to add it to your workspace
+5. A setup popup will walk you through connecting any integrations the agent needs — follow the prompts to link your accounts
+6. Review the prompt, tools, and settings — adjust anything you need
 
-**Best for:** Leveraging proven templates and best practices
+<Tip>
+Great when you know what you want to build but don't want to start from scratch. Clone it, tweak it, ship it.
+</Tip>
 
-**How it works:**
-1. Browse the [Marketplace](/marketplace/intro-to-marketplace) for agents that match your use case
-2. Clone the agent to your workspace
-3. Customize the configuration to your needs
-4. Connect your integrations and deploy
+### Option 3: Build from Scratch
 
-<Info>
-  Perfect for faster deployments when you want to build on existing expertise and proven patterns.
-</Info>
+Full control from the ground up. Best if you have a specific workflow in mind.
 
----
+1. Click **Agents** in the left sidebar
+2. Click **+ Create Agent**
+3. Select **Start from scratch**
+4. Write a [prompt](/agent/build-your-agent/prompt) — tell the agent who it is, what it does, and how it should behave
+5. Add [tools](/agent/build-your-agent/tools) — give it the actions it needs (search the web, send emails, update your CRM, etc.)
+6. Optionally add [knowledge](/knowledge/create-knowledge) — upload docs or connect data sources for context
 
-### Build from Scratch
+For a full walkthrough of every setting, see [Build with Relevance AI](/build/introduction).
 
-Start from scratch and build your agent fully customized to your workflows. This approach gives you complete control over every aspect of your agent's design and behavior.
+## Step 2: Test your agent
 
-**Best for:** Advanced users who need full customization
+There are two ways to test:
 
-**How it works:**
-1. Define your agent's purpose and goals
-2. Configure the prompt and instructions
-3. Add tools and integrations
-4. Set up knowledge bases
-5. Configure escalation and approval workflows
-6. Test and deploy
+- **Quick test** — click **Test agent** under the agent name in the Prompt tab. This opens a chat window where you can give the agent a task and see how it responds, what tools it calls, and what output it produces. Great for rapid iteration while you're still building.
+- **Full test** — head to the **Run** tab to give your agent a proper end-to-end run. This simulates a real task in the same environment your agent will actually operate in, so you can see exactly how it behaves in production.
 
-For detailed guidance on building from scratch, see our [Build Your Agent](/agent/build-your-agent/build-overview) documentation.
+Start with a quick test to make sure the basics work, then move to the Run tab to validate with real inputs before sharing.
 
----
+## Step 3: Refine
 
-## Customizing Your Agent
+If the output isn't quite right, iterate:
 
-Regardless of which method you choose, you'll want to customize your agent to match your specific needs. Here are the key areas to configure:
+- **Tighten the prompt** — be more specific about what you want, how it should be formatted, and what tone to use
+- **Add or adjust tools** — make sure the agent has access to the right actions for the job
+- **Add knowledge** — upload docs, connect data sources, or add context so the agent has what it needs
 
-<AccordionGroup>
-  <Accordion title="Prompt Instructions" icon="message">
-    Define how your agent thinks and responds. Write clear instructions about the agent's role, tone, and behavior. Include specific guidelines for handling different scenarios.
-    
-    [Learn more about prompts →](/agent/build-your-agent/prompt)
-  </Accordion>
+Test again after each change. A few rounds of this and you'll have a solid agent.
 
-  <Accordion title="Tools & Integrations" icon="wrench">
-    Give your agent the ability to take actions by connecting tools. This could include sending emails, updating CRMs, searching databases, or calling APIs.
-    
-    [Learn more about tools →](/agent/build-your-agent/tools)
-  </Accordion>
+## Step 4: Share and deploy
 
-  <Accordion title="Knowledge Bases" icon="brain">
-    Upload documents, connect data sources, or integrate with your knowledge management systems to give your agent access to specific information.
-    
-    [Learn more about knowledge →](/knowledge/create-knowledge)
-  </Accordion>
+Once you're happy with the output, put your agent to work:
 
-  <Accordion title="Triggers & Automation" icon="bolt">
-    Set up how and when your agent runs. Configure triggers from integrations, webhooks, schedules, or API calls.
-    
-    [Learn more about triggers →](/agent/build-your-agent/triggers)
-  </Accordion>
+- [Share your agent](/agent/share-your-agent) with your team so others can use it
+- Set up [triggers](/agent/build-your-agent/triggers) to run it automatically — on a schedule, from a webhook, or when something happens in your CRM
+- Use [bulk schedule](/agent/give-your-agent-tasks/bulk-schedule) to run it across a list of inputs
+- Add [escalations](/agent/build-your-agent/escalations) so the agent knows when to loop in a human
 
-  <Accordion title="Escalations & Approvals" icon="user-check">
-    Define when your agent should ask for human help or approval. Set up escalation paths to ensure quality and maintain control.
-    
-    [Learn more about escalations →](/agent/build-your-agent/escalations)
-  </Accordion>
-</AccordionGroup>
-
----
-
-## Follow along on YouTube
-
-We also have a number of YouTube tutorials you can use to follow along with and learn how to build Agents.
-
-<Frame caption="In this video, our GTM Lead, Ahmed Alassafi, will show you how to build an AI sales research agent that is saving sales teams 15+ hours every week.">
-  <iframe
-    className="w-full aspect-video rounded-xl"
-    src="https://www.youtube.com/embed/7X8Co6G7oo0"
-    title="YouTube video player"
-    allowFullScreen
-  ></iframe>
-</Frame>
-
----
-
-## Next Steps
+## What's next
 
 <CardGroup cols={2}>
-  <Card 
-    title="Build Your Agent" 
-    icon="hammer" 
-    href="/agent/build-your-agent/build-overview"
-  >
-    Learn about all the components that make up an agent
+  <Card title="Prompts" icon="message" href="/agent/build-your-agent/prompt">
+    Fine-tune how your agent thinks and responds
   </Card>
-  <Card 
-    title="Agent Introduction" 
-    icon="book-open" 
-    href="/agent/introduction"
-  >
-    Understand agent concepts, benefits, and best practices
+  <Card title="Tools" icon="wrench" href="/agent/build-your-agent/tools">
+    Connect actions like email, CRM, search, and APIs
   </Card>
-  <Card 
-    title="Give Your Agent Tasks" 
-    icon="list-check" 
-    href="/agent/give-your-agent-tasks/task-overview"
-  >
-    Learn how to interact with and manage your agents
+  <Card title="Knowledge" icon="book" href="/knowledge/create-knowledge">
+    Upload docs and data to give your agent context
   </Card>
-  <Card 
-    title="Explore the Marketplace" 
-    icon="store" 
-    href="/marketplace/intro-to-marketplace"
-  >
-    Browse pre-built agents and templates
+  <Card title="Triggers" icon="bolt" href="/agent/build-your-agent/triggers">
+    Automate when and how your agent runs
   </Card>
 </CardGroup>

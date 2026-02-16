@@ -4,9 +4,67 @@ description: "Workforce transforms how your agents collaborate by providing a vi
 sidebarTitle: "Workforces"
 ---
 
-Here's a YouTube video to get started with Workforce by one of our Product Managers, Matt\! 
+## What is a Workforce?
 
-<Frame caption="Get started with Workforce - learn how to create visual agent workflows.">
+A Workforce is a team of AI agents that work together to complete multi-step tasks. Instead of building one agent that tries to do everything, you connect specialists — each handling a different part of the process — on a visual canvas.
+
+Think of it like a team of employees: a researcher gathers information, a writer drafts the output, and a reviewer checks the quality. Each agent focuses on what it's best at, and the Workforce handles the handoffs between them.
+
+## What are the benefits of a Workforce?
+
+<CardGroup cols={2}>
+  <Card title="Break down complex tasks" icon="diagram-project">
+    Split multi-step processes across specialized agents instead of overloading a single one.
+  </Card>
+  <Card title="Visual workflow builder" icon="objects-column">
+    Design agent teams with drag-and-drop — no code, easy to understand and modify.
+  </Card>
+  <Card title="Flexible routing" icon="arrows-split-up-and-left">
+    Use AI-driven handoffs, fixed sequences, or conditional logic to control how work flows between agents.
+  </Card>
+  <Card title="End-to-end monitoring" icon="chart-line">
+    Track every step of a workflow to see what's working and where things get stuck.
+  </Card>
+</CardGroup>
+
+## How Workforces Work
+
+### Connection types
+
+When building your agent workflows, you choose how agents hand off to each other:
+
+- **AI connection** — the agent decides when to pass control to another agent based on context. Great when you want the agent to use judgement about whether another specialist is needed.
+- **Next step** — a mandatory transition. When one agent finishes, the next one starts automatically. Use this for predictable, sequential processes.
+
+### Tool integration
+
+You can connect tools directly within your workflow:
+
+- Connect tools to agents to extend what they can do
+- Link tools to other tools to create processing chains
+- Combine agent intelligence with specialized tool functionality
+
+### Conditional logic
+
+Make your workflows smarter with routing rules:
+
+- Create "if this, then that" rules to determine workflow paths
+- Set up decision points that route tasks based on specific criteria
+- Build adaptive workflows that respond differently depending on inputs or outcomes
+
+## Where are Workforces most useful?
+
+Workforces are ideal when a task requires multiple steps, skills, or handoffs that a single agent can't handle well on its own:
+
+- **Content pipelines**: A researcher gathers information, a writer drafts the content, and a reviewer checks quality before publishing
+- **Lead processing**: One agent qualifies inbound leads, another enriches the data, and a third routes them to the right sales rep
+- **Customer support escalation**: A frontline agent handles common questions and hands off complex issues to a specialist agent
+- **Report generation**: Agents collect data from multiple sources, analyze it, and compile a final report
+- **Onboarding workflows**: Coordinate welcome emails, account setup, training material delivery, and check-ins across multiple agents
+
+## Getting started
+
+<Frame caption="Get started with Workforce — learn how to create visual agent workflows.">
   <iframe
     className="w-full aspect-video rounded-xl"
     src="https://www.youtube.com/embed/-YucNGjfoWA"
@@ -15,48 +73,10 @@ Here's a YouTube video to get started with Workforce by one of our Product Manag
   ></iframe>
 </Frame>
 
-## Creating Visual Workflows
-
-Workforce provides a clear flowchart view of your entire agent ecosystem, eliminating the complexity of nested agent relationships. With the visual workflow builder, you can:
-
-- Design agent teams with intuitive drag-and-drop connections
-- Enable specialized agents to work as peers rather than in hierarchies
-- Create workflows that are easy to understand, modify, and monitor
-
-## Connection Types
-
-When building your agent workflows, you can choose between different connection types:
-
-### AI connection
-
-This connection type gives your agent autonomy to determine when to pass control to another agent. The agent evaluates the context and decides if another agent's expertise is needed to complete the task.
-
-### Next step
-
-This connection type creates a mandatory transition between agents. When one agent completes its task, control automatically passes to the next agent in the workflow, ensuring a predictable process flow.
-
-## Tool Integration
-
-Workforce allows you to connect tools directly within your workflow:
-
-- Connect tools directly to agents to enhance their capabilities
-- Link tools to other tools to create sophisticated processing chains
-- Build complex workflows that combine agent intelligence with specialized tool functionality
-
-## Conditional Logic
-
-Make your workflows smarter with conditional logic:
-
-- Create "if this, then that" rules to determine workflow paths
-- Set up decision points that route tasks based on specific criteria
-- Build adaptive workflows that respond differently depending on inputs or outcomes
-
-## Getting Started with Workforce
-
 To create your first Workforce:
 
-1. Click on “Workforce” on the left side bar
-2. Click on “\+ New Workforce” to open the visual canvas
+1. Click **Workforce** in the left sidebar
+2. Click **+ New Workforce** to open the visual canvas
 3. Add your agents to the canvas by dragging them from the sidebar
 4. Connect your agents by drawing lines between them
 5. Configure each connection by selecting the connection type
@@ -64,32 +84,56 @@ To create your first Workforce:
 7. Set up any conditional logic for routing
 8. Save your workflow
 
-## Best Practices
+## How to get the most from your Workforce?
 
-For optimal results with Workforce:
+1. **Start with a clear workflow**: Map out your process before building — know which agents handle which steps and how they hand off.
+2. **Keep agents focused**: Each agent should have a single responsibility. A researcher shouldn't also be writing and reviewing.
+3. **Choose the right connection type**: Use AI connections when the agent needs judgement about handoffs. Use next step for predictable, sequential flows.
+4. **Name connections clearly**: Descriptive names document the purpose of each handoff and make your workflow easier to understand.
+5. **Test with varied inputs**: Run different scenarios to make sure routing works as expected and edge cases are handled.
+6. **Monitor and optimize**: Review workflow performance regularly to identify bottlenecks or communication gaps between agents.
 
-- Start with a clear workflow diagram before building in the interface
-- Group related agents together visually to improve readability
-- Use descriptive names for your connections to document their purpose
-- Test your workflow with various inputs to ensure proper routing
-- Monitor agent handovers to identify any communication gaps
-- Regularly review and optimize your workflow based on performance
+## Frequently Asked Questions
 
-## Follow along on YouTube
+<AccordionGroup>
+  <Accordion title="How many agents can I add to a Workforce?">
+    There's no hard limit on the number of agents in a Workforce. However, simpler workflows with clearly defined roles tend to perform better than overly complex ones.
+  </Accordion>
 
-We also have a number of YouTube tutorials you can use to follow along with and learn how to build Agents.
+  <Accordion title="What's the difference between an AI connection and a next step?">
+    An AI connection lets the agent decide when to hand off based on context — it uses judgement. A next step is a mandatory transition that always fires when the previous agent finishes. Use AI connections for flexible routing and next steps for predictable sequences.
+  </Accordion>
 
-<Frame caption="In this video, our GTM Lead, Ahmed Alassafi, will show you how to build an AI Content Creation Team in Workforce that took him from 3k to 12k LinkedIn followers in under 3 months.">
-  <iframe
-    className="w-full aspect-video rounded-xl"
-    src="https://www.youtube.com/embed/0vATbdyGJMs"
-    title="YouTube video player"
-    allowFullScreen
-  ></iframe>
-</Frame>
+  <Accordion title="Can I use tools inside a Workforce?">
+    Yes. You can connect tools directly to agents within your Workforce, or link tools to other tools to create processing chains.
+  </Accordion>
 
-## Related Features
+  <Accordion title="Can I reuse agents across multiple Workforces?">
+    Yes. The same agent can participate in multiple Workforces. This is useful when a specialist agent — like a data enrichment agent — is needed in several different workflows.
+  </Accordion>
 
-[Agent Configuration](https://relevanceai.com/docs/agent/agent-configuration) - Learn how to configure individual agents before adding them to your Workforce.
+  <Accordion title="How do I debug a Workforce that isn't working as expected?">
+    Review the workflow execution to see which agent handled each step, what it received, and what it passed on. This helps you identify where the process broke down — whether it's a routing issue, a tool failure, or a prompt that needs refining.
+  </Accordion>
+</AccordionGroup>
 
-[Tools](https://relevanceai.com/docs/tool/introduction) - Discover the tools you can integrate into your Workforce workflows.
+---
+
+## Ready to get started with Workforces?
+
+<CardGroup cols={2}>
+  <Card
+    title="Build Your First Workforce"
+    icon="diagram-project"
+    href="/workforce/workforce-overview/quick-start-guide"
+  >
+    Create a multi-agent workflow on the visual canvas
+  </Card>
+  <Card
+    title="Watch a Walkthrough"
+    icon="circle-play"
+    href="https://www.youtube.com/watch?v=0vATbdyGJMs"
+  >
+    See how to build an AI content creation team in Workforce
+  </Card>
+</CardGroup>

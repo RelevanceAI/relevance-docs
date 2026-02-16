@@ -1,86 +1,119 @@
 ---
-title: 'Knowledge'
-sidebarTitle: 'Knowledge'
-description: "Knowledge in Relevance AI is a powerful Retrieval Augmented Generation (RAG) solution that enhances your AI agents and tools with relevant context and information."
+title: "Knowledge"
+sidebarTitle: "Knowledge"
+description: "Give your agents the context they need with Relevance AI's RAG-powered knowledge system."
 ---
-
 
 ## What is Knowledge?
 
-Knowledge is Relevance AI's RAG solution that allows you to provide additional context and relevant information to your agents and tools. It serves as the memory and information repository that your AI workforce can access when responding to queries or performing tasks. With Knowledge, your agents can draw upon specific information rather than relying solely on their pre-trained knowledge.
+Knowledge is Relevance AI's retrieval augmented generation (RAG) system. It lets you give your agents and tools access to specific information — your docs, your data, your expertise — so they can respond with accuracy instead of relying only on their training data.
 
-## Why Use Knowledge?
+Think of it as your agent's reference library. When an agent needs to answer a question or complete a task, it searches your knowledge bases for the most relevant information and uses it to ground its response.
 
-Adding knowledge to your agents and tools offers several key benefits:
+## What are the benefits of Knowledge?
 
-- **Enhanced accuracy** - Agents can reference specific information rather than generating responses based only on their training data
-- **Reduced hallucinations** - By grounding responses in factual information, agents are less likely to generate incorrect or fabricated answers
-- **Domain-specific expertise** - Easily make your agents experts in particular subjects by providing relevant knowledge bases
-- **Up-to-date information** - Keep your agents informed with the latest information by updating your knowledge bases
+<CardGroup cols={2}>
+  <Card title="More accurate responses" icon="bullseye">
+    Agents reference your actual data instead of guessing. Fewer hallucinations, more reliable output.
+  </Card>
+  <Card title="Domain expertise on demand" icon="graduation-cap">
+    Turn any agent into a specialist by giving it access to the right knowledge — product docs, playbooks, policies, whatever it needs.
+  </Card>
+  <Card title="Always up to date" icon="rotate">
+    Update your knowledge bases as things change. Your agents automatically use the latest information.
+  </Card>
+  <Card title="Works across your stack" icon="plug">
+    Pull in data from files, websites, Google Drive, SharePoint, Notion, and more.
+  </Card>
+</CardGroup>
 
-## Creating Knowledge in Relevance AI
+## How Knowledge Works
 
-Creating knowledge in Relevance AI is simple and flexible with multiple options to suit your needs:
+Knowledge uses semantic search to find the most relevant information for each query. When an agent receives a task or question:
 
-### Manually Input Data
+1. It searches your connected knowledge bases for relevant content
+2. The most relevant results are passed to the agent as context
+3. The agent uses that context to generate an accurate, grounded response
 
-Start with an empty table and enter information directly. This approach works well when you have specific information you want to make available to your agents that isn't contained in existing documents.
+This is powered by retrieval augmented generation (RAG) — your agents get the right information at the right time without needing it baked into their training data.
 
-The manual approach gives you complete control over the structure and content of your knowledge base, allowing you to create precisely tailored information resources.
+### Connecting Knowledge to an agent
 
-### Upload Structured and Unstructured Data
+When you add a knowledge base to an agent, you choose how the agent uses it:
 
-Import files such as CSV, PDF, Excel, JSON, or even audio files. This method is ideal when your information already exists in document form and you want to make it accessible to your agents.
+- **Add all to prompt** — the entire knowledge set is included in the prompt every time the agent runs. Best for small or simple datasets.
+- **Allow agent to search** — the agent searches the knowledge base using RAG and pulls only what's relevant. Best for large or complex datasets.
 
-Relevance AI automatically processes these documents, extracting the relevant information and making it searchable for your agents. This capability allows you to quickly transform existing documentation into actionable knowledge.
+## Where is Knowledge most useful?
 
-### Extract Content from Websites
+Knowledge is most effective when your agents need access to specific, proprietary, or frequently changing information:
 
-Fetch text and relevant information directly from URLs. This approach is perfect for incorporating information from your company website, documentation sites, or other online resources.
+- **Customer support**: Product documentation, troubleshooting guides, and FAQs so agents resolve issues accurately
+- **Sales enablement**: Battlecards, pricing sheets, and case studies to keep sales agents informed
+- **Internal operations**: Company policies, SOPs, and handbooks that employees need on demand
+- **Onboarding**: Training materials and process documentation for new team members
+- **Research and analysis**: Reports, datasets, and reference materials for agents that synthesize information
 
-Website extraction saves you the time of manually copying information and ensures your knowledge base stays synchronized with your online content.
+## Getting started
 
-### Connect Third-Party Integrations
+1. Click **Knowledge** in the left sidebar
+2. Click **+ New Knowledge** and choose how you want to add data:
+   - **Upload files** — CSV, PDF, Excel, JSON, or audio
+   - **Enter manually** — start with an empty table and add data directly
+   - **Extract from websites** — pull content from URLs
+   - **Connect integrations** — sync from [Google Drive](/knowledge/integrated-knowledge-sources/google-drive), [SharePoint](/knowledge/integrated-knowledge-sources/sharepoint), or [Notion](/knowledge/integrated-knowledge-sources/notion)
+3. Go to your agent's settings and connect the knowledge base
+4. Test your agent to make sure it's pulling the right information
 
-Sync data from external platforms to create comprehensive knowledge bases that draw from multiple sources. This integration capability allows you to connect your existing tools and data repositories with Relevance AI.
+## How to get the most from Knowledge?
 
-By connecting to third-party platforms, you can ensure your agents have access to the most current information across your entire technology stack.
+1. **Keep data clean and structured**: Well-organized content with clear headings and sections improves retrieval accuracy.
+2. **Be specific with what you upload**: Give agents only the knowledge they need — too much irrelevant data dilutes search results.
+3. **Keep it up to date**: Regularly refresh your knowledge bases so agents always reference current information.
+4. **Use enrichment**: Run [tools](/knowledge/enrich-with-tool) over your knowledge to add summaries, tags, or derived fields that help agents find the right content faster.
+5. **Use snippets for quick access**: Set up [snippets](/knowledge/use-snippets-for-quick-access) for frequently referenced information your agents use often.
 
-## Accessing Knowledge
+## Frequently Asked Questions
 
-Once you've created knowledge bases, you can connect them to your agents and tools. This connection allows your AI workforce to:
+<AccordionGroup>
+  <Accordion title="What file types can I upload to Knowledge?">
+    You can upload CSV, PDF, Excel, JSON, and audio files. You can also pull content from websites or sync from integrations like Google Drive, SharePoint, and Notion.
+  </Accordion>
 
-1. Search through relevant information when responding to queries
-2. Reference specific facts and details
-3. Provide responses grounded in your organization's specific information
-4. Deliver more accurate and contextually appropriate answers
+  <Accordion title="How does semantic search differ from keyword search?">
+    Keyword search looks for exact word matches. Semantic search understands meaning — so a search for "pricing information" can find content titled "how much does it cost" even though the words don't match.
+  </Accordion>
 
-## Advanced Knowledge Features
+  <Accordion title="Can multiple agents share the same knowledge base?">
+    Yes. You can connect a single knowledge base to as many agents as you like. This is useful when multiple agents need access to the same reference material.
+  </Accordion>
 
-Relevance AI's knowledge capabilities include:
+  <Accordion title="How do I keep my knowledge base up to date?">
+    You can manually update entries, re-upload files, or use integrations like Google Drive and SharePoint that sync automatically when your source documents change.
+  </Accordion>
 
-- **Semantic search** - Find information based on meaning, not just keywords
-- **Knowledge enrichment** - Enhance your knowledge bases with additional context using tools
-- **Advanced retrieval options** - Configure how your agents search and prioritize information
+  <Accordion title="What is knowledge enrichment?">
+    Enrichment lets you run tools over your knowledge table to add or transform data — for example, generating summaries, extracting key fields, or tagging entries. This makes retrieval more effective and gives agents richer context.
+  </Accordion>
+</AccordionGroup>
 
-- **Versioning and updates** - Keep your knowledge bases current with easy updating
+---
 
-## Getting Started with Knowledge
+## Ready to get started with Knowledge?
 
-To begin using Knowledge in Relevance AI:
-
-1. Navigate to the Knowledge section in your Relevance AI dashboard
-2. Choose your preferred method for creating a knowledge base
-3. Upload or input your information
-4. Connect your knowledge base to relevant agents and tools
-5. Test your agents to ensure they're effectively utilizing the knowledge
-
-By following these steps, you'll create a more capable AI workforce that can leverage specific information to deliver better results.
-
-## Related Resources
-
-For more information on working with Relevance AI's key concepts:
-
-- [Tools](https://relevanceai.com/docs/get-started/key-concepts/tools): Build integrations, LLM prompt chains, or other step-by-step automations
-- [Agents](https://relevanceai.com/docs/get-started/key-concepts/agent): Create reasoning bots powered by LLMs that plan and complete tasks
-- [API keys](https://relevanceai.com/docs/get-started/key-concepts/api-keys): Enter your own API key(s) for the many supported vendors
+<CardGroup cols={2}>
+  <Card
+    title="Create a Knowledge Base"
+    icon="book"
+    href="/knowledge/create-knowledge"
+  >
+    Upload your data and build your first knowledge base
+  </Card>
+  <Card
+    title="Connect Integrations"
+    icon="plug"
+    href="/knowledge/integrated-knowledge-sources/google-drive"
+  >
+    Sync from Google Drive, SharePoint, Notion, and more
+  </Card>
+</CardGroup>

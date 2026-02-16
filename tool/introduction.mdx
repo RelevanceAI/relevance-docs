@@ -1,70 +1,118 @@
 ---
 title: "Tools"
 sidebarTitle: "Tools"
-description: "Build tools for AI agents"
+description: "The actions your agents use to get things done — from API calls to LLM prompts to custom code."
 ---
 
-## What are tools?
+## What are Tools?
 
-Tools are how you build integrations, LLM prompt chains or other step by step automations. You can build them in our no code tool builder. You can then share them as a form, run them in bulk on knowledge tables, or give them to your agents to help them complete work.
+Tools are the actions your agents can take. They're step-by-step automations you build in a no-code builder — things like calling an API, running an LLM prompt, sending an email, searching a database, or executing custom code.
 
-The possibilities are vast. You can tap into any API, choose from our extensive library of third-party integrations, or even incorporate custom code into your tools.
+You can give tools to your agents so they know how to complete tasks, share them as standalone forms, or run them in bulk across a knowledge table.
 
-## How Do Tools Work?
+## What are the benefits of Tools?
 
-**Receive inputs**
-Inputs define the data that a tool will process and act upon. Tools accept various types of inputs, such as text or numbers. These inputs can be provided manually by users or agents, or passed from other tools.
+<CardGroup cols={2}>
+  <Card title="Extend what agents can do" icon="puzzle-piece">
+    Without tools, agents can only talk. With tools, they can take real actions — update your CRM, send emails, search the web, and more.
+  </Card>
+  <Card title="No-code builder" icon="wand-magic-sparkles">
+    Build tools visually by chaining steps together. No engineering required.
+  </Card>
+  <Card title="Reusable across agents" icon="clone">
+    Build a tool once and give it to any agent. Share it with your team or publish it to the Marketplace.
+  </Card>
+  <Card title="Full flexibility" icon="code">
+    Use pre-built integrations, call any API, or write custom Python. Whatever your workflow needs.
+  </Card>
+</CardGroup>
 
-**Chain together steps**
-Steps are the core actions that a tool performs. They can include operations like LLM prompts, API calls, or custom code execution. Steps are arranged in a logical sequence, with each step potentially using outputs from previous steps.
+## How Tools Work
 
-**Generate outputs**
-After processing the inputs through its chain of steps, the tool produces one or more outputs. Outputs can be in various formats, such as text, links or HTML. These outputs can be displayed to users, stored in databases, or passed to other tools or agents for further processing.
+Every tool follows the same pattern: **inputs → steps → outputs**.
+
+- **Inputs** — the data the tool receives. Text, numbers, files, or data passed from an agent or another tool.
+- **Steps** — the actions the tool performs in sequence. Each step can use the output of previous steps. Steps include LLM prompts, API calls, integrations, code execution, and more.
+- **Outputs** — what the tool returns when it's done. Text, links, structured data, or files that get passed back to the agent or displayed to the user.
+
+## Where are Tools most useful?
+
+Tools shine anywhere your agents need to take action beyond conversation:
+
+- **CRM updates**: Automatically create, update, or enrich records in HubSpot, Salesforce, and other systems
+- **Email and messaging**: Send emails, Slack messages, or notifications as part of a workflow
+- **Web search and scraping**: Pull live information from the web to inform agent decisions
+- **Data processing**: Transform, filter, or analyze data with code steps or LLM prompts
+- **Third-party APIs**: Connect to any external service — payment processors, marketing platforms, internal systems, and more
 
 ## Getting started
 
-The Relevance **Tool Builder** consists of three tabs:
+The Tool Builder has three tabs:
 
-1. Use
-2. Build
-3. Logs 
+- **Use** — run and test your tool as a shareable form
+- **Build** — create your tool by defining inputs and chaining steps together
+- **Logs** — review past executions and debug issues
 
-<div
-  style={{
-    width: '100%',
-    position: 'relative',
-    paddingTop: '56.25%',
-  }}>
-  <iframe
-    src="https://app.supademo.com/embed/cm7oal74r0340hilg0k2ujcij"
-    frameBorder="0"
-    title="Build an AI agent from scratch in Relevance AI"
-    allow="clipboard-write; fullscreen"
-    webkitAllowFullscreen="true"
-    mozAllowFullscreen="true"
-    allowFullscreen
-    style={{
-      position: 'absolute',
-      top: 0,left: 0, width: '100%', height: '100%',
-      border: '3px solid #5E43CE',
-      borderRadius: '10px',
-    }}/>
-</div>
+To create your first tool:
 
-### Use
+1. Click **Tools** in the left sidebar
+2. Click **+ New Tool**
+3. Add your inputs — what data does the tool need?
+4. Add steps — what should the tool do with that data?
+5. Run individual steps to test as you build
+6. Give the tool to an agent or [share it](/tool/share-your-tool) as a standalone form
 
-Use provides you with an interface that allows you to run and test a tool as a shareable app.
+For a full guide on building tools, see the [Style Guide](/tool/customize-tool/tool-style-guide).
 
-### Build
+## How to get the most from your Tools?
 
-The builder is where you create your tool. 
+1. **Keep tools focused**: Each tool should do one thing well. Break complex workflows into smaller, composable tools.
+2. **Write clear descriptions**: Your agent uses the tool's name and description to decide when to use it — make them specific.
+3. **Define inputs carefully**: Use descriptive input names and set sensible defaults so agents pass the right data.
+4. **Test step by step**: Run individual steps as you build to catch issues early instead of debugging the whole chain.
+5. **Reuse and share**: Build tools once, then give them to multiple agents or share with your team via the Marketplace.
 
-You can define the inputs expected of the tool, for example, a file input and a text input.
+## Frequently Asked Questions
 
-Then, select from a library of steps and add them to your tool.
+<AccordionGroup>
+  <Accordion title="Do I need coding knowledge to build a tool?">
+    No. The Tool Builder is a no-code interface where you chain steps together visually. If you need custom logic, you can add a code step with Python, but it's entirely optional.
+  </Accordion>
 
-Each step can be ran individually, which is useful for testing and debugging your tool.
+  <Accordion title="What's the difference between a tool and an agent?">
+    An agent thinks, plans, and decides what to do. A tool is a specific action the agent can take — like calling an API or sending an email. Agents use tools to get work done.
+  </Accordion>
 
-### Logs
+  <Accordion title="Can I use the same tool across multiple agents?">
+    Yes. Tools are reusable. Build a tool once and assign it to as many agents as you like.
+  </Accordion>
 
-The Logs tab is where you can view the logs of your tool, which is useful for reviewing executions.
+  <Accordion title="How do I debug a tool that isn't working?">
+    Use the **Logs** tab in the Tool Builder to review past executions. You can see exactly what each step received and returned, making it easy to pinpoint where things went wrong.
+  </Accordion>
+
+  <Accordion title="Can I call external APIs from a tool?">
+    Yes. You can add an API step to call any REST endpoint, pass headers and parameters, and use the response in subsequent steps.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Ready to get started with Tools?
+
+<CardGroup cols={2}>
+  <Card
+    title="Build a Tool"
+    icon="hammer"
+    href="/tool/create-a-tool"
+  >
+    Follow our guide to create your first tool step by step
+  </Card>
+  <Card
+    title="Tool Style Guide"
+    icon="palette"
+    href="/tool/customize-tool/tool-style-guide"
+  >
+    Learn best practices for building effective tools
+  </Card>
+</CardGroup>
