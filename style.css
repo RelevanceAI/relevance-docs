@@ -3,9 +3,14 @@
   max-width: 90ch;
 }
 
-/* Widen content area but exclude search modal */
-main [class*="max-w-"] {
+/* Widen content area */
+[class*="max-w-"] {
   max-width: 100%;
+}
+
+/* Keep search modal at its default width */
+[id^="headlessui-dialog-panel"] {
+  max-width: 640px !important;
 }
 
 main > div {
@@ -35,6 +40,7 @@ div#content-side-layout {
     padding-right: 20rem !important;
   }
 }
+
 
 /* Hide gradient decoration on mobile */
 @media (max-width: 640px) {
