@@ -1,32 +1,16 @@
 ---
 title: "MCP Server Integration"
-description: "Connect your Relevance AI tools to Claude, Cursor, and other AI clients that support MCP servers. This integration creates a bridge between your Relevance AI workspace and external AI assistants, allowing you to leverage your custom tools across multiple platforms."
+description: "Connect tools to and from Relevance AI via MCP connection."
 ---
 
-## Overview
+The MCP (Model Context Protocol) integration lets you connect tools to and from Relevance AI. Give your agents access to tools hosted on external MCP servers, or expose your Relevance AI tools to services like Claude and Cursor. This means you can centralize your tool management in one place while extending their reach across your workflow — or pull in capabilities from other platforms without rebuilding them.
 
-The MCP Server integration enables you to use your Relevance AI tools in external AI clients that support the MCP (Model Control Protocol) standard and allow your agents to run external tools available from an MCP Server connection. This powerful feature creates a seamless connection between your Relevance AI workspace and popular AI assistants like Claude and development environments like Cursor.
+There are two ways to use MCP with Relevance AI:
 
-With MCP Server integration, you maintain a single source of truth for your tools while extending their availability across your entire AI ecosystem. This means the specialized tools you've built in Relevance AI can now be accessed and utilized by your favorite AI assistants outside our platform.
-
-## Benefits
-
-- **Extended tool availability**: Use your Relevance AI tools in Claude, Cursor, and other MCP-compatible AI clients
-- **Centralized tool management**: Update tools in one place and have changes reflect everywhere
-- **Customizable integration**: Select exactly which tools to expose to external clients
-- **Simple configuration**: Generate MCP server settings with just a few clicks
-- **Seamless workflow integration**: Access your specialized tools wherever you work with AI
-- **External tool integration**: Allow your agents to run external tools available from an MCP Server connection
-
-## How It Works
-
-The MCP Server integration creates a secure bridge between your Relevance AI workspace and external AI clients. When you configure the integration, you select which tools from your workspace you want to make available to external clients. The system then generates the necessary configuration settings that you can copy into your preferred MCP-compatible client.
-
-Once configured, your external AI assistant can access and execute the selected Relevance AI tools as if they were native to that platform. This creates a consistent experience across your entire AI workflow, regardless of which interface you're using.
+1. **External MCP server → Relevance AI Agent**: Connect a remote MCP server to your agent, giving it access to tools from another service.
+2. **Relevance AI tools → External service**: Expose your Relevance AI tools to an external MCP-compatible client like Claude or Cursor.
 
 ## Setting Up MCP Server Integration
-
-Setting up the MCP Server integration is straightforward:
 
 ### For Agents
 
@@ -37,9 +21,9 @@ Agents can connect to and run tools from remote MCP servers.
 </div>
 
 1. Open the Agent you want to connect
-2. Head to Advanced Settings by clicking "Advanced" in the sidebar
-3. Click "MCP Server"
-4. Click "+ Add remote MCP tools"
+2. Navigate to the "Tools" tab in the agent builder
+3. Click "Add MCP"
+4. Click "Connect my own"
 5. Add the URL of the remote hosted MCP server
 6. Label your MCP Server connection
 7. Add any authentication details required for the MCP server
