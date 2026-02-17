@@ -40,73 +40,6 @@ Use recurring schedules for:
 - Monthly analytics and summaries
 - Periodic system checks and maintenance tasks
 
-## Pausing triggers
-
-### Pause all triggers
-
-<div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
-<iframe src="https://app.supademo.com/embed/cmlq00tfh1z7gegrdbvz0ok0e?embed_v=2" frameBorder="0" title="How to pause all triggers" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
-</div>
-
-The "Pause all triggers" feature allows you to temporarily stop automated triggers in your workforce without disconnecting integrations or deleting trigger configurations. This feature is accessible from the workforce interface and provides a quick way to control automated workflow execution.
-
-#### What gets paused
-- Integration triggers (Gmail, Slack, CRM, etc.)
-- Webhook triggers
-- Recurring schedule triggers
-- All other automated triggers
-
-#### What continues working
-- Manual triggers (user message received)
-- Direct user interactions
-
-<Note>
-Manual triggers like "user message received" are designed to always remain active and cannot be paused. This ensures users can always interact with the workforce, even when automated triggers are paused.
-</Note>
-
-### Understanding manual vs automated triggers
-
-Understanding the difference between manual and automated triggers is essential for effectively managing your workforce's behavior.
-
-#### Manual triggers
-- Initiated by users through direct interaction
-- Represent user-initiated interactions (e.g., sending a message through Task View)
-- Always active and cannot be paused
-- Ensure continuous communication between users and the workforce
-- Example: Sending a message to your workforce through the Task tab
-
-#### Automated triggers
-- Run automatically based on events or schedules
-- Can be paused using the "Pause all triggers" feature
-- Include integration triggers, webhooks, and recurring schedules
-- Examples:
-  - Gmail monitors that activate when new emails arrive
-  - Slack event listeners that respond to channel messages
-  - Webhooks that trigger on external system events
-  - Recurring schedules that run at specific times
-
-### When to use pause all triggers
-
-The "Pause all triggers" feature is useful in several scenarios:
-
-<AccordionGroup>
-  <Accordion title="During maintenance" icon="wrench">
-    Temporarily stop automated workflows while making changes to your workforce configuration, updating agent logic, or modifying integrations. This prevents automated triggers from firing while you're working on improvements.
-  </Accordion>
-  
-  <Accordion title="Testing" icon="flask">
-    Prevent automated triggers from firing while testing your workforce. This allows you to focus on manual testing without interference from scheduled or event-based triggers, ensuring a controlled testing environment.
-  </Accordion>
-  
-  <Accordion title="Temporary suspension" icon="pause">
-    Pause integrations without disconnecting them when you need to temporarily halt automated workflows. This is useful during holidays, system migrations, or when external systems are undergoing maintenance.
-  </Accordion>
-  
-  <Accordion title="Troubleshooting" icon="bug">
-    Isolate issues by stopping automated triggers while keeping manual interaction available. This helps you determine whether problems are caused by automated trigger behavior or other aspects of your workforce configuration.
-  </Accordion>
-</AccordionGroup>
-
 ## Adding Triggers to Your Workforce
 
 ### Adding Your First Trigger
@@ -213,6 +146,30 @@ minute hour day-of-month month day-of-week year
 AWS EventBridge cron expressions use 6 fields, unlike traditional Unix cron which uses 5 fields. Always include the year field, and use `?` for either day-of-month or day-of-week when specifying the other.
 </Note>
 
+## Pausing triggers
+
+### Pause all triggers
+
+<div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
+<iframe src="https://app.supademo.com/embed/cmlq00tfh1z7gegrdbvz0ok0e?embed_v=2" frameBorder="0" title="How to pause all triggers" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+The "Pause all triggers" feature allows you to temporarily stop integrated triggers in your workforce without disconnecting integrations or deleting trigger configurations. This feature is accessible from the workforce interface and provides a quick way to control automated workflow execution.
+
+#### What gets paused
+- Integration triggers (Gmail, Slack, CRM, etc.)
+- Webhook triggers
+- Recurring schedule triggers
+- All other integrated triggers
+
+#### What continues working
+- Manual triggers (user message received)
+- Direct user interactions
+
+<Note>
+Manual triggers like "user message received" are designed to always remain active and cannot be paused. This ensures users can always interact with the workforce, even when integrated triggers are paused.
+</Note>
+
 ## Best Practices for Using Triggers
 
 ### Strategic Trigger Placement
@@ -261,10 +218,10 @@ AWS EventBridge cron expressions use 6 fields, unlike traditional Unix cron whic
     Scheduled runs use your account's configured timezone. You can adjust this in your workforce settings to ensure tasks run at the correct local time.
   </Accordion>
   <Accordion title="What happens when I click 'Pause all triggers'?">
-    When you click "Pause all triggers", all automated triggers in your workforce are temporarily disabled. This includes integration triggers (Gmail, Slack, CRM monitors), webhook triggers, and recurring schedule triggers. However, manual triggers like "user message received" continue to work normally, allowing you to interact with your workforce through the Task View at any time.
+    When you click "Pause all triggers", all integrated triggers in your workforce are temporarily disabled. This includes integration triggers (Gmail, Slack, CRM monitors), webhook triggers, and recurring schedule triggers. However, manual triggers like "user message received" continue to work normally, allowing you to interact with your workforce through the Task View at any time.
   </Accordion>
   <Accordion title="Why does my workforce still respond to messages after pausing all triggers?">
-    Manual triggers, such as "user message received", are designed to always remain active and cannot be paused. These triggers represent direct user interactions and ensure you can always communicate with your workforce. The "Pause all triggers" feature only affects automated triggers (integrations, webhooks, and schedules) that run without user initiation.
+    Manual triggers, such as "user message received", are designed to always remain active and cannot be paused. These triggers represent direct user interactions and ensure you can always communicate with your workforce. The "Pause all triggers" feature only affects integrated triggers (integrations, webhooks, and schedules) that run without user initiation.
   </Accordion>
   <Accordion title="How do I test my triggers?">
     Test triggers based on their type:
