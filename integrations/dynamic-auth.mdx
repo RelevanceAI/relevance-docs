@@ -1,5 +1,5 @@
 ---
-title: "Dynamic Auth"
+title: "User Level Authentication"
 description: "Enable agents to use individual user authentication for secure, private access to integrations"
 ---
 
@@ -7,11 +7,11 @@ description: "Enable agents to use individual user authentication for secure, pr
   User Level Authentication is an Enterprise-only feature that is gradually being rolled out to Enterprise customers. If you have an Enterprise subscription and don't have access yet, please reach out to your sales representative.
 </Warning>
 
-Dynamic Auth enables agents to operate using each user's individual authentication accounts for integrations, allowing multiple users to safely and privately use the same shared agent (especially in Chat) while only accessing their own data. Builders can configure this behavior per tool input, and users only need to authenticate once per integration.
+User Level Authentication enables agents to operate using each user's individual authentication accounts for integrations, allowing multiple users to safely and privately use the same shared agent (especially in Chat) while only accessing their own data. Builders can configure this behavior per tool input, and users only need to authenticate once per integration.
 
-## How Dynamic Auth works
+## How User Level Authentication works
 
-Dynamic Auth changes how authentication works when multiple people use the same agent. Instead of everyone using a single shared account to access integrations (like Google Drive, Slack, or HubSpot), each user connects their own personal accounts.
+User Level Authentication changes how authentication works when multiple people use the same agent. Instead of everyone using a single shared account to access integrations (like Google Drive, Slack, or HubSpot), each user connects their own personal accounts.
 
 <Columns cols={2}>
   <Card title="Builders configure" icon="wrench">
@@ -30,7 +30,7 @@ Dynamic Auth changes how authentication works when multiple people use the same 
 
 This means that when multiple team members use the same agent, each person only sees and accesses their own data within the connected integrations.
 
-## Why use Dynamic Auth
+## Why use User Level Authentication
 
 <Columns cols={2}>
   <Card title="Enhanced Security" icon="shield-check">
@@ -89,16 +89,33 @@ User Level Authentication is supported in the following contexts:
 
 ## Setting up user level authentication
 
-As a builder, you can configure Dynamic Auth at the tool input level. If you want to enable Dynamic Auth for a tool step that currently has authentication configured directly on the step, you'll need to convert that authentication to a tool input instead.
+As a builder, you can configure User Level Authentication at the tool input level. If you want to enable User Level Authentication for a tool step that currently has authentication configured directly on the step, you'll need to convert that authentication to a tool input instead.
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmhe9r2w33m1bfatipia57zjj" frameBorder="0" title="Enable user level authentication at tool input level" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{width: "100%", position: "relative", "padding-top": "56.75%"}}>
+  <iframe 
+    src="PLACEHOLDER-SETUP"
+    frameBorder="0"
+    title="Enable user level authentication at tool input level"
+    allow="clipboard-write; fullscreen"
+    webkitAllowFullscreen="true"
+    mozAllowFullscreen="true"
+    allowFullscreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px"
+    }}
+  />
 </div>
 
 To enable user level authentication at the tool input level:
 
 1. Enter the Tool you want to configure and make sure you're on the Build tab
-2. Navigate to the OAuth Input you want to enable Dynamic Auth on and click the authentication settings icon
+2. Navigate to the OAuth Input you want to enable User Level Authentication on and click the authentication settings icon
 3. Toggle on the switch next to 'User level authentication required'
 
 <Note>
@@ -108,28 +125,37 @@ The shield icon only appears on OAuth account inputs. If you don't see the shiel
 When this is enabled, any agent using this tool will require each user to authenticate with their own account for this integration.
 
 <Tip>
-If you have authentication configured directly on a tool step and want to enable Dynamic Auth, you'll need to convert that authentication to a tool input field. This allows each user to provide their own credentials when using the tool.
+If you have authentication configured directly on a tool step and want to enable User Level Authentication, you'll need to convert that authentication to a tool input field. This allows each user to provide their own credentials when using the tool.
 </Tip>
 
 <Note>
 For Enterprise customers: If you have [asset-level authentication controls](/get-started/enterprise/rbac#permissions) enabled through RBAC, users can also choose from project-level shared accounts instead of authorizing their individual accounts.
 </Note>
 
-### Video walkthrough
-
-<iframe src="https://app.supademo.com/embed/PLACEHOLDER-SETUP" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen allow="clipboard-write" style={{width: '100%', height: '600px'}}></iframe>
-
-*This demo shows how to enable User Level Authentication on a tool equipped to an agent.*
-
 ## User experience in Chat
 
-When users interact with an agent in Chat that has Dynamic Auth enabled, the authentication flow is seamless and intuitive.
+When users interact with an agent in Chat that has User Level Authentication enabled, the authentication flow is seamless and intuitive.
 
-### Video walkthrough
-
-<iframe src="https://app.supademo.com/embed/PLACEHOLDER-CHAT" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen allow="clipboard-write" style={{width: '100%', height: '600px'}}></iframe>
-
-*This demo shows the user experience when using User Level Authentication in chat.*
+<div style={{width: "100%", position: "relative", "padding-top": "56.75%"}}>
+  <iframe 
+    src="PLACEHOLDER-CHAT"
+    frameBorder="0"
+    title="Using user level authentication in chat"
+    allow="clipboard-write; fullscreen"
+    webkitAllowFullscreen="true"
+    mozAllowFullscreen="true"
+    allowFullscreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "3px solid #5E43CE",
+      borderRadius: "10px"
+    }}
+  />
+</div>
 
 ### First-time authentication
 
@@ -191,11 +217,11 @@ To protect privacy and security:
   </Accordion>
   
   <Accordion title="Can I use both shared accounts and individual accounts in the same project?">
-    Yes, if you're on an Enterprise subscription with asset-level authentication controls enabled. When Dynamic Auth is configured for a tool input, Enterprise users will see both their individual accounts and any shared project-level accounts available for selection. This gives you flexibility to choose the appropriate account based on the context. Non-Enterprise users will only see their individual accounts.
+    Yes, if you're on an Enterprise subscription with asset-level authentication controls enabled. When User Level Authentication is configured for a tool input, Enterprise users will see both their individual accounts and any shared project-level accounts available for selection. This gives you flexibility to choose the appropriate account based on the context. Non-Enterprise users will only see their individual accounts.
   </Accordion>
   
-  <Accordion title="What integrations support Dynamic Auth?">
-    Dynamic Auth works with all integrations that require authentication in Relevance AI. This includes popular integrations like Google Drive, Gmail, Slack, HubSpot, Salesforce, and many others. The feature is integration-agnostic and will work with any tool that uses an authenticated connection.
+  <Accordion title="What integrations support User Level Authentication?">
+    User Level Authentication works with all integrations that require authentication in Relevance AI. This includes popular integrations like Google Drive, Gmail, Slack, HubSpot, Salesforce, and many others. The feature is integration-agnostic and will work with any tool that uses an authenticated connection.
   </Accordion>
   
   <Accordion title="Is this feature only available on Enterprise plans?">
