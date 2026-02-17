@@ -63,10 +63,10 @@ Implement once, with the knowledge that as new models come out, your product can
 | Command Light  | `cohere-command-light`        | Cohere    |Cohere model, easy to retrain                                  |
 
 In the next pages, we will explain about more advanced settings for your LLM component:
-* [Conversation history](/tool/tool-steps/llms/llm-advance-setting#conversation-history)
-* [System prompt](/tool/tool-steps/llms/llm-advance-setting#system-prompt)
-* [Temperature](/tool/tool-steps/llms/llm-advance-setting#temperature)
-* [Validators](/tool/tool-steps/llms/llm-advance-setting#validators)
+* [Conversation history](/tool/tool-steps/llms/llm-tool-step#conversation-history)
+* [System prompt](/tool/tool-steps/llms/llm-tool-step#system-prompt)
+* [Temperature](/tool/tool-steps/llms/llm-tool-step#temperature)
+* [Validators](/tool/tool-steps/llms/llm-tool-step#validators)
 * [How to handle large amount of text/context](/tool/tool-steps/llms/how-to-handle-too-much-text)
 
 ## LLM cost with and without credits
@@ -88,7 +88,7 @@ range; more information is available at [How to handle to much text](/tool/tool-
 ```
 
 ### Validation
-When there are [output validations](/tool/tool-steps/llms/llm-advance-setting#validators) set for an LLM, Relevance automatically checks the output
+When there are [output validations](/tool/tool-steps/llms/llm-tool-step#validators) set for an LLM, Relevance automatically checks the output
 to confirm the validity. If the output does not match the required setup, the below error will raise.
 The best solution is to improve your prompt with more explanation or examples. 
 ```
@@ -126,13 +126,13 @@ The maximum number of LLM runs per minute for your OpenAI Plan has been reached.
 ```
 
 ### Temperature
-There is a [temperature](/tool/tool-steps/llms/llm-advance-setting#temperature) parameter under LLM advance setting. The below error occurs if the entered value is out of the accepted (0,1) range.
+There is a [temperature](/tool/tool-steps/llms/llm-tool-step#temperature) parameter under LLM advance setting. The below error occurs if the entered value is out of the accepted (0,1) range.
 ```
 400: {"message":"-0.5 is less than the minimum of 0 - 'temperature'","type":"invalid_request_error","param":null,"code":null}
 ```
 
 ### History
-This error occurs if [History](/tool/tool-steps/llms/llm-advance-setting#conversation-history) is set to an empty array. Either enter values, or use the `X` button on the right side of each row to remove the empty rows.
+This error occurs if [History](/tool/tool-steps/llms/llm-tool-step#conversation-history) is set to an empty array. Either enter values, or use the `X` button on the right side of each row to remove the empty rows.
 ```
 Studio transformation prompt_completion input validation error: must be array {"type":"array"} /history
 ```
