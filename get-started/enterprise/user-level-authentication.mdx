@@ -7,18 +7,18 @@ description: "Enable agents to use individual user authentication for secure, pr
   User Level Authentication is an Enterprise-only feature that is being rolled out. If you don't have access yet, please reach out to your sales representative.
 </Warning>
 
-User Level Authentication enables agents to operate using each user's individual authentication accounts for integrations, allowing multiple users to safely and privately use the same shared agent (especially in Chat) while only accessing their own data. Builders can configure this behavior per agent, and users only need to authenticate once per integration.
+User Level Authentication enables agents to operate using each user's individual authentication accounts for integrations, allowing multiple users to safely and privately use the same shared agent (especially in Chat) while only accessing their own data. Builders can configure this behavior per agent, and users only need to authenticate once per tool.
 
 ## How User Level Authentication works
 
-User Level Authentication changes how authentication works when multiple people use the same agent. Instead of everyone using a single shared account to access integrations (like Google Drive, Slack, or HubSpot), each user connects their own personal accounts.
+User Level Authentication changes how authentication works when multiple people use the same agent. Instead of everyone using a single shared account to access integrations (like Google Drive, Slack, or HubSpot), each user connects their own individual work accounts.
 
 <Columns cols={2}>
   <Card title="Builders configure" icon="wrench">
     Choose which tool inputs require user level authentication using simple toggles
   </Card>
   <Card title="Users authenticate" icon="key">
-    Connect once per integration when first using the agent - credentials are saved for future use
+    Connect once per tool when first using the agent - credentials are saved for future use
   </Card>
   <Card title="Credentials persist" icon="lock">
     Authentication is automatically remembered and reused for all future agent runs
@@ -131,9 +131,9 @@ After the first authentication:
 - No interruption to the agent's execution
 - Users can change their default credentials in project settings if needed
 
-### Multiple integrations
+### Multiple tools
 
-If an agent uses multiple integrations (for example, both Google Drive and Slack), users will be prompted to authenticate each integration the first time they're encountered. After initial setup, all credentials are remembered and reused automatically.
+Authentication is required per tool, not per integration. If an agent uses two Google Drive tools, for example, you'll be prompted to authenticate each tool separately on the first run. After initial setup, all credentials are remembered and reused automatically.
 
 ## Managing default authentication
 
