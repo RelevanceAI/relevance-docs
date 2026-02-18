@@ -1,0 +1,196 @@
+---
+title: "User Level Authentication"
+description: "Enable agents to use individual user authentication for secure, private access to integrations"
+---
+
+<Warning>
+  User Level Authentication is an Enterprise-only feature that is being rolled out. If you don't have access yet, please reach out to your sales representative.
+</Warning>
+
+User Level Authentication enables agents to operate using each user's individual authentication accounts for integrations, allowing multiple users to safely and privately use the same shared agent (especially in Chat) while only accessing their own data. Builders can configure this behavior per agent, and users only need to authenticate once per tool.
+
+## How User Level Authentication works
+
+User Level Authentication changes how authentication works when multiple people use the same agent. Instead of everyone using a single shared account to access integrations (like Google Drive, Slack, or HubSpot), each user connects their own individual work accounts.
+
+<Columns cols={2}>
+  <Card title="Builders configure" icon="wrench">
+    Choose which tool inputs require user level authentication using simple toggles
+  </Card>
+  <Card title="Users authenticate" icon="key">
+    Connect once per tool when first using the agent - credentials are saved for future use
+  </Card>
+  <Card title="Credentials persist" icon="lock">
+    Authentication is automatically remembered and reused for all future agent runs
+  </Card>
+  <Card title="Defaults apply" icon="star">
+    Set preferred accounts for each integration that auto-populate in new agents
+  </Card>
+</Columns>
+
+This means that when multiple team members use the same agent, each person only sees and accesses their own data within the connected integrations.
+
+## Why use User Level Authentication
+
+<Columns cols={2}>
+  <Card title="Enhanced Security" icon="shield-check">
+    Each user accesses integrations with their own credentials and permissions, reducing the security risks of shared accounts.
+  </Card>
+  <Card title="Privacy Protection" icon="user-lock">
+    Users only see their own data. When an agent queries Google Drive or searches through emails, it only accesses the data that user has permission to see.
+  </Card>
+  <Card title="Access Control" icon="user-shield">
+    Users can only access what they're authorized to see in the external integration, based on their own account permissions rather than a shared account's permissions.
+  </Card>
+  <Card title="Simplified Management" icon="users-gear">
+    No need to manage shared credentials or worry about what happens when team members leave. Each user manages their own connections.
+  </Card>
+  <Card title="Audit Trail" icon="clipboard-list">
+    Actions taken by agents are attributed to individual user accounts in external integrations, making it easier to track who did what.
+  </Card>
+</Columns>
+
+## Requirements for User Level Authentication
+
+User Level Authentication works with tools that use **OAuth authentication only**. 
+
+**Supported:**
+- Tool steps with OAuth account inputs (e.g., Google Sheets, Slack, HubSpot, Notion, Trello)
+- Any integration that uses OAuth to connect user accounts
+
+**Not supported:**
+- Tools that use API key authentication
+- Python code steps (even when using OAuth via the Integration helper class)
+- Custom API calls with API key or bearer token authentication
+
+If your tool uses API key authentication or Python steps, you'll need to use a shared account instead of User Level Authentication.
+
+## Where User Level Authentication works
+
+User Level Authentication is supported in the following contexts:
+
+<Columns cols={3}>
+  <Card title="Chat" icon="message-lines">
+    Users are prompted to connect their own account when an agent requests an authenticated action
+  </Card>
+  <Card title="Run tab" icon="play">
+    Same experience when running an agent directly in the agent builder
+  </Card>
+  <Card title="Workforces" icon="users">
+    When a workforce delegates to an agent with user level authentication configured, the user is prompted to authenticate
+  </Card>
+</Columns>
+
+### Limitations
+
+<Warning>
+  **Embedded chat is NOT currently supported.** Users who embed agents on external sites via the embed widget cannot use user level authentication. For embedded agents, you'll need to use a shared account for those integrations instead.
+</Warning>
+
+## Setting up user level authentication
+
+As a builder, you can configure User Level Authentication at the agent level.
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
+<iframe src="https://app.supademo.com/embed/cmlq8m0u524pgegrdv7dlhoqy" frameBorder="0" title="Setting up User Level Authentication" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+To enable User Level Authentication:
+
+1. Head into your Agent and click Tools.
+2. Head to the Tool you want to set User Level Authentication on, and find the Input for the OAuth account. From here, click the agent input setting, which is currently set to 'Set manually'.
+3. Then, set this to 'Per-user authentication'.
+
+When this is enabled, any agent using this tool will require each user to authenticate with their own account for this integration.
+
+<Note>
+If you have [asset-level authentication controls](/get-started/enterprise/rbac#permissions) enabled through RBAC, users can also choose from project-level shared accounts instead of authorizing their individual accounts.
+</Note>
+
+## User experience in Chat
+
+When users interact with an agent in Chat that has User Level Authentication enabled, the authentication flow is seamless and intuitive.
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
+<iframe src="https://app.supademo.com/embed/cmlq8o3si24q3egrd75i2p1yf" frameBorder="0" title="Using User Level Authentication in chat" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+### First-time authentication
+
+When a user runs an agent that requires User Level Authentication for the first time:
+
+1. If you call an Agent that requires User Level Authentication for the first time, you will see a pop up appear when you need to connect an account.
+2. To do this, click the 'Select connected account' dropdown, and choose a shared account from here, or add your own private account.
+3. Then, click 'Add account' to continue onto your account log in, and follow the next steps to log into your account on the integration you're connecting to.
+
+### Subsequent uses
+
+After the first authentication:
+
+- The agent automatically uses the user's saved credentials
+- No interruption to the agent's execution
+- Users can change their default credentials in project settings if needed
+
+### Multiple tools
+
+Authentication is required per tool, not per integration. If an agent uses two Google Drive tools, for example, you'll be prompted to authenticate each tool separately on the first run. After initial setup, all credentials are remembered and reused automatically.
+
+## Managing default authentication
+
+Users can manage their default authentication accounts for each integration at the project level, making it easy to control which accounts are used by agents.
+
+### Setting integration defaults
+
+To set or change your default account for an integration:
+
+1. Click on 'Integrations & API Keys' in the sidebar
+2. Click on the integration you want to configure
+
+<Tip>
+Integration defaults pre-populate when you create new assets or use assets for the first time, saving you time and ensuring consistency across your agent interactions.
+</Tip>
+
+### Privacy and account visibility
+
+To protect privacy and security:
+
+- **Private accounts are hidden** - Your personal accounts won't be visible to other users
+- **Auths are private by default** - When you connect a new account, it's automatically set as private
+- **Shared accounts** - If your organization has shared project-level accounts, you'll see those as options alongside your personal accounts
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens if I need to change my authentication credentials?">
+    If you need to change your authentication credentials, you can do so easily. During Chat, you'll receive modal prompts that allow you to select existing credentials, add new ones, or mark a new credential as default. You can also manage your default credentials by going to Integrations & API Keys in the sidebar and selecting the integration you want to reconfigure.
+  </Accordion>
+  
+  <Accordion title="Can I use both shared accounts and individual accounts in the same project?">
+    Yes, if you have asset-level authentication controls enabled. When User Level Authentication is configured, you will see both your individual accounts and any shared project-level accounts available for selection. This gives you flexibility to choose the appropriate account based on the context.
+  </Accordion>
+  
+  <Accordion title="What integrations support User Level Authentication?">
+    User Level Authentication works with all integrations that support OAuth authentication in Relevance AI. This includes popular integrations like Google Drive, Gmail, Slack, HubSpot, Salesforce, and many others.
+  </Accordion>
+  
+  <Accordion title="Is this feature only available on Enterprise plans?">
+    Yes, User Level Authentication is an Enterprise-only feature. If you would like access to this feature, please reach out to your sales representative.
+  </Accordion>
+  
+  <Accordion title="Where can I use User Level Authentication?">
+    User Level Authentication works in Chat, the Run tab (when running agents directly in the agent builder), and in Workforces (when a workforce delegates to an agent with user level authentication configured). However, it is NOT currently supported in embedded chat widgets on external websites.
+  </Accordion>
+
+  <Accordion title="Why can't I enable User Level Authentication on my tool?">
+    User Level Authentication only works with OAuth-based integrations. If you don't see the option to set 'Per-user authentication' on your agent input setting, it's likely because:
+
+    - Your tool uses API key authentication instead of OAuth
+    - Your tool uses a Python code step
+
+    To use User Level Authentication, you need to use a tool that supports OAuth authentication (like Google Sheets, Slack, HubSpot, etc.). For tools that use API keys or Python steps, you'll need to use a shared account instead.
+  </Accordion>
+
+  <Accordion title="My integration uses API keys or Python code steps. Can I use User Level Authentication?">
+    No. User Level Authentication only supports OAuth-based integrations. If your integration uses API key authentication, Python code steps, or custom API calls with bearer tokens, you'll need to use a shared account instead. Only integrations that use OAuth to connect user accounts (like Google Sheets, Slack, HubSpot, Notion, etc.) are compatible with User Level Authentication.
+  </Accordion>
+</AccordionGroup>
