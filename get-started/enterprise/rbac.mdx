@@ -181,6 +181,70 @@ Upon asset creation, the creator becomes the admin. An asset can have multiple a
 
 ----
 
+## API Secrets and Access Control
+
+### How Secrets Work in Projects
+
+API secrets in Relevance AI are accessed via `{{secrets.secret_name}}` in [JavaScript code steps](/tool/tool-steps/code-javascript) and [Python code steps](/tool/tool-steps/python-code/code-python). These secrets are available to **all agent builders** within a project, regardless of who created the secret.
+
+This means:
+- Any builder with access to the project can use any secret in their code execution steps
+- Secret access is project-wide and not restricted to the creator
+- All project members with builder permissions (Admin, Editor, or Member who can create assets) can reference secrets in their tools and agents
+
+### Security Considerations
+
+<Warning>
+While secrets are automatically redacted with `<redacted>` when code steps attempt to print them out, members who can create secrets should exercise caution. Other builders in the project can use those secrets to gain elevated access to downstream resources.
+</Warning>
+
+Key security points:
+- **Automatic redaction**: Secrets are protected from accidental exposure in logs and outputs
+- **Shared access risk**: Any builder in the project can use secrets to access external systems with the permissions granted to those credentials
+- **Project membership matters**: Carefully consider who has builder access to projects containing sensitive API credentials
+
+### Best Practices
+
+<AccordionGroup>
+  <Accordion title="Limit secret scope" icon="shield-halved">
+    Provide API secrets that are limited in scope and permissions at the source. For example:
+    - Use read-only API keys when write access isn't needed
+    - Restrict API keys to specific resources or endpoints
+    - Set up service accounts with minimal required permissions
+    - Use time-limited or rotatable credentials where possible
+  </Accordion>
+  
+  <Accordion title="Use project isolation" icon="folder-tree">
+    Create entirely new projects with only trusted team members when working with sensitive credentials. Use RBAC controls to:
+    - Separate production and development environments
+    - Isolate high-privilege credentials in dedicated projects
+    - Limit project membership to only those who need access
+    - Review project membership regularly
+  </Accordion>
+  
+  <Accordion title="Prefer OAuth over API secrets" icon="key">
+    Use OAuth credentials via [User Level Authentication](/get-started/enterprise/user-level-authentication) instead of shared API secrets where possible. This ensures:
+    - Each user authenticates with their own credentials
+    - Actions are tied to individual user accounts
+    - Access can be revoked per user without affecting others
+    - Audit trails show which user performed each action
+  </Accordion>
+</AccordionGroup>
+
+### Future: Fine-Grained Access Controls
+
+<Info>
+Fine-grained access (FGA) controls on secrets are coming soon. This will provide more granular control over who can access specific secrets within a project, allowing you to restrict secret usage to specific users or roles.
+</Info>
+
+**Related documentation:**
+- [API Keys](/get-started/key-concepts/api-keys) - Learn about managing API keys at organization and project levels
+- [User Level Authentication](/get-started/enterprise/user-level-authentication) - Use OAuth for individual user authentication
+- [JavaScript Code Step](/tool/tool-steps/code-javascript) - Using secrets in JavaScript code
+- [Python Code Step](/tool/tool-steps/python-code/code-python) - Using secrets in Python code
+
+----
+
 ## Workforce Permissions
 
 Workforces are treated as first-class assets in the RBAC system. However, running a workforce requires permissions at two levels:
