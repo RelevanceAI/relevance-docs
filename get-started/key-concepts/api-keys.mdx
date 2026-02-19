@@ -8,7 +8,7 @@ description: "Use your own API keys"
 
 API keys are unique codes that let different software talk to each other. They act as a way to identify who is trying to connect and make sure the connection is secure.
 
-Think of an API key like a special key card you use to enter a building. It tells the system who you are and what you’re allowed to do. Every time an app wants to connect to another app, it shows this key card.
+Think of an API key like a special key card you use to enter a building. It tells the system who you are and what you're allowed to do. Every time an app wants to connect to another app, it shows this key card.
 
 <Warning>
   You can think of API keys as a form of a password so these should never be shared.
@@ -40,6 +40,86 @@ To access your custom keys, you can get to it using `{{secrets.chains_your_api_k
 ### Region and URL endpoints
 
 <Snippet file="region-and-url.mdx" />
+
+## Native APIs
+
+Native APIs are OAuth-based integrations that are pre-built into Relevance AI. Unlike custom API keys, these integrations handle authentication automatically and don't require manual configuration.
+
+### What Are Native APIs?
+
+Native APIs are integrations that:
+- Use OAuth authentication (no manual API key entry needed)
+- Are added through the Integrations page
+- Do NOT require the `{{secrets.chains_your_api_key}}` syntax
+- Do NOT need to be added to variables
+- Work immediately after authentication
+
+### How Native APIs Differ from Custom APIs
+
+<Columns cols={2}>
+  <Card title="Native APIs" icon="plug">
+    - OAuth-based authentication
+    - Added via Integrations page
+    - No `secrets.variable` needed
+    - Just authenticate and use
+    - Pre-built tool steps available
+  </Card>
+  <Card title="Custom APIs" icon="key">
+    - Manual API key entry
+    - Must use `{{secrets.chains_your_api_key}}` syntax
+    - Need to be referenced in variables
+    - Requires manual configuration
+    - Custom implementation needed
+  </Card>
+</Columns>
+
+### How to Use Native APIs
+
+<Steps>
+  <Step title="Navigate to Integrations">
+    Go to the **Integrations & API Keys** page in your Relevance AI workspace
+  </Step>
+  <Step title="Select an Integration">
+    Click on the integration you want to add (e.g., Gmail, Slack, HubSpot, Google Sheets)
+  </Step>
+  <Step title="Authenticate">
+    Follow the OAuth flow to authenticate with the service
+  </Step>
+  <Step title="Start Using">
+    The integration is now available to use in your tools and agents without any additional configuration
+  </Step>
+</Steps>
+
+### Examples of Native APIs
+
+Native APIs include popular services such as:
+
+- **Communication:** Gmail, Slack, Microsoft Teams
+- **CRM & Sales:** HubSpot, Salesforce
+- **Productivity:** Google Sheets, Notion, Airtable
+- **Development:** GitHub, GitLab
+- **And many more...**
+
+### Benefits of Native APIs
+
+<AccordionGroup>
+  <Accordion title="No Manual Configuration" icon="wand-magic-sparkles">
+    Once authenticated, native APIs are ready to use immediately. No need to copy API keys, set up variables, or configure secrets.
+  </Accordion>
+  <Accordion title="Secure Credential Storage" icon="shield-check">
+    OAuth tokens are securely stored and managed by Relevance AI. You never need to handle sensitive credentials directly.
+  </Accordion>
+  <Accordion title="Pre-built Tool Steps" icon="puzzle-piece">
+    Many native APIs come with pre-built tool steps that you can use right away, saving development time.
+  </Accordion>
+  <Accordion title="Automatic Credential Management" icon="rotate">
+    OAuth tokens are automatically refreshed when needed, ensuring uninterrupted access to your integrations.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  If you're unsure whether an integration is a native API or requires a custom API key, check the Integrations page. Native APIs will have an OAuth authentication flow, while custom APIs will ask you to enter an API key manually.
+</Tip>
 
 ## Links
 
