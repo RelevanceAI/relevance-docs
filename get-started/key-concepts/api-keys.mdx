@@ -41,85 +41,116 @@ To access your custom keys, you can get to it using `{{secrets.chains_your_api_k
 
 <Snippet file="region-and-url.mdx" />
 
-## Native APIs
+## Types of API Integrations
 
-Native APIs are OAuth-based integrations that are pre-built into Relevance AI. Unlike custom API keys, these integrations handle authentication automatically and don't require manual configuration.
+Relevance AI supports three different types of API integrations, each with its own authentication method and usage pattern.
 
-### What Are Native APIs?
+### Overview
 
-Native APIs are integrations that:
-- Use OAuth authentication (no manual API key entry needed)
-- Are added through the Integrations page
-- Do NOT require the `{{secrets.chains_your_api_key}}` syntax
-- Do NOT need to be added to variables
-- Work immediately after authentication
-
-### How Native APIs Differ from Custom APIs
-
-<Columns cols={2}>
-  <Card title="Native APIs" icon="plug">
-    - OAuth-based authentication
-    - Added via Integrations page
-    - No `secrets.variable` needed
-    - Just authenticate and use
-    - Pre-built tool steps available
+<Columns cols={3}>
+  <Card title="Native OAuth" icon="shield-check">
+    OAuth-based authentication for services like Gmail, Slack, and HubSpot
   </Card>
-  <Card title="Custom APIs" icon="key">
-    - Manual API key entry
-    - Must use `{{secrets.chains_your_api_key}}` syntax
-    - Need to be referenced in variables
-    - Requires manual configuration
-    - Custom implementation needed
+  <Card title="Native API Keys" icon="key">
+    Pre-built integrations where you add your API key once in Integrations
+  </Card>
+  <Card title="Custom API Keys" icon="code">
+    Manual configuration for APIs not available as native integrations
   </Card>
 </Columns>
 
-### How to Use Native APIs
+### Native OAuth Integrations
+
+OAuth-based integrations that handle authentication automatically through a secure authorization flow.
+
+**Examples:** Gmail, Slack, HubSpot, Google Sheets, Notion, GitHub, Microsoft Teams
+
+**How to use:**
+1. Go to **Integrations & API Keys** page
+2. Click on the integration you want to add
+3. Authenticate through OAuth
+4. Select the integration from the dropdown in your tool steps
+
+### Native API Key Integrations
+
+These are pre-built integrations where you add your API key once to the Integrations page, and it's automatically used by all tool steps that need it.
+
+<Note>
+  **Key behavior:** When you add an API key to the Integrations page, you **leave the API key field BLANK** in your tool steps. The system automatically detects and uses the key from your integrations.
+</Note>
+
+**Examples:** Firecrawl, Lusha, Airtop, OpenAI, Anthropic, Azure OpenAI, and other LLM providers
+
+#### How to Add Native API Key Integrations
 
 <Steps>
   <Step title="Navigate to Integrations">
-    Go to the **Integrations & API Keys** page in your Relevance AI workspace
+    Go to the **Integrations & API Keys** page in your workspace
   </Step>
-  <Step title="Select an Integration">
-    Click on the integration you want to add (e.g., Gmail, Slack, HubSpot, Google Sheets)
+  <Step title="Find the Service">
+    Locate the service you want to add (e.g., Firecrawl, OpenAI, Anthropic)
   </Step>
-  <Step title="Authenticate">
-    Follow the OAuth flow to authenticate with the service
+  <Step title="Enter Your API Key">
+    Click on the integration and enter your API key from that service
   </Step>
-  <Step title="Start Using">
-    The integration is now available to use in your tools and agents without any additional configuration
+  <Step title="Use in Tools">
+    When adding tool steps that use this service, **leave the API key field blank**. The system will automatically use the key from your integrations.
   </Step>
 </Steps>
 
-### Examples of Native APIs
-
-Native APIs include popular services such as:
-
-- **Communication:** Gmail, Slack, Microsoft Teams
-- **CRM & Sales:** HubSpot, Salesforce
-- **Productivity:** Google Sheets, Notion, Airtable
-- **Development:** GitHub, GitLab
-- **And many more...**
-
-### Benefits of Native APIs
+#### Important Characteristics
 
 <AccordionGroup>
-  <Accordion title="No Manual Configuration" icon="wand-magic-sparkles">
-    Once authenticated, native APIs are ready to use immediately. No need to copy API keys, set up variables, or configure secrets.
+  <Accordion title="Automatic Detection" icon="wand-magic-sparkles">
+    When you use a tool step that requires a native API key integration (like Firecrawl or OpenAI), the system automatically detects if you've added that key to your Integrations page. You don't need to configure anything in the tool step itself.
   </Accordion>
-  <Accordion title="Secure Credential Storage" icon="shield-check">
-    OAuth tokens are securely stored and managed by Relevance AI. You never need to handle sensitive credentials directly.
+  <Accordion title="Not Accessible via Variables" icon="ban">
+    Unlike custom API keys, native API key integrations **cannot** be accessed using the `{{secrets.chains_}}` syntax. They work automatically in the background when you use their corresponding tool steps.
   </Accordion>
   <Accordion title="Pre-built Tool Steps" icon="puzzle-piece">
-    Many native APIs come with pre-built tool steps that you can use right away, saving development time.
+    These integrations come with pre-built tool steps that are designed to work with the keys stored in your Integrations page. No manual HTTP configuration needed.
   </Accordion>
-  <Accordion title="Automatic Credential Management" icon="rotate">
-    OAuth tokens are automatically refreshed when needed, ensuring uninterrupted access to your integrations.
+  <Accordion title="LLM Provider Benefits" icon="brain">
+    For LLM providers (OpenAI, Anthropic, Azure OpenAI), adding your own API key means you use your own account and billing instead of consuming Relevance credits.
   </Accordion>
 </AccordionGroup>
 
+### Custom API Keys
+
+For APIs that aren't available as native integrations, you can add custom API keys that you reference manually in your tools.
+
+**When to use:** When the API you need isn't available in the Integrations page
+
+**How they work:**
+- Add the custom API key in the Integrations page
+- Reference it in your tools using `{{secrets.chains_your_api_key}}`
+- Requires manual HTTP configuration in tool steps
+
+**Key difference:** Custom API keys **must** be explicitly referenced using the `{{secrets.chains_}}` syntax, unlike native API key integrations which work automatically.
+
+### Comparison Table
+
+| Feature | Native OAuth | Native API Keys | Custom API Keys |
+|---------|-------------|-----------------|-----------------|
+| **Authentication** | OAuth flow | API key entry | API key entry |
+| **Added via** | Integrations page | Integrations page | Integrations page |
+| **Usage in tools** | Select from dropdown | Leave field blank | Use `{{secrets.chains_}}` |
+| **Variable access** | No | No | Yes |
+| **Pre-built steps** | Yes | Yes | No |
+| **Examples** | Gmail, Slack, HubSpot | Firecrawl, OpenAI, Anthropic | Any custom API |
+
+### When to Use Each Type
+
 <Tip>
-  If you're unsure whether an integration is a native API or requires a custom API key, check the Integrations page. Native APIs will have an OAuth authentication flow, while custom APIs will ask you to enter an API key manually.
+  **Quick guide:**
+  - **Native OAuth:** Available for the service you need? Use this for the easiest setup.
+  - **Native API Keys:** Service has pre-built tool steps (like Firecrawl, OpenAI)? Add your key to Integrations and leave tool fields blank.
+  - **Custom API Keys:** Service not available as a native integration? Add a custom key and reference it with `{{secrets.chains_}}` syntax.
 </Tip>
+
+<Warning>
+  **Common mistake:** Don't try to reference native API key integrations (like Firecrawl or OpenAI) using `{{secrets.chains_}}` syntax. They're not accessible this way. Just leave the API key field blank in your tool steps and they'll work automatically.
+</Warning>
 
 ## Links
 
