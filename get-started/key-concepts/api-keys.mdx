@@ -47,10 +47,7 @@ Relevance AI supports three different types of API integrations, each with its o
 
 ### Overview
 
-<Columns cols={3}>
-  <Card title="Native OAuth" icon="shield-check">
-    OAuth-based authentication for services like Gmail, Slack, and HubSpot
-  </Card>
+<Columns cols={2}>
   <Card title="Native API Keys" icon="key">
     Pre-built integrations where you add your API key once in Integrations
   </Card>
@@ -58,18 +55,6 @@ Relevance AI supports three different types of API integrations, each with its o
     Manual configuration for APIs not available as native integrations
   </Card>
 </Columns>
-
-### Native OAuth Integrations
-
-OAuth-based integrations that handle authentication automatically through a secure authorization flow.
-
-**Examples:** Gmail, Slack, HubSpot, Google Sheets, Notion, GitHub, Microsoft Teams
-
-**How to use:**
-1. Go to **Integrations & API Keys** page
-2. Click on the integration you want to add
-3. Authenticate through OAuth
-4. Select the integration from the dropdown in your tool steps
 
 ### Native API Key Integrations
 
@@ -115,42 +100,24 @@ These are pre-built integrations where you add your API key once to the Integrat
   </Accordion>
 </AccordionGroup>
 
-### Custom API Keys
-
-For APIs that aren't available as native integrations, you can add custom API keys that you reference manually in your tools.
-
-**When to use:** When the API you need isn't available in the Integrations page
-
-**How they work:**
-- Add the custom API key in the Integrations page
-- Reference it in your tools using `{{secrets.chains_your_api_key}}`
-- Requires manual HTTP configuration in tool steps
-
-**Key difference:** Custom API keys **must** be explicitly referenced using the `{{secrets.chains_}}` syntax, unlike native API key integrations which work automatically.
-
 ### Comparison Table
 
-| Feature | Native OAuth | Native API Keys | Custom API Keys |
-|---------|-------------|-----------------|-----------------|
-| **Authentication** | OAuth flow | API key entry | API key entry |
-| **Added via** | Integrations page | Integrations page | Integrations page |
-| **Usage in tools** | Select from dropdown | Leave field blank | Use `{{secrets.chains_}}` |
-| **Variable access** | No | No | Yes |
-| **Pre-built steps** | Yes | Yes | No |
-| **Examples** | Gmail, Slack, HubSpot | Firecrawl, OpenAI, Anthropic | Any custom API |
+| Feature | Native API Keys | Custom API Keys |
+|---------|-----------------|-----------------|
+| **Authentication** | API key entry | API key entry |
+| **Added via** | Integrations page | Integrations page |
+| **Usage in tools** | Leave field blank | Use `{{secrets.chains_}}` |
+| **Variable access** | No | Yes |
+| **Pre-built steps** | Yes | No |
+| **Examples** | Firecrawl, OpenAI, Anthropic | Any custom API |
 
 ### When to Use Each Type
 
 <Tip>
   **Quick guide:**
-  - **Native OAuth:** Available for the service you need? Use this for the easiest setup.
   - **Native API Keys:** Service has pre-built tool steps (like Firecrawl, OpenAI)? Add your key to Integrations and leave tool fields blank.
   - **Custom API Keys:** Service not available as a native integration? Add a custom key and reference it with `{{secrets.chains_}}` syntax.
 </Tip>
-
-<Warning>
-  **Common mistake:** Don't try to reference native API key integrations (like Firecrawl or OpenAI) using `{{secrets.chains_}}` syntax. They're not accessible this way. Just leave the API key field blank in your tool steps and they'll work automatically.
-</Warning>
 
 ## Links
 
