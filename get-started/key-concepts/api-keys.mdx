@@ -37,87 +37,23 @@ If the integration you would like to use is not on the list, you can add a custo
 
 To access your custom keys, you can get to it using `{{secrets.chains_your_api_key}}`
 
-### Region and URL endpoints
+## Native API key integrations
 
-<Snippet file="region-and-url.mdx" />
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
+<iframe src="https://app.supademo.com/embed/cmlubzwdh2tf6d2ntr9uvi3hd?embed_v=2" frameBorder="0" title="Native API key integrations" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+</div>
 
-## Types of API Integrations
-
-Relevance AI supports three different types of API integrations, each with its own authentication method and usage pattern.
-
-### Overview
-
-<Columns cols={2}>
-  <Card title="Native API Keys" icon="key">
-    Pre-built integrations where you add your API key once in Integrations
-  </Card>
-  <Card title="Custom API Keys" icon="code">
-    Manual configuration for APIs not available as native integrations
-  </Card>
-</Columns>
-
-### Native API Key Integrations
-
-These are pre-built integrations where you add your API key once to the Integrations page, and it's automatically used by all tool steps that need it.
+Unlike custom API keys, native API key integrations connect to third-party services through pre-built connectors directly supported by Relevance AI. Add your API key once on the Integrations page, and Relevance AI automatically injects it wherever it's needed. No need to configure individual tool steps or reference keys with variables.
 
 <Note>
-  **Key behavior:** When you add an API key to the Integrations page, you **leave the API key field BLANK** in your tool steps. The system automatically detects and uses the key from your integrations.
+  When you add an API key to the Integrations page, you leave the API key field blank in your tool steps. The system automatically detects and uses the key from your integrations.
 </Note>
 
 **Examples:** Firecrawl, Lusha, Airtop, OpenAI, Anthropic, Azure OpenAI, and other LLM providers
 
-#### How to Add Native API Key Integrations
+### Region and URL endpoints
 
-<Steps>
-  <Step title="Navigate to Integrations">
-    Go to the **Integrations & API Keys** page in your workspace
-  </Step>
-  <Step title="Find the Service">
-    Locate the service you want to add (e.g., Firecrawl, OpenAI, Anthropic)
-  </Step>
-  <Step title="Enter Your API Key">
-    Click on the integration and enter your API key from that service
-  </Step>
-  <Step title="Use in Tools">
-    When adding tool steps that use this service, **leave the API key field blank**. The system will automatically use the key from your integrations.
-  </Step>
-</Steps>
-
-#### Important Characteristics
-
-<AccordionGroup>
-  <Accordion title="Automatic Detection" icon="wand-magic-sparkles">
-    When you use a tool step that requires a native API key integration (like Firecrawl or OpenAI), the system automatically detects if you've added that key to your Integrations page. You don't need to configure anything in the tool step itself.
-  </Accordion>
-  <Accordion title="Not Accessible via Variables" icon="ban">
-    Unlike custom API keys, native API key integrations **cannot** be accessed using the `{{secrets.chains_}}` syntax. They work automatically in the background when you use their corresponding tool steps.
-  </Accordion>
-  <Accordion title="Pre-built Tool Steps" icon="puzzle-piece">
-    These integrations come with pre-built tool steps that are designed to work with the keys stored in your Integrations page. No manual HTTP configuration needed.
-  </Accordion>
-  <Accordion title="LLM Provider Benefits" icon="brain">
-    For LLM providers (OpenAI, Anthropic, Azure OpenAI), adding your own API key means you use your own account and billing instead of consuming Relevance credits.
-  </Accordion>
-</AccordionGroup>
-
-### Comparison Table
-
-| Feature | Native API Keys | Custom API Keys |
-|---------|-----------------|-----------------|
-| **Authentication** | API key entry | API key entry |
-| **Added via** | Integrations page | Integrations page |
-| **Usage in tools** | Leave field blank | Use `{{secrets.chains_}}` |
-| **Variable access** | No | Yes |
-| **Pre-built steps** | Yes | No |
-| **Examples** | Firecrawl, OpenAI, Anthropic | Any custom API |
-
-### When to Use Each Type
-
-<Tip>
-  **Quick guide:**
-  - **Native API Keys:** Service has pre-built tool steps (like Firecrawl, OpenAI)? Add your key to Integrations and leave tool fields blank.
-  - **Custom API Keys:** Service not available as a native integration? Add a custom key and reference it with `{{secrets.chains_}}` syntax.
-</Tip>
+<Snippet file="region-and-url.mdx" />
 
 ## Links
 
