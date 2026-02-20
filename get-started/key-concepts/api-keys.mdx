@@ -8,7 +8,7 @@ description: "Use your own API keys"
 
 API keys are unique codes that let different software talk to each other. They act as a way to identify who is trying to connect and make sure the connection is secure.
 
-Think of an API key like a special key card you use to enter a building. It tells the system who you are and what you’re allowed to do. Every time an app wants to connect to another app, it shows this key card.
+Think of an API key like a special key card you use to enter a building. It tells the system who you are and what you're allowed to do. Every time an app wants to connect to another app, it shows this key card.
 
 <Warning>
   You can think of API keys as a form of a password so these should never be shared.
@@ -36,6 +36,20 @@ You can also generate your own Relevance API key to use tools or agents in other
 If the integration you would like to use is not on the list, you can add a custom one.
 
 To access your custom keys, you can get to it using `{{secrets.chains_your_api_key}}`
+
+## Native API key integrations
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
+<iframe src="https://app.supademo.com/embed/cmlubzwdh2tf6d2ntr9uvi3hd?embed_v=2" frameBorder="0" title="Native API key integrations" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+</div>
+
+Unlike custom API keys, native API key integrations connect to third-party services through pre-built connectors directly supported by Relevance AI. Add your API key once on the Integrations page, and Relevance AI automatically injects it wherever it's needed. No need to configure individual tool steps or reference keys with variables.
+
+<Note>
+  When you add an API key to the Integrations page, you leave the API key field blank in your tool steps. The system automatically detects and uses the key from your integrations.
+</Note>
+
+**Examples:** Firecrawl, Lusha, Airtop, OpenAI, Anthropic, Azure OpenAI, and other LLM providers
 
 ### Region and URL endpoints
 
