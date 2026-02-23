@@ -4,57 +4,44 @@ sidebarTitle: "Build with Relevance AI"
 description: "An overview of building agents, tools, and workforces in Relevance AI."
 ---
 
-Relevance AI gives you a set of builders to create and configure the different parts of your AI workforce. Whether you're building a single agent or an entire team, everything starts here.
+Relevance AI has two main experiences — the builder platform for creating, and Chat for using.
 
-## How It All Fits Together
+The **[builder platform](https://app.relevanceai.com)** is where you create and configure everything — agents, tools, workforces, and knowledge. You'll also find the [Marketplace](/marketplace/intro-to-marketplace) here, where you can clone pre-built agents and tools instead of starting from scratch. This section of the docs covers the builder platform and all of its features.
 
-**Tools** are the building blocks — they define the actions and automations your agents can perform, like searching a CRM, sending an email, or running a custom workflow. **Agents** use those tools to autonomously complete tasks, following the instructions and guardrails you set. **Workforces** connect multiple agents together, letting them collaborate and hand off work to each other on a visual canvas. **Knowledge** gives your agents access to specific data sources — documents, spreadsheets, databases — so they have the context they need to do their job well.
+**[Relevance Chat](/chat/intro-to-chat)** is a conversational interface where you and your team interact with your agents directly. You can @ mention agents, use multiple agents in a single conversation, and give your team access to your agents — all through a familiar chat experience.
 
-## The Builders
+This section focuses on building. To learn more about Chat, head to the [Relevance Chat](/chat/intro-to-chat) page in Getting Started.
+
+## How it all fits together
+
+<Steps>
+  <Step title="Tools — the actions" icon="screwdriver-wrench">
+    You build [tools](/tool/customize-tool/tool-style-guide) that define what your agents can do — call an API, send an email, search your CRM, run custom code, or chain steps together into a workflow.
+  </Step>
+  <Step title="Knowledge — the context" icon="brain">
+    You connect [knowledge](/knowledge/create-knowledge) so agents have access to your data — documents, spreadsheets, databases, websites — and can respond with accuracy.
+  </Step>
+  <Step title="Agents — the workers" icon="robot">
+    You create [agents](/agent/build-your-agent/prompt) that use your tools and knowledge to autonomously complete tasks, following the instructions and guardrails you set.
+  </Step>
+  <Step title="Workforces — the team" icon="users-gear">
+    You connect multiple agents into a [workforce](/workforce/build-an-ai-workforce/add-triggers) on a visual canvas — they collaborate and hand off work to each other.
+  </Step>
+</Steps>
+
+## Ways to create
+
+When creating agents and tools, you have two approaches:
 
 <CardGroup cols={2}>
-  <Card
-    title="Agent Builder"
-    icon="robot"
-    href="/agent/build-your-agent/build-overview"
-  >
-    Create AI agents that autonomously complete tasks — configure their instructions, tools, triggers, and escalation paths.
+  <Card title="Invent" icon="wand-magic-sparkles">
+    Describe what you want in plain language and the platform generates it for you. Invent sets up the prompt, suggests tools, and gets you a working agent or tool fast — you make the tweaks.
   </Card>
-  <Card
-    title="Tool Builder"
-    icon="screwdriver-wrench"
-    href="/tool/create-a-tool"
-  >
-    Build custom tools and workflows that your agents can use — chain together API calls, code, integrations, and more.
-  </Card>
-  <Card
-    title="Workforce Builder"
-    icon="users-gear"
-    href="/workforce/build-an-ai-workforce/add-triggers"
-  >
-    Design multi-agent teams on a visual canvas — connect agents, tools, and conditions into collaborative workflows.
-  </Card>
-  <Card
-    title="Knowledge"
-    icon="brain"
-    href="/knowledge/create-knowledge"
-  >
-    Connect data sources like documents, spreadsheets, and databases to give your agents the context they need.
+  <Card title="Build from scratch" icon="hammer">
+    Full step-by-step control over every setting and configuration. Ideal when you need precision, have a specific workflow in mind, or want to fine-tune behavior.
   </Card>
 </CardGroup>
 
-## Inside a Builder
+## What's next?
 
-Here's an example of what a builder looks like — in this case, the Agent Builder:
-
-![](/images/agent/build_overview.png)
-
-Each builder looks a bit different, but they all utilise the same concepts. The docs throughout this tab cover all the features available across each builder and how to configure them.
-
-## Building Options
-
-When creating agents and tools, you have two approaches. **Invent** lets you describe what you want in plain language and the platform generates it for you — great for getting started quickly. **Manual** gives you full step-by-step control over every setting and configuration, ideal when you need precision or want to fine-tune behavior.
-
-## What's Next?
-
-A good starting point is to build your first agent — head to the [Agent Builder](/agent/build-your-agent/build-overview) to get going. From there, you can create [custom tools](/tool/create-a-tool) for it to use, add [knowledge](/knowledge/create-knowledge) to give it context, and eventually connect multiple agents into a [workforce](/workforce/build-an-ai-workforce/add-triggers) as your needs grow.
+If you want to dive into the specifics of how to build and configure each component, the rest of this section covers everything. Start with [building an agent's prompt](/agent/build-your-agent/prompt), then explore how to create [custom tools](/tool/customize-tool/tool-style-guide), connect [knowledge sources](/knowledge/create-knowledge), and wire it all together in a [workforce](/workforce/build-an-ai-workforce/add-triggers).
