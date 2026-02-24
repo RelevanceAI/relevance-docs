@@ -1,14 +1,42 @@
 ---
-title: 'Create a tool'
-sidebarTitle: 'Create a tool'
-description: 'Create your first tool'
+title: "Create a Tool"
+sidebarTitle: "Create a Tool"
+description: "How to create your first Tool in Relevance AI."
 ---
 
-## Create a tool
+This guide walks you through creating a Tool. For an overview of what Tools are and how they work, see [Tools](/tool/introduction).
 
-Navigate to **Tools** in the left sidebar and click `Build from scratch`.
+## Two ways to create
 
-Give your tool a name and description, then click on `Edit agent prompt` and provide some information about how an agent should use the tool.
+<CardGroup cols={2}>
+  <Card title="Invent" icon="wand-magic-sparkles">
+    Describe what you want in plain language and the platform generates a working Tool for you. Great for getting started fast — you make the tweaks.
+  </Card>
+  <Card title="Build from scratch" icon="hammer">
+    Full step-by-step control over inputs, steps, and outputs. Ideal when you have a specific workflow in mind or need precision.
+  </Card>
+</CardGroup>
+
+## Option 1: Invent a Tool
+
+1. Click **Tools** in the left sidebar
+2. Click **+ New Tool**
+3. Select **Invent**
+4. Describe what the Tool should do — be specific about the input it receives, the action it performs, and the output you expect
+5. Review the generated Tool — Inventor will set up the inputs, steps, and outputs for you
+6. Test and tweak as needed
+
+## Option 2: Build from scratch
+
+1. Click **Tools** in the left sidebar
+2. Click **+ New Tool**
+3. Select **Start from scratch**
+4. Give your Tool a name and description, then click **Edit agent prompt** to describe how an Agent should use the Tool
+5. Add your **inputs** — what data does the Tool need to receive?
+6. Add **steps** — what should the Tool do with that data? Steps include LLM prompts, API calls, integrations, code execution, and more
+7. Define your **outputs** — what should the Tool return when it's done?
+8. Run individual steps to test as you build
+9. Give the Tool to an Agent or [share it](/tool/share-your-tool) as a standalone form
 
 <div
   style={{
@@ -32,9 +60,19 @@ Give your tool a name and description, then click on `Edit agent prompt` and pro
     }}/>
 </div>
 
+## The Tool Builder
+
+![The Tool Builder — switch between Use, Build, and Logs tabs.](/images/tool-builder-tabs.png)
+
+The Tool Builder has three tabs:
+
+- **Use** — run and test your Tool as a shareable form
+- **Build** — create your Tool by defining inputs and chaining steps together
+- **Logs** — review past executions and debug issues
+
 ## Follow along on YouTube
 
-<Frame caption="Learn how to build tools that can work with multiple data sources.">
+<Frame caption="Learn how to build Tools that can work with multiple data sources.">
   <iframe
     className="w-full aspect-video rounded-xl"
     src="https://www.youtube.com/embed/bP7SMGr72ZM"
@@ -42,3 +80,12 @@ Give your tool a name and description, then click on `Edit agent prompt` and pro
     allowFullScreen
   ></iframe>
 </Frame>
+
+## What's next?
+
+Once you've created a Tool, explore the rest of the build guides to refine it:
+
+- [Style guide](/tool/customize-tool/tool-style-guide) — naming conventions and best practices for making Tools work well with Agents
+- [Inputs](/tool/customize-tool/inputs) — configure what data your Tool receives
+- [Steps](/tool/customize-tool/steps) — chain actions together into a workflow
+- [Outputs](/tool/customize-tool/outputs) — define what your Tool returns
