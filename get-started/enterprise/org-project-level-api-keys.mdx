@@ -40,6 +40,36 @@ Organization and project-level API keys are an Enterprise feature. Enterprise su
 
 ---
 
+## Custom API Keys
+
+Custom API Keys allow you to securely store and use API credentials from external services in your agents and tools. Understanding how these keys are accessed and shared within your projects is important for maintaining security.
+
+### Who Can Access Custom API Keys
+
+Custom API Keys are accessed in [JavaScript code steps](/tool/tool-steps/code-javascript) and [Python code steps](/tool/tool-steps/python-code/code-python) using the syntax `{{secrets.key_name}}`. These keys are available to **all agent builders** within a project.
+
+Key points about access:
+- Any builder with access to the project can use any Custom API Key in their code execution steps
+- Custom API Key access is project-wide, regardless of who created the key
+- All project members with builder permissions (Admin, Editor, or Member who can create assets) can reference Custom API Keys in their tools and agents
+
+<Info>
+Learn more about managing project membership and permissions in the [RBAC documentation](/get-started/enterprise/rbac).
+</Info>
+
+### Security Considerations
+
+<Warning>
+While Custom API Keys are automatically redacted with `<redacted>` when code steps attempt to print them out, members who can create Custom API Keys should exercise caution. Other builders in the project can use those keys to gain elevated access to downstream resources.
+</Warning>
+
+Important security points:
+- **Automatic redaction**: Custom API Keys are protected from accidental exposure in logs and outputs
+- **Shared access risk**: Any builder in the project can use Custom API Keys to access external systems with the permissions granted to those credentials
+- **Project membership matters**: Carefully consider who has builder access to projects containing sensitive API credentials
+
+---
+
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
@@ -48,4 +78,11 @@ Organization and project-level API keys are an Enterprise feature. Enterprise su
   </Accordion>
   <Accordion title="I've set an organization- and project-level API key. Which one takes precedence?">The *project-level API key does*. If you want the organization-level API key to be used, the project-level API key must be removed.</Accordion>
   <Accordion title="How does this apply to OAuth accounts?">Integrations that rely on OAuth or third-party services don't support shared credentials, so users will need to connect their own, or service accounts.</Accordion>
+  <Accordion title="What are the best practices for using Custom API Keys?">
+    - Provide Custom API Keys that are limited in scope and permissions (e.g., read-only access, specific resource access)
+    - Create separate projects with only trusted team members when working with sensitive credentials
+    - Use OAuth credentials via [User Level Authentication](/get-started/enterprise/user-level-authentication) instead of Custom API Keys where possible
+  </Accordion>
+  <Accordion title="Can I restrict which builders can use specific Custom API Keys?">Currently, all Custom API Keys in a project are accessible to all builders in that project. Use project isolation to control access to sensitive credentials by creating separate projects with limited membership.</Accordion>
+  <Accordion title="What's the difference between Custom API Keys and OAuth authentication?">Custom API Keys are shared credentials stored at the project level that all builders can use. OAuth authentication via [User Level Authentication](/get-started/enterprise/user-level-authentication) allows each user to authenticate with their own credentials, providing better security and individual accountability.</Accordion>
 </AccordionGroup>
