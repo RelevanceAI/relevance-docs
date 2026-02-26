@@ -307,6 +307,30 @@ Traces track execution flows for agents, workforces, and LLM completions. Use tr
 }
 ```
 
+### Resource Attributes
+
+Resource attributes identify the service producing telemetry data. These attributes are attached to all spans and logs exported from Relevance AI.
+
+| Attribute | Type | Value | Description |
+|-----------|------|-------|-------------|
+| `service.name` | string | `"Relevance AI"` | Logical name of the service producing telemetry |
+
+Resource attributes follow OpenTelemetry semantic conventions and help observability platforms group and filter telemetry by service.
+
+**Example structure:**
+```json
+{
+  "resourceSpans": [{
+    "resource": {
+      "attributes": [
+        { "key": "service.name", "value": { "stringValue": "Relevance AI" } }
+      ]
+    },
+    "scopeSpans": [{ "spans": [...] }]
+  }]
+}
+```
+
 ### Base Attributes
 
 Included on all spans:
@@ -340,9 +364,9 @@ Spans share `traceId` and link via `parentSpanId`:
 multi_agent_system_trigger
 ├── condition_trigger
 └── invoke_agent
-    ├── llm_completion
+    ├── chat
     └── invoke_agent (sub-agent)
-        └── llm_completion
+        └── chat
 ```
 
 ### Supported Spans
@@ -366,22 +390,23 @@ Records a complete agent conversation/invocation.
 | `relevance_ai.agent.knowledge_used` | array | Yes | Knowledge set IDs used |
 | `relevance_ai.agent.escalation.reason` | string | No | Escalation reason |
 | `relevance_ai.agent.escalation.context` | string | No | Escalation context |
+| `relevance_ai.agent.version_id` | string | No | The active version ID of the agent |
 
-### `llm_completion`
+### `chat`
 
 Records a single LLM inference call.
 
-**Name**: `llm_completion {model_name}`
+**Name**: `chat {model_name}`
 
 | Attribute | Type | Required | Description |
 | --- | --- | --- | --- |
-| `gen_ai.operation.name` | string | Yes | `"llm_completion"` |
+| `gen_ai.operation.name` | string | Yes | `"chat"` |
 | `gen_ai.request.model` | string | Yes | Requested model ID |
 | `gen_ai.request.temperature` | int | No | Temperature setting |
 | `gen_ai.request.max_tokens` | int | No | Max tokens setting |
 | `gen_ai.system_instructions` | string | No | System prompt |
 | `gen_ai.input.messages` | string | Yes | JSON-stringified input messages |
-| `gen_ai.tool.definitions` | array | Yes | JSON-stringified tool definitions |
+| `gen_ai.tool.definitions` | string | Yes | JSON-stringified tool definitions |
 | `gen_ai.response.id` | string | Yes | Provider's response ID |
 | `gen_ai.response.model` | string | Yes | Actual model used |
 | `gen_ai.response.finish_reasons` | array | Yes | Finish reasons (e.g., `["stop"]`) |
@@ -403,6 +428,7 @@ Records a complete workforce execution.
 | `relevance_ai.workforce.type` | string | Yes | `"chat"` or `"default"` |
 | `relevance_ai.workforce.metadata` | object | Yes | Custom metadata |
 | `relevance_ai.workforce.status` | string | Yes | Final status |
+| `relevance_ai.workforce.version_id` | string | No | The active version ID of the workforce |
 
 ### `condition_trigger`
 
