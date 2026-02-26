@@ -1,0 +1,15 @@
+name: Agent-Friendly Docs Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  afdocs:
+    name: afdocs check
+    runs-on: ubuntu-latest
+    # Continue even if the check fails — this is informational only
+    continue-on-error: true
+    steps:
+      - name: Run afdocs checks
+        run: npx afdocs@latest check https://docs.relevanceai.com --format text --verbose
