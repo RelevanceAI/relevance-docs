@@ -8,6 +8,24 @@ sidebarTitle: 'Telegram'
 
 Connect your AI agents with Telegram to automate conversations and workflows directly through the popular messaging platform. The Telegram integration allows your agents to receive messages, respond intelligently, and execute actions based on user interactions.
 
+## How the Telegram Integration Works
+
+The Relevance AI Telegram integration connects your **personal Telegram account** (or a dedicated Telegram account you create). When you set up this integration:
+
+- Your AI agent sends and receives messages **as that Telegram account**
+- You authenticate using Telegram's standard login process
+- The agent can interact with your contacts, groups, and channels
+
+**Important**: This integration does **not** support Telegram BotFather bot tokens. If you created a bot via [@BotFather](https://t.me/botfather) and have a bot API token, you cannot use that token with this native integration.
+
+### Want to Use a BotFather Bot Instead?
+
+If you prefer to use a dedicated bot created via BotFather (rather than a personal account), you can set this up using:
+- A [Webhook trigger](https://relevanceai.com/docs/agent/build-your-agent/agent-triggers/custom-webhook) to receive messages from Telegram
+- The [API tool step](https://relevanceai.com/docs/tool/tool-steps/api) to send messages via the Telegram Bot API
+
+This approach gives you full control over bot behavior but requires manual configuration of the Telegram Bot API endpoints.
+
 ## Connect the integration
 
 Setting up the Telegram integration with Relevance AI is straightforward:
@@ -78,7 +96,7 @@ Here's an example of how you might use Telegram actions in a customer support wo
 
 ## Use the integration's API tool step (advanced)
 
-In addition to the pre-built actions, advanced users can access the full Telegram API for custom functionality:
+In addition to the pre-built actions, advanced users can access additional Telegram functionality through the Telegram API tool step:
 
 1. Create a new tool
 2. Scroll down to Tool-steps
@@ -86,7 +104,9 @@ In addition to the pre-built actions, advanced users can access the full Telegra
 4. Select your connected Telegram account in the dropdown
 5. Configure the API endpoint and parameters according to your needs
 
-The Telegram API tool step gives you access to all Telegram Bot API methods, allowing for highly customized interactions beyond the standard actions.
+**Note**: This tool step uses your connected personal Telegram account's authentication. While it provides access to Telegram's API methods, it operates within the context of your authenticated account, not as a BotFather bot. The available methods depend on what Telegram allows for user accounts versus bots.
+
+For full Telegram Bot API functionality with a BotFather bot, use the [API tool step](https://relevanceai.com/docs/tool/tool-steps/api) with your bot token instead.
 
 ### Example API usage
 
@@ -107,4 +127,14 @@ The Telegram API tool step gives you access to all Telegram Bot API methods, all
   <Accordion title="Can my agent respond to messages in Telegram groups?">Yes, your agent can be configured to respond to messages in private chats, groups, or both, depending on your trigger settings.</Accordion>
   <Accordion title="Is there a limit to how many messages my agent can process through Telegram?">Message processing is counted against your overall credit usage. The specific limits depend on your subscription plan.</Accordion>
   <Accordion title="Can I customize how my agent appears in Telegram conversations?">Yes, you can customize the name and profile picture of your Telegram bot that represents your agent in conversations.</Accordion>
+  <Accordion title="Can I use a BotFather bot token with this integration?">
+    No, the native Telegram integration does not support BotFather bot tokens. This integration connects your personal Telegram account (or a dedicated account), and your agent operates as that account.
+
+If you want to use a dedicated bot created via [@BotFather](https://t.me/botfather):
+1. Set up a [Webhook trigger](https://relevanceai.com/docs/agent/build-your-agent/agent-triggers/custom-webhook) in your agent
+2. Configure your Telegram bot to send updates to that webhook URL (see [Telegram's webhook guide](https://core.telegram.org/bots/webhooks))
+3. Use the [API tool step](https://relevanceai.com/docs/tool/tool-steps/api) to send messages back via the Telegram Bot API
+
+This approach requires more technical setup but gives you full control over bot functionality.
+  </Accordion>
 </AccordionGroup>
