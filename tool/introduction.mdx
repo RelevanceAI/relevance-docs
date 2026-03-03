@@ -10,6 +10,39 @@ Tools are how you build integrations, LLM prompt chains or other step by step au
 
 The possibilities are vast. You can tap into any API, choose from our extensive library of third-party integrations, or even incorporate custom code into your tools.
 
+## Tool Sharing and Reusability
+
+One of the key advantages of building tools in Relevance AI is their reusability across your project. Once you create a tool, you can:
+
+<CardGroup cols={2}>
+  <Card title="Share with Agents" icon="robot">
+    Add your tools to multiple agents without reconfiguring them each time. Tools maintain their settings when shared across agents.
+  </Card>
+  <Card title="Use in Workforces" icon="diagram-project">
+    Drag tools into your Workforce Builder where they can be connected to multiple agents and other tools in complex workflows.
+  </Card>
+  <Card title="Share Externally" icon="share-nodes">
+    Create shareable links, embeddable forms, or cloneable templates to share your tools with others outside your project.
+  </Card>
+  <Card title="Run Independently" icon="play">
+    Execute tools as standalone applications, in bulk operations, or through API calls.
+  </Card>
+</CardGroup>
+
+### Benefits of Tool Sharing
+
+The tool sharing UX makes it easy to:
+
+- **Maintain consistency**: Use the same tool configuration across multiple agents and workflows
+- **Save time**: Configure once, use everywhere—no need to rebuild similar tools
+- **Collaborate effectively**: Team members can discover and use tools created by others
+- **Update efficiently**: Changes to a tool propagate to all agents and workforces using it
+- **Build modularly**: Create specialized tools that can be combined in different ways
+
+<Tip>
+When building tools, consider how they might be reused. Generic, well-documented tools are easier to share and integrate into different workflows.
+</Tip>
+
 ## Getting started
 
 The Relevance **Tool Builder** consists of three tabs:
@@ -57,3 +90,31 @@ Each step can be ran individually, which is useful for testing and debugging you
 ### Logs
 
 The Logs tab is where you can view the logs of your tool, which is useful for reviewing executions.
+
+## How Tools Work with Agents
+
+Tools extend your agents' capabilities by giving them the ability to perform actions. When you share a tool with an agent:
+
+1. **The agent can access the tool**: The tool appears in the agent's available tools list
+2. **Configuration is preserved**: Input settings, parameters, and logic remain consistent
+3. **The agent decides when to use it**: Based on your instructions, the agent determines when the tool is needed
+4. **Results are integrated**: Tool outputs are seamlessly incorporated into the agent's responses
+
+This sharing mechanism allows you to build a library of reusable tools that can be mixed and matched across different agents and use cases.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Create a Tool" icon="wrench" href="/tool/create-a-tool">
+    Learn how to build your first tool from scratch
+  </Card>
+  <Card title="Give Your Agent Tools" icon="robot" href="/agent/build-your-agent/tools">
+    Discover how to add tools to your agents
+  </Card>
+  <Card title="Add Tools to Workforce" icon="diagram-project" href="/workforce/build-an-ai-workforce/add-tools">
+    Use tools in your AI Workforce workflows
+  </Card>
+  <Card title="Share Your Tool" icon="share" href="/tool/share-your-tool">
+    Learn about external tool sharing options
+  </Card>
+</CardGroup>
