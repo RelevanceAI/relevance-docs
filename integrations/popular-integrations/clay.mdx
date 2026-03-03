@@ -1,0 +1,449 @@
+---
+title: "Clay"
+description: "Clay is a data enrichment and automation platform that combines 150+ premium data sources with AI-powered research agents."
+sidebarTitle: "Clay"
+---
+
+Clay is a data enrichment and automation platform that combines 150+ premium data sources with AI-powered research agents. With Relevance AI's Clay integration, you can build no-code prospecting workflows, enrich leads with data from multiple sources, and automate your go-to-market operations with verified contact and company information.
+
+<Warning>
+  The Clay integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Clay. If you have a question or issue with using Clay in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Clay, you can [reach out to Clay support](https://www.clay.com/support).
+</Warning>
+
+## Connect the integration
+
+Connecting your Clay account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Clay" from the available integrations.
+3. Click on the "Add Integration" button.
+4. Enter your Clay API key when prompted.
+5. Once authenticated, your Clay account will appear as a connected integration.
+
+<Tip>
+  You can find your Clay API key in your Clay account settings under API & Integrations. If you don't have a Clay account yet, you can [sign up here](https://www.clay.com/).
+</Tip>
+
+## Tool steps for Clay
+
+The Clay integration provides a comprehensive set of actions that your agents can use to enrich leads, find contacts, and automate prospecting workflows. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated sales automation and data enrichment capabilities.
+
+### Data Enrichment
+<CardGroup cols={2}>
+  <Card title="Enrich Person" icon="user-plus">
+    Enrich contact records with data from 150+ sources including email, phone, social profiles, and employment history
+  </Card>
+  <Card title="Enrich Company" icon="building">
+    Enrich company records with firmographic data, technographics, funding information, and employee counts
+  </Card>
+  <Card title="Find Email" icon="envelope">
+    Find verified email addresses using multiple data providers with waterfall enrichment
+  </Card>
+  <Card title="Find Phone" icon="phone">
+    Find verified phone numbers for contacts using Clay's aggregated data sources
+  </Card>
+</CardGroup>
+
+### Prospecting & Research
+<CardGroup cols={2}>
+  <Card title="Search People" icon="users">
+    Search for contacts matching specific criteria across Clay's aggregated databases
+  </Card>
+  <Card title="Search Companies" icon="buildings">
+    Search for companies matching your ideal customer profile criteria
+  </Card>
+  <Card title="AI Research" icon="sparkles">
+    Use Clay's AI research agents to gather custom information about prospects or companies
+  </Card>
+  <Card title="Web Scraping" icon="globe">
+    Extract structured data from websites and LinkedIn profiles
+  </Card>
+</CardGroup>
+
+### Automation & Workflows
+<CardGroup cols={2}>
+  <Card title="Create Table Row" icon="table-rows">
+    Add new records to Clay tables for tracking and enrichment
+  </Card>
+  <Card title="Update Table Row" icon="pen-to-square">
+    Update existing records in Clay tables with new information
+  </Card>
+  <Card title="Trigger Webhook" icon="webhook">
+    Send data to Clay via webhooks to trigger enrichment workflows
+  </Card>
+  <Card title="Clay API Call" icon="code">
+    Make custom API calls to access any Clay API endpoint for advanced use cases
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Clay" in the tool step search bar to see all available Clay actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Clay-specific activities using the Clay API Call tool step.
+
+### How to use the Clay API Call tool step
+
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add Clay functionality to.
+  </Step>
+  
+  <Step title="Add the Clay API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "Clay API Call" in the tool step search bar
+    3. Add the Clay API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your Clay account">
+    Select your connected Clay account from the dropdown menu.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters according to your needs:
+    - **Method**: Select the HTTP method (GET, POST, PUT, DELETE)
+    - **Endpoint**: Enter the API endpoint path (e.g., `/v1/enrichment/person`)
+    - **Body**: Add any required request body data with enrichment parameters
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
+
+### Example: Enriching a Contact with Waterfall Enrichment
+
+Here's a practical example of using the Clay API Call tool step to enrich a contact using Clay's waterfall enrichment feature:
+
+**API Endpoint**: `POST /v1/enrichment/person`
+
+**Configuration**:
+```json
+{
+  "method": "POST",
+  "endpoint": "/v1/enrichment/person",
+  "body": {
+    "email": "john.doe@example.com",
+    "enrichments": [
+      "email_verification",
+      "phone_number",
+      "linkedin_profile",
+      "job_title",
+      "company_info"
+    ],
+    "waterfall": true
+  }
+}
+```
+
+This configuration:
+- Uses the POST method to request contact enrichment
+- Specifies the `/v1/enrichment/person` endpoint for individual contact lookup
+- Provides the email address as the primary identifier
+- Requests multiple enrichment types from Clay's data sources
+- Enables waterfall enrichment to try multiple providers until data is found
+- Returns verified contact information including phone numbers, LinkedIn profile, job title, and company details
+
+<Info>
+  You can find Clay's complete API documentation at [https://docs.clay.com/](https://docs.clay.com/).
+</Info>
+
+### Common Clay API Endpoints
+
+Here are some commonly used Clay API endpoints you can use with the API Call tool step:
+
+<AccordionGroup>
+  <Accordion title="Person Enrichment" icon="user">
+    - **Enrich by email**: `POST /v1/enrichment/person` with `{"email": "user@example.com"}`
+    - **Enrich by LinkedIn**: `POST /v1/enrichment/person` with `{"linkedin_url": "https://linkedin.com/in/username"}`
+    - **Enrich by name & company**: `POST /v1/enrichment/person` with `{"first_name": "John", "last_name": "Doe", "company": "Acme Corp"}`
+    - **Waterfall enrichment**: Add `"waterfall": true` to try multiple data providers
+    
+    Returns: Email addresses, phone numbers, job title, company, location, social profiles, employment history
+    
+    [View API Documentation](https://docs.clay.com/)
+  </Accordion>
+  
+  <Accordion title="Company Enrichment" icon="building">
+    - **Enrich by domain**: `POST /v1/enrichment/company` with `{"domain": "example.com"}`
+    - **Enrich by company name**: `POST /v1/enrichment/company` with `{"name": "Acme Corporation"}`
+    - **Technographic data**: Request technology stack and tools used
+    
+    Returns: Company size, industry, location, revenue, funding, technologies used, employee count, social profiles
+    
+    [View API Documentation](https://docs.clay.com/)
+  </Accordion>
+  
+  <Accordion title="AI Research Agent" icon="sparkles">
+    - **Custom research**: `POST /v1/research` with custom research prompt
+    - **Competitive intelligence**: Research competitors and market positioning
+    - **News and signals**: Find recent news, funding announcements, job postings
+    
+    Clay's AI research agents can answer custom questions about prospects or companies using web search and data aggregation.
+    
+    [View API Documentation](https://docs.clay.com/)
+  </Accordion>
+  
+  <Accordion title="Table Operations" icon="table">
+    - **Create row**: `POST /v1/tables/{table_id}/rows` with row data
+    - **Update row**: `PUT /v1/tables/{table_id}/rows/{row_id}` with updated data
+    - **Get table data**: `GET /v1/tables/{table_id}/rows` to retrieve records
+    - **Trigger enrichment**: Add rows to trigger Clay's enrichment workflows
+    
+    Useful for syncing data between Relevance AI and Clay tables.
+    
+    [View API Documentation](https://docs.clay.com/)
+  </Accordion>
+  
+  <Accordion title="Search & Discovery" icon="magnifying-glass">
+    - **Search people**: `POST /v1/search/people` with filters for job title, company, location, seniority
+    - **Search companies**: `POST /v1/search/companies` with filters for industry, size, location, funding
+    - **Find decision makers**: Search for specific roles within target companies
+    
+    Useful for building prospect lists matching your ideal customer profile.
+    
+    [View API Documentation](https://docs.clay.com/)
+  </Accordion>
+</AccordionGroup>
+
+## Example use cases
+
+Here are some ways you can leverage the Clay integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="Automated Lead Enrichment Pipeline" icon="user-plus">
+    Create an agent that automatically enriches incoming leads using Clay's waterfall enrichment. The agent takes leads from your CRM or forms, uses Clay to gather data from 150+ sources, validates the information, and updates your CRM with enriched contact details including verified emails, phone numbers, and company information.
+  </Accordion>
+  
+  <Accordion title="AI-Powered Prospect Research" icon="sparkles">
+    Build an agent that conducts deep research on prospects using Clay's AI research agents. Given a company name or LinkedIn profile, the agent uses Clay to gather recent news, funding announcements, technology stack, key decision-makers, and competitive positioning, then compiles a comprehensive research brief for your sales team.
+  </Accordion>
+  
+  <Accordion title="Multi-Source Contact Finder" icon="magnifying-glass">
+    Deploy an agent that finds contact information using Clay's aggregated data sources. The agent tries multiple data providers in sequence (waterfall enrichment) to find verified email addresses and phone numbers, ensuring higher match rates than single-source solutions.
+  </Accordion>
+  
+  <Accordion title="ICP-Based List Builder" icon="list-check">
+    Create an agent that builds targeted prospect lists based on your ideal customer profile. The agent uses Clay's search capabilities to find companies and contacts matching specific criteria (industry, company size, job title, location, technologies used), enriches the results, and exports them to your sales engagement platform.
+  </Accordion>
+  
+  <Accordion title="Technographic Intelligence Agent" icon="microchip">
+    Build an agent that identifies prospects based on their technology stack. The agent uses Clay to find companies using specific technologies (e.g., Salesforce, HubSpot, Shopify), enriches decision-maker contacts, and prioritizes accounts based on tech stack compatibility with your product.
+  </Accordion>
+  
+  <Accordion title="Signal-Based Outreach Automation" icon="bell">
+    Deploy an agent that monitors buying signals and triggers outreach. The agent uses Clay to track company signals (funding rounds, job postings, news mentions, leadership changes), identifies relevant contacts, and automatically initiates personalized outreach when signals are detected.
+  </Accordion>
+  
+  <Accordion title="Account Mapping & Org Chart Builder" icon="sitemap">
+    Create an agent that maps organizational structures of target accounts. The agent uses Clay to identify all employees at a company, their roles and seniority, reporting relationships, and contact information, building a comprehensive org chart for account-based selling strategies.
+  </Accordion>
+  
+  <Accordion title="Data Quality Maintenance Bot" icon="database">
+    Build an agent that continuously maintains data quality across your systems. The agent identifies incomplete or outdated records in your CRM, uses Clay's waterfall enrichment to find current information from multiple sources, validates the data, and automatically updates your systems with verified information.
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Data Privacy & Compliance" icon="shield-check">
+    **Always ensure compliance with data privacy regulations:**
+    - Only use Clay data for legitimate business purposes
+    - Respect GDPR, CCPA, and other privacy regulations in your region
+    - Include proper opt-out mechanisms in your outreach
+    - Store enriched data securely and delete when no longer needed
+    - Review Clay's terms of service and acceptable use policy
+    - Obtain proper consent before processing personal data
+    
+    Clay aggregates data from public sources, but you're responsible for how you use it.
+  </Accordion>
+  
+  <Accordion title="Credit Management & Waterfall Strategy" icon="coins">
+    **Optimize your Clay credit usage:**
+    - Each enrichment request consumes Clay credits based on data sources used
+    - Use waterfall enrichment to try cheaper sources first, then premium sources
+    - Configure waterfall order based on your data quality needs and budget
+    - Cache enriched data to avoid duplicate lookups
+    - Implement logic to check if data already exists before enriching
+    - Monitor your credit usage through Clay's dashboard
+    - Set up alerts when credits are running low
+    - Use bulk operations when processing multiple records
+  </Accordion>
+  
+  <Accordion title="Data Quality & Validation" icon="star">
+    **Maximize the quality of enriched data:**
+    - Provide as much information as possible in your enrichment requests
+    - Use waterfall enrichment to increase match rates across multiple providers
+    - Validate email addresses before using them in outreach campaigns
+    - Implement fallback logic when Clay doesn't find a match
+    - Regularly update enriched data as contact information changes
+    - Use Clay's confidence scores to assess data reliability
+    - Cross-reference data from multiple sources when accuracy is critical
+    - Set up data validation rules before syncing to your CRM
+  </Accordion>
+  
+  <Accordion title="Rate Limiting & Performance" icon="gauge">
+    **Handle API rate limits gracefully:**
+    - Clay enforces rate limits to ensure service quality
+    - Implement retry logic with exponential backoff for rate limit errors
+    - Use bulk endpoints to reduce the number of API calls
+    - Distribute enrichment tasks over time for large datasets
+    - Monitor API response codes and handle errors appropriately
+    - Consider using Clay's webhook integrations for asynchronous processing
+    - Batch requests when possible to improve efficiency
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What is Clay and why should I use it?">
+    Clay is a data enrichment and automation platform that combines 150+ premium data sources with AI-powered research agents. It helps sales and marketing teams find accurate contact information, enrich leads with firmographic and technographic data, and automate prospecting workflows. Using Clay with Relevance AI allows you to build sophisticated AI agents that leverage multiple data sources for comprehensive lead enrichment and research at scale.
+  </Accordion>
+  
+  <Accordion title="Do I need a Clay account to use this integration?">
+    Yes, you need an active Clay account with API access. You can sign up for Clay at [https://www.clay.com/](https://www.clay.com/). Clay offers various plans with different credit allocations and feature access. You'll need to generate an API key from your Clay account settings to connect it to Relevance AI.
+  </Accordion>
+  
+  <Accordion title="How do I get my Clay API key?">
+    To get your Clay API key:
+    1. Log in to your Clay account
+    2. Navigate to Settings or Account Settings
+    3. Look for "API & Integrations" or "API Access"
+    4. Generate a new API key or copy your existing key
+    5. Use this key when connecting Clay to Relevance AI
+    
+    Keep your API key secure and never share it publicly.
+  </Accordion>
+  
+  <Accordion title="What is waterfall enrichment and how does it work?">
+    Waterfall enrichment is Clay's approach to finding data by trying multiple data providers in sequence until information is found. When you enable waterfall enrichment, Clay will:
+    1. Try the first data source
+    2. If no data is found, automatically try the next source
+    3. Continue until data is found or all sources are exhausted
+    
+    This increases match rates and data coverage while optimizing credit usage by trying cheaper sources first.
+  </Accordion>
+  
+  <Accordion title="How many Clay credits does each enrichment use?">
+    Credit usage depends on the data sources used and the type of enrichment:
+    - Basic enrichment: 1-5 credits per lookup
+    - Premium data sources: 5-20 credits per lookup
+    - AI research agents: 10-50 credits per query
+    - Waterfall enrichment: Credits consumed only for sources that return data
+    
+    Check your Clay plan details for specific credit allocations. You can monitor your credit usage in your Clay dashboard and configure waterfall order to optimize costs.
+  </Accordion>
+  
+  <Accordion title="What happens if Clay doesn't find a match?">
+    If Clay doesn't find information for a contact or company, the API will return an empty result or indicate no match was found. Your agent should include logic to handle these cases, such as:
+    - Trying alternative search parameters or identifiers
+    - Using waterfall enrichment with more data sources
+    - Using fallback data sources or integrations
+    - Flagging the record for manual research
+    - Skipping to the next record in bulk operations
+    
+    Clay's waterfall enrichment helps maximize match rates by trying multiple providers.
+  </Accordion>
+  
+  <Accordion title="Can I use Clay for cold outreach?">
+    Yes, but you must comply with all applicable laws and regulations:
+    - Follow CAN-SPAM, GDPR, CCPA, and other relevant regulations
+    - Include proper identification and opt-out mechanisms
+    - Only contact people with legitimate business interest
+    - Respect do-not-contact lists and preferences
+    - Review Clay's acceptable use policy
+    - Obtain proper consent where required
+    
+    Clay provides the data, but you're responsible for how you use it in your outreach campaigns.
+  </Accordion>
+  
+  <Accordion title="How accurate is Clay's data?">
+    Clay aggregates data from 150+ sources and uses AI to validate and cross-reference information. Accuracy varies by data type and source:
+    - Email addresses: Typically 90-95% accuracy with verification
+    - Phone numbers: 85-90% accuracy for direct dials
+    - Company data: High accuracy for firmographic information
+    - Job titles: Generally accurate but may lag for recent changes
+    
+    Best practices: Use waterfall enrichment, validate emails before sending, and regularly update your data.
+  </Accordion>
+  
+  <Accordion title="Can I use Clay's AI research agents?">
+    Yes! Clay's AI research agents can answer custom questions about prospects or companies using web search and data aggregation. You can use them to:
+    - Research company news and recent developments
+    - Find competitive intelligence and market positioning
+    - Identify buying signals like funding rounds or job postings
+    - Gather custom information not available in structured databases
+    
+    AI research agents consume more credits but provide unique insights not available from standard data sources.
+  </Accordion>
+  
+  <Accordion title="What's the difference between Clay and other enrichment tools?">
+    Clay differs from single-source enrichment tools in several ways:
+    - **150+ data sources**: Aggregates data from multiple providers vs. single source
+    - **Waterfall enrichment**: Automatically tries multiple sources for higher match rates
+    - **AI research agents**: Can answer custom questions and gather unstructured data
+    - **No-code workflows**: Built-in automation capabilities beyond just enrichment
+    - **Technographic data**: Includes technology stack and tool usage information
+    
+    Clay is ideal when you need comprehensive data coverage and custom research capabilities.
+  </Accordion>
+  
+  <Accordion title="Can I integrate Clay with my CRM?">
+    Yes! You can build agents that connect Clay with popular CRMs like Salesforce, HubSpot, and others available in Relevance AI. Your agent can:
+    - Pull contacts from your CRM
+    - Enrich them with Clay's multi-source data
+    - Validate and clean the enriched data
+    - Update the CRM with enriched information
+    - All automatically on a schedule or trigger
+    
+    Check our [integrations page](/integrations/introduction) for available CRM connections.
+  </Accordion>
+  
+  <Accordion title="How do I find companies using specific technologies?">
+    Clay provides technographic data that shows what technologies companies use. You can:
+    - Use the Search Companies endpoint with technology filters
+    - Enrich company records to get their technology stack
+    - Filter by specific tools (e.g., Salesforce, Shopify, AWS)
+    - Build prospect lists based on technology usage
+    
+    This is particularly useful for targeting companies that use complementary or competing technologies.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits for the Clay API?">
+    Yes, Clay enforces rate limits to ensure service quality for all users. The specific limits depend on your Clay plan. If you hit rate limits:
+    - Your agent will receive a rate limit error (429 status code)
+    - Implement retry logic with exponential backoff
+    - Use bulk endpoints when processing many records
+    - Consider using webhooks for asynchronous processing
+    - Contact Clay support if you need higher limits
+    
+    Design your workflows to handle rate limits gracefully with proper error handling.
+  </Accordion>
+  
+  <Accordion title="Can I use Clay for recruitment and talent sourcing?">
+    Yes! Clay is excellent for recruitment use cases:
+    - Search for candidates with specific skills and experience
+    - Find contact information for passive candidates
+    - Research candidates' background and employment history
+    - Identify candidates at target companies
+    - Build talent pipelines for hard-to-fill roles
+    
+    Ensure you comply with recruitment-specific regulations and obtain proper consent for candidate outreach.
+  </Accordion>
+  
+  <Accordion title="How does Clay handle data privacy and GDPR compliance?">
+    Clay aggregates data from public sources and complies with GDPR and CCPA regulations. However:
+    - You're responsible for how you use the data
+    - Ensure you have legal basis for processing personal data
+    - Provide opt-out mechanisms in your communications
+    - Store data securely and delete when no longer needed
+    - Review Clay's privacy policy and data processing agreement
+    - Implement proper data governance in your workflows
+    
+    Consult with legal counsel to ensure your use case complies with applicable regulations.
+  </Accordion>
+</AccordionGroup>
