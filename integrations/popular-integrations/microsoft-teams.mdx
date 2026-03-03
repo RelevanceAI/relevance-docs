@@ -1,16 +1,15 @@
 ---
-title: 'Microsoft Teams'
-sidebarTitle: 'Microsoft Teams'
-description: 'Enable your AI Agents and Workforces to respond to Microsoft Teams messages'
+title: "Microsoft Teams"
+description: "Microsoft Teams is a collaboration platform that combines workplace chat, video meetings, file storage, and application integration."
+sidebarTitle: "Microsoft Teams"
 ---
 
-# Microsoft Teams
+Microsoft Teams is a collaboration platform that combines workplace chat, video meetings, file storage, and application integration. With Relevance AI's Microsoft Teams integration, you can seamlessly connect your Teams workspace to your AI agents, enabling them to monitor channels, respond to messages, and automate communication workflows directly within your team's collaboration environment.
 
-Microsoft Teams is a collaboration platform that combines workplace chat, video meetings, file storage, and application integration.
+<Warning>
+  The Microsoft Teams integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Microsoft. If you have a question or issue with using Microsoft Teams in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Microsoft Teams, you can [reach out to Microsoft support](https://support.microsoft.com/).
+</Warning>
 
-The Microsoft Teams integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Microsoft. If you have a question or issue with using Microsoft Teams in Relevance AI, please reach out to our support team. If you have a question or issue that is only about Microsoft Teams, you can reach out to Microsoft support.
-
-​
 ## Connect the integration
 
 Connecting your Microsoft account to Relevance AI is a straightforward process. The Microsoft integration provides unified authentication across Teams, Outlook, SharePoint, and OneDrive.
@@ -18,13 +17,14 @@ Connecting your Microsoft account to Relevance AI is a straightforward process. 
 1. Go to the "Integrations & API Keys" page in the sidebar of your Relevance AI dashboard.
 2. Click on "Microsoft (Teams, Outlook, SharePoint, OneDrive)" from the available integrations.
 3. Click on the "Add Integration" button.
-4. Sign in with your Microsoft account.
-5. Approve the requested permissions.
-6. Once connected, you'll see your Microsoft account listed under connected integrations.
+4. In the pop-up window, sign into your Microsoft account.
+5. Grant the necessary permissions for Relevance AI to access your Microsoft Teams data.
+6. Once authenticated, your Microsoft account will appear as a connected integration.
 
-Note: You may need admin consent depending on your organisation's Microsoft policies.
+<Note>
+  You may need admin consent depending on your organisation's Microsoft policies. After connecting, you can use Microsoft Teams as a trigger for your agents to automatically respond to messages, or use Teams tool steps in your custom tools to send messages and manage channels.
+</Note>
 
-​
 ## Microsoft integration overview
 
 Relevance AI uses a unified Microsoft authentication that works across multiple Microsoft services:
@@ -36,114 +36,325 @@ Relevance AI uses a unified Microsoft authentication that works across multiple 
 
 This means connecting one Microsoft account gives you access to all these services within Relevance AI.
 
-​
-## Setting up triggers
+<Tip>
+  Learn more about our [Outlook integration](/integrations/popular-integrations/outlook) and [SharePoint knowledge source](/knowledge/integrated-knowledge-sources/sharepoint).
+</Tip>
 
-Microsoft Teams triggers activate when new messages are posted in channels or chats. When a trigger fires, the message content is passed into your Agent or Workforce as input.
-
-**Important**: Teams triggers activate only on new messages. They do not trigger on new chat creation, group creation, or webhooks.
-
-To set up Microsoft Teams as a trigger:
-
-1. Create or edit an agent in Relevance AI.
-2. Navigate to the "Triggers" section in "Agent Profile".
-3. Click "Add Trigger".
-4. Select "Microsoft Teams" as the trigger source.
-5. Choose your connected Microsoft account.
-6. Select the Team and Channel (or chat) to monitor.
-7. Configure any trigger conditions if applicable.
-8. Save your trigger configuration.
-
-Your Agent will now run automatically whenever a new message is posted in the selected location.
-
-​
 ## Tool steps for Microsoft Teams
 
-The Microsoft Teams integration provides actions that your agents can use to send messages and manage Teams. These actions can be incorporated into your agent's workflows as tool steps.
+The Microsoft Teams integration provides actions that your agents can use to send messages and manage Teams. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated communication automation capabilities.
 
-**Note**: Most Microsoft Teams tool steps are currently in beta. Please report any issues to our support team.
-
-​
 ### Messaging
+<CardGroup cols={2}>
+  <Card title="Send Channel Message" icon="message">
+    Post a message to a specific Teams channel
+  </Card>
+  <Card title="Send Chat Message" icon="comment">
+    Send a direct message in Teams
+  </Card>
+</CardGroup>
 
-**Send Channel Message**
-Post a message to a specific Teams channel.
-
-**Send Chat Message**
-Send a direct message in Teams.
-
-​
 ### Channel Management
+<CardGroup cols={2}>
+  <Card title="Create Channel" icon="plus">
+    Create a new channel in a Team
+  </Card>
+  <Card title="List Channels" icon="list">
+    Get all channels in a Team
+  </Card>
+</CardGroup>
 
-**Create Channel**
-Create a new channel in a Team.
-
-**List Channels**
-Get all channels in a Team.
-
-​
 ### Other Actions
+<CardGroup cols={2}>
+  <Card title="List Shifts" icon="calendar-days">
+    Retrieve shift information from Teams
+  </Card>
+</CardGroup>
 
-**List Shifts**
-Retrieve shift information from Teams.
+### Advanced API Access
+<CardGroup cols={1}>
+  <Card title="Microsoft Teams API Call" icon="code">
+    Make custom API calls to Microsoft Graph API for advanced use cases
+  </Card>
+</CardGroup>
 
-Type "Microsoft Teams" in the tool step search bar to see all available Microsoft Teams actions when building your tools.
+<Note>
+  Most Microsoft Teams tool steps are currently in beta. Please report any issues to our support team.
+</Note>
 
-​
+<Tip>
+  Type "Microsoft Teams" in the tool step search bar to see all available Microsoft Teams actions when building your tools.
+</Tip>
+
 ## Use the integration's API tool step (Advanced)
 
-In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Microsoft Teams-specific activities using the Microsoft Teams API Call tool step.
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Microsoft Teams-specific activities using the Microsoft Teams API Call tool step. This gives you access to the full Microsoft Graph API for advanced Teams operations.
 
-You can build custom tools that perform Microsoft Teams activities, by using the Microsoft Teams API Call tool-step:
+### How to use the Microsoft Teams API Call tool step
 
-- Create a new tool.
-- Scroll down to Tool-steps.
-- Add Microsoft Teams API tool-step.
-- Select your connected Microsoft account in the dropdown.
-- Configure the API endpoint and parameters according to the Microsoft Graph API documentation.
-- Test your API call to ensure it works as expected.
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add Microsoft Teams functionality to.
+  </Step>
+  
+  <Step title="Add the Microsoft Teams API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "Microsoft Teams API Call" in the tool step search bar
+    3. Add the Microsoft Teams API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your Microsoft account">
+    Select your connected Microsoft account from the dropdown menu.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters according to your needs:
+    - **Method**: Select the HTTP method (GET, POST, PUT, DELETE, PATCH)
+    - **Endpoint**: Enter the API endpoint path (e.g., `/teams/{teamId}/channels`, `/chats/{chatId}/messages`)
+    - **Body**: Add any required request body data
+    - **Headers**: Add any custom headers if needed
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
 
-The Microsoft Teams API Call tool step uses the Microsoft Graph API, which provides access to the full range of Microsoft Teams functionality.
+### Example: Sending a Message to a Teams Channel
 
-​
-## Remove integration
+Here's a practical example of using the Microsoft Teams API Call tool step to send a message to a Teams channel:
 
-If you need to remove the integration for Microsoft Teams:
+**API Endpoint**: `POST /teams/{teamId}/channels/{channelId}/messages`
 
-1. Go to the Integrations & API Keys page from the sidebar.
-2. Search for Microsoft (Teams, Outlook, SharePoint, OneDrive) from the list.
-3. Click "…" on the account you want to remove.
-4. Click "Remove" and confirm your choice.
+**Configuration**:
+```json
+{
+  "method": "POST",
+  "endpoint": "/teams/{teamId}/channels/{channelId}/messages",
+  "body": {
+    "body": {
+      "content": "Hello team! This is an automated message from your AI agent."
+    }
+  }
+}
+```
 
-Note: Removing the Microsoft integration will disable all triggers and tool steps using this account across Teams, Outlook, SharePoint, and OneDrive.
+This configuration:
+- Uses the POST method to send a new message
+- Specifies the team and channel IDs in the endpoint
+- Provides the message content in the request body
 
-​
+<Info>
+  You can find Microsoft Graph API's complete documentation at [https://learn.microsoft.com/en-us/graph/api/overview](https://learn.microsoft.com/en-us/graph/api/overview).
+</Info>
+
+### Common Microsoft Graph API Endpoints for Teams
+
+Here are some commonly used Microsoft Graph API endpoints you can use with the API Call tool step:
+
+<AccordionGroup>
+  <Accordion title="Channel Operations" icon="hashtag">
+    - **List channels**: `GET /teams/{teamId}/channels`
+    - **Get channel**: `GET /teams/{teamId}/channels/{channelId}`
+    - **Create channel**: `POST /teams/{teamId}/channels`
+    - **Update channel**: `PATCH /teams/{teamId}/channels/{channelId}`
+    - **Delete channel**: `DELETE /teams/{teamId}/channels/{channelId}`
+    
+    [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/channel)
+  </Accordion>
+  
+  <Accordion title="Message Operations" icon="message">
+    - **List channel messages**: `GET /teams/{teamId}/channels/{channelId}/messages`
+    - **Get message**: `GET /teams/{teamId}/channels/{channelId}/messages/{messageId}`
+    - **Send message**: `POST /teams/{teamId}/channels/{channelId}/messages`
+    - **Reply to message**: `POST /teams/{teamId}/channels/{channelId}/messages/{messageId}/replies`
+    - **List message replies**: `GET /teams/{teamId}/channels/{channelId}/messages/{messageId}/replies`
+    
+    [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/chatmessage)
+  </Accordion>
+  
+  <Accordion title="Chat Operations" icon="comments">
+    - **List chats**: `GET /me/chats`
+    - **Get chat**: `GET /chats/{chatId}`
+    - **List chat messages**: `GET /chats/{chatId}/messages`
+    - **Send chat message**: `POST /chats/{chatId}/messages`
+    
+    [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/chat)
+  </Accordion>
+  
+  <Accordion title="Team Operations" icon="users">
+    - **List teams**: `GET /me/joinedTeams`
+    - **Get team**: `GET /teams/{teamId}`
+    - **List team members**: `GET /teams/{teamId}/members`
+    - **Add team member**: `POST /teams/{teamId}/members`
+    
+    [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/team)
+  </Accordion>
+  
+  <Accordion title="Meeting Operations" icon="video">
+    - **Create online meeting**: `POST /me/onlineMeetings`
+    - **Get online meeting**: `GET /me/onlineMeetings/{meetingId}`
+    - **Update online meeting**: `PATCH /me/onlineMeetings/{meetingId}`
+    
+    [View API Documentation](https://learn.microsoft.com/en-us/graph/api/resources/onlinemeeting)
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  Use query parameters like `$filter`, `$select`, and `$orderby` to refine your API calls and retrieve exactly the data you need.
+</Tip>
+
+## Set up Microsoft Teams as a trigger
+
+You can configure your agents to automatically respond to Microsoft Teams messages by setting up Teams as a trigger.
+
+<Warning>
+  Teams triggers activate only on new messages. They do not trigger on new chat creation, group creation, or webhooks.
+</Warning>
+
+### How to set up the Microsoft Teams trigger
+
+<Steps>
+  <Step title="Open agent settings">
+    Navigate to your agent's settings page.
+  </Step>
+  
+  <Step title="Add Microsoft Teams trigger">
+    1. Go to the "Triggers" section in "Agent Profile"
+    2. Click "Add Trigger"
+    3. Select "Microsoft Teams" as the trigger source
+    4. Choose your connected Microsoft account
+  </Step>
+  
+  <Step title="Select Team and Channel">
+    Choose the specific Team and Channel (or chat) you want your agent to monitor. Your agent will receive all new messages posted to this location.
+  </Step>
+  
+  <Step title="Configure trigger conditions (optional)">
+    You can optionally configure trigger conditions such as keyword matching to filter which messages activate your workflow.
+  </Step>
+  
+  <Step title="Create a response tool">
+    Build a tool that uses the "Send Channel Message" or "Send Chat Message" tool step to respond to Teams messages. Equip your agent with this tool in the agent settings.
+  </Step>
+  
+  <Step title="Configure tool permissions">
+    Set the tool permissions to "approval mode" initially so your agent asks for permission before sending messages. Switch to autopilot once you're confident in the responses.
+  </Step>
+  
+  <Step title="Write agent instructions">
+    In the "Core Instructions" section of your agent settings, write a prompt that guides your agent on how to respond to Teams messages.
+  </Step>
+</Steps>
+
+<Note>
+  Your agent will process messages in real-time as they are posted to the monitored channel or chat.
+</Note>
+
+## Example use cases
+
+Here are some ways you can leverage the Microsoft Teams integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="IT Support Bot" icon="headset">
+    Create an agent that monitors your IT support channel and automatically responds to common technical questions, provides troubleshooting steps, creates support tickets for complex issues, and escalates urgent problems to human team members.
+  </Accordion>
+  
+  <Accordion title="Meeting Scheduler Assistant" icon="calendar-check">
+    Build an agent that helps schedule meetings by finding available time slots across team members' calendars, sending meeting invites, and posting meeting details to relevant Teams channels with agenda and preparation materials.
+  </Accordion>
+  
+  <Accordion title="Onboarding Assistant" icon="user-plus">
+    Deploy an agent in your onboarding channel that welcomes new team members, answers common questions about company policies and tools, shares relevant documentation, and guides new hires through their first week.
+  </Accordion>
+  
+  <Accordion title="Project Status Bot" icon="list-check">
+    Create an agent that monitors project channels, collects status updates from team members, compiles progress reports, identifies blockers, and posts daily or weekly summaries to keep everyone aligned.
+  </Accordion>
+  
+  <Accordion title="Knowledge Base Assistant" icon="book">
+    Build an agent that answers questions by searching your company's knowledge base, documentation, and previous Teams conversations, then provides relevant information with source links directly in the channel.
+  </Accordion>
+  
+  <Accordion title="Standup Facilitator" icon="users">
+    Deploy an agent that runs daily standups by prompting team members for updates, collecting responses, summarizing key points, and posting the standup summary to the team channel.
+  </Accordion>
+  
+  <Accordion title="Announcement Distributor" icon="bullhorn">
+    Create an agent that monitors an announcements channel and automatically cross-posts important updates to relevant team channels, ensuring critical information reaches all stakeholders.
+  </Accordion>
+  
+  <Accordion title="Customer Success Agent" icon="handshake">
+    Build an agent for your customer success channel that monitors customer inquiries, provides initial responses, searches for relevant case history, and routes complex issues to the appropriate team member.
+  </Accordion>
+  
+  <Accordion title="Code Review Notifier" icon="code">
+    Deploy an agent that monitors your development channels and posts notifications when pull requests are ready for review, code is deployed, or CI/CD pipelines complete, keeping the team informed of development progress.
+  </Accordion>
+  
+  <Accordion title="Sales Pipeline Assistant" icon="chart-line">
+    Create an agent that monitors your sales channel, logs important deal updates to your CRM, reminds team members of follow-up tasks, and posts daily pipeline summaries to keep the sales team aligned.
+  </Accordion>
+</AccordionGroup>
+
 ## Frequently asked questions (FAQs)
 
-**What is Microsoft Teams and why should I use it?**
-
-Microsoft Teams is a collaboration platform that combines workplace chat, video meetings, and file storage. Using it with Relevance AI allows you to automate responses to messages, trigger workflows from Teams conversations, and send automated messages to channels or chats.
-
-**Do I need a Microsoft Teams account to use this integration?**
-
-Yes, you need a Microsoft account with access to Microsoft Teams. This integration is designed for Microsoft Teams for business and enterprise.
-
-**Can I use multiple Microsoft accounts with Relevance AI?**
-
-Yes, you can connect multiple Microsoft accounts to your workspace. Each account can be used for different triggers and tool steps.
-
-**What permissions does the Microsoft Teams integration require?**
-
-Relevance AI requires permissions to read messages, send messages, and access team/channel information. The exact permissions will be shown during the OAuth flow when you connect your account.
-
-**Do triggers work for private messages?**
-
-Yes, Teams triggers can monitor both channel messages and private chats, depending on your configuration.
-
-**Can I filter which messages trigger my Agent?**
-
-Yes, you can configure trigger conditions such as keyword matching to filter which messages activate your workflow.
-
-**How do I remove the Microsoft Teams integration?**
-
-Follow the steps in the "Remove integration" section above. Note that removing the Microsoft integration affects all Microsoft services (Teams, Outlook, SharePoint, OneDrive).
+<AccordionGroup>
+  <Accordion title="What is Microsoft Teams and why should I use it with Relevance AI?">
+    Microsoft Teams is a collaboration platform that combines workplace chat, video meetings, and file storage. Using it with Relevance AI allows you to automate responses to messages, trigger workflows from Teams conversations, and send automated messages to channels or chats, making your team communication more efficient.
+  </Accordion>
+  
+  <Accordion title="Do I need a Microsoft Teams account to use this integration?">
+    Yes, you need a Microsoft account with access to Microsoft Teams. This integration is designed for Microsoft Teams for business and enterprise. You'll need to authenticate your Microsoft account through Relevance AI to connect the integration.
+  </Accordion>
+  
+  <Accordion title="Can I connect multiple Microsoft accounts?">
+    Yes, you can connect multiple Microsoft accounts to your workspace through the Integrations & API Keys page. Each account can be used for different triggers and tool steps, which is useful for managing different Teams workspaces or separating different projects.
+  </Accordion>
+  
+  <Accordion title="What permissions does the Microsoft Teams integration require?">
+    The integration requires permissions to read messages, send messages, and access team/channel information. The exact permissions will be shown during the OAuth flow when you connect your account. You may need admin consent depending on your organization's policies.
+  </Accordion>
+  
+  <Accordion title="Do triggers work for private messages?">
+    Yes, Teams triggers can monitor both channel messages and private chats, depending on your configuration. You can set up triggers for specific channels or direct message conversations.
+  </Accordion>
+  
+  <Accordion title="Can I filter which messages trigger my Agent?">
+    Yes, you can configure trigger conditions such as keyword matching to filter which messages activate your workflow. This allows you to have your agent respond only to relevant messages rather than every message in a channel.
+  </Accordion>
+  
+  <Accordion title="How do I prevent my agent from sending messages automatically?">
+    Set your message-sending tools to "approval mode" in the agent settings. This ensures your agent will always ask for permission before sending a Teams message. You can review the draft, make edits if needed, and then approve or reject the send action.
+  </Accordion>
+  
+  <Accordion title="Can my agent access files shared in Teams?">
+    Yes, files shared in Teams channels are stored in SharePoint. You can use the Microsoft Graph API to access these files through the API Call tool step. The files are typically accessible via the channel's associated SharePoint document library.
+  </Accordion>
+  
+  <Accordion title="What's the difference between the pre-built Teams tool steps and the API Call tool step?">
+    Pre-built tool steps (like "Send Channel Message" or "Create Channel") are designed for specific, common tasks and have simplified interfaces with guided inputs. The Microsoft Teams API Call tool step gives you full access to Microsoft Graph API, allowing you to implement any functionality available in the API, including advanced operations not covered by pre-built steps.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits for Microsoft Teams API calls?">
+    Yes, Microsoft Graph API enforces rate limits. The specific limits depend on your Microsoft 365 subscription and the type of requests being made. Your agents should be designed to handle rate limiting gracefully. Microsoft typically returns a `429 Too Many Requests` status code when limits are exceeded.
+  </Accordion>
+  
+  <Accordion title="Can I use this integration with Microsoft Teams for personal use?">
+    This integration is designed for Microsoft Teams for business and enterprise. Personal Microsoft accounts may have limited functionality. We recommend using a business or enterprise Microsoft 365 account for the best experience.
+  </Accordion>
+  
+  <Accordion title="How do I remove the Microsoft Teams integration?">
+    To remove the Microsoft Teams integration:
+    1. Go to the Integrations & API Keys page from the sidebar
+    2. Search for Microsoft (Teams, Outlook, SharePoint, OneDrive) from the list
+    3. Click "…" on the account you want to remove
+    4. Click "Remove" and confirm your choice
+    
+    Note: Removing the Microsoft integration will disable all triggers and tool steps using this account across Teams, Outlook, SharePoint, and OneDrive.
+  </Accordion>
+  
+  <Accordion title="Why are my Teams tool steps in beta?">
+    The beta status indicates that while the Microsoft Teams integration is fully functional and available for use, we're still gathering user feedback and may make refinements to improve the experience. We recommend testing your workflows thoroughly before deploying them in production. If you encounter any issues or have suggestions, please contact our support team.
+  </Accordion>
+</AccordionGroup>
