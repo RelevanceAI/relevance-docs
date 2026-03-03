@@ -1,0 +1,153 @@
+---
+title: 'Microsoft Teams'
+sidebarTitle: 'Microsoft Teams'
+description: 'Enable your AI Agents and Workforces to respond to Microsoft Teams messages'
+---
+
+Enable your AI Agents and Workforces to respond to Microsoft Teams messages — automating workflows directly from your Teams environment.
+
+<Note>
+This integration for Microsoft Teams was developed by our team and is not affiliated with Microsoft. Please contact our Support for any questions/queries you may have.
+</Note>
+
+## Overview
+
+Relevance AI's Microsoft Teams integration allows your Agents and Workforces to monitor and respond to messages in Teams.
+
+This enables you to:
+- Trigger workflows from channel or chat messages
+- Automatically analyse, classify, or respond to messages
+- Send replies directly back into Teams
+
+<Warning>
+Teams triggers activate only on new messages. They do not trigger on new chat creation, group creation, or webhooks.
+</Warning>
+
+## 1) Connect Microsoft Integration (Teams, Outlook, SharePoint, OneDrive)
+
+Before setting up Teams triggers, you must connect your Microsoft account.
+
+Relevance AI uses a unified Microsoft authentication across:
+- Microsoft Teams
+- Outlook
+- SharePoint
+- OneDrive
+
+<Tip>
+Learn more about our [Outlook integration](/integrations/popular-integrations/outlook) and [SharePoint knowledge source](/knowledge/integrated-knowledge-sources/sharepoint).
+</Tip>
+
+### Steps
+
+1. Log in to your Relevance AI workspace
+2. Navigate to **Integrations & API Keys**
+3. Find **Microsoft (Teams, Outlook, SharePoint, OneDrive)**
+4. Click **Add Integration**
+5. Sign in with your Microsoft account
+6. Approve the requested permissions
+7. Once authenticated, the integration will appear as connected
+
+<Note>
+You may need admin consent depending on your organisation's Microsoft policies.
+</Note>
+
+<Frame>
+  <img src="/images/integrations/microsoft-teams-integration.png" alt="Microsoft Teams Integration Page" />
+</Frame>
+
+## 2) How Teams Triggers Work
+
+A Teams trigger activates when a new message is posted in a selected channel or chat.
+
+When the trigger fires, the message content is passed into your Agent or Workforce as input.
+
+The trigger:
+- Listens to a specific Teams channel or chat
+- Activates when a new message is received
+- Sends the message payload into your workflow
+
+## 3) Set Up a Teams Trigger for an Agent
+
+### Step-by-Step
+
+1. Open your Agent in the Relevance AI dashboard
+2. Navigate to the **Triggers** section
+3. Click **Add Trigger**
+4. Select **Microsoft Teams** as the trigger source
+5. Choose the connected Microsoft account
+6. Select the **Team** and **Channel** (or chat) to monitor
+7. Configure any trigger conditions (e.g. keyword match if applicable)
+8. Click **Setup Trigger** to activate
+
+<Frame>
+  <img src="/images/integrations/microsoft-teams-trigger-selection.png" alt="Microsoft Teams Trigger Selection" />
+</Frame>
+
+<Frame>
+  <img src="/images/integrations/microsoft-teams-trigger-config.png" alt="Microsoft Teams Trigger Configuration" />
+</Frame>
+
+Your Agent will now run automatically whenever a new message is posted in the selected location.
+
+## Available Microsoft Teams Tool Steps
+
+You can also use Microsoft Teams tool steps to send messages and interact with Teams from your workflows:
+
+- **Send Channel Message** - Post a message to a specific Teams channel
+- **Send Chat Message** - Send a direct message in Teams
+- **Create Channel** - Create a new channel in a Team
+- **List Channels** - Get all channels in a Team
+- **List Shifts** - Retrieve shift information
+- **Microsoft Teams API call** - Make custom API calls to Microsoft Graph API
+
+<Note>
+Most Microsoft Teams tool steps are currently in beta. Please report any issues to our support team.
+</Note>
+
+## Remove Integration
+
+To disconnect your Microsoft Teams integration:
+
+1. Go to **Integrations & API Keys**
+2. Find **Microsoft (Teams, Outlook, SharePoint, OneDrive)**
+3. Click on the connected account
+4. Select **Remove Integration**
+5. Confirm the removal
+
+<Warning>
+Removing the integration will disable all Teams triggers and tool steps using this account.
+</Warning>
+
+## FAQs
+
+<AccordionGroup>
+  <Accordion title="Can I connect multiple Microsoft accounts?">
+    Yes, you can connect multiple Microsoft accounts to your workspace. Each account can be used for different triggers and tool steps.
+  </Accordion>
+
+  <Accordion title="What permissions does Relevance AI need?">
+    Relevance AI requires permissions to read messages, send messages, and access team/channel information. The exact permissions will be shown during the OAuth flow.
+  </Accordion>
+
+  <Accordion title="Do triggers work for private messages?">
+    Yes, Teams triggers can monitor both channel messages and private chats, depending on your configuration.
+  </Accordion>
+
+  <Accordion title="Can I filter which messages trigger my Agent?">
+    Yes, you can configure trigger conditions such as keyword matching to filter which messages activate your workflow.
+  </Accordion>
+
+  <Accordion title="Does this work with Microsoft Teams for personal use?">
+    This integration is designed for Microsoft Teams for business and enterprise. Personal Microsoft accounts may have limited functionality.
+  </Accordion>
+</AccordionGroup>
+
+## Related Integrations
+
+- [Slack](/integrations/popular-integrations/slack) - Similar messaging platform integration
+- [Outlook](/integrations/popular-integrations/outlook) - Microsoft email and calendar integration
+- [SharePoint](/knowledge/integrated-knowledge-sources/sharepoint) - Microsoft SharePoint knowledge source
+
+---
+
+**Need help?** Contact our support team or check out our [general integration documentation](/get-started/key-concepts/api-keys).
