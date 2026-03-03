@@ -1,0 +1,109 @@
+---
+title: "Knowledge"
+sidebarTitle: "Knowledge"
+description: "Give your agents the context they need with Relevance AI's RAG-powered knowledge system."
+---
+
+## What is Knowledge?
+
+Knowledge is Relevance AI's retrieval augmented generation (RAG) system. It lets you give your agents and tools access to specific information — your docs, your data, your expertise — so they can respond with accuracy instead of relying only on their training data.
+
+Think of it as your agent's reference library. When an agent needs to answer a question or complete a task, it searches your knowledge bases for the most relevant information and uses it to ground its response.
+
+## What are the benefits of Knowledge?
+
+<CardGroup cols={2}>
+  <Card title="More accurate responses" icon="bullseye">
+    Agents reference your actual data instead of guessing. Fewer hallucinations, more reliable output.
+  </Card>
+  <Card title="Domain expertise on demand" icon="graduation-cap">
+    Turn any agent into a specialist by giving it access to the right knowledge — product docs, playbooks, policies, whatever it needs.
+  </Card>
+  <Card title="Always up to date" icon="rotate">
+    Update your knowledge bases as things change. Your agents automatically use the latest information.
+  </Card>
+  <Card title="Works across your stack" icon="plug">
+    Pull in data from files, websites, Google Drive, SharePoint, Notion, and more.
+  </Card>
+</CardGroup>
+
+## How Knowledge Works
+
+
+Knowledge uses semantic search to find the most relevant information for each query. When an agent receives a task or question:
+
+1. It searches your connected knowledge bases for relevant content
+2. The most relevant results are passed to the agent as context
+3. The agent uses that context to generate an accurate, grounded response
+
+This is powered by retrieval augmented generation (RAG) — your agents get the right information at the right time without needing it baked into their training data.
+
+### Connecting Knowledge to an agent
+
+When you add a knowledge base to an agent, you choose how the agent uses it:
+
+- **Add all to prompt** — the entire knowledge set is included in the prompt every time the agent runs. Best for small or simple datasets.
+- **Allow agent to search** — the agent searches the knowledge base using RAG and pulls only what's relevant. Best for large or complex datasets.
+
+## Where is Knowledge most useful?
+
+Knowledge is most effective when your agents need access to specific, proprietary, or frequently changing information:
+
+- **Customer support**: Product documentation, troubleshooting guides, and FAQs so agents resolve issues accurately
+- **Sales enablement**: Battlecards, pricing sheets, and case studies to keep sales agents informed
+- **Internal operations**: Company policies, SOPs, and handbooks that employees need on demand
+- **Onboarding**: Training materials and process documentation for new team members
+- **Research and analysis**: Reports, datasets, and reference materials for agents that synthesize information
+
+## How to get the most from Knowledge?
+
+1. **Keep data clean and structured**: Well-organized content with clear headings and sections improves retrieval accuracy.
+2. **Be specific with what you upload**: Give agents only the knowledge they need — too much irrelevant data dilutes search results.
+3. **Keep it up to date**: Regularly refresh your knowledge bases so agents always reference current information.
+4. **Use enrichment**: Run [tools](/build/knowledge/enrich-with-tool) over your knowledge to add summaries, tags, or derived fields that help agents find the right content faster.
+5. **Use snippets for quick access**: Set up [snippets](/build/knowledge/use-snippets-for-quick-access) for frequently referenced information your agents use often.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What file types can I upload to Knowledge?">
+    You can upload CSV, PDF, Excel, JSON, and audio files. You can also pull content from websites or sync from integrations like Google Drive, SharePoint, and Notion.
+  </Accordion>
+
+  <Accordion title="How does semantic search differ from keyword search?">
+    Keyword search looks for exact word matches. Semantic search understands meaning — so a search for "pricing information" can find content titled "how much does it cost" even though the words don't match.
+  </Accordion>
+
+  <Accordion title="Can multiple agents share the same knowledge base?">
+    Yes. You can connect a single knowledge base to as many agents as you like. This is useful when multiple agents need access to the same reference material.
+  </Accordion>
+
+  <Accordion title="How do I keep my knowledge base up to date?">
+    You can manually update entries, re-upload files, or use integrations like Google Drive and SharePoint that sync automatically when your source documents change.
+  </Accordion>
+
+  <Accordion title="What is knowledge enrichment?">
+    Enrichment lets you run tools over your knowledge table to add or transform data — for example, generating summaries, extracting key fields, or tagging entries. This makes retrieval more effective and gives agents richer context.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Ready to get started with Knowledge?
+
+<CardGroup cols={2}>
+  <Card
+    title="Create a Knowledge Base"
+    icon="book"
+    href="/build/knowledge/create-knowledge"
+  >
+    Upload your data and build your first knowledge base
+  </Card>
+  <Card
+    title="Connect Integrations"
+    icon="plug"
+    href="/build/knowledge/integrated-knowledge-sources/google-drive"
+  >
+    Sync from Google Drive, SharePoint, Notion, and more
+  </Card>
+</CardGroup>

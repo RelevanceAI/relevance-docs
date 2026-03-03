@@ -1,0 +1,108 @@
+---
+title: "API integration"
+sidebarTitle: "API integration"
+description: "Add custom API keys to connect services Relevance doesn't have built-in, or use the Relevance API key to access the platform programmatically."
+---
+
+## What is API integration?
+
+Relevance AI has [built-in integrations](/integrations/introduction) for dozens of popular services — but if you need to call a custom endpoint or connect a service that isn't on the list, you can add your own API keys. And if you want to access Relevance programmatically — via the SDK — you can generate a Relevance API key.
+
+## What are the benefits of API integration?
+
+<CardGroup cols={2}>
+  <Card title="Connect anything" icon="plug">
+    Add your own API keys to connect any service or endpoint that Relevance doesn't have a built-in integration for.
+  </Card>
+  <Card title="Programmatic access" icon="code">
+    Use the Relevance API key to interact with the platform through the SDK.
+  </Card>
+  <Card title="Secure by default" icon="shield-check">
+    All keys are encrypted and scoped to your project. Access them safely in tools using template variables.
+  </Card>
+  <Card title="Full flexibility" icon="sliders">
+    Call any REST endpoint, pass custom headers and parameters, and use the response in your tool steps.
+  </Card>
+</CardGroup>
+
+## How to add a custom API key
+
+If the integration you need isn't available as a built-in, you can add a custom API key:
+
+1. Go to the **Integrations & API Keys** page from the left-hand menu
+2. Click **Custom API Keys**
+3. Give your key a name, paste the value, and save
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
+<iframe src="https://app.supademo.com/embed/cmm2smdf23h7tvkq14bz13o8b?embed_v=2" frameBorder="0" title="Add a custom API key" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+</div>
+
+Once saved, you can access it in any tool step using the template variable:
+
+```
+{{secrets.chains_your_api_key}}
+```
+
+This lets you call any external endpoint from an API step or code step while keeping your credentials secure.
+
+## Relevance API key
+
+The Relevance API key is different from custom API keys — it authenticates *you* against the Relevance platform itself. Use it when you want to:
+
+- **Use the Python or JavaScript SDK** to trigger agents, run tools, or manage resources programmatically
+- **Connect agents to external platforms** by embedding them outside of Relevance
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
+<iframe src="https://app.supademo.com/embed/cmm2sx0rm3he5vkq12isxu2ej?embed_v=2" frameBorder="0" title="Create a Relevance API key" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+</div>
+
+To generate one, go to **Integrations & API Keys** and click **Relevance API Keys**.
+
+<Warning>
+  API keys are a form of credential — treat them like passwords. Never share them publicly or commit them to source control.
+</Warning>
+
+### Region and URL endpoints
+
+<Snippet file="region-and-url.mdx" />
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What's the difference between a custom API key and a Relevance API key?">
+    Custom API keys connect Relevance to an external service you want to call. The Relevance API key connects external code to Relevance itself — it's what you use with the SDK.
+  </Accordion>
+
+  <Accordion title="How do I use a custom API key in a tool?">
+    Reference it with the template variable `{{secrets.chains_your_key_name}}` in any tool step that supports it, such as an API call or Python code step.
+  </Accordion>
+
+  <Accordion title="Are my API keys secure?">
+    Yes. All keys are encrypted and scoped to your project. They're never exposed in logs or agent responses.
+  </Accordion>
+
+  <Accordion title="What about built-in integrations like HubSpot or Slack?">
+    Those are covered on the [Integrations](/integrations/introduction) page. This page is for connecting services that don't have a built-in integration, or for accessing Relevance programmatically.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Explore integrations"
+    icon="puzzle-piece"
+    href="/integrations/introduction"
+  >
+    See the full list of built-in integrations and how to use them
+  </Card>
+  <Card
+    title="Build a tool"
+    icon="hammer"
+    href="/build/tools/create-a-tool"
+  >
+    Create a tool that uses your API keys to call external services
+  </Card>
+</CardGroup>

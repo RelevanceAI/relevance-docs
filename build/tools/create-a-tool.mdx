@@ -1,0 +1,91 @@
+---
+title: "Create a Tool"
+sidebarTitle: "Create a Tool"
+description: "How to create your first Tool in Relevance AI."
+---
+
+This guide walks you through creating a Tool. For an overview of what Tools are and how they work, see [Tools](/get-started/core-concepts/tools).
+
+## Two ways to create
+
+<CardGroup cols={2}>
+  <Card title="Invent" icon="wand-magic-sparkles">
+    Describe what you want in plain language and the platform generates a working Tool for you. Great for getting started fast — you make the tweaks.
+  </Card>
+  <Card title="Build from scratch" icon="hammer">
+    Full step-by-step control over inputs, steps, and outputs. Ideal when you have a specific workflow in mind or need precision.
+  </Card>
+</CardGroup>
+
+## Option 1: Invent a Tool
+
+1. Click **Tools** in the left sidebar
+2. Click **+ New Tool**
+3. Select **Invent**
+4. Describe what the Tool should do — be specific about the input it receives, the action it performs, and the output you expect
+5. Review the generated Tool — Inventor will set up the inputs, steps, and outputs for you
+6. Test and tweak as needed
+
+## Option 2: Build from scratch
+
+1. Click **Tools** in the left sidebar
+2. Click **+ New Tool**
+3. Select **Start from scratch**
+4. Give your Tool a name and description, then click **Edit agent prompt** to describe how an Agent should use the Tool
+5. Add your **inputs** — what data does the Tool need to receive?
+6. Add **steps** — what should the Tool do with that data? Steps include LLM prompts, API calls, integrations, code execution, and more
+7. Define your **outputs** — what should the Tool return when it's done?
+8. Run individual steps to test as you build
+9. Give the Tool to an Agent or [share it](/build/tools/share-your-tool) as a standalone form
+
+<div
+  style={{
+    width: '100%',
+    position: 'relative',
+    paddingTop: '56.25%',
+  }}>
+  <iframe
+    src="https://app.supademo.com/embed/cm7obxeh703xihilguwnkradd"
+    frameBorder="0"
+    title="Build an AI agent from scratch in Relevance AI"
+    allow="clipboard-write; fullscreen"
+    webkitAllowFullscreen="true"
+    mozAllowFullscreen="true"
+    allowFullscreen
+    style={{
+      position: 'absolute',
+      top: 0,left: 0, width: '100%', height: '100%',
+      border: '3px solid #5E43CE',
+      borderRadius: '10px',
+    }}/>
+</div>
+
+## The Tool Builder
+
+![The Tool Builder — switch between Use, Build, and Logs tabs.](/images/tool-builder-tabs.png)
+
+The Tool Builder has three tabs:
+
+- **Use** — run and test your Tool as a shareable form
+- **Build** — create your Tool by defining inputs and chaining steps together
+- **Logs** — review past executions and debug issues
+
+## Follow along on YouTube
+
+<Frame caption="Learn how to build Tools that can work with multiple data sources.">
+  <iframe
+    className="w-full aspect-video rounded-xl"
+    src="https://www.youtube.com/embed/bP7SMGr72ZM"
+    title="Build Tools for Multiple Data Sources"
+    allowFullScreen
+  ></iframe>
+</Frame>
+
+## What's next?
+
+Once you've created a Tool, explore the rest of the build guides to refine it:
+
+- [Style guide](/build/tools/customize-tool/tool-style-guide) — naming conventions and best practices for making Tools work well with Agents
+- [Inputs](/build/tools/customize-tool/inputs) — configure what data your Tool receives
+- [Steps](/build/tools/customize-tool/steps) — chain actions together into a workflow
+- [Outputs](/build/tools/customize-tool/outputs) — define what your Tool returns
