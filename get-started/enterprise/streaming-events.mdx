@@ -83,6 +83,22 @@ Send your Account Manager or support team:
 
 ---
 
+## PII Redaction (Enterprise Feature)
+
+Enterprise customers can enable PII redaction to automatically detect and protect Personally Identifiable Information (PII) in their OTEL logs. This feature uses AI-powered entity recognition to identify and redact sensitive data before it's delivered to your S3 bucket.
+
+<Note>PII redaction is a contractual Enterprise feature. Contact your Account Manager to enable this capability for your organization.</Note>
+
+### Prerequisites
+
+Before configuring PII redaction, ensure:
+
+- OTEL log shipping is enabled for your organization
+- The `jsonl_to_otel_json` transformation is applied
+- Your Enterprise plan includes PII redaction (contact your Account Manager)
+
+---
+
 ## Delivery Format
 
 **Format**: Gzipped JSON following the OpenTelemetry JSON specification.
