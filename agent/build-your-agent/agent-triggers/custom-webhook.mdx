@@ -24,6 +24,78 @@ Webhook triggers enable you to initiate agent tasks through HTTP requests from e
     - Map Thread ID and Unique ID fields as needed
     - Copy your unique webhook URL for integration with external systems
 
+### Activating Your Webhook Trigger
+
+<Warning>
+Your webhook URL will return 404 errors until you complete both the save and publish steps below.
+</Warning>
+
+After configuring your webhook trigger, you must complete two critical steps before the endpoint becomes active:
+
+<Steps>
+  <Step title="Save the Trigger Configuration">
+    Click the "Save" button to store your trigger configuration. This creates the webhook endpoint in the system.
+  </Step>
+  
+  <Step title="Publish Your Agent">
+    Click the "Publish" button in your agent's interface to make all configuration changes live. Publishing activates your webhook endpoint and makes it ready to receive requests.
+  </Step>
+  
+  <Step title="Test Your Webhook URL">
+    Once published, your webhook URL is active and ready to receive HTTP POST requests from external systems.
+  </Step>
+</Steps>
+
+<Info>
+Your webhook URL follows this format: `https://[region].stack.tryrelevance.com/agents/hooks/custom-trigger/[project_id]/[trigger_id]`
+</Info>
+
+The webhook endpoint only becomes active after both saving the trigger configuration and publishing your agent. Until then, any requests to the URL will return 404 errors.
+
+### Troubleshooting Webhook 404 Errors
+
+If you're receiving 404 errors when testing your webhook URL, follow this checklist:
+
+<AccordionGroup>
+  <Accordion title="Common Cause #1: Trigger Not Saved" icon="floppy-disk">
+    **Problem**: The trigger configuration hasn't been saved to the database.
+    
+    **Solution**: 
+    - Go to your agent's Triggers section
+    - Verify your webhook trigger configuration is complete
+    - Click the "Save" button to store the configuration
+    - Wait a few seconds for the changes to propagate
+  </Accordion>
+
+  <Accordion title="Common Cause #2: Agent Not Published" icon="rocket">
+    **Problem**: The agent hasn't been published, so the webhook endpoint isn't active.
+    
+    **Solution**:
+    - Look for the "Publish" button in your agent's interface
+    - Click "Publish" to make your agent and all triggers live
+    - Wait for the publish process to complete (usually a few seconds)
+    - Test your webhook URL again
+  </Accordion>
+
+  <Accordion title="Common Cause #3: Incorrect URL" icon="link">
+    **Problem**: The webhook URL contains a typo or incorrect IDs.
+    
+    **Solution**:
+    - Return to your agent's Triggers section
+    - Copy the webhook URL directly from the trigger configuration
+    - Verify the URL matches exactly (including region, project ID, and trigger ID)
+    - Ensure there are no extra spaces or characters
+  </Accordion>
+</AccordionGroup>
+
+**Quick Resolution Checklist:**
+
+1. ✅ Trigger configuration is complete
+2. ✅ Trigger has been saved
+3. ✅ Agent has been published
+4. ✅ Webhook URL is copied correctly
+5. ✅ External system is sending POST requests (not GET)
+
 ### Implementation Examples
 
 Webhook triggers can be used for various automation scenarios:
@@ -35,20 +107,32 @@ Webhook triggers can be used for various automation scenarios:
 
 ## Related Features
 
-[Core Instructions](https://relevanceai.com/docs/agent/customise-agent/core-instructions) - Define how your agent should process and respond to webhook triggers by setting up comprehensive instructions that guide its behavior when receiving external data.
+[Triggers Overview](/agent/build-your-agent/triggers) - Learn about all available trigger types and when to use each one.
 
-[Flow Builder](https://relevanceai.com/docs/agent/customise-agent/flowbuilder) - Create sophisticated workflows that can be initiated by webhook triggers, allowing for complex multi-step processes that combine different tools and decision points.
+[Publishing Your Agent](/agent/build-your-agent/agent-settings/publishing) - Understand how publishing works and why it's required for triggers to function.
+
+[API Triggers](/agent/build-your-agent/agent-triggers/api) - Use the Relevance AI API for programmatic control over agent activation.
 
 ## FAQs
 
-**Q: Can I use webhook triggers with any external system?**
+<AccordionGroup>
+  <Accordion title="Can I use webhook triggers with any external system?">
+    Yes, any system capable of sending HTTP POST requests can integrate with Relevance AI's webhook triggers, making them extremely versatile for various integration scenarios.
+  </Accordion>
 
-A: Yes, any system capable of sending HTTP requests can integrate with Relevance AI's webhook triggers, making them extremely versatile for various integration scenarios.
+  <Accordion title="How secure are webhook triggers?">
+    Webhook triggers use unique URLs that are difficult to guess. For additional security, you can implement Unique ID mapping to prevent duplicate processing and validate incoming requests.
+  </Accordion>
 
-**Q: How secure are webhook triggers?**
+  <Accordion title="What happens if the same webhook is triggered multiple times?">
+    By mapping a Unique ID field, you can prevent duplicate processing. If an event with the same Unique ID is received again, it will be ignored, ensuring data integrity.
+  </Accordion>
 
-A: Webhook triggers use unique URLs that are difficult to guess. For additional security, you can implement Unique ID mapping to prevent duplicate processing and validate incoming requests.
+  <Accordion title="Why am I getting 404 errors on my webhook URL?">
+    404 errors typically occur when either the trigger hasn't been saved or the agent hasn't been published. Both steps are required for the webhook endpoint to become active. See the "Troubleshooting Webhook 404 Errors" section above for detailed resolution steps.
+  </Accordion>
 
-**Q: What happens if the same webhook is triggered multiple times?**
-
-A: By mapping a Unique ID field, you can prevent duplicate processing. If an event with the same Unique ID is received again, it will be ignored, ensuring data integrity.
+  <Accordion title="Do I need to republish my agent every time I change the webhook configuration?">
+    Yes, any changes to your agent's configuration (including trigger settings) require republishing for the changes to take effect.
+  </Accordion>
+</AccordionGroup>
