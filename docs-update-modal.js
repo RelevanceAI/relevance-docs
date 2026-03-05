@@ -1,5 +1,5 @@
 (function () {
-  // if (localStorage.getItem("docs-refresh-dismissed")) return;
+  if (localStorage.getItem("docs-refresh-dismissed")) return;
 
   var overlay = document.createElement("div");
   overlay.id = "docs-refresh-overlay";
