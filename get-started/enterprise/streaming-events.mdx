@@ -21,6 +21,8 @@ You don't need to run an OTEL collector to use this feature. Events are delivere
 - Ingest into your data lake (Snowflake, Databricks, etc.)
 - Forward to any OTEL-compatible backend for visualization and alerting
 
+<Note>Enterprise customers can enable PII redaction to automatically protect sensitive information in logs. Contact your Account Manager to learn more.</Note>
+
 <Note>**S3 is currently the only supported destination**. Support for direct OTEL collector endpoints is on our roadmap.</Note>
 
 ---
@@ -81,6 +83,84 @@ Send your Account Manager or support team:
 
 ---
 
+## PII Redaction (Enterprise Feature)
+
+PII (Personally Identifiable Information) redaction is an org-level feature that automatically scrubs sensitive information like email addresses, phone numbers, credit card numbers, and names before your event data leaves the platform and is delivered to your S3 destination.
+
+PII redaction applies at the point of data export, specifically when telemetry and audit logs are being written to your S3 bucket. It does not apply to live agent conversations in real-time or data stored internally on Relevance AI's side. Think of it as a "scrub before delivery" mechanism for your downstream data pipeline.
+
+<Note>PII redaction is a contractual Enterprise feature. Contact your Account Manager to enable this capability for your organization.</Note>
+
+### What gets redacted
+
+There are two layers of redaction:
+
+**1. Structured fields (always scrubbed automatically)**
+
+The following fields are redacted from exported data regardless of whether PII scrubbing is explicitly enabled:
+
+- User email addresses
+- IP addresses
+- Device info
+
+**2. Unstructured text (scrubbed when PII redaction is enabled for your org)**
+
+When PII redaction is enabled, the following fields are scanned and scrubbed using a Presidio-powered ML engine:
+
+- LLM input messages (what you send to an agent/tool)
+- LLM output messages (what the agent responds)
+- System instructions
+
+### Supported PII entities
+
+The following entity types can be detected. By default, all supported entities are targeted. You can optionally limit detection to specific entity types via configuration.
+
+<CardGroup cols={3}>
+  <Card title="EMAIL_ADDRESS" icon="envelope" />
+  <Card title="PHONE_NUMBER" icon="phone" />
+  <Card title="PERSON" icon="user" />
+  <Card title="CREDIT_CARD" icon="credit-card" />
+  <Card title="US_SSN" icon="id-card" />
+  <Card title="IP_ADDRESS" icon="globe" />
+  <Card title="IBAN_CODE" icon="building-columns" />
+  <Card title="URL" icon="link" />
+  <Card title="DATE_TIME" icon="calendar" />
+  <Card title="LOCATION" icon="location-dot" />
+</CardGroup>
+
+### Redaction actions
+
+When PII is detected, the following actions can be applied:
+
+| Action | Description |
+|--------|-------------|
+| `replace` | Substitutes the detected value with a placeholder like `<EMAIL_ADDRESS>`. **This is the default.** |
+| `mask` | Replaces the detected value with `****` |
+| `redact` | Removes the detected value entirely |
+| `hash` | Hashes the detected value (one-way) |
+
+### Prerequisites
+
+Before configuring PII redaction, ensure:
+
+- OTEL log shipping is enabled for your organization
+- The `jsonl_to_otel_json` transformation is applied
+- Your Enterprise plan includes PII redaction (contact your Account Manager)
+
+### Configuration
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `enabled` | boolean | Yes | Enable or disable PII redaction |
+| `action` | string | Yes | Action to take on detected PII. Options: `"replace"`, `"redact"`, `"mask"`, or `"hash"` |
+| `entities` | string[] | No | Specific PII entity types to target. If omitted, all supported entities are used |
+| `target_fields` | string[] | No | Specific data fields to scan for PII |
+| `score_threshold` | float | No | Minimum confidence level for PII detection (0.0–1.0). Higher values require more confidence |
+
+<Warning>There is currently no self-serve UI to toggle PII redaction. It is configured at the organization level by the Relevance AI team. Contact your Account Manager to have it enabled.</Warning>
+
+---
+
 ## Delivery Format
 
 **Format**: Gzipped JSON following the OpenTelemetry JSON specification.
@@ -100,7 +180,7 @@ Send your Account Manager or support team:
 
 ## Logs
 
-Audit logs provide a complete record of activity across your organization for security monitoring, compliance reporting, and operational visibility. Events capture who did what, when, and from where.
+Audit logs provide a complete record of activity across your organization for security monitoring, compliance reporting, and operational visibility. Events capture who did what, when, and from where. Enterprise customers can enable PII redaction to automatically protect sensitive information in logs.
 
 <Note>We're actively expanding our event coverage. If there are specific operations or attributes you'd like to see, let your Account Manager know.</Note>
 
