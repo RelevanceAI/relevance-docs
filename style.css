@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 /* Reduce left and right margins for wider layout */
 .max-w-prose {
   max-width: 90ch;
@@ -31,23 +33,24 @@ div#sidebar {
 div#content-side-layout {
   position: fixed !important;
   right: 2rem !important;
+  /* Aligns below the top nav bar */
   top: 9.5rem !important;
 }
 
 /* Prevent content from extending under the fixed right sidebar (only when sidebar is visible) */
 @media (min-width: 1280px) {
   div#content-area {
+    /* Matches the width of the right sidebar */
     padding-right: 20rem !important;
   }
 }
 
-
-/* Hide gradient decoration on mobile */
+/* Hide the background gradient decoration on mobile to reduce visual noise */
 @media (max-width: 640px) {
-  [class*="gradient"],
-  [class*="decoration"] {
+  .dark\:bg-gradient-to-b,
+  .bg-gradient-to-b,
+  [data-decoration="gradient"] {
     display: none !important;
-    opacity: 0 !important;
   }
 }
 
@@ -58,8 +61,6 @@ div#content-side-layout {
 }
 
 /* Docs refresh modal */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 #docs-refresh-overlay {
   position: fixed;
   inset: 0;
@@ -130,7 +131,6 @@ div#content-side-layout {
   cursor: pointer;
   border-radius: 6px;
   transition: all 0.15s ease;
-  font-family: 'Inter', sans-serif;
 }
 
 #docs-refresh-x:hover {
@@ -138,23 +138,7 @@ div#content-side-layout {
   background: rgba(255, 255, 255, 0.05);
 }
 
-#docs-refresh-modal .modal-badge {
-  display: inline-block;
-  background: rgba(99, 102, 241, 0.15);
-  color: #a5b4fc;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  padding: 0.3rem 0.85rem;
-  border-radius: 100px;
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  margin-bottom: 1.25rem;
-}
-
 #docs-refresh-modal h2 {
-  font-family: 'Inter', sans-serif;
   color: #fff;
   font-size: 1.4rem;
   font-weight: 700;
@@ -164,7 +148,6 @@ div#content-side-layout {
 }
 
 #docs-refresh-modal p {
-  font-family: 'Inter', sans-serif;
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.9rem;
   font-weight: 400;
@@ -178,25 +161,3 @@ div#content-side-layout {
   border: 1px solid rgba(255, 255, 255, 0.08);
   margin-bottom: 1.25rem;
 }
-
-#docs-refresh-close {
-  font-family: 'Inter', sans-serif;
-  background: #4F46E5;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 0.7rem 2.25rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 3px rgba(79, 70, 229, 0.3);
-}
-
-#docs-refresh-close:hover {
-  background: #4338CA;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
-  transform: translateY(-1px);
-}
-
