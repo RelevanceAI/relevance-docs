@@ -29,19 +29,19 @@ even embed it to a websites.
         3. provides the best answer from the knowledge to the question
 
 ## Let's build a knowledge retrieval Tool
-1. Start with clicking on `+ Create tool` located on top right of the [Tools](/get-started/key-concepts/tools) page.
-For more information see [how to create a tool](/tool).
+1. Start with clicking on `+ Create tool` located on top right of the [Tools](/get-started/core-concepts/tools) page.
+For more information see [how to create a tool](/build/tools/create-a-tool).
 2. Click on `+ Add data` on the knowledge section to [add knowledge](/build/tools/knowledge/knowledge) to your Tool. 
 Note that you can upload knowledge sources to your Tool directly from the add knowledge window, or select already 
 existing data tables on your accounts.
 <Tip>
-Make sure to [enable knowledge](/knowledge) (i.e. vectorize your data). Vectors allow semantic 
+Make sure to [enable knowledge](/build/knowledge/create-knowledge) (i.e. vectorize your data). Vectors allow semantic 
 search (as opposed to word-matching) and increase the accuracy of knowledge retrieval. 
 </Tip>
 3. Add a [text input](/build/tools/user-inputs/text-input) component which will carry the query/question. Lets call
 it `query`. Your Tool must be similar to the image below.
 ![knowledge and input](/images/example-use-cases/knowledge-retrieval-1.png)
-4. Add an [LLM](/build/tools/tool-steps/llms/llm) component.
+4. Add an [LLM](/build/tools/tool-steps/llms/llm-tool-step) component.
 * **The prompt**
     
     Use `{{}}` and the component names (i.e. `knowledge` and `query` in our current example) to bring the knowledge and the 

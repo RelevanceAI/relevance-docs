@@ -24,7 +24,7 @@ For instance, LinkedIn messages tend to be shorter and more specific.
 ### 1. Create the build sales response automation Tool
 To start, [create](/build/tools/create-a-tool) a new tool. 
 Add a [long text](/build/tools/user-inputs/long-text-input) input, to present the message to which we want to respond. Next, add an
-[LLM](/build/tools/tool-steps/llms/llm) component.
+[LLM](/build/tools/tool-steps/llms/llm-tool-step) component.
 Don't forget to hit "Save" on the top right to save your Tool.
 
 <Tip>
@@ -56,13 +56,13 @@ A few samples are beneficial in altering how the LLM produces messages. But what
 By using a database of responses and replies that have been proven to be effective in the past, you can train your LLM to generate similar responses. 
 </Tip>
 
-[Upload](/knowledge) a CSV file containing samples of received messages and your corresponding replies. 
-Make sure to [enable knowledge](/knowledge).
+[Upload](/build/knowledge/create-knowledge) a CSV file containing samples of received messages and your corresponding replies.
+Make sure to [enable knowledge](/build/knowledge/create-knowledge).
 See our short guide on [best practice to prepare my CSV data](/build/knowledge/).
 
 ### 4. Search in knowledge
 We want to create our own few-shot prompting technique based on an entire dataset. This can be achieved by using a search step to find the most similar 
-past response(s) to the current input. So, we need to add a [Knowledge search](/build/tools/tool-steps/knowledge-search) component to our Tool and
+past response(s) to the current input. So, we need to add a [Knowledge search](/build/tools/tool-steps/knowledge/knowledge-search) component to our Tool and
 configure the step:
 
 ![knowledge search](/images/example-use-cases/few-shot-prompt-knowledge-search.png)
