@@ -4,55 +4,199 @@ description: 'Connect to a Zapier Trigger'
 sidebarTitle: 'Zapier Trigger'
 ---
 
-## Webhook Triggers
+## Zapier Triggers
 
-Webhook triggers enable you to initiate agent tasks through HTTP requests from external systems. This powerful integration method allows you to connect virtually any third-party service to your Relevance AI agents without requiring native support.
+Zapier triggers allow you to connect your Relevance AI agents to thousands of apps and services through Zapier's automation platform. This integration enables you to trigger your agents based on events from any Zapier-supported application.
+
+### What is Zapier?
+
+Zapier is an automation platform that connects different web applications together. With Zapier, you can create "Zaps" - automated workflows that trigger actions in one app based on events in another app.
 
 ### Key Features
 
-- **Custom Webhook URLs**: Each webhook trigger provides a unique URL that receives incoming requests and activates your agent.
-- **Flexible Payload Formatting**: You have complete control over how incoming data is processed. Use template variables with double brackets (e.g., `{{first_name}}`) to personalize messages or include the entire payload with `{{$}}`.
-- **Thread ID Mapping**: For continuous conversations, map a specific field from your payload to serve as a Thread ID. This ensures new information is added to the same agent conversation, perfect for chatbot implementations.
-- **Duplicate Prevention**: Map a Unique ID field to prevent processing the same event multiple times, ensuring data integrity and avoiding redundant operations.
+- **Access to 5,000+ Apps**: Connect your agent to any application supported by Zapier
+- **No-Code Integration**: Set up complex workflows without writing any code
+- **Multi-Step Workflows**: Chain multiple actions together in a single Zap
+- **Conditional Logic**: Use Zapier's filters and paths to create sophisticated automation rules
 
-### Setting Up a Webhook Trigger
+### How Zapier Triggers Work
 
-1. Navigate to your agent's settings and select the Triggers section
-2. Choose "Webhook Trigger" from the available options
-3. Configure your webhook settings:
-    - Customize the message template using variable placeholders
-    - Map Thread ID and Unique ID fields as needed
-    - Copy your unique webhook URL for integration with external systems
+When you set up a Zapier trigger for your Relevance AI agent:
 
-### Implementation Examples
+1. An event occurs in a Zapier-connected app (e.g., new email, form submission, calendar event)
+2. Zapier detects the event and processes it according to your Zap configuration
+3. Zapier sends the data to your Relevance AI agent
+4. Your agent processes the information and executes its configured tasks
 
-Webhook triggers can be used for various automation scenarios:
+<Info>
+Zapier triggers are configured through the Zapier platform, not within Relevance AI. You'll need a Zapier account to set up these integrations.
+</Info>
 
-- Trigger customer support responses when new tickets are created
-- Process form submissions from your website
-- Respond to events from third-party platforms
-- Create automated workflows between different systems
+### Setting Up a Zapier Trigger
 
-## Related Features
+<Steps>
+  <Step title="Create a Zapier Account">
+    If you don't already have one, sign up for a free account at [zapier.com](https://zapier.com)
+  </Step>
+  
+  <Step title="Find Relevance AI in Zapier">
+    Search for "Relevance AI" in Zapier's app directory or use the Zapier integration link provided in your agent's Triggers section
+  </Step>
+  
+  <Step title="Create a New Zap">
+    Click "Create Zap" and choose your trigger app (the app that will start the workflow)
+  </Step>
+  
+  <Step title="Configure Your Trigger">
+    Select the specific event in your trigger app that should activate your agent (e.g., "New Email", "New Row in Spreadsheet")
+  </Step>
+  
+  <Step title="Add Relevance AI as Action">
+    Add Relevance AI as the action app and select "Trigger Agent" as the action event
+  </Step>
+  
+  <Step title="Connect Your Account">
+    Authenticate your Relevance AI account in Zapier using your API credentials
+  </Step>
+  
+  <Step title="Map Your Data">
+    Configure how data from the trigger app should be sent to your agent. You can map specific fields or send the entire payload.
+  </Step>
+  
+  <Step title="Test and Activate">
+    Test your Zap to ensure it works correctly, then turn it on to start automating
+  </Step>
+</Steps>
 
-[Core Instructions](https://relevanceai.com/docs/agent/customise-agent/core-instructions) - Define how your agent should process and respond to webhook triggers by setting up comprehensive instructions that guide its behavior when receiving external data.
+<Warning>
+Remember to publish your agent in Relevance AI after configuring the Zapier trigger. The integration won't work until your agent is published.
+</Warning>
 
-[Flow Builder](https://relevanceai.com/docs/agent/customise-agent/flowbuilder) - Create sophisticated workflows that can be initiated by webhook triggers, allowing for complex multi-step processes that combine different tools and decision points.
+### Common Use Cases
+
+**Email Automation**
+- Trigger your agent when you receive emails matching specific criteria
+- Automatically categorize, summarize, or respond to incoming messages
+
+**Form Processing**
+- Process form submissions from Typeform, Google Forms, or other form builders
+- Extract information and trigger follow-up actions
+
+**CRM Integration**
+- Trigger agents when new leads are added to your CRM
+- Automate lead qualification and follow-up sequences
+
+**Calendar Management**
+- Trigger agents based on calendar events
+- Send reminders, prepare meeting materials, or log meeting notes
+
+**Social Media Monitoring**
+- Monitor social media mentions or posts
+- Trigger agents to analyze sentiment or draft responses
+
+**E-commerce**
+- Process new orders from Shopify, WooCommerce, or other platforms
+- Automate order confirmation, inventory updates, or customer communications
+
+### Zapier vs Webhook Triggers
+
+| Feature | Zapier Triggers | Webhook Triggers |
+|---------|----------------|------------------|
+| **Setup Complexity** | No-code, visual interface | Requires technical knowledge |
+| **App Support** | 5,000+ pre-built integrations | Any app that can send HTTP requests |
+| **Data Transformation** | Built-in formatters and filters | Manual payload formatting |
+| **Cost** | Requires Zapier subscription | Included with Relevance AI |
+| **Flexibility** | Limited to Zapier's capabilities | Full control over requests |
+
+### Best Practices
+
+- **Test Thoroughly**: Always test your Zaps with real data before activating them in production
+- **Use Filters**: Add Zapier filters to ensure only relevant events trigger your agent
+- **Monitor Usage**: Keep track of your Zapier task usage to stay within your plan limits
+- **Error Handling**: Set up error notifications in Zapier to catch issues early
+- **Document Your Zaps**: Keep notes on what each Zap does for easier maintenance
+
+### Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="My Zap isn't triggering my agent" icon="triangle-exclamation">
+    **Check these items:**
+    - Verify your agent is published in Relevance AI
+    - Confirm the Zap is turned on in Zapier
+    - Check that your Relevance AI authentication is still valid
+    - Review the Zap history in Zapier for error messages
+    - Ensure the trigger event is actually occurring in your source app
+  </Accordion>
+
+  <Accordion title="Data isn't being passed correctly to my agent" icon="database">
+    **Possible solutions:**
+    - Review your field mappings in the Zapier action step
+    - Check that the data format matches what your agent expects
+    - Use Zapier's formatter tools to transform data if needed
+    - Test with sample data to verify the mapping
+  </Accordion>
+
+  <Accordion title="Authentication keeps failing" icon="key">
+    **Try these steps:**
+    - Regenerate your Relevance AI API key
+    - Reconnect your Relevance AI account in Zapier
+    - Verify you're using the correct API credentials
+    - Check that your API key hasn't expired or been revoked
+  </Accordion>
+
+  <Accordion title="Zap is running but agent isn't responding" icon="robot">
+    **Debugging steps:**
+    - Check your agent's task history in Relevance AI
+    - Verify the agent's prompt and tools are configured correctly
+    - Look for error messages in the task details
+    - Test the agent manually with similar input
+  </Accordion>
+</AccordionGroup>
+
+## Related Documentation
+
+<Columns cols={2}>
+  <Card title="Webhook Triggers" href="/agent/build-your-agent/agent-triggers/custom-webhook" icon="webhook">
+    Use custom webhooks for direct HTTP integrations
+  </Card>
+  <Card title="API Triggers" href="/agent/build-your-agent/agent-triggers/api" icon="code">
+    Trigger agents programmatically via API
+  </Card>
+</Columns>
+
+<Columns cols={2}>
+  <Card title="Publishing Your Agent" href="/agent/build-your-agent/agent-settings/publishing" icon="rocket">
+    Learn why publishing is required for triggers
+  </Card>
+  <Card title="Triggers Overview" href="/agent/build-your-agent/triggers" icon="bolt">
+    Explore all available trigger types
+  </Card>
+</Columns>
 
 ## FAQs
 
-**Q: Can I use webhook triggers with any external system?**
+<AccordionGroup>
+  <Accordion title="Do I need a paid Zapier account?">
+    Zapier offers a free tier with limited tasks per month. For production use with higher volumes, you'll likely need a paid Zapier plan. Check Zapier's pricing for current limits.
+  </Accordion>
 
-A: Yes, any system capable of sending HTTP requests can integrate with Relevance AI's webhook triggers, making them extremely versatile for various integration scenarios.
+  <Accordion title="Can I use Zapier with Workforce triggers?">
+    Yes! Zapier is available as an external trigger in Workforces. The setup process is similar to agent triggers.
+  </Accordion>
 
-**Q: How secure are webhook triggers?**
+  <Accordion title="How many Zaps can I create for one agent?">
+    There's no limit on the number of Zaps you can create for a single agent. Each Zap can trigger the same agent with different data or conditions.
+  </Accordion>
 
-A: Webhook triggers use unique URLs that are difficult to guess. For additional security, you can implement Unique ID mapping to prevent duplicate processing and validate incoming requests.
+  <Accordion title="Can I trigger multiple agents from one Zap?">
+    Yes, you can add multiple Relevance AI actions to a single Zap, each triggering a different agent or the same agent with different parameters.
+  </Accordion>
 
-**Q: What happens if the same webhook is triggered multiple times?**
+  <Accordion title="What happens if my Zap fails?">
+    Zapier will retry failed tasks automatically based on your plan's retry settings. You'll receive error notifications if tasks continue to fail. Check the Zap history for details.
+  </Accordion>
 
-A: By mapping a Unique ID field, you can prevent duplicate processing. If an event with the same Unique ID is received again, it will be ignored, ensuring data integrity.
-
-**Q: Can I use Zapier as a Workforce trigger?**
-
-A: Yes! Zapier is available as an external trigger in Workforces. External triggers are not managed by Relevance AI. This trigger is configured through Zapier. 
+  <Accordion title="Can I use Zapier's delay and schedule features?">
+    Yes, you can use Zapier's built-in delay and schedule actions to control when your agent is triggered, creating time-based workflows.
+  </Accordion>
+</AccordionGroup>
