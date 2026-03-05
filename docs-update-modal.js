@@ -10,7 +10,7 @@
     '<h2>We\u2019ve refreshed our docs!</h2>' +
     "<p>Our documentation is now organized into tabs so you can find what you need faster.</p>" +
     '<img src="/images/tabs_screenshot.png" alt="New documentation tabs" />' +
-    "<p>Can\u2019t find what you\u2019re looking for? Use the search bar at the top to find any page instantly.</p>" +
+    "<p>Can\u2019t find what you\u2019re looking for? Use the search bar to find any page, or chat with our Docs agent in the bottom right to get answers quick.</p>" +
     "</div>";
 
   document.body.appendChild(overlay);
