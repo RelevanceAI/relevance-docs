@@ -8,7 +8,7 @@ Stream audit logs and execution traces to your own infrastructure for compliance
 
 ## Overview
 
-Relevance AI delivers events in [**OpenTelemetry (OTEL)**](https://opentelemetry.io/) format—an open, vendor-neutral standard for telemetry data. This provides several advantages:
+Relevance AI delivers events in [**OpenTelemetry (OTEL)**](https://opentelemetry.io/) format - an open, vendor-neutral standard for telemetry data. This provides several advantages:
 
 - **Interoperability**: OTEL is supported by most major observability platforms, making it easy to route data to your existing tools
 - **Future-proof**: As an [industry standard backed by CNCF](https://www.cncf.io/projects/opentelemetry/), OTEL ensures your data pipelines won't be locked into proprietary formats
@@ -20,6 +20,8 @@ You don't need to run an OTEL collector to use this feature. Events are delivere
 - Query them directly using Athena, BigQuery, or similar tools
 - Ingest into your data lake (Snowflake, Databricks, etc.)
 - Forward to any OTEL-compatible backend for visualization and alerting
+
+<Note>Enterprise customers can enable PII redaction to automatically protect sensitive information in logs. Contact your Account Manager to learn more.</Note>
 
 <Note>**S3 is currently the only supported destination**. Support for direct OTEL collector endpoints is on our roadmap.</Note>
 
@@ -81,6 +83,84 @@ Send your Account Manager or support team:
 
 ---
 
+## PII Redaction (Enterprise Feature)
+
+PII (Personally Identifiable Information) redaction is an org-level feature that automatically scrubs sensitive information like email addresses, phone numbers, credit card numbers, and names before your event data leaves the platform and is delivered to your S3 destination.
+
+PII redaction applies at the point of data export, specifically when telemetry and audit logs are being written to your S3 bucket. It does not apply to live agent conversations in real-time or data stored internally on Relevance AI's side. Think of it as a "scrub before delivery" mechanism for your downstream data pipeline.
+
+<Note>PII redaction is a contractual Enterprise feature. Contact your Account Manager to enable this capability for your organization.</Note>
+
+### What gets redacted
+
+There are two layers of redaction:
+
+**1. Structured fields (always scrubbed automatically)**
+
+The following fields are redacted from exported data regardless of whether PII scrubbing is explicitly enabled:
+
+- User email addresses
+- IP addresses
+- Device info
+
+**2. Unstructured text (scrubbed when PII redaction is enabled for your org)**
+
+When PII redaction is enabled, the following fields are scanned and scrubbed using a Presidio-powered ML engine:
+
+- LLM input messages (what you send to an agent/tool)
+- LLM output messages (what the agent responds)
+- System instructions
+
+### Supported PII entities
+
+The following entity types can be detected. By default, all supported entities are targeted. You can optionally limit detection to specific entity types via configuration.
+
+<CardGroup cols={3}>
+  <Card title="EMAIL_ADDRESS" icon="envelope" />
+  <Card title="PHONE_NUMBER" icon="phone" />
+  <Card title="PERSON" icon="user" />
+  <Card title="CREDIT_CARD" icon="credit-card" />
+  <Card title="US_SSN" icon="id-card" />
+  <Card title="IP_ADDRESS" icon="globe" />
+  <Card title="IBAN_CODE" icon="building-columns" />
+  <Card title="URL" icon="link" />
+  <Card title="DATE_TIME" icon="calendar" />
+  <Card title="LOCATION" icon="location-dot" />
+</CardGroup>
+
+### Redaction actions
+
+When PII is detected, the following actions can be applied:
+
+| Action | Description |
+|--------|-------------|
+| `replace` | Substitutes the detected value with a placeholder like `<EMAIL_ADDRESS>`. **This is the default.** |
+| `mask` | Replaces the detected value with `****` |
+| `redact` | Removes the detected value entirely |
+| `hash` | Hashes the detected value (one-way) |
+
+### Prerequisites
+
+Before configuring PII redaction, ensure:
+
+- OTEL log shipping is enabled for your organization
+- The `jsonl_to_otel_json` transformation is applied
+- Your Enterprise plan includes PII redaction (contact your Account Manager)
+
+### Configuration
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `enabled` | boolean | Yes | Enable or disable PII redaction |
+| `action` | string | Yes | Action to take on detected PII. Options: `"replace"`, `"redact"`, `"mask"`, or `"hash"` |
+| `entities` | string[] | No | Specific PII entity types to target. If omitted, all supported entities are used |
+| `target_fields` | string[] | No | Specific data fields to scan for PII |
+| `score_threshold` | float | No | Minimum confidence level for PII detection (0.0–1.0). Higher values require more confidence |
+
+<Warning>There is currently no self-serve UI to toggle PII redaction. It is configured at the organization level by the Relevance AI team. Contact your Account Manager to have it enabled.</Warning>
+
+---
+
 ## Delivery Format
 
 **Format**: Gzipped JSON following the OpenTelemetry JSON specification.
@@ -100,7 +180,7 @@ Send your Account Manager or support team:
 
 ## Logs
 
-Audit logs provide a complete record of activity across your organization for security monitoring, compliance reporting, and operational visibility. Events capture who did what, when, and from where.
+Audit logs provide a complete record of activity across your organization for security monitoring, compliance reporting, and operational visibility. Events capture who did what, when, and from where. Enterprise customers can enable PII redaction to automatically protect sensitive information in logs.
 
 <Note>We're actively expanding our event coverage. If there are specific operations or attributes you'd like to see, let your Account Manager know.</Note>
 
@@ -307,6 +387,30 @@ Traces track execution flows for agents, workforces, and LLM completions. Use tr
 }
 ```
 
+### Resource Attributes
+
+Resource attributes identify the service producing telemetry data. These attributes are attached to all spans and logs exported from Relevance AI.
+
+| Attribute | Type | Value | Description |
+|-----------|------|-------|-------------|
+| `service.name` | string | `"Relevance AI"` | Logical name of the service producing telemetry |
+
+This attribute is applied to all spans - `chat`, `invoke_agent`, `multi_agent_system_trigger`, and `condition_trigger`. In your observability tool, you can filter all Relevance activity with a single query like `service.name = "Relevance AI"`, cleanly separating Relevance spans from your own services.
+
+**Example structure:**
+```json
+{
+  "resourceSpans": [{
+    "resource": {
+      "attributes": [
+        { "key": "service.name", "value": { "stringValue": "Relevance AI" } }
+      ]
+    },
+    "scopeSpans": [{ "spans": [...] }]
+  }]
+}
+```
+
 ### Base Attributes
 
 Included on all spans:
@@ -340,9 +444,9 @@ Spans share `traceId` and link via `parentSpanId`:
 multi_agent_system_trigger
 ├── condition_trigger
 └── invoke_agent
-    ├── llm_completion
+    ├── chat
     └── invoke_agent (sub-agent)
-        └── llm_completion
+        └── chat
 ```
 
 ### Supported Spans
@@ -366,28 +470,35 @@ Records a complete agent conversation/invocation.
 | `relevance_ai.agent.knowledge_used` | array | Yes | Knowledge set IDs used |
 | `relevance_ai.agent.escalation.reason` | string | No | Escalation reason |
 | `relevance_ai.agent.escalation.context` | string | No | Escalation context |
+| `relevance_ai.agent.version_id` | string | No | The active version ID of the agent at invocation time. Use this to compare performance across agent versions |
 
-### `llm_completion`
+### `chat`
 
 Records a single LLM inference call.
 
-**Name**: `llm_completion {model_name}`
+**Name**: `chat {model_name}`
+
+<Warning>This span was previously named `llm_completion`. If you have existing dashboards or queries filtering on `gen_ai.operation.name = "llm_completion"` or span names containing `llm_completion`, update them to use `"chat"`. The rename aligns with the [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/).</Warning>
 
 | Attribute | Type | Required | Description |
 | --- | --- | --- | --- |
-| `gen_ai.operation.name` | string | Yes | `"llm_completion"` |
+| `gen_ai.operation.name` | string | Yes | `"chat"` |
 | `gen_ai.request.model` | string | Yes | Requested model ID |
 | `gen_ai.request.temperature` | int | No | Temperature setting |
 | `gen_ai.request.max_tokens` | int | No | Max tokens setting |
 | `gen_ai.system_instructions` | string | No | System prompt |
 | `gen_ai.input.messages` | string | Yes | JSON-stringified input messages |
-| `gen_ai.tool.definitions` | array | Yes | JSON-stringified tool definitions |
+| `gen_ai.tool.definitions` | string | Yes | JSON-stringified tool definitions (use `JSON.parse()` to access as structured data) |
 | `gen_ai.response.id` | string | Yes | Provider's response ID |
 | `gen_ai.response.model` | string | Yes | Actual model used |
 | `gen_ai.response.finish_reasons` | array | Yes | Finish reasons (e.g., `["stop"]`) |
 | `gen_ai.output.messages` | string | Yes | JSON-stringified output messages |
 | `gen_ai.usage.input_tokens` | int | Yes | Input tokens used |
 | `gen_ai.usage.output_tokens` | int | Yes | Output tokens generated |
+
+**Attribute**: `gen_ai.tool.definitions`
+
+<Warning>`gen_ai.tool.definitions` was previously an array type (`arrayValue`). It is now a JSON string (`stringValue`). If you consume this field in your pipeline or queries, you need to call `JSON.parse()` on the value to work with the tool definitions as structured data. The content is identical - the same tool definitions are present, just serialized as a string for better compatibility across OTEL exporters and backends.</Warning>
 
 ### `multi_agent_system_trigger`
 
@@ -403,6 +514,7 @@ Records a complete workforce execution.
 | `relevance_ai.workforce.type` | string | Yes | `"chat"` or `"default"` |
 | `relevance_ai.workforce.metadata` | object | Yes | Custom metadata |
 | `relevance_ai.workforce.status` | string | Yes | Final status |
+| `relevance_ai.workforce.version_id` | string | No | The active version ID of the workforce at trigger time. Use this to compare performance across workforce versions |
 
 ### `condition_trigger`
 
