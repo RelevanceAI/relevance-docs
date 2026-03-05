@@ -15,9 +15,16 @@
   closeBtn.setAttribute("aria-label", "Close");
   closeBtn.textContent = "\u00d7";
 
+  var basePath = window.location.pathname.split("/").slice(0, -1).join("/") || "";
+  if (basePath === "/docs" || window.location.pathname.startsWith("/docs/")) {
+    basePath = "/docs";
+  } else {
+    basePath = "";
+  }
+
   var logo = document.createElement("img");
   logo.className = "modal-logo";
-  logo.src = "/images/logo/dark.png";
+  logo.src = basePath + "/images/logo/dark.png";
   logo.alt = "Relevance AI";
 
   var heading = document.createElement("h2");
@@ -27,7 +34,7 @@
   p1.textContent = "Our documentation is now organized into tabs so you can find what you need faster.";
 
   var screenshot = document.createElement("img");
-  screenshot.src = "/images/tabs_screenshot.png";
+  screenshot.src = basePath + "/images/tabs_screenshot.png";
   screenshot.alt = "New documentation tabs";
 
   var p2 = document.createElement("p");
