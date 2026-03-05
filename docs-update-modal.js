@@ -1,5 +1,5 @@
 (function () {
-  if (localStorage.getItem("docs-refresh-dismissed")) return;
+  // if (localStorage.getItem("docs-refresh-dismissed")) return;
 
   var overlay = document.createElement("div");
   overlay.id = "docs-refresh-overlay";
@@ -17,7 +17,7 @@
 
   var logo = document.createElement("img");
   logo.className = "modal-logo";
-  logo.src = "/images/logo/dark.png";
+  logo.src = "/docs/images/logo/dark.png";
   logo.alt = "Relevance AI";
 
   var heading = document.createElement("h2");
@@ -27,7 +27,7 @@
   p1.textContent = "Our documentation is now organized into tabs so you can find what you need faster.";
 
   var screenshot = document.createElement("img");
-  screenshot.src = "/images/tabs_screenshot.png";
+  screenshot.src = "/docs/images/tabs_screenshot.png";
   screenshot.alt = "New documentation tabs";
 
   var p2 = document.createElement("p");
