@@ -1,0 +1,228 @@
+---
+title: 'Publishing Your Agent'
+sidebarTitle: 'Publishing'
+description: 'Understand how publishing works and why it matters'
+---
+
+## What is Publishing?
+
+Publishing is the process of making your agent's configuration changes live and active. When you publish your agent, you're deploying all the settings, triggers, tools, and instructions you've configured so they can be used in production.
+
+<Warning>
+Your agent's triggers will not work until you publish your agent. This includes webhook triggers, integration triggers, and scheduled triggers.
+</Warning>
+
+## Why Publishing Matters
+
+Think of publishing like deploying code to production. While you're building and configuring your agent, you're working in a draft state. Publishing takes all those changes and makes them active.
+
+### What Publishing Does
+
+When you click the Publish button:
+
+- **Activates triggers**: Webhook URLs become live, integration triggers start listening, and scheduled tasks begin running
+- **Applies configuration changes**: Updates to your prompt, tools, variables, and settings take effect
+- **Updates the agent version**: Creates a new version of your agent with all current changes
+- **Makes changes visible**: Users and systems interacting with your agent will see the updated behavior
+
+### What Happens If You Don't Publish
+
+Without publishing:
+
+- Webhook triggers return 404 errors
+- Integration triggers don't activate
+- Scheduled tasks won't run
+- Configuration changes remain in draft state
+- Your agent continues using the last published version
+
+## When to Publish
+
+You need to publish your agent whenever you make changes to:
+
+<Columns cols={2}>
+  <Card title="Triggers" icon="bolt">
+    Adding, removing, or modifying any trigger type (webhooks, integrations, schedules)
+  </Card>
+  <Card title="Prompt Instructions" icon="message">
+    Changes to your agent's core instructions or behavior
+  </Card>
+</Columns>
+
+<Columns cols={2}>
+  <Card title="Tools & Integrations" icon="wrench">
+    Adding or removing tools, updating tool configurations
+  </Card>
+  <Card title="Settings & Variables" icon="sliders">
+    Changes to agent settings, variables, or advanced configurations
+  </Card>
+</Columns>
+
+<Info>
+It's a good practice to publish after completing a set of related changes rather than after every individual edit. This helps you test changes together and maintain version control.
+</Info>
+
+## How to Publish Your Agent
+
+<Steps>
+  <Step title="Make Your Changes">
+    Configure your agent's settings, triggers, tools, or any other components in the Build interface.
+  </Step>
+  
+  <Step title="Save Your Configuration">
+    Click the "Save" button to store your changes. This saves your draft but doesn't make it live yet.
+  </Step>
+  
+  <Step title="Click Publish">
+    Look for the "Publish" button (usually in the top right of the agent interface) and click it.
+  </Step>
+  
+  <Step title="Wait for Deployment">
+    The publish process typically takes a few seconds. Wait for confirmation that publishing is complete.
+  </Step>
+  
+  <Step title="Test Your Changes">
+    After publishing, test your agent to verify that all changes are working as expected.
+  </Step>
+</Steps>
+
+## Force Publish
+
+In some cases, you may see a "Force Publish" option. This is used when:
+
+- The system detects potential conflicts with the current published version
+- You need to override the existing published version
+- There are pending changes that need to be deployed immediately
+
+<Warning>
+Force Publish should be used carefully as it will override any existing published configuration without additional checks.
+</Warning>
+
+## Publishing Best Practices
+
+### Test Before Publishing
+
+- Test your agent manually with the draft configuration when possible
+- Verify webhook URLs are correctly formatted before publishing
+- Check that all required integrations are properly connected
+
+### Version Control
+
+- Keep track of what changes you're publishing
+- Consider documenting major changes for your team
+- Use the export feature to backup your agent configuration before major updates
+
+### Timing Your Publishes
+
+- Publish during low-traffic periods if your agent is in production
+- Group related changes together in a single publish
+- Avoid publishing partial configurations that might break existing workflows
+
+### After Publishing
+
+- Test critical workflows immediately after publishing
+- Monitor your agent's task history for any errors
+- Check that triggers are activating as expected
+
+## Troubleshooting Publishing Issues
+
+<AccordionGroup>
+  <Accordion title="My webhook trigger still returns 404 after publishing" icon="triangle-exclamation">
+    **Possible causes:**
+    - Publishing hasn't fully completed (wait 10-15 seconds and try again)
+    - The trigger wasn't saved before publishing
+    - The webhook URL was copied incorrectly
+    
+    **Solution:**
+    1. Verify the trigger is saved in your agent's Triggers section
+    2. Wait a few seconds after publishing completes
+    3. Copy the webhook URL again directly from the trigger configuration
+    4. Test with a simple POST request
+  </Accordion>
+
+  <Accordion title="Changes aren't appearing after publishing" icon="rotate">
+    **Possible causes:**
+    - Browser cache is showing old version
+    - Changes weren't saved before publishing
+    - You're viewing a different agent or version
+    
+    **Solution:**
+    1. Refresh your browser (hard refresh: Ctrl+Shift+R or Cmd+Shift+R)
+    2. Verify you saved changes before publishing
+    3. Check you're viewing the correct agent
+    4. Try Force Publish if the issue persists
+  </Accordion>
+
+  <Accordion title="Publish button is disabled or missing" icon="ban">
+    **Possible causes:**
+    - No changes have been made since last publish
+    - You don't have permission to publish
+    - The agent is currently processing a task
+    
+    **Solution:**
+    1. Make sure you've made and saved changes
+    2. Check your account permissions
+    3. Wait for any active tasks to complete
+    4. Contact your workspace admin if permissions are the issue
+  </Accordion>
+
+  <Accordion title="Integration triggers not activating after publish" icon="plug">
+    **Possible causes:**
+    - Integration credentials need to be reconnected
+    - The integration service is experiencing issues
+    - Trigger configuration is incomplete
+    
+    **Solution:**
+    1. Check the integration connection status
+    2. Reconnect your credentials if needed
+    3. Verify all required trigger fields are filled
+    4. Test the integration connection separately
+  </Accordion>
+</AccordionGroup>
+
+## Related Documentation
+
+<Columns cols={2}>
+  <Card title="Webhook Triggers" href="/agent/build-your-agent/agent-triggers/custom-webhook" icon="webhook">
+    Learn about webhook trigger activation and troubleshooting
+  </Card>
+  <Card title="Triggers Overview" href="/agent/build-your-agent/triggers" icon="bolt">
+    Understand all available trigger types
+  </Card>
+</Columns>
+
+<Columns cols={2}>
+  <Card title="Build Overview" href="/agent/build-your-agent/build-overview" icon="hammer">
+    Get started building your agent
+  </Card>
+  <Card title="General Settings" href="/agent/build-your-agent/agent-settings/general" icon="gear">
+    Configure advanced agent settings
+  </Card>
+</Columns>
+
+## FAQs
+
+<AccordionGroup>
+  <Accordion title="How long does publishing take?">
+    Publishing typically takes 5-15 seconds. Complex agents with many integrations may take slightly longer. You'll see a confirmation message when publishing is complete.
+  </Accordion>
+
+  <Accordion title="Can I unpublish an agent?">
+    You cannot unpublish an agent, but you can disable specific triggers or deactivate the agent entirely. To make changes, simply edit and republish with your desired configuration.
+  </Accordion>
+
+  <Accordion title="What happens to active tasks when I publish?">
+    Active tasks continue running with the configuration they started with. New tasks will use the newly published configuration. This prevents disruption to in-progress work.
+  </Accordion>
+
+  <Accordion title="Do I need to publish for every small change?">
+    Yes, any change requires publishing to take effect. However, you can make multiple changes and publish them all at once rather than publishing after each individual edit.
+  </Accordion>
+
+  <Accordion title="Can multiple team members publish the same agent?">
+    Yes, but be careful of conflicts. If two people make different changes, the last person to publish will override the previous changes. Consider coordinating with your team on agent updates.
+  </Accordion>
+
+  <Accordion title="Is there a publish history or version control?">
+    Currently, there isn't a built-in version history. We recommend using the Export Agent feature to create backups before major changes, especially for production agents.
+  </Accordion>
+</AccordionGroup>
