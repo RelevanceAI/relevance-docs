@@ -1,0 +1,123 @@
+---
+title: "Delete Knowledge"
+description: "The 'Delete Knowledge' Tool step allows your agent to remove information from your knowledge table — making it easy to manage and keep your data relevant and up to date."
+---
+
+---
+
+## Add the 'Delete Knowledge' Tool step to your Tool
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%",paddingTop:"75%" }}>
+<iframe src="https://app.supademo.com/embed/cmcsl75ju0e0e9st8xzau7o3z?embed_v=2" frameBorder="0" title="Add the Delete Knowledge Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+
+</div>
+
+You can add the 'Delete Knowledge' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Delete Knowledge' Tool step
+3. Clicking ‘Expand’ to see the full Tool step
+4. Selecting the knowledge table you would like to access
+5. Filter condition: “and” vs “or” when matching data to delete:
+   - Use `and` when all specified conditions must match for a row to be deleted.
+   - Use `or` when any of the conditions can match.
+
+   <Note>
+     Filter condition only applies if you include more than one object in the filter
+   </Note>
+6. Filters: Accepts a JSON selection of objects, where each object corresponds to a row. Add more objects as outlined in the formatting examples below to delete multiple rows at once.
+7. Click `Run step` to test out the Tool
+
+## Common errors
+
+<Accordion title="Formatting issues">
+  This indicates that there is a formatting issue in the "Filters" input field. Make sure your object is formatted correctly. `Expected property name or '}' in JSON at...`
+</Accordion>
+
+<Accordion title="Incorrect data type">
+  This means the Filter being used is not a JSON. `Invalid JSON`
+</Accordion>
+
+## Formatting Examples
+
+### Example 1: Delete single condition
+
+```json
+// All poodles will be deleted
+[
+  {
+    "breed": "poodle"
+  }
+]
+```
+
+### Example 2: Delete single condition
+
+```json
+// All small poodles will be deleted
+[
+  {
+    "breed": "poodle",
+	"size": "small"
+  }
+]
+```
+
+### Example 3: Delete multiple conditions (_or_)
+
+```json
+// All small poodles will be deleted AND any dog aged 4 will be deleted
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }, 
+  {
+    "age": 4
+  }
+]
+```
+
+### Example 3: Delete multiple conditions (_and_)
+
+```json
+// Only small poodles that are aged 4 will be deleted
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }, 
+  {
+    "age": 4
+  }
+]
+```
+
+<Note>
+  Ensure to separate each object with a comma if inserting multiple rows.
+</Note>
+
+## Using Variables in JSON
+
+You can use variables from Tool inputs and other Tool steps in the **Filters** field. For detailed information on how to use variables in JSON for Knowledge Tool steps, including variable syntax and typing, see [Using Variables in JSON](/build/tools/tool-steps/knowledge/using-variables-in-json).
+
+For Knowledge Tool steps, all variables should be wrapped in quotes in the JSON format: `"{{variable_name}}"`. The filter values will be matched against your knowledge table data based on the column types.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+    <Accordion title="What's the difference between using 'AND' and 'OR'?">
+        - Use **AND** when _all_ filter conditions must be true for a row to be deleted.
+        - Use **OR** when _any_ one of the conditions can match.
+
+        <Note>
+          This only applies when you include more than one object in the filter array. 
+        </Note>
+    </Accordion>
+    <Accordion title="Can I delete multiple rows at once?">
+        Yes. Any row that matches the filter condition you have specified will be deleted.
+    </Accordion>
+    <Accordion title="What if my filters don't match any rows?">
+        If no rows match the provided conditions, no data will be deleted. Make sure your filter values exactly match the data in the knowledge set (e.g., casing, field names, etc.).
+    </Accordion>
+</AccordionGroup>

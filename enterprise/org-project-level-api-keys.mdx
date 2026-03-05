@@ -1,0 +1,88 @@
+---
+title: "Organization- and project-level API keys"
+description: "Set API keys at the organization and project level in Relevance AI"
+---
+
+Organization and project-level API keys are an Enterprise feature. Enterprise subscriptions allow you to set API keys at both a project level and organization level.
+
+## How do I set organization-level API keys?
+
+<Info>To set organization-level API keys, you must have an Enterprise subscription and be an organization admin or owner.</Info>
+
+<Note>
+  If you set an API key at the organization level, any projects in this organization will use this API key _unless_ an API key is added at the project level.
+</Note>
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cme10kddt06vfg56jwgh7p747" frameBorder="0" title="How to set organization level API keys" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+1. First, click 'Settings' in the sidebar of Relevance AI
+2. Then, click 'Integrations control'
+3. Navigate to the integration you want to set an API key for and toggle it on
+4. Enter the API key on the pop-up that appears, and click 'Save'
+
+## How do I set project-level API keys?
+
+<Info>To set project-level API keys, you must have an Enterprise subscription and be an organization admin or owner, or project admin or editor.</Info>
+
+<Note>
+  If you set an API key at the project level, **_this will override the organization level API key_**.
+</Note>
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cme10ovod072vg56j4cucbap4" frameBorder="0" title="How to set project level API keys" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+1. First, navigate to your project in Relevance AI and click 'Integrations & API Keys'
+2. Then, navigate to the integration you want to set an API key for
+3. Enter the API key on the pop-up that appears, and click 'Save'
+
+---
+
+## Custom API Keys
+
+Custom API Keys allow you to securely store and use API credentials from external services in your agents and tools. Understanding how these keys are accessed and shared within your projects is important for maintaining security.
+
+### Who Can Access Custom API Keys
+
+Custom API Keys are accessed in [JavaScript code steps](/build/tools/tool-steps/code-javascript) and [Python code steps](/build/tools/tool-steps/python-code/code-python) using the syntax `{{secrets.key_name}}`. These keys are available to **all agent builders** within a project.
+
+Key points about access:
+- Any builder with access to the project can use any Custom API Key in their code execution steps
+- Custom API Key access is project-wide, regardless of who created the key
+- All project members with builder permissions (Admin, Editor, or Member who can create assets) can reference Custom API Keys in their tools and agents
+
+<Info>
+Learn more about managing project membership and permissions in the [RBAC documentation](/enterprise/rbac).
+</Info>
+
+### Security Considerations
+
+<Warning>
+While Custom API Keys are automatically redacted with `<redacted>` when code steps attempt to print them out, members who can create Custom API Keys should exercise caution. Other builders in the project can use those keys to gain elevated access to downstream resources.
+</Warning>
+
+Important security points:
+- **Automatic redaction**: Custom API Keys are protected from accidental exposure in logs and outputs
+- **Shared access risk**: Any builder in the project can use Custom API Keys to access external systems with the permissions granted to those credentials
+- **Project membership matters**: Carefully consider who has builder access to projects containing sensitive API credentials
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I access organization- and project-level API keys without upgrading to Enterprise?">
+    No. This feature is available for Enterprise subscriptions only.
+  </Accordion>
+  <Accordion title="I've set an organization- and project-level API key. Which one takes precedence?">The *project-level API key does*. If you want the organization-level API key to be used, the project-level API key must be removed.</Accordion>
+  <Accordion title="How does this apply to OAuth accounts?">Integrations that rely on OAuth or third-party services don't support shared credentials, so users will need to connect their own, or service accounts.</Accordion>
+  <Accordion title="What are the best practices for using Custom API Keys?">
+    - Provide Custom API Keys that are limited in scope and permissions (e.g., read-only access, specific resource access)
+    - Create separate projects with only trusted team members when working with sensitive credentials
+    - Use OAuth credentials via [User Level Authentication](/enterprise/user-level-authentication) instead of Custom API Keys where possible
+  </Accordion>
+  <Accordion title="Can I restrict which builders can use specific Custom API Keys?">Currently, all Custom API Keys in a project are accessible to all builders in that project. Use project isolation to control access to sensitive credentials by creating separate projects with limited membership.</Accordion>
+  <Accordion title="What's the difference between Custom API Keys and OAuth authentication?">Custom API Keys are shared credentials stored at the project level that all builders can use. OAuth authentication via [User Level Authentication](/enterprise/user-level-authentication) allows each user to authenticate with their own credentials, providing better security and individual accountability.</Accordion>
+</AccordionGroup>
