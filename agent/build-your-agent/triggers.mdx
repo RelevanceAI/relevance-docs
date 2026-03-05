@@ -5,6 +5,10 @@ sidebarTitle: "Triggers"
 
 ![](/images/agent/triggers1.png)
 
+<Warning>
+After configuring any trigger, you must publish your agent for the trigger to become active. Triggers will not work until your agent is published.
+</Warning>
+
 ### Triggers Overview
 
 Triggers allow your Agent to start workflows automatically based on specific events.\
@@ -30,6 +34,10 @@ How does this work? It all comes down to the **Prompt Instructions** you gave yo
 ## How to use Triggers
 
 For each Trigger, connect to the integration using your associated credentials. For more information about setting up specific triggers, refer to the integration-specific documentation.
+
+<Info>
+Remember: After adding or modifying any trigger, click the "Publish" button to make your changes live. Learn more about [publishing your agent](/agent/build-your-agent/agent-settings/publishing).
+</Info>
 
 ### Integration Triggers
 
@@ -90,6 +98,7 @@ Setting up is simple:
 3. Navigate to the 'Triggers' section
 4. Select 'Recurring Schedule'
 5. Choose your schedule type
+6. **Publish your agent** to activate the schedule
 
 ### Schedule Types
 
@@ -173,6 +182,7 @@ Create monthly inventory reports that run automatically on the 1st of each month
 - **Test thoroughly**: Run your agent manually first to ensure it works as expected
 - **Monitor initially**: Check the first few automated runs to confirm everything works correctly
 - **Use cron for precision**: When you need exact timing control, use cron expressions instead of simple schedules
+- **Don't forget to publish**: Schedules only become active after you publish your agent
 
 ### Frequently asked questions (FAQs)
 
@@ -184,7 +194,7 @@ Create monthly inventory reports that run automatically on the 1st of each month
     Yes, you can disable schedules without deleting them when you need a pause. Simply toggle off the schedule in your agent's Triggers settings.
   </Accordion>
   <Accordion title="How do I change an existing schedule?">
-    Go back to the Recurring Schedule section in your agent's Triggers settings and update the schedule as needed. Changes take effect immediately.
+    Go back to the Recurring Schedule section in your agent's Triggers settings and update the schedule as needed. Changes take effect immediately after you publish your agent.
   </Accordion>
   <Accordion title="What timezone are scheduled runs based on?">
     Scheduled runs use your account's configured timezone. You can adjust this in your agent's schedule settings to ensure tasks run at the correct local time.
@@ -221,6 +231,7 @@ It's easy to get started:
 2. Look for the **Triggers** section
 3. Scroll to the bottom and turn on the **Enabled Scheduled Messages** toggle
 4. Add instructions in your agent's core instructions about when to schedule messages
+5. **Publish your agent** to activate scheduled messages
 
 Once turned on, your agent will understand time-based requests like "send a follow-up tomorrow at 9 AM" or "remind me about this next Tuesday."
 
