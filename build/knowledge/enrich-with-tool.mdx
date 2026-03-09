@@ -4,16 +4,95 @@ sidebarTitle: 'Enrich with tool'
 description: "Enrich your knowledge base with tools"
 ---
 
+Enriching with tools allows you to update your knowledge base using AI tools. You can apply any tool to individual rows (single run) or to all entries in your dataset (bulk run).
+
 <Tip>
-When setting up an enrichment, try it on the first few rows first to confirm the output 
-and behavior is as expected. Then apply the analysis to your whole table.
+When setting up an enrichment, try it on the first few rows first to confirm the output and behavior is as expected. Then apply the analysis to your whole table.
 </Tip>
-Enriching with tools allows you to update your knowledge base using AI tools.
 
-Select the knowledge table you want to enrich, click on `Enrich with Tool` and choose the tool your want to use from the library.
+## Two Ways to Access Enrichment
 
-Configure how the tool should process and add information to your table by mapping outputs to columns, then run the enrichment.
+You can enrich your knowledge tables using tools in two ways:
 
+### Method 1: From the Data Table
+
+Navigate to the [Knowledge](/get-started/core-concepts/knowledge) page and select your target dataset. Once the data table is opened, click the **Enrich with Tool** button to add analysis to your data.
+
+<Frame>
+  <img src="/images/knowledge/enrich-button-location.png" alt="Location of Enrich with Tool button on data table" />
+</Frame>
+
+### Method 2: From a Tool's Use Page
+
+On any tool's **Use** tab, you'll find a **Run in bulk** option next to the App section. Click **Run on my data** to be directed to the Knowledge page where you can select your dataset and configure the enrichment.
+
+<Frame>
+  <img src="/images/knowledge/tool-use-page-bulk-run.png" alt="Run in bulk option on Tool's Use page" />
+</Frame>
+
+## Configuring Your Enrichment
+
+Follow these steps to set up an enrichment on your knowledge table:
+
+<Steps>
+  <Step title="Select Your Tool">
+    Choose the tool you want to use from the library. Browse available tools or search for specific functionality.
+    
+    <Frame>
+      <img src="/images/knowledge/tool-library-selection.png" alt="Tool selection modal showing available tools" />
+    </Frame>
+  </Step>
+
+  <Step title="Map Your Inputs">
+    Configure how the tool receives data from your table:
+    
+    - **Fetch from dataset**: Select the column containing the input data
+    - **Manually type data**: Enter a fixed value to use for all rows
+    
+    <Info>
+    You can switch between these modes by clicking **Manually type data**. To fetch data from the table, click on the corresponding column header.
+    </Info>
+    
+    <Frame>
+      <img src="/images/knowledge/input-mapping-options.png" alt="Input mapping showing column selection vs manual data entry" />
+    </Frame>
+  </Step>
+
+  <Step title="Map Your Outputs">
+    Configure how the tool's results will be added to your table. The enrichment will create a new column containing the analysis results for each row.
+  </Step>
+
+  <Step title="Confirm Setup">
+    Click **Confirm** to finalize the enrichment configuration. A new enrichment column will be added to your table.
+  </Step>
+</Steps>
+
+## Running Your Enrichment
+
+Once the enrichment is configured, you'll see a new column in your table with options to:
+
+- **Single run**: Test the enrichment on one individual row to verify the output
+- **Bulk run**: Apply the enrichment to your entire table
+
+<Frame>
+  <img src="/images/knowledge/enrichment-column-actions.png" alt="Enrichment column showing single run and bulk run options" />
+</Frame>
+
+<Tip>
+**Before Running in Bulk:**
+- Try a single row first to understand the input/output behavior
+- Test on the first few rows to confirm the results match your expectations
+- Check the credit cost per row
+- Then apply the enrichment to your whole table
+</Tip>
+
+## Customizing Tools for Your Needs
+
+<Tip>
+If the tool output isn't what you need, you can clone and customize it. Click the **share** button on the top right of the tool to create your own copy that you can modify.
+</Tip>
+
+## Video Tutorial
 
 <div
   style={{
@@ -30,3 +109,9 @@ Configure how the tool should process and add information to your table by mappi
       borderRadius: '10px',
     }}/>
 </div>
+
+## Related Resources
+
+- [Create Knowledge](/build/knowledge/create-knowledge): Learn how to create and organize knowledge bases
+- [Knowledge Tool Steps](/build/knowledge/knowledge-tool-steps): Explore tool steps for working with knowledge
+- [Access Knowledge](/build/knowledge/access-knowledge): Configure how agents and tools access your knowledge
