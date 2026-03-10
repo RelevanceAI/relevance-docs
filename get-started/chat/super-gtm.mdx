@@ -1,0 +1,255 @@
+---
+title: "Super GTM"
+description: "Use Super GTM mode in Chat to work across your entire go-to-market technology stack with AI"
+---
+
+<Warning>
+Super GTM is currently in closed beta and only available for Enterprise customers. If you're an Enterprise customer and want to join the beta, contact your account team.
+</Warning>
+
+Super GTM is a Chat mode that provides you with a super agent capable of working across your entire go-to-market (GTM) technology stack. It integrates with your CRM, calendar, email, calls, support tickets, and more—while also being able to run any agent you've built within the Relevance AI platform.
+
+Unlike standard chat modes, Super GTM offers deeper tool integrations and enhanced autonomy through memories, files, tasks, and skills, enabling true end-to-end task execution across your GTM stack.
+
+## What is Super GTM?
+
+Super GTM transforms Chat into a powerful GTM assistant that can:
+
+- **Connect to your entire GTM stack**: Work with CRM systems, calendars, email, call recordings, support tickets, and other business tools
+- **Execute your custom agents**: Run any agent you've built in Relevance AI directly from Chat
+- **Complete tasks autonomously**: Execute multi-step workflows end-to-end using your connected tools
+- **Maintain context**: Remember conversations, access files, track tasks, and apply learned skills across sessions
+
+The key differentiator is Super GTM's ability to not just read from your tools, but to take actions across them—with your approval.
+
+## Key Features
+
+### Deep GTM Integrations
+
+Super GTM connects with the tools you use every day:
+
+- **CRM systems**: Access and update customer records, deals, and contacts
+- **Calendar**: Schedule, reschedule, and manage meetings
+- **Email**: Read, draft, and send emails
+- **Calls**: Access call recordings and transcripts
+- **Support tickets**: View, create, and update support tickets
+- **And more**: Connect additional tools in your GTM ecosystem
+
+### Agent Execution
+
+Run any agent you've built in Relevance AI directly from Super GTM. Simply reference your agents in conversation, and Super GTM will execute them as part of completing your request.
+
+### Action Approval Flow
+
+<Info>
+Super GTM includes a built-in approval flow for all actions that modify data.
+</Info>
+
+For any integration that can modify data—such as sending emails, creating CRM records, posting Slack messages, or updating support tickets—Super GTM includes a human-in-the-loop approval flow:
+
+1. **Action Preview**: Before executing any write action, Super GTM presents the action and its parameters for your review
+2. **Approve or Reject**: You can approve the action to proceed as-is, or reject it to prevent execution
+3. **Full Control**: The agent never sends, creates, updates, or deletes anything without your explicit confirmation
+
+This approval flow ensures you maintain complete control over what Super GTM does in your systems, while still benefiting from its autonomous capabilities.
+
+### Enhanced Context
+
+Super GTM maintains rich context across your conversations:
+
+- **Memories**: Remembers important information from past conversations
+- **Files**: Access and reference files you've shared
+- **Tasks**: Track and manage tasks across sessions
+- **Skills**: Apply learned patterns and preferences to future interactions
+
+## Getting Started
+
+### Prerequisites
+
+- Enterprise plan with Relevance AI
+- Enrollment in the Super GTM closed beta (contact your account team)
+- Access to [chat.relevanceai.com](https://chat.relevanceai.com) or the iOS TestFlight app
+
+### Enrollment Process
+
+Super GTM is enabled by Relevance staff after discussion with your Account Executive (AE). Enrollment can be configured:
+
+- **By user**: Provide a list of email addresses to your AE
+- **By domain**: Enable for all users with a specific email domain
+
+Once enrolled, you'll see the Super GTM option in your Chat interface.
+
+### Accessing Super GTM
+
+<Steps>
+  <Step title="Open Chat">
+    Navigate to [chat.relevanceai.com](https://chat.relevanceai.com) or open the Relevance AI app on iOS
+  </Step>
+  
+  <Step title="Open the Model Picker">
+    Click the model picker in the chat interface
+  </Step>
+  
+  <Step title="Toggle Super GTM">
+    Enable the Super GTM mode toggle
+  </Step>
+  
+  <Step title="Start Chatting">
+    Begin working with Super GTM across your GTM stack
+  </Step>
+</Steps>
+
+## Configuring Super GTM
+
+Once Super GTM is enabled, click the settings button next to the Super GTM toggle to configure your setup.
+
+### Integrations
+
+Connect the tools in your GTM ecosystem. Super GTM supports two integration methods:
+
+#### OAuth Integration
+
+Each user authorizes their own integration through a popup modal. This creates individual connections for each user.
+
+**Best for**: Teams where each user needs their own authenticated connection to tools.
+
+**Setup**: Click the integration you want to connect, authorize in the popup, and you're ready to go.
+
+#### API Key Integration
+
+Add an API key to a Relevance project, making it usable by all users in that project. API keys are managed centrally in the builders app at [app.relevanceai.com](https://app.relevanceai.com) under "Integrations & API Keys".
+
+**Best for**: Teams that want centralized management of integrations.
+
+**Setup**: 
+1. Navigate to [app.relevanceai.com](https://app.relevanceai.com)
+2. Go to "Integrations & API Keys"
+3. Add your API key for the desired integration
+4. All project users can now use that integration in Super GTM
+
+<Note>
+Depending on your organizational configuration, you may need admin access to enable OAuth integrations or obtain API keys.
+</Note>
+
+### Capabilities
+
+Configure what Super GTM can do:
+
+- **Creating content**: Allow Super GTM to generate content
+- **Editing files**: Enable file editing capabilities
+- **User preferences**: Set your preferences for how Super GTM works
+- **Memory**: Control how Super GTM remembers information across sessions
+
+### Agents
+
+Select which agents from your Relevance AI workspace to make available to Super GTM. For example, you might enable:
+
+- Your custom research agents
+- Slide Builder for creating presentations
+- Data analysis agents
+- Content generation agents
+
+Only selected agents will be accessible to Super GTM during conversations.
+
+## Using Super GTM
+
+### Understanding the Approval Flow
+
+When Super GTM needs to take an action that modifies data, you'll see an approval prompt:
+
+1. **Review the action**: Super GTM shows you exactly what it wants to do (e.g., "Send email to john@example.com with subject 'Follow-up on demo'")
+2. **Review parameters**: See all the details of the action (recipients, content, fields being updated, etc.)
+3. **Make a decision**: 
+   - **Approve**: The action executes as shown
+   - **Reject**: The action is cancelled, and Super GTM will ask how you'd like to proceed
+
+This flow applies to actions like:
+- Sending emails
+- Creating or updating CRM records
+- Posting messages to Slack or other communication tools
+- Creating or updating support tickets
+- Scheduling calendar events
+- Any other action that writes data to your systems
+
+### Working with Integrations
+
+Once your integrations are configured, simply ask Super GTM to work with them naturally:
+
+- "Find all open deals in Salesforce for ACME Corp"
+- "Schedule a follow-up meeting with Sarah next Tuesday at 2pm"
+- "Draft an email to the customer about their support ticket"
+- "Create a new contact in HubSpot for John Smith at Example Inc"
+
+Super GTM will access the appropriate tools, and when it needs to take an action, it will present it for your approval.
+
+### Running Agents
+
+Reference your agents in conversation to have Super GTM execute them:
+
+- "Use the Deep Researcher agent to find information about AI trends in healthcare"
+- "Run my competitor analysis agent for Company XYZ"
+- "Generate slides using Slide Builder about our Q1 results"
+
+Super GTM will execute the agent and incorporate the results into completing your request.
+
+## Platform Availability
+
+Super GTM is available on:
+
+- **Web**: [chat.relevanceai.com](https://chat.relevanceai.com)
+- **iOS**: Early pre-release access via TestFlight (contact your account team for access)
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="How do I get access to Super GTM?">
+    Super GTM is currently in closed beta for Enterprise customers. Contact your Account Executive to discuss enrollment. They'll work with you to enable Super GTM for your team.
+  </Accordion>
+  
+  <Accordion title="Can I disable the approval flow?">
+    No. The approval flow is a core safety feature of Super GTM and cannot be disabled. It ensures you maintain control over all actions that modify data in your systems.
+  </Accordion>
+  
+  <Accordion title="What happens if I reject an action?">
+    If you reject an action, Super GTM will not execute it. The agent will ask how you'd like to proceed—you can provide different instructions, modify the action, or cancel the task entirely.
+  </Accordion>
+  
+  <Accordion title="Can I use Super GTM with my existing agents?">
+    Yes! Super GTM can run any agent you've built in Relevance AI. Just configure which agents to make available in the Super GTM settings.
+  </Accordion>
+  
+  <Accordion title="What's the difference between OAuth and API key integrations?">
+    OAuth creates individual connections for each user, while API keys are shared across all users in a project. OAuth is best when each user needs their own authenticated connection. API keys are best for centralized management.
+  </Accordion>
+  
+  <Accordion title="Does Super GTM work on mobile?">
+    Yes! Super GTM is available on iOS through TestFlight. Contact your account team for early access to the iOS app.
+  </Accordion>
+  
+  <Accordion title="What integrations are supported?">
+    Super GTM supports a wide range of GTM tools including CRM systems, calendars, email, call recordings, support tickets, and more. The specific integrations available depend on your plan and configuration. Check the integrations settings in Super GTM to see what's available.
+  </Accordion>
+  
+  <Accordion title="Can Super GTM access data from multiple tools at once?">
+    Yes! Super GTM can work across multiple tools simultaneously. For example, it can pull data from your CRM, check your calendar, and draft an email—all in a single conversation.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## What's next?
+
+<CardGroup cols={2}>
+  <Card title="Chat Overview" icon="messages" href="/get-started/chat/introduction">
+    Explore all Chat features
+  </Card>
+  <Card title="Build Your Own Agent" icon="robot" href="/build/agents/create-an-agent">
+    Create custom agents to use with Super GTM
+  </Card>
+  <Card title="Integrations" icon="plug" href="/integrations/introduction">
+    Learn about available integrations
+  </Card>
+  <Card title="Enterprise Features" icon="building" href="/enterprise/introduction">
+    Explore Enterprise capabilities
+  </Card>
+</CardGroup>
