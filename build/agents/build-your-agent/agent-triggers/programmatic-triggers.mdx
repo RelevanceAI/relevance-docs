@@ -1,0 +1,151 @@
+---
+title: 'SDK & API Triggers'
+description: 'Trigger your Agent using the Relevance AI SDK or API'
+sidebarTitle: 'SDK & API Triggers'
+---
+
+Trigger your Agent from your own code — using the Relevance AI SDK for a streamlined developer experience, or direct HTTP requests via the API.
+
+<Warning>
+The Relevance AI SDK and API are officially supported for triggering Agents and Tools only. All other usage is currently unsupported.
+</Warning>
+
+## SDK Trigger
+
+The SDK is the recommended way to trigger your Agent programmatically. It provides a higher-level interface for Python and TypeScript — no need to manage raw HTTP requests or authentication headers manually.
+
+### Getting Started
+
+Install the SDK for your language:
+
+**Python**
+```bash
+pip install relevanceai
+```
+
+**TypeScript**
+```bash
+npm install @relevanceai/chain
+```
+
+<Note>
+For full SDK documentation, setup guides, and advanced usage, refer to the [Developer Docs & SDK](https://sdk.relevanceai.com/).
+</Note>
+
+---
+
+## API Trigger
+
+If you prefer working with raw HTTP requests or need to integrate from a language the SDK doesn't support, you can use the API trigger directly.
+
+<Note>
+When triggering an agent via API, the response is not returned directly. Instead, the result must be sent to a specified destination, such as uploading the final output to Google Sheets.
+</Note>
+
+### Setting Up an API Trigger
+
+1. Navigate to the Agents page and select the agent you want to configure
+2. In the sidebar on the left, go to "Triggers" and click the "Add trigger" button
+3. Under the "Build your own triggers" section, click the "API" trigger
+
+The API trigger configuration popup displays the endpoint, a button to generate your API key, and a pre-filled request body with your `agent_id`. Code examples in cURL, JavaScript, and Python are also provided.
+
+<Warning>
+Make sure to save your API key somewhere safe - once generated, you won't be able to view it again. However, you can regenerate one at any time.
+</Warning>
+
+### API Reference
+
+**Endpoint:**
+```http
+POST https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
+```
+
+<Info>
+The endpoint URL differs based on your organization's region. The example above shows the AU region endpoint. When you set up your API trigger in the UI, the correct endpoint for your region will be displayed in the configuration popup.
+</Info>
+
+**Request Body:**
+```json
+{
+  "message": {
+    "role": "user",
+    "content": "Hello"
+  },
+  "agent_id": "[YOUR_AGENT_ID_GOES_HERE]"
+}
+```
+
+### Code Examples
+
+**cURL**
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: [YOUR_API_KEY]" \
+  -d '{"message":{"role":"user","content":"Hello"},"agent_id":"[YOUR_AGENT_ID_GOES_HERE]"}' \
+  https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
+```
+
+**JavaScript (Fetch)**
+```js
+fetch('https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger', {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "[YOUR_API_KEY]"
+  },
+  body: JSON.stringify({
+    message: { role: "user", content: "Hello" },
+    agent_id: "[YOUR_AGENT_ID_GOES_HERE]"
+  })
+});
+```
+
+**Python (requests)**
+```python
+import requests
+import json
+
+requests.post(
+  'https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger',
+  headers={
+    "Content-Type": "application/json",
+    "Authorization": "[YOUR_API_KEY]"
+  },
+  data=json.dumps({
+    "message": { "role": "user", "content": "Hello" },
+    "agent_id": "[YOUR_AGENT_ID_GOES_HERE]"
+  })
+)
+```
+
+---
+
+## Best Practices
+
+- **Error Handling**: Implement robust error handling in your integration code
+- **Rate Limiting**: Be mindful of API rate limits and implement appropriate throttling
+- **Security**: Store API keys securely and use environment variables rather than hardcoding them
+- **Monitoring**: Set up monitoring for your trigger usage to detect issues early
+- **Testing**: Thoroughly test your implementation in a development environment before deploying to production
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What programming languages can I use?">
+    The SDK is available for Python and TypeScript. The API trigger works with any language capable of making HTTP requests.
+  </Accordion>
+  <Accordion title="What's the difference between the SDK and API triggers?">
+    Both achieve the same result — triggering your agent programmatically. The SDK provides a higher-level interface with built-in authentication handling, while the API trigger uses raw HTTP requests. We recommend the SDK for most use cases.
+  </Accordion>
+  <Accordion title="Are there rate limits?">
+    Yes, usage is subject to rate limits based on your subscription plan. Please refer to your plan details for specific limitations.
+  </Accordion>
+  <Accordion title="Can I use these with serverless functions?">
+    Absolutely! Both the SDK and API work well with serverless architectures like AWS Lambda, Google Cloud Functions, or Azure Functions.
+  </Accordion>
+  <Accordion title="How secure are these triggers?">
+    All requests must be authenticated with your API key, and all data is transmitted over HTTPS.
+  </Accordion>
+</AccordionGroup>

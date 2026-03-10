@@ -98,12 +98,12 @@
                   "build/agents/build-your-agent/variables",
                   "build/agents/build-your-agent/evals",
                   {
-                    "group": "Agent Triggers",
+                    "group": "Trigger Types",
                     "pages": [
                       "build/agents/build-your-agent/agent-triggers/integrations",
+                      "build/agents/build-your-agent/agent-triggers/scheduled-triggers",
                       "build/agents/build-your-agent/agent-triggers/custom-webhook",
-                      "build/agents/build-your-agent/agent-triggers/zapier",
-                      "build/agents/build-your-agent/agent-triggers/api",
+                      "build/agents/build-your-agent/agent-triggers/programmatic-triggers",
                       "build/agents/build-your-agent/agent-triggers/tools-as-triggers"
                     ]
                   },
@@ -861,6 +861,18 @@
     {
       "source": "/get-started/enterprise/:slug*",
       "destination": "/enterprise/:slug*"
+    },
+    {
+      "source": "/build/agents/build-your-agent/agent-triggers/zapier",
+      "destination": "/build/agents/build-your-agent/triggers"
+    },
+    {
+      "source": "/build/agents/build-your-agent/agent-triggers/api",
+      "destination": "/build/agents/build-your-agent/agent-triggers/programmatic-triggers"
+    },
+    {
+      "source": "/build/agents/build-your-agent/agent-triggers/sdk",
+      "destination": "/build/agents/build-your-agent/agent-triggers/programmatic-triggers"
     }
   ]
 }
