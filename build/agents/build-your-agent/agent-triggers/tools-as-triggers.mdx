@@ -1,12 +1,42 @@
 ---
-title: 'Tools as a Trigger'
-sidebarTitle: 'Tools as a Trigger'
-tag: 'BETA'
+title: 'Tools as Triggers'
+sidebarTitle: 'Tools as Triggers'
 description: 'Use a Tool as a trigger for your Agent'
 ---
 
-<Warning>While this feature is functional, it has not gone through extensive user experience (UX) testing and improvements. We recognise that the usability may not be optimal right now, but we’re committed to making enhancements in future updates to ensure a smoother experience for everyone. We have more documentation on this feature once it moves past the beta stage.</Warning>
+Tools as Triggers let you use the output of a Tool to trigger your Agent. This is useful when you need to combine data from multiple sources — like Salesforce and Airtable — to filter and process only the most relevant records before your Agent acts on them.
 
-The 'Tools as a Trigger' feature allows users to create custom tools that can act as triggers for agents. This means you can combine data from various sources, like Salesforce and Airtable, to filter and process only the most relevant records. It’s designed to enhance your workflow by providing greater customisation and advanced logic.
+<Note>The Tool you use as a Trigger must return an **array** as its output.</Note>
 
-<Note>In order to use this feature, the Tool you use as a Trigger's output must be an **array**.</Note>
+### Setting up a Tool Trigger
+
+1. Navigate to your Agent's **Triggers** section and select **Tool Trigger**
+2. **Name your Trigger** — give it a clear name so you can identify it later
+3. **Select the Tool** you want to use as a trigger
+4. Click **Continue**
+5. **Run a test** of the Tool — this produces a sample output so you can configure what gets sent to your Agent
+6. **Select the output field** from the Tool's results that you want to use as the Agent's input
+7. Optionally, enable **deduping** (see below)
+8. **Set a schedule** — choose how often the Tool runs (daily, weekly, etc.) and the time
+9. Optionally, configure **queue work hours** if your plan supports it
+10. Click **Setup** to finish
+
+### Deduping
+
+Deduping prevents duplicate messages from being added to your Agent's queue. When enabled, you specify a field to use for deduplication.
+
+For example, if your Tool output includes a unique field like `_id`, messages with the same value in that field won't be added to the queue more than once — regardless of whether the rest of the data has changed.
+
+### Common use cases
+
+- Pull new leads from a CRM and filter by criteria before triggering outreach
+- Combine data from multiple platforms into a single, filtered trigger
+- Process only records that meet specific conditions using custom Tool logic
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I change the Tool's inputs for each run?">
+    No. You can only set default values for the Tool's inputs, which will be used every time the Trigger fires. Dynamic inputs per run are not supported.
+  </Accordion>
+</AccordionGroup>
