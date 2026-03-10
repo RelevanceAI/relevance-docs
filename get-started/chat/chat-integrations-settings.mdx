@@ -1,0 +1,160 @@
+---
+title: "Chat integrations settings"
+description: "Configure and manage integrations for Relevance Chat"
+sidebarTitle: "Chat integrations settings"
+---
+
+Chat integrations settings allow you to control which integrations are available in Relevance Chat and configure how they behave. The redesigned interface provides granular control over integration access and permissions, helping you manage how Chat interacts with external services.
+
+## Accessing Chat integrations settings
+
+To access Chat integrations settings:
+
+1. Open Relevance Chat at [chat.relevanceai.com](https://chat.relevanceai.com)
+2. Navigate to Settings
+3. Select "Chat integrations" from the settings menu
+
+<Note>
+The exact navigation path may vary depending on your interface version. Look for integration or settings options in the Chat interface.
+</Note>
+
+## Understanding the interface
+
+The Chat integrations settings interface uses a list layout that organizes integrations by connection status:
+
+### Connected integrations
+
+Connected integrations appear at the top of the list. These are integrations you've already authenticated and can use immediately in Chat.
+
+### Available integrations
+
+Unconnected integrations appear below the connected section. These integrations are available to connect but haven't been set up yet.
+
+### Enabling and disabling integrations
+
+Each integration has a toggle switch that controls whether it's active in Chat:
+
+- **Toggle on** - The integration is available for use in Chat conversations
+- **Toggle off** - The integration is disabled and won't appear as an option in Chat
+
+<Tip>
+Disabling an integration doesn't remove your authentication credentials. You can re-enable it at any time without reconnecting.
+</Tip>
+
+## Per-integration settings
+
+Click on any integration to open its settings panel. Each integration has two key controls:
+
+### Require approval for writes
+
+**What it does:** When enabled, any action that would modify data in the external service requires manual approval before execution.
+
+**When to use it:**
+- When Chat agents need read access but you want to review all changes before they're applied
+- For sensitive integrations where data modifications need oversight
+- In production environments where accidental changes could have significant impact
+- When training new team members who are learning to use Chat with integrations
+
+**Example:** With this enabled for a CRM integration, Chat can read contact information but any attempt to create, update, or delete records will pause and wait for your approval.
+
+### Read-only mode
+
+**What it does:** Restricts the integration to read operations only. Chat can retrieve and display information but cannot create, modify, or delete any data in the external service.
+
+**When to use it:**
+- When you only need Chat to access information, not modify it
+- For reporting and analytics integrations where writes aren't necessary
+- To prevent accidental data modifications entirely
+- When compliance or security policies require read-only access
+
+**Example:** With read-only mode enabled for a database integration, Chat can query and display data but cannot insert, update, or delete records.
+
+<Warning>
+Read-only mode is more restrictive than "Require approval for writes". In read-only mode, write operations are blocked entirely rather than requiring approval.
+</Warning>
+
+## Global settings
+
+The Settings section at the bottom of the interface contains organization-wide controls:
+
+### Global "Require approval for writes"
+
+This setting applies the approval requirement across all integrations that support write operations.
+
+**How it relates to per-integration settings:**
+- When the global setting is enabled, all integrations require approval for writes by default
+- Per-integration settings can override the global default
+- If you disable the global setting, each integration uses its own per-integration setting
+
+<Info>
+The global setting provides a safety net. You can enable it organization-wide and then selectively disable approval for specific trusted integrations.
+</Info>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Start with read-only mode for new integrations">
+    When connecting a new integration to Chat, consider starting with read-only mode enabled. This lets you test and understand how Chat interacts with the service before allowing write operations.
+  </Accordion>
+
+  <Accordion title="Use approval requirements for high-impact integrations">
+    Enable "Require approval for writes" for integrations that connect to critical systems like CRMs, databases, or financial platforms. The extra approval step prevents costly mistakes.
+  </Accordion>
+
+  <Accordion title="Review integration settings regularly">
+    As your team's needs change, periodically review which integrations are enabled and what permissions they have. Disable integrations that are no longer needed.
+  </Accordion>
+
+  <Accordion title="Document your integration policies">
+    If you're managing Chat for a team, document which integrations should use read-only mode or require approvals. This helps maintain consistency across your organization.
+  </Accordion>
+
+  <Accordion title="Test integration behavior before production use">
+    Before using a new integration in production workflows, test it in a development or staging environment to understand how the approval and read-only settings affect Chat's behavior.
+  </Accordion>
+</AccordionGroup>
+
+## Related documentation
+
+<CardGroup cols={2}>
+  <Card title="Add integrations" icon="plug" href="/integrations/add-integrations">
+    Learn how to connect integrations to your Relevance AI account
+  </Card>
+  <Card title="Workforce approvals" icon="circle-check" href="/workforce/workforce-features/approvals-and-escalations">
+    Understand how approval workflows function in Relevance AI
+  </Card>
+  <Card title="Integration controls" icon="shield" href="/enterprise/integration-controls">
+    Enterprise-level controls for managing integrations across your organization
+  </Card>
+  <Card title="Chat introduction" icon="comments" href="/get-started/chat/introduction">
+    Get started with Relevance Chat
+  </Card>
+</CardGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens to active Chat conversations when I disable an integration?">
+    Disabling an integration prevents it from being used in new Chat messages. Existing conversations that used the integration remain visible, but you won't be able to trigger new actions with that integration until you re-enable it.
+  </Accordion>
+
+  <Accordion title="Can I set different permissions for different team members?">
+    Integration permissions in Chat integrations settings apply at the project level. For user-level or role-based access controls, see [Enterprise integration controls](/enterprise/integration-controls) and [RBAC](/enterprise/rbac).
+  </Accordion>
+
+  <Accordion title="Do these settings affect integrations used in agents outside of Chat?">
+    No. Chat integrations settings only control how integrations behave within Relevance Chat. Agents running outside of Chat (via API, triggers, or the main Relevance AI platform) use their own integration configurations.
+  </Accordion>
+
+  <Accordion title="What's the difference between disabling an integration and enabling read-only mode?">
+    Disabling an integration removes it entirely from Chat - it won't appear as an option. Read-only mode keeps the integration available but restricts it to read operations only. Use read-only mode when you need information access but want to prevent modifications.
+  </Accordion>
+
+  <Accordion title="How do I know which integrations support write operations?">
+    Most integrations that connect to external services (CRMs, databases, project management tools) support both read and write operations. Read-only integrations like some analytics or reporting services won't have write capabilities. The integration's documentation will specify its capabilities.
+  </Accordion>
+
+  <Accordion title="Can I require approval for specific types of operations only?">
+    Currently, the "Require approval for writes" setting applies to all write operations (create, update, delete) for an integration. You cannot selectively require approval for only certain operation types.
+  </Accordion>
+</AccordionGroup>
