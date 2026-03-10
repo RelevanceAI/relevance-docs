@@ -1,0 +1,223 @@
+---
+title: 'Performance Dashboard'
+sidebarTitle: 'Performance'
+description: 'Analyze and explore your Agent evaluation results with interactive performance insights'
+---
+
+<Info>
+**Rollout Status**: The Performance dashboard is currently being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see this feature in your account yet, reach out to your account manager to discuss access.
+</Info>
+
+The Performance dashboard provides detailed, interactive analysis of your Agent evaluation results. Located in the **Monitor** tab under **Performance**, this dashboard helps you explore eval runs, understand pass/fail patterns, and identify areas for improvement through visual breakdowns and conversation-level insights.
+
+<Frame>
+  <img 
+    src="/images/agent/performance-dashboard.png" 
+    alt="Performance dashboard showing eval runs table with expandable rows and interactive charts"
+  />
+</Frame>
+
+## Getting Started
+
+<Steps>
+  <Step title="Access Performance">
+    Navigate to the **Monitor** tab in your Agent builder and select **Performance** from the left sidebar
+  </Step>
+  <Step title="View Your Eval Runs">
+    The dashboard displays a paginated table of all your evaluation runs with key metrics
+  </Step>
+  <Step title="Explore Results">
+    Click on any row to expand and see detailed per-evaluator breakdowns, or click chart bars to filter results
+  </Step>
+</Steps>
+
+---
+
+## What You Can Do
+
+<CardGroup cols={3}>
+  <Card title="Explore Eval Runs" icon="table">
+    View all your evaluation runs in a paginated table with pass/fail metrics, scores, and timestamps
+  </Card>
+  <Card title="Analyze Evaluators" icon="chart-bar">
+    Expand rows to see per-evaluator breakdowns with pass/fail counts and detailed reasons
+  </Card>
+  <Card title="Review Conversations" icon="messages">
+    Click "View Conversation" to open a sidebar showing the full conversation and Judge verdicts
+  </Card>
+</CardGroup>
+
+---
+
+## Dashboard Components
+
+### Eval Runs Table
+
+The main table displays your evaluation runs with the following information:
+
+| Column | Description |
+|--------|-------------|
+| **Run Name** | Name of the evaluation run with expandable arrow |
+| **Pass/Fail Chart** | Visual bar chart showing pass (green) and fail (red) proportions |
+| **Score** | Overall pass percentage (e.g., "75%") |
+| **Date** | When the evaluation was executed |
+| **Actions** | "View Conversation" button to see full details |
+
+<Tip>
+The table is paginated—use the controls at the bottom to navigate through your evaluation history. You can adjust the number of rows displayed per page.
+</Tip>
+
+### Interactive Chart Filtering
+
+Each eval run displays a horizontal bar chart showing the proportion of passed (green) and failed (red) evaluations:
+
+- **Click on the green section** to filter the table and show only runs with passing evaluations
+- **Click on the red section** to filter the table and show only runs with failing evaluations
+- **Click again** to remove the filter and return to the full view
+
+This allows you to quickly focus on successful runs or identify problematic evaluations that need attention.
+
+### Expandable Row Details
+
+Click the arrow next to any run name to expand the row and see a detailed breakdown:
+
+<AccordionGroup>
+  <Accordion title="Per-Evaluator Breakdown">
+    Each evaluator (Judge) is listed with:
+    - **Evaluator name** (e.g., "Professional Tone", "Empathy Shown")
+    - **Pass/fail count** (e.g., "3 passed, 1 failed")
+    - **Detailed reasons** explaining why evaluations passed or failed
+    
+    This breakdown helps you understand which specific criteria your Agent is meeting or missing.
+  </Accordion>
+  
+  <Accordion title="Pass/Fail Reasons">
+    For each evaluator, you'll see:
+    - **Pass reasons**: Specific examples of what the Agent did well
+    - **Fail reasons**: Detailed explanations of what went wrong and why the evaluation failed
+    
+    These insights help you identify patterns and make targeted improvements to your Agent's behavior.
+  </Accordion>
+</AccordionGroup>
+
+### Conversation Viewer
+
+Click the **View Conversation** button on any eval run to open a sidebar that displays:
+
+1. **Full conversation transcript** between the simulated user and your Agent
+2. **All Judge verdicts** with detailed pass/fail explanations
+3. **Scenario context** showing the test scenario that was executed
+
+This gives you complete visibility into what happened during the evaluation and why Judges reached their verdicts.
+
+---
+
+## Filter and Navigation Controls
+
+The Performance dashboard includes several controls to help you navigate and filter your data:
+
+### Filter Dropdowns
+
+Use the filter dropdowns at the top of the table to:
+
+- **Filter by pass/fail status** - Show only passing runs, failing runs, or all runs
+- **Filter by date range** - Focus on evaluations from specific time periods
+- **Filter by evaluator** - See runs that included specific Judges
+
+### Pagination Controls
+
+At the bottom of the table, you'll find:
+
+- **Rows per page selector** - Choose how many runs to display (e.g., 10, 25, 50)
+- **Page navigation** - Move between pages with previous/next buttons
+- **Page indicator** - Shows current page and total pages (e.g., "Page 1 of 5")
+
+---
+
+## Using Performance Data
+
+<CardGroup cols={2}>
+  <Card title="Identify Patterns" icon="magnifying-glass-chart">
+    Expand multiple runs to compare per-evaluator results. If the same Judge consistently fails, that indicates a specific area where your Agent needs improvement
+  </Card>
+  
+  <Card title="Track Improvements" icon="arrow-trend-up">
+    Use the date column to compare recent runs with older ones. Watch for score improvements after making changes to your Agent's prompt or configuration
+  </Card>
+  
+  <Card title="Focus on Failures" icon="triangle-exclamation">
+    Click the red section of chart bars to filter for failing runs. Review the detailed reasons to understand what's going wrong and prioritize fixes
+  </Card>
+  
+  <Card title="Validate Changes" icon="check-circle">
+    After updating your Agent, run new evaluations and compare the Performance dashboard results with previous runs to confirm your changes had the desired effect
+  </Card>
+</CardGroup>
+
+---
+
+## Relationship to Evals
+
+The Performance dashboard complements the [Evals](/build/agents/build-your-agent/evals) section:
+
+- **Evals section** - Create Tests, define Judges, and run evaluations
+- **Performance dashboard** - Analyze and explore the results of those evaluations
+
+While the Runs section in Evals shows basic evaluation history, the Performance dashboard provides:
+
+- **Interactive exploration** with expandable rows and chart filtering
+- **Detailed per-evaluator breakdowns** showing exactly which Judges passed or failed
+- **Visual representations** of pass/fail proportions for quick pattern recognition
+- **Conversation-level insights** with full transcripts and Judge reasoning
+
+<Note>
+For detailed performance analysis and interactive exploration of your eval runs, use the Performance dashboard. For creating and managing Tests and Judges, use the [Evals](/build/agents/build-your-agent/evals) section.
+</Note>
+
+---
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Review Regularly" icon="calendar-check">
+    Check the Performance dashboard after each evaluation run to catch issues early and understand how your Agent is performing
+  </Card>
+  
+  <Card title="Expand Failed Runs" icon="magnifying-glass">
+    Always expand rows for failed evaluations to read the detailed reasons. These insights are crucial for making targeted improvements
+  </Card>
+  
+  <Card title="Use Chart Filtering" icon="filter">
+    Click chart bars to quickly isolate passing or failing runs. This helps you focus your analysis on the most relevant data
+  </Card>
+  
+  <Card title="Compare Over Time" icon="clock-rotate-left">
+    Use pagination to review older runs and track how your Agent's performance has evolved as you've made improvements
+  </Card>
+</CardGroup>
+
+---
+
+## Frequently Asked Questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="How is the score calculated?">
+    The score is the percentage of evaluations that passed. For example, if 3 out of 4 Judges passed, the score would be 75%.
+  </Accordion>
+  
+  <Accordion title="What happens when I click on a chart bar?">
+    Clicking the green section filters the table to show only runs with passing evaluations. Clicking the red section shows only failing runs. Click again to remove the filter.
+  </Accordion>
+  
+  <Accordion title="Can I export Performance data?">
+    Currently, the Performance dashboard is designed for interactive exploration within the platform. For detailed analysis, use the expandable rows and conversation viewer to review specific runs.
+  </Accordion>
+  
+  <Accordion title="How far back does the Performance dashboard show data?">
+    The Performance dashboard displays all evaluation runs for your Agent. Use the pagination controls to navigate through your complete evaluation history.
+  </Accordion>
+  
+  <Accordion title="I don't see the Performance dashboard. How do I get access?">
+    The Performance dashboard is being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see Performance in the Monitor tab yet, reach out to your account manager to discuss access.
+  </Accordion>
+</AccordionGroup>
