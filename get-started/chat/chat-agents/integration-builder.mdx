@@ -1,0 +1,258 @@
+---
+title: "Integration Builder"
+description: "Build end-to-end integrations with external services using the Integration Builder skill in Chat"
+---
+
+The Integration Builder is a consolidated skill that guides you through the complete process of building integrations with external services. Use it to connect APIs, configure authentication, and create tools—all from within Chat.
+
+## What is the Integration Builder?
+
+The Integration Builder (`/integration` skill) provides end-to-end assistance for creating integrations with external services. It combines multiple capabilities into a single, streamlined workflow:
+
+- **API discovery and analysis** - Analyzes API documentation to understand endpoints and authentication
+- **Authentication setup** - Auto-detects and configures authentication methods (API keys, OAuth, etc.)
+- **Tool creation** - Generates tools with the appropriate API calls and parameters
+- **Testing and validation** - Helps you test the integration before deployment
+
+## How to Use the Integration Builder
+
+<Steps>
+  <Step title="Start the Integration Builder">
+    In Chat, type `/integration` or @ mention the Integration Builder to start the process.
+  </Step>
+  
+  <Step title="Provide API Information">
+    Share details about the service you want to integrate:
+    - API documentation URL
+    - Service name
+    - What you want to accomplish with the integration
+  </Step>
+  
+  <Step title="Review Auto-Detected Settings">
+    The Integration Builder will analyze the API and auto-detect:
+    - Authentication type and requirements
+    - Available endpoints
+    - Required parameters
+    - Data formats
+  </Step>
+  
+  <Step title="Configure Authentication">
+    Provide your API credentials when prompted. The system will securely store them and configure authentication automatically.
+  </Step>
+  
+  <Step title="Create Tools">
+    The Integration Builder will generate tools for the API endpoints you need. Review and customize as needed.
+  </Step>
+  
+  <Step title="Test the Integration">
+    Test your integration with sample data to ensure it works correctly before using it in production.
+  </Step>
+</Steps>
+
+## Key Features
+
+### Auto-Detection
+
+The Integration Builder uses intelligent discovery patterns to automatically identify:
+- Authentication methods (API key, OAuth 2.0, Basic Auth, Bearer tokens)
+- API structure and conventions
+- Required vs. optional parameters
+- Response formats and error handling
+
+Learn more about [Discovery Patterns](/integrations/discovery-patterns).
+
+### Guided Setup
+
+Rather than manually configuring every aspect of an integration, the Integration Builder guides you through the process with:
+- Step-by-step instructions
+- Contextual help and suggestions
+- Validation at each stage
+- Error detection and troubleshooting
+
+### End-to-End Workflow
+
+The Integration Builder handles the complete integration lifecycle:
+1. **Discovery** - Analyze API documentation
+2. **Configuration** - Set up authentication and endpoints
+3. **Creation** - Generate tools and actions
+4. **Testing** - Validate the integration works
+5. **Deployment** - Make the integration available to your agents
+
+## Example Usage
+
+### Building a CRM Integration
+
+```
+You: /integration I want to integrate with Pipedrive CRM
+
+Integration Builder: I'll help you build a Pipedrive integration. 
+First, I need some information:
+1. Do you have the Pipedrive API documentation URL?
+2. What actions do you want to perform? (e.g., create contacts, 
+   update deals, search organizations)
+
+You: Here's the API docs: https://developers.pipedrive.com/docs/api/v1
+I want to create contacts and update deal stages.
+
+Integration Builder: Analyzing the Pipedrive API...
+
+✓ Detected authentication: API Token (header-based)
+✓ Found endpoints for:
+  - Create Person (contact)
+  - Update Deal
+✓ Identified required parameters
+
+Please provide your Pipedrive API token to continue...
+```
+
+### Building a Custom API Integration
+
+```
+You: /integration I need to connect to our internal API at 
+https://api.mycompany.com
+
+Integration Builder: I'll help you build a custom API integration.
+Can you provide:
+1. API documentation or describe the endpoints you need
+2. Authentication method (API key, OAuth, etc.)
+3. What data you want to access or actions you want to perform
+
+You: It uses Bearer token auth. I need to GET /customers and 
+POST /orders
+
+Integration Builder: Setting up your custom API integration...
+
+✓ Authentication: Bearer token
+✓ Endpoints configured:
+  - GET /customers - Retrieve customer list
+  - POST /orders - Create new order
+  
+Please provide your Bearer token...
+```
+
+## Prerequisites
+
+Before using the Integration Builder, ensure you have:
+
+<Accordion title="API Access">
+  - Valid API credentials for the service you want to integrate
+  - Appropriate permissions/scopes for the actions you need
+  - Access to the service's API documentation
+</Accordion>
+
+<Accordion title="Relevance AI Account">
+  - An active Relevance AI account
+  - Access to Chat
+  - Permissions to create tools and integrations
+</Accordion>
+
+## Tips for Best Results
+
+<AccordionGroup>
+  <Accordion title="Provide Complete Documentation">
+    Link to official API documentation or provide comprehensive details. This helps the auto-detection work more accurately.
+  </Accordion>
+  
+  <Accordion title="Start with Simple Actions">
+    Begin with basic API calls (like GET requests) before building complex workflows. This helps you validate the integration works.
+  </Accordion>
+  
+  <Accordion title="Test Thoroughly">
+    Always test your integration with sample data before using it in production workflows.
+  </Accordion>
+  
+  <Accordion title="Use Descriptive Names">
+    Give your integration tools clear, descriptive names so they're easy to find and use later.
+  </Accordion>
+</AccordionGroup>
+
+## Common Use Cases
+
+### SaaS Integrations
+Connect with popular SaaS platforms like:
+- CRMs (Salesforce, HubSpot, Pipedrive)
+- Project management (Asana, Jira, Monday.com)
+- Communication (Slack, Microsoft Teams)
+- Marketing (Mailchimp, SendGrid)
+
+### Internal APIs
+Build integrations with your company's internal APIs to:
+- Access proprietary data
+- Trigger internal workflows
+- Sync data between systems
+- Automate business processes
+
+### Data Sources
+Connect to data sources and databases:
+- REST APIs
+- GraphQL endpoints
+- Webhook providers
+- Third-party data services
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Authentication fails">
+    If authentication isn't working:
+    - Verify your API credentials are correct
+    - Check that you have the required permissions/scopes
+    - Ensure the authentication method was correctly detected
+    - Try manually specifying the authentication type
+  </Accordion>
+  
+  <Accordion title="API calls return errors">
+    If API calls fail:
+    - Check that required parameters are provided
+    - Verify parameter formats match API requirements
+    - Review API rate limits
+    - Check the API documentation for changes
+  </Accordion>
+  
+  <Accordion title="Can't find specific endpoints">
+    If needed endpoints aren't detected:
+    - Provide more specific API documentation
+    - Manually describe the endpoints you need
+    - Check if the endpoints require special permissions
+  </Accordion>
+</AccordionGroup>
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="Can I use the Integration Builder with any API?">
+    Yes, the Integration Builder works with any REST API. It's optimized for standard REST conventions but can handle custom APIs as well.
+  </Accordion>
+  
+  <Accordion title="How are my API credentials stored?">
+    API credentials are securely encrypted and stored in your Relevance AI account. They're only used for the integrations you create.
+  </Accordion>
+  
+  <Accordion title="Can I modify integrations after creation?">
+    Yes, you can edit the generated tools to add custom logic, modify parameters, or adjust configurations.
+  </Accordion>
+  
+  <Accordion title="Does this work with GraphQL APIs?">
+    The Integration Builder is optimized for REST APIs. For GraphQL, you may need to manually configure some aspects of the integration.
+  </Accordion>
+  
+  <Accordion title="Can I use this with other Chat Agents?">
+    Yes, you can use the Integration Builder alongside other Chat Agents in Multi-agent mode.
+  </Accordion>
+</AccordionGroup>
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Discovery Patterns" icon="magnifying-glass" href="/integrations/discovery-patterns">
+    Learn how auto-detection identifies authentication and API patterns
+  </Card>
+  <Card title="Add Integrations" icon="plug" href="/integrations/add-integrations">
+    Connect pre-built integrations to your account
+  </Card>
+  <Card title="API Tool Step" icon="code" href="/build/tools/tool-steps/api">
+    Understand the API tool step for custom integrations
+  </Card>
+  <Card title="Chat Overview" icon="messages" href="/get-started/chat/introduction">
+    Learn about all Chat features and capabilities
+  </Card>
+</CardGroup>
