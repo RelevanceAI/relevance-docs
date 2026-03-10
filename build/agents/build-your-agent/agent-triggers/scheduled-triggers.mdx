@@ -4,25 +4,18 @@ description: 'Set your Agent to run on a schedule or send messages at specific t
 sidebarTitle: 'Scheduled Triggers'
 ---
 
-## Recurring Schedules
+Scheduled triggers let your Agent act on its own based on time — either by running tasks on a recurring schedule or by sending messages at specific future times. Use them to automate reports, follow-ups, reminders, and any workflow that needs to happen without manual input.
+
+## Recurring schedules
 
 <img
   height="200"
   src="/images/agent/recurring-schedule.png"
 />
 
-Recurring Schedules let your AI agents run automatically at set times without you having to start them manually. This is perfect for automating repetitive tasks that need to happen on a regular basis.
+Recurring schedules run your Agent automatically at set intervals — daily, weekly, monthly, or on a custom cadence.
 
-### Why Use Recurring Schedules?
-
-- **Save time** by automating repetitive tasks
-- **Never miss important processes** - they run even if you forget
-- **Maintain consistency** in your workflows
-- **Keep things running** outside business hours
-
-### Setting Up a Recurring Schedule
-
-Setting up is simple:
+### Setting up a recurring schedule
 
 1. Go to your agent in the Relevance AI dashboard
 2. Click 'Edit Agent'
@@ -30,11 +23,9 @@ Setting up is simple:
 4. Select 'Recurring Schedule'
 5. Choose your schedule type
 
-### Schedule Types
+### Schedule types
 
-You have two options for configuring recurring schedules:
-
-#### Simple Schedule Options
+#### Simple schedule options
 
 | Schedule Type | What It Does | Perfect For |
 | --- | --- | --- |
@@ -43,7 +34,7 @@ You have two options for configuring recurring schedules:
 | **Monthly** | Runs on chosen dates each month | Monthly reports, regular maintenance |
 | **Custom** | Runs on specific dates you select | One-off tasks or irregular schedules |
 
-#### Advanced: Cron Expressions
+#### Advanced: cron expressions
 
 For more precise control over scheduling, you can use **Cron expressions**. Relevance AI uses **AWS EventBridge cron format**, which requires **six fields**:
 
@@ -92,21 +83,7 @@ minute hour day-of-month month day-of-week year
 AWS EventBridge cron expressions use 6 fields, unlike traditional Unix cron which uses 5 fields. Always include the year field, and use `?` for either day-of-month or day-of-week when specifying the other.
 </Note>
 
-### Real-World Examples
-
-**For Marketing Teams:**
-
-Set your agent to gather social media metrics every Monday morning and prepare a weekly performance report.
-
-**For Sales Teams:**
-
-Schedule daily updates on new leads and automatic follow-up messages to prospects who haven't responded in 3 days.
-
-**For Operations:**
-
-Create monthly inventory reports that run automatically on the 1st of each month.
-
-### Pro Tips
+### Tips
 
 - **Start small**: Begin with one simple recurring task before setting up complex schedules
 - **Test thoroughly**: Run your agent manually first to ensure it works as expected
@@ -115,27 +92,13 @@ Create monthly inventory reports that run automatically on the 1st of each month
 
 ---
 
-## Scheduled Messages
+## Scheduled messages
 
 ![](/images/agent/scheduled-messages.png)
 
-Scheduled Messages let your AI agents send messages in the future without you having to do anything. Instead of just responding when someone talks to them, your agents can now reach out at specific times you choose.
+Scheduled messages let your Agent send messages at specific future times — follow-ups, reminders, check-ins, or any time-based outreach. You can edit or reschedule these messages directly in Task View.
 
-With the latest update, you can easily edit or reschedule these messages directly in Task View - no need to start over if plans change!
-
-### Why Use Scheduled Messages?
-
-Your agents can now:
-
-- Send follow-ups automatically (like "How did that meeting go?")
-- Set reminders for deadlines or events
-- Create step-by-step communication sequences
-- Send information exactly when it's needed
-- Stay in touch with people across different time zones
-
-### Setting Up Scheduled Messages
-
-It's easy to get started:
+### Setting up Scheduled Messages
 
 1. Navigate to the **Build** page
 2. Look for the **Triggers** section
@@ -144,9 +107,7 @@ It's easy to get started:
 
 Once turned on, your agent will understand time-based requests like "send a follow-up tomorrow at 9 AM" or "remind me about this next Tuesday."
 
-### Making the Most of Scheduled Messages
-
-Tell your agent when to schedule messages by adding instructions to your agent's **Prompt** like:
+You can guide your agent's scheduling behaviour by adding instructions to your agent's **Prompt** like:
 
 ```
 When someone asks about upcoming events, schedule a reminder 24 hours before each event.
@@ -156,17 +117,17 @@ If someone has a deadline, schedule a check-in halfway to the deadline.
 For multi-step processes, schedule messages at each milestone to keep people on track.
 ```
 
-### Scheduled Messages Settings
+### Scheduled messages settings
 
-#### Enabled Scheduled Messages (Toggle)
+#### Enabled Scheduled Messages (toggle)
 
 Turn this on to allow your Agent to schedule actions or messages for the future. Without this enabled, your Agent can only respond in real-time and won't be able to set future reminders, follow-ups, or scheduled notifications.
 
-#### Max Daily Scheduled Triggers
+#### Max daily Scheduled Triggers
 
 Set a limit on how many scheduled actions your Agent can process in a single day. Leaving it at "No limit" means the Agent can schedule and send as many future messages as needed. If you want to control costs, manage system load, or prevent overactivity, you can set a specific maximum number.
 
-#### Prevent Scheduled Messages from Interrupting a Task
+#### Prevent Scheduled Messages from interrupting a Task
 
 When this is enabled, your Agent won't interrupt an active task (like when it's waiting for approvals or processing another action) just to send a scheduled message. Instead, the scheduled message will wait and be delayed by at least the time you specify (default is 1,440 minutes, or 24 hours).
 

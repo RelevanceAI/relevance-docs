@@ -13,7 +13,20 @@ You can trigger your Agent through three different methods:
 - **External Actions**: Configure your agent to respond to specific events or inputs
 - **Manual Activation**: Allow users to directly engage with the agent when needed
 
-## Trigger Types
+## Setting up a Trigger
+
+1. Navigate to the **Agents** page and select the agent you want to configure
+2. In the sidebar on the left, click **Triggers**
+3. Click the **Add trigger** button
+4. Choose from the available trigger types — integration triggers, scheduled triggers, or build-your-own options like webhooks, SDK, API, or Tools
+5. Follow the configuration steps for your chosen trigger type
+6. Once configured, your trigger will appear in the Triggers section of your agent
+
+<Note>
+You can add multiple triggers to a single agent. Each trigger operates independently, so your agent can respond to emails, run on a schedule, and accept API requests all at the same time.
+</Note>
+
+## Trigger types
 
 ### Integration Triggers
 
@@ -27,12 +40,38 @@ Set your Agent to run on a recurring schedule or send messages at specific times
 
 <Card title="Scheduled Triggers" href="/build/agents/build-your-agent/agent-triggers/scheduled-triggers">Set up recurring schedules and scheduled messages.</Card>
 
-### Build Your Own Triggers
+### Build your own Triggers
 
 Connect to custom webhooks, APIs, and SDKs to trigger your Agent programmatically.
 
 <Columns cols={3}>
   <Card title="Webhook" href="/build/agents/build-your-agent/agent-triggers/custom-webhook">Trigger your Agent from a custom webhook.</Card>
   <Card title="SDK & API" href="/build/agents/build-your-agent/agent-triggers/programmatic-triggers">Trigger your Agent using the SDK or API.</Card>
-  <Card title="Tools as a Trigger" href="/build/agents/build-your-agent/agent-triggers/tools-as-triggers">Use a specific Tool to trigger your Agent.</Card>
+  <Card title="Tools as Triggers" href="/build/agents/build-your-agent/agent-triggers/tools-as-triggers">Use a specific Tool to trigger your Agent.</Card>
 </Columns>
+
+## Choosing the right Trigger
+
+| I want to... | Use this trigger |
+| --- | --- |
+| React to emails, Slack messages, or CRM updates | **Integration Triggers** |
+| Run a report every morning or weekly | **Scheduled Triggers** |
+| Send follow-ups or reminders at a future time | **Scheduled Messages** |
+| Connect a third-party service like Zapier | **Integration Triggers** (external) |
+| Receive data from my own app or website | **Webhook Trigger** |
+| Trigger my agent from code I control | **SDK & API Triggers** |
+| Combine data from multiple sources before triggering | **Tools as Triggers** |
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I add multiple Triggers to one Agent?">
+    Yes. Each Trigger operates independently, so your Agent can respond to integration events, run on a schedule, and accept API requests all at the same time.
+  </Accordion>
+  <Accordion title="What happens when a Trigger fires?">
+    The Trigger sends a message to your Agent, which then processes it based on your Prompt instructions and executes its configured Tools.
+  </Accordion>
+  <Accordion title="Can I pause or disable a Trigger without deleting it?">
+    Yes. You can toggle Triggers off in your Agent's Triggers settings. This pauses them without removing your configuration.
+  </Accordion>
+</AccordionGroup>
