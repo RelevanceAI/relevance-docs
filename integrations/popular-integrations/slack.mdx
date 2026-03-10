@@ -72,6 +72,30 @@ Then, set up your Trigger from Relevance AI by following the steps below:
 Once setup, you can trigger your Agent from Slack by tagging `@Relevance AI` and mentioning the keyword you've set (if you set a keyword)! You can also keep the conversation rolling in threads - simply `@Relevance AI` in thread for your agent to respond, with full context of the conversation.
 </Note>
 
+## View Configured Agents in a Channel
+
+You can quickly see which agents are configured in any Slack channel by using the `/agents` slash command. This displays a private list of all agents available in that channel, along with their trigger keywords and quick access to their settings.
+
+### How to use
+
+Simply type `/agents` in any Slack channel where Relevance AI agents are configured.
+
+### What you'll see
+
+When you run the `/agents` command, you'll receive an ephemeral message (visible only to you) that shows:
+
+- All agents configured for that channel
+- The trigger keywords for each agent
+- Links to view or edit each agent's configuration
+
+<Tip>
+  The `/agents` command is useful when you need to:
+  
+  - Discover which agents are available in a channel
+  - Check what keywords trigger specific agents
+  - Quickly access agent settings without leaving Slack
+</Tip>
+
 ### Advanced Trigger Settings
 
 #### Live Status Updates
@@ -204,6 +228,10 @@ This will disconnect your Slack workspace from Relevance AI, and your agents wil
   
   <Accordion title="What permissions do I need to trigger an agent via Slack DM?">
     To trigger an agent via direct message (DM) in Slack, you must have Editor permissions or higher on that specific agent.
+  </Accordion>
+
+  <Accordion title="How do I see which agents are configured in my Slack channel?">
+    Use the `/agents` slash command in any Slack channel where Relevance AI agents are configured. This will show you a private list of all agents available in that channel, their trigger keywords, and links to view or edit their settings.
   </Accordion>
 
   <Accordion title="How do I send specific messages to someone on Slack?">
