@@ -1,0 +1,193 @@
+---
+title: "Discovery Patterns"
+sidebarTitle: "Discovery Patterns"
+description: "Learn how Relevance AI automatically detects authentication types and API patterns when building integrations"
+---
+
+## Overview
+
+When building integrations with the `/integration` skill, Relevance AI uses intelligent discovery patterns to automatically detect and configure authentication methods and API structures. This reduces manual configuration and helps you build integrations faster.
+
+## Auth-Type Auto-Detection
+
+The system automatically analyzes API documentation and endpoints to identify the authentication method used by the service you're integrating with.
+
+### Supported Authentication Types
+
+<AccordionGroup>
+  <Accordion title="API Key Authentication">
+    Detects when a service uses API keys for authentication. Common patterns include:
+    - Header-based API keys (`X-API-Key`, `Authorization: Bearer`)
+    - Query parameter API keys
+    - Custom header formats
+    
+    The system identifies where the API key should be placed and the expected format.
+  </Accordion>
+  
+  <Accordion title="OAuth 2.0">
+    Recognizes OAuth 2.0 flows including:
+    - Authorization code flow
+    - Client credentials flow
+    - Refresh token handling
+    
+    Automatically configures the OAuth handshake and token management.
+  </Accordion>
+  
+  <Accordion title="Basic Authentication">
+    Identifies services using HTTP Basic Authentication with username and password credentials.
+  </Accordion>
+  
+  <Accordion title="Bearer Tokens">
+    Detects bearer token authentication patterns and configures the Authorization header appropriately.
+  </Accordion>
+  
+  <Accordion title="Custom Authentication">
+    For services with non-standard authentication, the system analyzes the API documentation to determine:
+    - Required headers
+    - Authentication parameter placement
+    - Token format and structure
+  </Accordion>
+</AccordionGroup>
+
+### How Auto-Detection Works
+
+<Steps>
+  <Step title="API Documentation Analysis">
+    The system analyzes the API documentation you provide, looking for authentication sections and security requirements.
+  </Step>
+  
+  <Step title="Pattern Recognition">
+    Using machine learning, the system identifies common authentication patterns and matches them to known authentication types.
+  </Step>
+  
+  <Step title="Configuration Generation">
+    Based on the detected authentication type, the system automatically generates the appropriate configuration for your integration.
+  </Step>
+  
+  <Step title="Validation">
+    The system validates the authentication setup by testing a sample API call to ensure credentials are correctly configured.
+  </Step>
+</Steps>
+
+## API Structure Discovery
+
+Beyond authentication, the discovery system also identifies:
+
+### Endpoint Patterns
+
+- **RESTful conventions**: Detects standard REST patterns (GET, POST, PUT, DELETE)
+- **Resource naming**: Identifies how resources are named and structured
+- **Pagination methods**: Recognizes pagination patterns (offset, cursor, page-based)
+- **Rate limiting**: Detects rate limit headers and constraints
+
+### Data Formats
+
+- **Request formats**: JSON, XML, form-data, or other formats
+- **Response structures**: Identifies response schemas and data types
+- **Error handling**: Recognizes error response patterns
+
+### Required Parameters
+
+The system analyzes API documentation to identify:
+- Required vs. optional parameters
+- Parameter types and validation rules
+- Default values
+- Nested object structures
+
+## Using Discovery Patterns with `/integration`
+
+When you use the `/integration` skill to build an integration:
+
+1. **Provide the API documentation URL** or paste relevant documentation
+2. **The system analyzes** the documentation using discovery patterns
+3. **Authentication is auto-configured** based on detected patterns
+4. **Endpoint structures are mapped** to create tool steps
+5. **You review and customize** the generated integration
+
+<Tip>The more complete the API documentation you provide, the more accurate the auto-detection will be.</Tip>
+
+## Manual Override
+
+While auto-detection handles most cases, you can always manually override detected settings:
+
+- Specify a different authentication method
+- Adjust endpoint configurations
+- Modify parameter mappings
+- Add custom headers or transformations
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Provide Complete Documentation">
+    Link to the official API documentation or provide comprehensive details about authentication and endpoints. This improves detection accuracy.
+  </Accordion>
+  
+  <Accordion title="Verify Auto-Detected Settings">
+    Always review the auto-detected authentication and endpoint configurations before using the integration in production.
+  </Accordion>
+  
+  <Accordion title="Test with Sample Calls">
+    Use the built-in testing features to validate that auto-detected patterns work correctly with your API credentials.
+  </Accordion>
+  
+  <Accordion title="Report Issues">
+    If auto-detection fails or produces incorrect results, provide feedback to help improve the system.
+  </Accordion>
+</AccordionGroup>
+
+## Common Detection Scenarios
+
+### Scenario 1: Standard REST API with API Key
+
+```
+Input: API documentation showing "X-API-Key" header requirement
+Detection: API Key authentication in header
+Configuration: Automatically adds X-API-Key header to all requests
+```
+
+### Scenario 2: OAuth 2.0 Service
+
+```
+Input: Documentation with OAuth 2.0 authorization flow
+Detection: OAuth 2.0 with authorization code flow
+Configuration: Sets up OAuth handshake and token refresh
+```
+
+### Scenario 3: Mixed Authentication
+
+```
+Input: Service requiring both API key and OAuth token
+Detection: Hybrid authentication pattern
+Configuration: Configures both authentication methods appropriately
+```
+
+## Troubleshooting Auto-Detection
+
+<AccordionGroup>
+  <Accordion title="Authentication not detected">
+    If the system doesn't detect authentication:
+    - Ensure you've provided the authentication section of the API docs
+    - Try manually specifying the authentication type
+    - Check if the service uses a non-standard authentication method
+  </Accordion>
+  
+  <Accordion title="Wrong authentication type detected">
+    If the wrong type is detected:
+    - Review the API documentation for clarity
+    - Manually select the correct authentication type
+    - Provide additional context about the authentication method
+  </Accordion>
+  
+  <Accordion title="Endpoints not properly mapped">
+    If endpoints aren't correctly identified:
+    - Ensure the API documentation includes endpoint details
+    - Check for non-standard REST patterns
+    - Manually configure endpoint mappings as needed
+  </Accordion>
+</AccordionGroup>
+
+## Related Resources
+
+- [Add Integrations](/integrations/add-integrations) - Learn how to connect integrations to your account
+- [API Tool Step](/build/tools/tool-steps/api) - Understand how to use the API tool step for custom integrations
+- [Integration Examples](/integrations/integration-examples/email-warmups) - See examples of built integrations
