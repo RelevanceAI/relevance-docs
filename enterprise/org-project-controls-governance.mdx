@@ -47,6 +47,62 @@ This API endpoint is currently being worked on and is not yet available.
 
 ---
 
+## Users
+
+### List Organization Users
+
+**Permissions Required**: Organization Admin or Owner
+
+Lists all users in the specified organization with optional filtering capabilities.
+
+#### Filter Parameters
+
+This endpoint supports two optional filter parameters:
+
+- **`filter_by_search`** (NEW): Searches across email, first_name, and last_name fields simultaneously using OR logic. Ideal for server-side search in large organizations where you want to find users by any identifying information.
+- **`filter_by_email`**: Filters by exact email match. Use this when you need to find a specific user by their email address.
+
+Both parameters are optional and backwards-compatible. You can use either parameter depending on your search needs.
+
+#### Example: Search across multiple fields
+
+```bash
+curl 'https://api-f1db6c.stack.tryrelevance.com/latest/organizations/<org_id>/users/list?filter_by_search=john' \
+  --request GET \
+  --header 'Authorization: Bearer :<api_key>'
+```
+
+This will return users where "john" appears in their email, first name, OR last name (e.g., john@example.com, John Smith, or Sarah Johnson).
+
+#### Example: Filter by exact email
+
+```bash
+curl 'https://api-f1db6c.stack.tryrelevance.com/latest/organizations/<org_id>/users/list?filter_by_email=john@example.com' \
+  --request GET \
+  --header 'Authorization: Bearer :<api_key>'
+```
+
+This will return only the user with the exact email address john@example.com.
+
+#### Response
+
+```bash
+{
+  "users": [
+    {
+      "user_id": "string",
+      "email": "string",
+      "first_name": "string",
+      "last_name": "string",
+      "created_at": "string",
+      "role": "string"
+    }
+  ]
+}
+```
+
+---
+
 ## Invites
 
 ### Invite User to Project
