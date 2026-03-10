@@ -24,6 +24,78 @@ OpenAI's LLM models are known for advanced conversational abilities, creative wr
   </Accordion>
 </AccordionGroup>
 
+## Available Models
+
+OpenAI offers multiple model variants optimized for different use cases. All models support multimodal inputs (images and files), function calling, and configurable reasoning levels.
+
+### GPT 5.4
+
+The flagship model with a 1M+ context window and state-of-the-art capabilities across coding, computer use, and tool search.
+
+**Key Specifications:**
+- **Context window:** 1,050,000 tokens (1M+)
+- **Max output tokens:** 128,000 tokens
+- **Reasoning levels:** Supports none, low, medium, high, and xhigh
+- **Multimodal support:** Images and files (.pdf, .jpg, .jpeg, .gif, .webp, .png)
+- **Function calling:** Full support
+
+**Pricing:**
+- Input: 0.00125 credits per 1K tokens
+- Output: 0.0075 credits per 1K tokens
+
+**Best for:**
+- Complex coding tasks requiring large context
+- Multi-step agentic workflows
+- Tasks requiring deep reasoning
+- Processing large documents
+
+### GPT 5.4 Pro
+
+The most powerful variant that uses additional compute to think harder on complex problems.
+
+**Key Specifications:**
+- **Context window:** 1,050,000 tokens (1M+)
+- **Max output tokens:** 128,000 tokens
+- **Reasoning levels:** Supports medium, high, and xhigh (minimum medium)
+- **Multimodal support:** Images and files (.pdf, .jpg, .jpeg, .gif, .webp, .png)
+- **Function calling:** Full support
+
+**Pricing:**
+- Input: 0.015 credits per 1K tokens
+- Output: 0.09 credits per 1K tokens
+
+<Warning>
+GPT 5.4 Pro is significantly more expensive than GPT 5.4. Use only when additional reasoning capability justifies the cost.
+</Warning>
+
+**Best for:**
+- Extremely complex reasoning tasks
+- Advanced mathematical or scientific problems
+- Tasks where accuracy is critical and cost is secondary
+
+### Choosing the Right Model
+
+<AccordionGroup>
+  <Accordion title="When to use GPT 5.4">
+    Choose GPT 5.4 for most production workloads where you need:
+    - Strong performance across general tasks
+    - Large context windows for document processing
+    - Balanced cost and capability
+    - Flexibility to disable reasoning when not needed
+  </Accordion>
+  <Accordion title="When to use GPT 5.4 Pro">
+    Choose GPT 5.4 Pro only when you need:
+    - Maximum reasoning capability on hard problems
+    - Highest possible accuracy regardless of cost
+    - Complex multi-step problem solving
+    - Advanced mathematical or scientific computation
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+You can configure reasoning levels for your agent in the [Language Model settings](/build/agents/build-your-agent/agent-settings/language-model). Higher reasoning levels use more output tokens and increase cost, but improve performance on complex problems.
+</Note>
+
 ## Understanding pricing & implicit caching
 
 OpenAI models automatically cache repeated input tokens (like agent instructions and tool definitions) in multi-turn conversations, charging them at **90% less** than uncached tokens. This happens automatically with no code changes required.
