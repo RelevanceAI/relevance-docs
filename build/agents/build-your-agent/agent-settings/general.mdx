@@ -22,6 +22,55 @@ Simply toggle this on, and your agent will offer clickable reply suggestions aft
 
 ---
 
+### Visual Data Masking
+
+**What it is:** A privacy feature that automatically replaces personally identifiable information (PII) with placeholders in conversation history views.
+
+**When to use it:** Enable Visual data masking when you need to:
+
+- Comply with privacy regulations (GDPR, HIPAA, etc.)
+- Protect sensitive customer information in shared views
+- Reduce exposure of PII in conversation logs
+- Allow team members to review conversations without accessing raw sensitive data
+
+**What gets masked:**
+
+Visual data masking automatically detects and replaces:
+
+- Email addresses (e.g., `john@example.com` → `[EMAIL]`)
+- Phone numbers (e.g., `+1-555-123-4567` → `[PHONE]`)
+- Credit card numbers (e.g., `4532-1234-5678-9010` → `[CREDIT_CARD]`)
+
+<Warning>
+Visual data masking only affects what you see in conversation history views. The agent still processes the original, unmasked data to function properly. This feature is for display purposes only and does not prevent the agent from accessing or using PII.
+</Warning>
+
+**How to enable it:**
+
+<Steps>
+  <Step title="Open Agent Settings">
+    Navigate to your agent and click on **Settings** in the top navigation.
+  </Step>
+  
+  <Step title="Access Advanced Settings">
+    Click on the **Advanced** tab, then select **General** from the sidebar.
+  </Step>
+  
+  <Step title="Enable Visual Data Masking">
+    Scroll to the **Visual Data Masking** section and toggle it on.
+  </Step>
+  
+  <Step title="Save Changes">
+    Your changes are saved automatically. Visual data masking will now apply to all conversation history views for this agent.
+  </Step>
+</Steps>
+
+<Info>
+For Workforce users: When Visual data masking is enabled on an agent within a workforce, the masking will also apply in the Workforce Task View when viewing conversations involving that agent.
+</Info>
+
+---
+
 ### Agent Timeout Time
 
 **What it is:** The maximum time your agent can work on a task before timing out.
