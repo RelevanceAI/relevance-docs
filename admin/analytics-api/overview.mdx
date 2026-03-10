@@ -1,0 +1,84 @@
+---
+title: "Analytics API"
+sidebarTitle: "Overview"
+description: "Query your organization's usage data programmatically"
+---
+
+The Analytics API provides programmatic access to your organization's usage data and metrics. These endpoints allow you to retrieve time-series data for monitoring, reporting, and capacity planning.
+
+## Authentication
+
+All Analytics API endpoints require authentication using your organization's API key with admin permissions.
+
+```bash
+'Authorization': 'Bearer <your_api_key>'
+```
+
+<Warning>
+Analytics API endpoints require **admin permissions**. Users without admin access will receive a 403 Forbidden error.
+</Warning>
+
+## Requirements
+
+<AccordionGroup>
+  <Accordion title="Admin permissions" icon="shield-check">
+    You must have admin-level access to your organization to use Analytics API endpoints. See [Role-based access controls](/enterprise/rbac) for more information about permission levels.
+  </Accordion>
+  
+  <Accordion title="Team plan or higher" icon="users">
+    Analytics API endpoints are available on Team plans and above. If you're on a different plan and need access to these endpoints, please [contact sales](https://relevanceai.com/book-a-demo).
+  </Accordion>
+</AccordionGroup>
+
+## Base URL
+
+Analytics API endpoints are available at your region-specific base URL:
+
+```
+https://api-{region}.stack.tryrelevance.com/latest/analytics
+```
+
+Replace `{region}` with your organization's region (e.g., `f1`, `d1`, `e1`).
+
+## Available endpoints
+
+<Card title="Concurrency time series" icon="chart-line" href="/admin/analytics-api/concurrency-time-series">
+  Query your organization's concurrency usage over time with configurable granularity and aggregation options.
+</Card>
+
+## Common parameters
+
+Many Analytics API endpoints share common parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `start_date` | string | Start of date range (ISO 8601 format) |
+| `end_date` | string | End of date range (ISO 8601 format) |
+| `timezone` | string | IANA timezone identifier (default: UTC) |
+| `granularity` | string | Time bucket size for aggregation |
+
+## Use cases
+
+<AccordionGroup>
+  <Accordion title="Usage monitoring" icon="chart-mixed">
+    Track your organization's resource usage over time to understand patterns and trends.
+  </Accordion>
+  
+  <Accordion title="Capacity planning" icon="calendar-days">
+    Analyze historical usage data to forecast future needs and plan capacity accordingly.
+  </Accordion>
+  
+  <Accordion title="Cost optimization" icon="dollar-sign">
+    Identify peak usage periods and optimize your resource allocation to reduce costs.
+  </Accordion>
+  
+  <Accordion title="Custom reporting" icon="file-chart-column">
+    Build custom dashboards and reports using your organization's usage data.
+  </Accordion>
+</AccordionGroup>
+
+## Related documentation
+
+- [System quotas](/admin/system-limits) - Learn about concurrency limits and other system quotas
+- [Usage limits](/admin/project-management/usage-limits) - Set up usage limits and alerts
+- [Role-based access controls](/enterprise/rbac) - Understand admin permissions
