@@ -4,7 +4,7 @@ sidebarTitle: "Model Context Protocol (MCP)"
 description: "Connect your Relevance AI tools to Claude, Cursor, and other AI clients that support MCP servers. This integration creates a bridge between your Relevance AI workspace and external AI assistants, allowing you to leverage your custom tools across multiple platforms."
 ---
 
-The MCP (Model Context Protocol) integration lets you connect tools to and from Relevance AI. Give your agents access to tools hosted on external MCP servers, or expose your Relevance AI tools to services like Claude and Cursor. This means you can centralize your tool management in one place while extending their reach across your workflow — or pull in capabilities from other platforms without rebuilding them.
+The MCP (Model Context Protocol) integration lets you connect tools to and from Relevance AI. Give your agents access to tools hosted on external MCP servers through preset connections (Notion, Canva, Atlassian) or custom server URLs, or expose your Relevance AI tools to services like Claude and Cursor. This means you can centralize your tool management in one place while extending their reach across your workflow — or pull in capabilities from other platforms without rebuilding them.
 
 There are two ways to use MCP with Relevance AI:
 
@@ -13,9 +13,11 @@ There are two ways to use MCP with Relevance AI:
 
 ## Setting Up MCP Server Integration
 
+<Note>MCP uses a unified interface across both agent-level and project-level configuration, providing a consistent experience wherever you connect MCP servers.</Note>
+
 ### For Agents
 
-Agents can connect to and run tools from remote MCP servers.
+Agents can connect to and run tools from remote MCP servers. You can choose between preset connections for popular services or connect your own custom MCP server.
 
 <div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
 <iframe src="https://app.supademo.com/embed/cmg8tiu3h23ii2nomxtqolybm" frameBorder="0" title="How to set up an MCP Server connection for an agent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
@@ -24,14 +26,69 @@ Agents can connect to and run tools from remote MCP servers.
 1. Open the Agent you want to connect
 2. Navigate to the "Tools" tab in the agent builder
 3. Click "Add MCP"
-4. Click "Connect my own"
-5. Add the URL of the remote hosted MCP server
-6. Label your MCP Server connection
-7. Add any authentication details required for the MCP server
+4. Choose your connection type:
+   - **Preset connections**: Select from Notion, Canva, or Atlassian for simplified setup
+   - **Custom connection**: Click "Connect my own" to add any other MCP server
+5. For preset connections:
+   - Select the service you want to connect
+   - Authenticate with the respective service when prompted
+   - The server URL and configuration are handled automatically
+6. For custom connections:
+   - Add the URL of the remote hosted MCP server
+   - Label your MCP Server connection
+   - Add any authentication details required for the MCP server
 
-Once connected, the agent will automatically fetch and display the available tools from the remote MCP server. These tools can be referenced in the agent’s core instructions and will appear in the conversation task view. When a tool is run, the agent communicates with the remote MCP server and returns the result directly in the conversation.
+Once connected, the agent will automatically fetch and display the available tools from the remote MCP server. These tools can be referenced in the agent's core instructions and will appear in the conversation task view. When a tool is run, the agent communicates with the remote MCP server and returns the result directly in the conversation.
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
+
+### Preset MCP Connections
+
+Relevance AI provides preset MCP connections for popular services, simplifying the setup process and ensuring secure, reliable integration.
+
+#### Available Presets
+
+<AccordionGroup>
+  <Accordion title="Notion" icon="book">
+    Access your Notion workspace, pages, databases, and content through MCP. This preset is ideal for knowledge management workflows, allowing your agents to read from and write to your Notion workspace without manual server configuration.
+    
+    **What you can do:**
+    - Query and retrieve page content
+    - Search across your workspace
+    - Access database entries
+    - Create and update pages
+  </Accordion>
+
+  <Accordion title="Canva" icon="palette">
+    Connect to Canva's design tools and API to create, manage, and access designs. This preset enables your agents to interact with Canva's design capabilities programmatically.
+    
+    **What you can do:**
+    - Access design templates
+    - Create and modify designs
+    - Export design assets
+    - Manage design projects
+  </Accordion>
+
+  <Accordion title="Atlassian" icon="jira">
+    Integrate with Jira and Confluence for project management and knowledge base access. This preset connects your agents to your Atlassian workspace for seamless collaboration and documentation workflows.
+    
+    **What you can do:**
+    - Query Jira issues and projects
+    - Access Confluence pages and spaces
+    - Create and update tickets
+    - Search across your Atlassian workspace
+  </Accordion>
+</AccordionGroup>
+
+#### Benefits of Preset Connections
+
+- **Simplified setup**: No need to manually configure server URLs or connection parameters
+- **Automatic configuration**: Server endpoints and authentication flows are handled for you
+- **Secure authentication**: OAuth flows and secure token management built-in
+- **Maintained by Relevance AI**: Presets are kept up-to-date with the latest API changes
+- **Quick start**: Connect in seconds with just authentication
+
+Custom connections remain available for any other MCP servers not covered by presets, giving you flexibility to connect to any MCP-compatible service.
 
 ### For Tools
 
@@ -75,14 +132,18 @@ To use your Relevance AI tools in Claude:
 
 ## Best Practices
 
+- **Use preset connections when available**: Preset connections for Notion, Canva, and Atlassian provide simplified setup and automatic maintenance
 - **Select tools strategically**: Only expose tools that would be useful in external contexts
 - **Test the integration**: After setting up, test each tool to ensure it works as expected
 - **Update regularly**: When you update tools in Relevance AI, regenerate your MCP configuration
 - **Monitor usage**: Keep track of how your tools are being used across different platforms
+- **Secure custom connections**: For custom MCP servers, ensure authentication credentials are properly secured
 
 ## Security Considerations
 
 The MCP Server integration maintains the security of your tools while making them accessible to external clients. Authentication is handled through secure tokens, ensuring that only authorized users can access your tools. All communication between Relevance AI and external clients is encrypted to protect your data.
+
+For preset connections, OAuth flows and token management are handled automatically, providing an additional layer of security without requiring manual credential management.
 
 ## Troubleshooting
 
@@ -92,6 +153,7 @@ If you encounter issues with the MCP Server integration:
 - Ensure the external client supports the MCP standard
 - Check that the selected tools are compatible with the external client
 - Confirm your authentication credentials are valid
+- For preset connections, try disconnecting and reconnecting to refresh authentication
 - Regenerate the MCP configuration if necessary
 
 ## Related Features
@@ -104,4 +166,4 @@ If you encounter issues with the MCP Server integration:
 
 ## Conclusion
 
-The MCP Server integration is a significant step forward in creating a unified AI ecosystem. By allowing your Relevance AI tools to be used in external AI clients, you can maintain consistency across platforms while leveraging the unique strengths of each environment. This integration maximizes your investment in tool development and ensures that your specialized capabilities are available wherever you work with AI.
+The MCP Server integration is a significant step forward in creating a unified AI ecosystem. By allowing your Relevance AI tools to be used in external AI clients, you can maintain consistency across platforms while leveraging the unique strengths of each environment. With preset connections for popular services like Notion, Canva, and Atlassian, getting started is easier than ever. This integration maximizes your investment in tool development and ensures that your specialized capabilities are available wherever you work with AI.
