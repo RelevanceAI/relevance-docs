@@ -258,6 +258,34 @@ Click on any past run to view its detailed results.
 
 ---
 
+## Tracking performance over time
+
+The Evals section includes a performance timeseries chart that displays evaluation scores across multiple runs over time. This chart helps you track how your Agent's performance evolves as you make changes and improvements.
+
+### Version markers
+
+The chart displays vertical dashed lines that mark when new Agent versions were published. These version markers provide visual reference points to correlate performance changes with specific Agent updates.
+
+**Interacting with version markers:**
+
+- **Hover** — Move your cursor over a version marker to see a tooltip displaying the version name, publish date, and the person who published it
+- **Click** — Click on a version marker to open the version history sidebar, where you can view detailed information about that version and compare it with other versions
+
+### Using performance trends
+
+The performance timeseries chart enables data-driven decision making by helping you:
+
+- Identify which Agent changes improved evaluation scores versus those that caused performance regressions
+- Track the impact of specific updates by comparing scores before and after version markers
+- Spot performance trends over longer time periods to understand overall Agent improvement
+- Make informed decisions about whether to roll back changes or continue iterating based on evaluation data
+
+<Tip>
+Run evaluations regularly after making changes to your Agent's prompt, tools, or knowledge. The version markers will help you quickly identify which updates had the most positive impact on your Agent's performance.
+</Tip>
+
+---
+
 ## Best practices
 
 <CardGroup cols={2}>
@@ -305,5 +333,4 @@ Click on any past run to view its detailed results.
     Evals is being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see the Evals section in the Monitor tab yet, reach out to your account manager to discuss access.
   </Accordion>
 </AccordionGroup>
-
 
