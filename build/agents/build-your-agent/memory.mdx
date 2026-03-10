@@ -8,9 +8,14 @@ description: "Extract and recall metadata from your Agent's task output"
 
 ## Overview
 
-Memory in Relevance AI allows your agent to remember and recall information during and across conversations. There are two types of memory that serve different purposes:
+Memory in Relevance AI allows your agent to remember and recall information during and across conversations. There are three types of memory that serve different purposes:
 
-<Columns cols={2}>
+<Columns cols={3}>
+  <Card title="Core Memory" icon="star" href="#core-memory">
+    Essential identity and behavior
+    
+    Foundational information that defines your agent's identity, role, and core behavior. This memory type shapes how your agent operates at a fundamental level.
+  </Card>
   <Card title="Short-Term Memory" icon="list" href="#short-term-memory">
     Also known as **Metadata**
     
@@ -28,6 +33,62 @@ These memory systems help make your conversations:
 - **Filterable** - Sort conversations by specific criteria  
 - **Consistent** - Ensure the same data is used throughout conversations
 - **Intuitive** - Easily recall and update memorized data when needed
+
+## Core Memory
+
+Core Memory stores essential, foundational information that defines your agent's identity and core behavior. Unlike short-term memory (which is temporary session context) or long-term memory (which stores historical learned data), core memory contains the fundamental characteristics that shape how your agent operates.
+
+### What is Core Memory?
+
+Core Memory represents the essential information that defines who your agent is and how it should behave. This includes:
+
+- Agent identity and role definition
+- Core behavioral guidelines
+- Fundamental operating principles
+- Essential context that should always be available
+
+Core Memory is distinct from other memory types because it's foundational rather than contextual or historical. While short-term memory handles temporary conversation context and long-term memory stores learned information over time, core memory defines the agent's fundamental nature.
+
+### When to Use Core Memory
+
+Use Core Memory for information that:
+
+- Defines the agent's core identity or role
+- Establishes fundamental behavioral guidelines
+- Provides essential context needed for all interactions
+- Should remain consistent across all conversations
+
+Examples include agent personality traits, primary objectives, key constraints, or critical background information that shapes every interaction.
+
+### Managing Core Memory from Chat
+
+You can view and edit core memory items directly from the Chat floating panel, making it easy to adjust your agent's foundational behavior during conversations.
+
+#### Viewing Core Memory
+
+Core memory items are displayed in the Chat floating panel, allowing you to see the essential information that's currently defining your agent's behavior.
+
+#### Editing Core Memory
+
+To modify core memory content:
+
+1. Locate the core memory item you want to edit in the Chat floating panel
+2. Click the edit button next to the memory item
+3. A dialog will open where you can modify the memory content
+4. Save your changes to update the core memory
+
+<Tip>
+Changes to core memory take effect immediately and will influence how your agent behaves in all subsequent interactions.
+</Tip>
+
+### Best Practices
+
+- **Keep it essential**: Only include information that truly defines your agent's core identity and behavior
+- **Be clear and concise**: Core memory should be easy to understand and apply
+- **Review regularly**: Periodically assess whether core memory items still reflect your agent's intended purpose
+- **Avoid duplication**: Don't store information in core memory that's better suited for short-term or long-term memory
+
+----
 
 ## Short-Term Memory
 
