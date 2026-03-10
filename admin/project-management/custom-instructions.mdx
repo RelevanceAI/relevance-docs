@@ -1,0 +1,175 @@
+---
+title: Custom Instructions
+sidebarTitle: Custom Instructions
+description: "Set persistent instructions that guide agent behavior across all conversations"
+---
+
+Custom instructions are persistent text injected into the system prompt for all chat sessions and agent interactions. They allow you to define how agents and chats should behave across all conversations without repeating instructions each time.
+
+<Note>The character limit for custom instructions was recently increased from 10,000 to 50,000 characters.</Note>
+
+---
+
+## Two Types of Custom Instructions
+
+Custom instructions can be set at two different levels, each serving distinct purposes:
+
+<CardGroup cols={2}>
+  <Card title="Project-level" icon="building" iconType="duotone">
+    Set by project admins and apply to all users within that project. Provides organization-wide consistency for brand voice, compliance requirements, and shared standards.
+  </Card>
+  <Card title="User-level" icon="user" iconType="duotone">
+    Set by individual users and apply only to their own chats and agent interactions. Allows personal customization and workflow preferences.
+  </Card>
+</CardGroup>
+
+---
+
+## How Custom Instructions Work
+
+Custom instructions are injected into the system prompt for the orchestrator, working alongside each agent's core prompt to provide additional context without modifying individual agent configurations.
+
+### Relationship with Agent Prompts
+
+Custom instructions complement your agent's prompt rather than replacing it. When an agent processes a task:
+
+1. The agent's core prompt defines its role, capabilities, and specific instructions
+2. Custom instructions add persistent context that applies across all interactions
+3. Both work together to guide the agent's behavior
+
+For more details on agent prompts, see the [Prompt documentation](/build/agents/build-your-agent/prompt).
+
+<Tip>Think of custom instructions as organization-wide or personal guidelines that sit above individual agent configurations.</Tip>
+
+---
+
+## Where to Set Custom Instructions
+
+### Project-level Custom Instructions
+
+Project admins can set custom instructions that apply to all users in the project.
+
+**To access:**
+1. Navigate to **Settings** in the left sidebar
+2. Select your project
+3. Look for the **Custom Instructions** section
+
+<Note>Project-level custom instructions require admin access to configure.</Note>
+
+### User-level Custom Instructions
+
+Individual users can set personal custom instructions that apply only to their own interactions.
+
+**To access:**
+1. Navigate to your **User Profile** or **Account Settings**
+2. Look for the **Custom Instructions** section
+
+<Info>User-level custom instructions work alongside project-level instructions. Both are applied when you interact with agents.</Info>
+
+---
+
+## Use Cases
+
+Custom instructions are useful for a wide range of scenarios:
+
+<AccordionGroup>
+  <Accordion title="Brand Voice Consistency" icon="bullhorn">
+    Ensure all agents maintain your organization's tone, style, and communication standards across every interaction.
+    
+    **Example:** "Always use a professional but friendly tone. Avoid jargon. Use 'we' instead of 'I' when referring to the company."
+  </Accordion>
+
+  <Accordion title="Compliance Requirements" icon="shield-check">
+    Enforce legal, regulatory, or industry-specific requirements across all agent interactions.
+    
+    **Example:** "Always include a disclaimer that this is AI-generated content. Never provide medical, legal, or financial advice."
+  </Accordion>
+
+  <Accordion title="Domain-specific Knowledge" icon="book">
+    Provide context about your industry, products, or internal processes that agents should always consider.
+    
+    **Example:** "Our company specializes in B2B SaaS solutions for healthcare providers. Always consider HIPAA compliance in recommendations."
+  </Accordion>
+
+  <Accordion title="Personal Workflow Preferences" icon="sliders">
+    Customize how agents interact with you based on your individual working style.
+    
+    **Example:** "I prefer concise responses with bullet points. Always ask clarifying questions before making assumptions."
+  </Accordion>
+
+  <Accordion title="Seasonal or Temporary Instructions" icon="calendar">
+    Add time-sensitive context that should apply across all agents during specific periods.
+    
+    **Example:** "We're currently running a Q4 promotion. Mention our 20% discount when relevant to customer inquiries."
+  </Accordion>
+
+  <Accordion title="Multi-language Support" icon="language">
+    Set language preferences or translation guidelines for international teams.
+    
+    **Example:** "Always respond in Spanish. Use formal 'usted' rather than informal 'tú' when addressing users."
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Keep Instructions Clear" icon="lightbulb">
+    Write specific, actionable instructions rather than vague guidelines. The clearer your instructions, the more consistently agents will follow them.
+  </Card>
+
+  <Card title="Use Project-level for Standards" icon="building">
+    Set organization-wide requirements, brand voice, and compliance rules at the project level so they apply to everyone.
+  </Card>
+
+  <Card title="Use User-level for Preferences" icon="user">
+    Set personal working styles, communication preferences, and individual workflow needs at the user level.
+  </Card>
+
+  <Card title="Consider the Character Limit" icon="text-size">
+    With 50,000 characters available, you can include comprehensive guidelines, but keep instructions focused and relevant.
+  </Card>
+
+  <Card title="Test Interactions" icon="flask">
+    After setting custom instructions, test how they interact with your agent prompts to ensure they work together effectively.
+  </Card>
+
+  <Card title="Review Regularly" icon="rotate">
+    Periodically review and update custom instructions to keep them current with your organization's needs.
+  </Card>
+</CardGroup>
+
+---
+
+## Character Limit
+
+Custom instructions support up to **50,000 characters**, allowing you to include comprehensive guidelines, examples, and context.
+
+<Check>This limit was recently increased from 10,000 characters to provide more flexibility for detailed instructions.</Check>
+
+---
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="What happens if both project-level and user-level instructions are set?">
+    Both sets of instructions are applied. Project-level instructions provide organization-wide standards, while user-level instructions add personal preferences on top.
+  </Accordion>
+
+  <Accordion title="Do custom instructions override agent prompts?">
+    No, custom instructions work alongside agent prompts. The agent's core prompt defines its specific role and capabilities, while custom instructions provide additional persistent context.
+  </Accordion>
+
+  <Accordion title="Can I use custom instructions to add tools or capabilities to agents?">
+    Custom instructions provide context and guidelines but don't add new tools or technical capabilities. To add tools, configure them directly in the agent's settings.
+  </Accordion>
+
+  <Accordion title="How do I know if my custom instructions are working?">
+    Test your agents after setting custom instructions. You should see the behavior or tone changes reflected in agent responses. If not, review your instructions for clarity and specificity.
+  </Accordion>
+
+  <Accordion title="Can I export or share custom instructions?">
+    Custom instructions are tied to your project or user account. To share them, you'll need to copy the text and share it manually with team members.
+  </Accordion>
+</AccordionGroup>
