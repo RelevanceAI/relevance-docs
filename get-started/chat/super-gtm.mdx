@@ -30,8 +30,8 @@ Super GTM is a Chat mode that gives you an AI super agent capable of working acr
 
 ### Prerequisites
 
-- Enterprise plan with Relevance AI
-- Enrollment in the Super GTM closed beta (contact your account team)
+- You must be on an Enterprise plan with Relevance AI.
+- Requires enrollment in the Super GTM closed beta. Contact your account team to request access.
 
 ### Enrollment
 
@@ -52,20 +52,13 @@ Once enrolled, you'll see the Super GTM option in your Chat interface.
 
 <Tabs>
   <Tab title="Web">
-    <Steps>
-      <Step title="Go to Chat">
-        Navigate to [chat.relevanceai.com](https://chat.relevanceai.com)
-      </Step>
-      <Step title="Open the Model Picker">
-        Click the model picker in the chat interface
-      </Step>
-      <Step title="Toggle Super GTM">
-        Enable the Super GTM mode toggle
-      </Step>
-      <Step title="Start Chatting">
-        Begin working with Super GTM across your GTM stack
-      </Step>
-    </Steps>
+    <div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+    <iframe src="https://app.supademo.com/embed/cmmlhs5wg3xr3qfzsj0wvm2bw" frameBorder="0" title="Accessing Super GTM" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+    </div>
+    1. Navigate to [chat.relevanceai.com](https://chat.relevanceai.com)
+    2. Click the model picker in the chat interface
+    3. Enable the Super GTM mode toggle
+    4. Start working across your GTM stack
   </Tab>
   <Tab title="iOS (TestFlight)">
     <Steps>
@@ -76,7 +69,7 @@ Once enrolled, you'll see the Super GTM option in your Chat interface.
         [Open the invite link](https://testflight.apple.com/join/xx1C1Z6y) to join the Relevance AI iOS beta
       </Step>
       <Step title="Install the App">
-        Install Relevance AI from within TestFlight and turn on automatic updates
+        Install Relevance AI from within TestFlight. Turn on automatic updates so the app stays up-to-date.
       </Step>
       <Step title="Toggle Super GTM">
         Open the model picker and enable the Super GTM mode toggle
@@ -87,31 +80,32 @@ Once enrolled, you'll see the Super GTM option in your Chat interface.
 
 ## Configuring Super GTM
 
-Once Super GTM is enabled, click the settings button next to the Super GTM toggle to configure your setup.
+Tailor Super GTM to your workflow across three areas:
+
+<CardGroup cols={3}>
+  <Card title="Integrations" icon="plug">
+    Connect your CRM, calendar, email, and other tools across your GTM stack
+  </Card>
+  <Card title="Capabilities" icon="sliders">
+    Control content creation, file editing, user preferences, and memory
+  </Card>
+  <Card title="Agents" icon="robot">
+    Choose which of your Relevance AI agents are available, such as Slide Builder
+  </Card>
+</CardGroup>
 
 ### Integrations
 
-Connect the tools in your GTM ecosystem. Super GTM supports two integration methods:
+To get the most out of Super GTM, start by connecting your integrations. Click the gear icon next to the Super GTM toggle to open the settings panel, find the integration you want to enable, and click "Connect account" or "Add API key".
 
-#### OAuth Integration
+<img src="/images/super-gtm-settings.png" alt="Super GTM settings panel" />
 
-Each user authorizes their own integration through a popup modal. This creates individual connections for each user.
+There are two ways integrations can be set up:
 
-**Best for**: Teams where each user needs their own authenticated connection to tools.
+- **OAuth:** Each user authorizes their own connection via a popup modal. Each user needs to connect their apps individually.
+- **API key:** Add an API key to a Relevance project, which can be used by all users in that project. These can be centrally managed on a project basis in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration).
 
-**Setup**: Click the integration you want to connect, authorize in the popup, and you're ready to go.
-
-#### API Key Integration
-
-Add an API key to a Relevance project, making it usable by all users in that project. API keys are managed centrally in the builders app at [app.relevanceai.com](https://app.relevanceai.com) under "Integrations & API Keys".
-
-**Best for**: Teams that want centralized management of integrations.
-
-**Setup**:
-1. Navigate to [app.relevanceai.com](https://app.relevanceai.com)
-2. Go to "Integrations & API Keys"
-3. Add your API key for the desired integration
-4. All project users can now use that integration in Super GTM
+Learn more about [OAuth authentication](/enterprise/user-level-authentication) and [API key integrations](/get-started/core-concepts/api-integration).
 
 <Note>
 Depending on how your organization has configured each external application, you may need to request admin access to enable OAuth access or to obtain an API key. Check with your IT team or admin of the external application to confirm.
@@ -119,83 +113,76 @@ Depending on how your organization has configured each external application, you
 
 #### Supported Integrations
 
-| Application | How to connect | Permissions |
-| --- | --- | --- |
-| **Available now** | | |
-| HubSpot | OAuth | Read, create, update, delete and search CRM objects (contacts, companies, deals, etc.). List owners. |
-| GSuite (Calendar, Gmail, Docs) | OAuth | Gmail: Read, send, draft and label emails. Calendar: Create events and check availability. Docs: Read and edit documents. |
-| Linear | API key or OAuth | Read, create, update and archive issues. Read, create and update comments. Read projects and labels. |
-| Notion | OAuth | Read, create and update pages. Query and create databases. Create comments. Manage blocks. Search workspace. |
-| Slack | OAuth | Read and post messages. Search messages. Manage channels. List users. Add reactions. |
-| Cursor | API key | List, launch and stop agents. View conversation history. Send follow-up prompts. |
-| Apollo | API key | Search, create and update contacts and accounts. List, create and update deals. Enrich person and organization data. |
-| Salesforce | OAuth | Read and write CRM data via API. Run SOQL queries. |
-| Gong | API key | Read call data and recordings via Gong API. |
-| MS Calendar | OAuth | Create and manage calendar events including on shared calendars. |
-| MS Outlook | OAuth | Read, send and draft emails. Manage labels and mailbox settings. |
-| MS Teams | OAuth | Read and send chat and channel messages. Read meeting transcripts. Manage online meetings. |
-| **Planned next** | | |
-| Google Drive | OAuth | Browse, search, upload, and manage files and folders in Google Drive, including shared drives. |
-| Google Sheets | OAuth | Read, write, and manage Google Sheets spreadsheets, including cell values, rows, worksheets, notes, and comments. |
-| Outreach | OAuth | Create tasks. Access sequences, prospects, accounts, and other Outreach resources via API. |
-| ZoomInfo | TBC | Search and look up contacts and companies. |
-| Firmable | API key | TBC |
-
-### Capabilities
-
-Configure what Super GTM can do:
-
-- **Creating content**: Allow Super GTM to generate content
-- **Editing files**: Enable file editing capabilities
-- **User preferences**: Set your preferences for how Super GTM works
-- **Memory**: Control how Super GTM remembers information across sessions
-
-### Agents
-
-Select which agents from your Relevance AI workspace to make available to Super GTM. For example, you might enable:
-
-- Your custom research agents
-- Slide Builder for creating presentations
-- Data analysis agents
-- Content generation agents
-
-Only selected agents will be accessible to Super GTM during conversations.
-
-## Using Super GTM
-
-### Working with Integrations
-
-Once your integrations are configured, simply ask Super GTM to work with them naturally:
-
-- "Find all open deals in Salesforce for ACME Corp"
-- "Schedule a follow-up meeting with Sarah next Tuesday at 2pm"
-- "Draft an email to the customer about their support ticket"
-- "Create a new contact in HubSpot for John Smith at Example Inc"
-
-Super GTM will access the appropriate tools, and when it needs to take an action, it will present it for your approval.
-
-### Running Agents
-
-Reference your agents in conversation to have Super GTM execute them:
-
-- "Use the Deep Researcher agent to find information about AI trends in healthcare"
-- "Run my competitor analysis agent for Company XYZ"
-- "Generate slides using Slide Builder about our Q1 results"
-
-Super GTM will execute the agent and incorporate the results into completing your request.
+<Tabs>
+  <Tab title="OAuth">
+    | Application | Permissions |
+    | --- | --- |
+    | HubSpot | Read, create, update, delete and search CRM objects (contacts, companies, deals, etc.). List owners. |
+    | GSuite (Calendar, Gmail, Docs) | Gmail: Read, send, draft and label emails. Calendar: Create events and check availability. Docs: Read and edit documents. |
+    | Linear | Read, create, update and archive issues. Read, create and update comments. Read projects and labels. |
+    | Notion | Read, create and update pages. Query and create databases. Create comments. Manage blocks. Search workspace. |
+    | Slack | Read and post messages. Search messages. Manage channels. List users. Add reactions. |
+    | Salesforce | Read and write CRM data via API. Run SOQL queries. |
+    | Microsoft Calendar | Create and manage calendar events including on shared calendars. |
+    | Microsoft Outlook | Read, send and draft emails. Manage labels and mailbox settings. |
+    | Microsoft Teams | Read and send chat and channel messages. Read meeting transcripts. Manage online meetings. |
+  </Tab>
+  <Tab title="API Key">
+    | Application | Permissions |
+    | --- | --- |
+    | Cursor | List, launch and stop agents. View conversation history. Send follow-up prompts. |
+    | Apollo | Search, create and update contacts and accounts. List, create and update deals. Enrich person and organization data. |
+    | Gong | Read call data and recordings via Gong API. |
+    | Linear | Read, create, update and archive issues. Read, create and update comments. Read projects and labels. |
+  </Tab>
+  <Tab title="Planned Next">
+    | Application | How to connect | Permissions |
+    | --- | --- | --- |
+    | Google Drive | OAuth | Browse, search, upload, and manage files and folders in Google Drive, including shared drives. |
+    | Google Sheets | OAuth | Read, write, and manage Google Sheets spreadsheets, including cell values, rows, worksheets, notes, and comments. |
+    | Outreach | OAuth | Create tasks. Access sequences, prospects, accounts, and other Outreach resources via API. |
+    | ZoomInfo | TBC | Search and look up contacts and companies. |
+    | Firmable | API key | TBC |
+  </Tab>
+</Tabs>
 
 ### Action Approval
 
 <Info>
-Super GTM includes a built-in approval flow for all actions that modify data.
+The agent can never send, create, update, or delete anything without your explicit confirmation.
 </Info>
 
-For any integration that can modify data—such as sending emails, creating CRM records, posting Slack messages, or updating support tickets—Super GTM presents the action and its parameters for your review before executing. You can:
+For integrations that can modify data (e.g. sending an email, creating a CRM record, or posting a Slack message), Super GTM includes a built-in approval flow. Before the agent executes a write action, it will present the action and its parameters for your review. You can:
 
-- **Approve**: The action executes as shown
-- **Reject**: The action is cancelled, and Super GTM will ask how you'd like to proceed
+- **Approve** the action to let it proceed as-is.
+- **Reject** the action to prevent it from executing.
 
-The agent never sends, creates, updates, or deletes anything without your explicit confirmation.
+This gives you human-in-the-loop control over any action that changes data in your connected tools.
+
+## Example Use Cases
+
+<Tabs>
+  <Tab title="Integrations">
+    Once your integrations are configured, simply ask Super GTM to work with them naturally:
+
+    - "Find all open deals in Salesforce for ACME Corp"
+    - "Schedule a follow-up meeting with Sarah next Tuesday at 2pm"
+    - "Draft an email to the customer about their support ticket"
+    - "Create a new contact in HubSpot for John Smith at Example Inc"
+
+    Super GTM will access the appropriate tools, and when it needs to take an action, it will present it for your approval.
+  </Tab>
+  <Tab title="Agents">
+    Reference your agents in conversation to have Super GTM execute them:
+
+    - "Use the Deep Researcher agent to find information about AI trends in healthcare"
+    - "Run my competitor analysis agent for Company XYZ"
+    - "Generate slides using Slide Builder about our Q1 results"
+
+    Super GTM will execute the agent and incorporate the results into completing your request.
+  </Tab>
+</Tabs>
+
 
 ## Frequently Asked Questions
 
@@ -225,7 +212,7 @@ The agent never sends, creates, updates, or deletes anything without your explic
   </Accordion>
 
   <Accordion title="What integrations are supported?">
-    Currently available: HubSpot, GSuite (Calendar, Gmail, Docs), Linear, Notion, Slack, Cursor, Apollo, Salesforce, Gong, MS Calendar, MS Outlook, and MS Teams. Google Drive, Google Sheets, Outreach, ZoomInfo, and Firmable are planned next. See the [Supported Integrations](#supported-integrations) table for full details on connection methods and permissions.
+    Currently available: HubSpot, GSuite (Calendar, Gmail, Docs), Linear, Notion, Slack, Cursor, Apollo, Salesforce, Gong, Microsoft Calendar, Microsoft Outlook, and Microsoft Teams. Google Drive, Google Sheets, Outreach, ZoomInfo, and Firmable are planned next. See the [Supported Integrations](#supported-integrations) table for full details on connection methods and permissions.
   </Accordion>
 
   <Accordion title="Can Super GTM access data from multiple tools at once?">
@@ -235,4 +222,6 @@ The agent never sends, creates, updates, or deletes anything without your explic
 
 ## Feedback
 
-We are conducting this closed beta to gather early feedback. Please treat us as a partner in this process — tell us what's working and what's not working, and we will use that feedback to directly drive improvements.
+We are conducting this closed beta to gather early feedback. Please treat us as a partner in this process. Tell us what's working and what's not working, and we will use that feedback to directly drive improvements.
+
+Reach out to your account team or [contact support](https://relevanceai.com/support) to share your feedback.
