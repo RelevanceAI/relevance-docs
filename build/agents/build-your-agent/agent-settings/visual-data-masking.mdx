@@ -72,13 +72,9 @@ Visual Data Masking automatically detects and masks the following types of sensi
 
 Detection happens automatically in real-time as conversations are displayed in the UI using AI-powered pattern recognition.
 
-<Warning>
-All four PII types are automatically masked when the feature is enabled. You cannot choose which types to mask or customize the masking format. This is a simple toggle feature with no advanced configuration options.
-</Warning>
+## Configuration options
 
-## Configuration limitations
-
-Visual Data Masking is a simple toggle feature with no advanced configuration options. When enabled:
+Visual Data Masking is a simple toggle feature with **no advanced configuration options**. When enabled:
 
 - **All four PII types are automatically masked** - You cannot select which types to mask
 - **Masking format is fixed** - You cannot customize the placeholder text or masking pattern
@@ -169,7 +165,7 @@ Visual Data Masking is a UI-only feature. It does not modify, encrypt, or redact
 
 ## Visual Data Masking vs PII Redaction
 
-Visual Data Masking and PII Redaction are complementary features that protect sensitive information at different stages. They serve different purposes and work together to provide comprehensive privacy protection.
+Visual Data Masking and PII Redaction are **complementary features** that protect sensitive information at different stages. They serve different purposes and are designed to work together for comprehensive privacy protection.
 
 | Feature | Visual Data Masking | PII Redaction |
 |---------|---------------------|---------------|
@@ -197,8 +193,10 @@ These features are designed to work together, not replace each other:
 </Columns>
 
 **Recommended approach:** Enable both features for comprehensive protection:
-- Visual Data Masking protects what your team sees in the platform
-- PII Redaction (Enterprise) protects what gets exported to your S3 bucket
+- **Visual Data Masking** protects what your team sees in the platform UI
+- **PII Redaction** (Enterprise) protects what gets exported to your S3 bucket for compliance
+
+Together, these features provide defense in depth: UI privacy for internal collaboration and backend data protection for external systems.
 
 <Info>
 Learn more about [PII Redaction for Event Streaming](/enterprise/streaming-events#pii-redaction-enterprise-feature).
@@ -270,7 +268,7 @@ Learn more about [PII Redaction for Event Streaming](/enterprise/streaming-event
 As a Beta feature, Visual Data Masking has current limitations that users should understand:
 
 <AccordionGroup>
-  <Accordion title="AI detection can miss PII">
+  <Accordion title="AI detection can occasionally miss PII">
     The AI model used for PII detection can occasionally miss sensitive information. Detection accuracy varies based on data format, context, and PII type. This is a known limitation of the beta. Do not rely on Visual Data Masking as your sole privacy control for highly sensitive data.
   </Accordion>
 
