@@ -76,6 +76,18 @@ Detection happens automatically in real-time as conversations are displayed in t
 All four PII types are automatically masked when the feature is enabled. You cannot choose which types to mask or customize the masking format. This is a simple toggle feature with no advanced configuration options.
 </Warning>
 
+## Configuration limitations
+
+Visual Data Masking is a simple toggle feature with no advanced configuration options. When enabled:
+
+- **All four PII types are automatically masked** - You cannot select which types to mask
+- **Masking format is fixed** - You cannot customize the placeholder text or masking pattern
+- **No detection sensitivity controls** - You cannot adjust the AI detection threshold or rules
+- **No custom PII types** - You cannot add organization-specific sensitive data patterns
+- **Same rules for all data** - All detected PII is masked using the same approach
+
+This simplicity makes Visual Data Masking easy to enable, but limits flexibility for organizations with specific masking requirements.
+
 ## Enabling Visual Data Masking
 
 ### For agents
@@ -125,18 +137,6 @@ To enable Visual Data Masking on a workforce:
     Your changes are saved automatically. Visual Data Masking will now apply to all task views and conversation histories for this workforce.
   </Step>
 </Steps>
-
-## Configuration limitations
-
-Visual Data Masking is a simple toggle feature with no advanced configuration options. When enabled:
-
-- **All four PII types are automatically masked** - You cannot select which types to mask
-- **Masking format is fixed** - You cannot customize the placeholder text or masking pattern
-- **No detection sensitivity controls** - You cannot adjust the AI detection threshold or rules
-- **No custom PII types** - You cannot add organization-specific sensitive data patterns
-- **Same rules for all data** - All detected PII is masked using the same approach
-
-This simplicity makes Visual Data Masking easy to enable, but limits flexibility for organizations with specific masking requirements.
 
 ## What is and isn't masked
 
@@ -242,16 +242,6 @@ Learn more about [PII Redaction for Event Streaming](/enterprise/streaming-event
     - **[Data Retention](/enterprise/data-retention)** - Automatically delete old sensitive data
 
     Each feature protects data at a different layer, creating defense in depth.
-
-    ### Why use multiple features?
-
-    - **Visual Data Masking** protects UI visibility during collaboration
-    - **PII Redaction** protects exported data for compliance
-    - **User Level Authentication** protects data access at the integration level
-    - **RBAC** protects who can access agents and projects
-    - **Data Retention** protects by removing old data entirely
-
-    Together, these features provide comprehensive privacy protection across the entire data lifecycle.
   </Tab>
 
   <Tab title="Testing and validation">
@@ -272,13 +262,6 @@ Learn more about [PII Redaction for Event Streaming](/enterprise/streaming-event
     - Custom data formats may require additional protection
     - Context-specific sensitive information may not be automatically masked
     - AI detection can occasionally miss PII that matches standard patterns
-
-    ### Set proper expectations
-
-    - Communicate to your team that this is a Beta feature with known limitations
-    - Explain that AI detection is not 100% reliable
-    - Ensure team members understand this is visual only and doesn't modify backend data
-    - Document any PII types that are consistently missed for your use case
   </Tab>
 </Tabs>
 
@@ -309,10 +292,6 @@ As a Beta feature, Visual Data Masking has current limitations that users should
 
   <Accordion title="Performance impact on long conversations">
     On very long conversations with extensive PII, there may be a slight delay in rendering masked content. This is typically imperceptible but may be noticeable in extreme cases with thousands of messages.
-  </Accordion>
-
-  <Accordion title="International format detection">
-    Detection accuracy is optimized for US/standard formats. International phone numbers, non-Latin character names, and region-specific data formats may not be detected reliably.
   </Accordion>
 </AccordionGroup>
 
@@ -382,9 +361,5 @@ We're actively improving Visual Data Masking based on user feedback. If you enco
 
   <Accordion title="Does this protect data sent to LLMs?">
     No. Visual Data Masking is UI-only. Agents send unmasked data to LLMs for processing. This is necessary for agents to function correctly. If you need to protect data sent to LLMs, you must implement pre-processing to scrub data before it reaches the agent.
-  </Accordion>
-
-  <Accordion title="What if Visual Data Masking misses PII in my conversations?">
-    AI detection can occasionally miss PII, especially with non-standard formats. If you notice consistent detection failures for specific data types, document these cases and contact support. Do not rely solely on Visual Data Masking for critical privacy requirements. Consider implementing additional privacy controls at the data source or using PII Redaction (Enterprise) for backend protection.
   </Accordion>
 </AccordionGroup>
