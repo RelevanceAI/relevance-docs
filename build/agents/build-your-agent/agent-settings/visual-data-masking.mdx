@@ -1,0 +1,286 @@
+---
+title: "Visual Data Masking"
+sidebarTitle: "Visual Data Masking"
+description: "Protect sensitive information in the UI while agents continue to work with actual data"
+---
+
+<Note>
+Visual Data Masking is a Beta feature currently being rolled out. If you don't have access yet, contact your sales representative.
+</Note>
+
+Visual Data Masking is a front-end privacy feature that automatically masks standard PII (Personally Identifiable Information) fields in conversation histories and task views. This protects confidential information when viewing agent interactions in the UI, during screen sharing, or when reviewing tasks with your team.
+
+## How Visual Data Masking works
+
+Visual Data Masking operates at the UI layer only. When enabled, sensitive information is masked in what you see on screen, but agents continue to access and process the actual, unmasked data.
+
+<Columns cols={2}>
+  <Card title="What you see" icon="eye-slash">
+    Masked values like `***@***.com` or `***-***-1234` in conversation histories
+  </Card>
+  <Card title="What agents see" icon="robot">
+    Full, unmasked data for processing, reasoning, and tool execution
+  </Card>
+</Columns>
+
+This approach ensures privacy during UI viewing while maintaining full agent functionality.
+
+## When to use Visual Data Masking
+
+Enable Visual Data Masking when you need to protect sensitive information from being visible in the UI:
+
+<AccordionGroup>
+  <Accordion title="Handling customer data" icon="users">
+    When agents process customer information like email addresses, phone numbers, or payment details, Visual Data Masking prevents this data from being visible to team members reviewing conversations.
+  </Accordion>
+
+  <Accordion title="Screen sharing and demos" icon="screen-users">
+    During product demonstrations, training sessions, or customer calls where you're sharing your screen, Visual Data Masking ensures sensitive information isn't accidentally exposed.
+  </Accordion>
+
+  <Accordion title="Team reviews and QA" icon="clipboard-check">
+    When multiple team members review agent conversations for quality assurance or training purposes, Visual Data Masking protects customer privacy while allowing evaluation of agent performance.
+  </Accordion>
+
+  <Accordion title="Compliance requirements" icon="shield-check">
+    For organizations with regulatory requirements around data visibility, Visual Data Masking adds an extra layer of protection when viewing agent interactions.
+  </Accordion>
+</AccordionGroup>
+
+## Supported PII types
+
+Visual Data Masking automatically detects and masks the following types of sensitive information:
+
+<CardGroup cols={2}>
+  <Card title="Email addresses" icon="envelope">
+    Masks email addresses like `user@example.com` → `***@***.com`
+  </Card>
+  <Card title="Phone numbers" icon="phone">
+    Masks phone numbers like `(555) 123-4567` → `***-***-1234`
+  </Card>
+  <Card title="Credit card numbers" icon="credit-card">
+    Masks credit card numbers like `4532 1234 5678 9010` → `****-****-****-9010`
+  </Card>
+  <Card title="Person names" icon="user">
+    Masks person names like `John Smith` → `**** *****`
+  </Card>
+</CardGroup>
+
+Detection happens automatically in real-time as conversations are displayed in the UI.
+
+## Enabling Visual Data Masking
+
+### For agents
+
+To enable Visual Data Masking on an agent:
+
+<Steps>
+  <Step title="Open agent settings">
+    Navigate to your agent and click the **Settings** tab in the top navigation.
+  </Step>
+
+  <Step title="Access Advanced settings">
+    Scroll down to the **Advanced** section and expand it.
+  </Step>
+
+  <Step title="Enable Visual Data Masking">
+    Toggle on **Visual Data Masking** to enable the feature for this agent.
+  </Step>
+
+  <Step title="Save changes">
+    Your changes are saved automatically. Visual Data Masking will now apply to all conversation histories for this agent.
+  </Step>
+</Steps>
+
+### For workforces
+
+To enable Visual Data Masking on a workforce:
+
+<Steps>
+  <Step title="Open workforce settings">
+    Navigate to your workforce and click the **Settings** icon in the top right.
+  </Step>
+
+  <Step title="Enable Visual Data Masking">
+    Toggle on **Visual Data Masking** to enable the feature for this workforce.
+  </Step>
+
+  <Step title="Save changes">
+    Your changes are saved automatically. Visual Data Masking will now apply to all task views and conversation histories for this workforce.
+  </Step>
+</Steps>
+
+## What is and isn't masked
+
+### What IS masked
+
+Visual Data Masking applies to:
+
+- **Conversation histories** in agent task views
+- **Workforce task views** showing agent interactions
+- **Message content** displayed in the UI
+- **Tool inputs and outputs** visible in conversation logs
+
+### What ISN'T masked
+
+Visual Data Masking does NOT apply to:
+
+- **Agent processing** - Agents always work with unmasked, actual data
+- **Tool execution** - Tools receive and process unmasked data
+- **API responses** - Data returned via API is unmasked
+- **Exported data** - Data exports contain unmasked information
+- **Backend storage** - Data is stored unmasked in the database
+- **Audit logs** - Event streaming and logs contain unmasked data
+
+<Warning>
+Visual Data Masking is a UI-only feature. It does not modify, encrypt, or redact data at the storage or processing level. For backend data protection, see [PII Redaction](#visual-data-masking-vs-pii-redaction).
+</Warning>
+
+## Visual Data Masking vs PII Redaction
+
+Visual Data Masking and PII Redaction are complementary features that protect sensitive information at different stages:
+
+| Feature | Visual Data Masking | PII Redaction |
+|---------|---------------------|---------------|
+| **Purpose** | Protect privacy in the UI | Protect data in exported logs |
+| **Where it applies** | Front-end display only | Backend data export to S3 |
+| **When it applies** | Real-time during UI rendering | During OTEL event streaming |
+| **Agent access** | Agents see unmasked data | Agents see unmasked data |
+| **Use case** | Screen sharing, team reviews | Compliance, audit logs |
+| **Availability** | Beta feature | Enterprise feature |
+
+**Visual Data Masking** is for protecting what humans see in the UI. **PII Redaction** is for protecting what gets exported to your observability infrastructure.
+
+<Info>
+Learn more about [PII Redaction for Event Streaming](/enterprise/streaming-events#pii-redaction-enterprise-feature).
+</Info>
+
+## Best practices
+
+<Tabs>
+  <Tab title="When to enable">
+    ### Enable Visual Data Masking when:
+
+    - Your agents handle customer PII regularly
+    - Multiple team members review agent conversations
+    - You frequently share your screen during demos or training
+    - You need an extra layer of privacy protection in the UI
+    - Compliance policies require limiting PII visibility
+
+    ### Consider NOT enabling when:
+
+    - You need to see actual values for debugging or troubleshooting
+    - Your agents don't process sensitive information
+    - You're the only person accessing the agent
+    - Masked values would make conversation review difficult
+  </Tab>
+
+  <Tab title="Combining with other features">
+    ### Layer your security
+
+    Visual Data Masking works best as part of a comprehensive security strategy:
+
+    - **[User Level Authentication](/enterprise/user-level-authentication)** - Ensure users only access their own data in integrations
+    - **[PII Redaction](/enterprise/streaming-events#pii-redaction-enterprise-feature)** - Protect exported audit logs and telemetry data
+    - **[RBAC](/enterprise/rbac)** - Control who can access agents and view conversations
+    - **[Data Retention](/enterprise/data-retention)** - Automatically delete old sensitive data
+
+    Each feature protects data at a different layer, creating defense in depth.
+  </Tab>
+
+  <Tab title="Testing and validation">
+    ### Verify masking behavior
+
+    Before rolling out Visual Data Masking to production agents:
+
+    1. **Test with sample data** - Run test conversations with known PII to verify masking works as expected
+    2. **Check all views** - Verify masking appears in task views, conversation histories, and workforce views
+    3. **Confirm agent functionality** - Ensure agents can still process data correctly despite UI masking
+    4. **Review with your team** - Have team members confirm masked values are sufficiently protected
+
+    ### Monitor for edge cases
+
+    - Some PII formats may not be detected (e.g., international phone numbers)
+    - Custom data formats may require additional protection
+    - Context-specific sensitive information may not be automatically masked
+  </Tab>
+</Tabs>
+
+## Beta limitations
+
+As a Beta feature, Visual Data Masking has some current limitations:
+
+<AccordionGroup>
+  <Accordion title="Detection accuracy">
+    PII detection uses pattern matching and may occasionally miss edge cases or non-standard formats. International phone numbers, unusual email formats, or context-specific sensitive data may not be masked.
+  </Accordion>
+
+  <Accordion title="Custom PII types">
+    Currently, only the four standard PII types (email, phone, credit card, person names) are supported. Custom sensitive data types cannot be configured for masking.
+  </Accordion>
+
+  <Accordion title="Masking format">
+    The masking format (e.g., `***@***.com`) is fixed and cannot be customized. Future versions may offer configurable masking patterns.
+  </Accordion>
+
+  <Accordion title="Performance impact">
+    On very long conversations with extensive PII, there may be a slight delay in rendering masked content. This is typically imperceptible but may be noticeable in extreme cases.
+  </Accordion>
+</AccordionGroup>
+
+<Info>
+We're actively improving Visual Data Masking based on user feedback. If you encounter issues or have feature requests, contact your sales representative or [reach out to support](/get-started/support).
+</Info>
+
+## Related features
+
+<CardGroup cols={2}>
+  <Card title="Security overview" icon="shield-halved" href="/admin/security">
+    Learn about Relevance AI's comprehensive security features and compliance
+  </Card>
+  <Card title="PII Redaction" icon="database" href="/enterprise/streaming-events#pii-redaction-enterprise-feature">
+    Protect sensitive data in exported OTEL logs and audit trails
+  </Card>
+  <Card title="User Level Authentication" icon="user-lock" href="/enterprise/user-level-authentication">
+    Enable users to authenticate with their own credentials for integrations
+  </Card>
+  <Card title="Workforce Task View" icon="list-check" href="/build/workforces/workforce-features/workforce-task-view">
+    Monitor and manage workforce tasks with Visual Data Masking enabled
+  </Card>
+</CardGroup>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Does Visual Data Masking affect agent performance?">
+    No. Visual Data Masking only affects what you see in the UI. Agents continue to process unmasked data with no performance impact. The masking happens during UI rendering, not during agent execution.
+  </Accordion>
+
+  <Accordion title="Can I customize which PII types are masked?">
+    Not currently. Visual Data Masking automatically detects and masks all four supported PII types (email, phone, credit card, person names). Custom configuration may be available in future releases.
+  </Accordion>
+
+  <Accordion title="Will masked data appear in API responses?">
+    No. Visual Data Masking only applies to the UI. Data returned via API calls is unmasked. If you need to protect data in API responses, implement masking in your application layer.
+  </Accordion>
+
+  <Accordion title="Can I temporarily disable masking to see actual values?">
+    Yes. You can toggle Visual Data Masking off in agent or workforce settings at any time. Changes take effect immediately for new page loads.
+  </Accordion>
+
+  <Accordion title="Does Visual Data Masking work with embedded chat?">
+    Visual Data Masking applies to the Relevance AI platform UI only. If you've embedded agents on external websites, Visual Data Masking does not apply to those embedded interfaces.
+  </Accordion>
+
+  <Accordion title="How is this different from PII Redaction?">
+    Visual Data Masking protects what you see in the UI. PII Redaction protects what gets exported to your S3 bucket for audit logs and observability. Visual Data Masking is front-end only; PII Redaction is backend data scrubbing. Use both for comprehensive protection.
+  </Accordion>
+
+  <Accordion title="What happens to data that's already in conversation history?">
+    When you enable Visual Data Masking, it applies to all conversation histories immediately, including past conversations. The masking is applied during rendering, so historical data is protected retroactively in the UI.
+  </Accordion>
+
+  <Accordion title="Can I export unmasked data for analysis?">
+    Yes. Visual Data Masking only affects the UI display. Data exports, API responses, and backend storage all contain unmasked data. If you need masked exports, you'll need to implement masking in your export pipeline.
+  </Accordion>
+</AccordionGroup>
