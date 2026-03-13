@@ -113,10 +113,10 @@ To create a global Evaluator:
 3. Select a **Type** (LLM Judge, String Contains, String Equals, or Tool Usage)
 4. Enter a **Name** for the Evaluator (e.g., "Professional Tone")
 5. Configure the type-specific settings (see table above)
-6. Save the Evaluator
+6. Click **Create Evaluator**
 
 <Note>
-When you run a Test scenario, you can select which Evaluators to include — both scenario-specific Evaluators (defined within that scenario) and global Evaluators (from the Evaluators tab). This allows you to mix standard criteria with scenario-specific evaluation rules. You can add or remove Evaluators before each run.
+When you run a Test scenario, scenario-level Evaluators are always included automatically. You can also add or remove global Evaluators (from the Evaluators tab) before each run, allowing you to mix standard criteria with scenario-specific evaluation rules.
 </Note>
 
 ---
@@ -130,9 +130,9 @@ When you run a Test scenario, you can select which Evaluators to include — bot
 Follow these steps to create your first evaluation Test Suite:
 
 1. Open your Agent in the builder and click the **Monitor** tab (next to the Run tab). Select **Evals** from the left sidebar, then select **Test Suites**.
-2. Click the **+ New Test Suite** button. Enter a name for your Test Suite and click **Create**.
+2. Click the **+ New test suite** button. Enter a name for your Test Suite and click **Create**.
 3. Click on the Test Suite you just created to open it.
-4. Click the **+ New Test scenario** button to create a scenario within your Test Suite.
+4. Click the **+ New Test** button to create a scenario within your Test Suite.
 5. Fill in the scenario details:
 
     | Field | Description | Example |
@@ -151,7 +151,7 @@ Follow these steps to create your first evaluation Test Suite:
     | **Name** | Name of the evaluation criterion | "Empathy Shown" |
     | **Type-specific config** | Settings based on the chosen type (see [Evaluator types](#evaluator-types)) | *Evaluation Prompt*: "Did the Agent acknowledge the customer's frustration and express empathy before offering solutions?" |
 
-    Click **+ Add Evaluator** to add more evaluation criteria to the scenario.
+    Click **Create Evaluator** to save it. You can then create additional Evaluators to add more evaluation criteria to the scenario.
 
 7. (Optional) Add **Tool simulations** to emulate tool usage without actually calling the tools. Tool simulations are configured at the scenario level:
     - Select a tool to simulate
