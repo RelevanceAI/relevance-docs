@@ -23,6 +23,38 @@ Webhook Triggers let you trigger your Agent via HTTP requests from any external 
 - Connect third-party platforms that support outgoing webhooks
 - Build automated workflows between different systems
 
+## Pausing webhook triggers
+
+You can pause webhook triggers to temporarily stop processing incoming requests while preserving your webhook URL and all configuration.
+
+**To pause a webhook trigger:**
+
+1. Go to your agent's **Triggers** section in agent settings
+2. Find the webhook trigger you want to pause
+3. Click the pause button next to the trigger
+
+**To resume:**
+
+Click the resume button next to the paused trigger. Your webhook will start processing incoming requests again immediately.
+
+### What happens when you pause a webhook trigger
+
+- Incoming webhook requests are not processed
+- Your webhook URL remains the same
+- All configuration (message template, Thread ID mapping, Unique ID mapping) is preserved
+- You can resume at any time without reconfiguring
+
+### Common use cases
+
+- **Testing**: Pause production webhooks while testing changes to your agent or webhook configuration
+- **Maintenance**: Temporarily disable webhooks during system updates or debugging
+- **Rate limiting**: Pause high-volume webhooks during peak periods
+- **Development**: Keep your webhook URL stable while making changes to your agent
+
+<Note>
+When a webhook trigger is paused, incoming HTTP requests to your webhook URL will still be received but will not trigger your agent. Resume the trigger to start processing requests again.
+</Note>
+
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
@@ -34,5 +66,11 @@ Webhook Triggers let you trigger your Agent via HTTP requests from any external 
   </Accordion>
   <Accordion title="What happens if the same webhook is triggered multiple times?">
     By mapping a Unique ID field, you can prevent duplicate processing. If an event with the same Unique ID is received again, it will be ignored, ensuring data integrity.
+  </Accordion>
+  <Accordion title="Can I pause a webhook trigger without losing my webhook URL?">
+    Yes. Pausing a webhook trigger stops it from processing incoming requests while preserving your webhook URL and all configuration. You can resume the trigger at any time without needing to update the webhook URL in your external systems.
+  </Accordion>
+  <Accordion title="What happens to webhook requests sent while the trigger is paused?">
+    When a webhook trigger is paused, incoming requests are received but not processed by your agent. Once you resume the trigger, only new requests will be processed — requests sent during the pause period are not queued or processed retroactively.
   </Accordion>
 </AccordionGroup>
