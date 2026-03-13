@@ -1,0 +1,405 @@
+---
+title: "MCP Server"
+sidebarTitle: "MCP Server"
+description: "Connect to Relevance AI from Claude, Cursor, VS Code, and other AI clients using the Model Context Protocol (MCP)."
+---
+
+Relevance AI provides an MCP server that gives AI clients direct access to your agents, tools, and knowledge. Instead of switching between platforms, you can interact with your entire Relevance AI workspace from the AI tools you already use.
+
+The MCP server is available at `https://mcp.relevanceai.com/`.
+
+<Warning>
+  This page is about using Relevance AI **from** external AI clients. If you want to connect an external MCP server **to** a Relevance AI agent, see [MCP Client](/integrations/popular-integrations/model-context-protocol).
+</Warning>
+
+## Supported clients
+
+<AccordionGroup>
+  <Accordion title="Claude Code" icon="terminal">
+    **Option 1: Plugin (recommended)**
+
+    The Relevance AI plugin bundles the MCP server along with built-in skills that teach Claude Code how to work with agents, tools, workforces, knowledge, analytics, and evals.
+
+    ```bash
+    claude plugin marketplace add RelevanceAI/claude-code-plugin
+    claude plugin install relevance-ai@RelevanceAI-claude-code-plugin
+    ```
+
+    Once installed, run `/mcp` from within Claude Code, select the `relevance-ai` server, and click **Authenticate** to log in via your browser. Authentication is required only once.
+
+    Requires Claude Code version 1.0.33 or later. See the [plugin on GitHub](https://github.com/RelevanceAI/claude-code-plugin) for more details.
+
+    **Option 2: Manual MCP server**
+
+    If you prefer to add the MCP server directly without the plugin:
+
+    ```bash
+    claude mcp add relevance-prod --transport http https://mcp.relevanceai.com/
+    ```
+
+    Once added, run `/mcp` from within Claude Code. You will see the new MCP server in the list. Select it to connect and follow the authentication steps.
+  </Accordion>
+
+  <Accordion title="Claude Desktop" icon="message-bot">
+    1. Open Claude Desktop
+    2. Go to **Settings** → **Connectors**
+    3. Click **Add connector**
+    4. Enter the server URL: `https://mcp.relevanceai.com/`
+    5. Follow the authentication prompts to connect your Relevance AI project
+  </Accordion>
+
+  <Accordion title="Claude Web" icon="globe">
+    1. Navigate to the [Connectors page](https://claude.ai/settings/connectors) in Claude.ai
+    2. Click **Add connector**
+    3. Enter the server URL: `https://mcp.relevanceai.com/`
+    4. Follow the authentication prompts
+  </Accordion>
+
+  <Accordion title="ChatGPT" icon="comment">
+    ChatGPT supports MCP servers through Developer Mode, available on Pro, Team, Enterprise, and Edu plans.
+
+    1. Open ChatGPT **Settings**
+    2. Go to **Connectors** → **Advanced** → **Developer Mode**
+    3. Click **Add connector**
+    4. Enter the server URL: `https://mcp.relevanceai.com/`
+    5. Set Authentication to **OAuth** and follow the login flow
+
+    Once connected, the Relevance AI tools will be available in both Chat and Deep Research modes.
+  </Accordion>
+
+  <Accordion title="Cursor" icon="i-cursor">
+    1. Open Cursor Settings
+    2. Navigate to the **MCP** tab
+    3. Click **Add new MCP server**
+    4. Use the following configuration in your `mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="VS Code / Copilot" icon="code">
+    Add the following to your VS Code settings (`.vscode/mcp.json`):
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Windsurf" icon="wind">
+    Add the following to your Windsurf MCP configuration:
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Codex" icon="robot">
+    Run the following command:
+
+    ```bash
+    codex --mcp-server https://mcp.relevanceai.com/
+    ```
+
+    You can also set the MCP server via an environment variable:
+
+    ```bash
+    export CODEX_MCP_SERVER=https://mcp.relevanceai.com/
+    ```
+  </Accordion>
+
+  <Accordion title="Zed" icon="pen-nib">
+    Add the following to your Zed settings (`settings.json`):
+
+    ```json
+    {
+      "language_models": {
+        "mcp": {
+          "servers": {
+            "relevance-ai": {
+              "command": "npx",
+              "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+            }
+          }
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="v0 by Vercel" icon="bolt">
+    Add the following MCP configuration in your v0 project settings:
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Other clients" icon="plug">
+    For any MCP-compatible client, use the server URL:
+
+    ```
+    https://mcp.relevanceai.com/
+    ```
+
+    If your client requires an `npx` command, use:
+
+    ```bash
+    npx -y mcp-remote https://mcp.relevanceai.com/
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Authentication
+
+When you first connect, you will be prompted to authenticate with your Relevance AI account. Authentication is **per project** — you will be connected to a specific Relevance AI project after logging in.
+
+### Working with multiple projects
+
+If you work across multiple Relevance AI projects, the recommended approach is to add a separate MCP server entry for each project:
+
+<CodeGroup>
+```bash Claude Code
+claude mcp add relevance-project-1 --transport http https://mcp.relevanceai.com/
+claude mcp add relevance-project-2 --transport http https://mcp.relevanceai.com/
+claude mcp add relevance-project-3 --transport http https://mcp.relevanceai.com/
+```
+
+```json Cursor
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+
+```json VS Code
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+
+```json Windsurf
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+</CodeGroup>
+
+Each entry will authenticate independently against its own project. This lets you access tools and agents across all your projects without needing to log out and back in.
+
+<Note>
+  Alternatively, you can use a single connection and log out / log back in to switch projects — but the multi-connection approach above is preferred for convenience.
+</Note>
+
+## What you can do
+
+Once connected, your AI client gets full access to your Relevance AI project. This goes far beyond just running existing tools — you can build and manage your entire AI infrastructure directly from clients like Claude Code.
+
+<CardGroup cols={3}>
+  <Card title="Create agents" icon="robot">
+    Design and configure new agents, set their instructions, assign tools, and configure triggers.
+  </Card>
+  <Card title="Build tools" icon="wrench">
+    Create new tools with custom steps, inputs, and outputs.
+  </Card>
+  <Card title="Set up workforces" icon="users">
+    Build multi-agent workflows with triggers, conditions, and agent-to-agent handoffs.
+  </Card>
+  <Card title="Trigger agents" icon="play">
+    Start conversations with your agents and get responses.
+  </Card>
+  <Card title="Execute tools" icon="bolt">
+    Run any of your Relevance AI tools directly from your AI client.
+  </Card>
+  <Card title="Troubleshoot agents" icon="stethoscope">
+    Diagnose issues with your agents by reviewing conversation logs and tool outputs.
+  </Card>
+  <Card title="Refine agents" icon="sliders">
+    Iterate on agent instructions, tool configurations, and behaviour based on real results.
+  </Card>
+  <Card title="Evaluate runs" icon="chart-line">
+    Review previous agent runs, identify failures, and improve performance over time.
+  </Card>
+  <Card title="Update configurations" icon="gear">
+    Modify agent instructions, tool settings, and workflow logic.
+  </Card>
+</CardGroup>
+
+This means you can use a platform like Claude Code as a full development environment for your Relevance AI workspace — building agents, iterating on tools, and testing workflows without ever leaving your terminal.
+
+## Use cases
+
+<AccordionGroup>
+  <Accordion title="Building a new agent" icon="robot">
+    Use the MCP server to create and configure agents end-to-end from your AI client. You can describe what you want the agent to do in natural language and let your AI client handle the setup.
+
+    **Example prompts:**
+    - *"Create a new agent called 'Customer Support Bot' that answers questions using our FAQ knowledge base. Give it a friendly tone and make sure it escalates to a human when it can't answer."*
+    - *"Build me a BDR agent that qualifies inbound leads from HubSpot. It should check the company size and industry, then send a personalised follow-up email via Gmail."*
+    - *"Set up an agent that monitors our Slack support channel, categorises messages by urgency, and assigns them to the right team member."*
+    - *"Create an agent with a scheduled trigger that runs every morning, pulls yesterday's sales data from Google Sheets, and posts a summary to Slack."*
+  </Accordion>
+
+  <Accordion title="Evaluating and improving an agent" icon="chart-line">
+    Review how your agents have been performing by looking at previous conversation runs, identifying where they succeeded or failed, and making targeted improvements.
+
+    **Example prompts:**
+    - *"Pull the last 20 conversations for my Support Agent. Identify any where the agent gave an incorrect answer or failed to resolve the issue."*
+    - *"Look at my BDR Agent's recent runs. How often is it successfully qualifying leads vs. letting unqualified ones through?"*
+    - *"Review the last week of conversations for my Onboarding Agent. Are there any common questions it struggles with? Suggest improvements to its instructions."*
+    - *"Compare the performance of my Sales Agent before and after I updated its prompt last Tuesday. Is it doing better at objection handling?"*
+  </Accordion>
+
+  <Accordion title="Building a new tool" icon="wrench">
+    Create custom tools that your agents can use, combining API calls, code steps, LLM processing, and integrations — all from your AI client.
+
+    **Example prompts:**
+    - *"Create a tool that takes a company URL, scrapes the homepage, and returns a one-paragraph summary of what the company does."*
+    - *"Build a tool that searches our knowledge base for the top 3 most relevant articles given a customer question, and formats them as a numbered list with links."*
+    - *"Make a tool that takes a CSV of leads, enriches each one with LinkedIn data, and outputs a Google Sheet with the results."*
+    - *"Create a tool that generates a personalised cold email based on a prospect's LinkedIn profile and our product's value props."*
+  </Accordion>
+
+  <Accordion title="Troubleshooting issues" icon="stethoscope">
+    When something isn't working right, use the MCP server to dig into agent behaviour, tool failures, and configuration problems.
+
+    **Example prompts:**
+    - *"My Support Agent stopped responding to Slack messages yesterday. Check its trigger configuration and recent conversation logs to figure out what happened."*
+    - *"The lead enrichment tool is returning empty results. Look at the tool steps and check if the API call is configured correctly."*
+    - *"My agent keeps hallucinating answers instead of using the knowledge base. Review its instructions and knowledge configuration and suggest fixes."*
+    - *"List all my agents and their triggers. I think one of them has a broken webhook — find it and show me the configuration."*
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Plan before you build" icon="map">
+    Before asking your AI client to create or modify anything, start by having it plan the work first. In Claude Code, you can type `/plan` to enter plan mode — this lets you and Claude align on the approach before any changes are made.
+
+    For example, instead of jumping straight to *"Build me a support agent"*, start with *"Let's plan a support agent that handles inbound Slack messages. What tools will it need? What should the escalation flow look like?"* — then review the plan and tell Claude to execute it.
+  </Accordion>
+
+  <Accordion title="Review before you approve" icon="eye">
+    When your AI client proposes changes — like updating an agent's instructions or modifying a tool — read through what it's about to do before confirming. This is especially important for agents that are already live and handling real conversations.
+  </Accordion>
+
+  <Accordion title="Use conversation history for context" icon="clock-rotate-left">
+    When troubleshooting or refining an agent, ask your AI client to pull recent conversation logs first. This gives it real context to work with rather than guessing. Prompts like *"Look at the last 10 conversations and tell me what's going wrong"* are far more effective than *"My agent isn't working well, fix it"*.
+  </Accordion>
+
+  <Accordion title="Test with real scenarios" icon="flask">
+    After building or updating an agent, trigger a test conversation through the MCP server to see how it actually behaves. Don't just review the configuration — run it. Ask your AI client to *"Send a test message to my Support Agent asking about refund policies"* and review the response.
+  </Accordion>
+
+  <Accordion title="Work across multiple projects deliberately" icon="folder-tree">
+    If you have separate projects for development and production, connect to both via separate MCP entries. Build and test in your dev project, then once you're happy, recreate or promote the agent in production. This keeps your live agents safe while you experiment.
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Authentication issues">
+    If you are having trouble authenticating:
+    - Make sure you have an active Relevance AI account
+    - Check that you have access to the project you are trying to connect to
+    - Try removing and re-adding the MCP server connection
+    - For Claude Code, you can reset the connection with `claude mcp remove relevance-prod` and then re-add it
+  </Accordion>
+
+  <Accordion title="Tools not appearing">
+    If your tools are not showing up in the client:
+    - Verify that you have tools configured in your Relevance AI project
+    - Check that you are authenticated to the correct project
+    - Try disconnecting and reconnecting the MCP server
+  </Accordion>
+
+  <Accordion title="Connection errors">
+    If you cannot connect to the MCP server:
+    - Ensure you have a stable internet connection
+    - Check that `https://mcp.relevanceai.com/` is accessible from your network
+    - Try removing and re-adding the MCP server connection in your client
+    - Try clearing the auth cache: `rm -rf ~/.mcp-auth`
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What is MCP?">
+    The Model Context Protocol (MCP) is an open standard that allows AI clients to connect to external tools and data sources. It provides a standardized way for AI assistants to access your Relevance AI workspace.
+  </Accordion>
+
+  <Accordion title="Is the MCP server free to use?">
+    The MCP server itself is free. You will be billed for any Relevance AI usage (agent runs, tool executions, etc.) according to your plan.
+  </Accordion>
+
+  <Accordion title="Can I use the MCP server with multiple AI clients at the same time?">
+    Yes. You can connect to the Relevance AI MCP server from as many clients as you like simultaneously. Each client authenticates independently.
+  </Accordion>
+
+  <Accordion title="Does authentication expire?">
+    Authentication tokens may expire after a period of inactivity. If you are prompted to re-authenticate, simply follow the login flow again.
+  </Accordion>
+
+  <Accordion title="Can I restrict which tools are available via MCP?">
+    The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each MCP connection to the appropriate project.
+  </Accordion>
+
+
+</AccordionGroup>
