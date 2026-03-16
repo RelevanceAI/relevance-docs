@@ -1,0 +1,302 @@
+---
+title: "MCP Server"
+sidebarTitle: "MCP Server"
+description: "Connect to Relevance AI from Claude Desktop, Cursor, VS Code, ChatGPT, and other MCP-compatible AI clients."
+---
+
+The Relevance AI MCP server gives any MCP-compatible AI client direct access to your agents, tools, and knowledge. Connect from the AI tools you already use and start building.
+
+The MCP server is available at:
+
+```
+https://mcp.relevanceai.com/
+```
+
+<Tip>For Claude Code, we recommend using the [Relevance AI plugin](/integrations/mcp/programmatic-gtm/claude-code) instead of a manual MCP connection — it includes built-in skills and context that make the experience significantly better.</Tip>
+
+<Warning>
+  This page is about using Relevance AI **from** external AI clients. If you want to connect an external MCP server **to** a Relevance AI agent, see [MCP Client](/integrations/mcp/mcp-client).
+</Warning>
+
+---
+
+## Supported clients
+
+<Tabs>
+  <Tab title="Claude">
+    ### Claude Desktop
+
+    <Steps>
+      <Step title="Open settings">
+        Go to **Settings** → **Connectors** in Claude Desktop.
+      </Step>
+      <Step title="Add connector">
+        Click **Add connector** and enter the server URL: `https://mcp.relevanceai.com/`
+      </Step>
+      <Step title="Authenticate">
+        Follow the authentication prompts to connect your Relevance AI project.
+      </Step>
+    </Steps>
+
+    ### Claude Web
+
+    <Steps>
+      <Step title="Open connectors">
+        Navigate to the [Connectors page](https://claude.ai/settings/connectors) in Claude.ai.
+      </Step>
+      <Step title="Add connector">
+        Click **Add connector** and enter the server URL: `https://mcp.relevanceai.com/`
+      </Step>
+      <Step title="Authenticate">
+        Follow the authentication prompts.
+      </Step>
+    </Steps>
+
+    ### Claude Code (manual)
+
+    If you prefer to add the MCP server directly without the plugin:
+
+    ```bash
+    claude mcp add relevance-prod --transport http https://mcp.relevanceai.com/
+    ```
+
+    Once added, run `/mcp` from within Claude Code to connect and follow the authentication steps.
+  </Tab>
+
+  <Tab title="ChatGPT">
+    <Info>ChatGPT supports MCP servers through Developer Mode, available on Pro, Team, Enterprise, and Edu plans.</Info>
+
+    <Steps>
+      <Step title="Enable Developer Mode">
+        Open ChatGPT **Settings** → **Connectors** → **Advanced** → **Developer Mode**.
+      </Step>
+      <Step title="Add connector">
+        Click **Add connector** and enter the server URL: `https://mcp.relevanceai.com/`
+      </Step>
+      <Step title="Authenticate">
+        Set Authentication to **OAuth** and follow the login flow.
+      </Step>
+    </Steps>
+
+    Once connected, the Relevance AI tools will be available in both Chat and Deep Research modes.
+  </Tab>
+
+  <Tab title="Cursor">
+    Add the following to your `mcp.json` in Cursor Settings → **MCP** tab → **Add new MCP server**:
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab title="VS Code">
+    Add the following to your VS Code settings (`.vscode/mcp.json`):
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab title="Windsurf">
+    Add the following to your Windsurf MCP configuration:
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Tab>
+
+  <Tab title="Other">
+    ### Codex
+
+    ```bash
+    codex --mcp-server https://mcp.relevanceai.com/
+    ```
+
+    Or set via environment variable:
+
+    ```bash
+    export CODEX_MCP_SERVER=https://mcp.relevanceai.com/
+    ```
+
+    ### Zed
+
+    Add to your Zed settings (`settings.json`):
+
+    ```json
+    {
+      "language_models": {
+        "mcp": {
+          "servers": {
+            "relevance-ai": {
+              "command": "npx",
+              "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+            }
+          }
+        }
+      }
+    }
+    ```
+
+    ### v0 by Vercel
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+
+    ### Any MCP-compatible client
+
+    Use the server URL directly:
+
+    ```
+    https://mcp.relevanceai.com/
+    ```
+
+    If your client requires an `npx` command:
+
+    ```bash
+    npx -y mcp-remote https://mcp.relevanceai.com/
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Authentication
+
+When you first connect, you will be prompted to authenticate with your Relevance AI account. Authentication is **per project** — you will be connected to a specific Relevance AI project after logging in.
+
+### Working with multiple projects
+
+If you work across multiple Relevance AI projects, add a separate MCP server entry for each:
+
+<CodeGroup>
+```json Cursor
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+
+```json VS Code
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+
+```json Windsurf
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+</CodeGroup>
+
+Each entry authenticates independently against its own project, so you can access tools and agents across all your projects without logging out and back in.
+
+<Note>
+  Alternatively, you can use a single connection and log out / log back in to switch projects — but the multi-connection approach above is preferred for convenience.
+</Note>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Authentication issues">
+    - Make sure you have an active Relevance AI account
+    - Check that you have access to the project you are trying to connect to
+    - Try removing and re-adding the MCP server connection
+  </Accordion>
+
+  <Accordion title="Tools not appearing">
+    - Verify that you have tools configured in your Relevance AI project
+    - Check that you are authenticated to the correct project
+    - Try disconnecting and reconnecting the MCP server
+  </Accordion>
+
+  <Accordion title="Connection errors">
+    - Ensure you have a stable internet connection
+    - Check that `https://mcp.relevanceai.com/` is accessible from your network
+    - Try removing and re-adding the MCP server connection in your client
+    - Try clearing the auth cache: `rm -rf ~/.mcp-auth`
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What is MCP?">
+    The Model Context Protocol (MCP) is an open standard that allows AI clients to connect to external tools and data sources. It provides a standardized way for AI assistants to access your Relevance AI workspace.
+  </Accordion>
+
+  <Accordion title="Is the MCP server free to use?">
+    The MCP server itself is free. You will be billed for any Relevance AI usage (agent runs, tool executions, etc.) according to your plan.
+  </Accordion>
+
+  <Accordion title="Can I use multiple AI clients at the same time?">
+    Yes. You can connect to the Relevance AI MCP server from as many clients as you like simultaneously. Each client authenticates independently.
+  </Accordion>
+
+  <Accordion title="Does authentication expire?">
+    Authentication tokens may expire after a period of inactivity. If you are prompted to re-authenticate, simply follow the login flow again.
+  </Accordion>
+
+  <Accordion title="Can I restrict which tools are available via MCP?">
+    The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each connection to the appropriate project.
+  </Accordion>
+</AccordionGroup>

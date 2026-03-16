@@ -1,0 +1,206 @@
+---
+title: "Programmatic GTM"
+sidebarTitle: "Overview"
+description: "Build and manage your GTM agents programmatically using Claude Code or any MCP-compatible AI client connected to Relevance AI."
+---
+
+Programmatic GTM is the new way to build your agents for GTM in Relevance AI. Instead of clicking through a UI, you build, test, and iterate on agents, tools, and workforces directly from your coding environment — using natural language.
+
+<CardGroup cols={2}>
+  <Card title="Claude Code Plugin" icon="terminal" href="/integrations/mcp/programmatic-gtm/claude-code">
+    The fastest way to get started. Install the Relevance AI plugin for Claude Code and build agents from your terminal.
+  </Card>
+  <Card title="MCP Server" icon="plug" href="/integrations/mcp/programmatic-gtm/mcp-server">
+    Connect from any MCP-compatible client — Claude Desktop, Cursor, VS Code, ChatGPT, and more.
+  </Card>
+</CardGroup>
+
+---
+
+## What you can do
+
+Once connected, your AI client gets full access to your Relevance AI project. This goes far beyond running existing tools — you can build and manage your entire GTM infrastructure from clients like Claude Code.
+
+<CardGroup cols={3}>
+  <Card title="Create agents" icon="robot">
+    Design and configure new agents, set their instructions, assign tools, and configure triggers.
+  </Card>
+  <Card title="Build tools" icon="wrench">
+    Create new tools with custom steps, inputs, and outputs.
+  </Card>
+  <Card title="Set up workforces" icon="users">
+    Build multi-agent workflows with triggers, conditions, and agent-to-agent handoffs.
+  </Card>
+  <Card title="Trigger agents" icon="play">
+    Start conversations with your agents and get responses.
+  </Card>
+  <Card title="Execute tools" icon="bolt">
+    Run any of your Relevance AI tools directly from your AI client.
+  </Card>
+  <Card title="Troubleshoot agents" icon="stethoscope">
+    Diagnose issues with your agents by reviewing conversation logs and tool outputs.
+  </Card>
+  <Card title="Refine agents" icon="sliders">
+    Iterate on agent instructions, tool configurations, and behaviour based on real results.
+  </Card>
+  <Card title="Evaluate runs" icon="chart-line">
+    Review previous agent runs, identify failures, and improve performance over time.
+  </Card>
+  <Card title="Update configurations" icon="gear">
+    Modify agent instructions, tool settings, and workflow logic.
+  </Card>
+</CardGroup>
+
+---
+
+## Use cases
+
+<Tabs>
+  <Tab title="Build agents">
+    Use Programmatic GTM to create and configure agents end-to-end from your AI client. Describe what you want in natural language and let your AI client handle the setup.
+
+    **Example prompts:**
+
+    <AccordionGroup>
+      <Accordion title="Customer support agent">
+        *"Create a new agent called 'Customer Support Bot' that answers questions using our FAQ knowledge base. Give it a friendly tone and make sure it escalates to a human when it can't answer."*
+      </Accordion>
+      <Accordion title="BDR agent">
+        *"Build me a BDR agent that qualifies inbound leads from HubSpot. It should check the company size and industry, then send a personalised follow-up email via Gmail."*
+      </Accordion>
+      <Accordion title="Slack triage agent">
+        *"Set up an agent that monitors our Slack support channel, categorises messages by urgency, and assigns them to the right team member."*
+      </Accordion>
+      <Accordion title="Scheduled reporting agent">
+        *"Create an agent with a scheduled trigger that runs every morning, pulls yesterday's sales data from Google Sheets, and posts a summary to Slack."*
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Evaluate & improve">
+    Review how your agents have been performing by looking at previous conversation runs, identifying where they succeeded or failed, and making targeted improvements.
+
+    **Example prompts:**
+
+    <AccordionGroup>
+      <Accordion title="Identify failures">
+        *"Pull the last 20 conversations for my Support Agent. Identify any where the agent gave an incorrect answer or failed to resolve the issue."*
+      </Accordion>
+      <Accordion title="Measure qualification rates">
+        *"Look at my BDR Agent's recent runs. How often is it successfully qualifying leads vs. letting unqualified ones through?"*
+      </Accordion>
+      <Accordion title="Find common struggles">
+        *"Review the last week of conversations for my Onboarding Agent. Are there any common questions it struggles with? Suggest improvements to its instructions."*
+      </Accordion>
+      <Accordion title="Compare before & after">
+        *"Compare the performance of my Sales Agent before and after I updated its prompt last Tuesday. Is it doing better at objection handling?"*
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Build tools">
+    Create custom tools that your agents can use, combining API calls, code steps, LLM processing, and integrations — all from your AI client.
+
+    **Example prompts:**
+
+    <AccordionGroup>
+      <Accordion title="Company research tool">
+        *"Create a tool that takes a company URL, scrapes the homepage, and returns a one-paragraph summary of what the company does."*
+      </Accordion>
+      <Accordion title="Knowledge search tool">
+        *"Build a tool that searches our knowledge base for the top 3 most relevant articles given a customer question, and formats them as a numbered list with links."*
+      </Accordion>
+      <Accordion title="Lead enrichment tool">
+        *"Make a tool that takes a CSV of leads, enriches each one with LinkedIn data, and outputs a Google Sheet with the results."*
+      </Accordion>
+      <Accordion title="Cold email generator">
+        *"Create a tool that generates a personalised cold email based on a prospect's LinkedIn profile and our product's value props."*
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Troubleshoot">
+    When something isn't working right, use Programmatic GTM to dig into agent behaviour, tool failures, and configuration problems.
+
+    **Example prompts:**
+
+    <AccordionGroup>
+      <Accordion title="Debug triggers">
+        *"My Support Agent stopped responding to Slack messages yesterday. Check its trigger configuration and recent conversation logs to figure out what happened."*
+      </Accordion>
+      <Accordion title="Fix tool errors">
+        *"The lead enrichment tool is returning empty results. Look at the tool steps and check if the API call is configured correctly."*
+      </Accordion>
+      <Accordion title="Fix hallucination">
+        *"My agent keeps hallucinating answers instead of using the knowledge base. Review its instructions and knowledge configuration and suggest fixes."*
+      </Accordion>
+      <Accordion title="Audit configurations">
+        *"List all my agents and their triggers. I think one of them has a broken webhook — find it and show me the configuration."*
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
+
+---
+
+## Best practices
+
+<Steps>
+  <Step title="Plan before you build">
+    Before asking your AI client to create or modify anything, start by having it plan the work first. In Claude Code, you can type `/plan` to enter plan mode — this lets you and Claude align on the approach before any changes are made.
+
+    <Tip>Instead of jumping straight to *"Build me a support agent"*, start with *"Let's plan a support agent that handles inbound Slack messages. What tools will it need? What should the escalation flow look like?"* — then review the plan and tell Claude to execute it.</Tip>
+  </Step>
+
+  <Step title="Review before you approve">
+    When your AI client proposes changes — like updating an agent's instructions or modifying a tool — read through what it's about to do before confirming. This is especially important for agents that are already live and handling real conversations.
+  </Step>
+
+  <Step title="Use conversation history for context">
+    When troubleshooting or refining an agent, ask your AI client to pull recent conversation logs first. This gives it real context to work with rather than guessing.
+
+    <Tip>Prompts like *"Look at the last 10 conversations and tell me what's going wrong"* are far more effective than *"My agent isn't working well, fix it"*.</Tip>
+  </Step>
+
+  <Step title="Test with real scenarios">
+    After building or updating an agent, trigger a test conversation to see how it actually behaves. Don't just review the configuration — run it. Ask your AI client to *"Send a test message to my Support Agent asking about refund policies"* and review the response.
+  </Step>
+
+  <Step title="Work across multiple projects deliberately">
+    If you have separate projects for development and production, connect to both via separate MCP entries. Build and test in your dev project, then once you're happy, recreate or promote the agent in production. This keeps your live agents safe while you experiment.
+  </Step>
+</Steps>
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What is Programmatic GTM?">
+    Programmatic GTM lets you build, manage, and iterate on your Relevance AI agents and tools directly from AI-powered coding environments like Claude Code, Cursor, or VS Code — instead of using the Relevance AI web interface. You describe what you want in natural language and your AI client handles the rest.
+  </Accordion>
+
+  <Accordion title="What is MCP?">
+    The Model Context Protocol (MCP) is an open standard that allows AI clients to connect to external tools and data sources. It provides a standardized way for AI assistants to access your Relevance AI workspace. Programmatic GTM is built on top of MCP.
+  </Accordion>
+
+  <Accordion title="Do I need to use Claude Code?">
+    No. Claude Code with the Relevance AI plugin provides the richest experience, but you can use any MCP-compatible client — Claude Desktop, ChatGPT, Cursor, VS Code, Windsurf, and more. See the [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server) page for all supported clients.
+  </Accordion>
+
+  <Accordion title="Is Programmatic GTM free to use?">
+    The MCP server and Claude Code plugin are free. You will be billed for any Relevance AI usage (agent runs, tool executions, etc.) according to your plan.
+  </Accordion>
+
+  <Accordion title="Can I use multiple AI clients at the same time?">
+    Yes. You can connect to the Relevance AI MCP server from as many clients as you like simultaneously. Each client authenticates independently.
+  </Accordion>
+
+  <Accordion title="Does authentication expire?">
+    Authentication tokens may expire after a period of inactivity. If you are prompted to re-authenticate, simply follow the login flow again.
+  </Accordion>
+
+  <Accordion title="Can I restrict which tools are available?">
+    The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each connection to the appropriate project.
+  </Accordion>
+</AccordionGroup>
