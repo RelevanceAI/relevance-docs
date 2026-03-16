@@ -22,67 +22,39 @@ https://mcp.relevanceai.com/
 
 ## Supported clients
 
-<Tabs>
-  <Tab title="Claude">
-    ### Claude Desktop
+<AccordionGroup>
+  <Accordion title="Claude Desktop" icon="message-bot">
+    1. Open Claude Desktop
+    2. Go to **Settings** → **Connectors**
+    3. Click **Add connector**
+    4. Enter the server URL: `https://mcp.relevanceai.com/`
+    5. Follow the authentication prompts to connect your Relevance AI project
+  </Accordion>
 
-    <Steps>
-      <Step title="Open settings">
-        Go to **Settings** → **Connectors** in Claude Desktop.
-      </Step>
-      <Step title="Add connector">
-        Click **Add connector** and enter the server URL: `https://mcp.relevanceai.com/`
-      </Step>
-      <Step title="Authenticate">
-        Follow the authentication prompts to connect your Relevance AI project.
-      </Step>
-    </Steps>
+  <Accordion title="Claude Web" icon="globe">
+    1. Navigate to the [Connectors page](https://claude.ai/settings/connectors) in Claude.ai
+    2. Click **Add connector**
+    3. Enter the server URL: `https://mcp.relevanceai.com/`
+    4. Follow the authentication prompts
+  </Accordion>
 
-    ### Claude Web
+  <Accordion title="ChatGPT" icon="comment">
+    ChatGPT supports MCP servers through Developer Mode, available on Pro, Team, Enterprise, and Edu plans.
 
-    <Steps>
-      <Step title="Open connectors">
-        Navigate to the [Connectors page](https://claude.ai/settings/connectors) in Claude.ai.
-      </Step>
-      <Step title="Add connector">
-        Click **Add connector** and enter the server URL: `https://mcp.relevanceai.com/`
-      </Step>
-      <Step title="Authenticate">
-        Follow the authentication prompts.
-      </Step>
-    </Steps>
-
-    ### Claude Code (manual)
-
-    If you prefer to add the MCP server directly without the plugin:
-
-    ```bash
-    claude mcp add relevance-prod --transport http https://mcp.relevanceai.com/
-    ```
-
-    Once added, run `/mcp` from within Claude Code to connect and follow the authentication steps.
-  </Tab>
-
-  <Tab title="ChatGPT">
-    <Info>ChatGPT supports MCP servers through Developer Mode, available on Pro, Team, Enterprise, and Edu plans.</Info>
-
-    <Steps>
-      <Step title="Enable Developer Mode">
-        Open ChatGPT **Settings** → **Connectors** → **Advanced** → **Developer Mode**.
-      </Step>
-      <Step title="Add connector">
-        Click **Add connector** and enter the server URL: `https://mcp.relevanceai.com/`
-      </Step>
-      <Step title="Authenticate">
-        Set Authentication to **OAuth** and follow the login flow.
-      </Step>
-    </Steps>
+    1. Open ChatGPT **Settings**
+    2. Go to **Connectors** → **Advanced** → **Developer Mode**
+    3. Click **Add connector**
+    4. Enter the server URL: `https://mcp.relevanceai.com/`
+    5. Set Authentication to **OAuth** and follow the login flow
 
     Once connected, the Relevance AI tools will be available in both Chat and Deep Research modes.
-  </Tab>
+  </Accordion>
 
-  <Tab title="Cursor">
-    Add the following to your `mcp.json` in Cursor Settings → **MCP** tab → **Add new MCP server**:
+  <Accordion title="Cursor" icon="i-cursor">
+    1. Open Cursor Settings
+    2. Navigate to the **MCP** tab
+    3. Click **Add new MCP server**
+    4. Use the following configuration in your `mcp.json`:
 
     ```json
     {
@@ -94,9 +66,9 @@ https://mcp.relevanceai.com/
       }
     }
     ```
-  </Tab>
+  </Accordion>
 
-  <Tab title="VS Code">
+  <Accordion title="VS Code / Copilot" icon="code">
     Add the following to your VS Code settings (`.vscode/mcp.json`):
 
     ```json
@@ -109,9 +81,9 @@ https://mcp.relevanceai.com/
       }
     }
     ```
-  </Tab>
+  </Accordion>
 
-  <Tab title="Windsurf">
+  <Accordion title="Windsurf" icon="wind">
     Add the following to your Windsurf MCP configuration:
 
     ```json
@@ -124,24 +96,24 @@ https://mcp.relevanceai.com/
       }
     }
     ```
-  </Tab>
+  </Accordion>
 
-  <Tab title="Other">
-    ### Codex
+  <Accordion title="Codex" icon="robot">
+    Run the following command:
 
     ```bash
     codex --mcp-server https://mcp.relevanceai.com/
     ```
 
-    Or set via environment variable:
+    You can also set the MCP server via an environment variable:
 
     ```bash
     export CODEX_MCP_SERVER=https://mcp.relevanceai.com/
     ```
+  </Accordion>
 
-    ### Zed
-
-    Add to your Zed settings (`settings.json`):
+  <Accordion title="Zed" icon="pen-nib">
+    Add the following to your Zed settings (`settings.json`):
 
     ```json
     {
@@ -157,8 +129,10 @@ https://mcp.relevanceai.com/
       }
     }
     ```
+  </Accordion>
 
-    ### v0 by Vercel
+  <Accordion title="v0 by Vercel" icon="bolt">
+    Add the following MCP configuration in your v0 project settings:
 
     ```json
     {
@@ -170,22 +144,32 @@ https://mcp.relevanceai.com/
       }
     }
     ```
+  </Accordion>
 
-    ### Any MCP-compatible client
+  <Accordion title="Claude Code (manual)" icon="terminal">
+    If you prefer to add the MCP server directly without the plugin:
 
-    Use the server URL directly:
+    ```bash
+    claude mcp add relevance-prod --transport http https://mcp.relevanceai.com/
+    ```
+
+    Once added, run `/mcp` from within Claude Code. You will see the new MCP server in the list. Select it to connect and follow the authentication steps.
+  </Accordion>
+
+  <Accordion title="Other clients" icon="plug">
+    For any MCP-compatible client, use the server URL:
 
     ```
     https://mcp.relevanceai.com/
     ```
 
-    If your client requires an `npx` command:
+    If your client requires an `npx` command, use:
 
     ```bash
     npx -y mcp-remote https://mcp.relevanceai.com/
     ```
-  </Tab>
-</Tabs>
+  </Accordion>
+</AccordionGroup>
 
 ---
 
