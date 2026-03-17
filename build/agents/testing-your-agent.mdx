@@ -1,0 +1,425 @@
+---
+title: 'Testing Your Agent'
+sidebarTitle: 'Testing Your Agent'
+description: 'Comprehensive guide to testing and validating your AI Agent before and after deployment'
+---
+
+Testing your Agent ensures it behaves correctly, handles edge cases, and delivers consistent results. Relevance AI provides multiple testing methods for different stages of development—from quick manual tests during building to automated evaluations and production monitoring.
+
+<Frame>
+  <img 
+    src="/images/agent/agent-testing-overview.png" 
+    alt="Agent testing workflow from development to production"
+  />
+</Frame>
+
+## Testing methods overview
+
+<CardGroup cols={3}>
+  <Card title="Run Tab" icon="play" href="#run-tab-manual-testing">
+    Quick manual testing during development. Test prompts and see responses in real-time.
+  </Card>
+  <Card title="Evals" icon="flask-vial" href="#evals-automated-testing">
+    Automated testing with scenarios and Judges. Compare agent versions and run A/B tests.
+  </Card>
+  <Card title="Task View" icon="list-check" href="#task-view-conversation-review">
+    Review real conversation history. Monitor how your Agent performs with actual users.
+  </Card>
+  <Card title="Analytics" icon="chart-line" href="#analytics-performance-metrics">
+    Track performance metrics over time. Monitor costs, error rates, and usage patterns.
+  </Card>
+  <Card title="Agent Optimiser" icon="wand-magic-sparkles" href="#agent-optimiser-improvement-recommendations">
+    AI-powered analysis of conversation history with improvement recommendations.
+  </Card>
+</CardGroup>
+
+---
+
+## Testing workflow
+
+Follow this workflow to test your Agent from development through production:
+
+<Steps>
+  <Step title="Development Testing">
+    Use the **Run tab** for quick manual tests while building your Agent. Test different prompts, verify tool connections, and check basic behavior.
+  </Step>
+  <Step title="Pre-deployment Validation">
+    Create **Evals** with test scenarios and Judges to validate your Agent before publishing. Run automated evaluations to catch issues early.
+  </Step>
+  <Step title="A/B Testing">
+    Use **Evals** to compare different agent versions. Test prompt changes, tool configurations, or model settings to find the best setup.
+  </Step>
+  <Step title="Production Monitoring">
+    Monitor real conversations in **Task View**. Track performance metrics in **Analytics** (Enterprise). Use **Agent Optimiser** to identify improvement opportunities.
+  </Step>
+  <Step title="Continuous Improvement">
+    Regularly run Evals after making changes. Review Task View for edge cases. Update test scenarios based on real user interactions.
+  </Step>
+</Steps>
+
+---
+
+## Run tab: Manual testing
+
+The Run tab is your testing playground during development. Located next to the Build tab in the Agent builder, it provides a chat interface to test your Agent in real-time.
+
+### When to use the Run tab
+
+<CardGroup cols={2}>
+  <Card title="During Development" icon="hammer">
+    Test prompts as you write them. Verify tool connections work correctly. Check basic conversation flow.
+  </Card>
+  <Card title="Quick Validation" icon="bolt">
+    Test a single scenario quickly. Verify a specific change works. Debug tool execution issues.
+  </Card>
+</CardGroup>
+
+### How to use the Run tab
+
+1. Open your Agent in the builder and click the **Run** tab
+2. Type a message to your Agent in the chat interface
+3. Review the Agent's response and any tool executions
+4. Continue the conversation to test multi-turn interactions
+5. Check the right sidebar for execution details, credits used, and tool outputs
+
+<Tip>
+The Run tab shows you exactly what tools your Agent calls and what data it receives. Use this to debug tool configuration issues or verify your Agent is using the right tools at the right time.
+</Tip>
+
+### Limitations of manual testing
+
+- **Time-consuming** — Testing multiple scenarios manually takes significant time
+- **Not repeatable** — Hard to test the same scenario consistently across agent versions
+- **No scoring** — Subjective evaluation without quantitative metrics
+- **Limited coverage** — Difficult to test all edge cases and variations
+
+For comprehensive testing, use Evals for automated evaluation.
+
+---
+
+## Evals: Automated testing
+
+Evals is your automated testing system. Located in the **Monitor** tab (next to the Run tab), Evals enables you to create test scenarios, define evaluation criteria (Judges), and run automated evaluations without manual testing.
+
+<Info>
+**Rollout Status**: Evals is currently being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see this feature yet, reach out to your account manager.
+</Info>
+
+### When to use Evals
+
+<CardGroup cols={2}>
+  <Card title="Pre-deployment Testing" icon="shield-check">
+    Validate your Agent before publishing. Block publishing if tests fail. Ensure quality standards are met.
+  </Card>
+  <Card title="A/B Testing" icon="flask">
+    Compare different agent versions. Test prompt variations. Evaluate model or tool changes.
+  </Card>
+  <Card title="Regression Testing" icon="rotate">
+    Verify changes don't break existing behavior. Run the same tests after updates. Track performance over time.
+  </Card>
+  <Card title="Edge Case Testing" icon="triangle-exclamation">
+    Test difficult scenarios systematically. Verify handling of angry customers, off-topic requests, or unusual inputs.
+  </Card>
+</CardGroup>
+
+### Key concepts
+
+**Test scenarios** simulate user interactions with your Agent. Each scenario includes:
+- A prompt describing the user persona and situation
+- Maximum conversation turns
+- Scenario-specific Judges (evaluation criteria)
+
+**Judges** are evaluation criteria that automatically assess Agent responses:
+- **Scenario Judges** — Created within a test scenario, only evaluate that scenario
+- **Agent-level Judges** — Created in the Judges tab, automatically run on all test scenarios
+
+**Runs** are evaluation executions. Each run:
+- Simulates conversations based on your scenarios
+- Applies all Judges (scenario + agent-level)
+- Generates scores and detailed feedback
+- Saves results for comparison over time
+
+### Creating effective test scenarios
+
+<AccordionGroup>
+  <Accordion title="Define clear personas">
+    Describe the user's role, emotional state, and goals. Example: "You are a frustrated customer who was charged twice for the same order. You've already contacted support once without resolution."
+  </Accordion>
+  
+  <Accordion title="Set appropriate turn limits">
+    Use 5-10 turns for simple scenarios, 10-20 for complex interactions. Too few turns may not reveal issues; too many consume unnecessary credits.
+  </Accordion>
+  
+  <Accordion title="Write specific Judge rules">
+    Vague criteria lead to inconsistent results. Instead of "Agent was helpful," write "Agent acknowledged the customer's frustration and offered a specific solution within 2 responses."
+  </Accordion>
+  
+  <Accordion title="Test edge cases">
+    Create scenarios for difficult situations: angry customers, requests to bypass rules, off-topic questions, attempts to manipulate the Agent.
+  </Accordion>
+</AccordionGroup>
+
+### Running evaluations
+
+1. Go to **Monitor** tab → **Evals** → **Tests**
+2. Select the test scenarios you want to run
+3. Click **Run** and name your evaluation
+4. Review results: average score, individual scenario scores, Judge verdicts
+5. Click **View Conversation** on any scenario to see the full interaction and Judge feedback
+
+<Tip>
+Run multiple scenarios together to group them under one evaluation result. This makes it easier to compare overall performance across agent versions.
+</Tip>
+
+### Blocking publishing with Evals
+
+Configure Evals to enforce quality standards before publishing:
+
+1. Click **Publish** on your Agent
+2. Select which Tests or scenarios to run
+3. Set a **Pass Threshold** (e.g., 70%)
+4. Enable **Block save if evaluation fails**
+5. Click **Publish** — the Agent will only publish if evaluation scores meet the threshold
+
+To bypass evaluation, use **Force Publish** from the Publish button dropdown.
+
+For detailed Evals documentation, see [Evals](/build/agents/build-your-agent/evals).
+
+For A/B testing workflows, see [A/B Testing with Evals](/build/agents/build-your-agent/ab-testing-with-evals).
+
+---
+
+## Task View: Conversation review
+
+Task View shows all conversations your Agent has handled. Located in the **Tasks** section, it provides complete visibility into real user interactions.
+
+### When to use Task View
+
+<CardGroup cols={2}>
+  <Card title="Production Monitoring" icon="eye">
+    Review real conversations after deployment. Identify issues users encounter. Find patterns in successful interactions.
+  </Card>
+  <Card title="Quality Assurance" icon="clipboard-check">
+    Spot-check Agent responses. Verify handling of edge cases. Ensure brand voice consistency.
+  </Card>
+  <Card title="Training Data" icon="graduation-cap">
+    Find examples for test scenarios. Identify common user questions. Discover new use cases.
+  </Card>
+  <Card title="Troubleshooting" icon="wrench">
+    Debug specific user issues. Review tool execution logs. Understand why a conversation failed.
+  </Card>
+</CardGroup>
+
+### Reviewing conversations
+
+1. Navigate to **Tasks** in the left sidebar
+2. Select a task from the list to view the conversation
+3. Review the Agent's responses and tool executions
+4. Check the right sidebar for metadata: credits used, tools called, status
+5. Use the chat interface to continue the conversation or provide feedback
+
+<Tip>
+Use the **To Review** filter to find tasks that need your attention. Create saved filters for specific scenarios like "High Priority" or "Customer Support Tasks."
+</Tip>
+
+### What to look for
+
+- **Response quality** — Are responses accurate, helpful, and on-brand?
+- **Tool usage** — Is the Agent calling the right tools at the right time?
+- **Error handling** — How does the Agent handle unexpected inputs or tool failures?
+- **Conversation flow** — Does the Agent maintain context across multiple turns?
+- **Edge cases** — What unusual scenarios are users encountering?
+
+For detailed Task View documentation, see [Tasks Overview](/build/agents/give-your-agent-tasks/task-overview).
+
+---
+
+## Analytics: Performance metrics
+
+Analytics provides real-time visibility into Agent performance, costs, and usage patterns. Available to Enterprise customers, Analytics helps you track metrics over time and optimize your AI workforce.
+
+<Info>Analytics is an Enterprise feature. Access it from **Account** → **Analytics** in your dashboard.</Info>
+
+### When to use Analytics
+
+<CardGroup cols={2}>
+  <Card title="Performance Tracking" icon="chart-line">
+    Monitor task volume, error rates, and success metrics. Track trends over time. Compare agent performance.
+  </Card>
+  <Card title="Cost Management" icon="coins">
+    Track credit consumption. Identify expensive workflows. Optimize costs per task.
+  </Card>
+  <Card title="Capacity Planning" icon="arrow-trend-up">
+    Forecast resource needs. Identify peak usage periods. Plan for scaling.
+  </Card>
+  <Card title="ROI Reporting" icon="chart-pie">
+    Demonstrate value to stakeholders. Show task volume and cost efficiency. Track improvements over time.
+  </Card>
+</CardGroup>
+
+### Key metrics to monitor
+
+| Metric | What It Tells You | How to Use It |
+|--------|-------------------|---------------|
+| **Tasks** | Total tasks completed | Track workload and growth trends |
+| **Error Rate** | Percentage of failed tasks | Identify reliability issues |
+| **Credits/Task** | Cost efficiency | Compare agents, optimize expensive workflows |
+| **Actions/Task** | Workflow complexity | Understand resource usage patterns |
+| **Tasks to Review** | Human intervention needed | Monitor escalation rates |
+
+### Using Analytics for testing
+
+1. **Baseline performance** — Record metrics before making changes
+2. **Deploy changes** — Update your Agent and publish
+3. **Monitor impact** — Compare metrics after deployment
+4. **Identify issues** — Look for spikes in error rates or costs
+5. **Optimize** — Adjust based on data and re-test
+
+<Tip>
+Use the date range filter to compare periods. For example, compare "Last 7 days" with "Previous 7 days" to see the impact of recent changes.
+</Tip>
+
+For detailed Analytics documentation, see [Analytics](/enterprise/analytics).
+
+---
+
+## Agent Optimiser: Improvement recommendations
+
+Agent Optimiser is a Marketplace tool that analyzes your Agent's conversation history and provides AI-powered improvement recommendations.
+
+### When to use Agent Optimiser
+
+<CardGroup cols={2}>
+  <Card title="Periodic Reviews" icon="calendar">
+    Run monthly or quarterly reviews. Identify improvement opportunities. Get fresh perspectives on Agent behavior.
+  </Card>
+  <Card title="After Major Changes" icon="code-compare">
+    Validate that changes improved performance. Discover unintended side effects. Find new optimization opportunities.
+  </Card>
+  <Card title="Troubleshooting" icon="stethoscope">
+    Diagnose recurring issues. Understand patterns in failures. Get specific recommendations for fixes.
+  </Card>
+  <Card title="Optimization" icon="gauge-high">
+    Improve response quality. Reduce costs. Enhance user satisfaction.
+  </Card>
+</CardGroup>
+
+### How Agent Optimiser works
+
+1. Analyzes your Agent's conversation history from Task View
+2. Identifies patterns in successful and unsuccessful interactions
+3. Evaluates prompt effectiveness, tool usage, and response quality
+4. Generates specific, actionable recommendations
+5. Suggests prompt improvements, tool configurations, or workflow changes
+
+<Note>
+Agent Optimiser is available in the [Marketplace](https://marketplace.relevanceai.com/). Clone it to your workspace to start analyzing your agents.
+</Note>
+
+---
+
+## Testing best practices
+
+<AccordionGroup>
+  <Accordion title="Test early and often" icon="clock">
+    Start testing during development with the Run tab. Create Evals before deploying. Run evaluations after every significant change.
+  </Accordion>
+  
+  <Accordion title="Build a test suite" icon="layer-group">
+    Create a comprehensive set of test scenarios covering:
+    - Happy path scenarios (typical use cases)
+    - Edge cases (unusual inputs, errors)
+    - Negative tests (attempts to bypass rules)
+    - Performance tests (complex multi-turn conversations)
+  </Accordion>
+  
+  <Accordion title="Use realistic test data" icon="database">
+    Base test scenarios on real user interactions from Task View. Use actual customer questions and situations. Test with production-like data.
+  </Accordion>
+  
+  <Accordion title="Automate regression testing" icon="rotate">
+    Configure Evals to run automatically before publishing. Set appropriate pass thresholds. Block publishing if critical tests fail.
+  </Accordion>
+  
+  <Accordion title="Monitor production continuously" icon="radar">
+    Review Task View regularly for issues. Track Analytics metrics for trends. Run Agent Optimiser periodically for recommendations.
+  </Accordion>
+  
+  <Accordion title="Document test scenarios" icon="file-lines">
+    Name scenarios clearly (e.g., "Angry Customer - Double Charge"). Document expected behavior in Judge rules. Keep test scenarios up to date as requirements change.
+  </Accordion>
+  
+  <Accordion title="Compare versions systematically" icon="code-compare">
+    Use Evals to A/B test changes. Run the same test scenarios on different versions. Track scores over time to measure improvements.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Testing checklist
+
+Use this checklist to ensure comprehensive testing:
+
+### Before deployment
+
+- [ ] Test basic functionality in Run tab
+- [ ] Create test scenarios for primary use cases
+- [ ] Add Judges for critical evaluation criteria
+- [ ] Run Evals and review results
+- [ ] Test edge cases and error handling
+- [ ] Verify tool connections and integrations
+- [ ] Check response quality and brand voice
+- [ ] Set up Evals to block publishing if tests fail
+
+### After deployment
+
+- [ ] Monitor first conversations in Task View
+- [ ] Check Analytics for error rates and costs
+- [ ] Review Tasks to Review for escalations
+- [ ] Run Evals regularly after changes
+- [ ] Use Agent Optimiser for improvement recommendations
+- [ ] Update test scenarios based on real user interactions
+- [ ] Track metrics over time to measure improvements
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Which testing method should I use?">
+    Use multiple methods for comprehensive testing:
+    - **Run tab** for quick manual tests during development
+    - **Evals** for automated testing and A/B comparisons
+    - **Task View** for monitoring real conversations
+    - **Analytics** for tracking performance metrics over time
+    - **Agent Optimiser** for AI-powered improvement recommendations
+  </Accordion>
+  
+  <Accordion title="How often should I run Evals?">
+    Run Evals:
+    - Before every deployment (configure to block publishing)
+    - After making changes to prompts, tools, or knowledge
+    - Weekly or monthly for regression testing
+    - When comparing different agent versions (A/B testing)
+  </Accordion>
+  
+  <Accordion title="What's the difference between Evals and the Run tab?">
+    The Run tab is for manual testing during development—you type messages and review responses. Evals is for automated testing—you define scenarios and Judges, then the system simulates conversations and scores them automatically. Use Run tab for quick checks, Evals for comprehensive validation.
+  </Accordion>
+  
+  <Accordion title="Can I use Evals for A/B testing?">
+    Yes. Evals is our A/B testing solution. Create test scenarios, run them on different agent versions, and compare scores to determine which version performs better. See [A/B Testing with Evals](/build/agents/build-your-agent/ab-testing-with-evals) for detailed workflows.
+  </Accordion>
+  
+  <Accordion title="How do I access Analytics?">
+    Analytics is an Enterprise feature. If you're an Enterprise customer, access it from **Account** → **Analytics** in your dashboard. If you don't see Analytics, contact your account manager to discuss access.
+  </Accordion>
+  
+  <Accordion title="What should I test first?">
+    Start with your Agent's primary use cases—the most common scenarios users will encounter. Create 3-5 test scenarios covering typical interactions, then add edge cases and error handling tests. Focus on scenarios that represent the majority of your Agent's work.
+  </Accordion>
+  
+  <Accordion title="How many test scenarios do I need?">
+    Start with 5-10 scenarios covering your main use cases and critical edge cases. Add more as you discover new patterns in Task View or identify gaps in coverage. Quality matters more than quantity—well-designed scenarios with specific Judges are more valuable than many vague tests.
+  </Accordion>
+</AccordionGroup>
