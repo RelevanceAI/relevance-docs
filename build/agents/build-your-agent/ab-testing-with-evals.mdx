@@ -1,0 +1,436 @@
+---
+title: 'A/B Testing with Evals'
+sidebarTitle: 'A/B Testing'
+description: 'Compare agent versions and optimize performance using Evals'
+---
+
+<Info>
+**Rollout Status**: Evals is currently being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see this feature yet, reach out to your account manager.
+</Info>
+
+Evals is Relevance AI's A/B testing solution. Use it to compare different agent versions, test prompt variations, evaluate model changes, and make data-driven decisions about which configuration performs best.
+
+<Frame>
+  <img 
+    src="/images/agent/ab-testing-evals.png" 
+    alt="A/B testing workflow with Evals showing version comparison"
+  />
+</Frame>
+
+## What is A/B testing with Evals?
+
+A/B testing compares two or more versions of your Agent to determine which performs better. With Evals, you:
+
+1. Create test scenarios that simulate real user interactions
+2. Define Judges (evaluation criteria) to score Agent responses
+3. Run the same scenarios on different agent versions
+4. Compare scores to identify the best-performing version
+
+Unlike manual testing, Evals provides quantitative scores and consistent evaluation across all versions.
+
+---
+
+## When to use A/B testing
+
+<CardGroup cols={2}>
+  <Card title="Prompt Optimization" icon="message">
+    Test different prompt variations. Compare instruction styles. Find the most effective wording.
+  </Card>
+  <Card title="Model Comparison" icon="brain">
+    Evaluate different LLM models. Compare GPT-4 vs Claude vs Gemini. Balance performance and cost.
+  </Card>
+  <Card title="Tool Configuration" icon="wrench">
+    Test different tool setups. Compare tool execution strategies. Optimize tool selection.
+  </Card>
+  <Card title="Feature Validation" icon="flask">
+    Validate new features before full rollout. Test changes to knowledge sources. Verify escalation logic.
+  </Card>
+</CardGroup>
+
+---
+
+## A/B testing workflow
+
+<Steps>
+  <Step title="Create baseline test scenarios">
+    Define test scenarios that represent your Agent's key use cases. Include both typical interactions and edge cases. Add Judges to evaluate critical criteria.
+  </Step>
+  
+  <Step title="Run baseline evaluation">
+    Run your test scenarios on the current agent version. Record the scores as your baseline. This is your "Version A."
+  </Step>
+  
+  <Step title="Create variant version">
+    Make changes to your Agent (prompt, model, tools, etc.). Save this as a new version. This is your "Version B."
+  </Step>
+  
+  <Step title="Run comparison evaluation">
+    Run the same test scenarios on the new version. Use identical scenarios and Judges to ensure fair comparison.
+  </Step>
+  
+  <Step title="Compare results">
+    Review scores from both runs. Compare average scores, individual scenario performance, and Judge verdicts. Identify which version performs better.
+  </Step>
+  
+  <Step title="Make decision">
+    Choose the better-performing version. If Version B is better, publish it. If Version A is better, keep the current version or iterate on Version B.
+  </Step>
+</Steps>
+
+---
+
+## Setting up your first A/B test
+
+### Step 1: Create test scenarios
+
+Create scenarios that cover your Agent's primary use cases and critical edge cases.
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmkgejmej07qr1363n7t53jle" frameBorder="0" title="Creating a Test" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+1. Go to **Monitor** tab → **Evals** → **Tests**
+2. Click **+ New Test** and name it (e.g., "Customer Support A/B Test")
+3. Click **+ New Test scenario** to add scenarios
+4. For each scenario, define:
+   - **Scenario name** — Descriptive name (e.g., "Frustrated Customer - Refund Request")
+   - **Scenario prompt** — User persona and situation
+   - **Max turns** — Conversation length (5-20 turns)
+   - **Judges** — Evaluation criteria specific to this scenario
+
+<Tip>
+Create 5-10 scenarios covering your most important use cases. Focus on scenarios where performance differences will be most visible.
+</Tip>
+
+### Step 2: Add Agent-level Judges
+
+Create standard evaluation criteria that apply to all scenarios.
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmkgdhjap072d1363lp4rrarz" frameBorder="0" title="Creating an Agent-level Judge" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+1. Go to **Monitor** tab → **Evals** → **Judges**
+2. Click **+ New Judge**
+3. Add Judges for criteria that should apply to all scenarios:
+   - Professional tone
+   - No hallucinations
+   - Brand voice compliance
+   - Appropriate escalation
+   - Accurate information
+
+<Note>
+Agent-level Judges automatically run on every test scenario. This ensures consistent evaluation across all tests without duplicating Judge definitions.
+</Note>
+
+### Step 3: Run baseline evaluation (Version A)
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmkgfefzi08ge1363ebwvcemp" frameBorder="0" title="Running a Test scenario" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+1. Select all scenarios you want to include in the test
+2. Click **Run**
+3. Name the run clearly (e.g., "Baseline - Current Prompt - March 17")
+4. Wait for evaluation to complete
+5. Record the average score and individual scenario scores
+
+<Tip>
+Use descriptive run names that include the version identifier and date. This makes it easy to compare results later.
+</Tip>
+
+### Step 4: Create and test variant (Version B)
+
+1. Make changes to your Agent:
+   - Update the prompt
+   - Change the model
+   - Modify tool configuration
+   - Adjust knowledge sources
+2. **Do not publish yet** — keep this as a draft version
+3. Run the same test scenarios on this version
+4. Name the run clearly (e.g., "Variant - New Prompt - March 17")
+5. Wait for evaluation to complete
+
+### Step 5: Compare results
+
+Navigate to **Monitor** tab → **Evals** → **Runs** to compare both evaluations:
+
+| Metric | What to Compare |
+|--------|-----------------|
+| **Average Score** | Overall performance across all scenarios |
+| **Individual Scenario Scores** | Performance on specific use cases |
+| **Judge Pass Rates** | Which criteria each version meets better |
+| **Credits Used** | Cost efficiency of each version |
+
+Click into each run to view detailed results and conversation transcripts.
+
+---
+
+## Example A/B test scenarios
+
+### Example 1: Prompt optimization
+
+**Goal**: Improve empathy in customer support responses
+
+**Version A (Baseline)**:
+```
+You are a customer support agent. Help customers resolve their issues efficiently.
+```
+
+**Version B (Variant)**:
+```
+You are a customer support agent. Your priority is to understand the customer's 
+situation and emotions before offering solutions. Always acknowledge their feelings 
+and validate their concerns.
+```
+
+**Test Scenarios**:
+- Frustrated customer with billing issue
+- Angry customer with service outage
+- Confused customer needing product help
+
+**Key Judges**:
+- Empathy shown
+- Issue resolution
+- Professional tone
+
+**Expected Outcome**: Version B should score higher on empathy while maintaining issue resolution quality.
+
+---
+
+### Example 2: Model comparison
+
+**Goal**: Evaluate GPT-4 vs Claude for cost and quality
+
+**Version A**: GPT-4 Turbo
+**Version B**: Claude 3.5 Sonnet
+
+**Test Scenarios**:
+- Complex multi-step reasoning task
+- Creative content generation
+- Technical troubleshooting
+- Simple FAQ responses
+
+**Key Judges**:
+- Accuracy of information
+- Response quality
+- Appropriate tool usage
+
+**Metrics to Compare**:
+- Average score (quality)
+- Credits per task (cost)
+- Response time
+
+**Expected Outcome**: Identify which model provides the best balance of quality and cost for your use case.
+
+---
+
+### Example 3: Tool configuration
+
+**Goal**: Test different tool execution strategies
+
+**Version A**: Agent has access to all 10 tools
+**Version B**: Agent has access to 5 most-used tools only
+
+**Test Scenarios**:
+- Common tasks using frequent tools
+- Edge cases requiring specialized tools
+- Multi-tool workflows
+
+**Key Judges**:
+- Task completion
+- Correct tool selection
+- Efficiency (actions per task)
+
+**Metrics to Compare**:
+- Success rate
+- Credits per task
+- Average actions per task
+
+**Expected Outcome**: Determine if limiting tools improves focus and reduces costs without sacrificing capability.
+
+---
+
+## Interpreting results
+
+### Understanding scores
+
+Evals scores represent the percentage of Judges that passed:
+
+- **90-100%** — Excellent performance, meets all or nearly all criteria
+- **70-89%** — Good performance, meets most criteria with minor issues
+- **50-69%** — Moderate performance, significant improvement needed
+- **Below 50%** — Poor performance, major issues to address
+
+### Making decisions
+
+<AccordionGroup>
+  <Accordion title="Clear winner (>10% difference)">
+    If one version scores 10% or more higher than the other, it's a clear winner. Deploy the better-performing version.
+  </Accordion>
+  
+  <Accordion title="Marginal difference (5-10%)">
+    Consider other factors: cost (credits per task), complexity, maintainability. If scores are similar, choose the simpler or more cost-effective version.
+  </Accordion>
+  
+  <Accordion title="No significant difference (<5%)">
+    Versions perform similarly. Choose based on secondary criteria like cost, speed, or ease of maintenance. Consider testing more scenarios or different variations.
+  </Accordion>
+  
+  <Accordion title="Mixed results">
+    One version performs better on some scenarios, the other on different scenarios. Analyze which scenarios matter most to your use case. Consider creating a hybrid approach.
+  </Accordion>
+</AccordionGroup>
+
+### Analyzing Judge verdicts
+
+Click **View Conversation** on any scenario to see detailed Judge feedback:
+
+- **Passed Judges** — What the Agent did well
+- **Failed Judges** — Specific issues and why they failed
+- **Conversation transcript** — Full interaction to understand context
+
+Use this feedback to:
+- Understand why one version outperformed the other
+- Identify specific areas for improvement
+- Refine your prompt or configuration
+- Create new test scenarios for edge cases
+
+---
+
+## Best practices for A/B testing
+
+<CardGroup cols={2}>
+  <Card title="Test one variable at a time" icon="flask-vial">
+    Change only one thing between versions (prompt, model, or tools). This makes it clear what caused performance differences.
+  </Card>
+  
+  <Card title="Use consistent scenarios" icon="equals">
+    Run the exact same scenarios on both versions. Don't modify scenarios between runs or results won't be comparable.
+  </Card>
+  
+  <Card title="Include diverse scenarios" icon="layer-group">
+    Test typical use cases, edge cases, and error conditions. A version might excel at common tasks but fail on edge cases.
+  </Card>
+  
+  <Card title="Set clear success criteria" icon="bullseye">
+    Define what "better" means before testing. Is it higher scores, lower costs, or both? Know your priorities.
+  </Card>
+  
+  <Card title="Run multiple iterations" icon="rotate">
+    Don't stop at one A/B test. Use insights to create Version C, then test again. Continuous improvement requires multiple iterations.
+  </Card>
+  
+  <Card title="Consider cost vs quality" icon="scale-balanced">
+    A version with slightly lower scores but 50% lower costs might be the better choice. Balance quality and efficiency.
+  </Card>
+</CardGroup>
+
+---
+
+## Advanced A/B testing techniques
+
+### Multi-variant testing (A/B/C/D)
+
+Test more than two versions simultaneously:
+
+1. Create baseline (Version A)
+2. Create multiple variants (Versions B, C, D)
+3. Run the same scenarios on all versions
+4. Compare all results to find the best performer
+
+<Tip>
+Use clear naming conventions like "V1-Baseline", "V2-Empathy-Focus", "V3-Efficiency-Focus" to track multiple variants.
+</Tip>
+
+### Iterative optimization
+
+Use A/B test results to inform the next iteration:
+
+1. Run initial A/B test
+2. Identify winner
+3. Create new variant based on insights
+4. Test winner vs new variant
+5. Repeat until you reach performance goals
+
+### Segmented testing
+
+Test different versions for different use cases:
+
+1. Create scenario groups (e.g., "Sales", "Support", "Technical")
+2. Test versions on each group separately
+3. Deploy different versions for different use cases
+4. Use routing logic to direct users to appropriate version
+
+---
+
+## Tracking improvements over time
+
+Use the **Runs** history to track performance across multiple tests:
+
+1. Go to **Monitor** tab → **Evals** → **Runs**
+2. Review past evaluation runs
+3. Compare average scores over time
+4. Identify trends and improvements
+5. Document what changes led to improvements
+
+<Tip>
+Export or screenshot key results for documentation. This helps you remember what worked and why, especially when testing multiple iterations.
+</Tip>
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="How many scenarios do I need for A/B testing?">
+    Start with 5-10 scenarios covering your most important use cases. More scenarios provide more confidence in results, but even 5 well-designed scenarios can reveal significant differences between versions.
+  </Accordion>
+  
+  <Accordion title="Can I test more than two versions at once?">
+    Yes. Create multiple agent versions and run the same test scenarios on each. Compare all results to identify the best performer. This is called multi-variant testing.
+  </Accordion>
+  
+  <Accordion title="How do I test different models?">
+    Change the model in your Agent settings (under Advanced settings in the Build tab). Save as a new version, then run your test scenarios on both the original and new model versions.
+  </Accordion>
+  
+  <Accordion title="Should I test in production or staging?">
+    Test in staging (draft versions) before deploying to production. Use Evals to validate changes, then publish the winning version. Monitor production with Task View and Analytics after deployment.
+  </Accordion>
+  
+  <Accordion title="What if both versions perform poorly?">
+    If both versions score below 70%, focus on improving your Agent before comparing versions. Review Judge feedback to identify issues, update your prompt or configuration, then test again.
+  </Accordion>
+  
+  <Accordion title="How often should I run A/B tests?">
+    Run A/B tests whenever you make significant changes to your Agent. For continuous optimization, run tests weekly or monthly to identify improvement opportunities.
+  </Accordion>
+  
+  <Accordion title="Can I use real user conversations for testing?">
+    Yes. Review conversations in Task View, identify common scenarios or issues, then create test scenarios based on real interactions. This ensures your tests reflect actual usage.
+  </Accordion>
+  
+  <Accordion title="What's the difference between A/B testing and regression testing?">
+    A/B testing compares two versions to find the better one. Regression testing verifies that changes don't break existing functionality. Use Evals for both—compare versions for A/B testing, run the same tests after changes for regression testing.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Evals Documentation" icon="book" href="/build/agents/build-your-agent/evals">
+    Learn more about creating test scenarios, Judges, and running evaluations
+  </Card>
+  <Card title="Testing Your Agent" icon="flask" href="/build/agents/testing-your-agent">
+    Explore all testing methods from development to production
+  </Card>
+  <Card title="Task View" icon="list-check" href="/build/agents/give-your-agent-tasks/task-overview">
+    Monitor real conversations and gather insights for test scenarios
+  </Card>
+  <Card title="Analytics" icon="chart-line" href="/enterprise/analytics">
+    Track performance metrics and measure improvements over time
+  </Card>
+</CardGroup>
