@@ -1,0 +1,601 @@
+---
+title: 'File System API'
+description: 'REST API for managing files and directories in S3 storage'
+sidebarTitle: 'File System API'
+---
+
+Manage files and directories in S3 storage through a REST API, with operations scoped to conversations, users, projects, workspaces, and organizations.
+
+<Warning>
+This API is currently behind the S3FileSystem feature flag and being gradually rolled out. Contact your account representative for access.
+</Warning>
+
+## Overview
+
+The File System API provides REST endpoints for managing files and directories stored in S3. All operations are scoped to specific entities (conversations, users, projects, workspaces, or organizations) using volume keys, ensuring proper access control and data isolation.
+
+**Base URL:**
+```http
+https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs
+```
+
+<Info>
+The endpoint URL differs based on your organization's region. The example above shows the AU region endpoint. Check your organization settings for the correct regional endpoint.
+</Info>
+
+---
+
+## Volume Keys
+
+Volume keys define the scope and location of file operations. They follow the format:
+
+```
+scope:entityId:mount
+```
+
+### Available Scopes
+
+| Scope | Format | Description |
+|-------|--------|-------------|
+| Conversation | `conversation:{conversationId}:files` | Files scoped to a specific conversation |
+| User | `user:{userId}:files` | Files scoped to a specific user |
+| Project | `project:{projectId}:files` | Files scoped to a specific project |
+| Workspace | `workspace:{workspaceId}:files` | Files scoped to a specific workspace |
+| Organization | `organization:{orgId}:files` | Files scoped to an entire organization |
+
+**Example volume keys:**
+```
+conversation:abc123:files
+user:user_456:files
+project:proj_789:files
+```
+
+---
+
+## Authentication
+
+All API requests require authentication using your API key and project ID.
+
+### Required Headers
+
+```http
+Authorization: YOUR_API_KEY
+Content-Type: application/json
+```
+
+### Required Parameters
+
+Most endpoints require a `project` parameter in the request body:
+
+```json
+{
+  "project": "YOUR_PROJECT_ID"
+}
+```
+
+<Warning>
+Store your API key securely and use environment variables rather than hardcoding it in your application code.
+</Warning>
+
+---
+
+## Endpoints
+
+### List Directory Contents
+
+List all files and directories within a specified path.
+
+**Endpoint:**
+```http
+POST /v1/fs/list
+```
+
+**Request Body:**
+```json
+{
+  "volume_key": "project:proj_123:files",
+  "path": "/documents",
+  "project": "proj_123"
+}
+```
+
+**Response:**
+```json
+{
+  "items": [
+    {
+      "name": "report.pdf",
+      "path": "/documents/report.pdf",
+      "type": "file",
+      "size": 1024000,
+      "modified": "2026-03-15T10:30:00Z"
+    },
+    {
+      "name": "images",
+      "path": "/documents/images",
+      "type": "directory",
+      "modified": "2026-03-14T15:20:00Z"
+    }
+  ]
+}
+```
+
+**Code Examples:**
+
+<Tabs>
+  <Tab title="cURL">
+    ```bash
+    curl -X POST \
+      -H "Content-Type: application/json" \
+      -H "Authorization: YOUR_API_KEY" \
+      -d '{"volume_key":"project:proj_123:files","path":"/documents","project":"proj_123"}' \
+      https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs/list
+    ```
+  </Tab>
+  <Tab title="JavaScript">
+    ```js
+    const response = await fetch('https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs/list', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'YOUR_API_KEY'
+      },
+      body: JSON.stringify({
+        volume_key: 'project:proj_123:files',
+        path: '/documents',
+        project: 'proj_123'
+      })
+    });
+    
+    const data = await response.json();
+    console.log(data.items);
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    import requests
+    
+    response = requests.post(
+      'https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs/list',
+      headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'YOUR_API_KEY'
+      },
+      json={
+        'volume_key': 'project:proj_123:files',
+        'path': '/documents',
+        'project': 'proj_123'
+      }
+    )
+    
+    items = response.json()['items']
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+### Get File Metadata
+
+Retrieve metadata for a specific file without downloading its contents.
+
+**Endpoint:**
+```http
+POST /v1/fs/metadata
+```
+
+**Request Body:**
+```json
+{
+  "volume_key": "project:proj_123:files",
+  "path": "/documents/report.pdf",
+  "project": "proj_123"
+}
+```
+
+**Response:**
+```json
+{
+  "name": "report.pdf",
+  "path": "/documents/report.pdf",
+  "type": "file",
+  "size": 1024000,
+  "modified": "2026-03-15T10:30:00Z",
+  "content_type": "application/pdf"
+}
+```
+
+---
+
+### Generate Presigned Upload URL
+
+Generate a presigned URL for uploading files directly from a browser or client application.
+
+**Endpoint:**
+```http
+POST /v1/fs/presigned-upload
+```
+
+**Request Body:**
+```json
+{
+  "volume_key": "project:proj_123:files",
+  "path": "/documents/new-file.pdf",
+  "content_type": "application/pdf",
+  "project": "proj_123"
+}
+```
+
+**Response:**
+```json
+{
+  "url": "https://s3.amazonaws.com/bucket/path?signature=...",
+  "expires_at": "2026-03-17T23:52:00Z",
+  "fields": {
+    "key": "path/to/file",
+    "policy": "...",
+    "signature": "..."
+  }
+}
+```
+
+**Usage Example:**
+
+<Tabs>
+  <Tab title="JavaScript (Browser)">
+    ```js
+    // Get presigned URL
+    const uploadResponse = await fetch('https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs/presigned-upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'YOUR_API_KEY'
+      },
+      body: JSON.stringify({
+        volume_key: 'project:proj_123:files',
+        path: '/documents/upload.pdf',
+        content_type: 'application/pdf',
+        project: 'proj_123'
+      })
+    });
+    
+    const { url, fields } = await uploadResponse.json();
+    
+    // Upload file using presigned URL
+    const formData = new FormData();
+    Object.entries(fields).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    formData.append('file', fileInput.files[0]);
+    
+    await fetch(url, {
+      method: 'POST',
+      body: formData
+    });
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    import requests
+    
+    # Get presigned URL
+    response = requests.post(
+      'https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs/presigned-upload',
+      headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'YOUR_API_KEY'
+      },
+      json={
+        'volume_key': 'project:proj_123:files',
+        'path': '/documents/upload.pdf',
+        'content_type': 'application/pdf',
+        'project': 'proj_123'
+      }
+    )
+    
+    data = response.json()
+    
+    # Upload file using presigned URL
+    with open('local-file.pdf', 'rb') as f:
+      files = {'file': f}
+      requests.post(data['url'], data=data['fields'], files=files)
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+### Generate Presigned Download URL
+
+Generate a presigned URL for downloading files directly from S3.
+
+**Endpoint:**
+```http
+POST /v1/fs/presigned-download
+```
+
+**Request Body:**
+```json
+{
+  "volume_key": "project:proj_123:files",
+  "path": "/documents/report.pdf",
+  "project": "proj_123"
+}
+```
+
+**Response:**
+```json
+{
+  "url": "https://s3.amazonaws.com/bucket/path?signature=...",
+  "expires_at": "2026-03-17T23:52:00Z"
+}
+```
+
+**Usage Example:**
+
+<Tabs>
+  <Tab title="JavaScript">
+    ```js
+    const response = await fetch('https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs/presigned-download', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'YOUR_API_KEY'
+      },
+      body: JSON.stringify({
+        volume_key: 'project:proj_123:files',
+        path: '/documents/report.pdf',
+        project: 'proj_123'
+      })
+    });
+    
+    const { url } = await response.json();
+    
+    // Download file
+    window.location.href = url;
+    // Or fetch and process
+    const fileResponse = await fetch(url);
+    const blob = await fileResponse.blob();
+    ```
+  </Tab>
+  <Tab title="Python">
+    ```python
+    import requests
+    
+    response = requests.post(
+      'https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs/presigned-download',
+      headers={
+        'Content-Type': 'application/json',
+        'Authorization': 'YOUR_API_KEY'
+      },
+      json={
+        'volume_key': 'project:proj_123:files',
+        'path': '/documents/report.pdf',
+        'project': 'proj_123'
+      }
+    )
+    
+    download_url = response.json()['url']
+    
+    # Download file
+    file_response = requests.get(download_url)
+    with open('downloaded-file.pdf', 'wb') as f:
+      f.write(file_response.content)
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+### Create Directory
+
+Create a new directory at the specified path.
+
+**Endpoint:**
+```http
+POST /v1/fs/mkdir
+```
+
+**Request Body:**
+```json
+{
+  "volume_key": "project:proj_123:files",
+  "path": "/documents/new-folder",
+  "project": "proj_123"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "path": "/documents/new-folder"
+}
+```
+
+**Code Example:**
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: YOUR_API_KEY" \
+  -d '{"volume_key":"project:proj_123:files","path":"/documents/new-folder","project":"proj_123"}' \
+  https://api-f1db6c.stack.tryrelevance.com/latest/v1/fs/mkdir
+```
+
+---
+
+### Move or Rename Files
+
+Move a file or directory to a new location, or rename it.
+
+**Endpoint:**
+```http
+POST /v1/fs/move
+```
+
+**Request Body:**
+```json
+{
+  "volume_key": "project:proj_123:files",
+  "source_path": "/documents/old-name.pdf",
+  "destination_path": "/documents/new-name.pdf",
+  "project": "proj_123"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "source": "/documents/old-name.pdf",
+  "destination": "/documents/new-name.pdf"
+}
+```
+
+<Note>
+Moving files across different volume keys is not supported. Both source and destination must use the same volume key.
+</Note>
+
+---
+
+### Delete Files or Directories
+
+Delete a file or directory. Deleting a directory removes all its contents recursively.
+
+**Endpoint:**
+```http
+POST /v1/fs/delete
+```
+
+**Request Body:**
+```json
+{
+  "volume_key": "project:proj_123:files",
+  "path": "/documents/old-file.pdf",
+  "project": "proj_123"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "path": "/documents/old-file.pdf"
+}
+```
+
+<Warning>
+Deleting a directory removes all files and subdirectories within it. This operation cannot be undone.
+</Warning>
+
+---
+
+## Presigned URLs
+
+Presigned URLs allow secure, temporary access to S3 objects without exposing your API credentials to client applications.
+
+### Upload Workflow
+
+1. Request a presigned upload URL from the API
+2. Receive the URL and required form fields
+3. Upload the file directly to S3 using the presigned URL
+4. The file becomes available at the specified path in your volume
+
+### Download Workflow
+
+1. Request a presigned download URL from the API
+2. Receive a temporary URL with embedded authentication
+3. Use the URL to download the file directly from S3
+4. The URL expires after a set time period (typically 1 hour)
+
+### Benefits
+
+- **Security**: No need to expose API keys to client applications
+- **Performance**: Direct uploads/downloads to S3 bypass your application servers
+- **Scalability**: Offload file transfer bandwidth to S3
+- **Browser-friendly**: Works seamlessly with browser-based file uploads
+
+---
+
+## Access Control
+
+File access is controlled through volume keys and entity permissions:
+
+- **Conversation scope**: Only users with access to the conversation can access files
+- **User scope**: Only the specific user can access their files
+- **Project scope**: All users with project access can access files
+- **Workspace scope**: All workspace members can access files
+- **Organization scope**: All organization members can access files
+
+The API automatically enforces these permissions based on the authenticated user and the volume key used in requests.
+
+---
+
+## Best Practices
+
+### Security
+
+- **Store API keys securely**: Use environment variables or secure key management systems
+- **Use appropriate scopes**: Choose the most restrictive volume scope for your use case
+- **Validate file types**: Check file extensions and content types before upload
+- **Set expiration times**: Use short-lived presigned URLs when possible
+
+### Performance
+
+- **Use presigned URLs**: For browser uploads/downloads, always use presigned URLs
+- **Batch operations**: When listing large directories, implement pagination
+- **Cache metadata**: Cache file metadata to reduce API calls
+- **Parallel uploads**: Upload multiple files concurrently for better performance
+
+### Error Handling
+
+- **Implement retries**: Network issues can occur; implement exponential backoff
+- **Check responses**: Always verify API responses before proceeding
+- **Handle edge cases**: Account for missing files, permission errors, and quota limits
+- **Log errors**: Maintain logs for debugging and monitoring
+
+### File Organization
+
+- **Use clear paths**: Organize files with descriptive directory structures
+- **Avoid deep nesting**: Keep directory hierarchies reasonably flat
+- **Name consistently**: Use consistent naming conventions for files
+- **Clean up regularly**: Delete unused files to manage storage costs
+
+---
+
+## Frequently Asked Questions
+
+<AccordionGroup>
+  <Accordion title="What file types are supported?">
+    The File System API supports all file types. However, you should validate file types in your application based on your specific requirements.
+  </Accordion>
+  
+  <Accordion title="What are the file size limits?">
+    File size limits depend on your subscription plan. Contact your account representative for specific limits on your account.
+  </Accordion>
+  
+  <Accordion title="How long do presigned URLs remain valid?">
+    Presigned URLs typically expire after 1 hour. The exact expiration time is included in the API response.
+  </Accordion>
+  
+  <Accordion title="Can I move files between different volume keys?">
+    No, files can only be moved within the same volume key. To transfer files between scopes, you must download and re-upload them.
+  </Accordion>
+  
+  <Accordion title="What happens when I delete a directory?">
+    Deleting a directory removes all files and subdirectories within it recursively. This operation cannot be undone, so use with caution.
+  </Accordion>
+  
+  <Accordion title="How do I handle large file uploads?">
+    For large files, use presigned upload URLs which support multipart uploads. This allows you to upload files in chunks and resume interrupted uploads.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits on the API?">
+    Yes, rate limits apply based on your subscription plan. Implement exponential backoff and retry logic to handle rate limit errors gracefully.
+  </Accordion>
+  
+  <Accordion title="Can I use this API from a browser?">
+    Yes, the presigned URL endpoints are specifically designed for browser-based applications. Request presigned URLs from your backend, then use them directly in the browser.
+  </Accordion>
+</AccordionGroup>
