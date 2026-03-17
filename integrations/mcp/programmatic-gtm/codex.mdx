@@ -1,0 +1,142 @@
+---
+title: "OpenAI Codex"
+sidebarTitle: "Codex"
+description: "Connect OpenAI Codex to Relevance AI using the MCP server and agent skills."
+---
+
+[OpenAI Codex](https://openai.com/index/codex/) is OpenAI's cloud-based coding agent. You can connect it to Relevance AI by adding the MCP server and cloning the agent skills repository — giving Codex full access to your agents, tools, workforces, and knowledge.
+
+<div style={{position: "relative", paddingBottom: "56.25%", height: 0}}>
+  <iframe
+    src="https://www.loom.com/embed/ee17f2be46354e0fa193374a6c2af951?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true&autoplay=true&muted=true"
+    frameBorder="0"
+    webkitAllowFullscreen
+    mozAllowFullscreen
+    allowFullscreen
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", borderRadius: "10px"}}
+  ></iframe>
+</div>
+
+---
+
+## Quick start
+
+<Steps>
+  <Step title="Add the MCP server">
+    Register the Relevance AI MCP server with Codex:
+
+    ```bash
+    codex mcp add relevance-ai --url https://mcp.relevanceai.com/
+    ```
+  </Step>
+
+  <Step title="Authenticate">
+    Log in to your Relevance AI account:
+
+    ```bash
+    codex mcp login relevance-ai
+    ```
+
+    This opens your browser to authenticate. You only need to do this once per project.
+  </Step>
+
+  <Step title="Clone the agent skills">
+    Give Codex built-in knowledge of Relevance AI by cloning the [agent skills repository](https://github.com/RelevanceAI/agent-skills):
+
+    ```bash
+    git clone https://github.com/RelevanceAI/agent-skills ~/.agents/skills/relevance-ai
+    ```
+
+    This provides Codex with detailed context on how to work with agents, tools, workforces, knowledge, and more — so it can handle complex tasks correctly on the first try.
+
+    <Tip>Learn more about what's included in the agent skills on the [Agent Skills](/integrations/mcp/programmatic-gtm/agent-skills) page.</Tip>
+  </Step>
+
+  <Step title="Start building">
+    You're ready to go. Try one of the example prompts below or describe what you want to build.
+  </Step>
+</Steps>
+
+---
+
+## Example prompts
+
+Once connected, you can start building immediately:
+
+<Tabs>
+  <Tab title="Agents">
+    ```
+    > Create a BDR agent that qualifies inbound leads from HubSpot
+    ```
+
+    ```
+    > Set up a workforce where a triage agent routes support tickets to specialist agents
+    ```
+  </Tab>
+
+  <Tab title="Tools">
+    ```
+    > Build a tool that enriches a company URL with a one-paragraph summary
+    ```
+
+    ```
+    > Create a tool that generates personalised cold emails from LinkedIn profiles
+    ```
+  </Tab>
+
+  <Tab title="Evaluate & debug">
+    ```
+    > Pull the last 20 conversations for my Support Agent and identify failures
+    ```
+
+    ```
+    > My BDR agent is letting unqualified leads through — review its instructions and fix it
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Working with multiple projects
+
+If you work across multiple Relevance AI projects, add a separate MCP server entry for each:
+
+```bash
+codex mcp add relevance-project-1 --url https://mcp.relevanceai.com/
+codex mcp login relevance-project-1
+
+codex mcp add relevance-project-2 --url https://mcp.relevanceai.com/
+codex mcp login relevance-project-2
+```
+
+Each entry authenticates independently against its own project.
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="MCP server not connecting">
+    - Ensure you have run `codex mcp add relevance-ai --url https://mcp.relevanceai.com/`
+    - Check that authentication completed successfully with `codex mcp login relevance-ai`
+    - Verify your internet connection and that `https://mcp.relevanceai.com/` is accessible
+  </Accordion>
+
+  <Accordion title="Authentication issues">
+    - Make sure you have an active Relevance AI account
+    - Check that you have access to the project you are trying to connect to
+    - Try re-authenticating with `codex mcp login relevance-ai`
+  </Accordion>
+
+  <Accordion title="Tools not appearing">
+    - Verify you have completed authentication
+    - Check that your Relevance AI project has tools and agents configured
+    - Try removing and re-adding the MCP server
+  </Accordion>
+
+  <Accordion title="Codex not using agent skills">
+    - Confirm the agent skills are cloned to the correct path: `~/.agents/skills/relevance-ai`
+    - Run `ls ~/.agents/skills/relevance-ai/SKILL.md` to verify the files exist
+    - Pull the latest version: `cd ~/.agents/skills/relevance-ai && git pull`
+  </Accordion>
+</AccordionGroup>
