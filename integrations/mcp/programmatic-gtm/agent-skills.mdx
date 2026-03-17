@@ -1,0 +1,110 @@
+---
+title: "Agent Skills"
+sidebarTitle: "Agent Skills"
+description: "Give your AI coding assistant built-in knowledge of Relevance AI by cloning the agent skills repository."
+---
+
+The [Relevance AI agent skills](https://github.com/RelevanceAI/agent-skills) repository is a local reference that teaches your AI coding assistant how to work with Relevance AI. Clone it once and your assistant gets detailed context on agents, tools, workforces, knowledge, analytics, and evals — without needing to figure things out from scratch.
+
+<Info>Agent skills work alongside the [MCP server](/integrations/mcp/programmatic-gtm/mcp-server). The MCP server gives your assistant the **ability** to call Relevance AI tools. Agent skills give it the **knowledge** to use them well.</Info>
+
+---
+
+## Quick start
+
+<Steps>
+  <Step title="Clone the agent skills repository">
+    Choose the path that matches your AI coding assistant:
+
+    <CodeGroup>
+    ```bash Claude Code
+    git clone https://github.com/RelevanceAI/agent-skills ~/.claude/skills/relevance-ai
+    ```
+
+    ```bash OpenAI Codex
+    git clone https://github.com/RelevanceAI/agent-skills ~/.agents/skills/relevance-ai
+    ```
+
+    ```bash Cursor / VS Code / Others
+    git clone https://github.com/RelevanceAI/agent-skills .agents/skills/relevance-ai
+    ```
+    </CodeGroup>
+  </Step>
+
+  <Step title="Connect the MCP server">
+    The agent skills provide context, but your assistant still needs the MCP server to actually interact with your Relevance AI project. Follow the setup for your client on the [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server) page.
+  </Step>
+
+  <Step title="Verify the connection">
+    Ask your AI assistant to list your agents or tools:
+
+    ```
+    > List all my Relevance AI agents
+    ```
+
+    If the assistant returns your agents, you're all set.
+  </Step>
+</Steps>
+
+---
+
+## What's included
+
+The agent skills repository contains structured reference documentation that your AI assistant reads on-demand:
+
+<CardGroup cols={2}>
+  <Card title="SKILL.md" icon="book">
+    The main skill definition — covers all 46 MCP tools, critical usage rules, and workflow patterns your assistant should follow.
+  </Card>
+  <Card title="Reference docs" icon="folder-open">
+    Detailed guides for agents, tools, workforces, knowledge, analytics, and evals that the assistant reads when working on specific tasks.
+  </Card>
+</CardGroup>
+
+### Topics covered
+
+<CardGroup cols={3}>
+  <Card title="Agents" icon="robot">
+    Creating agents, system prompts, actions, memory, triggers, and troubleshooting.
+  </Card>
+  <Card title="Tools" icon="wrench">
+    Building tools, transformations, OAuth configuration, versioning, and patterns.
+  </Card>
+  <Card title="Workforces" icon="users">
+    Multi-agent orchestration concepts, setup, and debugging.
+  </Card>
+  <Card title="Knowledge" icon="database">
+    Knowledge table operations — creating tables, adding rows, querying data.
+  </Card>
+  <Card title="Analytics" icon="chart-line">
+    Usage metrics and reporting capabilities.
+  </Card>
+  <Card title="Evals" icon="check-double">
+    Testing agent behaviour with evaluation cases.
+  </Card>
+</CardGroup>
+
+---
+
+## Keeping skills up to date
+
+The agent skills repository is a standard Git repo. Pull the latest changes periodically:
+
+```bash
+cd ~/.agents/skills/relevance-ai  # or ~/.claude/skills/relevance-ai
+git pull
+```
+
+---
+
+## How it works
+
+When your AI assistant encounters a Relevance AI task, it reads the relevant files from the agent skills repository to understand:
+
+- **Which MCP tools to call** — the skill definition maps tasks to specific tool names
+- **What parameters to use** — reference docs include required fields and correct formats
+- **What pitfalls to avoid** — critical rules like "always fetch full agent config before updating" prevent common mistakes
+
+This means your assistant can handle complex workflows (like creating an agent with tools, triggers, and a system prompt) correctly on the first try, rather than through trial and error.
+
+<Tip>Agent skills follow the [Agent Skills open standard](https://github.com/anthropics/agent-skills). Any AI coding assistant that supports this convention can use them.</Tip>
