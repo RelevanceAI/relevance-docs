@@ -18,17 +18,109 @@ Agents can connect to and run tools from remote MCP servers.
 <iframe src="https://app.supademo.com/embed/cmg8tiu3h23ii2nomxtqolybm" frameBorder="0" title="How to set up an MCP Server connection for an agent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 </div>
 
-1. Open the Agent you want to connect
-2. Navigate to the **Tools** tab in the agent builder
-3. Click **Add MCP**
-4. Click **Connect my own**
-5. Add the URL of the remote hosted MCP server
-6. Label your MCP Server connection
-7. Add any authentication details required for the MCP server
+<Steps>
+  <Step title="Open your agent">
+    Navigate to the agent you want to connect to an MCP server.
+  </Step>
 
-Once connected, the agent will automatically fetch and display the available tools from the remote MCP server. These tools can be referenced in the agent's core instructions and will appear in the conversation task view. When a tool is run, the agent communicates with the remote MCP server and returns the result directly in the conversation.
+  <Step title="Go to the Tools tab">
+    In the agent builder, click on the **Tools** tab.
+  </Step>
+
+  <Step title="Open the MCP connection modal">
+    Click **Add MCP** to open the MCP server connection modal.
+  </Step>
+
+  <Step title="Choose your connection method">
+    The modal has two tabs:
+    
+    - **Connected**: Shows MCP servers you've already linked to this agent
+    - **Presets**: Shows available preset MCP integrations you can add with one click
+    
+    You can switch between tabs to view your existing connections or browse available presets.
+  </Step>
+
+  <Step title="Connect a preset MCP server (optional)">
+    If you want to use a preset integration:
+    
+    1. Click the **Presets** tab
+    2. Use the search bar to filter MCPs by name
+    3. Select a preset MCP server (e.g., Linear, Notion, GitHub)
+    4. Follow the authentication prompts if required
+    
+    The preset will be added to your agent automatically.
+  </Step>
+
+  <Step title="Connect a custom MCP server (optional)">
+    If you want to connect your own MCP server:
+    
+    1. Click **Connect my own** in the modal
+    2. Enter the URL of the remote hosted MCP server
+    3. Label your MCP server connection
+    4. Add any authentication details required for the MCP server
+  </Step>
+
+  <Step title="View connected servers">
+    Once connected, switch to the **Connected** tab to see all MCP servers linked to this agent. The agent will automatically fetch and display the available tools from each connected MCP server.
+  </Step>
+</Steps>
+
+Once connected, the tools from your MCP servers can be referenced in the agent's core instructions and will appear in the conversation task view. When a tool is run, the agent communicates with the remote MCP server and returns the result directly in the conversation.
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
+
+## Using the search feature
+
+The MCP connection modal includes a search bar to help you quickly find specific MCP servers:
+
+- In the **Presets** tab, type the name of the service you're looking for (e.g., "Linear", "Notion")
+- The list will filter in real-time to show matching preset integrations
+- This is especially useful when browsing through many available preset MCPs
+
+## Available preset MCP integrations
+
+Relevance AI provides preset integrations for popular MCP servers. These presets simplify the connection process by handling authentication and configuration automatically.
+
+<CardGroup cols={3}>
+  <Card title="Linear" icon="list-check">
+    Connect to Linear for issue tracking and project management
+  </Card>
+  <Card title="Notion" icon="book">
+    Access Notion databases and pages
+  </Card>
+  <Card title="GitHub" icon="github">
+    Interact with GitHub repositories and workflows
+  </Card>
+</CardGroup>
+
+<Info>
+  More preset integrations are added regularly. Check the **Presets** tab in the MCP connection modal to see the latest available options.
+</Info>
+
+## Managing MCP connections
+
+### Viewing connected servers
+
+To see which MCP servers are connected to your agent:
+
+1. Open the agent in the agent builder
+2. Go to the **Tools** tab
+3. Click **Add MCP**
+4. Select the **Connected** tab
+
+This shows all currently linked MCP servers and their available tools.
+
+### Disconnecting an MCP server
+
+To remove an MCP server connection:
+
+1. Navigate to the **Connected** tab in the MCP modal
+2. Find the server you want to disconnect
+3. Click the disconnect or remove option for that server
+
+### Connecting multiple MCP servers
+
+You can connect multiple MCP servers to a single agent, giving it access to tools from several external services at once. Each connection appears in the **Connected** tab and can be managed independently.
 
 ## Troubleshooting
 
@@ -37,12 +129,14 @@ Once connected, the agent will automatically fetch and display the available too
     - Verify the MCP server URL is correct and the server is online
     - Check that any required authentication credentials are entered correctly
     - Ensure the external MCP server supports the Streamable HTTP transport
+    - Try disconnecting and reconnecting the server from the **Connected** tab
   </Accordion>
 
   <Accordion title="Agent cannot run external tools">
     - Confirm the tools are listed in the agent's Tools tab after connecting
     - Check that the external MCP server has not revoked access or changed credentials
     - Try disconnecting and reconnecting the MCP server in the agent builder
+    - Verify the tools appear in the **Connected** tab
   </Accordion>
 
   <Accordion title="Connection timeout or errors">
@@ -50,20 +144,50 @@ Once connected, the agent will automatically fetch and display the available too
     - Check that the server URL does not require VPN or network access that Relevance AI cannot reach
     - Contact the MCP server provider if the issue persists
   </Accordion>
+
+  <Accordion title="Cannot find a preset MCP integration">
+    - Use the search bar in the **Presets** tab to filter by name
+    - Check that you're looking in the **Presets** tab, not the **Connected** tab
+    - If the integration you need isn't available as a preset, use **Connect my own** to add it manually
+  </Accordion>
+
+  <Accordion title="Preset authentication failing">
+    - Ensure you have an active account with the service you're trying to connect
+    - Check that you've granted the necessary permissions during the authentication flow
+    - Try disconnecting and reconnecting the preset from the **Connected** tab
+  </Accordion>
 </AccordionGroup>
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
   <Accordion title="What types of MCP servers can I connect?">
-    You can connect any remote MCP server that supports the Streamable HTTP transport. This includes servers from services like Linear, Notion, GitHub, and any custom MCP servers you host.
+    You can connect any remote MCP server that supports the Streamable HTTP transport. This includes:
+    - Preset integrations available in the **Presets** tab (like Linear, Notion, GitHub)
+    - Custom MCP servers you host yourself
+    - Third-party MCP servers from other services
+  </Accordion>
+
+  <Accordion title="What's the difference between the Connected and Presets tabs?">
+    - **Connected**: Shows MCP servers already linked to your agent. Use this to manage existing connections.
+    - **Presets**: Shows available preset MCP integrations you can add. These are pre-configured for popular services and handle authentication automatically.
   </Accordion>
 
   <Accordion title="Can I connect multiple MCP servers to one agent?">
-    Yes. You can add multiple MCP server connections to a single agent, giving it access to tools from several external services at once.
+    Yes. You can add multiple MCP server connections to a single agent, giving it access to tools from several external services at once. All connections appear in the **Connected** tab.
   </Accordion>
 
   <Accordion title="Can I use locally hosted MCP servers?">
     No. Relevance AI only supports remote MCP servers accessible via a public URL. Local MCP servers running on your machine (e.g. via JSON configuration) are not supported.
+  </Accordion>
+
+  <Accordion title="How do I switch between viewing my connections and adding new ones?">
+    Use the tabs at the top of the MCP connection modal:
+    - Click **Connected** to view and manage existing connections
+    - Click **Presets** to browse and add new preset integrations
+  </Accordion>
+
+  <Accordion title="Can I search for specific MCP servers?">
+    Yes. The MCP connection modal includes a search bar. Type the name of the service you're looking for, and the list will filter to show matching results. This works in the **Presets** tab when browsing available integrations.
   </Accordion>
 </AccordionGroup>
