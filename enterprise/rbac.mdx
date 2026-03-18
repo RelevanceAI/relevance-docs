@@ -92,6 +92,10 @@ Project admins will be able to set a users role upon invite. Organization admins
 | **Chat**   | Access [Relevance Chat](/get-started/chat/introduction) only - cannot access the web app. Requires asset-level permissions to run agents. |
 | **Viewer** | View agents, tools, and knowledge outputs only, cannot run or edit anything                |
 
+<Note>
+Project admins can create [Group Triggers](/build/agents/build-your-agent/agent-triggers/group-triggers) that allow team members to share trigger configurations while using their own OAuth accounts.
+</Note>
+
 ### Permissions
 
 <Tip>
@@ -103,6 +107,7 @@ Scroll horizontally to view all columns, including the Chat role permissions.
 | Delete project                         | ✅         | ❌          | ❌          | ❌          | ❌        |
 | Assign project roles to users          | ✅         | ❌          | ❌          | ❌          | ❌        |
 | Manage project-level API keys & OAuths | ✅         | ❌          | ❌          | ❌          | ❌        |
+| Create Group Triggers                  | ✅         | ❌          | ❌          | ❌          | ❌        |
 | Delete agents                          | ✅         | ✅          | ❌          | ❌          | ❌        |
 | View all assets by default             | ✅         | ✅          | ❌          | ❌          | ❌        |
 | Edit/run assets they did not create    | ✅         | ✅          | ❌          | ❌          | ❌        |
@@ -217,4 +222,5 @@ Learn more about [sharing workforces](/build/workforces/share-your-workforce) as
   <Accordion title="I'm on an Enterprise subscription but do not have access to this feature yet. How do I get access?">This feature is gradually being rolled out to Enterprise customers. Please reach out to your sales representative to express your interest in receiving this feature.</Accordion>
   <Accordion title="How do I limit someone to only access Chat?">To limit a user to only access [Relevance Chat](/get-started/chat/introduction), assign them the **Chat** role at the project level. Users with the Chat role are automatically redirected to Chat and cannot access the main web application. They can still interact with agents and have LLM conversations, but will need appropriate asset-level permissions (Member or higher) on specific agents to run them in Chat.</Accordion>
   <Accordion title="Is there a role that allows a user to approve escalations or interact with agent tasks, but not edit the agent?">Yes, assigning a user the Asset Member role for a specific agent allows them to create tasks on the agent, approve/reject escalations, and view outputs, but not edit or delete the agent's configuration.</Accordion>
+  <Accordion title="What are Group Triggers and who can create them?">Group Triggers allow admins to create shared trigger configurations that team members can join by connecting their own OAuth accounts. Only project admins can create Group Triggers. Learn more about [Group Triggers](/build/agents/build-your-agent/agent-triggers/group-triggers).</Accordion>
 </AccordionGroup>
