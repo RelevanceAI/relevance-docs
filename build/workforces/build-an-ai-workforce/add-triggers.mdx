@@ -30,6 +30,10 @@ Common integration triggers include:
 - CRM triggers that react to new lead creation or status changes
 - Webhook triggers that respond to custom events from any system
 
+<Tip>
+For teams using integration triggers, consider [Group Triggers](/build/agents/build-your-agent/agent-triggers/group-triggers) to share trigger configurations while team members use their own OAuth accounts.
+</Tip>
+
 #### Recurring Schedule Triggers
 
 Recurring schedule triggers allow your AI Workforce to run automatically at set times without manual intervention. This is perfect for automating repetitive tasks that need to happen on a regular basis.
@@ -228,6 +232,9 @@ Manual triggers like "user message received" are designed to always remain activ
   </Accordion>
   <Accordion title="Why does my workforce still respond to messages after pausing all triggers?">
     Manual triggers, such as "user message received", are designed to always remain active and cannot be paused. These triggers represent direct user interactions and ensure you can always communicate with your workforce. The "Pause all triggers" feature only affects integrated triggers (integrations, webhooks, and schedules) that run without user initiation.
+  </Accordion>
+  <Accordion title="What are Group Triggers?">
+    Group Triggers allow admins to create shared trigger configurations that team members can join by connecting their own OAuth accounts. This is useful for teams where multiple members need the same trigger setup. Learn more about [Group Triggers](/build/agents/build-your-agent/agent-triggers/group-triggers).
   </Accordion>
   <Accordion title="How do I test my triggers?">
     Test triggers based on their type:
