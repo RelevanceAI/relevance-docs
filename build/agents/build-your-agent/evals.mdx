@@ -30,11 +30,12 @@ The Evals section is your command center for testing and evaluating AI Agent per
 
 ## Evals sections
 
-The Evals section contains four main sections, accessible from the left sidebar:
+The Evals section contains five main sections, accessible from the left sidebar:
 
 - **Test Suites** — Create and manage groups of Test scenarios for your Agent. Each Test Suite can contain multiple scenarios with different prompts and evaluation criteria.
 - **Evaluators** — Configure global evaluation criteria that can be applied across any Test Suite or scenario without needing to set them up each time.
 - **Runs** — View your evaluation run history and results. See average scores, number of conversations evaluated, progress status, credit spend, and creation dates for all past runs.
+- **Publish Checks** — Configure which Test Suites must pass before your Agent can be published. Set a pass threshold and optionally block publishing if evaluations fail.
 - **Performance** — Automatically evaluate live Agent conversations by selecting a global Evaluator, setting a sample rate, and filtering by conversation status.
 
 ---
@@ -292,46 +293,26 @@ To adjust Performance settings after initial setup, click the **Settings** butto
 
 ---
 
-## Test and publish
+## Publish Checks
 
-When you have Evals configured on an Agent, a **Test and publish** option becomes available. Click the dropdown arrow on the **Publish** button and select **Test and publish** to run evaluations before publishing.
+Publish Checks let you choose which Test Suites to run before your Agent is published. If the results don't meet your threshold, publishing can be blocked.
 
-### Selecting Test Suites and scenarios
+You can configure Publish Checks from the **Publish Checks** section in Evals.
 
-You can choose which evaluations to run in two ways:
+### Test sets to run
 
-- **Select entire Test Suites** — Check the boxes next to Test Suite names to include all scenarios within those Test Suites
-- **Select specific scenarios** — Click on a Test Suite name to expand it, then select individual scenarios from within that Test Suite
+Select which Test Suites to run before publishing. Click **Add test sets** to choose them — all scenarios in the selected Test Suites will be evaluated.
 
-All associated Evaluators (both scenario Evaluators and global Evaluators) will be checked against the threshold.
+### Publish settings
 
-### Pass threshold and block save
-
-Configure how evaluations affect the save process:
+Configure how evaluations affect the publish process:
 
 | Setting | Description |
 |---------|-------------|
-| **Pass Threshold (%)** | The minimum score percentage required for the evaluation to pass (e.g., 70%) |
-| **Block save if evaluation fails** | When checked, the Agent will only be published if the evaluation score meets or exceeds the pass threshold. If unchecked, the Agent will be published even if the evaluation fails the threshold. |
+| **Pass threshold (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
+| **Block publish if evaluation fails** | When checked, the Agent will only be published if the evaluation score meets or exceeds the pass threshold. If unchecked, the Agent will be published even if the evaluation fails the threshold. |
 
-These settings work together: if "Block save if evaluation fails" is enabled and your evaluation score is below the threshold, publishing will be blocked.
-
----
-
-## Runs history
-
-Access your complete evaluation history from the **Runs** section. This shows:
-
-| Column | Description |
-|--------|-------------|
-| **Run name** | Name of the evaluation run |
-| **Average score** | Overall pass rate with visual progress bar |
-| **# Conversations** | Number of conversations in the run |
-| **Progress** | Completion status (e.g., "1/1") |
-| **Credit spend** | Credits consumed for the run |
-| **Date created** | When the run was executed |
-
-Click on any past run to view its detailed results. You can also view ongoing runs to see conversations in progress.
+Once configured, click **Save**. When you next publish your Agent, the selected Test Suites will run automatically and the results will be checked against your threshold.
 
 ---
 
