@@ -1,0 +1,221 @@
+---
+title: "Conversation Tagging"
+description: "Organize and filter your Chat conversations with custom colored tags"
+---
+
+<Info>
+Conversation tagging is a GTM-mode feature (CHA-2777) available to users with GTM mode enabled in Relevance Chat.
+</Info>
+
+Conversation tagging lets you organize your Chat conversations with custom colored labels. Tags help you categorize conversations by topic, priority, status, or any other criteria that matters to your workflow. Once tagged, you can quickly filter conversations from the sidebar or search modal to find exactly what you need.
+
+### What you can do with conversation tagging
+
+<CardGroup cols={2}>
+  <Card title="Custom tag definitions" icon="tag">
+    Create tags with custom names and colors to match your workflow
+  </Card>
+  <Card title="Manual tagging" icon="hand-pointer">
+    Apply tags to any conversation to organize your chats
+  </Card>
+  <Card title="Filter by tags" icon="filter">
+    Filter conversations in the sidebar and search modal by tag
+  </Card>
+  <Card title="Visual organization" icon="palette">
+    Tags appear as colored pills throughout the UI for easy identification
+  </Card>
+</CardGroup>
+
+## Getting started
+
+### Prerequisites
+
+- GTM mode must be enabled in Relevance Chat
+- Project admin role is required to create, edit, or delete tag definitions
+- All users can apply existing tags to conversations
+
+### Tag management roles
+
+<Tabs>
+  <Tab title="Project Admins">
+    Project admins have full control over tag definitions:
+    - Create new tag definitions with custom names and colors
+    - Edit existing tag names, colors, and auto-tagging prompts
+    - Delete tag definitions
+    - Apply tags to conversations
+  </Tab>
+  <Tab title="All Users">
+    All users can work with existing tags:
+    - Apply tags to their own conversations
+    - Filter conversations by tag in the sidebar
+    - Search for tagged conversations in the search modal
+    - View tags as colored pills in the UI
+  </Tab>
+</Tabs>
+
+## For Project Admins: Managing tag definitions
+
+Project admins can create and manage the tag definitions available to all users in the project.
+
+### Creating a new tag
+
+<Steps>
+  <Step title="Access tag settings">
+    Navigate to the tag management interface in Chat settings
+  </Step>
+  <Step title="Create tag definition">
+    Click "Create tag" or similar option to start defining a new tag
+  </Step>
+  <Step title="Configure tag properties">
+    Set the tag name, choose a color, and optionally add an auto-tagging prompt
+  </Step>
+  <Step title="Save the tag">
+    Save your tag definition to make it available to all project users
+  </Step>
+</Steps>
+
+### Tag properties
+
+When creating or editing a tag definition, you can configure:
+
+<AccordionGroup>
+  <Accordion title="Tag name" icon="text">
+    The display name for the tag. Choose descriptive names like "Customer Support", "Sales Lead", "Bug Report", or "Feature Request".
+  </Accordion>
+  <Accordion title="Tag color" icon="palette">
+    Select a color for the tag. Tags appear as colored pills in the UI, making it easy to visually distinguish different categories at a glance.
+  </Accordion>
+  <Accordion title="Auto-tagging prompt (optional)" icon="wand-magic-sparkles">
+    Add an optional prompt to enable automatic tag suggestions. When configured, the system can suggest this tag for relevant conversations based on the prompt criteria.
+  </Accordion>
+</AccordionGroup>
+
+### Editing and deleting tags
+
+<Tabs>
+  <Tab title="Edit a tag">
+    To modify an existing tag:
+    1. Navigate to tag management settings
+    2. Select the tag you want to edit
+    3. Update the name, color, or auto-tagging prompt
+    4. Save your changes
+    
+    <Note>
+    Changes to tag definitions apply immediately and affect how the tag appears across all conversations.
+    </Note>
+  </Tab>
+  <Tab title="Delete a tag">
+    To remove a tag definition:
+    1. Navigate to tag management settings
+    2. Select the tag you want to delete
+    3. Confirm deletion
+    
+    <Warning>
+    Deleting a tag definition removes it from all conversations where it was applied. This action cannot be undone.
+    </Warning>
+  </Tab>
+</Tabs>
+
+## For All Users: Using tags
+
+Once tag definitions are created by project admins, all users can apply them to organize their conversations.
+
+### Applying tags to conversations
+
+<Steps>
+  <Step title="Open a conversation">
+    Navigate to the conversation you want to tag
+  </Step>
+  <Step title="Access tag options">
+    Click the tag icon or menu option for the conversation
+  </Step>
+  <Step title="Select tags">
+    Choose one or more tags to apply to the conversation
+  </Step>
+  <Step title="Confirm">
+    The tags appear as colored pills on the conversation
+  </Step>
+</Steps>
+
+<Tip>
+You can apply multiple tags to a single conversation to categorize it in different ways.
+</Tip>
+
+### Filtering conversations by tag
+
+Tags make it easy to find specific conversations across two key areas:
+
+<Tabs>
+  <Tab title="Sidebar filtering">
+    Filter your conversation list directly from the sidebar:
+    1. Look for the tag filter option in the sidebar
+    2. Select one or more tags to filter by
+    3. The conversation list updates to show only tagged conversations
+    4. Clear filters to see all conversations again
+  </Tab>
+  <Tab title="Search modal">
+    Use tags when searching for conversations:
+    1. Open the search modal
+    2. Use tag filters to narrow your search
+    3. Combine tag filters with text search for precise results
+    4. Tagged conversations appear with their colored pills in search results
+  </Tab>
+</Tabs>
+
+### Where tags appear
+
+Tags are visible throughout the Chat interface as colored pills:
+
+- **Conversation list**: Tags appear next to conversation titles in the sidebar
+- **Search results**: Tagged conversations show their tags in search results
+- **Conversation view**: Tags are displayed within the conversation interface
+- **Filter controls**: Available tags appear in filter menus for easy selection
+
+## Use cases
+
+<CardGroup cols={2}>
+  <Card title="Customer support" icon="headset">
+    Tag conversations by issue type, priority level, or resolution status to track support requests
+  </Card>
+  <Card title="Sales pipeline" icon="chart-line">
+    Organize conversations by lead stage, deal size, or follow-up status to manage your sales process
+  </Card>
+  <Card title="Project management" icon="list-check">
+    Categorize conversations by project, sprint, or task type to keep work organized
+  </Card>
+  <Card title="Content creation" icon="pen-to-square">
+    Tag conversations by content type, publication status, or topic to manage your content workflow
+  </Card>
+</CardGroup>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Who can create new tags?">
+    Only project admins can create, edit, or delete tag definitions. All users can apply existing tags to their conversations.
+  </Accordion>
+
+  <Accordion title="Can I apply multiple tags to one conversation?">
+    Yes, you can apply as many tags as needed to a single conversation to categorize it in multiple ways.
+  </Accordion>
+
+  <Accordion title="What happens if a tag is deleted?">
+    When a project admin deletes a tag definition, it is removed from all conversations where it was applied. This action cannot be undone.
+  </Accordion>
+
+  <Accordion title="Can I see tags on other users' conversations?">
+    You can only see and manage tags on your own conversations. Tags are not visible across different users' conversations.
+  </Accordion>
+
+  <Accordion title="How do auto-tagging prompts work?">
+    Auto-tagging prompts are optional criteria that project admins can configure when creating a tag. When set, the system can suggest the tag for relevant conversations based on the prompt. This helps automate organization without requiring manual tagging for every conversation.
+  </Accordion>
+
+  <Accordion title="Do I need GTM mode to use conversation tagging?">
+    Yes, conversation tagging is a GTM-mode feature. You must have GTM mode enabled in Relevance Chat to access tagging functionality.
+  </Accordion>
+
+  <Accordion title="Can I change a tag's color after creating it?">
+    Yes, project admins can edit tag definitions at any time, including changing the color. The new color will apply to all conversations using that tag.
+  </Accordion>
+</AccordionGroup>
