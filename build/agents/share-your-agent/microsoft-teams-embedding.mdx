@@ -1,0 +1,298 @@
+---
+title: "Microsoft Teams Embedding"
+sidebarTitle: "Microsoft Teams"
+description: "Embed your Relevance AI chat app directly within Microsoft Teams for a native collaboration experience"
+---
+
+## Overview
+
+Embed your Relevance AI chat app as an iframe or tab directly within Microsoft Teams, allowing your team to access AI-powered assistance without leaving their collaboration environment. This integration provides a native Teams experience that works seamlessly across Microsoft 365 and Microsoft cloud environments.
+
+Unlike the [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams) which focuses on triggers and automation, embedding allows users to interact directly with your chat app inside Teams channels, tabs, or personal apps.
+
+## Why embed in Microsoft Teams?
+
+<CardGroup cols={2}>
+  <Card title="Native experience" icon="microsoft">
+    Users stay within Teams—no context switching or separate browser tabs required.
+  </Card>
+  <Card title="Microsoft 365 integration" icon="building">
+    Works across Microsoft Teams, Microsoft 365, and Microsoft cloud environments.
+  </Card>
+  <Card title="Centralized access" icon="users">
+    Make your AI agent accessible to your entire team in their primary collaboration tool.
+  </Card>
+  <Card title="Simplified deployment" icon="rocket">
+    Deploy once and make available across your organization's Teams workspace.
+  </Card>
+</CardGroup>
+
+## Prerequisites
+
+Before embedding your chat app in Microsoft Teams, ensure you have:
+
+- **Microsoft Teams account** with appropriate permissions to add tabs or apps
+- **Relevance AI account** with a configured agent or chat app
+- **Admin permissions** (if required by your organization's Teams policies)
+- **HTTPS endpoint** for your chat app (required by Microsoft Teams)
+
+## Setup instructions
+
+<Steps>
+  <Step title="Get your chat app URL">
+    Navigate to your agent in Relevance AI and go to the **Share** section. Copy the Chat UI or Chat Widget URL that you want to embed in Teams.
+  </Step>
+  
+  <Step title="Add a tab in Microsoft Teams">
+    In your Teams channel or chat:
+    1. Click the **+** button to add a new tab
+    2. Select **Website** from the tab options
+    3. Give your tab a name (e.g., "AI Assistant")
+    4. Paste your Relevance AI chat app URL
+    5. Click **Save**
+  </Step>
+  
+  <Step title="Configure permissions">
+    Ensure your Teams workspace allows iframe embedding. Your Teams admin may need to approve the Relevance AI domain if your organization has strict content security policies.
+  </Step>
+  
+  <Step title="Test the integration">
+    Open the newly created tab and verify that your chat app loads correctly. Test basic interactions to ensure full functionality.
+  </Step>
+</Steps>
+
+## Technical requirements
+
+### HTTPS endpoints
+
+Microsoft Teams requires all embedded content to be served over HTTPS. Relevance AI chat apps are automatically served over HTTPS, so this requirement is met by default.
+
+### Content Security Policy (CSP) headers
+
+Your embedded chat app must allow Microsoft domains in its Content Security Policy headers. Relevance AI automatically configures the following domains:
+
+- `*.cloud.microsoft`
+- `teams.microsoft.com`
+- `*.teams.microsoft.com`
+- `*.microsoft365.com`
+- `*.office.com`
+
+<Note>
+  Microsoft is migrating services to the `*.cloud.microsoft` domain. Relevance AI's CSP headers include both legacy and new Microsoft domains to ensure compatibility.
+</Note>
+
+### Authentication considerations
+
+<Warning>
+  **User Level Authentication is not supported in embedded chat widgets.** If your agent uses [User Level Authentication](/enterprise/user-level-authentication) (an Enterprise feature), it will not work when embedded in Teams. Configure your agent to use a shared account for integrations instead.
+</Warning>
+
+## Configuration options
+
+You can customize your embedded chat app using URL parameters. These parameters work the same way whether you're embedding in Teams or elsewhere.
+
+### Available parameters
+
+| Parameter | Type | Description | Example |
+|-----------|------|-------------|---------|
+| `primary_color` | string | Custom color for your chat interface | `#685fff` |
+| `hide_file_uploads` | boolean | Hide file upload functionality | `true` |
+| `hide_conversation_list` | boolean | Hide conversation history sidebar | `true` |
+| `hide_tool_steps` | boolean | Hide tool execution details | `true` |
+| `hide_logo` | boolean | Hide Relevance AI branding | `false` |
+| `hide_description` | boolean | Hide agent description | `true` |
+| `input_placeholder_text` | string | Custom placeholder text | `Ask me anything...` |
+| `starting_message_prompts` | string | Pre-defined prompt buttons | `["Help with onboarding", "IT support"]` |
+
+### Example URL with parameters
+
+```
+https://app.relevanceai.com/agent/YOUR_AGENT_ID/chat?primary_color=%23685fff&hide_logo=true&input_placeholder_text=How%20can%20I%20help%20you%3F
+```
+
+## Embedding options
+
+### Channel tabs
+
+Add your chat app as a permanent tab in a Teams channel, making it accessible to all channel members.
+
+**Best for:** Team-wide resources, department-specific assistants, shared knowledge bases
+
+### Personal apps
+
+Add your chat app as a personal app that appears in each user's Teams sidebar.
+
+**Best for:** Individual productivity tools, personal assistants, private workflows
+
+### Meeting tabs
+
+Include your chat app as a tab within Teams meetings for real-time assistance during calls.
+
+**Best for:** Meeting facilitators, note-taking assistants, real-time research tools
+
+## Limitations
+
+<AccordionGroup>
+  <Accordion title="User Level Authentication not supported">
+    Embedded chat widgets cannot use User Level Authentication. Each user cannot authenticate with their own credentials when the chat app is embedded. Use shared integration accounts instead.
+  </Accordion>
+  
+  <Accordion title="Mobile experience">
+    The embedded experience on Teams mobile apps may differ from desktop. Test your chat app on mobile devices to ensure acceptable functionality.
+  </Accordion>
+  
+  <Accordion title="Iframe restrictions">
+    Some advanced features that require pop-ups or new windows may be restricted by Teams' iframe security policies.
+  </Accordion>
+  
+  <Accordion title="File uploads">
+    File upload functionality may be limited depending on your Teams organization's policies and the device being used.
+  </Accordion>
+</AccordionGroup>
+
+## Use cases
+
+<CardGroup cols={2}>
+  <Card title="IT support assistant" icon="headset">
+    Embed a support agent in your IT channel to answer common technical questions, provide troubleshooting steps, and create tickets—all without leaving Teams.
+  </Card>
+  
+  <Card title="HR onboarding bot" icon="user-plus">
+    Add an onboarding assistant to your new hire channel to answer policy questions, share documentation, and guide employees through their first weeks.
+  </Card>
+  
+  <Card title="Sales enablement" icon="chart-line">
+    Provide your sales team with instant access to product information, competitive intelligence, and proposal templates directly in their Teams workspace.
+  </Card>
+  
+  <Card title="Knowledge base access" icon="book">
+    Embed a knowledge assistant that can search your company documentation, wikis, and resources without requiring users to leave Teams.
+  </Card>
+  
+  <Card title="Project assistant" icon="list-check">
+    Add a project-specific agent to project channels to track tasks, answer questions about deliverables, and provide status updates.
+  </Card>
+  
+  <Card title="Customer success hub" icon="handshake">
+    Create a customer-facing Teams workspace with an embedded agent that can answer product questions and provide support resources.
+  </Card>
+</CardGroup>
+
+## Embedding vs. Teams integration
+
+Understanding the difference between embedding and the Teams integration helps you choose the right approach:
+
+| Feature | Embedded Chat App | Teams Integration |
+|---------|------------------|-------------------|
+| **Purpose** | Direct user interaction | Automation and triggers |
+| **User experience** | Chat interface in Teams | Background automation |
+| **Setup** | Add as tab/iframe | Configure triggers and tool steps |
+| **Use case** | Interactive Q&A, support | Automated responses, workflows |
+| **Documentation** | This page | [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams) |
+
+<Tip>
+  You can use both approaches together! Embed a chat app for direct interaction while also setting up triggers for automated responses to channel messages.
+</Tip>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Chat app doesn't load in Teams">
+    **Possible causes:**
+    - Your organization's Teams admin has blocked external content
+    - CSP headers are not configured correctly
+    - The URL is not using HTTPS
+    
+    **Solutions:**
+    - Contact your Teams admin to whitelist Relevance AI domains
+    - Verify your chat app URL starts with `https://`
+    - Check browser console for specific error messages
+  </Accordion>
+  
+  <Accordion title="Authentication errors">
+    If you see authentication errors, verify that:
+    - You're not using User Level Authentication (not supported in embeds)
+    - Your agent's integrations use shared accounts
+    - The agent is published and accessible
+  </Accordion>
+  
+  <Accordion title="Features not working">
+    Some features may be restricted by Teams' iframe security:
+    - File uploads may require additional permissions
+    - Pop-ups and new windows may be blocked
+    - Some browser features may be unavailable
+    
+    Test your specific use case and adjust your agent's configuration accordingly.
+  </Accordion>
+  
+  <Accordion title="Mobile display issues">
+    The Teams mobile app handles iframes differently than desktop:
+    - Test on actual mobile devices
+    - Consider using `hide_conversation_list=true` for better mobile layout
+    - Simplify the interface for smaller screens
+  </Accordion>
+  
+  <Accordion title="Slow loading times">
+    If your chat app loads slowly in Teams:
+    - Check your internet connection
+    - Verify the agent is published and not in draft mode
+    - Consider reducing the number of starting message prompts
+    - Contact support if issues persist
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I embed multiple agents in the same Teams workspace?">
+    Yes! You can create multiple tabs, each embedding a different Relevance AI agent. This is useful for specialized agents serving different purposes or departments.
+  </Accordion>
+  
+  <Accordion title="Who pays for the usage when embedded in Teams?">
+    All usage is billed to your Relevance AI account, regardless of who interacts with the embedded chat app. Users don't need their own Relevance AI accounts.
+  </Accordion>
+  
+  <Accordion title="Can I restrict who can access the embedded chat app?">
+    Access control is managed through Teams permissions. Only users with access to the channel or tab can interact with the embedded chat app. You cannot set additional restrictions within Relevance AI for embedded apps.
+  </Accordion>
+  
+  <Accordion title="Does the embedded chat app work offline?">
+    No, the embedded chat app requires an internet connection to function, as it communicates with Relevance AI's servers in real-time.
+  </Accordion>
+  
+  <Accordion title="Can I customize the appearance to match my Teams theme?">
+    Yes, use the `primary_color` URL parameter to match your brand colors. The chat app will automatically adapt to Teams' light and dark modes.
+  </Accordion>
+  
+  <Accordion title="What's the difference between Chat UI and Chat Widget for Teams embedding?">
+    - **Chat UI**: Full-page chat interface, best for dedicated tabs
+    - **Chat Widget**: Pop-up chat bubble, better suited for website embedding than Teams
+    
+    For Teams embedding, we recommend using the Chat UI option.
+  </Accordion>
+  
+  <Accordion title="Can I track usage analytics for the embedded chat app?">
+    Yes, all interactions with your embedded chat app appear in your agent's task history and analytics in Relevance AI, just like any other agent usage.
+  </Accordion>
+  
+  <Accordion title="Do I need to update the embedded app when I change my agent?">
+    No, the embedded app automatically reflects changes you make to your agent in Relevance AI. Simply publish your changes and they'll be live immediately.
+  </Accordion>
+</AccordionGroup>
+
+## Related resources
+
+<CardGroup cols={2}>
+  <Card title="Share Your Agent" icon="share-nodes" href="/build/agents/share-your-agent">
+    Learn about all the ways to share your agent
+  </Card>
+  <Card title="Microsoft Teams Integration" icon="microsoft" href="/integrations/popular-integrations/microsoft-teams">
+    Set up triggers and automation with Microsoft Teams
+  </Card>
+  <Card title="Chat Widget Configuration" icon="message" href="/build/agents/share-your-agent#chat-widget">
+    Detailed guide on chat widget customization
+  </Card>
+  <Card title="User Level Authentication" icon="lock" href="/enterprise/user-level-authentication">
+    Learn about authentication options (not supported in embeds)
+  </Card>
+</CardGroup>
