@@ -1,0 +1,182 @@
+---
+title: "Permissions Setup"
+description: "Grant screen recording and microphone access for the Desktop App"
+---
+
+The Relevance AI Desktop App requires two macOS permissions to function: screen recording and microphone access. This guide explains why these permissions are needed and how to grant them.
+
+## Why permissions are needed
+
+<CardGroup cols={2}>
+  <Card title="Screen recording" icon="display">
+    Detects when you're in a meeting by monitoring active applications
+  </Card>
+  <Card title="Microphone" icon="microphone">
+    Captures audio from your meetings for transcription
+  </Card>
+</CardGroup>
+
+<Info>
+The Desktop App only uses these permissions when you're actively recording a meeting. Screen recording is used solely for meeting detection, not to capture your screen content.
+</Info>
+
+## Grant screen recording permission
+
+macOS requires explicit permission for apps to access screen recording capabilities.
+
+<Steps>
+  <Step title="Open System Settings">
+    Click the Apple menu in the top-left corner of your screen and select "System Settings" (or "System Preferences" on older macOS versions).
+  </Step>
+  <Step title="Navigate to Privacy & Security">
+    In the sidebar, click "Privacy & Security."
+    
+    <Frame>
+      <img src="/images/desktop-app/privacy-security.png" alt="Privacy & Security in System Settings" />
+    </Frame>
+  </Step>
+  <Step title="Select Screen Recording">
+    Scroll down and click "Screen Recording" in the list of privacy options.
+    
+    You may need to click the lock icon in the bottom-left corner and enter your password to make changes.
+  </Step>
+  <Step title="Enable Relevance AI">
+    Find "Relevance AI" in the list of apps and toggle the switch to enable screen recording permission.
+    
+    <Frame>
+      <img src="/images/desktop-app/enable-screen-recording.png" alt="Enable screen recording for Relevance AI" />
+    </Frame>
+    
+    <Warning>
+    You must quit and restart the Desktop App after granting screen recording permission for the change to take effect.
+    </Warning>
+  </Step>
+</Steps>
+
+## Grant microphone permission
+
+The Desktop App needs microphone access to capture audio from your meetings.
+
+<Steps>
+  <Step title="Open System Settings">
+    Click the Apple menu and select "System Settings" (or "System Preferences").
+  </Step>
+  <Step title="Navigate to Privacy & Security">
+    In the sidebar, click "Privacy & Security."
+  </Step>
+  <Step title="Select Microphone">
+    Scroll down and click "Microphone" in the list of privacy options.
+    
+    You may need to unlock settings by clicking the lock icon and entering your password.
+  </Step>
+  <Step title="Enable Relevance AI">
+    Find "Relevance AI" in the list of apps and toggle the switch to enable microphone access.
+    
+    <Frame>
+      <img src="/images/desktop-app/enable-microphone.png" alt="Enable microphone for Relevance AI" />
+    </Frame>
+  </Step>
+</Steps>
+
+<Tip>
+Unlike screen recording, microphone permission changes take effect immediately without requiring an app restart.
+</Tip>
+
+## Verify permissions are granted
+
+After granting permissions, verify they're working correctly:
+
+<Steps>
+  <Step title="Open the Desktop App">
+    Click the Relevance AI icon in your menu bar to open the app interface.
+  </Step>
+  <Step title="Check permission status">
+    The app will display the status of both permissions in the settings or main interface.
+    
+    You should see green checkmarks next to both "Screen Recording" and "Microphone."
+  </Step>
+  <Step title="Test meeting detection">
+    Open a video conferencing app (Zoom, Google Meet, etc.) to verify the Desktop App detects it.
+    
+    The app should show a notification or status change indicating a meeting has been detected.
+  </Step>
+</Steps>
+
+## Troubleshooting permission issues
+
+<AccordionGroup>
+  <Accordion title="The app says permissions are denied, but I granted them">
+    If permissions appear granted in System Settings but the app still reports them as denied:
+    
+    1. Quit the Desktop App completely (right-click the menu bar icon and select "Quit")
+    2. Reopen System Settings and verify the permissions are still enabled
+    3. Restart your Mac if the issue persists
+    4. Try removing and re-granting the permissions
+  </Accordion>
+  <Accordion title="I don't see Relevance AI in the permissions list">
+    If the app doesn't appear in the Screen Recording or Microphone lists:
+    
+    1. Launch the Desktop App at least once to trigger the permission request
+    2. Try performing an action that requires the permission (like starting a recording)
+    3. Check that the app is installed in your Applications folder, not running from the Downloads folder
+    4. Reinstall the app if it still doesn't appear
+  </Accordion>
+  <Accordion title="Screen recording permission keeps getting revoked">
+    If macOS repeatedly revokes screen recording permission:
+    
+    1. Make sure you're running the latest version of the Desktop App
+    2. Check that the app is properly signed (right-click the app, select "Get Info," and verify the signature)
+    3. Try removing the app from Screen Recording permissions, restarting your Mac, then re-granting permission
+    4. Contact support if the issue continues
+  </Accordion>
+  <Accordion title="Meeting detection isn't working after granting permissions">
+    If the app has permissions but still doesn't detect meetings:
+    
+    1. Verify both screen recording AND microphone permissions are granted
+    2. Make sure automatic meeting detection is enabled in the app settings
+    3. Check that your video conferencing app is supported (Zoom, Google Meet, Teams, etc.)
+    4. Try manually starting a recording to test if the issue is specific to automatic detection
+  </Accordion>
+  <Accordion title="Can I grant permissions without admin access?">
+    Granting screen recording and microphone permissions requires administrator access on macOS. If you're using a work computer with restricted permissions:
+    
+    1. Contact your IT department to request permission changes
+    2. Provide them with this documentation to explain what permissions are needed
+    3. Some organizations may have policies that prevent granting screen recording access
+  </Accordion>
+</AccordionGroup>
+
+## Privacy and security
+
+<Info>
+The Relevance AI Desktop App takes your privacy seriously:
+
+- Screen recording permission is used only to detect active meeting applications, not to capture screen content
+- Microphone access is only active during meetings you choose to record
+- All recordings are encrypted during transmission and storage
+- You can revoke permissions at any time through macOS System Settings
+</Info>
+
+## Revoke permissions
+
+If you need to remove the Desktop App's permissions:
+
+1. Open System Settings > Privacy & Security
+2. Select "Screen Recording" or "Microphone"
+3. Find "Relevance AI" in the list and toggle the switch off
+4. The app will no longer have access to that permission
+
+<Warning>
+Revoking permissions will prevent the Desktop App from detecting meetings and recording audio. You'll need to re-grant permissions to use the app again.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Start using the app" icon="play" href="/get-started/desktop-app/using-the-app">
+    Learn how to record and transcribe meetings
+  </Card>
+  <Card title="Troubleshooting" icon="wrench" href="/get-started/desktop-app/troubleshooting">
+    Get help with common issues
+  </Card>
+</CardGroup>
