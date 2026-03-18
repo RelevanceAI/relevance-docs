@@ -7,14 +7,14 @@ sidebarTitle: 'Escalations'
 
 ## Notifications
 
-If your Agent ever gets stuck or needs a decision it can't make on its own, you can set up notifications to stay in the loop. Add your email address or connect a Slack channel, and the Agent will ping you when something needs human attention. This is especially helpful for Agents handling critical tasks where you don't want silent failures.
+If your Agent ever gets stuck or needs a decision it can't make on its own, you can set up notifications to stay in the loop. Add your email address, connect a Slack channel, or set up Microsoft Teams notifications, and the Agent will ping you when something needs human attention. This is especially helpful for Agents handling critical tasks where you don't want silent failures.
 
 
 ### Key Benefits
 
 ### Real-Time Team Alerts
 
-Your team receives instant Slack or email notifications when the AI needs human expertise, ensuring urgent customer needs are addressed promptly.
+Your team receives instant notifications via Slack, Teams, or email when the AI needs human expertise, ensuring urgent customer needs are addressed promptly.
 
 
 ### Seamless Customer Experience
@@ -34,6 +34,37 @@ Customers enjoy a smooth conversation flow even when human expertise is neededâ€
 ![](/images/agent/escalate.png)
 
 When you configure the Escalations feature, it will add an 'Escalate to Manager' tool into your agent. You can configure when your agent chooses to escalate tasks by adding the 'Escalate to Manager' tool into your prompt with the "/" command and clicking on it.
+
+## Agent Notifications
+
+<Warning>
+  This feature is currently in beta for some users
+</Warning>
+
+You can receive notifications when your agents enter specific statuses or encounter tool errors. Notifications can be sent to Email, Slack, or Microsoft Teams.
+
+### Setting up agent notifications
+
+1. Navigate to your agent and click the **Build** tab
+2. In the left sidebar, click **Escalations**
+3. Under "Agent Notifications", click **Add agent notification**
+4. Configure your notification settings:
+   - Select your notification channel: **Email**, **Slack**, or **Microsoft Teams**
+   - Choose the notification trigger:
+     - **Agent enters status** - Select specific task statuses (e.g., "Running", "Completed", "Failed")
+     - **Tool errors (any tool)** - Get notified when any tool encounters an error
+   - For Slack: Select a connected Slack account and channel
+   - For Teams: Select a connected Microsoft Teams account and channel
+   - For Email: Enter the email address to receive notifications
+5. Click **Publish changes** to save your notification configuration
+
+<Note>
+  For Slack and Teams notifications, make sure you have the respective integration connected in your Integrations & API Keys page before setting up agent notifications.
+</Note>
+
+Learn more about setting up notifications for specific platforms:
+- [Slack Agent Notifications](/integrations/popular-integrations/slack#agent-notifications)
+- [Microsoft Teams Agent Notifications](/integrations/popular-integrations/microsoft-teams#agent-notifications)
 
 ## Tool Approvals
 
