@@ -25,9 +25,10 @@ Keep permissions simple. Assign roles based on who needs to build, who needs to 
 
 ### Organization Level
 
+- **Owners** — have full control including billing and can delete the organization. Assign to 1-2 people maximum (CEO, CTO, or Head of Operations). Owners have all Admin permissions plus billing control.
 - **Admins** — set up and manage teams, projects, and authentication. Usually your workspace or IT leads.
-- **Members** — have autonomy to create their own projects and assets. Best for power users or builders.
-- **Viewers** — should not create anything until they're assigned to a project. Use this for early access or external collaborators.
+- **Members** — can only access projects they're assigned to. Cannot create projects at the organization level. Asset creation within projects is controlled by project-level permissions. Best for users who need access to specific projects but shouldn't manage organization-wide settings.
+- **Viewers** — view-only access to audit logs, usage data, and compliance reports. Use this for stakeholders who need visibility without operational access.
 
 ### Project Level
 
@@ -57,7 +58,7 @@ New organization members will be given viewer permissions by default. If invited
 | ---------- | ------------------------------------------------------------------------------------------------ |
 | **Owner**  | Full control of organization, billing, security, users and all projects                          |
 | **Admin**  | Manage users, projects, organization-level API keys and OAuths                                   |
-| **Member** | Access only assigned projects, can create private projects and assets (agents, tools, knowledge) |
+| **Member** | Access only assigned projects. Cannot create projects at organization level. Asset creation within projects is controlled by project-level permissions. |
 | **Viewer** | View-only access to agent and tool audit logs, usage data and compliance reports                 |
 
 ### Permissions
@@ -73,7 +74,7 @@ New organization members will be given viewer permissions by default. If invited
 | Delete any asset                                       | ✅         | ✅         | ❌          | ❌          |
 | Edit project roles                                     | ✅         | ✅         | ❌          | ❌          |
 | View credit information                                | ✅         | ✅         | ❌          | ❌          |
-| Create projects                                        | ✅         | ✅         | ✅          | ❌          |
+| Create projects                                        | ✅         | ✅         | ❌          | ❌          |
 | View organization members / admins                     | ✅         | ✅         | ✅          | ✅          |
 
 ----
