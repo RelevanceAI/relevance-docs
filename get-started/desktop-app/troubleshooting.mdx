@@ -1,0 +1,366 @@
+---
+title: "Troubleshooting"
+description: "Solutions to common Desktop App issues"
+---
+
+This guide covers common issues you might encounter with the Relevance AI Desktop App and how to resolve them.
+
+## Permission issues
+
+<AccordionGroup>
+  <Accordion title="The app says screen recording permission is denied">
+    **Solution:**
+    
+    1. Open System Settings > Privacy & Security > Screen Recording
+    2. Verify "Relevance AI" is in the list and enabled
+    3. If enabled, toggle it off and back on
+    4. Quit the Desktop App completely (right-click menu bar icon > Quit)
+    5. Relaunch the app
+    6. If the issue persists, restart your Mac
+    
+    [Learn more about permissions →](/get-started/desktop-app/permissions)
+  </Accordion>
+  <Accordion title="The app says microphone permission is denied">
+    **Solution:**
+    
+    1. Open System Settings > Privacy & Security > Microphone
+    2. Verify "Relevance AI" is in the list and enabled
+    3. If not in the list, try starting a recording to trigger the permission request
+    4. If enabled but still not working, toggle it off and back on
+    5. Test your microphone in another app to ensure it's working
+  </Accordion>
+  <Accordion title="Permissions keep getting revoked after updates">
+    **Solution:**
+    
+    This can happen if the app's code signature changes between versions:
+    
+    1. Remove the app from both Screen Recording and Microphone permission lists
+    2. Restart your Mac
+    3. Launch the Desktop App
+    4. Grant permissions when prompted
+    5. Make sure you're downloading updates from the official Relevance AI website
+  </Accordion>
+</AccordionGroup>
+
+## Authentication issues
+
+<AccordionGroup>
+  <Accordion title="Authentication fails when signing in">
+    **Solution:**
+    
+    1. Make sure you're logged into the correct Relevance AI account in your browser
+    2. Try using a different browser (Chrome, Safari, Firefox)
+    3. Disable browser extensions that might block redirects
+    4. Clear your browser cache and cookies
+    5. If using a work computer, check with IT about firewall or proxy settings
+    6. Try copying the authorization code manually instead of using the deep link
+  </Accordion>
+  <Accordion title="The app says my session has expired">
+    **Solution:**
+    
+    1. Click "Sign in again" in the Desktop App
+    2. Complete the authentication flow in your browser
+    3. If this happens frequently, check your system clock is set correctly
+    4. Make sure you're not signed into multiple Relevance AI accounts in different browser tabs
+  </Accordion>
+  <Accordion title="Deep link redirect doesn't work">
+    **Solution:**
+    
+    If the browser doesn't redirect back to the Desktop App:
+    
+    1. Look for an authorization code displayed in your browser
+    2. Copy the code
+    3. Return to the Desktop App
+    4. Paste the code into the input field
+    5. Click "Authorize"
+    
+    If this doesn't work, check your default browser settings in macOS System Settings > Desktop & Dock > Default web browser.
+  </Accordion>
+</AccordionGroup>
+
+## Meeting detection issues
+
+<AccordionGroup>
+  <Accordion title="The app doesn't detect my meetings">
+    **Solution:**
+    
+    1. Verify screen recording permission is granted
+    2. Check that automatic meeting detection is enabled in app settings
+    3. Make sure you're using a supported platform (Zoom, Google Meet, Teams, etc.)
+    4. Try manually starting a recording to test if the issue is specific to detection
+    5. Check that the meeting app is actually running (not just a browser tab)
+    6. Restart the Desktop App
+  </Accordion>
+  <Accordion title="Detection works for some platforms but not others">
+    **Solution:**
+    
+    1. Open Desktop App settings
+    2. Go to "Detection" settings
+    3. Verify the platform is enabled in the list of monitored apps
+    4. If using a browser-based platform, make sure the browser is also in the list
+    5. Try adding the specific app manually if it's not listed
+  </Accordion>
+  <Accordion title="The app detects meetings too early or too late">
+    **Solution:**
+    
+    1. Open Desktop App settings
+    2. Adjust the "Auto-start recording delay" setting
+    3. Increase the delay if recordings start before you join
+    4. Decrease the delay if recordings start after the meeting begins
+    5. You can also disable automatic recording and start manually
+  </Accordion>
+</AccordionGroup>
+
+## Recording issues
+
+<AccordionGroup>
+  <Accordion title="No audio is being recorded">
+    **Solution:**
+    
+    1. Check that microphone permission is granted
+    2. Verify the correct microphone is selected in macOS System Settings > Sound > Input
+    3. Test your microphone in another app (like Voice Memos)
+    4. Check the audio input level in the Desktop App settings
+    5. Make sure your microphone isn't muted in macOS or the meeting app
+    6. Try using a different microphone or audio input device
+  </Accordion>
+  <Accordion title="Audio quality is poor or distorted">
+    **Solution:**
+    
+    1. Open Desktop App settings > Recording
+    2. Increase the audio quality setting to "High" or "Maximum"
+    3. Check for background noise or interference
+    4. Use an external microphone instead of the built-in one
+    5. Make sure your Mac has sufficient CPU and memory available
+    6. Close unnecessary apps to free up system resources
+  </Accordion>
+  <Accordion title="Recording stops unexpectedly">
+    **Solution:**
+    
+    1. Check if you've reached the maximum recording duration (set in app settings)
+    2. Verify you have sufficient disk space for recordings
+    3. Make sure your Mac isn't going to sleep during meetings (System Settings > Battery/Energy Saver)
+    4. Check the app logs for error messages (Settings > Advanced > View Logs)
+    5. Update to the latest version of the Desktop App
+  </Accordion>
+  <Accordion title="Recordings are missing or incomplete">
+    **Solution:**
+    
+    1. Check the sync status in the Desktop App
+    2. Make sure you have a stable internet connection
+    3. Wait for sync to complete before closing your laptop
+    4. Check your Relevance AI account storage quota
+    5. Look for the recording in the local storage location (Settings > Sync > Storage location)
+    6. If the recording exists locally but didn't sync, try manually triggering a sync
+  </Accordion>
+</AccordionGroup>
+
+## Transcription issues
+
+<AccordionGroup>
+  <Accordion title="Transcripts are inaccurate">
+    **Solution:**
+    
+    Transcription accuracy depends on audio quality and speech clarity:
+    
+    1. Use a better microphone for clearer audio
+    2. Minimize background noise during meetings
+    3. Speak clearly and at a moderate pace
+    4. Avoid overlapping conversations when possible
+    5. Check that the correct language is selected in app settings
+    6. Technical terms or jargon may require manual correction
+  </Accordion>
+  <Accordion title="Speaker labels are wrong or missing">
+    **Solution:**
+    
+    1. Speaker identification works best with distinct voices
+    2. Make sure participants introduce themselves at the start
+    3. You can manually edit speaker labels in the transcript after recording
+    4. For better accuracy, use the Meeting Notetaker Agent which joins as a participant
+  </Accordion>
+  <Accordion title="Transcripts aren't appearing in real-time">
+    **Solution:**
+    
+    1. Check your internet connection (transcription requires connectivity)
+    2. Verify the recording is actually active (check menu bar indicator)
+    3. Try closing and reopening the transcript view
+    4. Check if you've exceeded your transcription quota
+    5. Restart the Desktop App if the issue persists
+  </Accordion>
+</AccordionGroup>
+
+## Sync issues
+
+<AccordionGroup>
+  <Accordion title="Recordings aren't syncing to my account">
+    **Solution:**
+    
+    1. Check the sync status indicator in the Desktop App
+    2. Verify you have an active internet connection
+    3. Make sure you're signed into the correct Relevance AI account
+    4. Check your account storage quota (Settings > Plan & Billing in web app)
+    5. Try manually triggering a sync (click the sync icon in the app)
+    6. Check for error messages in the sync log (Settings > Advanced > View Sync Log)
+  </Accordion>
+  <Accordion title="Sync is very slow">
+    **Solution:**
+    
+    1. Large recordings take time to upload, especially on slower connections
+    2. Check your internet upload speed
+    3. Pause other uploads or downloads
+    4. Adjust sync settings to upload during off-hours
+    5. Consider upgrading your internet connection for faster uploads
+  </Accordion>
+  <Accordion title="Sync failed with an error">
+    **Solution:**
+    
+    Common sync errors and fixes:
+    
+    - **"Storage quota exceeded"**: Upgrade your plan or delete old recordings
+    - **"Network error"**: Check your internet connection and firewall settings
+    - **"Authentication failed"**: Sign out and sign back in
+    - **"File too large"**: Contact support to increase upload limits
+    - **"Server error"**: Wait a few minutes and try again, or contact support
+  </Accordion>
+</AccordionGroup>
+
+## Performance issues
+
+<AccordionGroup>
+  <Accordion title="The app is using too much CPU or memory">
+    **Solution:**
+    
+    1. Close unnecessary apps to free up system resources
+    2. Lower the audio quality setting in app preferences
+    3. Disable real-time transcription if you don't need it during meetings
+    4. Check for background processes consuming resources (Activity Monitor)
+    5. Restart your Mac to clear memory
+    6. Update to the latest version of the Desktop App
+  </Accordion>
+  <Accordion title="The app is draining my battery quickly">
+    **Solution:**
+    
+    1. Recording and transcription are CPU-intensive tasks
+    2. Plug in your Mac during long meetings when possible
+    3. Lower the audio quality setting to reduce processing
+    4. Disable real-time transcription to save battery
+    5. Close other apps during meetings
+    6. Check Battery settings in macOS to see what's consuming power
+  </Accordion>
+  <Accordion title="The app is slow or unresponsive">
+    **Solution:**
+    
+    1. Restart the Desktop App
+    2. Check available disk space (recordings need temporary storage)
+    3. Make sure you're running the latest version
+    4. Check for macOS updates
+    5. Try resetting app preferences (Settings > Advanced > Reset to Defaults)
+    6. If the issue persists, uninstall and reinstall the app
+  </Accordion>
+</AccordionGroup>
+
+## Installation and update issues
+
+<AccordionGroup>
+  <Accordion title="The app won't install">
+    **Solution:**
+    
+    1. Make sure you're running macOS 11.0 (Big Sur) or later
+    2. Check that you have administrator access on your Mac
+    3. Verify you have sufficient disk space (at least 500MB free)
+    4. Download the installer again in case the file was corrupted
+    5. Try installing from a different location (move .dmg to Desktop)
+    6. Check with IT if you're on a managed work computer
+  </Accordion>
+  <Accordion title="Updates fail to install">
+    **Solution:**
+    
+    1. Quit the Desktop App completely before updating
+    2. Download the latest version manually from the website
+    3. Uninstall the old version first, then install the new one
+    4. Check that you have sufficient disk space
+    5. Verify you have administrator access
+    6. Try restarting your Mac and installing again
+  </Accordion>
+  <Accordion title="The app won't launch after updating">
+    **Solution:**
+    
+    1. Try launching the app from Applications folder (not from the .dmg)
+    2. Right-click the app and select "Open" to bypass Gatekeeper
+    3. Check Console app for error messages
+    4. Uninstall and reinstall the app
+    5. Make sure you're not running an incompatible macOS version
+    6. Contact support if the issue persists
+  </Accordion>
+</AccordionGroup>
+
+## Getting additional help
+
+If you've tried the solutions above and still need help:
+
+<Steps>
+  <Step title="Check the app logs">
+    1. Open Desktop App settings
+    2. Go to Advanced > View Logs
+    3. Look for error messages or warnings
+    4. Copy relevant log entries to share with support
+  </Step>
+  <Step title="Gather system information">
+    Collect this information before contacting support:
+    - macOS version (Apple menu > About This Mac)
+    - Desktop App version (Settings > About)
+    - Description of the issue and when it started
+    - Steps to reproduce the problem
+    - Any error messages you've seen
+  </Step>
+  <Step title="Contact support">
+    Reach out through:
+    - In-app support (Settings > Help & Support)
+    - Email: support@relevanceai.com
+    - [Support documentation](/get-started/support)
+    
+    Include the information gathered above for faster resolution.
+  </Step>
+</Steps>
+
+## Known issues
+
+<Warning>
+**Current known issues:**
+
+- **macOS Sonoma 14.4+**: Some users report intermittent screen recording permission issues. Workaround: Toggle permission off and on in System Settings.
+- **External displays**: Meeting detection may not work correctly with certain external display configurations. Workaround: Use manual recording.
+- **VPN connections**: Some corporate VPNs may interfere with sync. Workaround: Temporarily disable VPN during sync or configure VPN to allow Relevance AI traffic.
+
+These issues are being actively worked on. Check for app updates regularly.
+</Warning>
+
+## Report a bug
+
+Found a bug? Help us improve the Desktop App:
+
+1. Open Desktop App settings
+2. Go to Help & Support > Report a Bug
+3. Describe the issue in detail
+4. Include steps to reproduce
+5. Attach logs if requested
+6. Submit the report
+
+Our team will investigate and follow up with you.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Installation guide" icon="download" href="/get-started/desktop-app/installation">
+    Reinstall or update the Desktop App
+  </Card>
+  <Card title="Permissions setup" icon="shield-check" href="/get-started/desktop-app/permissions">
+    Review permission requirements
+  </Card>
+  <Card title="Using the app" icon="play" href="/get-started/desktop-app/using-the-app">
+    Learn how to use the Desktop App
+  </Card>
+  <Card title="Get support" icon="life-ring" href="/get-started/support">
+    Contact our support team
+  </Card>
+</CardGroup>
