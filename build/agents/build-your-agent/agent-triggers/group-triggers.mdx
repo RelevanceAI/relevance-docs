@@ -1,0 +1,212 @@
+---
+title: "Group Triggers"
+description: "Enable teams to share trigger configurations while using their own OAuth accounts"
+sidebarTitle: "Group Triggers"
+---
+
+<Info>
+  Group Triggers is a new feature being rolled out. This feature is currently behind the GroupInviteTriggers feature flag.
+</Info>
+
+Group Triggers allow admins to create shared trigger configurations that team members can join by connecting their own OAuth accounts. This eliminates the need for each team member to configure the same trigger individually, while maintaining privacy and security through individual authentication.
+
+## How Group Triggers work
+
+Group Triggers change how teams collaborate on trigger configurations. Instead of each team member setting up identical triggers with their own accounts, an admin creates a single shared configuration that team members can join.
+
+<Columns cols={2}>
+  <Card title="Admin creates" icon="user-gear">
+    Configure the trigger once with all settings, filters, and conditions
+  </Card>
+  <Card title="Team joins" icon="users">
+    Connect individual OAuth accounts to the shared configuration
+  </Card>
+  <Card title="Individual accounts" icon="key">
+    Each member's own account is used when the trigger fires
+  </Card>
+  <Card title="Centralized management" icon="sliders">
+    Admin manages settings while members control their own connections
+  </Card>
+</Columns>
+
+When a trigger event occurs, the agent runs using the OAuth account of the team member whose account detected the event. This means each team member only sees and processes data they have permission to access in the connected integration.
+
+## Why use Group Triggers
+
+<Columns cols={2}>
+  <Card title="Simplified Setup" icon="bolt">
+    Configure trigger settings once instead of having each team member set up the same trigger individually.
+  </Card>
+  <Card title="Consistent Configuration" icon="check-double">
+    Ensure all team members use the same filters, conditions, and settings without manual coordination.
+  </Card>
+  <Card title="Privacy Protection" icon="user-lock">
+    Each team member uses their own OAuth account, so they only access data they have permission to see.
+  </Card>
+  <Card title="Easy Collaboration" icon="users-gear">
+    Team members can join or leave group triggers without affecting others or requiring admin reconfiguration.
+  </Card>
+  <Card title="Centralized Management" icon="shield-check">
+    Admins control trigger configuration while team members manage their own account connections.
+  </Card>
+</Columns>
+
+## Requirements
+
+**Who can create Group Triggers:**
+- Project admins only
+
+**Supported integrations:**
+- OAuth-based integrations only (Gmail, Slack, Microsoft Teams, etc.)
+- Integrations that use API key authentication are not supported for Group Triggers
+
+**Availability:**
+- Currently behind the GroupInviteTriggers feature flag
+
+## Setting up Group Triggers
+
+### For Admins: Creating a Group Trigger
+
+As a project admin, you can create Group Triggers that your team members can join.
+
+<Steps>
+  <Step title="Navigate to Triggers">
+    Go to your agent and click **Triggers** in the sidebar.
+  </Step>
+  <Step title="Add a new trigger">
+    Click **Add trigger** and select an OAuth-based integration (e.g., Gmail, Slack, Teams).
+  </Step>
+  <Step title="Enable Group Trigger">
+    During trigger configuration, enable the **Group Trigger** option.
+  </Step>
+  <Step title="Configure settings">
+    Set up filters, conditions, and other trigger settings. These settings will apply to all team members who join.
+  </Step>
+  <Step title="Save configuration">
+    Save the trigger. Team members can now connect their accounts to this shared configuration.
+  </Step>
+</Steps>
+
+### Managing Group Triggers
+
+Once created, admins can:
+
+- **View connection count**: See how many team members have connected their accounts
+- **Manage team connections**: View which team members are connected
+- **Update configuration**: Modify trigger settings that apply to all connected members
+- **Remove the trigger**: Delete the group trigger configuration
+
+<Note>
+When you update a Group Trigger's configuration, the changes apply to all team members who have connected their accounts.
+</Note>
+
+### For Team Members: Joining a Group Trigger
+
+Team members can connect their own OAuth accounts to Group Triggers created by admins.
+
+<Steps>
+  <Step title="Find available Group Triggers">
+    Navigate to the agent with Group Triggers available. You'll see a notification or prompt to connect your account.
+  </Step>
+  <Step title="Connect your OAuth account">
+    Click to connect your account and follow the OAuth authentication flow for the integration.
+  </Step>
+  <Step title="Authorize access">
+    Grant the necessary permissions for the integration to monitor events in your account.
+  </Step>
+  <Step title="Start receiving triggers">
+    Once connected, the agent will trigger when events occur in your connected account based on the admin's configuration.
+  </Step>
+</Steps>
+
+### Managing your connection
+
+Team members can:
+
+- **Disconnect at any time**: Remove your account from the Group Trigger without affecting other team members
+- **Reconnect if needed**: Rejoin the Group Trigger by connecting your account again
+- **View trigger settings**: See the configuration set by the admin (read-only)
+
+## Group Triggers vs. Individual Triggers
+
+| Feature | Group Triggers | Individual Triggers |
+|---------|----------------|---------------------|
+| **Setup** | Admin configures once | Each user configures separately |
+| **Configuration** | Centrally managed by admin | Managed by each user |
+| **OAuth accounts** | Each member uses their own | User uses their own |
+| **Settings consistency** | Guaranteed across team | May vary between users |
+| **Best for** | Team collaboration, shared workflows | Personal use, individual workflows |
+| **Who can create** | Project admins only | Any user with appropriate permissions |
+
+## Group Triggers vs. User Level Authentication
+
+While both features involve individual OAuth accounts, they serve different purposes:
+
+**Group Triggers:**
+- Used for **trigger setup** and configuration
+- Determines **when** an agent runs based on events
+- Admin creates shared trigger configuration
+- Team members connect accounts to receive trigger events
+- Example: Team members all monitor their Gmail for customer inquiries
+
+**User Level Authentication:**
+- Used for **tool authentication** during agent execution
+- Determines **what data** an agent can access when running
+- Builder configures per-tool authentication requirements
+- Users authenticate when agent needs to access their data
+- Example: Agent accesses each user's Google Drive files during execution
+
+<Tip>
+You can use both features together. For example, a Group Trigger monitors team members' Gmail accounts (trigger), and when the agent runs, it uses User Level Authentication to access each user's Google Drive (tool).
+</Tip>
+
+Learn more about [User Level Authentication](/enterprise/user-level-authentication).
+
+## Limitations
+
+<Warning>
+  Group Triggers is currently behind the GroupInviteTriggers feature flag and may not be available to all users yet.
+</Warning>
+
+**Current limitations:**
+
+- Only OAuth-based integrations are supported
+- Only project admins can create Group Triggers
+- API key-based integrations cannot be used with Group Triggers
+- Team members must have appropriate permissions in the connected integration to receive trigger events
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens when I join a Group Trigger?">
+    When you join a Group Trigger, you connect your own OAuth account to the shared trigger configuration. The agent will then monitor your account for events matching the admin's configured filters and conditions. When an event occurs in your account, the agent runs using your credentials.
+  </Accordion>
+  
+  <Accordion title="Can I modify the trigger settings after joining?">
+    No. Only the admin who created the Group Trigger can modify the configuration settings. Team members can only connect or disconnect their accounts. If you need different settings, ask your admin to update the Group Trigger or create your own individual trigger.
+  </Accordion>
+  
+  <Accordion title="What integrations support Group Triggers?">
+    Group Triggers work with OAuth-based integrations only, including Gmail, Slack, Microsoft Teams, and other services that use OAuth authentication. Integrations that use API key authentication are not supported for Group Triggers.
+  </Accordion>
+  
+  <Accordion title="Will other team members see my data?">
+    No. Each team member uses their own OAuth account, so they only access data they have permission to see in the connected integration. When the agent runs, it uses the credentials of the team member whose account detected the trigger event.
+  </Accordion>
+  
+  <Accordion title="What happens if I disconnect from a Group Trigger?">
+    When you disconnect, the agent will no longer monitor your account for trigger events. Other team members who remain connected are not affected. You can reconnect at any time by joining the Group Trigger again.
+  </Accordion>
+  
+  <Accordion title="Can I be part of multiple Group Triggers?">
+    Yes. You can connect your account to multiple Group Triggers across different agents and integrations. Each Group Trigger operates independently.
+  </Accordion>
+  
+  <Accordion title="How is this different from User Level Authentication?">
+    Group Triggers are for trigger setup (when an agent runs), while User Level Authentication is for tool authentication (what data an agent can access during execution). Group Triggers determine which events activate your agent, while User Level Authentication determines which user's data the agent accesses when using tools. You can use both features together in the same agent.
+  </Accordion>
+  
+  <Accordion title="Who can see that I've joined a Group Trigger?">
+    The admin who created the Group Trigger can see how many team members have connected and which team members are connected. Other team members cannot see who else has joined.
+  </Accordion>
+</AccordionGroup>
