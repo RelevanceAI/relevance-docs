@@ -73,6 +73,70 @@ Turn your Agent into a pop-up chat interface you can embed on any website with a
 | `hide_logo`                | `boolean` |                                                                                                                                                                                                          | Toggle Relevance AI branding.                       | `false`                                                |
 | `hide_description`         | `boolean` |                                                                                                                                                                                                          | Toggle agent description.                           | `true`                                                 |
 
+## Microsoft Teams Tab
+
+Embed Relevance AI Chat as a tab within Microsoft Teams, allowing your team members to interact with your agent directly inside Teams. This deployment option is designed specifically for the Teams environment and handles authentication differently from standard web embeds.
+
+### How it works
+
+When you add Relevance AI Chat as a Teams tab, users can access your agent without leaving the Teams interface. Because Teams tabs cannot redirect users away from the Teams context, the chat uses a popup-based authentication flow instead of the standard redirect-based flow.
+
+When a user needs to authenticate:
+1. A popup window opens for login
+2. The user completes authentication in the popup
+3. The popup closes automatically
+4. The user continues their conversation in Teams
+
+This approach keeps users within Teams while still providing secure authentication.
+
+### Setting up Chat as a Teams tab
+
+<Steps>
+  <Step title="Get your Chat URL">
+    From your agent's Share menu, copy the Chat UI URL or iframe embed code.
+  </Step>
+  
+  <Step title="Add a tab in Teams">
+    In your Teams channel or chat, click the **+** button to add a new tab.
+  </Step>
+  
+  <Step title="Choose Website">
+    Select **Website** from the tab options.
+  </Step>
+  
+  <Step title="Configure the tab">
+    - Enter a name for your tab (e.g., "AI Assistant")
+    - Paste your Relevance AI Chat URL
+    - Click **Save**
+  </Step>
+</Steps>
+
+### Authentication behavior
+
+<Info>
+  The popup authentication flow is automatic when Chat detects it's running inside a Teams tab. No additional configuration is required.
+</Info>
+
+If your agent uses integrations that require user authentication, users will see a popup window when they first interact with features that need authentication. This is different from standard web embeds where authentication happens via redirect.
+
+### Limitations
+
+<Warning>
+  **User Level Authentication is not supported in Teams tabs.** Similar to other embedded scenarios, if your agent uses [User Level Authentication](/enterprise/user-level-authentication), this will not work when embedded as a Teams tab. Configure your agent to use a shared account for integrations instead.
+</Warning>
+
+- Popup blockers may interfere with authentication. Users should allow popups from Teams.
+- Some browser extensions may affect the popup authentication flow.
+
+### Teams integration vs. Teams tab
+
+This Teams tab deployment is different from the [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams), which allows agents to monitor Teams channels and respond to messages automatically. 
+
+- **Teams tab** (this section): Embeds Chat UI for direct user interaction within Teams
+- **Teams integration**: Connects agents to monitor and respond to channel messages as a trigger
+
+You can use both approaches together — for example, an agent that monitors a support channel and is also available as a tab for direct questions.
+
 ## Task UI
 
 This gives users access to a task-focused version of your Agent via an iframe. Users can view past task runs, pick from existing tasks, and even interact with outputs — all within a self-contained UI. It's great for operational dashboards, workflow demos, or giving others visibility into what your Agent is doing.
