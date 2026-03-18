@@ -15,13 +15,65 @@ Scheduled triggers let your Agent act on its own based on time — either by run
 
 Recurring schedules run your Agent automatically at set intervals — daily, weekly, monthly, or on a custom cadence.
 
-### Setting up a recurring schedule
+You can create recurring schedules in two ways:
+
+1. **From the Agent Builder** — Configure schedules in the Triggers section when building or editing your agent
+2. **From the Super Agent Panel** — Create schedules directly from the chat interface (Enterprise beta feature)
+
+### Setting up a recurring schedule in the Agent Builder
 
 1. Go to your agent in the Relevance AI dashboard
 2. Click 'Edit Agent'
 3. Navigate to the 'Triggers' section
 4. Select 'Recurring Schedule'
 5. Choose your schedule type
+
+### Setting up a recurring schedule from the Super Agent Panel
+
+<Warning>
+This feature is available in Super GTM, which is currently in closed beta for Enterprise customers. Contact your account team to request access.
+</Warning>
+
+The Super Agent floating panel in Chat lets you create, edit, and delete recurring schedules without leaving your conversation. This is useful when you want to set up automation while working in the chat interface.
+
+<Steps>
+  <Step title="Access the Super Agent panel">
+    In Chat, click the Super Agent floating panel icon to open the panel
+  </Step>
+  <Step title="Navigate to Schedules">
+    Click on the "Schedules" tab in the panel
+  </Step>
+  <Step title="Create a new schedule">
+    Click "Add Schedule" to open the schedule creation form
+  </Step>
+  <Step title="Configure your schedule">
+    - **Message**: Describe what the agent should do automatically (e.g., "Send a daily summary of new leads")
+    - **Frequency**: Choose Daily, Weekly, Monthly, or Annually
+    - **Time**: Set the time when the schedule should run
+    - **Timezone**: Select your timezone to ensure the schedule runs at the correct local time
+  </Step>
+  <Step title="Save the schedule">
+    Click "Save" to activate the recurring schedule
+  </Step>
+</Steps>
+
+#### Managing schedules from the panel
+
+Once created, you can manage your schedules directly from the Super Agent panel:
+
+- **View all schedules**: See a list of all active recurring schedules for the agent
+- **Edit a schedule**: Click on any schedule to modify its frequency, time, timezone, or message
+- **Delete a schedule**: Remove schedules you no longer need
+
+<Tip>
+Schedules created from the Super Agent panel are the same as schedules created in the Agent Builder. You can view and edit them in either location.
+</Tip>
+
+#### Timezone considerations
+
+When creating schedules from the Super Agent panel, always verify your timezone selection. The agent will run at the specified time in the timezone you choose, not your browser's local timezone.
+
+For example, if you set a schedule for 9:00 AM in Pacific Time (PT), it will run at 9:00 AM PT regardless of where you're located when you view the schedule.
 
 ### Schedule types
 
@@ -89,6 +141,7 @@ AWS EventBridge cron expressions use 6 fields, unlike traditional Unix cron whic
 - **Test thoroughly**: Run your agent manually first to ensure it works as expected
 - **Monitor initially**: Check the first few automated runs to confirm everything works correctly
 - **Use cron for precision**: When you need exact timing control, use cron expressions instead of simple schedules
+- **Panel vs Builder**: Use the Super Agent panel for quick schedule creation during chat workflows, or use the Agent Builder for more complex scheduling configurations
 
 ---
 
@@ -150,9 +203,15 @@ A built-in tool your Agent can use when writing prompts. Use the `/schedule mess
     Yes, you can disable schedules without deleting them when you need a pause. Simply toggle off the schedule in your agent's Triggers settings.
   </Accordion>
   <Accordion title="How do I change an existing schedule?">
-    Go back to the Recurring Schedule section in your agent's Triggers settings and update the schedule as needed. Changes take effect immediately.
+    Go back to the Recurring Schedule section in your agent's Triggers settings and update the schedule as needed. Changes take effect immediately. If you created the schedule from the Super Agent panel, you can also edit it there.
   </Accordion>
   <Accordion title="What timezone are scheduled runs based on?">
-    Scheduled runs use your account's configured timezone. You can adjust this in your agent's schedule settings to ensure tasks run at the correct local time.
+    Scheduled runs use the timezone you configure when creating the schedule. When using the Super Agent panel, you can select your timezone from a dropdown. When using the Agent Builder, you can adjust the timezone in your agent's schedule settings. Always verify the timezone to ensure tasks run at the correct local time.
+  </Accordion>
+  <Accordion title="Can I create schedules from both the Agent Builder and the Super Agent panel?">
+    Yes! Schedules created in either location are the same underlying recurring schedule triggers. You can create a schedule in the Agent Builder and later edit it from the Super Agent panel, or vice versa. Both methods give you full CRUD (create, read, update, delete) capabilities.
+  </Accordion>
+  <Accordion title="What's the difference between panel-based and builder-based scheduling?">
+    Both methods configure the same recurring schedule triggers. The Super Agent panel method is more convenient when you're working in Chat and want to quickly set up automation without leaving your conversation. The Agent Builder method provides access to advanced options like cron expressions and is better for complex scheduling configurations.
   </Accordion>
 </AccordionGroup>
