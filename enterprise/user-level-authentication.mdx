@@ -158,6 +158,30 @@ To protect privacy and security:
 - **Auths are private by default** - When you connect a new account, it's automatically set as private
 - **Shared accounts** - If your organization has shared project-level accounts, you'll see those as options alongside your personal accounts
 
+## User Level Authentication vs. Group Triggers
+
+While both features involve individual OAuth accounts, they serve different purposes:
+
+**User Level Authentication:**
+- Used for **tool authentication** during agent execution
+- Determines **what data** an agent can access when running
+- Builder configures per-tool authentication requirements
+- Users authenticate when agent needs to access their data
+- Example: Agent accesses each user's Google Drive files during execution
+
+**Group Triggers:**
+- Used for **trigger setup** and configuration
+- Determines **when** an agent runs based on events
+- Admin creates shared trigger configuration
+- Team members connect accounts to receive trigger events
+- Example: Team members all monitor their Gmail for customer inquiries
+
+<Tip>
+You can use both features together. For example, a Group Trigger monitors team members' Gmail accounts (trigger), and when the agent runs, it uses User Level Authentication to access each user's Google Drive (tool).
+</Tip>
+
+Learn more about [Group Triggers](/build/agents/build-your-agent/agent-triggers/group-triggers).
+
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
@@ -192,5 +216,9 @@ To protect privacy and security:
 
   <Accordion title="My integration uses API keys or Python code steps. Can I use User Level Authentication?">
     No. User Level Authentication only supports OAuth-based integrations. If your integration uses API key authentication, Python code steps, or custom API calls with bearer tokens, you'll need to use a shared account instead. Only integrations that use OAuth to connect user accounts (like Google Sheets, Slack, HubSpot, Notion, etc.) are compatible with User Level Authentication.
+  </Accordion>
+
+  <Accordion title="How is this different from Group Triggers?">
+    User Level Authentication is for tool authentication (what data an agent can access during execution), while Group Triggers are for trigger setup (when an agent runs). User Level Authentication determines which user's data the agent accesses when using tools, while Group Triggers determine which events activate your agent. You can use both features together in the same agent. Learn more about [Group Triggers](/build/agents/build-your-agent/agent-triggers/group-triggers).
   </Accordion>
 </AccordionGroup>
