@@ -79,6 +79,55 @@ Full control from the ground up. Best if you have a specific workflow in mind.
 5. Add [Tools](/build/agents/build-your-agent/tools) — give it the actions it needs (search the web, send emails, update your CRM, etc.)
 6. Optionally add [Knowledge](/build/knowledge/create-knowledge) — upload docs or connect data sources for context
 
+## Using Inventor v3 while building
+
+Once you've created an Agent using any of the three methods above, you can continue building and refining it with **Inventor v3** — a conversational assistant that stays with you throughout the entire build process.
+
+### What is Inventor v3?
+
+Inventor v3 is a persistent sidebar in the Agent builder that lets you configure your Agent using natural language instead of navigating through menus and settings. Think of it as a building partner that understands what you're trying to accomplish and can make changes for you.
+
+Unlike the one-time **Invent** feature you use at creation, Inventor v3 remains available as you build. You can ask it to adjust your prompt, add tools, configure triggers, update knowledge sources, or modify any other Agent setting — all through conversation.
+
+<Note>
+Inventor v3 is currently behind the `InventV3` feature flag. Contact your workspace admin or Relevance AI support to enable it.
+</Note>
+
+### How it works
+
+Inventor v3 has access to approximately 50 specialized tools that cover every aspect of Agent configuration:
+
+- **Prompt and behavior** — update instructions, adjust tone, refine responses
+- **Tools** — add, remove, or configure the actions your Agent can take
+- **Knowledge** — create tables, add data sources, manage context
+- **Triggers** — set up schedules, webhooks, or integration-based automation
+- **Variables** — define dynamic inputs your Agent uses
+- **Advanced settings** — configure memory, escalations, model selection, and more
+
+Simply describe what you want to change, and Inventor v3 handles the implementation. For example:
+
+- *"Add a tool that sends a Slack message when the task is complete"*
+- *"Update the prompt to be more formal and include a greeting"*
+- *"Create a knowledge table for customer data with columns for name, email, and company"*
+- *"Set up a daily trigger at 9 AM to run this Agent"*
+
+### When to use Inventor v3
+
+Inventor v3 is useful when you:
+
+- Want to make changes quickly without clicking through multiple settings
+- Need help understanding how to configure a specific feature
+- Prefer describing what you want over manually implementing it
+- Are learning the platform and want guidance as you build
+
+You can switch between using Inventor v3 and manually configuring settings at any time — they work together, not as replacements for each other.
+
+### Difference from the Invent feature
+
+The **Invent** feature (used during Agent creation) generates an initial Agent blueprint based on your description. It's a one-time setup step.
+
+**Inventor v3** is an ongoing assistant that stays available after creation. It helps you iterate, refine, and expand your Agent as you build. Use Invent to get started, then use Inventor v3 to continue building.
+
 ## What's next?
 
 Once you've created an Agent, explore the rest of the build guides to refine it:
@@ -88,3 +137,5 @@ Once you've created an Agent, explore the rest of the build guides to refine it:
 - [Triggers](/build/agents/build-your-agent/triggers) — run your Agent automatically on a schedule, from a webhook, or from an integration
 - [Escalations](/build/agents/build-your-agent/escalations) — define when your Agent should loop in a human
 - [Memory](/build/agents/build-your-agent/memory) — configure how your Agent retains context across conversations
+
+You can configure all of these manually or use Inventor v3 to make changes conversationally as you build.
