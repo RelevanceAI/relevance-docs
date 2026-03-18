@@ -1,0 +1,179 @@
+---
+title: "Installation & Setup"
+description: "Download and install the Relevance AI Desktop App on your Mac"
+---
+
+The Relevance AI Desktop App is a signed macOS application that installs like any other Mac app. This guide walks you through downloading, installing, and authenticating the app.
+
+## System requirements
+
+Before installing, verify your Mac meets these requirements:
+
+- macOS 11.0 (Big Sur) or later
+- Active Relevance AI account
+- Internet connection for authentication and syncing
+
+## Download the app
+
+<Steps>
+  <Step title="Visit the download page">
+    Go to [relevanceai.com/desktop](https://relevanceai.com/desktop) or access the download link from your Relevance AI account.
+  </Step>
+  <Step title="Download the installer">
+    Click the download button to get the latest version of the Desktop App for macOS.
+    
+    The file will be named something like `Relevance-Desktop-1.0.0.dmg`.
+  </Step>
+</Steps>
+
+## Install the app
+
+<Steps>
+  <Step title="Open the installer">
+    Double-click the downloaded `.dmg` file to mount the disk image.
+  </Step>
+  <Step title="Drag to Applications">
+    Drag the Relevance AI app icon to your Applications folder.
+    
+    <Frame>
+      <img src="/images/desktop-app/drag-to-applications.png" alt="Drag Relevance AI to Applications folder" />
+    </Frame>
+  </Step>
+  <Step title="Launch the app">
+    Open your Applications folder and double-click the Relevance AI app to launch it.
+    
+    If you see a security warning about the app being from an unidentified developer, right-click the app and select "Open" to bypass the warning on first launch.
+  </Step>
+</Steps>
+
+<Note>
+The Desktop App is signed with an Apple Developer certificate, but macOS may still show a security warning on first launch. This is normal for apps downloaded outside the Mac App Store.
+</Note>
+
+## Authenticate the app
+
+The Desktop App uses a secure deep-link authentication flow to connect to your Relevance AI account.
+
+<Steps>
+  <Step title="Click 'Sign in'">
+    When you first launch the app, you'll see a welcome screen with a "Sign in" button.
+  </Step>
+  <Step title="Authorize in your browser">
+    The app will open your default web browser and take you to the Relevance AI authentication page.
+    
+    If you're not already logged in, enter your Relevance AI credentials.
+  </Step>
+  <Step title="Grant authorization">
+    Review the permissions the Desktop App is requesting and click "Authorize" to grant access.
+  </Step>
+  <Step title="Return to the app">
+    Your browser will redirect you back to the Desktop App using a deep link. The app will automatically complete the authentication process.
+    
+    <Tip>
+    If the redirect doesn't work automatically, copy the authorization code from your browser and paste it into the Desktop App.
+    </Tip>
+  </Step>
+</Steps>
+
+## Initial setup
+
+After authentication, the app will guide you through the initial setup:
+
+<Steps>
+  <Step title="Grant permissions">
+    The app will prompt you to grant screen recording and microphone permissions in macOS System Settings.
+    
+    These permissions are required for the app to detect meetings and record audio.
+    
+    [Learn more about permissions →](/get-started/desktop-app/permissions)
+  </Step>
+  <Step title="Configure preferences">
+    Set your recording preferences:
+    - Automatic meeting detection (on/off)
+    - Audio quality settings
+    - Sync preferences
+  </Step>
+  <Step title="Complete setup">
+    Click "Get Started" to finish setup and begin using the Desktop App.
+  </Step>
+</Steps>
+
+## Verify installation
+
+To confirm the Desktop App is installed and working correctly:
+
+1. Check that the Relevance AI icon appears in your macOS menu bar
+2. Click the menu bar icon to open the app interface
+3. Verify your account name appears in the app settings
+4. Confirm the app status shows "Ready to record"
+
+## Update the app
+
+The Desktop App checks for updates automatically and will notify you when a new version is available.
+
+To update manually:
+
+1. Click the Relevance AI icon in your menu bar
+2. Select "Check for updates" from the menu
+3. If an update is available, click "Download and install"
+4. The app will restart automatically after updating
+
+## Uninstall the app
+
+If you need to remove the Desktop App:
+
+1. Quit the app by clicking the menu bar icon and selecting "Quit"
+2. Open your Applications folder
+3. Drag the Relevance AI app to the Trash
+4. Empty the Trash to complete removal
+
+<Note>
+Uninstalling the app does not delete your recordings or transcripts from your Relevance AI account. They remain accessible through the web interface.
+</Note>
+
+## Troubleshooting installation
+
+<AccordionGroup>
+  <Accordion title="The app won't open after installation">
+    If macOS prevents the app from opening:
+    
+    1. Right-click the app in your Applications folder
+    2. Select "Open" from the context menu
+    3. Click "Open" in the security dialog that appears
+    
+    This bypasses the Gatekeeper security check for apps downloaded outside the Mac App Store.
+  </Accordion>
+  <Accordion title="Authentication fails or times out">
+    If the deep-link authentication doesn't work:
+    
+    1. Make sure your default browser is set correctly in macOS System Settings
+    2. Try copying the authorization code from the browser and pasting it into the app
+    3. Check that you're logged into the correct Relevance AI account in your browser
+    4. Disable any browser extensions that might block redirects
+  </Accordion>
+  <Accordion title="The app doesn't appear in my menu bar">
+    If the menu bar icon is missing:
+    
+    1. Check that the app is actually running (look in Activity Monitor)
+    2. Try quitting and relaunching the app
+    3. Check your macOS menu bar settings to ensure the icon isn't hidden
+  </Accordion>
+  <Accordion title="I can't find the downloaded .dmg file">
+    By default, macOS saves downloads to your Downloads folder. If you can't find it:
+    
+    1. Open Finder and go to Downloads
+    2. Sort by "Date Added" to find recent files
+    3. Search for "Relevance" in Spotlight (Cmd + Space)
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Grant permissions" icon="shield-check" href="/get-started/desktop-app/permissions">
+    Set up screen recording and microphone access
+  </Card>
+  <Card title="Start using the app" icon="play" href="/get-started/desktop-app/using-the-app">
+    Learn how to record and transcribe meetings
+  </Card>
+</CardGroup>
