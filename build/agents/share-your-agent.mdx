@@ -73,6 +73,29 @@ Turn your Agent into a pop-up chat interface you can embed on any website with a
 | `hide_logo`                | `boolean` |                                                                                                                                                                                                          | Toggle Relevance AI branding.                       | `false`                                                |
 | `hide_description`         | `boolean` |                                                                                                                                                                                                          | Toggle agent description.                           | `true`                                                 |
 
+## Microsoft Teams Embedding
+
+Embed your Relevance AI chat app directly within Microsoft Teams as an iframe or tab, allowing your team to access AI-powered assistance without leaving their collaboration environment. This provides a native Teams experience that works seamlessly across Microsoft 365 and Microsoft cloud environments.
+
+<Card title="Microsoft Teams Embedding Guide" icon="microsoft" href="/build/agents/share-your-agent/microsoft-teams-embedding">
+  Learn how to embed your chat app in Microsoft Teams, including setup instructions, technical requirements, and configuration options.
+</Card>
+
+**Key features:**
+- Native Teams experience—users stay within their collaboration tool
+- Works across Microsoft 365 and Microsoft cloud environments
+- Simple setup using Teams tabs or personal apps
+- Supports URL parameters for customization
+
+**Important considerations:**
+- User Level Authentication is not supported in embedded chat widgets
+- Requires HTTPS endpoints (automatically provided by Relevance AI)
+- Content Security Policy headers must allow Microsoft domains (automatically configured)
+
+<Tip>
+  Microsoft Teams embedding is different from the [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams). Embedding provides direct user interaction through a chat interface, while the integration enables triggers and automation. You can use both together!
+</Tip>
+
 ## Task UI
 
 This gives users access to a task-focused version of your Agent via an iframe. Users can view past task runs, pick from existing tasks, and even interact with outputs — all within a self-contained UI. It's great for operational dashboards, workflow demos, or giving others visibility into what your Agent is doing.
