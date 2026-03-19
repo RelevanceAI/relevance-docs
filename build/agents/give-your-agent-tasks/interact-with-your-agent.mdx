@@ -4,6 +4,43 @@ sidebarTitle: "Interact With Your Agent"
 description: "What are tasks and how do they differ from prompt?"
 ---
 
+## **Testing in the Agent Builder**
+
+### The Run Tab: Your Testing Environment
+
+When you're building and refining an agent, the **Run** tab in the agent builder gives you a direct way to test how your agent handles tasks. This is where you iterate on your agent's behavior before deploying it to production.
+
+The Run tab shows you exactly what your agent does step-by-step — which tools it calls, what decisions it makes, and what output it produces. This visibility helps you spot issues and refine your agent's prompt and tool configuration.
+
+### Run Controls: Stop and Resume
+
+While your agent is processing a task, you have precise control over execution:
+
+**During a run:**
+- The message input is disabled — you can't send new messages while the agent is working
+- The send button becomes a **red stop button**
+- Click the stop button to pause execution mid-run
+
+**After stopping:**
+- The agent pauses wherever it is in the task
+- The input re-enables so you can type your next message
+- Send your next message to resume the agent from where it stopped
+
+### Why Use the Stop Control
+
+The stop button gives you fine-grained control when testing and refining agent behavior:
+
+- **Catch mistakes early** — stop the agent before it completes an action you didn't intend
+- **Save credits** — halt execution if you spot an issue in the agent's reasoning
+- **Test iteratively** — stop, adjust your prompt or tools, then resume to see how changes affect behavior
+- **Debug step-by-step** — pause at any point to examine what the agent has done so far
+
+This control is especially useful when you're working with agents that call multiple tools or handle complex multi-step workflows. You can stop, review, make adjustments, and continue — all within the same task context.
+
+<Tip>
+The stop control only affects the current run. It doesn't cancel the task or clear the conversation — it just pauses execution so you can decide what happens next.
+</Tip>
+
 ## **Agent Chat**
 
 ### What is Agent Chat?
