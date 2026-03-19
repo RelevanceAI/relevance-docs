@@ -1,14 +1,16 @@
 ---
 title: 'Evals'
 sidebarTitle: 'Evals'
-description: 'Test and evaluate your AI Agents with scenario-based evaluations and automated Evaluators'
+description: 'Test and evaluate your AI Agents and Workforces with scenario-based evaluations and automated Evaluators'
 ---
 
 <Info>
 **Rollout Status**: Evals is currently being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Monitor** tab (next to the Run tab) in the Agent builder, Evals enables you to create Test Suites, define evaluation criteria (Evaluators), run automated evaluations, and monitor ongoing performance—all without manual testing.
+The Evals section is your command center for testing and evaluating AI Agent and Workforce performance. Located in the **Monitor** tab (next to the Run tab) in the Agent builder, or in the Workforce interface, Evals enables you to create Test Suites, define evaluation criteria (Evaluators), run automated evaluations, and monitor ongoing performance—all without manual testing.
+
+You can create evaluation rules for individual agents or entire workforces, allowing you to test both single-agent responses and multi-agent workflows end-to-end.
 
 ![Evals section showing Test Suites, Evaluators, Runs, and Performance](/images/agent/agent-evals.png)
 
@@ -16,15 +18,47 @@ The Evals section is your command center for testing and evaluating AI Agent per
 
 <CardGroup cols={3}>
   <Card title="Conduct Tests" icon="flask-vial">
-    Create Test Suites with scenarios that simulate real user interactions. Combine scenarios with Evaluators to measure accuracy and evaluate Agent performance automatically.
+    Create Test Suites with scenarios that simulate real user interactions. Combine scenarios with Evaluators to measure accuracy and evaluate Agent or Workforce performance automatically.
   </Card>
   <Card title="Create Evaluators" icon="scale-balanced">
-    Define evaluation criteria that automatically assess Agent responses. Evaluators look for specific conditions and score conversations based on your defined rules.
+    Define evaluation criteria that automatically assess Agent or Workforce responses. Evaluators look for specific conditions and score conversations based on your defined rules.
   </Card>
   <Card title="Monitor Performance" icon="chart-line">
-    Automatically evaluate live Agent conversations using global Evaluators. Track scores, view insights, and monitor quality over time without running manual tests.
+    Automatically evaluate live Agent or Workforce conversations using global Evaluators. Track scores, view insights, and monitor quality over time without running manual tests.
   </Card>
 </CardGroup>
+
+---
+
+## Evals for Agents vs Workforces
+
+Evaluation rules work for both individual agents and entire workforces, but they test different aspects of your AI system:
+
+### Agent Evals
+
+Agent evals test a single agent's responses and behavior. Use these to verify:
+
+- Response quality and accuracy
+- Tone and brand voice compliance
+- Tool usage and decision-making
+- Handling of specific scenarios
+
+Access agent evals from the **Monitor** tab in the Agent builder.
+
+### Workforce Evals
+
+Workforce evals test the entire multi-agent workflow end-to-end. Use these to verify:
+
+- Agent-to-agent handoffs and transitions
+- Complete context preservation across agents
+- Multi-step workflow completion
+- Coordination between specialized agents
+
+Access workforce evals from the Workforce interface.
+
+<Tip>
+Workforce evals are particularly useful for testing complex workflows where multiple agents need to collaborate. They help you verify that the full process works correctly, not just individual agent responses.
+</Tip>
 
 ---
 
@@ -32,17 +66,17 @@ The Evals section is your command center for testing and evaluating AI Agent per
 
 The Evals section contains five main sections, accessible from the left sidebar:
 
-- **Test Suites** — Create and manage groups of Test scenarios for your Agent. Each Test Suite can contain multiple scenarios with different prompts and evaluation criteria.
+- **Test Suites** — Create and manage groups of Test scenarios for your agent or workforce. Each Test Suite can contain multiple scenarios with different prompts and evaluation criteria.
 - **Evaluators** — Configure global evaluation criteria that can be applied across any Test Suite or scenario without needing to set them up each time.
 - **Runs** — View your evaluation run history and results. See average scores, number of conversations evaluated, progress status, credit spend, and creation dates for all past runs.
-- **Publish Checks** — Configure which Test Suites must pass before your Agent can be published. Set a pass threshold and optionally block publishing if evaluations fail.
-- **Performance** — Automatically evaluate live Agent conversations by selecting a global Evaluator, setting a sample rate, and filtering by conversation status.
+- **Publish Checks** — Configure which Test Suites must pass before your agent or workforce can be published. Set a pass threshold and optionally block publishing if evaluations fail.
+- **Performance** — Automatically evaluate live conversations by selecting a global Evaluator, setting a sample rate, and filtering by conversation status.
 
 ---
 
 ## Understanding Evaluators
 
-Evaluators are evaluation criteria that automatically assess Agent conversations. There are two types of Evaluators:
+Evaluators are evaluation criteria that automatically assess conversations. There are two types of Evaluators:
 
 ### Scenario Evaluators
 
@@ -77,7 +111,7 @@ When creating an Evaluator (either scenario-level or global), you choose from th
   </Accordion>
 
   <Accordion title="String Contains" icon="text">
-    Checks whether the Agent's response includes specific text.
+    Checks whether the response includes specific text.
 
     | Field | Description |
     |-------|-------------|
@@ -85,11 +119,11 @@ When creating an Evaluator (either scenario-level or global), you choose from th
   </Accordion>
 
   <Accordion title="String Equals" icon="equals">
-    Checks whether the Agent's response exactly matches an expected value.
+    Checks whether the response exactly matches an expected value.
 
     | Field | Description |
     |-------|-------------|
-    | **Expected value** | The exact message the Agent should have sent |
+    | **Expected value** | The exact message that should have been sent |
   </Accordion>
 
   <Accordion title="Tool Usage" icon="screwdriver-wrench">
@@ -130,7 +164,7 @@ When you run a Test scenario, scenario-level Evaluators are always included auto
 
 Follow these steps to create your first evaluation Test Suite:
 
-1. Open your Agent in the builder and click the **Monitor** tab (next to the Run tab). Select **Evals** from the left sidebar, then select **Test Suites**.
+1. Open your agent or workforce and click the **Monitor** tab (next to the Run tab). Select **Evals** from the left sidebar, then select **Test Suites**.
 2. Click the **+ New test suite** button. Enter a name for your Test Suite and click **Create**.
 3. Click on the Test Suite you just created to open it.
 4. Click the **+ New Test** button to create a scenario within your Test Suite.
@@ -140,7 +174,7 @@ Follow these steps to create your first evaluation Test Suite:
     |-------|-------------|---------|
     | **Scenario name** | A descriptive name for this Test case | "Response Empathy" |
     | **Persona & situation** | The persona or situation the simulated user will adopt | "You are an impatient customer who wants quick answers about their bill." |
-    | **First message** | A fixed message the simulated user sends to your Agent as the opening message (optional) | "Hi, I need help with my bill." |
+    | **First message** | A fixed message the simulated user sends as the opening message (optional) | "Hi, I need help with my bill." |
     | **Max turns** | Maximum conversation turns (1-50) | 10 |
     | **Number of runs** | How many times this scenario should be executed | 3 |
 
@@ -162,7 +196,7 @@ Follow these steps to create your first evaluation Test Suite:
 8. Click **Save Test scenario** to save your configuration.
 
 <Tip>
-You can add multiple scenarios to a single Test Suite to evaluate different aspects of your Agent's behavior. Each scenario can have its own prompt, max turns, number of runs, Evaluators, and tool simulations.
+You can add multiple scenarios to a single Test Suite to evaluate different aspects of behavior. Each scenario can have its own prompt, max turns, number of runs, Evaluators, and tool simulations.
 </Tip>
 
 ### Example scenarios
@@ -202,6 +236,28 @@ Here are some example Test scenarios you might create:
     **Evaluator**: Appropriate Escalation (LLM Judge)
     - *Evaluation Prompt*: Did the Agent acknowledge the severity of the situation, validate the customer's need for escalation, and initiate a handoff to a human representative while maintaining a professional and empathetic tone throughout?
   </Accordion>
+
+  <Accordion title="Workforce - Multi-agent handoff">
+    **Scenario name**: Agent Transition Quality
+
+    **Persona & situation**: You are a customer with a complex issue that requires multiple specialists. Start with a general inquiry that should be routed to a specialist, then verify that the handoff includes all necessary context.
+
+    **Max turns**: 15
+
+    **Evaluator**: Smooth Handoff (LLM Judge)
+    - *Evaluation Prompt*: Did the workflow successfully hand off from the initial agent to the specialist agent? Verify that the specialist agent had complete context from the previous conversation and didn't ask the user to repeat information.
+  </Accordion>
+
+  <Accordion title="Workforce - End-to-end workflow">
+    **Scenario name**: Complete Workflow Execution
+
+    **Persona & situation**: You are requesting a service that requires multiple steps across different agents (e.g., data collection, analysis, and report generation). Provide all necessary information and verify the complete workflow executes correctly.
+
+    **Max turns**: 20
+
+    **Evaluator**: Workflow Completion (LLM Judge)
+    - *Evaluation Prompt*: Did the workforce complete all steps of the process from initial request to final deliverable? Verify that each agent in the chain contributed appropriately and the final output meets the requirements.
+  </Accordion>
 </AccordionGroup>
 
 ---
@@ -214,7 +270,7 @@ You can select specific Test scenarios within a Test Suite to run certain ones a
 
 1. Enter a name for the evaluation run (e.g., "Scenario Run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
 2. Select which global Evaluators to include in the run — you can add or remove global Evaluators before starting. Scenario-level Evaluators are always included automatically.
-3. Click **Run** to begin. The system will simulate conversations with your Agent based on your scenario prompts and evaluate them with your selected Evaluators.
+3. Click **Run** to begin. The system will simulate conversations based on your scenario prompts and evaluate them with your selected Evaluators.
 
 ---
 
@@ -230,7 +286,7 @@ The top of the results page shows key metrics:
 |--------|-------------|
 | **Average Score** | Overall pass rate across all scenarios and Evaluators |
 | **Number of Conversations** | How many Test conversations were evaluated |
-| **Agent Version** | The version of the Agent that was tested |
+| **Agent Version** | The version of the agent or workforce that was tested |
 
 ### Scenario results
 
@@ -248,7 +304,7 @@ Each scenario displays:
 
 Click **View Conversation** on any scenario to see:
 
-1. **The full conversation** between the simulated user and your Agent
+1. **The full conversation** between the simulated user and your agent or workforce
 2. **Evaluator verdicts** from all Evaluators included in the run, with detailed explanations of why each Evaluator passed or failed
 
 For example, an "Empathy Shown" Evaluator might show:
@@ -258,7 +314,7 @@ For example, an "Empathy Shown" Evaluator might show:
 
 ## Performance tab
 
-The Performance tab lets you automatically evaluate live Agent conversations without manually running Test Suites. This is useful for ongoing quality monitoring.
+The Performance tab lets you automatically evaluate live conversations without manually running Test Suites. This is useful for ongoing quality monitoring.
 
 ### Setting up Performance monitoring
 
@@ -295,7 +351,7 @@ To adjust Performance settings after initial setup, click the **Settings** butto
 
 ## Publish Checks
 
-Publish Checks let you choose which Test Suites to run before your Agent is published. If the results don't meet your threshold, publishing can be blocked.
+Publish Checks let you choose which Test Suites to run before your agent or workforce is published. If the results don't meet your threshold, publishing can be blocked.
 
 You can configure Publish Checks from the **Publish Checks** section in Evals.
 
@@ -310,9 +366,9 @@ Configure how evaluations affect the publish process:
 | Setting | Description |
 |---------|-------------|
 | **Pass threshold (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
-| **Block publish if evaluation fails** | When checked, the Agent will only be published if the evaluation score meets or exceeds the pass threshold. If unchecked, the Agent will be published even if the evaluation fails the threshold. |
+| **Block publish if evaluation fails** | When checked, the agent or workforce will only be published if the evaluation score meets or exceeds the pass threshold. If unchecked, the agent or workforce will be published even if the evaluation fails the threshold. |
 
-Once configured, click **Save**. When you next publish your Agent, the selected Test Suites will run automatically and the results will be checked against your threshold.
+Once configured, click **Save**. When you next publish, the selected Test Suites will run automatically and the results will be checked against your threshold.
 
 ---
 
@@ -320,7 +376,7 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
 
 <CardGroup cols={2}>
   <Card title="Start simple" icon="seedling">
-    Begin with a few core scenarios that test your Agent's primary use cases. Add complexity as you learn what matters most.
+    Begin with a few core scenarios that test primary use cases. Add complexity as you learn what matters most.
   </Card>
   <Card title="Be specific with Evaluators" icon="bullseye">
     Write detailed evaluation rules. Vague criteria lead to inconsistent results. Include specific examples of what passing looks like.
@@ -329,7 +385,13 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
     Create scenarios for difficult situations: angry customers, off-topic requests, requests to bypass rules, etc.
   </Card>
   <Card title="Use Performance monitoring" icon="chart-line">
-    Set up global Evaluators in the Performance tab to continuously monitor live Agent conversations without manual testing.
+    Set up global Evaluators in the Performance tab to continuously monitor live conversations without manual testing.
+  </Card>
+  <Card title="Test agent handoffs in workforces" icon="arrows-turn-right">
+    For workforces, create scenarios that verify smooth transitions between agents with complete context preservation.
+  </Card>
+  <Card title="Test end-to-end workflows" icon="diagram-project">
+    For workforces, test the full multi-agent workflow from start to finish to ensure all agents coordinate correctly.
   </Card>
 </CardGroup>
 
@@ -344,7 +406,7 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
 
   <Accordion title="How are credits calculated for evaluations?">
     Credits consumed for each scenario are calculated by adding together:
-    - The Agent task run (the conversation with your Agent)
+    - The agent or workforce task run (the conversation)
     - The simulator (the persona/user simulation) - uses an LLM to simulate the user persona
     - The Evaluator evaluations (both scenario Evaluators and global Evaluators) - each Evaluator uses an LLM to evaluate the conversation
 
@@ -352,11 +414,15 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
   </Accordion>
 
   <Accordion title="Can I rerun a previous evaluation?">
-    Yes, you can run the same Test scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
+    Yes, you can run the same Test scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different versions.
   </Accordion>
 
   <Accordion title="What's the difference between scenario Evaluators and global Evaluators?">
     Scenario Evaluators are created within Test scenarios and only evaluate conversations generated by that specific scenario. Global Evaluators are created in the Evaluators tab and can be selected to run on any Test Suite or scenario, providing reusable evaluation criteria across all your tests. Global Evaluators are also used in the Performance tab for monitoring live conversations.
+  </Accordion>
+
+  <Accordion title="Can I use evals with workforces?">
+    Yes. Evals work with both individual agents and entire workforces. Workforce evals test the complete multi-agent workflow end-to-end, including agent handoffs and context preservation across agents.
   </Accordion>
 
   <Accordion title="I don't see the Evals section. How do I get access?">
