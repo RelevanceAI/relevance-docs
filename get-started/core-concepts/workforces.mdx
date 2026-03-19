@@ -25,6 +25,9 @@ Think of it like a team of employees: a researcher gathers information, a writer
   <Card title="End-to-end monitoring" icon="chart-line">
     Track every step of a workflow to see what's working and where things get stuck.
   </Card>
+  <Card title="Automated quality testing" icon="flask-vial">
+    Use Evals to test multi-agent workflows end-to-end and verify agent handoffs work correctly.
+  </Card>
 </CardGroup>
 
 ## How Workforces Work
@@ -71,6 +74,7 @@ Workforces are ideal when a task requires multiple steps, skills, or handoffs th
 4. **Name connections clearly**: Descriptive names document the purpose of each handoff and make your workflow easier to understand.
 5. **Test with varied inputs**: Run different scenarios to make sure routing works as expected and edge cases are handled.
 6. **Monitor and optimize**: Review workflow performance regularly to identify bottlenecks or communication gaps between agents.
+7. **Use Evals for quality assurance**: Set up [evaluation rules](/build/agents/build-your-agent/evals) to automatically test your workforce's end-to-end performance and verify agent handoffs preserve context correctly.
 
 ## Frequently asked questions (FAQs)
 
@@ -93,6 +97,10 @@ Workforces are ideal when a task requires multiple steps, skills, or handoffs th
 
   <Accordion title="How do I debug a Workforce that isn't working as expected?">
     Review the workflow execution to see which agent handled each step, what it received, and what it passed on. This helps you identify where the process broke down — whether it's a routing issue, a tool failure, or a prompt that needs refining.
+  </Accordion>
+
+  <Accordion title="Can I test my Workforce automatically?">
+    Yes. Use [Evals](/build/agents/build-your-agent/evals) to create automated tests for your workforce. You can verify agent handoffs, test end-to-end workflows, and monitor quality over time.
   </Accordion>
 </AccordionGroup>
 
