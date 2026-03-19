@@ -26,9 +26,63 @@ Agents can connect to and run tools from remote MCP servers.
 6. Label your MCP Server connection
 7. Add any authentication details required for the MCP server
 
+<Note>
+  The connection label you provide will appear in tool descriptions as `(MCP: connection-name)`. This helps agents distinguish between tools from different connections, especially when using multiple instances of the same MCP server.
+</Note>
+
 Once connected, the agent will automatically fetch and display the available tools from the remote MCP server. These tools can be referenced in the agent's core instructions and will appear in the conversation task view. When a tool is run, the agent communicates with the remote MCP server and returns the result directly in the conversation.
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
+
+## Connecting Multiple Instances of the Same MCP Server
+
+You can connect the same MCP server URL multiple times within a project. This allows you to maintain separate connections with different authentication credentials or configurations.
+
+### How it works
+
+Each connection operates independently with its own:
+- Authentication credentials
+- Connection label
+- Configuration settings
+
+Tools from each connection will display `(MCP: connection-name)` in their descriptions, making it easy for agents to identify which connection a tool belongs to.
+
+### Use cases
+
+**Different authentication contexts**  
+Connect the same MCP server with different user credentials to access different data or permissions.
+
+**Environment separation**  
+Maintain separate connections for staging and production environments of the same service.
+
+**Multi-tenant scenarios**  
+Connect to the same MCP server multiple times with different tenant credentials to manage data across organizations.
+
+**A/B testing**  
+Test different configurations or versions of the same MCP server side-by-side.
+
+**Isolated workflows**  
+Keep tools organized by workflow or team by creating separate connections with descriptive labels.
+
+### Best practices
+
+<AccordionGroup>
+  <Accordion title="Use descriptive connection labels">
+    Choose labels that clearly indicate the purpose or context of each connection. For example: `github-prod`, `github-staging`, or `linear-team-a`, `linear-team-b`.
+  </Accordion>
+
+  <Accordion title="Document your connections">
+    Keep track of which credentials and configurations are used for each connection, especially when managing multiple instances.
+  </Accordion>
+
+  <Accordion title="Reference connections in agent instructions">
+    When building agents that use multiple instances of the same server, include guidance in the agent's instructions about when to use tools from each connection.
+  </Accordion>
+
+  <Accordion title="Monitor usage separately">
+    Track which connections are being used most frequently to optimize your setup and identify unused connections.
+  </Accordion>
+</AccordionGroup>
 
 ## Troubleshooting
 
@@ -61,6 +115,8 @@ Once connected, the agent will automatically fetch and display the available too
 
   <Accordion title="Can I connect multiple MCP servers to one agent?">
     Yes. You can add multiple MCP server connections to a single agent, giving it access to tools from several external services at once.
+    
+    You can also connect the same MCP server URL multiple times with different labels and credentials. This is useful for scenarios like environment separation (staging vs production), different authentication contexts, or multi-tenant setups. See [Connecting Multiple Instances of the Same MCP Server](#connecting-multiple-instances-of-the-same-mcp-server) for more details.
   </Accordion>
 
   <Accordion title="Can I use locally hosted MCP servers?">
