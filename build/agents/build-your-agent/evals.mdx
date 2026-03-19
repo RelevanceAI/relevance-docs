@@ -295,15 +295,17 @@ To adjust Performance settings after initial setup, click the **Settings** butto
 
 ## Publish Checks
 
-Publish Checks let you choose which Test Suites to run before your Agent is published. If the results don't meet your threshold, publishing can be blocked.
+Publish Checks let you run Test Suites automatically before publishing your Agent. Configure which Test Suites to run, set a pass threshold, and optionally block publishing if checks fail. The Pre-publish Checks sidebar provides real-time status updates and a history of all checks.
+
+### Configuring Publish Checks
 
 You can configure Publish Checks from the **Publish Checks** section in Evals.
 
-### Test sets to run
+#### Test sets to run
 
 Select which Test Suites to run before publishing. Click **Add test sets** to choose them — all scenarios in the selected Test Suites will be evaluated.
 
-### Publish settings
+#### Publish settings
 
 Configure how evaluations affect the publish process:
 
@@ -313,6 +315,81 @@ Configure how evaluations affect the publish process:
 | **Block publish if evaluation fails** | When checked, the Agent will only be published if the evaluation score meets or exceeds the pass threshold. If unchecked, the Agent will be published even if the evaluation fails the threshold. |
 
 Once configured, click **Save**. When you next publish your Agent, the selected Test Suites will run automatically and the results will be checked against your threshold.
+
+### Accessing the Pre-publish Checks sidebar
+
+The Pre-publish Checks sidebar provides visibility into running checks and check history. You can access it in two ways:
+
+1. **From the publish button dropdown** — Click the dropdown arrow next to the **Publish** button in the Agent builder and select **Pre-publish Checks**
+2. **Automatically when checks run** — The sidebar opens automatically when you trigger a publish and checks begin running
+
+### Understanding the sidebar interface
+
+The Pre-publish Checks sidebar displays:
+
+- **Real-time check status** — See the current status of running checks, including progress indicators and which Test Suites are being evaluated
+- **User attribution** — Each check shows who triggered it (e.g., "Triggered by [User Name]")
+- **Check history** — View recent checks with their results, scores, and timestamps
+- **Version filtering** — Filter check history by Agent version to see checks for specific versions
+
+### Managing running checks
+
+When checks are running:
+
+1. The sidebar displays the current check status with a progress indicator
+2. You can **cancel running checks** by clicking the cancel button in the sidebar
+3. The publish button shows a **"Running checks"** state and is disabled until checks complete
+
+<Note>
+Canceling a running check will stop the evaluation immediately. You'll need to trigger a new publish to run checks again.
+</Note>
+
+### Viewing check history
+
+The sidebar maintains a paginated history of recent checks:
+
+1. Each check entry shows:
+   - Check status (Running, Passed, Failed)
+   - Overall score percentage
+   - Agent version tested
+   - Timestamp
+   - User who triggered the check
+
+2. Click on any historical check to view detailed results, including:
+   - Individual Test Suite scores
+   - Scenario-level results
+   - Evaluator verdicts
+
+3. Use the **version filter** dropdown to view checks for specific Agent versions
+
+### Publish button states
+
+The publish button displays different states based on check status:
+
+| State | Description | Publishing Allowed |
+|-------|-------------|-------------------|
+| **Default** | No checks running, ready to publish | Yes |
+| **Running checks** | Checks are currently running | No (button disabled) |
+| **Check Failed** | Most recent check failed to meet threshold | Depends on "Block publish" setting |
+| **Check Passed** | Most recent check passed threshold | Yes |
+
+<Warning>
+When "Block publish if evaluation fails" is enabled in your Publish Checks settings, you cannot publish if the most recent check failed. You must either fix the issues and run checks again, or use Force Publish.
+</Warning>
+
+### Force Publish option
+
+If checks fail and you need to publish anyway, you can use Force Publish:
+
+1. Click the dropdown arrow next to the **Publish** button
+2. Select **Force Publish**
+3. Confirm that you want to publish despite failed checks
+
+Force Publish bypasses the check threshold requirement and publishes the Agent immediately. Use this option when you need to deploy urgent fixes or when check failures are acceptable for your use case.
+
+<Tip>
+Force Publish is useful for emergency deployments, but it's recommended to investigate and resolve check failures before your next publish to maintain Agent quality.
+</Tip>
 
 ---
 
