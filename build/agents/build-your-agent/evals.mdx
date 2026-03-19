@@ -299,11 +299,13 @@ Publish Checks let you choose which Test Suites to run before your Agent is publ
 
 You can configure Publish Checks from the **Publish Checks** section in Evals.
 
-### Test sets to run
+### Configuring Publish Checks
+
+#### Test sets to run
 
 Select which Test Suites to run before publishing. Click **Add test sets** to choose them — all scenarios in the selected Test Suites will be evaluated.
 
-### Publish settings
+#### Publish settings
 
 Configure how evaluations affect the publish process:
 
@@ -313,6 +315,73 @@ Configure how evaluations affect the publish process:
 | **Block publish if evaluation fails** | When checked, the Agent will only be published if the evaluation score meets or exceeds the pass threshold. If unchecked, the Agent will be published even if the evaluation fails the threshold. |
 
 Once configured, click **Save**. When you next publish your Agent, the selected Test Suites will run automatically and the results will be checked against your threshold.
+
+### Using the Pre-publish Checks sidebar
+
+When you're ready to publish your Agent, you can access the Pre-publish Checks sidebar to monitor evaluation progress and review results before publishing.
+
+#### Accessing the sidebar
+
+1. In the Agent builder, click the **Publish** button dropdown in the top right corner
+2. Select **Pre-publish Checks** from the dropdown menu
+
+The sidebar provides a centralized view of all publish checks activity for your Agent.
+
+#### Monitoring running checks
+
+When publish checks are actively running, the sidebar displays:
+
+- Real-time status updates as checks execute
+- Progress indicators showing which scenarios are being evaluated
+- A **Cancel** button to stop the evaluation if you need to make changes to your Agent
+
+While checks are running, the publish button displays a spinner with the label "Running checks" to indicate that evaluations are in progress.
+
+<Tip>
+You can cancel running checks from the sidebar if you need to make changes to your Agent before publishing. Simply click the **Cancel** button in the sidebar.
+</Tip>
+
+#### Viewing check results
+
+After checks complete, the sidebar shows:
+
+- Overall score for the evaluation run
+- Pass/fail status for each Test Suite and scenario
+- Detailed breakdowns of individual Evaluator results
+- The ability to view full conversation details without leaving the publish flow
+
+You can review these results to understand how your Agent performed against your configured criteria before proceeding with the publish.
+
+#### Browsing check history
+
+The sidebar includes a paginated history of past publish checks:
+
+- View previous evaluation runs and their results
+- Filter by Agent version to see checks from specific versions
+- Compare performance across different versions
+- Access historical check results for audit and tracking purposes
+
+This history helps you track quality trends over time and understand how your Agent's performance has evolved.
+
+### Understanding publish button states
+
+The publish button displays different visual states to help you understand the status of your publish checks:
+
+| State | Description | When it appears |
+|-------|-------------|-----------------|
+| **Default** | Standard publish button appearance | When no checks are running and previous checks passed (or no checks configured) |
+| **Running checks** | Spinner with "Running checks" label | While publish checks are actively executing |
+| **Check Failed** | "Check Failed" indicator | When the most recent evaluation did not meet your configured pass threshold |
+
+These visual states provide at-a-glance feedback about your Agent's readiness to publish:
+
+- If you see **"Running checks"**, wait for the evaluation to complete before publishing
+- If you see **"Check Failed"**, review the results in the Pre-publish Checks sidebar to understand which scenarios or Evaluators didn't pass. You can then decide whether to make improvements to your Agent or publish anyway (if "Block publish if evaluation fails" is unchecked)
+- The **Default** state indicates your Agent is ready to publish
+
+<Note>
+The "Check Failed" state appears when your evaluation score falls below the pass threshold you configured in Publish Checks settings. If you have "Block publish if evaluation fails" enabled, you won't be able to publish until the checks pass.
+</Note>
 
 ---
 
