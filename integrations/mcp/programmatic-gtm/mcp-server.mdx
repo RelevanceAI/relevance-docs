@@ -242,6 +242,100 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
 
 ---
 
+## Handling long-running agent executions
+
+When triggering agents via MCP, you have two execution modes available depending on how long your agent takes to complete.
+
+### Execution modes
+
+<Tabs>
+  <Tab title="Synchronous">
+    **Tool:** `relevance_trigger_agent`
+    
+    **Timeout:** 120 seconds
+    
+    Use synchronous execution for agents that complete quickly. The tool waits for the agent to finish and returns the result directly.
+    
+    **Best for:**
+    - Simple, fast agent executions expected to complete within 120 seconds
+    - Single-step agents with minimal tool usage
+    - Agents without workforce nodes
+  </Tab>
+  
+  <Tab title="Asynchronous">
+    **Tools:** `relevance_trigger_agent_async` + `relevance_poll_agent_result`
+    
+    **Timeout:** None
+    
+    Use asynchronous execution for agents that may take longer than 2 minutes. The trigger returns immediately with a conversation ID, which you then poll to check status and retrieve results.
+    
+    **Best for:**
+    - Agents with workforce nodes or multi-agent orchestration
+    - Multi-step chains with complex workflows
+    - Long-running research or data processing tasks
+    - Agents using multiple external tools or APIs
+    - Any execution expected to exceed 2 minutes
+  </Tab>
+</Tabs>
+
+### When to use async execution
+
+Use the asynchronous pattern if your agent includes:
+
+- **Workforce nodes** — Multi-agent orchestration typically exceeds the 120-second sync timeout
+- **Multi-step chains** — Complex workflows with multiple sequential operations
+- **External API calls** — Agents that call multiple third-party services
+- **Research tasks** — Web scraping, data gathering, or analysis operations
+- **Unpredictable execution times** — Any agent where runtime varies significantly
+
+<Warning>
+  If you encounter timeout errors with `relevance_trigger_agent`, switch to the async pattern. Agents with workforce nodes should always use async execution.
+</Warning>
+
+### Async execution workflow
+
+<Steps>
+  <Step title="Trigger the agent">
+    Call `relevance_trigger_agent_async` with your agent parameters. This returns immediately with a `conversation_id`.
+    
+    ```json
+    {
+      "conversation_id": "abc123..."
+    }
+    ```
+  </Step>
+  
+  <Step title="Poll for results">
+    Use `relevance_poll_agent_result` with the `conversation_id` to check the execution status.
+    
+    The response includes a `status` field indicating the current state.
+  </Step>
+  
+  <Step title="Check the status">
+    The status can be:
+    - `working` or `in progress` — Agent is still executing
+    - `complete` — Agent finished successfully, results are available
+    - `failed` — Agent encountered an error
+  </Step>
+  
+  <Step title="Implement polling intervals">
+    Poll every 3-5 seconds until the status is `complete` or `failed`. Avoid polling too frequently to reduce unnecessary API calls.
+  </Step>
+  
+  <Step title="Retrieve the results">
+    Once the status is `complete`, the poll response contains the agent's output.
+  </Step>
+</Steps>
+
+### Benefits of async execution
+
+- **No timeout constraints** — Agents can run as long as needed
+- **Non-blocking operation** — Your AI client remains responsive while the agent executes
+- **Reliable for complex workflows** — Handles multi-agent orchestration and workforce nodes without timing out
+- **Better handling of unpredictable execution times** — No need to estimate how long an agent will take
+
+---
+
 ## Troubleshooting
 
 <AccordionGroup>
@@ -262,6 +356,14 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
     - Check that `https://mcp.relevanceai.com/` is accessible from your network
     - Try removing and re-adding the MCP server connection in your client
     - Try clearing the auth cache: `rm -rf ~/.mcp-auth`
+  </Accordion>
+
+  <Accordion title="Agent execution timeouts">
+    If you encounter timeout errors when triggering agents with `relevance_trigger_agent`, this means your agent exceeded the 120-second synchronous execution limit.
+    
+    **Solution:** Switch to asynchronous execution using `relevance_trigger_agent_async` and `relevance_poll_agent_result`. See [Handling long-running agent executions](#handling-long-running-agent-executions) for details.
+    
+    Agents with workforce nodes, multi-step chains, or complex workflows should always use the async pattern.
   </Accordion>
 </AccordionGroup>
 
