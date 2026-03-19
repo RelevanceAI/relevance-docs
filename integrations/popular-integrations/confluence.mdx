@@ -87,12 +87,16 @@ When using the Confluence API Call Tool step, you must manually add any headers 
   The `accept: application/json` header tells the Confluence API what format you want the response in. Most REST API v2 endpoints require this header to return data in JSON format, which the tool can then process. Without this header, the API may return an error or data in an unexpected format.
 </Info>
 
-### Example API Call Configuration
+### Example API Call Configurations
 
-Here's a complete example of calling the Confluence API to retrieve a page by ID. This endpoint requires the `accept: application/json` header according to the [Atlassian documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/#api-pages-id-get):
+Here are examples of calling the Confluence API with both object and array request bodies.
 
 <Tabs>
-  <Tab title="Configuration">
+  <Tab title="Object Body Example">
+    **Use case**: Get a page by ID
+    
+    This endpoint requires the `accept: application/json` header according to the [Atlassian documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/api-group-page/#api-pages-id-get).
+    
     **API Method**: GET
     
     **Endpoint**: `/wiki/api/v2/pages/{id}?body-format=storage`
@@ -106,9 +110,8 @@ Here's a complete example of calling the Confluence API to retrieve a page by ID
     
     **Path Parameters**:
     - `id`: The ID of the Confluence page you want to retrieve
-  </Tab>
-  
-  <Tab title="Expected Response">
+    
+    **Expected Response**:
     ```json
     {
       "id": "123456",
@@ -124,10 +127,53 @@ Here's a complete example of calling the Confluence API to retrieve a page by ID
     }
     ```
   </Tab>
+  
+  <Tab title="Array Body Example">
+    **Use case**: Bulk update page properties
+    
+    Some Confluence endpoints require array bodies for bulk operations. This example shows updating multiple page properties at once.
+    
+    **API Method**: PUT
+    
+    **Endpoint**: `/wiki/api/v2/pages/{id}/properties`
+    
+    **Headers** (must be added manually):
+    ```json
+    {
+      "accept": "application/json",
+      "content-type": "application/json"
+    }
+    ```
+    
+    **Body** (array format):
+    ```json
+    [
+      {
+        "key": "status",
+        "value": "reviewed"
+      },
+      {
+        "key": "priority",
+        "value": "high"
+      },
+      {
+        "key": "last-updated-by",
+        "value": "automation-bot"
+      }
+    ]
+    ```
+    
+    **Path Parameters**:
+    - `id`: The ID of the Confluence page
+    
+    <Info>
+      This endpoint demonstrates the array body support added in PR #12797. The API Call tool step now accepts both JSON objects `{}` and JSON arrays `[]` as top-level request bodies.
+    </Info>
+  </Tab>
 </Tabs>
 
 <Tip>
-  **Best Practice**: Always consult the [Confluence API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/) for your specific endpoint before configuring your API call. The documentation will specify all required headers, parameters, and request body formats.
+  **Best Practice**: Always consult the [Confluence API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/) for your specific endpoint before configuring your API call. The documentation will specify all required headers, parameters, and request body formats (including whether an object or array is expected).
 </Tip>
 
 ## Example use cases
@@ -172,5 +218,13 @@ Here are some ways you can leverage the Confluence integration with your agents:
     **Always check the official [Confluence API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/)** for your specific endpoint to see which headers are required. The documentation will clearly specify all required headers in the "Request" section of each endpoint.
     
     Remember: The API Call Tool does not add any headers automatically, so you must manually add all required headers specified in the documentation.
+  </Accordion>
+  <Accordion title="When should I use array bodies vs. object bodies in Confluence API calls?">
+    The request body format depends on what the specific Confluence API endpoint expects:
+    
+    - **Object bodies** `{}` are used for most single-item operations (creating a page, updating a single property)
+    - **Array bodies** `[]` are required for bulk operations or specific endpoints that expect multiple items (like updating multiple page properties at once)
+    
+    Always check the [Confluence API documentation](https://developer.atlassian.com/cloud/confluence/rest/v2/intro/) for your endpoint to see which format is required. The documentation will show example request bodies in the correct format.
   </Accordion>
 </AccordionGroup>
