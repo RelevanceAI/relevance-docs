@@ -242,6 +242,135 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
 
 ---
 
+## Triggering agents
+
+The MCP server provides two patterns for triggering agents: synchronous and asynchronous. Choose the pattern based on your agent's expected runtime.
+
+### Synchronous trigger
+
+Use `relevance_trigger_agent` for agents that complete quickly.
+
+<CodeGroup>
+```json Tool call
+{
+  "tool": "relevance_trigger_agent",
+  "arguments": {
+    "agent_id": "abc123",
+    "params": {
+      "input_field": "value"
+    }
+  }
+}
+```
+
+```json Response
+{
+  "status": "complete",
+  "output": {
+    "result": "Agent output here"
+  }
+}
+```
+</CodeGroup>
+
+**Timeout:** The synchronous tool has a 120-second timeout. If your agent doesn't complete within 120 seconds, the call will fail.
+
+<Warning>Use the synchronous trigger only for agents that reliably complete in under 120 seconds. For longer-running agents, use the async pattern below.</Warning>
+
+### Asynchronous trigger + polling
+
+For agents that take longer than 120 seconds, use the async pattern:
+
+1. **Trigger the agent** with `relevance_trigger_agent_async` — returns immediately with a conversation ID
+2. **Poll for results** with `relevance_poll_agent_result` using the conversation ID
+
+<Steps>
+  <Step title="Trigger the agent asynchronously">
+    Call `relevance_trigger_agent_async` to start the agent. This returns a conversation ID immediately without waiting for completion.
+
+    <CodeGroup>
+    ```json Tool call
+    {
+      "tool": "relevance_trigger_agent_async",
+      "arguments": {
+        "agent_id": "abc123",
+        "params": {
+          "input_field": "value"
+        }
+      }
+    }
+    ```
+
+    ```json Response
+    {
+      "conversation_id": "conv_xyz789",
+      "status": "running"
+    }
+    ```
+    </CodeGroup>
+  </Step>
+
+  <Step title="Poll for the result">
+    Use the conversation ID to check the agent's status and retrieve results once complete.
+
+    <CodeGroup>
+    ```json Tool call
+    {
+      "tool": "relevance_poll_agent_result",
+      "arguments": {
+        "conversation_id": "conv_xyz789"
+      }
+    }
+    ```
+
+    ```json Response (running)
+    {
+      "conversation_id": "conv_xyz789",
+      "status": "running"
+    }
+    ```
+
+    ```json Response (complete)
+    {
+      "conversation_id": "conv_xyz789",
+      "status": "complete",
+      "output": {
+        "result": "Agent output here"
+      }
+    }
+    ```
+    </CodeGroup>
+
+    Poll periodically until the status changes to `complete` or `failed`.
+  </Step>
+</Steps>
+
+### When to use each pattern
+
+<CardGroup cols={2}>
+  <Card title="Synchronous" icon="bolt">
+    **Use for:**
+    - Agents that complete in under 120 seconds
+    - Simple queries or lookups
+    - Real-time interactions where you need immediate results
+
+    **Limitation:** 120-second timeout
+  </Card>
+
+  <Card title="Asynchronous" icon="clock">
+    **Use for:**
+    - Agents that take longer than 120 seconds
+    - Complex workflows with multiple steps
+    - Batch processing or data-intensive tasks
+
+    **Benefit:** No timeout — poll until complete
+  </Card>
+</CardGroup>
+
+<Tip>The conversation ID links the trigger and polling calls. Store it after triggering the agent so you can poll for results later.</Tip>
+
+---
+
 ## Troubleshooting
 
 <AccordionGroup>
@@ -262,6 +391,20 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
     - Check that `https://mcp.relevanceai.com/` is accessible from your network
     - Try removing and re-adding the MCP server connection in your client
     - Try clearing the auth cache: `rm -rf ~/.mcp-auth`
+  </Accordion>
+
+  <Accordion title="Agent timeout errors">
+    If you receive a timeout error when triggering an agent:
+    - Check if your agent is taking longer than 120 seconds to complete
+    - Switch to the async trigger pattern (`relevance_trigger_agent_async` + `relevance_poll_agent_result`)
+    - Optimize your agent to reduce runtime if possible
+  </Accordion>
+
+  <Accordion title="Polling returns 'running' indefinitely">
+    If polling continues to return `running` status:
+    - Check the agent's execution logs in the Relevance AI dashboard
+    - Verify the agent isn't stuck on a long-running step
+    - Ensure the conversation ID is correct
   </Accordion>
 </AccordionGroup>
 
@@ -288,5 +431,13 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
 
   <Accordion title="Can I restrict which tools are available via MCP?">
     The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each connection to the appropriate project.
+  </Accordion>
+
+  <Accordion title="What's the difference between sync and async agent triggers?">
+    The synchronous trigger (`relevance_trigger_agent`) waits for the agent to complete and returns results directly, but has a 120-second timeout. The async pattern (`relevance_trigger_agent_async` + `relevance_poll_agent_result`) returns immediately with a conversation ID, allowing you to poll for results without timeout limits.
+  </Accordion>
+
+  <Accordion title="How often should I poll for agent results?">
+    Poll every 2-5 seconds for responsive feedback. Avoid polling more frequently than once per second to reduce unnecessary API calls.
   </Accordion>
 </AccordionGroup>
