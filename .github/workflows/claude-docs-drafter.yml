@@ -1,0 +1,71 @@
+name: Claude Docs Drafter
+
+on:
+  workflow_dispatch:
+    inputs:
+      task_description:
+        description: 'Content brief for the documentation change'
+        required: true
+        type: string
+      linear_issue_key:
+        description: 'Linear issue key (e.g. TSP-123) for branch naming'
+        required: true
+        type: string
+
+jobs:
+  draft-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Claude Docs Drafter"
+          git config --global user.email "claude-docs-drafter[bot]@users.noreply.github.com"
+
+      - name: Create branch
+        run: |
+          BRANCH_NAME="docs/${{ inputs.linear_issue_key }}"
+          git checkout -b "$BRANCH_NAME" || git checkout "$BRANCH_NAME"
+          echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_ENV"
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            You are drafting documentation changes for the Relevance AI docs site.
+
+            ## Task
+            ${{ inputs.task_description }}
+
+            ## Instructions
+            1. Read the CLAUDE.md file for documentation standards and workflow
+            2. Explore the repo structure to find similar pages for reference
+            3. Draft the changes — create/update files as needed
+            4. Update docs.json navigation if adding new pages
+            5. Commit with a clear message referencing ${{ inputs.linear_issue_key }}
+            6. Push and create a PR targeting main with:
+               - Title: "docs(${{ inputs.linear_issue_key }}): <brief description>"
+               - Body: Summary of changes, pages created/updated, link to https://linear.app/relevance/issue/${{ inputs.linear_issue_key }}/
+               - Label: "docs-drafter" (create with `gh label create docs-drafter` if it doesn't exist)
+          claude_args: '--allowedTools "Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git checkout:*),Bash(npx mintlify dev:*),Bash(gh pr:*),Bash(gh label:*),Read,Write,Edit,Glob,Grep"'
+
+      - name: Extract PR URL
+        id: extract-pr
+        if: success()
+        run: |
+          PR_URL=$(gh pr list --head "$BRANCH_NAME" --json url --jq '.[0].url' 2>/dev/null || echo "")
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
