@@ -1,0 +1,271 @@
+---
+title: "Twilio"
+description: "Connect Twilio to send SMS, make voice calls, and automate communications with AI agents"
+sidebarTitle: "Twilio"
+---
+
+Twilio is a cloud communications platform that provides APIs for SMS, voice calls, video, and other messaging channels. With the Twilio integration in Relevance AI, your agents can send text messages, make and manage phone calls, look up phone numbers, handle media, and run SMS verification flows.
+
+<Note>
+This integration is built by Relevance AI. For integration-specific support, contact [Relevance AI support](https://relevanceai.com/docs/get-started/support). For Twilio platform issues, visit [Twilio Support](https://help.twilio.com/).
+</Note>
+
+## Connect the integration
+
+You authenticate with your Twilio Account SID and Auth Token. Both are available in the **Account Info** panel on your [Twilio Console](https://console.twilio.com/) dashboard.
+
+<Steps>
+  <Step title="Navigate to Integrations">
+    Go to the **Integrations & API Keys** page in your Relevance AI dashboard.
+  </Step>
+
+  <Step title="Select Twilio">
+    Find and click on **Twilio** from the list of available integrations.
+  </Step>
+
+  <Step title="Add integration">
+    Click the **Add Integration** button to begin the connection process.
+  </Step>
+
+  <Step title="Enter your Account SID">
+    Paste your Twilio **Account SID**. In the Twilio Console, this is shown under **Account Info** on the main dashboard (format: `ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`).
+  </Step>
+
+  <Step title="Enter your Auth Token">
+    Paste your Twilio **Auth Token**. This is shown directly below the Account SID in the **Account Info** panel. Click the eye icon in the Twilio Console to reveal it.
+  </Step>
+
+  <Step title="Confirm connection">
+    Click **Connect**. Once authenticated, your Twilio account will appear as connected in your integrations list.
+  </Step>
+</Steps>
+
+<Tip>
+If you manage multiple Twilio projects, you can connect each project separately using its own Account SID and Auth Token. Each connection appears as a distinct entry in your integrations list.
+</Tip>
+
+## Setting up triggers
+
+Twilio does not currently support event-based triggers in Relevance AI. To react to inbound SMS or calls, set up a [webhook trigger](/build/agents/build-your-agent/triggers/webhook) on your agent and configure your Twilio phone number's webhook URL to point to it.
+
+## Tools & tool steps
+
+The Twilio integration provides 17 operations across seven categories. To find them in the tool step search, type "Twilio" in the search bar.
+
+### SMS operations
+
+<AccordionGroup>
+  <Accordion title="Send SMS" icon="message">
+    Send an SMS message from a Twilio phone number to any destination number. Specify the `from` number (must be a Twilio number on your account), the `to` number, and the message body. Supports plain text up to 1,600 characters; longer messages are split automatically.
+  </Accordion>
+
+  <Accordion title="Send MMS" icon="image">
+    Send an MMS message with one or more media attachments. Provide the `from` and `to` numbers, an optional text body, and one or more publicly accessible media URLs. Supported formats include JPEG, PNG, GIF, and MP4.
+  </Accordion>
+
+  <Accordion title="Schedule SMS" icon="clock">
+    Schedule an SMS to be sent at a future date and time. Specify the message content, the send time in ISO 8601 format, and the messaging service SID to use. Scheduling requires a Twilio Messaging Service with scheduling enabled.
+  </Accordion>
+
+  <Accordion title="Cancel scheduled message" icon="ban">
+    Cancel a previously scheduled SMS before it is sent. Provide the message SID of the scheduled message. The message must still be in `scheduled` status — messages already sent cannot be recalled.
+  </Accordion>
+</AccordionGroup>
+
+### Voice call operations
+
+<AccordionGroup>
+  <Accordion title="Make call" icon="phone">
+    Initiate an outbound phone call from a Twilio number. Provide the `from` and `to` numbers and a TwiML URL or TwiML string that defines how the call behaves (e.g., playing a message, collecting input, or connecting to another number).
+  </Accordion>
+
+  <Accordion title="Make TTS call" icon="volume-high">
+    Make a voice call and read out a text message using Twilio's text-to-speech engine. Specify the `from` and `to` numbers, the text to speak, and optionally the language and voice. No TwiML knowledge required — the integration handles the TwiML generation.
+  </Accordion>
+
+  <Accordion title="Hang up call" icon="phone-slash">
+    End an in-progress call by updating its status to `completed`. Provide the call SID. Useful for programmatically terminating calls from within an agent workflow.
+  </Accordion>
+</AccordionGroup>
+
+### Call & message management
+
+<AccordionGroup>
+  <Accordion title="List calls" icon="list">
+    Retrieve a list of calls from your Twilio account. Filter by `from` number, `to` number, status, or date range. Returns call metadata including SID, direction, duration, status, and timestamps.
+  </Accordion>
+
+  <Accordion title="Get call" icon="circle-info">
+    Fetch details about a specific call using its call SID. Returns the call's status, direction, duration, from/to numbers, price, and any associated recordings.
+  </Accordion>
+
+  <Accordion title="List messages" icon="messages">
+    Retrieve a list of messages from your Twilio account. Filter by `from` number, `to` number, date sent, or message status. Returns message metadata including SID, body, direction, status, and timestamps.
+  </Accordion>
+
+  <Accordion title="Get message" icon="envelope-open">
+    Fetch details about a specific message using its message SID. Returns the full message body, status, direction, error codes (if any), and pricing information.
+  </Accordion>
+</AccordionGroup>
+
+### Phone number lookup
+
+<AccordionGroup>
+  <Accordion title="Lookup phone number" icon="magnifying-glass">
+    Look up carrier and line-type information for any phone number. Returns whether the number is mobile, landline, or VoIP, along with the carrier name and country. Useful for validating numbers before sending SMS or making calls. This operation uses Twilio Lookup and may incur additional Twilio charges.
+  </Accordion>
+
+  <Accordion title="Fetch available numbers" icon="hashtag">
+    Search for available Twilio phone numbers to purchase in a given country or area code. Filter by capabilities (SMS, voice, MMS), area code, or locality. Returns a list of available numbers with their capabilities and monthly costs.
+  </Accordion>
+</AccordionGroup>
+
+### Transcription services
+
+<AccordionGroup>
+  <Accordion title="Transcribe recording" icon="microphone">
+    Submit a Twilio call recording for transcription. Provide the recording SID. Twilio processes the audio and returns the transcription text once complete. Transcription is an asynchronous operation — poll the Get Transcription step or use a webhook to retrieve the result.
+  </Accordion>
+
+  <Accordion title="Get transcription" icon="file-lines">
+    Retrieve the text and metadata for a completed transcription using its transcription SID. Returns the transcription body, status, duration, and the associated recording SID.
+  </Accordion>
+</AccordionGroup>
+
+### SMS verification
+
+<AccordionGroup>
+  <Accordion title="Send verification code" icon="shield-check">
+    Send a one-time passcode (OTP) to a phone number via SMS or voice call using Twilio Verify. Provide the destination number and the channel (`sms` or `call`). Requires a Twilio Verify Service SID configured in your Twilio account.
+  </Accordion>
+
+  <Accordion title="Check verification code" icon="check-circle">
+    Verify a code entered by the user against the OTP sent by Twilio Verify. Provide the phone number, the code, and the Verify Service SID. Returns `approved` if the code matches and is still within its validity window.
+  </Accordion>
+</AccordionGroup>
+
+### Media handling
+
+<AccordionGroup>
+  <Accordion title="List media" icon="photo-film">
+    List all media attachments associated with a specific MMS message. Provide the message SID. Returns media SIDs, content types, and URLs for each attachment.
+  </Accordion>
+
+  <Accordion title="Delete media" icon="trash">
+    Delete a media attachment from your Twilio account using its media SID and parent message SID. Deleted media is no longer accessible via its Twilio URL. This action is permanent.
+  </Accordion>
+</AccordionGroup>
+
+## Use the integration's API tool step (advanced)
+
+For operations not covered by the pre-built tool steps, use the **Twilio API Call** tool step to make raw requests to any Twilio REST API endpoint.
+
+<Steps>
+  <Step title="Add the tool step">
+    In your agent or tool builder, add the **Twilio API Call** tool step.
+  </Step>
+
+  <Step title="Select HTTP method">
+    Choose the appropriate HTTP method — most Twilio write operations use `POST`, and reads use `GET`.
+  </Step>
+
+  <Step title="Enter the endpoint">
+    Provide the API path relative to `https://api.twilio.com/2010-04-01/Accounts/{AccountSid}/`, for example `/Messages.json` or `/Calls/{CallSid}.json`.
+  </Step>
+
+  <Step title="Add request parameters">
+    Provide the request body as form-encoded key-value pairs (Twilio's REST API uses `application/x-www-form-urlencoded`, not JSON).
+  </Step>
+
+  <Step title="Test the request">
+    Run the tool step to confirm it returns the expected response before using it in a live workflow.
+  </Step>
+</Steps>
+
+### Example: sending an SMS via API tool step
+
+```json
+{
+  "method": "POST",
+  "endpoint": "/Messages.json",
+  "body": {
+    "From": "+15551234567",
+    "To": "+15559876543",
+    "Body": "Your appointment is confirmed for tomorrow at 10am."
+  }
+}
+```
+
+For the full endpoint reference, see the [Twilio REST API documentation](https://www.twilio.com/docs/usage/api).
+
+## Example use cases
+
+<CardGroup cols={2}>
+  <Card title="Appointment reminders" icon="calendar-check">
+    Send automated SMS reminders to customers before scheduled appointments. Reduce no-shows by triggering reminder messages 24 hours and 1 hour before the appointment time.
+  </Card>
+
+  <Card title="Two-factor authentication" icon="shield-halved">
+    Add SMS-based two-factor authentication to your workflows using Twilio Verify. Send a one-time code and verify it before granting access or confirming high-value actions.
+  </Card>
+
+  <Card title="Customer support automation" icon="headset">
+    Automatically respond to inbound SMS inquiries using an AI agent. Route complex issues to human agents while resolving common questions instantly.
+  </Card>
+
+  <Card title="Call center automation" icon="phone-volume">
+    Trigger outbound voice calls for order confirmations, collections follow-ups, or survey outreach. Use text-to-speech to deliver dynamic messages without pre-recording audio.
+  </Card>
+
+  <Card title="Lead qualification by SMS" icon="user-check">
+    Qualify inbound leads via SMS conversation. An agent can ask qualifying questions, score responses, and pass qualified leads to your CRM automatically.
+  </Card>
+
+  <Card title="Delivery and logistics alerts" icon="truck">
+    Send real-time SMS notifications for shipment status updates, delivery confirmations, or exception alerts — triggered automatically as order status changes in your systems.
+  </Card>
+</CardGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Where do I find my Account SID and Auth Token?" icon="key">
+    Both are displayed in the **Account Info** panel on your Twilio Console dashboard at console.twilio.com. Click the eye icon next to the Auth Token to reveal it. Keep your Auth Token secret — anyone with it can make API calls on your behalf.
+  </Accordion>
+
+  <Accordion title="Do I need a Twilio phone number to use this integration?" icon="hashtag">
+    For sending SMS or making outbound calls, yes — you need at least one Twilio phone number on your account. You can purchase numbers in the Twilio Console under **Phone Numbers** > **Manage** > **Buy a number**. For Twilio Verify (SMS verification), you need a Verify Service instead of a regular phone number.
+  </Accordion>
+
+  <Accordion title="Can I connect multiple Twilio accounts?" icon="building">
+    Yes. Each Twilio project has its own Account SID and Auth Token. Add a separate integration for each project, and each will appear as a distinct connected account in your integrations list.
+  </Accordion>
+
+  <Accordion title="Why is my SMS not being delivered?" icon="triangle-exclamation">
+    Common causes include: the destination number is a landline (not SMS-capable), the `from` number does not have SMS capability enabled, your Twilio account balance is insufficient, or the message was filtered as spam. Check the message status and error code using the Get Message tool step, then refer to the [Twilio error code reference](https://www.twilio.com/docs/api/errors) for resolution steps.
+  </Accordion>
+
+  <Accordion title="Are there rate limits on Twilio API calls?" icon="gauge-high">
+    Twilio enforces rate limits per account and per phone number. The limits vary by Twilio account type and the specific API. If your workflow sends a high volume of messages, consider using a Twilio Messaging Service to distribute load across multiple numbers. Consult [Twilio's rate limit documentation](https://www.twilio.com/docs/usage/api/rate-limits) for specifics.
+  </Accordion>
+
+  <Accordion title="Can I receive inbound SMS or calls?" icon="inbox">
+    Inbound messages and calls are handled via webhooks. Configure your Twilio phone number's inbound webhook URL to point to a [webhook trigger](/build/agents/build-your-agent/triggers/webhook) on your Relevance AI agent. Your agent will then be activated each time a message or call arrives.
+  </Accordion>
+
+  <Accordion title="How do I use Twilio Verify for SMS verification?" icon="shield-check">
+    First, create a Verify Service in your Twilio Console under **Verify** > **Services**. Note the Service SID. Then use the **Send verification code** tool step with your Verify Service SID to send an OTP, and the **Check verification code** tool step to validate what the user enters.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Need help?" icon="life-ring" href="https://relevanceai.com/docs/get-started/support">
+    Contact our support team for assistance with the Twilio integration.
+  </Card>
+
+  <Card title="Explore more integrations" icon="puzzle-piece" href="/integrations/introduction">
+    Discover other integrations to enhance your workflows.
+  </Card>
+</CardGroup>
