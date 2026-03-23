@@ -1,0 +1,100 @@
+---
+title: 'Alerts'
+sidebarTitle: 'Alerts'
+description: 'Set up rules to get notified when your agent encounters an issue, reaches a threshold, or gets updated.'
+---
+
+Set up rules to get notified when your agent encounters an issue, reaches a threshold, or gets updated.
+
+<Note>
+Alerts are available on paid plans only.
+</Note>
+
+## Alert rules
+
+Stay on top of agent issues by creating alert rules that notify you automatically when specific events occur. Each rule has a **trigger condition** (what happened) and one or more **notification channels** (where to send it).
+
+### Setting up an alert rule
+
+1. Navigate to your agent and open the **Alerts** tab
+2. Click **Create alert rule**
+3. Select a trigger type from the left panel
+4. Configure the trigger conditions (if applicable)
+5. Preview how the notification will look
+6. Add at least one notification channel (Email, Slack, or Microsoft Teams)
+7. Click **Save**
+
+You can create multiple alert rules, each with different triggers and channels. Existing rules appear as cards showing the trigger description, active channels, and controls to edit, delete, or toggle them on/off.
+
+### Alert types
+
+#### Status change
+
+Triggers when an agent task enters one or more specific statuses. Select which statuses you want to be alerted on from the multi-select dropdown.
+
+Available statuses include:
+- Starting up
+- Waiting for capacity
+- Pending approval
+- Running
+- Cancelled
+- Idle
+- Timed out
+- Escalated
+- Unrecoverable error
+- Paused
+- Completed
+- Exhausted retries
+- Queued for approval
+- Queued for rerun
+
+<Tip>
+A common configuration is to alert on failure states like **Timed out**, **Unrecoverable error**, and **Exhausted retries** so your team can respond quickly when something goes wrong.
+</Tip>
+
+#### Tool error
+
+Triggers when a tool fails during execution. You can optionally scope this to specific tools — leave the selection empty to watch all tools, or pick individual tools to monitor.
+
+This is useful for keeping an eye on critical integrations where a tool failure could block your agent's workflow.
+
+#### Agent published
+
+Triggers when the agent is published. No additional configuration is needed — simply select a notification channel and you'll be alerted whenever a new version of the agent goes live.
+
+### Notification channels
+
+Each alert rule can send notifications to one or more channels:
+
+#### Email
+
+Add one or more email addresses. No OAuth connection is required — just enter the addresses and notifications will be sent directly.
+
+#### Slack
+
+Connect your Slack workspace via OAuth, then select a channel to receive notifications. See [Slack integration](/integrations/popular-integrations/slack) for setup details.
+
+#### Microsoft Teams
+
+Connect your Microsoft Teams account via OAuth, then select a team and channel. See [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams) for setup details.
+
+---
+
+## Agent escalations
+
+When your agent encounters a situation beyond its capabilities, it can escalate the conversation to a human manager using the built-in **Escalate to Manager** tool.
+
+This is different from alert rules — escalation is an in-conversation handoff where the agent actively routes a conversation to a human, rather than a background notification about an event.
+
+### Enabling the escalation tool
+
+In the **Agent escalations** section at the bottom of the Alerts page, click **Enable escalation tool**. This adds the "Escalate to Manager" tool to your agent's available tools.
+
+Once enabled, you can reference the tool in your agent's prompt using the **/** command to give the agent guidance on when to escalate. Click **Edit prompt** to go directly to the prompt editor.
+
+### Common use cases
+
+- Complex technical support issues requiring specialized knowledge
+- Sensitive customer service situations needing human empathy
+- Detailed product feedback that should reach product managers
+- High-value sales opportunities requiring personalized attention

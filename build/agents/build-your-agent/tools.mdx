@@ -69,3 +69,43 @@ While the specific tools available depend on your implementation, common categor
 - **Content Creation**: Generating text, images, or other media
 
 By thoughtfully selecting and configuring the right tools for your agent, you can create a powerful assistant that delivers exceptional value to your users through both conversation and action.
+
+## Tool Approvals
+
+Control whether your agent needs permission before running a tool. You can set the approval mode individually for each tool.
+
+### Auto Run
+
+The tool runs automatically whenever the agent determines it should be used. This provides the smoothest user experience as the agent can seamlessly incorporate tool functionality without interrupting the conversation flow.
+
+**Best for:** Tools that are low-risk, frequently used, or where immediate action is beneficial.
+
+### Approval Required
+
+The agent will ask for explicit permission before using the tool. When the agent determines a tool would be helpful, it will first explain what it wants to do and why, then wait for user confirmation before proceeding.
+
+**Best for:** Tools that perform sensitive actions, have potential costs associated with them, or where user oversight is important.
+
+### Let Agent Decide
+
+This balanced approach gives your agent the flexibility to determine when approval is necessary based on context. The agent will use its judgment about when to ask for permission versus when to proceed automatically.
+
+**Best for:** A mix of tool types where you want to balance convenience with appropriate caution.
+
+## Tool Settings
+
+### Failure policy
+
+Define what your agent should do when a tool errors. Open the **Tool Settings** on the Tools page to configure the failure policy.
+
+#### Always retry errored tool
+
+When on, forces the agent to retry errored tools until success or max retries (at which point the task will fail). When off, the agent decides on its own whether it's worth retrying. For most users, enabling retries is a safe way to handle occasional hiccups without manual intervention.
+
+#### Maximum number of tool retries
+
+The number of times the agent will retry a tool that errors before marking the task as failed. A few retries (like 3) usually strikes a good balance — it gives your agent a second chance without risking long loops or extra costs. Increasing this may raise credit usage.
+
+#### Behaviour after max tool retries
+
+Decide what should happen when the maximum number of retries is reached: either **Terminate task** immediately or **Escalate** it to a human for help. Terminating is faster and simpler, but escalation gives you a chance to fix things manually when it matters most.
