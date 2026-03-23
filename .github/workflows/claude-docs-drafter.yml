@@ -79,6 +79,7 @@ jobs:
                - Title: "docs(${{ inputs.linear_issue_key }}): <brief description>"
                - Body: Summary of changes, link to https://linear.app/relevance/issue/${{ inputs.linear_issue_key }}/
                - Label: "docs-drafter" (create with `gh label create docs-drafter` if it doesn't exist)
+               - After creating the PR, assign it to Claude: `gh pr edit <pr-number> --add-assignee app/claude`
             7. If a PR already exists, just push — don't create a duplicate
           claude_args: '--allowedTools "Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git checkout:*),Bash(git rebase:*),Bash(git fetch:*),Bash(git merge:*),Bash(git pull:*),Bash(npx mintlify dev:*),Bash(gh pr:*),Bash(gh label:*),Read,Write,Edit,Glob,Grep"'
 
