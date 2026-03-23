@@ -5,19 +5,70 @@ sidebarTitle: 'Tools'
 
 ## Overview
 
-Tools enable your agent to go beyond simple conversation by performing actions such as searching the web, accessing databases, sending emails, or interacting with other systems. When properly configured, tools transform your agent from a conversational interface into a powerful digital assistant that can take meaningful actions on behalf of users.
+Tools enable your agent to go beyond simple conversation by performing actions such as searching the web, accessing databases, sending emails, or interacting with other systems. When properly configured, tools transform your agent from a conversational interface into a digital assistant that can take meaningful actions on behalf of users.
 
 ![](/images/agent/tools_new.png)
 
-## Adding Tools to Your Agent
+## Adding tools to your agent
 
-In the Agent Builder interface, navigate to the **Tools** section to begin enhancing your agent's capabilities:
+In the Agent Builder interface, navigate to the **Tools** section to begin enhancing your agent's capabilities. Click **Add tool** to open the tool selection modal, where you can:
 
-1. Select from pre-built tool templates that cover common use cases
-2. Add custom tools you've created under the `Add new tool` option
-3. Configure each tool's usage settings based on your requirements
+- Browse tools organized by category
+- Search and filter to find the right tool quickly
+- Preview tool details before adding
+- Invent a new tool directly from the modal
 
-## Tool Input Configuration Options
+See [Browsing and selecting tools](#browsing-and-selecting-tools), [Search and filter tools](#search-and-filter-tools), and [AI-powered tool invention](#ai-powered-tool-invention) below for details on each capability.
+
+## Browsing and selecting tools
+
+<Note>The redesigned tool selection modal is currently rolling out to users. If you don't see these features yet, they'll be available to you soon.</Note>
+
+The tool selection modal organizes available tools into sections, making it easier to find what you need. Tools are grouped by category — for example, integrations, data retrieval, and communication — so you can browse by the type of action you want your agent to perform.
+
+Each tool in the list shows a summary of what it does. Click a tool to open its detail panel and review more information before adding it to your agent. See [Understanding tool details](#understanding-tool-details) for what information appears in the panel.
+
+Once you've found the right tool, click **Add** to attach it to your agent.
+
+## Search and filter tools
+
+<Note>The redesigned tool selection modal is currently rolling out to users. If you don't see these features yet, they'll be available to you soon.</Note>
+
+Use the search bar at the top of the modal to find tools by name or description. Filters let you narrow results further:
+
+- **Use case** — find tools suited to specific scenarios, such as research, data processing, or outreach
+- **Integration** — filter by platform or service, such as Google, Slack, or HubSpot
+- **Author** — filter by who created the tool: Relevance AI's built-in tools, community-contributed tools, or tools you've created yourself
+
+You can combine filters with search. For example, search for "email" and filter by author to see only your own email-related tools.
+
+## AI-powered tool invention
+
+<Note>The redesigned tool selection modal is currently rolling out to users. If you don't see these features yet, they'll be available to you soon.</Note>
+
+If no existing tool fits your use case, you can invent one directly from the tool selection modal without leaving the Agent Builder. Click **Invent tool** in the modal, describe what you want the tool to do, and the platform generates a working tool for you.
+
+Use invention when:
+- You have a specific workflow that no existing tool covers
+- You want to prototype a tool quickly and refine it later
+- You're building something that combines multiple steps into one reusable action
+
+For a full walkthrough of the tool creation process — including building from scratch, configuring inputs and steps, and defining outputs — see [Create a Tool](/build/tools/create-a-tool).
+
+## Understanding tool details
+
+<Note>The redesigned tool selection modal is currently rolling out to users. If you don't see these features yet, they'll be available to you soon.</Note>
+
+Clicking a tool in the modal opens a detail panel with information to help you evaluate whether it's the right fit:
+
+- **Steps** — the number of steps in the tool, giving you an idea of its complexity
+- **Clone count** — how many times the tool has been cloned, indicating how widely it's used
+- **Connected integrations** — which external services the tool requires, so you know what needs to be connected before it will work
+- **Agent usage** — how many agents are currently using this tool
+
+Reviewing these details before adding a tool helps you understand its requirements and gauge how well-tested it is.
+
+## Tool input configuration options
 
 ![](/images/agent/tool-configuration.png)
 
@@ -29,7 +80,7 @@ This balanced approach gives your agent the flexibility to determine how the Inp
 
 **Best for:** A mix of tool types where you want to get things up and running quickly.
 
-### Set manually  
+### Set manually
 This option allows you to explicitly specify the Inputs for each Tool or action. You have full control over which settings are used for your tools.
 
 **Best for**: Scenarios where strict oversight or compliance is needed, and you want to minimize any ambiguity in approval processes.
@@ -38,7 +89,7 @@ This option allows you to explicitly specify the Inputs for each Tool or action.
 
 This option allows you to select the outputs from a previous Tool run by the Agent.
 
-## Guiding Your Agent's Tool Usage
+## Guiding your agent's tool usage
 
 For optimal results, provide your agent with clear guidance about how and when to use its tools:
 
@@ -48,24 +99,22 @@ For optimal results, provide your agent with clear guidance about how and when t
    - What circumstances warrant tool use versus simple conversation
 
 
-## Best Practices for Tool Implementation
+## Best practices for tool implementation
 
-- **Start Simple**: Begin with a few essential tools before adding more complex capabilities
-- **Test Thoroughly**: Verify that each tool works as expected in various scenarios
-- **Monitor Usage**: Review how your agent is using tools in real conversations to identify opportunities for improvement
-- **Refine Gradually**: Adjust tool configurations and instructions based on actual usage patterns
-- **Combine Tools Strategically**: Create powerful workflows by combining multiple tools in sequence
+- **Start simple**: Begin with a few essential tools before adding more complex capabilities
+- **Test thoroughly**: Verify that each tool works as expected in various scenarios
+- **Monitor usage**: Review how your agent is using tools in real conversations to identify opportunities for improvement
+- **Refine gradually**: Adjust tool configurations and instructions based on actual usage patterns
+- **Combine tools strategically**: Create workflows by combining multiple tools in sequence
 
 
-## Common Tool Categories
+## Common tool categories
 
 While the specific tools available depend on your implementation, common categories include:
 
-- **Information Retrieval**: Search engines, knowledge bases, document repositories
+- **Information retrieval**: Search engines, knowledge bases, document repositories
 
 - **Communication**: Email, messaging, notifications
-- **Data Processing**: Analysis, transformation, summarization
+- **Data processing**: Analysis, transformation, summarization
 - **Integration**: Connecting with external systems and APIs
-- **Content Creation**: Generating text, images, or other media
-
-By thoughtfully selecting and configuring the right tools for your agent, you can create a powerful assistant that delivers exceptional value to your users through both conversation and action.
+- **Content creation**: Generating text, images, or other media
