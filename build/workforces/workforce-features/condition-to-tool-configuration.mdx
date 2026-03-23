@@ -15,11 +15,39 @@ To create a Condition to Tool connection in your workforce:
 
 1. Navigate to Workforce and "Build" in the main navigation
 2. Add a condition node to your workspace by dragging it from the node palette
-3. Write your condition using natural language (e.g., "Go down this path if it's a weekday" or "Follow this route if the customer priority is high")
+3. Configure your condition (see below for LLM-based vs Rule-based options)
 4. Add a tool node to your workspace
 5. Connect the condition node to the tool node by clicking and dragging from the condition's output connector to the tool's input connector
 
-## Condition Examples Using Natural Language
+## Choosing Between LLM-based and Rule-based Conditions
+
+Workforce offers two types of conditions, each suited for different scenarios:
+
+### LLM-based Conditions
+
+Use natural language to describe complex logic. The AI interprets your description and evaluates whether the condition is met.
+
+**Best for:**
+- Complex logic that's easier to express in natural language
+- Evaluating unstructured data like text content
+- Time-based conditions
+- Scenarios requiring interpretation
+
+**Example:** "Go down this path if the email contains an urgent request"
+
+### Rule-based Conditions
+
+Use structured filters to compare specific values with deterministic logic.
+
+**Best for:**
+- Precise comparisons of tool outputs
+- Numeric threshold checks
+- Validating specific field values
+- Performance-critical paths
+
+**Example:** Check if `Validate Data / output / status` equals "SUCCESS"
+
+## LLM-based Condition Examples
 
 You can create various types of conditions using simple, natural language instructions:
 
@@ -35,17 +63,131 @@ You can create various types of conditions using simple, natural language instru
 
 ### Tool Output Conditions
 - "Go down this path if the previous tool completed successfully"
-
 - "Follow this route if the data validation passed"
 - "Use this tool if we received a response from the API"
 
+## Rule-based Condition Examples
+
+Rule-based conditions use structured filters for precise, deterministic comparisons:
+
+### Validating Tool Output Status
+
+**Scenario:** Only proceed if a validation tool succeeded
+
+**Configuration:**
+- Condition type: Rule-based
+- Filter:
+  - Target: `Validate Input / output / status`
+  - Operator: equals
+  - Source: "SUCCESS"
+
+This ensures the next tool only runs when validation explicitly returns "SUCCESS".
+
+### Numeric Threshold Checks
+
+**Scenario:** Route high-value transactions to a special processing tool
+
+**Configuration:**
+- Condition type: Rule-based
+- Filter:
+  - Target: `Calculate Amount / output / total`
+  - Operator: >
+  - Source: 10000
+
+The tool only executes when the transaction amount exceeds $10,000.
+
+### Multiple Criteria (AND Logic)
+
+**Scenario:** Process orders that are both complete and paid
+
+**Configuration:**
+- Condition type: Rule-based
+- Match mode: Match All
+- Filter 1:
+  - Target: `Check Status / output / order_status`
+  - Operator: equals
+  - Source: "complete"
+- Filter 2:
+  - Target: `Check Payment / output / payment_status`
+  - Operator: equals
+  - Source: "paid"
+
+Both conditions must be true for the tool to execute.
+
+### Multiple Criteria (OR Logic)
+
+**Scenario:** Flag items that need attention (either urgent or high-value)
+
+**Configuration:**
+- Condition type: Rule-based
+- Match mode: Match Any
+- Filter 1:
+  - Target: `Get Priority / output / priority`
+  - Operator: equals
+  - Source: "urgent"
+- Filter 2:
+  - Target: `Calculate Value / output / amount`
+  - Operator: >=
+  - Source: 5000
+
+The tool executes if either condition is true.
+
+### Field Existence Check
+
+**Scenario:** Only process records that have an optional field populated
+
+**Configuration:**
+- Condition type: Rule-based
+- Filter:
+  - Target: `Get Data / output / optional_field`
+  - Operator: exists
+
+This checks whether the field has any value before proceeding.
+
+### String Pattern Matching
+
+**Scenario:** Route customer IDs with a specific prefix to a specialized tool
+
+**Configuration:**
+- Condition type: Rule-based
+- Filter:
+  - Target: `Get Customer / output / customer_id`
+  - Operator: starts with
+  - Source: "PREMIUM-"
+
+Only customers with IDs starting with "PREMIUM-" trigger this tool.
+
+## When to Use Each Condition Type
+
+### Use LLM-based Conditions When:
+
+- You need to evaluate natural language or unstructured text
+- The logic is complex and easier to express in plain English
+- You're working with time-based or contextual conditions
+- Exact matching isn't critical
+- You want the AI to interpret intent
+
+**Example use case:** Routing customer emails based on content sentiment or urgency
+
+### Use Rule-based Conditions When:
+
+- You need precise, deterministic comparisons
+- You're validating tool outputs against known values
+- You're working with numeric thresholds
+- Performance and reliability are critical
+- You want to avoid AI interpretation overhead
+- You need to check specific field values or existence
+
+**Example use case:** Validating API responses, checking status codes, or enforcing business rules with specific thresholds
+
 ## Best Practices for Condition to Tool Connections
 
-1. **Use clear, descriptive language**: Make your conditions easy to understand at a glance
+1. **Choose the right condition type**: Use LLM-based for complex interpretation, rule-based for precise comparisons
 2. **Keep conditions focused**: Each condition should evaluate a single concept for clarity
 3. **Be specific**: Provide clear criteria for when the condition should be true
 4. **Test thoroughly**: Verify your conditions work as expected with different inputs
 5. **Consider edge cases**: Think about unusual scenarios that might affect your condition
+6. **Structure tool outputs appropriately**: For rule-based conditions, ensure tools output flat values rather than nested objects
 
 ## Advanced Condition to Tool Patterns
 
@@ -65,38 +207,69 @@ For more complex scenarios, you can have multiple conditions evaluating the same
 2. Connect each condition to different tools
 3. Multiple tools may execute in parallel depending on which conditions are met
 
+### Combining Condition Types
+
+You can use both LLM-based and rule-based conditions in the same workflow:
+
+1. Use rule-based conditions for precise validation checks
+2. Use LLM-based conditions for complex interpretation
+3. Connect them to different tools based on your workflow needs
+
 ## Practical Use Cases
 
 ### Email Routing Based on Content
 
-Create conditions like "Go down this path if the email contains a support request" or "Follow this route if the message mentions billing issues."
+**LLM-based approach:** "Go down this path if the email contains a support request" or "Follow this route if the message mentions billing issues."
+
+**Rule-based approach:** Check if `Classify Email / output / category` equals "support" or "billing"
 
 ### Time-Sensitive Workflows
 
-Build conditions such as "Use this tool only during business hours" or "Go down this path if it's the first day of the month."
+**LLM-based approach:** "Use this tool only during business hours" or "Go down this path if it's the first day of the month."
+
+**Rule-based approach:** Check if `Get Current Hour / output / hour` is >= 9 and <= 17
 
 ### Data Quality Control
 
-Implement conditions like "Follow this route if all required fields are filled" or "Use this tool if the data passes validation."
+**LLM-based approach:** "Follow this route if all required fields are filled" or "Use this tool if the data passes validation."
+
+**Rule-based approach:** Check if `Validate Data / output / status` equals "valid" and `Check Required Fields / output / all_present` equals true
 
 ### Approval Workflows
 
-Design conditions such as "Go down this path if the request has been approved" or "Use this tool if the manager has given permission."
+**LLM-based approach:** "Go down this path if the request has been approved" or "Use this tool if the manager has given permission."
+
+**Rule-based approach:** Check if `Check Approval / output / approved` equals true
 
 ## Troubleshooting Condition to Tool Connections
 
 If your condition to tool connections aren't working as expected:
 
+### For LLM-based Conditions:
+
 1. **Review your condition language**: Make sure your natural language condition is clear and specific
-2. **Check the flow**: Confirm the connections between nodes are correctly established
-3. **Test with simpler conditions**: Try a very basic condition to verify the connection works
-4. **Monitor execution**: Watch how the workflow behaves when the condition is evaluated
-5. **Refine your language**: If needed, make your condition more explicit or detailed
+2. **Test with simpler conditions**: Try a very basic condition to verify the connection works
+3. **Refine your language**: If needed, make your condition more explicit or detailed
+
+### For Rule-based Conditions:
+
+1. **Check the target path**: Verify it points to the correct field from the upstream node
+2. **Verify the operator**: Ensure you're using the right comparison type (e.g., numeric operators for numbers)
+3. **Check the source value**: Make sure it matches the expected data type and format
+4. **Review match mode**: Confirm whether you need "Match All" (AND) or "Match Any" (OR) logic
+5. **Test with simple filters**: Start with a single filter to isolate issues
+
+### General Troubleshooting:
+
+1. **Check the flow**: Confirm the connections between nodes are correctly established
+2. **Monitor execution**: Watch how the workflow behaves when the condition is evaluated
+3. **Review upstream outputs**: Verify that the data you're evaluating actually exists and has the expected format
 
 ## Related Features
 
-- **Agent to Tool connections**: Direct connections from agents to tools without conditional logic
-- **Tool to Tool connections**: Sequential execution of tools in a workflow
-- **Trigger to Agent connections**: Starting points for your workforce flows
+- [Add Conditions](/build/workforces/build-an-ai-workforce/add-conditions): Complete guide to configuring both LLM-based and rule-based conditions
+- [Agent to Tool connections](/build/workforces/workforce-features/agent-to-tool-configuration): Direct connections from agents to tools without conditional logic
+- [Tool to Tool connections](/build/workforces/workforce-features/tool-to-tool-configuration): Sequential execution of tools in a workflow
+- [Edge Settings](/build/workforces/build-an-ai-workforce/edge-settings): Configure how nodes connect in your workforce
 
-By using Condition to Tool connections with natural language in the Workforce Builder, you can create intelligent, adaptive workflows that respond dynamically to changing circumstances, making your AI workforce more efficient and effective.
+By using Condition to Tool connections with both LLM-based and rule-based conditions in the Workforce Builder, you can create intelligent, adaptive workflows that respond dynamically to changing circumstances, making your AI workforce more efficient and effective.
