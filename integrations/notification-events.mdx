@@ -1,0 +1,72 @@
+---
+title: "Notification events"
+sidebarTitle: "Notification events"
+description: "Receive email, Slack, or Microsoft Teams notifications when configuration changes occur in your Relevance AI account."
+---
+
+## Overview
+
+Notification events alert your team when system-level changes happen in Relevance AI — such as when agent triggers are added, modified, or removed. Unlike task notifications (which fire when an agent runs), notification events track configuration changes.
+
+This is useful for:
+
+- Keeping your team informed when agent behavior changes in shared workspaces
+- Maintaining an audit trail of who changed what and when
+- Catching unintended configuration changes before they affect live workflows
+
+## Available notification events
+
+### `agent_triggers_updated`
+
+Fires when a trigger on an agent is added, changed, or removed.
+
+Each notification includes:
+
+| Field | Description |
+|---|---|
+| Trigger type | The type of trigger that was affected (e.g., Slack, email, webhook) |
+| Trigger name | The name assigned to the trigger |
+| Changed by | The user who made the change |
+
+<Note>
+  This event fires for any trigger modification — including creating a new trigger, editing an existing one, or deleting one.
+</Note>
+
+## Configuring notifications
+
+Notification events are configured per agent. To set up notifications for trigger changes:
+
+1. Go to the **Agents** page in the sidebar.
+2. Select the agent you want to monitor.
+3. Navigate to the **Build** tab.
+4. Click **Notifications** in the left sidebar.
+5. Click **Add notification**.
+6. Select the `agent_triggers_updated` event.
+7. Choose your notification channel (Email, Slack, or Microsoft Teams).
+8. Complete the channel-specific configuration (see below).
+9. Click **Save**.
+
+## Notification channels
+
+### Email
+
+Select **Email** as the channel and enter the recipient address. Notifications are sent to that address whenever the event fires.
+
+### Slack
+
+Select **Slack** as the channel, then:
+
+1. Connect your Slack account or select an existing connection.
+2. Choose the Slack channel where notifications should be posted.
+3. Make sure the Relevance AI bot has been invited to that channel (`/invite @Relevance AI`).
+
+For more details on connecting Slack, see the [Slack integration guide](/integrations/popular-integrations/slack).
+
+### Microsoft Teams
+
+Select **Microsoft Teams** as the channel, then:
+
+1. Connect your Microsoft Teams account or select an existing connection.
+2. Choose the team and channel where notifications should be posted.
+
+For more details on connecting Microsoft Teams, see the [Microsoft Teams integration guide](/integrations/popular-integrations/microsoft-teams).
