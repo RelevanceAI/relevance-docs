@@ -1,0 +1,347 @@
+---
+title: "WorldNewsAPI"
+description: "Access thousands of news sources in 86+ languages from 210+ countries with semantic search, sentiment analysis, and real-time updates"
+sidebarTitle: "WorldNewsAPI"
+---
+
+WorldNewsAPI provides access to thousands of news sources across 210+ countries in 86+ languages, with 170,000+ news articles added daily in real-time. The platform offers semantic tagging, sentiment analysis, author extraction, and structured data extraction including images, videos, titles, descriptions, and publication dates.
+
+With the WorldNewsAPI integration in Relevance AI, you can search news with advanced filters, extract structured data from news URLs, and convert location names to coordinates for location-based news searches—all directly within your AI workflows.
+
+<Warning>
+  The WorldNewsAPI integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not WorldNewsAPI. If you have a question or issue with using WorldNewsAPI in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about WorldNewsAPI, you can [reach out to WorldNewsAPI support](https://worldnewsapi.com/).
+</Warning>
+
+## About WorldNewsAPI
+
+WorldNewsAPI is a comprehensive news data platform that provides:
+
+- **Global Coverage**: Access to thousands of news sources from 210+ countries
+- **Multi-language Support**: Content in 86+ languages
+- **Real-time Updates**: 170,000+ new articles added daily
+- **Advanced Features**: Semantic tagging, sentiment analysis, author extraction
+- **Rich Media**: Automatic extraction of images, videos, titles, descriptions, and dates
+- **Powerful Search**: Semantic search with filters for country, language, time, sentiment, entities, sources, and authors
+
+<Note>
+  This is a native integration that replaces the previous Pipedream version, offering improved reliability and performance.
+</Note>
+
+## Connect the integration
+
+Connecting your WorldNewsAPI account to Relevance AI requires an API key:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "WorldNewsAPI" from the available integrations.
+3. Click on the "Add Integration" button.
+4. Enter your WorldNewsAPI API key when prompted.
+5. Once authenticated, your WorldNewsAPI account will appear as a connected integration.
+
+<Tip>
+  To get your WorldNewsAPI API key:
+  1. Sign up at [https://worldnewsapi.com/](https://worldnewsapi.com/)
+  2. Confirm your email address
+  3. Go to your Profile page
+  4. Click "Show/Hide API Key" to reveal your key
+</Tip>
+
+## Tool steps for WorldNewsAPI
+
+The WorldNewsAPI integration provides ready-made actions that your agents can use to search news, extract article data, and work with location-based searches. These actions can be incorporated into your agent's workflows as tool steps.
+
+### News Search & Discovery
+
+<CardGroup cols={2}>
+  <Card title="Search News" icon="magnifying-glass">
+    Search thousands of news sources with filters for 50+ languages, 150+ countries, date ranges, sentiment, entities, sources, and authors
+  </Card>
+  <Card title="Extract News from URL" icon="file-lines">
+    Extract structured data from any news article URL including title, text, images, videos, publish date, authors, language, source country, and sentiment
+  </Card>
+</CardGroup>
+
+### Location Services
+
+<CardGroup cols={1}>
+  <Card title="Get Geo Coordinates" icon="location-dot">
+    Convert location names to latitude and longitude coordinates for location-based news searches
+  </Card>
+</CardGroup>
+
+### Advanced API Access
+
+<CardGroup cols={1}>
+  <Card title="WorldNewsAPI API Call" icon="code">
+    Make custom API calls to access any WorldNewsAPI endpoint for advanced use cases
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "WorldNewsAPI" in the tool step search bar to see all available actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform WorldNewsAPI-specific activities using the WorldNewsAPI API Call tool step.
+
+### How to use the API Call tool step
+
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add WorldNewsAPI functionality to.
+  </Step>
+  
+  <Step title="Add the WorldNewsAPI API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "WorldNewsAPI API Call" in the tool step search bar
+    3. Add the WorldNewsAPI API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your WorldNewsAPI account">
+    Select your connected WorldNewsAPI account from the dropdown menu.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters according to your needs:
+    - **Method**: Select the HTTP method (GET, POST)
+    - **Endpoint**: Enter the API endpoint path (e.g., `/search-news`)
+    - **Parameters**: Add query parameters for filtering and search criteria
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
+
+### Example: Search News with Custom Filters
+
+Here's a practical example of using the WorldNewsAPI API Call tool step to search for technology news with sentiment filtering:
+
+**API Endpoint**: `GET /search-news`
+
+**Configuration**:
+```json
+{
+  "method": "GET",
+  "endpoint": "/search-news",
+  "params": {
+    "text": "artificial intelligence",
+    "language": "en",
+    "sentiment": "positive",
+    "earliest-publish-date": "2026-03-01",
+    "number": 10
+  }
+}
+```
+
+This configuration:
+- Searches for articles about "artificial intelligence"
+- Filters for English language content
+- Returns only positive sentiment articles
+- Limits results to articles published after March 1, 2026
+- Returns up to 10 results
+
+<Info>
+  You can find WorldNewsAPI's complete API documentation at [https://worldnewsapi.com/docs/](https://worldnewsapi.com/docs/).
+</Info>
+
+### Common API endpoints
+
+<AccordionGroup>
+  <Accordion title="Search News" icon="magnifying-glass">
+    **Endpoint**: `GET /search-news`
+    
+    Search news articles with advanced filtering options:
+    - **text**: Search query text
+    - **language**: Filter by language code (e.g., "en", "es", "fr")
+    - **source-countries**: Filter by country codes
+    - **sentiment**: Filter by sentiment (positive, negative, neutral)
+    - **entities**: Filter by named entities
+    - **earliest-publish-date**: Start date for results
+    - **latest-publish-date**: End date for results
+    - **number**: Number of results to return
+    
+    Returns: Array of news articles with full metadata
+    
+    [View API Documentation](https://worldnewsapi.com/docs/)
+  </Accordion>
+  
+  <Accordion title="Extract News" icon="file-lines">
+    **Endpoint**: `GET /extract-news`
+    
+    Extract structured data from a news article URL:
+    - **url**: The news article URL to extract from
+    - **analyze**: Whether to include sentiment analysis
+    
+    Returns: Title, text, images, videos, publish date, authors, language, source country, sentiment
+    
+    [View API Documentation](https://worldnewsapi.com/docs/)
+  </Accordion>
+  
+  <Accordion title="Geo Coordinates" icon="location-dot">
+    **Endpoint**: `GET /geo-coordinates`
+    
+    Convert location names to coordinates:
+    - **location**: Location name to geocode
+    
+    Returns: Latitude and longitude coordinates
+    
+    Useful for location-based news searches and mapping.
+    
+    [View API Documentation](https://worldnewsapi.com/docs/)
+  </Accordion>
+  
+  <Accordion title="Top News" icon="star">
+    **Endpoint**: `GET /top-news`
+    
+    Get top news headlines:
+    - **source-country**: Country code for news sources
+    - **language**: Language code
+    - **date**: Date for top news
+    
+    Returns: Top headlines for the specified criteria
+    
+    [View API Documentation](https://worldnewsapi.com/docs/)
+  </Accordion>
+</AccordionGroup>
+
+## Example use cases
+
+Here are some ways you can leverage the WorldNewsAPI integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="Brand Monitoring Agent" icon="chart-line">
+    Create an agent that monitors news mentions of your brand, products, or key executives. The agent searches for relevant articles, analyzes sentiment, and sends alerts when negative coverage is detected or when your brand appears in major publications.
+  </Accordion>
+  
+  <Accordion title="Competitive Intelligence Bot" icon="chess">
+    Build an agent that tracks competitor mentions across global news sources. The agent monitors product launches, executive changes, funding announcements, and market moves, then compiles daily intelligence briefings for your team.
+  </Accordion>
+  
+  <Accordion title="Market Research Analyzer" icon="magnifying-glass-chart">
+    Deploy an agent that analyzes news trends in your industry. The agent tracks emerging topics, sentiment shifts, and geographic patterns, providing insights into market dynamics and consumer sentiment.
+  </Accordion>
+  
+  <Accordion title="Content Aggregation System" icon="newspaper">
+    Create an agent that builds curated news feeds for specific topics, industries, or regions. The agent filters by language, sentiment, and relevance, then formats articles for your website, newsletter, or internal dashboard.
+  </Accordion>
+  
+  <Accordion title="Crisis Monitoring System" icon="triangle-exclamation">
+    Build an agent that monitors for breaking news and crisis situations relevant to your organization. The agent searches for keywords related to potential risks, analyzes sentiment and urgency, and sends real-time alerts to stakeholders.
+  </Accordion>
+  
+  <Accordion title="Multi-language News Digest" icon="globe">
+    Deploy an agent that aggregates news from multiple languages and regions. The agent searches news in different languages, translates key articles, and creates a comprehensive international news digest for global teams.
+  </Accordion>
+  
+  <Accordion title="Sentiment Analysis Dashboard" icon="face-smile">
+    Create an agent that tracks sentiment trends for specific topics over time. The agent collects articles, analyzes sentiment patterns, and generates reports showing how public perception is evolving.
+  </Accordion>
+  
+  <Accordion title="Location-based News Alerts" icon="location-dot">
+    Build an agent that monitors news for specific geographic locations. The agent uses geo-coordinates to find local news, tracks regional events, and alerts relevant teams about location-specific developments.
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="API Rate Limits" icon="gauge">
+    **Manage your API usage effectively:**
+    - Rate limits depend on your WorldNewsAPI plan
+    - Implement retry logic with exponential backoff for rate limit errors
+    - Cache search results when appropriate to reduce API calls
+    - Use specific filters to reduce result set sizes
+    - Monitor your API usage through the WorldNewsAPI dashboard
+    - Consider upgrading your plan if you consistently hit limits
+  </Accordion>
+  
+  <Accordion title="Search Optimization" icon="magnifying-glass">
+    **Get better search results:**
+    - Use specific search terms rather than broad queries
+    - Combine multiple filters (language, country, date) to narrow results
+    - Use sentiment filters to focus on relevant coverage
+    - Specify date ranges to get timely results
+    - Use entity filters to find articles mentioning specific people or organizations
+    - Test different search queries to find the most effective terms
+  </Accordion>
+  
+  <Accordion title="Data Quality" icon="star">
+    **Ensure high-quality data:**
+    - Validate extracted article data before using it
+    - Handle cases where extraction fails or returns incomplete data
+    - Check sentiment scores for reliability
+    - Verify publication dates are within expected ranges
+    - Filter out duplicate articles from different sources
+    - Implement fallback logic for missing data fields
+  </Accordion>
+  
+  <Accordion title="Performance" icon="bolt">
+    **Optimize workflow performance:**
+    - Limit the number of results per search to what you actually need
+    - Use pagination for large result sets
+    - Process articles in batches rather than one at a time
+    - Cache frequently accessed data
+    - Schedule regular searches rather than real-time queries when possible
+    - Use webhooks or scheduled runs instead of continuous polling
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What languages are supported?">
+    WorldNewsAPI supports 86+ languages including English, Spanish, French, German, Chinese, Japanese, Arabic, Portuguese, Russian, and many more. You can filter search results by language code (e.g., "en" for English, "es" for Spanish).
+  </Accordion>
+  
+  <Accordion title="How many news sources are available?">
+    WorldNewsAPI provides access to thousands of news sources across 210+ countries. The exact number varies as sources are continuously added and updated. Coverage includes major international publications, regional news outlets, and specialized industry sources.
+  </Accordion>
+  
+  <Accordion title="What's the difference between the native integration and the Pipedream version?">
+    The native WorldNewsAPI integration is built directly into Relevance AI, offering better reliability, performance, and support. The Pipedream version (now renamed "World News API (Pipedream)") is being deprecated. We recommend using the native integration for all new workflows.
+  </Accordion>
+  
+  <Accordion title="How do I get a WorldNewsAPI API key?">
+    To get your API key:
+    1. Visit [https://worldnewsapi.com/](https://worldnewsapi.com/)
+    2. Sign up for an account
+    3. Confirm your email address
+    4. Log in and go to your Profile page
+    5. Click "Show/Hide API Key" to reveal your key
+    
+    Keep your API key secure and never share it publicly.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits?">
+    Yes, rate limits depend on your WorldNewsAPI subscription plan. Free plans have lower limits, while paid plans offer higher request volumes. Check your WorldNewsAPI account dashboard for your specific limits. If you hit rate limits, implement retry logic in your workflows.
+  </Accordion>
+  
+  <Accordion title="How accurate is the sentiment analysis?">
+    WorldNewsAPI uses advanced natural language processing for sentiment analysis. While generally accurate, sentiment detection can vary based on article complexity, language, and context. We recommend reviewing sentiment scores and implementing confidence thresholds for critical use cases.
+  </Accordion>
+  
+  <Accordion title="Can I search for news in multiple languages simultaneously?">
+    Yes, you can search across multiple languages by making separate API calls for each language or by not specifying a language filter (which returns results in all languages). You can then filter or process the results based on your needs.
+  </Accordion>
+  
+  <Accordion title="How real-time is the news data?">
+    WorldNewsAPI adds 170,000+ articles daily in real-time. New articles typically appear in search results within minutes of publication. However, the exact timing depends on when the source publishes and how quickly it's indexed.
+  </Accordion>
+  
+  <Accordion title="Can I extract data from any news URL?">
+    The Extract News tool works with most news article URLs. However, some sites may block automated extraction or have paywalls. The tool extracts publicly accessible content and structured data like titles, images, videos, authors, and publication dates.
+  </Accordion>
+  
+  <Accordion title="What are geo coordinates used for?">
+    Geo coordinates (latitude and longitude) allow you to search for news from specific geographic locations. This is useful for finding local news, tracking regional events, or monitoring news from areas relevant to your business operations.
+  </Accordion>
+  
+  <Accordion title="Can I filter by specific news sources?">
+    Yes, you can filter search results by specific news sources or domains using the source filters in your search queries. This is useful when you want to monitor specific publications or exclude certain sources.
+  </Accordion>
+  
+  <Accordion title="How far back does the news archive go?">
+    WorldNewsAPI maintains an extensive archive of historical news articles. The exact coverage period varies by source, but many sources have archives going back several years. Use the date range filters to search historical content.
+  </Accordion>
+</AccordionGroup>
