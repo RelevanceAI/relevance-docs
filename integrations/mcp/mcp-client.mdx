@@ -4,7 +4,7 @@ sidebarTitle: "MCP Client"
 description: "Connect external MCP servers to your Relevance AI agents, giving them access to tools from other services."
 ---
 
-The MCP client integration lets you connect remote MCP servers to your Relevance AI agents. This gives your agents access to tools hosted on external platforms — so you can pull in capabilities from other services without rebuilding them in Relevance AI.
+The MCP client integration lets you connect remote MCP servers to your Relevance AI agents using preset connections (Notion, Canva, Atlassian) or custom server URLs. This gives your agents access to tools hosted on external platforms without rebuilding them in Relevance AI.
 
 <Warning>
   This page is about connecting external MCP servers **to** Relevance AI agents. If you want to use Relevance AI **from** an AI client like Claude or Cursor, see [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction).
@@ -12,7 +12,7 @@ The MCP client integration lets you connect remote MCP servers to your Relevance
 
 ## Setting up an MCP connection for Agents
 
-Agents can connect to and run tools from remote MCP servers.
+Agents can connect to and run tools from remote MCP servers. You can choose from preset connections for popular services or connect your own custom MCP server.
 
 <div style={{ width:"100%",position:"relative","padding-top":"56.75%"}}>
 <iframe src="https://app.supademo.com/embed/cmg8tiu3h23ii2nomxtqolybm" frameBorder="0" title="How to set up an MCP Server connection for an agent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
@@ -21,12 +21,11 @@ Agents can connect to and run tools from remote MCP servers.
 1. Open the Agent you want to connect
 2. Navigate to the **Tools** tab in the agent builder
 3. Click **Add MCP**
-4. Click **Connect my own**
-5. Add the URL of the remote hosted MCP server
-6. Label your MCP Server connection
-7. Add any authentication details required for the MCP server
+4. Choose your connection type:
+   - **Preset connections**: Select from Notion, Canva, or Atlassian — follow the OAuth flow to authorize access and tools are configured automatically
+   - **Custom connection**: Click **Connect my own**, add the server URL, label the connection, and enter any required authentication details
 
-Once connected, the agent will automatically fetch and display the available tools from the remote MCP server. These tools can be referenced in the agent's core instructions and will appear in the conversation task view. When a tool is run, the agent communicates with the remote MCP server and returns the result directly in the conversation.
+Once connected, the agent automatically fetches and displays available tools from the MCP server. These tools can be referenced in the agent's core instructions and appear in the conversation task view.
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
 
@@ -48,6 +47,7 @@ Once connected, the agent will automatically fetch and display the available too
   <Accordion title="Connection timeout or errors">
     - The external MCP server may be temporarily unavailable — try again later
     - Check that the server URL does not require VPN or network access that Relevance AI cannot reach
+    - For preset connections, try disconnecting and reconnecting to refresh the OAuth token
     - Contact the MCP server provider if the issue persists
   </Accordion>
 </AccordionGroup>
