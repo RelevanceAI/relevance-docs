@@ -4,12 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       task_description:
-        description: 'Content brief for the documentation change'
+        description: 'What Claude Code should do in the relevance-docs repo'
         required: true
         type: string
       linear_issue_key:
-        description: 'Linear issue key (e.g. TSP-123) for branch naming'
+        description: 'Linear issue key (e.g. TSP-123) — used for default branch naming'
         required: true
+        type: string
+      branch_name:
+        description: 'Optional: existing branch to work on (overrides default docs/{key} naming)'
+        required: false
         type: string
 
 jobs:
@@ -33,10 +37,22 @@ jobs:
           git config --global user.name "Claude Docs Drafter"
           git config --global user.email "claude-docs-drafter[bot]@users.noreply.github.com"
 
-      - name: Create branch
+      - name: Set up branch
         run: |
-          BRANCH_NAME="docs/${{ inputs.linear_issue_key }}"
-          git checkout -b "$BRANCH_NAME" || git checkout "$BRANCH_NAME"
+          # Use provided branch name, or default to docs/{linear_issue_key}
+          if [ -n "${{ inputs.branch_name }}" ]; then
+            BRANCH_NAME="${{ inputs.branch_name }}"
+          else
+            BRANCH_NAME="docs/${{ inputs.linear_issue_key }}"
+          fi
+
+          # Try to check out existing remote branch, or create new one
+          if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+            git checkout -b "$BRANCH_NAME" "origin/$BRANCH_NAME"
+          else
+            git checkout -b "$BRANCH_NAME"
+          fi
+
           echo "BRANCH_NAME=$BRANCH_NAME" >> "$GITHUB_ENV"
 
       - name: Run Claude Code
@@ -44,22 +60,27 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
-            You are drafting documentation changes for the Relevance AI docs site.
+            You are working on the Relevance AI docs site (relevance-docs repo).
 
             ## Task
             ${{ inputs.task_description }}
 
+            ## Context
+            - Linear issue: ${{ inputs.linear_issue_key }}
+            - Branch: ${{ env.BRANCH_NAME }}
+
             ## Instructions
-            1. Read the CLAUDE.md file for documentation standards and workflow
-            2. Explore the repo structure to find similar pages for reference
-            3. Draft the changes — create/update files as needed
-            4. Update docs.json navigation if adding new pages
-            5. Commit with a clear message referencing ${{ inputs.linear_issue_key }}
-            6. Push and create a PR targeting main with:
+            1. Read the CLAUDE.md file for documentation standards
+            2. Do whatever the task asks — edit files, rebase, create PRs, fix conflicts, etc.
+            3. If creating or updating docs, explore similar pages first for reference
+            4. Commit with a clear message referencing ${{ inputs.linear_issue_key }}
+            5. Push your changes
+            6. If no PR exists for this branch yet, create one targeting main with:
                - Title: "docs(${{ inputs.linear_issue_key }}): <brief description>"
-               - Body: Summary of changes, pages created/updated, link to https://linear.app/relevance/issue/${{ inputs.linear_issue_key }}/
+               - Body: Summary of changes, link to https://linear.app/relevance/issue/${{ inputs.linear_issue_key }}/
                - Label: "docs-drafter" (create with `gh label create docs-drafter` if it doesn't exist)
-          claude_args: '--allowedTools "Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git checkout:*),Bash(npx mintlify dev:*),Bash(gh pr:*),Bash(gh label:*),Read,Write,Edit,Glob,Grep"'
+            7. If a PR already exists, just push — don't create a duplicate
+          claude_args: '--allowedTools "Bash(git add:*),Bash(git commit:*),Bash(git push:*),Bash(git status:*),Bash(git diff:*),Bash(git log:*),Bash(git checkout:*),Bash(git rebase:*),Bash(git fetch:*),Bash(git merge:*),Bash(git pull:*),Bash(npx mintlify dev:*),Bash(gh pr:*),Bash(gh label:*),Read,Write,Edit,Glob,Grep"'
 
       - name: Extract PR URL
         id: extract-pr
