@@ -34,53 +34,21 @@ Once connected, the agent will automatically fetch and display the available too
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
 
-## Connecting Multiple Instances of the Same MCP Server
+## Connecting multiple instances of the same MCP server
 
-You can connect the same MCP server URL multiple times within a project. This allows you to maintain separate connections with different authentication credentials or configurations.
+You can connect the same MCP server URL multiple times within a project. Each connection operates independently with its own authentication credentials, label, and configuration. Tools from each connection display `(MCP: connection-name)` in their descriptions so agents can distinguish which connection a tool belongs to.
 
-### How it works
-
-Each connection operates independently with its own:
-- Authentication credentials
-- Connection label
-- Configuration settings
-
-Tools from each connection will display `(MCP: connection-name)` in their descriptions, making it easy for agents to identify which connection a tool belongs to.
-
-### Use cases
-
-**Different authentication contexts**  
-Connect the same MCP server with different user credentials to access different data or permissions.
-
-**Environment separation**  
-Maintain separate connections for staging and production environments of the same service.
-
-**Multi-tenant scenarios**  
-Connect to the same MCP server multiple times with different tenant credentials to manage data across organizations.
-
-**A/B testing**  
-Test different configurations or versions of the same MCP server side-by-side.
-
-**Isolated workflows**  
-Keep tools organized by workflow or team by creating separate connections with descriptive labels.
+This is useful when you need different authentication contexts (e.g. separate user credentials for different data access), environment separation (staging vs production), or multi-tenant setups where each connection uses different tenant credentials.
 
 ### Best practices
 
 <AccordionGroup>
   <Accordion title="Use descriptive connection labels">
-    Choose labels that clearly indicate the purpose or context of each connection. For example: `github-prod`, `github-staging`, or `linear-team-a`, `linear-team-b`.
-  </Accordion>
-
-  <Accordion title="Document your connections">
-    Keep track of which credentials and configurations are used for each connection, especially when managing multiple instances.
+    Choose labels that clearly indicate the purpose or context of each connection, such as `github-prod`, `github-staging`, or `linear-team-a`, `linear-team-b`.
   </Accordion>
 
   <Accordion title="Reference connections in agent instructions">
-    When building agents that use multiple instances of the same server, include guidance in the agent's instructions about when to use tools from each connection.
-  </Accordion>
-
-  <Accordion title="Monitor usage separately">
-    Track which connections are being used most frequently to optimize your setup and identify unused connections.
+    When building agents that use multiple instances of the same server, include guidance in the agent's core instructions about when to use tools from each connection.
   </Accordion>
 </AccordionGroup>
 
@@ -116,7 +84,7 @@ Keep tools organized by workflow or team by creating separate connections with d
   <Accordion title="Can I connect multiple MCP servers to one agent?">
     Yes. You can add multiple MCP server connections to a single agent, giving it access to tools from several external services at once.
     
-    You can also connect the same MCP server URL multiple times with different labels and credentials. This is useful for scenarios like environment separation (staging vs production), different authentication contexts, or multi-tenant setups. See [Connecting Multiple Instances of the Same MCP Server](#connecting-multiple-instances-of-the-same-mcp-server) for more details.
+    You can also connect the same MCP server URL multiple times with different labels and credentials. This is useful for environment separation (staging vs production), different authentication contexts, or multi-tenant setups. See [connecting multiple instances](#connecting-multiple-instances-of-the-same-mcp-server) for details.
   </Accordion>
 
   <Accordion title="Can I use locally hosted MCP servers?">
