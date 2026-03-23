@@ -143,7 +143,7 @@ Makes an authenticated HTTP request to the specified URL using the OAuth credent
 
 - `method`: The HTTP method to use (e.g., `'GET'`, `'POST'`, `'PUT'`, `'DELETE'`).
 - `url`: The full URL endpoint to make the request to.
-- `body`: Optional dictionary containing the request body (for POST, PUT, etc.). Will be automatically serialized to JSON.
+- `body`: Optional dictionary or list containing the request body (for POST, PUT, etc.). Supports both JSON objects (dictionaries) and JSON arrays (lists). Will be automatically serialized to JSON.
 - `headers`: Optional dictionary of additional HTTP headers to include in the request.
 - `params`: Optional dictionary of query parameters to append to the URL.
 
@@ -202,7 +202,7 @@ account_id = params['my_oauth_account']
 # Create Integration instance
 integration = Integration('google', account_id)
 
-# Make authenticated API call
+# Make authenticated API call with object body
 response = integration.api_call(
     method='GET',
     url='https://www.googleapis.com/oauth2/v2/userinfo',
@@ -211,4 +211,23 @@ response = integration.api_call(
 
 # Access the parsed JSON response
 user_info = response
+```
+
+### Integration with Array Body
+
+```python Python
+# Example: Bulk update operation with array body
+account_id = params['my_oauth_account']
+integration = Integration('confluence', account_id)
+
+# Make API call with array body
+response = integration.api_call(
+    method='PUT',
+    url='https://your-domain.atlassian.net/wiki/api/v2/pages/123/properties',
+    body=[
+        {"key": "status", "value": "reviewed"},
+        {"key": "priority", "value": "high"}
+    ],
+    headers={'accept': 'application/json'}
+)
 ```
