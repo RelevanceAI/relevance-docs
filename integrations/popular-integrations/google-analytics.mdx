@@ -1,0 +1,388 @@
+---
+title: "Google Analytics (GA4)"
+description: "Connect Google Analytics 4 to Relevance AI to automate reporting, track conversions, and manage properties with AI agents"
+sidebarTitle: "Google Analytics"
+---
+
+Google Analytics 4 (GA4) is Google's analytics platform for measuring traffic, engagement, and conversions across your websites and apps. With the Google Analytics integration in Relevance AI, you can connect your GA4 properties to AI agents that run custom reports, create key events for conversion tracking, manage properties programmatically, and query the GA4 APIs directly.
+
+<Note>
+This integration is built by Relevance AI. For integration-specific support, contact [Relevance AI support](/get-started/support). For Google Analytics platform issues, visit [Google Analytics Help](https://support.google.com/analytics).
+</Note>
+
+## Connect the integration
+
+The Google Analytics integration uses OAuth to authenticate with your Google account. You only need to complete this process once per Google account.
+
+<Steps>
+  <Step title="Navigate to Integrations & API Keys">
+    Select **Integrations & API Keys** from the left sidebar in your Relevance AI dashboard.
+  </Step>
+
+  <Step title="Find Google Analytics">
+    Browse the integrations directory and click on **Google Analytics**.
+  </Step>
+
+  <Step title="Click Connect">
+    Click the **Connect** button to start the OAuth flow.
+  </Step>
+
+  <Step title="Sign in to Google">
+    You'll be redirected to Google's authentication page. Select the Google account that has access to the GA4 properties you want to use.
+  </Step>
+
+  <Step title="Review permissions">
+    Review the permissions Relevance AI is requesting. These are needed to read analytics data and manage your GA4 properties on your behalf.
+  </Step>
+
+  <Step title="Approve access">
+    Click **Allow** to grant access. You'll be redirected back to Relevance AI.
+  </Step>
+
+  <Step title="Confirm connection">
+    Your Google Analytics account will now appear as connected in the Integrations dashboard and will be available for use in your agents and tools.
+  </Step>
+</Steps>
+
+You can connect multiple Google accounts if you manage GA4 properties across different Google logins. Each connected account appears separately in the integrations list.
+
+<Warning>
+  Your Google account must have at least **Viewer** access to the GA4 properties you want to query. To create properties or key events, you need **Editor** or **Administrator** access on those properties.
+</Warning>
+
+## Tools & tool steps
+
+The Google Analytics integration provides four tool steps that your agents can use. Search for "Google Analytics" in the tool step search bar when building your tools.
+
+### Run Reports
+
+<AccordionGroup>
+  <Accordion title="Run Reports" icon="chart-line">
+    Retrieve analytics data from a GA4 property by specifying metrics (quantitative measurements) and dimensions (data categories). Use this to pull traffic data, engagement stats, conversion counts, or any other GA4 report data into your agent workflows.
+
+    **Key inputs:**
+    - **Property ID**: The GA4 property to query (e.g., `properties/123456789`)
+    - **Metrics**: What to measure — for example, `sessions`, `activeUsers`, `conversions`, `screenPageViews`
+    - **Dimensions**: How to break down the data — for example, `date`, `country`, `sessionSource`, `pagePath`
+    - **Date range**: The time period to report on
+    - **Filters**: Optional dimension or metric filters to narrow results
+
+    **What are metrics and dimensions?**
+    In GA4, *metrics* are numeric values (how much, how many), and *dimensions* are attributes used to categorize or segment that data. For example, `sessions` is a metric and `country` is a dimension — together they give you sessions by country.
+  </Accordion>
+</AccordionGroup>
+
+### Create Key Events
+
+<AccordionGroup>
+  <Accordion title="Create Key Events" icon="flag-checkered">
+    Create a key event in a GA4 property. Key events mark the actions that matter most to your business — they were called "conversions" in Universal Analytics (UA) and earlier versions of GA4. Creating a key event tells GA4 to highlight that event in reports and use it as a conversion signal.
+
+    **Key inputs:**
+    - **Property ID**: The GA4 property to add the key event to
+    - **Event name**: The name of the existing GA4 event to mark as a key event (e.g., `purchase`, `sign_up`, `generate_lead`)
+
+    **Note:** The event must already be collected in your GA4 property before it can be designated as a key event. You cannot create an event and mark it as a key event in the same step.
+  </Accordion>
+</AccordionGroup>
+
+### Create GA4 properties
+
+<AccordionGroup>
+  <Accordion title="Create GA4 properties" icon="building">
+    Create a new Google Analytics 4 property programmatically. This is useful when you're provisioning GA4 tracking for new client websites, new app launches, or when you manage analytics at scale across many sites.
+
+    **Key inputs:**
+    - **Display name**: The name for the new property
+    - **Time zone**: The reporting time zone for the property
+    - **Currency code**: The currency used for revenue metrics (e.g., `USD`, `EUR`)
+    - **Industry category**: The industry the property belongs to (optional, used for benchmarking)
+
+    **Note:** You must have **Administrator** access in the Google Analytics account where the property will be created. Properties are created under your Google Analytics account, not under a specific website — you'll still need to set up a data stream separately to start collecting data.
+  </Accordion>
+</AccordionGroup>
+
+### Google Analytics API Call
+
+<AccordionGroup>
+  <Accordion title="Google Analytics API Call" icon="code">
+    Make a custom API call to any Google Analytics Data API or Admin API endpoint. Use this when the pre-built tool steps don't cover your specific use case.
+
+    This tool step handles OAuth authentication automatically, so you don't need to manage access tokens. See the [advanced section below](#use-the-google-analytics-api-tool-step-advanced) for full usage details and examples.
+  </Accordion>
+</AccordionGroup>
+
+## Use the Google Analytics API Tool Step (Advanced)
+
+For use cases beyond the pre-built tool steps, the Google Analytics API Call tool step gives you direct access to both the [GA4 Data API](https://developers.google.com/analytics/devguides/reporting/data/v1) and the [GA4 Admin API](https://developers.google.com/analytics/devguides/config/admin/v1).
+
+### How to use the Google Analytics API Call tool step
+
+<Steps>
+  <Step title="Create or open a tool">
+    Create a new tool in Relevance AI or open an existing one you want to add Google Analytics functionality to.
+  </Step>
+
+  <Step title="Add the tool step">
+    Scroll down to **Tool-steps**, search for "Google Analytics API", and add the **Google Analytics API Call** tool step to your workflow.
+  </Step>
+
+  <Step title="Select your connected account">
+    Choose your connected Google Analytics account from the dropdown.
+  </Step>
+
+  <Step title="Configure the request">
+    Set the HTTP method, endpoint path, and request body:
+    - **Method**: The HTTP method (`GET`, `POST`, `DELETE`, etc.)
+    - **Endpoint**: The API path, starting from the base URL (e.g., `v1beta/properties/123456789:runReport`)
+    - **Body**: The JSON request body (for POST requests)
+  </Step>
+
+  <Step title="Test the request">
+    Run a test to confirm the API call returns the expected data before using it in production.
+  </Step>
+</Steps>
+
+### Example: Run a custom report
+
+This example retrieves the top 10 pages by page views for the past 30 days.
+
+**API**: `POST https://analyticsdata.googleapis.com/v1beta/properties/{propertyId}:runReport`
+
+```json
+{
+  "method": "POST",
+  "endpoint": "v1beta/properties/123456789:runReport",
+  "body": {
+    "dateRanges": [
+      { "startDate": "30daysAgo", "endDate": "today" }
+    ],
+    "dimensions": [
+      { "name": "pagePath" }
+    ],
+    "metrics": [
+      { "name": "screenPageViews" }
+    ],
+    "orderBys": [
+      {
+        "metric": { "metricName": "screenPageViews" },
+        "desc": true
+      }
+    ],
+    "limit": 10
+  }
+}
+```
+
+### Example: Create a key event
+
+This example marks the `purchase` event as a key event on a GA4 property.
+
+**API**: `POST https://analyticsadmin.googleapis.com/v1beta/properties/{propertyId}/keyEvents`
+
+```json
+{
+  "method": "POST",
+  "endpoint": "v1beta/properties/123456789/keyEvents",
+  "body": {
+    "eventName": "purchase"
+  }
+}
+```
+
+### Example: Query real-time data
+
+This example retrieves how many users are active on the site right now, broken down by country.
+
+**API**: `POST https://analyticsdata.googleapis.com/v1beta/properties/{propertyId}:runRealtimeReport`
+
+```json
+{
+  "method": "POST",
+  "endpoint": "v1beta/properties/123456789:runRealtimeReport",
+  "body": {
+    "dimensions": [
+      { "name": "country" }
+    ],
+    "metrics": [
+      { "name": "activeUsers" }
+    ]
+  }
+}
+```
+
+<Info>
+  Replace `123456789` with your actual GA4 property ID. You can find this in your GA4 account under **Admin** > **Property Settings**.
+</Info>
+
+## Common GA4 API endpoints
+
+<AccordionGroup>
+  <Accordion title="Data API — reporting" icon="chart-bar">
+    The GA4 Data API base URL is `https://analyticsdata.googleapis.com/`.
+
+    - **Run report**: `POST v1beta/properties/{propertyId}:runReport`
+    - **Run real-time report**: `POST v1beta/properties/{propertyId}:runRealtimeReport`
+    - **Run pivot report**: `POST v1beta/properties/{propertyId}:runPivotReport`
+    - **Batch run reports**: `POST v1beta/properties/{propertyId}:batchRunReports`
+    - **Get metadata** (available metrics and dimensions): `GET v1beta/properties/{propertyId}/metadata`
+
+    [View Data API documentation](https://developers.google.com/analytics/devguides/reporting/data/v1/rest)
+  </Accordion>
+
+  <Accordion title="Admin API — properties" icon="building">
+    The GA4 Admin API base URL is `https://analyticsadmin.googleapis.com/`.
+
+    - **List properties**: `GET v1beta/properties?filter=parent:accounts/{accountId}`
+    - **Get property**: `GET v1beta/properties/{propertyId}`
+    - **Create property**: `POST v1beta/properties`
+    - **Update property**: `PATCH v1beta/properties/{propertyId}`
+    - **Delete property**: `DELETE v1beta/properties/{propertyId}`
+
+    [View Admin API — properties documentation](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1beta/properties)
+  </Accordion>
+
+  <Accordion title="Admin API — key events" icon="flag-checkered">
+    - **List key events**: `GET v1beta/properties/{propertyId}/keyEvents`
+    - **Create key event**: `POST v1beta/properties/{propertyId}/keyEvents`
+    - **Get key event**: `GET v1beta/properties/{propertyId}/keyEvents/{keyEventId}`
+    - **Delete key event**: `DELETE v1beta/properties/{propertyId}/keyEvents/{keyEventId}`
+
+    [View Admin API — key events documentation](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1beta/properties.keyEvents)
+  </Accordion>
+
+  <Accordion title="Admin API — data streams" icon="wifi">
+    - **List data streams**: `GET v1beta/properties/{propertyId}/dataStreams`
+    - **Get data stream**: `GET v1beta/properties/{propertyId}/dataStreams/{dataStreamId}`
+    - **Create data stream**: `POST v1beta/properties/{propertyId}/dataStreams`
+    - **Update data stream**: `PATCH v1beta/properties/{propertyId}/dataStreams/{dataStreamId}`
+
+    [View Admin API — data streams documentation](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1beta/properties.dataStreams)
+  </Accordion>
+</AccordionGroup>
+
+## Example use cases
+
+<AccordionGroup>
+  <Accordion title="Automated performance reporting" icon="file-chart-column">
+    Build an agent that runs GA4 reports on a schedule, compiles key metrics (sessions, conversions, revenue), and delivers formatted summaries to Slack, email, or a Google Sheet. The agent can compare performance week-over-week or month-over-month and flag significant changes automatically.
+  </Accordion>
+
+  <Accordion title="Conversion tracking automation" icon="flag-checkered">
+    Create an agent that reads from a CRM or project management tool and automatically creates GA4 key events when new business goals are defined. This removes the manual step of updating GA4 settings each time your team identifies a new conversion action to track.
+  </Accordion>
+
+  <Accordion title="Multi-property management" icon="building">
+    Deploy an agent that provisions GA4 properties at scale — useful for agencies managing analytics for multiple clients or organizations rolling out tracking across many regional sites. The agent creates properties, applies consistent settings, and logs the property IDs for reference.
+  </Accordion>
+
+  <Accordion title="Custom dashboard creation" icon="table-columns">
+    Connect GA4 data to internal dashboards by having an agent pull specific metrics and dimensions on demand. The agent can combine data from multiple GA4 properties, apply business logic, and write results to a database or BI tool for visualization.
+  </Accordion>
+
+  <Accordion title="Threshold-based alerts" icon="bell">
+    Set up an agent that monitors GA4 metrics and sends alerts when values cross defined thresholds — for example, when bounce rate exceeds 80%, when daily sessions drop by more than 20% compared to the previous week, or when conversion rate falls below a target. The agent runs reports at regular intervals and routes alerts to the appropriate channel.
+  </Accordion>
+
+  <Accordion title="Cross-platform analytics" icon="arrows-rotate">
+    Build an agent that combines GA4 data with data from your CRM, advertising platforms, or marketing automation tools. For example, pull GA4 conversion data alongside HubSpot lead data to get a full picture of how web traffic translates into pipeline, or combine GA4 session data with ad spend data to calculate cost per session by channel.
+  </Accordion>
+
+  <Accordion title="Marketing ROI calculation" icon="calculator">
+    Create an agent that retrieves GA4 conversion data (key events, revenue) alongside campaign spend data from advertising platforms, then calculates return on ad spend (ROAS), cost per acquisition (CPA), and other ROI metrics. Results can be written to a spreadsheet or sent as a periodic report.
+  </Accordion>
+
+  <Accordion title="Audience behavior analysis" icon="users">
+    Deploy an agent that runs detailed GA4 reports segmented by user attributes — device type, location, traffic source, landing page — and identifies patterns in how different audience segments engage with your site. The agent can surface insights about which segments convert at higher rates or where users drop off in key flows.
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+- **Request minimal permissions**: OAuth grants access to all GA4 properties in your Google account. Where possible, use a dedicated Google account with access only to the properties your agent needs, rather than a personal account with access to many unrelated properties.
+- **Respect rate limits**: The GA4 Data API enforces quotas per property, including limits on requests per day, tokens per day, and concurrent requests. Design your agents to batch reports where possible and avoid making redundant API calls. See [GA4 API quotas](https://developers.google.com/analytics/devguides/reporting/data/v1/quotas) for current limits.
+- **Account for data processing delays**: GA4 data is typically processed within 24–48 hours. Real-time reports show data from the last 30 minutes but exclude some processed signals. If your use case requires fully processed data (including attribution and session stitching), query for dates at least 48 hours in the past.
+- **Use property IDs, not names**: Property names can change but property IDs don't. Store and reference properties by their numeric ID (visible in GA4 Admin > Property Settings) rather than by display name.
+- **Handle empty responses**: GA4 reports return no rows when there's no matching data for the requested dimensions and date range. Make sure your agent handles empty result sets gracefully rather than treating them as errors.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What Google account permissions do I need?" icon="lock">
+    To connect the integration, your Google account must have at least **Viewer** access on the GA4 properties you want to query. To create key events or manage property settings, you need **Editor** access. To create new properties, you need **Administrator** access on the Google Analytics account.
+
+    You can check your access level in GA4 under **Admin** > **Account Access Management** or **Property Access Management**.
+  </Accordion>
+
+  <Accordion title="Can I connect multiple Google accounts?" icon="user-group">
+    Yes. You can connect multiple Google accounts by completing the OAuth flow once for each account. Each connected account will appear separately in your Relevance AI integrations list, and you can select which account to use when configuring individual tool steps.
+  </Accordion>
+
+  <Accordion title="What are GA4 key events?" icon="flag-checkered">
+    Key events are the actions you've identified as important to your business — for example, purchases, form submissions, or sign-ups. In GA4, you first collect an event (via your tracking code or Google Tag Manager), then designate it as a key event to highlight it in reports and use it for conversion measurement. Key events were called "conversions" in Universal Analytics and in earlier versions of GA4; Google renamed them to key events in 2024.
+  </Accordion>
+
+  <Accordion title="What are GA4 API rate limits?" icon="gauge-high">
+    The GA4 Data API enforces per-property quotas including:
+
+    - **Core reporting**: 200,000 tokens per day, 40,000 tokens per hour, 10 concurrent requests
+    - **Real-time reporting**: 75,000 tokens per day, 15,000 tokens per hour
+
+    Tokens are consumed based on the complexity of your queries. Simple queries use fewer tokens than complex ones with many dimensions or large date ranges. See the [GA4 quotas documentation](https://developers.google.com/analytics/devguides/reporting/data/v1/quotas) for full details.
+  </Accordion>
+
+  <Accordion title="Why is my GA4 data showing a delay?" icon="clock">
+    GA4 processes most data within 24 hours, but full processing (including attribution, session stitching, and some conversions) can take up to 48 hours. Real-time data is available within minutes but represents a subset of the fully processed data. If you need accurate, fully processed metrics, query for dates at least 48 hours in the past.
+  </Accordion>
+
+  <Accordion title="Can I access Universal Analytics (UA) data?" icon="circle-info">
+    No. Universal Analytics properties stopped processing new data in July 2023. The Google Analytics integration in Relevance AI connects to GA4 only. Historical UA data is no longer accessible via the API.
+  </Accordion>
+
+  <Accordion title="How do I find my GA4 property ID?" icon="magnifying-glass">
+    In Google Analytics, go to **Admin** > **Property Settings**. Your property ID is the numeric ID shown at the top of the page (e.g., `123456789`). When using the API, you reference it as `properties/123456789`.
+  </Accordion>
+
+  <Accordion title="Why am I getting permission errors when creating properties?" icon="triangle-exclamation">
+    Creating GA4 properties requires **Administrator** access on the Google Analytics account (not just the property). If you receive a permission error, check your access level under **Admin** > **Account Access Management** and ensure your connected Google account has Administrator rights on the account where you want to create the property.
+  </Accordion>
+</AccordionGroup>
+
+## Additional resources
+
+<CardGroup cols={2}>
+  <Card title="GA4 Data API reference" icon="chart-line" href="https://developers.google.com/analytics/devguides/reporting/data/v1">
+    Complete reference for querying GA4 analytics data, including all available metrics, dimensions, and report types
+  </Card>
+  <Card title="GA4 Admin API reference" icon="gear" href="https://developers.google.com/analytics/devguides/config/admin/v1">
+    Reference for managing GA4 properties, data streams, key events, and account configuration
+  </Card>
+  <Card title="GA4 key events documentation" icon="flag-checkered" href="https://support.google.com/analytics/answer/9267568">
+    Learn how key events work in GA4 and how to use them for conversion measurement
+  </Card>
+  <Card title="GA4 API quotas" icon="gauge-high" href="https://developers.google.com/analytics/devguides/reporting/data/v1/quotas">
+    Details on GA4 Data API rate limits, quota types, and how tokens are calculated
+  </Card>
+</CardGroup>
+
+## Remove the integration
+
+To disconnect your Google Analytics account from Relevance AI:
+
+1. Navigate to **Integrations & API Keys** from the left sidebar.
+2. Find your Google Analytics connection in the integrations list.
+3. Click on the integration to expand its details.
+4. Click the three-dot menu and select **Remove**.
+
+Removing the integration revokes Relevance AI's access to your Google Analytics data. Any agents or tools using Google Analytics tool steps will stop working until you reconnect. Removing the integration from Relevance AI does not affect your Google Analytics account or data in any way.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Need help?" icon="life-ring" href="/get-started/support">
+    Contact our support team for assistance with the Google Analytics integration
+  </Card>
+  <Card title="Explore more integrations" icon="puzzle-piece" href="/integrations/introduction">
+    Discover other integrations to extend your agent workflows
+  </Card>
+</CardGroup>
