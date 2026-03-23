@@ -1,0 +1,368 @@
+---
+title: "Firmable"
+description: "Firmable is a B2B sales intelligence platform specializing in Australian and New Zealand markets, providing accurate company and contact data for ANZ businesses."
+sidebarTitle: "Firmable"
+---
+
+Firmable is a B2B sales intelligence platform specializing in Australian and New Zealand markets, providing accurate company and contact data for ANZ businesses. With Relevance AI's Firmable integration, you can seamlessly enrich your leads with verified contact and company information specific to the AU/NZ region, enabling your AI agents to automate prospect research, qualify leads, and build comprehensive sales pipelines with locally-verified data.
+
+<Warning>
+  The Firmable integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Firmable. If you have a question or issue with using Firmable in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Firmable, you can [reach out to Firmable support](https://www.firmable.com/contact).
+</Warning>
+
+## Connect the integration
+
+Connecting your Firmable account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Firmable" from the available integrations.
+3. Click on the "Add Integration" button.
+4. Enter your Firmable API key when prompted.
+5. Once authenticated, your Firmable account will appear as a connected integration.
+
+<Tip>
+  You can find your Firmable API key in your Firmable account settings under API Access. If you don't have a Firmable account yet, you can [sign up here](https://www.firmable.com/).
+</Tip>
+
+## Tool steps for Firmable
+
+The Firmable integration provides a comprehensive set of actions that your agents can use to enrich leads, find contacts, and gather company intelligence specific to Australian and New Zealand markets. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated sales automation and prospect research capabilities for ANZ businesses.
+
+### People Enrichment
+<CardGroup cols={2}>
+  <Card title="Firmable: People Enrichment" icon="user-plus">
+    Enrich existing contact records with verified email addresses, phone numbers, and professional details using LinkedIn URL, email, or LinkedIn slug
+  </Card>
+  <Card title="Firmable: People Search" icon="users">
+    Search for contacts matching specific criteria such as company, position, seniority, or department across Firmable's ANZ database
+  </Card>
+</CardGroup>
+
+### Company Intelligence
+<CardGroup cols={2}>
+  <Card title="Firmable: Company Enrichment" icon="building">
+    Enrich company records with firmographic data using LinkedIn, domain, ABN (Australian Business Number), or website
+  </Card>
+</CardGroup>
+
+### Advanced API Access
+<CardGroup cols={1}>
+  <Card title="Firmable API Call" icon="code">
+    Make custom API calls to access any Firmable API endpoint for advanced use cases
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Firmable" in the tool step search bar to see all available Firmable actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Firmable-specific activities using the Firmable API Call tool step.
+
+### How to use the Firmable API Call tool step
+
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add Firmable functionality to.
+  </Step>
+  
+  <Step title="Add the Firmable API Call tool step">
+    1. Scroll down to Tool-steps
+    2. Search for "Firmable API Call" in the tool step search bar
+    3. Add the Firmable API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your Firmable account">
+    Select your connected Firmable account from the dropdown menu.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters according to your needs:
+    - **Method**: Select the HTTP method (GET, POST)
+    - **Endpoint**: Enter the API endpoint path (e.g., `/enrich/person`)
+    - **Body**: Add any required request body data with search criteria
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
+
+### Example: Enriching a Contact by LinkedIn URL
+
+Here's a practical example of using the Firmable API Call tool step to enrich a contact using their LinkedIn profile:
+
+**API Endpoint**: `POST /enrich/person`
+
+**Configuration**:
+```json
+{
+  "method": "POST",
+  "endpoint": "/enrich/person",
+  "body": {
+    "linkedin_url": "https://www.linkedin.com/in/john-doe-au"
+  }
+}
+```
+
+This configuration:
+- Uses the POST method to request contact enrichment
+- Specifies the `/enrich/person` endpoint for individual contact lookup
+- Provides the LinkedIn URL as the search parameter
+- Returns verified contact information including email addresses, phone numbers, job title, company details, and location data specific to Australian and New Zealand professionals
+
+<Info>
+  You can find Firmable's complete API documentation at [https://www.firmable.com/api-documentation](https://www.firmable.com/api-documentation).
+</Info>
+
+### Common Firmable API Endpoints
+
+Here are some commonly used Firmable API endpoints you can use with the API Call tool step:
+
+<AccordionGroup>
+  <Accordion title="Person Enrichment" icon="user">
+    - **Enrich by LinkedIn URL**: `POST /enrich/person` with `{"linkedin_url": "https://linkedin.com/in/username"}`
+    - **Enrich by email**: `POST /enrich/person` with `{"email": "user@example.com.au"}`
+    - **Enrich by LinkedIn slug**: `POST /enrich/person` with `{"linkedin_slug": "john-doe-au"}`
+    
+    Returns: Email addresses, phone numbers, job title, company, location, and professional details for ANZ contacts
+    
+    [View API Documentation](https://www.firmable.com/api-documentation)
+  </Accordion>
+  
+  <Accordion title="Company Enrichment" icon="building">
+    - **Enrich by domain**: `POST /enrich/company` with `{"domain": "example.com.au"}`
+    - **Enrich by LinkedIn**: `POST /enrich/company` with `{"linkedin_url": "https://linkedin.com/company/example"}`
+    - **Enrich by ABN**: `POST /enrich/company` with `{"abn": "12345678901"}`
+    - **Enrich by website**: `POST /enrich/company` with `{"website": "https://example.com.au"}`
+    
+    Returns: Company size, industry, location, ABN, employee count, technologies used, and firmographic data for Australian and New Zealand businesses
+    
+    [View API Documentation](https://www.firmable.com/api-documentation)
+  </Accordion>
+  
+  <Accordion title="People Search" icon="magnifying-glass">
+    - **Search by company**: `POST /search/people` with `{"company": "Acme Corp"}`
+    - **Search by position**: `POST /search/people` with `{"position": "Sales Manager"}`
+    - **Search by seniority**: `POST /search/people` with `{"seniority": "Director"}`
+    - **Search by department**: `POST /search/people` with `{"department": "Marketing"}`
+    
+    Useful for building prospect lists of decision-makers within target ANZ companies
+    
+    [View API Documentation](https://www.firmable.com/api-documentation)
+  </Accordion>
+  
+  <Accordion title="Advanced Filtering" icon="filter">
+    - **Combined search criteria**: Use multiple filters together for precise targeting
+    - **Location filtering**: Target specific Australian states or New Zealand regions
+    - **Company size filtering**: Focus on SMBs or enterprise accounts
+    
+    Allows sophisticated prospect discovery across the ANZ market
+    
+    [View API Documentation](https://www.firmable.com/api-documentation)
+  </Accordion>
+</AccordionGroup>
+
+## Example use cases
+
+Here are some ways you can leverage the Firmable integration with your agents for Australian and New Zealand markets:
+
+<AccordionGroup>
+  <Accordion title="ANZ Lead Enrichment" icon="user-plus">
+    Create an agent that automatically enriches incoming leads from Australian and New Zealand markets with verified contact information. The agent can take a LinkedIn URL, email address, or company ABN, use Firmable to gather phone numbers, job titles, and company details, then update your CRM with the enriched ANZ-specific data.
+  </Accordion>
+  
+  <Accordion title="Australian Business Research Agent" icon="magnifying-glass-chart">
+    Build an agent that conducts deep research on Australian businesses before sales calls. Given a company ABN, domain, or LinkedIn profile, the agent uses Firmable to gather company information, key decision-makers, and organizational structure, then compiles a comprehensive research brief tailored to the ANZ market.
+  </Accordion>
+  
+  <Accordion title="ABN-Based Lead Qualification" icon="filter">
+    Deploy an agent that automatically qualifies Australian leads using ABN lookups. The agent uses Firmable to verify company legitimacy, gather company size and industry data, then scores and routes leads to the appropriate sales representatives based on your ANZ qualification criteria.
+  </Accordion>
+  
+  <Accordion title="ANZ Outbound List Builder" icon="list-check">
+    Create an agent that builds targeted prospect lists for Australian and New Zealand outbound campaigns. The agent searches Firmable's database for contacts matching your ideal customer profile (job title, company size, industry, location within AU/NZ), enriches the results, and exports them to your sales engagement platform.
+  </Accordion>
+  
+  <Accordion title="Regional CRM Data Enhancement" icon="database">
+    Build an agent that maintains data quality for your ANZ contacts in your CRM. The agent identifies incomplete or outdated contact records for Australian and New Zealand businesses, uses Firmable to find current information including ABN verification, and automatically updates your CRM with verified local data.
+  </Accordion>
+  
+  <Accordion title="ANZ Account-Based Marketing Research" icon="bullseye">
+    Deploy an agent that supports ABM campaigns targeting Australian and New Zealand accounts. The agent uses Firmable to identify key decision-makers within target ANZ companies, gather their contact information, and map out the organizational structure for strategic regional outreach.
+  </Accordion>
+  
+  <Accordion title="Australian Recruitment Sourcing" icon="user-tie">
+    Create an agent that helps recruiters find and contact qualified candidates in Australia and New Zealand. The agent searches for professionals with specific skills and experience in the ANZ market, uses Firmable to find their contact information, and prepares personalized outreach messages.
+  </Accordion>
+  
+  <Accordion title="Trans-Tasman Partnership Development" icon="handshake">
+    Build an agent that identifies and researches potential business partners across Australia and New Zealand. The agent finds companies in complementary industries within the ANZ region, uses Firmable to identify partnership decision-makers, and gathers contact information for cross-border outreach.
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Data Privacy & ANZ Compliance" icon="shield-check">
+    **Always ensure compliance with Australian and New Zealand data privacy regulations:**
+    - Comply with the Australian Privacy Act and New Zealand Privacy Act
+    - Only use Firmable data for legitimate business purposes
+    - Include proper opt-out mechanisms in your outreach
+    - Store enriched data securely and delete when no longer needed
+    - Review Firmable's terms of service and acceptable use policy
+    - Respect the Australian Spam Act 2003 and New Zealand's Unsolicited Electronic Messages Act
+    
+    Firmable provides ANZ-compliant data, but you're responsible for how you use it.
+  </Accordion>
+  
+  <Accordion title="Credit Management" icon="coins">
+    **Optimize your Firmable credit usage:**
+    - Each enrichment request consumes Firmable credits
+    - Cache enriched data to avoid duplicate lookups
+    - Implement logic to check if data already exists before enriching
+    - Monitor your credit usage through Firmable's dashboard
+    - Set up alerts when credits are running low
+    - Prioritize high-value prospects for enrichment
+  </Accordion>
+  
+  <Accordion title="Data Quality for ANZ Markets" icon="star">
+    **Maximize the quality of enriched ANZ data:**
+    - Provide as much information as possible in your search queries (LinkedIn URL + email is better than email alone)
+    - Validate enriched data before using it in outreach
+    - Implement fallback logic when Firmable doesn't find a match
+    - Regularly update enriched data as contact information changes
+    - Verify ABN numbers for Australian companies to ensure legitimacy
+    - Consider regional variations in job titles and company structures between AU and NZ
+  </Accordion>
+  
+  <Accordion title="Regional Targeting" icon="location-dot">
+    **Leverage Firmable's ANZ market specialization:**
+    - Use location filters to target specific Australian states or New Zealand regions
+    - Consider time zones when scheduling outreach (AEST, AEDT, NZST, NZDT)
+    - Tailor messaging to local business culture and practices
+    - Use ABN lookups for Australian companies to verify business registration
+    - Understand the differences between Australian and New Zealand business environments
+  </Accordion>
+  
+  <Accordion title="Rate Limiting" icon="gauge">
+    **Handle API rate limits gracefully:**
+    - Firmable enforces rate limits to ensure service quality
+    - Implement retry logic with exponential backoff for rate limit errors
+    - Distribute enrichment tasks over time for large datasets
+    - Monitor API response codes and handle errors appropriately
+    - Contact Firmable support if you need higher limits for enterprise use
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What is Firmable and why should I use it?">
+    Firmable is a B2B sales intelligence platform specializing in Australian and New Zealand markets. It provides verified contact and company information specifically for ANZ businesses. Using Firmable with Relevance AI allows you to automate lead enrichment, prospect research, and data quality maintenance at scale for the AU/NZ region, with unique features like ABN lookups for Australian companies.
+  </Accordion>
+  
+  <Accordion title="Do I need a Firmable account to use this integration?">
+    Yes, you need an active Firmable account with API access. You can sign up for Firmable at [https://www.firmable.com/](https://www.firmable.com/). You'll need to generate an API key from your Firmable account settings to connect it to Relevance AI.
+  </Accordion>
+  
+  <Accordion title="How do I get my Firmable API key?">
+    To get your Firmable API key:
+    1. Log in to your Firmable account
+    2. Navigate to Settings or Account Settings
+    3. Look for "API Access" or "API Keys"
+    4. Generate a new API key or copy your existing key
+    5. Use this key when connecting Firmable to Relevance AI
+    
+    Keep your API key secure and never share it publicly.
+  </Accordion>
+  
+  <Accordion title="What does 'beta' status mean for the Firmable integration?">
+    The beta status indicates that while the Firmable integration is fully functional and available for use, we're still gathering user feedback and may make refinements to improve the experience. We recommend testing your workflows thoroughly before deploying them in production. If you encounter any issues or have suggestions, please contact our support team.
+  </Accordion>
+  
+  <Accordion title="What is an ABN and how do I use it with Firmable?">
+    An ABN (Australian Business Number) is a unique 11-digit identifier for businesses operating in Australia. Firmable's company enrichment tool can look up Australian companies using their ABN, which is particularly useful for:
+    - Verifying business legitimacy
+    - Finding company details for Australian businesses
+    - Enriching leads with official business registration data
+    
+    Simply provide the 11-digit ABN in the company enrichment tool step to retrieve comprehensive company information.
+  </Accordion>
+  
+  <Accordion title="Does Firmable cover both Australia and New Zealand?">
+    Yes, Firmable specializes in both Australian and New Zealand markets. The platform provides comprehensive B2B data for companies and contacts across both countries, making it ideal for businesses targeting the ANZ region. You can filter searches by country or specific regions within AU/NZ.
+  </Accordion>
+  
+  <Accordion title="How many Firmable credits does each enrichment use?">
+    Credit usage depends on the type of enrichment and the data returned. Typically:
+    - Person enrichment: 1-2 credits per successful lookup
+    - Company enrichment: 1 credit per successful lookup
+    - Search operations: Credits vary based on result volume
+    
+    Check your Firmable plan details for specific credit allocations and pricing. You can monitor your credit usage in your Firmable dashboard.
+  </Accordion>
+  
+  <Accordion title="What happens if Firmable doesn't find a match?">
+    If Firmable doesn't find information for a contact or company, the API will return an empty result or indicate no match was found. Your agent should include logic to handle these cases, such as:
+    - Trying alternative search parameters (e.g., LinkedIn URL instead of email)
+    - Using fallback data sources
+    - Flagging the record for manual research
+    - Skipping to the next record in bulk operations
+    
+    Not all ANZ contacts are in Firmable's database, so plan for partial match rates.
+  </Accordion>
+  
+  <Accordion title="Can I use Firmable for cold outreach in Australia and New Zealand?">
+    Yes, but you must comply with all applicable laws and regulations:
+    - Follow the Australian Spam Act 2003 and New Zealand's Unsolicited Electronic Messages Act
+    - Include proper identification and opt-out mechanisms
+    - Only contact people with legitimate business interest
+    - Respect do-not-contact lists and preferences
+    - Review Firmable's acceptable use policy
+    
+    Firmable provides the data, but you're responsible for how you use it in compliance with ANZ regulations.
+  </Accordion>
+  
+  <Accordion title="How accurate is Firmable's ANZ data?">
+    Firmable maintains high data accuracy through continuous verification and updates specific to Australian and New Zealand markets. However, contact information can change over time. Best practices:
+    - Use the most recent enrichment data available
+    - Implement email verification before sending campaigns
+    - Update your records regularly
+    - Verify ABN numbers for Australian companies
+    - Have a process for handling bounced emails or wrong numbers
+    - Consider that ANZ business data may update less frequently than global databases
+  </Accordion>
+  
+  <Accordion title="Can I enrich contacts from LinkedIn profiles?">
+    Yes! Firmable can enrich LinkedIn profiles for Australian and New Zealand professionals. You can provide a LinkedIn URL or LinkedIn slug to the Firmable people enrichment tool step, and it will return verified contact information including email addresses and phone numbers. This is particularly useful for ANZ sales prospecting and recruitment workflows.
+  </Accordion>
+  
+  <Accordion title="What's the difference between the enrichment and search tool steps?">
+    - **Enrichment tool steps**: Used when you have specific identifying information (LinkedIn URL, email, ABN, domain) and want to retrieve that specific contact or company's details
+    - **Search tool steps**: Used when you want to discover contacts matching certain criteria (company, position, seniority, department) within the ANZ market
+    
+    Use enrichment for data completion, search for prospecting and list building.
+  </Accordion>
+  
+  <Accordion title="Can I integrate Firmable with my CRM?">
+    Yes! You can build agents that connect Firmable with popular CRMs like Salesforce, HubSpot, and others available in Relevance AI. Your agent can:
+    - Pull ANZ contacts from your CRM
+    - Enrich them with Firmable
+    - Update the CRM with enriched data including ABN numbers
+    - All automatically on a schedule or trigger
+    
+    Check our [integrations page](/integrations/introduction) for available CRM connections.
+  </Accordion>
+  
+  <Accordion title="Are there rate limits for the Firmable API?">
+    Yes, Firmable enforces rate limits to ensure service quality for all users. The specific limits depend on your Firmable plan. If you hit rate limits:
+    - Your agent will receive a rate limit error
+    - Implement retry logic with delays
+    - Distribute enrichment tasks over time
+    - Contact Firmable support if you need higher limits
+    
+    Design your workflows to handle rate limits gracefully.
+  </Accordion>
+</AccordionGroup>
