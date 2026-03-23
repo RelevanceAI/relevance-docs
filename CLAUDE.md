@@ -17,7 +17,7 @@ Relevance AI documentation site, powered by Mintlify. Hosted at https://relevanc
 - WRONG: `## How To Configure Your Settings`
 
 This applies to ALL text that acts as a section header:
-- Heading levels (`##`, `###`, `####`)
+- Heading levels (`#`, `##`, `###`, `####`, `#####`, `######`) — all H1 through H6 are valid in MDX files and can be used for proper document hierarchy
 - `<Card title="...">`
 - `<Accordion title="...">`
 - `<Step title="...">`
