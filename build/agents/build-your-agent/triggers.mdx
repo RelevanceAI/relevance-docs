@@ -13,7 +13,7 @@ You can trigger your Agent through three different methods:
 - **External Actions**: Configure your agent to respond to specific events or inputs
 - **Manual Activation**: Allow users to directly engage with the agent when needed
 
-## Setting up a Trigger
+## Setting up a trigger
 
 1. Navigate to the **Agents** page and select the agent you want to configure
 2. In the sidebar on the left, click **Triggers**
@@ -26,21 +26,59 @@ You can trigger your Agent through three different methods:
 You can add multiple triggers to a single agent. Each trigger operates independently, so your agent can respond to emails, run on a schedule, and accept API requests all at the same time.
 </Note>
 
+## Managing your triggers
+
+Once you've set up triggers, you can control them without deleting your configuration.
+
+### Pausing and resuming triggers
+
+You can pause any trigger type — integration triggers (Gmail, Slack, LinkedIn, WhatsApp, etc.), scheduled triggers, webhooks, and all others. Pausing stops the trigger from firing while preserving all your configuration, so you don't need to delete and recreate triggers when you want to temporarily disable them.
+
+#### To pause or resume a single trigger
+
+1. Go to your agent's **Triggers** section in agent settings or the agent builder sidebar
+2. Find the trigger you want to pause
+3. Click the pause button next to the trigger
+4. To resume, click the resume button
+
+#### To pause or resume all triggers at once
+
+Use the **Pause all** or **Resume all** buttons at the top of the Triggers section to quickly control all triggers for your agent.
+
+### Visual status indicators
+
+Active triggers display with a standard appearance, while paused triggers show a visual indicator so you can quickly see which triggers are currently active and which are paused.
+
+### Where to manage triggers
+
+You can pause and resume triggers from two locations:
+
+- **Agent settings**: Navigate to your agent and open the Triggers section
+- **Agent builder sidebar**: Access trigger controls directly while building your agent
+
+### Common use cases for pausing triggers
+
+- **Testing**: Pause production triggers while testing changes to your agent
+- **Maintenance**: Temporarily disable triggers during system updates or configuration changes
+- **Cost control**: Pause high-volume triggers during periods when you don't need them active
+- **Debugging**: Isolate specific triggers to troubleshoot issues
+- **Seasonal workflows**: Pause triggers that are only relevant during certain times of the year
+
 ## Trigger types
 
-### Integration Triggers
+### Integration triggers
 
 We have 1,000+ integrations you can connect to and set up to trigger your Agent, including external triggers like Zapier.
 
-<Card title="Integration Triggers" href="/build/agents/build-your-agent/agent-triggers/integrations">View all available integration triggers and premium options.</Card>
+<Card title="Integration triggers" href="/build/agents/build-your-agent/agent-triggers/integrations">View all available integration triggers and premium options.</Card>
 
-### Scheduled Triggers
+### Scheduled triggers
 
 Set your Agent to run on a recurring schedule or send messages at specific times.
 
-<Card title="Scheduled Triggers" href="/build/agents/build-your-agent/agent-triggers/scheduled-triggers">Set up recurring schedules and scheduled messages.</Card>
+<Card title="Scheduled triggers" href="/build/agents/build-your-agent/agent-triggers/scheduled-triggers">Set up recurring schedules and scheduled messages.</Card>
 
-### Build your own Triggers
+### Build your own triggers
 
 Connect to custom webhooks, APIs, and SDKs to trigger your Agent programmatically.
 
@@ -50,7 +88,7 @@ Connect to custom webhooks, APIs, and SDKs to trigger your Agent programmaticall
   <Card title="Tools as Triggers" href="/build/agents/build-your-agent/agent-triggers/tools-as-triggers">Use a specific Tool to trigger your Agent.</Card>
 </Columns>
 
-## Choosing the right Trigger
+## Choosing the right trigger
 
 | I want to... | Use this trigger |
 | --- | --- |
@@ -72,6 +110,10 @@ Connect to custom webhooks, APIs, and SDKs to trigger your Agent programmaticall
     The Trigger sends a message to your Agent, which then processes it based on your Prompt instructions and executes its configured Tools.
   </Accordion>
   <Accordion title="Can I pause or disable a Trigger without deleting it?">
-    Yes. You can toggle Triggers off in your Agent's Triggers settings. This pauses them without removing your configuration.
+    Yes. You can pause any trigger type from your agent's Triggers section — this works for integration triggers (Gmail, Slack, LinkedIn, WhatsApp, etc.), scheduled triggers, webhooks, and all other trigger types.
+    
+    Pausing preserves all your configuration, so you don't need to delete and recreate triggers. You can pause individual triggers or use the **Pause all** button to disable all triggers at once. Visual status indicators show which triggers are active and which are paused.
+    
+    This is useful for testing, maintenance, cost control, or any time you need to temporarily disable triggers without losing your setup.
   </Accordion>
 </AccordionGroup>
