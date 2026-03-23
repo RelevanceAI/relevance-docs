@@ -1,0 +1,82 @@
+---
+title: "Prompt injection detection Tool step"
+sidebarTitle: "Prompt injection detection"
+description: "Detect prompt injection attempts in text using ML-based classification"
+---
+
+The Prompt Injection Detection Tool step analyzes text for patterns characteristic of injection attempts — instructions that try to override an agent's intended behavior (e.g., "ignore all previous instructions"). It returns a classification and confidence score so you can act on the result within the same Tool.
+
+## Add the Prompt Injection Detection Tool step to your Tool
+
+You can add the Prompt Injection Detection Tool step to your Tool by:
+
+1. Opening an existing Tool or creating a new one
+2. Click **+ Add step**, then search for "Prompt injection detection" under **Steps**
+3. In the **Text to analyze** field, enter the text you want to evaluate — typically a variable referencing user input (e.g., `{{user_message}}`)
+4. Run the Tool step to confirm it works with your configuration
+
+## Use cases
+
+<CardGroup cols={2}>
+  <Card title="Customer-facing agents" icon="robot">
+    Screen user messages before they reach an LLM step to prevent manipulation of agent behavior.
+  </Card>
+  <Card title="Content moderation" icon="shield-check">
+    Flag submissions containing injection patterns for human review before processing.
+  </Card>
+  <Card title="Data processing pipelines" icon="database">
+    Validate text data in bulk before passing it to downstream AI steps.
+  </Card>
+  <Card title="Security monitoring" icon="eye">
+    Log and alert on high-confidence injection attempts across agent conversations.
+  </Card>
+</CardGroup>
+
+## Tool step outputs
+
+The Tool step returns two fields you can reference in subsequent steps:
+
+| Output | Type | Description |
+|---|---|---|
+| `classification` | string | Either `"benign"` or `"injection"` |
+| `confidence_score` | number | A value between 0 and 1 indicating how confident the model is in the classification |
+
+A `confidence_score` of `1.0` means the model is highly certain of the classification. A score near `0.5` indicates low confidence — you may want to treat borderline cases as requiring human review.
+
+## Conditional processing based on detection results
+
+<Accordion title="Routing a Tool based on injection classification">
+After the Prompt Injection Detection step runs, use a **Code (JavaScript)** step or an **LLM** step with conditional logic to route the Tool's behavior.
+
+For example, if your Prompt Injection Detection step is named `injection_check`, you can reference its output in a subsequent step:
+
+```javascript
+// In a JavaScript Tool step
+if (injection_check.classification === "injection" && injection_check.confidence_score > 0.8) {
+  return { blocked: true, reason: "Potential prompt injection detected." };
+} else {
+  return { blocked: false };
+}
+```
+
+You can then use the `blocked` output to conditionally run or skip downstream steps.
+</Accordion>
+
+## Batch evaluation
+
+To evaluate multiple texts in a single run, pass an array of strings to the **Text to analyze** field. The Tool step returns an array of results in the same order, each containing a `classification` and `confidence_score`.
+
+This is useful when processing a dataset of messages or validating content in bulk before storing or forwarding it.
+
+## Advanced settings
+
+### Confidence threshold
+
+Set a minimum confidence score required before the classification is treated as actionable. For example, a threshold of `0.75` means only results with `confidence_score >= 0.75` are flagged. Results below the threshold are treated as `benign` regardless of classification.
+
+### Action on detection
+
+Choose what happens when an injection is detected above the confidence threshold:
+
+- **Continue** — the Tool step records the result and execution continues normally. Use this when you want to handle routing yourself in a later step.
+- **Stop and return error** — execution halts and the Tool returns an error response. Use this for hard blocks on agent input.

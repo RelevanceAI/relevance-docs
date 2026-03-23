@@ -132,6 +132,16 @@ We regularly undergo third-party assessments to ensure that we are compliant wit
 
 We have multiple controls, including prompt management, escalation, and parameterized inputs to protect you from prompt injection.
 
+Relevance AI also includes an ML-based prompt injection detection capability. It analyzes text for patterns characteristic of injection attempts — such as instructions that try to override an agent's behavior — and returns a classification (`benign` or `injection`) along with a confidence score between 0 and 1.
+
+You can use this detection as a Tool step in any Tool or Agent. Common applications include:
+
+- Screening user input before it reaches an LLM step
+- Flagging suspicious messages in customer-facing agents for human review
+- Blocking or redirecting requests that exceed a confidence threshold you define
+
+The Tool step supports both single-text and batch evaluation, so you can apply detection across multiple inputs in a single run. See the [Prompt Injection Detection Tool step](/build/tools/tool-steps/prompt-injection-detection) for setup instructions and output details.
+
 ## Vendor & Supply Chain Security
 
 ### Third-party risk management
