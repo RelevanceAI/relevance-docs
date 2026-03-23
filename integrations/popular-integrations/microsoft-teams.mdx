@@ -4,7 +4,9 @@ description: "Microsoft Teams is a collaboration platform that combines workplac
 sidebarTitle: "Microsoft Teams"
 ---
 
-With Relevance AI's Microsoft Teams integration, you can seamlessly connect your Teams workspace to your AI agents, enabling them to monitor channels, respond to messages, and automate communication workflows directly within your team's collaboration environment.
+With Relevance AI's Microsoft Teams integration, you can connect your Teams workspace to your AI agents, enabling them to monitor channels, respond to messages, search conversations, and automate communication workflows directly within your team's collaboration environment.
+
+The integration uses native OAuth-based tool steps that call Microsoft Graph API directly, giving you faster execution, more reliable performance, and tighter security compared to third-party relay approaches.
 
 ## Connect the integration
 
@@ -77,51 +79,256 @@ You can configure your agents to automatically respond to Microsoft Teams messag
 <iframe src="https://app.supademo.com/embed/cmmbee6og0j1y22c40mj0hzvt?embed_v=2" frameBorder="0" title="Microsoft Teams tool steps" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
 </div>
 
-The Microsoft Teams integration provides actions that your agents can use to send messages and manage Teams. These actions can be incorporated into your agent's workflows as tool steps, enabling sophisticated communication automation capabilities.
+The Microsoft Teams integration provides 10 native OAuth-based tool steps that call Microsoft Graph API directly. These can be incorporated into your agent's workflows to automate communication and team management tasks.
+
+### Team & channel management
+
+<CardGroup cols={2}>
+  <Card title="List Teams" icon="users">
+    Retrieve all Microsoft Teams that the authenticated user is a member of
+  </Card>
+  <Card title="List Channels" icon="list">
+    Get all channels within a specific Team
+  </Card>
+  <Card title="Create Channel" icon="plus">
+    Create a new channel in a Team
+  </Card>
+  <Card title="List Team Members" icon="user-group">
+    Retrieve the members of a specific Team
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="List Teams — details">
+    Returns all Teams that the authenticated user belongs to, including the team name, ID, description, and visibility (public or private).
+
+    **Use cases:**
+    - Let an agent discover which teams exist before routing a message to the right channel
+    - Build a dynamic team selector when automating cross-team notifications
+    - Audit team membership across your organization
+
+    **Key parameters:** none required — returns results scoped to the authenticated user's memberships.
+
+    **Output:** An array of team objects, each containing `id`, `displayName`, `description`, and `visibility`.
+  </Accordion>
+  <Accordion title="List Channels — details">
+    Returns all channels within a given Team, including channel name, ID, description, and membership type (standard or private).
+
+    **Use cases:**
+    - Identify the correct channel ID before sending a message
+    - List available channels so an agent can present options to a user
+    - Check whether a channel already exists before creating a duplicate
+
+    **Key parameters:** `teamId` — the ID of the Team whose channels you want to list.
+
+    **Output:** An array of channel objects, each containing `id`, `displayName`, `description`, and `membershipType`.
+  </Accordion>
+  <Accordion title="Create Channel — details">
+    Creates a new standard or private channel within a specified Team.
+
+    **Use cases:**
+    - Automatically create project-specific channels when a new project is kicked off
+    - Set up dedicated support channels for high-priority customers
+    - Provision onboarding channels for new team members
+
+    **Key parameters:** `teamId`, `displayName` (channel name), `description` (optional), `membershipType` (`standard` or `private`).
+
+    **Output:** The newly created channel object, including its `id` and `webUrl`.
+  </Accordion>
+  <Accordion title="List Team Members — details">
+    Returns the members of a specific Team, including their display names, email addresses, and roles (owner or member).
+
+    **Use cases:**
+    - Look up a team member's user ID before sending them a direct message
+    - Check whether a specific person is already a member of a team before adding them
+    - Generate membership reports for compliance or auditing
+
+    **Key parameters:** `teamId` — the ID of the Team whose members you want to list.
+
+    **Output:** An array of member objects, each containing `id`, `displayName`, `email`, and `roles`.
+  </Accordion>
+</AccordionGroup>
+
+### Messaging & communication
 
 <CardGroup cols={2}>
   <Card title="Send Channel Message" icon="message">
     Post a message to a specific Teams channel
   </Card>
   <Card title="Send Chat Message" icon="comment">
-    Send a direct message in Teams
+    Send a direct message in a Teams chat
   </Card>
-  <Card title="Create Channel" icon="plus">
-    Create a new channel in a Team
+  <Card title="Retrieve Chat Messages" icon="messages">
+    Fetch messages from a specific Teams chat or conversation
   </Card>
-  <Card title="List Channels" icon="list">
-    Get all channels in a Team
-  </Card>
-  <Card title="List Shifts" icon="calendar-days">
-    Retrieve shift information from Teams
-  </Card>
-  <Card title="Microsoft API Call" icon="code">
-    Make custom API calls to Microsoft Graph API for advanced use cases
+  <Card title="Search Messages" icon="magnifying-glass">
+    Search across Teams messages using keywords or filters
   </Card>
 </CardGroup>
 
+<AccordionGroup>
+  <Accordion title="Send Channel Message — details">
+    Posts a message to a channel within a specified Team. Supports plain text and basic HTML formatting.
+
+    **Use cases:**
+    - Send automated status updates to a project channel
+    - Post alerts when a monitored event occurs (e.g., a failed deployment or a new support ticket)
+    - Notify a team channel when a report is ready
+
+    **Key parameters:** `teamId`, `channelId`, `content` (message body), `contentType` (`text` or `html`).
+
+    **Output:** The created message object, including its `id` and `createdDateTime`.
+  </Accordion>
+  <Accordion title="Send Chat Message — details">
+    Sends a message to an existing one-on-one or group chat thread.
+
+    **Use cases:**
+    - Send a personalized follow-up message directly to a user
+    - Notify a small group chat about a time-sensitive update
+    - Reply to a user who contacted your agent via direct message
+
+    **Key parameters:** `chatId`, `content` (message body), `contentType` (`text` or `html`).
+
+    **Output:** The created message object, including its `id` and `createdDateTime`.
+  </Accordion>
+  <Accordion title="Retrieve Chat Messages — details">
+    Fetches messages from a specific chat thread, returning them in chronological order. Useful for giving your agent context about an ongoing conversation before it responds.
+
+    **Use cases:**
+    - Read the history of a support chat before drafting a reply
+    - Summarize recent conversation context for a handoff between agents
+    - Extract action items from a group chat discussion
+
+    **Key parameters:** `chatId`, `top` (number of messages to return), `skip` (pagination offset).
+
+    **Output:** An array of message objects, each containing `id`, `from`, `body`, `createdDateTime`, and `lastModifiedDateTime`.
+  </Accordion>
+  <Accordion title="Search Messages — details">
+    Searches across Teams messages using a keyword query, returning matching messages from channels and chats the authenticated user has access to.
+
+    **Use cases:**
+    - Find all messages mentioning a specific project or customer name
+    - Locate a past decision or approval that was recorded in Teams
+    - Audit messages containing sensitive terms for compliance purposes
+
+    **Key parameters:** `query` (search keywords or phrases), `top` (maximum results to return).
+
+    **Output:** An array of matching message objects with `id`, `from`, `body`, `channelIdentity` or `chatInfo`, and `createdDateTime`.
+  </Accordion>
+</AccordionGroup>
+
+### Team operations
+
+<CardGroup cols={1}>
+  <Card title="List Team Shifts" icon="calendar-days">
+    Retrieve shift schedule information from Microsoft Teams Shifts
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="List Team Shifts — details">
+    Returns shift schedule data from the Teams Shifts feature, including shift times, assigned users, and shift notes.
+
+    **Use cases:**
+    - Let an agent check the current schedule before assigning tasks to team members
+    - Notify on-call staff of incidents based on who is currently on shift
+    - Summarize the week's schedule and post it to a team channel
+
+    **Key parameters:** `teamId`, `startDateTime`, `endDateTime` (date range for shifts to retrieve).
+
+    **Output:** An array of shift objects, each containing `id`, `userId`, `sharedShift` (with `startDateTime`, `endDateTime`, `activities`), and `draftShift`.
+  </Accordion>
+</AccordionGroup>
+
+### Advanced operations
+
+<CardGroup cols={1}>
+  <Card title="Microsoft API Call" icon="code">
+    Make custom calls to any Microsoft Graph API endpoint for operations not covered by the pre-built tool steps
+  </Card>
+</CardGroup>
+
+<AccordionGroup>
+  <Accordion title="Microsoft API Call — details">
+    Gives you direct access to any Microsoft Graph API endpoint. Use this for operations not covered by the pre-built tool steps, or when you need fine-grained control over request parameters.
+
+    **Use cases:**
+    - Access Teams meeting transcripts or recordings
+    - Manage team membership (add or remove members)
+    - Retrieve files from a channel's SharePoint document library
+
+    **Key parameters:** `method` (`GET`, `POST`, `PATCH`, `DELETE`), `endpoint` (Graph API path, e.g. `/teams/{teamId}/members`), `body` (JSON request body for write operations), `params` (query string parameters).
+
+    **Output:** The raw JSON response from the Microsoft Graph API.
+  </Accordion>
+</AccordionGroup>
+
 <Note>
-  Most Microsoft Teams tool steps are currently in beta. Please report any issues to our support team.
+  These tool steps use native OAuth and call Microsoft Graph API directly. If you encounter issues with a specific tool step, please [contact support](/get-started/support).
 </Note>
 
 ## Example use cases
 
-Here are some ways you can leverage the Microsoft Teams integration with your agents:
-
 <CardGroup cols={2}>
   <Card title="IT support bot" icon="headset">
-    Monitor your IT support channel and automatically respond to common technical questions, provide troubleshooting steps, create support tickets, and escalate urgent problems.
+    Monitor your IT support channel, search message history for similar past issues, and automatically respond to common technical questions. Escalate unresolved issues by creating a dedicated channel or messaging the on-call engineer.
   </Card>
   <Card title="Onboarding assistant" icon="user-plus">
-    Welcome new team members, answer common questions about company policies and tools, share relevant documentation, and guide new hires through their first week.
+    When a new hire joins, retrieve their team membership, create a dedicated onboarding channel, and send a personalized welcome message with links to relevant documentation and contacts.
   </Card>
   <Card title="Customer success agent" icon="handshake">
-    Monitor customer inquiries, provide initial responses, search for relevant case history, and route complex issues to the appropriate team member.
+    Search Teams messages for mentions of a specific customer, retrieve recent chat history for context, and post a summary of open action items to the account team's channel.
   </Card>
   <Card title="Sales pipeline assistant" icon="chart-line">
-    Log important deal updates to your CRM, remind team members of follow-up tasks, and post daily pipeline summaries.
+    Post daily pipeline summaries to a sales channel, send direct messages to remind reps of follow-up tasks, and list team members to route new leads to the next available rep.
+  </Card>
+  <Card title="Shift handoff bot" icon="arrows-rotate">
+    At the end of each shift, retrieve current shift data, summarize open tickets or tasks from the channel, and send the outgoing team a handoff message with a status summary.
+  </Card>
+  <Card title="Compliance monitor" icon="shield-check">
+    Periodically search messages for flagged terms, retrieve the surrounding conversation for context, and post a digest to a compliance team channel for review.
   </Card>
 </CardGroup>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Use List Teams and List Channels to resolve IDs dynamically">
+    Team and channel IDs are required parameters for most tool steps, but they are not human-readable. Rather than hardcoding IDs in your tool configuration, use the List Teams and List Channels tool steps to look up IDs at runtime. This makes your agent more flexible when teams or channels are renamed or reorganized.
+  </Accordion>
+  <Accordion title="Start message-sending tools in approval mode">
+    Before deploying an agent that sends messages autonomously, set your Send Channel Message and Send Chat Message tool steps to "approval mode". This lets you review and approve each outgoing message before it is sent, which is useful for catching formatting issues or unintended content during initial testing.
+  </Accordion>
+  <Accordion title="Retrieve chat messages before responding">
+    When your agent is triggered by a new message, use the Retrieve Chat Messages tool step to fetch recent conversation history before composing a reply. This gives the agent the context it needs to respond accurately rather than treating each message in isolation.
+  </Accordion>
+  <Accordion title="Use Search Messages for context retrieval, not real-time monitoring">
+    The Search Messages tool step is designed for querying historical message content. It is not suited for real-time monitoring — use a Teams trigger for that. Reserve Search Messages for cases where your agent needs to look up past decisions, approvals, or discussions before taking action.
+  </Accordion>
+  <Accordion title="Handle rate limits gracefully">
+    Microsoft Graph API enforces rate limits that vary by subscription tier. Design your agent workflows to spread out API calls where possible and handle `429 Too Many Requests` responses by waiting before retrying. Avoid polling patterns that make repeated API calls in quick succession.
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Tool step returns an authorization error">
+    This typically means the OAuth token does not have the permissions required for that operation. Reconnect your Microsoft account through the Integrations & API Keys page and ensure you grant all requested permissions during the OAuth flow. If your organization requires admin consent, ask your Microsoft 365 admin to approve the permission request.
+  </Accordion>
+  <Accordion title="List Teams returns an empty array">
+    The authenticated user must be a member of at least one Team for this tool step to return results. If the user is a guest in your tenant rather than a full member, Team visibility may be restricted. Verify the account is a direct member of the Teams you expect to see.
+  </Accordion>
+  <Accordion title="Send Channel Message fails with a 403 error">
+    A 403 error on Send Channel Message usually means the authenticated user does not have permission to post in that channel. Check the channel's moderation settings in Teams — some channels are configured to allow posts only from owners or specific roles.
+  </Accordion>
+  <Accordion title="Search Messages returns no results for a known message">
+    Microsoft Graph search indexes Teams messages with a short delay after they are sent. If you are searching for a very recent message, wait a few minutes and try again. Search results are also scoped to content the authenticated user has access to — messages in private channels the user is not a member of will not appear.
+  </Accordion>
+  <Accordion title="Retrieve Chat Messages returns messages out of order">
+    Messages are returned in the order specified by the Graph API, which defaults to ascending `createdDateTime`. If you need the most recent messages first, sort the output by `createdDateTime` in descending order within your tool configuration.
+  </Accordion>
+</AccordionGroup>
 
 ## Frequently asked questions (FAQs)
 
@@ -133,58 +340,54 @@ Here are some ways you can leverage the Microsoft Teams integration with your ag
   <Accordion title="What is Microsoft Teams and why should I use it with Relevance AI?">
     Microsoft Teams is a collaboration platform that combines workplace chat, video meetings, and file storage. Using it with Relevance AI allows you to automate responses to messages, trigger workflows from Teams conversations, and send automated messages to channels or chats, making your team communication more efficient.
   </Accordion>
-  
+
   <Accordion title="Do I need a Microsoft Teams account to use this integration?">
     Yes, you need a Microsoft account with access to Microsoft Teams. This integration is designed for Microsoft Teams for business and enterprise. You'll need to authenticate your Microsoft account through Relevance AI to connect the integration.
   </Accordion>
-  
+
   <Accordion title="Can I connect multiple Microsoft accounts?">
     Yes, you can connect multiple Microsoft accounts to your workspace through the Integrations & API Keys page. Each account can be used for different triggers and tool steps, which is useful for managing different Teams workspaces or separating different projects.
   </Accordion>
-  
+
   <Accordion title="What permissions does the Microsoft Teams integration require?">
-    The integration requires permissions to read messages, send messages, and access team/channel information. The exact permissions will be shown during the OAuth flow when you connect your account. You may need admin consent depending on your organization's policies.
+    The integration requires permissions to read messages, send messages, and access team and channel information. The exact permissions are shown during the OAuth flow when you connect your account. Some operations — such as listing team members or accessing private channels — may require admin consent depending on your organization's Microsoft 365 policies.
   </Accordion>
-  
+
   <Accordion title="Do triggers work for private messages?">
     Yes, Teams triggers can monitor both channel messages and private chats, depending on your configuration. You can set up triggers for specific channels or direct message conversations.
   </Accordion>
-  
-  <Accordion title="Can I filter which messages trigger my Agent?">
+
+  <Accordion title="Can I filter which messages trigger my agent?">
     Yes, you can configure trigger conditions such as keyword matching to filter which messages activate your workflow. This allows you to have your agent respond only to relevant messages rather than every message in a channel.
   </Accordion>
-  
+
   <Accordion title="How do I prevent my agent from sending messages automatically?">
     Set your message-sending tools to "approval mode" in the agent settings. This ensures your agent will always ask for permission before sending a Teams message. You can review the draft, make edits if needed, and then approve or reject the send action.
   </Accordion>
-  
+
   <Accordion title="Can my agent access files shared in Teams?">
-    Yes, files shared in Teams channels are stored in SharePoint. You can use the Microsoft Graph API to access these files through the API Call tool step. The files are typically accessible via the channel's associated SharePoint document library.
+    Yes, files shared in Teams channels are stored in SharePoint. You can use the Microsoft API Call tool step to access these files through the Graph API. Files are typically accessible via the channel's associated SharePoint document library.
   </Accordion>
-  
-  <Accordion title="What's the difference between the pre-built Teams tool steps and the API Call tool step?">
-    Pre-built tool steps (like "Send Channel Message" or "Create Channel") are designed for specific, common tasks and have simplified interfaces with guided inputs. The Microsoft API Call tool step gives you full access to Microsoft Graph API, allowing you to implement any functionality available in the API, including advanced operations not covered by pre-built steps.
+
+  <Accordion title="What's the difference between the pre-built Teams tool steps and the Microsoft API Call tool step?">
+    Pre-built tool steps (like Send Channel Message or List Teams) are designed for specific, common tasks and have simplified interfaces with guided inputs. The Microsoft API Call tool step gives you direct access to any Microsoft Graph API endpoint, allowing you to implement functionality not covered by pre-built steps.
   </Accordion>
-  
+
   <Accordion title="Are there rate limits for Microsoft Teams API calls?">
-    Yes, Microsoft Graph API enforces rate limits. The specific limits depend on your Microsoft 365 subscription and the type of requests being made. Your agents should be designed to handle rate limiting gracefully. Microsoft typically returns a `429 Too Many Requests` status code when limits are exceeded.
+    Yes, Microsoft Graph API enforces rate limits. The specific limits depend on your Microsoft 365 subscription and the type of requests being made. Your agents should handle rate limiting gracefully. Microsoft returns a `429 Too Many Requests` status code when limits are exceeded.
   </Accordion>
-  
+
   <Accordion title="Can I use this integration with Microsoft Teams for personal use?">
     This integration is designed for Microsoft Teams for business and enterprise. Personal Microsoft accounts may have limited functionality. We recommend using a business or enterprise Microsoft 365 account for the best experience.
   </Accordion>
-  
+
   <Accordion title="How do I remove the Microsoft Teams integration?">
     To remove the Microsoft Teams integration:
     1. Go to the Integrations & API Keys page from the sidebar
     2. Search for Microsoft (Teams, Outlook, SharePoint, OneDrive) from the list
     3. Click "…" on the account you want to remove
     4. Click "Remove" and confirm your choice
-    
+
     Note: Removing the Microsoft integration will disable all triggers and tool steps using this account across Teams, Outlook, SharePoint, and OneDrive.
-  </Accordion>
-  
-  <Accordion title="Why are my Teams tool steps in beta?">
-    The beta status indicates that while the Microsoft Teams integration is fully functional and available for use, we're still gathering user feedback and may make refinements to improve the experience. We recommend testing your workflows thoroughly before deploying them in production. If you encounter any issues or have suggestions, please contact our support team.
   </Accordion>
 </AccordionGroup>
