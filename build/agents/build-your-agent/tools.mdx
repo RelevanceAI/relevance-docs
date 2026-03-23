@@ -76,7 +76,7 @@ Control whether your agent needs permission before running a tool. You can set t
 
 ### Auto Run
 
-The tool runs automatically whenever the agent determines it should be used. This provides the smoothest user experience as the agent can seamlessly incorporate tool functionality without interrupting the conversation flow.
+The tool runs automatically whenever the agent determines it should be used. The agent incorporates tool functionality without interrupting the conversation flow.
 
 **Best for:** Tools that are low-risk, frequently used, or where immediate action is beneficial.
 
@@ -106,6 +106,6 @@ When on, forces the agent to retry errored tools until success or max retries (a
 
 The number of times the agent will retry a tool that errors before marking the task as failed. A few retries (like 3) usually strikes a good balance — it gives your agent a second chance without risking long loops or extra costs. Increasing this may raise credit usage.
 
-#### Behaviour after max tool retries
+#### Behavior after max tool retries
 
 Decide what should happen when the maximum number of retries is reached: either **Terminate task** immediately or **Escalate** it to a human for help. Terminating is faster and simpler, but escalation gives you a chance to fix things manually when it matters most.
