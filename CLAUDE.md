@@ -56,6 +56,7 @@ Key rules:
 - "Learn more" links go at the bottom of the page, not the top.
 - Verify all internal and anchor links work. Don't link to `#section-name` targeting bold text — the target must be a proper heading.
 - Use root-relative paths for internal links (e.g., `/quickstart`).
+- Always link to the support contact page (`/get-started/support`) rather than referencing specific email addresses like `support@relevanceai.com`. This keeps contact information centralized and up-to-date.
 
 ## Step-by-step instructions
 
