@@ -242,6 +242,44 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
 
 ---
 
+## Handling long-running agent executions
+
+When triggering agents via MCP, you have two execution modes available depending on how long your agent takes to complete.
+
+### Execution modes
+
+<Tabs>
+  <Tab title="Synchronous">
+    The `relevance_trigger_agent` tool waits for the agent to finish and returns the result directly. It has a 120-second timeout, so use it for agents that complete quickly — single-step agents with minimal tool usage and no workforce nodes.
+  </Tab>
+
+  <Tab title="Asynchronous">
+    The `relevance_trigger_agent_async` and `relevance_poll_agent_result` tools work together with no timeout limit. The trigger returns immediately with a conversation ID, which you then poll to check status and retrieve results. Use this for agents with workforce nodes, multi-step chains, external API calls, or any execution expected to exceed 2 minutes.
+  </Tab>
+</Tabs>
+
+<Warning>
+  If you encounter timeout errors with `relevance_trigger_agent`, switch to the async pattern. Agents with workforce nodes should always use async execution.
+</Warning>
+
+### Async execution workflow
+
+<Steps>
+  <Step title="Trigger the agent">
+    Call `relevance_trigger_agent_async` with your agent parameters. This returns immediately with a `conversation_id`.
+  </Step>
+
+  <Step title="Poll for results">
+    Use `relevance_poll_agent_result` with the `conversation_id` to check the execution status. Poll every 3-5 seconds until the status is `complete` or `failed`.
+  </Step>
+
+  <Step title="Retrieve the results">
+    The status will be `working` or `in progress` while the agent is executing, `complete` when results are available, or `failed` if an error occurred. Once complete, the poll response contains the agent's output.
+  </Step>
+</Steps>
+
+---
+
 ## Troubleshooting
 
 <AccordionGroup>
@@ -262,6 +300,10 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
     - Check that `https://mcp.relevanceai.com/` is accessible from your network
     - Try removing and re-adding the MCP server connection in your client
     - Try clearing the auth cache: `rm -rf ~/.mcp-auth`
+  </Accordion>
+
+  <Accordion title="Agent execution timeouts">
+    Timeout errors from `relevance_trigger_agent` mean your agent exceeded the 120-second synchronous limit. Switch to `relevance_trigger_agent_async` and `relevance_poll_agent_result` instead. See [handling long-running agent executions](#handling-long-running-agent-executions) for the full workflow. Agents with workforce nodes, multi-step chains, or complex workflows should always use the async pattern.
   </Accordion>
 </AccordionGroup>
 
