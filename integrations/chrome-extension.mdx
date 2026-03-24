@@ -1,0 +1,178 @@
+---
+title: 'Chrome extension'
+sidebarTitle: 'Chrome extension'
+description: 'Extract web page content and send it directly to Relevance AI Chat from your browser.'
+---
+
+The Relevance AI Chrome extension lets you capture content from any web page and send it to Chat, where you can work with it using any of your agents. It also includes built-in support for LinkedIn profiles, extracting structured data like name, title, and company.
+
+The extension is a manual, browser-based complement to automated web scraping. Use it when you want to send specific page content to an agent on demand, rather than building a scheduled pipeline.
+
+<Note>The Chrome extension is only available on desktop Chrome. It is not available on mobile browsers or other browsers such as Firefox or Safari.</Note>
+
+## Installation
+
+1. Open the Relevance AI Chrome extension page in the Chrome Web Store.
+2. Click **Add to Chrome**.
+3. When prompted, click **Add extension** to confirm.
+
+The extension icon will appear in your Chrome toolbar. If you don't see it, click the puzzle piece icon in the toolbar and pin the Relevance AI extension.
+
+## Authentication
+
+Before you can use the extension, you need to connect it to your Relevance AI account.
+
+1. Click the Relevance AI icon in your Chrome toolbar.
+2. Click **Connect with Relevance AI**.
+3. A browser window opens asking you to authorize the connection. Sign in to your Relevance AI account if prompted.
+4. Click **Authorize** to grant the extension access.
+5. Once authorized, the extension shows your connected account.
+
+<Note>Authentication uses OAuth. The extension does not store your Relevance AI password.</Note>
+
+## Project selection
+
+If your Relevance AI account has multiple projects, you can choose which project the extension sends content to.
+
+1. Open the extension by clicking the toolbar icon.
+2. Click the project dropdown at the top of the extension panel.
+3. Select the project you want to work in.
+
+The extension remembers your selection across sessions. To switch projects, repeat these steps.
+
+Learn more about [managing projects](/admin/project-management/switch-projects).
+
+## Accessing the extension
+
+There are three ways to open the extension on any web page.
+
+### Toolbar icon
+
+Click the Relevance AI icon in your Chrome toolbar. This opens the extension panel showing the current page and any extraction options.
+
+### Right-click context menu
+
+Right-click anywhere on a web page and select **Send to Relevance AI** from the context menu. This opens the extension panel with the current page pre-selected.
+
+### Keyboard shortcut
+
+Use the keyboard shortcut to open the extension without clicking. The default shortcut is shown in the extension panel. You can customize it by going to `chrome://extensions/shortcuts` in your browser.
+
+## Content extraction
+
+When you open the extension on a web page, it extracts the page content and sends it to Chat.
+
+### General web pages
+
+For most web pages, the extension extracts the visible text content of the page — articles, documentation, product pages, and other text-heavy content.
+
+1. Navigate to the web page you want to extract.
+2. Open the extension using any of the three access methods above.
+3. Click **Extract content**.
+4. Review the extracted content in the preview panel.
+5. Click **Send to Chat** to open Relevance AI Chat with the content pre-loaded.
+
+### LinkedIn profiles
+
+The extension has built-in support for LinkedIn profiles. When you open the extension on a LinkedIn profile page, it recognizes the page type and extracts structured profile data including:
+
+- Name and headline
+- Current role and company
+- Location
+- About section
+- Work experience
+- Education
+
+1. Navigate to a LinkedIn profile page.
+2. Open the extension using any access method.
+3. The extension automatically detects the profile and shows an **Extract LinkedIn profile** option.
+4. Click **Extract LinkedIn profile**.
+5. Review the structured data in the preview panel.
+6. Click **Send to Chat** to open Relevance AI Chat with the profile data pre-loaded.
+
+<Tip>LinkedIn profile extraction works on profiles you can view while logged in to LinkedIn. Make sure you are logged in to LinkedIn for best results.</Tip>
+
+For automated LinkedIn workflows, see the [LinkedIn integration](/integrations/popular-integrations/linkedin).
+
+## Sending content to Chat
+
+After extracting content, clicking **Send to Chat** opens Relevance AI Chat with the content included in the conversation. From Chat, you can:
+
+- Type a message to start a conversation about the content
+- Use **@** to mention a specific agent to handle the content
+- Ask questions, request summaries, or trigger agent workflows
+
+For example, after extracting a LinkedIn profile, you could type `@sales-agent Draft a personalized outreach message for this person.`
+
+Learn more about [Chat](/get-started/chat/introduction).
+
+## Usage examples
+
+<AccordionGroup>
+<Accordion title="Research a prospect from LinkedIn and draft outreach">
+1. Open a LinkedIn profile.
+2. Use the extension to extract the profile.
+3. Send to Chat.
+4. In Chat, type `@outreach-agent Draft a personalized connection request for this person.`
+5. The agent uses the extracted profile data to write a relevant message.
+</Accordion>
+
+<Accordion title="Summarize an article or blog post">
+1. Open an article or blog post.
+2. Use the extension to extract the page content.
+3. Send to Chat.
+4. In Chat, type `@research-agent Summarize this article in three bullet points.`
+</Accordion>
+
+<Accordion title="Analyze a competitor product page">
+1. Open a competitor's product page.
+2. Use the extension to extract the page content.
+3. Send to Chat.
+4. @ mention your competitive research agent and ask it to analyze the page.
+</Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+<AccordionGroup>
+<Accordion title="The extension icon is not visible in the toolbar">
+Click the puzzle piece icon in the Chrome toolbar to see all installed extensions. Click the pin icon next to Relevance AI to keep it visible in the toolbar.
+</Accordion>
+
+<Accordion title="Authentication fails or the extension shows as disconnected">
+1. Click the extension icon.
+2. Click **Disconnect** if the option is available, then reconnect.
+3. Make sure you are logged in to your Relevance AI account in the browser before authenticating.
+4. If the issue persists, try removing and reinstalling the extension.
+</Accordion>
+
+<Accordion title="Content extraction returns incomplete or garbled text">
+Some web pages block content extraction through JavaScript or page structure. If extraction returns incomplete content:
+- Scroll through the full page before extracting, so all content has loaded.
+- Use the [Extract Website Content](/tool/tool-steps/extract-website-content) tool step in an automated workflow instead.
+</Accordion>
+
+<Accordion title="LinkedIn profile extraction does not trigger">
+Make sure you are on a LinkedIn profile page — the URL should contain `linkedin.com/in/`. The LinkedIn extraction mode only activates on profile pages, not on the LinkedIn feed or company pages.
+</Accordion>
+</AccordionGroup>
+
+## FAQs
+
+<AccordionGroup>
+<Accordion title="Which browsers are supported?">
+The extension is only available for Google Chrome on desktop. It is not available for Firefox, Safari, Edge, or mobile browsers.
+</Accordion>
+
+<Accordion title="Can I send content to a specific agent directly?">
+You can send content to Chat, then use **@** to mention a specific agent. There is no option to route content directly to an agent from the extension — all content goes through Chat first.
+</Accordion>
+
+<Accordion title="Does the extension work on any web page?">
+The extension can extract content from most publicly accessible web pages. Pages with heavy JavaScript rendering or login requirements may return incomplete results. For reliable, automated extraction at scale, use the [Extract Website Content](/tool/tool-steps/extract-website-content) tool step.
+</Accordion>
+
+<Accordion title="Is LinkedIn data extraction compliant with LinkedIn's terms of service?">
+The extension extracts data that is visible to you in your browser session, similar to manually copying profile information. You are responsible for ensuring your use of extracted data complies with LinkedIn's terms of service and applicable data privacy regulations.
+</Accordion>
+</AccordionGroup>
