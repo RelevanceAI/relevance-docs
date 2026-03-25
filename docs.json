@@ -94,7 +94,7 @@
                   "build/agents/build-your-agent/prompt",
                   "build/agents/build-your-agent/tools",
                   "build/agents/build-your-agent/triggers",
-                  "build/agents/build-your-agent/escalations",
+                  "build/agents/build-your-agent/alerts",
                   "build/agents/build-your-agent/memory",
                   "build/agents/build-your-agent/variables",
                   "build/agents/build-your-agent/evals",
@@ -112,6 +112,7 @@
                     "group": "Advanced Settings",
                     "pages": [
                       "build/agents/build-your-agent/agent-settings/general",
+                      "build/agents/build-your-agent/agent-settings/visual-data-masking",
                       "build/agents/build-your-agent/agent-settings/language-model",
                       "build/agents/build-your-agent/agent-settings/subagents",
                       "build/agents/build-your-agent/agent-settings/task-view",
@@ -394,7 +395,16 @@
           {
             "group": "Model Context Protocol",
             "pages": [
-              "integrations/mcp/mcp-server",
+              {
+                "group": "Programmatic GTM",
+                "pages": [
+                  "integrations/mcp/programmatic-gtm/introduction",
+                  "integrations/mcp/programmatic-gtm/claude-code",
+                  "integrations/mcp/programmatic-gtm/codex",
+                  "integrations/mcp/programmatic-gtm/mcp-server",
+                  "integrations/mcp/programmatic-gtm/agent-skills"
+                ]
+              },
               "integrations/mcp/mcp-client"
             ]
           },
@@ -418,7 +428,8 @@
                   "integrations/popular-integrations/salesforce",
                   "integrations/popular-integrations/lusha",
                   "integrations/popular-integrations/zoominfo",
-                  "integrations/popular-integrations/marketo"
+                  "integrations/popular-integrations/marketo",
+                  "integrations/popular-integrations/firmable"
                 ]
               },
               {
@@ -430,6 +441,7 @@
                   "integrations/popular-integrations/whatsapp",
                   "integrations/popular-integrations/whatsapp-for-business",
                   "integrations/popular-integrations/telegram",
+                  "integrations/popular-integrations/twilio",
                   "integrations/popular-integrations/microsoft-teams",
                   "integrations/popular-integrations/linkedin",
                   "integrations/popular-integrations/zoom",
@@ -455,11 +467,18 @@
                 ]
               },
               {
+                "group": "Analytics & Marketing",
+                "pages": [
+                  "integrations/popular-integrations/google-analytics"
+                ]
+              },
+              {
                 "group": "Developer",
                 "pages": [
                   "integrations/popular-integrations/github",
                   "integrations/popular-integrations/vercel",
-                  "integrations/popular-integrations/airtop"
+                  "integrations/popular-integrations/airtop",
+                  "integrations/popular-integrations/worldnewsapi"
                 ]
               }
             ]
@@ -613,6 +632,10 @@
   },
   "redirects": [
     {
+      "source": "/build/agents/build-your-agent/escalations",
+      "destination": "/build/agents/build-your-agent/alerts"
+    },
+    {
       "source": "/get-started/system_limits",
       "destination": "/admin/system-limits"
     },
@@ -629,8 +652,12 @@
       "destination": "/get-started/core-concepts/tools"
     },
     {
+      "source": "/build/tools/bulk-run",
+      "destination": "/build/knowledge/enrich-with-tool"
+    },
+    {
       "source": "/templates/bulk-run",
-      "destination": "/build/tools/bulk-run"
+      "destination": "/build/knowledge/enrich-with-tool"
     },
     {
       "source": "/templates/faq",
@@ -786,7 +813,11 @@
     },
     {
       "source": "/integrations/popular-integrations/mcp-server",
-      "destination": "/integrations/mcp/mcp-server"
+      "destination": "/integrations/mcp/programmatic-gtm/mcp-server"
+    },
+    {
+      "source": "/integrations/mcp/mcp-server",
+      "destination": "/integrations/mcp/programmatic-gtm/mcp-server"
     },
     {
       "source": "/chat/intro-to-chat",

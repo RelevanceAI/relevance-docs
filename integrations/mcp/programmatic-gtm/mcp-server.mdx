@@ -1,0 +1,334 @@
+---
+title: "MCP Server"
+sidebarTitle: "MCP Server"
+description: "Connect to Relevance AI from Claude Desktop, Cursor, VS Code, ChatGPT, and other MCP-compatible AI clients."
+---
+
+The Relevance AI MCP server gives any MCP-compatible AI client direct access to your agents, tools, and knowledge. Connect from the AI tools you already use and start building.
+
+The MCP server is available at:
+
+```
+https://mcp.relevanceai.com/
+```
+
+<Tip>For Claude Code, we recommend using the [Relevance AI plugin](/integrations/mcp/programmatic-gtm/claude-code) instead of a manual MCP connection — it includes built-in skills and context that make the experience significantly better.</Tip>
+
+<Warning>
+  This page is about using Relevance AI **from** external AI clients. If you want to connect an external MCP server **to** a Relevance AI agent, see [MCP Client](/integrations/mcp/mcp-client).
+</Warning>
+
+---
+
+## Supported clients
+
+<AccordionGroup>
+  <Accordion title="Claude Desktop" icon="message-bot">
+    1. Open Claude Desktop
+    2. Go to **Settings** → **Connectors**
+    3. Click **Add connector**
+    4. Enter the server URL: `https://mcp.relevanceai.com/`
+    5. Follow the authentication prompts to connect your Relevance AI project
+  </Accordion>
+
+  <Accordion title="Claude Web" icon="globe">
+    1. Navigate to the [Connectors page](https://claude.ai/settings/connectors) in Claude.ai
+    2. Click **Add connector**
+    3. Enter the server URL: `https://mcp.relevanceai.com/`
+    4. Follow the authentication prompts
+  </Accordion>
+
+  <Accordion title="ChatGPT" icon="comment">
+    ChatGPT supports MCP servers through Developer Mode, available on Pro, Team, Enterprise, and Edu plans.
+
+    1. Open ChatGPT **Settings**
+    2. Go to **Connectors** → **Advanced** → **Developer Mode**
+    3. Click **Add connector**
+    4. Enter the server URL: `https://mcp.relevanceai.com/`
+    5. Set Authentication to **OAuth** and follow the login flow
+
+    Once connected, the Relevance AI tools will be available in both Chat and Deep Research modes.
+  </Accordion>
+
+  <Accordion title="Cursor" icon="i-cursor">
+    1. Open Cursor Settings
+    2. Navigate to the **MCP** tab
+    3. Click **Add new MCP server**
+    4. Use the following configuration in your `mcp.json`:
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="VS Code / Copilot" icon="code">
+    Add the following to your VS Code settings (`.vscode/mcp.json`):
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Windsurf" icon="wind">
+    Add the following to your Windsurf MCP configuration:
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Codex" icon="robot">
+    Run the following command:
+
+    ```bash
+    codex --mcp-server https://mcp.relevanceai.com/
+    ```
+
+    You can also set the MCP server via an environment variable:
+
+    ```bash
+    export CODEX_MCP_SERVER=https://mcp.relevanceai.com/
+    ```
+  </Accordion>
+
+  <Accordion title="Zed" icon="pen-nib">
+    Add the following to your Zed settings (`settings.json`):
+
+    ```json
+    {
+      "language_models": {
+        "mcp": {
+          "servers": {
+            "relevance-ai": {
+              "command": "npx",
+              "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+            }
+          }
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="v0 by Vercel" icon="bolt">
+    Add the following MCP configuration in your v0 project settings:
+
+    ```json
+    {
+      "mcpServers": {
+        "relevance-ai": {
+          "command": "npx",
+          "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+        }
+      }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Claude Code (manual)" icon="terminal">
+    If you prefer to add the MCP server directly without the plugin:
+
+    ```bash
+    claude mcp add relevance-prod --transport http https://mcp.relevanceai.com/
+    ```
+
+    Once added, run `/mcp` from within Claude Code. You will see the new MCP server in the list. Select it to connect and follow the authentication steps.
+  </Accordion>
+
+  <Accordion title="Other clients" icon="plug">
+    For any MCP-compatible client, use the server URL:
+
+    ```
+    https://mcp.relevanceai.com/
+    ```
+
+    If your client requires an `npx` command, use:
+
+    ```bash
+    npx -y mcp-remote https://mcp.relevanceai.com/
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Authentication
+
+When you first connect, you will be prompted to authenticate with your Relevance AI account. Authentication is **per project** — you will be connected to a specific Relevance AI project after logging in.
+
+### Working with multiple projects
+
+If you work across multiple Relevance AI projects, add a separate MCP server entry for each:
+
+<CodeGroup>
+```json Cursor
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+
+```json VS Code
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+
+```json Windsurf
+{
+  "mcpServers": {
+    "relevance-project-1": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    },
+    "relevance-project-2": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.relevanceai.com/"]
+    }
+  }
+}
+```
+</CodeGroup>
+
+Each entry authenticates independently against its own project, so you can access tools and agents across all your projects without logging out and back in.
+
+<Note>
+  Alternatively, you can use a single connection and log out / log back in to switch projects — but the multi-connection approach above is preferred for convenience.
+</Note>
+
+---
+
+## Add agent skills
+
+The MCP server gives your AI assistant the ability to call Relevance AI tools, but it doesn't know _how_ to use them well. For better results, pair it with the [agent skills](/integrations/mcp/programmatic-gtm/agent-skills) repository — a local reference that teaches your assistant how to work with agents, tools, workforces, knowledge, and more.
+
+---
+
+## Handling long-running agent executions
+
+When triggering agents via MCP, you have two execution modes available depending on how long your agent takes to complete.
+
+### Execution modes
+
+<Tabs>
+  <Tab title="Synchronous">
+    The `relevance_trigger_agent` tool waits for the agent to finish and returns the result directly. It has a 120-second timeout, so use it for agents that complete quickly — single-step agents with minimal tool usage and no workforce nodes.
+  </Tab>
+
+  <Tab title="Asynchronous">
+    The `relevance_trigger_agent_async` and `relevance_poll_agent_result` tools work together with no timeout limit. The trigger returns immediately with a conversation ID, which you then poll to check status and retrieve results. Use this for agents with workforce nodes, multi-step chains, external API calls, or any execution expected to exceed 2 minutes.
+  </Tab>
+</Tabs>
+
+<Warning>
+  If you encounter timeout errors with `relevance_trigger_agent`, switch to the async pattern. Agents with workforce nodes should always use async execution.
+</Warning>
+
+### Async execution workflow
+
+<Steps>
+  <Step title="Trigger the agent">
+    Call `relevance_trigger_agent_async` with your agent parameters. This returns immediately with a `conversation_id`.
+  </Step>
+
+  <Step title="Poll for results">
+    Use `relevance_poll_agent_result` with the `conversation_id` to check the execution status. Poll every 3-5 seconds until the status is `complete` or `failed`.
+  </Step>
+
+  <Step title="Retrieve the results">
+    The status will be `working` or `in progress` while the agent is executing, `complete` when results are available, or `failed` if an error occurred. Once complete, the poll response contains the agent's output.
+  </Step>
+</Steps>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Authentication issues">
+    - Make sure you have an active Relevance AI account
+    - Check that you have access to the project you are trying to connect to
+    - Try removing and re-adding the MCP server connection
+  </Accordion>
+
+  <Accordion title="Tools not appearing">
+    - Verify that you have tools configured in your Relevance AI project
+    - Check that you are authenticated to the correct project
+    - Try disconnecting and reconnecting the MCP server
+  </Accordion>
+
+  <Accordion title="Connection errors">
+    - Ensure you have a stable internet connection
+    - Check that `https://mcp.relevanceai.com/` is accessible from your network
+    - Try removing and re-adding the MCP server connection in your client
+    - Try clearing the auth cache: `rm -rf ~/.mcp-auth`
+  </Accordion>
+
+  <Accordion title="Agent execution timeouts">
+    Timeout errors from `relevance_trigger_agent` mean your agent exceeded the 120-second synchronous limit. Switch to `relevance_trigger_agent_async` and `relevance_poll_agent_result` instead. See [handling long-running agent executions](#handling-long-running-agent-executions) for the full workflow. Agents with workforce nodes, multi-step chains, or complex workflows should always use the async pattern.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What is MCP?">
+    The Model Context Protocol (MCP) is an open standard that allows AI clients to connect to external tools and data sources. It provides a standardized way for AI assistants to access your Relevance AI workspace.
+  </Accordion>
+
+  <Accordion title="Is the MCP server free to use?">
+    The MCP server itself is free. You will be billed for any Relevance AI usage (agent runs, tool executions, etc.) according to your plan.
+  </Accordion>
+
+  <Accordion title="Can I use multiple AI clients at the same time?">
+    Yes. You can connect to the Relevance AI MCP server from as many clients as you like simultaneously. Each client authenticates independently.
+  </Accordion>
+
+  <Accordion title="Does authentication expire?">
+    Authentication tokens may expire after a period of inactivity. If you are prompted to re-authenticate, simply follow the login flow again.
+  </Accordion>
+
+  <Accordion title="Can I restrict which tools are available via MCP?">
+    The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each connection to the appropriate project.
+  </Accordion>
+</AccordionGroup>

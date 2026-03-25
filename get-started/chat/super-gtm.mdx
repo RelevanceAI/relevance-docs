@@ -159,6 +159,16 @@ For integrations that can modify data (e.g. sending an email, creating a CRM rec
 
 This gives you human-in-the-loop control over any action that changes data in your connected tools.
 
+### Filesystem explorer
+
+Super GTM includes a filesystem explorer that shows which files your agent has access to during a conversation. As the agent works, the file tree displays visual indicators so you can see at a glance which files it has interacted with — without reviewing individual tool call logs.
+
+- **Amber dot + amber text** — the agent wrote to this file
+- **Gray dot** — the agent read this file but did not modify it
+- **Folder icons** also display these indicators when any file inside was accessed
+
+If the agent both read and wrote to the same file, it shows as written (amber). Write operations take visual priority over reads.
+
 ## Example use cases
 
 <Tabs>

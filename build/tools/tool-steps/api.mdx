@@ -8,7 +8,7 @@ The API Tool step allows you to run a custom API call to any another product / s
 
 ## What is an API?
 
-Think of an API like a waiter in a restaurant. You (the user) look at the menu (a list of what’s possible), place your order with the waiter (the API), and then the kitchen (the system or server) prepares the food and the waiter brings it back to you.
+Think of an API like a waiter in a restaurant. You (the user) look at the menu (a list of what's possible), place your order with the waiter (the API), and then the kitchen (the system or server) prepares the food and the waiter brings it back to you.
 
 In the tech world, an API is a set of rules that allows one piece of software (like an app) to talk to another (like a server).
 
@@ -28,7 +28,94 @@ You can add the API Tool step to your Tool by:
 3. Select the method you wish to use for your API call
 4. Enter the URL / pathway / endpoint you want to call
 5. Add headers, body and URL parameters as needed for your API call
-6. Click 'Run step' to run the Tool step
+6. Click 'Run step' to run the Tool step (see [Configuring the Request Body](#configuring-the-request-body) for details on body formatting)
+
+### Configuring the Request Body
+
+The Body field accepts JSON data for POST, PUT, PATCH, and other HTTP methods that support request bodies. Both JSON objects and JSON arrays are supported as top-level request bodies.
+
+**JSON Objects** (most common):
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "role": "admin"
+}
+```
+
+**JSON Arrays** (for bulk operations or APIs that require array format):
+```json
+[
+  {
+    "id": 1,
+    "status": "active"
+  },
+  {
+    "id": 2,
+    "status": "inactive"
+  }
+]
+```
+
+<Info>The request body is automatically serialized to JSON when sent to the API. You don't need to manually stringify the data.</Info>
+
+**When to use objects vs. arrays:**
+- Use **objects** for single-item operations (creating one user, updating one record)
+- Use **arrays** for bulk operations (creating multiple items at once) or when the API specifically requires an array format (e.g., some Confluence endpoints)
+
+## Example API Call Configurations
+
+### Object Body Example
+
+Most APIs accept JSON objects for single-item operations. Here's an example of creating a user:
+
+**Method**: POST  
+**URL**: `https://api.example.com/users`  
+**Headers**:
+```json
+{
+  "Content-Type": "application/json",
+  "Authorization": "Bearer YOUR_TOKEN"
+}
+```
+**Body**:
+```json
+{
+  "username": "johndoe",
+  "email": "john@example.com",
+  "firstName": "John",
+  "lastName": "Doe"
+}
+```
+
+### Array Body Example
+
+Some APIs require array bodies for bulk operations or specific endpoints. Here's an example using the Confluence API to update page properties:
+
+**Method**: PUT  
+**URL**: `https://your-domain.atlassian.net/wiki/api/v2/pages/{pageId}/properties`  
+**Headers**:
+```json
+{
+  "Content-Type": "application/json",
+  "Accept": "application/json"
+}
+```
+**Body**:
+```json
+[
+  {
+    "key": "property-key-1",
+    "value": "property-value-1"
+  },
+  {
+    "key": "property-key-2",
+    "value": "property-value-2"
+  }
+]
+```
+
+<Tip>Always check the API documentation for your specific endpoint to determine whether it expects an object or array body format.</Tip>
 
 ## Advanced Settings
 
@@ -55,6 +142,6 @@ When checked, throws an error when the API response contains a 4xx/5xx response 
     The "missing scopes" API error code generally indicates that the access token or credentials used in the API request do not include the necessary permissions (scopes) required to perform the requested action. This usually indicates your API key / token is missing, or you may not have the access to perform the call you're attempting.
   </Accordion>
   <Accordion title="Invalid values">
-    An "invalid values" API error generally occurs when one or more of the parameters or fields in your API request contain data that doesn’t conform to the expected format, type, or allowed range defined by the API. This can also occur when your request hasn't filled out a mandatory / required field for the API call. To fix this, make sure all required fields have been added to your call, and your parameters match the expected format (e.g. strings, booleans).
+    An "invalid values" API error generally occurs when one or more of the parameters or fields in your API request contain data that doesn't conform to the expected format, type, or allowed range defined by the API. This can also occur when your request hasn't filled out a mandatory / required field for the API call. To fix this, make sure all required fields have been added to your call, and your parameters match the expected format (e.g. strings, booleans).
   </Accordion>
 </AccordionGroup>

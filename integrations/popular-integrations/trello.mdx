@@ -9,7 +9,7 @@ Trello is a flexible personal productivity and work management tool that helps i
   The Trello integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Atlassian (Trello's parent company). If you have a question / issue with using Trello in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question / issue that is only about Trello, you can [reach out to Atlassian support](https://support.atlassian.com/contact/).
 </Warning>
 
-## Connect the Integration
+## Connect the integration
 
 Setting up the Trello integration with Relevance AI is straightforward:
 
@@ -22,6 +22,65 @@ Setting up the Trello integration with Relevance AI is straightforward:
 7. Once authorized, you'll be redirected back to Relevance AI with the integration active
 
 After connecting, your Relevance AI agents will be able to interact with your Trello account, accessing boards, creating cards, and managing your Trello workflows.
+
+## Trello API authentication
+
+In addition to OAuth authentication, you can use Trello's native API key and token authentication method. This approach is useful for server-to-server integrations, automation scripts, or when you need more granular control over API access.
+
+### When to use API key + token authentication
+
+- **OAuth (recommended for most users)**: Best for user-facing integrations where you want users to authorize access through Trello's interface
+- **API key + token**: Ideal for backend automation, service accounts, or when you need persistent access without user interaction
+
+### Getting your API key
+
+<Steps>
+  <Step title="Access Trello Power-Ups Admin">
+    Navigate to [https://trello.com/power-ups/admin](https://trello.com/power-ups/admin) while logged into your Trello account.
+  </Step>
+  
+  <Step title="Create a new Power-Up or API key">
+    If you haven't created a Power-Up before, click "New" to create one. You'll need to provide a name for your integration (e.g., "Relevance AI Integration").
+  </Step>
+  
+  <Step title="Copy your API key">
+    Once created, you'll see your API key displayed. Copy this key and store it securely.
+  </Step>
+</Steps>
+
+### Generating a token
+
+After obtaining your API key, you need to generate a token:
+
+<Steps>
+  <Step title="Generate token URL">
+    Visit the following URL in your browser, replacing `YOUR_API_KEY` with your actual API key:
+    
+    ```
+    https://trello.com/1/authorize?expiration=never&name=RelevanceAI&scope=read,write&response_type=token&key=YOUR_API_KEY
+    ```
+  </Step>
+  
+  <Step title="Authorize the token">
+    You'll be prompted to authorize the token. Review the permissions and click "Allow" to generate your token.
+  </Step>
+  
+  <Step title="Copy your token">
+    After authorization, Trello will display your token. Copy and store it securely alongside your API key.
+  </Step>
+</Steps>
+
+### Using API credentials in Relevance AI
+
+When configuring Trello tool steps in Relevance AI, you can provide your API key and token directly in the tool configuration. This allows your agents to authenticate with Trello without requiring OAuth authorization.
+
+<Warning>
+  Store your API key and token securely. Never commit them to version control or share them publicly. Treat them like passwords.
+</Warning>
+
+<Info>
+  For more details on Trello's API authentication, see the [official Trello API documentation](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/).
+</Info>
 
 ## Available triggers
 
@@ -132,24 +191,186 @@ Here are some powerful ways to use Trello triggers with Relevance AI:
 
 ## Tool steps for Trello
 
-The Trello integration provides a rich set of actions that your agents can use to interact with Trello. These actions can be incorporated into your agent's workflows to automate tasks.
+The Trello integration provides a comprehensive set of actions that your agents can use to interact with your boards and workflows. These actions can be incorporated into your agent's workflows as tool steps, enabling automation capabilities.
 
-<Snippet file="components/integrations/trello-tool-steps.mdx"/>
+### Card Management
+<CardGroup cols={2}>
+  <Card title="Create Card" icon="square-plus">
+    Create a new card on a Trello board
+  </Card>
+  <Card title="Update Card" icon="pen-to-square">
+    Update an existing card's properties
+  </Card>
+  <Card title="Get Card" icon="square">
+    Retrieve details about a specific card
+  </Card>
+  <Card title="Archive Card" icon="box-archive">
+    Archive a card from a board
+  </Card>
+</CardGroup>
+
+### Board & List Operations
+<CardGroup cols={2}>
+  <Card title="Get Boards" icon="table-columns">
+    List all boards accessible to your account
+  </Card>
+  <Card title="Get List Cards" icon="list">
+    Retrieve all cards from a specific list
+  </Card>
+  <Card title="Create List" icon="list-ul">
+    Create a new list on a board
+  </Card>
+</CardGroup>
+
+### Comments & Collaboration
+<CardGroup cols={2}>
+  <Card title="Add Comment to Card" icon="comment">
+    Post a comment on a card
+  </Card>
+  <Card title="Add Comment" icon="message">
+    Add a comment to a card (legacy action)
+  </Card>
+</CardGroup>
+
+### Checklist Management
+<CardGroup cols={2}>
+  <Card title="Add Checklist" icon="list-check">
+    Add a checklist to a card
+  </Card>
+  <Card title="Create a Checklist Item" icon="square-check">
+    Add an item to an existing checklist
+  </Card>
+</CardGroup>
+
+### Advanced Operations
+<CardGroup cols={2}>
+  <Card title="Trello API Call" icon="code">
+    Make custom API calls to any Trello endpoint
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Trello" in the tool step search bar to see all available Trello actions when building your tools.
+</Tip>
 
 ## Use the integration's API tool step (advanced)
 
-In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Trello-specific activities using the Trello API Call tool step:
+In addition to the pre-built actions available in the tool directory, you can build custom tools that perform Trello-specific activities using the Trello API Call tool step.
 
-1. Create a new tool in Relevance AI.
-2. Scroll down to Tool steps.
-3. Add the Trello API Tool step.
-4. Select your connected Trello account in the dropdown.
-5. Configure the API endpoint, method, and parameters according to your needs.
+### How to use the Trello API Call tool step
 
-This advanced approach gives you full access to the Trello REST API, allowing you to implement custom functionality beyond what's available in the standard actions.
+<Steps>
+  <Step title="Create a new tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add Trello functionality to.
+  </Step>
+  
+  <Step title="Add the Trello API Call tool step">
+    1. Scroll down to Tool steps
+    2. Search for "Trello API Call" in the tool step search bar
+    3. Add the Trello API Call tool step to your workflow
+  </Step>
+  
+  <Step title="Select your authentication method">
+    Choose between OAuth (connected account) or API key + token authentication.
+  </Step>
+  
+  <Step title="Configure the API endpoint">
+    Configure the API endpoint, method, and parameters:
+    - **Method**: Select the HTTP method (GET, POST, PUT, DELETE)
+    - **Endpoint**: Enter the API endpoint path (e.g., `/1/boards/{id}/cards`)
+    - **Body**: Add any required request body data
+    - **Query Parameters**: Add URL parameters as needed
+  </Step>
+  
+  <Step title="Test your API call">
+    Test your configuration to ensure it works correctly before deploying.
+  </Step>
+</Steps>
+
+### Example: Creating a card with custom fields
+
+Here's a practical example of using the Trello API Call tool step to create a card with specific properties:
+
+**API Endpoint**: `POST /1/cards`
+
+**Configuration**:
+```json
+{
+  "method": "POST",
+  "endpoint": "/1/cards",
+  "body": {
+    "idList": "5f8a1b2c3d4e5f6g7h8i9j0k",
+    "name": "New Task from Agent",
+    "desc": "This card was created automatically by Relevance AI",
+    "pos": "top",
+    "due": "2024-12-31",
+    "idLabels": ["5f8a1b2c3d4e5f6g7h8i9j0k"]
+  }
+}
+```
+
+This configuration:
+- Uses the POST method to create a new card
+- Specifies the list ID where the card should be created
+- Sets the card name and description
+- Positions the card at the top of the list
+- Adds a due date
+- Applies labels to the card
+
+### Common Trello API endpoints
+
+Here are some commonly used Trello API endpoints you can use with the API Call tool step:
+
+<AccordionGroup>
+  <Accordion title="Cards" icon="square">
+    - **Get card**: `GET /1/cards/{id}`
+    - **Create card**: `POST /1/cards`
+    - **Update card**: `PUT /1/cards/{id}`
+    - **Delete card**: `DELETE /1/cards/{id}`
+    - **Add comment**: `POST /1/cards/{id}/actions/comments`
+    
+    [View API Documentation](https://developer.atlassian.com/cloud/trello/rest/api-group-cards/)
+  </Accordion>
+  
+  <Accordion title="Boards" icon="table-columns">
+    - **Get board**: `GET /1/boards/{id}`
+    - **Get board lists**: `GET /1/boards/{id}/lists`
+    - **Get board cards**: `GET /1/boards/{id}/cards`
+    - **Create board**: `POST /1/boards`
+    
+    [View API Documentation](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/)
+  </Accordion>
+  
+  <Accordion title="Lists" icon="list">
+    - **Get list**: `GET /1/lists/{id}`
+    - **Create list**: `POST /1/lists`
+    - **Update list**: `PUT /1/lists/{id}`
+    - **Get list cards**: `GET /1/lists/{id}/cards`
+    
+    [View API Documentation](https://developer.atlassian.com/cloud/trello/rest/api-group-lists/)
+  </Accordion>
+  
+  <Accordion title="Checklists" icon="list-check">
+    - **Get checklist**: `GET /1/checklists/{id}`
+    - **Create checklist**: `POST /1/checklists`
+    - **Add checklist item**: `POST /1/checklists/{id}/checkItems`
+    - **Update checklist item**: `PUT /1/cards/{id}/checkItem/{idCheckItem}`
+    
+    [View API Documentation](https://developer.atlassian.com/cloud/trello/rest/api-group-checklists/)
+  </Accordion>
+  
+  <Accordion title="Labels" icon="tags">
+    - **Get label**: `GET /1/labels/{id}`
+    - **Create label**: `POST /1/labels`
+    - **Add label to card**: `POST /1/cards/{id}/idLabels`
+    - **Remove label from card**: `DELETE /1/cards/{id}/idLabels/{idLabel}`
+    
+    [View API Documentation](https://developer.atlassian.com/cloud/trello/rest/api-group-labels/)
+  </Accordion>
+</AccordionGroup>
 
 <Info>
-  You can find Trello's API documentation [here](https://developer.atlassian.com/cloud/trello/rest/).
+  You can find Trello's complete API documentation at [https://developer.atlassian.com/cloud/trello/rest/](https://developer.atlassian.com/cloud/trello/rest/).
 </Info>
 
 ## Frequently asked questions (FAQs)
@@ -157,6 +378,14 @@ This advanced approach gives you full access to the Trello REST API, allowing yo
 <AccordionGroup>
   <Accordion title="What permissions does the Trello integration require?">
     The integration requires read and write access to your Trello boards, lists, and cards. When you connect your Trello account, you'll be asked to authorize Relevance AI to access your Trello data. You can review the specific permissions during the OAuth authorization process.
+  </Accordion>
+  
+  <Accordion title="Should I use OAuth or API key + token authentication?">
+    **OAuth** is recommended for most users as it's simpler to set up and provides user-level permissions. Use **API key + token** when you need:
+    - Server-to-server integrations
+    - Persistent access without user interaction
+    - Service account functionality
+    - More granular control over API access
   </Accordion>
   
   <Accordion title="Can I restrict my agent to only access certain boards?">

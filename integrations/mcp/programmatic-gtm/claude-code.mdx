@@ -1,0 +1,126 @@
+---
+title: "Claude Code Plugin"
+sidebarTitle: "Claude Code"
+description: "Use the Relevance AI Claude Code plugin to build and manage your GTM agents directly from your terminal."
+---
+
+The [Relevance AI Claude Code plugin](https://github.com/RelevanceAI/claude-code-plugin) is the fastest way to get started with [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction). It bundles the MCP server along with built-in skills that teach Claude Code how to work with agents, tools, workforces, knowledge, analytics, and evals — all from your terminal.
+
+## Quick start
+
+<Steps>
+  <Step title="Install the plugin">
+    Install from the Claude Code marketplace:
+
+    ```bash
+    claude plugin marketplace add RelevanceAI/cc-plugin
+    claude plugin install relevance-ai@cc-plugin
+    ```
+
+    <Info>Requires Claude Code version **1.0.33** or later.</Info>
+  </Step>
+
+  <Step title="Authenticate">
+    Run `/mcp` from within Claude Code, select the **relevance-ai** server, and click **Authenticate** to log in via your browser.
+
+    Authentication is required only once.
+  </Step>
+
+  <Step title="Start building">
+    You're ready to go. Try one of the example prompts below or describe what you want to build.
+  </Step>
+</Steps>
+
+---
+
+## What the plugin includes
+
+<CardGroup cols={3}>
+  <Card title="MCP server connection" icon="server">
+    Full access to your Relevance AI project's agents, tools, and knowledge.
+  </Card>
+  <Card title="Built-in skills" icon="graduation-cap">
+    Pre-configured prompts and workflows for agents, tools, workforces, triggers, and evaluations.
+  </Card>
+  <Card title="Context awareness" icon="brain">
+    Claude Code understands Relevance AI's data model, so you can describe what you want in plain language.
+  </Card>
+</CardGroup>
+
+---
+
+## Example prompts
+
+Once authenticated, you can start building immediately. Here are some things to try:
+
+<Tabs>
+  <Tab title="Agents">
+    ```
+    > Create a BDR agent that qualifies inbound leads from HubSpot
+    ```
+
+    ```
+    > Set up a workforce where a triage agent routes support tickets to specialist agents
+    ```
+  </Tab>
+
+  <Tab title="Tools">
+    ```
+    > Build a tool that enriches a company URL with a one-paragraph summary
+    ```
+
+    ```
+    > Create a tool that generates personalised cold emails from LinkedIn profiles
+    ```
+  </Tab>
+
+  <Tab title="Evaluate & debug">
+    ```
+    > Pull the last 20 conversations for my Support Agent and identify failures
+    ```
+
+    ```
+    > My BDR agent is letting unqualified leads through — review its instructions and fix it
+    ```
+  </Tab>
+</Tabs>
+
+<Tip>Use `/plan` in Claude Code to have Claude plan the work before executing — recommended for complex builds.</Tip>
+
+---
+
+## Working with multiple projects
+
+If you work across multiple Relevance AI projects, add separate MCP server entries for each:
+
+```bash
+claude mcp add relevance-project-1 --transport http https://mcp.relevanceai.com/
+claude mcp add relevance-project-2 --transport http https://mcp.relevanceai.com/
+```
+
+Each entry authenticates independently against its own project. This lets you access tools and agents across all your projects without needing to log out and back in.
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Plugin not installing">
+    - Ensure you are running Claude Code version **1.0.33** or later
+    - Try running `claude plugin marketplace add RelevanceAI/claude-code-plugin` again
+    - Check your internet connection
+  </Accordion>
+
+  <Accordion title="Authentication issues">
+    - Run `/mcp` and select the **relevance-ai** server to re-authenticate
+    - Make sure you have an active Relevance AI account with access to the project
+    - Try removing and re-adding the plugin
+  </Accordion>
+
+  <Accordion title="Tools not appearing">
+    - Verify you have completed authentication via `/mcp`
+    - Check that your Relevance AI project has tools and agents configured
+    - Try restarting Claude Code
+  </Accordion>
+</AccordionGroup>
+

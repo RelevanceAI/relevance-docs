@@ -8,6 +8,10 @@ sidebarTitle: 'Add Conditions'
 
 Conditions enable you to build dynamic, responsive workflows by creating branching paths based on specific criteria. Rather than having a linear workflow where every step always executes in the same order, conditions let you implement decision points that determine which path your workflow should take.
 
+Workforce offers two types of conditions to suit different use cases:
+- **LLM-based conditions**: Use natural language to describe complex logic that requires interpretation
+- **Rule-based conditions**: Use structured filters for deterministic, precise comparisons
+
 ## When to Use Conditions
 
 Conditions are particularly valuable when you need to:
@@ -27,12 +31,289 @@ To add a condition to your workforce:
 3. Drag a condition node onto your workspace
 4. Connect the condition to the appropriate tools or agents
 
-## Configuring Conditions
+## Choosing a Condition Type
 
-Setting up conditions in Workforce is simple thanks to natural language configuration. Instead of complex technical settings, you can simply describe your condition in plain English:
+When you configure a condition node, you'll see a **Condition type** dropdown with two options:
+
+### LLM-based Conditions
+
+LLM-based conditions use natural language to evaluate complex logic. The AI interprets your description and determines whether the condition is met.
+
+**Best for:**
+- Complex logic that's easier to express in natural language
+- Evaluating unstructured data like text content
+- Scenarios requiring interpretation or context understanding
+- Time-based conditions (e.g., "if it's a weekday")
+
+**Example use cases:**
+- "Go down this path if the email contains an urgent request"
+- "Follow this route if the customer sentiment is negative"
+- "Use this path if today is a weekday"
+
+### Rule-based Conditions
+
+Rule-based conditions use structured filters to compare specific values. These are deterministic and don't require AI interpretation.
+
+**Best for:**
+- Precise comparisons of known values
+- Checking tool outputs against expected values
+- Numeric comparisons
+- Validating that specific fields exist or have certain values
+- Performance-critical paths where you need guaranteed behavior
+
+**Example use cases:**
+- Checking if a tool's status output equals "SUCCESS"
+- Verifying a numeric value is greater than a threshold
+- Confirming a required field is not empty
+
+## Configuring LLM-based Conditions
+
+Setting up LLM-based conditions is simple thanks to natural language configuration:
 
 1. Click on your condition node to open its settings
-2. Enter a natural language description of your condition, such as:
+2. Select **LLM-based** from the Condition type dropdown
+3. Enter a natural language description of your condition, such as:
    - "Go down this path if the day is a weekday"
    - "Follow this route if the customer score is above 80"
    - "Use this path if the email contains the word 'urgent'"
+
+## Configuring Rule-based Conditions
+
+Rule-based conditions let you build precise filters using a structured interface:
+
+### Basic Setup
+
+1. Click on your condition node to open its settings
+2. Select **Rule-based** from the Condition type dropdown
+3. Click **Add filter** to create your first rule
+
+### Filter Components
+
+Each filter has three parts:
+
+#### 1. Target
+
+The **Target** is the value you want to evaluate. Use the variable picker to select from upstream node outputs.
+
+The picker displays available variables in this format:
+```
+<Node Name> / output / <field name>
+```
+
+For example:
+- `Check Status / output / result` - the "result" field from a tool called "Check Status"
+- `Get User Data / output / email` - the "email" field from a tool called "Get User Data"
+
+<Note>The target resolves to whatever value that field contains. If the field contains an object, you're comparing the entire object, not a nested property within it.</Note>
+
+#### 2. Operator
+
+Choose how to compare the target value:
+
+| Operator | Description | Example Use Case |
+|----------|-------------|------------------|
+| **equals** | Exact match | Check if status equals "SUCCESS" |
+| **contains** | Target includes the source value | Check if text contains "urgent" |
+| **starts with** | Target begins with source value | Check if ID starts with "CUST-" |
+| **ends with** | Target ends with source value | Check if filename ends with ".pdf" |
+| **exists** | Target field has any value | Verify a field is present |
+| **empty** | Target field is empty or null | Check if optional field is blank |
+| **>** | Greater than (numeric) | Check if score > 80 |
+| **<** | Less than (numeric) | Check if count < 10 |
+| **>=** | Greater than or equal to | Check if age >= 18 |
+| **<=** | Less than or equal to | Check if price <= 100 |
+
+#### 3. Source
+
+The **Source** is the value you're comparing against. You can either:
+- Enter a constant value (e.g., "SUCCESS", 100, "urgent")
+- Use the variable picker to select another field from upstream nodes
+
+### Match Modes
+
+When you have multiple filters, choose how they should be evaluated:
+
+- **Match All** (AND logic): All filters must be true for the condition to pass
+- **Match Any** (OR logic): At least one filter must be true for the condition to pass
+
+### Understanding Target Paths
+
+The target path determines what value gets evaluated. Here's how it works:
+
+**Example 1: Simple string output**
+```
+Tool: "Check Status"
+Output: "SUCCESS"
+Target: Check Status / output
+Comparison: equals "SUCCESS" ✓
+```
+
+**Example 2: Object output**
+```
+Tool: "Validate Data"
+Output: {"status": "SUCCESS", "code": 200}
+Target: Validate Data / output
+Comparison: equals {"status": "SUCCESS", "code": 200} ✓
+```
+
+<Warning>If a tool returns an object like `{"status":"SUCCESS"}`, the target picker shows `Tool Name / output`, which refers to the entire object. You cannot drill into nested fields like `status` through the picker.</Warning>
+
+### Nested Field Limitation and Workaround
+
+Rule-based conditions cannot access nested fields within objects. If your tool returns:
+
+```json
+{
+  "status": "SUCCESS",
+  "data": {
+    "user_id": 123
+  }
+}
+```
+
+You **cannot** directly access `status` or `data.user_id` through the target picker.
+
+**Workaround:** Structure your tools to output flat values as separate named outputs:
+
+Instead of returning a single object, configure your tool to return:
+- Output 1: `status` = "SUCCESS"
+- Output 2: `user_id` = 123
+
+This way, each value is accessible as a separate target in your rule-based condition.
+
+## Practical Examples
+
+### Example 1: Check Tool Success Status
+
+**Scenario:** Only proceed if a validation tool succeeded
+
+**Setup:**
+- Condition type: Rule-based
+- Filter 1:
+  - Target: `Validate Input / output / status`
+  - Operator: equals
+  - Source: "SUCCESS"
+
+### Example 2: Numeric Threshold Check
+
+**Scenario:** Route high-value orders differently
+
+**Setup:**
+- Condition type: Rule-based
+- Filter 1:
+  - Target: `Calculate Total / output / amount`
+  - Operator: >
+  - Source: 1000
+
+### Example 3: Multiple Conditions (AND Logic)
+
+**Scenario:** Process only if status is complete AND priority is high
+
+**Setup:**
+- Condition type: Rule-based
+- Match mode: Match All
+- Filter 1:
+  - Target: `Get Status / output / status`
+  - Operator: equals
+  - Source: "complete"
+- Filter 2:
+  - Target: `Get Priority / output / level`
+  - Operator: equals
+  - Source: "high"
+
+### Example 4: Multiple Conditions (OR Logic)
+
+**Scenario:** Flag items that are either urgent or high-value
+
+**Setup:**
+- Condition type: Rule-based
+- Match mode: Match Any
+- Filter 1:
+  - Target: `Check Priority / output / priority`
+  - Operator: equals
+  - Source: "urgent"
+- Filter 2:
+  - Target: `Calculate Value / output / amount`
+  - Operator: >=
+  - Source: 5000
+
+### Example 5: Check Field Exists
+
+**Scenario:** Only proceed if an optional field was provided
+
+**Setup:**
+- Condition type: Rule-based
+- Filter 1:
+  - Target: `Get Input / output / optional_field`
+  - Operator: exists
+
+### Example 6: String Pattern Matching
+
+**Scenario:** Route customer IDs that start with a specific prefix
+
+**Setup:**
+- Condition type: Rule-based
+- Filter 1:
+  - Target: `Get Customer / output / customer_id`
+  - Operator: starts with
+  - Source: "PREMIUM-"
+
+## Best Practices
+
+### When to Use Each Condition Type
+
+**Use LLM-based conditions when:**
+- You need to evaluate natural language or unstructured text
+- The logic is complex and easier to express in plain English
+- You're working with time-based or contextual conditions
+- Exact matching isn't critical
+
+**Use rule-based conditions when:**
+- You need precise, deterministic comparisons
+- You're validating tool outputs against known values
+- You're working with numeric thresholds
+- Performance and reliability are critical
+- You want to avoid AI interpretation overhead
+
+### General Tips
+
+1. **Keep conditions focused**: Each condition should evaluate a clear, specific criterion
+2. **Test thoroughly**: Verify your conditions work with different inputs and edge cases
+3. **Use descriptive node names**: Make it easy to identify what each condition checks
+4. **Consider the data structure**: For rule-based conditions, ensure your tools output data in a format that's easy to filter
+5. **Combine condition types**: Use LLM-based for complex logic and rule-based for precise checks in the same workflow
+
+## Troubleshooting
+
+### Rule-based Condition Not Working
+
+**Problem:** Your rule-based condition isn't evaluating correctly
+
+**Solutions:**
+1. Check that the target path points to the correct field
+2. Verify the operator matches your comparison type (e.g., use numeric operators for numbers)
+3. Ensure the source value matches the expected data type
+4. Test with a simpler condition to isolate the issue
+5. Check if the upstream tool is actually outputting the expected value
+
+### Cannot Access Nested Fields
+
+**Problem:** You need to check a value inside an object, but it's not available in the picker
+
+**Solution:** Restructure your tool to output flat values as separate named outputs instead of nested objects.
+
+### Condition Always Passes or Fails
+
+**Problem:** Your condition doesn't seem to evaluate properly
+
+**Solutions:**
+1. For rule-based: Verify the target field actually contains data
+2. For LLM-based: Make your natural language description more specific
+3. Check the match mode (Match All vs Match Any) if using multiple filters
+4. Review the execution logs to see what values are being compared
+
+## Related Features
+
+- [Condition to Tool Configuration](/build/workforces/workforce-features/condition-to-tool-configuration): Learn how to connect conditions to tools
+- [Edge Settings](/build/workforces/build-an-ai-workforce/edge-settings): Configure how nodes connect in your workforce
+- [Add Tools](/build/workforces/build-an-ai-workforce/add-tools): Learn about adding and configuring tools in your workforce
