@@ -1,19 +1,16 @@
 ---
-title: 'Enrich with tool'
-sidebarTitle: 'Enrich with tool'
-description: "Enrich your knowledge base with tools"
+title: 'Enrich with Tool'
+sidebarTitle: 'Enrich with Tool'
+description: "Run a Tool across rows in your Knowledge table to add AI-generated columns"
 ---
 
-<Tip>
-When setting up an enrichment, try it on the first few rows first to confirm the output 
-and behavior is as expected. Then apply the analysis to your whole table.
-</Tip>
-Enriching with tools allows you to update your knowledge base using AI tools.
+Enrich with Tool lets you run any Tool across your Knowledge table and write the results back as new columns. It's useful any time you want to process, analyze, or generate data at scale — for example, summarizing a column of text, classifying records, or extracting structured fields from unstructured content.
 
-Select the knowledge table you want to enrich, click on `Enrich with Tool` and choose the tool your want to use from the library.
+## Accessing the enrichment
 
-Configure how the tool should process and add information to your table by mapping outputs to columns, then run the enrichment.
+There are two ways to start an enrichment on a Knowledge table.
 
+### From the Knowledge table
 
 <div
   style={{
@@ -30,3 +27,61 @@ Configure how the tool should process and add information to your table by mappi
       borderRadius: '10px',
     }}/>
 </div>
+
+{/* TODO: screenshot — Knowledge table with Enrich button highlighted */}
+
+1. Navigate to **Knowledge** and open the table you want to enrich.
+2. Click the **Enrich** button in the table toolbar.
+3. Select a Tool from the library.
+
+### From the Tool's Use tab
+
+On the **Use** tab of any Tool, select the **Run in bulk** tab.
+
+![Run in bulk tab on the Tool's Use page](/images/general/tool-bulk-run.png)
+
+Click **Run on my data** to go directly to your Knowledge tables and start the enrichment from there.
+
+## Configuring the enrichment
+
+Once you've selected a Tool, configure how it should run on your data. The modal shows **Map tool inputs to columns** with a dropdown for each input.
+
+![Input mapping — map to a table column or manually type data](/images/general/enrichment-manual-table.png)
+
+- **Map to table column** — click the dropdown to see your table's column headers and select the one to use. The value from that column will be used for each row.
+- **Manually type data** — click **+ Manually type data** to switch to manual entry and use the same fixed value for every row.
+
+Once your inputs are mapped, click **Confirm** to finish the setup.
+
+## Running the enrichment
+
+After confirming, a new column is added to your Knowledge table showing the Tool name. From there you can choose to run on individual rows or across the entire dataset.
+
+![Enrichment column with run buttons](/images/general/run-table.png)
+
+- The **play button in the column header** runs the Tool across the whole table.
+- The **play button on each row** runs the Tool on that individual row.
+
+<Tip>
+Always test on a few individual rows before running across the whole table to confirm the output is correct and check the credit cost.
+</Tip>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I use a Tool I built myself, or only Tools from the library?">
+    You can use any Tool — including ones you've built yourself. The library shows all Tools available in your project alongside marketplace Tools.
+  </Accordion>
+  <Accordion title="How do I know what a bulk run will cost before I commit?">
+    The configuration modal shows an estimated credit cost before you click **Confirm**. Use the single-row run to get a more precise sense of cost per row before scaling up.
+  </Accordion>
+  <Accordion title="Can I have more than one enrichment column on the same table?">
+    Yes. Each enrichment is independent — click **Enrich** again to set up another Tool on the same table. Each creates its own column.
+  </Accordion>
+  <Accordion title="What happens to rows I add to the table after the enrichment is set up?">
+    New rows are not automatically enriched. You'll need to run the Tool on them manually using the play button on each row, or trigger another bulk run.
+  </Accordion>
+  <Accordion title="Can I run the enrichment on a specific subset of rows?">
+    Not as a selection — but you can run the play button on any individual row without affecting others. For targeted bulk runs on a subset, consider filtering your data into a separate table first.
+  </Accordion>
+</AccordionGroup>
