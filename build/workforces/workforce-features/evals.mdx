@@ -1,0 +1,89 @@
+---
+title: 'Evals'
+sidebarTitle: 'Evals'
+description: 'Test and evaluate multi-agent systems using scenario-based tests and automated evaluators'
+---
+
+<Info>
+**Rollout status**: Evals is currently being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see this feature yet, reach out to your account manager to discuss access.
+</Info>
+
+Workforce Evals lets you test and evaluate multi-agent systems as a whole — not just individual agents. You can run scenario-based tests against your entire workforce and score how well agents collaborate to complete tasks, or score existing workforce task results without re-running them.
+
+The same evaluator types and scoring logic used for agent evals apply to workforce evals. See the [agent evals documentation](/build/agents/build-your-agent/evals) for full details on evaluator types, creating test suites, and understanding results.
+
+---
+
+## Evaluation modes
+
+Workforce Evals supports two modes depending on whether you want to generate new task results or evaluate existing ones.
+
+### Generate-and-score mode
+
+The workforce runs a test scenario from scratch and the result is scored against your evaluators. Use this mode when you want to:
+
+- Test a new workforce configuration before deploying it
+- Run regression tests after making changes to agent instructions or connections
+- Simulate specific scenarios to check how agents hand off work to each other
+
+### Score-only mode
+
+Existing workforce task results are passed to your evaluators without re-running the workforce. Use this mode when you want to:
+
+- Evaluate production workforce runs after the fact
+- Analyze historical task performance across a batch of results
+- Score results from tasks that are expensive or slow to re-run
+
+---
+
+## Evaluators
+
+Workforce Evals uses the same evaluator types as agent evals:
+
+<CardGroup cols={2}>
+  <Card title="LLM Judge" icon="brain-circuit">
+    Uses an LLM to assess task results against criteria you define in a prompt.
+  </Card>
+  <Card title="String Contains" icon="text">
+    Checks whether the output includes specific text.
+  </Card>
+  <Card title="String Equals" icon="equals">
+    Checks whether the output exactly matches an expected value.
+  </Card>
+  <Card title="Tool Usage" icon="screwdriver-wrench">
+    Checks whether a specific tool was used during the task.
+  </Card>
+</CardGroup>
+
+For full evaluator configuration details — including how to create global evaluators, configure LLM Judge prompts, and set pass thresholds — see the [agent evals documentation](/build/agents/build-your-agent/evals).
+
+---
+
+## Key differences from agent evals
+
+Workforce evals evaluate multi-agent collaboration across an entire workflow, not the behavior of a single agent. This means:
+
+- **Evaluation scope**: Evaluators assess the combined output of all agents involved in a task, including handoffs, tool calls across agents, and final results.
+- **Test scenarios**: Scenarios simulate end-to-end workforce tasks rather than single-agent conversations. The simulated input triggers the workforce from its entry point.
+- **Score-only mode**: Unlike agent evals, workforce evals include a score-only mode for evaluating existing task results without re-running the workforce.
+
+---
+
+## When to use each mode
+
+| Scenario | Recommended mode |
+|----------|-----------------|
+| Testing a new workforce configuration | Generate-and-score |
+| Regression testing after agent changes | Generate-and-score |
+| Evaluating production task results | Score-only |
+| Analyzing historical performance | Score-only |
+| Checking agent handoff quality | Generate-and-score |
+| Auditing a batch of completed tasks | Score-only |
+
+---
+
+## Related pages
+
+- [Agent evals](/build/agents/build-your-agent/evals) — Full documentation on evaluator types, test suites, and scoring
+- [Workforce task view](/build/workforces/workforce-features/workforce-task-view) — Monitor live workforce task performance and review task results
+- [Workforces](/get-started/core-concepts/workforces) — Overview of how workforces and multi-agent systems work
