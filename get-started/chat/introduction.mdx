@@ -168,6 +168,22 @@ Here's a comprehensive breakdown of supported file types by model provider:
 File export is not supported for organizations in the AU region.
 </Warning>
 
+### File preview capabilities
+
+Chat can preview 70+ file types directly in the interface, so you can view a file without leaving the conversation. Supported categories include:
+
+- **PDFs**
+- **Images:** PNG, JPG, GIF, WebP, SVG
+- **Videos:** MP4, WebM, MOV
+- **Spreadsheets:** CSV, XLSX
+- **Code files:** JS, TS, Python, JSON, HTML, CSS, Markdown, and 20+ other programming languages
+
+Files without extensions (such as `Dockerfile`) are treated as plain text and can be previewed. If a file type is not supported for preview, Chat displays a "This file type can't be previewed" message.
+
+<Note>
+File preview (viewing a file in the chat UI) is separate from file processing (what the LLM can read and reason about). Preview support does not affect which files an LLM can process — that remains provider-dependent. See the file capabilities section below for details.
+</Note>
+
 ### File size limits by provider
 
 File size limits vary by model provider. Each provider has limits for individual files and combined attachments in a single message.
