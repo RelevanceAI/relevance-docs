@@ -73,7 +73,7 @@ When creating an Evaluator (either scenario-level or global), you choose from th
     |-------|-------------|
     | **Evaluation Prompt** | Describe the criteria for passing |
     | **Judge model** | Select which model evaluates the conversation |
-    | **Truncate long conversations** | Toggle to truncate lengthy conversations before evaluation |
+    | **Truncate long conversations** | When enabled, conversations that exceed the judge model's context window are trimmed from the oldest messages first, and the eval runs on the remaining portion. When disabled, oversized conversations fail with an error instead. Note that trimming removes early context, which can affect score accuracy if your evaluation criteria depend on the beginning of the conversation. |
   </Accordion>
 
   <Accordion title="String Contains" icon="text">
