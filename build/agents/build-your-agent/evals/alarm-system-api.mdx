@@ -1,0 +1,508 @@
+---
+title: 'Alarm system API'
+sidebarTitle: 'Alarm system API'
+description: 'Programmatically create and manage threshold-based alarms for evaluation metrics'
+---
+
+The Alarm System API lets you create, read, update, and delete alarms that monitor your evaluation metric scores. When an evaluator score breaches a configured threshold — for example, dropping below 0.5 for three consecutive hours — the alarm can notify your team via email, Slack, or Microsoft Teams.
+
+<Warning>
+**CRUD only — scheduling and notifications are not yet active.** This release covers alarm configuration management only. The scheduling engine that checks thresholds and triggers notifications is coming in a future release. You can create and manage alarms now so they are ready when the notification engine ships.
+</Warning>
+
+Alarms are scoped to a specific agent or workforce and reference a global Evaluator you have already configured in the Evals section.
+
+---
+
+## Prerequisites
+
+Before using the Alarm System API:
+
+- You have a Relevance AI API key. Find it in **Settings → API Keys**.
+- The target agent or workforce has at least one global Evaluator configured. See [Evals](/build/agents/build-your-agent/evals) for setup instructions.
+- The Performance tab is collecting live evaluation data for that Evaluator.
+
+---
+
+## API reference
+
+All endpoints use your region-specific base URL. The examples below use the AU region. When you generate your API key in the Relevance AI dashboard, the correct base URL for your region is shown there.
+
+**Base URL:**
+```
+https://api-f1db6c.stack.tryrelevance.com/latest
+```
+
+**Authentication:**
+
+Include your API key in the `Authorization` header on every request:
+```
+Authorization: YOUR_API_KEY
+```
+
+---
+
+### Create an alarm
+
+Creates a new alarm that monitors an evaluation metric score against a threshold.
+
+```http
+POST /evals/alarms
+```
+
+**Request body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | Yes | A display name for the alarm (e.g., `"Low empathy score"`) |
+| `evaluator_id` | string | Yes | ID of the global Evaluator to monitor |
+| `scope` | object | Yes | Scopes the alarm to an agent or workforce (see below) |
+| `threshold` | number | Yes | Score value to compare against (0.0–1.0) |
+| `comparison` | string | Yes | `"below"` or `"above"` |
+| `window_hours` | integer | Yes | Number of consecutive hours the condition must hold before the alarm triggers |
+| `notifications` | array | Yes | One or more notification channel objects (see below) |
+| `enabled` | boolean | No | Whether the alarm is active. Defaults to `true`. |
+
+**Scope object:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | string | `"agent"` or `"workforce"` |
+| `id` | string | The agent ID or workforce ID |
+
+**Notification channel object:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `type` | string | `"email"`, `"slack"`, or `"teams"` |
+| `email` | string | Required when `type` is `"email"`. The recipient address. |
+| `webhook_url` | string | Required when `type` is `"slack"`. The Slack incoming webhook URL. |
+| `teams_channel_id` | string | Required when `type` is `"teams"`. The Teams channel ID from your integration. |
+
+<AccordionGroup>
+  <Accordion title="Example: create an alarm for a score dropping below 0.5 for 3 consecutive hours">
+
+**cURL**
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: YOUR_API_KEY" \
+  -d '{
+    "name": "Low empathy score",
+    "evaluator_id": "eval_abc123",
+    "scope": {
+      "type": "agent",
+      "id": "agent_xyz789"
+    },
+    "threshold": 0.5,
+    "comparison": "below",
+    "window_hours": 3,
+    "notifications": [
+      {
+        "type": "email",
+        "email": "team@example.com"
+      },
+      {
+        "type": "slack",
+        "webhook_url": "YOUR_SLACK_WEBHOOK_URL"
+      }
+    ]
+  }' \
+  https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms
+```
+
+**JavaScript (Fetch)**
+```js
+fetch('https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    name: 'Low empathy score',
+    evaluator_id: 'eval_abc123',
+    scope: {
+      type: 'agent',
+      id: 'agent_xyz789'
+    },
+    threshold: 0.5,
+    comparison: 'below',
+    window_hours: 3,
+    notifications: [
+      { type: 'email', email: 'team@example.com' },
+      { type: 'slack', webhook_url: 'YOUR_SLACK_WEBHOOK_URL' }
+    ]
+  })
+});
+```
+
+**Python (requests)**
+```python
+import requests
+
+requests.post(
+  'https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms',
+  headers={
+    'Content-Type': 'application/json',
+    'Authorization': 'YOUR_API_KEY'
+  },
+  json={
+    'name': 'Low empathy score',
+    'evaluator_id': 'eval_abc123',
+    'scope': {
+      'type': 'agent',
+      'id': 'agent_xyz789'
+    },
+    'threshold': 0.5,
+    'comparison': 'below',
+    'window_hours': 3,
+    'notifications': [
+      {'type': 'email', 'email': 'team@example.com'},
+      {'type': 'slack', 'webhook_url': 'YOUR_SLACK_WEBHOOK_URL'}
+    ]
+  }
+)
+```
+
+**Response (201 Created):**
+```json
+{
+  "alarm_id": "alarm_def456",
+  "name": "Low empathy score",
+  "evaluator_id": "eval_abc123",
+  "scope": {
+    "type": "agent",
+    "id": "agent_xyz789"
+  },
+  "threshold": 0.5,
+  "comparison": "below",
+  "window_hours": 3,
+  "notifications": [
+    { "type": "email", "email": "team@example.com" },
+    { "type": "slack", "webhook_url": "YOUR_SLACK_WEBHOOK_URL" }
+  ],
+  "enabled": true,
+  "created_at": "2026-03-25T10:00:00Z"
+}
+```
+
+  </Accordion>
+</AccordionGroup>
+
+---
+
+### List alarms
+
+Returns all alarms in your workspace, with optional filters.
+
+```http
+GET /evals/alarms
+```
+
+**Query parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `scope_type` | string | Filter by `"agent"` or `"workforce"` |
+| `scope_id` | string | Filter to a specific agent or workforce ID |
+| `enabled` | boolean | Filter by enabled/disabled status |
+
+<AccordionGroup>
+  <Accordion title="Example: list all alarms for a specific agent">
+
+**cURL**
+```bash
+curl -H "Authorization: YOUR_API_KEY" \
+  "https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms?scope_type=agent&scope_id=agent_xyz789"
+```
+
+**JavaScript (Fetch)**
+```js
+const params = new URLSearchParams({ scope_type: 'agent', scope_id: 'agent_xyz789' });
+fetch(`https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms?${params}`, {
+  headers: { 'Authorization': 'YOUR_API_KEY' }
+});
+```
+
+**Python (requests)**
+```python
+import requests
+
+requests.get(
+  'https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms',
+  headers={'Authorization': 'YOUR_API_KEY'},
+  params={'scope_type': 'agent', 'scope_id': 'agent_xyz789'}
+)
+```
+
+**Response (200 OK):**
+```json
+{
+  "alarms": [
+    {
+      "alarm_id": "alarm_def456",
+      "name": "Low empathy score",
+      "evaluator_id": "eval_abc123",
+      "scope": { "type": "agent", "id": "agent_xyz789" },
+      "threshold": 0.5,
+      "comparison": "below",
+      "window_hours": 3,
+      "enabled": true,
+      "created_at": "2026-03-25T10:00:00Z"
+    }
+  ],
+  "total": 1
+}
+```
+
+  </Accordion>
+</AccordionGroup>
+
+---
+
+### Get an alarm
+
+Returns a single alarm by ID.
+
+```http
+GET /evals/alarms/{alarm_id}
+```
+
+<AccordionGroup>
+  <Accordion title="Example: get alarm by ID">
+
+**cURL**
+```bash
+curl -H "Authorization: YOUR_API_KEY" \
+  https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456
+```
+
+**JavaScript (Fetch)**
+```js
+fetch('https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456', {
+  headers: { 'Authorization': 'YOUR_API_KEY' }
+});
+```
+
+**Python (requests)**
+```python
+import requests
+
+requests.get(
+  'https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456',
+  headers={'Authorization': 'YOUR_API_KEY'}
+)
+```
+
+  </Accordion>
+</AccordionGroup>
+
+---
+
+### Update an alarm
+
+Updates one or more fields on an existing alarm. Only the fields you include are changed.
+
+```http
+PATCH /evals/alarms/{alarm_id}
+```
+
+<AccordionGroup>
+  <Accordion title="Example: disable an alarm and raise the threshold">
+
+**cURL**
+```bash
+curl -X PATCH \
+  -H "Content-Type: application/json" \
+  -H "Authorization: YOUR_API_KEY" \
+  -d '{"threshold": 0.4, "enabled": false}' \
+  https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456
+```
+
+**JavaScript (Fetch)**
+```js
+fetch('https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456', {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'YOUR_API_KEY'
+  },
+  body: JSON.stringify({ threshold: 0.4, enabled: false })
+});
+```
+
+**Python (requests)**
+```python
+import requests
+
+requests.patch(
+  'https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456',
+  headers={
+    'Content-Type': 'application/json',
+    'Authorization': 'YOUR_API_KEY'
+  },
+  json={'threshold': 0.4, 'enabled': False}
+)
+```
+
+**Response (200 OK):**
+```json
+{
+  "alarm_id": "alarm_def456",
+  "threshold": 0.4,
+  "enabled": false,
+  "updated_at": "2026-03-25T11:30:00Z"
+}
+```
+
+  </Accordion>
+</AccordionGroup>
+
+---
+
+### Delete an alarm
+
+Permanently removes an alarm.
+
+```http
+DELETE /evals/alarms/{alarm_id}
+```
+
+<AccordionGroup>
+  <Accordion title="Example: delete an alarm">
+
+**cURL**
+```bash
+curl -X DELETE \
+  -H "Authorization: YOUR_API_KEY" \
+  https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456
+```
+
+**JavaScript (Fetch)**
+```js
+fetch('https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456', {
+  method: 'DELETE',
+  headers: { 'Authorization': 'YOUR_API_KEY' }
+});
+```
+
+**Python (requests)**
+```python
+import requests
+
+requests.delete(
+  'https://api-f1db6c.stack.tryrelevance.com/latest/evals/alarms/alarm_def456',
+  headers={'Authorization': 'YOUR_API_KEY'}
+)
+```
+
+**Response (204 No Content)**
+
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Notification channel configuration
+
+### Email
+
+Add one or more email addresses to the `notifications` array. Each address is a separate object:
+
+```json
+{ "type": "email", "email": "oncall@example.com" }
+```
+
+No OAuth setup is needed. The notification will be sent from Relevance AI's system.
+
+### Slack
+
+Provide a Slack incoming webhook URL. You generate this in your Slack workspace settings, not in the Relevance AI dashboard. For full connection instructions, see [Slack integration](/integrations/popular-integrations/slack).
+
+```json
+{
+  "type": "slack",
+  "webhook_url": "YOUR_SLACK_WEBHOOK_URL"
+}
+```
+
+### Microsoft Teams
+
+Provide a Teams channel ID from your connected Microsoft Teams integration. You connect Teams via OAuth in the Relevance AI integrations settings. For full connection instructions, see [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams).
+
+```json
+{
+  "type": "teams",
+  "teams_channel_id": "19:abc123@thread.tacv2"
+}
+```
+
+---
+
+## Best practices
+
+<CardGroup cols={2}>
+  <Card title="Set thresholds based on baselines" icon="chart-line">
+    Before choosing a threshold, review your historical evaluation scores in the Performance tab. Setting a threshold too close to your normal score range will cause frequent false positives when the notification engine ships.
+  </Card>
+  <Card title="Use a window to avoid alert fatigue" icon="bell-slash">
+    A `window_hours` value of 1–3 hours filters out transient dips caused by a single unusual conversation. Require the condition to persist before treating it as a real degradation.
+  </Card>
+  <Card title="Scope alarms narrowly" icon="crosshairs">
+    Create separate alarms per agent rather than one alarm across an entire workforce. This makes it easier to identify which agent is degrading when a notification fires.
+  </Card>
+  <Card title="Prepare channels before the engine ships" icon="plug">
+    Configure your notification channels now so alarms are ready the moment the scheduling engine is released. Verify your webhook URLs and Teams channel IDs are correct.
+  </Card>
+</CardGroup>
+
+---
+
+## Current limitations and future enhancements
+
+<Warning>
+The alarm scheduling engine — which periodically checks threshold conditions and dispatches notifications — is not yet released. Alarms you create now will be stored and activated automatically when the scheduling engine ships. No action is required on your part at that point.
+</Warning>
+
+**What is available now:**
+- Full CRUD management of alarm configurations via API
+- All notification channel types can be configured (email, Slack, Teams)
+- Alarms can be scoped to specific agents or workforces
+- Alarms can be enabled or disabled
+
+**Coming in a future release:**
+- Automatic threshold evaluation on a scheduled cadence
+- Notification dispatch to configured channels when thresholds are breached
+- Alarm history and trigger logs
+- UI-based alarm management inside the Evals section
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I monitor custom evaluator metrics?">
+    Yes. Any global Evaluator you have configured in the Evaluators tab can be referenced by `evaluator_id`. This includes LLM Judge, String Contains, String Equals, and Tool Usage evaluator types.
+  </Accordion>
+
+  <Accordion title="Is there a limit on alarms per workspace?">
+    There is no documented per-workspace limit at this time. If you are creating alarms at scale and encounter errors, contact [support](/get-started/support).
+  </Accordion>
+
+  <Accordion title="What happens if a notification channel is misconfigured?">
+    During the CRUD phase, the API accepts your configuration as-is. When the notification engine ships, delivery failures to misconfigured channels (invalid webhook URLs, revoked OAuth tokens) will be reported in alarm logs. Verify your webhook URLs and channel IDs before the engine goes live.
+  </Accordion>
+
+  <Accordion title="How do I test my alarm configuration?">
+    You can verify the alarm was saved correctly by retrieving it with `GET /evals/alarms/{alarm_id}` and confirming the fields match your intent. End-to-end notification delivery testing will be possible once the scheduling engine is released.
+  </Accordion>
+
+  <Accordion title="Can one alarm notify multiple channels?">
+    Yes. The `notifications` array accepts any number of channel objects. You can mix email addresses, Slack webhooks, and Teams channels in the same alarm.
+  </Accordion>
+
+  <Accordion title="How is this different from alert rules?">
+    [Alert rules](/build/agents/build-your-agent/alerts) notify you about agent task events — status changes, tool errors, or agent publishes. Evaluation alarms notify you when an evaluation metric score crosses a threshold over time. Use alert rules for operational events and evaluation alarms for quality degradation monitoring.
+  </Accordion>
+</AccordionGroup>
