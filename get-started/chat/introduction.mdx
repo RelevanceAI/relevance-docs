@@ -138,15 +138,48 @@ Combine saved prompts with @ mentioned Agents for powerful workflows that levera
 
 ---
 
-## Project files
+## Project files and folders
 
-You can search and insert files from your project's file system directly in Chat using the @ menu. Files appear alongside agents, workforces, and saved prompts in results, showing the file icon, name, and path.
+You can reference files and folders from your project's connected storage directly in Chat using the @ menu. When you @mention a file or folder, its contents are included in the context sent to the agent — so you can ask questions about documents, analyze data, or run tasks against file content without manually uploading anything.
 
-### Searching for project files
+<Info>
+Project file and folder @mentions work with files stored in connected storage integrations (such as Google Drive). They are distinct from file attachments (uploading a file directly into the chat) and knowledge sources (files indexed for retrieval by agents).
+</Info>
 
-1. **Type @** in the chat input field followed by a search query
-2. Browse the results — files appear alongside agents, workforces, and saved prompts, showing the file name and path
-3. Select a file to insert its file path into your message
+### Referencing individual files
+
+1. Type `@` in the chat input field to open the menu
+2. Start typing the file name — files appear in the results alongside agents and saved prompts, showing the file name and its path
+3. Select a file to insert a reference into your message
+4. Add your question or instruction alongside the reference and send
+
+The file's contents are fetched and included in the context when your message is sent.
+
+### Referencing entire folders
+
+Referencing a folder includes all files within that folder in the context of your message — useful when you want an agent to work across a set of related documents without referencing each one individually.
+
+1. Type `@` in the chat input field to open the menu
+2. Start typing the folder name — folders appear in the results alongside files, agents, and saved prompts
+3. Select a folder to insert a reference into your message
+4. Add your question or instruction and send
+
+<Warning>
+Referencing large folders with many files will consume more context. If you hit limits, reference specific files instead of the whole folder.
+</Warning>
+
+### When to use file and folder references
+
+| Approach | Best for |
+|----------|----------|
+| **@ mention a file** | Asking questions about a specific document, analyzing a single file |
+| **@ mention a folder** | Working across a set of related files, summarizing a project directory |
+| **File attachment** | Uploading a file you have locally that isn't in connected storage |
+| **Knowledge source** | Giving an agent persistent, searchable access to a large document library |
+
+<Tip>
+Combine file @mentions with agent @mentions in the same message — for example, `@ResearchAgent summarize @quarterly-report.pdf` — to direct a specific agent at a specific file.
+</Tip>
 
 ---
 
