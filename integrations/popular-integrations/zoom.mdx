@@ -22,3 +22,27 @@ Once your account is connected, you can use Zoom steps in the Tool builder. You 
 2. Select Zoom from the list
 3. Click "..." on the account you want to remove
 4. Click remove
+
+### Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Why am I getting an authentication error saying only the account owner can connect Zoom?">
+    This issue occurs when you're trying to connect Zoom as an admin user (not the account owner) and your admin role lacks the necessary permissions for external API connections.
+
+    Two specific permissions must be enabled in Zoom's admin role settings:
+
+    - **Chat messages** — allows API access to all users' chat messages
+    - **External Connections** — allows admin accounts to view and manage external connections
+
+    To fix this:
+
+    1. Log into your Zoom account as an admin.
+    2. Navigate to **Admin > Role Management**.
+    3. Select your admin role.
+    4. Check the boxes for both **Chat messages** and **External Connections**.
+    5. Save your changes.
+    6. Retry connecting your Zoom account in Relevance AI.
+
+    This applies whether you're connecting directly through Relevance AI or via third-party services like Pipedream.
+  </Accordion>
+</AccordionGroup>
