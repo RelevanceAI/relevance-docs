@@ -103,6 +103,45 @@ You can configure your agents to automatically respond to Teams messages by sett
 
 <Tip>Set tool permissions to "approval mode" initially so your agent asks before sending messages. Switch to autopilot once you're confident.</Tip>
 
+## Agent Notifications
+
+![Agent notification rule configuration](/images/team-agent-notifications.png)
+
+<Warning>
+  This feature is currently in beta for some users
+</Warning>
+
+You can receive notifications in Microsoft Teams when your agents enter specific statuses or encounter tool errors. This helps you monitor agent activity and respond quickly when issues occur.
+
+### Setting up Teams notifications
+
+1. Navigate to your agent and click the **Build** tab
+2. In the left sidebar, click **Escalations**
+3. Under "Agent Notifications", click **Add agent notification**
+4. Configure your notification settings:
+   - Select **Microsoft Teams** as the platform
+   - Choose the notification trigger:
+     - **Agent enters status** - Select specific task statuses (e.g., "Running", "Completed", "Failed")
+     - **Tool errors (any tool)** - Get notified when any tool encounters an error
+   - Select a Microsoft Teams account that you have previously connected, or add a new Teams account
+   - Select the Teams channel where you want to receive notifications
+5. Click **Publish changes** to save your notification configuration
+6. Test the notification by running your agent - you should receive a notification in your selected Teams channel based on your configured triggers
+
+<Note>
+  Make sure you have a Microsoft Teams account connected in your Integrations & API Keys page before setting up agent notifications.
+</Note>
+
+### What you'll receive
+
+When a notification is triggered, you'll receive a message in your Teams channel with:
+- Agent name and status
+- Task details and context
+- A link to view the full task in Relevance AI
+- For tool errors: information about which tool failed and why
+
+You can click through to the task in Relevance AI to take further action or investigate issues.
+
 ## Tool steps for Microsoft Teams
 
 <div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
