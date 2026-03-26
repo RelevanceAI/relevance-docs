@@ -15,7 +15,7 @@ Relevance AI delivers events in [**OpenTelemetry (OTEL)**](https://opentelemetry
 - **Rich semantics**: Built-in support for traces, logs, and metrics with standardized attribute naming conventions
 - **Correlation**: Trace IDs link related events across agent invocations, LLM calls, and workforce executions
 
-You don't need to run an OTEL collector to use this feature. Events are delivered directly to your S3 bucket where you can:
+You don't need to run an OTEL collector to use this feature. Events are delivered directly to your destination where you can:
 
 - Query them directly using Athena, BigQuery, or similar tools
 - Ingest into your data lake (Snowflake, Databricks, etc.)
@@ -23,18 +23,32 @@ You don't need to run an OTEL collector to use this feature. Events are delivere
 
 <Note>Enterprise customers can enable PII redaction to automatically protect sensitive information in logs. Contact your Account Manager to learn more.</Note>
 
-<Note>**S3 is currently the only supported destination**. Support for direct OTEL collector endpoints is on our roadmap.</Note>
+<Note>Supported destinations are Amazon S3 and Databricks Delta Sharing. Support for direct OTEL collector endpoints is on our roadmap.</Note>
+
+---
+
+## Supported destinations
+
+### Amazon S3
+
+Stream events to an S3 bucket in your AWS account. Use this option if you want to query data directly with Athena, ingest into a data lake, or route events to an OTEL-compatible backend. Relevance writes gzipped OTEL JSON files to a bucket and prefix you specify.
+
+### Databricks Delta Sharing
+
+Stream events directly into your Databricks environment via Delta Sharing with native Unity Catalog integration. Use this option if your organization runs Databricks and wants events available as Delta tables for SQL analytics, notebooks, or downstream pipelines without an intermediate S3 step.
 
 ---
 
 ## Setup
 
-### Prerequisites
+### Amazon S3 setup
+
+#### Prerequisites
 
 - AWS account with permissions to create S3 buckets and bucket policies
 - Relevance AI Enterprise plan
 
-### 1. Create an S3 Bucket
+#### 1. Create an S3 bucket
 
 Create a bucket in the **same AWS region** as your Relevance data:
 
@@ -44,7 +58,7 @@ Create a bucket in the **same AWS region** as your Relevance data:
 | Europe | `eu-west-2` (London) |
 | US | `us-east-1` (N. Virginia) |
 
-### 2. Configure Bucket Policy
+#### 2. Configure bucket policy
 
 Add this policy to allow Relevance to write events to your bucket:
 
@@ -73,7 +87,7 @@ Replace:
 - `YOUR_BUCKET_NAME`: Your S3 bucket name
 - `RELEVANCE_EVENT_CONSUMER_ROLE_ARN`: Contact your Relevance team for the region-specific IAM role ARN
 
-### 3. Provide Configuration to Relevance
+#### 3. Provide configuration to Relevance
 
 Send your Account Manager or support team:
 
@@ -83,11 +97,35 @@ Send your Account Manager or support team:
 
 ---
 
+### Databricks Delta Sharing setup
+
+#### Prerequisites
+
+- Unity Catalog-enabled Databricks workspace
+- Relevance AI Enterprise plan
+- Databricks admin access
+
+#### Configuration
+
+Databricks Delta Sharing is not self-serve. Configuration is handled by the Relevance AI team via an internal admin process. Relevance provisions a Delta Sharing share directly into your Unity Catalog, so events appear as native Delta tables in your Databricks environment without requiring S3 or a separate ingestion pipeline.
+
+To get started, provide your Account Manager with:
+
+- **Databricks workspace URL**: Your Databricks workspace URL
+- **Unity Catalog metastore ID**: The metastore where events should be shared
+- **Recipient identifier**: The Delta Sharing recipient name or email for your Databricks account
+
+Your Account Manager will coordinate with the Relevance team to complete the setup.
+
+<Warning>There is no self-serve UI to configure Databricks Delta Sharing. Contact your Account Manager to enable this Enterprise feature for your organization.</Warning>
+
+---
+
 ## PII Redaction (Enterprise Feature)
 
-PII (Personally Identifiable Information) redaction is an org-level feature that automatically scrubs sensitive information like email addresses, phone numbers, credit card numbers, and names before your event data leaves the platform and is delivered to your S3 destination.
+PII (Personally Identifiable Information) redaction is an org-level feature that automatically scrubs sensitive information like email addresses, phone numbers, credit card numbers, and names before your event data leaves the platform and is delivered to your export destination.
 
-PII redaction applies at the point of data export, specifically when telemetry and audit logs are being written to your S3 bucket. It does not apply to live agent conversations in real-time or data stored internally on Relevance AI's side. Think of it as a "scrub before delivery" mechanism for your downstream data pipeline.
+PII redaction applies at the point of data export, specifically when telemetry and audit logs are being written to your destination. It does not apply to live agent conversations in real-time or data stored internally on Relevance AI's side. Think of it as a "scrub before delivery" mechanism for your downstream data pipeline.
 
 <Note>PII redaction is a contractual Enterprise feature. Contact your Account Manager to enable this capability for your organization.</Note>
 
