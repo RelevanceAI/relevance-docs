@@ -1,0 +1,67 @@
+---
+title: "Delete file"
+description: "Permanently remove a file from the filesystem mount."
+---
+
+The Delete file tool step removes a file from the filesystem mount. The deletion is permanent — there is no undo or recycle bin.
+
+## Add the Delete file tool step to your tool
+
+1. Open your tool and click **+ Add step**.
+2. Search for **Delete file** and select it.
+3. Enter the **File path** — the path to the file you want to delete within the filesystem mount.
+4. Click **Run step** to test the deletion.
+
+<Warning>
+Deletion is permanent. Verify the file path carefully before running the step, as there is no way to recover a deleted file.
+</Warning>
+
+## Parameters
+
+<ParamField path="file_path" type="string" required>
+  The path to the file to delete, relative to the filesystem mount root. For example: `temp/staging.txt` or `logs/old_run.log`.
+</ParamField>
+
+## Examples
+
+<AccordionGroup>
+  <Accordion title="Cleaning up a temporary file after processing">
+    An agent creates a temporary staging file during a multi-step workflow and removes it once the final output has been written:
+
+    | Parameter | Value |
+    |---|---|
+    | `file_path` | `temp/staging_data.json` |
+
+    The Delete file step runs as the last step in the tool, after the staging data has been used and is no longer needed.
+  </Accordion>
+
+  <Accordion title="Removing a stale report before generating a new one">
+    Before writing a fresh report, an agent deletes the previous version to avoid confusion if the new write step fails partway through:
+
+    | Parameter | Value |
+    |---|---|
+    | `file_path` | `reports/current_report.txt` |
+
+    A Write file step then creates the new report at the same path.
+  </Accordion>
+</AccordionGroup>
+
+## Safety considerations
+
+- **Permanent deletion** — deleted files cannot be recovered from within Relevance AI. If you need a backup, copy the contents to another file using Read file and Write file before deleting.
+- **No directory deletion** — Delete file only removes individual files. To remove a directory and its contents, use a Python code step with `shutil.rmtree`.
+- **Verify the path** — double-check that the `file_path` is correct before running. A common mistake is deleting a file in production when a staging path was intended.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens if the file does not exist?">
+    The step returns an error. No changes are made to the filesystem mount.
+  </Accordion>
+  <Accordion title="Can I delete a directory with Delete file?">
+    No. Delete file only removes individual files. Use a Python code step to remove directories.
+  </Accordion>
+  <Accordion title="Is there a way to recover a deleted file?">
+    No. Deletion is permanent within the filesystem mount. If file recovery is important for your workflow, implement a backup strategy using Read file and Write file to copy files to a backup directory before deletion.
+  </Accordion>
+</AccordionGroup>

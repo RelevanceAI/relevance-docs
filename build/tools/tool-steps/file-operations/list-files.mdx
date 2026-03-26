@@ -1,0 +1,86 @@
+---
+title: "List files"
+description: "List the files and directories at a given path in the filesystem mount."
+---
+
+The List files tool step returns the names of all files and subdirectories located at a specified path in the filesystem mount. Use it to discover what files are available before reading, editing, or deleting them.
+
+## Add the List files tool step to your tool
+
+1. Open your tool and click **+ Add step**.
+2. Search for **List files** and select it.
+3. Enter the **Directory path** — the path to the directory you want to list within the filesystem mount.
+4. Click **Run step** to test the listing and review the output.
+
+## Parameters
+
+<ParamField path="directory_path" type="string" required>
+  The path to the directory to list, relative to the filesystem mount root. For example: `reports/` or `data/exports`. Use `/` or an empty string to list the root of the filesystem mount.
+</ParamField>
+
+## Output
+
+The step returns a list of file and directory names found at the specified path. The output includes both files and subdirectories, but does not recurse into subdirectories — only the immediate contents are returned.
+
+## Examples
+
+<AccordionGroup>
+  <Accordion title="Listing all files in a directory">
+    An agent checks what report files have accumulated in the `reports/` directory:
+
+    | Parameter | Value |
+    |---|---|
+    | `directory_path` | `reports/` |
+
+    Example output:
+
+    ```
+    ["daily_2026-03-25.txt", "daily_2026-03-26.txt", "weekly_summary.txt"]
+    ```
+  </Accordion>
+
+  <Accordion title="Listing the root of the filesystem mount">
+    An agent lists all top-level directories and files to understand the overall structure:
+
+    | Parameter | Value |
+    |---|---|
+    | `directory_path` | `/` |
+
+    Example output:
+
+    ```
+    ["config", "data", "logs", "reports"]
+    ```
+  </Accordion>
+
+  <Accordion title="Dynamically processing each file in a directory">
+    An agent uses List files to get all filenames in `data/incoming/`, then iterates over the list in a Python code step to process each file individually using Read file steps.
+
+    | Parameter | Value |
+    |---|---|
+    | `directory_path` | `data/incoming/` |
+
+    The output list is passed to a Python code step that loops through each filename and constructs the full path for subsequent Read file calls.
+  </Accordion>
+</AccordionGroup>
+
+## When to use List files
+
+- Before reading or editing a file, to confirm it exists at the expected path
+- To iterate over a directory of files for batch processing
+- To check whether a file has been created by a previous step or agent run
+- To audit what files an agent has produced over multiple runs
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens if the directory does not exist?">
+    The step returns an error. The directory must exist in the filesystem mount before it can be listed.
+  </Accordion>
+  <Accordion title="Does List files recurse into subdirectories?">
+    No. List files returns only the immediate contents of the specified directory. To list files recursively, use a Python code step with `os.walk`.
+  </Accordion>
+  <Accordion title="Does the output include full file paths or just names?">
+    The output includes only the file and directory names, not the full paths. Prepend the directory path in a subsequent step if you need the full path to pass to Read file, Edit file, or Delete file.
+  </Accordion>
+</AccordionGroup>

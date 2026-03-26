@@ -1,0 +1,58 @@
+---
+title: "File operations"
+sidebarTitle: "Overview"
+description: "Read, write, edit, list, and delete files in your agent's filesystem mount."
+---
+
+File operation tool steps give agents direct access to files stored in a filesystem mount. Agents can read file contents, create new files, make targeted edits, list directory contents, and delete files — all without leaving the Relevance AI platform.
+
+## Available file operations
+
+<CardGroup cols={2}>
+  <Card title="Read file" icon="file-lines" href="/build/tools/tool-steps/file-operations/read-file">
+    Read the contents of a file from the filesystem mount.
+  </Card>
+  <Card title="Write file" icon="file-pen" href="/build/tools/tool-steps/file-operations/write-file">
+    Create a new file or overwrite an existing file with new content.
+  </Card>
+  <Card title="Edit file" icon="pen-to-square" href="/build/tools/tool-steps/file-operations/edit-file">
+    Replace a specific string within a file without rewriting the whole file.
+  </Card>
+  <Card title="List files" icon="folder-open" href="/build/tools/tool-steps/file-operations/list-files">
+    List the files and directories at a given path in the filesystem mount.
+  </Card>
+  <Card title="Delete file" icon="trash" href="/build/tools/tool-steps/file-operations/delete-file">
+    Permanently remove a file from the filesystem mount.
+  </Card>
+</CardGroup>
+
+## How file operations work
+
+File operations work with filesystem mounts attached to an agent's environment. A filesystem mount is a persistent storage volume that exists across agent runs. Files written in one run are available in subsequent runs, making it possible for agents to maintain state, accumulate data, and collaborate on shared files.
+
+File operations are built-in tool steps — they do not require an external integration or API credentials.
+
+## File operations vs. file inputs
+
+File inputs (uploaded through the agent conversation) are read-only references to files provided by a user. File operations, by contrast, work with files stored in the agent's filesystem mount. Use file operations when:
+
+- The agent needs to create or modify files as part of its work
+- Files need to persist between agent runs
+- The agent is processing, transforming, or building up a file over multiple steps
+
+Use file inputs when a user needs to hand a file to the agent for one-time processing.
+
+## Choosing the right operation
+
+| Goal | Operation |
+|---|---|
+| Read the full contents of a file | Read file |
+| Create a new file | Write file |
+| Overwrite a file with entirely new content | Write file |
+| Change a specific part of a file | Edit file |
+| See what files exist in a directory | List files |
+| Remove a file | Delete file |
+
+<Note>
+All file operations fail safely with a clear error message if the target file or path does not exist, so agents can handle errors explicitly rather than silently producing bad output.
+</Note>
