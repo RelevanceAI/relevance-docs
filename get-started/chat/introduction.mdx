@@ -214,6 +214,23 @@ When an agent writes or modifies files during a conversation, a **Files updated*
 
 Click **View files** in the bar to open the most recently written file in the file viewer. The bar hides itself automatically if the file panel is already open, so it only appears when there is something new to see.
 
+When you open a file from your project, you can view and edit it directly in Chat. See [File viewer and editing](#file-viewer-and-editing) for details on handling conflicts when an agent modifies a file you're editing.
+
+---
+
+## File viewer and editing
+
+You can open files from your project directly in Chat to view and edit their contents. The file viewer displays alongside your conversation, letting you read or modify a file without switching to another tool.
+
+When an AI agent writes to a file you currently have open, Chat detects the conflict and responds based on whether you have unsaved changes:
+
+- **If you have unsaved changes**, a modal dialog appears with two options:
+  - **Save your edits** — overwrites the agent's version with your changes
+  - **Load agent's version** — discards your changes and loads what the agent wrote
+- **If you have no unsaved changes**, the file refreshes silently in the background with the agent's updated version.
+
+{/* TODO: Add screenshot of the conflict resolution modal dialog */}
+
 ---
 
 ## Providing Feedback on Responses
