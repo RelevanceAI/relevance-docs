@@ -4,9 +4,9 @@ sidebarTitle: "Visual Data Masking"
 description: "Protect sensitive information in the UI while agents continue to work with actual data"
 ---
 
-<Note>
-Visual Data Masking is a Beta feature currently being rolled out. If you don't have access yet, contact your sales representative.
-</Note>
+<Warning>
+Visual Data Masking is an Enterprise-only feature currently in limited beta. It is not available on Free, Pro, or Team plans. To have this feature enabled for your organization, contact your account manager or [reach out to support](/get-started/support).
+</Warning>
 
 <Warning>
 The AI model used for PII detection can occasionally miss sensitive information. Do not rely on Visual Data Masking as your sole privacy control for highly sensitive data. This is a known limitation of the beta.
@@ -114,6 +114,10 @@ To enable Visual Data Masking on an agent:
 
 ### For workforces
 
+<Warning>
+If any agent in a workforce has Visual Data Masking enabled, the entire workforce will mask PII across all task views and conversation histories — not just that individual agent. Enable this feature at the agent level only when you intend this cascading behavior.
+</Warning>
+
 To enable Visual Data Masking on a workforce:
 
 <Steps>
@@ -169,7 +173,7 @@ Visual Data Masking and PII Redaction are **complementary features** that protec
 
 | Feature | Visual Data Masking | PII Redaction |
 |---------|---------------------|---------------|
-| **Availability** | Beta (all tiers) | Enterprise only |
+| **Availability** | Enterprise only (limited beta) | Enterprise only |
 | **Where it applies** | Front-end UI display | Backend data export to S3 |
 | **What it does** | Visual masking only | Data is scrubbed before export |
 | **Data modification** | No - backend data unchanged | Yes - PII removed from exports |
@@ -193,7 +197,7 @@ These features are designed to work together, not replace each other:
 </Columns>
 
 **Recommended approach:** Enable both features for comprehensive protection:
-- **Visual Data Masking** protects what your team sees in the platform UI
+- **Visual Data Masking** (Enterprise) protects what your team sees in the platform UI
 - **PII Redaction** (Enterprise) protects what gets exported to your S3 bucket for compliance
 
 Together, these features provide defense in depth: UI privacy for internal collaboration and backend data protection for external systems.
@@ -265,7 +269,7 @@ Learn more about [PII Redaction for Event Streaming](/enterprise/streaming-event
 
 ## Beta limitations
 
-As a Beta feature, Visual Data Masking has current limitations that users should understand:
+As an Enterprise limited beta feature, Visual Data Masking has current limitations that users should understand:
 
 <AccordionGroup>
   <Accordion title="AI detection can occasionally miss PII">
@@ -346,7 +350,7 @@ We're actively improving Visual Data Masking based on user feedback. If you enco
   </Accordion>
 
   <Accordion title="How is this different from PII Redaction?">
-    Visual Data Masking protects what you see in the UI (front-end only). PII Redaction protects what gets exported to your S3 bucket for audit logs and observability (backend data scrubbing). Visual Data Masking is a simple toggle available in Beta; PII Redaction is an Enterprise feature with advanced configuration. Use both together for comprehensive protection.
+    Visual Data Masking protects what you see in the UI (front-end only). PII Redaction protects what gets exported to your S3 bucket for audit logs and observability (backend data scrubbing). Both are Enterprise features: Visual Data Masking is a simple toggle currently in limited beta; PII Redaction has advanced configuration options. Use both together for comprehensive protection.
   </Accordion>
 
   <Accordion title="What happens to data that's already in conversation history?">
