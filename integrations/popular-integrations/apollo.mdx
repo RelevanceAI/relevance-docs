@@ -1,0 +1,164 @@
+---
+title: "Apollo"
+description: "Apollo is a B2B sales intelligence and engagement platform for finding, enriching, and engaging prospects."
+sidebarTitle: "Apollo"
+---
+
+Apollo is a B2B sales intelligence and engagement platform with a large database of contacts and companies. With Relevance AI's Apollo integration, you can build agents that search for prospects, enrich contact and organization data, and manage deals — all using your connected Apollo account.
+
+<Warning>
+  The Apollo integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Apollo. If you have a question or issue with using Apollo in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Apollo, you can reach out to Apollo support directly.
+</Warning>
+
+## Connect the integration
+
+1. Go to the **Integrations** page in the sidebar of your Relevance AI dashboard.
+2. Click on **Apollo** from the available integrations.
+3. Click **Add Integration**.
+4. Enter your Apollo API key when prompted.
+5. Once authenticated, your Apollo account will appear as a connected integration.
+
+<Tip>
+  You can find your Apollo API key in your Apollo account under **Settings → Integrations → API**. You need at least a Basic plan to access the API.
+</Tip>
+
+## Tool steps for Apollo
+
+The Apollo integration provides actions for prospecting, contact management, deal tracking, and data enrichment. These actions can be used as tool steps in your agents' workflows.
+
+### Contact and account management
+
+<CardGroup cols={2}>
+  <Card title="Search contacts" icon="magnifying-glass">
+    Search Apollo's database for contacts matching criteria like job title, company, location, or industry.
+  </Card>
+  <Card title="Create contact" icon="user-plus">
+    Create a new contact record in Apollo.
+  </Card>
+  <Card title="Update contact" icon="user-pen">
+    Update an existing contact record with new information.
+  </Card>
+  <Card title="Search accounts" icon="building-magnifying-glass">
+    Search for company accounts in Apollo by name, domain, industry, or other criteria.
+  </Card>
+  <Card title="Create account" icon="building-circle-arrow-right">
+    Create a new company account record in Apollo.
+  </Card>
+  <Card title="Update account" icon="building-circle-check">
+    Update an existing company account record.
+  </Card>
+</CardGroup>
+
+### Deal management
+
+<CardGroup cols={2}>
+  <Card title="List deals" icon="list">
+    Retrieve deals from Apollo, with optional filters by stage, owner, or account.
+  </Card>
+  <Card title="Create deal" icon="circle-plus">
+    Create a new deal record in Apollo and associate it with a contact or account.
+  </Card>
+  <Card title="Update deal" icon="pen-to-square">
+    Update an existing deal's stage, value, or other attributes.
+  </Card>
+</CardGroup>
+
+### Person and organization enrichment
+
+<CardGroup cols={2}>
+  <Card title="Enrich person" icon="address-card">
+    Enrich a contact record with data from Apollo's database, including phone numbers, email addresses, job title, and social profiles.
+  </Card>
+  <Card title="Enrich organization" icon="building">
+    Enrich a company record with firmographic data including employee count, revenue, industry, and technology stack.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Apollo" in the tool step search bar to see all available Apollo actions when building your tools.
+</Tip>
+
+## Phone number retrieval
+
+The **Enrich Person** tool step supports phone number retrieval via Apollo's `reveal_phone_number` and `run_waterfall_phone` options. When you enable these options, Relevance AI handles the underlying webhook flow automatically and returns the phone numbers directly in the enrichment response — no additional configuration required on your end.
+
+This means you can use Apollo's phone number enrichment the same way as any other enrichment field, and the result will include phone numbers when Apollo can locate them.
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built tool steps, you can make custom API calls to any Apollo endpoint using the Apollo API Call tool step.
+
+### How to use the Apollo API Call tool step
+
+<Steps>
+  <Step title="Create or open a tool">
+    Create a new tool in Relevance AI, or open an existing tool you want to add Apollo functionality to.
+  </Step>
+
+  <Step title="Add the Apollo API Call tool step">
+    1. Scroll down to **Tool steps**.
+    2. Search for **Apollo API Call** in the tool step search bar.
+    3. Add it to your workflow.
+  </Step>
+
+  <Step title="Select your Apollo account">
+    Select your connected Apollo account from the dropdown.
+  </Step>
+
+  <Step title="Configure the API endpoint">
+    Set the HTTP method, endpoint path, and any request body parameters. Refer to [Apollo's API documentation](https://apolloio.github.io/apollo-api-docs/) for available endpoints and required fields.
+  </Step>
+
+  <Step title="Test your configuration">
+    Run a test to confirm the call returns the expected data before deploying your agent.
+  </Step>
+</Steps>
+
+## Example use cases
+
+<AccordionGroup>
+  <Accordion title="Automated prospect research" icon="magnifying-glass-chart">
+    Build an agent that takes an inbound lead's email or LinkedIn URL, uses Apollo to enrich the contact with job title, phone number, company details, and funding data, then posts a research summary to Slack or updates your CRM before the sales rep's first call.
+  </Accordion>
+
+  <Accordion title="ICP-based list building" icon="list-check">
+    Create an agent that searches Apollo's database for contacts matching your ideal customer profile — filtering by industry, company size, seniority, and location — then exports the list to a Google Sheet or pushes it into HubSpot as new leads.
+  </Accordion>
+
+  <Accordion title="Deal pipeline automation" icon="diagram-project">
+    Deploy an agent that monitors your CRM for trigger events (e.g., a contact replies to an email) and automatically creates or updates the corresponding deal in Apollo, keeping both systems in sync without manual data entry.
+  </Accordion>
+
+  <Accordion title="Enrichment before outbound sequences" icon="envelope-open-text">
+    Build an agent that enriches a batch of contacts with Apollo before they enter an outreach sequence, ensuring each contact has a verified phone number and current job title. Contacts missing key data can be flagged for manual review.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Do I need an Apollo account to use this integration?">
+    Yes, you need an active Apollo account with API access. Apollo offers a free plan with limited credits, and paid plans with higher limits. You'll need to generate an API key from your Apollo account settings to connect it to Relevance AI.
+  </Accordion>
+
+  <Accordion title="How do I get my Apollo API key?">
+    1. Log in to your Apollo account.
+    2. Go to **Settings → Integrations → API**.
+    3. Copy your existing API key or generate a new one.
+    4. Use this key when connecting Apollo to Relevance AI.
+
+    Keep your API key secure and do not share it publicly.
+  </Accordion>
+
+  <Accordion title="Does phone number enrichment require extra setup?">
+    No. When you use the `reveal_phone_number` or `run_waterfall_phone` options in the Enrich Person tool step, Relevance AI manages the webhook flow automatically. Phone numbers are returned directly in the enrichment response when Apollo can locate them.
+  </Accordion>
+
+  <Accordion title="What happens if Apollo doesn't find a match for an enrichment request?">
+    If Apollo cannot find data for a contact or organization, the enrichment response will be empty or will indicate no match. Design your agent to handle these cases — for example, by trying alternative identifiers, using a fallback data source, or flagging the record for manual review.
+  </Accordion>
+
+  <Accordion title="Does Apollo charge credits for enrichment?">
+    Yes, Apollo's enrichment endpoints consume credits from your Apollo plan. Phone number reveal requests consume additional credits depending on your plan. Monitor your Apollo credit usage in your Apollo account dashboard.
+  </Accordion>
+</AccordionGroup>
