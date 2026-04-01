@@ -246,27 +246,31 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
 
 When triggering agents via MCP, you have two execution modes available depending on how long your agent takes to complete.
 
+<Warning>
+  **Breaking change:** `relevance_trigger_agent` is now asynchronous — it returns a `conversation_id` immediately without waiting for the agent to finish. If you need synchronous (blocking) behavior, use `relevance_trigger_agent_sync` instead. Existing integrations that relied on `relevance_trigger_agent` being synchronous must be updated.
+</Warning>
+
 ### Execution modes
 
 <Tabs>
   <Tab title="Synchronous">
-    The `relevance_trigger_agent` tool waits for the agent to finish and returns the result directly. It has a 120-second timeout, so use it for agents that complete quickly — single-step agents with minimal tool usage and no workforce nodes.
+    The `relevance_trigger_agent_sync` tool waits for the agent to finish and returns the result directly. It has a 120-second timeout, so use it for agents that complete quickly — single-step agents with minimal tool usage and no workforce nodes.
   </Tab>
 
   <Tab title="Asynchronous">
-    The `relevance_trigger_agent_async` and `relevance_poll_agent_result` tools work together with no timeout limit. The trigger returns immediately with a conversation ID, which you then poll to check status and retrieve results. Use this for agents with workforce nodes, multi-step chains, external API calls, or any execution expected to exceed 2 minutes.
+    The `relevance_trigger_agent` and `relevance_poll_agent_result` tools work together with no timeout limit. The trigger returns immediately with a conversation ID, which you then poll to check status and retrieve results. Use this for agents with workforce nodes, multi-step chains, external API calls, or any execution expected to exceed 2 minutes.
   </Tab>
 </Tabs>
 
 <Warning>
-  If you encounter timeout errors with `relevance_trigger_agent`, switch to the async pattern. Agents with workforce nodes should always use async execution.
+  If you encounter timeout errors with `relevance_trigger_agent_sync`, switch to the async pattern. Agents with workforce nodes should always use async execution.
 </Warning>
 
 ### Async execution workflow
 
 <Steps>
   <Step title="Trigger the agent">
-    Call `relevance_trigger_agent_async` with your agent parameters. This returns immediately with a `conversation_id`.
+    Call `relevance_trigger_agent` with your agent parameters. This returns immediately with a `conversation_id`.
   </Step>
 
   <Step title="Poll for results">
@@ -303,7 +307,7 @@ When triggering agents via MCP, you have two execution modes available depending
   </Accordion>
 
   <Accordion title="Agent execution timeouts">
-    Timeout errors from `relevance_trigger_agent` mean your agent exceeded the 120-second synchronous limit. Switch to `relevance_trigger_agent_async` and `relevance_poll_agent_result` instead. See [handling long-running agent executions](#handling-long-running-agent-executions) for the full workflow. Agents with workforce nodes, multi-step chains, or complex workflows should always use the async pattern.
+    Timeout errors from `relevance_trigger_agent_sync` mean your agent exceeded the 120-second synchronous limit. Switch to `relevance_trigger_agent` and `relevance_poll_agent_result` instead. See [handling long-running agent executions](#handling-long-running-agent-executions) for the full workflow. Agents with workforce nodes, multi-step chains, or complex workflows should always use the async pattern.
   </Accordion>
 </AccordionGroup>
 
