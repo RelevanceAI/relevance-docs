@@ -4,9 +4,11 @@ description: "Microsoft Teams is a collaboration platform that combines workplac
 sidebarTitle: "Microsoft Teams"
 ---
 
-With Relevance AI's Microsoft Teams integration, you can connect your Teams workspace to your AI agents, enabling them to monitor channels, respond to messages, and automate communication workflows directly within Teams.
+With Relevance AI's Microsoft Teams integration, you can connect your Teams workspace to your AI agents, enabling two-way conversations in real-time. Users can interact with AI agents directly in Teams — through channels, group chats, or direct messages — without leaving the platform. Agents monitor messages, respond in real-time, and automate communication workflows across your organization.
 
 Relevance AI uses a unified Microsoft authentication that works across **Teams**, **Outlook**, **SharePoint**, and **OneDrive** — connecting one account gives you access to all services.
+
+<Check>The Relevance AI Bot App is officially approved on the Microsoft marketplace and available to install directly from within Teams.</Check>
 
 ## Prerequisites
 
@@ -22,8 +24,8 @@ Before setting up the Microsoft Teams integration, ensure you have:
   <Card title="Sufficient permissions" icon="lock">
     Enterprise organizations may require admin consent (see [Admin consent & permissions](#admin-consent-permissions))
   </Card>
-  <Card title="A Teams channel or chat" icon="hashtag">
-    At least one channel or chat where you want your agent to operate
+  <Card title="A Teams channel, chat, or DM" icon="hashtag">
+    At least one channel, group chat, or direct message where you want your agent to operate
   </Card>
 </CardGroup>
 
@@ -44,7 +46,7 @@ Before setting up the Microsoft Teams integration, ensure you have:
 
 ## Step 2: Install the Relevance AI app in Microsoft Teams
 
-After connecting your Microsoft account, you need to install the Relevance AI app in Teams so your agents can interact with channels and chats.
+After connecting your Microsoft account, install the Relevance AI Bot App from the Microsoft marketplace so your agents can interact with channels, group chats, and direct messages.
 
 <Steps>
   <Step title="Open the Teams app store">
@@ -52,13 +54,13 @@ After connecting your Microsoft account, you need to install the Relevance AI ap
   </Step>
 
   <Step title="Search and install">
-    Search for **Relevance AI**, then click **Add** or **Install** to add it to your workspace.
+    Search for **Relevance AI**, then click **Add** or **Install** to add the Bot App to your workspace.
 
     <Info>If you don't see an install button, your organization may require admin approval. See [Admin consent & permissions](#admin-consent-permissions).</Info>
   </Step>
 
-  <Step title="Add the app to channels and chats">
-    After installing, add the app to each channel or chat where you want your agent to operate.
+  <Step title="Add the app to channels, group chats, or direct messages">
+    After installing, add the app to each location where you want your agent to operate. The Bot App supports three contexts:
 
     <Tabs>
       <Tab title="Channels">
@@ -73,19 +75,30 @@ After connecting your Microsoft account, you need to install the Relevance AI ap
         3. Search for and select **Relevance AI**
         4. Add the app to the chat
       </Tab>
+      <Tab title="Direct messages (DMs)">
+        To use the bot in a 1:1 direct message conversation:
+
+        1. In the Teams search bar at the top, search for **Relevance AI**
+        2. Under **People**, select the **Relevance AI** bot
+        3. Send the bot any message to open the conversation — this establishes the DM connection and makes it appear as a trigger option in Relevance AI
+
+        Once you've sent a message, the DM will appear in the channel/chat selection dropdown when setting up triggers.
+      </Tab>
     </Tabs>
 
-    **Important:** The app must be added to every channel and chat where you want your agent to respond. Triggers will not work for channels without the app.
+    <Warning>The app must be added to every channel or chat where you want your agent to respond. Triggers will not work for locations where the app has not been added.</Warning>
   </Step>
 
   <Step title="Verify the app is active">
-    Confirm the Relevance AI app appears in the channel's app list and that the channel shows up in the trigger setup dropdown in Relevance AI.
+    Confirm the Relevance AI app appears in the channel's app list and that the channel or chat shows up in the trigger setup dropdown in Relevance AI.
   </Step>
 </Steps>
 
 ## Set up Microsoft Teams as a trigger
 
-You can configure your agents to automatically respond to Teams messages by setting up a trigger. Your agent will process messages in real-time as they are posted.
+You can configure your agents to automatically respond to Teams messages by setting up a trigger. When a message is received, your agent processes it and replies in real-time — creating a two-way conversation between the user and your AI agent directly within Teams.
+
+Triggers work across channels, group chats, and direct messages with the bot.
 
 **Important:** Teams triggers activate only on new messages. They do not trigger on new chat creation, group creation, or webhooks.
 
@@ -95,7 +108,7 @@ You can configure your agents to automatically respond to Teams messages by sett
 
 1. Navigate to your agent in Relevance AI and go to the **Triggers** section.
 2. Click **Add Trigger** and select **Microsoft Teams** from the list.
-3. Choose the Microsoft account you connected, then select the **Team** and specific **channel** or **chat** you want to monitor.
+3. Choose the Microsoft account you connected, then select the **Team** and specific **channel**, **group chat**, or **direct message** you want to monitor.
 4. Optionally, set up **keyword matching** to filter which messages activate your agent. Leave the keyword field empty to trigger on all messages, or enter specific keywords separated by commas.
 5. In the **Core Instructions** section, write a prompt that guides how your agent should respond — including its role, tone, and when to respond.
 
@@ -179,16 +192,16 @@ The Microsoft Teams integration provides actions your agents can use as tool ste
 
 <CardGroup cols={2}>
   <Card title="IT support bot" icon="headset">
-    Monitor your IT support channel and automatically respond to common technical questions, provide troubleshooting steps, and escalate urgent problems.
+    Monitor your IT support channel and respond in real-time to common technical questions, provide troubleshooting steps, and escalate urgent problems — all through natural two-way conversation.
   </Card>
   <Card title="Onboarding assistant" icon="user-plus">
-    Welcome new team members, answer questions about company policies, share relevant documentation, and guide new hires through their first week.
+    Welcome new team members via DM, answer questions about company policies, share relevant documentation, and guide new hires through their first week directly in Teams.
   </Card>
   <Card title="Customer success agent" icon="handshake">
-    Monitor customer inquiries, provide initial responses, search for relevant case history, and route complex issues to the appropriate team member.
+    Monitor customer inquiries across channels and chats, engage in real-time conversation to gather context, and route complex issues to the appropriate team member.
   </Card>
   <Card title="Sales pipeline assistant" icon="chart-line">
-    Log deal updates to your CRM, remind team members of follow-up tasks, and post daily pipeline summaries.
+    Log deal updates to your CRM, remind team members of follow-up tasks, and post daily pipeline summaries to your sales channels.
   </Card>
 </CardGroup>
 
@@ -222,6 +235,30 @@ If you see "Need admin approval" or "This app requires admin approval", follow t
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
+  <Accordion title="What is the Teams Bot App?">
+    The Relevance AI Teams Bot App is an officially approved application available on the Microsoft marketplace. It enables two-way conversations between Teams users and your AI agents — users can message the bot directly in channels, group chats, or direct messages, and your agent responds in real-time within Teams.
+  </Accordion>
+
+  <Accordion title="Where can I use the bot?">
+    The bot works in three contexts within Microsoft Teams:
+
+    - **Channels** — add the app to a channel and your agent can monitor and respond to messages there
+    - **Group chats** — add the app to a group chat for your agent to participate in group conversations
+    - **Direct messages (DMs)** — users can open a 1:1 conversation with the Relevance AI bot and interact with your agent privately
+
+    Each location requires the app to be added separately before triggers will work there.
+  </Accordion>
+
+  <Accordion title="How do I start a direct message conversation with the bot?">
+    To start a DM with the Relevance AI bot:
+
+    1. In the Teams search bar, type **Relevance AI**
+    2. Under **People**, select the **Relevance AI** bot
+    3. Send any message to open the conversation
+
+    Once you've sent a message, the DM will appear in the channel/chat selection dropdown when setting up triggers in Relevance AI.
+  </Accordion>
+
   <Accordion title="Who supports the Microsoft Teams integration?">
     The Microsoft Teams integration was built by Relevance AI and is supported by our team, not Microsoft. If you have a question or issue, please [reach out to our support team](/get-started/support). For Microsoft Teams-specific issues, contact [Microsoft support](https://support.microsoft.com/).
   </Accordion>
@@ -258,8 +295,8 @@ If you see "Need admin approval" or "This app requires admin approval", follow t
     The integration requires permissions to read messages, send messages, and access team/channel information. The exact permissions are shown during the OAuth flow. You may need admin consent depending on your organization's policies.
   </Accordion>
 
-  <Accordion title="Do triggers work for private messages?">
-    Yes, Teams triggers can monitor both channel messages and private chats, depending on your configuration.
+  <Accordion title="Do triggers work for direct messages?">
+    Yes, Teams triggers can monitor channels, group chats, and 1:1 direct messages with the bot. To enable DM triggers, first send a message to the Relevance AI bot in Teams to establish the connection, then select that DM when configuring your trigger in Relevance AI.
   </Accordion>
 
   <Accordion title="Can I filter which messages trigger my Agent?">
