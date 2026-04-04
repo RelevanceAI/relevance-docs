@@ -175,6 +175,123 @@ The Microsoft Teams integration provides actions your agents can use as tool ste
   Most Microsoft Teams tool steps are currently in beta. Please report any issues to our support team.
 </Note>
 
+## Permissions Reference
+
+When you connect Microsoft Teams to Relevance AI, you grant specific permissions through the Microsoft Graph API. These permissions determine what actions Relevance AI can perform on your behalf within Teams.
+
+### Requested Permissions
+
+The following Microsoft Graph API scopes are requested during the OAuth connection flow:
+
+<AccordionGroup>
+  <Accordion title="offline_access" icon="clock">
+    Maintain access to data when not actively using the app. This keeps your connection active without requiring re-authentication each time your agent needs to access Teams.
+  </Accordion>
+  
+  <Accordion title="Chat.Create" icon="plus">
+    Create new chats. Allows your agents to initiate new chat conversations in Teams.
+  </Accordion>
+  
+  <Accordion title="Chat.ReadWrite" icon="comments">
+    Read and write to all chats the user participates in. This enables your agents to view chat history and send messages in existing conversations.
+  </Accordion>
+  
+  <Accordion title="ChatMessage.Read" icon="envelope-open-text">
+    Read messages in chats the user participates in. Required for triggers to monitor incoming messages and for agents to understand conversation context.
+  </Accordion>
+  
+  <Accordion title="ChatMessage.Send" icon="paper-plane">
+    Send messages in chats. Allows your agents to respond to messages in chat conversations.
+  </Accordion>
+  
+  <Accordion title="ChannelMessage.Read.All" icon="book-open">
+    Read messages in all channels the connected user has access to. This permission enables triggers to monitor channel messages across your Teams workspace.
+  </Accordion>
+  
+  <Accordion title="ChannelMessage.Send" icon="bullhorn">
+    Send messages to channels. Allows your agents to post messages in Teams channels.
+  </Accordion>
+  
+  <Accordion title="Channel.ReadBasic.All" icon="hashtag">
+    Read basic channel information including names and descriptions. Required to list available channels when configuring triggers and tool steps.
+  </Accordion>
+  
+  <Accordion title="Team.ReadBasic.All" icon="users">
+    Read basic Teams information. Needed to list available Teams in your organization when setting up integrations.
+  </Accordion>
+  
+  <Accordion title="User.Read" icon="user">
+    Read basic profile information including name and email. This is a standard permission for Microsoft integrations.
+  </Accordion>
+  
+  <Accordion title="User.Read.All" icon="address-book">
+    List all users in your organization. Required for the "Select specific users" filter option in trigger configuration, allowing you to limit which users' messages activate your agent.
+  </Accordion>
+</AccordionGroup>
+
+<Info>
+  The exact permissions may evolve as Relevance AI updates the integration. Always review the consent screen carefully before accepting to understand what access you're granting.
+</Info>
+
+## Troubleshooting
+
+### Common admin issues and fixes
+
+If you encounter issues connecting or using the Microsoft Teams integration, these solutions address the most common problems:
+
+<AccordionGroup>
+  <Accordion title='"The application is not authorized" error' icon="lock">
+    **Problem:** You see an error stating the application is not authorized when trying to connect.
+    
+    **Solution:** Your Azure AD tenant may have an application allowlist enabled. Contact your Microsoft 365 administrator and ask them to:
+    - Add Relevance AI's application ID to the approved application list in Azure AD
+    - Or grant tenant-wide admin consent for the Relevance AI application
+    
+    Your admin can manage this in the Azure Portal under Azure Active Directory > Enterprise applications.
+  </Accordion>
+  
+  <Accordion title='"Consent was denied" error' icon="ban">
+    **Problem:** An administrator denied consent when you tried to connect the integration.
+    
+    **Solution:** If an admin denies consent, the integration cannot function. You'll need to:
+    - Work with your administrator to understand their concerns about the integration
+    - Provide context about how Relevance AI will use the data (see the Permissions Reference section above)
+    - Share Relevance AI's [Privacy Policy](https://relevanceai.com/privacy-policy) with your admin
+    - Request they reconsider and approve the consent request
+  </Accordion>
+  
+  <Accordion title="Relevance AI app not visible in Teams app store" icon="store-slash">
+    **Problem:** You can't find the Relevance AI app when searching in the Microsoft Teams app store.
+    
+    **Solution:** Your Teams administrator may have restricted third-party apps. Ask your admin to:
+    - Go to the Teams Admin Center
+    - Navigate to Teams apps > Permission policies
+    - Allowlist the Relevance AI app or adjust the policy to allow third-party apps
+    
+    Once the policy is updated, the Relevance AI app should appear in your Teams app store.
+  </Accordion>
+  
+  <Accordion title="Trigger is configured but agent isn't responding" icon="robot">
+    **Problem:** You've set up a Teams trigger, but your agent doesn't respond to messages.
+    
+    **Solution:** This is the most common issue. Check the following:
+    
+    1. **Is the Relevance AI app installed and added to the channel or chat?**
+       - The app must be present in the specific channel or chat where you want the trigger to work
+       - Install the Relevance AI app from the Teams app store
+       - Add it to the relevant channel or chat
+    
+    2. **Is the Microsoft account that authenticated a member of that channel?**
+       - The user who connected the Microsoft integration must have access to the channel
+       - Verify the authenticated user is a member of the channel in Teams
+    
+    3. **Is the trigger active and properly configured?**
+       - Check that the trigger is toggled to "Active" in Relevance AI
+       - Verify that keyword filters aren't excluding your test messages
+       - Ensure you're testing in the correct channel or chat that matches your trigger configuration
+  </Accordion>
+</AccordionGroup>
+
 ## Example use cases
 
 <CardGroup cols={2}>
@@ -229,6 +346,9 @@ If you see "Need admin approval" or "This app requires admin approval", follow t
   <Accordion title="What is Microsoft Teams and why should I use it with Relevance AI?">
     Microsoft Teams is a collaboration platform that combines workplace chat, video meetings, and file storage. Using it with Relevance AI allows you to automate responses to messages, trigger workflows from Teams conversations, and send automated messages to channels or chats.
   </Accordion>
+  <Accordion title="Do I need a Microsoft Teams account to use this integration?">
+    Yes, you need an active Microsoft 365 account with a Teams license. This integration is designed for Microsoft Teams for business and enterprise. You'll need to authenticate your Microsoft account through Relevance AI to connect the integration.
+  </Accordion>
 
   <Accordion title="What's the difference between connecting my Microsoft account and installing the Teams app?">
     These are two separate required steps:
@@ -251,19 +371,29 @@ If you see "Need admin approval" or "This app requires admin approval", follow t
   </Accordion>
 
   <Accordion title="Can I connect multiple Microsoft accounts?">
-    Yes, you can connect multiple Microsoft accounts through the Integrations & API Keys page. Each account can be used for different triggers and tool steps.
+    Yes, you can connect multiple Microsoft accounts to your workspace from the Integrations & API Keys page. Each account can be used for different triggers and tool steps, which is useful for managing different Teams workspaces or separating different projects. When configuring a trigger or tool step, you can choose which connected account to use.
   </Accordion>
 
-  <Accordion title="What permissions does the integration require?">
-    The integration requires permissions to read messages, send messages, and access team/channel information. The exact permissions are shown during the OAuth flow. You may need admin consent depending on your organization's policies.
+  <Accordion title="What permissions does the Microsoft Teams integration require?">
+    The integration requires permissions to read messages, send messages, and access team/channel information. The exact permissions will be shown during the OAuth flow when you connect your account. You may need admin consent depending on your organization's policies. See the [Permissions Reference](#permissions-reference) section above for a detailed breakdown of all requested permissions.
+  </Accordion>
+
+  <Accordion title="I set up a trigger but my agent isn't responding. What's wrong?">
+    The most common cause is that the Relevance AI app hasn't been added to the channel or chat. Even with a trigger configured, the app must be present in the channel to receive messages. To fix this:
+
+    1. Install the Relevance AI app from the Microsoft Teams app store
+    2. Add the app to the specific channel or chat where you want the trigger to work
+    3. Test by sending a message that matches your trigger conditions
+
+    Also verify that the trigger is toggled to "Active" and that keyword filters aren't excluding your messages.
   </Accordion>
 
   <Accordion title="Do triggers work for private messages?">
-    Yes, Teams triggers can monitor both channel messages and private chats, depending on your configuration.
+    Yes, Teams triggers can monitor both channel messages and private chats. When setting up your trigger, you can configure it to work with "Direct chats with Relevance AI" or specific channels, depending on your needs.
   </Accordion>
 
-  <Accordion title="Can I filter which messages trigger my Agent?">
-    Yes, you can configure keyword matching in trigger conditions to have your agent respond only to relevant messages rather than every message in a channel.
+  <Accordion title="Can I filter which messages trigger my agent?">
+    Yes, you can configure keyword matching in the trigger settings to only activate your agent on messages containing specific words or phrases. This allows your agent to respond only to relevant messages rather than every message in a channel.
   </Accordion>
 
   <Accordion title="How do I prevent my agent from sending messages automatically?">
@@ -278,16 +408,29 @@ If you see "Need admin approval" or "This app requires admin approval", follow t
     Pre-built tool steps (like "Send Channel Message") are designed for common tasks with simplified interfaces. The Microsoft API Call tool step gives you full access to Microsoft Graph API for advanced operations not covered by pre-built steps.
   </Accordion>
 
+  <Accordion title="My agent's tools are returning a 401 Unauthorized error. How do I fix this?">
+    This typically happens when the Microsoft OAuth connection is set to Private instead of Project level. Tools using Private OAuth may return 401 errors because the agent cannot access the credentials. To fix this:
+
+    1. Go to Integrations & API Keys in your Relevance AI dashboard
+    2. Find your Microsoft connection
+    3. Ensure the sharing level is set to "Project level" (not Private)
+    4. Save the changes and test your agent again
+
+    Project-level connections allow all agents in your project to use the integration.
+  </Accordion>
+
   <Accordion title="Are there rate limits for Microsoft Teams API calls?">
     Yes, Microsoft Graph API enforces rate limits depending on your Microsoft 365 subscription. Microsoft returns a `429 Too Many Requests` status code when limits are exceeded.
   </Accordion>
 
   <Accordion title="How do I remove the Microsoft Teams integration?">
+    To remove the Microsoft Teams integration:
+
     1. Go to the **Integrations & API Keys** page from the sidebar
     2. Find **Microsoft (Teams, Outlook, SharePoint, OneDrive)**
     3. Click "..." on the account you want to remove
     4. Click "Remove" and confirm
 
-    This will disable all triggers and tool steps using this account across Teams, Outlook, SharePoint, and OneDrive.
+    This will revoke Relevance AI's access to your Microsoft account. Note that removing the Microsoft integration will disable all triggers and tool steps using this account across Teams, Outlook, SharePoint, and OneDrive. If you no longer need the Relevance AI app in Teams, you should also uninstall it from Microsoft Teams.
   </Accordion>
 </AccordionGroup>
