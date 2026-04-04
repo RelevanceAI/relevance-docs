@@ -1,0 +1,181 @@
+---
+title: "File versioning"
+sidebarTitle: "File versioning"
+description: "View, download, and restore previous versions of files in your Relevance AI project"
+---
+
+File versioning gives you visibility into the change history of any file in your project. You can browse past versions, download a specific earlier version, or restore a file to how it looked at a previous point in time.
+
+This is useful any time a file is changed accidentally, overwritten by a collaborator, or needs to be rolled back to a known-good state.
+
+## Why use this?
+
+<CardGroup cols={2}>
+  <Card title="Recover from accidental changes" icon="clock-rotate-left">
+    Undo unwanted edits or overwritten files by restoring a previous version without needing to recreate the file manually
+  </Card>
+
+  <Card title="Track file history" icon="timeline">
+    See a full record of when a file was changed, giving you transparency into modifications over time
+  </Card>
+
+  <Card title="Support team collaboration" icon="users">
+    When multiple team members work with the same files, versioning provides a safety net for conflicts and unintended changes
+  </Card>
+
+  <Card title="Audit and review" icon="magnifying-glass">
+    Review what a file contained at a specific point in time, useful for debugging or understanding past behavior
+  </Card>
+</CardGroup>
+
+---
+
+## What's covered?
+
+File versioning applies to files stored within your Relevance AI project. Each time a file is modified or overwritten, a new version is created and the previous one is retained in the version history.
+
+<Note>
+File versioning is a project-level feature. All project members with appropriate permissions can view version history and restore files.
+</Note>
+
+### Known limitation: deleted vs. moved files
+
+The version history system currently cannot distinguish between a file that was **deleted** and a file that was **moved** to a different location. Both appear as a deletion in the version history.
+
+If a file appears missing but you believe it may have been moved rather than deleted, check other locations in your project before using version history to restore it.
+
+---
+
+## How to use
+
+### View version history
+
+<Steps>
+  <Step title="Open the file">
+    Navigate to the file you want to inspect within your project.
+  </Step>
+
+  <Step title="Open the version history panel">
+    Click the **"..."** menu on the file, then select **"Version history"**.
+
+    <Frame>
+      <img
+        src="/images/file-versioning-history.png"
+        alt="File context menu showing the Version history option"
+        noZoom
+      />
+    </Frame>
+  </Step>
+
+  <Step title="Browse versions">
+    The version history panel shows all recorded versions of the file, listed from most recent to oldest. Each entry shows the timestamp of when that version was created.
+  </Step>
+</Steps>
+
+---
+
+### Download a previous version
+
+<Steps>
+  <Step title="Open version history">
+    Follow the steps above to open the version history panel for the file.
+  </Step>
+
+  <Step title="Find the version you want">
+    Scroll through the version list to locate the version you want to download.
+  </Step>
+
+  <Step title="Download the version">
+    Click **"Download"** next to the version entry. The file is downloaded to your device in its original format at that point in time.
+  </Step>
+</Steps>
+
+---
+
+### Restore a file to an earlier version
+
+<Steps>
+  <Step title="Open version history">
+    Follow the steps above to open the version history panel for the file.
+  </Step>
+
+  <Step title="Select the version to restore">
+    Click on the version you want to restore.
+  </Step>
+
+  <Step title="Restore the version">
+    Click **"Restore this version"**. The file is updated to match the selected version.
+
+    <Warning>
+    Restoring a version overwrites the current file contents. The current state is saved as a new version in the history before the restore takes place, so you can undo the restore if needed.
+    </Warning>
+  </Step>
+</Steps>
+
+---
+
+## Use cases
+
+<AccordionGroup>
+  <Accordion title="Recovering an accidentally overwritten file">
+    A team member uploads a new file with the same name as an existing one, overwriting it. Using version history, you can find the version that existed before the upload and restore it, or download it to compare the two.
+  </Accordion>
+
+  <Accordion title="Rolling back after a bad edit">
+    You edit a file and later discover the changes introduced a problem. Open version history, find the last known-good version, and restore it to undo the edit.
+  </Accordion>
+
+  <Accordion title="Reviewing what a file contained at a past date">
+    You need to check what a configuration file looked like three weeks ago for auditing or debugging purposes. Browse the version history, find the version from that time period, and download it for review.
+  </Accordion>
+
+  <Accordion title="Undoing an unintended deletion">
+    A file appears missing and you believe it was deleted by mistake. Open version history for the file (accessible via the project's file list even for deleted files), find the last available version, and restore it to bring the file back.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How many versions are kept?">
+    The number of versions retained depends on your plan and any data retention policies configured for your organization. Enterprise customers can configure retention periods via [Data Retention](/enterprise/data-retention) settings.
+  </Accordion>
+
+  <Accordion title="Can I see who made each change?">
+    The version history shows timestamps for each version. Attribution (which user made the change) may not be available for all file types.
+  </Accordion>
+
+  <Accordion title="What happens to version history when I restore a file?">
+    When you restore a file to an earlier version, the current state is saved as a new version entry in the history before the restore is applied. This means the restore itself is reversible — you can undo it by restoring the version that was current before you triggered the restore.
+  </Accordion>
+
+  <Accordion title="Can I restore a file that was deleted?">
+    Yes. Version history is accessible for deleted files through the project's file list. Locate the deleted file, open its version history, and restore the last available version to bring it back.
+
+    Note the known limitation: if a file was moved rather than deleted, it will appear as deleted in version history. Check other project locations before restoring.
+  </Accordion>
+
+  <Accordion title="Does file versioning affect storage?">
+    Yes. Retaining previous versions consumes storage. If you are on an Enterprise plan, you can use [Data Retention](/enterprise/data-retention) policies to automatically remove old versions after a specified period.
+  </Accordion>
+
+  <Accordion title="Is file versioning available on all plans?">
+    File versioning is available to all projects. Enterprise customers have additional controls over how long versions are retained via the Data Retention feature.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related features
+
+<CardGroup cols={2}>
+  <Card title="Data Retention" icon="database" href="/enterprise/data-retention">
+    Enterprise feature to automatically manage how long file versions and other data are stored in your organization
+  </Card>
+
+  <Card title="Security and data ownership" icon="shield-halved" href="/get-started/support">
+    Learn more about how Relevance AI manages your data and supports data ownership requirements
+  </Card>
+</CardGroup>
