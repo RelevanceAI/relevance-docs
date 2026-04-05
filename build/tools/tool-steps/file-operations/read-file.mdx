@@ -1,0 +1,71 @@
+---
+title: "Read file"
+description: "Read the contents of a file from the filesystem mount."
+---
+
+The Read file tool step retrieves the full text contents of a file stored in the filesystem mount and makes it available as output for the next step in your tool.
+
+## Add the Read file tool step to your tool
+
+1. Open your tool and click **+ Add step**.
+2. Search for **Read file** and select it.
+3. Enter the **File path** — the path to the file you want to read within the filesystem mount.
+4. Click **Run step** to test the read and confirm the file contents appear in the output.
+
+## Parameters
+
+<ParamField path="file_path" type="string" required>
+  The path to the file to read, relative to the filesystem mount root. For example: `reports/summary.txt` or `data/records.json`.
+</ParamField>
+
+## Output
+
+The step returns the full text content of the file as a string. You can reference this output in subsequent steps using the step output variable.
+
+## Examples
+
+<AccordionGroup>
+  <Accordion title="Reading a text file for LLM processing">
+    An agent needs to summarize a daily report. The report is saved to `reports/daily.txt` by a previous step.
+
+    | Parameter | Value |
+    |---|---|
+    | `file_path` | `reports/daily.txt` |
+
+    The step output (the file contents) is then passed to an LLM tool step with a prompt like: `Summarize the following report: {{read_file.output}}`.
+  </Accordion>
+
+  <Accordion title="Reading a JSON config file">
+    An agent reads its own configuration before starting a task:
+
+    | Parameter | Value |
+    |---|---|
+    | `file_path` | `config/agent_settings.json` |
+
+    The output is a JSON string that can be parsed in a subsequent Python code step or passed directly to an LLM.
+  </Accordion>
+</AccordionGroup>
+
+## When to use Read file
+
+- Before editing a file, to check its current contents
+- To pass file contents to an LLM tool step for analysis or summarization
+- To retrieve data written by a previous agent run (because files in filesystem mounts persist between runs)
+- To load configuration or state that was saved in an earlier step
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens if the file does not exist?">
+    The step returns an error and produces no output. Subsequent steps that depend on the output will not run unless your tool handles the error explicitly.
+  </Accordion>
+  <Accordion title="Is there a file size limit?">
+    Very large files may exceed the context limits of downstream LLM tool steps. For large files, consider using the Python code step to extract only the relevant section before passing it to an LLM.
+  </Accordion>
+  <Accordion title="Can Read file read binary files?">
+    No. Read file is designed for text files. For binary files such as PDFs or images, use the Convert PDF to text or File to text tool steps instead.
+  </Accordion>
+  <Accordion title="Does the file need to be in the filesystem mount?">
+    Yes. Read file only works with files stored in the agent's filesystem mount. It cannot read files from external URLs or storage services directly.
+  </Accordion>
+</AccordionGroup>
