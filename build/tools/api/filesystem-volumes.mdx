@@ -1,0 +1,78 @@
+---
+title: 'Filesystem volumes API'
+sidebarTitle: 'Filesystem volumes'
+description: 'Discover accessible filesystem volumes using the API'
+---
+
+The filesystem volumes API lets you discover which filesystem volumes are accessible in your Relevance AI environment. This is useful when building tools that read from or write to specific storage locations.
+
+<Info>All API examples on this page use the AU endpoint. Replace the subdomain with `api-d7b62b` (EU) or `api-bcbe5a` (US) if your organization is hosted in a different region.</Info>
+
+## Region-specific endpoints
+
+| Region | Base URL |
+|--------|----------|
+| AU | `https://api-f1db6c.stack.tryrelevance.com/latest` |
+| EU | `https://api-d7b62b.stack.tryrelevance.com/latest` |
+| US | `https://api-bcbe5a.stack.tryrelevance.com/latest` |
+
+## GET /fs/volumes
+
+Returns a list of accessible filesystem volumes with their metadata.
+
+### Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `conversation_id` | string | No | Filter volumes by conversation context |
+
+### Example request
+
+```bash
+curl 'https://api-f1db6c.stack.tryrelevance.com/latest/fs/volumes' \
+  --request GET \
+  --header 'Authorization: Bearer <project_id>:<api_key>'
+```
+
+To filter by conversation context, pass `conversation_id` as a query parameter:
+
+```bash
+curl 'https://api-f1db6c.stack.tryrelevance.com/latest/fs/volumes?conversation_id=<conversation_id>' \
+  --request GET \
+  --header 'Authorization: Bearer <project_id>:<api_key>'
+```
+
+### Response
+
+The response is a list of volume objects. Each object includes:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `key` | string | Unique identifier for the volume |
+| `label` | string | Human-readable name for the volume |
+| `file_types` | object | Information about the file types supported or present in the volume |
+
+#### Example response
+
+```json
+{
+  "results": [
+    {
+      "key": "volume-abc123",
+      "label": "Conversation files",
+      "file_types": {
+        "allowed": ["pdf", "txt", "csv"],
+        "default": "txt"
+      }
+    },
+    {
+      "key": "volume-def456",
+      "label": "Shared workspace",
+      "file_types": {
+        "allowed": ["pdf", "docx", "xlsx"],
+        "default": "pdf"
+      }
+    }
+  ]
+}
+```
