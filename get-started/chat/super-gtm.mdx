@@ -1,6 +1,6 @@
 ---
 title: "Super GTM"
-description: "Activate Super GTM in Relevance Chat to unlock an AI super agent for your entire go-to-market stack"
+description: "Use Super GTM in Relevance Chat to run an AI super agent across your entire go-to-market stack"
 ---
 
 <Warning>
@@ -135,15 +135,6 @@ Depending on how your organization has configured each external application, you
     | Gong | Read call data and recordings via Gong API. |
     | Linear | Read, create, update and archive issues. Read, create and update comments. Read projects and labels. |
   </Tab>
-  <Tab title="Planned next">
-    | Application | How to connect | Permissions |
-    | --- | --- | --- |
-    | Google Drive | OAuth | Browse, search, upload, and manage files and folders in Google Drive, including shared drives. |
-    | Google Sheets | OAuth | Read, write, and manage Google Sheets spreadsheets, including cell values, rows, worksheets, notes, and comments. |
-    | Outreach | OAuth | Create tasks. Access sequences, prospects, accounts, and other Outreach resources via API. |
-    | ZoomInfo | TBC | Search and look up contacts and companies. |
-    | Firmable | API key | TBC |
-  </Tab>
 </Tabs>
 
 ### Action approval
@@ -161,13 +152,155 @@ This gives you human-in-the-loop control over any action that changes data in yo
 
 ### Filesystem explorer
 
-Super GTM includes a filesystem explorer that shows which files your agent has access to during a conversation. As the agent works, the file tree displays visual indicators so you can see at a glance which files it has interacted with — without reviewing individual tool call logs.
+Super GTM includes a persistent virtual filesystem that stores memories, skills, and files across sessions. The filesystem explorer in the chat sidebar shows which files your agent has access to and how it interacted with them.
+
+#### File access indicators
+
+As the agent works, the file tree displays visual indicators so you can see at a glance which files it has interacted with, without reviewing individual tool call logs.
 
 - **Amber dot + amber text** — the agent wrote to this file
 - **Gray dot** — the agent read this file but did not modify it
 - **Folder icons** also display these indicators when any file inside was accessed
 
 If the agent both read and wrote to the same file, it shows as written (amber). Write operations take visual priority over reads.
+
+#### File system structure
+
+The virtual filesystem is organized into several top-level directories:
+
+| Directory | Purpose |
+| --- | --- |
+| `/skills/project/` | Project-wide skills shared across all team members |
+| `/skills/user/` | Personal skills visible only to you |
+| `/memory/` | User memory files, with `MEMORY.md` as an index |
+| `/project_filesystem/` | Shared project knowledge accessible to all users |
+| `/{mount}/` | External integration mounts (e.g., Google Drive) |
+
+Files persist across chat sessions. The filesystem is backed by S3, so files are retained between conversations.
+
+#### Integration mounts
+
+When you connect an external integration that supports filesystem access, it appears as a virtual mount in the file tree. Each mount includes a `README.md` that describes how to interact with the integration — the agent reads this before using the mount for the first time.
+
+Agents interact with integration data by reading from and writing to mount directories. For example, a Google Drive integration appears as a `/google-drive/` mount where the agent can browse folders, read documents, and create files.
+
+#### Managing files
+
+You can create new folders and files directly from the filesystem explorer UI. Use descriptive names and a logical folder structure — agents rely on file names and paths when searching for context. Regularly review the file access indicators to understand what your agent is reading and writing during a session, and clean up unused files to keep the filesystem tidy.
+
+**Permissions:**
+
+- Project-level files (under `/skills/project/` and `/project_filesystem/`) can only be written or deleted by project admins.
+- User-level files (under `/skills/user/` and `/memory/`) are private to the owning user.
+- Virtual skills (presets, agents-as-skills) are always read-only and cannot be edited via the filesystem.
+
+## Skills
+
+Skills are repeatable workflows that Super GTM can invoke during a chat session. Think of agents as the "doers" and skills as the "how-to guides" — skills give agents the step-by-step instructions and context they need to perform tasks correctly.
+
+### How skills work
+
+At the start of each conversation, Super GTM loads all `SKILL.md` files found in the `/skills/user/` and `/skills/project/` directories. These are parsed and added to the skills catalog for that session.
+
+A skill can be invoked in two ways:
+
+- **Manually** — you explicitly ask Super GTM to use a specific skill by name
+- **Automatically** — when your request matches a skill's `when_to_use` trigger, Super GTM invokes the skill without being asked
+
+Skills can be personal (stored in `/skills/user/`) or project-wide (stored in `/skills/project/`). Project skills are shared across the entire team and can only be created or modified by project admins.
+
+### Creating skills with the skillify flow
+
+The easiest way to create a new skill is through the skillify flow — an agent-guided interview that captures everything needed to define a reliable, reusable skill.
+
+To start the skillify flow, tell Super GTM you want to create a new skill. For example:
+
+> "Create a skill for how I like to qualify new leads"
+
+SuperGTM will guide you through a structured interview covering:
+
+1. **Skill name and description** — what the skill is called and what it does
+2. **Goals and success criteria** — what a successful outcome looks like
+3. **Step-by-step breakdown** — the exact steps the agent should follow
+4. **Arguments** — any inputs the skill requires (e.g., a contact name, deal ID)
+5. **Triggers** — phrases or conditions that should automatically invoke the skill
+6. **Edge cases and corrections** — known exceptions and how to handle them
+
+At the end of the interview, SuperGTM writes a `SKILL.md` file to either `/skills/user/{skill-name}/SKILL.md` or `/skills/project/{skill-name}/SKILL.md` depending on whether you want it to be personal or shared.
+
+### SKILL.md format
+
+Each skill is stored as a `SKILL.md` file with YAML frontmatter followed by the skill body.
+
+<Accordion title="Example SKILL.md file">
+```markdown
+---
+name: qualify-new-lead
+version: 1
+status: active
+description: Qualify a new inbound lead using the BANT framework
+when_to_use: Use this skill when the user wants to qualify a new lead, prospect, or contact
+triggers:
+  - "qualify lead"
+  - "qualify prospect"
+  - "new lead qualification"
+---
+
+## Skill: Qualify a new lead
+
+Use the BANT framework (Budget, Authority, Need, Timeline) to qualify a new inbound lead.
+
+### Steps
+
+1. Look up the contact in HubSpot using their name or email address.
+2. Check the associated company record for firmographic data (size, industry, revenue).
+3. Review any recent deal activity or notes on the contact.
+4. Score each BANT dimension based on available data:
+   - **Budget**: Is there budget allocated? Has pricing been discussed?
+   - **Authority**: Is this person a decision-maker or influencer?
+   - **Need**: Is there a clearly stated business problem this solves?
+   - **Timeline**: Is there an expected purchase or evaluation timeline?
+5. Summarize findings and recommend a qualification status: Qualified, Unqualified, or Needs More Info.
+6. Update the HubSpot contact record with a qualification note.
+
+### Edge cases
+
+- If the contact doesn't exist in HubSpot, create a new record before proceeding.
+- If BANT data is incomplete, note what's missing and flag for follow-up rather than marking as Unqualified.
+```
+</Accordion>
+
+The `when_to_use` field is what Super GTM uses for automatic skill matching. Write it as a clear, natural-language description of when the skill should be invoked.
+
+### Managing skills
+
+<CardGroup cols={2}>
+  <Card title="View skills" icon="list">
+    Open the filesystem explorer and browse `/skills/user/` or `/skills/project/` to see all available skills
+  </Card>
+  <Card title="Edit a skill" icon="pen">
+    Click any `SKILL.md` file in the filesystem explorer to open and edit it, or ask Super GTM to update an existing skill
+  </Card>
+  <Card title="Delete a skill" icon="trash">
+    Select the skill folder in the filesystem explorer and delete it, or ask Super GTM to remove a skill by name
+  </Card>
+  <Card title="Share a skill" icon="users">
+    Project admins can move a personal skill to `/skills/project/` to make it available to the whole team
+  </Card>
+</CardGroup>
+
+**Permissions:**
+
+- `/skills/user/` — only the owning user can create, edit, or delete their skills
+- `/skills/project/` — only project admins can create, edit, or delete project-wide skills; all team members can invoke them
+
+### Best practices
+
+- Write `when_to_use` triggers as clear, specific sentences describing the scenario — vague triggers cause unintended matches
+- Include detailed step-by-step instructions; the more precise the steps, the more consistently the agent will execute the skill
+- Document edge cases explicitly so the agent knows how to handle exceptions
+- Test a new skill with several different phrasings to verify automatic matching works as expected
+- Keep skill names short and descriptive so they're easy to reference manually
 
 ## Example use cases
 
@@ -190,6 +323,15 @@ If the agent both read and wrote to the same file, it shows as written (amber). 
     - "Generate slides using Slide Builder about our Q1 results"
 
     Super GTM will execute the agent and incorporate the results into completing your request.
+  </Tab>
+  <Tab title="Skills">
+    Skills let Super GTM follow your established workflows automatically:
+
+    - "Qualify this new lead from the form submission" *(triggers a lead qualification skill)*
+    - "Run discovery prep for my call with Acme Corp tomorrow" *(triggers a call prep skill)*
+    - "Create a skill for how I like to write follow-up emails after demos"
+
+    Skills can be invoked by name or triggered automatically when your request matches the skill's `when_to_use` condition.
   </Tab>
 </Tabs>
 
@@ -222,11 +364,19 @@ If the agent both read and wrote to the same file, it shows as written (amber). 
   </Accordion>
 
   <Accordion title="What integrations are supported?">
-    Currently available: HubSpot, GSuite (Calendar, Gmail, Docs), Linear, Notion, Slack, Cursor, Apollo, Salesforce, Gong, Microsoft Calendar, Microsoft Outlook, and Microsoft Teams. Google Drive, Google Sheets, Outreach, ZoomInfo, and Firmable are planned next. See the [Supported Integrations](#supported-integrations) table for full details on connection methods and permissions.
+    OAuth integrations (per-user): HubSpot, GSuite (Calendar, Gmail, Docs), Linear, Notion, Slack, Salesforce, Microsoft Calendar, Microsoft Outlook, and Microsoft Teams. API key integrations (project-wide): Cursor, Apollo, Gong, and Linear. See the [Supported integrations](#supported-integrations) table for full details on permissions.
   </Accordion>
 
   <Accordion title="Can Super GTM access data from multiple tools at once?">
     Yes! Super GTM can work across multiple tools simultaneously. For example, it can pull data from your CRM, check your calendar, and draft an email, all in a single conversation.
+  </Accordion>
+
+  <Accordion title="What's the difference between personal and project skills?">
+    Personal skills are stored in `/skills/user/` and are only visible to you. Project skills are stored in `/skills/project/`, are shared with everyone in the project, and can only be created or modified by project admins. Both types are available during your chat sessions.
+  </Accordion>
+
+  <Accordion title="Do files and skills persist between sessions?">
+    Yes. The virtual filesystem is backed by S3 and persists across all chat sessions. Skills, memory files, and any files you or the agent create remain available in future conversations.
   </Accordion>
 </AccordionGroup>
 
@@ -234,4 +384,4 @@ If the agent both read and wrote to the same file, it shows as written (amber). 
 
 We are conducting this closed beta to gather early feedback. Please treat us as a partner in this process. Tell us what's working and what's not working, and we will use that feedback to directly drive improvements.
 
-Reach out to your account team or [contact support](https://relevanceai.com/support) to share your feedback.
+Reach out to your account team or [contact support](/get-started/support) to share your feedback.
