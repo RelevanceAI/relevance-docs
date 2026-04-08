@@ -1,0 +1,31 @@
+name: Documentation Lint Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  documentation-lint:
+    name: Documentation Lint Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run documentation lint checks on changed MDX files
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep '\.mdx$' || true)
+
+          if [ -z "$CHANGED" ]; then
+            echo "No MDX files changed — skipping structure check."
+            exit 0
+          fi
+
+          echo "Checking files:"
+          echo "$CHANGED"
+          echo ""
+
+          echo "$CHANGED" | xargs node .github/scripts/structure-check.js
