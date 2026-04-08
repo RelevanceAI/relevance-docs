@@ -4,11 +4,20 @@ description: 'Extract content from any web page and send it directly to an AI ag
 sidebarTitle: 'Chrome Extension'
 ---
 
-The Relevance AI Chrome Extension lets you extract content from any web page and send it directly to an AI agent chat, bridging your web browsing and agent-based workflows without copy-pasting.
-
-The extension works in Chrome and any Chromium-based browser that supports Manifest V3, including Edge, Brave, and Arc.
+The Relevance AI Chrome Extension lets you extract content from any web page and send it directly to an AI agent chat, without copy-pasting.
 
 <Info>Install the extension from the [Chrome Web Store](https://chromewebstore.google.com/detail/relevance-ai/oeejdfhhhceikclacdlikdgfenhehgcp).</Info>
+
+### Supported browsers
+
+<CardGroup cols={4}>
+  <Card title="Chrome" icon="chrome" />
+  <Card title="Edge" icon="edge" />
+  <Card title="Brave" icon="brave" />
+  <Card title="Arc" icon="globe" />
+</CardGroup>
+
+Any Chromium-based browser that supports Manifest V3 is compatible. Firefox is not supported.
 
 ## Installation and setup
 
@@ -20,10 +29,9 @@ The extension works in Chrome and any Chromium-based browser that supports Manif
 
 ### Signing in
 
-1. Click the extension icon in your toolbar to open the popup.
-2. Click **Sign in to send to chat**.
-3. An OAuth popup opens through `app.relevanceai.com/auth` — authorize the extension with your Relevance AI account.
-4. Tokens are stored locally in your browser and refreshed automatically. You stay signed in across browser sessions.
+<img src="/images/chrome-extension-sign-in.png" alt="Chrome extension sign in screen" />
+
+Click the extension icon in your toolbar, then click **Sign in to send to chat**. An OAuth popup opens through `app.relevanceai.com/auth` where you authorize the extension with your Relevance AI account. Tokens are stored locally and refreshed automatically, so you stay signed in across browser sessions.
 
 ### Selecting a project and region
 
@@ -33,109 +41,84 @@ After signing in, click your user avatar in the extension popup header to open a
 
 ### Main workflow
 
-1. Browse to any web page.
-2. Open the extension via the toolbar icon, or use the keyboard shortcut:
-   - **Mac:** `Cmd+Shift+S`
-   - **Windows/Linux:** `Ctrl+Shift+S`
-3. The extension automatically extracts content from the page and displays it in an editable text area.
-4. Edit the extracted content if needed.
-5. Click **Start new chat** to open a new agent conversation with the content as the first message.
-6. Click **Open in Chat** to jump directly to the conversation in Relevance AI.
+<Steps>
+  <Step title="Browse to any web page">
+    Navigate to the page you want to extract content from.
+  </Step>
+  <Step title="Open the extension">
+    Click the toolbar icon, or use the keyboard shortcut: **Mac:** `Cmd+Shift+S` / **Windows/Linux:** `Ctrl+Shift+S`
+  </Step>
+  <Step title="Review extracted content">
+    The extension automatically extracts content from the page and displays it in an editable text area. Edit as needed.
+  </Step>
+  <Step title="Send to chat">
+    Click **Start new chat** to open a new agent conversation with the content as the first message.
+  </Step>
+  <Step title="Continue in Relevance AI">
+    Click **Open in Chat** to jump directly to the conversation in Relevance AI.
+  </Step>
+</Steps>
 
-### Right-click context menu
+### Use the extension without opening the popup
 
-You can also trigger the extension without opening the popup manually:
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmnpmcm9z8874abur9vla9n2w" frameBorder="0" title="Using the Chrome Extension right-click context menu" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+You can also trigger the extension without opening the popup:
 
 1. Right-click anywhere on a page, or right-click on selected text.
 2. Choose **Send to Chat** from the context menu.
 3. The extension popup opens with content pre-loaded.
 
-While content is pending, a badge notification ("1") appears on the extension icon as a reminder.
+<Tip>While content is pending, a badge notification ("1") appears on the extension icon as a reminder.</Tip>
 
 ## Content extraction
 
 The extension uses a multi-stage extraction pipeline that selects the appropriate method based on the page type.
 
-### Supported page types
-
 <AccordionGroup>
-  <Accordion title="LinkedIn profiles">
+  <Accordion title="LinkedIn profiles" icon="linkedin">
     Extracts name, headline, company, location, about section, experience, education, skills, and profile URL. Handles LinkedIn's single-page app navigation, including iframe-based content.
   </Accordion>
-  <Accordion title="Articles and blog posts">
+  <Accordion title="Articles and blog posts" icon="newspaper">
     Uses Mozilla Readability (the same library as Firefox Reader View) to extract the title, author, published date, and body text, plus the canonical URL. Works on most news sites and blog platforms.
   </Accordion>
-  <Accordion title="Generic web pages">
+  <Accordion title="Generic web pages" icon="globe">
     Extracts the page title, meta description, body text (up to 4,000 characters), and structured data including JSON-LD and Open Graph tags.
   </Accordion>
-  <Accordion title="Selected text">
+  <Accordion title="Selected text" icon="text">
     If you have text selected on the page when you open the extension, that selection is included alongside the page extraction.
   </Accordion>
 </AccordionGroup>
 
-Extracted content is formatted as markdown in the popup and wrapped with metadata before being sent to the agent.
+Extracted content is formatted as markdown and wrapped with metadata before being sent to the agent. When you click **Start new chat**, the extension calls the TriggerWorkforceChat API to create a new conversation, and the extracted content becomes the first message.
 
-### Limitations
+<Warning>The extension cannot extract content from browser-internal pages such as `chrome://`, `about:`, or other extension pages.</Warning>
 
-The extension cannot extract content from browser-internal pages such as `chrome://`, `about:`, or other extension pages. A clear message is shown when a page isn't supported.
+## Permissions and network access
 
-## Popup states
-
-The popup displays different UI depending on your authentication state:
-
-| State | What you see |
-|---|---|
-| **Logged out** | Relevance AI logo, **Sign in to send to chat** button, and extension version number |
-| **Logged in with content** | Header with logo and user avatar (for project selection and sign out), extracted content area with a refresh button, editable text area, and **Start new chat** button |
-| **After sending** | Green **Sent!** confirmation, **Open in Chat** button, and **Done** button |
-
-## Browser permissions
-
-<AccordionGroup>
-  <Accordion title="activeTab — read and extract page content">
-    Allows the extension to read the current tab's URL and extract content from the page you're viewing. Used only when you actively open the extension or trigger it via the context menu.
-  </Accordion>
-  <Accordion title="contextMenus — right-click Send to Chat option">
+<CardGroup cols={2}>
+  <Card title="activeTab">
+    Read the current tab's URL and extract page content. Only used when you actively open the extension or trigger it via the context menu.
+  </Card>
+  <Card title="contextMenus">
     Adds the **Send to Chat** option to your browser's right-click menu.
-  </Accordion>
-  <Accordion title="storage — save your preferences locally">
-    Stores authentication tokens, your project selection, and other preferences in your local browser storage. Nothing is transmitted to a third party.
-  </Accordion>
-  <Accordion title="tabs — detect URL and navigation changes">
-    Detects tab URL changes to handle LinkedIn's single-page app navigation and the OAuth callback after you sign in.
-  </Accordion>
-</AccordionGroup>
+  </Card>
+  <Card title="storage">
+    Stores authentication tokens, your project selection, and other preferences in local browser storage. Nothing is transmitted to a third party.
+  </Card>
+  <Card title="tabs">
+    Detects tab URL changes to handle LinkedIn's single-page app navigation and the OAuth callback after sign-in.
+  </Card>
+</CardGroup>
 
-### Network access
-
-The extension makes requests to the following hosts:
-
-| Host | Purpose |
-|---|---|
-| `app.relevanceai.com` | OAuth authentication |
-| `api.global.relevanceai.com` | API calls for projects and chat creation |
-| `*.stack.tryrelevance.com` | Regional API endpoints |
-| `*.sentry.io` | Error reporting |
-
-## How it connects to Relevance AI chat
-
-When you click **Start new chat**, the extension calls the TriggerWorkforceChat API to create a new agent conversation. The extracted content becomes the first message in that chat. The **Open in Chat** button links directly to `chat.relevanceai.com/chat/{projectId}:{chatId}` using the same authentication system as the main Relevance AI platform.
-
-<Accordion title="Technical details">
-  The extension is built with WXT (Web Extension Tooling) on the Manifest V3 platform. The popup UI uses React. Content extraction uses Mozilla Readability for article parsing, and all extracted content is sanitized with DOMPurify before display.
-</Accordion>
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
-  <Accordion title="Which browsers are supported?">
-    Chrome and any Chromium-based browser that supports Manifest V3, including Microsoft Edge, Brave, and Arc. Firefox is not supported.
-  </Accordion>
   <Accordion title="What if a page won't extract content properly?">
-    Try clicking the refresh button in the content area to re-run extraction. If the page is a browser-internal page (such as a `chrome://` or `about:` page), extraction isn't possible by design. For other pages that extract poorly, you can manually edit the content in the text area before sending.
-  </Accordion>
-  <Accordion title="How do I change which project content is sent to?">
-    Click your user avatar in the extension popup header to open the project and region selector. Your selection is saved and persists across sessions.
+    Try clicking the refresh button in the content area to re-run extraction. For pages that extract poorly, you can manually edit the content in the text area before sending.
   </Accordion>
   <Accordion title="How do I sign out?">
     Click your user avatar in the extension popup header and select **Sign out** from the dropdown.
@@ -145,8 +128,5 @@ When you click **Start new chat**, the extension calls the TriggerWorkforceChat 
   </Accordion>
   <Accordion title="Can I use this with any agent?">
     The extension creates a new chat session in your selected project. The agent that handles the chat depends on your project configuration in Relevance AI.
-  </Accordion>
-  <Accordion title="What is the keyboard shortcut to open the extension?">
-    `Cmd+Shift+S` on Mac, or `Ctrl+Shift+S` on Windows and Linux. You can change browser extension shortcuts in your browser's extension management settings.
   </Accordion>
 </AccordionGroup>
