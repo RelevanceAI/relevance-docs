@@ -118,6 +118,29 @@ Triggers work across channels, group chats, and direct messages with the bot.
 
 <Tip>Set tool permissions to "approval mode" initially so your agent asks before sending messages. Switch to autopilot once you're confident.</Tip>
 
+## Attachment support
+
+Agents connected via Microsoft Teams can receive and process attachments sent in channels and chats.
+
+### Supported attachment types
+
+<CardGroup cols={2}>
+  <Card title="Inline images" icon="image">
+    Images pasted directly into the Teams message composer are sent to the agent for processing
+  </Card>
+  <Card title="File uploads" icon="file">
+    Files attached via the Teams file picker (PDFs, documents, images, and other formats) are passed to the agent
+  </Card>
+</CardGroup>
+
+### Messages with only attachments
+
+If a user sends a message that contains attachments but no text, the agent receives a `[N attachments]` indicator (e.g., `[1 attachments]`) in place of the message body. The agent can use this signal to recognize that attachments were sent and respond accordingly.
+
+<Note>
+  The agent's ability to interpret attachment content depends on which tools and capabilities are configured for that agent.
+</Note>
+
 ## Agent Notifications
 
 ![Agent notification rule configuration](/images/team-agent-notifications.png)
@@ -659,7 +682,7 @@ If you see "Need admin approval" or "This app requires admin approval", follow t
   </Accordion>
 
   <Accordion title="Can my agent access files shared in Teams?">
-    Yes, files shared in Teams channels are stored in SharePoint. You can use the Microsoft API Call tool step to access these files through the Graph API. Files are typically accessible via the channel's associated SharePoint document library.
+    Yes, in two ways. First, agents can directly receive file uploads and inline images sent in a Teams message — these are passed as attachments when the trigger fires. Second, files shared in Teams channels are also stored in SharePoint, which you can access through the Microsoft API Call tool step via the Microsoft Graph API.
   </Accordion>
 
   <Accordion title="What's the difference between the pre-built Teams tool steps and the Microsoft API Call tool step?">
