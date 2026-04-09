@@ -1,0 +1,195 @@
+---
+title: "Salesloft"
+description: "Connect Salesloft to Relevance AI to manage sales engagement, cadences, and contacts with your agents."
+sidebarTitle: "Salesloft"
+---
+
+Salesloft is a sales engagement and revenue orchestration platform built for B2B sales teams. It centralizes multi-channel outreach across email, phone, and social, with cadence management as its core capability — letting sales teams run structured, repeatable engagement sequences at scale. With Relevance AI's Salesloft integration, you can build agents that enroll contacts in cadences, manage people and accounts, create notes, and coordinate outreach — all using your connected Salesloft account.
+
+<Warning>
+  The Salesloft integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Salesloft. If you have a question or issue with using Salesloft in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Salesloft, you can reach out to Salesloft support directly.
+</Warning>
+
+## Connect the integration
+
+1. Go to the **Integrations** page in the sidebar of your Relevance AI dashboard.
+2. Click on **Salesloft** from the available integrations.
+3. Click **Add Integration**.
+4. Enter your Salesloft API key when prompted.
+5. Once authenticated, your Salesloft account will appear as a connected integration.
+
+<Tip>
+  You can find your Salesloft API key in your Salesloft account under **Settings → API**. You need appropriate permissions in your Salesloft account to generate API keys.
+</Tip>
+
+## Tool steps
+
+<Warning>
+  All Salesloft tool steps are currently in **beta**. Behavior may change and some edge cases may not be handled. Test your workflows thoroughly before deploying to production.
+</Warning>
+
+The Salesloft integration provides actions for people management, account management, cadence management, notes, and search. These actions can be used as tool steps in your agents' workflows.
+
+### People management
+
+<CardGroup cols={2}>
+  <Card title="Search people" icon="magnifying-glass">
+    Search for contacts and leads in Salesloft by name, email, title, or other attributes.
+  </Card>
+  <Card title="Create person" icon="user-plus">
+    Create a new person record in Salesloft with contact details such as name, email, phone, and title.
+  </Card>
+  <Card title="Update person" icon="user-pen">
+    Update an existing person record in Salesloft with new or corrected information.
+  </Card>
+  <Card title="Get person details" icon="user">
+    Retrieve the full details for a specific person record in Salesloft by ID.
+  </Card>
+</CardGroup>
+
+### Account management
+
+<CardGroup cols={2}>
+  <Card title="Search accounts" icon="building-magnifying-glass">
+    Search for company accounts in Salesloft by name, domain, or other criteria.
+  </Card>
+  <Card title="Create account" icon="building-circle-arrow-right">
+    Create a new company account record in Salesloft.
+  </Card>
+  <Card title="Update account" icon="building-circle-check">
+    Update an existing company account record with new information.
+  </Card>
+  <Card title="Get account details" icon="building">
+    Retrieve the full details for a specific account record in Salesloft by ID.
+  </Card>
+</CardGroup>
+
+### Cadence management
+
+Cadences are Salesloft's core feature for structured, multi-step outreach sequences. The following tool steps let your agents control who is enrolled in cadences and how.
+
+<CardGroup cols={2}>
+  <Card title="Add people to cadence" icon="list-check">
+    Enroll one or more people in a Salesloft cadence to begin a structured outreach sequence.
+  </Card>
+  <Card title="Remove people from cadence" icon="user-xmark">
+    Remove one or more people from an active cadence, stopping further cadence steps from being executed for those contacts.
+  </Card>
+  <Card title="List cadences" icon="list">
+    Retrieve a list of available cadences in your Salesloft account, including their names and status.
+  </Card>
+</CardGroup>
+
+### Notes
+
+<CardGroup cols={2}>
+  <Card title="Create note" icon="note-sticky">
+    Create a new note in Salesloft, associated with a person or account record.
+  </Card>
+  <Card title="Update note" icon="pen-to-square">
+    Update the content of an existing note in Salesloft.
+  </Card>
+  <Card title="List notes" icon="list-ul">
+    Retrieve notes from Salesloft, with optional filtering by person or account.
+  </Card>
+</CardGroup>
+
+### Search
+
+<CardGroup cols={1}>
+  <Card title="Search" icon="magnifying-glass">
+    Run a broad search across Salesloft data — people, accounts, and other records — using keywords or filters.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Salesloft" in the tool step search bar to see all available Salesloft actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built tool steps, you can make custom API calls to any Salesloft endpoint using the Salesloft API Call tool step. This is useful for accessing Salesloft features or data not yet covered by the pre-built actions.
+
+### How to use the Salesloft API Call tool step
+
+<Steps>
+  <Step title="Create or open a tool">
+    Create a new tool in Relevance AI, or open an existing tool you want to add Salesloft functionality to.
+  </Step>
+
+  <Step title="Add the Salesloft API Call tool step">
+    1. Scroll down to **Tool steps**.
+    2. Search for **Salesloft API Call** in the tool step search bar.
+    3. Add it to your workflow.
+  </Step>
+
+  <Step title="Select your Salesloft account">
+    Select your connected Salesloft account from the dropdown.
+  </Step>
+
+  <Step title="Configure the API endpoint">
+    Set the HTTP method, endpoint path, and any request body parameters. Refer to [Salesloft's API documentation](https://developers.salesloft.com/) for available endpoints and required fields.
+  </Step>
+
+  <Step title="Test your configuration">
+    Run a test to confirm the call returns the expected data before deploying your agent.
+  </Step>
+</Steps>
+
+## Example use cases
+
+<AccordionGroup>
+  <Accordion title="Automated lead qualification and cadence enrollment" icon="user-check">
+    Build an agent that evaluates inbound leads against your qualification criteria — job title, company size, industry — then automatically creates the person in Salesloft and enrolls them in the appropriate cadence based on their profile. This removes manual triage and ensures every qualified lead enters the right sequence immediately.
+  </Accordion>
+
+  <Accordion title="Cadence optimization based on engagement" icon="chart-line">
+    Deploy an agent that monitors engagement signals — email opens, replies, meeting bookings — and adjusts cadence enrollment accordingly. For example, move a contact who replies from a high-frequency prospecting cadence to a lower-frequency nurture cadence, or remove them entirely if they have already booked a call.
+  </Accordion>
+
+  <Accordion title="Account-based outreach coordination" icon="building-user">
+    Create an agent that coordinates multi-threaded outreach across an account. When a target account is identified, the agent searches for relevant contacts at that company, creates or updates their records in Salesloft, and enrolls each contact in role-specific cadences — ensuring consistent messaging across the buying committee.
+  </Accordion>
+
+  <Accordion title="CRM sync automation" icon="arrows-rotate">
+    Build an agent that keeps Salesloft synchronized with your CRM. When a contact's status changes in your CRM — for example, moving from prospect to qualified lead — the agent updates the corresponding person record in Salesloft, adds a note with the status change context, and enrolls them in the next appropriate cadence.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Do I need a Salesloft account to use this integration?">
+    Yes, you need an active Salesloft account with API access enabled. Contact your Salesloft administrator if you are unsure whether your account has API access.
+  </Accordion>
+
+  <Accordion title="How do I get my Salesloft API key?">
+    1. Log in to your Salesloft account.
+    2. Go to **Settings → API**.
+    3. Generate a new API key or copy an existing one.
+    4. Use this key when connecting Salesloft to Relevance AI.
+
+    Keep your API key secure and do not share it publicly.
+  </Accordion>
+
+  <Accordion title="What does beta status mean for these tools?">
+    Beta means the tool steps are functional but may have rough edges. Some API responses may not be fully handled, error messages may be generic, and behavior may change as we improve the integration. Test your workflows in a non-production environment before deploying agents that interact with live Salesloft data.
+  </Accordion>
+
+  <Accordion title="What happens when I remove someone from a cadence?">
+    Removing a person from a cadence stops any future cadence steps from executing for that contact. Steps that have already been completed are not reversed — for example, emails that have already been sent remain sent. The person's record in Salesloft is not affected; only their cadence enrollment changes.
+  </Accordion>
+
+  <Accordion title="Can I use this integration to manage cadences across multiple Salesloft accounts?">
+    Yes. You can connect multiple Salesloft accounts to Relevance AI via the Integrations page. When building your tools, select the appropriate connected account from the dropdown in each tool step.
+  </Accordion>
+</AccordionGroup>
+
+## Remove Salesloft integration
+
+You can remove a connected Salesloft account from Relevance AI at any time:
+
+1. Go to the **Integrations** page from the sidebar.
+2. Select **Salesloft** from the list.
+3. Click **...** on the account you want to remove.
+4. Click **Remove**.
