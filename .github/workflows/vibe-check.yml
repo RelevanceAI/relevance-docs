@@ -1,0 +1,226 @@
+name: Vibe Checks
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  vibe-check:
+    name: Vibe Checks
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed
+        run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          git diff --name-only origin/${{ github.base_ref }}...HEAD >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Run vibe check
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          claude_args: '--allowedTools "Read,Write,Glob,Grep,Bash(git diff:*),Bash(git fetch:*)"'
+          prompt: |
+            You are doing a vibe check on a documentation PR for the Relevance AI docs site.
+
+            ## Changed files in this PR
+            ${{ steps.changed.outputs.files }}
+
+            ## Step 1 — decide whether this PR needs a documentation review
+
+            Look at the list of changed files and use your judgment:
+
+            - **Full review**: Any `.mdx` files changed. Also do a full review if non-doc files directly affect documentation rendering or content — e.g. `docs.json` (navigation), `.mdx` snippets, or JS/CSS files that are clearly embedded in or referenced by docs pages.
+            - **No review needed**: Pure internal changes with no docs impact — e.g. GitHub Actions workflow files, scripts, config files, `package.json`, standalone JS that doesn't touch doc content. Write only "No documentation review needed." to `VIBE_CHECK_OUTPUT.md` and stop.
+            - **Partial note**: If non-doc files are changed alongside `.mdx` files, include a brief note in the review about what the non-doc changes do and whether they appear to affect the docs.
+
+            Only proceed to Step 2 if a full or partial review is warranted.
+
+            ## Step 2 — run the review
+
+            1. Read `CLAUDE.md` for the full content standards.
+            2. Read each changed `.mdx` file.
+            3. For contradiction checking and consistency context:
+               - Read up to 2 sibling pages (same directory) for each changed file.
+               - Also scan the changed file for internal links (e.g. `/build/agents/...`, `/get-started/...`) and cross-references to other features. Read up to 2 of those linked pages too — these are the highest-risk sources of contradictions since the author is explicitly pointing to them.
+               - Cap total context pages at 4 per changed file across both sources. Be credit-efficient — prioritise pages the changed file directly references over arbitrary siblings.
+            4. Write your complete review to `VIBE_CHECK_OUTPUT.md` in the current directory. A separate step will post it as a PR comment — you do not need to post it yourself.
+
+            ## What to evaluate
+
+            ### 1. Relevance AI product term capitalization
+            These are proper nouns and must always be capitalized when referring to the Relevance AI product feature:
+            - Agent, Tool, Workforce, Knowledge, Trigger, Programmatic GTM
+
+            These must NOT be capitalized in these contexts:
+            - Third-party tools: "a tool like Claude", "use the Slack tool"
+            - Generic verbs: "this will trigger the workflow", "agent the conversation"
+            - Lowercase when clearly referring to the concept not the product: "your agent's memory"
+
+            Use context to judge. "Configure your Agent" = product feature = cap. "Claude is a capable agent" = generic = lowercase.
+
+            ### 2. Banned words
+            Flag any use of: powerful, seamlessly, effortlessly, unlock, supercharge, robust, leverage.
+
+            ### 3. American English
+            Flag British spellings: colour, behaviour, optimise, customise, recognise, analyse, centre, etc.
+
+            ### 4. Heading sentence case
+            All headings (`#` through `######`) and all `title="..."` props on Card, Accordion, and Step components must use sentence case.
+            Only capitalize: proper nouns, product names (Agent, Tool, etc.), acronyms (API, GTM, MCP).
+            Example — wrong: `## How To Configure Your Settings` / right: `## How to configure your settings`
+
+            ### 5. Component suggestions
+            Look at what the content is actually doing before suggesting a component change. Ask: would this genuinely serve the reader better, or just add visual noise?
+
+            **`<CardGroup>` is appropriate when:**
+            - Items are navigable (each card links somewhere)
+            - Items represent equal, parallel choices the user picks between (e.g. three ways to create something)
+            - Items are feature benefits on a concept/landing page where visual weight helps — and each item has enough substance for a title + icon + short description
+            - There are at least 3 items with real content, not just short phrases
+
+            **`<CardGroup>` is NOT appropriate for:**
+            - Short adjective or property lists (e.g. "Searchable, Filterable, Consistent") — these are descriptors, not navigable options. A bullet list or prose sentence is better.
+            - Sequential steps or considerations
+            - Technical reference lists (data types, status codes, field names)
+            - Best practices that read naturally as flowing bullets
+
+            **Markdown table when:**
+            - Items have 2+ consistent attributes to compare (name, type, description, etc.)
+            - It's a reference the reader needs to scan and compare across — data formats, API params, status values
+
+            **`<Accordion>` / `<AccordionGroup>` when:**
+            - FAQ-style questions that would interrupt reading flow inline
+            - Long examples or edge cases that are optional reading
+            - Advanced config that most readers will skip
+
+            **`<Steps>` when:**
+            - A numbered list represents a sequential procedure — `<Steps>` adds visual progress indicators that plain numbered lists don't
+
+            **Callout swaps:**
+            - `<Note>` on a risk, cost, or irreversible action → `<Warning>`
+            - `<Warning>` on a tip or shortcut → `<Tip>`
+            - `<Info>` or `<Note>` on a positive confirmation → `<Check>`
+
+            Be specific — describe what the suggested component would look like in practice, not just its type.
+
+            If you encounter a Mintlify component you haven't seen used elsewhere in the repo, don't assume it's wrong — flag it as "not seen elsewhere in this repo, verify it renders as expected" and leave it at that. Don't suggest replacing it unless you're confident it's actually broken or misused.
+
+            ### 6. Page structure
+            Match the page against the correct template for its type:
+
+            **Concept page** (explaining what X is): definition → benefits → how it works → use cases → best practices → FAQ → closing CTA
+            **How-to page** (explaining how to do X): options/paths → steps → what's next
+            **Reference/settings page**: overview → section-by-section breakdown → examples → FAQ
+
+            **Closing CTA logic — only flag this if it actually applies:**
+            - Concept and overview pages should end with a CTA — reader just learned what X is and needs somewhere to go
+            - How-to pages that are part of a clear sequence should end with a "What's next?" pointing to the next step
+            - Reference and settings pages (field definitions, data formats, configuration options) do NOT need a CTA — readers come here mid-task to look something up, then leave. Don't flag a missing CTA on these.
+            - If a CTA is warranted, suggest 2–3 specific real pages from the repo that would make natural next steps.
+
+            Is complexity layered? (overview first, deep-dive after)? Does each major section flow logically into the next?
+
+            ### 7. Clarity
+            **For non-technical readers:**
+            - Is the topic defined in plain English before instructions begin?
+            - Are there analogies ("think of it like...")?
+            - Is jargon introduced gradually or dropped cold?
+
+            **For technical readers:**
+            - Are UI element names exact and specific? ("Click **Create agent**", not "click the button")
+            - Are edge cases, gotchas, or prerequisites called out?
+            - Is behavior under error conditions or limits mentioned where relevant?
+
+            ### 8. Contradiction check
+            This section is ONLY for flagging conflicts between what the changed file says and what a neighboring file says — e.g. one page says a feature behaves one way, and another page describes it differently.
+
+            Do NOT flag quality issues you notice in the context pages themselves (bad links, wrong components, etc.) — those are that page's problem and will be caught when that file is in a PR. Only report genuine contradictions where both files are making claims about the same thing and they don't agree.
+
+            ---
+
+            ## Output format
+
+            Write your review to `VIBE_CHECK_OUTPUT.md` in this format:
+
+            ```
+            ## 🎯 Vibe check — `path/to/file.mdx`
+
+            **Scores**
+            | | Dimension | Score | What's holding it back |
+            |---|-----------|-------|------------------------|
+            | 🟢/🟡/🔴 | Consistency | X/10 | If not 10: explain exactly what's inconsistent. If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Technical clarity | X/10 | If not 10: explain what's missing or vague for a technical reader. If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Non-technical clarity | X/10 | If not 10: explain what would lose a non-technical reader. If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Structure | X/10 | If not 10: explain what's off about the page architecture. If 10: "No issues found." |
+
+            Score emoji key: 🟢 = 9–10, 🟡 = 6–8, 🔴 = 1–5
+
+            ---
+
+            ### 🔧 Issues *(omit section if none)*
+            - Line N: `powerful` → banned word, remove
+            - Line N: Heading "How To Set Up Triggers" → sentence case: "How to set up triggers"
+            - Line N: `<Note>` used for a cost warning → use `<Warning>` instead
+
+            ### 🧩 Component suggestions *(omit section if none)*
+            - Lines N–M: You're listing 5 benefits as bullet points. This section would land better as a `<CardGroup cols={3}>` — each card could cover one benefit with a matching icon, matching the pattern used in `get-started/core-concepts/agents.mdx`. It gives visual weight to the value prop instead of burying it in a list.
+            - Lines N–M: The example workflow here is 30 lines inline. Wrapping it in `<Accordion title="Example: configuring a scheduled trigger">` would keep the page scannable without hiding the detail.
+
+            ### 🏗️ Page structure *(omit section if nothing to flag)*
+            - No closing CTA. This page would round off well with a `## What's next?` section linking to `/build/agents/build-your-agent/triggers` and `/build/agents/give-your-agent-tasks/overview`.
+            - The how it works section comes before the definition — consider flipping so readers know what they're reading about first.
+
+            ### ⚠️ Contradiction watch *(omit section if none)*
+            - Line N says triggers fire immediately. `triggers.mdx` (line M) says there can be up to a 30-second delay. Worth aligning these.
+
+            ### ✨ Overall vibe
+            2–3 sentences on the overall feel — does it match the tone and structure of the surrounding docs?
+
+            ---
+            ```
+
+            Repeat the block for each changed file. After all file blocks, end your response with:
+
+            ```
+            ---
+            <details>
+            <summary>🔋 Credit usage</summary>
+
+            | Item | Count |
+            |------|-------|
+            | Files reviewed | N |
+            | Context pages read | N |
+            | Total lines processed | ~N |
+
+            **Files read:** list each file and its line count, e.g. `build/agents/create-an-agent.mdx` (82 lines)
+            </details>
+            ```
+
+            Be accurate with line counts — use actual values from what you read.
+
+            Repeat the file blocks for each changed file. If a file scores well with no issues, just post the scores table and overall vibe — skip the other sections.
+
+            Keep the tone direct and useful. You're helping a technical writer improve their work, not grading an exam.
+
+      - name: Post vibe check comment
+        if: always()
+        run: |
+          if [ -f "VIBE_CHECK_OUTPUT.md" ]; then
+            gh pr comment ${{ github.event.pull_request.number }} --body-file VIBE_CHECK_OUTPUT.md
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
