@@ -93,6 +93,10 @@ Project admins will be able to set a users role upon invite. Organization admins
 | **Chat**   | Access [Relevance Chat](/get-started/chat/introduction) only - cannot access the web app. Requires asset-level permissions to run agents. |
 | **Viewer** | View agents, tools, and knowledge outputs only, cannot run or edit anything                |
 
+<Info>
+Editor is a project-level role only and does not exist at organization or asset levels. Project Editors automatically have Admin permissions on all assets within the project.
+</Info>
+
 ### Permissions
 
 <Tip>
@@ -113,6 +117,9 @@ Scroll horizontally to view all columns, including the Chat role permissions.
 | Access Web App                         | ✅         | ✅          | ✅          | ✅          | ❌        |
 | Run a chat (LLM)                       | ✅         | ✅          | ✅          | ✅          | ✅        |
 
+<Info>
+Project Viewer access grants read-only visibility to full asset configurations — including prompts, tools, and steps. There is no field-level redaction. If a Viewer cannot see an agent's internals, it's because they lack asset-level access entirely, not because their read access is limited to metadata.
+</Info>
 
 ### Chat Role Details
 
@@ -180,6 +187,10 @@ Upon asset creation, the creator becomes the admin. An asset can have multiple a
 | View asset outputs              | ✅         | ✅          | ✅          |
 | View asset audit logs           | ✅         | ✅          | ✅          |
 
+<Info>
+Asset Viewer access grants read-only visibility to full asset configurations — including prompts, tools, and steps. There is no field-level redaction. If a Viewer cannot see an agent's internals, it's because they lack asset-level access entirely, not because their read access is limited to metadata.
+</Info>
+
 ----
 
 ## Workforce Permissions
@@ -208,6 +219,34 @@ This means when sharing a workforce, you must:
 <Tip>
 Learn more about [sharing workforces](/build/workforces/share-your-workforce) as cloneable templates.
 </Tip>
+
+----
+
+## Permission inheritance and cascading
+
+Permissions cascade automatically from project level to assets within that project:
+
+| Project role | Automatic asset access |
+| ------------ | ---------------------- |
+| **Admin**    | Admin on all assets    |
+| **Editor**   | Admin on all assets    |
+| **Viewer**   | Viewer on all assets   |
+
+<Warning>
+Read access cascades automatically, but execution permissions (run/trigger) may require explicit asset-level grants due to known gaps in the system. If a project Viewer needs to run specific agents, grant them Member access at the asset level explicitly.
+</Warning>
+
+Project Members do **not** automatically have access to all assets. Members must be granted asset-level permissions explicitly for each asset they need to access.
+
+----
+
+## Technical implementation notes
+
+The following is relevant primarily for API users and developers integrating directly with the authorization system.
+
+- **Member vs operator:** The "Member" role label in the UI maps to the `operator` role in the underlying authorization system. When querying permissions via the API, use `operator` rather than `member`.
+- **Authorization system:** The platform uses OpenFGA for authorization. Some parts of the system use a legacy authorization layer that may produce slightly different behavior in edge cases.
+- **Embeddable agents:** Agents shared via public embed links (Chat UI, Chat Widget) may behave differently under the legacy authorization system. Test permissions explicitly when deploying embedded agents.
 
 ----
 
