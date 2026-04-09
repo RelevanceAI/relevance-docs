@@ -3,7 +3,6 @@ name: Vibe check
 on:
   pull_request:
     branches: [main]
-  workflow_dispatch:
 
 jobs:
   vibe-check:
@@ -30,6 +29,8 @@ jobs:
 
       - name: Run vibe check
         uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: '--allowedTools "Read,Write,Glob,Grep,Bash(git diff:*),Bash(gh pr comment:*),Bash(gh pr view:*),Bash(git fetch:*)"'
