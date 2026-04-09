@@ -22,7 +22,7 @@ jobs:
       - name: Get changed files
         id: changed
         run: |
-          git fetch origin ${{ github.base_ref }} --depth=1
+          git fetch origin ${{ github.base_ref }}
           echo "files<<EOF" >> "$GITHUB_OUTPUT"
           git diff --name-only origin/${{ github.base_ref }}...HEAD >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
