@@ -29,11 +29,10 @@ jobs:
 
       - name: Run vibe check
         uses: anthropics/claude-code-action@v1
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: '--allowedTools "Read,Write,Glob,Grep,Bash(git diff:*),Bash(gh pr comment:*),Bash(gh pr view:*),Bash(git fetch:*)"'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          claude_args: '--allowedTools "Read,Glob,Grep,Bash(git diff:*),Bash(git fetch:*)"'
           prompt: |
             You are doing a vibe check on a documentation PR for the Relevance AI docs site.
 
@@ -45,8 +44,7 @@ jobs:
             Look at the list of changed files and use your judgment:
 
             - **Full review**: Any `.mdx` files changed. Also do a full review if non-doc files directly affect documentation rendering or content — e.g. `docs.json` (navigation), `.mdx` snippets, or JS/CSS files that are clearly embedded in or referenced by docs pages.
-            - **No review needed**: Pure internal changes with no docs impact — e.g. GitHub Actions workflow files, scripts, config files, `package.json`, standalone JS that doesn't touch doc content. Post a short comment and stop:
-              `gh pr comment ${{ github.event.pull_request.number }} --body "No documentation review needed."`
+            - **No review needed**: Pure internal changes with no docs impact — e.g. GitHub Actions workflow files, scripts, config files, `package.json`, standalone JS that doesn't touch doc content. Respond with only: "No documentation review needed." and nothing else.
             - **Partial note**: If non-doc files are changed alongside `.mdx` files, include a brief note in the review about what the non-doc changes do and whether they appear to affect the docs.
 
             Only proceed to Step 2 if a full or partial review is warranted.
@@ -59,9 +57,7 @@ jobs:
                - Read up to 2 sibling pages (same directory) for each changed file.
                - Also scan the changed file for internal links (e.g. `/build/agents/...`, `/get-started/...`) and cross-references to other features. Read up to 2 of those linked pages too — these are the highest-risk sources of contradictions since the author is explicitly pointing to them.
                - Cap total context pages at 4 per changed file across both sources. Be credit-efficient — prioritise pages the changed file directly references over arbitrary siblings.
-            4. Write your review to `VIBE_CHECK_OUTPUT.md`, then post it:
-               `gh pr comment ${{ github.event.pull_request.number }} --body-file VIBE_CHECK_OUTPUT.md`
-               Using `--body-file` avoids quoting issues with multi-line content.
+            4. Write your review directly as your response — the action will post it as a PR comment automatically. Do not write to any file or run any shell commands to post the comment.
 
             ## What to evaluate
 
@@ -158,7 +154,7 @@ jobs:
 
             ## Output format
 
-            Write this to `VIBE_CHECK_OUTPUT.md`:
+            Respond with your review in this format:
 
             ```
             ## 🎯 Vibe check — `path/to/file.mdx`
@@ -197,7 +193,7 @@ jobs:
             ---
             ```
 
-            Repeat the block for each changed file. After all file blocks, append:
+            Repeat the block for each changed file. After all file blocks, end your response with:
 
             ```
             ---
