@@ -159,46 +159,48 @@ jobs:
             Write this to `VIBE_CHECK_OUTPUT.md`:
 
             ```
-            ## Vibe check
-
-            ### `path/to/file.mdx`
+            ## 🎯 Vibe check — `path/to/file.mdx`
 
             **Scores**
-            | Dimension | Score | What's holding it back |
-            |-----------|-------|------------------------|
-            | Consistency | X/10 | If not 10: explain exactly what's inconsistent. If 10: "No issues found." |
-            | Technical clarity | X/10 | If not 10: explain what's missing or vague for a technical reader. If 10: "No issues found." |
-            | Non-technical clarity | X/10 | If not 10: explain what would lose a non-technical reader. If 10: "No issues found." |
-            | Structure | X/10 | If not 10: explain what's off about the page architecture. If 10: "No issues found." |
+            | | Dimension | Score | What's holding it back |
+            |---|-----------|-------|------------------------|
+            | 🟢/🟡/🔴 | Consistency | X/10 | If not 10: explain exactly what's inconsistent. If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Technical clarity | X/10 | If not 10: explain what's missing or vague for a technical reader. If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Non-technical clarity | X/10 | If not 10: explain what would lose a non-technical reader. If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Structure | X/10 | If not 10: explain what's off about the page architecture. If 10: "No issues found." |
 
-            **Issues** *(omit section if none)*
+            Score emoji key: 🟢 = 9–10, 🟡 = 6–8, 🔴 = 1–5
+
+            ---
+
+            ### 🔧 Issues *(omit section if none)*
             - Line N: `powerful` → banned word, remove
             - Line N: Heading "How To Set Up Triggers" → sentence case: "How to set up triggers"
             - Line N: `<Note>` used for a cost warning → use `<Warning>` instead
 
-            **Component suggestions** *(omit section if none)*
+            ### 🧩 Component suggestions *(omit section if none)*
             - Lines N–M: You're listing 5 benefits as bullet points. This section would land better as a `<CardGroup cols={3}>` — each card could cover one benefit with a matching icon, matching the pattern used in `get-started/core-concepts/agents.mdx`. It gives visual weight to the value prop instead of burying it in a list.
             - Lines N–M: The example workflow here is 30 lines inline. Wrapping it in `<Accordion title="Example: configuring a scheduled trigger">` would keep the page scannable without hiding the detail.
 
-            **Page structure** *(omit section if nothing to flag)*
+            ### 🏗️ Page structure *(omit section if nothing to flag)*
             - No closing CTA. This page would round off well with a `## What's next?` section linking to `/build/agents/build-your-agent/triggers` and `/build/agents/give-your-agent-tasks/overview`.
             - The how it works section comes before the definition — consider flipping so readers know what they're reading about first.
 
-            **Contradiction watch** *(omit section if none)*
+            ### ⚠️ Contradiction watch *(omit section if none)*
             - Line N says triggers fire immediately. `triggers.mdx` (line M) says there can be up to a 30-second delay. Worth aligning these.
 
-            **Overall vibe**
-            2–3 sentences on the overall feel — does it match the tone and structure of the surrounding docs? Does it read like it belongs in the Pale City or like it wandered in from somewhere else?
+            ### ✨ Overall vibe
+            2–3 sentences on the overall feel — does it match the tone and structure of the surrounding docs?
 
             ---
             ```
 
-            After all file blocks, append a usage footer to `VIBE_CHECK_OUTPUT.md`:
+            Repeat the block for each changed file. After all file blocks, append:
 
             ```
             ---
             <details>
-            <summary>Credit usage</summary>
+            <summary>🔋 Credit usage</summary>
 
             | Item | Count |
             |------|-------|
@@ -210,7 +212,7 @@ jobs:
             </details>
             ```
 
-            This helps track credit consumption across runs. Be accurate — use actual line counts from what you read.
+            Be accurate with line counts — use actual values from what you read.
 
             Repeat the file blocks for each changed file. If a file scores well with no issues, just post the scores table and overall vibe — skip the other sections.
 
