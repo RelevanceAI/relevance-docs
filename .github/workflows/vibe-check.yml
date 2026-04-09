@@ -53,7 +53,10 @@ jobs:
 
             1. Read `CLAUDE.md` for the full content standards.
             2. Read each changed `.mdx` file.
-            3. For contradiction checking and consistency context: find up to 2 pages in the same directory as each changed file and read them. No more — be credit-efficient. Skip this if the changed file is in the root.
+            3. For contradiction checking and consistency context:
+               - Read up to 2 sibling pages (same directory) for each changed file.
+               - Also scan the changed file for internal links (e.g. `/build/agents/...`, `/get-started/...`) and cross-references to other features. Read up to 2 of those linked pages too — these are the highest-risk sources of contradictions since the author is explicitly pointing to them.
+               - Cap total context pages at 4 per changed file across both sources. Be credit-efficient — prioritise pages the changed file directly references over arbitrary siblings.
             4. Write your review to `VIBE_CHECK_OUTPUT.md`, then post it:
                `gh pr comment ${{ github.event.pull_request.number }} --body-file VIBE_CHECK_OUTPUT.md`
                Using `--body-file` avoids quoting issues with multi-line content.
