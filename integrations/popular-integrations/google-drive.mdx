@@ -1,0 +1,67 @@
+---
+title: 'Google Drive'
+description: 'Trigger your agents automatically when files in Google Drive are created, modified, or deleted.'
+---
+
+Connect your Google Drive account to Relevance AI and configure your agents to respond automatically when files in your Google Drive change.
+
+<Info>The Google Drive trigger is currently rolling out in early access. If you don't see it in your account yet, it will become available soon.</Info>
+
+## Connect the integration
+
+1. Navigate to the "Integrations & API Keys" page in the sidebar of your Relevance AI dashboard.
+2. Click on "Google Drive" from the available integrations.
+3. Click the "Add Integration" button.
+4. In the pop-up window, sign into your Google account and authorize the connection.
+5. Once authorized, your Google account will appear in the connected accounts list.
+
+## Setting up triggers
+
+The Google Drive integration lets you trigger agents automatically when files are created, modified, or deleted. You can also filter to a specific folder so only changes within that folder activate your agent.
+
+<Warning>The Google Drive trigger is a Premium trigger, available on the Pro plan and above. Learn more about our [new pricing](/admin/subscriptions/new-pricing).</Warning>
+
+### Available Google Drive triggers
+
+- **File created** — triggers when a new file is added to your Google Drive or monitored folder
+- **File modified** — triggers when an existing file is updated
+- **File deleted** — triggers when a file is removed from your Google Drive or monitored folder
+
+<Note>Conversations are threaded by file ID. Multiple changes to the same file continue in the same conversation thread, so your agent maintains full context across a file's history.</Note>
+
+### How to set up a Google Drive trigger
+
+The setup process differs slightly depending on whether you're configuring a trigger for an agent or a workforce.
+
+#### For agents
+
+1. Navigate to the agent builder by selecting the agent you want to configure.
+2. In the left sidebar, locate and click the "Triggers" section.
+3. Click the "Add trigger" button, then select "Google Drive" from the available trigger types.
+4. Choose the connected Google account you want to use. If you haven't connected one yet, do so first in the Integrations & API Keys page.
+5. Select the trigger event:
+   - **File created** — triggers when a new file is added
+   - **File modified** — triggers when a file is updated
+   - **File deleted** — triggers when a file is removed
+6. Optionally, specify a folder to monitor. Only file events within that folder will activate your agent.
+7. If available on your plan, configure queue work hours to control when your agent processes Google Drive triggers.
+
+#### For workforces
+
+1. Navigate to the workforce builder by selecting the workforce you want to configure.
+2. In the Build section, locate the "Triggers" section in the node palette on the left. Drag a trigger node onto your workspace.
+3. Click the trigger node to open its configuration panel, then select "Google Drive" as the trigger type.
+4. Choose the connected Google account you want to use. If you haven't connected one yet, do so first in the Integrations & API Keys page.
+5. Select the trigger event:
+   - **File created** — triggers when a new file is added
+   - **File modified** — triggers when a file is updated
+   - **File deleted** — triggers when a file is removed
+6. Optionally, specify a folder to monitor. Only file events within that folder will activate your agents.
+7. If available on your plan, configure queue work hours to control when your workforce processes Google Drive triggers.
+8. Drag a connection line from the trigger node to the agent in your workforce that should respond when the trigger fires.
+
+## Google Drive as a knowledge source
+
+You can also use Google Drive as a knowledge source, giving your agents direct read access to files for retrieval and reference.
+
+[Learn more about Google Drive as a knowledge source](/build/knowledge/integrated-knowledge-sources/google-drive).
