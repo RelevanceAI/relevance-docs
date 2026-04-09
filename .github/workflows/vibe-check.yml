@@ -32,6 +32,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          allowed_bots: "claude[bot]"
           claude_args: '--allowedTools "Read,Write,Glob,Grep,Bash(git diff:*),Bash(git fetch:*)"'
           prompt: |
             You are doing a vibe check on a documentation PR for the Relevance AI docs site.
