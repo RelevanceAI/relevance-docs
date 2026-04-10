@@ -211,6 +211,63 @@ Learn more about [sharing workforces](/build/workforces/share-your-workforce) as
 
 ----
 
+## Transitioning to RBAC
+
+If your organization is being migrated from legacy permissions to RBAC, this section covers what changes, what stays the same, and what actions you need to take.
+
+### Before RBAC (legacy permissions)
+
+The legacy permission system had three roles — Admin, Editor, and Viewer — applied at the project and organization level only:
+
+- **Admin** — full read and write access to all assets and settings
+- **Editor** — read and write access to all datasets, knowledge sets, and agents; could run agents and tools
+- **Viewer** — read access to all datasets, knowledge sets, and agents; could run agents
+
+There was no asset-level granularity. All users with a given role had the same access to every asset in the project by default. Shared credentials (API keys, OAuths) applied project-wide.
+
+### During the migration
+
+The Relevance AI team handles the technical migration to RBAC. You do not need to manually migrate roles, but you should review and adjust assignments after migration is complete.
+
+**How legacy roles map to RBAC roles by default:**
+
+| Legacy role | Default RBAC role (project level) |
+|-------------|-----------------------------------|
+| Admin       | Admin                             |
+| Editor      | Editor                            |
+| Viewer      | Viewer                            |
+
+<Warning>
+  The Viewer role changes significantly under RBAC. Legacy Viewers could run agents — RBAC Viewers cannot run anything and can only view assets they have been explicitly granted access to. Users who only need to interact with agents via chat should be assigned the Chat role, not Viewer.
+</Warning>
+
+After migration, review every user mapped to Viewer and determine whether they should be:
+- **Chat** — for users who only need to use agents through [Relevance Chat](/get-started/chat/introduction)
+- **Viewer** — for users who genuinely only need read access to asset configurations and outputs
+- **Member** — for users who need to run agents
+
+### After RBAC is enabled
+
+Once RBAC is active for your organization:
+
+- **Asset-level permissions are enforced.** Access to individual agents, tools, and knowledge bases is controlled separately from project-level roles.
+- **Project Editors and Admins retain full access** to all assets in that project automatically — project Admin and Editor roles cascade to asset Admin on all assets in the project.
+- **Members, Viewers, and Chat users need explicit asset-level permissions.** Without a grant, they will receive a 403 error when attempting to access an asset.
+- **Shared credentials can be scoped per tool.** Rather than all project members sharing one set of credentials, asset admins can assign specific authentication accounts per tool.
+- **Permissions are assigned via the Share modal** on each individual agent, tool, or knowledge base.
+
+### Action items for admins
+
+After RBAC is enabled, complete these steps to restore appropriate access for your team:
+
+- **Review user roles immediately.** Check that the default role mappings match your intended access levels, particularly for legacy Viewer accounts.
+- **Assign asset-level permissions** using the Share modal on each agent, tool, and knowledge base that non-Admin/Editor users need to access.
+- **Use RBAC Groups for bulk assignment.** If many users need the same access, create a group and assign asset permissions to the group rather than individual users.
+- **Audit chat-only users.** Confirm that users who only need [Relevance Chat](/get-started/chat/introduction) access are assigned the Chat project role, not Viewer.
+- **Verify critical users can access required assets.** Test access for key team members, especially those with Member or Viewer roles, before announcing the migration is complete.
+
+----
+
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
