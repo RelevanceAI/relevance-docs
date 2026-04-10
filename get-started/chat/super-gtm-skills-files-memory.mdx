@@ -1,0 +1,187 @@
+---
+title: "Skills, files, and memory"
+sidebarTitle: "Skills, files, and memory"
+description: "Persistent capabilities that let Super GTM learn your workflows and carry context across sessions"
+---
+
+<Warning>
+Super GTM is currently in closed beta (started March 2, 2026) and only available for Enterprise customers. If you're an Enterprise customer and want to join the beta, contact your account team.
+</Warning>
+
+Skills, files, and memory are the persistent building blocks of Super GTM. Together they let the agent carry context across sessions, learn how you work, and run your team's processes consistently.
+
+<CardGroup cols={3}>
+  <Card title="Skills" icon="bolt">
+    Repeatable workflows the agent activates automatically based on your request
+  </Card>
+  <Card title="Files" icon="folder-open">
+    Persistent document storage shared across conversations and users
+  </Card>
+  <Card title="Memory" icon="brain">
+    Per-user learning that accumulates across all your conversations
+  </Card>
+</CardGroup>
+
+## Skills
+
+Skills are repeatable workflows that Super GTM can activate automatically based on the context of your request. Rather than telling the agent exactly how to do something each time, skills encode that process once so it runs consistently.
+
+Configure which skills are available by opening the Super GTM settings panel (click the gear icon next to the Super GTM toggle).
+
+### Built-in skills
+
+Built-in skills come pre-configured with Super GTM and cover common GTM workflows. These are available to all Super GTM users without any setup — for example, researching a prospect before a meeting or summarizing a call recording.
+
+### Project skills
+
+Project skills are created by your team and shared across all users in your Relevance AI project. They encode the specific processes your organization uses, such as how to qualify a lead, what to include in a proposal, or how to hand off an account.
+
+Admins can create and manage project skills in the Super GTM settings panel.
+
+### User skills
+
+User skills are personal to you. They capture your individual preferences and working style — for example, how you prefer to open outreach emails, or which fields you always fill in when creating a CRM record.
+
+You can add and edit your own user skills from the Super GTM settings panel without affecting other users.
+
+### Agents as skills
+
+Any agent you've built in Relevance AI can function as a skill. When you configure an agent as a skill, Super GTM can invoke it automatically when the context matches, without you needing to explicitly @ mention it.
+
+For example, if you have a "Competitor Analysis" agent, you can configure it as a skill so Super GTM runs it automatically when you ask about a competitor.
+
+Configure which agents are available as skills in the **Agents** section of the Super GTM settings panel. See [Super GTM](/get-started/chat/super-gtm#configuring-super-gtm) for details on the settings panel.
+
+## Files
+
+Super GTM includes a persistent file system that lets your agent save, read, and update documents across conversations. Unlike conversation context — which resets each session — files remain accessible over time.
+
+Use files to store reference material, templates, research outputs, or anything the agent should be able to consult across multiple sessions.
+
+### File scopes
+
+Files can be stored at different scopes depending on who should have access:
+
+<CardGroup cols={2}>
+  <Card title="User files" icon="user">
+    Personal to you. Other users in your project cannot access your user-scoped files.
+  </Card>
+  <Card title="Project files" icon="users">
+    Shared with everyone in your Relevance AI project. Use these for team-wide reference material.
+  </Card>
+</CardGroup>
+
+### Using the filesystem explorer
+
+The filesystem explorer in the Super GTM chat interface shows which files your agent has access to during a conversation. As the agent works, the file tree displays visual indicators so you can see which files it has interacted with at a glance.
+
+- **Amber dot + amber text** — the agent wrote to this file
+- **Gray dot** — the agent read this file but did not modify it
+- **Folder icons** also display these indicators when any file inside was accessed
+
+If the agent both reads and writes the same file, it shows as written (amber). Write operations take visual priority over reads.
+
+<Note>
+File operations that create or modify files are subject to the same approval flow as other write actions in Super GTM. The agent will present the action for your review before executing it.
+</Note>
+
+## Memory
+
+Memory lets Super GTM learn about you over time. Rather than starting fresh each conversation, the agent builds up context about who you are, how you work, and what matters to you.
+
+Memory is per-user — each team member has their own memory store, and the agent personalizes its responses to each individual.
+
+### Memory types
+
+Super GTM captures four types of information in memory:
+
+<CardGroup cols={2}>
+  <Card title="Preferences" icon="sliders">
+    How you like to work: communication style, formatting choices, tools you prefer, and other personal working patterns
+  </Card>
+  <Card title="Background" icon="id-card">
+    Context about you: your role, your company, your objectives, and other stable facts the agent should always know
+  </Card>
+  <Card title="Relationships" icon="address-book">
+    Key contacts, accounts, and relationships you've mentioned, so the agent can refer to them across sessions
+  </Card>
+  <Card title="Processes" icon="arrows-spin">
+    Specific ways you like to handle tasks or workflows that differ from the default agent behavior
+  </Card>
+</CardGroup>
+
+### How memory works
+
+Memory is captured automatically as you work with Super GTM. When you share information about yourself, correct how the agent handled something, or describe a preference, the agent stores that for future conversations.
+
+You can also explicitly tell Super GTM to remember something:
+
+- "Remember that I always CC my manager on enterprise deals"
+- "My main Salesforce territory is EMEA"
+- "I prefer bullet points over paragraphs in summaries"
+
+### Viewing and managing memory
+
+You can view what Super GTM has stored in memory and remove items you no longer want. Access your memory from the Super GTM settings panel.
+
+<Info>
+Memory is scoped to you individually. Clearing or editing your memory does not affect other users in your project.
+</Info>
+
+## Example workflows
+
+<Tabs>
+  <Tab title="Skills">
+    Skills activate automatically when the context matches — you don't need to invoke them explicitly:
+
+    - Ask Super GTM to "prep for my call with ACME Corp" → it runs the prospect research skill
+    - Say "create a deal for this lead" → it runs your CRM deal creation skill, following your team's required fields
+    - Mention a competitor → it runs your competitor analysis agent as a skill and incorporates the output
+
+    You can also explicitly request a skill by name: "use the call prep skill for Sarah at Example Inc."
+  </Tab>
+  <Tab title="Files">
+    Files let the agent work with documents that span multiple sessions:
+
+    - "Save this research to my files so I can reference it next week"
+    - "Read the ACME Corp battlecard from project files and use it to prepare talking points"
+    - "Update the deal summary file with what we learned from today's call"
+
+    The filesystem explorer updates in real time as the agent works with files.
+  </Tab>
+  <Tab title="Memory">
+    Memory keeps the agent aligned with your context without you needing to re-explain it:
+
+    - After you mention "I'm focused on Series B companies in fintech," future sessions remember this
+    - After the agent drafts something too long, say "remember I prefer concise summaries" — it won't repeat that
+    - If you've discussed a key account before, the agent can reference that context in future sessions
+  </Tab>
+</Tabs>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="How are user skills different from project skills?">
+    User skills are personal to you and only affect your own interactions with Super GTM. Project skills are shared across everyone in your Relevance AI project and are created by admins to encode team-wide processes.
+  </Accordion>
+
+  <Accordion title="Can I stop Super GTM from accessing a specific file?">
+    You can delete files from the filesystem to remove agent access. During a conversation, you can also instruct Super GTM not to use a specific file. File write operations always require your approval through the standard action approval flow.
+  </Accordion>
+
+  <Accordion title="Does memory carry across different projects?">
+    No. Memory is scoped to the project you're working in. If you switch projects, Super GTM starts with a fresh memory context for that project.
+  </Accordion>
+
+  <Accordion title="Can Super GTM forget something I told it?">
+    Yes. You can explicitly ask Super GTM to forget specific information ("forget that I prefer long-form summaries") or remove items directly from the memory panel in settings.
+  </Accordion>
+
+  <Accordion title="Are project files visible to all users in my organization?">
+    Project files are visible to all users with access to that specific Relevance AI project. They are not shared across projects or your entire organization. User files are private to each individual.
+  </Accordion>
+
+  <Accordion title="Do skills require approval before running?">
+    Skills that only read data run without requiring approval. Skills that create, update, or delete data in your connected integrations follow the same action approval flow as all other write operations in Super GTM.
+  </Accordion>
+</AccordionGroup>
