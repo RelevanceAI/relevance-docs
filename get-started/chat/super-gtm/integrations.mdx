@@ -7,21 +7,34 @@ Super GTM connects to your go-to-market tech stack so the agent can read data an
 
 ## Connecting integrations
 
-To connect an integration:
+<Steps>
+  <Step title="Open the settings panel">
+    Click the gear icon next to the Super GTM toggle.
+  </Step>
+  <Step title="Find the integration">
+    Navigate to the **Integrations** section and locate the tool you want to connect.
+  </Step>
+  <Step title="Authorize">
+    Click **Connect account** (OAuth) or **Add API key** (API key integrations) and follow the prompts.
+  </Step>
+</Steps>
 
-1. Click the gear icon next to the Super GTM toggle to open the settings panel
-2. Navigate to the **Integrations** section
-3. Find the integration you want to connect
-4. Click **Connect account** (OAuth) or **Add API key** (API key integrations)
+<div style={{ width:"100%",position:"relative","padding-top":"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmnzflj252zi91q1ey26wryd8" frameBorder="0" title="Connecting integrations" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
 ### OAuth vs API key
 
-There are two connection methods, depending on the integration:
+<Tabs>
+  <Tab title="OAuth (per user)">
+    Each user authorizes their own connection via a popup modal. Every team member must connect their own account individually. This is the standard method for tools like HubSpot, Google, and Slack.
 
-- **OAuth:** Each user authorizes their own connection via a popup modal. Every team member must connect their own account individually. This is the standard method for tools like HubSpot, Google, and Slack.
-- **API key:** A single API key is added to the Relevance project and shared across all users in that project. Admins can manage these centrally in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration).
-
-For per-user OAuth setup at the organizational level, see [user-level authentication](/enterprise/user-level-authentication).
+    For per-user OAuth setup at the organizational level, see [user-level authentication](/enterprise/user-level-authentication).
+  </Tab>
+  <Tab title="API key (per project)">
+    A single API key is added to the Relevance project and shared across all users in that project. Admins can manage these centrally in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration).
+  </Tab>
+</Tabs>
 
 <Note>
 Depending on how your organization has configured each external application, you may need to request admin access to enable OAuth or to obtain an API key. Check with your IT team or the admin of the external application.
@@ -297,34 +310,39 @@ Depending on how your organization has configured each external application, you
   </Accordion>
 </AccordionGroup>
 
-### Planned integrations
-
-The following integrations are on the roadmap. Check with your account team for expected availability.
-
-| Integration | Connection method | What it will do |
-| --- | --- | --- |
-| Google Drive | OAuth | Browse, search, upload, and manage files and folders, including shared drives |
-| Google Sheets | OAuth | Read, write, and manage spreadsheets, including cell values, rows, worksheets, and comments |
-| Outreach | OAuth | Create tasks. Access sequences, prospects, accounts, and other Outreach resources |
-| ZoomInfo | TBC | Search and look up contacts and companies |
-| Firmable | API key | TBC |
-
 ## Managing connections
 
-All active integrations are visible in the Super GTM settings panel. You can:
+All active integrations are visible in the Super GTM settings panel.
 
-- **Reconnect** an integration if your credentials expire or permissions change
-- **Disconnect** an integration to revoke access
-- **View permissions** to see what the agent can do with each connected tool
+<CardGroup cols={3}>
+  <Card title="Reconnect" icon="rotate">
+    Re-authorize an integration if your credentials expire or permissions change
+  </Card>
+  <Card title="Disconnect" icon="link-slash">
+    Revoke access for an integration you no longer need
+  </Card>
+  <Card title="View permissions" icon="eye">
+    See what the agent can do with each connected tool
+  </Card>
+</CardGroup>
 
+<Tip>
 For project-level API key integrations, admins can manage these centrally in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration). This is the recommended approach for API key integrations that should be shared across your team.
+</Tip>
 
 ## Troubleshooting
 
-**Authorization fails or redirects to an error page.** This usually means your organization has restricted third-party app access. Check with your IT admin or the admin of the external application to request approval.
-
-**The agent can't see data I expect it to find.** Confirm that the integration is connected and that your account has access to the relevant data in the external tool. For Notion, check that you've shared the specific pages during the OAuth flow.
-
-**An OAuth connection expires.** OAuth tokens can expire or be revoked. If the agent reports that a tool is disconnected, go to the Integrations section in Super GTM settings and reconnect.
-
-**API key stops working.** API keys can be revoked or rotated. Generate a new key in the external tool and update it in the Super GTM settings panel.
+<AccordionGroup>
+  <Accordion title="Authorization fails or redirects to an error page">
+    This usually means your organization has restricted third-party app access. Check with your IT admin or the admin of the external application to request approval.
+  </Accordion>
+  <Accordion title="The agent can't see data I expect it to find">
+    Confirm that the integration is connected and that your account has access to the relevant data in the external tool. For Notion, check that you've shared the specific pages during the OAuth flow.
+  </Accordion>
+  <Accordion title="An OAuth connection expires">
+    OAuth tokens can expire or be revoked. If the agent reports that a tool is disconnected, go to the Integrations section in Super GTM settings and reconnect.
+  </Accordion>
+  <Accordion title="API key stops working">
+    API keys can be revoked or rotated. Generate a new key in the external tool and update it in the Super GTM settings panel.
+  </Accordion>
+</AccordionGroup>

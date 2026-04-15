@@ -11,41 +11,48 @@ Think of skills as standing instructions: "whenever I ask for a prospect brief, 
 
 Skills live in your Super GTM environment and persist across sessions. When you send a message, the agent considers which skills are relevant and activates them as needed. You don't have to say "use my prospect briefing skill" — the agent infers it from context.
 
-Skills can:
-- Pull data from connected integrations (CRM, calendar, email, etc.)
-- Read from and write to the [file system](/get-started/chat/super-gtm/file-system)
-- Reference things the agent has learned about you via [memory](/get-started/chat/super-gtm/memory)
-- Run other agents you've built in Relevance AI
-- Combine multiple steps into a single, repeatable workflow
+<CardGroup cols={2}>
+  <Card title="Integration access" icon="plug">
+    Pull data from connected integrations (CRM, calendar, email, etc.)
+  </Card>
+  <Card title="File system access" icon="folder-open">
+    Read from and write to the [file system](/get-started/chat/super-gtm/file-system)
+  </Card>
+  <Card title="Memory-aware" icon="brain">
+    Reference things the agent has learned about you via [memory](/get-started/chat/super-gtm/memory)
+  </Card>
+  <Card title="Agent execution" icon="robot">
+    Run other agents you've built in Relevance AI
+  </Card>
+</CardGroup>
 
 ## Types of skills
 
-### Project skills
+<Tabs>
+  <Tab title="Project skills">
+    Project skills are available to all users in a Super GTM project. They're useful for standardized workflows that your whole team should use — for example, a "weekly pipeline report" skill that every sales rep can activate.
 
-Project skills are available to all users in a Super GTM project. They're useful for standardized workflows that your whole team should use — for example, a "weekly pipeline report" skill that every sales rep can activate.
+    Project skills are created and managed by project admins.
+  </Tab>
+  <Tab title="User skills">
+    User skills are personal to you. They reflect your individual working style, preferences, and recurring tasks. Only you can see and use them.
 
-Project skills are created and managed by project admins.
+    Examples:
+    1. A "daily standup prep" skill that pulls your meetings, open tasks, and recent emails
+    2. A "deal summary" skill that formats CRM data the way you like it
+    3. A "follow-up email" skill that drafts outreach in your voice using email history and notes
+  </Tab>
+  <Tab title="Built-in skills">
+    Super GTM includes a set of built-in skills that come pre-configured. These cover common GTM tasks like summarizing recent activity across your connected tools, finding contact information, or checking your calendar.
 
-### User skills
+    Built-in skills require the relevant integrations to be connected.
+  </Tab>
+  <Tab title="Agent-as-skills">
+    Any agent you've built in Relevance AI can be made available as a skill in Super GTM. The agent appears in your skill library and can be activated by name or inferred from context.
 
-User skills are personal to you. They reflect your individual working style, preferences, and recurring tasks. Only you can see and use them.
-
-Examples:
-- A "daily standup prep" skill that pulls your meetings, open tasks, and recent emails
-- A "deal summary" skill that formats CRM data the way you like it
-- A "follow-up email" skill that drafts outreach in your voice using email history and notes
-
-### Built-in skills
-
-Super GTM includes a set of built-in skills that come pre-configured. These cover common GTM tasks like summarizing recent activity across your connected tools, finding contact information, or checking your calendar.
-
-Built-in skills require the relevant integrations to be connected.
-
-### Agent-as-skills
-
-Any agent you've built in Relevance AI can be made available as a skill in Super GTM. The agent appears in your skill library and can be activated by name or inferred from context.
-
-To add an agent as a skill, go to the Agents section in your Super GTM settings and enable the agents you want available.
+    To add an agent as a skill, go to the **Agents** section in your Super GTM settings and enable the agents you want available.
+  </Tab>
+</Tabs>
 
 ## Creating skills
 
@@ -54,6 +61,9 @@ Skills are created using the Skill Creator in Super GTM.
 <Steps>
   <Step title="Open the Skill Creator">
     In the Super GTM interface, navigate to the Skills section and click **Create skill**.
+    <div style={{ width:"100%",position:"relative","padding-top":"56.25%" }}>
+    <iframe src="https://app.supademo.com/embed/cmnzf14fj2zdv1q1evobspz8x" frameBorder="0" title="Creating a skill" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+    </div>
   </Step>
   <Step title="Name and describe the skill">
     Give the skill a clear, descriptive name and a short description of what it does. The name and description help the agent understand when to activate the skill — write them as you would explain the workflow to a colleague.
@@ -71,15 +81,23 @@ Skills are created using the Skill Creator in Super GTM.
 
 ## Tips for writing good skills
 
-**Be specific about inputs and outputs.** Vague instructions produce inconsistent results. Instead of "summarize recent deals," write "pull all deals updated in the last 7 days from HubSpot, include deal name, stage, ARR, and last activity date, and format as a table."
-
-**Name integrations explicitly.** Tell the skill which tool to use: "check Google Calendar for tomorrow's meetings" rather than "check my calendar."
-
-**Reference the file system for templates and reference material.** If the skill uses a standard format or needs background context, store it as a file and reference it in the skill instructions. See [File system](/get-started/chat/super-gtm/file-system).
-
-**Let memory personalize the output.** You can instruct the agent to apply preferences it's learned about you. For example: "use the tone and structure the user prefers for outbound emails." See [Memory](/get-started/chat/super-gtm/memory).
-
-**Keep skills focused.** One skill per workflow is easier to maintain and debug than one skill that tries to do everything.
+<AccordionGroup>
+  <Accordion title="Be specific about inputs and outputs">
+    Vague instructions produce inconsistent results. Instead of "summarize recent deals," write "pull all deals updated in the last 7 days from HubSpot, include deal name, stage, ARR, and last activity date, and format as a table."
+  </Accordion>
+  <Accordion title="Name integrations explicitly">
+    Tell the skill which tool to use: "check Google Calendar for tomorrow's meetings" rather than "check my calendar."
+  </Accordion>
+  <Accordion title="Reference the file system for templates">
+    If the skill uses a standard format or needs background context, store it as a file and reference it in the skill instructions. See [File system](/get-started/chat/super-gtm/file-system).
+  </Accordion>
+  <Accordion title="Let memory personalize the output">
+    You can instruct the agent to apply preferences it's learned about you. For example: "use the tone and structure the user prefers for outbound emails." See [Memory](/get-started/chat/super-gtm/memory).
+  </Accordion>
+  <Accordion title="Keep skills focused">
+    One skill per workflow is easier to maintain and debug than one skill that tries to do everything.
+  </Accordion>
+</AccordionGroup>
 
 ## Running skills on a schedule
 
@@ -91,7 +109,9 @@ Schedules are configured in the **Schedules** section of the Super GTM Overview 
 
 Skills can read from and write to the file system as part of their workflow. For example, a "competitive brief" skill might read a competitors reference file and update it with findings from a recent call.
 
+<Info>
 When a skill instructs the agent to use a file, the agent pulls the relevant content from the file system at the time the skill runs. Files don't need to be manually attached — they're there when needed.
+</Info>
 
 See [File system](/get-started/chat/super-gtm/file-system) for how to upload and manage files.
 

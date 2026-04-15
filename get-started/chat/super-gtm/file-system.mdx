@@ -9,47 +9,57 @@ This makes the file system useful for anything the agent should be able to refer
 
 ## Project files vs session files
 
-### Project files
+<Tabs>
+  <Tab title="Project files">
+    Project files are shared across all users in a Super GTM project. They're useful for team-wide reference material that everyone's agent should have access to — for example, product positioning documents, ICP definitions, or standard email templates.
 
-Project files are shared across all users in a Super GTM project. They're useful for team-wide reference material that everyone's agent should have access to — for example, product positioning documents, ICP definitions, or standard email templates.
+    Project files are managed by project admins.
+  </Tab>
+  <Tab title="Session files">
+    Session files are scoped to an individual conversation. They're uploaded inline during a chat and are not persisted after the session ends. Use session files when you want the agent to work with a document just for the current task.
 
-Project files are managed by project admins.
-
-### Session files
-
-Session files are scoped to an individual conversation. They're uploaded inline during a chat and are not persisted after the session ends. Use session files when you want the agent to work with a document just for the current task.
-
-To persist a file beyond the current session, ask the agent to save it to the project or user file system.
+    To persist a file beyond the current session, ask the agent to save it to the project or user file system.
+  </Tab>
+</Tabs>
 
 ## Uploading files
 
-You can add files to the file system in two ways:
+<CardGroup cols={2}>
+  <Card title="Inline upload" icon="paperclip">
+    Attach a file directly in the chat interface. The agent can work with it immediately, and you can ask it to save the file for future use.
+  </Card>
+  <Card title="Settings panel" icon="gear">
+    Navigate to the Files section in Super GTM settings to upload and manage persistent files directly.
+  </Card>
+</CardGroup>
 
-- **Inline upload:** Attach a file directly in the chat interface. The agent can work with it immediately, and you can ask it to save the file for future use.
-- **Settings panel:** Navigate to the Files section in Super GTM settings to upload and manage persistent files directly.
-
+<Tip>
 Supported file types include documents (PDF, DOCX, TXT, MD), spreadsheets (CSV, XLSX), and plain text. Ask the agent if you're unsure whether a specific file type is supported.
+</Tip>
 
 ## How the agent uses files
 
 Files are there when needed. When a skill or a prompt requires information from the file system, the agent pulls the relevant content automatically — you don't need to reference files by name or attach them manually.
 
-For example:
-- A "prospect brief" skill might read your ICP definition file and your competitor positioning doc to tailor its output.
-- If you ask "what's our pricing for mid-market accounts?", the agent can search the file system for relevant pricing documentation.
-- A skill that drafts outbound emails might pull a templates file to structure its output.
-
-You can also interact with files directly in conversation:
-
-- "Save these meeting notes to my account notes file for ACME Corp"
-- "Update the competitive positioning doc with the new information about Competitor X"
-- "What does our onboarding checklist say about enterprise accounts?"
+<AccordionGroup>
+  <Accordion title="Skill-driven file access">
+    A "prospect brief" skill might read your ICP definition file and your competitor positioning doc to tailor its output. A skill that drafts outbound emails might pull a templates file to structure its output.
+  </Accordion>
+  <Accordion title="Question-driven file search">
+    If you ask "what's our pricing for mid-market accounts?", the agent searches the file system for relevant pricing documentation and includes the answer in its response.
+  </Accordion>
+  <Accordion title="Direct file interaction">
+    You can also interact with files directly in conversation: "Save these meeting notes to my account notes file for ACME Corp", "Update the competitive positioning doc with the new information about Competitor X", or "What does our onboarding checklist say about enterprise accounts?"
+  </Accordion>
+</AccordionGroup>
 
 ## Reading and searching files
 
 The agent can read file contents and search across files by keyword or topic. It will pull the most relevant sections and incorporate them into its response.
 
+<Info>
 If you want to make a file easier for the agent to search, keep it well-structured with clear headings and concise sections.
+</Info>
 
 ## Updating files
 
@@ -61,9 +71,11 @@ Before updating a file, the agent will tell you what it intends to write. For fi
 
 The Super GTM interface includes a filesystem explorer that shows which files the agent has interacted with during the current conversation.
 
-- **Amber dot + amber text** — the agent wrote to this file
-- **Gray dot** — the agent read this file but did not modify it
-- **Folder icons** display these indicators when any file inside was accessed
+| Indicator | Meaning |
+| --- | --- |
+| Amber dot + amber text | The agent wrote to this file |
+| Gray dot | The agent read this file but did not modify it |
+| Folder icon with indicator | At least one file inside was accessed |
 
 If the agent both read and wrote to the same file, it shows as written (amber). Write operations take visual priority over reads. This lets you see at a glance which files were involved — without reviewing individual tool call logs.
 

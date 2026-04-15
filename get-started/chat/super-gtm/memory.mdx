@@ -11,83 +11,113 @@ Over time, memory makes the agent progressively more useful. It picks up on how 
 
 When you start a Super GTM session, the agent automatically loads your memory before responding to anything. This happens in the background — you won't see it, but the effect is that the agent already has context when the conversation begins.
 
+<Note>
 Memory is scoped per user. Your memory is not shared with other users in your project.
+</Note>
 
 ## Memory types
 
 Super GTM organizes memory into four categories:
 
-### User memory
+<CardGroup cols={2}>
+  <Card title="User memory" icon="user">
+    Information about who you are: your role, goals, responsibilities, domain expertise, and how you prefer to work
+  </Card>
+  <Card title="Feedback memory" icon="comment">
+    Guidance you've given about how the agent should approach tasks, including corrections and confirmations
+  </Card>
+  <Card title="Project memory" icon="briefcase">
+    Information about ongoing work: accounts, deals in progress, company context, and active initiatives
+  </Card>
+  <Card title="Reference memory" icon="bookmark">
+    Pointers to where information lives — in files, external systems, or specific locations the agent should check
+  </Card>
+</CardGroup>
 
-Information about who you are: your role, goals, responsibilities, domain expertise, and how you prefer to work. The agent uses this to tailor responses — for example, it knows whether to explain a concept from first principles or assume you already know it.
+<AccordionGroup>
+  <Accordion title="User memory examples">
+    - "User is a senior AE focused on mid-market SaaS accounts"
+    - "User prefers short, direct email drafts — no filler phrases"
+    - "User is new to using CRM and prefers step-by-step guidance"
 
-Examples of what gets stored:
-- "User is a senior AE focused on mid-market SaaS accounts"
-- "User prefers short, direct email drafts — no filler phrases"
-- "User is new to using CRM and prefers step-by-step guidance"
+    The agent uses this to tailor responses — for example, it knows whether to explain a concept from first principles or assume you already know it.
+  </Accordion>
+  <Accordion title="Feedback memory examples">
+    - "Don't include pleasantries in email drafts"
+    - "Always include a next-step CTA in outreach"
+    - "User confirmed that bullet-point deal summaries are the preferred format"
 
-### Feedback memory
+    Feedback memory is how the agent learns your working style over time. If you correct the agent, it won't make the same mistake next time.
+  </Accordion>
+  <Accordion title="Project memory examples">
+    - "ACME Corp is in late-stage negotiation; decision maker is Sarah Chen"
+    - "User's team is launching a new product line in Q3 — mention in relevant outreach"
+    - "Competitor X recently raised a Series C — flag in competitive briefings"
+  </Accordion>
+  <Accordion title="Reference memory examples">
+    - "The pricing sheet for enterprise accounts is in the file system under /pricing/enterprise.md"
+    - "Pipeline deals are tracked in HubSpot under the 'Q2 Pipeline' view"
+  </Accordion>
+</AccordionGroup>
 
-Guidance you've given about how the agent should approach tasks. This includes corrections ("don't do X") and confirmations of approaches that worked ("yes, keep doing that").
+## Managing memory
 
-Feedback memory is how the agent learns your working style over time. If you correct the agent, it won't make the same mistake next time.
+<Tabs>
+  <Tab title="Remembering">
+    You can explicitly ask the agent to save something to memory at any time:
 
-Examples:
-- "Don't include pleasantries in email drafts"
-- "Always include a next-step CTA in outreach"
-- "User confirmed that bullet-point deal summaries are the preferred format"
+    1. "Remember that I prefer email drafts in first person"
+    2. "Note that ACME Corp's budget cycle runs January to March"
+    3. "Remember that we don't use 'synergy' in any customer-facing content"
 
-### Project memory
+    The agent will confirm what it stored and which memory type it used.
+  </Tab>
+  <Tab title="Forgetting">
+    If a memory is outdated or incorrect, you can ask the agent to remove it:
 
-Information about ongoing work: accounts you're working, deals in progress, important context about companies or contacts, and background on active initiatives.
+    1. "Forget that ACME Corp is in negotiation — that deal closed"
+    2. "Remove the note about my preference for bullet-point summaries"
+    3. "Clear any memory about Project X"
 
-Examples:
-- "ACME Corp is in late-stage negotiation; decision maker is Sarah Chen"
-- "User's team is launching a new product line in Q3 — mention in relevant outreach"
-- "Competitor X recently raised a Series C — flag in competitive briefings"
+    The agent will confirm what was removed.
+  </Tab>
+  <Tab title="Reviewing">
+    Periodically review what the agent remembers by asking:
 
-### Reference memory
+    1. "What do you know about me?"
+    2. "What have you saved about ACME Corp?"
+    3. "Show me my feedback preferences"
 
-Pointers to where information lives — in files, in external systems, or in specific locations the agent should check when answering questions.
-
-Examples:
-- "The pricing sheet for enterprise accounts is in the file system under /pricing/enterprise.md"
-- "Pipeline deals are tracked in HubSpot under the 'Q2 Pipeline' view"
-
-## Telling the agent to remember things
-
-You can explicitly ask the agent to save something to memory at any time:
-
-- "Remember that I prefer email drafts in first person"
-- "Note that ACME Corp's budget cycle runs January to March"
-- "Remember that we don't use 'synergy' in any customer-facing content"
-
-The agent will confirm what it stored and which memory type it used.
-
-## Telling the agent to forget things
-
-If a memory is outdated or incorrect, you can ask the agent to remove it:
-
-- "Forget that ACME Corp is in negotiation — that deal closed"
-- "Remove the note about my preference for bullet-point summaries"
-- "Clear any memory about Project X"
-
-The agent will confirm what was removed.
+    The agent stores memories to be helpful, not as a permanent record. You can always update or remove entries.
+  </Tab>
+</Tabs>
 
 ## How skills and memory work together
 
 When a [skill](/get-started/chat/super-gtm/skills) runs, it has access to your full memory. This means the same skill produces personalized output for you without needing a separate skill definition for each user.
 
-For example, a "draft outreach email" skill will naturally write in your preferred tone if your tone preferences are in memory. A "deal summary" skill will highlight the details you care about if your priorities are stored.
+| Scenario | How memory helps |
+| --- | --- |
+| Draft outreach email | Writes in your preferred tone if your tone preferences are in memory |
+| Deal summary | Highlights the details you care about if your priorities are stored |
+| Account research | Incorporates known context about the account from project memory |
 
 Skills can also be written to update memory as part of their workflow — for example, "note any new information learned about this account." Over time, this makes your project memory richer and more accurate.
 
 ## Keeping memory accurate
 
-Memory is only useful if it's current. A few practices help:
+<Tip>
+Memory is only useful if it's current. Follow these practices to keep it reliable.
+</Tip>
 
-- Correct the agent when it misremembers or applies outdated context. This updates feedback memory.
-- When situations change (a deal closes, a contact changes roles), tell the agent so it can update project memory.
-- Periodically review what the agent remembers by asking: "What do you know about me?" or "What have you saved about ACME Corp?"
-
-The agent stores memories to be helpful, not as a permanent record. You can always update or remove entries.
+<Steps>
+  <Step title="Correct mistakes immediately">
+    When the agent misremembers or applies outdated context, correct it. This updates feedback memory.
+  </Step>
+  <Step title="Update when situations change">
+    When a deal closes, a contact changes roles, or priorities shift — tell the agent so it can update project memory.
+  </Step>
+  <Step title="Review periodically">
+    Ask the agent what it knows about you or a specific account to catch stale information before it affects output.
+  </Step>
+</Steps>

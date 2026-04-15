@@ -9,7 +9,9 @@ Super GTM can run [skills](/get-started/chat/super-gtm/skills) on a recurring sc
 
 When you schedule a skill, Super GTM runs it automatically at the interval you specify. The agent executes the skill exactly as it would in a conversation — pulling from connected integrations, referencing files, applying memory — and delivers the output.
 
+<Info>
 Scheduled tasks run in the background. You'll receive the results when the task completes, typically via a notification or a message in your Super GTM inbox.
+</Info>
 
 ## Setting up a schedule
 
@@ -23,10 +25,7 @@ Schedules are configured in the **Schedules** section of the Super GTM Overview 
     Choose the skill you want to run on a schedule. Any skill in your skill library can be scheduled.
   </Step>
   <Step title="Set the frequency">
-    Choose how often the skill should run:
-    - **Daily** — runs once per day at a specified time
-    - **Weekly** — runs on selected days of the week
-    - **Custom** — set a specific cron-style interval for more granular control
+    Choose how often the skill should run: daily, weekly, or a custom cron-style interval. See the frequency options table below for details.
   </Step>
   <Step title="Configure delivery">
     Specify where the output should be sent — for example, posted to a Slack channel, emailed to you, or saved to a file in the file system.
@@ -46,22 +45,42 @@ Schedules are configured in the **Schedules** section of the Super GTM Overview 
 
 ## Managing schedules
 
-You can view, edit, pause, and delete schedules from the Schedules section of the Overview tab.
+<CardGroup cols={3}>
+  <Card title="Pause" icon="pause">
+    Stop a schedule temporarily without deleting it. Resume at any time.
+  </Card>
+  <Card title="Edit" icon="pen-to-square">
+    Change the skill, frequency, or delivery settings for an existing schedule.
+  </Card>
+  <Card title="Delete" icon="trash">
+    Remove a schedule permanently when it's no longer needed.
+  </Card>
+</CardGroup>
 
-- **Pause** a schedule to stop it temporarily without deleting it
-- **Edit** a schedule to change the skill, frequency, or delivery settings
-- **Delete** a schedule to remove it permanently
+All schedules are managed from the Schedules section of the Overview tab.
 
 ## What scheduled tasks can do
 
-Scheduled tasks run the full skill workflow, including:
+Scheduled tasks run the full skill workflow with access to the same capabilities as a live conversation:
 
-- Reading from and writing to the [file system](/get-started/chat/super-gtm/file-system)
-- Pulling data from connected [integrations](/get-started/chat/super-gtm/integrations) (CRM, calendar, email, etc.)
-- Applying [memory](/get-started/chat/super-gtm/memory) to personalize output
-- Running sub-agents from your Relevance AI agent library
+<CardGroup cols={2}>
+  <Card title="File system" icon="folder-open">
+    Read from and write to the [file system](/get-started/chat/super-gtm/file-system)
+  </Card>
+  <Card title="Integrations" icon="plug">
+    Pull data from connected [integrations](/get-started/chat/super-gtm/integrations) (CRM, calendar, email, etc.)
+  </Card>
+  <Card title="Memory" icon="brain">
+    Apply [memory](/get-started/chat/super-gtm/memory) to personalize output
+  </Card>
+  <Card title="Sub-agents" icon="robot">
+    Run sub-agents from your Relevance AI agent library
+  </Card>
+</CardGroup>
 
+<Warning>
 Scheduled tasks that take write actions — such as sending an email or creating a CRM record — still require approval unless the skill has been explicitly configured for autonomous execution. Check your skill's configuration before scheduling write-heavy workflows.
+</Warning>
 
 ## Further reading
 
