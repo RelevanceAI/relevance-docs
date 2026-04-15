@@ -1,0 +1,68 @@
+---
+title: "Scheduled tasks"
+description: "Run skills automatically on a recurring schedule without manual intervention"
+---
+
+Super GTM can run [skills](/get-started/chat/super-gtm/skills) on a recurring schedule. This is useful for anything that should happen regularly without you needing to ask — daily pipeline reports, weekly account summaries, automated outreach sequences, or periodic data hygiene tasks.
+
+## How scheduling works
+
+When you schedule a skill, Super GTM runs it automatically at the interval you specify. The agent executes the skill exactly as it would in a conversation — pulling from connected integrations, referencing files, applying memory — and delivers the output.
+
+Scheduled tasks run in the background. You'll receive the results when the task completes, typically via a notification or a message in your Super GTM inbox.
+
+## Setting up a schedule
+
+Schedules are configured in the **Schedules** section of the Super GTM Overview tab.
+
+<Steps>
+  <Step title="Open the Schedules section">
+    In the Super GTM Overview tab, navigate to the **Schedules** section.
+  </Step>
+  <Step title="Select a skill">
+    Choose the skill you want to run on a schedule. Any skill in your skill library can be scheduled.
+  </Step>
+  <Step title="Set the frequency">
+    Choose how often the skill should run:
+    - **Daily** — runs once per day at a specified time
+    - **Weekly** — runs on selected days of the week
+    - **Custom** — set a specific cron-style interval for more granular control
+  </Step>
+  <Step title="Configure delivery">
+    Specify where the output should be sent — for example, posted to a Slack channel, emailed to you, or saved to a file in the file system.
+  </Step>
+  <Step title="Activate the schedule">
+    Save and enable the schedule. The skill will run automatically at the next scheduled time.
+  </Step>
+</Steps>
+
+## Recurring schedule options
+
+| Frequency | Description | Example use case |
+| --- | --- | --- |
+| Daily | Runs every day at a set time | Morning pipeline digest, daily standup prep |
+| Weekly | Runs on specific days each week | Weekly account health summary, Monday kick-off report |
+| Custom | Cron-style interval | Every Monday and Thursday at 9am, first of each month |
+
+## Managing schedules
+
+You can view, edit, pause, and delete schedules from the Schedules section of the Overview tab.
+
+- **Pause** a schedule to stop it temporarily without deleting it
+- **Edit** a schedule to change the skill, frequency, or delivery settings
+- **Delete** a schedule to remove it permanently
+
+## What scheduled tasks can do
+
+Scheduled tasks run the full skill workflow, including:
+
+- Reading from and writing to the [file system](/get-started/chat/super-gtm/file-system)
+- Pulling data from connected [integrations](/get-started/chat/super-gtm/integrations) (CRM, calendar, email, etc.)
+- Applying [memory](/get-started/chat/super-gtm/memory) to personalize output
+- Running sub-agents from your Relevance AI agent library
+
+Scheduled tasks that take write actions — such as sending an email or creating a CRM record — still require approval unless the skill has been explicitly configured for autonomous execution. Check your skill's configuration before scheduling write-heavy workflows.
+
+## Further reading
+
+For a deeper look at how recurring schedules work within the broader Relevance AI platform, including bulk scheduling and scheduled agent triggers, see the [recurring schedule documentation](/build/agents/build-your-agent/agent-triggers/scheduled-triggers).

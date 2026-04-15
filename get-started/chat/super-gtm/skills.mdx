@@ -1,0 +1,104 @@
+---
+title: "Skills"
+description: "Define repeatable workflows that Super GTM activates automatically whenever you need them"
+---
+
+Skills are named, reusable workflows that you teach Super GTM to execute on your behalf. Once defined, a skill is always available — the agent activates the right one automatically based on what you're asking for, without you needing to invoke it by name.
+
+Think of skills as standing instructions: "whenever I ask for a prospect brief, here's exactly how to pull and format it." The agent learns the pattern once and applies it consistently every time.
+
+## How skills work
+
+Skills live in your Super GTM environment and persist across sessions. When you send a message, the agent considers which skills are relevant and activates them as needed. You don't have to say "use my prospect briefing skill" — the agent infers it from context.
+
+Skills can:
+- Pull data from connected integrations (CRM, calendar, email, etc.)
+- Read from and write to the [file system](/get-started/chat/super-gtm/file-system)
+- Reference things the agent has learned about you via [memory](/get-started/chat/super-gtm/memory)
+- Run other agents you've built in Relevance AI
+- Combine multiple steps into a single, repeatable workflow
+
+## Types of skills
+
+### Project skills
+
+Project skills are available to all users in a Super GTM project. They're useful for standardized workflows that your whole team should use — for example, a "weekly pipeline report" skill that every sales rep can activate.
+
+Project skills are created and managed by project admins.
+
+### User skills
+
+User skills are personal to you. They reflect your individual working style, preferences, and recurring tasks. Only you can see and use them.
+
+Examples:
+- A "daily standup prep" skill that pulls your meetings, open tasks, and recent emails
+- A "deal summary" skill that formats CRM data the way you like it
+- A "follow-up email" skill that drafts outreach in your voice using email history and notes
+
+### Built-in skills
+
+Super GTM includes a set of built-in skills that come pre-configured. These cover common GTM tasks like summarizing recent activity across your connected tools, finding contact information, or checking your calendar.
+
+Built-in skills require the relevant integrations to be connected.
+
+### Agent-as-skills
+
+Any agent you've built in Relevance AI can be made available as a skill in Super GTM. The agent appears in your skill library and can be activated by name or inferred from context.
+
+To add an agent as a skill, go to the Agents section in your Super GTM settings and enable the agents you want available.
+
+## Creating skills
+
+Skills are created using the Skill Creator in Super GTM.
+
+<Steps>
+  <Step title="Open the Skill Creator">
+    In the Super GTM interface, navigate to the Skills section and click **Create skill**.
+  </Step>
+  <Step title="Name and describe the skill">
+    Give the skill a clear, descriptive name and a short description of what it does. The name and description help the agent understand when to activate the skill — write them as you would explain the workflow to a colleague.
+  </Step>
+  <Step title="Define the workflow">
+    Describe the steps the agent should follow. Be specific about which integrations to use, what data to pull, how to format the output, and what to do with the result. You can reference files from the file system and tell the agent to update memory when relevant.
+  </Step>
+  <Step title="Test the skill">
+    Run the skill to verify it works as expected. Refine the instructions based on the output.
+  </Step>
+  <Step title="Save and activate">
+    Save the skill. It's immediately available in your environment — no further configuration needed.
+  </Step>
+</Steps>
+
+## Tips for writing good skills
+
+**Be specific about inputs and outputs.** Vague instructions produce inconsistent results. Instead of "summarize recent deals," write "pull all deals updated in the last 7 days from HubSpot, include deal name, stage, ARR, and last activity date, and format as a table."
+
+**Name integrations explicitly.** Tell the skill which tool to use: "check Google Calendar for tomorrow's meetings" rather than "check my calendar."
+
+**Reference the file system for templates and reference material.** If the skill uses a standard format or needs background context, store it as a file and reference it in the skill instructions. See [File system](/get-started/chat/super-gtm/file-system).
+
+**Let memory personalize the output.** You can instruct the agent to apply preferences it's learned about you. For example: "use the tone and structure the user prefers for outbound emails." See [Memory](/get-started/chat/super-gtm/memory).
+
+**Keep skills focused.** One skill per workflow is easier to maintain and debug than one skill that tries to do everything.
+
+## Running skills on a schedule
+
+Skills can be scheduled to run automatically at set intervals — daily, weekly, or on a custom cadence. This is useful for recurring reports, pipeline hygiene tasks, or any workflow that should happen without you having to ask.
+
+Schedules are configured in the **Schedules** section of the Super GTM Overview tab. See [Scheduled tasks](/get-started/chat/super-gtm/scheduled-tasks) for details.
+
+## How skills reference the file system
+
+Skills can read from and write to the file system as part of their workflow. For example, a "competitive brief" skill might read a competitors reference file and update it with findings from a recent call.
+
+When a skill instructs the agent to use a file, the agent pulls the relevant content from the file system at the time the skill runs. Files don't need to be manually attached — they're there when needed.
+
+See [File system](/get-started/chat/super-gtm/file-system) for how to upload and manage files.
+
+## How skills and memory work together
+
+When a skill runs, the agent brings along everything it knows about you from memory — your preferences, feedback you've given, context about your role and accounts. This means the same skill can produce personalized output for each user without requiring separate skill definitions.
+
+You can also tell the agent to update memory as part of a skill: "remember any new information about this account for future reference." Over time, this makes skills progressively more tailored to how you work.
+
+See [Memory](/get-started/chat/super-gtm/memory) for details on what the agent remembers and how to manage it.
