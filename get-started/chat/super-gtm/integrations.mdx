@@ -44,7 +44,7 @@ Super GTM connects to your go-to-market tech stack so the agent can read data an
     A project admin can configure API key integrations at the project level (e.g. a shared Gong API key for the whole team), so individual users don't need to connect personally — they inherit the project's credentials. Admins can manage these in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration).
   </Tab>
   <Tab title="Built-in">
-    Some integrations work automatically with no credentials required — they're always available to the Super Agent.
+    Some integrations work automatically with no credentials required — they're always available to the agent.
   </Tab>
 </Tabs>
 
@@ -58,7 +58,7 @@ All active integrations are visible in the Super GTM settings panel. Each integr
 
 <CardGroup cols={3}>
   <Card title="Connected and enabled" icon="circle-check">
-    Integration is active and the Super Agent can use it
+    Integration is active and the agent can use it
   </Card>
   <Card title="Connected but disabled" icon="circle-pause">
     Credentials exist but you've toggled it off in your settings
@@ -74,10 +74,10 @@ Every integration action is classified as either a read or a write (create, upda
 
 <Tabs>
   <Tab title="Ask before writing (default)">
-    The Super Agent pauses and asks for your approval before writing to any integration — e.g. "I'm about to create a contact in HubSpot — approve?"
+    The agent pauses and asks for your approval before writing to any integration — e.g. "I'm about to create a contact in HubSpot — approve?"
   </Tab>
   <Tab title="Never ask">
-    The Super Agent executes writes automatically without asking for confirmation.
+    The agent executes writes automatically without asking for confirmation.
   </Tab>
   <Tab title="Per-integration overrides">
     Override write approval on a per-integration basis from the settings modal. For example: auto-approve Slack posts but always require approval for HubSpot CRM updates.
