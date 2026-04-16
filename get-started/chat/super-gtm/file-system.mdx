@@ -3,84 +3,54 @@ title: "File system"
 description: "Persistent storage for documents and reference material that the agent can access across all conversations"
 ---
 
-The Super GTM file system is a persistent store of documents and reference material attached to your environment. Files you upload remain available across sessions — the agent can read, search, and update them without you needing to re-attach anything each time.
+The file system is the agent's persistent storage. It holds shared documents, reference material, deliverables, and working files that the agent can read from or write to as instructed. It's completely separate from your integration connections (HubSpot, Gmail, Slack, etc.) — those are their own mounts.
 
-This makes the file system useful for anything the agent should be able to reference on an ongoing basis: company positioning docs, account notes, templates, competitive research, persona guides, and more.
+Think of the file system as a shared drive for your project. Anything you want the agent (or your team) to have access to across conversations lives here.
 
-## Project files vs session files
+## Where to find files
+
+You can view and manage your files in the **Files** tab. From here you can browse all project files, upload new documents, and see what the agent has saved.
+
+<Frame>
+  <img src="/images/where-to-find-files.png" alt="Files tab in the Super GTM interface" />
+</Frame>
+
+## Key areas
 
 <Tabs>
   <Tab title="Project files">
-    Project files are shared across all users in a Super GTM project. They're useful for team-wide reference material that everyone's agent should have access to — for example, product positioning documents, ICP definitions, or standard email templates.
+    Persistent storage shared across your project. This is where shared knowledge lives — deliverables, reference documents, ways of working, templates, and anything the team needs access to across conversations.
+
+    To add something to project files, just ask the agent:
+
+    > "Save this report to the project files"
+
+    > "Create a document in project files called Q3 Campaign Brief"
+
+    You can also ask the agent to read, search, or update anything already stored there:
+
+    > "What's in the project files?"
+
+    > "Find the competitive analysis in project files"
+
+    > "Update the onboarding checklist with the new step"
 
     Project files are managed by project admins.
   </Tab>
   <Tab title="Session files">
-    Session files are scoped to an individual conversation. They're uploaded inline during a chat and are not persisted after the session ends. Use session files when you want the agent to work with a document just for the current task.
+    Temporary workspace for the current conversation. The agent uses this for working files — exploration results, execution plans, and task lists. Session files don't persist after the conversation ends.
 
-    To persist a file beyond the current session, ask the agent to save it to the project or user file system.
+    You generally don't need to interact with session files directly. The agent manages them as part of its workflow. To persist a file beyond the current session, ask the agent to save it to the project file system.
   </Tab>
 </Tabs>
 
-## Uploading files
+## How skills use the file system
 
-<CardGroup cols={2}>
-  <Card title="Inline upload" icon="paperclip">
-    Attach a file directly in the chat interface. The agent can work with it immediately, and you can ask it to save the file for future use.
-  </Card>
-  <Card title="Settings panel" icon="gear">
-    Navigate to the Files section in Super GTM settings to upload and manage persistent files directly.
-  </Card>
-</CardGroup>
+[Skills](/get-started/chat/super-gtm/skills) can reference the file system in their instructions. When a skill runs, the agent fetches the relevant files at that moment — you can update a reference file once and all skills that use it pick up the new version automatically.
 
-<Tip>
-Supported file types include documents (PDF, DOCX, TXT, MD), spreadsheets (CSV, XLSX), and plain text. Ask the agent if you're unsure whether a specific file type is supported.
-</Tip>
+This is useful for storing things like:
 
-## How the agent uses files
-
-Files are there when needed. When a skill or a prompt requires information from the file system, the agent pulls the relevant content automatically — you don't need to reference files by name or attach them manually.
-
-<AccordionGroup>
-  <Accordion title="Skill-driven file access">
-    A "prospect brief" skill might read your ICP definition file and your competitor positioning doc to tailor its output. A skill that drafts outbound emails might pull a templates file to structure its output.
-  </Accordion>
-  <Accordion title="Question-driven file search">
-    If you ask "what's our pricing for mid-market accounts?", the agent searches the file system for relevant pricing documentation and includes the answer in its response.
-  </Accordion>
-  <Accordion title="Direct file interaction">
-    You can also interact with files directly in conversation: "Save these meeting notes to my account notes file for ACME Corp", "Update the competitive positioning doc with the new information about Competitor X", or "What does our onboarding checklist say about enterprise accounts?"
-  </Accordion>
-</AccordionGroup>
-
-## Reading and searching files
-
-The agent can read file contents and search across files by keyword or topic. It will pull the most relevant sections and incorporate them into its response.
-
-<Info>
-If you want to make a file easier for the agent to search, keep it well-structured with clear headings and concise sections.
-</Info>
-
-## Updating files
-
-The agent can write to files as part of a skill or when instructed directly. This is useful for maintaining living documents — account notes that accumulate over time, a CRM supplement with information not captured in your CRM, or a running log of decisions.
-
-Before updating a file, the agent will tell you what it intends to write. For file modifications within a conversation, the standard [action approval](/get-started/chat/super-gtm/introduction#action-approval) flow applies.
-
-## Visual indicators in the filesystem explorer
-
-The Super GTM interface includes a filesystem explorer that shows which files the agent has interacted with during the current conversation.
-
-| Indicator | Meaning |
-| --- | --- |
-| Amber dot + amber text | The agent wrote to this file |
-| Gray dot | The agent read this file but did not modify it |
-| Folder icon with indicator | At least one file inside was accessed |
-
-If the agent both read and wrote to the same file, it shows as written (amber). Write operations take visual priority over reads. This lets you see at a glance which files were involved — without reviewing individual tool call logs.
-
-## How skills reference the file system
-
-[Skills](/get-started/chat/super-gtm/skills) can specify which files to read or update as part of their workflow. When a skill runs, the agent fetches the relevant files from the file system at that moment. This means you can update a reference file once and all skills that use it will pick up the new version automatically.
-
-For example, a "weekly account summary" skill might read all files in an account folder, or a "draft outreach" skill might read your tone-of-voice guide and a persona template before composing.
+- Templates that skills use as a starting point
+- Reference documents (brand guidelines, process docs, competitive intel)
+- Deliverables the agent produces that should persist across conversations
+- Ways of working that the whole team should follow

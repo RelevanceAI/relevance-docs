@@ -1,11 +1,15 @@
 ---
 title: "Integrations"
-description: "Connect your GTM tools to Super GTM via OAuth or API key"
+description: "Connect your GTM tools to Super GTM via OAuth, API key, or use built-in integrations that work automatically"
 ---
 
-Super GTM connects to your go-to-market tech stack so the agent can read data and take actions across your tools. Integrations are connected per user (OAuth) or per project (API key), and are managed from the Super GTM settings panel.
+Super GTM connects to your go-to-market tech stack so the agent can read data and take actions across your tools. Integrations are managed from the Super GTM settings panel.
 
 ## Connecting integrations
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmnzflj252zi91q1ey26wryd8" frameBorder="0" title="Connecting integrations" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
 <Steps>
   <Step title="Open the settings panel">
@@ -19,20 +23,28 @@ Super GTM connects to your go-to-market tech stack so the agent can read data an
   </Step>
 </Steps>
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.25%" }}>
-<iframe src="https://app.supademo.com/embed/cmnzflj252zi91q1ey26wryd8" frameBorder="0" title="Connecting integrations" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
-</div>
-
-### OAuth vs API key
+### Connection methods
 
 <Tabs>
-  <Tab title="OAuth (per user)">
-    Each user authorizes their own connection via a popup modal. Every team member must connect their own account individually. This is the standard method for tools like HubSpot, Google, and Slack.
+  <Tab title="OAuth">
+    You click **Connect**, log in to the third-party service, and Relevance securely stores your tokens. No manual key management needed.
 
-    For per-user OAuth setup at the organizational level, see [user-level authentication](/enterprise/user-level-authentication).
+    1. Click **Connect** on the integration
+    2. A modal opens and redirects you to the third-party login (e.g. Google, HubSpot)
+    3. Authorize the requested scopes
+    4. The integration shows as connected and is immediately available
+
+    Each user must connect their own OAuth integrations individually. For per-user OAuth setup at the organizational level, see [user-level authentication](/enterprise/user-level-authentication).
   </Tab>
-  <Tab title="API key (per project)">
-    A single API key is added to the Relevance project and shared across all users in that project. Admins can manage these centrally in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration).
+  <Tab title="API key">
+    You paste in a key from the third-party platform's settings page.
+
+    Enter API keys via the integrations settings page — accessible from the Super GTM settings panel (click the external link icon on the integration) or from your project's Integrations page directly.
+
+    A project admin can configure API key integrations at the project level (e.g. a shared Gong API key for the whole team), so individual users don't need to connect personally — they inherit the project's credentials. Admins can manage these in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration).
+  </Tab>
+  <Tab title="Built-in">
+    Some integrations work automatically with no credentials required — they're always available to the Super Agent.
   </Tab>
 </Tabs>
 
@@ -40,17 +52,153 @@ Super GTM connects to your go-to-market tech stack so the agent can read data an
 Depending on how your organization has configured each external application, you may need to request admin access to enable OAuth or to obtain an API key. Check with your IT team or the admin of the external application.
 </Note>
 
+### Managing connections
+
+All active integrations are visible in the Super GTM settings panel. Each integration has one of three states:
+
+<CardGroup cols={3}>
+  <Card title="Connected and enabled" icon="circle-check">
+    Integration is active and the Super Agent can use it
+  </Card>
+  <Card title="Connected but disabled" icon="circle-pause">
+    Credentials exist but you've toggled it off in your settings
+  </Card>
+  <Card title="Not connected" icon="circle-xmark">
+    No credentials stored — a "Connect" button is shown
+  </Card>
+</CardGroup>
+
+### Write approval
+
+Every integration action is classified as either a read or a write (create, update, delete). You control how the agent handles writes.
+
+<Tabs>
+  <Tab title="Ask before writing (default)">
+    The Super Agent pauses and asks for your approval before writing to any integration — e.g. "I'm about to create a contact in HubSpot — approve?"
+  </Tab>
+  <Tab title="Never ask">
+    The Super Agent executes writes automatically without asking for confirmation.
+  </Tab>
+  <Tab title="Per-integration overrides">
+    Override write approval on a per-integration basis from the settings modal. For example: auto-approve Slack posts but always require approval for HubSpot CRM updates.
+  </Tab>
+</Tabs>
+
+<Info>
+Certain built-in agents (like Explorer) are hardcoded to read-only — they can query and search integrations but cannot write anything, regardless of your approval settings.
+</Info>
+
 ## Supported integrations
 
-### CRM & sales
+<CardGroup cols={3}>
+  <Card title="HubSpot" icon="chart-simple">
+    CRM read/write — OAuth
+  </Card>
+  <Card title="Salesforce" icon="cloud">
+    CRM read/write, SOQL queries — OAuth
+  </Card>
+  <Card title="Apollo" icon="rocket">
+    Contact enrichment, prospecting — API key
+  </Card>
+  <Card title="Gong" icon="microphone">
+    Call recordings and transcripts — API key
+  </Card>
+  <Card title="Salesloft" icon="bullhorn">
+    Sales engagement — API key
+  </Card>
+  <Card title="Slack" icon="hashtag">
+    Messages, channels, search — OAuth
+  </Card>
+  <Card title="Gmail" icon="envelope">
+    Read, send, draft emails — OAuth
+  </Card>
+  <Card title="Microsoft Outlook" icon="envelope-open">
+    Read, send, draft emails — OAuth
+  </Card>
+  <Card title="Microsoft Teams" icon="comments">
+    Chat, channels, meeting transcripts — OAuth
+  </Card>
+  <Card title="Google Calendar" icon="calendar">
+    Events and availability — OAuth
+  </Card>
+  <Card title="Microsoft Calendar" icon="calendar-days">
+    Events and shared calendars — OAuth
+  </Card>
+  <Card title="Google Docs" icon="file-lines">
+    Read and edit documents — OAuth
+  </Card>
+  <Card title="Google Drive" icon="hard-drive">
+    File storage read/write — OAuth
+  </Card>
+  <Card title="Google Sheets" icon="table">
+    Spreadsheet read/write — OAuth
+  </Card>
+  <Card title="Notion" icon="book">
+    Pages, databases, search — OAuth
+  </Card>
+  <Card title="Linear" icon="list-check">
+    Issues, projects, comments — OAuth or API key
+  </Card>
+  <Card title="Ashby" icon="user-tie">
+    Recruiting and ATS — API key
+  </Card>
+  <Card title="Avoma" icon="video">
+    Meeting intelligence — API key
+  </Card>
+  <Card title="Firmable" icon="building">
+    Company data enrichment — API key
+  </Card>
+  <Card title="ZoomInfo" icon="database">
+    Contact and company intelligence — API key (3 fields)
+  </Card>
+  <Card title="Cursor" icon="terminal">
+    Agent control and conversations — API key
+  </Card>
+</CardGroup>
+
+Built-in integrations that need no setup:
+
+<CardGroup cols={4}>
+  <Card title="Filesystem" icon="folder-open">
+    Project file storage
+  </Card>
+  <Card title="Python" icon="code">
+    Code execution
+  </Card>
+  <Card title="Skills" icon="wand-magic-sparkles">
+    Your custom workflows
+  </Card>
+  <Card title="Native Meetings" icon="phone">
+    Uses your connected calendar
+  </Card>
+</CardGroup>
+
+### Quick reference
+
+| OAuth | API key | Either | Built-in |
+| --- | --- | --- | --- |
+| HubSpot | Apollo | Linear | Filesystem |
+| Salesforce | Gong | | Python |
+| Gmail | Salesloft | | Skills |
+| Google Calendar | Ashby | | Native Meetings |
+| Google Docs | Avoma | | |
+| Google Drive | Cursor | | |
+| Google Sheets | Firmable | | |
+| Notion | ZoomInfo (3 fields) | | |
+| Slack | | | |
+| Microsoft Outlook | | | |
+| Microsoft Teams | | | |
+| Microsoft Calendar | | | |
+
+### Setup details
 
 <AccordionGroup>
   <Accordion title="HubSpot">
     **Connection method:** OAuth
 
-    **What it does:** Gives Super GTM read and write access to your HubSpot CRM. The agent can search contacts, companies, and deals; create and update records; and pull activity history to give you a complete picture of any account.
+    Gives Super GTM read and write access to your HubSpot CRM — search contacts, companies, and deals; create and update records; manage sequences and pipelines; pull activity history.
 
-    **Permissions:** Read, create, update, delete, and search CRM objects (contacts, companies, deals, tickets, etc.). List owners.
+    HubSpot requests a broad set of optional scopes (contacts, companies, deals, files, tickets, automation sequences, sales email, pipeline management). This is intentional to enable the full range of Super GTM workflows. You can review and approve scopes during the OAuth flow.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **HubSpot** under Integrations
@@ -67,9 +215,7 @@ Depending on how your organization has configured each external application, you
   <Accordion title="Salesforce">
     **Connection method:** OAuth
 
-    **What it does:** Connects Super GTM to your Salesforce org. The agent can read and write CRM data, run SOQL queries to find specific records, and take actions across Salesforce objects.
-
-    **Permissions:** Read and write CRM data via API. Run SOQL queries.
+    Connects Super GTM to your Salesforce org — full API access with read and write CRM data, SOQL queries, and actions across Salesforce objects.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **Salesforce** under Integrations
@@ -86,9 +232,7 @@ Depending on how your organization has configured each external application, you
   <Accordion title="Apollo">
     **Connection method:** API key
 
-    **What it does:** Gives Super GTM access to Apollo's sales intelligence database. The agent can search and enrich contact and company data, find contact information, and pull prospect details directly into your workflow.
-
-    **Permissions:** Search, create, and update contacts and accounts. List, create, and update deals. Enrich person and organization data.
+    Gives Super GTM access to Apollo's sales intelligence database — search and enrich contact and company data, find contact information, pull prospect details.
 
     **How to connect:**
     1. Log in to Apollo and navigate to Settings > Integrations > API
@@ -104,9 +248,7 @@ Depending on how your organization has configured each external application, you
   <Accordion title="Gong">
     **Connection method:** API key
 
-    **What it does:** Connects Super GTM to Gong call recordings and transcripts. The agent can pull call data, surface key moments, and incorporate conversation intelligence into deal briefings and account summaries.
-
-    **Permissions:** Read call data and recordings via Gong API.
+    Connects Super GTM to Gong call recordings and transcripts — pull call data, surface key moments, incorporate conversation intelligence into deal briefings.
 
     **How to connect:**
     1. In Gong, navigate to Settings > Ecosystem > API
@@ -118,17 +260,23 @@ Depending on how your organization has configured each external application, you
     - Gong API access typically requires Technical Admin permissions in Gong — check with your Gong admin
     - The agent can only access calls that are already processed and indexed in Gong
   </Accordion>
-</AccordionGroup>
 
-### Communication & collaboration
+  <Accordion title="Salesloft">
+    **Connection method:** API key
 
-<AccordionGroup>
+    Connects Super GTM to your Salesloft account for sales engagement workflows.
+
+    **How to connect:**
+    1. Log in to Salesloft and navigate to your API settings
+    2. Generate an API key
+    3. In the Super GTM settings panel, find **Salesloft** under Integrations
+    4. Click **Add API key** and paste your Salesloft API key
+  </Accordion>
+
   <Accordion title="Slack">
     **Connection method:** OAuth
 
-    **What it does:** Connects Super GTM to your Slack workspace. The agent can read and post messages, search conversations, list users, manage channels, and add reactions — useful for surfacing context from Slack or taking communication actions.
-
-    **Permissions:** Read and post messages. Search messages. Manage channels. List users. Add reactions.
+    Connects Super GTM to your Slack workspace — read and post messages, search conversations, list users, manage channels, add reactions.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **Slack** under Integrations
@@ -145,9 +293,7 @@ Depending on how your organization has configured each external application, you
   <Accordion title="Gmail">
     **Connection method:** OAuth (via GSuite)
 
-    **What it does:** Connects Super GTM to your Gmail account. The agent can read, send, and draft emails, and manage labels — enabling email-based workflows like drafting outreach, summarizing threads, and tracking correspondence.
-
-    **Permissions:** Read, send, draft, and label emails.
+    Connects Super GTM to your Gmail account — compose, read, send, and draft emails, manage labels, modify settings.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **GSuite** under Integrations
@@ -156,7 +302,7 @@ Depending on how your organization has configured each external application, you
     4. If your Google Workspace organization restricts third-party app access, contact your Google Workspace admin
 
     **Things to know:**
-    - Gmail access is part of the GSuite integration, which also covers Google Calendar and Google Docs
+    - Gmail access is part of the GSuite integration, which also covers Google Calendar, Google Docs, Google Drive, and Google Sheets
     - Google Workspace organizations often have policies restricting which apps can access Gmail — your admin may need to approve the connection
     - Sent emails appear in your Gmail Sent folder as normal
   </Accordion>
@@ -164,9 +310,7 @@ Depending on how your organization has configured each external application, you
   <Accordion title="Microsoft Outlook">
     **Connection method:** OAuth
 
-    **What it does:** Connects Super GTM to your Microsoft Outlook account. The agent can read, send, and draft emails, and manage labels and mailbox settings.
-
-    **Permissions:** Read, send, and draft emails. Manage labels and mailbox settings.
+    Connects Super GTM to your Microsoft Outlook account — read, send, and draft emails, manage labels and mailbox settings.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **Microsoft Outlook** under Integrations
@@ -182,9 +326,7 @@ Depending on how your organization has configured each external application, you
   <Accordion title="Microsoft Teams">
     **Connection method:** OAuth
 
-    **What it does:** Gives Super GTM access to your Microsoft Teams environment. The agent can read and send chat and channel messages, read meeting transcripts, and manage online meetings.
-
-    **Permissions:** Read and send chat and channel messages. Read meeting transcripts. Manage online meetings.
+    Gives Super GTM access to your Microsoft Teams environment — read and send chat and channel messages, read meeting transcripts, manage online meetings.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **Microsoft Teams** under Integrations
@@ -196,23 +338,17 @@ Depending on how your organization has configured each external application, you
     - Teams API access almost always requires Microsoft 365 admin consent — plan for this when setting up
     - Meeting transcript access requires that transcription is enabled in your Teams tenant
   </Accordion>
-</AccordionGroup>
 
-### Calendar & scheduling
-
-<AccordionGroup>
   <Accordion title="Google Calendar">
     **Connection method:** OAuth (via GSuite)
 
-    **What it does:** Connects Super GTM to your Google Calendar. The agent can check your availability, create events, and give you scheduling context — useful for scheduling follow-ups, blocking focus time, or surfacing upcoming meetings.
-
-    **Permissions:** Create events and check availability.
+    Connects Super GTM to your Google Calendar — check availability, create events, get scheduling context.
 
     **How to connect:**
     Google Calendar access is included with the GSuite integration. Connect via the **GSuite** option in the Integrations section.
 
     **Things to know:**
-    - Calendar access is part of the GSuite integration alongside Gmail and Google Docs
+    - Calendar access is part of the GSuite integration alongside Gmail, Google Docs, Google Drive, and Google Sheets
     - The agent can only create events on calendars you have write access to
     - Meeting invitations sent by the agent will come from your Google account
   </Accordion>
@@ -220,9 +356,7 @@ Depending on how your organization has configured each external application, you
   <Accordion title="Microsoft Calendar">
     **Connection method:** OAuth
 
-    **What it does:** Connects Super GTM to Microsoft Calendar (via Microsoft 365). The agent can create and manage calendar events, including events on shared calendars you have access to.
-
-    **Permissions:** Create and manage calendar events including on shared calendars.
+    Connects Super GTM to Microsoft Calendar (via Microsoft 365) — create and manage calendar events, including shared calendars.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **Microsoft Calendar** under Integrations
@@ -233,32 +367,50 @@ Depending on how your organization has configured each external application, you
     - Microsoft Calendar access is separate from Microsoft Outlook — you can connect either or both
     - Shared calendar access depends on your Microsoft 365 permissions
   </Accordion>
-</AccordionGroup>
 
-### Productivity & documents
-
-<AccordionGroup>
   <Accordion title="Google Docs">
     **Connection method:** OAuth (via GSuite)
 
-    **What it does:** Connects Super GTM to Google Docs. The agent can read and edit documents — useful for pulling content from existing docs, updating them with new information, or creating new documents as part of a workflow.
-
-    **Permissions:** Read and edit documents.
+    Connects Super GTM to Google Docs — read and edit documents, pull content from existing docs, create new documents.
 
     **How to connect:**
     Google Docs access is included with the GSuite integration. Connect via the **GSuite** option in the Integrations section.
 
     **Things to know:**
-    - Google Docs access is part of the GSuite integration alongside Gmail and Google Calendar
+    - Google Docs access is part of the GSuite integration alongside Gmail, Google Calendar, Google Drive, and Google Sheets
     - The agent can only access documents shared with or owned by your Google account
+  </Accordion>
+
+  <Accordion title="Google Drive">
+    **Connection method:** OAuth (via GSuite)
+
+    Connects Super GTM to Google Drive — read and write files, search across your Drive.
+
+    **How to connect:**
+    Google Drive access is included with the GSuite integration. Connect via the **GSuite** option in the Integrations section.
+
+    **Things to know:**
+    - Google Drive access is part of the GSuite integration
+    - The agent can only access files shared with or owned by your Google account
+  </Accordion>
+
+  <Accordion title="Google Sheets">
+    **Connection method:** OAuth (via GSuite)
+
+    Connects Super GTM to Google Sheets — read and write spreadsheet data.
+
+    **How to connect:**
+    Google Sheets access is included with the GSuite integration. Connect via the **GSuite** option in the Integrations section.
+
+    **Things to know:**
+    - Google Sheets access is part of the GSuite integration
+    - The agent can only access spreadsheets shared with or owned by your Google account
   </Accordion>
 
   <Accordion title="Notion">
     **Connection method:** OAuth
 
-    **What it does:** Connects Super GTM to your Notion workspace. The agent can read and create pages, query and create databases, create comments, manage blocks, and search across your workspace.
-
-    **Permissions:** Read, create, and update pages. Query and create databases. Create comments. Manage blocks. Search workspace.
+    Connects Super GTM to your Notion workspace — read and create pages, query and create databases, create comments, manage blocks, search.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **Notion** under Integrations
@@ -274,9 +426,9 @@ Depending on how your organization has configured each external application, you
   <Accordion title="Linear">
     **Connection method:** OAuth or API key
 
-    **What it does:** Connects Super GTM to Linear for issue and project tracking. The agent can read, create, update, and archive issues, manage comments, and read projects and labels.
+    Linear is the only integration that supports both OAuth and API key. You can choose whichever you prefer — both methods work interchangeably. If either is configured, the integration shows as connected.
 
-    **Permissions:** Read, create, update, and archive issues. Read, create, and update comments. Read projects and labels.
+    Connects Super GTM to Linear — read, create, update, and archive issues, manage comments, read projects and labels.
 
     **How to connect:**
 
@@ -289,60 +441,65 @@ Depending on how your organization has configured each external application, you
     2. Create a new API key
     3. In the Super GTM settings panel, find **Linear** under Integrations
     4. Click **Add API key** and paste your Linear API key
+  </Accordion>
 
-    **Things to know:**
-    - Linear supports both OAuth and API key connections — use OAuth for per-user access, API key for project-wide shared access
-    - The agent operates within your Linear workspace permissions
+  <Accordion title="Ashby">
+    **Connection method:** API key
+
+    Connects Super GTM to Ashby for recruiting and ATS workflows.
+
+    **How to connect:**
+    1. Log in to Ashby and navigate to your API settings
+    2. Generate an API key
+    3. In the Super GTM settings panel, find **Ashby** under Integrations
+    4. Click **Add API key** and paste your Ashby API key
+  </Accordion>
+
+  <Accordion title="Avoma">
+    **Connection method:** API key
+
+    Connects Super GTM to Avoma for meeting intelligence — access call recordings, transcripts, and meeting notes.
+
+    **How to connect:**
+    1. Log in to Avoma and navigate to your API settings
+    2. Generate an API key
+    3. In the Super GTM settings panel, find **Avoma** under Integrations
+    4. Click **Add API key** and paste your Avoma API key
+  </Accordion>
+
+  <Accordion title="Firmable">
+    **Connection method:** API key
+
+    Connects Super GTM to Firmable for company data enrichment.
+
+    **How to connect:**
+    1. Log in to Firmable and navigate to your API settings
+    2. Generate an API key
+    3. In the Super GTM settings panel, find **Firmable** under Integrations
+    4. Click **Add API key** and paste your Firmable API key
+  </Accordion>
+
+  <Accordion title="ZoomInfo">
+    **Connection method:** API key (3 fields)
+
+    Connects Super GTM to ZoomInfo for contact and company intelligence. Unlike other API key integrations, ZoomInfo requires three separate credentials.
+
+    **How to connect:**
+    1. Log in to ZoomInfo and navigate to your account settings
+    2. Locate your **Email**, **Client ID**, and **Private Key**
+    3. In the Super GTM settings panel, find **ZoomInfo** under Integrations
+    4. Enter all three values
   </Accordion>
 
   <Accordion title="Cursor">
     **Connection method:** API key
 
-    **What it does:** Connects Super GTM to Cursor, allowing the agent to interact with Cursor's agent capabilities — list, launch, and stop agents, view conversation history, and send follow-up prompts.
-
-    **Permissions:** List, launch, and stop agents. View conversation history. Send follow-up prompts.
+    Connects Super GTM to Cursor — list, launch, and stop agents, view conversation history, send follow-up prompts.
 
     **How to connect:**
     1. In Cursor, navigate to your account settings and find the API section
     2. Generate an API key
     3. In the Super GTM settings panel, find **Cursor** under Integrations
     4. Click **Add API key** and paste your Cursor API key
-  </Accordion>
-</AccordionGroup>
-
-## Managing connections
-
-All active integrations are visible in the Super GTM settings panel.
-
-<CardGroup cols={3}>
-  <Card title="Reconnect" icon="rotate">
-    Re-authorize an integration if your credentials expire or permissions change
-  </Card>
-  <Card title="Disconnect" icon="link-slash">
-    Revoke access for an integration you no longer need
-  </Card>
-  <Card title="View permissions" icon="eye">
-    See what the agent can do with each connected tool
-  </Card>
-</CardGroup>
-
-<Tip>
-For project-level API key integrations, admins can manage these centrally in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration). This is the recommended approach for API key integrations that should be shared across your team.
-</Tip>
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="Authorization fails or redirects to an error page">
-    This usually means your organization has restricted third-party app access. Check with your IT admin or the admin of the external application to request approval.
-  </Accordion>
-  <Accordion title="The agent can't see data I expect it to find">
-    Confirm that the integration is connected and that your account has access to the relevant data in the external tool. For Notion, check that you've shared the specific pages during the OAuth flow.
-  </Accordion>
-  <Accordion title="An OAuth connection expires">
-    OAuth tokens can expire or be revoked. If the agent reports that a tool is disconnected, go to the Integrations section in Super GTM settings and reconnect.
-  </Accordion>
-  <Accordion title="API key stops working">
-    API keys can be revoked or rotated. Generate a new key in the external tool and update it in the Super GTM settings panel.
   </Accordion>
 </AccordionGroup>

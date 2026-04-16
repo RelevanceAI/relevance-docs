@@ -1,83 +1,98 @@
 ---
 title: "Scheduled tasks"
-description: "Run skills automatically on a recurring schedule without manual intervention"
+description: "Set up recurring prompts that Super GTM acts on automatically at a time you define"
 ---
 
-Super GTM can run [skills](/get-started/chat/super-gtm/skills) on a recurring schedule. This is useful for anything that should happen regularly without you needing to ask — daily pipeline reports, weekly account summaries, automated outreach sequences, or periodic data hygiene tasks.
+Scheduled tasks let you configure recurring prompts that Super GTM runs on your behalf at a set time. Instead of manually typing the same request every morning, you write the instruction once, pick a schedule, and the agent handles it from there.
 
-## How scheduling works
+When a schedule fires, the agent receives your saved message exactly as if you had typed it into a conversation. It pulls from your connected [integrations](/get-started/chat/super-gtm/integrations), references your [files](/get-started/chat/super-gtm/file-system), applies [memory](/get-started/chat/super-gtm/memory), and delivers the output — just like a normal Super GTM interaction.
 
-When you schedule a skill, Super GTM runs it automatically at the interval you specify. The agent executes the skill exactly as it would in a conversation — pulling from connected integrations, referencing files, applying memory — and delivers the output.
+<Note>
+Scheduled tasks is in limited rollout. Your organization needs access enabled before the feature appears. Contact your account team or [reach out to support](/get-started/support) to check availability.
+</Note>
 
-<Info>
-Scheduled tasks run in the background. You'll receive the results when the task completes, typically via a notification or a message in your Super GTM inbox.
-</Info>
+## Where to find schedules
 
-## Setting up a schedule
+The **Schedules** section lives in the Super GTM panel on the **Overview** tab, below the Calendar and Recently Viewed sections.
 
-Schedules are configured in the **Schedules** section of the Super GTM Overview tab.
+## Setting up a scheduled task
 
 <Steps>
   <Step title="Open the Schedules section">
-    In the Super GTM Overview tab, navigate to the **Schedules** section.
+    In the Super GTM **Overview** tab, scroll to the **Schedules** section and click to add a new schedule.
   </Step>
-  <Step title="Select a skill">
-    Choose the skill you want to run on a schedule. Any skill in your skill library can be scheduled.
+  <Step title="Write your message">
+    Enter a natural language instruction — this is the prompt the agent receives when the schedule fires. Write it the same way you would in a conversation.
+
+    Examples:
+    - "Summarize all new Gong calls from the last 7 days"
+    - "Check my pipeline for deals that haven't had activity in 2 weeks and flag them"
+    - "Find 5 new prospects matching our ICP and add them to my outreach list"
   </Step>
-  <Step title="Set the frequency">
-    Choose how often the skill should run: daily, weekly, or a custom cron-style interval. See the frequency options table below for details.
+  <Step title="Set the frequency and time">
+    Choose how often the task should run (daily, weekly, monthly, or annually), the time of day, and your timezone.
   </Step>
-  <Step title="Configure delivery">
-    Specify where the output should be sent — for example, posted to a Slack channel, emailed to you, or saved to a file in the file system.
-  </Step>
-  <Step title="Activate the schedule">
-    Save and enable the schedule. The skill will run automatically at the next scheduled time.
+  <Step title="Save and enable">
+    Save the schedule. It runs automatically at the next scheduled time.
   </Step>
 </Steps>
 
-## Recurring schedule options
+<Tip>
+Write your scheduled message the same way you'd ask the agent in a conversation. The more specific your instruction, the more useful the output.
+</Tip>
 
-| Frequency | Description | Example use case |
-| --- | --- | --- |
-| Daily | Runs every day at a set time | Morning pipeline digest, daily standup prep |
-| Weekly | Runs on specific days each week | Weekly account health summary, Monday kick-off report |
-| Custom | Cron-style interval | Every Monday and Thursday at 9am, first of each month |
+## Frequency options
+
+<CardGroup cols={2}>
+  <Card title="Daily" icon="sun">
+    Runs every day at a set time — e.g. morning pipeline digest at 9am
+  </Card>
+  <Card title="Weekly" icon="calendar-week">
+    Runs on specific days each week — e.g. Monday kick-off report, Friday wrap-up
+  </Card>
+  <Card title="Monthly" icon="calendar">
+    Runs once a month on a set day — e.g. account health review on the 1st
+  </Card>
+  <Card title="Annually" icon="calendar-check">
+    Runs once a year on a set date — e.g. annual renewal check-in
+  </Card>
+</CardGroup>
+
+<Info>
+All schedules run in your selected timezone. Full IANA timezone support (e.g. Australia/Sydney, America/New_York).
+</Info>
 
 ## Managing schedules
 
-<CardGroup cols={3}>
-  <Card title="Pause" icon="pause">
-    Stop a schedule temporarily without deleting it. Resume at any time.
-  </Card>
-  <Card title="Edit" icon="pen-to-square">
-    Change the skill, frequency, or delivery settings for an existing schedule.
-  </Card>
-  <Card title="Delete" icon="trash">
-    Remove a schedule permanently when it's no longer needed.
-  </Card>
-</CardGroup>
+You can have up to **10 active schedules**. All management happens from the Schedules section of the Overview tab.
 
-All schedules are managed from the Schedules section of the Overview tab.
+<Tabs>
+  <Tab title="Pause and resume">
+    Temporarily stop a schedule without deleting it. Paused schedules show a "(paused)" label in the list. Resume at any time from the same menu.
+  </Tab>
+  <Tab title="Edit">
+    Update the message, frequency, time, or timezone for an existing schedule. Changes take effect from the next scheduled run.
+  </Tab>
+  <Tab title="Delete">
+    Remove a schedule permanently when it's no longer needed. This cannot be undone.
+  </Tab>
+</Tabs>
 
-## What scheduled tasks can do
+Each schedule displays the last time it was triggered, so you can confirm it's running as expected.
 
-Scheduled tasks run the full skill workflow with access to the same capabilities as a live conversation:
+## Use cases
 
 <CardGroup cols={2}>
-  <Card title="File system" icon="folder-open">
-    Read from and write to the [file system](/get-started/chat/super-gtm/file-system)
+  <Card title="Daily pipeline summaries" icon="chart-line">
+    "Every morning, summarize my open deals and highlight any at-risk accounts"
   </Card>
-  <Card title="Integrations" icon="plug">
-    Pull data from connected [integrations](/get-started/chat/super-gtm/integrations) (CRM, calendar, email, etc.)
+  <Card title="Weekly prospect research" icon="magnifying-glass">
+    "Every Monday, find 5 new prospects matching our ICP criteria and add them to my outreach list"
   </Card>
-  <Card title="Memory" icon="brain">
-    Apply [memory](/get-started/chat/super-gtm/memory) to personalize output
+  <Card title="Recurring reporting" icon="calendar-week">
+    "Every Friday at 5pm, prepare a summary of this week's customer conversations from Gong"
   </Card>
-  <Card title="Sub-agents" icon="robot">
-    Run sub-agents from your Relevance AI agent library
+  <Card title="Follow-up nudges" icon="bell">
+    "Every Tuesday, remind me of any contacts I haven't followed up with in 2+ weeks"
   </Card>
 </CardGroup>
-
-<Warning>
-Scheduled tasks that take write actions — such as sending an email or creating a CRM record — still require approval unless the skill has been explicitly configured for autonomous execution. Check your skill's configuration before scheduling write-heavy workflows.
-</Warning>
