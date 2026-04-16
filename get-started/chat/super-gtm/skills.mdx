@@ -1,124 +1,159 @@
 ---
 title: "Skills"
-description: "Define repeatable workflows that Super GTM activates automatically whenever you need them"
+description: "Repeatable workflows that your agent activates automatically based on what you ask for"
 ---
 
-Skills are named, reusable workflows that you teach Super GTM to execute on your behalf. Once defined, a skill is always available — the agent activates the right one automatically based on what you're asking for, without you needing to invoke it by name.
+Skills are repeatable workflows that the agent activates based on what you ask for. Each skill defines the instructions, integrations, output format, and reference material for a specific task.
 
-Think of skills as standing instructions: "whenever I ask for a prospect brief, here's exactly how to pull and format it." The agent learns the pattern once and applies it consistently every time.
+When your request matches a skill, the agent loads it and follows the instructions step by step. You don't need to explain how to do the work — the agent already has everything it needs.
 
-## How skills work
+## Where to find skills
 
-Skills live in your Super GTM environment and persist across sessions. When you send a message, the agent considers which skills are relevant and activates them as needed. You don't have to say "use my prospect briefing skill" — the agent infers it from context.
+You can view and manage your skills in the **Skills** tab in the right-side menu.
 
-<CardGroup cols={2}>
-  <Card title="Integration access" icon="plug">
-    Pull data from connected integrations (CRM, calendar, email, etc.)
-  </Card>
-  <Card title="File system access" icon="folder-open">
-    Read from and write to the [file system](/get-started/chat/super-gtm/file-system)
-  </Card>
-  <Card title="Memory-aware" icon="brain">
-    Reference things the agent has learned about you via [memory](/get-started/chat/super-gtm/memory)
-  </Card>
-  <Card title="Agent execution" icon="robot">
-    Run other agents you've built in Relevance AI
-  </Card>
-</CardGroup>
+<Frame>
+  <img src="/images/where-to-find-your-skills.png" alt="Skills tab in the Super GTM right-side menu" />
+</Frame>
+
+From here you can browse all available skills (project, user, and built-in), see which skills are active, and open any skill to view or edit its contents.
+
+## How the agent knows what's available
+
+The agent sees all available skills at the start of every conversation. When your request matches a skill, it activates the skill and loads the full instructions.
+
+<Tip>
+You don't need to reference skills by name. Just describe what you need, and the agent will match it to the right skill if one exists.
+</Tip>
 
 ## Types of skills
 
 <Tabs>
   <Tab title="Project skills">
-    Project skills are available to all users in a Super GTM project. They're useful for standardized workflows that your whole team should use — for example, a "weekly pipeline report" skill that every sales rep can activate.
+    Shared workflows available to everyone in your project. Use these for recurring tasks your team handles the same way — post-meeting follow-ups, pipeline reviews, or weekly reporting.
 
-    Project skills are created and managed by project admins.
+    Only admins can create and edit project skills. All project members can use them.
   </Tab>
   <Tab title="User skills">
-    User skills are personal to you. They reflect your individual working style, preferences, and recurring tasks. Only you can see and use them.
+    Personal workflows private to you. Use these for tasks tailored to your role or preferences — your specific outreach style, how you like reports formatted, or a workflow only you need.
 
-    Examples:
-    1. A "daily standup prep" skill that pulls your meetings, open tasks, and recent emails
-    2. A "deal summary" skill that formats CRM data the way you like it
-    3. A "follow-up email" skill that drafts outreach in your voice using email history and notes
+    You can create and edit your own user skills. Other team members can discover and read them, but can't modify them.
   </Tab>
   <Tab title="Built-in skills">
-    Super GTM includes a set of built-in skills that come pre-configured. These cover common GTM tasks like summarizing recent activity across your connected tools, finding contact information, or checking your calendar.
+    Skills that ship with the platform. These include:
 
-    Built-in skills require the relevant integrations to be connected.
+    - **Skill Creator** — helps you build new skills (see [How to create a skill](#how-to-create-a-skill) below)
+    - **Meeting Prep & Summary** — prepares you for upcoming meetings using your calendar, transcripts, and notes (assumes you have a meeting integration setup like Google Calendar — use this as a starting example)
+
+    Built-in skills are read-only and available to everyone.
   </Tab>
   <Tab title="Agent-as-skills">
-    Any agent you've built in Relevance AI can be made available as a skill in Super GTM. The agent appears in your skill library and can be activated by name or inferred from context.
+    Other agents in your project that have been made available to Super GTM. Unlike regular skills (which are instructions Super GTM follows), agent-as-skills have their own **tools** and run independently when activated.
 
-    To add an agent as a skill, go to the **Agents** section in your Super GTM settings and enable the agents you want available.
+    To enable an agent as a skill, open it in the agent builder, go to **Advanced**, and toggle on **Can be used by Super GTM**. It will then appear in the skills catalog.
   </Tab>
 </Tabs>
 
-## Creating skills
+## How to create a skill
 
-Skills are created using the Skill Creator in Super GTM.
+<div style={{ width:"100%",position:"relative","padding-top":"56.25%" }}>
+<iframe src="https://app.supademo.com/embed/cmnzf14fj2zdv1q1evobspz8x" frameBorder="0" title="Creating a skill" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
-<Steps>
-  <Step title="Open the Skill Creator">
-    In the Super GTM interface, navigate to the Skills section and click **Create skill**.
-    <div style={{ width:"100%",position:"relative","padding-top":"56.25%" }}>
-    <iframe src="https://app.supademo.com/embed/cmnzf14fj2zdv1q1evobspz8x" frameBorder="0" title="Creating a skill" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
-    </div>
-  </Step>
-  <Step title="Name and describe the skill">
-    Give the skill a clear, descriptive name and a short description of what it does. The name and description help the agent understand when to activate the skill — write them as you would explain the workflow to a colleague.
-  </Step>
-  <Step title="Define the workflow">
-    Describe the steps the agent should follow. Be specific about which integrations to use, what data to pull, how to format the output, and what to do with the result. You can reference files from the file system and tell the agent to update memory when relevant.
-  </Step>
-  <Step title="Test the skill">
-    Run the skill to verify it works as expected. Refine the instructions based on the output.
-  </Step>
-  <Step title="Save and activate">
-    Save the skill. It's immediately available in your environment — no further configuration needed.
-  </Step>
-</Steps>
+Ask the agent:
 
-## Tips for writing good skills
+> "Create a skill that does [description of the workflow]"
 
-<AccordionGroup>
-  <Accordion title="Be specific about inputs and outputs">
-    Vague instructions produce inconsistent results. Instead of "summarize recent deals," write "pull all deals updated in the last 7 days from HubSpot, include deal name, stage, ARR, and last activity date, and format as a table."
-  </Accordion>
-  <Accordion title="Name integrations explicitly">
-    Tell the skill which tool to use: "check Google Calendar for tomorrow's meetings" rather than "check my calendar."
-  </Accordion>
-  <Accordion title="Reference the file system for templates">
-    If the skill uses a standard format or needs background context, store it as a file and reference it in the skill instructions. See [File system](/get-started/chat/super-gtm/file-system).
-  </Accordion>
-  <Accordion title="Let memory personalize the output">
-    You can instruct the agent to apply preferences it's learned about you. For example: "use the tone and structure the user prefers for outbound emails." See [Memory](/get-started/chat/super-gtm/memory).
-  </Accordion>
-  <Accordion title="Keep skills focused">
-    One skill per workflow is easier to maintain and debug than one skill that tries to do everything.
-  </Accordion>
-</AccordionGroup>
+The agent activates the built-in **Skill Creator** and walks you through defining the workflow, integrations, output format, and whether it should be a project skill (shared) or user skill (personal). The agent handles formatting and saving. You can also ask the agent to update an existing skill at any time.
+
+### Example: creating a post-meeting follow-up skill
+
+<Accordion title="Building the skill from a conversation">
+  After a sales call, you ask the agent:
+
+  > "Summarize my call with Moonlight Labs. Pull the action items, update the deal in HubSpot, and draft a follow-up email to the attendees."
+
+  The agent finds the meeting in Google Calendar, reads the transcript, extracts action items, updates HubSpot, and drafts the email. You refine:
+
+  > "Always include the deal stage and next scheduled meeting in the summary. Format the action items as a table with columns for action, owner, and deadline."
+
+  The agent adjusts the output. Now you tell it:
+
+  > "Make a skill out of this conversation."
+
+  The agent activates the Skill Creator, reviews the conversation, and builds a skill that captures the full workflow — steps, integrations, output format, and your formatting preferences. It saves the skill to your catalog. From then on, the agent can run that same workflow whenever you need it.
+</Accordion>
+
+<Accordion title="Using the skill afterward">
+  From then on, whenever you say something like:
+
+  - "Follow up on my call with Moonlight Labs"
+  - "I just got off a call with Sarah — process it"
+  - "Summarize my last meeting and update the CRM"
+
+  The agent matches your request to the skill and runs the same workflow.
+
+  **What you get back:**
+
+  - Meeting summary (date, attendees, duration, deal stage, next scheduled meeting)
+  - Action items table (action, owner, deadline)
+  - Confirmation of what was updated in HubSpot
+  - A draft follow-up email ready to send or edit
+  - Any open questions that need attention
+
+  The skill captures the process, not specific data. The agent adapts it to whatever meeting and CRM records are relevant.
+</Accordion>
 
 ## Running skills on a schedule
 
-Skills can be scheduled to run automatically at set intervals — daily, weekly, or on a custom cadence. This is useful for recurring reports, pipeline hygiene tasks, or any workflow that should happen without you having to ask.
+<Frame>
+  <img src="/images/run-your-skill-on-a-schedule.png" alt="Schedule configuration for running skills automatically" />
+</Frame>
 
-Schedules are configured in the **Schedules** section of the Super GTM Overview tab. See [Scheduled tasks](/get-started/chat/super-gtm/scheduled-tasks) for details.
+Skills don't have to be triggered by a conversation. You can schedule the agent to run a skill automatically on a recurring basis — daily, weekly, or at whatever cadence you need. Set up schedules in the **Overview** tab in the right-side panel.
 
-## How skills reference the file system
+<Accordion title="Example: scheduling a Follow up all calls skill">
+  You have a skill called **Follow up all calls** that checks recent meetings, lists outstanding action items, and flags clients you haven't followed up with. You schedule it to run every weekday morning at 9am.
 
-Skills can read from and write to the file system as part of their workflow. For example, a "competitive brief" skill might read a competitors reference file and update it with findings from a recent call.
+  Each morning, the agent runs the skill, checks your calendar and CRM, and sends you a summary — missed follow-ups, overdue action items, and calls without a recap.
+</Accordion>
 
-<Info>
-When a skill instructs the agent to use a file, the agent pulls the relevant content from the file system at the time the skill runs. Files don't need to be manually attached — they're there when needed.
-</Info>
+This is useful for any skill that benefits from regular execution:
 
-See [File system](/get-started/chat/super-gtm/file-system) for how to upload and manage files.
+<CardGroup cols={2}>
+  <Card title="Daily pipeline reviews" icon="chart-line">
+    Summarize deal movements, stale opportunities, and next actions each morning.
+  </Card>
+  <Card title="Weekly reporting" icon="calendar-week">
+    Generate end-of-week reports covering activity metrics, closed deals, and upcoming priorities.
+  </Card>
+  <Card title="CRM hygiene checks" icon="broom">
+    Flag missing fields, outdated contacts, and deals without recent activity.
+  </Card>
+  <Card title="Monday meeting prep" icon="mug-hot">
+    Brief you on upcoming meetings, attendee context, and open action items for the week.
+  </Card>
+</CardGroup>
 
-## How skills and memory work together
+To set up a schedule, go to the **Schedules** section in the UI. Choose the skill, set the cadence, and the agent runs it automatically.
 
-When a skill runs, the agent brings along everything it knows about you from memory — your preferences, feedback you've given, context about your role and accounts. This means the same skill can produce personalized output for each user without requiring separate skill definitions.
+## Tips for writing good skills
 
-You can also tell the agent to update memory as part of a skill: "remember any new information about this account for future reference." Over time, this makes skills progressively more tailored to how you work.
+Keep these in mind when creating skills:
 
-See [Memory](/get-started/chat/super-gtm/memory) for details on what the agent remembers and how to manage it.
+<AccordionGroup>
+  <Accordion title="Describe when it should activate">
+    Include the kinds of things you'd say when you need this workflow. The agent uses this to match your requests to the right skill.
+  </Accordion>
+  <Accordion title="Be specific about where to look">
+    Specify which integrations to use — "check HubSpot for the deal" is better than "check the CRM."
+  </Accordion>
+  <Accordion title="Define the output">
+    Describe what the result should look like so the agent delivers consistent output every time.
+  </Accordion>
+  <Accordion title="Reference memory">
+    If the skill should respect your preferences (email tone, formatting style), tell it to check your [memory](/get-started/chat/super-gtm/memory).
+  </Accordion>
+  <Accordion title="Don't over-specify">
+    Define a clear process, but let the agent adapt to the data it finds. Specific steps are good; hard-coded values are not.
+  </Accordion>
+</AccordionGroup>
