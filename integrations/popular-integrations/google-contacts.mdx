@@ -1,0 +1,72 @@
+---
+title: "Google Contacts"
+description: "Connect Google Contacts to Relevance AI for read-only contact retrieval via the People API"
+---
+
+## Overview
+
+The Google Contacts integration connects your AI agents to your Google Contacts via the People API, providing read-only access to contact data. Agents can retrieve contact details, search your address book, and access contact group information to support workflows that reference or enrich contact data.
+
+<Note>This integration provides read-only access. Creating, updating, or deleting contacts is not supported.</Note>
+
+## Connect the integration
+
+To connect the Google Contacts integration to Relevance AI:
+
+1. Go to the **Integrations & API Keys** page in the sidebar of your Relevance AI dashboard.
+2. Click on "Google Contacts" from the available integrations.
+3. Click **Connect**.
+4. You'll be redirected to Google's authentication page.
+5. Select the Google account you want to connect.
+6. Review and approve the requested permissions.
+7. Once authenticated, you'll be redirected back to Relevance AI with your Google Contacts now connected.
+
+You can connect multiple Google accounts if needed and manage all connections from the Integrations dashboard.
+
+## Tools & Tool Steps
+
+The Google Contacts integration provides actions for retrieving contact information from your Google account.
+
+### Contact retrieval
+
+- **Get Contact**: Retrieve a specific contact by ID or identifier
+- **List Contacts**: Retrieve a list of contacts from your Google account
+- **Search Contacts**: Find contacts matching specific criteria such as name, email, or phone number
+
+### Contact information
+
+- **Get Contact Details**: Retrieve comprehensive information about a contact, including phone numbers, addresses, and custom fields
+- **Get Contact Groups**: List and retrieve the groups your contacts are organized into
+
+## Use the integration's API tool step (advanced)
+
+For use cases requiring access to People API endpoints not covered by the standard actions:
+
+1. Create a new tool in Relevance AI.
+2. Scroll down to Tool-steps.
+3. Add the Google Contacts API tool-step.
+4. Select your connected Google account from the dropdown.
+5. Configure the API request with the endpoint, HTTP method, and any parameters.
+
+This gives you direct access to the Google People API, allowing you to query additional contact fields, work with other contacts directories, or implement custom contact retrieval logic.
+
+## Use cases
+
+- **CRM enrichment**: Look up contact details to populate or update CRM records automatically
+- **Contact lookup**: Retrieve contact information during email or messaging workflows
+- **Automated outreach**: Pull contact details to personalize agent-driven communications
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Why is this integration read-only?">The Google Contacts integration uses the People API in read-only mode. Agents can retrieve and use contact data but cannot create, update, or delete contacts.</Accordion>
+  <Accordion title="What is the People API?">The People API is Google's interface for accessing contact and profile data from Google Contacts and Google Directory. It provides structured access to contact fields like names, emails, phone numbers, addresses, and custom data.</Accordion>
+  <Accordion title="Can I connect multiple Google accounts?">Yes, you can connect multiple Google accounts and configure different agents to use specific accounts.</Accordion>
+  <Accordion title="What contact fields are accessible?">The integration can retrieve names, email addresses, phone numbers, physical addresses, organization details, contact groups, and other fields stored in Google Contacts.</Accordion>
+</AccordionGroup>
+
+## Related integrations
+
+<Card title="Gmail" icon="envelope" href="/integrations/popular-integrations/gmail">
+  Use contact data retrieved from Google Contacts in your Gmail email workflows
+</Card>

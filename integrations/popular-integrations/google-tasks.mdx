@@ -1,0 +1,102 @@
+---
+title: "Google Tasks"
+description: "Connect Google Tasks to Relevance AI for full task and task list management"
+---
+
+## Overview
+
+The Google Tasks integration connects your AI agents to Google Tasks, enabling full create, read, update, and delete operations on tasks and task lists. Agents can automate task creation, track completion status, set due dates, and manage task lists to coordinate work across your workflows.
+
+## Connect the integration
+
+To connect the Google Tasks integration to Relevance AI:
+
+1. Go to the **Integrations & API Keys** page in the sidebar of your Relevance AI dashboard.
+2. Click on "Google Tasks" from the available integrations.
+3. Click **Connect**.
+4. You'll be redirected to Google's authentication page.
+5. Select the Google account you want to connect.
+6. Review and approve the requested permissions.
+7. Once authenticated, you'll be redirected back to Relevance AI with your Google Tasks now connected.
+
+You can connect multiple Google accounts if needed and manage all connections from the Integrations dashboard.
+
+## Setting up triggers
+
+Google Tasks can trigger your AI agents when task events occur, enabling agents to respond automatically to changes in your task lists.
+
+To set up Google Tasks as a trigger:
+
+1. Create or edit an agent in Relevance AI.
+2. Navigate to the **Triggers** section in **Agent Profile**.
+3. Select **Google Tasks** as the trigger source.
+4. Configure the trigger conditions:
+   - **New task created**: Trigger when a task is added to a specific list
+   - **Task completed**: Trigger when a task is marked as done
+   - **Task updated**: Trigger when a task's details, due date, or status changes
+5. Select which task list(s) to monitor.
+6. Save your trigger configuration.
+
+## Tools & Tool Steps
+
+The Google Tasks integration provides a full set of actions for managing tasks and task lists.
+
+### Task management
+
+- **Create Task**: Add a new task to a specified task list
+- **Update Task**: Modify a task's title, notes, due date, or status
+- **Delete Task**: Remove a task from a task list
+- **Get Task Details**: Retrieve full information about a specific task
+
+### Task lists
+
+- **Create List**: Create a new task list
+- **Update List**: Rename or modify an existing task list
+- **Delete List**: Remove a task list and its tasks
+- **List Tasks**: Retrieve all tasks in a specified task list
+
+### Task operations
+
+- **Mark complete**: Set a task's status to completed
+- **Set due date**: Assign or update the due date on a task
+- **Add notes**: Append or update the notes field on a task
+- **Set priority**: Assign a priority level to a task
+
+## Use the integration's API tool step (advanced)
+
+For use cases requiring access to Tasks API endpoints beyond the standard actions:
+
+1. Create a new tool in Relevance AI.
+2. Scroll down to Tool-steps.
+3. Add the Google Tasks API tool-step.
+4. Select your connected Google account from the dropdown.
+5. Configure the API request with the endpoint, HTTP method, and request body as needed.
+
+This gives you direct access to the Google Tasks API, useful for bulk operations, advanced filtering, or custom task management logic.
+
+## Use cases
+
+- **Task automation**: Create tasks automatically from emails, calendar events, or other triggers
+- **Project management**: Track project milestones and assign tasks as part of multi-step agent workflows
+- **Workflow integration**: Coordinate task completion with downstream actions in other integrated tools
+
+## Best practices
+
+- **Task organization**: Use task lists to group related tasks by project or workflow, making it easier for agents to retrieve and act on the right set of tasks.
+- **Due dates**: Set due dates consistently so agents can filter and prioritize tasks based on urgency.
+- **Integration with other tools**: Combine Google Tasks with the [Google Calendar integration](/integrations/popular-integrations/google-calendar) to create calendar events from tasks or add tasks based on calendar events.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I use Google Tasks with multiple Google accounts?">Yes, you can connect multiple Google accounts and configure different agents to use specific accounts.</Accordion>
+  <Accordion title="Does the integration support subtasks?">The Google Tasks API supports basic task hierarchies. You can create tasks with a parent task reference to model subtask relationships.</Accordion>
+  <Accordion title="Can my agent both create and complete tasks?">Yes. The integration has full CRUD capabilities, so agents can create tasks, update them, mark them complete, and delete them.</Accordion>
+  <Accordion title="How do triggers work if I have multiple task lists?">When setting up a trigger, you can select which task list(s) to monitor. The agent will only activate for events in those lists.</Accordion>
+</AccordionGroup>
+
+## Related integrations
+
+<Card title="Google Calendar" icon="calendar" href="/integrations/popular-integrations/google-calendar">
+  Coordinate tasks with calendar events — create tasks from meetings or schedule events based on task deadlines
+</Card>
