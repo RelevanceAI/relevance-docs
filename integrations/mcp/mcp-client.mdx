@@ -1,18 +1,35 @@
 ---
 title: "MCP Client"
 sidebarTitle: "MCP Client"
-description: "Connect external MCP servers to your Relevance AI agents, giving them access to tools from other services."
+description: "Connect external MCP servers to your Relevance AI agents, giving them access to tools and resources from other services."
 ---
 
-The MCP client integration lets you connect remote MCP servers to your Relevance AI agents — either through preset connections (Notion, Canva, Atlassian) or by manually connecting any custom server URL. This gives your agents access to tools hosted on external platforms without rebuilding them in Relevance AI.
+The MCP client integration lets you connect remote MCP servers to your Relevance AI agents — either through preset connections (Notion, Canva, Atlassian) or by manually connecting any custom server URL. This gives your agents access to tools and resources hosted on external platforms without rebuilding them in Relevance AI.
 
 <Warning>
   This page is about connecting external MCP servers **to** Relevance AI agents. If you want to use Relevance AI **from** an AI client like Claude or Cursor, see [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction).
 </Warning>
 
-## Setting up an MCP connection for Agents
+## Understanding MCP capabilities
 
-Agents can connect to and run tools from remote MCP servers. You can choose from preset connections for popular services or connect your own custom MCP server.
+MCP servers expose two types of capabilities: **tools** and **resources**. When you connect an MCP server to an agent, the agent automatically gets access to both.
+
+<CardGroup cols={2}>
+  <Card title="Tools" icon="wrench">
+    Active functions that perform actions — like creating a page, sending a message, or querying a database. The AI model decides when to call a tool based on the conversation.
+  </Card>
+  <Card title="Resources" icon="file-lines">
+    Passive data sources that provide read-only context — like documentation files, schemas, skill guides, or API references. The agent reads these when it needs background information.
+  </Card>
+</CardGroup>
+
+The key difference is control: tools are model-controlled (the AI decides when to invoke them), while resources are application-controlled (the agent determines when to read them for context).
+
+Examples of MCP resources include documentation files, knowledge base articles, database schemas, API reference guides, and skill guides that describe how to use a service.
+
+## Setting up an MCP connection for agents
+
+Agents can connect to and run tools and read resources from remote MCP servers. You can choose from preset connections for popular services or connect your own custom MCP server.
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
 <iframe src="https://app.supademo.com/embed/cmg8tiu3h23ii2nomxtqolybm" frameBorder="0" title="How to set up an MCP Server connection for an agent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
@@ -22,16 +39,34 @@ Agents can connect to and run tools from remote MCP servers. You can choose from
 2. Navigate to the **Tools** tab in the agent builder
 3. Click **Add MCP**
 4. Choose your connection type:
-   - **Preset connections**: Select from Notion, Canva, or Atlassian — follow the OAuth flow to authorize access and tools are configured automatically
+   - **Preset connections**: Select from Notion, Canva, or Atlassian — follow the OAuth flow to authorize access and tools and resources are configured automatically
    - **Custom connection**: Click **Connect my own**, add the server URL, label the connection, and enter any required authentication details
 
 <Note>
   The connection label you provide will appear in tool descriptions as `(MCP: connection-name)`. This helps agents distinguish between tools from different connections, especially when using multiple instances of the same MCP server.
 </Note>
 
-Once connected, the agent automatically fetches and displays available tools from the MCP server. These tools can be referenced in the agent's core instructions and appear in the conversation task view.
+Once connected, the agent automatically fetches and displays the available tools from the MCP server, and gains access to any resources the server exposes. Tools appear in the conversation task view and can be referenced in the agent's core instructions. Resources are read automatically when the agent needs contextual information.
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
+
+## Using MCP resources
+
+Resources are read-only data sources that MCP servers make available alongside their tools. When an agent is connected to an MCP server, it can read these resources to get contextual information relevant to the task at hand.
+
+Common examples of MCP resources include:
+
+- **Documentation files** — reference docs for a service or API
+- **Skill guides** — instructions that describe how to use a service effectively
+- **Knowledge base articles** — structured content an agent can draw on
+- **Database schemas** — structural information about data sources
+- **API references** — endpoint definitions and parameter descriptions
+
+Unlike tools, resources do not perform actions — they provide information. Agents read resources automatically when they contain context that helps complete a task, without requiring any explicit instruction to do so.
+
+<Note>
+  Resources are read-only. An agent can read a resource to understand documentation or schemas, but cannot modify the underlying content through the resource interface.
+</Note>
 
 ## Connecting multiple instances of the same MCP server
 
@@ -66,6 +101,13 @@ This is useful when you need different authentication contexts (e.g. separate us
     - Try disconnecting and reconnecting the MCP server in the agent builder
   </Accordion>
 
+  <Accordion title="Resources not available or returning errors">
+    - Confirm the MCP server exposes resources — not all servers provide them
+    - Check that authentication credentials have read access to the resources
+    - Try disconnecting and reconnecting the MCP server to refresh the connection
+    - Verify the MCP server is running a version that supports the resources capability
+  </Accordion>
+
   <Accordion title="Connection timeout or errors">
     - The external MCP server may be temporarily unavailable — try again later
     - Check that the server URL does not require VPN or network access that Relevance AI cannot reach
@@ -81,8 +123,16 @@ This is useful when you need different authentication contexts (e.g. separate us
     You can connect any remote MCP server that supports the Streamable HTTP transport. This includes servers from services like Linear, Notion, GitHub, and any custom MCP servers you host.
   </Accordion>
 
+  <Accordion title="What is the difference between MCP tools and MCP resources?">
+    Tools are active functions that perform actions, such as creating a record or sending a message. Resources are passive, read-only data sources, such as documentation files or schemas. When you connect an MCP server, your agent automatically gets access to both — tools for taking actions and resources for retrieving contextual information.
+  </Accordion>
+
+  <Accordion title="Can agents automatically read MCP resources?">
+    Yes. Once an MCP server is connected, agents can read any resources the server exposes without additional configuration. The agent determines when reading a resource is useful for completing the task at hand.
+  </Accordion>
+
   <Accordion title="Can I connect multiple MCP servers to one agent?">
-    Yes. You can add multiple MCP server connections to a single agent, giving it access to tools from several external services at once.
+    Yes. You can add multiple MCP server connections to a single agent, giving it access to tools and resources from several external services at once.
     
     You can also connect the same MCP server URL multiple times with different labels and credentials. This is useful for environment separation (staging vs production), different authentication contexts, or multi-tenant setups. See [connecting multiple instances](#connecting-multiple-instances-of-the-same-mcp-server) for details.
   </Accordion>
