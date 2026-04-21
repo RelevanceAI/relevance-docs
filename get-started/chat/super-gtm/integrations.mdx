@@ -1,14 +1,14 @@
 ---
 title: "Integrations"
-description: "Connect your GTM tools to Super GTM via OAuth, API key, or use built-in integrations that work automatically"
+description: "Connect your GTM tools to Super GTM via OAuth, API key, or built-in integrations"
 ---
 
 Super GTM connects to your go-to-market tech stack so the agent can read data and take actions across your tools. Integrations are managed from the Super GTM settings panel.
 
 ## Connecting integrations
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.25%" }}>
-<iframe src="https://app.supademo.com/embed/cmnzflj252zi91q1ey26wryd8" frameBorder="0" title="Connecting integrations" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmnzflj252zi91q1ey26wryd8" frameBorder="0" title="Connecting integrations" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 <Steps>
@@ -42,9 +42,6 @@ Super GTM connects to your go-to-market tech stack so the agent can read data an
     Enter API keys via the integrations settings page — accessible from the Super GTM settings panel (click the external link icon on the integration) or from your project's Integrations page directly.
 
     A project admin can configure API key integrations at the project level (e.g. a shared Gong API key for the whole team), so individual users don't need to connect personally — they inherit the project's credentials. Admins can manage these in the builders app under [Integrations & API Keys](/get-started/core-concepts/api-integration).
-  </Tab>
-  <Tab title="Built-in">
-    Some integrations work automatically with no credentials required — they're always available to the agent.
   </Tab>
 </Tabs>
 
@@ -88,108 +85,6 @@ Every integration action is classified as either a read or a write (create, upda
 Certain built-in agents (like Explorer) are hardcoded to read-only — they can query and search integrations but cannot write anything, regardless of your approval settings.
 </Info>
 
-## Supported integrations
-
-<CardGroup cols={3}>
-  <Card title="HubSpot" icon="chart-simple">
-    CRM read/write — OAuth
-  </Card>
-  <Card title="Salesforce" icon="cloud">
-    CRM read/write, SOQL queries — OAuth
-  </Card>
-  <Card title="Apollo" icon="rocket">
-    Contact enrichment, prospecting — API key
-  </Card>
-  <Card title="Gong" icon="microphone">
-    Call recordings and transcripts — API key
-  </Card>
-  <Card title="Salesloft" icon="bullhorn">
-    Sales engagement — API key
-  </Card>
-  <Card title="Slack" icon="hashtag">
-    Messages, channels, search — OAuth
-  </Card>
-  <Card title="Gmail" icon="envelope">
-    Read, send, draft emails — OAuth
-  </Card>
-  <Card title="Microsoft Outlook" icon="envelope-open">
-    Read, send, draft emails — OAuth
-  </Card>
-  <Card title="Microsoft Teams" icon="comments">
-    Chat, channels, meeting transcripts — OAuth
-  </Card>
-  <Card title="Google Calendar" icon="calendar">
-    Events and availability — OAuth
-  </Card>
-  <Card title="Microsoft Calendar" icon="calendar-days">
-    Events and shared calendars — OAuth
-  </Card>
-  <Card title="Google Docs" icon="file-lines">
-    Read and edit documents — OAuth
-  </Card>
-  <Card title="Google Drive" icon="hard-drive">
-    File storage read/write — OAuth
-  </Card>
-  <Card title="Google Sheets" icon="table">
-    Spreadsheet read/write — OAuth
-  </Card>
-  <Card title="Notion" icon="book">
-    Pages, databases, search — OAuth
-  </Card>
-  <Card title="Linear" icon="list-check">
-    Issues, projects, comments — OAuth or API key
-  </Card>
-  <Card title="Ashby" icon="user-tie">
-    Recruiting and ATS — API key
-  </Card>
-  <Card title="Avoma" icon="video">
-    Meeting intelligence — API key
-  </Card>
-  <Card title="Firmable" icon="building">
-    Company data enrichment — API key
-  </Card>
-  <Card title="ZoomInfo" icon="database">
-    Contact and company intelligence — API key (3 fields)
-  </Card>
-  <Card title="Cursor" icon="terminal">
-    Agent control and conversations — API key
-  </Card>
-</CardGroup>
-
-Built-in integrations that need no setup:
-
-<CardGroup cols={4}>
-  <Card title="Filesystem" icon="folder-open">
-    Project file storage
-  </Card>
-  <Card title="Python" icon="code">
-    Code execution
-  </Card>
-  <Card title="Skills" icon="wand-magic-sparkles">
-    Your custom workflows
-  </Card>
-  <Card title="Native Meetings" icon="phone">
-    Uses your connected calendar
-  </Card>
-</CardGroup>
-
-### Quick reference
-
-| OAuth | API key | Either | Built-in |
-| --- | --- | --- | --- |
-| HubSpot | Apollo | Linear | Filesystem |
-| Salesforce | Gong | | Python |
-| Gmail | Salesloft | | Skills |
-| Google Calendar | Ashby | | Native Meetings |
-| Google Docs | Avoma | | |
-| Google Drive | Cursor | | |
-| Google Sheets | Firmable | | |
-| Notion | ZoomInfo (3 fields) | | |
-| Slack | | | |
-| Microsoft Outlook | | | |
-| Microsoft Teams | | | |
-| Microsoft Calendar | | | |
-
 ### Setup details
 
 <AccordionGroup>
@@ -215,6 +110,8 @@ Built-in integrations that need no setup:
   <Accordion title="Salesforce">
     **Connection method:** OAuth
 
+    **Credentials:** OAuth. Before connecting, check **Sandbox account** if you're connecting a Salesforce sandbox (test/staging) environment — this routes login to test.salesforce.com instead of login.salesforce.com. Leave unchecked for production accounts.
+
     Connects Super GTM to your Salesforce org — full API access with read and write CRM data, SOQL queries, and actions across Salesforce objects.
 
     **How to connect:**
@@ -232,6 +129,8 @@ Built-in integrations that need no setup:
   <Accordion title="Apollo">
     **Connection method:** API key
 
+    **Credentials:** Single API key
+
     Gives Super GTM access to Apollo's sales intelligence database — search and enrich contact and company data, find contact information, pull prospect details.
 
     **How to connect:**
@@ -248,6 +147,8 @@ Built-in integrations that need no setup:
   <Accordion title="Gong">
     **Connection method:** API key
 
+    **Credentials:** Single API key
+
     Connects Super GTM to Gong call recordings and transcripts — pull call data, surface key moments, incorporate conversation intelligence into deal briefings.
 
     **How to connect:**
@@ -263,6 +164,8 @@ Built-in integrations that need no setup:
 
   <Accordion title="Salesloft">
     **Connection method:** API key
+
+    **Credentials:** Single API key
 
     Connects Super GTM to your Salesloft account for sales engagement workflows.
 
@@ -426,6 +329,8 @@ Built-in integrations that need no setup:
   <Accordion title="Linear">
     **Connection method:** OAuth or API key
 
+    **Credentials:** OAuth (no extra fields) or a single API key
+
     Linear is the only integration that supports both OAuth and API key. You can choose whichever you prefer — both methods work interchangeably. If either is configured, the integration shows as connected.
 
     Connects Super GTM to Linear — read, create, update, and archive issues, manage comments, read projects and labels.
@@ -446,6 +351,8 @@ Built-in integrations that need no setup:
   <Accordion title="Ashby">
     **Connection method:** API key
 
+    **Credentials:** Single API key
+
     Connects Super GTM to Ashby for recruiting and ATS workflows.
 
     **How to connect:**
@@ -457,6 +364,8 @@ Built-in integrations that need no setup:
 
   <Accordion title="Avoma">
     **Connection method:** API key
+
+    **Credentials:** Single API key
 
     Connects Super GTM to Avoma for meeting intelligence — access call recordings, transcripts, and meeting notes.
 
@@ -470,6 +379,8 @@ Built-in integrations that need no setup:
   <Accordion title="Firmable">
     **Connection method:** API key
 
+    **Credentials:** Single API key
+
     Connects Super GTM to Firmable for company data enrichment.
 
     **How to connect:**
@@ -481,6 +392,8 @@ Built-in integrations that need no setup:
 
   <Accordion title="ZoomInfo">
     **Connection method:** API key (3 fields)
+
+    **Credentials:** Three fields — Email, Client ID, and Private Key
 
     Connects Super GTM to ZoomInfo for contact and company intelligence. Unlike other API key integrations, ZoomInfo requires three separate credentials.
 
@@ -494,6 +407,8 @@ Built-in integrations that need no setup:
   <Accordion title="Cursor">
     **Connection method:** API key
 
+    **Credentials:** Single API key
+
     Connects Super GTM to Cursor — list, launch, and stop agents, view conversation history, send follow-up prompts.
 
     **How to connect:**
@@ -503,3 +418,29 @@ Built-in integrations that need no setup:
     4. Click **Add API key** and paste your Cursor API key
   </Accordion>
 </AccordionGroup>
+
+### Quick reference
+
+| Integration | Method | Credentials |
+| --- | --- | --- |
+| HubSpot | OAuth | — |
+| Salesforce | OAuth | Sandbox toggle |
+| Gmail | OAuth (GSuite) | — |
+| Google Calendar | OAuth (GSuite) | — |
+| Google Docs | OAuth (GSuite) | — |
+| Google Drive | OAuth (GSuite) | — |
+| Google Sheets | OAuth (GSuite) | — |
+| Notion | OAuth | — |
+| Slack | OAuth | — |
+| Microsoft Outlook | OAuth | — |
+| Microsoft Teams | OAuth | — |
+| Microsoft Calendar | OAuth | — |
+| Linear | OAuth or API key | OAuth (no extra fields) or single API key |
+| Apollo | API key | Single key |
+| Gong | API key | Single key |
+| Salesloft | API key | Single key |
+| Ashby | API key | Single key |
+| Avoma | API key | Single key |
+| Cursor | API key | Single key |
+| Firmable | API key | Single key |
+| ZoomInfo | API key | Email, Client ID, Private Key |
