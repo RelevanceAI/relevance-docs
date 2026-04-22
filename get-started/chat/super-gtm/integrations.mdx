@@ -103,7 +103,7 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
 
     **Things to know:**
     - Each user must authorize their own HubSpot connection
-    - If your HubSpot portal restricts API access, you may need your HubSpot admin to approve the integration
+    - If your HubSpot portal restricts app installations, a HubSpot admin needs to enable App Marketplace access for your user — see [Troubleshooting](#troubleshooting) below
     - The agent respects your HubSpot user permissions — it can only access records you have permission to see
   </Accordion>
 
@@ -485,6 +485,36 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
 
     <Note>
     If you don't see the Relevance AI app in Connected Apps OAuth Usage, initiate the connection from the Super GTM settings panel first — this registers the app in your Salesforce org.
+    </Note>
+  </Accordion>
+
+  <Accordion title="HubSpot app installation blocked by permissions">
+    If a user can't install the Relevance App from the HubSpot App Marketplace, they likely don't have the **App Marketplace access** permission enabled on their account. A HubSpot Super Admin (or any admin with permission to manage users) needs to grant this.
+
+    <Steps>
+      <Step title="Open HubSpot settings">
+        Log in to HubSpot and click the **Settings** gear icon in the top navigation bar.
+      </Step>
+      <Step title="Navigate to Users & Teams">
+        In the left sidebar, click **Users & Teams**. This shows a list of all users in your HubSpot account.
+      </Step>
+      <Step title="Select the user">
+        Find the user who needs access and click **Edit permissions**. This opens the permissions editor.
+      </Step>
+      <Step title="Enable App Marketplace access">
+        Scroll down to **Account / Settings Access** (or search for "App Marketplace") and toggle **App Marketplace access** to **ON**. You may also want to enable **App Marketplace uninstall access** if the user should be able to remove apps later.
+      </Step>
+      <Step title="Save changes">
+        Click **Save** to apply the new permissions. The user now has App Marketplace access and can install the Relevance App.
+      </Step>
+    </Steps>
+
+    To grant access to multiple users at once, select the checkboxes next to each user in the Users & Teams list (they must share the same seat type), click **Edit permissions** at the top, toggle on **App Marketplace access**, and save.
+
+    On HubSpot Enterprise, you can also add **App Marketplace access** to an existing Permission Set under **Settings** > **Users & Teams** > **Permission Sets** — all users assigned to that set will automatically receive the permission.
+
+    <Note>
+    If the permission changes don't take effect immediately, have the user open HubSpot in a private/incognito browser window. If it works there, they just need to clear their browser cache and cookies, then reload HubSpot.
     </Note>
   </Accordion>
 </AccordionGroup>
