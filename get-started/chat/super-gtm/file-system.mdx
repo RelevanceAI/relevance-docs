@@ -3,7 +3,7 @@ title: "File system"
 description: "Persistent storage for documents and reference material that the agent can access across all conversations"
 ---
 
-The file system is the agent's persistent storage. It holds shared documents, reference material, deliverables, and working files that the agent can read from or write to as instructed. It's completely separate from your integration connections (HubSpot, Gmail, Slack, etc.) — those are their own mounts.
+The file system is the agent's persistent storage. It holds shared documents, reference material, deliverables, and working files that the agent can read from or write to as instructed. It's completely separate from your integration connections (HubSpot, Gmail, Slack, etc.) — the agent works with those directly.
 
 Think of the file system as a shared drive for your project. Anything you want the agent (or your team) to have access to across conversations lives here.
 
@@ -19,7 +19,7 @@ You can view and manage your files in the **Files** tab. From here you can brows
 
 <Tabs>
   <Tab title="Project files">
-    Persistent storage shared across your project. This is where shared knowledge lives — deliverables, reference documents, ways of working, templates, and anything the team needs access to across conversations.
+    Persistent storage shared across your project. This is where shared knowledge lives — company context, reference documents, templates, and anything the team needs access to across conversations.
 
     To add something to project files, just ask the agent:
 
@@ -40,13 +40,15 @@ You can view and manage your files in the **Files** tab. From here you can brows
   <Tab title="Session files">
     Temporary workspace for the current conversation. The agent uses this for working files — exploration results, execution plans, and task lists. Session files don't persist after the conversation ends.
 
-    You generally don't need to interact with session files directly. The agent manages them as part of its workflow. To persist a file beyond the current session, ask the agent to save it to the project file system.
+    You generally don't need to interact with session files directly. The agent manages them as part of its workflow. Session files will also persist across sessions, discoverable in a folder matching the conversation id.
   </Tab>
 </Tabs>
 
 ## How skills use the file system
 
-[Skills](/get-started/chat/super-gtm/skills) can reference the file system in their instructions. When a skill runs, the agent fetches the relevant files at that moment — you can update a reference file once and all skills that use it pick up the new version automatically.
+Skills can optionally pull context from the file system. Each skill can have its own `/references` or `/assets` folder for skill-specific context, or reference shared project files when the same document is relevant across multiple skills.
+
+When a skill runs, the agent fetches the relevant files at that moment — you can update a reference file once and all skills that use it pick up the new version automatically.
 
 This is useful for storing things like:
 

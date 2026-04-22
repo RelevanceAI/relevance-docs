@@ -110,6 +110,8 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   <Accordion title="Salesforce">
     **Connection method:** OAuth
 
+    **Additional field:** **Sandbox account** checkbox — enable this if you're connecting a Salesforce sandbox (test/staging) environment. Routes login to test.salesforce.com instead of login.salesforce.com.
+
     Connects Super GTM to your Salesforce org — full API access with read and write CRM data, SOQL queries, and actions across Salesforce objects.
 
     **How to connect:**
@@ -378,7 +380,12 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   <Accordion title="ZoomInfo">
     **Connection method:** API key
 
-    Connects Super GTM to ZoomInfo for contact and company intelligence. Unlike other API key integrations, ZoomInfo requires three separate fields.
+    Connects Super GTM to ZoomInfo for contact and company intelligence. ZoomInfo is the only integration that requires three separate fields instead of a single API key.
+
+    **Required fields:**
+    - **ZoomInfo Email** — your ZoomInfo account email address
+    - **ZoomInfo Client ID** — your ZoomInfo API client ID
+    - **ZoomInfo Private Key** — your ZoomInfo private key (this is a multi-line key, pasted into a larger text area)
 
     **How to connect:**
     1. Log in to ZoomInfo and navigate to your account settings
