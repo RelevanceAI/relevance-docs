@@ -110,26 +110,23 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   <Accordion title="Salesforce">
     **Connection method:** OAuth
 
-    **Credentials:** OAuth. Before connecting, check **Sandbox account** if you're connecting a Salesforce sandbox (test/staging) environment — this routes login to test.salesforce.com instead of login.salesforce.com. Leave unchecked for production accounts.
-
     Connects Super GTM to your Salesforce org — full API access with read and write CRM data, SOQL queries, and actions across Salesforce objects.
 
     **How to connect:**
     1. In the Super GTM settings panel, find **Salesforce** under Integrations
-    2. Click **Connect account**
-    3. Sign in to Salesforce and authorize the connection
-    4. If your org requires admin approval for connected apps, request access from your Salesforce admin
+    2. If you're connecting a sandbox (test/staging) environment, check **Sandbox account** before proceeding — this routes login to test.salesforce.com instead of login.salesforce.com
+    3. Click **Connect account**
+    4. Sign in to Salesforce and authorize the connection
+    5. If your org requires admin approval for connected apps, request access from your Salesforce admin
 
     **Things to know:**
-    - Salesforce organizations often require admin approval for new OAuth apps — check with your Salesforce admin if the connection fails
+    - Salesforce organizations often require admin approval for new OAuth apps — see [Troubleshooting](#troubleshooting) below if the connection fails
     - The agent operates within your Salesforce user permissions and sharing rules
     - Custom objects and fields are accessible if they're visible to your user profile
   </Accordion>
 
   <Accordion title="Apollo">
     **Connection method:** API key
-
-    **Credentials:** Single API key
 
     Gives Super GTM access to Apollo's sales intelligence database — search and enrich contact and company data, find contact information, pull prospect details.
 
@@ -147,8 +144,6 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   <Accordion title="Gong">
     **Connection method:** API key
 
-    **Credentials:** Single API key
-
     Connects Super GTM to Gong call recordings and transcripts — pull call data, surface key moments, incorporate conversation intelligence into deal briefings.
 
     **How to connect:**
@@ -164,8 +159,6 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
 
   <Accordion title="Salesloft">
     **Connection method:** API key
-
-    **Credentials:** Single API key
 
     Connects Super GTM to your Salesloft account for sales engagement workflows.
 
@@ -329,8 +322,6 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   <Accordion title="Linear">
     **Connection method:** OAuth or API key
 
-    **Credentials:** OAuth (no extra fields) or a single API key
-
     Linear is the only integration that supports both OAuth and API key. You can choose whichever you prefer — both methods work interchangeably. If either is configured, the integration shows as connected.
 
     Connects Super GTM to Linear — read, create, update, and archive issues, manage comments, read projects and labels.
@@ -351,8 +342,6 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   <Accordion title="Ashby">
     **Connection method:** API key
 
-    **Credentials:** Single API key
-
     Connects Super GTM to Ashby for recruiting and ATS workflows.
 
     **How to connect:**
@@ -364,8 +353,6 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
 
   <Accordion title="Avoma">
     **Connection method:** API key
-
-    **Credentials:** Single API key
 
     Connects Super GTM to Avoma for meeting intelligence — access call recordings, transcripts, and meeting notes.
 
@@ -379,8 +366,6 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   <Accordion title="Firmable">
     **Connection method:** API key
 
-    **Credentials:** Single API key
-
     Connects Super GTM to Firmable for company data enrichment.
 
     **How to connect:**
@@ -391,11 +376,9 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   </Accordion>
 
   <Accordion title="ZoomInfo">
-    **Connection method:** API key (3 fields)
+    **Connection method:** API key
 
-    **Credentials:** Three fields — Email, Client ID, and Private Key
-
-    Connects Super GTM to ZoomInfo for contact and company intelligence. Unlike other API key integrations, ZoomInfo requires three separate credentials.
+    Connects Super GTM to ZoomInfo for contact and company intelligence. Unlike other API key integrations, ZoomInfo requires three separate fields.
 
     **How to connect:**
     1. Log in to ZoomInfo and navigate to your account settings
@@ -407,8 +390,6 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   <Accordion title="Cursor">
     **Connection method:** API key
 
-    **Credentials:** Single API key
-
     Connects Super GTM to Cursor — list, launch, and stop agents, view conversation history, send follow-up prompts.
 
     **How to connect:**
@@ -419,28 +400,92 @@ Certain built-in agents (like Explorer) are hardcoded to read-only — they can 
   </Accordion>
 </AccordionGroup>
 
-### Quick reference
+### Troubleshooting
 
-| Integration | Method | Credentials |
-| --- | --- | --- |
-| HubSpot | OAuth | — |
-| Salesforce | OAuth | Sandbox toggle |
-| Gmail | OAuth (GSuite) | — |
-| Google Calendar | OAuth (GSuite) | — |
-| Google Docs | OAuth (GSuite) | — |
-| Google Drive | OAuth (GSuite) | — |
-| Google Sheets | OAuth (GSuite) | — |
-| Notion | OAuth | — |
-| Slack | OAuth | — |
-| Microsoft Outlook | OAuth | — |
-| Microsoft Teams | OAuth | — |
-| Microsoft Calendar | OAuth | — |
-| Linear | OAuth or API key | OAuth (no extra fields) or single API key |
-| Apollo | API key | Single key |
-| Gong | API key | Single key |
-| Salesloft | API key | Single key |
-| Ashby | API key | Single key |
-| Avoma | API key | Single key |
-| Cursor | API key | Single key |
-| Firmable | API key | Single key |
-| ZoomInfo | API key | Email, Client ID, Private Key |
+<AccordionGroup>
+  <Accordion title="Salesforce OAuth error when connecting">
+    When connecting Salesforce to Relevance AI, you may encounter one of these OAuth errors:
+
+    <Frame>
+      <img src="/images/salesforce-oauth-error.png" alt="Salesforce OAuth Error page showing OAUTH_APPROVAL_ERROR_GENERIC" />
+    </Frame>
+
+    This error occurs when the Relevance AI connected app in Salesforce needs to be configured to allow admin-approved users.
+
+    <Frame>
+      <img src="/images/oauth-connection-failed-salesforce.png" alt="Relevance AI OAuth Connection Failed page showing OAUTH_APP_ACCESS_DENIED error" />
+    </Frame>
+
+    A Salesforce administrator must complete these steps:
+
+    <Steps>
+      <Step title="Navigate to Setup">
+        In Salesforce, click the gear icon in the top right and select **Setup**.
+
+        <Frame>
+          <img src="/images/salesforce-solution1.png" alt="Salesforce Setup menu accessed from the gear icon" />
+        </Frame>
+      </Step>
+      <Step title="Open Connected Apps OAuth Usage">
+        Search for and open **Connected Apps OAuth Usage**.
+
+        <Frame>
+          <img src="/images/salesforce-solution2.png" alt="Connected Apps OAuth Usage page in Salesforce Setup" />
+        </Frame>
+      </Step>
+      <Step title="Install the Relevance AI app if needed">
+        If the **Relevance AI** app is not already installed, click **Install**. This redirects to the app settings page — skip to step 5.
+
+        <Frame>
+          <img src="/images/salesforce-solution3.png" alt="Block and Install buttons for connected apps" />
+        </Frame>
+      </Step>
+      <Step title="Go to Manage Connected Apps">
+        Navigate to **Manage Connected Apps** and click **Relevance AI**.
+
+        <Frame>
+          <img src="/images/salesforce-solution4.png" alt="Manage Connected Apps page listing Relevance AI" />
+        </Frame>
+
+        This opens the Connected App Detail page for Relevance AI.
+
+        <Frame>
+          <img src="/images/salesforce-solution5.png" alt="Relevance AI Connected App Detail page" />
+        </Frame>
+      </Step>
+      <Step title="Click Edit Policies">
+        Click the **Edit Policies** button on the Connected App Detail page.
+
+        <Frame>
+          <img src="/images/salesforce-solution6.png" alt="Edit Policies button on the Connected App Detail page" />
+        </Frame>
+      </Step>
+      <Step title="Configure permitted users">
+        Under **OAuth Policies**, set the **Permitted Users** dropdown to one of:
+
+        **All users may self-authorize** — any Salesforce user can connect to Relevance AI.
+
+        <Frame>
+          <img src="/images/salesforce-solution7.png" alt="Permitted Users dropdown showing All users may self-authorize and Admin approved users are pre-authorized" />
+        </Frame>
+
+        **Admin approved users are pre-authorized** — only users with specific profiles or permission sets can connect. If you choose this option, scroll down to the **Profiles** and **Permission Sets** sections to assign access.
+
+        <Frame>
+          <img src="/images/salesforce-solution8.png" alt="Profiles and Permission Sets sections on the Connected App page" />
+        </Frame>
+
+        Use **Manage Profiles** or **Manage Permission Sets** to select which users can connect.
+
+        <Frame>
+          <img src="/images/salesforce-solution9.png" alt="Application Profile Assignment page for selecting authorized profiles" />
+        </Frame>
+      </Step>
+    </Steps>
+
+    <Note>
+    If you don't see the Relevance AI app in Connected Apps OAuth Usage, initiate the connection from the Super GTM settings panel first — this registers the app in your Salesforce org.
+    </Note>
+  </Accordion>
+</AccordionGroup>
+
