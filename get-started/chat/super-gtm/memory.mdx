@@ -5,7 +5,7 @@ description: "How the agent remembers your preferences, corrections, and context
 
 Memory is how the agent learns about you across conversations. It stores your preferences, corrections, project context, and references so the agent gets better over time — without you having to repeat yourself.
 
-User memory is loaded at the start of every conversation. The agent always has your context before it starts working.
+The agent checks your memory at the start of every conversation, so it always has your context before it starts working.
 
 ## Where to find memory
 
@@ -21,7 +21,7 @@ Memory is scoped per user. Your memory is not shared with other users in your pr
 
 ## How it works
 
-The agent maintains a memory entry for each thing it learns about you. At the start of each conversation, a lightweight model scans your memories and picks the ones relevant to what you're asking about. Those are loaded into the agent's context alongside your message.
+The agent maintains a memory entry for each thing it learns about you. At the start of each conversation, the agent reads a memory index and opens the individual entries relevant to your request. Those are loaded into the agent's context alongside your message.
 
 The agent doesn't load everything every time — it loads what's relevant. The more clearly your memories are described, the better the selection works.
 
