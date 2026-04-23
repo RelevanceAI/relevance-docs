@@ -133,13 +133,16 @@ This is useful for any skill that benefits from regular execution:
 
 To set up a schedule, go to the **Schedules** section in the **Overview** tab. Choose the skill, set the cadence, and the agent runs it automatically. See [scheduled tasks](/get-started/chat/super-gtm/scheduled-tasks) for full details.
 
-## Tips for writing good skills
+## Tips for writing and managing skills
 
-The agent already knows how to create, refine, and consolidate skills through its built-in Skill Creator. These tips are for when you want to fine-tune a skill's behavior yourself.
+The agent already knows how to create, refine, and consolidate skills through its built-in Skill Creator. These tips help you get more out of your skills.
 
 <AccordionGroup>
+  <Accordion title="Scope each skill to one workflow">
+    Each skill should handle one specific workflow — "post-meeting follow-up" or "weekly pipeline review," not "handle all my sales tasks." If you find yourself writing a skill that covers multiple unrelated workflows, split it into separate skills. You can always consolidate later once you've confirmed each piece works well on its own.
+  </Accordion>
   <Accordion title="Describe when it should activate">
-    Include the kinds of things you'd say when you need this workflow. The agent uses this to match your requests to the right skill.
+    Include the kinds of things you'd say when you need this workflow. The agent uses these to match your requests to the right skill. Narrowly focused skills with clear descriptions produce more accurate matches.
   </Accordion>
   <Accordion title="Be specific about where to look">
     Specify which integrations to use — "check HubSpot for the deal" is better than "check the CRM."
@@ -152,5 +155,11 @@ The agent already knows how to create, refine, and consolidate skills through it
   </Accordion>
   <Accordion title="Don't over-specify">
     Define a clear process, but let the agent adapt to the data it finds. Specific steps are good; hard-coded values are not.
+  </Accordion>
+  <Accordion title="Start with a user skill, then promote to project">
+    Use project skills for workflows the whole team runs the same way — post-meeting follow-ups, pipeline reviews, or weekly reporting. Use user skills for workflows tailored to your personal style or role. Start as a user skill and iterate through a few real scenarios until the results are consistent, then ask an admin to recreate it as a project skill. Each person's agent applies their own [memory](/get-started/chat/super-gtm/memory) when running a shared project skill, so the same skill adapts to individual preferences without needing separate versions.
+  </Accordion>
+  <Accordion title="Keep your catalog lean">
+    Fewer well-defined skills outperform a large collection of vague ones. The agent sees all available skills at the start of every conversation, and when too many overlap or have ambiguous descriptions, matching accuracy drops. Periodically review your skills in the **Skills** tab — consolidate overlapping skills (ask the agent: "consolidate my meeting follow-up skills into one") and remove any that haven't been triggered in several weeks. If your team uses project skills, treat the shared catalog as a curated set of your highest-value workflows.
   </Accordion>
 </AccordionGroup>
