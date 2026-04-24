@@ -1,0 +1,115 @@
+---
+title: "Agents"
+sidebarTitle: "Agents"
+description: "Load agents, read their metadata, send messages, and list tasks."
+---
+
+The `Agent` class represents a single agent on the Relevance AI platform. Use it to start conversations, fetch existing tasks, and read configuration set in the dashboard.
+
+## Load a single agent
+
+Fetch an agent by its ID. The agent ID is visible on the agent's page in the dashboard.
+
+```typescript
+import { Agent } from "@relevanceai/sdk";
+
+const agent = await Agent.get("<agent-id>");
+```
+
+To use a specific client instead of the default singleton:
+
+```typescript
+const agent = await Agent.get("<agent-id>", client);
+```
+
+## List all agents
+
+Fetch a paginated list of every agent in the project:
+
+```typescript
+const agents = await Agent.getAll();
+```
+
+Pagination is controlled with `pageSize` and `page`:
+
+```typescript
+const agents = await Agent.getAll({
+  pageSize: 50,
+  page: 2,
+});
+```
+
+The defaults are `pageSize: 20` and `page: 1`.
+
+## Read agent metadata
+
+Once loaded, an agent exposes a number of fields:
+
+```typescript
+const agent = await Agent.get("<agent-id>");
+
+console.log(agent.name);        // display name
+console.log(agent.description); // agent description
+console.log(agent.avatar);      // avatar emoji or URL
+console.log(agent.id);          // unique identifier
+console.log(agent.region);      // deployment region
+console.log(agent.project);     // project identifier
+console.log(agent.createdAt);   // Date object
+console.log(agent.updatedAt);   // Date object
+```
+
+`name`, `description`, and `avatar` may be `undefined` if they haven't been configured in the dashboard.
+
+## Start a conversation
+
+Send a message with `sendMessage`. This creates a new task (the conversation thread) and returns it immediately. The method doesn't wait for the agent to respond.
+
+```typescript
+const task = await agent.sendMessage("What can you help me with?");
+```
+
+To continue an existing conversation, pass the task back:
+
+```typescript
+await agent.sendMessage("Tell me more about that", task);
+```
+
+File attachments can be included as well:
+
+```typescript
+const file = new File([bytes], "report.pdf", {
+  type: "application/pdf",
+});
+
+const task = await agent.sendMessage("Summarize this report", [file]);
+```
+
+For a full walkthrough of message types, attachments, and response handling, see [Messaging](/sdk/messaging).
+
+## Retrieve tasks
+
+### A single task
+
+Fetch a specific task by ID:
+
+```typescript
+const task = await agent.getTask("<task-id>");
+```
+
+### A list of tasks
+
+Fetch a paginated, sortable, and filterable list of tasks for the agent:
+
+```typescript
+const tasks = await agent.getTasks({
+  pageSize: 10,
+  page: 1,
+  sort: { updatedAt: "desc" },
+  filter: { status: ["running", "queued"] },
+  search: "quarterly report",
+});
+```
+
+All options are optional. The defaults are `pageSize: 100`, `page: 1`, and `sort: { createdAt: "asc" }`.
+
+Filtering by status accepts an array of simplified task statuses. For the full lifecycle and status values, see [Tasks](/sdk/tasks).

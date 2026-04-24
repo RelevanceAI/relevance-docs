@@ -1,0 +1,77 @@
+---
+title: "Quickstart"
+sidebarTitle: "Quickstart"
+description: "Install the SDK, authenticate, and send your first message in under a minute."
+---
+
+Get from zero to a live agent conversation in five steps. This quickstart uses Node.js — for other runtimes, see [Installation](/sdk/installation).
+
+<Steps>
+  <Step title="Install the SDK">
+    ```bash
+    npm install @relevanceai/sdk
+    ```
+
+    Yarn, pnpm, Bun, and Deno are all supported. See [Installation](/sdk/installation) for the full matrix.
+  </Step>
+
+  <Step title="Grab your credentials">
+    From the Relevance AI dashboard, go to **Integrations & API Keys** and generate a Relevance API key. You'll also need your project ID and the region your project is deployed in.
+
+    For a walkthrough, see [API integration](/get-started/core-concepts/api-integration).
+  </Step>
+
+  <Step title="Create a client">
+    ```typescript
+    import { createClient, REGION_US } from "@relevanceai/sdk";
+
+    createClient({
+      apiKey: process.env.RELEVANCE_API_KEY,
+      region: REGION_US,
+      project: process.env.RELEVANCE_PROJECT_ID,
+    });
+    ```
+
+    `createClient` stores the client as the default singleton, so you don't need to pass it around. Replace `REGION_US` with `REGION_EU` or `REGION_AU` to match your project.
+  </Step>
+
+  <Step title="Load an agent and send a message">
+    ```typescript
+    import { Agent } from "@relevanceai/sdk";
+
+    const agent = await Agent.get("<agent-id>");
+    const task = await agent.sendMessage("What can you help me with?");
+    ```
+
+    `sendMessage` returns a `Task` immediately — it doesn't wait for the agent to respond. The agent ID is visible on the agent's page in the dashboard.
+  </Step>
+
+  <Step title="Listen for the response">
+    ```typescript
+    task.addEventListener("message", ({ detail: { message } }) => {
+      if (message.isAgent()) {
+        console.log("Agent:", message.text);
+      }
+    });
+    ```
+
+    Messages arrive through the `"message"` event on the task. Use the type guards (`isAgent`, `isTool`, `isTyping`, and so on) to handle each kind. When the conversation is done, call `task.unsubscribe()` to release the connection.
+  </Step>
+</Steps>
+
+## What to read next
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/sdk/authentication">
+    Use embed keys for browser apps, or API keys for server code.
+  </Card>
+  <Card title="Tasks" icon="list-check" href="/sdk/tasks">
+    Understand task status, events, and cleanup.
+  </Card>
+  <Card title="Messaging" icon="messages" href="/sdk/messaging">
+    Handle tool calls, user messages, attachments, and errors.
+  </Card>
+  <Card title="Streaming" icon="wave-sine" href="/sdk/streaming">
+    Render responses as the agent types them.
+  </Card>
+</CardGroup>

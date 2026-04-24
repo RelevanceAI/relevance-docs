@@ -1,0 +1,104 @@
+---
+title: "Streaming"
+sidebarTitle: "Streaming"
+description: "Render thinking and typing tokens in real time as the agent produces them."
+---
+
+Streaming delivers incremental thinking and typing tokens as the agent processes — letting your application render live feedback before the final response is complete.
+
+## What streaming provides
+
+As an agent works through a request, it produces two kinds of incremental output:
+
+<CardGroup cols={2}>
+  <Card title="Thinking tokens" icon="brain">
+    The agent's intermediate reasoning and planning. Useful for progress indicators or debug views.
+  </Card>
+  <Card title="Typing tokens" icon="keyboard">
+    The agent's response text as it's being generated. Enables character-by-character or chunk-by-chunk rendering.
+  </Card>
+</CardGroup>
+
+Both arrive through the standard `"message"` event on a task, alongside the final polled messages.
+
+## Streaming is automatic
+
+The SDK enables and manages streaming for you. There's no configuration step. When a task is subscribed to (via `addEventListener`), the SDK opens a streaming connection if one is available. Token refresh, reconnection, and cleanup are handled internally.
+
+Streaming works across every supported runtime: browsers, Node.js, Deno, Bun, and Cloudflare Workers.
+
+## Listen for streaming events
+
+Streaming messages arrive through the same `"message"` event used for every other message type. Identify them with the `isThinking` and `isTyping` type guards:
+
+```typescript
+task.addEventListener("message", ({ detail }) => {
+  const { message } = detail;
+
+  if (message.isThinking()) {
+    console.log("[thinking]", message.text);
+  }
+
+  if (message.isTyping()) {
+    process.stdout.write(message.text);
+  }
+});
+```
+
+Both `ThinkingMessage` and `TypingMessage` expose a `text` property with the incremental content.
+
+## Build a live typing indicator
+
+A common pattern is rendering the agent's response in real time as it's generated. Accumulate typing tokens into a buffer and render them as they arrive:
+
+```typescript
+let buffer = "";
+
+task.addEventListener("message", ({ detail }) => {
+  const { message } = detail;
+
+  if (message.isTyping()) {
+    buffer += message.text;
+    renderPartialResponse(buffer);
+  }
+
+  if (message.isAgent()) {
+    // Final response arrived; replace the buffer
+    buffer = "";
+    renderFinalResponse(message.text);
+  }
+});
+```
+
+The typing tokens represent the same content that will eventually appear in the final `AgentMessage`. Once the final message arrives, replace the accumulated buffer with the complete response.
+
+## Thinking vs. typing
+
+Thinking and typing are different phases of the agent's processing.
+
+- **Thinking** happens while the agent reasons about what to do next, which tools to call, or how to structure its response. You might show this as a "thinking..." indicator, display it in a debug panel, or ignore it entirely.
+- **Typing** happens as the agent generates its actual response text. This is the content that ends up in the final agent message.
+
+```typescript
+task.addEventListener("message", ({ detail }) => {
+  const { message } = detail;
+
+  if (message.isThinking()) {
+    showThinkingIndicator(message.text);
+  }
+
+  if (message.isTyping()) {
+    appendToResponse(message.text);
+  }
+});
+```
+
+## Streaming lifecycle
+
+Streaming follows the same lifecycle as task subscriptions:
+
+- **Start** — when the first event listener is added to a task, the SDK subscribes and opens a streaming connection if available.
+- **Active** — thinking and typing tokens arrive through the `"message"` event as the agent processes. Connection health and token refresh are managed transparently.
+- **End** — when `task.unsubscribe()` is called, the streaming connection is closed along with the polling loop.
+
+There's no separate subscription or connect step for streaming. It's part of the standard task subscription and follows the same cleanup rules described in [Tasks](/sdk/tasks).
