@@ -1,0 +1,219 @@
+---
+title: "UserChatSettings"
+sidebarTitle: "UserChatSettings"
+description: "Control which mounts and agent skills are active in a chat session using the Node.js SDK."
+---
+
+`UserChatSettings` is a TypeScript type in the Relevance AI Node.js SDK that lets you configure the chat interface when starting or managing an agent conversation programmatically. It controls which **mounts** (built-in capabilities like file upload or code execution) and **agent skills** (other agents callable from within the conversation) are enabled or disabled.
+
+## Concepts
+
+**Mounts** are named capabilities that can be attached to a chat session. Each mount maps to a feature the agent can use during a conversation — for example, accessing files, running code, or calling external services. Disabling a mount prevents the agent from using that capability in a given session.
+
+**Agent skills** are agents that have been configured as callable skills from within another agent's conversation. Each skill is identified by its agent ID. You can control whether a given skill is available to the agent in a specific session.
+
+## API structure
+
+`UserChatSettings` takes an object where keys are mount names or agent IDs. Each value is an object with a single boolean field.
+
+```typescript
+type UserChatSettings = {
+  // Mount configuration: mountName -> { is_enabled: boolean }
+  [mountName: string]: { is_enabled: boolean };
+} | {
+  // Agent skill configuration: agentId -> { is_skill: boolean }
+  [agentId: string]: { is_skill: boolean };
+}
+```
+
+### Mount format
+
+```typescript
+{
+  [mountName: string]: {
+    is_enabled: boolean; // true = mount is active, false = mount is disabled
+  }
+}
+```
+
+### Agent skill format
+
+```typescript
+{
+  [agentId: string]: {
+    is_skill: boolean; // true = agent is available as a skill, false = agent is not available
+  }
+}
+```
+
+## Usage examples
+
+### Enable and disable mounts
+
+```typescript
+import { RelevanceAI } from "@relevanceai/chain";
+
+const client = new RelevanceAI({
+  apiKey: process.env.RELEVANCE_API_KEY,
+  projectId: process.env.RELEVANCE_PROJECT_ID,
+  region: process.env.RELEVANCE_REGION,
+});
+
+// Enable a specific mount, disable another
+const chatSettings = {
+  file_upload: { is_enabled: true },
+  code_execution: { is_enabled: false },
+};
+
+await client.agents.trigger({
+  agentId: "your-agent-id",
+  message: { role: "user", content: "Hello" },
+  userChatSettings: chatSettings,
+});
+```
+
+### Control agent skills
+
+```typescript
+import { RelevanceAI } from "@relevanceai/chain";
+
+const client = new RelevanceAI({
+  apiKey: process.env.RELEVANCE_API_KEY,
+  projectId: process.env.RELEVANCE_PROJECT_ID,
+  region: process.env.RELEVANCE_REGION,
+});
+
+// Make a specific agent available as a skill, disable another
+const chatSettings = {
+  "agent-id-for-research": { is_skill: true },
+  "agent-id-for-outreach": { is_skill: false },
+};
+
+await client.agents.trigger({
+  agentId: "your-agent-id",
+  message: { role: "user", content: "Start the research workflow" },
+  userChatSettings: chatSettings,
+});
+```
+
+### Combine mounts and agent skills
+
+```typescript
+const chatSettings = {
+  // Mounts
+  file_upload: { is_enabled: true },
+  web_search: { is_enabled: true },
+  code_execution: { is_enabled: false },
+
+  // Agent skills
+  "a1b2c3d4-research-agent": { is_skill: true },
+  "e5f6g7h8-outreach-agent": { is_skill: false },
+};
+```
+
+## Deprecated format
+
+<Warning>
+The following format is deprecated. It still works but will be removed in a future release. Migrate to the new format above.
+</Warning>
+
+The old format used two separate list fields:
+
+```typescript
+// Deprecated — do not use in new code
+{
+  disabled_mounts: string[];  // list of mount names to disable
+  disabled_skills: string[];  // list of agent IDs to disable
+}
+```
+
+**Why the new format is preferred:** The object format makes each entry's intent explicit — you can see at a glance whether a mount is enabled or disabled without inferring from inclusion in a list. It also removes the ambiguity around what the default state is when a mount or skill is not listed.
+
+### Migrating from the old format
+
+<AccordionGroup>
+  <Accordion title="Migrate disabled_mounts to the new format">
+    Old code using `disabled_mounts`:
+
+    ```typescript
+    // Old format (deprecated)
+    const chatSettings = {
+      disabled_mounts: ["code_execution", "file_upload"],
+    };
+    ```
+
+    Equivalent new format:
+
+    ```typescript
+    // New format
+    const chatSettings = {
+      code_execution: { is_enabled: false },
+      file_upload: { is_enabled: false },
+    };
+    ```
+
+    Mounts not listed in the new format retain their default state. If you previously relied on the absence from `disabled_mounts` to mean "enabled", explicitly set `is_enabled: true` for those entries to be unambiguous.
+  </Accordion>
+
+  <Accordion title="Migrate disabled_skills to the new format">
+    Old code using `disabled_skills`:
+
+    ```typescript
+    // Old format (deprecated)
+    const chatSettings = {
+      disabled_skills: ["a1b2c3d4-research-agent"],
+    };
+    ```
+
+    Equivalent new format:
+
+    ```typescript
+    // New format
+    const chatSettings = {
+      "a1b2c3d4-research-agent": { is_skill: false },
+    };
+    ```
+  </Accordion>
+
+  <Accordion title="Migrate a combined old-format config">
+    Old code with both fields:
+
+    ```typescript
+    // Old format (deprecated)
+    const chatSettings = {
+      disabled_mounts: ["code_execution"],
+      disabled_skills: ["a1b2c3d4-research-agent", "e5f6g7h8-outreach-agent"],
+    };
+    ```
+
+    Equivalent new format:
+
+    ```typescript
+    // New format
+    const chatSettings = {
+      code_execution: { is_enabled: false },
+      "a1b2c3d4-research-agent": { is_skill: false },
+      "e5f6g7h8-outreach-agent": { is_skill: false },
+    };
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card
+    title="SDK & API triggers"
+    icon="bolt"
+    href="/build/agents/build-your-agent/agent-triggers/sdk-and-api-triggers"
+  >
+    Trigger agents programmatically using the SDK or HTTP API
+  </Card>
+  <Card
+    title="Conversation API"
+    icon="comments"
+    href="/build/agents/extend-your-agent/conversation"
+  >
+    Create and continue conversations with agents via the API
+  </Card>
+</CardGroup>
