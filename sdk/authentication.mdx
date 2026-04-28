@@ -101,8 +101,9 @@ Each embed key is bound to exactly one agent or one workforce. To interact with 
 
 ## Persisting embed keys
 
-Generating an embed key involves a network request. To avoid regenerating on every page load, persist the key with `toJSON` and restore it with the `Key` constructor.
+Generating an embed key involves a network request and, importantly, initializes a specific user session. You should persist keys to avoid unnecessary latency and to ensure session continuity; **regenerating a new key on every page load will prevent the user from restoring their past conversations.**
 
+To maintain the session, persist the key with `toJSON()` and restore it using the `Key` constructor.
 ### Save to localStorage
 
 ```typescript
@@ -136,5 +137,5 @@ Never embed API keys in client-side code, browser-accessible environment variabl
 </Warning>
 
 - Embed keys are the only safe authentication method for browser environments. They're scoped to a single agent or workforce and can't access other project resources.
-- If an embed key is compromised, generate a new one. The old key keeps working until it's explicitly revoked from the dashboard.
+- Immediately revoke any compromised API keys before regenerating. Existing keys do not auto-expire and must be manually decommissioned via the dashboard to terminate access.
 - Store embed keys in `localStorage`, a secure cookie, or an equivalent client-side persistence mechanism. Regenerate them if the storage is cleared.
