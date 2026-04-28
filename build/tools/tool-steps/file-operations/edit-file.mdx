@@ -1,0 +1,183 @@
+---
+title: "Edit file"
+description: "Replace a specific string within a file without rewriting the whole file."
+---
+
+The Edit file tool step performs a targeted string replacement inside a file. Instead of reading the entire file, generating new content, and writing it back, an agent can make a precise change to exactly the text that needs updating.
+
+## Add the Edit file tool step to your tool
+
+1. Open your tool and click **+ Add step**.
+2. Search for **Edit file** and select it.
+3. Enter the **File path** — the path to the file you want to edit within the filesystem mount.
+4. Enter the **Target** string — the exact text you want to replace.
+5. Enter the **Replacement** string — the text to insert in place of the target.
+6. Optionally, enable **Replace all** if the target string appears multiple times and you want every occurrence replaced.
+7. Click **Run step** to test the edit.
+
+## Parameters
+
+<ParamField path="file_path" type="string" required>
+  The path to the file to edit, relative to the filesystem mount root. For example: `reports/summary.txt` or `data/config.json`.
+</ParamField>
+
+<ParamField path="target" type="string" required>
+  The exact string to find in the file. The edit fails if this string is not found, or if it appears more than once and `replace_all` is not set to `true`.
+</ParamField>
+
+<ParamField path="replacement" type="string" required>
+  The string to insert in place of `target`. Use an empty string to delete the target text without inserting anything.
+</ParamField>
+
+<ParamField path="replace_all" type="boolean">
+  When `true`, every occurrence of `target` in the file is replaced. When `false` or omitted, the step fails if `target` appears more than once — this protects against unintended edits when the target string is not unique.
+</ParamField>
+
+## Safety behavior
+
+Edit file is designed to fail explicitly rather than silently make a wrong change:
+
+- **Target not found** — the step returns an error and the file is left unchanged.
+- **Multiple matches, `replace_all` not set** — the step returns an error describing the ambiguity and the file is left unchanged.
+- **Multiple matches, `replace_all: true`** — all occurrences are replaced.
+
+This means an agent can check the step output for errors and decide how to proceed, rather than discovering a corrupted file later.
+
+## Examples
+
+<AccordionGroup>
+  <Accordion title="Replacing a status value in a text file">
+    A file `jobs/status.txt` contains:
+
+    ```
+    Job ID: 1042
+    Status: pending
+    Assigned to: Alice
+    ```
+
+    To update the status:
+
+    | Parameter | Value |
+    |---|---|
+    | `file_path` | `jobs/status.txt` |
+    | `target` | `Status: pending` |
+    | `replacement` | `Status: complete` |
+
+    Result:
+
+    ```
+    Job ID: 1042
+    Status: complete
+    Assigned to: Alice
+    ```
+  </Accordion>
+
+  <Accordion title="Updating a value in a JSON config file">
+    A file `config/settings.json` contains:
+
+    ```json
+    {
+      "environment": "staging",
+      "debug": false,
+      "max_retries": 3
+    }
+    ```
+
+    To promote the environment to production:
+
+    | Parameter | Value |
+    |---|---|
+    | `file_path` | `config/settings.json` |
+    | `target` | `"environment": "staging"` |
+    | `replacement` | `"environment": "production"` |
+
+    Result:
+
+    ```json
+    {
+      "environment": "production",
+      "debug": false,
+      "max_retries": 3
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Replacing all occurrences of a string">
+    A report file `output/report.txt` contains multiple references to a former project name:
+
+    ```
+    Project Phoenix update: Phase 1 complete.
+    Phoenix milestones are on track.
+    Next review for Phoenix is Friday.
+    ```
+
+    To rename the project throughout the file:
+
+    | Parameter | Value |
+    |---|---|
+    | `file_path` | `output/report.txt` |
+    | `target` | `Phoenix` |
+    | `replacement` | `Aurora` |
+    | `replace_all` | `true` |
+
+    Result:
+
+    ```
+    Project Aurora update: Phase 1 complete.
+    Aurora milestones are on track.
+    Next review for Aurora is Friday.
+    ```
+  </Accordion>
+
+  <Accordion title="Error: target string not found">
+    If the target string does not exist in the file, the step returns an error similar to:
+
+    ```
+    Error: Target string not found in file "jobs/status.txt".
+    The file has not been modified.
+    ```
+
+    The file is left unchanged. In your tool, you can route on this error to retry with a corrected target or surface the issue to the agent.
+  </Accordion>
+
+  <Accordion title="Error: ambiguous match">
+    If `target` appears more than once and `replace_all` is not enabled, the step returns an error:
+
+    ```
+    Error: Target string appears 3 times in "output/report.txt".
+    Set replace_all to true to replace all occurrences, or use a more specific target string.
+    ```
+
+    The file is left unchanged.
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+**Make target strings specific.** The more context you include in the target, the less likely it is to match unintended text. For example, prefer `"status": "pending"` over just `pending` when editing a JSON file.
+
+**Include surrounding context.** If the value you want to change is short or generic (like a number or a common word), include the surrounding line or key-value pair as the target to ensure uniqueness.
+
+**Use `replace_all` deliberately.** Only enable `replace_all` when you intentionally want every occurrence changed. For most targeted edits, leaving it off lets the safety check catch accidental ambiguity.
+
+**Prefer Edit file over Write file for partial updates.** Reading a large file, modifying it in an LLM prompt, and writing it back risks introducing unintended changes to untouched sections. Edit file touches only the specified text.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens if the file does not exist?">
+    The step returns an error and does not create the file. Use the Write file step to create a new file, then use Edit file for subsequent modifications.
+  </Accordion>
+  <Accordion title="Can I use Edit file to delete a line?">
+    Yes. Set `replacement` to an empty string to remove the target text. To remove a full line including its newline character, include the newline in the `target` string.
+  </Accordion>
+  <Accordion title="Does Edit file support regex patterns?">
+    No. The `target` is matched as a literal string. For pattern-based replacements, use the Python code tool step with a script that performs regex substitution.
+  </Accordion>
+  <Accordion title="Can Edit file handle binary files?">
+    No. Edit file works on text files only. Attempting to edit a binary file will return an error.
+  </Accordion>
+  <Accordion title="Is the match case-sensitive?">
+    Yes. The `target` string is matched exactly as entered, including capitalization.
+  </Accordion>
+</AccordionGroup>
