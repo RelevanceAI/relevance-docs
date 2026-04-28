@@ -92,6 +92,25 @@ This balanced approach gives your agent the flexibility to determine when approv
 
 **Best for:** A mix of tool types where you want to balance convenience with appropriate caution.
 
+## Skills vs. Tools
+
+Tools and Skills both extend what your agent can do, but they serve different purposes.
+
+**Tools** are actions — discrete integrations that let your agent interact with external systems. Sending an email, querying a database, and searching the web are all tool operations.
+
+**Skills** are behavioral patterns and knowledge sets stored as files. They shape how the agent thinks, communicates, and approaches problems — without performing any external actions themselves.
+
+| | Tools | Skills |
+|---|---|---|
+| **Purpose** | Do things in the world | Shape how the agent thinks and responds |
+| **Examples** | Send email, search web, query database | Communication style, domain expertise, methodology |
+| **Configured in** | Tools section of Agent Builder | Files section (`/skills/` directories) |
+| **Activated by** | Adding to the agent's tool list | File read commands in the agent prompt |
+
+Use Tools when your agent needs to take an action. Use Skills when you want to encode reusable knowledge or behaviors across multiple agents.
+
+For a full guide on creating and managing Skills, see the [Agent Skills page](/build/agents/build-your-agent/agent-skills).
+
 ## Tool Settings
 
 ### Failure policy

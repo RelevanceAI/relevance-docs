@@ -162,9 +162,22 @@ Type **/** to open the Slash menu and quickly insert shortcuts like:
 
 - Referencing available Tools
 - Adding Tool Placeholders
+- Referencing and activating Agent Skills
 - Adding Markdown Styles for your Prompt
 
 This speeds up writing structured and action-driven prompts.
+
+#### Activating skills from the slash menu
+
+You can reference a skill file directly from the slash menu while writing your prompt. Select a skill from the menu to insert a file read instruction — for example:
+
+```
+Read /skills/project/meetings and apply the meeting facilitation guidelines.
+```
+
+Skills activate at the start of each task session when the agent reads the file. Place skill activation instructions near the top of your prompt so the agent has the full behavioral context before processing task-specific instructions.
+
+For a full guide on creating and managing skills, see [Agent Skills](/build/agents/build-your-agent/agent-skills).
 
 ### Create or Invent New Tools from the Slash Menu
 

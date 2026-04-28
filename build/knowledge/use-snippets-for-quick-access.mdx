@@ -92,6 +92,24 @@ snippets.email_signature = "Best regards,\\nThe Customer Success Team\\nAcme Cor
 
 ```
 
+## Snippets vs. Skills
+
+Snippets and [Agent Skills](/build/agents/build-your-agent/agent-skills) both let you reuse content across agents, but they serve different purposes.
+
+**Snippets** store reusable text values — static strings like company names, email signatures, or legal disclaimers — that get inserted into prompts and tool inputs at runtime using `{{ snippets.name }}` syntax.
+
+**Skills** store reusable behavioral patterns and knowledge sets — instructions that shape how an agent thinks, communicates, or approaches problems — activated via file read commands in the agent prompt.
+
+| | Snippets | Skills |
+|---|---|---|
+| **Best for** | Reusable text values | Reusable behaviors and knowledge |
+| **Examples** | Company name, support email, disclaimer text | Communication style, domain methodology, meeting facilitation |
+| **How to use** | `{{ snippets.company_name }}` in prompts or inputs | `Read /skills/project/skill-name` in prompt |
+| **Updates** | Edit once, propagates everywhere the snippet is referenced | Edit the skill file, applies next time an agent reads it |
+| **Scope** | Workspace-wide | Per-agent (activated per prompt) |
+
+Use Snippets when you want to insert a consistent piece of text. Use Skills when you want to define how an agent behaves across a range of situations.
+
 ## Related Features
 
 [Agent Settings](https://relevanceai.com/docs/agent-settings) - Centralize your agent configurations for easier management, complementing snippets by providing a single source of truth for agent details.

@@ -1,0 +1,217 @@
+---
+title: 'Agent Skills'
+sidebarTitle: 'Skills'
+description: 'Reusable behavioral patterns and knowledge sets that shape how your agent thinks and acts'
+---
+
+## Overview
+
+Agent Skills are reusable behavioral patterns, instructions, and knowledge sets stored as files that you can give to your agents. While [Tools](/build/agents/build-your-agent/tools) enable agents to take actions (sending emails, searching the web, querying databases), Skills shape *how* agents think, communicate, and approach problems.
+
+<Note>
+Agent Skills is an in-platform feature for configuring agents in Relevance AI. It is separate from MCP Agent Skills, which is designed for external coding assistants.
+</Note>
+
+A skill might define a communication style, encode domain expertise, establish a methodology for handling specific situations, or provide reference knowledge the agent draws on. You can mix and match skills to build agents with exactly the right combination of behaviors for your use case.
+
+### Skills vs. Tools
+
+| | Skills | Tools |
+|---|---|---|
+| **What they are** | Behavioral patterns and knowledge sets | Actions and integrations |
+| **What they do** | Shape how the agent thinks and responds | Let the agent do things in the world |
+| **Examples** | Meeting facilitation style, sales methodology, domain expertise | Send email, search the web, query a database |
+| **Stored as** | Files in `/skills/` directories | Configured in the Tools section |
+| **Activated by** | File read commands in agent instructions | Adding to the agent's tool list |
+
+Use Skills when you want to define reusable behaviors or knowledge. Use Tools when you need the agent to interact with external systems or perform discrete actions.
+
+---
+
+## Skill organization
+
+Skills are stored as files in two locations, each with different scope and permissions.
+
+<CardGroup cols={2}>
+  <Card title="/skills/user/" icon="user">
+    **Personal skills** — only visible to you. Create skills here for personal workflows, drafts, or behaviors you haven't shared with your team yet.
+  </Card>
+  <Card title="/skills/project/" icon="users">
+    **Shared skills** — visible to everyone in the project. Only admins can write to this directory, ensuring shared behaviors remain consistent and controlled.
+  </Card>
+</CardGroup>
+
+### Permission model
+
+- Any user can create and manage skills in `/skills/user/`
+- Only project admins can create or modify skills in `/skills/project/`
+- All users can read skills from both locations and activate them in their agents
+
+---
+
+## Built-in preset skills
+
+Relevance AI includes two preset skills available in every project.
+
+### meetings
+
+The `meetings` skill gives your agent the knowledge and behavioral patterns needed to handle meeting-related workflows. This includes:
+
+- Structuring meeting agendas and summaries
+- Capturing action items and decisions
+- Following up with participants
+- Formatting notes in a consistent, readable way
+
+Activate this skill when building agents that handle calendar management, meeting preparation, note-taking, or post-meeting follow-up tasks.
+
+### skill-creator
+
+The `skill-creator` skill equips your agent with the ability to generate new skills. When activated, the agent understands the skill file format and can write well-structured skill definitions based on your descriptions.
+
+Use this skill when you want your agent to help you expand your skill library — describe a behavior you need, and the agent drafts the skill file for you to review and save.
+
+---
+
+## How agents read and activate skills
+
+Agents access skills through file read commands in their instructions. When the agent processes its prompt at the start of a task, it reads the specified skill files and incorporates their contents into its behavior for that session.
+
+To activate a skill, include a read command in the agent's prompt:
+
+```
+Read /skills/project/meetings and apply the meeting facilitation guidelines to all interactions.
+```
+
+You can activate multiple skills in a single agent:
+
+```
+Read /skills/project/meetings and apply the meeting facilitation approach.
+Read /skills/user/my-tone-guide and follow the communication style defined there.
+```
+
+<Tip>
+Place skill activation instructions near the top of your agent prompt, before task-specific instructions. This ensures the agent has the full behavioral context before processing the rest of the prompt.
+</Tip>
+
+---
+
+## Creating custom skills
+
+Skills are plain text files with a structured format. You can create them directly in the platform or have the `skill-creator` preset skill generate them for you.
+
+### Skill file structure
+
+A skill file typically contains:
+
+1. **Name and purpose** — a short description of what the skill does
+2. **Behavioral instructions** — specific guidance on how to apply the skill
+3. **Examples** (optional) — sample inputs and outputs that illustrate the expected behavior
+4. **Edge cases** (optional) — how to handle situations that fall outside the norm
+
+### Example: a custom communication skill
+
+```
+# Concise communication style
+
+## Purpose
+Apply this skill to keep all responses short, direct, and free of filler language.
+
+## Instructions
+- Lead with the answer or recommendation, not background context
+- Use bullet points for lists of three or more items
+- Avoid phrases like "Great question", "Certainly", or "Of course"
+- If a response would exceed 150 words, summarize key points and offer to elaborate
+
+## Edge cases
+- For technical explanations that genuinely require detail, use numbered steps with short descriptions per step
+- When the user explicitly asks for a full explanation, set aside the length constraint for that response only
+```
+
+### Creating a skill in the platform
+
+1. Navigate to the **Files** section in your Relevance AI workspace
+2. Go to `/skills/user/` for a personal skill or `/skills/project/` for a shared skill (admin required)
+3. Click **New file** and give it a descriptive name (e.g., `sales-qualification-style.md`)
+4. Write the skill content following the structure above
+5. Save the file
+
+Alternatively, use the `skill-creator` preset:
+
+1. Add the `skill-creator` skill to an agent
+2. Describe the behavior you want to encode
+3. The agent drafts the skill file content for you
+4. Review, adjust, and save it to the appropriate `/skills/` directory
+
+---
+
+## Managing skills
+
+### Reading and previewing skills
+
+You can view skill files directly in the Files section of your workspace. Both `/skills/user/` and `/skills/project/` are browsable.
+
+### Updating a skill
+
+Edit the skill file in the Files section. Changes take effect the next time an agent reads the skill — no need to reconfigure the agents that use it.
+
+### Sharing skills with your team
+
+Move a personal skill from `/skills/user/` to `/skills/project/` to make it available to the whole project. This requires admin permissions on `/skills/project/`.
+
+### Removing a skill from an agent
+
+Remove the file read instruction from the agent's prompt. The skill file itself remains available for other agents or future use.
+
+---
+
+## Best practices
+
+- **One skill per concern** — keep each skill file focused on a single behavior or domain. Combining multiple unrelated behaviors in one file makes skills harder to reuse and maintain.
+- **Use descriptive file names** — names like `executive-summary-style.md` or `b2b-sales-methodology.md` make it clear what each skill does without opening the file.
+- **Version through naming** — if you're iterating on a skill, keep the working version in `/skills/user/` while the stable version lives in `/skills/project/`.
+- **Document the activation instruction** — in the skill file itself, include a suggested activation instruction so other agents (and team members) know how to use it.
+- **Test before sharing** — verify a skill behaves as expected in a personal agent before promoting it to `/skills/project/` for team-wide use.
+
+---
+
+## Use cases
+
+<AccordionGroup>
+  <Accordion title="Customer support tone and escalation rules">
+    Create a skill that defines how the agent should handle frustrated customers, when to escalate to a human, and what language to use when apologizing or explaining delays. Apply it to any support-facing agent to ensure consistency across the team.
+  </Accordion>
+  <Accordion title="Sales methodology encoding">
+    Encode a qualification framework (MEDDIC, SPIN, BANT) as a skill so any sales agent follows the same discovery process. Update the skill file once to propagate the change to all agents using it.
+  </Accordion>
+  <Accordion title="Domain-specific expertise">
+    Store industry terminology, regulatory requirements, or technical reference knowledge in a skill file. Agents that read this skill can answer domain-specific questions accurately without needing all of that context in the main prompt.
+  </Accordion>
+  <Accordion title="Meeting facilitation">
+    Use the built-in `meetings` skill to equip a meeting assistant agent with structured note-taking, action item tracking, and follow-up formatting — ready to use without any configuration.
+  </Accordion>
+  <Accordion title="Writing style guides">
+    Define tone, voice, and formatting rules in a skill file. Any content-producing agent that reads this skill will apply your brand's writing standards consistently.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="How are Skills different from writing instructions directly in the prompt?">
+    Writing instructions directly in the prompt works well for behavior specific to one agent. Skills are better when you want the same behavior across multiple agents — you define it once in a file and reference it wherever you need it. When the behavior changes, you update one file instead of editing every prompt.
+  </Accordion>
+  <Accordion title="Can I activate a skill for only part of a task?">
+    Skills are activated at the start of a session when the agent reads the file. They apply to the full task. If you need conditional behavior, you can describe those conditions within the skill file itself.
+  </Accordion>
+  <Accordion title="What happens if a skill file is deleted?">
+    If an agent tries to read a skill file that no longer exists, it will not be able to apply that skill for the session. The agent will proceed with its other instructions. Remove the read command from the agent's prompt if the skill file has been permanently deleted.
+  </Accordion>
+  <Accordion title="Can non-admin users create project-level skills?">
+    No. Only project admins can create or modify files in `/skills/project/`. Any user can create skills in `/skills/user/` for personal use, and admins can promote personal skills to the project level.
+  </Accordion>
+  <Accordion title="How many skills can I activate in one agent?">
+    There is no fixed limit, but each skill adds to the context the agent processes. Keep skill files focused and concise, and activate only the skills relevant to the agent's purpose to avoid unnecessary context overhead.
+  </Accordion>
+</AccordionGroup>
