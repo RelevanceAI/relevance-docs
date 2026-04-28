@@ -1,0 +1,245 @@
+---
+title: 'Bulk rerun conversations'
+sidebarTitle: 'Bulk rerun conversations'
+description: 'Rerun multiple agent conversations in a single API call, with optional step-specific reruns'
+---
+
+## API authorization set up
+<Snippet file="api-auth-setup.mdx" />
+
+## Overview
+
+The bulk rerun conversations endpoint lets you rerun multiple agent conversations in a single request. You can rerun each conversation from the beginning, or from a specific message — useful when you want to retry from a particular step without replaying the entire conversation history.
+
+<Info>
+Step-specific reruns require the `regenerate_message_id` field. Without it, the entire conversation reruns from the start.
+</Info>
+
+## Endpoint
+
+```
+POST https://api-{region}.stack.tryrelevance.com/latest/agents/conversations/bulk_rerun
+```
+
+Replace `{region}` with your region code found on the [API keys](/get-started/core-concepts/api-integration) page.
+
+## Request body
+
+```json
+{
+  "conversations": [
+    {
+      "conversation_id": "string",
+      "regenerate_message_id": "string"
+    }
+  ]
+}
+```
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `conversations` | array | Yes | List of conversation objects to rerun |
+| `conversations[].conversation_id` | string | Yes | ID of the conversation to rerun |
+| `conversations[].regenerate_message_id` | string | No | ID of the message to rerun from. Omit to rerun the entire conversation from the start |
+
+### Behavior by field presence
+
+**Without `regenerate_message_id`** — the conversation reruns from the very beginning. All previous messages are replayed. This is the backward-compatible behavior and matches what rerunning a single conversation does.
+
+**With `regenerate_message_id`** — the conversation reruns starting from the specified message. Messages before that point are preserved. Use this to retry a specific step that failed or produced an unexpected result.
+
+## Code examples
+
+<AccordionGroup>
+  <Accordion title="Bulk rerun from start (cURL)">
+    ```bash
+    curl -X POST \
+      "https://api-{region}.stack.tryrelevance.com/latest/agents/conversations/bulk_rerun" \
+      -H "Authorization: {project_id}:{api_key}" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "conversations": [
+          { "conversation_id": "conv_abc123" },
+          { "conversation_id": "conv_def456" },
+          { "conversation_id": "conv_ghi789" }
+        ]
+      }'
+    ```
+  </Accordion>
+
+  <Accordion title="Bulk rerun from specific step (cURL)">
+    ```bash
+    curl -X POST \
+      "https://api-{region}.stack.tryrelevance.com/latest/agents/conversations/bulk_rerun" \
+      -H "Authorization: {project_id}:{api_key}" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "conversations": [
+          {
+            "conversation_id": "conv_abc123",
+            "regenerate_message_id": "msg_xyz001"
+          },
+          {
+            "conversation_id": "conv_def456",
+            "regenerate_message_id": "msg_xyz002"
+          }
+        ]
+      }'
+    ```
+  </Accordion>
+
+  <Accordion title="Bulk rerun — mixed usage (JavaScript)">
+    ```javascript
+    const region = "YOUR_REGION";
+    const projectId = "YOUR_PROJECT_ID";
+    const apiKey = "YOUR_API_KEY";
+
+    const response = await fetch(
+      `https://api-${region}.stack.tryrelevance.com/latest/agents/conversations/bulk_rerun`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `${projectId}:${apiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          conversations: [
+            // Rerun from start
+            { conversation_id: "conv_abc123" },
+            // Rerun from a specific step
+            {
+              conversation_id: "conv_def456",
+              regenerate_message_id: "msg_xyz002",
+            },
+          ],
+        }),
+      }
+    );
+
+    const result = await response.json();
+    console.log(result);
+    ```
+  </Accordion>
+
+  <Accordion title="Bulk rerun — mixed usage (Python)">
+    ```python
+    import requests
+
+    project_id = "YOUR_PROJECT_ID"
+    api_key = "YOUR_API_KEY"
+    region = "YOUR_REGION"
+
+    base_url = f"https://api-{region}.stack.tryrelevance.com/latest"
+    headers = {
+        "Authorization": f"{project_id}:{api_key}",
+        "Content-Type": "application/json",
+    }
+
+    # Mix of full reruns and step-specific reruns in one request
+    body = {
+        "conversations": [
+            # Rerun entire conversation from start
+            {"conversation_id": "conv_abc123"},
+            # Rerun from a specific message
+            {
+                "conversation_id": "conv_def456",
+                "regenerate_message_id": "msg_xyz002",
+            },
+            # Another full rerun
+            {"conversation_id": "conv_ghi789"},
+        ]
+    }
+
+    response = requests.post(
+        base_url + "/agents/conversations/bulk_rerun",
+        headers=headers,
+        json=body,
+    )
+
+    print(response.json())
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Finding conversation and message IDs
+
+**Conversation ID** — visible in the URL when viewing a conversation in the Relevance AI app:
+
+```
+https://app.relevanceai.com/agents/{region}/{project_id}/{agent_id}/{conversation_id}
+```
+
+You can also retrieve conversation IDs programmatically using the [list conversations](/build/agents/extend-your-agent/list-conversations) endpoint.
+
+**Message ID** — retrieve message IDs by listing messages in a conversation:
+
+```python
+messages = requests.post(
+    base_url + "/knowledge/list",
+    headers=headers,
+    json={
+        "knowledge_set": conversation_id,
+        "page_size": 20,
+        "sort": [{"insert_date_": "asc"}],
+    },
+).json()["results"]
+
+# Each message has an _id field you can use as regenerate_message_id
+for msg in messages:
+    print(msg["_id"], msg["data"]["message"]["role"])
+```
+
+## Response
+
+A successful request returns an array of results, one per conversation submitted:
+
+```json
+{
+  "results": [
+    {
+      "conversation_id": "conv_abc123",
+      "status": "queued"
+    },
+    {
+      "conversation_id": "conv_def456",
+      "status": "queued"
+    }
+  ]
+}
+```
+
+Conversations are queued for asynchronous execution. A `queued` status means the rerun was accepted — use the [conversation polling](/build/agents/extend-your-agent/conversation) pattern to track progress.
+
+### Error responses
+
+| Status | Description |
+|---|---|
+| `400` | Invalid request body — check that all `conversation_id` values are present |
+| `401` | Invalid or missing authorization token |
+| `403` | The API key does not have permission to rerun these conversations |
+| `404` | One or more conversation IDs were not found |
+| `429` | Rate limit exceeded — reduce the number of concurrent requests |
+
+<Warning>
+If any conversation in the batch is invalid, the entire request may fail. Validate your conversation IDs before submitting large batches.
+</Warning>
+
+## Use cases
+
+<AccordionGroup>
+  <Accordion title="Retrying failed conversations">
+    After a tool outage or integration error, use bulk rerun to replay affected conversations without rerunning each one manually. Omit `regenerate_message_id` to start fresh, or provide it to resume from the point of failure.
+  </Accordion>
+
+  <Accordion title="Testing prompt changes">
+    When you update an agent's system prompt or tool configuration, bulk rerun a set of representative conversations to compare outputs. Use `regenerate_message_id` to rerun only from the first agent response, preserving the original user input.
+  </Accordion>
+
+  <Accordion title="Batch reprocessing">
+    If upstream data changes — for example, a knowledge base update — use bulk rerun to regenerate agent responses across a large set of conversations. Process conversations in batches to stay within rate limits.
+  </Accordion>
+</AccordionGroup>
+
+## Rate limiting
+
+Process conversations in batches of 50 or fewer per request to avoid hitting rate limits. If you receive a `429` response, wait before retrying and reduce your batch size.
