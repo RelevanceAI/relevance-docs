@@ -61,6 +61,36 @@ Using the 'Provider' dropdown, set this to match the model you've chosen for you
 
 ---
 
+### Parallel Tool Calls (Beta)
+
+**What it is:** Allows an agent to execute multiple tools or hand off multiple tasks to other agents at the same time, rather than one at a time. When enabled, the agent can issue parallel tool calls in a single step, which can significantly reduce overall execution time for workflows with independent operations.
+
+**Who it's for:** Anyone. No special plan or configuration is required beyond enabling the toggle.
+
+**When to use it:**
+
+- Running multiple independent operations at once (for example, querying several data sources in a single step)
+- Gathering information from multiple sources simultaneously
+- Reducing overall execution time when individual tool calls don't depend on each other's results
+- Parallel agent workflows in workforces where sub-agents can operate independently
+
+**How to enable:**
+
+1. Open your agent and click **Advanced** in the bottom-left of the agent builder
+2. In Advanced settings, go to the **Language Model** tab
+3. Toggle on **Parallel Tool Calls**
+4. For agent-to-agent handovers in the Workforce Builder: select the connection, open **Edge Settings**, and set **Task Behavior** to **Create new task**
+
+<Warning>
+Parallel Tool Calls is incompatible with "Continue same task" handovers. All connections from an agent with Parallel Tool Calls enabled must use "Create new task" as their Task Behavior. Connections that conflict with this requirement are highlighted in yellow in the Workforce Builder.
+</Warning>
+
+<Info>
+Parallel Tool Calls is a Beta feature. Behavior and available options may change. See [Edge Settings](/build/workforces/build-an-ai-workforce/edge-settings) for details on configuring Task Behavior for workforce connections.
+</Info>
+
+---
+
 ### Fallback Model
 
 **What it is:** A backup language model that automatically retries failed tasks when your primary model encounters errors or fails to respond. If your agent's primary model fails to complete a task, the fallback model will automatically retry the task **one time**. If the fallback model also fails, the task will fail as usual and follow your configured error handling behavior.

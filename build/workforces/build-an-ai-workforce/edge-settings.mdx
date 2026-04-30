@@ -68,6 +68,24 @@ Create sophisticated automation workflows:
 4. **Test Thoroughly**: Verify that your edge settings produce the expected behavior across different scenarios before deploying to production.
 5. **Monitor Performance**: Regularly review how your connections are being used and refine edge settings based on actual performance.
 
+## Parallel Tool Calls compatibility
+
+When an agent has [Parallel Tool Calls](/build/agents/build-your-agent/agent-settings/language-model#parallel-tool-calls-beta) enabled, all connections originating from that agent must use **Create new task** as their Task Behavior. Parallel handoffs require independent task instances that can execute simultaneously — "Continue same task" forces sequential execution and is incompatible with this mode.
+
+Connections that conflict with this requirement are highlighted in yellow in the Workforce Builder, signaling that you need to update the Task Behavior setting.
+
+**How to resolve a conflict:**
+
+1. Select the highlighted (yellow) connection in the Workforce Builder
+2. Open **Edge Settings**
+3. Set **Task Behavior** to **Create new task**
+
+Repeat for each conflicting connection on agents that have Parallel Tool Calls enabled.
+
+<Info>
+Parallel Tool Calls is enabled per agent in [Advanced Settings > Language Model](/build/agents/build-your-agent/agent-settings/language-model#parallel-tool-calls-beta). It is currently a Beta feature.
+</Info>
+
 ## Limitations
 
 - **One-way Communication**: Currently, connections in the Workforce Builder are limited to one-way communication. Bidirectional communication between nodes is not supported.
