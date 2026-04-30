@@ -1,0 +1,68 @@
+---
+title: "Inactive table deletion"
+sidebarTitle: "Inactive table deletion"
+description: "How Relevance AI handles automatic deletion of Knowledge tables on inactive accounts"
+---
+
+Relevance AI automatically deletes Knowledge tables on inactive accounts to optimize storage. This page explains what triggers deletion, how you are notified, and how to prevent it.
+
+<Warning>
+Deletion of inactive Knowledge tables is permanent and cannot be undone. All data stored in those tables will be lost.
+</Warning>
+
+## What counts as inactive
+
+Your account is considered inactive when **both** of the following conditions have been true for the last 182 days:
+
+- No tool or agent has been run
+- No login to the Relevance AI platform
+
+Both conditions must apply simultaneously. If either condition is not met — for example, if you have logged in within the last 182 days — your account is considered active and your Knowledge tables are safe.
+
+## Warning email
+
+You will receive an email warning 4 days before your Knowledge tables are scheduled for deletion. This email comes from `support@relevanceai.com` and is a legitimate notification from Relevance AI — not spam or phishing.
+
+## What gets deleted
+
+All data stored in your Knowledge tables will be permanently deleted, including all rows, columns, and any documents or files used to populate those tables.
+
+## How to prevent deletion
+
+Log in to Relevance AI and run any Agent or Tool. Either action resets the inactivity timer, and no further steps are needed. You do not need to re-upload data or reconfigure anything — simply using the platform is enough to keep your account active.
+
+If you receive a warning email, log in and run an Agent or Tool before the 4-day window closes to prevent deletion.
+
+## Received the email in error?
+
+If you believe you received a deletion warning in error — for example, if you have been actively using the platform — reply directly to the warning email to open a support ticket. You can also [contact support](/get-started/support) directly.
+
+---
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I recover deleted Knowledge tables?">
+    No. Once Knowledge tables are deleted due to inactivity, the data cannot be recovered. If you receive a warning email, log in and run an Agent or Tool before the 4-day window closes.
+  </Accordion>
+
+  <Accordion title="Does this policy apply to all accounts?">
+    Yes. The inactive Knowledge table deletion policy applies to all Relevance AI accounts regardless of plan.
+  </Accordion>
+
+  <Accordion title="What counts as 'running' a tool or agent?">
+    Any execution of a Tool or Agent through the Relevance AI platform resets the inactivity timer. This includes manual runs as well as automated or scheduled runs.
+  </Accordion>
+
+  <Accordion title="How is inactivity measured?">
+    Inactivity is measured independently from two signals: the last tool or agent run, and the last login to the platform. Both must be absent for 182 consecutive days before your account qualifies for deletion. A single login or run within that window is sufficient to prevent it.
+  </Accordion>
+
+  <Accordion title="Will I receive more than one warning?">
+    You will receive at least one warning email 4 days before deletion. Log in and run any Agent or Tool within that window to prevent deletion.
+  </Accordion>
+
+  <Accordion title="Is this related to the Enterprise Data Retention feature?">
+    No. The inactive Knowledge table deletion policy is a separate, platform-wide policy that applies to all accounts. The [Data Retention](/enterprise/data-retention) feature is an Enterprise-only configuration for managing the lifecycle of tool runs, agent conversations, and other activity data — it does not control Knowledge tables.
+  </Accordion>
+</AccordionGroup>
