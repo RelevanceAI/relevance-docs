@@ -166,6 +166,16 @@ jobs:
 
             **Reviewed:** N files (M with issues, K clean)
 
+            **Scores**
+            | | Dimension | Score | What's holding it back |
+            |---|-----------|-------|------------------------|
+            | 🟢/🟡/🔴 | Consistency | X/10 | If <10: list the worst offenders across all files (banned words, capitalization, spelling, terminology). If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Technical clarity | X/10 | If <10: list what's vague, missing, or broken for a technical reader (broken links, vague UI references, missing prerequisites). If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Non-technical clarity | X/10 | If <10: list what would lose a non-technical reader (jargon dumps, missing definitions, marketing fluff that obscures meaning). If 10: "No issues found." |
+            | 🟢/🟡/🔴 | Structure | X/10 | If <10: list what's off about page architecture, navigation, or component choice across the PR. If 10: "No issues found." |
+
+            Score key: 🟢 9–10, 🟡 6–8, 🔴 1–5. Scores are a single overall judgment about the whole PR — not per file. The dropdowns below contain the line-by-line specifics.
+
             ✨ **Overall vibe**: 2–3 sentences on the PR as a whole — what's strong, what's weak. Kept visible because it's the at-a-glance signal.
 
             <details>
@@ -226,9 +236,9 @@ jobs:
             - Each finding starts with `path:line` (or just `path` for whole-file issues) so the writer can jump straight to it.
             - Omit any `<details>` block whose count is 0 — don't render empty dropdowns.
             - Counts in dropdown titles match what's inside.
-            - Do NOT include per-file scoring tables.
+            - Exactly ONE scores table, covering the whole PR. Do NOT include per-file scoring tables.
             - Do NOT include per-file overall vibe paragraphs.
-            - The summary line + single overall vibe at the top cover the at-a-glance signal.
+            - The summary line + scores table + single overall vibe at the top cover the at-a-glance signal.
             - Be accurate with line counts in the credit usage table — use actual values from what you read.
 
             Keep the tone direct and useful. You're helping a technical writer improve their work, not grading an exam.
