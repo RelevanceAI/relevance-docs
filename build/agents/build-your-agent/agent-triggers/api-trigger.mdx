@@ -1,22 +1,18 @@
 ---
-title: 'API trigger'
+title: 'API Triggers'
 description: 'Trigger your Agent with direct HTTP requests'
-sidebarTitle: 'API trigger'
+sidebarTitle: 'API Triggers'
 ---
 
-Trigger your Agent from your own code using direct HTTP requests.
+API Triggers let you trigger your Agent programmatically with direct HTTP requests to the Relevance AI API. Use them to integrate from custom backends, automation scripts, or any environment that can make HTTP calls.
 
-<Tip>
-Working in JavaScript or TypeScript? The [Relevance AI SDK](/sdk/introduction) wraps this endpoint with type-safe primitives, automatic event handling, and runtime support for Node.js, Deno, Bun, Cloudflare Workers, and the browser.
-</Tip>
+<Callout icon="code" color="#4F46E5" iconType="regular">
+For a higher-level interface in JavaScript or TypeScript, use the [Relevance AI SDK](/sdk/introduction) — it wraps this endpoint with type-safe primitives, automatic event handling, and runtime support across Node.js, Deno, Bun, Cloudflare Workers, and the browser.
+</Callout>
 
 <Warning>
-The Relevance AI SDK and API are officially supported for triggering Agents and Tools only. All other usage is currently unsupported.
+The Relevance AI API is officially supported only for triggering Agents and Tools. All other usage is currently unsupported.
 </Warning>
-
-<Note>
-When triggering an agent via API, the response is not returned directly. Instead, the result must be sent to a specified destination, such as uploading the final output to Google Sheets.
-</Note>
 
 ## Setting up an API trigger
 
@@ -51,6 +47,10 @@ The endpoint URL differs based on your organization's region. The example above 
   "agent_id": "[YOUR_AGENT_ID_GOES_HERE]"
 }
 ```
+
+<Note>
+The response isn't returned directly. The agent's result must be sent to a destination you configure, such as Google Sheets, a webhook, or another integration.
+</Note>
 
 ## Code examples
 
