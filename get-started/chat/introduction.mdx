@@ -63,6 +63,24 @@ Your panel size and visibility settings are saved automatically. The next time y
 
 ---
 
+## Recent meeting chat links (desktop app)
+
+When no conversation is active, the desktop app displays up to 5 recent meeting chat links on the home view. These links appear after meetings end, giving you quick access to the chat conversation from each meeting.
+
+Each link shows:
+
+- A platform-specific icon (Google Meet, Zoom, Teams, etc.)
+- The meeting title
+- A timestamp
+
+Click any link to open that meeting's chat conversation directly. Links persist between sessions, so they remain available the next time you open the desktop app.
+
+<Note>
+Recent meeting chat links are only available in the desktop app. They do not appear in the web version of Chat.
+</Note>
+
+---
+
 ## Using Agents in Chat
 
 Simply @ mention any Agent you have access to in your project, and Chat will seamlessly integrate their capabilities into your conversation. Hover over any Agent in the @ menu to see a pop-up with its name, description, and other details — making it easy to pick the right one without leaving the chat.
@@ -142,15 +160,152 @@ Combine saved prompts with @ mentioned Agents for powerful workflows that levera
 
 ---
 
-## Project files
+## Project files and folders
 
-You can search and insert files from your project's file system directly in Chat using the @ menu. Files appear alongside agents, workforces, and saved prompts in results, showing the file icon, name, and path.
+You can reference files and folders from your project's connected storage directly in Chat using the @ menu. When you @mention a file or folder, its contents are included in the context sent to the agent — so you can ask questions about documents, analyze data, or run tasks against file content without manually uploading anything.
 
-### Searching for project files
+<Info>
+Project file and folder @mentions work with files stored in connected storage integrations (such as Google Drive). They are distinct from file attachments (uploading a file directly into the chat) and knowledge sources (files indexed for retrieval by agents).
+</Info>
 
-1. **Type @** in the chat input field followed by a search query
-2. Browse the results — files appear alongside agents, workforces, and saved prompts, showing the file name and path
-3. Select a file to insert its file path into your message
+### Referencing individual files
+
+1. Type `@` in the chat input field to open the menu
+2. Start typing the file name — files appear in the results alongside agents and saved prompts, showing the file name and its path
+3. Select a file to insert a reference into your message
+4. Add your question or instruction alongside the reference and send
+
+The file's contents are fetched and included in the context when your message is sent.
+
+### Referencing entire folders
+
+Referencing a folder includes all files within that folder in the context of your message — useful when you want an agent to work across a set of related documents without referencing each one individually.
+
+1. Type `@` in the chat input field to open the menu
+2. Start typing the folder name — folders appear in the results alongside files, agents, and saved prompts
+3. Select a folder to insert a reference into your message
+4. Add your question or instruction and send
+
+<Warning>
+Referencing large folders with many files will consume more context. If you hit limits, reference specific files instead of the whole folder.
+</Warning>
+
+### When to use file and folder references
+
+| Approach | Best for |
+|----------|----------|
+| **@ mention a file** | Asking questions about a specific document, analyzing a single file |
+| **@ mention a folder** | Working across a set of related files, summarizing a project directory |
+| **File attachment** | Uploading a file you have locally that isn't in connected storage |
+| **Knowledge source** | Giving an agent persistent, searchable access to a large document library |
+
+<Tip>
+Combine file @mentions with agent @mentions in the same message — for example, `@ResearchAgent summarize @quarterly-report.pdf` — to direct a specific agent at a specific file.
+</Tip>
+
+For a full guide to browsing and managing project files — including view options, folder navigation, and file operations — see [Project files](/get-started/chat/project-files).
+
+---
+
+## Selecting text from files
+
+When viewing a file in the Chat file viewer, you can highlight specific text passages and attach them as context to your chat message. This lets you reference a precise excerpt rather than an entire document, giving the agent exactly the information it needs.
+
+### Attaching a text selection to a message
+
+1. Open a file in the Chat file viewer
+2. Click and drag to highlight the text passage you want to reference
+3. Optionally, add a note to your selection to provide additional context
+4. Click **Add to message** to attach the selection to your chat input
+5. The selected text appears as a dismissible pill in the chat input — click the **×** on the pill to remove it if needed
+6. Send your message as normal; the selection is included as structured context
+
+### When to use text selection
+
+Use text selection when you need to ask about or act on a specific part of a file rather than its entirety. For example, point an agent to a single clause in a contract, a specific function in a code file, or a particular paragraph in a report. Providing targeted context reduces ambiguity and typically produces more accurate, focused responses than attaching a whole document.
+
+---
+
+## Viewing agent-created files
+
+When an agent writes or modifies files during a conversation, a **Files updated** bar appears above the chat input. This tells you that new or updated files are ready to review without interrupting the conversation flow.
+
+### Opening the file viewer
+
+Click **View files** in the bar to open the most recently written file in the file viewer. The bar hides itself automatically if the file panel is already open, so it only appears when there is something new to see.
+
+When you open a file from your project, you can view and edit it directly in Chat. See [File viewer and editing](#file-viewer-and-editing) for details on handling conflicts when an agent modifies a file you're editing.
+
+---
+
+## File viewer and editing
+
+You can open files from your project directly in Chat to view and edit their contents. The file viewer displays alongside your conversation, letting you read or modify a file without switching to another tool.
+
+When an AI agent writes to a file you currently have open, Chat detects the conflict and responds based on whether you have unsaved changes:
+
+- **If you have unsaved changes**, a modal dialog appears with two options:
+  - **Save your edits** — overwrites the agent's version with your changes
+  - **Load agent's version** — discards your changes and loads what the agent wrote
+- **If you have no unsaved changes**, the file refreshes silently in the background with the agent's updated version.
+
+{/* TODO: Add screenshot of the conflict resolution modal dialog */}
+
+---
+
+## Formatting your messages
+
+The Chat input supports a markdown editor with formatting tools to help you structure longer messages and prompts.
+
+### Slash command menu
+
+Type `/` in the chat input to open a searchable formatting menu. The menu includes 9 options:
+
+- Headings (H1, H2, H3)
+- Bulleted and numbered lists
+- Blockquotes
+- Code blocks
+- Dividers
+- Table of contents
+
+Start typing after `/` to filter the list and quickly find the format you need. Select an option to insert the corresponding block at your cursor position.
+
+### Table of contents block
+
+The table of contents block creates a live, clickable outline of all headings in your message. It updates automatically as you add or change headings, making it useful for long-form content like detailed briefs, structured prompts, or documentation drafts. Insert it via the slash command menu by typing `/` and selecting **Table of contents**.
+
+---
+
+## File version history
+
+Every file in the Chat filesystem maintains a complete version history. You can view past versions, preview their contents, and restore any previous version as the current file.
+
+### Accessing version history
+
+To access version history, right-click any file in the filesystem panel. Select **Version History** from the context menu to open the Version History dialog.
+
+The dialog lists all past versions of the file, each showing:
+
+- The date and time the version was saved
+- The file size at that point in time
+
+### Previewing a previous version
+
+To preview a version before restoring it, click on any version entry in the list. The file contents for that version are displayed so you can confirm it's the one you want.
+
+### Restoring a previous version
+
+To restore a previous version:
+
+1. Right-click the file in the filesystem and select **Version History**
+2. Find the version you want and click **Restore** next to it
+3. The selected version becomes the current file
+
+<Tip>
+Restoring a version does not delete any history. All previous versions remain available after a restore, so you can always go back to a different version if needed.
+</Tip>
+
+Any file tabs that are currently open for the restored file will automatically refresh to show the restored content.
 
 ---
 
@@ -207,6 +362,22 @@ Here's a comprehensive breakdown of supported file types by model provider:
 <Warning>
 File export is not supported for organizations in the AU region.
 </Warning>
+
+### File preview capabilities
+
+Chat can preview 70+ file types directly in the interface, so you can view a file without leaving the conversation. Supported categories include:
+
+- **PDFs**
+- **Images:** PNG, JPG, GIF, WebP, SVG
+- **Videos:** MP4, WebM, MOV
+- **Spreadsheets:** CSV, XLSX
+- **Code files:** JS, TS, Python, JSON, HTML, CSS, Markdown, and 20+ other programming languages
+
+Files without extensions (such as `Dockerfile`) are treated as plain text and can be previewed. If a file type is not supported for preview, Chat displays a "This file type can't be previewed" message.
+
+<Note>
+File preview (viewing a file in the chat UI) is separate from file processing (what the LLM can read and reason about). Preview support does not affect which files an LLM can process — that remains provider-dependent. See the file capabilities section below for details.
+</Note>
 
 ### File size limits by provider
 
@@ -356,6 +527,11 @@ For more detailed information about which models can process which files in agen
     You can switch between projects using the project selector in the bottom left of the Chat interface. You can also use **Cmd + K** (Mac) or **Ctrl + K** (Windows) for quick access. When you switch projects, you'll have access to all agents available in that project.
 
     For more details, see [Learn how to switch projects in Chat](/admin/project-management/switch-projects#switching-projects-in-chat).
+    </Accordion>
+    <Accordion title="What are Edge regions and how do I select them?">
+    Edge regions (US Edge, AU Edge, and EU Edge) are available in the Chat browser extension and desktop app. If your project is in an Edge region, it will appear in the project switcher labeled with **(Edge)** — for example, **US (Edge)**.
+
+    To select an Edge region project, open the project switcher and look for the **(Edge)** label next to the region name. For detailed instructions, see [how to switch projects in Chat](/admin/project-management/switch-projects#selecting-an-edge-region-in-chat).
     </Accordion>
     <Accordion title="What keyboard shortcuts are available in Chat?">
     Chat supports the following keyboard shortcuts:
