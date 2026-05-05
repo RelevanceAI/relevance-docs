@@ -5,7 +5,7 @@ description: "Add members to your project to collaborate with your team."
 ---
 
 <Info>
-This page covers adding members to projects and organizations. If you're on an Enterprise subscription and want to learn about Role-Based Access Controls (RBAC) with more granular permissions, see our [RBAC documentation](https://relevanceai.com/docs/enterprise/rbac).
+This page describes the standard permission system used by organizations that have not yet migrated to RBAC. If your organization has RBAC enabled, see [Role-based access controls (RBAC)](/enterprise/rbac) for the current permission model and the [transition guide](/enterprise/rbac#transitioning-to-rbac) for what changes during migration.
 </Info>
 
 ## Add members to your project
@@ -21,7 +21,7 @@ This page covers adding members to projects and organizations. If you're on an E
 
 ### User roles
 
-Members in your organization can be assigned the following roles: Admin, Editor and Viewer. These roles determine what they can do inside of the platform, and what they can do when using the API.
+Members in your organization can be assigned the following roles: Admin, Editor, Chat, and Viewer. These roles determine what they can do inside of the platform, and what they can do when using the API.
 
 <AccordionGroup>
   <Accordion title="Admin" icon="user-tie-hair-long" iconType="duotone">
@@ -45,18 +45,17 @@ Members in your organization can be assigned the following roles: Admin, Editor 
 
     - Can run agents and tools.
   </Accordion>
+  <Accordion title="Chat" icon="message" iconType="duotone">
+    Access [Relevance Chat](/get-started/chat/introduction) only — cannot access the web app. Requires asset-level permissions to run specific agents.
+  </Accordion>
   <Accordion title="Viewer" icon="book-open-reader" iconType="duotone">
-    **Has read permissions for:**
-
-    - All datasets
-    - All knowledge sets
-    - All agents
-
-    **Other permissions:**
-
-    - Can run agents.
+    View agents, tools, and knowledge outputs only. Cannot run agents, create assets, or edit anything.
   </Accordion>
 </AccordionGroup>
+
+<Info>
+For comprehensive permission details including enterprise RBAC controls, see [Role-based access controls](/enterprise/rbac).
+</Info>
 
 ### Cancel pending invitations
 
