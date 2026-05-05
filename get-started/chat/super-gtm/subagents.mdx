@@ -11,7 +11,7 @@ This is the bridge between the agents your team has already built and the Super 
 
 Super GTM acts as an orchestrator. Connected subagents appear in its catalog at the start of every conversation, and Super GTM decides when to delegate to one based on the user's request and the subagent's description.
 
-Each subagent runs as a full agent in its own conversation — separate context, its own reasoning, its own tools. The only context shared with Super GTM is the message Super GTM sends in. When the subagent finishes, its output is returned to Super GTM, which then continues the conversation with the user.
+Each subagent runs as a full agent in its own conversation — separate context, its own reasoning, its own tools. The only context shared with Super GTM is the message Super GTM sends in. When the subagent responds, its output is returned to Super GTM, which then continues with the user. If Super GTM needs more from the same subagent later in the session, it sends a follow-up message into that same subagent conversation rather than starting fresh.
 
 <Tabs>
   <Tab title="What Super GTM sees">
@@ -23,12 +23,14 @@ Each subagent runs as a full agent in its own conversation — separate context,
     These two fields drive routing — Super GTM matches the user's request against the description to decide whether to invoke the subagent. A clear, specific description that explains what the agent does and when to use it is the single biggest factor in getting reliable routing.
   </Tab>
   <Tab title="What the subagent sees">
-    When Super GTM invokes a subagent, the subagent receives a single message containing the instructions for the task. It does not see the rest of the Super GTM conversation, the user's memory, or any other context Super GTM has loaded.
+    When Super GTM first invokes a subagent, the subagent receives a single message with the instructions for the task. It does not see the rest of the Super GTM conversation, the user's memory, or any other context Super GTM has loaded.
 
-    The subagent runs from there using its own configuration — its system prompt, tools, integrations, and reasoning — exactly as it would when run standalone in the builder.
+    The subagent runs from there using its own configuration — its system prompt, tools, integrations, and reasoning — exactly as it would when run standalone in the builder. If Super GTM sends a follow-up message later in the same session, it lands in the same subagent conversation and the subagent keeps its prior context.
   </Tab>
   <Tab title="How output flows back">
-    When the subagent completes, its final output is returned to Super GTM. Super GTM treats that output as the result of the delegation and uses it to continue working on the user's original request — summarizing it, combining it with other tool outputs, or passing it into another step.
+    When the subagent responds, its output is returned to Super GTM. Super GTM treats that output as the result of the delegation and uses it to continue working on the user's original request — summarizing it, combining it with other tool outputs, or passing it into another step.
+
+    If a tool inside the subagent requires approval, the approval request is passed up to the Super GTM UI for the user to approve or reject. The subagent pauses until the user responds, then continues.
   </Tab>
 </Tabs>
 
@@ -100,13 +102,16 @@ The description should answer two questions clearly:
 
 <AccordionGroup>
   <Accordion title="Can Super GTM run multiple instances of the same subagent at once?">
-    No. Each connected agent appears once in Super GTM's subagent catalog and is invoked as a single node. Super GTM cannot spawn two parallel copies of the same subagent in one conversation.
+    Not currently. Each connected agent has a single conversation per Super GTM session, and follow-up messages from Super GTM go to that same conversation rather than spinning up a new instance.
   </Accordion>
   <Accordion title="Can Super GTM run subagents in parallel?">
-    Super GTM delegates to subagents one at a time per turn. When one subagent's output is needed by another, Super GTM passes context between them sequentially rather than running them in parallel.
+    Not currently. When Super GTM invokes a subagent, it waits for that subagent to respond before continuing — invocations happen one at a time, sequentially.
   </Accordion>
   <Accordion title="Can Super GTM send a follow-up message to an existing subagent conversation?">
-    No. Each subagent invocation is a fresh conversation. The subagent only sees the message Super GTM sent it; once it returns its output, that conversation ends. If Super GTM needs more from the subagent, it starts a new invocation with a new instruction.
+    Yes. If Super GTM needs more from a subagent it has already invoked, it sends a follow-up message into the same subagent conversation rather than starting a new one. The subagent keeps its prior context for that session.
+  </Accordion>
+  <Accordion title="What if the subagent uses a tool that requires approval?">
+    Approval requests are passed up from the subagent to the Super GTM UI, where the user approves or rejects them just like they would for any other approval-gated action. Once the user responds, the subagent continues from where it paused.
   </Accordion>
   <Accordion title="Is there a limit to how many subagents I can connect?">
     There is no hard technical limit, but we recommend connecting no more than ~20 subagents per project. Beyond that, Super GTM has more capabilities to choose between and routing accuracy starts to drop. Keep in mind that Super GTM already ships with 10+ built-in tools and agents, so each subagent you connect adds to that baseline.
