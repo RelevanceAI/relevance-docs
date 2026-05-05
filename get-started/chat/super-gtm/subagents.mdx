@@ -1,0 +1,139 @@
+---
+title: "Subagents"
+description: "Connect any Agent you've built in Relevance AI as a subagent so Super GTM can call it during a conversation"
+---
+
+Subagents let you connect any Agent you've built in the Relevance AI builder to Super GTM. Once connected, Super GTM sees the subagent in every conversation and can invoke it when a user request matches what the agent does.
+
+This is the bridge between the Agents your team has already built and the Super GTM chat experience — the work of designing, prompting, and configuring an Agent in the builder is reused directly inside Super GTM.
+
+<Info>
+**Subagents replaces agents-as-skills.** Agents-as-skills was our original approach, where Super GTM would "become" a connected agent by reading its instructions and running its tools inline. That approach has been deprecated in favor of subagents, which run each connected agent in its own conversation with its own context.
+</Info>
+
+## How it works
+
+Super GTM acts as an orchestrator. Connected subagents appear in its catalog at the start of every conversation, and Super GTM decides when to delegate to one based on the user's request and the subagent's description.
+
+Each subagent runs as a full agent in its own conversation — separate context, its own reasoning, its own tools. The only context shared with Super GTM is the message Super GTM sends in. When the subagent responds, its output is returned to Super GTM, which then continues with the user. If Super GTM needs more from the same subagent later in the session, it sends a follow-up message into that same subagent conversation rather than starting fresh.
+
+<Tabs>
+  <Tab title="What Super GTM sees">
+    For each connected subagent, Super GTM sees:
+
+    - The agent's **name**
+    - The agent's **description**
+
+    These two fields drive routing — Super GTM matches the user's request against the description to decide whether to invoke the subagent. A clear, specific description that explains what the agent does and when to use it is the single biggest factor in getting reliable routing.
+  </Tab>
+  <Tab title="What the subagent sees">
+    When Super GTM first invokes a subagent, the subagent receives a single message with the instructions for the task. It does not see the rest of the Super GTM conversation, the user's memory, or any other context Super GTM has loaded.
+
+    The subagent runs from there using its own configuration — its system prompt, tools, integrations, and reasoning — exactly as it would when run standalone in the builder. If Super GTM sends a follow-up message later in the same session, it lands in the same subagent conversation and the subagent keeps its prior context.
+  </Tab>
+  <Tab title="How output flows back">
+    When the subagent responds, its output is returned to Super GTM. Super GTM treats that output as the result of the delegation and uses it to continue working on the user's original request — summarizing it, combining it with other tool outputs, or passing it into another step.
+
+    If a tool inside the subagent requires approval, the approval request is passed up to the Super GTM UI for the user to approve or reject. The subagent pauses until the user responds, then continues.
+  </Tab>
+</Tabs>
+
+## Connecting an Agent as a subagent
+
+<Steps>
+  <Step title="Open the Agent in the builder">
+    Go to [app.relevanceai.com](https://app.relevanceai.com) and open the Agent you want to connect.
+  </Step>
+  <Step title="Make sure the Agent has a name and description">
+    The Agent must have both before it can be used as a subagent. The description is what Super GTM reads when deciding whether to route to this agent — explain clearly what the agent does and when to use it.
+  </Step>
+  <Step title="Open advanced settings">
+    In the agent edit view, navigate to the **Advanced** section.
+  </Step>
+  <Step title="Toggle on Can be used by Super GTM">
+    Enable the **Can be used by Super GTM** setting. The Agent is now available as a subagent in every Super GTM conversation in the project.
+  </Step>
+</Steps>
+
+<Warning>
+The agent's description is the most important field for subagent performance. Super GTM reads it on every conversation to decide when to route a request to this agent. If the description is vague, missing, or written for end users rather than for the orchestrator, routing will be unreliable.
+</Warning>
+
+## Writing a description that routes well
+
+The description should answer two questions clearly:
+
+1. **What does the agent do?** Be specific about the task — "drafts personalized cold outreach emails based on a prospect's LinkedIn profile" beats "writes emails."
+2. **When should Super GTM use it?** Describe the kind of request that should trigger it — "use when the user wants to write a first-touch email to a new prospect."
+
+<Accordion title="Example: a well-written subagent description">
+  **Agent name:** Cold Email Writer
+
+  **Description:** Drafts personalized cold outreach emails for new prospects. Takes a LinkedIn URL or company name as input, researches the prospect, and produces a short first-touch email matching our team's voice and outreach playbook. Use when the user asks for an outreach email, an intro email, or wants to start a sequence with a new prospect. Do not use for follow-ups on existing conversations — those should go to the Follow-up Email Writer.
+
+  This works because it explains exactly what the agent produces, what it needs as input, when to route to it, and when *not* to. Super GTM uses all of that to make a routing decision.
+</Accordion>
+
+<Accordion title="Example: a description that won't route well">
+  **Agent name:** Email Agent
+
+  **Description:** Helps with emails.
+
+  This fails because Super GTM has no way to distinguish it from any other email-related capability — the built-in skills, an integration, or another subagent. Most email-related requests will not route here, and the ones that do will be inconsistent.
+</Accordion>
+
+## Tips for managing subagents
+
+<AccordionGroup>
+  <Accordion title="Treat the description as a routing prompt, not user-facing copy">
+    The description is read by Super GTM, not the end user. Write it for an LLM making a routing decision. Include trigger phrases users might say, the kinds of inputs the agent expects, and any cases where this agent should *not* be used.
+  </Accordion>
+  <Accordion title="Connect agents that do something specific">
+    Subagents work best when each one owns a well-defined task. A "research a prospect" subagent and a "draft a follow-up email" subagent will route more reliably than a single "do anything sales-related" subagent.
+  </Accordion>
+  <Accordion title="Keep your catalog lean">
+    Super GTM sees every connected subagent at the start of every conversation. As the catalog grows, the orchestrator has more tools and agents to choose between, and routing accuracy can drop. We recommend keeping the total under ~20 user subagents per project. Super GTM also has 10+ built-in tools and agents already, so the effective catalog is larger than just your subagents.
+  </Accordion>
+  <Accordion title="Iterate on routing by watching real conversations">
+    If Super GTM routes to the wrong agent — or fails to route to your subagent when it should — the fix is almost always in the description. Update it to clarify when the agent should be used, then test the same request again.
+  </Accordion>
+  <Accordion title="Compare with skills before connecting">
+    A [skill](/get-started/chat/super-gtm/skills) is the right choice when the workflow is a sequence of steps Super GTM itself should run. A subagent is the right choice when the work is best done by a separate agent with its own configuration — its own system prompt, tools, or integrations. If a skill can do the job, prefer the skill.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can Super GTM run multiple instances of the same subagent at once?">
+    Not currently. Each connected agent has a single conversation per Super GTM session, and follow-up messages from Super GTM go to that same conversation rather than spinning up a new instance.
+  </Accordion>
+  <Accordion title="Can Super GTM run subagents in parallel?">
+    Not currently. When Super GTM invokes a subagent, it waits for that subagent to respond before continuing — invocations happen one at a time, sequentially.
+  </Accordion>
+  <Accordion title="Can Super GTM send a follow-up message to an existing subagent conversation?">
+    Yes. If Super GTM needs more from a subagent it has already invoked, it sends a follow-up message into the same subagent conversation rather than starting a new one. The subagent keeps its prior context for that session.
+  </Accordion>
+  <Accordion title="What if the subagent uses a tool that requires approval?">
+    Approval requests are passed up from the subagent to the Super GTM UI, where the user approves or rejects them just like they would for any other approval-gated action. Once the user responds, the subagent continues from where it paused.
+  </Accordion>
+  <Accordion title="Is there a limit to how many subagents I can connect?">
+    There is no hard technical limit, but we recommend connecting no more than ~20 subagents per project. Beyond that, Super GTM has more capabilities to choose between and routing accuracy starts to drop. Keep in mind that Super GTM already ships with 10+ built-in tools and agents, so each subagent you connect adds to that baseline.
+  </Accordion>
+  <Accordion title="Can other Super GTM users in my project see and use my connected subagents?">
+    Yes. The "Can be used by Super GTM" setting is project-wide — once an agent is enabled, every Super GTM user in the project sees it as a subagent. Use this in combination with the agent's own permissions in the builder to control who can run it.
+  </Accordion>
+  <Accordion title="What happens if a subagent's description is missing or empty?">
+    Super GTM cannot enable the toggle without a description. If you remove the description after the toggle is on, the agent will still appear in the catalog but Super GTM will have no information to route on, so requests are unlikely to reach it.
+  </Accordion>
+</AccordionGroup>
+
+## Skills, subagents, and memory
+
+Subagents sit alongside [skills](/get-started/chat/super-gtm/skills) and [memory](/get-started/chat/super-gtm/memory) as the three ways you tailor Super GTM to your team's work:
+
+- **Skills** define repeatable workflows Super GTM runs itself, step by step.
+- **Subagents** delegate work to a separate agent that has its own configuration and runs in its own context.
+- **Memory** personalizes how Super GTM and its subagents present output back to each user.
+
+A common pattern is a project skill that tells Super GTM to call a specific subagent at a specific step — for example, a "post-meeting follow-up" skill that delegates email drafting to your Cold Email Writer subagent. Memory then shapes the tone of the final output for each user.

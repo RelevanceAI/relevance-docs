@@ -1,0 +1,98 @@
+---
+title: "Scheduled tasks"
+description: "Set up recurring prompts that Super GTM acts on automatically at a time you define"
+---
+
+Scheduled tasks let you configure recurring prompts that Super GTM runs on your behalf at a set time. Instead of manually typing the same request every morning, you write the instruction once, pick a schedule, and the agent handles it from there.
+
+When a schedule fires, the agent receives your saved message exactly as if you had typed it into a conversation. It pulls from your connected [integrations](/get-started/chat/super-gtm/integrations), uses your [skills](/get-started/chat/super-gtm/skills), references your [files](/get-started/chat/super-gtm/file-system), applies [memory](/get-started/chat/super-gtm/memory), and delivers the output — just like a normal Super GTM interaction.
+
+<Note>
+Scheduled tasks is in limited rollout. Your organization needs access enabled before the feature appears. Contact your account team or [reach out to support](/get-started/support) to check availability.
+</Note>
+
+## Where to find schedules
+
+The **Schedules** section lives in the Super GTM panel on the **Overview** tab, below the Calendar and Recently Viewed sections.
+
+## Setting up a scheduled task
+
+<Steps>
+  <Step title="Open the Schedules section">
+    In the Super GTM **Overview** tab, scroll to the **Schedules** section and click to add a new schedule.
+  </Step>
+  <Step title="Write your message">
+    Enter a natural language instruction — this is the prompt the agent receives when the schedule fires. Write it the same way you would in a conversation.
+
+    Examples:
+    - "Summarize all new Gong calls from the last 7 days"
+    - "Check my pipeline for deals that haven't had activity in 2 weeks and flag them"
+    - "Find 5 new prospects matching our ICP and add them to my outreach list"
+  </Step>
+  <Step title="Set the frequency and time">
+    Choose how often the task should run (daily, weekly, monthly, or annually), the time of day, and your timezone.
+  </Step>
+  <Step title="Save and enable">
+    Save the schedule. It runs automatically at the next scheduled time.
+  </Step>
+</Steps>
+
+<Tip>
+Write your scheduled message the same way you'd ask the agent in a conversation. The more specific your instruction, the more useful the output.
+</Tip>
+
+## Frequency options
+
+<CardGroup cols={2}>
+  <Card title="Daily" icon="sun">
+    Runs every day at a set time — e.g. morning pipeline digest at 9am
+  </Card>
+  <Card title="Weekly" icon="calendar-week">
+    Runs on specific days each week — e.g. Monday kick-off report, Friday wrap-up
+  </Card>
+  <Card title="Monthly" icon="calendar">
+    Runs once a month on a set day — e.g. account health review on the 1st
+  </Card>
+  <Card title="Annually" icon="calendar-check">
+    Runs once a year on a set date — e.g. annual renewal check-in
+  </Card>
+</CardGroup>
+
+<Info>
+All schedules run in your selected timezone. Full IANA timezone support (e.g. Australia/Sydney, America/New_York).
+</Info>
+
+## Managing schedules
+
+You can have up to **10 active schedules**. All management happens from the Schedules section of the Overview tab.
+
+<Tabs>
+  <Tab title="Pause and resume">
+    Temporarily stop a schedule without deleting it. Paused schedules show a "(paused)" label in the list. Resume at any time from the same menu.
+  </Tab>
+  <Tab title="Edit">
+    Update the message, frequency, time, or timezone for an existing schedule. Changes take effect from the next scheduled run.
+  </Tab>
+  <Tab title="Delete">
+    Remove a schedule permanently when it's no longer needed. This cannot be undone.
+  </Tab>
+</Tabs>
+
+Each schedule displays the last time it was triggered, so you can confirm it's running as expected.
+
+## Use cases
+
+<CardGroup cols={2}>
+  <Card title="Daily pipeline summaries" icon="chart-line">
+    "Every morning, summarize my open deals and highlight any at-risk accounts"
+  </Card>
+  <Card title="Weekly prospect research" icon="magnifying-glass">
+    "Every Monday, find 5 new prospects matching our ICP criteria and add them to my outreach list"
+  </Card>
+  <Card title="Recurring reporting" icon="calendar-week">
+    "Every Friday at 5pm, prepare a summary of this week's customer conversations from Gong"
+  </Card>
+  <Card title="Follow-up nudges" icon="bell">
+    "Every Tuesday, remind me of any contacts I haven't followed up with in 2+ weeks"
+  </Card>
+</CardGroup>

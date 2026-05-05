@@ -1,0 +1,165 @@
+---
+title: "Skills"
+description: "Repeatable workflows that your agent activates automatically based on what you ask for"
+---
+
+Skills are repeatable workflows that the agent activates based on what you ask for. Each skill defines the instructions, integrations, output format, and reference material for a specific task.
+
+When your request matches a skill, the agent loads it and follows the instructions step by step. You don't need to explain how to do the work — the agent already has everything it needs.
+
+## Where to find skills
+
+View and manage your skills in the **Skills** tab in the right-side menu.
+
+<Frame>
+  <img src="/images/where-to-find-your-skills.png" alt="Skills tab in the Super GTM right-side menu" />
+</Frame>
+
+Browse all available skills (project, user, and built-in), see which are active, and open any skill to view or edit its contents.
+
+## How the agent knows what's available
+
+The agent sees all available skills at the start of every conversation. When your request matches a skill, it activates the skill and loads the full instructions.
+
+<Tip>
+You don't need to reference skills by name. Just describe what you need, and the agent will match it to the right skill if one exists.
+</Tip>
+
+To reference a skill directly, use the `/` menu. Type `/` in the chat input to see your available skills, then filter by typing part of the skill name. Use the arrow keys to navigate and press Enter or Tab to insert the skill into your message.
+
+## How to create a skill
+
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+  <iframe src="https://app.supademo.com/embed/cmnzf14fj2zdv1q1evobspz8x" frameBorder="0" title="Creating a skill" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+</div>
+
+Ask the agent:
+
+> "Create a skill that does [description of the workflow]"
+
+The agent activates the built-in **Skill Creator** and walks you through defining the workflow, integrations, output format, and whether it should be a project skill (shared) or user skill (personal). The agent handles formatting and saving. You can also ask the agent to update an existing skill at any time.
+
+### Example: creating a post-meeting follow-up skill
+
+<Accordion title="Building the skill from a conversation">
+  After a sales call, you ask the agent:
+
+  > "Summarize my call with Relevance AI. Pull the action items, update the deal in HubSpot, and draft a follow-up email to the attendees."
+
+  The agent finds the meeting in Google Calendar, reads the transcript, extracts action items, updates HubSpot, and drafts the email. You refine:
+
+  > "Always include the deal stage and next scheduled meeting in the summary. Format the action items as a table with columns for action, owner, and deadline."
+
+  The agent adjusts the output. Now you tell it:
+
+  > "Make a skill out of this conversation."
+
+  The agent activates the Skill Creator, reviews the conversation, and builds a skill that captures the full workflow — steps, integrations, output format, and your formatting preferences. It saves the skill to your catalog. From then on, the agent can run that same workflow whenever you need it.
+</Accordion>
+
+<Accordion title="Using the skill afterward">
+  From then on, whenever you say something like:
+
+  - "Follow up on my call with Relevance AI"
+  - "I just got off a call with Sarah — process it"
+  - "Summarize my last meeting and update the CRM"
+
+  The agent matches your request to the skill and runs the same workflow.
+
+  **What you get back:**
+
+  - Meeting summary (date, attendees, duration, deal stage, next scheduled meeting)
+  - Action items table (action, owner, deadline)
+  - Confirmation of what was updated in HubSpot
+  - A draft follow-up email ready to send or edit
+  - Any open questions that need attention
+
+  The skill captures the process, not specific data. The agent adapts it to whatever meeting and CRM records are relevant.
+</Accordion>
+
+## Types of skills
+
+<Tabs>
+  <Tab title="Project skills">
+    Shared workflows available to everyone in your project. Use these for recurring tasks your team handles the same way — post-meeting follow-ups, pipeline reviews, or weekly reporting.
+
+    Only admins can create and edit project skills. All project members can use them.
+  </Tab>
+  <Tab title="User skills">
+    Personal workflows private to you. Use these for tasks tailored to your role or preferences — your specific outreach style, how you like reports formatted, or a workflow only you need.
+
+    Create and edit your own user skills freely. Other team members can discover and read them, but can't modify them.
+  </Tab>
+  <Tab title="Built-in skills">
+    Skills that ship with the platform. These include:
+
+    - **Skill Creator** — helps you build new skills (see [How to create a skill](#how-to-create-a-skill) above)
+    - **Meeting Prep & Summary** — prepares you for upcoming meetings using your calendar, transcripts, and notes. Requires a meeting integration like Google Calendar. Use it as a reference when creating your own skills.
+
+    Built-in skills are read-only and available to everyone.
+  </Tab>
+</Tabs>
+
+## Running skills on a schedule
+
+<Frame>
+  <img src="/images/run-your-skill-on-a-schedule.png" alt="Schedule configuration for running skills automatically" />
+</Frame>
+
+Skills don't have to be triggered by a conversation. Schedule the agent to run a skill automatically on a recurring basis — daily, weekly, monthly, or annually. Set up schedules in the **Overview** tab in the right-side panel.
+
+<Accordion title="Example: scheduling a Follow up all calls skill">
+  You have a skill called **Follow up all calls** that checks recent meetings, lists outstanding action items, and flags clients you haven't followed up with. You schedule it to run every weekday morning at 9am.
+
+  Each morning, the agent runs the skill, checks your calendar and CRM, and sends you a summary — missed follow-ups, overdue action items, and calls without a recap.
+</Accordion>
+
+This is useful for any skill that benefits from regular execution:
+
+<CardGroup cols={2}>
+  <Card title="Daily pipeline reviews" icon="chart-line">
+    Summarize deal movements, stale opportunities, and next actions each morning.
+  </Card>
+  <Card title="Weekly reporting" icon="calendar-week">
+    Generate end-of-week reports covering activity metrics, closed deals, and upcoming priorities.
+  </Card>
+  <Card title="CRM hygiene checks" icon="broom">
+    Flag missing fields, outdated contacts, and deals without recent activity.
+  </Card>
+  <Card title="Monday meeting prep" icon="mug-hot">
+    Brief you on upcoming meetings, attendee context, and open action items for the week.
+  </Card>
+</CardGroup>
+
+To set up a schedule, go to the **Schedules** section in the **Overview** tab. Choose the skill, set the cadence, and the agent runs it automatically. See [scheduled tasks](/get-started/chat/super-gtm/scheduled-tasks) for full details.
+
+## Tips for writing and managing skills
+
+The agent already knows how to create, refine, and consolidate skills through its built-in Skill Creator. These tips help you get more out of your skills.
+
+<AccordionGroup>
+  <Accordion title="Scope each skill to one workflow">
+    Each skill should handle one specific workflow — "post-meeting follow-up" or "weekly pipeline review," not "handle all my sales tasks." If you find yourself writing a skill that covers multiple unrelated workflows, split it into separate skills. You can always consolidate later once you've confirmed each piece works well on its own.
+  </Accordion>
+  <Accordion title="Describe when it should activate">
+    Include the kinds of things you'd say when you need this workflow. The agent uses these to match your requests to the right skill. Narrowly focused skills with clear descriptions produce more accurate matches.
+  </Accordion>
+  <Accordion title="Be specific about where to look">
+    Specify which integrations to use — "check HubSpot for the deal" is better than "check the CRM."
+  </Accordion>
+  <Accordion title="Define the output">
+    Describe what the result should look like so the agent delivers consistent output every time.
+  </Accordion>
+  <Accordion title="Reference memory">
+    If the skill should respect your preferences (email tone, formatting style), tell it to check your [memory](/get-started/chat/super-gtm/memory).
+  </Accordion>
+  <Accordion title="Don't over-specify">
+    Define a clear process, but let the agent adapt to the data it finds. Specific steps are good; hard-coded values are not.
+  </Accordion>
+  <Accordion title="Start with a user skill, then promote to project">
+    Use project skills for workflows the whole team runs the same way — post-meeting follow-ups, pipeline reviews, or weekly reporting. Use user skills for workflows tailored to your personal style or role. Start as a user skill and iterate through a few real scenarios until the results are consistent, then ask an admin to recreate it as a project skill. Each person's agent applies their own [memory](/get-started/chat/super-gtm/memory) when running a shared project skill, so the same skill adapts to individual preferences without needing separate versions.
+  </Accordion>
+  <Accordion title="Keep your catalog lean">
+    Fewer well-defined skills outperform a large collection of vague ones. The agent sees all available skills at the start of every conversation, and when too many overlap or have ambiguous descriptions, matching accuracy drops. Periodically review your skills in the **Skills** tab — consolidate overlapping skills (ask the agent: "consolidate my meeting follow-up skills into one") and remove any that haven't been triggered in several weeks. If your team uses project skills, treat the shared catalog as a curated set of your highest-value workflows.
+  </Accordion>
+</AccordionGroup>
