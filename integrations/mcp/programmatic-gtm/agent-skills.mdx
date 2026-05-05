@@ -54,14 +54,96 @@ The agent skills repository contains structured reference documentation that you
 
 <CardGroup cols={2}>
   <Card title="SKILL.md" icon="book">
-    The main skill definition — covers all 46 MCP tools, critical usage rules, and workflow patterns your assistant should follow.
+    The main skill definition — covers all 65 MCP tools, critical usage rules, and workflow patterns your assistant should follow.
   </Card>
   <Card title="Reference docs" icon="folder-open">
     Detailed guides for agents, tools, workforces, knowledge, analytics, and evals that the assistant reads when working on specific tasks.
   </Card>
 </CardGroup>
 
-### Topics covered
+---
+
+## Creating skills programmatically
+
+While you can manually create and edit `SKILL.md` files in the agent skills repository, you can also create and manage skills programmatically using the Skills API. This is useful for automation workflows, CI/CD pipelines, or any scenario where you need to generate or update skills without manual editing.
+
+### Structured fields
+
+The Skills API accepts four structured fields when creating or updating a skill:
+
+<AccordionGroup>
+  <Accordion title="name (required)">
+    A unique identifier for the skill. Must be lowercase with hyphens, maximum 64 characters.
+
+    Example: `pdf-processing`
+  </Accordion>
+
+  <Accordion title="description (required)">
+    A comprehensive description of what the skill does. This is used to help AI agents understand the skill's purpose and capabilities. Maximum 1024 characters.
+
+    Example: `Extracts text and tables from PDF files, fills PDF forms, and merges multiple PDFs`
+  </Accordion>
+
+  <Accordion title="when_to_use (optional)">
+    Activation hints that help AI agents determine when to use this skill. These hints appear in the skills catalog for trusted skills and provide specific guidance on the contexts or scenarios where the skill should be activated.
+
+    Unlike `description` (which explains what the skill does), `when_to_use` tells the agent when to reach for it. This distinction matters because an agent might recognize a skill is relevant to PDFs but not know whether to activate it for a general document question versus a specific PDF task.
+
+    Example: `Use when the user mentions PDFs, asks to extract data from documents, needs to fill forms, or wants to combine multiple files`
+  </Accordion>
+
+  <Accordion title="content">
+    The full Markdown content of the skill instructions. This is equivalent to the body of `SKILL.md` — include tool descriptions, usage patterns, critical rules, and any context the AI assistant needs to use the skill correctly.
+  </Accordion>
+</AccordionGroup>
+
+### Trusted skills
+
+Trusted skills are verified skills that appear in the skills catalog with enhanced visibility. When a skill is marked as trusted, the `when_to_use` field is displayed prominently to help AI agents decide whether to activate it for a given task. If you are building skills intended for catalog distribution, populate `when_to_use` with specific, scenario-based hints rather than generic descriptions.
+
+### Code example
+
+<Accordion title="Create a skill with all structured fields">
+```python
+import requests
+
+API_URL = "https://api.relevanceai.com/v1/skills"
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+}
+
+skill = {
+    "name": "pdf-processing",
+    "description": "Extracts text and tables from PDF files, fills PDF forms, and merges multiple PDFs",
+    "when_to_use": "Use when the user mentions PDFs, asks to extract data from documents, needs to fill forms, or wants to combine multiple files",
+    "content": """# PDF processing
+
+## Overview
+Use these tools to work with PDF files in Relevance AI.
+
+## Tools
+- `pdf_extract_text` — extracts plain text from a PDF file
+- `pdf_extract_tables` — returns structured table data from a PDF
+- `pdf_fill_form` — fills a PDF form given a field map
+- `pdf_merge` — combines multiple PDFs into one
+
+## Usage rules
+- Always check the file size before extracting — files over 50 MB may time out
+- Use `pdf_extract_tables` instead of `pdf_extract_text` when the user needs structured data
+- `pdf_fill_form` requires the exact field names from the PDF; fetch them with `pdf_get_form_fields` first
+""",
+}
+
+response = requests.post(API_URL, json=skill, headers=headers)
+response.raise_for_status()
+print(response.json())
+```
+</Accordion>
+
+---
+
+## Topics covered
 
 <CardGroup cols={3}>
   <Card title="Agents" icon="robot">
@@ -80,7 +162,10 @@ The agent skills repository contains structured reference documentation that you
     Usage metrics and reporting capabilities.
   </Card>
   <Card title="Evals" icon="check-double">
-    Testing agent behaviour with evaluation cases.
+    Full evaluation lifecycle — creating test sets and test cases, configuring evaluator rules and tool simulations, running evaluations, and monitoring batch results.
+  </Card>
+  <Card title="Slide Builder" icon="presentation-screen">
+    Creating presentations, managing BrandKits and Templates, exporting slides, and version history.
   </Card>
 </CardGroup>
 
