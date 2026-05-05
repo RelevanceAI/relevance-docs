@@ -7,6 +7,10 @@ Subagents let you connect any agent you've built in the Relevance AI builder to 
 
 This is the bridge between the agents your team has already built and the Super GTM chat experience — the work of designing, prompting, and configuring an agent in the builder is reused directly inside Super GTM.
 
+<Info>
+**Subagents replaces agents-as-skills.** Agents-as-skills was our original approach, where Super GTM would "become" a connected agent by reading its instructions and running its tools inline. That approach has been deprecated in favor of subagents, which run each connected agent in its own conversation with its own context.
+</Info>
+
 ## How it works
 
 Super GTM acts as an orchestrator. Connected subagents appear in its catalog at the start of every conversation, and Super GTM decides when to delegate to one based on the user's request and the subagent's description.
