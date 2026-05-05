@@ -1,0 +1,53 @@
+---
+title: 'Export agent conversations'
+sidebarTitle: 'Export conversations'
+description: 'Download conversation history from your Agents as JSON or CSV.'
+---
+
+# Export agent conversations
+
+You can export the full conversation history from any of your Agents as JSON or CSV. This is useful for analysis, archival, or migrating conversation data into external tools.
+
+## Export from the dashboard
+
+To export from the UI:
+
+1. Open your Agent
+2. Navigate to the **Conversations** tab
+3. Select the conversations you want to export
+4. Click **Export** and choose your format
+
+<Note>
+JSON exports include full message metadata. CSV exports flatten messages into rows with one column per metadata field.
+</Note>
+
+## Export via API
+
+You can also export programmatically using the `/agents/{agent_id}/conversations/export` endpoint. See the [API reference](/api-reference/agents) for full parameters.
+
+## Format details
+
+### JSON
+
+Each conversation is exported as a JSON object with the following structure:
+
+- `id` — conversation identifier
+- `agent_id` — the Agent that owns this conversation
+- `messages` — array of message objects
+- `created_at` — ISO 8601 timestamp
+
+### CSV
+
+CSV exports use one row per message with the following columns:
+
+| Column | Description |
+|--------|-------------|
+| conversation_id | Unique identifier for the conversation |
+| message_id | Unique identifier for the message |
+| role | Sender role: user, agent, or tool |
+| content | Message text content |
+| timestamp | When the message was sent |
+
+## Limits
+
+The maximum export size is 10,000 conversations per request. For larger exports, paginate using the `cursor` parameter.
