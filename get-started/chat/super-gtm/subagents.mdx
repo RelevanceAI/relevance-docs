@@ -8,7 +8,7 @@ Subagents let you connect any Agent you've built in the Relevance AI builder to 
 This is the bridge between the Agents your team has already built and the Super GTM chat experience — the work of designing, prompting, and configuring an Agent in the builder is reused directly inside Super GTM.
 
 <Info>
-**Subagents replaces agents-as-skills.** Agents-as-skills was our original approach, where Super GTM would "become" a connected agent by reading its instructions and running its tools inline. That approach has been deprecated in favor of subagents, which run each connected agent in its own conversation with its own context.
+Subagents replaces the deprecated agents-as-skills approach. Previously, Super GTM would "become" a connected Agent by reading its instructions and running its tools inline. Subagents instead run each connected Agent in its own conversation with its own context.
 </Info>
 
 ## How it works
@@ -21,10 +21,10 @@ Each subagent runs as a full agent in its own conversation — separate context,
   <Tab title="What Super GTM sees">
     For each connected subagent, Super GTM sees:
 
-    - The agent's **name**
-    - The agent's **description**
+    - The Agent's **name**
+    - The Agent's **description**
 
-    These two fields drive routing — Super GTM matches the user's request against the description to decide whether to invoke the subagent. A clear, specific description that explains what the agent does and when to use it is the single biggest factor in getting reliable routing.
+    These two fields drive routing — Super GTM matches the user's request against the description to decide whether to invoke the subagent. A clear, specific description that explains what the Agent does and when to use it is the single biggest factor in getting reliable routing.
   </Tab>
   <Tab title="What the subagent sees">
     When Super GTM first invokes a subagent, the subagent receives a single message with the instructions for the task. It does not see the rest of the Super GTM conversation, the user's memory, or any other context Super GTM has loaded.
@@ -45,7 +45,7 @@ Each subagent runs as a full agent in its own conversation — separate context,
     Go to [app.relevanceai.com](https://app.relevanceai.com) and open the Agent you want to connect.
   </Step>
   <Step title="Make sure the Agent has a name and description">
-    The Agent must have both before it can be used as a subagent. The description is what Super GTM reads when deciding whether to route to this agent — explain clearly what the agent does and when to use it.
+    The Agent must have both before it can be used as a subagent. The description is what Super GTM reads when deciding whether to route to this Agent — explain clearly what the Agent does and when to use it.
   </Step>
   <Step title="Open advanced settings">
     In the agent edit view, navigate to the **Advanced** section.
@@ -56,14 +56,14 @@ Each subagent runs as a full agent in its own conversation — separate context,
 </Steps>
 
 <Warning>
-The agent's description is the most important field for subagent performance. Super GTM reads it on every conversation to decide when to route a request to this agent. If the description is vague, missing, or written for end users rather than for the orchestrator, routing will be unreliable.
+The Agent's description is the most important field for subagent performance. Super GTM reads it on every conversation to decide when to route a request to this Agent. If the description is vague, missing, or written for end users rather than for the orchestrator, routing will be unreliable.
 </Warning>
 
 ## Writing a description that routes well
 
 The description should answer two questions clearly:
 
-1. **What does the agent do?** Be specific about the task — "drafts personalized cold outreach emails based on a prospect's LinkedIn profile" beats "writes emails."
+1. **What does the Agent do?** Be specific about the task — "drafts personalized cold outreach emails based on a prospect's LinkedIn profile" beats "writes emails."
 2. **When should Super GTM use it?** Describe the kind of request that should trigger it — "use when the user wants to write a first-touch email to a new prospect."
 
 <Accordion title="Example: a well-written subagent description">
