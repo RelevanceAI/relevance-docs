@@ -1,31 +1,61 @@
 ---
 title: "CRM Data Enrichment"
-description: "How to use AI agents to automatically enrich contact and company records in your CRM."
+description: "How to use AI Agents to automatically enrich contact and company records in your CRM."
 ---
 
 ## Overview
 
-Incomplete CRM data slows everything down — reps waste time looking up basics, lead routing breaks, and reporting becomes unreliable. An enrichment agent fills in the gaps automatically so your data stays clean without manual effort.
+Incomplete CRM data slows everything down — reps waste time looking up basics, lead routing breaks, and reporting becomes unreliable. An enrichment Agent fills in the gaps automatically so your data stays clean without manual effort.
 
-## What the agent does
+## What the Agent does
 
-An enrichment agent takes existing CRM records and fills in missing or outdated fields:
+An enrichment Agent takes existing CRM records and fills in missing or outdated fields.
 
-- Company size, industry, location, and revenue range
-- Contact job titles, seniority, and department
-- Technology stack and tools used
-- Social profiles and recent activity
-- Firmographic data from public sources
+<CardGroup cols={2}>
+  <Card title="Firmographics" icon="building">
+    Company size, industry, location, and revenue range.
+  </Card>
+  <Card title="Contact details" icon="user">
+    Job titles, seniority, and department.
+  </Card>
+  <Card title="Tech stack" icon="microchip">
+    Tools and platforms the company uses.
+  </Card>
+  <Card title="Social profiles" icon="user-tag">
+    Profiles and recent activity across LinkedIn, X, and the web.
+  </Card>
+  <Card title="Public data" icon="globe">
+    Firmographic data pulled from public sources.
+  </Card>
+</CardGroup>
 
 ## How to set it up
 
-1. Start with the [Lead Enricher](https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b) from the Marketplace, or [build your own](/build/introduction)
-2. Connect your CRM — [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce)
-3. Add web search and [LinkedIn](/integrations/popular-integrations/linkedin) tools for sourcing data
-4. Write a [prompt](/agent/build-your-agent/prompt) that defines which fields to enrich and what format to return
+<Steps>
+  <Step title="Start from a template">
+    Clone the [Lead Enricher](https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b) from the Marketplace, or [build your own](/build/introduction).
+  </Step>
+  <Step title="Connect your CRM">
+    Wire up [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) so the Agent can read and write records.
+  </Step>
+  <Step title="Add data sources">
+    Web search and [LinkedIn](/integrations/popular-integrations/linkedin) cover most enrichment needs out of the box.
+  </Step>
+  <Step title="Define the fields">
+    Write a [prompt](/build/agents/build-your-agent/prompt) that says which fields to enrich and what format to return.
+  </Step>
+</Steps>
 
 ## Scaling it
 
-- Set up a [Trigger](/agent/build-your-agent/triggers) to enrich new records as they enter the CRM
-- Use [Bulk Schedule](/agent/give-your-agent-tasks/bulk-schedule) to clean up existing records in batches
-- Chain enrichment into a [Workforce](/workforce/workforce-overview/quick-start-guide) that enriches → scores → routes leads automatically
+<CardGroup cols={3}>
+  <Card title="On record creation" icon="bolt" href="/build/agents/build-your-agent/triggers">
+    Set up a Trigger to enrich new records as they enter the CRM.
+  </Card>
+  <Card title="Backfill the existing data" icon="layer-group" href="/build/agents/give-your-agent-tasks/bulk-schedule">
+    Use Bulk Schedule to clean up existing records in batches.
+  </Card>
+  <Card title="Chain it into a flow" icon="diagram-project" href="/build/workforces/create-a-workforce">
+    Build a Workforce that enriches → scores → routes leads automatically.
+  </Card>
+</CardGroup>

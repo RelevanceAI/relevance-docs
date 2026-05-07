@@ -1,30 +1,58 @@
 ---
 title: "Personalized Outbound"
-description: "How to use AI agents to generate tailored outreach at scale."
+description: "How to use AI Agents to generate tailored outreach at scale."
 ---
 
 ## Overview
 
-Generic outreach gets ignored. Personalized messages get replies — but writing them one by one doesn't scale. An outbound agent uses real prospect context to draft tailored emails and LinkedIn messages so your team can send personalized outreach without the manual effort.
+Generic outreach gets ignored. Personalized messages get replies — but writing them one by one doesn't scale. An outbound Agent uses real prospect context to draft tailored emails and LinkedIn messages so your team can send personalized outreach without the manual effort.
 
-## What the agent does
+## What the Agent does
 
-An outbound agent takes prospect data and produces ready-to-send messages:
+An outbound Agent takes prospect data and produces ready-to-send messages.
 
-- Personalized cold emails referencing the prospect's company, role, and recent activity
-- LinkedIn connection requests with relevant context
-- Follow-up sequences that adapt based on previous touchpoints
-- Messaging that matches your team's tone and value props
+<CardGroup cols={2}>
+  <Card title="Cold emails" icon="envelope">
+    Personalized opens that reference the prospect's company, role, and recent activity.
+  </Card>
+  <Card title="LinkedIn outreach" icon="linkedin">
+    Connection requests and DMs with relevant context.
+  </Card>
+  <Card title="Adaptive follow-ups" icon="rotate">
+    Sequences that change shape based on what happened on the previous touch.
+  </Card>
+  <Card title="On-brand voice" icon="comment-dots">
+    Messaging that matches your team's tone and value props.
+  </Card>
+</CardGroup>
 
 ## How to set it up
 
-1. Start with [LinkedIn Outreach](https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4) from the Marketplace, or [build your own](/build/introduction)
-2. Connect [Gmail](/integrations/popular-integrations/gmail) or [Outlook](/integrations/popular-integrations/outlook) for email, and [LinkedIn](/integrations/popular-integrations/linkedin) for social
-3. Upload messaging playbooks, email templates, and tone-of-voice guides to [Knowledge](/knowledge/create-knowledge)
-4. Write a [prompt](/agent/build-your-agent/prompt) that defines your outreach style, structure, and what personalization to include
+<Steps>
+  <Step title="Start from a template">
+    Clone [LinkedIn Outreach](https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4) from the Marketplace, or [build your own](/build/introduction).
+  </Step>
+  <Step title="Connect your channels">
+    Wire up [Gmail](/integrations/popular-integrations/gmail) or [Outlook](/integrations/popular-integrations/outlook) for email, and [LinkedIn](/integrations/popular-integrations/linkedin) for social.
+  </Step>
+  <Step title="Upload your playbooks">
+    Drop messaging playbooks, email templates, and tone-of-voice guides into [Knowledge](/build/knowledge/create-knowledge).
+  </Step>
+  <Step title="Write the prompt">
+    A [prompt](/build/agents/build-your-agent/prompt) defines your outreach style, structure, and what personalization to include in every send.
+  </Step>
+</Steps>
 
 ## Scaling it
 
-- Use [Bulk Schedule](/agent/give-your-agent-tasks/bulk-schedule) to generate outreach for an entire prospect list
-- Build a [Workforce](/workforce/workforce-overview/quick-start-guide) where a research agent feeds context directly into the outbound agent
-- Add [Escalations](/agent/build-your-agent/escalations) so reps review messages for high-value accounts before sending
+<CardGroup cols={3}>
+  <Card title="Bulk outreach" icon="layer-group" href="/build/agents/give-your-agent-tasks/bulk-schedule">
+    Use Bulk Schedule to generate outreach for an entire prospect list in one pass.
+  </Card>
+  <Card title="Research-fed sequences" icon="diagram-project" href="/build/workforces/create-a-workforce">
+    Build a Workforce where a research Agent feeds prospect context directly into the outbound Agent.
+  </Card>
+  <Card title="Human review on high-value" icon="user-check" href="/build/agents/build-your-agent/alerts">
+    Use Alerts so reps review messages for high-value accounts before sending.
+  </Card>
+</CardGroup>

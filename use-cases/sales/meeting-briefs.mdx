@@ -1,30 +1,58 @@
 ---
 title: "Meeting Briefs & Account Summaries"
-description: "How to use AI agents to prepare reps with account context before every call."
+description: "How to use AI Agents to prepare reps with account context before every call."
 ---
 
 ## Overview
 
-Reps shouldn't be scrambling for context five minutes before a call. A meeting brief agent pulls together everything relevant about an account — recent conversations, deal history, company updates — into a quick summary a rep can scan in under a minute.
+Reps shouldn't be scrambling for context five minutes before a call. A meeting brief Agent pulls together everything relevant about an account — recent conversations, deal history, company updates — into a snapshot a rep can scan in under a minute.
 
-## What the agent does
+## What the Agent does
 
-A meeting brief agent compiles a snapshot of the account ahead of a scheduled call:
+A meeting brief Agent compiles a snapshot of the account ahead of a scheduled call.
 
-- Deal stage, value, and key stakeholders
-- Summary of recent emails, calls, and notes in the CRM
-- Company news, leadership changes, or funding events
-- Open support tickets or product feedback
-- Suggested talking points based on the deal context
+<CardGroup cols={2}>
+  <Card title="Deal context" icon="handshake">
+    Stage, value, and key stakeholders on the account.
+  </Card>
+  <Card title="Recent activity" icon="clock-rotate-left">
+    Summary of emails, calls, and notes from the CRM.
+  </Card>
+  <Card title="Company updates" icon="newspaper">
+    News, leadership changes, or funding events.
+  </Card>
+  <Card title="Customer signals" icon="ticket">
+    Open support tickets or product feedback worth knowing about.
+  </Card>
+  <Card title="Talking points" icon="comment-dots">
+    Suggested angles based on the deal context.
+  </Card>
+</CardGroup>
 
 ## How to set it up
 
-1. [Build an agent](/build/introduction) with a [prompt](/agent/build-your-agent/prompt) that defines your preferred brief format
-2. Connect your CRM — [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) — for deal and activity data
-3. Add [Gmail](/integrations/popular-integrations/gmail) or [Outlook](/integrations/popular-integrations/outlook) to pull recent email threads
-4. Add web search for company news and updates
+<Steps>
+  <Step title="Build an Agent">
+    [Build an Agent](/build/introduction) with a [prompt](/build/agents/build-your-agent/prompt) that defines your preferred brief format.
+  </Step>
+  <Step title="Connect your CRM">
+    Wire up [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) so the Agent can pull deal and activity data.
+  </Step>
+  <Step title="Add email">
+    [Gmail](/integrations/popular-integrations/gmail) or [Outlook](/integrations/popular-integrations/outlook) lets the Agent surface recent email threads.
+  </Step>
+  <Step title="Add research tools">
+    Web search covers company news and updates outside your own systems.
+  </Step>
+</Steps>
 
 ## Scaling it
 
-- Set up a [Trigger](/agent/build-your-agent/triggers) linked to [Google Calendar](/integrations/popular-integrations/google-calendar) so briefs are generated automatically before meetings
-- Build a [Workforce](/workforce/workforce-overview/quick-start-guide) that generates the brief and delivers it to the rep via [Slack](/integrations/popular-integrations/slack) or email
+<CardGroup cols={2}>
+  <Card title="Auto-brief from calendar" icon="calendar" href="/build/agents/build-your-agent/triggers">
+    Trigger from [Google Calendar](/integrations/popular-integrations/google-calendar) so briefs are generated automatically before each meeting.
+  </Card>
+  <Card title="Deliver to the rep" icon="paper-plane" href="/build/workforces/create-a-workforce">
+    Build a Workforce that generates the brief and delivers it via [Slack](/integrations/popular-integrations/slack) or email.
+  </Card>
+</CardGroup>

@@ -1,30 +1,58 @@
 ---
 title: "Lead Scoring & Qualification"
-description: "How to use AI agents to score and qualify leads so reps focus on the right accounts."
+description: "How to use AI Agents to score and qualify leads so reps focus on the right accounts."
 ---
 
 ## Overview
 
-Not every lead deserves the same attention. A lead scoring agent evaluates incoming leads against your ICP and buying signals so reps spend their time on the accounts most likely to close.
+Not every lead deserves the same attention. A scoring Agent evaluates incoming leads against your ICP and buying signals so reps spend their time on the accounts most likely to close.
 
-## What the agent does
+## What the Agent does
 
-A scoring agent takes lead data and returns a qualification assessment:
+A scoring Agent takes lead data and returns a qualification assessment.
 
-- Fit score based on ICP criteria (company size, industry, role, geography)
-- Intent signals from website activity, content engagement, or social behavior
-- Summary of why a lead scored high or low
-- Recommended next action — reach out, nurture, or disqualify
+<CardGroup cols={2}>
+  <Card title="Fit score" icon="bullseye">
+    Match against ICP criteria — company size, industry, role, geography.
+  </Card>
+  <Card title="Intent signals" icon="signal">
+    Website activity, content engagement, social behavior, and other buying signals.
+  </Card>
+  <Card title="Reasoning" icon="comment-dots">
+    A short summary of why the lead scored high or low — not just a number.
+  </Card>
+  <Card title="Recommended action" icon="arrow-right">
+    Reach out now, nurture, or disqualify.
+  </Card>
+</CardGroup>
 
 ## How to set it up
 
-1. [Build an agent](/build/introduction) and define your scoring criteria in the [prompt](/agent/build-your-agent/prompt)
-2. Connect your CRM — [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) — to pull lead data
-3. Upload your ICP definition and qualification framework to [Knowledge](/knowledge/create-knowledge)
-4. Add web search tools so the agent can research leads beyond what's in the CRM
+<Steps>
+  <Step title="Build an Agent">
+    [Build an Agent](/build/introduction) and define your scoring criteria in the [prompt](/build/agents/build-your-agent/prompt).
+  </Step>
+  <Step title="Connect your CRM">
+    Wire up [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) so the Agent can pull lead data.
+  </Step>
+  <Step title="Upload your scoring framework">
+    Drop your ICP definition and qualification framework into [Knowledge](/build/knowledge/create-knowledge) so every score reflects your team's lens.
+  </Step>
+  <Step title="Add research tools">
+    Web search lets the Agent look beyond what's already in the CRM when the record is thin.
+  </Step>
+</Steps>
 
 ## Scaling it
 
-- Set up a [Trigger](/agent/build-your-agent/triggers) to score leads as soon as they enter the pipeline
-- Use [Bulk Schedule](/agent/give-your-agent-tasks/bulk-schedule) to re-score existing leads after updating your ICP
-- Chain into a [Workforce](/workforce/workforce-overview/quick-start-guide) where scored leads automatically get routed to the right rep or outreach sequence
+<CardGroup cols={3}>
+  <Card title="Score on entry" icon="bolt" href="/build/agents/build-your-agent/triggers">
+    Trigger scoring the moment a lead enters the pipeline.
+  </Card>
+  <Card title="Re-score in batches" icon="layer-group" href="/build/agents/give-your-agent-tasks/bulk-schedule">
+    Use Bulk Schedule to re-score existing leads after updating your ICP.
+  </Card>
+  <Card title="Auto-route by score" icon="diagram-project" href="/build/workforces/create-a-workforce">
+    Build a Workforce that routes scored leads to the right rep or outreach sequence.
+  </Card>
+</CardGroup>
