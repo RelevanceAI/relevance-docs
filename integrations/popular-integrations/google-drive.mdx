@@ -3,7 +3,9 @@ title: 'Google Drive'
 description: 'Trigger your Agents automatically when files in Google Drive are created, modified, or deleted.'
 ---
 
-Connect your Google Drive account to Relevance AI and configure your Agents to respond automatically when files in your Google Drive change, or give them tool steps to read, create, and manage files directly.
+## Overview
+
+Connect your Google Drive account to Relevance AI and configure your Agents to respond automatically when files change, or give them tool steps to read, create, and manage files directly in Drive.
 
 <Info>The Google Drive trigger is currently rolling out in early access. If you don't see it in your account yet, it will become available soon.</Info>
 
@@ -11,21 +13,23 @@ Connect your Google Drive account to Relevance AI and configure your Agents to r
 
 1. Navigate to the "Integrations & API Keys" page in the sidebar of your Relevance AI dashboard.
 2. Click on "Google Drive" from the available integrations.
-3. Click the "Add Integration" button.
+3. Click the **+ Connect account** button.
 4. In the pop-up window, sign into your Google account and authorize the connection.
 5. Once authorized, your Google account will appear in the connected accounts list.
 
 ## Setting up triggers
 
-The Google Drive integration lets you trigger Agents automatically when files are created, modified, or deleted. You can also filter to a specific folder so only changes within that folder activate your Agent.
+The Google Drive integration lets you trigger Agents automatically when files in a Google Drive change. The trigger fires on every change within the drive (or folders) you watch — created, modified, trashed, or removed — and the event type is included in the message your Agent receives.
 
-### Available Google Drive triggers
+### What fires the trigger
 
-- **File created** — triggers when a new file is added to your Google Drive or monitored folder
-- **File modified** — triggers when an existing file is updated
-- **File deleted** — triggers when a file is removed from your Google Drive or monitored folder
+A Google Drive trigger fires on each of the following events within the drive or folders you've selected:
 
-<Note>Conversations are threaded by file ID. Multiple changes to the same file continue in the same conversation thread, so your Agent maintains full context across a file's history.</Note>
+- **File created** — a new file is added
+- **File modified** — an existing file is updated
+- **File deleted** — a file is moved to trash or permanently removed
+
+<Note>Each Google Drive file gets its own ongoing conversation. When the same file changes again, your Agent picks up where it left off rather than starting a new conversation — so it has the full history for each file.</Note>
 
 ### How to set up a Google Drive trigger
 
@@ -33,28 +37,25 @@ The setup process differs slightly depending on whether you're configuring a tri
 
 #### For Agents
 
-1. Navigate to the Agent builder by selecting the Agent you want to configure.
-2. In the left sidebar, locate and click the "Triggers" section.
-3. Click the "Add trigger" button, then select "Google Drive" from the available trigger types.
-4. Choose the connected Google account you want to use. If you haven't connected one yet, do so first in the Integrations & API Keys page.
-5. Select the trigger event:
-   - **File created** — triggers when a new file is added
-   - **File modified** — triggers when a file is updated
-   - **File deleted** — triggers when a file is removed
-6. Optionally, specify a folder to monitor. Only file events within that folder will activate your Agent.
+1. Open the Agent you want to configure in the Agent builder.
+2. In the left sidebar, click the "Triggers" section.
+3. Click **+ Add trigger** and select "Google Drive" from the trigger types.
+4. Choose the connected Google account you want to use. If you haven't connected one yet, set it up first in the Integrations & API Keys page.
+5. Select a **Drive** — defaults to "My Drive", or pick any shared drive you have access to.
+6. Optionally, select one or more **Folders** to restrict the watch to only those folders. Leave empty to watch the entire drive.
+7. Optionally, enable **Watch for file property changes** to also trigger on changes to custom file properties (not just content changes).
+8. Save the trigger.
 
 #### For Workforces
 
-1. Navigate to the Workforce builder by selecting the Workforce you want to configure.
-2. In the Build section, locate the "Triggers" section in the node palette on the left. Drag a trigger node onto your workspace.
+1. Open the Workforce you want to configure in the Workforce builder.
+2. In the **Triggers** section at the bottom of the screen, drag a trigger node onto your workspace.
 3. Click the trigger node to open its configuration panel, then select "Google Drive" as the trigger type.
-4. Choose the connected Google account you want to use. If you haven't connected one yet, do so first in the Integrations & API Keys page.
-5. Select the trigger event:
-   - **File created** — triggers when a new file is added
-   - **File modified** — triggers when a file is updated
-   - **File deleted** — triggers when a file is removed
-6. Optionally, specify a folder to monitor. Only file events within that folder will activate your Agents.
-7. Drag a connection line from the trigger node to the Agent in your Workforce that should respond when the trigger fires.
+4. Choose the connected Google account you want to use. If you haven't connected one yet, set it up first in the Integrations & API Keys page.
+5. Select a **Drive** — defaults to "My Drive", or pick any shared drive you have access to.
+6. Optionally, select one or more **Folders** to restrict the watch.
+7. Optionally, enable **Watch for file property changes**.
+8. Drag a connection line from the trigger node to the Agent that should respond when the trigger fires.
 
 ## Tool steps
 
