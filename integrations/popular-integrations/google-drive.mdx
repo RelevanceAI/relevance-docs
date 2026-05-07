@@ -3,7 +3,7 @@ title: 'Google Drive'
 description: 'Trigger your Agents automatically when files in Google Drive are created, modified, or deleted.'
 ---
 
-Connect your Google Drive account to Relevance AI and configure your Agents to respond automatically when files in your Google Drive change.
+Connect your Google Drive account to Relevance AI and configure your Agents to respond automatically when files in your Google Drive change, or give them tool steps to read, create, and manage files directly.
 
 <Info>The Google Drive trigger is currently rolling out in early access. If you don't see it in your account yet, it will become available soon.</Info>
 
@@ -55,6 +55,77 @@ The setup process differs slightly depending on whether you're configuring a tri
    - **File deleted** — triggers when a file is removed
 6. Optionally, specify a folder to monitor. Only file events within that folder will activate your Agents.
 7. Drag a connection line from the trigger node to the Agent in your Workforce that should respond when the trigger fires.
+
+## Tool steps
+
+Beyond triggers, the Google Drive integration provides pre-built tool steps your Agents can use to read, create, and manage files in Drive. Add these in the Tool builder by searching "Google Drive" in the tool-step picker.
+
+### File operations
+
+- **Google Drive: Upload File** — upload a file to Google Drive
+- **Google Drive: Download File** — download a file from Google Drive (specify a MIME type to export Google Workspace files like Docs, Sheets, or Slides)
+- **Google Drive: Create File from Text** — create a new file from plain text
+- **Google Drive: Create File from Template** — create a new Google Doc from a template, replacing placeholders
+- **Google Drive: Update File** — update a file's metadata or content
+- **Google Drive: Copy File** — duplicate a file
+- **Google Drive: Move File** — move a file from one folder to another
+- **Google Drive: Move to Trash** — send a file or folder to trash
+- **Google Drive: Delete File** — permanently delete a file or folder
+
+### Search and discovery
+
+- **Google Drive: List Files** — list files from a specific folder
+- **Google Drive: Find File** — search for a file by name
+- **Google Drive: Find Folder** — search for a folder by name
+- **Google Drive: Find Forms** — list or search Google Form documents
+- **Google Drive: Find Spreadsheets** — search for Google Sheets by name
+- **Google Drive: Get File by ID** — fetch file metadata by ID
+- **Google Drive: Get Folder ID for Path** — resolve a folder path to its ID
+
+### Folders
+
+- **Google Drive: Create Folder** — create a new empty folder
+
+### Shared drives
+
+- **Google Drive: Create Shared Drive** — create a new shared drive
+- **Google Drive: Get Shared Drive** — fetch metadata for a shared drive
+- **Google Drive: Search Shared Drives** — search for shared drives
+- **Google Drive: Update Shared Drive** — update an existing shared drive
+- **Google Drive: Delete Shared Drive** — delete an empty shared drive
+
+### Sharing and permissions
+
+- **Google Drive: Share File or Folder** — add a sharing permission and return a sharing URL
+- **Google Drive: List Access Proposals** — list pending requests for access to a file or folder
+- **Google Drive: Resolve Access Proposal** — accept or deny a request for access
+
+## Use the Google Drive API tool step (advanced)
+
+For actions that aren't covered by a dedicated tool step, the **Google Drive API call** tool step lets your Agent make authorized requests directly to the Google Drive API.
+
+1. Create a new Tool in Relevance AI.
+2. Scroll to the Tool steps section.
+3. Add the **Google Drive API call** tool step.
+4. Select your connected Google account in the dropdown.
+5. Configure the request — endpoint, method, parameters, and body — based on the [Google Drive API reference](https://developers.google.com/drive/api/reference/rest/v3).
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What's the difference between a Google Drive trigger and Google Drive as a knowledge source?">
+    Triggers fire your Agent automatically when files in Google Drive change — created, modified, or deleted. A knowledge source gives your Agent read access to specific files so it can reference them during a conversation. You can use both together: a trigger to start the conversation, and a knowledge source to give the Agent ongoing context.
+  </Accordion>
+  <Accordion title="Can Agents work with shared drives or only My Drive?">
+    Both. The trigger config supports selecting either My Drive or any shared drive you have access to, and the tool steps include a full set of shared-drive actions for creating, searching, and updating shared drives.
+  </Accordion>
+  <Accordion title="Can I connect multiple Google accounts?">
+    Yes. Connect each account in the Integrations & API Keys page, then choose which connected account each trigger or tool step uses.
+  </Accordion>
+  <Accordion title="Does it work with personal Gmail and Google Workspace accounts?">
+    Both work. Sign in with whichever account has access to the files or folders you want your Agent to watch or act on.
+  </Accordion>
+</AccordionGroup>
 
 ## Google Drive as a knowledge source
 
