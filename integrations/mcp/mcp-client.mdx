@@ -10,7 +10,7 @@ The MCP client integration lets you connect remote MCP servers to your Relevance
   This page is about connecting external MCP servers **to** Relevance AI agents. If you want to use Relevance AI **from** an AI client like Claude or Cursor, see [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction).
 </Warning>
 
-## Setting up an MCP connection for agents
+## Setting up an MCP connection for Agents
 
 Agents can connect to remote MCP servers to run tools and read resources exposed by those servers. You can choose from preset connections for popular services or connect your own custom MCP server.
 
@@ -29,7 +29,7 @@ Agents can connect to remote MCP servers to run tools and read resources exposed
   The connection label you provide will appear in tool descriptions as `(MCP: connection-name)`. This helps agents distinguish between tools from different connections, especially when using multiple instances of the same MCP server.
 </Note>
 
-Once connected, the agent automatically fetches and displays the available tools from the MCP server. Tools appear in the conversation task view and can be referenced in the agent's core instructions. If the server also exposes resources (read-only data such as documentation or schemas), the agent can read those in the background when it needs context — no extra configuration required.
+Once connected, the agent automatically fetches and displays the available tools from the MCP server. Tools appear in the conversation task view and can be referenced in the agent's core instructions.
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
 
@@ -79,10 +79,6 @@ This is useful when you need different authentication contexts (e.g. separate us
 <AccordionGroup>
   <Accordion title="What types of MCP servers can I connect?">
     You can connect any remote MCP server that supports the Streamable HTTP transport. This includes servers from services like Linear, Notion, GitHub, and any custom MCP servers you host.
-  </Accordion>
-
-  <Accordion title="What is the difference between MCP tools and MCP resources?">
-    Tools perform actions (creating a record, sending a message). Resources are read-only data the agent can pull in for context (documentation, schemas). When you connect an MCP server, the agent gets access to both automatically — no extra setup for resources.
   </Accordion>
 
   <Accordion title="Can I connect multiple MCP servers to one agent?">
