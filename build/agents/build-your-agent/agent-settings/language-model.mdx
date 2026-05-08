@@ -13,11 +13,13 @@ description: "Access advanced settings related to the Language Model for your Ag
 - **Advanced models:** May offer improved reasoning but at higher cost
 - **Specialized models:** Optimized for specific tasks like coding or creative writing
 
-**Tip:** If you're just getting started, stick with the default model. You can always upgrade later as your needs evolve.
+<Tip>
+If you're just getting started, stick with the default model. You can always upgrade later as your needs evolve.
+</Tip>
 
 ---
 
-### Maximum Output Tokens
+### Maximum output tokens
 
 **What it is:** Override how much content an agent's model can generate as part of its reasoning, decision making, and text generation. Explicitly setting a larger limit (8,000 or higher) may be required for agents performing complex tasks with many tools and large inputs.
 
@@ -50,7 +52,7 @@ Adjust based on whether you need brief updates or comprehensive explanations fro
 
 ### Reasoning / Thinking
 
-**What it is:** For supported models (OpenAI, Google, Anthropic), you can configure your models to use output tokens to 'reason'. Decisions will be slower and cost more, but improves performance on complex problems. Ignored unless your selected agent model supports reasoning and you choose a consistent config, e.g. use OpenAI reasoning effort for OpenAI o-series models.
+**What it is:** For supported models (OpenAI, Google, Anthropic), you can configure your models to use output tokens to 'reason'. Decisions will be slower and cost more, but it improves performance on complex problems. Ignored unless your selected agent model supports reasoning and you choose a consistent config, e.g. use OpenAI reasoning effort for OpenAI o-series models.
 
 **How to set it:**
 
@@ -61,7 +63,31 @@ Using the 'Provider' dropdown, set this to match the model you've chosen for you
 
 ---
 
-### Fallback Model
+### Parallel Tool Calls <Badge color="orange">Beta</Badge>
+
+**What it is:** Allows an agent to execute multiple tools or hand off multiple tasks to other agents at the same time, rather than one at a time. When enabled, the agent can issue parallel tool calls in a single step, which can significantly reduce overall execution time for workflows with independent operations.
+
+**When to use it:**
+
+- Running multiple independent operations at once (for example, querying several data sources in a single step)
+- Gathering information from multiple sources simultaneously
+- Reducing overall execution time when individual tool calls don't depend on each other's results
+- Parallel agent workflows in Workforces where sub-agents can operate independently
+
+**How to configure:**
+
+1. Open your agent and click **Advanced** in the bottom-left of the agent builder
+2. In Advanced settings, go to the **Language Model** tab
+3. Toggle on **Parallel Tool Calls**
+4. For agent-to-agent handovers in the Workforce Builder: select the connection, open **Edge Settings**, and set **Task Behavior** to **Create new task**
+
+<Note>
+If the agent is part of a Workforce, set all of its outbound connections to use **Create new task** as their Task Behavior to get the parallel speedup. The Workforce Builder highlights conflicting connections in yellow as a reminder. See [Edge Settings](/build/workforces/build-an-ai-workforce/edge-settings) for details on configuring Task Behavior for Workforce connections.
+</Note>
+
+---
+
+### Fallback model
 
 **What it is:** A backup language model that automatically retries failed tasks when your primary model encounters errors or fails to respond. If your agent's primary model fails to complete a task, the fallback model will automatically retry the task **one time**. If the fallback model also fails, the task will fail as usual and follow your configured error handling behavior.
 
@@ -79,5 +105,5 @@ Using the 'Provider' dropdown, set this to match the model you've chosen for you
 4. Under **Fallback model**, select a model to rerun failed tasks on
 
 <Tip>
-**Best practice:** Choose a fallback model from a **different provider** than your primary model. For example, if you're using Gemini as your primary model, select an OpenAI model (like GPT-5) as your fallback. This eliminates the chance of another provider-specific error and maximizes reliability.
+Choose a fallback model from a **different provider** than your primary model. For example, if you're using Gemini as your primary model, select an OpenAI model (like GPT-5) as your fallback. This eliminates the chance of another provider-specific error and maximizes reliability.
 </Tip>
