@@ -150,9 +150,9 @@ Use the **Invent** feature to automatically generate a smart, structured prompt 
 
 You can also manually type your prompt from scratch if you want full control over how your Agent behaves and what tasks it focuses on. Clear, specific prompts produce the best results.
 
-### Reference Tools in Your Prompt
+### Reference tools in your prompt
 
-While writing your instructions, you can reference specific Tools (e.g., "Use the **Extract Text from PDF** tool to pull invoice data."). This lets the Agent know exactly _which_ tools to use when completing tasks.
+While writing your instructions, you can reference specific tools (e.g., "Use the **Extract Text from PDF** tool to pull invoice data."). This tells the agent exactly _which_ tools to use when completing tasks. You can also [swap a referenced tool](#swap-tools-in-your-prompt) directly from the prompt editor without leaving the page.
 
 ### Use the Slash ( / ) Menu
 
@@ -160,13 +160,24 @@ While writing your instructions, you can reference specific Tools (e.g., "Use th
 
 Type **/** to open the Slash menu and quickly insert shortcuts like:
 
-- Referencing available Tools
-- Adding Tool Placeholders
-- Adding Markdown Styles for your Prompt
+- Referencing available tools
+- Adding tool placeholders
+- Adding Markdown styles for your prompt
 
 This speeds up writing structured and action-driven prompts.
 
-### Create or Invent New Tools from the Slash Menu
+### Swap tools in your prompt
+
+When your prompt references a tool, you can replace it without leaving the editor. Hover over the tool mention in the prompt and click the **Swap** button that appears. You can choose a replacement from:
+
+- Tools already added to the agent
+- The full tool library
+
+When you swap a tool out and it's no longer referenced anywhere in the prompt, Relevance AI automatically disables it so the agent doesn't have access to tools it won't use. If you swap in a tool that was previously disabled, it gets re-enabled automatically. This keeps the agent's tool list accurate without any manual cleanup.
+
+For more on configuring and managing tools, see the [Tools page](/build/agents/build-your-agent/tools).
+
+### Create or invent new tools from the Slash menu
 
 If you insert a **Tool Placeholder** using the Slash menu, you can immediately **Invent** a new tool or **create one manually** — no need to leave the prompt\!\
 (Note: Currently, Invented Tools will still need to be customized in the separate **Tool Builder** section)
