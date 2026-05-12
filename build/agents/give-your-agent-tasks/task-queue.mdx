@@ -71,7 +71,16 @@ The task queue provides valuable insights about what's being imported and proces
 
 These insights help you understand your agent's workload and make informed decisions about scaling or adjusting your task schedules.
 
-## Best Practices
+## Filtering tasks by failure type
+
+When reviewing failed tasks, you can use the task filter builder to narrow down exactly which tasks had problems:
+
+- **Has active tool failures** — filters to tasks where one or more tools failed during execution, even if the agent kept running
+- **Agent has errored** — filters to tasks where the agent itself stopped due to an error
+
+These filters help you separate tool-level failures from agent-level failures, which often point to different root causes. For a full explanation of how to configure and combine these filters, see [Task View Settings](/build/agents/build-your-agent/agent-settings/task-view#filtering-tasks-by-error-and-status).
+
+## Best practices
 
 - **Monitor regularly**: Check your task queue regularly to ensure tasks are processing as expected
 - **Review failed tasks**: Pay attention to failed tasks to identify patterns or issues that need addressing
