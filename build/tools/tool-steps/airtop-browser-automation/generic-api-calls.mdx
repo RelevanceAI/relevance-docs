@@ -1,0 +1,64 @@
+---
+title: "Airtop - Generic API calls"
+sidebarTitle: "Generic API calls"
+description: "Make direct API calls to Airtop or execute browser API operations with Airtop browser automation"
+---
+
+<Note>
+  Before using Airtop browser automation tool steps, you need to configure the Airtop integration. See the [Airtop integration setup guide](/integrations/popular-integrations/airtop) for instructions on connecting your Airtop account.
+</Note>
+
+The Airtop Generic API Call tool steps allow you to interact with Airtop's API directly or execute browser-level API operations, giving you access to capabilities not covered by the dedicated tool steps.
+
+## Add the 'Airtop - Generic API Call' Tool step
+
+You can add the 'Airtop - Generic API Call' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Generic API Call' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Method** (Required): Select the HTTP method for the request (`GET`, `POST`, `PUT`, `PATCH`, or `DELETE`).
+5. **Endpoint** (Required): Enter the Airtop API endpoint path (e.g., `/v1/sessions`). Type `{{` to select a variable.
+6. **Request Body** (Optional): Enter a JSON object to send as the request body. Type `{{` to select a variable or enter the JSON directly.
+7. **Query Parameters** (Optional): Enter key-value pairs to append as query parameters to the request URL.
+8. Clicking `Run step` to test out the Tool
+
+The step sends an authenticated request to the specified Airtop API endpoint and returns the response. Use this step to call Airtop API endpoints that do not have a dedicated tool step, or when you need fine-grained control over the request payload.
+
+<Tip>
+  Refer to the [Airtop API documentation](https://docs.airtop.ai/) for available endpoints and required request formats.
+</Tip>
+
+## Add the 'Airtop - Browser API Call' Tool step
+
+You can add the 'Airtop - Browser API Call' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Browser API Call' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window in which to execute the call. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Method** (Required): Select the HTTP method for the request (`GET`, `POST`, `PUT`, `PATCH`, or `DELETE`).
+7. **Endpoint** (Required): Enter the Airtop browser API endpoint path. Type `{{` to select a variable.
+8. **Request Body** (Optional): Enter a JSON object to send as the request body. Type `{{` to select a variable or enter the JSON directly.
+9. Clicking `Run step` to test out the Tool
+
+The step sends an authenticated request to the specified Airtop browser API endpoint in the context of the given session and window, then returns the response. Use this step to access browser-level operations (such as Chrome DevTools Protocol commands) or session-scoped API capabilities not exposed by other tool steps.
+
+## Common use cases
+
+- Accessing Airtop API features not covered by dedicated tool steps
+- Executing browser-level operations using the Chrome DevTools Protocol
+- Retrieving session state or metadata directly from the Airtop API
+- Integrating custom Airtop workflows into a broader automation pipeline
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="When should I use Generic API Call instead of a dedicated step?">
+    Use the Generic API Call step when no dedicated step covers the operation you need, or when you require precise control over the request body or headers. For common tasks like clicking, typing, or taking screenshots, the dedicated steps are easier to configure.
+  </Accordion>
+  <Accordion title="Does the Generic API Call step handle authentication automatically?">
+    Yes, both steps automatically use the Airtop API key configured in your Airtop integration. You do not need to add authorization headers manually.
+  </Accordion>
+</AccordionGroup>
