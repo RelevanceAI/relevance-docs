@@ -1,0 +1,108 @@
+---
+title: "Gong"
+description: "Connect Gong to Relevance AI to access call recordings, transcripts, and revenue intelligence data."
+sidebarTitle: "Gong"
+---
+
+Gong is a revenue intelligence platform that records, transcribes, and analyzes sales calls and customer conversations. It surfaces insights from your team's interactions to help you understand deal health, coaching opportunities, and customer sentiment.
+
+With the native Gong integration in Relevance AI, your agents can retrieve call data, pull transcripts, and interact with Gong's API directly — without any third-party connectors.
+
+<Note>
+  If you previously used Pipedream-based Gong actions, migrate to these native tools. They offer the same functionality with a simpler OAuth-based connection.
+</Note>
+
+## Connect the integration
+
+The Gong integration uses OAuth, so no API keys are required. You authenticate directly with your Gong account.
+
+1. Go to the **Integrations & API Keys** page in the sidebar of your Relevance AI dashboard.
+2. Find **Gong** in the list of available integrations.
+3. Click **Add Integration**.
+4. In the pop-up window, sign into your Gong account and authorize the requested permissions.
+5. Once authenticated, your Gong account appears as a connected integration.
+
+<Note>
+  You need a Gong account with API access enabled. Gong API access typically requires Technical Admin permissions — check with your Gong administrator if you cannot complete the authorization.
+</Note>
+
+## Tool steps for Gong
+
+The Gong integration provides five tool steps that your agents can use to interact with your call data. Add these to any tool in the tool builder by searching for "Gong" in the tool step search bar.
+
+### Call data
+
+<CardGroup cols={2}>
+  <Card title="List Calls" icon="list">
+    Retrieve a list of calls from your Gong account, filterable by date range, participants, and other criteria.
+  </Card>
+  <Card title="Get Extensive Call Data" icon="chart-bar">
+    Fetch detailed metadata and analytics for a specific call, including duration, participants, talk ratios, and engagement metrics.
+  </Card>
+  <Card title="Retrieve Call Transcripts" icon="file-lines">
+    Pull the full transcript for a call, with speaker-identified turns and timestamps.
+  </Card>
+  <Card title="Add New Calls" icon="plus">
+    Add call records to Gong, such as uploading recordings from other platforms or logging external conversations.
+  </Card>
+</CardGroup>
+
+### Advanced
+
+<CardGroup cols={1}>
+  <Card title="Generic Gong API Call" icon="code">
+    Make any request to the Gong REST API. Use this when you need functionality beyond the pre-built tool steps.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Gong" in the tool step search bar to see all available Gong actions when building your tools.
+</Tip>
+
+## Example use cases
+
+<AccordionGroup>
+  <Accordion title="Automated deal briefings from call data" icon="briefcase">
+    After a sales call is processed in Gong, an agent retrieves the transcript and key moments, then generates a deal briefing summarizing the prospect's pain points, objections, and agreed next steps. The briefing is pushed to your CRM automatically.
+  </Accordion>
+
+  <Accordion title="Call coaching summaries" icon="chalkboard-user">
+    An agent pulls recent calls for a sales rep, analyzes the transcripts for coaching signals (talk ratio, question frequency, filler words), and produces a personalized coaching report for their manager.
+  </Accordion>
+
+  <Accordion title="CRM enrichment after calls" icon="database">
+    When a call ends, an agent retrieves the extensive call data and transcript, extracts relevant fields (budget mentioned, decision-maker identified, competitor named), and updates the corresponding CRM record.
+  </Accordion>
+
+  <Accordion title="Competitive intelligence tracking" icon="magnifying-glass-chart">
+    An agent regularly scans call transcripts for competitor mentions, aggregates the findings, and produces a weekly competitive intelligence digest for the product and sales leadership teams.
+  </Accordion>
+
+  <Accordion title="Customer feedback extraction" icon="comments">
+    An agent retrieves transcripts from customer success calls, identifies recurring feedback themes, and routes them to the appropriate product or support teams.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What Gong permissions are required to connect?">
+    You need a Gong account with API access. In most organizations, this requires Technical Admin permissions in Gong. Contact your Gong administrator if the OAuth authorization fails or you do not see an API access option in your Gong settings.
+  </Accordion>
+
+  <Accordion title="Can I connect multiple Gong accounts?">
+    Yes. You can add multiple Gong integrations to your Relevance AI workspace, each authenticated with a different Gong account.
+  </Accordion>
+
+  <Accordion title="How do I migrate from the previous Pipedream-based Gong actions?">
+    Connect the native Gong integration via OAuth (see steps above), then replace any Pipedream-based Gong tool steps in your tools with the equivalent native tool steps. The native tools cover the same core functionality and do not require a separate Pipedream account.
+  </Accordion>
+
+  <Accordion title="Can the integration access calls in real time?">
+    The integration can only access calls that have already been processed and indexed in Gong. There is typically a short delay after a call ends before it is available via the API. Real-time call access is not supported.
+  </Accordion>
+
+  <Accordion title="Are there rate limits?">
+    Gong enforces API rate limits based on your Gong plan and usage tier. If you encounter rate limit errors, reduce the frequency of API calls or contact Gong support to review your limits.
+  </Accordion>
+</AccordionGroup>
