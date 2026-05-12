@@ -117,7 +117,7 @@ To create a global Evaluator:
 6. Click **Create Evaluator**
 
 <Note>
-When you run a Test scenario, scenario-level Evaluators are always included automatically. You can also add or remove global Evaluators (from the Evaluators tab) before each run, allowing you to mix standard criteria with scenario-specific evaluation rules.
+When you run a Test scenario, scenario-level Evaluators are always included automatically. Global Evaluators are not included by default — you must explicitly opt in to **Additional global checks** in the evaluation modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) to include them.
 </Note>
 
 ---
@@ -223,7 +223,7 @@ You can run an entire Test Suite or an individual Test scenario from within a Te
 You can select specific Test scenarios within a Test Suite to run certain ones at once, or run all scenarios in the Test Suite together. Note that you cannot bulk select and run multiple Test Suites at the same time.
 
 1. Enter a name for the evaluation run (e.g., "Scenario Run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
-2. Select which global Evaluators to include in the run — you can add or remove global Evaluators before starting. Scenario-level Evaluators are always included automatically.
+2. Scenario-level Evaluators are always included automatically. Global Evaluators are not included by default — to include them, expand **Additional global checks** and select the global Evaluators you want to add to this run.
 3. Click **Run** to begin. The system will simulate conversations with your Agent based on your scenario prompts and evaluate them with your selected Evaluators.
 
 ---
@@ -353,6 +353,10 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
 <AccordionGroup>
   <Accordion title="How many scenarios can I have in a Test Suite?">
     You can add as many scenarios as needed to a single Test Suite. Each scenario is evaluated independently and can have its own Evaluators.
+  </Accordion>
+
+  <Accordion title="How many Evaluators can I add to a scenario?">
+    Each scenario supports up to 10 Evaluators. This applies to scenario-level Evaluators defined within the scenario itself. Global Evaluators added via **Additional global checks** at run time are counted separately.
   </Accordion>
 
   <Accordion title="How are credits calculated for evaluations?">
