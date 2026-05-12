@@ -1,0 +1,47 @@
+---
+title: "Draft and publish"
+sidebarTitle: "Draft and publish"
+description: "How the draft/publish model works when building agents in Relevance AI."
+---
+
+All changes to an agent in Inventor and Builder save as drafts first. Nothing goes live until you explicitly publish.
+
+This applies to every type of change: creating a new agent, editing the prompt or configuration, and attaching or modifying tools. Each change lands in a draft state and stays there until you decide to publish.
+
+## How drafts work
+
+When you make a change in the agent builder or Inventor, that change is stored as a draft against your agent. The live version — the one that runs when users interact with the agent or triggers fire — is unaffected until you publish.
+
+Visual indicators in the interface show whether you're viewing the **Draft** or **Live** version of your agent at any time. You can have a live agent running while you continue refining a draft.
+
+## Publishing your changes
+
+To push your draft live:
+
+1. Open the agent in Inventor or the agent builder
+2. Click **Publish**
+3. Confirm in the dialog that appears
+
+Both the button click and the confirmation are required. Even if auto-approve is enabled for your agent, publishing always requires explicit confirmation — auto-approve does not bypass this step.
+
+<Warning>
+Publishing replaces the current live version with your draft. Test your changes before publishing.
+</Warning>
+
+## Testing with drafts
+
+When you test an agent inside Inventor or the agent builder, the test always runs against the **draft** version. This lets you verify behavior before changes reach users.
+
+The live version is only used when the agent is accessed externally: by users in Chat, by scheduled triggers, by webhooks, or by integrations.
+
+## Granular per-tool editing
+
+Tools attached to your agent can be edited individually. Changes to a tool save as a draft for that tool without affecting other tools or the agent's live state. Publish when you're ready to make those tool changes live.
+
+## Version history
+
+Each time you publish, a new version is recorded. You can view the version history for your agent to compare versions or roll back to an earlier published state if needed.
+
+## Publish checks
+
+If you've configured [Publish Checks](/build/agents/build-your-agent/evals#publish-checks) in Evals, the selected test suites run automatically when you click **Publish**. If the results don't meet your pass threshold, publishing can be blocked. The check runs in addition to the confirmation dialog — both must pass before the draft goes live.
