@@ -71,12 +71,71 @@ You can add the 'Airtop - Scroll Page' Tool step to your Tool by:
 
 The step scrolls the page by the specified pixel amounts. This is useful for loading dynamic content or reaching specific sections of a page.
 
+## Add the 'Airtop - Press Tab' Tool step
+
+You can add the 'Airtop - Press Tab' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Press Tab' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Count** (Optional): Enter the number of times to press the Tab key. Defaults to `1` if not specified.
+7. Clicking `Run step` to test out the Tool
+
+The step simulates pressing the Tab key, moving focus to the next focusable element on the page. This is useful for navigating between form fields without needing to identify each field by description.
+
+## Add the 'Airtop - Clear Input' Tool step
+
+You can add the 'Airtop - Clear Input' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Clear Input' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Element Description** (Required): Enter a description of the input field you want to clear. This can be a natural language description (e.g., "the search input") or a CSS selector/XPath. Type `{{` to select a variable.
+7. Clicking `Run step` to test out the Tool
+
+The step clears the current value of the specified input field. Use this before typing new text into a field that may already contain a value.
+
+## Add the 'Airtop - Natural Language Scroll' Tool step
+
+You can add the 'Airtop - Natural Language Scroll' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Natural Language Scroll' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Scroll Description** (Required): Enter a natural language description of where or how to scroll (e.g., "scroll to the bottom of the page", "scroll down until the pricing section is visible", "scroll to the top"). Type `{{` to select a variable.
+7. Clicking `Run step` to test out the Tool
+
+The step interprets your description and scrolls the page accordingly. Use this when you need to scroll to a specific section without knowing the exact pixel position. For precise pixel-level control, use the 'Airtop - Scroll Page' step instead.
+
+## Add the 'Airtop - Extract Structured Data' Tool step
+
+You can add the 'Airtop - Extract Structured Data' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Extract Structured Data' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
+5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
+6. **Extraction Prompt** (Required): Enter a description of the data you want to extract and its structure (e.g., "extract all product listings as a JSON array with name, price, and availability fields"). Type `{{` to select a variable.
+7. Clicking `Run step` to test out the Tool
+
+The step extracts data from the page and returns it as a structured JSON object. Unlike the 'Airtop - Query Page' step which returns free-form text, this step returns data in a consistent JSON format suitable for downstream processing.
+
 ## Common use cases
 
 - Filling out forms automatically
 - Clicking buttons and links to navigate through a website
 - Scrolling to load dynamic content or reach specific page sections
 - Automating repetitive user interactions
+- Navigating multi-field forms using Tab key presses
+- Clearing pre-filled fields before entering new values
+- Extracting structured data for use in subsequent steps or storage
 
 ## Common errors
 
@@ -94,5 +153,14 @@ The step scrolls the page by the specified pixel amounts. This is useful for loa
   </Accordion>
   <Accordion title="How do I type special characters or keyboard shortcuts?">
     The Type Text step handles standard text input. For special keys or keyboard shortcuts, you may need to use additional automation steps.
+  </Accordion>
+  <Accordion title="When should I use 'Clear Input' vs selecting all text and typing?">
+    Use the 'Clear Input' step when you want to empty a field completely before entering new content. It is more reliable than simulating keyboard shortcuts (like Ctrl+A then Delete) because it directly clears the field value regardless of the current cursor position or selection state.
+  </Accordion>
+  <Accordion title="When should I use natural language scrolling vs pixel-based scrolling?">
+    Use natural language scrolling when you want to scroll to a named section or element and don't know its exact position. Use the pixel-based 'Airtop - Scroll Page' step when you need precise control over the scroll distance, such as loading a fixed number of items in an infinite scroll list.
+  </Accordion>
+  <Accordion title="What is the difference between 'Query Page' and 'Extract Structured Data'?">
+    'Query Page' returns a free-form text response based on your prompt, which is useful for summarisation or open-ended extraction. 'Extract Structured Data' returns a JSON object, which is useful when downstream steps expect a consistent data format for further processing.
   </Accordion>
 </AccordionGroup>

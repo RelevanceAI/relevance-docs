@@ -42,7 +42,9 @@ You can add the 'Airtop - Screenshot Page' Tool step to your Tool by:
 3. Clicking 'Expand' to see the full Tool step
 4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
 5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
-6. Clicking `Run step` to test out the Tool
+6. **Full Page** (Optional): Check this box to capture the entire scrollable page content, not just the visible viewport. Useful when you need to document or analyze content below the fold.
+7. **Output Format** (Optional): Select the format for the returned screenshot data. Options include `dataUrl` (a data URL ready for use in `<img>` tags or downstream steps) and `base64` (raw base64-encoded image data).
+8. Clicking `Run step` to test out the Tool
 
 The step captures a screenshot of the current page. The screenshot is returned as image data that can be used in subsequent steps or stored for later use.
 
@@ -77,7 +79,10 @@ The step continuously monitors the page for the specified condition. Once the co
 
 <AccordionGroup>
   <Accordion title="Can I use screenshots in subsequent steps?">
-    Screenshots are returned as image data that can be used in other tool steps or stored for later use.
+    Screenshots are returned as image data that can be used in other tool steps or stored for later use. Use the `dataUrl` output format to pass the screenshot directly to steps that accept image inputs, or `base64` if you need to process the raw image data.
+  </Accordion>
+  <Accordion title="What is the difference between a full-page and viewport screenshot?">
+    A viewport screenshot captures only the visible portion of the page — what you would see without scrolling. A full-page screenshot captures the entire scrollable content of the page. Use full-page screenshots when the content you need extends beyond the visible area.
   </Accordion>
   <Accordion title="What conditions can I monitor for?">
     Common conditions include element visibility, text content, and element count.

@@ -1,0 +1,74 @@
+---
+title: "Airtop - API Calls"
+sidebarTitle: "API calls"
+description: "Call any Airtop API endpoint directly from a tool step, for both BYOK and managed AI Browser users"
+---
+
+These tool steps let you call any Airtop API endpoint directly from within a Tool. Two variants are available depending on how you access Airtop:
+
+- **Airtop - Generic API Call** — for customers who have connected their own Airtop account (BYOK).
+- **Browser - API Call** — for customers using Relevance AI's managed AI Browser, with no personal Airtop account required.
+
+Use these steps when existing Airtop tool steps don't cover the endpoint you need, or when you want to call a beta endpoint before dedicated support is added.
+
+## Add the 'Airtop - Generic API Call' Tool step
+
+<Note>
+  This step requires the Airtop integration to be connected with your own Airtop API key. See the [Airtop integration setup guide](/integrations/popular-integrations/airtop) for instructions.
+</Note>
+
+You can add the 'Airtop - Generic API Call' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Airtop - Generic API Call' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Endpoint** (Required): Enter the Airtop API endpoint path to call (e.g., `/sessions`, `/windows/{windowId}/query`). Type `{{` to select a variable from a previous step.
+5. **Method** (Required): Select the HTTP method for the request (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`).
+6. **Request Body** (Optional): Enter the JSON request body for `POST`, `PUT`, and `PATCH` requests. Type `{{` to select a variable or enter the JSON directly.
+7. **Query Parameters** (Optional): Enter any query parameters to append to the request URL as a JSON object (e.g., `{"limit": 10}`).
+8. Clicking `Run step` to test out the Tool
+
+The step sends the request to the Airtop API using your connected credentials and returns the full API response. You can reference the response in subsequent steps.
+
+## Add the 'Browser - API Call' Tool step
+
+<Note>
+  This step is for customers using Relevance AI's managed AI Browser. You do not need to connect a personal Airtop account to use this step.
+</Note>
+
+You can add the 'Browser - API Call' Tool step to your Tool by:
+
+1. Creating a new Tool, then clicking `+ Add Step`
+2. Searching for and adding the 'Browser - API Call' Tool step
+3. Clicking 'Expand' to see the full Tool step
+4. **Endpoint** (Required): Enter the Airtop API endpoint path to call (e.g., `/sessions`, `/windows/{windowId}/query`). Type `{{` to select a variable from a previous step.
+5. **Method** (Required): Select the HTTP method for the request (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`).
+6. **Request Body** (Optional): Enter the JSON request body for `POST`, `PUT`, and `PATCH` requests. Type `{{` to select a variable or enter the JSON directly.
+7. **Query Parameters** (Optional): Enter any query parameters to append to the request URL as a JSON object.
+8. Clicking `Run step` to test out the Tool
+
+The step sends the request through Relevance AI's managed Airtop connection and returns the full API response. Credit usage follows the standard AI Browser billing model.
+
+## Common use cases
+
+- Calling Airtop API endpoints not yet covered by dedicated tool steps
+- Accessing beta or advanced Airtop features directly
+- Building custom browser automation workflows that require fine-grained API control
+- Combining API call results with other tool steps in the same Tool
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Which step should I use — 'Airtop - Generic API Call' or 'Browser - API Call'?">
+    Use 'Airtop - Generic API Call' if you have connected your own Airtop account in the Airtop integration settings (BYOK). Use 'Browser - API Call' if you are using Relevance AI's managed AI Browser and have not connected a personal Airtop account.
+  </Accordion>
+  <Accordion title="Where can I find the available Airtop API endpoints?">
+    Refer to the Airtop API documentation for a full list of available endpoints and their request/response schemas.
+  </Accordion>
+  <Accordion title="How do I pass session or window IDs from earlier steps?">
+    Type `{{` in any parameter field to select a variable from a previous step's output. For example, you can reference the session ID returned by 'Airtop - Create Window' when calling endpoints that require a session identifier.
+  </Accordion>
+  <Accordion title="What happens if the API call returns an error?">
+    If the Airtop API returns an error response, the step will fail and surface the error message in the step output. Check the endpoint path, request body, and that your session or window IDs are valid before retrying.
+  </Accordion>
+</AccordionGroup>

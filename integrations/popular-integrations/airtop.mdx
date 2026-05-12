@@ -4,7 +4,7 @@ description: 'Connect your Airtop browser automation account with Relevance AI t
 sidebarTitle: 'Airtop'
 ---
 
-Connect your Airtop browser automation platform with Relevance AI to enable powerful web automation capabilities for your AI agents and tools. The Airtop integration allows you to control browser windows, interact with web pages, extract content, and capture screenshots through automated workflows.
+Connect your Airtop browser automation platform with Relevance AI to enable web automation capabilities for your AI agents and tools. The Airtop integration allows you to control browser windows, interact with web pages, extract content, and capture screenshots through automated workflows.
 
 ## Overview
 
@@ -17,7 +17,7 @@ The Airtop integration enables your AI agents and tools to perform browser autom
 - Capturing screenshots
 - Monitoring pages for specific conditions
 
-This powerful connection transforms how you can automate web-based workflows, enabling your agents to interact with websites just like a human would, but at scale and with precision.
+This connection enables your agents to interact with websites at scale and with precision.
 
 ## Connecting the Integration
 
@@ -53,6 +53,19 @@ You can build custom tools that perform browser automation activities using Airt
 6. This gives you access to Airtop's browser automation capabilities, allowing you to automate web interactions and data extraction.
 
 <Info>You can find detailed information about each Airtop tool step in the [Airtop Browser Automation Tool steps](/build/tools/tool-steps/airtop-browser-automation/window-management) documentation.</Info>
+
+## Credit billing for managed AI Browser
+
+When using Relevance AI's managed AI Browser (rather than your own Airtop account), credit usage is calculated as follows:
+
+- **LLM operations** (such as querying page content, extracting structured data, or monitoring conditions): Relevance AI passes through the actual Airtop LLM cost when that cost data is available from Airtop.
+- **Non-LLM operations** (such as clicking, typing, scrolling, taking screenshots, or navigating): A flat charge of **5 credits** applies per operation when no Airtop LLM cost is reported.
+
+This means the cost of a step varies depending on whether it involves an AI model call on Airtop's side. Query-type steps that use Airtop's LLM will reflect the true model cost, while purely mechanical interactions use the fixed 5-credit rate.
+
+<Note>
+  This billing model applies to the managed AI Browser only. If you have connected your own Airtop account, credits are not charged by Relevance AI for Airtop usage — you are billed directly by Airtop according to their pricing.
+</Note>
 
 ## Frequently asked questions (FAQs)
 
