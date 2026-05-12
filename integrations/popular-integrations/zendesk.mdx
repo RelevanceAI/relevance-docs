@@ -3,7 +3,7 @@ title: "Zendesk"
 description: "Connect Zendesk to automate customer support workflows and manage tickets with AI agents"
 ---
 
-Zendesk is a leading customer service platform that helps businesses manage support tickets, customer communications, and service operations. With the Zendesk integration in Relevance AI, you can automate ticket management, streamline support workflows, and enhance customer service operations using AI agents.
+Zendesk is a leading customer service platform that helps businesses manage support tickets, customer communications, and service operations. With the Zendesk integration in Relevance AI, you can automate ticket management, streamline support workflows, and enhance customer service operations using AI agents. The integration connects via OAuth, so tokens refresh automatically and there is no manual credential management required.
 
 <Note>
 This integration is built by Relevance AI. For integration-specific support, contact [Relevance AI support](https://relevanceai.com/docs/get-started/support). For Zendesk platform issues, visit [Zendesk Support](https://support.zendesk.com/).
@@ -17,25 +17,25 @@ Follow these steps to connect your Zendesk account to Relevance AI:
   <Step title="Navigate to Integrations">
     Go to the **Integrations & API Keys** page in your Relevance AI dashboard.
   </Step>
-  
+
   <Step title="Select Zendesk">
     Find and click on **Zendesk** from the list of available integrations.
   </Step>
-  
+
   <Step title="Add Integration">
     Click the **Add Integration** button to begin the connection process.
   </Step>
-  
-  <Step title="Enter Your Zendesk Domain">
-    Provide your Zendesk subdomain (e.g., `yourcompany.zendesk.com`).
+
+  <Step title="Enter your Zendesk subdomain">
+    Provide your Zendesk subdomain — the part before `.zendesk.com` in your Zendesk URL (e.g., if your Zendesk URL is `yourcompany.zendesk.com`, enter `yourcompany`).
   </Step>
-  
-  <Step title="Provide API Credentials">
-    Enter your Zendesk API token. You can generate an API token from your Zendesk Admin Center under **Apps and integrations** > **APIs** > **Zendesk API** > **Settings**.
+
+  <Step title="Authorize via OAuth">
+    Click **Authorize** to be redirected to Zendesk. Sign in if prompted, then click **Allow** to grant Relevance AI access to your Zendesk account.
   </Step>
-  
-  <Step title="Confirm Connection">
-    Once authenticated, you'll see a confirmation that your Zendesk account is successfully connected.
+
+  <Step title="Confirm connection">
+    You'll be redirected back to Relevance AI. A confirmation message will indicate that your Zendesk account is successfully connected. Tokens refresh automatically — no manual management needed.
   </Step>
 </Steps>
 
@@ -227,7 +227,7 @@ For complete API documentation, visit the [Zendesk API Reference](https://develo
 
 <AccordionGroup>
   <Accordion title="What permissions are required for the Zendesk integration?" icon="lock">
-    The integration requires an API token with appropriate permissions. For full functionality, your Zendesk user should have Admin or Agent permissions. You can configure specific API token scopes in your Zendesk Admin Center.
+    The integration uses OAuth, so you authorize access through your Zendesk account directly. For full functionality, the Zendesk account you authorize with should have Admin or Agent permissions.
   </Accordion>
   
   <Accordion title="Can I access tickets from multiple Zendesk accounts?" icon="building">
@@ -235,13 +235,7 @@ For complete API documentation, visit the [Zendesk API Reference](https://develo
   </Accordion>
   
   <Accordion title="How do I troubleshoot authentication errors?" icon="triangle-exclamation">
-    If you encounter authentication errors:
-    1. Verify your Zendesk subdomain is correct (e.g., `yourcompany.zendesk.com`)
-    2. Ensure your API token is active and hasn't expired
-    3. Check that your Zendesk user has appropriate permissions
-    4. Try regenerating your API token in Zendesk Admin Center
-    
-    If issues persist, contact [Relevance AI support](https://relevanceai.com/docs/get-started/support).
+    If you encounter authentication errors, check the following: ensure your Zendesk subdomain is entered correctly (just the part before `.zendesk.com`), verify that the Zendesk account you authorized has Admin or Agent permissions, and try disconnecting and reconnecting the integration to trigger a fresh OAuth flow. If issues persist, contact [Relevance AI support](/get-started/support).
   </Accordion>
   
   <Accordion title="Can I use custom ticket fields?" icon="sliders">
