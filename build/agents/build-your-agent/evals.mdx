@@ -105,8 +105,8 @@ When creating an Evaluator (either scenario-level or global), you choose from th
 
 To create a global Evaluator:
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmmmtwq7z1lsj9cvj5kwwifwi" frameBorder="0" title="Creating a global Evaluator" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmmmtwq7z1lsj9cvj5kwwifwi" frameBorder="0" title="Creating a global Evaluator" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 1. Go to the **Monitor** tab and select **Evals**, then select **Evaluators**
@@ -124,8 +124,8 @@ When you run a Test scenario, scenario-level Evaluators are always included auto
 
 ## Creating a Test Suite with a scenario
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmmmvldns1nlq9cvjzy4nkpe0" frameBorder="0" title="Creating a Test Suite" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmmmvldns1nlq9cvjzy4nkpe0" frameBorder="0" title="Creating a Test Suite" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 Follow these steps to create your first evaluation Test Suite:
@@ -164,6 +164,16 @@ Follow these steps to create your first evaluation Test Suite:
 <Tip>
 You can add multiple scenarios to a single Test Suite to evaluate different aspects of your Agent's behavior. Each scenario can have its own prompt, max turns, number of runs, Evaluators, and tool simulations.
 </Tip>
+
+### Managing test scenarios
+
+Test scenarios can be reorganized across Test Suites as your testing strategy evolves. Each scenario has a dropdown menu (accessible via the three-dot icon next to the scenario name) that provides three operations:
+
+| Operation | What it does | When to use it |
+|-----------|-------------|----------------|
+| **Move** | Relocates the scenario to another Test Suite | Reorganizing suites or consolidating related scenarios |
+| **Copy** | Creates a duplicate of the scenario in another Test Suite | Reusing a scenario as a baseline in a different suite |
+| **Duplicate** | Creates a copy of the scenario in the same Test Suite | Quickly creating a variation of an existing scenario |
 
 ### Example scenarios
 
@@ -331,6 +341,9 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
   <Card title="Use Performance monitoring" icon="chart-line">
     Set up global Evaluators in the Performance tab to continuously monitor live Agent conversations without manual testing.
   </Card>
+  <Card title="Organize scenarios across suites" icon="folder-tree">
+    Group related scenarios into dedicated Test Suites (e.g., one for edge cases, one for happy paths). Use Move, Copy, and Duplicate to reorganize as your testing strategy evolves.
+  </Card>
 </CardGroup>
 
 ---
@@ -365,6 +378,10 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
 
   <Accordion title="What happens when a conversation is truncated?">
     The oldest messages are removed from the start of the conversation until it fits within the judge model's context window. The judge is notified that truncation occurred and evaluates the remaining portion. If your evaluation criteria depend on early context — such as the user's original request or instructions given at the start of the conversation — the result may be less accurate. In those cases, disabling truncation and selecting a model with a larger context window is preferable.
+  </Accordion>
+
+  <Accordion title="Can I move test scenarios between test suites?">
+    Yes. Each scenario has a dropdown menu (three-dot icon) with three options: **Move** relocates the scenario to another Test Suite, **Copy** creates a duplicate in another suite, and **Duplicate** creates a copy in the same suite.
   </Accordion>
 
   <Accordion title="I don't see the Evals section. How do I get access?">
