@@ -59,3 +59,111 @@ div#content-side-layout {
   justify-content: center !important;
   width: 100% !important;
 }
+
+/* =========================================================
+   Changelog visual styling — timeline + dividers + accents
+   Scoped to pages whose data-page-title starts with "Changelog"
+   (main page + /changelog/2025, /2024, /2023 archives)
+   ========================================================= */
+
+@media (min-width: 1024px) {
+  /* Each entry sits to the right of the indigo rail. No background, no
+     border — just space in the left margin for the rail and dot. */
+  .mdx-content[data-page-title^="Changelog"] .update-container {
+    position: relative;
+    margin-left: 3rem;
+  }
+
+  /* Continuous indigo vertical line in the margin to the left of each card.
+     Each segment exactly matches its card's height — adjacent cards touch
+     edge to edge so the segments meet without overlapping (no double-opacity
+     bands) and without gaps. */
+  .mdx-content[data-page-title^="Changelog"] .update-container::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: rgba(79, 70, 229, 0.35);
+    z-index: 1;
+  }
+
+  .dark .mdx-content[data-page-title^="Changelog"] .update-container::before {
+    background-color: rgba(129, 140, 248, 0.45);
+  }
+
+  /* First entry: extend the segment 12px above the card and fade it in over
+     exactly that 12px so the rail is fully solid when it reaches the card. */
+  .mdx-content[data-page-title^="Changelog"] > .update-container:first-child::before {
+    top: -12px;
+    background: linear-gradient(
+      to bottom,
+      rgba(79, 70, 229, 0) 0px,
+      rgba(79, 70, 229, 0.35) 12px
+    );
+  }
+
+  .dark .mdx-content[data-page-title^="Changelog"] > .update-container:first-child::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(129, 140, 248, 0) 0px,
+      rgba(129, 140, 248, 0.45) 12px
+    );
+  }
+
+  /* Last entry: extend 12px below the card and fade out over that 12px. */
+  .mdx-content[data-page-title^="Changelog"] > .update-container:not(:has(+ .update-container))::before {
+    bottom: -12px;
+    background: linear-gradient(
+      to bottom,
+      rgba(79, 70, 229, 0.35) calc(100% - 12px),
+      rgba(79, 70, 229, 0) 100%
+    );
+  }
+
+  .dark .mdx-content[data-page-title^="Changelog"] > .update-container:not(:has(+ .update-container))::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(129, 140, 248, 0.45) calc(100% - 12px),
+      rgba(129, 140, 248, 0) 100%
+    );
+  }
+
+  /* Indigo dot sitting on the line, aligned with each date label.
+     pointer-events: none so it never intercepts hover/clicks. */
+  .mdx-content[data-page-title^="Changelog"] .update-container::after {
+    content: '';
+    position: absolute;
+    left: calc(-1.5rem - 5px);
+    top: 2.25rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background-color: #4F46E5;
+    box-shadow: 0 0 0 4px #ffffff;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .dark .mdx-content[data-page-title^="Changelog"] .update-container::after {
+    box-shadow: 0 0 0 4px rgb(15, 23, 42);
+  }
+
+  /* Push Mintlify's anchor-link button further to the left so it doesn't
+     sit under the dot. Default is -ml-10 (-2.5rem); we shift to -3.75rem
+     so the button's right edge clears the dot with breathing room. */
+  .mdx-content[data-page-title^="Changelog"] .update-container > div:first-child a[href^="#"] {
+    margin-left: -3.75rem !important;
+  }
+}
+
+/* Hero image polish — rounded + soft shadow */
+.mdx-content[data-page-title^="Changelog"] [data-component-part="update-content"] img {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.12);
+}
+
+.dark .mdx-content[data-page-title^="Changelog"] [data-component-part="update-content"] img {
+  box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.55);
+}
