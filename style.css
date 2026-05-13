@@ -39,7 +39,7 @@ div#content-side-layout {
 
 /* Prevent content from extending under the fixed right sidebar (only when sidebar is visible) */
 @media (min-width: 1280px) {
-  div#content-area {
+  body:has(div#content-side-layout) div#content-area {
     /* Matches the width of the right sidebar */
     padding-right: 20rem !important;
   }
