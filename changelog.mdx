@@ -4,740 +4,286 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
-<Update label="May 1, 2026" description="Confluence Knowledge Sync: Keep your AI agents updated with real-time documentation">
+<Update label="May 1, 2026" description="3 updates">
+
+## Confluence Knowledge Sync
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-confluence.webp)
 
-You can now connect your Confluence pages directly to Relevance AI and keep your knowledge tables automatically synced!
+Knowledge tables can now sync from Confluence. Pages are polled every 5 minutes and changes flow back into the connected table — same model as the existing Google Drive, Notion, and SharePoint sync.
 
-Confluence Knowledge Sync brings the same powerful auto-sync capabilities you love from Google Drive, Notion, and SharePoint integrations. Connect your Confluence workspace once, and your AI agents will always have access to the latest documentation, processes, and team knowledge—without manual updates.
+Connect in **Knowledge → Add Source → Confluence** and authenticate your workspace.
 
-➡️ Auto-sync Confluence pages – Your knowledge tables update automatically when page content changes
-
-➡️ Eliminate manual updates – No more copying and pasting documentation into your AI workflows
-
-➡️ Keep agents accurate – Ensure your AI workforce always references the most current information
-
-➡️ Centralize team knowledge – Connect your existing Confluence workspace without changing how your team works
-
-➡️ Scale confidently – As your documentation grows, your AI agents stay informed automatically
-
-With Confluence Knowledge Sync, you can build AI agents that stay current with your team’s documentation, ensuring accurate responses and eliminating the risk of outdated information derailing your workflows.
-
-To connect Confluence to your knowledge tables, go to Knowledge > Add Source > Confluence and authenticate your workspace.
-
-Start syncing your Confluence documentation today!
-
-</Update>
-
-<Update label="May 1, 2026" description="Project-level public agent controls: Centralize security settings across your workspace">
+## Project-level public agent controls
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-public-access.webp)
 
-You can now manage public sharing settings for all agents, workforces, and tools from one central location!
+Admins can now disable public cloning and embedding for every agent, workforce, and tool in a project from one place. Toggling these off at the project level overrides individual asset settings and stops users from re-enabling them.
 
-Project-Level Public Agent Controls give admins the power to disable public cloning and embeddability across their entire workspace with a single setting. When you disable these features at the project level, they’re automatically turned off for all agents, workforces, and tools—and individual users can’t re-enable them.
+Manage in **Project Settings → Manage Access**.
 
-➡️ Centralized control – Manage security settings for all assets from one place
-
-➡️ Enforce security policies – Prevent unauthorized public sharing across your organization
-
-➡️ Override individual settings – Automatically disable public features on all existing assets
-
-➡️ Prevent re-enabling – Stop team members from making assets public after you’ve locked them down
-
-➡️ Protect sensitive workflows – Ensure proprietary agents and tools stay within your organization
-
-With Project-Level Public Agent Controls, you can enforce consistent security policies across your entire AI workspace, giving your team the governance they need while protecting your intellectual property.
-
-To access these controls, go to your Project Settings and look for the Manage Access section.
-
-</Update>
-
-<Update label="May 1, 2026" description="Relevance AI Android App: Access your AI workforce anywhere">
+## Relevance AI Android app
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-google-play-2.webp)
 
-Your AI agents are now mobile! The Relevance AI Android app is live on the Google Play Store, giving you full access to your AI workforce from anywhere.
+The Android app is live on the Google Play Store. Trigger agents, view runs, and receive notifications from your phone.
 
-Built for teams that need flexibility, the Android app lets you manage agents, monitor workflows, and stay connected to your AI operations—all from your phone. Whether you’re commuting, traveling, or away from your desk, your AI workforce stays at your fingertips.
-
-➡️ Run agents on the go – Trigger workflows and execute tasks from anywhere
-
-➡️ Monitor agent activity – Track performance and view real-time updates instantly
-
-➡️ Manage your AI workforce – Access agent settings and configurations from your mobile device
-
-➡️ Stay connected to workflows – Receive notifications and respond to critical tasks immediately
-
-➡️ Full mobile experience – Enjoy a native Android interface designed for productivity
-
-With the Relevance AI Android app, you can keep your AI operations running smoothly no matter where you are, ensuring your team never misses a beat.
-
-To download the app, visit the Google Play Store and search for “Relevance AI” or go directly to: [https://play.google.com/store/apps/details?id=com.relevanceai.android](https://play.google.com/store/apps/details?id=com.relevanceai.android)
-
-Get the Android app today and take your AI workforce mobile!
+[Get it on Google Play](https://play.google.com/store/apps/details?id=com.relevanceai.android).
 
 </Update>
 
-<Update label="March 13, 2026" description="Agent Performance Observability: Monitor your AI agents in production like a pro">
+<Update label="March 13, 2026" description="3 updates">
+
+## Agent Performance Observability
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-observability.webp)
 
-You can now track how your agents perform in real-world scenarios with comprehensive production monitoring!  Just like software development has build → test → monitor stages, agent development now has the same complete lifecycle. After building your agents and testing them with Evals, you need visibility into production performance at scale.
+Production monitoring for agents using LLM judges. Define evaluation criteria (summary quality, hallucination detection, workflow execution), pick a sample rate, and watch scores trend over time. Drill into failed runs to see what went wrong.
 
-➡️ **Automatic evaluation** – Set up LLM judges to continuously assess your agents on custom criteria like summary quality, hallucination detection, and workflow execution
+- **Sampling**: 10%, 50%, or 100% of conversations
+- **Dashboard**: overall scores, per-evaluator breakdowns, time-series trends
+- **Investigation**: filter and inspect individual failed runs
 
-➡️ **Performance dashboards** – View overall scores, breakdowns by evaluator, and trends over time to spot issues before they become problems
+Find it under your agent's **Monitor → Test Suites**.
 
-➡️ **Smart sampling** – Run evaluations on 10%, 50%, or 100% of conversations to balance cost and coverage based on your volume
+<Note>Enterprise plan with eval access. Talk to your Relevance AI rep if you don't see it.</Note>
 
-➡️ **Detailed investigation** – Filter and drill down into specific failed runs to understand exactly what went wrong and when
-
-With Agent Performance Observability, you can catch performance degradations immediately—like when a model update changes behavior or agents start hallucinating—instead of discovering issues weeks later.
-
-🔐 **Permissions required:** Available exclusively for select Enterprise customers. Evals delivers the advanced testing capabilities needed for mission-critical AI deployments. This feature is not available on non-Enterprise plans.
-
-To access Agent Performance Observability, enterprise users can go to their agent’s dashboard and select the “Monitor” tab, then navigate to the “Test Suites” section. If you’re on an Enterprise plan and don’t yet have access, contact your Relevance AI sales representative to register interest.
-
-Keep your AI workforce running at peak performance with enterprise-grade monitoring!
-
-</Update>
-
-<Update label="March 13, 2026" description="Pause, cancel, and resume agent triggers in real time">
+## Pause, cancel, and resume agent triggers
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-pause-agent-triggers.webp)
 
-**Pause Agent Triggers: Take Control of Your Automated Workflows**
+Agent triggers now pause without being deleted — same controls that exist on Workforces. Toggle individual triggers, or pause every trigger on an agent at once. Paused triggers keep their configuration.
 
-You can now pause Agent triggers instantly without deleting them!
+Manage from **Agent → Triggers**.
 
-Following customer feedback, we’ve extended our Workforce trigger pause capability to Agents. Now you have complete control over when your automated workflows run, giving you the flexibility to temporarily halt triggers during maintenance, testing, or when you need a break from automation.
-
-➡️ **Pause all triggers at once** – Use the “Pause all triggers” button to instantly stop all automated workflows for an Agent
-
-➡️ **Individual trigger control** – Toggle specific triggers between Active and Paused states without affecting others
-
-➡️ **Preserve your configurations** – Paused triggers retain all their settings, so you can resume them exactly as they were
-
-➡️ **Perfect for testing and maintenance** – Temporarily halt production workflows while you make updates or troubleshoot issues
-
-With Pause Agent Triggers, you can confidently manage your AI automation without the fear of unwanted executions during critical periods.
-
-To pause triggers, go to your Agent > Triggers tab and use the pause controls.
-
-Take control of your Agent workflows with the precision you need!
-
-</Update>
-
-<Update label="March 13, 2026" description="Search for people with Chat's built-in people search engine">
+## Chat people search
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-chat-search.webp)
 
-**Chat People Search Engine: Find the perfect candidates instantly**
+Chat now includes people search powered by [Exa](https://exa.ai). Ask Chat to find people by role, location, or skills and it returns profiles with current roles and companies.
 
-You can now search for people directly within Chat using our powerful built-in search engine!
-
-Chat now includes an integrated people search powered by Exa’s index, making recruitment and networking effortless. Simply ask Chat to find people with specific skills, locations, or experience levels.
-
-➡️ **Instant recruitment** – Find software engineers, designers, or any role with specific skills in seconds
-
-➡️ **Location-based search** – Target candidates in specific cities, regions, or remote-friendly professionals
-➡️ **Skill-specific filtering** – Search by programming languages, frameworks, tools, or industry expertise
-
-➡️ **Comprehensive profiles** – Get detailed information including current roles, companies, and technical backgrounds
-
-With Chat People Search Engine, you can streamline your hiring process and discover talent that perfectly matches your requirements.
-
-To access people search, simply ask Chat: “Find me [role] in [location] with [specific skills]” and watch the magic happen.
-
-Transform your recruitment workflow with AI-powered people discovery!
+Example: *"Find me product designers in Sydney with SaaS experience."*
 
 </Update>
 
-<Update label="March 10, 2026" description="Monitor organization concurrency usage with detailed analytics and timeseries data">
+<Update label="March 10, 2026" description="Org concurrency timeseries">
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-concurrency.webp)
 
-**Org Concurrency Timeseries: Track Your Organization’s Performance Analytics**
+The Analytics dashboard now plots your org's concurrent operations as a timeseries over the last 7 days, with your plan limit drawn on the chart so you can see how close you've been running to the ceiling.
 
-You can now monitor your organization’s concurrency usage and limits with detailed timeseries data!
-
-View comprehensive analytics directly from your organization settings page under the Plan & Billing section, giving you complete visibility into how your team uses Relevance AI’s resources.
-
-➡️ Real-time concurrency tracking – See exactly how many concurrent operations your organization is running at any given time
-
-➡️ Historical usage patterns – Analyze trends over the last 7 days to understand peak usage times and optimize your workflows
-
-➡️ Usage limit monitoring – Keep track of your current usage against your plan limits to avoid unexpected throttling
-
-➡️ Visual timeseries charts – Easy-to-read graphs show your concurrency patterns, helping you identify optimization opportunities
-
-With Org Concurrency Timeseries, you can make data-driven decisions about your AI operations, ensuring optimal performance and resource allocation across your entire organization.
-
-🔐 Permissions required: Organization Admin access to view billing and usage analytics
-
-To access this feature, go to Analytics Dashboard.
-
-Take control of your AI performance with enterprise-grade analytics built right into Relevance AI!
+<Note>Requires Organization Admin.</Note>
 
 </Update>
 
-<Update label="March 9, 2026" description="Microsoft Teams integration: Trigger AI agents directly from your Teams workspace">
+<Update label="March 9, 2026" description="2 updates">
+
+## Microsoft Teams integration
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-teams.webp)
 
-**Microsoft Teams Integration: Trigger AI agents directly from your Teams workspace**
+The Relevance AI app is live in the Microsoft Teams App Store. Trigger agents from Teams channels and chats, and receive run results back in the same thread.
 
-You can now seamlessly integrate Relevance AI with Microsoft Teams!
+Install from the Teams App Store and connect your workspace.
 
-Relevance AI is officially live in the Microsoft Teams App Store. This integration brings your AI workforce directly into your daily collaboration hub.
-
-➡️ **Trigger Agents from Teams** – Launch any AI agent directly from Teams channels or chats without switching platforms
-
-➡️ **Real-time Teams alerts** – Get instant notifications when your agents complete tasks, find insights, or need attention
-
-➡️ **Streamlined workflows** – Keep your team in the loop with automated updates delivered straight to relevant Teams channels
-
-➡️ **Enterprise-ready integration** – Built to Microsoft’s standards with secure, scalable connectivity for teams of any size
-
-With Microsoft Teams Integration, you can transform how your team collaborates with AI—keeping everyone aligned while your agents work behind the scenes.
-
-To get started, install the Relevance AI app from the Microsoft Teams App Store and connect your workspace. Check out our **complete setup guide** for step-by-step instructions.
-
-Your AI workforce just got a whole lot more collaborative!
-
-</Update>
-
-<Update label="March 9, 2026" description="Track project invitation emails to ensure teammates receive invites">
+## Project invitation email tracking
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-invites.webp)
 
-**Project Invitation Email Tracking: Know When Your Team Invites Are Delivered**
+Project invitation emails now show delivery, bounce, and open status — and let you resend invites that bounced or got missed. No more guessing whether a teammate's invite landed.
 
-You can now see exactly what happens to every project invitation email you send to teammates!
-
-When you invite colleagues to join your Relevance AI projects, you’ll now get complete visibility into whether those invitation emails were delivered, bounced, or opened. No more wondering if your team members received their invites.
-
-➡️ **Delivery confirmation** – See exactly when project invitation emails reach your teammates
-
-➡️ **Bounce detection** – Know when invites can’t be delivered due to invalid email addresses
-
-➡️ **Open tracking** – See when your colleagues have opened their project invitation emails
-
-➡️ **Resend capability** – Easily resend project invitations that bounced or need a follow-up
-
-With Project Invitation Email Tracking, you can ensure your team onboarding runs smoothly and address delivery issues before they slow down collaboration.
-
-To view invitation status, go to your project settings and check the “Pending Invites” section.
-
-No more guessing whether your teammates got their project invites—just reliable, actionable insights into your invitation delivery!
+See it in **Project Settings → Pending Invites**.
 
 </Update>
 
-<Update label="March 6, 2026" description="Find what you need faster in the new Relevance AI documentation">
+<Update label="March 6, 2026" description="Documentation redesign">
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-docs.webp)
 
-**Documentation Redesign: Navigate faster with organized, focused tabs**
+The docs site has been restructured into five tabs instead of one long sidebar:
 
-You can now find exactly what you need in our completely redesigned documentation!
+- **Getting Started** — intro, quick start, core concepts, troubleshooting
+- **Build with Relevance AI** — agents, tools, knowledge, workforces
+- **Integrations** — grouped by category (CRM & Sales, Communication, Productivity, Customer Support, Developer)
+- **Enterprise** — business-critical features and requirements
+- **Access & Administration** — accounts, projects, billing, security, system limits
 
-We’ve transformed our documentation from a single overwhelming sidebar into 5 focused tabs that match how you actually work with Relevance AI.
-
-➡️ Getting Started – Everything new users need: introduction, quick start, core concepts, and troubleshooting all in one place
-
-➡️ Build with Relevance AI – Unified hub for creating agents, tools, knowledge bases, and workforces with new step-by-step guides
-
-➡️ Integrations – Organized by category (CRM & Sales, Communication, Productivity, Customer Support, Developer) instead of endless alphabetical lists
-
-➡️ Enterprise – Promoted to its own dedicated tab for business-critical features and requirements
-
-➡️ Access & Administration – Centralized account management, project settings, subscriptions, security, and system limits
-
-With the new documentation structure, you can jump straight to what matters most for your current task—whether you’re just getting started, building your first agent, or managing enterprise deployments.
-
-To explore the new documentation, visit [relevanceai.com/docs/get-started/introduction](https://relevanceai.com/docs/get-started/introduction).
+Start at [relevanceai.com/docs/get-started/introduction](https://relevanceai.com/docs/get-started/introduction).
 
 </Update>
 
-<Update label="March 3, 2026" description="Track individual team member AI usage with detailed per-user analytics">
+<Update label="March 3, 2026" description="Enterprise analytics: per-user usage">
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-per-user-usage.webp)
 
-**Enterprise Analytics - Per User Usage: Track Team Performance at a Glance**
+The Analytics dashboard now breaks credit usage down by individual user, with a per-agent breakdown showing which agents each user runs most.
 
-You can now see detailed per-user usage data in your analytics dashboard!
+Find it at **Analytics Dashboard → Users**.
 
-Get complete visibility into how each team member uses Relevance AI with our new per-user analytics view. Monitor credits consumed, track usage patterns, and optimize your team’s AI workflow efficiency.
-
-➡️ Individual Usage Tracking – See exactly how many credits each user has consumed with visual usage bars
-
-➡️ Team Performance Overview – Identify your power users and understand usage distribution across your organization
-
-➡️ Agent-Level Breakdown – Drill down to see which specific agents each user is running most frequently
-
-➡️ Enterprise Management – Make data-driven decisions about resource allocation and team optimization
-
-With Enterprise Analytics - Per User Usage, you can optimize team performance, manage costs effectively, and ensure your AI workforce is being utilized to its full potential.
-
-Permissions required: Admin role and Team plan or higher required to access analytics dashboard.
-
-To access per-user analytics, go to Analytics Dashboard > Users tab.
-
-Perfect for enterprise teams who need granular visibility into their AI usage patterns!
-
-### Other improvements
-
-General fixes and UI improvements
+<Note>Requires Admin role and Team plan or higher.</Note>
 
 </Update>
 
-<Update label="February 24, 2026" description="Trigger AI agents from Microsoft Teams calendar events">
+<Update label="February 24, 2026" description="Teams calendar trigger">
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-teams-trigger.webp)
 
-**Teams Calendar Trigger: Automate AI Agents with Microsoft Teams Meetings**
+Agents can now be triggered by Microsoft Teams calendar events — meeting start, end, etc. Parity with the existing Google Calendar trigger, so Microsoft 365 teams can wire up the same meeting-prep, follow-up, and summary workflows.
 
-You can now trigger your AI agents automatically based on Microsoft Teams calendar events!
-
-The Teams Calendar Trigger removes a major blocker for enterprise teams using Microsoft 365. If you’ve been waiting to automate workflows around your Teams meetings, you can now set up agents that respond to calendar events—just like Google Calendar users have been doing.
-
-➡️ Trigger agents when Teams meetings start or end – Automate meeting prep, follow-ups, and summaries
-
-➡️ Unlock enterprise automation for Microsoft 365 teams – No more being blocked by calendar platform limitations
-
-➡️ Integrate seamlessly with your existing workflows – Works with all your current agent configurations
-
-➡️ Match Google Calendar functionality – Get the same powerful automation capabilities for Teams users
-
-➡️ Enable meeting intelligence at scale – Perfect for organizations standardized on Microsoft 365
-
-With Teams Calendar Trigger, your enterprise team can finally automate meeting-related workflows without switching calendar platforms—removing a critical blocker for Microsoft-first organizations.
-
-To set up a Teams Calendar Trigger, go to your agent settings, select “Triggers,” and choose “Teams Calendar” from the available options.
+Add it from **Agent → Triggers → Teams Calendar**.
 
 </Update>
 
-<Update label="February 20, 2026" description="Analyze PowerPoint presentations instantly with PPTX file uploads in Chat">
+<Update label="February 20, 2026" description="PPTX file support in Chat">
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-pptx-in-chat.webp)
 
-**PPTX File Support: Upload and Analyze PowerPoint Presentations in Chat**
+`.pptx` files can be attached in Chat. Agents read the text, images, and slide layouts.
 
-You can now attach PowerPoint presentations directly in Relevance Chat and share them with any agent for instant analysis!
-
-PPTX file support means your agents can read, interpret, and analyze entire presentations—extracting text, understanding images and charts, and recognizing the visual layout of each slide. Simply attach your .pptx file and ask your agent to summarize, analyze, or extract insights from your presentation.
-
-➡️ Upload presentations directly – Attach .pptx files in chat just like any other document
-
-➡️ Full content interpretation – Agents read text, view images, analyze charts, and understand slide layouts
-
-➡️ Smart file size handling – Get automatic warnings if your file exceeds model limits
-
-➡️ Optimized model recommendations – Use Gemini or OpenAI models for presentations with 100+ slides
-
-➡️ Instant analysis – Ask agents to summarize, extract data, or answer questions about your presentations
-
-With PPTX file support, you can quickly analyze quarterly reports, extract insights from sales decks, summarize conference presentations, and transform static slides into actionable intelligence—all without leaving your chat.
-
-To upload a PowerPoint presentation, simply click the attachment icon in any Relevance Chat conversation or agent message and select your .pptx file.
+For decks with 100+ slides the file may exceed model limits — Gemini and OpenAI models handle the largest decks best.
 
 </Update>
 
-<Update label="February 19, 2026" description="OpenAI GPT Image 1.5 model now available in Relevance AI">
+<Update label="February 19, 2026" description="OpenAI GPT Image 1.5">
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-gpt-image-1.5.webp)
 
-**GPT Image 1.5: Create Stunning Visuals with OpenAI’s Latest Image Model**
+`gpt-image-1.5` is now available in the **Text to image generation** step. OpenAI's [latest image model](https://platform.openai.com/docs/models/gpt-image-1.5) — higher fidelity than the previous version.
 
-You can now generate higher-quality, more accurate images directly in your Relevance AI workflows with OpenAI’s GPT Image 1.5!
+### Also shipped
 
-The powerful GPT Image 1.5 model is now available in the “Text to image generation” step, giving you access to OpenAI’s latest image generation capabilities. Simply enter your prompt, select the model, and watch as your text transforms into stunning visuals powered by GPT-4 Turbo technology.
-
-➡️ Access cutting-edge image generation – Leverage OpenAI’s latest model directly in your workflows
-
-➡️ Create more accurate visualizations – Generate images that better match your text prompts
-
-➡️ Enhance your agent outputs – Deliver more engaging, visual responses to users
-
-➡️ Streamline creative processes – Produce professional-quality images without leaving Relevance AI
-
-With GPT Image 1.5, you can elevate your AI agents’ capabilities by incorporating visually stunning, contextually relevant images that enhance user engagement and communication effectiveness.
-
-To use GPT Image 1.5, simply add a “Text to image generation” step to your workflow, enter your prompt, and select “OpenAI GPT Image 1.5” from the model dropdown.
-
-Start creating amazing visuals with GPT Image 1.5 today!
-
-### Other improvements
-
-Clean up your workspace in seconds with our new bulk chat deletion feature – perfect for removing those numerous “Hi” test conversations and keeping your environment organized.
+- **Bulk chat deletion** — clean up test conversations in one go from the Chat list
 
 </Update>
 
-<Update label="February 17, 2026" description="Track AI agent usage and error trends with enterprise analytics dashboards">
+<Update label="February 17, 2026" description="Enterprise analytics: usage and error tracking">
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-analytics.webp)
 
-**Enterprise Analytics: Track AI Agent Usage and Error Trends**
+Two new dashboards on the project Analytics page:
 
-You can now track resource consumption and troubleshoot errors with powerful visual analytics!
+- **Usage Overview** — which agents, tools, and workforces consume the most actions and credits
+- **Error Timeline** — error counts over time, filterable by Agents / Tools / Workforces, with the underlying error message visible per data point
 
-The new Enterprise Analytics dashboards provide critical visibility into your AI operations with two specialized views. The Usage Overview dashboard shows exactly which agents, tools, and workforces consume the most actions and credits, while the Error Timeline helps you identify and resolve issues by tracking error patterns over time.
-
-➡️ Identify resource-intensive components – See which agents and tools use the most actions at a glance
-
-➡️ Optimize credit allocation – Make data-driven decisions about where to invest resources
-
-➡️ Track error patterns over time – Spot recurring issues with the visual timeline display
-
-➡️ Filter errors by type – Easily segment by Agents, Tools, or Workforce to pinpoint problem areas
-
-➡️ Diagnose transformation issues – View detailed error messages to quickly identify root causes
-
-With Enterprise Analytics, you gain the insights needed to optimize performance, reduce errors, and make informed decisions about your AI infrastructure.
-
-To access these new dashboards, go to your project's Analytics page and select either "Usage Overview" or "Error Timeline" from the navigation.
-
-### Other improvements
-
-General fixes and UI improvements
+Find both at **project → Analytics**.
 
 </Update>
 
-<Update label="February 11, 2026" description="Claude Opus 4.6 model now available in Relevance AI">
+<Update label="February 11, 2026" description="Claude Opus 4.6">
 
 ![](https://cdn.relevanceai.com/images/changelog/68faec2d3ffbd34e9c9295b9-changelog-claude.webp)
 
-**Claude Opus 4.6: Anthropic's Most Advanced AI Model Now Available**
+Anthropic's flagship Opus 4.6 is now available in the model picker.
 
-You can now access Anthropic's flagship Claude Opus 4.6 model directly in the platform, with an optional 1M context window variant for handling massive documents!
+- **Context window**: 1M tokens (both the base entry and the "1M context" entry — the second one exists for pricing reasons, with separate tiers for ≤200K and >200K input)
+- **Adaptive thinking**: supported by default
+- **Image inputs**: jpg, jpeg, gif, webp, png
 
-Claude Opus 4.6 delivers exceptional performance on complex reasoning, coding, and advanced agentic tasks. This latest version brings Anthropic's most powerful AI capabilities to your workflows, with both standard and extended context options to match your specific needs.
-
-➡️ Standard 200K token context window – Process lengthy documents and conversations with ease
-
-➡️ Optional 1M token context window – Handle massive datasets, codebases, or documents in a single prompt
-
-➡️ Adaptive thinking support – Tackle complex reasoning and multi-step problem solving
-
-➡️ Advanced image processing – Work with jpg, jpeg, gif, webp, and png files
-
-➡️ Exceptional output quality – Benefit from improved reasoning and response generation
-
-With Claude Opus 4.6, you can tackle your most demanding AI tasks with confidence, whether you need deep analysis of complex documents or sophisticated reasoning across massive datasets.
-
-To access Claude Opus 4.6, simply select it from the model selection menu in your workspace. For projects requiring extended context, choose the "Claude Opus 4.6 (1M context)" variant.
-
-### Other improvements
-
-General fixes and UI improvements
+Select **Claude Opus 4.6** from the model menu.
 
 </Update>
 
-<Update label="February 9, 2026" description="Edit bulk runs on the fly: Change agent automation settings without restarting">
+<Update label="February 9, 2026" description="2 updates">
+
+## Bulk run editing
 
 ![](https://cdn.relevanceai.com/images/changelog/698a5fc1b1dc4b278cb242b7-changelog-edit-bulk-runs.webp)
 
-**Bulk Run Editing: Customize Your Agent Automation Settings On-The-Fly**
+You can now edit a bulk run after it's been created — change daily task volume, change time zone, change other parameters in the bulk run modal — instead of cancelling and starting over.
 
-You can now modify your agent's bulk run settings even after they've been created!
+Open your agent, select the active bulk run, and click **Edit**.
 
-Bulk Run Editing gives you complete flexibility to adjust your automation parameters whenever your needs change. Whether you need to scale back daily tasks, change time zones, or make other adjustments, you can now modify these settings without creating entirely new bulk runs.
-
-➡️ Adjust task volume – Change the number of tasks processed per day from 100 to 10 or any number you need
-
-➡️ Update time zones – Switch processing times to match your team's location or business hours
-
-➡️ Modify any parameter – Edit any setting available in the bulk run modal
-
-➡️ Make changes anytime – Adjust settings mid-campaign without disrupting your workflow
-
-➡️ Maintain continuity – Keep the same bulk run while adapting to changing requirements
-
-With Bulk Run Editing, you gain greater control over your agent automation, allowing you to respond quickly to changing priorities, resource constraints, or business needs.
-
-To edit a bulk run, navigate to your agent, select the active bulk run, and click the "Edit" button in the bulk run modal.
-
-### Other improvements
-
-General fixes and UI improvements
-
-</Update>
-
-<Update label="February 9, 2026" description="Test and validate AI agents with Evals: Enterprise-grade agent testing">
+## Evals: agent testing and validation
 
 ![](https://cdn.relevanceai.com/images/changelog/698a6f9d99180607d34d642c-changelog-evals.webp)
 
-**Evals: Test and Validate Your AI Agents with Confidence**
+Structured testing for agents. Create test suites with multiple scenarios, generate user inputs, and evaluate runs with LLM-based judges against criteria you define. Track scores across test runs so regressions show up.
 
-You can now thoroughly test your AI agents with our powerful Evals feature, ensuring they perform exactly as expected in real-world scenarios!
+Tool-call simulation (run an agent through a flow without firing real tool side effects) is coming next.
 
-Evals provides a structured testing framework for your AI agents, allowing you to create test suites with multiple scenarios to validate functionality. Create golden test examples, simulate user interactions, and evaluate agent performance without triggering actual tool executions or external actions.
+Find it under your agent's **Monitor → Test Suites**.
 
-➡️ Create organized test suites – Group related tests together for better organization and management
-
-➡️ Generate realistic test scenarios – Automatically create diverse user interactions to thoroughly test your agents
-
-➡️ Evaluate with AI judges – Use LLM-powered evaluators to assess if your agent meets specific criteria
-
-➡️ Track performance over time – Monitor how your agents perform across multiple test runs
-
-➡️ Coming soon: Tool simulations – Test workflows with sensitive or expensive tools without triggering actual executions
-
-With Evals, you can confidently deploy agents knowing they've been thoroughly tested against a variety of scenarios, ensuring reliability and consistent performance for your users.
-
-**Available exclusively for select Enterprise customers**, Evals delivers the advanced testing capabilities needed for mission-critical AI deployments. To access Evals, enterprise users can go to their agent's dashboard and select the "Monitor" tab, then navigate to the "Test Suites" section. If you’re on an Enterprise plan and don’t yet have access, contact your Relevance AI sales representative to register interest. This feature is not available on non-Enterprise plans.
-
-Start building more reliable AI agents with comprehensive enterprise-grade testing today!
-
-### Other improvements
-
-General fixes and UI improvements
+<Note>Enterprise only — talk to your Relevance AI rep for access.</Note>
 
 </Update>
 
-<Update label="February 1, 2026" description="Add AWS Bedrock Guardrails to BYO Anthropic Models">
+<Update label="February 1, 2026" description="AWS Bedrock Guardrails for BYO Anthropic">
 
 ![](https://cdn.relevanceai.com/images/changelog/69800602a1c89e5e19ffd9f5-changelog-aws-bedrock-and-anthropic.webp)
 
-**AWS Bedrock Guardrails: Enhanced Content Safety for BYO Anthropic Models**
+If you're running Anthropic models through your own AWS Bedrock account (BYO), Relevance now forwards a guardrail identifier and version on every Bedrock invoke. The actual filters — prompt-injection blocking, PII masking, custom topic restrictions, profanity controls — are configured AWS-side in your Bedrock console; Relevance passes the ARN through.
 
-You can now apply powerful content safety controls to your BYO Anthropic models via AWS Bedrock Guardrails!
+Set the guardrail ID/version in your project's Anthropic integration settings.
 
-AWS Bedrock Guardrails integration gives customers using their own Bedrock account organization-wide content filtering capabilities for Anthropic models without custom workforces. Apply guardrails before or after LLM calls to filter harmful content, detect prompt injections, and protect sensitive information—all with minimal performance impact.
-
-➡️ Block prompt injection attacks – Choose from various strength levels to prevent malicious inputs
-
-➡️ Filter harmful content – Automatically detect and block insults, hate speech, sexual content, and misconduct
-
-➡️ Protect sensitive information – Mask or block PII like email addresses, phone numbers, and more
-
-➡️ Create custom topic filters – Define specific topics you want to restrict in your organization
-
-➡️ Apply profanity controls – Maintain professional communication standards across all AI interactions
-
-With AWS Bedrock Guardrails, you can confidently deploy your BYO Anthropic models across your organization while maintaining strict content safety standards and compliance requirements.
-
-Learn more in our [**documentation**](https://relevanceai.com/docs/integrations/llm-integrations/anthropic#aws-bedrock-guardrails-optional).
-
-### Other improvements
-
-General fixes and UI improvements
+[Setup guide →](https://relevanceai.com/docs/integrations/llm-integrations/anthropic#aws-bedrock-guardrails-optional)
 
 </Update>
 
-<Update label="January 22, 2026" description="Stream AI audit logs and execution traces with OpenTelemetry">
+<Update label="January 22, 2026" description="OpenTelemetry event streaming">
 
 ![](https://cdn.relevanceai.com/images/changelog/6972e080d65aad52eeebeb9b-changelog-opentelemetry-event-streaming.webp)
 
-**OpenTelemetry Event Streaming for AI Audit Logs and Execution Traces**
+Audit logs and execution traces can now be streamed to a customer-controlled destination in OpenTelemetry format (OTel spans + logs). Plug it into your existing observability stack — Datadog, Honeycomb, Grafana, whatever — and run governance and compliance queries alongside the rest of your telemetry.
 
-You can now stream AI audit logs and execution traces in industry-standard OpenTelemetry format to a customer-controlled destination.
-
-This enhancement enables enterprise teams to integrate Relevance AI event data directly into their existing observability and monitoring stack, supporting governance, compliance, and operational visibility across AI workflows.
-
-**What’s included:**
-
-➡️ Stream audit logs and execution traces to a customer-owned destination – Maintain full control over storage, access, and retention policies
-
-➡️ Export data in OpenTelemetry format – Integrate seamlessly with major observability and monitoring platforms
-
-➡️ Support enterprise governance and compliance requirements – Retain and analyze AI operational data within your approved systems
-
-➡️ Enable standardized querying and correlation – Use consistent schemas across your broader observability stack
-
-**Availability**
-
-**‍**OpenTelemetry event streaming is available to Enterprise customers with RBAC enabled. RBAC access is being rolled out progressively. If you’re on an Enterprise plan and don’t yet have access, contact your Relevance AI sales representative to register interest. This feature is not available on non-Enterprise plans.
-
-### Other improvements
-
-General fixes and UI improvements
+<Note>Enterprise with RBAC enabled. RBAC is rolling out progressively — talk to your Relevance AI rep if you don't see it.</Note>
 
 </Update>
 
-<Update label="January 20, 2026" description="Pause, cancel, and resume Workforce triggers in real time">
+<Update label="January 20, 2026" description="Workforce trigger controls">
 
 ![](https://cdn.relevanceai.com/images/changelog/69700d9eac32ec1e2b9919d0-changelog-pause-workforce-triggers.webp)
 
-**Workforce Trigger Controls: Pause, Cancel, and Resume Your Automation Workflows**
+Workforce triggers now support pause, cancel, and resume — both per-trigger and at the whole-workforce level. Pause an entire workforce during maintenance, then resume it without recreating anything.
 
-You can now take full control of your workforce triggers with flexible pause, cancel, and resume options!
-
-Workforce Trigger Controls give you granular management over your automation workflows. Quickly pause specific triggers when issues arise, cancel problematic workflows, or pause an entire workforce at once—then resume operations when you're ready.
-
-➡️ Pause individual triggers – Temporarily stop specific automations without affecting others
-
-➡️ Cancel active workflows – Immediately terminate problematic processes
-
-➡️ Resume paused triggers – Restart automations when issues are resolved
-
-➡️ Pause entire workforces – One-click solution to halt all triggers during maintenance
-
-➡️ Visual status indicators – Clearly see which triggers are active, paused, or canceled
-
-With Workforce Trigger Controls, you can confidently manage complex automation environments, quickly respond to issues, and maintain precise control over your AI workflows.
-
-To access these controls, navigate to your workforce dashboard and use the trigger status options or the "Pause all triggers" button in the top menu.
-
-### Other improvements
-
-General fixes and UI improvements
+Manage from the workforce dashboard, or use the **Pause all triggers** button in the top menu.
 
 </Update>
 
-<Update label="January 19, 2026" description="Slack tool approvals: Approve or reject agent tools in one click">
+<Update label="January 19, 2026" description="2 updates">
+
+## Slack tool approvals
 
 ![](https://cdn.relevanceai.com/images/changelog/696f13a0bd3782afb55800f7-changelog-slack-tool-approvals.webp)
 
-**Slack Tool Approval: Manage Agent Requests Directly in Slack**
+Approve or reject pending tool calls from your agents directly in Slack, without switching contexts. The notification shows the tool name and parameters; one click sends the approval back.
 
-You can now approve or reject agent tool requests without leaving Slack, streamlining your workflow and keeping your agents running smoothly!
+Enable per Slack trigger: **Triggers → ⋯ → Edit trigger → Advanced settings → Tool approval from Slack → Yes**.
 
-This new feature brings tool approval management directly to your Slack workspace, allowing you to review, approve, or reject pending tool requests from your agents without switching contexts. Simply enable the setting on your Slack trigger to receive interactive approval notifications.
-
-➡️ Review tool details – See exactly what tool the agent wants to run and with what parameters
-
-➡️ Make informed decisions – View all request information directly in Slack before approving
-
-➡️ Respond instantly – Approve or reject with a single click without leaving your conversation
-
-➡️ Maintain security – Keep control over sensitive operations while improving response time
-
-➡️ Streamline workflows – Eliminate context switching between platforms for approvals
-
-With Slack Tool Approval, you can maintain security oversight while dramatically reducing response times, keeping your agents productive and your team efficient.
-
-To enable this feature, go to "Triggers" > click the 3 dots on your Slack trigger > "Edit trigger" > "Advanced settings" > select "Tool approval from Slack" > select "yes".
-
-Start managing your agent approvals directly from Slack today!
-
-### Other improvements
-
-General fixes and UI improvements
-
-</Update>
-
-<Update label="January 19, 2026" description="Track and compare organizational spend by project and date">
+## Plan & Billing page filters
 
 ![](https://cdn.relevanceai.com/images/changelog/696f107a552f3dd900a5d66d-changelog-spend-filters.webp)
 
-**Improved Filters on Plan & Billing Page: Get Granular Control Over Your Organization's Spend**
+The Plan & Billing page now supports filtering credit usage by date range and by project, with side-by-side comparison and export. Useful for chargeback reporting and spotting which project is driving spend.
 
-You can now analyze your organization's spending patterns with precision using new date and project filters on the Plan & Billing page!
-
-The enhanced Plan & Billing page gives organization administrators a comprehensive view of credit usage across the entire organization. With new filtering capabilities, you can easily track spending trends, identify high-usage projects, and make informed decisions about resource allocation.
-
-➡️ Filter by specific date ranges – Analyze spending patterns over custom time periods
-
-➡️ Filter by individual projects – Identify which specific projects are consuming the most credits
-
-➡️ Compare project usage side-by-side – Easily see which projects are driving your organization's costs
-
-➡️ Export filtered data – Share spending reports with stakeholders and team members
-
-➡️ Make data-driven decisions – Optimize credit allocation based on actual usage patterns
-
-With these improved filters, you can quickly identify spending trends, optimize resource allocation, and ensure your organization is getting maximum value from its Relevance AI investment.
-
-To access these new filters, go to your profile, select "Manage organization" and then "Plan and billing".
-
-### Other improvements
-
-General fixes and UI improvements
+**Profile → Manage organization → Plan and billing**.
 
 </Update>
 
-<Update label="January 18, 2026" description="Test phone agents in your browser — No live calls required">
+<Update label="January 18, 2026" description="Test phone agents in your browser">
 
 ![](https://cdn.relevanceai.com/images/changelog/696d6f6c9e49abe25688ecf1-changelog-phone-testing.webp)
 
-**Test in Browser for Phone Agents: Test Your Voice Agents Without Making Calls**
+Validate a phone agent's prompt, voice, and conversation flow from the dashboard without placing a real call. Microphone permission required.
 
-You can now test your phone agents directly in your browser without making actual phone calls!
-
-Test in Browser gives you a quick and efficient way to validate your phone agent's behavior, system prompts, and voice options right from your dashboard. This streamlined testing process helps you perfect your voice interactions before deploying them to real callers.
-
-➡️ Test phone agents instantly – No need to make actual phone calls
-
-➡️ Validate system prompts – Ensure your agent responds correctly to different inputs
-
-➡️ Try different voices – Experiment with various voice options to find the perfect fit
-
-➡️ Debug faster – Quickly identify and fix issues in your phone agent's conversation flow
-
-➡️ Save time and resources – Eliminate the need for physical phone testing during development
-
-With Test in Browser, you can rapidly iterate on your phone agents, ensuring they deliver the intended experience before going live with real customers.
-
-To access this feature, go to your phone agent's build page and look for the "Test in Browser" button under "Call Agent". It will ask for your browser's permission to use the microphone. Also, when you're in the phone settings, if you want to try out different voices or other settings, that's also a quick way to try out different settings.
-
-Start testing your phone agents more efficiently today!
-
-### Other improvements
-
-General fixes and UI improvements
+On the phone agent's build page, hit **Test in Browser** under **Call Agent**.
 
 </Update>
 
-<Update label="January 4, 2026" description="Control your meeting agent in real time with chat commands">
+<Update label="January 4, 2026" description="2 updates">
+
+## Meeting agent realtime commands
 
 ![](https://cdn.relevanceai.com/images/changelog/695a95a2a931a05c425b7b72-changelog-meeting-bot-real-time-commands.webp)
 
-**Meeting Agent Realtime Commands: Control Your AI Agent During Live Meetings**
+Type a trigger word in the meeting chat and your meeting agent acts on it mid-meeting — run a search, pause or resume the recording, build slides, post to Notion or Slack — without breaking the conversation.
 
-You can now trigger your AI meeting agent with custom commands during live meetings without interrupting the flow of conversation!
+Build a new agent, add the **Relevance AI Meeting Bot** trigger, attach the tools you want (e.g. Pause Recording, Resume Recording, Google Search, Slide Builder) and define each tool's trigger word.
 
-Meeting Agent Realtime Commands lets you interact with your meeting bot during meetings by simply typing trigger words in the chat. Your agent springs into action when it detects these keywords, performing tasks like searching information, controlling recordings, or creating meeting artifacts—all while your meeting continues uninterrupted.
-
-➡️ Use custom trigger words – Define specific phrases that activate your agent during meetings
-
-➡️ Perform real-time searches – Get information without leaving your meeting
-
-➡️ Control meeting recordings – Pause and resume recordings with simple chat commands
-
-➡️ Create meeting artifacts – Generate slides, notes, or action items as ideas emerge
-
-➡️ Extend with any Relevance AI capability – Connect to Notion, Slack, or other tools for seamless workflows
-
-With Meeting Agent Realtime Commands, you can enhance your meeting productivity by leveraging AI assistance exactly when you need it, without disrupting the conversation flow.
-
-To set up your own meeting agent with custom commands, create a new agent from scratch, add the "Relevance AI Meeting Bot" under Triggers, add and configure your desired meeting bot tools (such as 'Pause Recording' and 'Resume Recording') and more general tools (such as 'Google Search' and 'Slide Builder') and trigger words.
-
-Start making your meetings more productive with an AI meeting agent that responds to your commands!
-
-### Other improvements
-
-General fixes and UI improvements
-
-</Update>
-
-<Update label="January 4, 2026" description="Drag-and-drop slide reordering now available in Slide Builder">
+## Slide reordering in Slide Builder
 
 ![](https://cdn.relevanceai.com/images/changelog/695a8b2e572345c02f6ae362-changelog-slide-reordering.webp)
 
-**Slide Re-ordering: Easily Organize Your Presentations with Drag-and-Drop**
-
-You can now quickly reorganize your slides with simple drag-and-drop functionality in Slide Builder in Chat!
-
-Slide Builder gets a powerful upgrade with intuitive slide re-ordering capabilities. This feature gives you complete control over your presentation structure, allowing you to effortlessly rearrange slides to create the perfect flow for your content without starting over.
-
-➡️ Drag-and-drop simplicity – Move slides exactly where you want them with no technical skills required
-
-➡️ Instant visual feedback – See your presentation structure change in real-time as you reorder
-
-➡️ No more rebuilding slides – Save time by repositioning existing content instead of recreating it
-
-➡️ Perfect your narrative flow – Easily experiment with different content sequences for maximum impact
-
-With drag-and-drop slide re-ordering, you can create more polished, professional presentations while dramatically reducing the time spent organizing your content.
-
-To use this feature, simply open any presentation in Chat, hover over a slide thumbnail, then click and drag it to your desired position.
-
-### Other improvements
-
-General fixes and UI improvements
+Drag-and-drop slide reordering in Slide Builder (Chat). Hover a slide thumbnail and drag it to its new position.
 
 </Update>
 
