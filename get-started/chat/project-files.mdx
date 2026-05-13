@@ -1,10 +1,42 @@
 ---
 title: "Project files"
 sidebarTitle: "Project files"
-description: "Browse and manage files in your project's file system from the Chat interface"
+description: "Browse, reference, view, and manage files in your project's file system from Chat"
 ---
 
 The filesystem browser in Chat gives you a visual way to explore and manage files stored in your project. You can view folder hierarchies, perform file operations, and reference files directly in your chat messages using @.
+
+## Managing sidebar panels
+
+The Chat interface includes two collapsible sidebar panels:
+
+- **Left panel** — chat history
+- **Right panel** — SuperAgent panel
+
+You can resize, collapse, or hide these panels to suit your workflow.
+
+<Tabs>
+  <Tab title="Resizing">
+    Drag the divider between the chat area and a sidebar panel to adjust its width. Release to set the new size.
+  </Tab>
+  <Tab title="Collapsing and hiding">
+    Each panel supports three display states:
+
+    - **Expanded** — full panel visible with all content
+    - **Icon-only** — collapsed to show just icons, saving horizontal space
+    - **Hidden** — panel removed from view entirely
+
+    To change a panel's display state, open the dropdown menu in the chat header and select your preferred option for that panel.
+  </Tab>
+  <Tab title="Keyboard shortcuts">
+    | Action | Mac | Windows |
+    |--------|-----|---------|
+    | Toggle left panel (chat history) | Cmd+\ | Ctrl+\ |
+    | Toggle right panel (SuperAgent) | Cmd+B | Ctrl+B |
+  </Tab>
+</Tabs>
+
+Your panel size and visibility settings are saved automatically. The next time you open Chat, your panels will appear exactly as you left them.
 
 ## Accessing the filesystem browser
 
@@ -54,9 +86,13 @@ Delete operations are permanent and cannot be undone.
 
 ---
 
-## Referencing files in chat
+## Referencing files and folders in chat
 
 Files visible in the filesystem browser can be referenced in your chat messages using the @ menu. This is useful when you want an agent to read, process, or act on a specific file.
+
+<Info>
+Project file and folder @mentions work with files stored in connected storage integrations (such as Google Drive). They are distinct from file attachments (uploading a file directly into the chat) and knowledge sources (files indexed for retrieval by agents).
+</Info>
 
 ### How to reference a file
 
@@ -69,4 +105,107 @@ Files visible in the filesystem browser can be referenced in your chat messages 
 Use the filesystem browser to locate a file and copy its path, then paste it into the chat if you prefer not to use the @ search.
 </Tip>
 
-Files appear in the @ menu alongside agents, workforces, and saved prompts. For more on using agents and other @ mentions, see the [Chat introduction](/get-started/chat/introduction).
+### Referencing entire folders
+
+Referencing a folder includes all files within that folder in the context of your message — useful when you want an agent to work across a set of related documents without referencing each one individually.
+
+1. Type `@` in the chat input field to open the menu
+2. Start typing the folder name — folders appear in the results alongside files, agents, and saved prompts
+3. Select a folder to insert a reference into your message
+4. Add your question or instruction and send
+
+<Warning>
+Referencing large folders with many files will consume more context. If you hit limits, reference specific files instead of the whole folder.
+</Warning>
+
+### When to use file and folder references
+
+| Approach | Best for |
+|----------|----------|
+| **@ mention a file** | Asking questions about a specific document, analyzing a single file |
+| **@ mention a folder** | Working across a set of related files, summarizing a project directory |
+| **File attachment** | Uploading a file you have locally that isn't in connected storage |
+| **Knowledge source** | Giving an agent persistent, searchable access to a large document library |
+
+<Tip>
+Combine file @mentions with agent @mentions in the same message — for example, `@ResearchAgent summarize @quarterly-report.pdf` — to direct a specific agent at a specific file.
+</Tip>
+
+---
+
+## Selecting text from files
+
+When viewing a file in the Chat file viewer, you can highlight specific text passages and attach them as context to your chat message. This lets you reference a precise excerpt rather than an entire document, giving the agent exactly the information it needs.
+
+### Attaching a text selection to a message
+
+1. Open a file in the Chat file viewer
+2. Click and drag to highlight the text passage you want to reference
+3. Optionally, add a note to your selection to provide additional context
+4. Click **Add to message** to attach the selection to your chat input
+5. The selected text appears as a dismissible pill in the chat input — click the **x** on the pill to remove it if needed
+6. Send your message as normal; the selection is included as structured context
+
+### When to use text selection
+
+Use text selection when you need to ask about or act on a specific part of a file rather than its entirety. For example, point an agent to a single clause in a contract, a specific function in a code file, or a particular paragraph in a report. Providing targeted context reduces ambiguity and typically produces more accurate, focused responses than attaching a whole document.
+
+---
+
+## Viewing agent-created files
+
+When an agent writes or modifies files during a conversation, a **Files updated** bar appears above the chat input. This tells you that new or updated files are ready to review without interrupting the conversation flow.
+
+### Opening the file viewer
+
+Click **View files** in the bar to open the most recently written file in the file viewer. The bar hides itself automatically if the file panel is already open, so it only appears when there is something new to see.
+
+When you open a file from your project, you can view and edit it directly in Chat. See [File viewer and editing](#file-viewer-and-editing) for details on handling conflicts when an agent modifies a file you're editing.
+
+---
+
+## File viewer and editing
+
+You can open files from your project directly in Chat to view and edit their contents. The file viewer displays alongside your conversation, letting you read or modify a file without switching to another tool.
+
+When an AI agent writes to a file you currently have open, Chat detects the conflict and responds based on whether you have unsaved changes:
+
+- **If you have unsaved changes**, a modal dialog appears with two options:
+  - **Save your edits** — overwrites the agent's version with your changes
+  - **Load agent's version** — discards your changes and loads what the agent wrote
+- **If you have no unsaved changes**, the file refreshes silently in the background with the agent's updated version.
+
+{/* TODO: Add screenshot of the conflict resolution modal dialog */}
+
+---
+
+## File version history
+
+Every file in the Chat filesystem maintains a complete version history. You can view past versions, preview their contents, and restore any previous version as the current file.
+
+### Accessing version history
+
+To access version history, right-click any file in the filesystem panel. Select **Version History** from the context menu to open the Version History dialog.
+
+The dialog lists all past versions of the file, each showing:
+
+- The date and time the version was saved
+- The file size at that point in time
+
+### Previewing a previous version
+
+To preview a version before restoring it, click on any version entry in the list. The file contents for that version are displayed so you can confirm it's the one you want.
+
+### Restoring a previous version
+
+To restore a previous version:
+
+1. Right-click the file in the filesystem and select **Version History**
+2. Find the version you want and click **Restore** next to it
+3. The selected version becomes the current file
+
+<Tip>
+Restoring a version does not delete any history. All previous versions remain available after a restore, so you can always go back to a different version if needed.
+</Tip>
+
+Any file tabs that are currently open for the restored file will automatically refresh to show the restored content.

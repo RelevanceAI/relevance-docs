@@ -5,13 +5,32 @@ description: "Meet Relevance Chat -- our new interface for using AI Agents and W
 
 ![Relevance Chat](/images/hero-chat.png)
 
-Relevance Chat is our application for using AI Agents and Workforces on the fly, as copilots. You can @ mention Agents, and use pre-built Agents to help you build websites, generate images, and perform deep research.
+Relevance Chat is our application for using AI Agents and Workforces on the fly, as copilots. You can @ mention Agents, use pre-built Agents to help you build websites, generate images, and perform deep research — all from [chat.relevanceai.com](https://chat.relevanceai.com), on desktop and mobile.
 
-Chat is the new way to give your team access to your Agents. Once you build an Agent, or clone one from the Marketplace, in your project, you and your fellow project members can use it in Chat alongside other Agents.
+Once you build an Agent, or clone one from the Marketplace, you and your fellow project members can use it in Chat alongside other Agents.
 
-<Card title="Open Relevance Chat" icon="arrow-up-right-from-square" href="https://chat.relevanceai.com">
-  Start chatting now at chat.relevanceai.com — works on desktop and mobile
-</Card>
+### What you can do with Chat
+
+<CardGroup cols={2}>
+  <Card title="Use Agents" icon="robot" href="#using-agents-in-chat">
+    @ mention any Agent in your project to bring its capabilities into a conversation
+  </Card>
+  <Card title="Project files" icon="folder-open" href="/get-started/chat/project-files">
+    Browse, reference, and edit files from your project's file system
+  </Card>
+  <Card title="Saved prompts" icon="bookmark" href="/get-started/chat/saved-prompts">
+    Reusable prompt templates shared across your team
+  </Card>
+  <Card title="Supported file types" icon="file" href="/get-started/chat/supported-file-types">
+    Provider-specific details, size limits, and input/output capabilities
+  </Card>
+  <Card title="Chat agents" icon="wand-magic-sparkles" href="#chat-agents">
+    Pre-built Agents for websites, research, images, and slides
+  </Card>
+  <Card title="LLM selection" icon="sliders" href="#using-different-llms-in-chat">
+    Choose the model that best fits your task, or let Chat pick automatically
+  </Card>
+</CardGroup>
 
 ## Using different LLMs in Chat
 
@@ -21,69 +40,9 @@ You can select the LLM you want to use in Chat:
 <iframe src="https://app.supademo.com/embed/cmfgfi5x0bz4239ozw2fj4het" frameBorder="0" title="How to set up Google Drive as a source of Knowledge" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 </div>
 
-1. Click the name of the LLM you're currently on (or Auto if you've selected 'Auto' previously) in the top right of Chat
-2. Search for and select the model you wish to use 
-3. Select 'Auto' to allow Chat to select the best LLM for your request
-
----
-
-## Managing sidebar panels
-
-The Chat interface includes two collapsible sidebar panels:
-
-- **Left panel** — chat history
-- **Right panel** — SuperAgent panel
-
-You can resize, collapse, or hide these panels to suit your workflow.
-
-### Resizing panels
-
-Drag the divider between the chat area and a sidebar panel to adjust its width. Release to set the new size.
-
-### Collapsing and hiding panels
-
-Each panel supports three display states:
-
-- **Expanded** — full panel visible with all content
-- **Icon-only** — collapsed to show just icons, saving horizontal space
-- **Hidden** — panel removed from view entirely
-
-To change a panel's display state, open the dropdown menu in the chat header and select your preferred option for that panel.
-
-### Keyboard shortcuts
-
-| Action | Mac | Windows |
-|--------|-----|---------|
-| Toggle left panel (chat history) | Cmd+\ | Ctrl+\ |
-| Toggle right panel (SuperAgent) | Cmd+B | Ctrl+B |
-
-### Panel preferences
-
-Your panel size and visibility settings are saved automatically. The next time you open Chat, your panels will appear exactly as you left them.
-
----
-
-## Recent meeting chat links (desktop app)
-
-When no conversation is active, the desktop app displays up to 5 recent meeting chat links on the home view. These links appear after meetings end, giving you quick access to the chat conversation from each meeting.
-
-Each link shows:
-
-- A platform-specific icon (Google Meet, Zoom, Teams, etc.)
-- The meeting title
-- A timestamp
-
-Click any link to open that meeting's chat conversation directly. Links persist between sessions, so they remain available the next time you open the desktop app.
-
-<Note>
-Recent meeting chat links are only available in the desktop app. They do not appear in the web version of Chat.
-</Note>
-
----
-
 ## Using Agents in Chat
 
-Simply @ mention any Agent you have access to in your project, and Chat will seamlessly integrate their capabilities into your conversation. Hover over any Agent in the @ menu to see a pop-up with its name, description, and other details — making it easy to pick the right one without leaving the chat.
+Simply @ mention any Agent you have access to in your project, and Chat will integrate their capabilities into your conversation. Hover over any Agent in the @ menu to see a pop-up with its name, description, and other details — making it easy to pick the right one without leaving the chat.
 
 <CardGroup cols={2}>
   <Card title="Individual Agents" icon="robot">
@@ -93,417 +52,63 @@ Simply @ mention any Agent you have access to in your project, and Chat will sea
     Combine different Agents in the same conversation for complex workflows
   </Card>
   <Card title="Workforces" icon="people-group">
-    Leverage teams of Agents working together on complex tasks
+    Use teams of Agents working together on complex tasks
   </Card>
   <Card title="Marketplace Agents" icon="store">
     Use pre-built Agents cloned from the [Marketplace](/get-started/marketplace/introduction)
   </Card>
 </CardGroup>
 
-<Tip>
+<Info>
 Build your own custom Agents and use them in Chat. See our [Quick Start Guide](/get-started/quick-start-guide) to get started.
-</Tip>
+</Info>
 
 <Note>
 Agents can be hidden from Chat discovery — including the @-mention menu and "Browse agents" list — using the Visible in Chat toggle in [Advanced Settings → General](/build/agents/build-your-agent/agent-settings/general). Hidden agents remain fully accessible via API and direct links.
 </Note>
 
----
-
-## Saved Prompts
-
-<Note>
-Saved prompts are currently in limited availability and being rolled out to select customers.
-</Note>
-
-Saved prompts are reusable prompt templates that help standardize common queries across your team. They allow you to create, manage, and share frequently-used prompts with everyone in your project, ensuring consistency and saving time on repetitive tasks.
-
-### Saving a prompt
-
-Save any prompt from your Chat conversations to make it available to all users in your project through the @ menu.
-
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cminu37g60bizgxadmuzniah7" frameBorder="0" title="How to save a prompt" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
-</div>
-
-1. Start a new conversation and enter the prompt you want to save
-2. After sending your prompt, click the bookmark icon that appears under it
-3. Give the prompt a descriptive name and click 'Save'
-
-<Info>
-For Enterprise customers, the ability to create and manage saved prompts can be controlled through role-based access controls (RBAC). Learn more about [RBAC and user permissions](/enterprise/rbac).
-</Info>
-
-### Using saved prompts
-
-All users in the project can access and use saved prompts in their Chat conversations. Saved prompts appear alongside Agents in the @ menu, making it easy to reuse standardized prompt templates.
-
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cminu7wv50bjwgxad462phl9g" frameBorder="0" title="How to use a saved prompt" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
-</div>
-
-1. Type @ in the chat input field to open the menu
-2. Click 'Prompts' in the pop-up that appears
-3. Select the saved prompt you want to use from the list
-
-### Managing saved prompts
-
-To delete a saved prompt:
-
-1. Type @ in the chat and click 'Prompts' in the pop-up
-2. Click the 'X' button next to the prompt you want to remove
-3. Click 'Delete' on the confirmation pop-up to confirm deletion
-
-<Tip>
-Combine saved prompts with @ mentioned Agents for powerful workflows that leverage both reusable templates and specialized AI capabilities.
-</Tip>
-
----
-
-## Project files and folders
-
-You can reference files and folders from your project's connected storage directly in Chat using the @ menu. When you @mention a file or folder, its contents are included in the context sent to the agent — so you can ask questions about documents, analyze data, or run tasks against file content without manually uploading anything.
-
-<Info>
-Project file and folder @mentions work with files stored in connected storage integrations (such as Google Drive). They are distinct from file attachments (uploading a file directly into the chat) and knowledge sources (files indexed for retrieval by agents).
-</Info>
-
-### Referencing individual files
-
-1. Type `@` in the chat input field to open the menu
-2. Start typing the file name — files appear in the results alongside agents and saved prompts, showing the file name and its path
-3. Select a file to insert a reference into your message
-4. Add your question or instruction alongside the reference and send
-
-The file's contents are fetched and included in the context when your message is sent.
-
-### Referencing entire folders
-
-Referencing a folder includes all files within that folder in the context of your message — useful when you want an agent to work across a set of related documents without referencing each one individually.
-
-1. Type `@` in the chat input field to open the menu
-2. Start typing the folder name — folders appear in the results alongside files, agents, and saved prompts
-3. Select a folder to insert a reference into your message
-4. Add your question or instruction and send
-
-<Warning>
-Referencing large folders with many files will consume more context. If you hit limits, reference specific files instead of the whole folder.
-</Warning>
-
-### When to use file and folder references
-
-| Approach | Best for |
-|----------|----------|
-| **@ mention a file** | Asking questions about a specific document, analyzing a single file |
-| **@ mention a folder** | Working across a set of related files, summarizing a project directory |
-| **File attachment** | Uploading a file you have locally that isn't in connected storage |
-| **Knowledge source** | Giving an agent persistent, searchable access to a large document library |
-
-<Tip>
-Combine file @mentions with agent @mentions in the same message — for example, `@ResearchAgent summarize @quarterly-report.pdf` — to direct a specific agent at a specific file.
-</Tip>
-
-For a full guide to browsing and managing project files — including view options, folder navigation, and file operations — see [Project files](/get-started/chat/project-files).
-
----
-
-## Selecting text from files
-
-When viewing a file in the Chat file viewer, you can highlight specific text passages and attach them as context to your chat message. This lets you reference a precise excerpt rather than an entire document, giving the agent exactly the information it needs.
-
-### Attaching a text selection to a message
-
-1. Open a file in the Chat file viewer
-2. Click and drag to highlight the text passage you want to reference
-3. Optionally, add a note to your selection to provide additional context
-4. Click **Add to message** to attach the selection to your chat input
-5. The selected text appears as a dismissible pill in the chat input — click the **×** on the pill to remove it if needed
-6. Send your message as normal; the selection is included as structured context
-
-### When to use text selection
-
-Use text selection when you need to ask about or act on a specific part of a file rather than its entirety. For example, point an agent to a single clause in a contract, a specific function in a code file, or a particular paragraph in a report. Providing targeted context reduces ambiguity and typically produces more accurate, focused responses than attaching a whole document.
-
----
-
-## Viewing agent-created files
-
-When an agent writes or modifies files during a conversation, a **Files updated** bar appears above the chat input. This tells you that new or updated files are ready to review without interrupting the conversation flow.
-
-### Opening the file viewer
-
-Click **View files** in the bar to open the most recently written file in the file viewer. The bar hides itself automatically if the file panel is already open, so it only appears when there is something new to see.
-
-When you open a file from your project, you can view and edit it directly in Chat. See [File viewer and editing](#file-viewer-and-editing) for details on handling conflicts when an agent modifies a file you're editing.
-
----
-
-## File viewer and editing
-
-You can open files from your project directly in Chat to view and edit their contents. The file viewer displays alongside your conversation, letting you read or modify a file without switching to another tool.
-
-When an AI agent writes to a file you currently have open, Chat detects the conflict and responds based on whether you have unsaved changes:
-
-- **If you have unsaved changes**, a modal dialog appears with two options:
-  - **Save your edits** — overwrites the agent's version with your changes
-  - **Load agent's version** — discards your changes and loads what the agent wrote
-- **If you have no unsaved changes**, the file refreshes silently in the background with the agent's updated version.
-
-{/* TODO: Add screenshot of the conflict resolution modal dialog */}
-
----
-
-## Formatting your messages
-
-The Chat input supports a markdown editor with formatting tools to help you structure longer messages and prompts.
-
-### Slash command menu
-
-Type `/` in the chat input to open a searchable formatting menu. The menu includes 9 options:
-
-- Headings (H1, H2, H3)
-- Bulleted and numbered lists
-- Blockquotes
-- Code blocks
-- Dividers
-- Table of contents
-
-Start typing after `/` to filter the list and quickly find the format you need. Select an option to insert the corresponding block at your cursor position.
-
-### Table of contents block
-
-The table of contents block creates a live, clickable outline of all headings in your message. It updates automatically as you add or change headings, making it useful for long-form content like detailed briefs, structured prompts, or documentation drafts. Insert it via the slash command menu by typing `/` and selecting **Table of contents**.
-
----
-
-## File version history
-
-Every file in the Chat filesystem maintains a complete version history. You can view past versions, preview their contents, and restore any previous version as the current file.
-
-### Accessing version history
-
-To access version history, right-click any file in the filesystem panel. Select **Version History** from the context menu to open the Version History dialog.
-
-The dialog lists all past versions of the file, each showing:
-
-- The date and time the version was saved
-- The file size at that point in time
-
-### Previewing a previous version
-
-To preview a version before restoring it, click on any version entry in the list. The file contents for that version are displayed so you can confirm it's the one you want.
-
-### Restoring a previous version
-
-To restore a previous version:
-
-1. Right-click the file in the filesystem and select **Version History**
-2. Find the version you want and click **Restore** next to it
-3. The selected version becomes the current file
-
-<Tip>
-Restoring a version does not delete any history. All previous versions remain available after a restore, so you can always go back to a different version if needed.
-</Tip>
-
-Any file tabs that are currently open for the restored file will automatically refresh to show the restored content.
-
----
-
-## Providing Feedback on Responses
-
-Help improve your AI agents by rating their responses with thumbs up or thumbs down. Your feedback helps identify what's working well and what needs improvement, making agents more effective over time.
-
-### Rating a response
-
-Once an AI assistant message finishes generating, you can rate it directly in the Chat interface.
-
-1. Wait for the assistant's response to complete
-2. Look for the thumbs up and thumbs down icons that appear alongside the copy button at the bottom of the message
-3. Click thumbs up for helpful responses or thumbs down for responses that need improvement
-4. Optionally, add written feedback in the modal dialog that appears to provide more context
-
-### When to provide feedback
-
-Feedback is most valuable when it helps identify patterns or specific issues:
-
-- **Thumbs down with written feedback** - Use this when a response is incorrect, incomplete, or unhelpful. Describe what went wrong to help improve the agent's performance
-- **Thumbs up** - Use this to reinforce good behaviors when a response is particularly helpful, accurate, or well-formatted
-- **Written feedback** - Add details about what worked or didn't work to make your feedback more actionable
-
----
-
 ## Chat agents
 
-You can also @ mention Agents built specifically for Chat. 
+You can also @ mention Agents built specifically for Chat.
 
-<Columns cols={2}>
-    <Card title="Website Builder" href="/get-started/chat/chat-agents/website-builder" icon="globe">
-        Build websites with our Website Builder Agent
-    </Card>
-    <Card title="Deep Researcher" href="/get-started/chat/chat-agents/deep-researcher" icon="school">
-        Perform deep research with our Deep Researcher Agent with OpenAI
-    </Card>
-    <Card title="Image Generator" href="/get-started/chat/chat-agents/image-generator" icon="image">
-        Generate images with our Image Generator Agent
-    </Card>
-    <Card title="Slide Builder" href="/get-started/chat/chat-agents/slide-builder" icon="presentation">
-        Create presentations with our in-built Slide Builder
-    </Card>
-</Columns>
+<CardGroup cols={2}>
+  <Card title="Website Builder" href="/get-started/chat/chat-agents/website-builder" icon="globe">
+    Build websites with our Website Builder Agent
+  </Card>
+  <Card title="Deep Researcher" href="/get-started/chat/chat-agents/deep-researcher" icon="school">
+    Perform deep research with our Deep Researcher Agent with OpenAI
+  </Card>
+  <Card title="Image Generator" href="/get-started/chat/chat-agents/image-generator" icon="image">
+    Generate images with our Image Generator Agent
+  </Card>
+  <Card title="Slide Builder" href="/get-started/chat/chat-agents/slide-builder" icon="presentation">
+    Create presentations with our in-built Slide Builder
+  </Card>
+</CardGroup>
 
----
+## Recent meeting chat links (desktop app)
 
-## Supported file types in Chat
-
-Chat empowers you to work with a wide range of file types, both for input and output. Upload documents, images, and data files to provide context to your conversations, and generate new files based on your Agent's responses or built-in Agent outputs. Whether you're analyzing spreadsheets, processing PDFs, or creating presentations, Chat seamlessly handles file operations across different model providers.
-
-Here's a comprehensive breakdown of supported file types by model provider:
-
-<Warning>
-File export is not supported for organizations in the AU region.
-</Warning>
-
-### File preview capabilities
-
-Chat can preview 70+ file types directly in the interface, so you can view a file without leaving the conversation. Supported categories include:
-
-- **PDFs**
-- **Images:** PNG, JPG, GIF, WebP, SVG
-- **Videos:** MP4, WebM, MOV
-- **Spreadsheets:** CSV, XLSX
-- **Code files:** JS, TS, Python, JSON, HTML, CSS, Markdown, and 20+ other programming languages
-
-Files without extensions (such as `Dockerfile`) are treated as plain text and can be previewed. If a file type is not supported for preview, Chat displays a "This file type can't be previewed" message.
+When no conversation is active, the desktop app displays up to 5 recent meeting chat links on the home view. These links appear after meetings end, giving you quick access to the chat conversation from each meeting. Each link shows a platform-specific icon, the meeting title, and a timestamp. Click any link to open that meeting's chat directly.
 
 <Note>
-File preview (viewing a file in the chat UI) is separate from file processing (what the LLM can read and reason about). Preview support does not affect which files an LLM can process — that remains provider-dependent. See the file capabilities section below for details.
+Recent meeting chat links are only available in the desktop app. They do not appear in the web version of Chat.
 </Note>
 
-### File size limits by provider
-
-File size limits vary by model provider. Each provider has limits for individual files and combined attachments in a single message.
-
-| Provider | Max per file | Max combined attachments |
-|----------|--------------|--------------------------|
-| **OpenAI** | 32MB | 50MB |
-| **Anthropic** | 32MB | 32MB |
-| **Gemini** | 32MB | 50MB |
-
-<Note>
-**Anthropic** has a lower combined attachment limit (32MB) compared to OpenAI and Gemini (50MB). Keep this in mind when uploading multiple files in a single message.
-</Note>
-
-### File capabilities
-
-<Info>
-**Reading** - Upload and process files to provide context to your conversations \\
-**Create/Export** - Generate new files or export content based on Chat responses
-</Info>
-
-<AccordionGroup>
-    <Accordion title="OpenAI">
-    **Document files:**
-    - `.docx` (32MB max) - Reading available, create/export available
-    - `.docx` with images (32MB max) - Reading not available, create/export available
-    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
-    - `.csv` (32MB max) - Reading available, create/export available
-    - `.pdf` (32MB max) - Reading available, create/export available
-    - `.pdf` with images (32MB max) - Reading available, create/export available
-    - `.txt` (32MB max) - Reading available, create/export available
-    - `.md` (32MB max) - Reading available, create/export not available (available on request)
-
-    **Image files:**
-    - `.png` (32MB max) - Reading available, create/export available
-    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
-
-    **File size limits:**
-    - Maximum per file: **32MB**
-    - Maximum combined attachments: **50MB**
-
-    **Not available:**
-    - `.pptx` - Reading not available, create/export not available
-    </Accordion>
-
-    <Accordion title="Anthropic">
-    **Document files:**
-    - `.docx` (32MB max) - Reading available, create/export available
-    - `.docx` with images (32MB max) - Reading not available, create/export available
-    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
-    - `.csv` (32MB max) - Reading available, create/export available
-    - `.pdf` (32MB max) - Reading available, create/export available
-    - `.pdf` with images (32MB max) - Reading available, create/export available
-    - `.txt` (32MB max) - Reading available, create/export available
-    - `.md` (32MB max) - Reading available (limited), create/export not available (available on request)
-
-    **Image files:**
-    - `.png` (32MB max) - Reading available, create/export available
-    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
-
-    **File size limits:**
-    - Maximum per file: **32MB**
-    - Maximum combined attachments: **32MB** ⚠️ *Lower than other providers*
-
-    <Warning>
-    Anthropic has a lower combined attachment limit (32MB) compared to OpenAI and Gemini (50MB).
-    </Warning>
-
-    **Not available:**
-    - `.pptx` - Reading not available, create/export not available
-    </Accordion>
-
-    <Accordion title="Gemini">
-    **Document files:**
-    - `.docx` (32MB max) - Reading available, create/export available
-    - `.docx` with images (32MB max) - Reading not available, create/export available
-    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
-    - `.csv` (32MB max) - Reading available, create/export available
-    - `.pdf` (32MB max) - Reading available, create/export available
-    - `.pdf` with images (32MB max) - Reading available, create/export available
-    - `.txt` (32MB max) - Reading available, create/export available
-    - `.md` (32MB max) - Reading available, create/export not available (available on request)
-
-    **Image files:**
-    - `.png` (32MB max) - Reading available, create/export available
-    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
-
-    **Video & Audio files (Gemini Pro only):**
-    - Video: `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`
-    - Audio: `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac`
-
-    **File size limits:**
-    - Maximum per file: **32MB**
-    - Maximum combined attachments: **50MB**
-
-    **Not available:**
-    - `.pptx` - Reading not available, create/export not available
-    </Accordion>
-</AccordionGroup>
-
-### Additional information
-
-If a file contains textual information, we convert it to a text file before uploading to the model.
-
-<Info>
-For more detailed information about which models can process which files in agents, see our [LLM integrations](/integrations/llm-integrations/openai) pages.
-</Info>
-
----
-
-## Frequently asked questions (FAQs)
+## Frequently asked questions
 
 <AccordionGroup>
     <Accordion title="How does Chat usage affect my credits?">
-        Chat credit usage will show up in the **Plan & Billing** credit monitoring section as **'Chat Orchestrator'**. 
-        
+        Chat credit usage will show up in the **Plan & Billing** credit monitoring section as **'Chat Orchestrator'**.
+
         You'll be charged credits based on:
         - The LLM model you're using in Chat
         - How much you use Chat (number of messages and interactions)
-        
+
         Built-in agents like [Slide Builder](/get-started/chat/chat-agents/slide-builder) will also appear on this page when you use them in Chat.
-        
-        <Tip>
+
+        <Info>
         To monitor your Chat credit usage, navigate to **Settings > Plan & Billing** to see a detailed breakdown of your credit expenses. Learn more about [Plans and credits](/admin/subscriptions/plans).
-        </Tip>
+        </Info>
     </Accordion>
     <Accordion title="Can I use different LLMs in Chat?">
     Yes, you can select the LLM you want to use in Chat by following these steps:
@@ -511,11 +116,11 @@ For more detailed information about which models can process which files in agen
     1. Click on the cog icon in the top right of your screen
     2. Choose the 'Chat Model' on the pop-up that appears
 
-    You can also add to the System Prompt for your Chat from this screen. 
+    You can also add to the System Prompt for your Chat from this screen.
     </Accordion>
     <Accordion title="Can I use Relevance Chat on mobile?">
-    Yes! While the main Relevance AI platform ([app.relevanceai.com](https://app.relevanceai.com)) is not available on mobile devices, you can use Relevance Chat by visiting [chat.relevanceai.com](https://chat.relevanceai.com) in a browser on your mobile device. 
-    
+    Yes! While the main Relevance AI platform ([app.relevanceai.com](https://app.relevanceai.com)) is not available on mobile devices, you can use Relevance Chat by visiting [chat.relevanceai.com](https://chat.relevanceai.com) in a browser on your mobile device.
+
     A dedicated Relevance Chat mobile app is also on the way!
     </Accordion>
     <Accordion title="Can Chat remember my previous conversations?">
@@ -551,24 +156,20 @@ For more detailed information about which models can process which files in agen
 
 <Tabs>
   <Tab title="Why We Built Chat">
-    <Frame caption="Understand the reasoning behind Relevance Chat and how it enables ad-hoc agent collaboration.">
-      <iframe
-        className="w-full aspect-video rounded-xl"
-        src="https://www.youtube.com/embed/EKyw3oRvvf4"
-        title="Why We Built Chat (After Swearing We Wouldn't) | Live with Daniel Palmer"
-        allowFullScreen
-      ></iframe>
-    </Frame>
+    <iframe
+      className="w-full aspect-video rounded-xl"
+      src="https://www.youtube.com/embed/EKyw3oRvvf4"
+      title="Why We Built Chat (After Swearing We Wouldn't) | Live with Daniel Palmer"
+      allowFullScreen
+    ></iframe>
   </Tab>
-  
+
   <Tab title="Building Multi-Agent Workflows">
-    <Frame caption="Step-by-step guide on building chat agents that work together in multi-agent workflows.">
-      <iframe
-        className="w-full aspect-video rounded-xl"
-        src="https://www.youtube.com/embed/rG3wQgVNlW0"
-        title="Build Chat Agents for Multi-Agent Workflows (Step-by-Step Demo + Q&A)"
-        allowFullScreen
-      ></iframe>
-    </Frame>
+    <iframe
+      className="w-full aspect-video rounded-xl"
+      src="https://www.youtube.com/embed/rG3wQgVNlW0"
+      title="Build Chat Agents for Multi-Agent Workflows (Step-by-Step Demo + Q&A)"
+      allowFullScreen
+    ></iframe>
   </Tab>
 </Tabs>

@@ -1,0 +1,137 @@
+---
+title: "Supported file types"
+sidebarTitle: "Supported file types"
+description: "File type support, size limits, and capabilities by model provider in Chat"
+---
+
+Chat supports a wide range of file types for both input and output. Upload documents, images, and data files to provide context to your conversations, and generate new files based on your Agent's responses or built-in Agent outputs. Whether you're analyzing spreadsheets, processing PDFs, or creating presentations, Chat handles file operations across different model providers.
+
+Here's a comprehensive breakdown of supported file types by model provider:
+
+<Warning>
+File export is not supported for organizations in the AU region.
+</Warning>
+
+## File preview capabilities
+
+Chat can preview 70+ file types directly in the interface, so you can view a file without leaving the conversation. Supported categories include:
+
+- **PDFs**
+- **Images:** PNG, JPG, GIF, WebP, SVG
+- **Videos:** MP4, WebM, MOV
+- **Spreadsheets:** CSV, XLSX
+- **Code files:** JS, TS, Python, JSON, HTML, CSS, Markdown, and 20+ other programming languages
+
+Files without extensions (such as `Dockerfile`) are treated as plain text and can be previewed. If a file type is not supported for preview, Chat displays a "This file type can't be previewed" message.
+
+<Note>
+File preview (viewing a file in the chat UI) is separate from file processing (what the LLM can read and reason about). Preview support does not affect which files an LLM can process — that remains provider-dependent. See the file capabilities section below for details.
+</Note>
+
+## File size limits by provider
+
+File size limits vary by model provider. Each provider has limits for individual files and combined attachments in a single message.
+
+| Provider | Max per file | Max combined attachments |
+|----------|--------------|--------------------------|
+| **OpenAI** | 32MB | 50MB |
+| **Anthropic** | 32MB | 32MB |
+| **Gemini** | 32MB | 50MB |
+
+<Note>
+**Anthropic** has a lower combined attachment limit (32MB) compared to OpenAI and Gemini (50MB). Keep this in mind when uploading multiple files in a single message.
+</Note>
+
+## File capabilities
+
+<Info>
+**Reading** - Upload and process files to provide context to your conversations \\
+**Create/Export** - Generate new files or export content based on Chat responses
+</Info>
+
+<AccordionGroup>
+    <Accordion title="OpenAI">
+    **Document files:**
+    - `.docx` (32MB max) - Reading available, create/export available
+    - `.docx` with images (32MB max) - Reading not available, create/export available
+    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
+    - `.csv` (32MB max) - Reading available, create/export available
+    - `.pdf` (32MB max) - Reading available, create/export available
+    - `.pdf` with images (32MB max) - Reading available, create/export available
+    - `.txt` (32MB max) - Reading available, create/export available
+    - `.md` (32MB max) - Reading available, create/export not available (available on request)
+
+    **Image files:**
+    - `.png` (32MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
+
+    **File size limits:**
+    - Maximum per file: **32MB**
+    - Maximum combined attachments: **50MB**
+
+    **Not available:**
+    - `.pptx` - Reading not available, create/export not available
+    </Accordion>
+
+    <Accordion title="Anthropic">
+    **Document files:**
+    - `.docx` (32MB max) - Reading available, create/export available
+    - `.docx` with images (32MB max) - Reading not available, create/export available
+    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
+    - `.csv` (32MB max) - Reading available, create/export available
+    - `.pdf` (32MB max) - Reading available, create/export available
+    - `.pdf` with images (32MB max) - Reading available, create/export available
+    - `.txt` (32MB max) - Reading available, create/export available
+    - `.md` (32MB max) - Reading available (limited), create/export not available (available on request)
+
+    **Image files:**
+    - `.png` (32MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
+
+    **File size limits:**
+    - Maximum per file: **32MB**
+    - Maximum combined attachments: **32MB** - *Lower than other providers*
+
+    <Warning>
+    Anthropic has a lower combined attachment limit (32MB) compared to OpenAI and Gemini (50MB).
+    </Warning>
+
+    **Not available:**
+    - `.pptx` - Reading not available, create/export not available
+    </Accordion>
+
+    <Accordion title="Gemini">
+    **Document files:**
+    - `.docx` (32MB max) - Reading available, create/export available
+    - `.docx` with images (32MB max) - Reading not available, create/export available
+    - `.xlsx` (32MB max) - Reading available (converted to text), create/export available
+    - `.csv` (32MB max) - Reading available, create/export available
+    - `.pdf` (32MB max) - Reading available, create/export available
+    - `.pdf` with images (32MB max) - Reading available, create/export available
+    - `.txt` (32MB max) - Reading available, create/export available
+    - `.md` (32MB max) - Reading available, create/export not available (available on request)
+
+    **Image files:**
+    - `.png` (32MB max) - Reading available, create/export available
+    - `.jpg` / `.jpeg` (32MB max) - Reading available, create/export available (exported as PNG)
+
+    **Video & Audio files (Gemini Pro only):**
+    - Video: `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`
+    - Audio: `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac`
+
+    **File size limits:**
+    - Maximum per file: **32MB**
+    - Maximum combined attachments: **50MB**
+
+    **Not available:**
+    - `.pptx` - Reading not available, create/export not available
+    </Accordion>
+</AccordionGroup>
+
+## Additional information
+
+If a file contains textual information, we convert it to a text file before uploading to the model.
+
+<Info>
+For more detailed information about which models can process which files in agents, see our [LLM integrations](/integrations/llm-integrations/openai) pages.
+</Info>
