@@ -1,0 +1,285 @@
+---
+title: "Slide Builder"
+sidebarTitle: "Slide Builder"
+description: "Create and manage AI-generated presentations via MCP using Claude, Cursor, or any MCP-compatible AI client."
+---
+
+AI assistants connected to Relevance AI via MCP can access the full Slide Builder — creating presentations, managing BrandKits and Templates, exporting slides, and working with version history — all through natural language prompts.
+
+---
+
+## Quick start
+
+<Steps>
+  <Step title="Connect the MCP server">
+    Set up the Relevance AI MCP server for your AI client. Follow the instructions on the [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server) page for your specific client (Claude Desktop, Cursor, VS Code, ChatGPT, and others).
+  </Step>
+
+  <Step title="Authenticate">
+    When you first connect, you will be prompted to authenticate with your Relevance AI account. Authentication is per project — you will have access to the Slide Builder in whichever project you log in to.
+  </Step>
+
+  <Step title="Start building">
+    You're ready to go. Try one of the example prompts below or describe the presentation you want to create.
+  </Step>
+</Steps>
+
+---
+
+## Available capabilities
+
+Once connected via MCP, your AI assistant can perform all Slide Builder operations:
+
+<CardGroup cols={2}>
+  <Card title="Create presentations" icon="presentation-screen">
+    Generate slide decks from a prompt, topic description, or existing content.
+  </Card>
+  <Card title="Manage BrandKits" icon="palette">
+    Create, update, list, and delete BrandKits to keep presentations on-brand.
+  </Card>
+  <Card title="Create and apply templates" icon="copy">
+    Save presentation structures as reusable templates and apply them to new decks.
+  </Card>
+  <Card title="Export slides" icon="arrow-up-from-bracket">
+    Export presentations as PDF, Images, PPTX, or JSON.
+  </Card>
+  <Card title="Remix designs" icon="shuffle">
+    Refresh slide designs while keeping content intact.
+  </Card>
+  <Card title="Incremental building" icon="layer-group">
+    Build one slide at a time or in batches — review the outline before committing to the full deck.
+  </Card>
+  <Card title="Version history" icon="clock-rotate-left">
+    Access and restore previous versions of a presentation.
+  </Card>
+  <Card title="Dynamic updates" icon="pen-to-square">
+    Modify, rearrange, or update individual slides after the initial build.
+  </Card>
+</CardGroup>
+
+---
+
+## Example prompts
+
+<Tabs>
+  <Tab title="Create presentations">
+    ```
+    > Create a 10-slide pitch deck for a B2B SaaS product that automates expense reporting
+    ```
+
+    ```
+    > Build a presentation about Q3 sales performance using the data in this CSV
+    ```
+
+    ```
+    > Create an onboarding deck for new sales hires — cover our product, ICP, and sales process
+    ```
+  </Tab>
+
+  <Tab title="BrandKits">
+    ```
+    > Create a new BrandKit called "Acme Corp" with blue and white as the primary colours
+    ```
+
+    ```
+    > List all my BrandKits and show me which one is set as default
+    ```
+
+    ```
+    > Update the "Acme Corp" BrandKit to use a more formal tone and add our new logo
+    ```
+  </Tab>
+
+  <Tab title="Templates">
+    ```
+    > Save the pitch deck I just created as a template called "Standard Pitch"
+    ```
+
+    ```
+    > Create a new presentation using the "Weekly Report" template — the topic is last week's marketing metrics
+    ```
+
+    ```
+    > List all my templates and describe what each one is for
+    ```
+  </Tab>
+
+  <Tab title="Export and remix">
+    ```
+    > Export the current presentation as a PPTX file
+    ```
+
+    ```
+    > Remix the current slides — try a darker, more minimal aesthetic
+    ```
+
+    ```
+    > Export each slide as a PNG image
+    ```
+  </Tab>
+
+  <Tab title="Incremental building">
+    ```
+    > Create a 12-slide product demo deck, but only build the first slide so I can review the style
+    ```
+
+    ```
+    > Show me the outline for a presentation about machine learning in healthcare, then wait for my approval before building
+    ```
+
+    ```
+    > Build slides 4 through 7 of the current presentation
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Working with BrandKits via MCP
+
+BrandKits define the visual identity of your presentations — colours, fonts, logos, tone, and design guidelines. Your AI assistant can manage BrandKits directly:
+
+<AccordionGroup>
+  <Accordion title="Creating a BrandKit from brand assets">
+    Describe your brand and provide references, and your assistant will create a BrandKit:
+
+    ```
+    > Create a BrandKit called "Tech Startup" — our primary colour is #2563EB,
+      secondary is #1E40AF, we use Inter for body text and Sora for headings,
+      and our tone is confident and direct
+    ```
+  </Accordion>
+
+  <Accordion title="Applying a BrandKit to a new presentation">
+    Specify which BrandKit to use when creating slides:
+
+    ```
+    > Create a 6-slide investor update using the "Acme Corp" BrandKit
+    ```
+  </Accordion>
+
+  <Accordion title="Listing and inspecting BrandKits">
+    Ask your assistant to show you what BrandKits are available:
+
+    ```
+    > List all BrandKits in this project and show the colour palette for each one
+    ```
+  </Accordion>
+
+  <Accordion title="Deleting a BrandKit">
+    Remove a BrandKit you no longer need:
+
+    ```
+    > Delete the BrandKit called "Old Brand 2023"
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Working with templates via MCP
+
+Templates capture the structure of a successful slide deck so you can reuse it. Your AI assistant can create, list, and apply templates:
+
+<AccordionGroup>
+  <Accordion title="Saving a presentation as a template">
+    After building a deck you're happy with, save it for future reuse:
+
+    ```
+    > Save the current presentation as a template called "Quarterly Business Review"
+    ```
+  </Accordion>
+
+  <Accordion title="Creating a presentation from a template">
+    Apply a template when starting a new deck:
+
+    ```
+    > Use the "Quarterly Business Review" template to create a presentation for Q4 2025
+    ```
+  </Accordion>
+
+  <Accordion title="Combining BrandKits and templates">
+    You can apply both a template (for structure) and a BrandKit (for visual identity) together:
+
+    ```
+    > Create a presentation using the "Standard Pitch" template and the "Acme Corp" BrandKit,
+      covering our new enterprise product launch
+    ```
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Exporting presentations via MCP
+
+Your AI assistant can export completed presentations in four formats:
+
+| Format | Use case |
+|--------|----------|
+| **PDF** | Sharing or printing the complete deck |
+| **Images** | Embedding individual slides in other documents |
+| **PPTX** | Editing in Microsoft PowerPoint or Google Slides |
+| **JSON** | Saving slide data to recreate or reference in a future session |
+
+<Note>Exported slides show the static final state of each slide. Animations and moving elements are not preserved in exported files.</Note>
+
+Example:
+
+```
+> Export the current presentation as a PDF and also as a PPTX file
+```
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Slide Builder tools not appearing">
+    - Verify you have completed authentication with the MCP server
+    - Check that your Relevance AI project has Slide Builder access
+    - Try disconnecting and reconnecting the MCP server
+  </Accordion>
+
+  <Accordion title="Authentication issues">
+    - Make sure you have an active Relevance AI account
+    - Confirm you have access to the project you are trying to connect to
+    - Try removing and re-adding the MCP server connection in your client
+  </Accordion>
+
+  <Accordion title="Presentation generation errors">
+    - Check that your prompt includes enough context for the assistant to build from
+    - If the deck is large (10+ slides), try using incremental building — ask for the outline first, then build in batches
+    - For complex presentations, break the task into steps: create the outline, review it, then build
+  </Accordion>
+
+  <Accordion title="BrandKit not applying correctly">
+    - Verify the BrandKit name matches exactly — ask your assistant to list all BrandKits first
+    - Make sure the BrandKit was saved successfully before referencing it in a new session
+    - Try explicitly specifying the BrandKit: *"Use the BrandKit named 'Acme Corp'"*
+  </Accordion>
+
+  <Accordion title="Export not working">
+    - Confirm slides have been fully built before attempting an export
+    - Try specifying the format explicitly: *"Export as PDF"*
+    - If export fails, try regenerating the slides first and then exporting
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## What's next
+
+<CardGroup cols={2}>
+  <Card title="Slide Builder in Chat" icon="presentation-screen" href="/get-started/chat/chat-agents/slide-builder">
+    Learn about all Slide Builder features available in the Chat interface.
+  </Card>
+  <Card title="MCP Server setup" icon="plug" href="/integrations/mcp/programmatic-gtm/mcp-server">
+    Connect to Relevance AI from Claude Desktop, Cursor, VS Code, ChatGPT, and other MCP clients.
+  </Card>
+  <Card title="Agent Skills" icon="graduation-cap" href="/integrations/mcp/programmatic-gtm/agent-skills">
+    Give your AI assistant built-in knowledge of Relevance AI for better results.
+  </Card>
+  <Card title="Programmatic GTM overview" icon="rocket" href="/integrations/mcp/programmatic-gtm/introduction">
+    Explore everything you can build and manage via MCP.
+  </Card>
+</CardGroup>

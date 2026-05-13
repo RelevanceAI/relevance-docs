@@ -1,0 +1,234 @@
+---
+title: "Programmatic evals via MCP"
+sidebarTitle: "Programmatic evals"
+description: "Manage the full evaluation lifecycle programmatically using MCP tools from your AI coding assistant."
+---
+
+The Relevance AI MCP server includes 19 tools for managing evaluations programmatically. This covers the complete evaluation lifecycle: creating test sets and test cases, configuring evaluator rules and tool simulations, running evaluations, and monitoring batch results.
+
+This enables CI/CD integration, automated testing frameworks, and bulk operations that would be impractical to do through the UI.
+
+<Info>
+This page covers the MCP tools for programmatic eval management. For the UI-based workflow, see [Evals](/build/agents/build-your-agent/evals).
+</Info>
+
+<Info>
+**Rollout Status**: Evals is currently being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see this feature in your account yet, reach out to your account manager to discuss access.
+</Info>
+
+---
+
+## Prerequisites
+
+You need the Relevance AI MCP server connected to your AI coding assistant before using these tools. See the [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server) page for setup instructions.
+
+For better results, also clone the [agent skills](/integrations/mcp/programmatic-gtm/agent-skills) repository — it gives your assistant the knowledge to use MCP tools correctly.
+
+---
+
+## Managing test sets
+
+Test sets (also called Test Suites in the UI) are containers for test cases that you run together as a group.
+
+### What you can do
+
+- Create a new test set for an agent
+- List all test sets for an agent
+- Get the details of a specific test set
+- Update a test set's name or configuration
+- Delete a test set
+
+### Example prompts
+
+```
+Create a test set called "Customer Support Regression" for agent [agent-id]
+```
+
+```
+List all test sets for my support agent
+```
+
+```
+Delete the test set named "Draft Tests" from agent [agent-id]
+```
+
+---
+
+## Managing test cases
+
+Test cases are individual scenarios within a test set. Each test case defines a simulated user persona, an opening message, conversation limits, and its own evaluator rules.
+
+### What you can do
+
+- Create a test case within a test set
+- List all test cases in a test set
+- Get the details of a specific test case
+- Update a test case's scenario, persona, or configuration
+- Delete a test case
+
+### Example prompts
+
+```
+Add a test case to the "Customer Support Regression" test set:
+- Scenario name: Billing Dispute
+- Persona: An upset customer who was charged twice for the same order
+- First message: "I've been double charged and no one is helping me"
+- Max turns: 8
+```
+
+```
+List all test cases in test set [test-set-id]
+```
+
+```
+Update the "Billing Dispute" test case to increase max turns to 12
+```
+
+---
+
+## Configuring evaluator rules
+
+Evaluator rules define the criteria used to assess whether an agent's response passes or fails a test case. You can add, update, and remove evaluator rules on individual test cases.
+
+### Evaluator rule types
+
+| Type | What it checks |
+|------|---------------|
+| LLM Judge | Evaluates the conversation against a prompt you write, using an LLM to score the result |
+| String Contains | Checks whether the agent's response includes specific text |
+| String Equals | Checks whether the agent's response exactly matches an expected value |
+| Tool Usage | Checks whether a specific tool was used, and how many times or in what position |
+
+### What you can do
+
+- Add an evaluator rule to a test case
+- Update an existing evaluator rule
+- Remove an evaluator rule from a test case
+- List all evaluator rules on a test case
+
+### Example prompts
+
+```
+Add an LLM Judge evaluator to test case [test-case-id]:
+- Name: Empathy Check
+- Prompt: Did the agent acknowledge the customer's frustration before offering a solution?
+```
+
+```
+Add a Tool Usage evaluator to test case [test-case-id]:
+- Name: Escalation Tool Used
+- Tool: escalate_to_human
+- Check that it was used at least once
+```
+
+```
+Remove the "String Contains" evaluator from test case [test-case-id]
+```
+
+---
+
+## Configuring tool simulation
+
+Tool simulation lets you emulate tool responses during evaluations without actually calling the real tools. This is useful for testing how your agent handles specific tool outputs without incurring real API calls or side effects.
+
+Tool simulations are configured at the test case level. You specify the tool to simulate and a prompt describing the fake response the tool should return.
+
+### Example prompts
+
+```
+Add a tool simulation to test case [test-case-id]:
+- Tool: get_customer_account
+- Simulation prompt: Return a customer account showing two identical charges of $49.99 on the same date
+```
+
+```
+Update the tool simulation for "get_order_status" in test case [test-case-id] to return a delayed shipment scenario
+```
+
+```
+Remove the tool simulation for "send_email" from test case [test-case-id]
+```
+
+---
+
+## Running evaluations
+
+You can trigger evaluation runs programmatically against a test set. This is the same operation as clicking **Run** in the UI, but callable from scripts, CI pipelines, and automated workflows.
+
+### What you can do
+
+- Run a test set (runs all test cases in the set)
+- Run an individual test case
+- Include or exclude global evaluators from a run
+
+### Example prompts
+
+```
+Run the "Customer Support Regression" test set for agent [agent-id]
+```
+
+```
+Run test case [test-case-id] and include the "Professional Tone" global evaluator
+```
+
+```
+Trigger an evaluation run on test set [test-set-id] and name it "v2.3 release check"
+```
+
+---
+
+## Monitoring batch results
+
+After triggering a run, you can retrieve the results programmatically — including per-test-case scores, evaluator verdicts, and conversation logs.
+
+### What you can do
+
+- List all evaluation runs for a test set
+- Get the detailed results for a specific run, including scores and evaluator verdicts
+- Check whether a run is still in progress or complete
+
+### Example prompts
+
+```
+List all evaluation runs for test set [test-set-id]
+```
+
+```
+Get the results for evaluation run [run-id] — show me which test cases passed and which failed
+```
+
+```
+Check if the latest evaluation run for the "Customer Support Regression" test set has completed
+```
+
+---
+
+## CI/CD integration
+
+Because evaluation runs are fully programmable via MCP, you can integrate them into automated pipelines:
+
+- Trigger a test set run as part of a pre-deployment check
+- Poll for completion and parse pass/fail status
+- Block deployment if scores fall below a threshold
+
+<Accordion title="Example CI/CD workflow using an AI coding assistant">
+Ask your AI coding assistant:
+
+```
+1. Trigger an evaluation run for test set [test-set-id] on agent [agent-id]
+2. Poll every 10 seconds until the run is complete
+3. Check whether all test cases passed
+4. If any test case scored below 80%, list the failing cases with their evaluator verdicts
+5. Return a summary with overall pass rate
+```
+
+Your assistant will use the MCP eval tools to carry out each step and return a structured report you can act on.
+</Accordion>
+
+---
+
+## Learn more
+
+- [Evals (UI workflow)](/build/agents/build-your-agent/evals) — create and manage evaluations through the Relevance AI interface
+- [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server) — connect your AI coding assistant to Relevance AI
+- [Agent Skills](/integrations/mcp/programmatic-gtm/agent-skills) — give your assistant built-in knowledge of Relevance AI tools
