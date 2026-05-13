@@ -130,13 +130,16 @@ div#content-side-layout {
     );
   }
 
-  /* Indigo dot sitting on the line, aligned with each date label.
+  /* Indigo dot sitting on the line, vertically centered with the date label.
+     Math: update-container has py-8 (2rem top padding), date label is text-sm
+     (~28px tall with py-1). Center of label is ~2rem + 14px from container top.
+     Dot is 12px, so its top is (2rem + 14px - 6px) ≈ 2.5rem.
      pointer-events: none so it never intercepts hover/clicks. */
   .mdx-content[data-page-title^="Changelog"] .update-container::after {
     content: '';
     position: absolute;
     left: calc(-1.5rem - 5px);
-    top: 2.25rem;
+    top: 2.5rem;
     width: 12px;
     height: 12px;
     border-radius: 9999px;
