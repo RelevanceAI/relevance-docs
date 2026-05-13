@@ -14,11 +14,11 @@ Knowledge tables can now sync from Confluence. Pages are polled every 5 minutes 
 
 Connect in **Knowledge → Add Source → Confluence** and authenticate your workspace.
 
-## Project-level public agent controls
+## Project-level public Agent controls
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-public-access.webp)
 
-Admins can now disable public cloning and embedding for every agent, workforce, and tool in a project from one place. Toggling these off at the project level overrides individual asset settings and stops users from re-enabling them.
+Admins can now disable public cloning and embedding for every Agent, Workforce, and Tool in a project from one place. Toggling these off at the project level overrides individual asset settings and stops users from re-enabling them.
 
 Manage in **Project Settings → Manage Access**.
 
@@ -26,7 +26,7 @@ Manage in **Project Settings → Manage Access**.
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-google-play-2.webp)
 
-The Android app is live on the Google Play Store. Trigger agents, view runs, and receive notifications from your phone.
+The Android app is live on the Google Play Store. Trigger Agents, view runs, and receive notifications from your phone.
 
 [Get it on Google Play](https://play.google.com/store/apps/details?id=com.relevanceai.android).
 
@@ -38,21 +38,21 @@ The Android app is live on the Google Play Store. Trigger agents, view runs, and
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-observability.webp)
 
-Production monitoring for agents using LLM judges. Define evaluation criteria (summary quality, hallucination detection, workflow execution), pick a sample rate, and watch scores trend over time. Drill into failed runs to see what went wrong.
+Production monitoring for Agents using LLM judges. Define evaluation criteria (summary quality, hallucination detection, workflow execution), pick a sample rate, and watch scores trend over time. Drill into failed runs to see what went wrong.
 
 - **Sampling**: 10%, 50%, or 100% of conversations
 - **Dashboard**: overall scores, per-evaluator breakdowns, time-series trends
 - **Investigation**: filter and inspect individual failed runs
 
-Find it under your agent's **Monitor → Test Suites**.
+Find it under your Agent's **Monitor → Test Suites**.
 
 <Note>Enterprise plan with eval access. Talk to your Relevance AI rep if you don't see it.</Note>
 
-## Pause, cancel, and resume agent triggers
+## Pause, cancel, and resume Agent triggers
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-pause-agent-triggers.webp)
 
-Agent triggers now pause without being deleted — same controls that exist on Workforces. Toggle individual triggers, or pause every trigger on an agent at once. Paused triggers keep their configuration.
+Agent triggers now pause without being deleted — same controls that exist on Workforces. Toggle individual triggers, or pause every trigger on an Agent at once. Paused triggers keep their configuration.
 
 Manage from **Agent → Triggers**.
 
@@ -82,7 +82,7 @@ The Analytics dashboard now plots your org's concurrent operations as a timeseri
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-teams.webp)
 
-The Relevance AI app is live in the Microsoft Teams App Store. Trigger agents from Teams channels and chats, and receive run results back in the same thread.
+The Relevance AI app is live in the Microsoft Teams App Store. Trigger Agents from Teams channels and chats, and receive run results back in the same thread.
 
 Install from the Teams App Store and connect your workspace.
 
@@ -103,7 +103,7 @@ See it in **Project Settings → Pending Invites**.
 The docs site has been restructured into five tabs instead of one long sidebar:
 
 - **Getting Started** — intro, quick start, core concepts, troubleshooting
-- **Build with Relevance AI** — agents, tools, knowledge, workforces
+- **Build with Relevance AI** — Agents, Tools, Knowledge, Workforces
 - **Integrations** — grouped by category (CRM & Sales, Communication, Productivity, Customer Support, Developer)
 - **Enterprise** — business-critical features and requirements
 - **Access & Administration** — accounts, projects, billing, security, system limits
@@ -116,7 +116,7 @@ Start at [relevanceai.com/docs/get-started/introduction](https://relevanceai.com
 
 ![](https://cdn.relevanceai.com/images/changelog/changelog-per-user-usage.webp)
 
-The Analytics dashboard now breaks credit usage down by individual user, with a per-agent breakdown showing which agents each user runs most.
+The Analytics dashboard now breaks credit usage down by individual user, with a per-Agent breakdown showing which Agents each user runs most.
 
 Find it at **Analytics Dashboard → Users**.
 
@@ -152,7 +152,7 @@ For decks with 100+ slides the file may exceed model limits — Gemini and OpenA
 
 ### Also shipped
 
-- **Bulk chat deletion** — clean up test conversations in one go from the Chat list
+- **Bulk Chat deletion** — clean up test conversations in one go from the Chat list
 
 </Update>
 
@@ -162,7 +162,7 @@ For decks with 100+ slides the file may exceed model limits — Gemini and OpenA
 
 Two new dashboards on the project Analytics page:
 
-- **Usage Overview** — which agents, tools, and workforces consume the most actions and credits
+- **Usage Overview** — which Agents, Tools, and Workforces consume the most actions and credits
 - **Error Timeline** — error counts over time, filterable by Agents / Tools / Workforces, with the underlying error message visible per data point
 
 Find both at **project → Analytics**.
@@ -191,17 +191,17 @@ Select **Claude Opus 4.6** from the model menu.
 
 You can now edit a bulk run after it's been created — change daily task volume, change time zone, change other parameters in the bulk run modal — instead of cancelling and starting over.
 
-Open your agent, select the active bulk run, and click **Edit**.
+Open your Agent, select the active bulk run, and click **Edit**.
 
-## Evals: agent testing and validation
+## Evals: Agent testing and validation
 
 ![](https://cdn.relevanceai.com/images/changelog/698a6f9d99180607d34d642c-changelog-evals.webp)
 
-Structured testing for agents. Create test suites with multiple scenarios, generate user inputs, and evaluate runs with LLM-based judges against criteria you define. Track scores across test runs so regressions show up.
+Structured testing for Agents. Create test suites with multiple scenarios, generate user inputs, and evaluate runs with LLM-based judges against criteria you define. Track scores across test runs so regressions show up.
 
-Tool-call simulation (run an agent through a flow without firing real tool side effects) is coming next.
+Tool-call simulation (run an Agent through a flow without firing real Tool side effects) is coming next.
 
-Find it under your agent's **Monitor → Test Suites**.
+Find it under your Agent's **Monitor → Test Suites**.
 
 <Note>Enterprise only — talk to your Relevance AI rep for access.</Note>
 
@@ -233,19 +233,19 @@ Audit logs and execution traces can now be streamed to a customer-controlled des
 
 ![](https://cdn.relevanceai.com/images/changelog/69700d9eac32ec1e2b9919d0-changelog-pause-workforce-triggers.webp)
 
-Workforce triggers now support pause, cancel, and resume — both per-trigger and at the whole-workforce level. Pause an entire workforce during maintenance, then resume it without recreating anything.
+Workforce triggers now support pause, cancel, and resume — both per-trigger and at the whole-Workforce level. Pause an entire Workforce during maintenance, then resume it without recreating anything.
 
-Manage from the workforce dashboard, or use the **Pause all triggers** button in the top menu.
+Manage from the Workforce dashboard, or use the **Pause all triggers** button in the top menu.
 
 </Update>
 
 <Update label="January 19, 2026" description="2 updates">
 
-## Slack tool approvals
+## Slack Tool approvals
 
 ![](https://cdn.relevanceai.com/images/changelog/696f13a0bd3782afb55800f7-changelog-slack-tool-approvals.webp)
 
-Approve or reject pending tool calls from your agents directly in Slack, without switching contexts. The notification shows the tool name and parameters; one click sends the approval back.
+Approve or reject pending Tool calls from your Agents directly in Slack, without switching contexts. The notification shows the Tool name and parameters; one click sends the approval back.
 
 Enable per Slack trigger: **Triggers → ⋯ → Edit trigger → Advanced settings → Tool approval from Slack → Yes**.
 
@@ -259,25 +259,25 @@ The Plan & Billing page now supports filtering credit usage by date range and by
 
 </Update>
 
-<Update label="January 18, 2026" description="Test phone agents in your browser">
+<Update label="January 18, 2026" description="Test Phone Agents in your browser">
 
 ![](https://cdn.relevanceai.com/images/changelog/696d6f6c9e49abe25688ecf1-changelog-phone-testing.webp)
 
-Validate a phone agent's prompt, voice, and conversation flow from the dashboard without placing a real call. Microphone permission required.
+Validate a Phone Agent's prompt, voice, and conversation flow from the dashboard without placing a real call. Microphone permission required.
 
-On the phone agent's build page, hit **Test in Browser** under **Call Agent**.
+On the Phone Agent's build page, hit **Test in Browser** under **Call Agent**.
 
 </Update>
 
 <Update label="January 4, 2026" description="2 updates">
 
-## Meeting agent realtime commands
+## Meeting Agent realtime commands
 
 ![](https://cdn.relevanceai.com/images/changelog/695a95a2a931a05c425b7b72-changelog-meeting-bot-real-time-commands.webp)
 
-Type a trigger word in the meeting chat and your meeting agent acts on it mid-meeting — run a search, pause or resume the recording, build slides, post to Notion or Slack — without breaking the conversation.
+Type a trigger word in the meeting chat and your Meeting Agent acts on it mid-meeting — run a search, pause or resume the recording, build slides, post to Notion or Slack — without breaking the conversation.
 
-Build a new agent, add the **Relevance AI Meeting Bot** trigger, attach the tools you want (e.g. Pause Recording, Resume Recording, Google Search, Slide Builder) and define each tool's trigger word.
+Build a new Agent, add the **Relevance AI Meeting Bot** trigger, attach the Tools you want (e.g. Pause Recording, Resume Recording, Google Search, Slide Builder) and define each Tool's trigger word.
 
 ## Slide reordering in Slide Builder
 
