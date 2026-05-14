@@ -1,0 +1,178 @@
+---
+title: "Installation"
+sidebarTitle: "Installation"
+description: "Install @relevanceai/sdk in Node.js, Deno, Bun, Cloudflare Workers, or the browser."
+---
+
+The SDK ships to both npm and JSR, and works in every major JavaScript runtime with no extra configuration.
+
+## Prerequisites
+
+Before installing, make sure you have:
+
+- A Relevance AI account with access to the project dashboard
+- An API key or embed key — see [Authentication](/sdk/authentication)
+- One of the supported runtimes below
+
+## Node.js, Bun, and Cloudflare Workers
+
+Install from npm with any package manager.
+
+<Tabs>
+  <Tab title="npm">
+    ```bash
+    npm install @relevanceai/sdk@latest
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn add @relevanceai/sdk@latest
+    ```
+  </Tab>
+  <Tab title="pnpm">
+    ```bash
+    pnpm add @relevanceai/sdk@latest
+    ```
+  </Tab>
+  <Tab title="Bun">
+    ```bash
+    bun add @relevanceai/sdk@latest
+    ```
+  </Tab>
+</Tabs>
+
+Then import the named exports you need:
+
+```typescript
+import { createClient, Agent } from "@relevanceai/sdk";
+```
+
+## Deno
+
+Add the package from JSR:
+
+```bash
+deno add jsr:@relevanceai/sdk
+```
+
+Or import directly without a local install:
+
+```typescript
+import { createClient } from "jsr:@relevanceai/sdk";
+```
+
+## Browser via CDN
+
+For browser apps that don't use a bundler, load the SDK through an import map:
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "@relevanceai/sdk": "https://esm.run/@relevanceai/sdk"
+    }
+  }
+</script>
+<script type="module">
+  import { createClient } from "@relevanceai/sdk";
+</script>
+```
+
+## Browser bundler configuration
+
+When bundling for the browser with Vite, Webpack, or Rollup, you may see a warning about `node:crypto`. The SDK uses this module for UUID generation and falls back to the native browser equivalent. To silence the warning, add a shim and point the bundler at it.
+
+<Steps>
+  <Step title="Create the shim">
+    Save this as `src/shims/crypto.ts`:
+
+    ```typescript
+    export default globalThis.crypto;
+    ```
+  </Step>
+
+  <Step title="Configure the bundler">
+    <AccordionGroup>
+      <Accordion title="Vite">
+        In `vite.config.ts`, add a resolve alias:
+
+        ```typescript
+        import { defineConfig } from "vite";
+        import path from "node:path";
+
+        export default defineConfig({
+          resolve: {
+            alias: {
+              "node:crypto": path.resolve(
+                __dirname,
+                "src/shims/crypto.ts"
+              ),
+            },
+          },
+        });
+        ```
+      </Accordion>
+
+      <Accordion title="Webpack">
+        In `webpack.config.js`, add a resolve alias:
+
+        ```javascript
+        module.exports = {
+          resolve: {
+            alias: {
+              "node:crypto": path.resolve(
+                __dirname,
+                "src/shims/crypto.js"
+              ),
+            },
+          },
+        };
+        ```
+      </Accordion>
+
+      <Accordion title="Rollup">
+        Use the `@rollup/plugin-alias` plugin:
+
+        ```javascript
+        import alias from "@rollup/plugin-alias";
+        import path from "node:path";
+
+        export default {
+          plugins: [
+            alias({
+              entries: [
+                {
+                  find: "node:crypto",
+                  replacement: path.resolve(
+                    __dirname,
+                    "src/shims/crypto.js"
+                  ),
+                },
+              ],
+            }),
+          ],
+        };
+        ```
+      </Accordion>
+    </AccordionGroup>
+  </Step>
+</Steps>
+
+## Verify the installation
+
+Run a minimal script to confirm everything is wired up. Replace the placeholder values with real credentials from the dashboard.
+
+```typescript
+import { createClient, Agent, REGION_US } from "@relevanceai/sdk";
+
+createClient({
+  apiKey: "<api-key>",
+  region: REGION_US,
+  project: "<project-id>",
+});
+
+const agent = await Agent.get("<agent-id>");
+console.log("Connected:", agent.name);
+```
+
+If the agent's name prints to the console, the SDK is installed and authenticated correctly.
