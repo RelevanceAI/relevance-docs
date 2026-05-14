@@ -16,11 +16,8 @@ Once you build an Agent or clone one from the Marketplace, you can use it in Cha
   <Card title="Using Agents" icon="robot" href="/get-started/chat/using-agents">
     Mention any Agent in your project to bring its capabilities into a conversation
   </Card>
-<Card title="Saved prompts" icon="bookmark" href="/get-started/chat/saved-prompts">
+  <Card title="Saved prompts" icon="bookmark" href="/get-started/chat/saved-prompts">
     Reusable prompt templates shared across your team
-  </Card>
-  <Card title="Supported file types" icon="file" href="/get-started/chat/supported-file-types">
-    File types you can upload and export in Chat, with size limits by provider
   </Card>
   <Card title="Built-in agents" icon="wand-magic-sparkles" href="/get-started/chat/using-agents#built-in-agents">
     Pre-built Agents for research, images, and slides
@@ -38,6 +35,109 @@ You can choose which LLM to use for your conversation, or select **Auto** to let
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
 <iframe src="https://app.supademo.com/embed/cmfgfi5x0bz4239ozw2fj4het" frameBorder="0" title="How to select an LLM in Chat" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
+
+Once you've selected your model, you can [run Agents and Workforces](/get-started/chat/using-agents) in your Chat conversations.
+
+## Supported file types
+
+Upload documents, images, and data files to give your conversations context, or generate new files from Agent responses. The following extensions are fully supported — other file types can still be uploaded but may not be processed reliably.
+
+<Tip>
+Chat can preview 70+ file types directly in the conversation. Pasting from clipboard is limited to images only.
+</Tip>
+
+<CardGroup cols={2}>
+  <Card title="Documents" icon="file-lines">
+    pdf, doc, docx, ppt, pptx, xls, xlsx, csv, txt, md, xml, json, abw
+  </Card>
+  <Card title="Images" icon="image">
+    png, jpg, jpeg, webp, gif, svg, avif, bmp
+  </Card>
+  <Card title="Media" icon="film">
+    **Audio:** mp3, wav, ogg, m4a, aac, aiff, flac
+
+    **Video:** mp4, mpeg, mov, webm, avi, flv, mpg, wmv
+  </Card>
+  <Card title="Archives" icon="file-zipper">
+    zip, bin, arc
+  </Card>
+</CardGroup>
+
+### File capabilities by provider
+
+Each provider supports different file types for reading (uploading files as context) and creating/exporting (generating new files from Chat responses).
+
+<Warning>
+File export is not supported for organizations in the AU region.
+</Warning>
+
+<AccordionGroup>
+    <Accordion title="OpenAI">
+    **Size limits:** 32 MiB per file, 50 MiB combined per message
+
+    **Document files:**
+    - `.docx` — read and create/export
+    - `.docx` with images — create/export only
+    - `.xlsx` — read (converted to text) and create/export
+    - `.csv` — read and create/export
+    - `.pdf` — read and create/export
+    - `.pdf` with images — read and create/export
+    - `.txt` — read and create/export
+    - `.md` — read only (create/export available on request)
+
+    **Image files:**
+    - `.png` — read and create/export
+    - `.jpg` / `.jpeg` — read and create/export (exported as PNG)
+
+    **Not supported:** `.pptx`
+    </Accordion>
+
+    <Accordion title="Anthropic">
+    **Size limits:** 32 MiB per file, 32 MiB combined per message
+
+    **Document files:**
+    - `.docx` — read and create/export
+    - `.docx` with images — create/export only
+    - `.xlsx` — read (converted to text) and create/export
+    - `.csv` — read and create/export
+    - `.pdf` — read and create/export
+    - `.pdf` with images — read and create/export
+    - `.txt` — read and create/export
+    - `.md` — read (limited) only (create/export available on request)
+
+    **Image files:**
+    - `.png` — read and create/export
+    - `.jpg` / `.jpeg` — read and create/export (exported as PNG)
+
+    **Not supported:** `.pptx`
+    </Accordion>
+
+    <Accordion title="Gemini">
+    **Size limits:** 32 MiB per file, 50 MiB combined per message
+
+    **Document files:**
+    - `.docx` — read and create/export
+    - `.docx` with images — create/export only
+    - `.xlsx` — read (converted to text) and create/export
+    - `.csv` — read and create/export
+    - `.pdf` — read and create/export
+    - `.pdf` with images — read and create/export
+    - `.txt` — read and create/export
+    - `.md` — read only (create/export available on request)
+
+    **Image files:**
+    - `.png` — read and create/export
+    - `.jpg` / `.jpeg` — read and create/export (exported as PNG)
+
+    **Video and audio (Gemini Pro only):**
+    - Video: `.mp4`, `.mpeg`, `.mov`, `.avi`, `.flv`, `.mpg`, `.webm`, `.wmv`
+    - Audio: `.wav`, `.mp3`, `.aiff`, `.aac`, `.ogg`, `.flac`
+
+    **Not supported:** `.pptx`
+
+    Video and audio files are only supported with Gemini. If you attach a video using an Anthropic or OpenAI model, the send button is blocked.
+    </Accordion>
+</AccordionGroup>
 
 ## Frequently asked questions (FAQs)
 
