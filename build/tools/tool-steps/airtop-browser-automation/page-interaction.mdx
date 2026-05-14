@@ -26,7 +26,8 @@ You can add the 'Airtop - Click Element' Tool step to your Tool by:
 6. **Element Description** (Required): Enter a description of the element you want to click. This can be a natural language description (e.g., "the submit button") or a CSS selector/XPath. Type `{{` to select a variable.
 7. **Wait Until Timeout Seconds** (Optional): Enter the maximum time in seconds to wait for the element to become clickable.
 8. **Wait For Navigation** (Optional): Check this box if you want the step to wait for page navigation after clicking the element (useful when clicking links or buttons that cause page loads).
-9. Clicking `Run step` to test out the Tool
+9. **Wait For Navigation Condition** (Optional): When 'Wait For Navigation' is checked, choose which event to wait for: `load`, `domcontentloaded`, `networkidle0`, or `networkidle2`. `networkidle0` and `networkidle2` are the most reliable for detecting that a post-submit page has fully settled.
+10. Clicking `Run step` to test out the Tool
 
 The step clicks the specified element on the page. If the element is not found or not clickable within the timeout period, the step will fail.
 
@@ -45,10 +46,13 @@ You can add the 'Airtop - Type Text' Tool step to your Tool by:
 5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
 6. **Element Description** (Required): Enter a description of the input field where you want to type. This can be a natural language description (e.g., "the email input field") or a CSS selector/XPath. Type `{{` to select a variable.
 7. **Text to Type** (Required): Enter the text you want to type into the element. Type `{{` to select a variable, or enter the text directly.
-8. **Press Enter Key** (Optional): Check this box if you want to press the Enter key after typing the text (useful for submitting forms or triggering search).
-9. **Wait Until Timeout Seconds** (Required): Enter the maximum time in seconds to wait for the element to become available.
-10. **Wait For Navigation** (Optional): Check this box if you want the step to wait for page navigation after typing (useful when typing triggers a page load).
-11. Clicking `Run step` to test out the Tool
+8. **Press Enter Key** (Optional): Check this box to press the Enter key after typing the text (useful for submitting forms or triggering search).
+9. **Press Tab Key** (Optional): Check this box to press the Tab key after typing the text. If both Enter and Tab are enabled, Enter is pressed first. Useful for advancing focus to the next field in a form.
+10. **Clear Input Field** (Optional): Check this box to clear the input field's existing value before typing. Use this when filling fields that may already contain a value.
+11. **Wait Until Timeout Seconds** (Required): Enter the maximum time in seconds to wait for the element to become available.
+12. **Wait For Navigation** (Optional): Check this box if you want the step to wait for page navigation after typing (useful when typing triggers a page load).
+13. **Wait For Navigation Condition** (Optional): When 'Wait For Navigation' is checked, choose which event to wait for: `load`, `domcontentloaded`, `networkidle0`, or `networkidle2`.
+14. Clicking `Run step` to test out the Tool
 
 The step types the specified text into the target element. If the element is not found within the timeout period, the step will fail.
 
@@ -65,77 +69,20 @@ You can add the 'Airtop - Scroll Page' Tool step to your Tool by:
 3. Clicking 'Expand' to see the full Tool step
 4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
 5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
-6. **X Scroll Amount in pixels** (Required): Enter the number of pixels to scroll horizontally. Use positive numbers to scroll right, negative numbers to scroll left, or `0` for no horizontal scrolling.
-7. **Y Scroll Amount in pixels** (Required): Enter the number of pixels to scroll vertically. Use positive numbers to scroll down, negative numbers to scroll up, or `0` for no vertical scrolling.
-8. Clicking `Run step` to test out the Tool
+6. **X Scroll Amount in pixels** (Optional): Number of pixels to scroll horizontally. Positive scrolls right, negative scrolls left. Ignored when 'Scroll To Element' is set.
+7. **Y Scroll Amount in pixels** (Optional): Number of pixels to scroll vertically. Positive scrolls down, negative scrolls up. Ignored when 'Scroll To Element' is set.
+8. **Scroll To Element** (Optional): Natural-language description of what to scroll to (e.g., "the first name field", "the pricing section"). Takes precedence over the pixel-based X/Y values.
+9. **Scroll Within** (Optional): Natural-language description of the scrollable container to scroll inside (e.g., "the modal dialog"). If left blank, the entire page is scrolled.
+10. Clicking `Run step` to test out the Tool
 
-The step scrolls the page by the specified pixel amounts. This is useful for loading dynamic content or reaching specific sections of a page.
-
-## Add the 'Airtop - Press Tab' Tool step
-
-You can add the 'Airtop - Press Tab' Tool step to your Tool by:
-
-1. Creating a new Tool, then clicking `+ Add Step`
-2. Searching for and adding the 'Airtop - Press Tab' Tool step
-3. Clicking 'Expand' to see the full Tool step
-4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
-5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
-6. **Count** (Optional): Enter the number of times to press the Tab key. Defaults to `1` if not specified.
-7. Clicking `Run step` to test out the Tool
-
-The step simulates pressing the Tab key, moving focus to the next focusable element on the page. This is useful for navigating between form fields without needing to identify each field by description.
-
-## Add the 'Airtop - Clear Input' Tool step
-
-You can add the 'Airtop - Clear Input' Tool step to your Tool by:
-
-1. Creating a new Tool, then clicking `+ Add Step`
-2. Searching for and adding the 'Airtop - Clear Input' Tool step
-3. Clicking 'Expand' to see the full Tool step
-4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
-5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
-6. **Element Description** (Required): Enter a description of the input field you want to clear. This can be a natural language description (e.g., "the search input") or a CSS selector/XPath. Type `{{` to select a variable.
-7. Clicking `Run step` to test out the Tool
-
-The step clears the current value of the specified input field. Use this before typing new text into a field that may already contain a value.
-
-## Add the 'Airtop - Natural Language Scroll' Tool step
-
-You can add the 'Airtop - Natural Language Scroll' Tool step to your Tool by:
-
-1. Creating a new Tool, then clicking `+ Add Step`
-2. Searching for and adding the 'Airtop - Natural Language Scroll' Tool step
-3. Clicking 'Expand' to see the full Tool step
-4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
-5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
-6. **Scroll Description** (Required): Enter a natural language description of where or how to scroll (e.g., "scroll to the bottom of the page", "scroll down until the pricing section is visible", "scroll to the top"). Type `{{` to select a variable.
-7. Clicking `Run step` to test out the Tool
-
-The step interprets your description and scrolls the page accordingly. Use this when you need to scroll to a specific section without knowing the exact pixel position. For precise pixel-level control, use the 'Airtop - Scroll Page' step instead.
-
-## Add the 'Airtop - Extract Structured Data' Tool step
-
-You can add the 'Airtop - Extract Structured Data' Tool step to your Tool by:
-
-1. Creating a new Tool, then clicking `+ Add Step`
-2. Searching for and adding the 'Airtop - Extract Structured Data' Tool step
-3. Clicking 'Expand' to see the full Tool step
-4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
-5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
-6. **Extraction Prompt** (Required): Enter a description of the data you want to extract and its structure (e.g., "extract all product listings as a JSON array with name, price, and availability fields"). Type `{{` to select a variable.
-7. Clicking `Run step` to test out the Tool
-
-The step extracts data from the page and returns it as a structured JSON object. Unlike the 'Airtop - Query Page' step which returns free-form text, this step returns data in a consistent JSON format suitable for downstream processing.
+The step scrolls the page (or a named container) by the specified pixel amounts, or scrolls to a described element. Use pixel-based scrolling for precise control such as paging through an infinite scroll list, and 'Scroll To Element' when you want to reach a named section without knowing its exact position.
 
 ## Common use cases
 
-- Filling out forms automatically
+- Filling out forms automatically, including advancing fields with Tab and clearing pre-filled values before typing
 - Clicking buttons and links to navigate through a website
-- Scrolling to load dynamic content or reach specific page sections
+- Scrolling to load dynamic content, either by pixel amount or by natural-language description of the target
 - Automating repetitive user interactions
-- Navigating multi-field forms using Tab key presses
-- Clearing pre-filled fields before entering new values
-- Extracting structured data for use in subsequent steps or storage
 
 ## Common errors
 
@@ -149,18 +96,18 @@ The step extracts data from the page and returns it as a structured JSON object.
 
 <AccordionGroup>
   <Accordion title="Can I wait for an element to appear before clicking?">
-    For dynamic content that loads asynchronously, consider using the 'Airtop - Monitor page for condition' step to wait for elements before interacting with them.
+    For dynamic content that loads asynchronously, consider using the 'Airtop - Monitor Page for Condition' step to wait for elements before interacting with them.
   </Accordion>
-  <Accordion title="How do I type special characters or keyboard shortcuts?">
-    The Type Text step handles standard text input. For Tab key navigation between fields, use the 'Airtop - Press Tab' step. For other special keys or keyboard shortcuts, you may need to use additional automation steps.
+  <Accordion title="How do I advance focus to the next field without identifying it?">
+    Enable 'Press Tab Key' on the 'Airtop - Type Text' step after typing into a field. The next focusable element receives focus, which is useful for filling multi-field forms without separately describing each input.
   </Accordion>
-  <Accordion title="When should I use 'Clear Input' vs selecting all text and typing?">
-    Use the 'Clear Input' step when you want to empty a field completely before entering new content. It is more reliable than simulating keyboard shortcuts (like Ctrl+A then Delete) because it directly clears the field value regardless of the current cursor position or selection state.
+  <Accordion title="How do I overwrite a pre-filled input field?">
+    Enable 'Clear Input Field' on the 'Airtop - Type Text' step. The existing value is cleared before the new text is typed, which is more reliable than simulating Ctrl+A then Delete because it works regardless of the current cursor position or selection state.
   </Accordion>
-  <Accordion title="When should I use natural language scrolling vs pixel-based scrolling?">
-    Use natural language scrolling when you want to scroll to a named section or element and don't know its exact position. Use the pixel-based 'Airtop - Scroll Page' step when you need precise control over the scroll distance, such as loading a fixed number of items in an infinite scroll list.
+  <Accordion title="When should I use 'Scroll To Element' vs pixel-based scrolling?">
+    Use 'Scroll To Element' when you want to reach a named section or element and don't know its exact pixel position. Use the X/Y pixel inputs when you need precise control over the scroll distance, such as paging through an infinite scroll list a fixed amount at a time.
   </Accordion>
-  <Accordion title="What is the difference between 'Query Page' and 'Extract Structured Data'?">
-    'Query Page' returns a free-form text response based on your prompt, which is useful for summarisation or open-ended extraction. 'Extract Structured Data' returns a JSON object, which is useful when downstream steps expect a consistent data format for further processing.
+  <Accordion title="What does 'Wait For Navigation Condition' do?">
+    When 'Wait For Navigation' is enabled on the click or type step, the condition controls which page-load event the step waits for. `load` and `domcontentloaded` complete earlier, while `networkidle0` and `networkidle2` wait for network activity to settle and are more reliable for detecting that a post-submit page has fully rendered.
   </Accordion>
 </AccordionGroup>
