@@ -28,6 +28,25 @@ To add Slack as an integration, follow these simple steps:
   The Relevance AI team are constantly making improvements to the Slack integrations. If a new Slack feature isn't showing on your account, try to reconnect your Slack integration. To see our changes, sometimes integrations need a reconnect or marketplace re-approval.
 </Note>
 
+## Understanding Slack connections in Relevance AI
+
+Relevance AI uses two distinct Slack authentication methods depending on which part of the platform you're using. They are independent of each other, and your Slack workspace admin can allow or block each type separately.
+
+<CardGroup cols={2}>
+  <Card title="Builder: Agents, Tools, Triggers, Workforces" icon="robot">
+    Uses a workspace-level bot token through the Relevance AI Slack app. Installed once for the whole workspace, it lets agents post messages, respond to triggers, and send notifications. Requires a Slack workspace admin to approve the Relevance AI app.
+  </Card>
+  <Card title="SuperGTM" icon="bolt">
+    Uses a per-user OAuth token. Each user connects their own Slack account individually, giving SuperGTM access to act on that user's behalf in Slack.
+  </Card>
+</CardGroup>
+
+<Info>
+If Slack works in one part of Relevance AI but not another, your workspace admin has likely approved one connection type but not the other. Ask your admin to check permissions for both the Relevance AI Slack app (for Builder) and per-user OAuth app installations (for SuperGTM).
+</Info>
+
+Both connection types can coexist in the same workspace. For details on the SuperGTM Slack connection, see [SuperGTM integrations](/get-started/chat/super-gtm/integrations).
+
 ## Triggering Agents or Workforces from Slack
 
 ![Slack Triggers New Pn](/images/slack_triggers_new.png)
@@ -236,6 +255,12 @@ This will disconnect your Slack workspace from Relevance AI, and your agents wil
   
   <Accordion title="What's the difference between Agent triggers and Workforce triggers in Slack?">
     Agent triggers start a single AI Agent, while Workforce triggers kick off an entire multi-agent workflow with multiple Agents working together. Use Workforce triggers for complex, multi-step processes that require different specialized Agents to collaborate.
+  </Accordion>
+
+  <Accordion title="Why does Slack work in SuperGTM but not in Builder (or vice versa)?">
+    Builder and SuperGTM use different Slack authentication methods. Builder features (Agents, Tools, Triggers, Workforces) use a workspace-level bot token through the Relevance AI Slack app, which requires a workspace admin to approve the app installation. SuperGTM uses per-user OAuth, where each user connects their own Slack account individually.
+
+    If Slack works in one area but not the other, your workspace admin has likely approved one connection type without the other. Ask your admin to check the app permission settings for both the Relevance AI Slack app (for Builder) and per-user OAuth app installations (for SuperGTM). Both connection types can coexist once both are approved. See [SuperGTM integrations](/get-started/chat/super-gtm/integrations) for details on the SuperGTM Slack connection.
   </Accordion>
 </AccordionGroup>
 
