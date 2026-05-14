@@ -1,0 +1,141 @@
+---
+title: "Authentication"
+sidebarTitle: "Authentication"
+description: "API keys for server code, embed keys for the browser, and region selection."
+---
+
+The SDK supports two authentication methods. Each one is designed for a specific environment.
+
+## API keys vs. embed keys
+
+<CardGroup cols={2}>
+  <Card title="API keys" icon="server">
+    Grant full access to a project. Use in server-side applications, background workers, and other secure environments where the key is never exposed to end users.
+  </Card>
+  <Card title="Embed keys" icon="browser">
+    Scoped to a single public agent or workforce. Use in browser applications and other client-side contexts where the key is visible in network traffic.
+  </Card>
+</CardGroup>
+
+Rule of thumb: if the code runs on a server, use an API key. If it runs in a browser, use an embed key.
+
+## Regions
+
+Every Relevance AI project is deployed to a specific region. Match the region where your project was created — check the project settings in the dashboard.
+
+| Constant    | Region        |
+| ----------- | ------------- |
+| `REGION_US` | United States |
+| `REGION_EU` | Europe        |
+| `REGION_AU` | Australia     |
+
+```typescript
+import { REGION_US, REGION_EU, REGION_AU } from "@relevanceai/sdk";
+```
+
+## API key authentication
+
+API keys are available in the project settings on the dashboard. They follow the `sk-...` format and grant unrestricted access to every resource in the project.
+
+The fastest way to authenticate is with `createClient`:
+
+```typescript
+import { createClient, REGION_AU } from "@relevanceai/sdk";
+
+const client = createClient({
+  apiKey: "sk-...",
+  region: REGION_AU,
+  project: "<project-id>",
+});
+```
+
+For more control, construct a `Key` instance explicitly and pass it to the `Client` constructor:
+
+```typescript
+import { Client, Key, REGION_AU } from "@relevanceai/sdk";
+
+const key = new Key({
+  key: "sk-...",
+  region: REGION_AU,
+  project: "<project-id>",
+});
+
+const client = new Client(key);
+```
+
+Both approaches produce an authenticated client. For details on `createClient` vs. direct construction, see [Client](/sdk/client).
+
+## Embed key authentication
+
+Embed keys are generated at runtime and scoped to a single public agent or a single workforce. They're safe to use in browser environments because they can't access resources outside their scope.
+
+### For an agent
+
+```typescript
+import { Key, createClient, REGION_US } from "@relevanceai/sdk";
+
+const key = await Key.generateEmbedKey({
+  region: REGION_US,
+  project: "<project-id>",
+  agentId: "<public-agent-id>",
+});
+
+const client = createClient(key);
+```
+
+The agent must be marked as public in the dashboard. Private agents can't be accessed with embed keys.
+
+### For a workforce
+
+```typescript
+import { Key, REGION_US } from "@relevanceai/sdk";
+
+const key = await Key.generateEmbedKey({
+  region: REGION_US,
+  project: "<project-id>",
+  workforceId: "<workforce-id>",
+});
+```
+
+Each embed key is bound to exactly one agent or one workforce. To interact with multiple agents or workforces from the client side, generate a separate embed key for each.
+
+## Persisting embed keys
+
+Generating an embed key involves a network request and, importantly, initializes a specific user session. You should persist keys to avoid unnecessary latency and to ensure session continuity; **regenerating a new key on every page load will prevent the user from restoring their past conversations.**
+
+To maintain the session, persist the key with `toJSON()` and restore it using the `Key` constructor.
+### Save to localStorage
+
+```typescript
+const key = await Key.generateEmbedKey({
+  region: REGION_US,
+  project: "<project-id>",
+  agentId: "<agent-id>",
+});
+
+localStorage.setItem("relevance_key", JSON.stringify(key.toJSON()));
+```
+
+### Restore from localStorage
+
+```typescript
+import { Key, Client } from "@relevanceai/sdk";
+
+const stored = localStorage.getItem("relevance_key");
+if (stored) {
+  const key = new Key(JSON.parse(stored));
+  const client = new Client(key);
+}
+```
+
+`toJSON` returns a plain object containing every field needed to reconstruct the key — region, project, scoped agent or workforce ID, and the task prefix used for conversation namespacing.
+
+## Security guidance
+
+<Warning>
+Never embed API keys in client-side code, browser-accessible environment variables, or version control. API keys grant full project access and must remain on the server.
+</Warning>
+
+- Embed keys are the only safe authentication method for browser environments. They're scoped to a single agent or workforce and can't access other project resources.
+- Immediately revoke any compromised API keys before regenerating. Existing keys do not auto-expire and must be manually decommissioned via the dashboard to terminate access.
+- Store embed keys in `localStorage`, a secure cookie, or an equivalent client-side persistence mechanism. Regenerate them if the storage is cleared.

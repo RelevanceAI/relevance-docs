@@ -1,41 +1,41 @@
 ---
 title: "MCP Client"
 sidebarTitle: "MCP Client"
-description: "Connect external MCP servers to your Relevance AI agents, giving them access to tools from other services."
+description: "Connect external MCP servers to your Relevance AI Agents, giving them access to Tools and resources from other services."
 ---
 
-The MCP client integration lets you connect remote MCP servers to your Relevance AI agents — either through preset connections (Notion, Canva, Atlassian) or by manually connecting any custom server URL. This gives your agents access to tools hosted on external platforms without rebuilding them in Relevance AI.
+The MCP client integration lets you connect remote MCP servers to your Relevance AI Agents — either through preset connections (Notion, Canva, Atlassian) or by manually connecting any custom server URL. This gives your Agents access to Tools and resources hosted on external platforms without rebuilding them in Relevance AI.
 
 <Warning>
-  This page is about connecting external MCP servers **to** Relevance AI agents. If you want to use Relevance AI **from** an AI client like Claude or Cursor, see [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction).
+  This page is about connecting external MCP servers **to** Relevance AI Agents. If you want to use Relevance AI **from** an AI client like Claude or Cursor, see [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction).
 </Warning>
 
 ## Setting up an MCP connection for Agents
 
-Agents can connect to and run tools from remote MCP servers. You can choose from preset connections for popular services or connect your own custom MCP server.
+Agents can connect to remote MCP servers to run Tools and read resources exposed by those servers. You can choose from preset connections for popular services or connect your own custom MCP server.
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
-<iframe src="https://app.supademo.com/embed/cmg8tiu3h23ii2nomxtqolybm" frameBorder="0" title="How to set up an MCP Server connection for an agent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+<iframe src="https://app.supademo.com/embed/cmg8tiu3h23ii2nomxtqolybm" frameBorder="0" title="How to set up an MCP Server connection for an Agent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 1. Open the Agent you want to connect
-2. Navigate to the **Tools** tab in the agent builder
+2. Navigate to the **Tools** tab in the Agent builder
 3. Click **Add MCP**
 4. Choose your connection type:
-   - **Preset connections**: Select from Notion, Canva, or Atlassian — follow the OAuth flow to authorize access and tools are configured automatically
+   - **Preset connections**: Select from Notion, Canva, or Atlassian — follow the OAuth flow to authorize access and Tools are configured automatically
    - **Custom connection**: Click **Connect my own**, add the server URL, label the connection, and enter any required authentication details
 
 <Note>
-  The connection label you provide will appear in tool descriptions as `(MCP: connection-name)`. This helps agents distinguish between tools from different connections, especially when using multiple instances of the same MCP server.
+  The connection label you provide will appear in Tool descriptions as `(MCP: connection-name)`. This helps Agents distinguish between Tools from different connections, especially when using multiple instances of the same MCP server.
 </Note>
 
-Once connected, the agent automatically fetches and displays available tools from the MCP server. These tools can be referenced in the agent's core instructions and appear in the conversation task view.
+Once connected, the Agent automatically fetches and displays the available Tools from the MCP server. Tools appear in the conversation task view and can be referenced in the Agent's core instructions.
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
 
 ## Connecting multiple instances of the same MCP server
 
-You can connect the same MCP server URL multiple times within a project. Each connection operates independently with its own authentication credentials, label, and configuration. Tools from each connection display `(MCP: connection-name)` in their descriptions so agents can distinguish which connection a tool belongs to.
+You can connect the same MCP server URL multiple times within a project. Each connection operates independently with its own authentication credentials, label, and configuration. Tools from each connection display `(MCP: connection-name)` in their descriptions so Agents can distinguish which connection a Tool belongs to.
 
 This is useful when you need different authentication contexts (e.g. separate user credentials for different data access), environment separation (staging vs production), or multi-tenant setups where each connection uses different tenant credentials.
 
@@ -46,8 +46,8 @@ This is useful when you need different authentication contexts (e.g. separate us
     Choose labels that clearly indicate the purpose or context of each connection, such as `github-prod`, `github-staging`, or `linear-team-a`, `linear-team-b`.
   </Accordion>
 
-  <Accordion title="Reference connections in agent instructions">
-    When building agents that use multiple instances of the same server, include guidance in the agent's core instructions about when to use tools from each connection.
+  <Accordion title="Reference connections in Agent instructions">
+    When building Agents that use multiple instances of the same server, include guidance in the Agent's core instructions about when to use Tools from each connection.
   </Accordion>
 </AccordionGroup>
 
@@ -60,10 +60,10 @@ This is useful when you need different authentication contexts (e.g. separate us
     - Ensure the external MCP server supports the Streamable HTTP transport
   </Accordion>
 
-  <Accordion title="Agent cannot run external tools">
-    - Confirm the tools are listed in the agent's Tools tab after connecting
+  <Accordion title="Agent cannot run external Tools">
+    - Confirm the Tools are listed in the Agent's Tools tab after connecting
     - Check that the external MCP server has not revoked access or changed credentials
-    - Try disconnecting and reconnecting the MCP server in the agent builder
+    - Try disconnecting and reconnecting the MCP server in the Agent builder
   </Accordion>
 
   <Accordion title="Connection timeout or errors">
@@ -81,8 +81,8 @@ This is useful when you need different authentication contexts (e.g. separate us
     You can connect any remote MCP server that supports the Streamable HTTP transport. This includes servers from services like Linear, Notion, GitHub, and any custom MCP servers you host.
   </Accordion>
 
-  <Accordion title="Can I connect multiple MCP servers to one agent?">
-    Yes. You can add multiple MCP server connections to a single agent, giving it access to tools from several external services at once.
+  <Accordion title="Can I connect multiple MCP servers to one Agent?">
+    Yes. You can add multiple MCP server connections to a single Agent, giving it access to Tools and resources from several external services at once.
     
     You can also connect the same MCP server URL multiple times with different labels and credentials. This is useful for environment separation (staging vs production), different authentication contexts, or multi-tenant setups. See [connecting multiple instances](#connecting-multiple-instances-of-the-same-mcp-server) for details.
   </Accordion>
