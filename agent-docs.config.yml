@@ -1,0 +1,42 @@
+# Configuration for afdocs (https://afdocs.dev).
+# Run via the .github/workflows/afdocs.yml CI check.
+#
+# We skip only checks that depend on Mintlify theme rendering we cannot
+# control from this repo. Everything else stays — those checks catch
+# real PR-level regressions (broken code fences, dropped markdown
+# mirrors, oversized pages, etc.).
+
+skipChecks:
+  # Mintlify renders the full sidebar + nav + TOC into HTML, which turndown
+  # converts into a large block of markdown links before the actual page
+  # content. Pushes real content past the 50% mark on short pages
+  # regardless of how the .mdx is written.
+  - content-start-position
+
+  # Mintlify places the llms.txt directive in the page footer. It is
+  # present on every page but always past the 50% mark, and we cannot
+  # move it without theme changes.
+  - llms-txt-directive-html
+
+options:
+  # Use deterministic sampling so CI runs are reproducible across PRs —
+  # avoids the same workflow flipping between warn/fail purely based on
+  # which random pages got sampled.
+  samplingStrategy: deterministic
+
+  # Strip Mintlify chrome from rendered HTML before comparing against the
+  # .md mirror. Without this, the markdown-content-parity check flags
+  # pages where the only diff is the sidebar/TOC/nav that exists in HTML
+  # and not in the markdown source. Selectors taken from the rendered DOM
+  # on relevanceai.com/docs.
+  parityExclusions:
+    - "#header"
+    - "#footer"
+    - "#sidebar"
+    - "#sidebar-content"
+    - "#navbar"
+    - "#navbar-transition"
+    - "#navigation-items"
+    - "#table-of-contents"
+    - "#table-of-contents-layout"
+    - "#content-side-layout"
