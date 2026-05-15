@@ -1,61 +1,100 @@
 ---
-title: "CRM Data Enrichment"
-description: "How to use AI Agents to automatically enrich contact and company records in your CRM."
+title: "CRM data enrichment"
+sidebarTitle: "CRM data enrichment"
+description: "Fill in missing CRM fields automatically so reps stop wasting time looking up basics."
 ---
-
-## Overview
 
 Incomplete CRM data slows everything down — reps waste time looking up basics, lead routing breaks, and reporting becomes unreliable. An enrichment Agent fills in the gaps automatically so your data stays clean without manual effort.
 
-## What the Agent does
-
-An enrichment Agent takes existing CRM records and fills in missing or outdated fields.
+## When this pays off
 
 <CardGroup cols={2}>
-  <Card title="Firmographics" icon="building">
-    Company size, industry, location, and revenue range.
+  <Card title="Routing rules can't fire" icon="route">
+    Lead-routing logic depends on fields that are blank for half the records.
   </Card>
-  <Card title="Contact details" icon="user">
-    Job titles, seniority, and department.
+  <Card title="Unreliable reporting" icon="chart-pie">
+    Industry and company-size data is inconsistent, so segmentation reports are useless.
   </Card>
-  <Card title="Tech stack" icon="microchip">
-    Tools and platforms the company uses.
+  <Card title="LinkedIn URL as research" icon="link">
+    Reps are pasting LinkedIn profile links into the CRM and calling it enrichment.
   </Card>
-  <Card title="Social profiles" icon="user-tag">
-    Profiles and recent activity across LinkedIn, X, and the web.
-  </Card>
-  <Card title="Public data" icon="globe">
-    Firmographic data pulled from public sources.
+  <Card title="New ICP rollout" icon="rotate">
+    You're redefining your ICP and need to re-evaluate every existing record against the new lens.
   </Card>
 </CardGroup>
 
-## How to set it up
+## The shape of this motion
 
-<Steps>
-  <Step title="Start from a template">
-    Clone the [Lead Enricher](https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b) from the Marketplace, or [build your own](/build/introduction).
-  </Step>
-  <Step title="Connect your CRM">
-    Wire up [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) so the Agent can read and write records.
-  </Step>
-  <Step title="Add data sources">
-    Web search and [LinkedIn](/integrations/popular-integrations/linkedin) cover most enrichment needs out of the box.
-  </Step>
-  <Step title="Define the fields">
-    Write a [prompt](/build/agents/build-your-agent/prompt) that says which fields to enrich and what format to return.
-  </Step>
-</Steps>
+An enrichment Agent takes a partial CRM record and fills in missing fields.
 
-## Scaling it
-
-<CardGroup cols={3}>
-  <Card title="On record creation" icon="bolt" href="/build/agents/build-your-agent/triggers">
-    Set up a Trigger to enrich new records as they enter the CRM.
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Existing CRM record (contact or account) with partial data.
   </Card>
-  <Card title="Backfill the existing data" icon="layer-group" href="/build/agents/give-your-agent-tasks/bulk-schedule">
-    Use Bulk Schedule to clean up existing records in batches.
+  <Card title="Sources" icon="globe">
+    Web search, LinkedIn, third-party data vendors, your own CRM history.
   </Card>
-  <Card title="Chain it into a flow" icon="diagram-project" href="/build/workforces/create-a-workforce">
-    Build a Workforce that enriches → scores → routes leads automatically.
+  <Card title="Output" icon="file-lines">
+    Filled-in fields — firmographics, contact details, tech stack, social profiles — with source attribution.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Written back to the CRM in the correct fields, with sourcing notes attached.
   </Card>
 </CardGroup>
+
+## Climb the ladder
+
+### L1 — Let SuperGTM do it
+
+A rep asks SuperGTM to enrich an account before a call.
+
+Example prompts:
+
+- *"Enrich Acme Corp — fill in industry, employee count, and any recent news."*
+- *"Find the head of RevOps at Initech and add them as a contact in HubSpot."*
+- *"What tech stack is Globex running? Web search and check LinkedIn."*
+
+See [SuperGTM](/get-started/chat/super-gtm) for setup.
+
+### L2 — Give it a playbook
+
+Build a reusable enrichment Agent:
+
+- Clone the [Lead Enricher](https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b) from the Marketplace, or [build your own](/build/introduction)
+- Define exactly which fields to enrich and in what format (e.g. employee count as a range, not a number) via the [prompt](/build/agents/build-your-agent/prompt)
+- Connect [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) for read and write
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- New record created → enriched within minutes, fields populated, sources logged
+- Existing record marked stale (no update in 90 days) → re-enriched in batch via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule)
+- Enrichment feeds into a Workforce that enriches → scores → routes leads automatically
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which fields actually drive downstream routing and segmentation accuracy. It stops enriching fields nobody uses and surfaces new fields that predict win rates. Your CRM schema evolves with what actually matters, not what someone added in 2023.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that enriches every new HubSpot contact with firmographics and tech stack data, then writes it back to the record."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Enriching every record on every event" icon="circle-exclamation">
+    Credit-burn at scale. Gate enrichment on lifecycle stage and a freshness window — don't re-enrich records that were updated last week.
+  </Accordion>
+  <Accordion title="Overwriting human-entered data" icon="circle-exclamation">
+    A rep's hand-typed value usually beats whatever the web returns. Preserve human overrides, or write to a parallel "enriched_*" field that reports can choose to use.
+  </Accordion>
+  <Accordion title="No source attribution" icon="circle-exclamation">
+    Reps can't trust a value if they can't see where it came from. Have the Agent attach a source URL and timestamp to every enriched field.
+  </Accordion>
+  <Accordion title="Stale data without a freshness check" icon="circle-exclamation">
+    Pulling 2019 data into a 2026 record looks like enrichment but isn't. Filter sources by recency where it matters — leadership, headcount, funding.
+  </Accordion>
+</AccordionGroup>

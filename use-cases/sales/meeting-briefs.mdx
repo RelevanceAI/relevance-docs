@@ -1,58 +1,100 @@
 ---
-title: "Meeting Briefs & Account Summaries"
-description: "How to use AI Agents to prepare reps with account context before every call."
+title: "Meeting briefs"
+sidebarTitle: "Meeting briefs"
+description: "Generate structured call prep so reps walk into every meeting already up to speed."
 ---
 
-## Overview
+Reps shouldn't be scrambling for context five minutes before a call. A meeting brief Agent pulls together everything relevant about the account — recent conversations, deal history, company updates — into a snapshot a rep can scan in under a minute.
 
-Reps shouldn't be scrambling for context five minutes before a call. A meeting brief Agent pulls together everything relevant about an account — recent conversations, deal history, company updates — into a snapshot a rep can scan in under a minute.
-
-## What the Agent does
-
-A meeting brief Agent compiles a snapshot of the account ahead of a scheduled call.
+## When this pays off
 
 <CardGroup cols={2}>
-  <Card title="Deal context" icon="handshake">
-    Stage, value, and key stakeholders on the account.
+  <Card title="Back-to-back calendars" icon="calendar-days">
+    Reps run meetings in sequence with no buffer to prep between them.
   </Card>
-  <Card title="Recent activity" icon="clock-rotate-left">
-    Summary of emails, calls, and notes from the CRM.
+  <Card title="Context scattered everywhere" icon="puzzle-piece">
+    Account history lives across CRM, Slack, support tickets, and email — and key details get missed.
   </Card>
-  <Card title="Company updates" icon="newspaper">
-    News, leadership changes, or funding events.
+  <Card title="New reps inheriting accounts" icon="user-plus">
+    Reps joining mid-deal need to come up to speed without reading every email thread.
   </Card>
-  <Card title="Customer signals" icon="ticket">
-    Open support tickets or product feedback worth knowing about.
-  </Card>
-  <Card title="Talking points" icon="comment-dots">
-    Suggested angles based on the deal context.
+  <Card title="Exec drop-ins on deals" icon="user-tie">
+    Leadership joins late-stage calls and needs the picture in two minutes, not twenty.
   </Card>
 </CardGroup>
 
-## How to set it up
+## The shape of this motion
 
-<Steps>
-  <Step title="Build an Agent">
-    [Build an Agent](/build/introduction) with a [prompt](/build/agents/build-your-agent/prompt) that defines your preferred brief format.
-  </Step>
-  <Step title="Connect your CRM">
-    Wire up [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) so the Agent can pull deal and activity data.
-  </Step>
-  <Step title="Add email">
-    [Gmail](/integrations/popular-integrations/gmail) or [Outlook](/integrations/popular-integrations/outlook) lets the Agent surface recent email threads.
-  </Step>
-  <Step title="Add research tools">
-    Web search covers company news and updates outside your own systems.
-  </Step>
-</Steps>
-
-## Scaling it
+A meeting brief Agent compiles a one-page snapshot of the account ahead of a scheduled call.
 
 <CardGroup cols={2}>
-  <Card title="Auto-brief from calendar" icon="calendar" href="/build/agents/build-your-agent/triggers">
-    Trigger from [Google Calendar](/integrations/popular-integrations/google-calendar) so briefs are generated automatically before each meeting.
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Calendar event — account, attendees, deal stage, meeting time.
   </Card>
-  <Card title="Deliver to the rep" icon="paper-plane" href="/build/workforces/create-a-workforce">
-    Build a Workforce that generates the brief and delivers it via [Slack](/integrations/popular-integrations/slack) or email.
+  <Card title="Sources" icon="globe">
+    CRM activity, past meeting notes, email threads, support tickets, company news.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A brief covering deal context, recent activity, company updates, and suggested talking points.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Emailed to the rep before the meeting, attached to the calendar event, or posted in Slack.
   </Card>
 </CardGroup>
+
+## Climb the ladder
+
+### L1 — Let SuperGTM do it
+
+A rep asks SuperGTM right before a call.
+
+Example prompts:
+
+- *"What do I need to know about Acme Corp before my 3pm? Pull the last three emails and recent deal activity."*
+- *"Summarize where we are with Globex — last call notes, open objections, next steps."*
+- *"Who from Initech is on my calendar tomorrow and what should I prep on each of them?"*
+
+See [SuperGTM](/get-started/chat/super-gtm) for setup.
+
+### L2 — Give it a playbook
+
+Build a reusable brief Agent:
+
+- Define your preferred brief format in the [prompt](/build/agents/build-your-agent/prompt) — length, sections, tone
+- Upload account templates, your sales methodology, and key questions per deal stage into [Knowledge](/build/knowledge/create-knowledge)
+- Connect CRM, email, and calendar so the brief draws on the full account picture
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- A calendar event is scheduled → brief generated 24 hours before, emailed to the rep
+- A deal moves to a key stage (e.g. proposal) → exec-style brief generated for leadership review
+- A support ticket opens on an account with an active deal → brief regenerated and sent to the AE
+
+See [Triggers](/build/agents/build-your-agent/triggers), [Google Calendar](/integrations/popular-integrations/google-calendar), and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The brief format adapts to what reps actually use vs skip — which sections they cite in calls, which they ignore. Per-rep style tuning emerges. Briefs get shorter where shorter works, deeper where deeper matters.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that generates a meeting brief from CRM and email 24 hours before every scheduled call and emails it to the rep."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Briefs that are too long" icon="circle-exclamation">
+    If the brief takes more than a minute to scan, reps stop reading. Cap section lengths in the prompt and force prioritization.
+  </Accordion>
+  <Accordion title="Static account data with no recency" icon="circle-exclamation">
+    A brief that just regurgitates the CRM record isn't useful. The Agent has to surface what's *new* — last contact, last news, last ticket.
+  </Accordion>
+  <Accordion title="Same depth for every meeting" icon="circle-exclamation">
+    A discovery call and a renewal call need different briefs. Branch the prompt by meeting type or deal stage.
+  </Accordion>
+  <Accordion title="Raw data instead of insight" icon="circle-exclamation">
+    "2 open tickets" is data. "Two open critical tickets opened this week — both about billing" is a talking point. Have the Agent interpret, not just enumerate.
+  </Accordion>
+</AccordionGroup>

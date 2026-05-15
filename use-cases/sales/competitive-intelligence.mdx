@@ -1,59 +1,100 @@
 ---
-title: "Competitive Intelligence"
-description: "How to use AI Agents to track competitors and keep your sales team informed."
+title: "Competitive intelligence"
+sidebarTitle: "Competitive intelligence"
+description: "Track competitor moves and keep your team's positioning sharp."
 ---
 
-## Overview
+Deals get lost when reps can't articulate how you compare. A competitive intelligence Agent monitors what competitors are doing and keeps your team's battle cards current — so reps walk into positioning conversations ready, not improvising.
 
-Deals get lost when reps can't speak to how you compare. A competitive intelligence Agent monitors what competitors are doing and keeps your team up to date — so they can position effectively without spending hours on manual research.
-
-## What the Agent does
+## When this pays off
 
 <CardGroup cols={2}>
-  <Card title="Product moves" icon="rocket">
-    New product launches, feature updates, and pricing changes.
+  <Card title="Competitors shipping fast" icon="rocket">
+    The market is moving faster than your battle cards can keep up.
   </Card>
-  <Card title="Company signals" icon="newspaper">
-    Press coverage, funding rounds, and leadership changes.
+  <Card title="Out-of-date positioning" icon="calendar-xmark">
+    Battle cards exist but were last updated two quarters ago and nobody trusts them.
   </Card>
-  <Card title="Hiring intent" icon="briefcase">
-    Job postings that signal strategic direction.
+  <Card title="Losing winnable deals" icon="chart-line-down">
+    Win/loss reviews keep flagging the same competitor as the reason — and the same gaps.
   </Card>
-  <Card title="Sentiment & social" icon="comments">
-    Social media activity and customer sentiment.
-  </Card>
-  <Card title="Battle cards" icon="chess">
-    Updated positioning your reps can use in live conversations.
+  <Card title="Weekly digests requested" icon="newspaper">
+    Leadership wants a regular pulse on competitive activity for the GTM team.
   </Card>
 </CardGroup>
 
-## How to set it up
+## The shape of this motion
 
-<Steps>
-  <Step title="Build an Agent">
-    [Build an Agent](/build/introduction) with a [prompt](/build/agents/build-your-agent/prompt) that defines which competitors to track and what to look for.
-  </Step>
-  <Step title="Add monitoring tools">
-    Add web search and [Firecrawl](/build/tools/tool-steps/firecrawl) for monitoring competitor websites and news.
-  </Step>
-  <Step title="Upload existing knowledge">
-    Drop your existing battle cards and positioning docs into [Knowledge](/build/knowledge/create-knowledge) so the Agent builds on what you already have.
-  </Step>
-  <Step title="Wire up delivery">
-    Connect [Slack](/integrations/popular-integrations/slack) or [Gmail](/integrations/popular-integrations/gmail) so updates land where the team already works.
-  </Step>
-</Steps>
+A competitive intelligence Agent monitors a defined competitor set and surfaces what matters.
 
-## Scaling it
-
-<CardGroup cols={3}>
-  <Card title="Recurring scans" icon="calendar" href="/build/agents/build-your-agent/triggers">
-    Set up a Trigger to run weekly or daily competitor scans.
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Competitor list, products to compare, market segments you operate in.
   </Card>
-  <Card title="Build a workforce" icon="diagram-project" href="/build/workforces/create-a-workforce">
-    Chain monitoring → battle card updates → team notifications into a Workforce.
+  <Card title="Sources" icon="globe">
+    Competitor websites, news, job boards, social media, your own win/loss notes.
   </Card>
-  <Card title="Bulk landscape analysis" icon="layer-group" href="/build/agents/give-your-agent-tasks/bulk-schedule">
-    Run a one-time landscape sweep across many competitors via Bulk Schedule.
+  <Card title="Output" icon="file-lines">
+    Updated battle cards, product comparison summaries, weekly digests.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Posted to Slack, written to your wiki or Notion, attached to deal records when a competitor shows up.
   </Card>
 </CardGroup>
+
+## Climb the ladder
+
+### L1 — Let SuperGTM do it
+
+A rep asks during a deal where a competitor surfaces.
+
+Example prompts:
+
+- *"What did Acme Corp announce last quarter? They came up on a call this morning."*
+- *"Pull a quick comparison of our pricing vs. Globex for an exec on this deal."*
+- *"Summarize where we stand against Initech for a renewal conversation tomorrow."*
+
+See [SuperGTM](/get-started/chat/super-gtm) for setup.
+
+### L2 — Give it a playbook
+
+Codify the patterns:
+
+- Build an Agent that tracks your top 5–10 competitors with a [prompt](/build/agents/build-your-agent/prompt) defining what counts as a signal
+- Upload existing battle cards, positioning docs, and win/loss notes into [Knowledge](/build/knowledge/create-knowledge) so the Agent builds on what you already have
+- Add web search and [Firecrawl](/build/tools/tool-steps/firecrawl) for crawling competitor sites and news
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- Weekly scan → digest posted to Slack every Monday morning
+- A competitor is mentioned in a deal note → the relevant battle card resurfaces to the rep
+- A competitor ships a product launch → battle card auto-updated and the team alerted
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which competitor signals actually predicted lost deals and weights monitoring accordingly. It stops alerting on noise nobody acts on, and surfaces only changes that should shift your positioning.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"set up an agent that scans our top competitors weekly and posts a digest to #gtm-intel in Slack."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Tracking too many competitors" icon="circle-exclamation">
+    Twenty competitors equals alert fatigue and nothing gets read. Limit to the 5–10 that actually surface in deals.
+  </Accordion>
+  <Accordion title="Battle cards that read like marketing copy" icon="circle-exclamation">
+    Reps can't use a battle card mid-call if it's a webpage. Write them as short objection-handling scripts the rep can read in one breath.
+  </Accordion>
+  <Accordion title="Intel that never reaches a deal" icon="circle-exclamation">
+    A weekly digest is interesting. Resurfacing the right battle card the moment a competitor shows up in a deal is useful. Wire the Agent to deal records, not just channels.
+  </Accordion>
+  <Accordion title="Sources that are too easy" icon="circle-exclamation">
+    Press releases only show you what competitors want you to see. Add hiring patterns, job postings, and customer-side social signals to catch real direction.
+  </Accordion>
+</AccordionGroup>

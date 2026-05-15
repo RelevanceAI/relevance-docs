@@ -1,58 +1,100 @@
 ---
-title: "Lead Scoring & Qualification"
-description: "How to use AI Agents to score and qualify leads so reps focus on the right accounts."
+title: "Lead scoring"
+sidebarTitle: "Lead scoring"
+description: "Qualify and prioritize leads so reps spend their time on the accounts most likely to close."
 ---
 
-## Overview
+Not every lead deserves the same effort. A scoring Agent evaluates incoming leads against your ICP and buying signals so reps focus on the accounts most likely to close — and disqualify the ones that won't.
 
-Not every lead deserves the same attention. A scoring Agent evaluates incoming leads against your ICP and buying signals so reps spend their time on the accounts most likely to close.
-
-## What the Agent does
-
-A scoring Agent takes lead data and returns a qualification assessment.
+## When this pays off
 
 <CardGroup cols={2}>
-  <Card title="Fit score" icon="bullseye">
-    Match against ICP criteria — company size, industry, role, geography.
+  <Card title="High inbound volume" icon="inbox">
+    Leads are arriving faster than reps can manually triage them.
   </Card>
-  <Card title="Intent signals" icon="signal">
-    Website activity, content engagement, social behavior, and other buying signals.
+  <Card title="Equal time on tire-kickers" icon="scale-unbalanced">
+    Reps are spending the same hour on a Fortune 500 prospect as a free-trial signup with no fit.
   </Card>
-  <Card title="Reasoning" icon="comment-dots">
-    A short summary of why the lead scored high or low — not just a number.
+  <Card title="MQLs losing momentum" icon="hourglass-half">
+    Marketing-qualified leads are sitting unrouted while marketing complains the funnel is broken.
   </Card>
-  <Card title="Recommended action" icon="arrow-right">
-    Reach out now, nurture, or disqualify.
+  <Card title="ICP exists on paper only" icon="file">
+    You have an ICP doc but the team isn't applying it consistently across new leads.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A scoring Agent takes a lead record and returns a qualification assessment.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    CRM lead record, form-fill data, intent signals, web activity.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, marketing automation, ICP and qualification framework in Knowledge, web search for missing context.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A score with a reasoning summary — not just a number — plus a recommended action.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Written back to the CRM as a field, posted to Slack for hot leads, used to auto-route to the right rep.
   </Card>
 </CardGroup>
 
-## How to set it up
+## Climb the ladder
 
-<Steps>
-  <Step title="Build an Agent">
-    [Build an Agent](/build/introduction) and define your scoring criteria in the [prompt](/build/agents/build-your-agent/prompt).
-  </Step>
-  <Step title="Connect your CRM">
-    Wire up [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) so the Agent can pull lead data.
-  </Step>
-  <Step title="Upload your scoring framework">
-    Drop your ICP definition and qualification framework into [Knowledge](/build/knowledge/create-knowledge) so every score reflects your team's lens.
-  </Step>
-  <Step title="Add research tools">
-    Web search lets the Agent look beyond what's already in the CRM when the record is thin.
-  </Step>
-</Steps>
+### L1 — Let SuperGTM do it
 
-## Scaling it
+A rep or AE asks SuperGTM about a specific lead before assigning rep time.
 
-<CardGroup cols={3}>
-  <Card title="Score on entry" icon="bolt" href="/build/agents/build-your-agent/triggers">
-    Trigger scoring the moment a lead enters the pipeline.
-  </Card>
-  <Card title="Re-score in batches" icon="layer-group" href="/build/agents/give-your-agent-tasks/bulk-schedule">
-    Use Bulk Schedule to re-score existing leads after updating your ICP.
-  </Card>
-  <Card title="Auto-route by score" icon="diagram-project" href="/build/workforces/create-a-workforce">
-    Build a Workforce that routes scored leads to the right rep or outreach sequence.
-  </Card>
-</CardGroup>
+Example prompts:
+
+- *"Score this lead — they came in from the pricing page yesterday. Is it worth a first call?"*
+- *"Why did we lose Globex last quarter, and is this new account similar?"*
+- *"Walk me through the top 10 new leads from this week and what to do with each."*
+
+See [SuperGTM](/get-started/chat/super-gtm) for setup.
+
+### L2 — Give it a playbook
+
+Codify your qualification framework as a reusable Agent:
+
+- Upload your ICP, persona definitions, and disqualification rules to [Knowledge](/build/knowledge/create-knowledge)
+- Build the scoring Agent with a [prompt](/build/agents/build-your-agent/prompt) that produces consistent fit and intent scores plus reasoning
+- Run it on a backfill of existing leads via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to validate the scoring matches your team's intuition
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- New lead lands in the CRM → scored within seconds, written back to the record
+- Score crosses a threshold → routed to the right rep and posted to Slack
+- Lead is enriched or updated → re-evaluated against the new data
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The scoring model retrains on win/loss outcomes — your closed-won deals teach it what "qualified" actually means. ICP definitions shift based on what closed, not what someone wrote a year ago.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that scores new leads against our ICP and routes hot ones to the right rep in Slack."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Scoring without enrichment first" icon="circle-exclamation">
+    Thin CRM data produces unreliable scores. Enrich the record before you ask the Agent to judge it.
+  </Accordion>
+  <Accordion title="Treating the score as truth" icon="circle-exclamation">
+    Reps stop using their own judgment if the number is treated as final. The score is an input — surface the reasoning so reps can override it.
+  </Accordion>
+  <Accordion title="Stale ICP definitions" icon="circle-exclamation">
+    If the ICP in Knowledge hasn't been touched in 18 months, the Agent is judging against last year's reality. Review it quarterly against actual close-won data.
+  </Accordion>
+  <Accordion title="No feedback loop from outcomes" icon="circle-exclamation">
+    Without won/lost deals flowing back into the scoring criteria, the model can't learn. Pipe deal outcomes back to the Agent's evals.
+  </Accordion>
+</AccordionGroup>

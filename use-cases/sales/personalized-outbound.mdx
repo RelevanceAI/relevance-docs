@@ -1,58 +1,101 @@
 ---
-title: "Personalized Outbound"
-description: "How to use AI Agents to generate tailored outreach at scale."
+title: "Personalized outbound"
+sidebarTitle: "Personalized outbound"
+description: "Draft tailored emails and LinkedIn messages at scale so personalization stops being a tax on volume."
 ---
 
-## Overview
+Generic outreach gets ignored. Hand-crafted messages get replies — but they don't scale to a list of 500 prospects. An outbound Agent uses real prospect context to draft personalized messages at the volume your pipeline needs.
 
-Generic outreach gets ignored. Personalized messages get replies — but writing them one by one doesn't scale. An outbound Agent uses real prospect context to draft tailored emails and LinkedIn messages so your team can send personalized outreach without the manual effort.
-
-## What the Agent does
-
-An outbound Agent takes prospect data and produces ready-to-send messages.
+## When this pays off
 
 <CardGroup cols={2}>
-  <Card title="Cold emails" icon="envelope">
-    Personalized opens that reference the prospect's company, role, and recent activity.
+  <Card title="High outbound volume" icon="paper-plane">
+    SDRs running 100+ touches a week and personalization is collapsing into copy-paste.
   </Card>
-  <Card title="LinkedIn outreach" icon="linkedin">
-    Connection requests and DMs with relevant context.
+  <Card title="Flatlining reply rates" icon="chart-line-down">
+    The team is writing more emails and getting fewer replies — the messages stopped sounding different.
   </Card>
-  <Card title="Adaptive follow-ups" icon="rotate">
-    Sequences that change shape based on what happened on the previous touch.
+  <Card title="Top-10% personalization" icon="medal">
+    Reps only hand-personalize their A-list. Everyone else gets a template they're not happy with.
   </Card>
-  <Card title="On-brand voice" icon="comment-dots">
-    Messaging that matches your team's tone and value props.
+  <Card title="Multi-channel sequences" icon="shuffle">
+    Email + LinkedIn + follow-up timing is breaking down because no human is orchestrating it.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+An outbound Agent takes a prospect and produces a message ready to send.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Prospect name, company, role, recent activity, CRM history.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, LinkedIn, web and news, your messaging playbooks, ICP and persona docs.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A drafted email or LinkedIn message tuned to that prospect, in your team's voice.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Queued in Gmail/Outlook, posted to LinkedIn, written to the CRM, or dropped in a rep's queue for review.
   </Card>
 </CardGroup>
 
-## How to set it up
+## Climb the ladder
 
-<Steps>
-  <Step title="Start from a template">
-    Clone [LinkedIn Outreach](https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4) from the Marketplace, or [build your own](/build/introduction).
-  </Step>
-  <Step title="Connect your channels">
-    Wire up [Gmail](/integrations/popular-integrations/gmail) or [Outlook](/integrations/popular-integrations/outlook) for email, and [LinkedIn](/integrations/popular-integrations/linkedin) for social.
-  </Step>
-  <Step title="Upload your playbooks">
-    Drop messaging playbooks, email templates, and tone-of-voice guides into [Knowledge](/build/knowledge/create-knowledge).
-  </Step>
-  <Step title="Write the prompt">
-    A [prompt](/build/agents/build-your-agent/prompt) defines your outreach style, structure, and what personalization to include in every send.
-  </Step>
-</Steps>
+### L1 — Let SuperGTM do it
 
-## Scaling it
+A rep pastes a prospect into chat and asks for a message. SuperGTM uses connected CRM, LinkedIn, and web tools to draft on demand.
 
-<CardGroup cols={3}>
-  <Card title="Bulk outreach" icon="layer-group" href="/build/agents/give-your-agent-tasks/bulk-schedule">
-    Use Bulk Schedule to generate outreach for an entire prospect list in one pass.
-  </Card>
-  <Card title="Research-fed sequences" icon="diagram-project" href="/build/workforces/create-a-workforce">
-    Build a Workforce where a research Agent feeds prospect context directly into the outbound Agent.
-  </Card>
-  <Card title="Human review on high-value" icon="user-check" href="/build/agents/build-your-agent/alerts">
-    Use Alerts so reps review messages for high-value accounts before sending.
-  </Card>
-</CardGroup>
+Example prompts:
+
+- *"Draft a LinkedIn DM to Sarah at Initech — she just got promoted to VP of Sales last month."*
+- *"Write a follow-up email to Acme Corp referencing our last call notes in HubSpot."*
+- *"Give me three subject line options for a re-engagement email to dormant trial users."*
+
+See [SuperGTM](/get-started/chat/super-gtm) for setup.
+
+### L2 — Give it a playbook
+
+Lift the patterns out of chat into a reusable Agent. Two paths:
+
+- **Clone a template** — start from [LinkedIn Outreach](https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4) and adapt the prompt to your tone and value props
+- **Configure SuperGTM** — upload messaging playbooks, value props, and tone-of-voice guides to Knowledge so every draft sounds like you
+
+See the [Marketplace](/get-started/marketplace/introduction) and [Knowledge](/build/knowledge/create-knowledge).
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow that fires automatically. Common triggers:
+
+- A new lead enters HubSpot → first-touch email drafted and queued for rep approval
+- A LinkedIn connection is accepted → follow-up DM drafted automatically
+- A prospect engages with content → re-engagement sequence drafts itself
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+
+### L4 — Let it tune itself
+
+The Agent A/B tests subject lines, opening hooks, CTAs, and follow-up timing against reply rates and meetings booked. It evolves its own playbook based on what actually converts for your team, not your last guess.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that drafts personalized first-touch emails for new HubSpot leads and queues them for rep approval."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Personalization that's surface-level" icon="circle-exclamation">
+    Mentioning the company name doesn't count. The opening line has to reference something the prospect would only believe you noticed if you actually paid attention — a post, a launch, a role change.
+  </Accordion>
+  <Accordion title="Sending too fast" icon="circle-exclamation">
+    Volume plus zero warm-up equals the spam folder. Use sending caps and a warm-up schedule on new domains.
+  </Accordion>
+  <Accordion title="Every message reads the same" icon="circle-exclamation">
+    If your reply rates flatline as volume grows, the Agent has converged on a template. Force structural variation in the prompt — different opens, different CTA placements.
+  </Accordion>
+  <Accordion title="No human gate on exec accounts" icon="circle-exclamation">
+    Use [Alerts](/build/agents/build-your-agent/alerts) to route messages for high-value accounts through human review before they send.
+  </Accordion>
+</AccordionGroup>
