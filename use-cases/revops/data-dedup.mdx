@@ -1,0 +1,98 @@
+---
+title: "Data dedup and cleanup"
+sidebarTitle: "Data dedup"
+description: "Find and merge duplicate records, fix inconsistent fields, surface the records that need a human."
+---
+
+CRMs accrete duplicate records the way oceans accrete plastic. The exact-match dedup is easy; the fuzzy cases — "Acme Corp" vs "Acme Corporation" vs "Acme Inc" — eat hours of RevOps time. A dedup Agent does the fuzzy matching with reasoning, merges what's safe, and surfaces the ambiguous cases for a human to decide.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Duplicate accounts everywhere" icon="copy">
+    Sales operations reports keep getting flagged because the same company exists under three names.
+  </Card>
+  <Card title="Manual dedup is hours" icon="hourglass">
+    Each quarter, someone spends a day or two going through dedup candidates and merging by hand.
+  </Card>
+  <Card title="Conflicting fields after merge" icon="scale-unbalanced">
+    Even when records get merged, field-level conflicts (which address? which industry?) get resolved arbitrarily.
+  </Card>
+  <Card title="Bad merge erodes trust" icon="triangle-exclamation">
+    A wrong merge wipes deal history; teams stop trusting the dedup process and the queue grows.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A dedup Agent takes a candidate pair (or a list of candidates) and returns a merge decision with reasoning.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Candidate records, full field-level data, related activity / deal history.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, your dedup heuristics / playbook, parent-child hierarchy, third-party data for ground-truth checks.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A decision (merge / keep separate / human review) with confidence, plus field-level conflict resolution recommendations.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    High-confidence merges applied directly (with audit log); ambiguous cases queued in a review tool or posted to RevOps Slack.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone a RevOps Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A RevOps analyst asks before merging a tricky pair.
+
+Example prompts:
+
+- *"These two HubSpot accounts both look like Acme Corp — are they the same company? Compare addresses, websites, contact overlap."*
+- *"Run dedup on the leads imported from this trade-show CSV — flag the high-confidence matches and the ones I should look at."*
+- *"Did we already have a record for this contact? Check across CRM and prior tickets."*
+
+### L2 — Give it a playbook
+
+When the same dedup pattern repeats, codify it:
+
+- Define your matching heuristics and confidence thresholds in the [prompt](/build/agents/build-your-agent/prompt) — what's a strong signal vs. a weak one
+- Upload your dedup playbook, field-priority rules (which record's address wins?), and parent-child structures to [Knowledge](/build/knowledge/create-knowledge)
+- Run on a backfill of suspected duplicates via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to clean a backlog
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- A new record is created → dedup runs immediately, high-confidence matches merge automatically with audit log
+- A weekly sweep across the database → fuzzy candidates surface to a RevOps review queue
+- A merge dispute / undo → Agent re-evaluates with extra context and proposes the right resolution
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns from merge undos and disputes — which heuristics produced bad merges, which were solid. The confidence thresholds tighten on the patterns that cause problems and loosen where it's been reliable.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that dedupes new HubSpot accounts on creation, auto-merges high-confidence matches with audit log, and queues fuzzy cases in a Notion review board."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Auto-merging without audit" icon="circle-exclamation">
+    A wrong merge loses deal history. Always log what got merged and offer one-click undo for the first quarter of running.
+  </Accordion>
+  <Accordion title="Confidence thresholds set too loose" icon="circle-exclamation">
+    Aggressive auto-merge merges records that should have stayed separate. Start with high thresholds and loosen as you watch outcomes.
+  </Accordion>
+  <Accordion title="Ignoring field-level conflicts" icon="circle-exclamation">
+    Merging accounts without a rule for which address / industry / size wins produces garbled records. Document field priority rules in Knowledge.
+  </Accordion>
+  <Accordion title="No relationship to ongoing deals" icon="circle-exclamation">
+    Merging an account with an active opportunity into one without can break attribution and rep ownership. Have the Agent factor open-deal status into the decision.
+  </Accordion>
+</AccordionGroup>

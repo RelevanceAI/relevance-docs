@@ -1,0 +1,98 @@
+---
+title: "Ticket triage and routing"
+sidebarTitle: "Ticket triage"
+description: "Classify, tag, and route every inbound ticket so the right agent picks it up first."
+---
+
+The first 30 seconds of a ticket's life shapes its whole trajectory. If it's mis-tagged, mis-routed, or lands in the wrong queue, response time blows out. A triage Agent reads each inbound ticket the moment it lands and tags, prioritizes, and routes it so the right human picks it up.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Manual triage backlog" icon="layer-group">
+    A lead or senior agent spends an hour every morning reading and routing the overnight backlog.
+  </Card>
+  <Card title="Mis-routed tickets" icon="route">
+    Tickets sit in the wrong queue for hours before someone re-routes them.
+  </Card>
+  <Card title="Inconsistent tagging" icon="tags">
+    Tags differ across agents, so reporting and trend analysis are unreliable.
+  </Card>
+  <Card title="VIP escalations are missed" icon="crown">
+    High-value account issues sit in the general queue because nobody flagged them.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A triage Agent takes an inbound ticket and returns a structured classification.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Ticket body, subject, channel (email / chat / form), customer record, prior tickets.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM for account context, prior tickets for pattern matching, your taxonomy / tag library, SLA / VIP rules.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    Classification (category, priority, urgency), tags, recommended queue and assignee, with reasoning.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Applied directly in Zendesk / Intercom / Service Cloud, posted to Slack for VIP escalations, written to a triage log for review.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone a support Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A team lead pastes a tricky ticket in and asks for a read.
+
+Example prompts:
+
+- *"How would you triage this ticket? Customer is on Enterprise tier, ticket mentions a billing error and a feature outage."*
+- *"Walk me through these 10 overnight tickets — what should we pick up first and why?"*
+- *"Is this a P1? Customer says 'urgent' but the issue is a typo in our marketing site."*
+
+### L2 — Give it a playbook
+
+When the same triage logic repeats, codify it:
+
+- Define your taxonomy and priority rules in the [prompt](/build/agents/build-your-agent/prompt)
+- Upload SLA matrix, VIP account list, escalation rules, and tag library to [Knowledge](/build/knowledge/create-knowledge)
+- Run on a backfill of last month's tickets via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to validate the classifications match your team's calls
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- A new ticket lands in Zendesk → triaged within seconds, tags and priority applied, routed to the right queue
+- A VIP account ticket arrives → escalation alert fires to Slack regardless of stated priority
+- SLA at risk → Agent re-evaluates priority and posts a heads-up to the team lead
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which triage decisions held up — which P2s should have been P1s, which "billing" tickets were actually product bugs. It tightens its own classification logic against actual resolution outcomes.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that triages every new Zendesk ticket within 30 seconds, applies tags, routes to the right queue, and escalates VIP accounts to a Slack channel."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Tag drift" icon="circle-exclamation">
+    The Agent invents new tags rather than using your existing taxonomy. Force the prompt to choose from a fixed Knowledge list — and fail closed if no tag fits.
+  </Accordion>
+  <Accordion title="Overconfident priority decisions" icon="circle-exclamation">
+    The Agent marks every "urgent"-flagged email as P1. Train it to read the actual issue against your priority matrix, not the customer's adjective.
+  </Accordion>
+  <Accordion title="Routing without account context" icon="circle-exclamation">
+    Tickets get routed by topic only and miss the account dimension — a P3 from a churning enterprise account isn't a P3. Pull CRM context into the triage prompt.
+  </Accordion>
+  <Accordion title="Auto-applying without review" icon="circle-exclamation">
+    A wrong tag at scale corrupts reporting and routing. Start with Agent-as-suggester (writes to a "suggested_priority" field) and graduate to direct application after a quarter of audit.
+  </Accordion>
+</AccordionGroup>

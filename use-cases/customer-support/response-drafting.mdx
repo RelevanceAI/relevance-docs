@@ -1,0 +1,98 @@
+---
+title: "Response drafting from KB"
+sidebarTitle: "Response drafting"
+description: "First-draft replies grounded in your knowledge base, with citations so the agent can spot-check before sending."
+---
+
+The fastest support team isn't the one with the most agents — it's the one whose agents don't start replies from a blank page. A response Agent drafts the first reply for every ticket, pulling the right KB articles, the right account context, the right tone. The agent edits, sends, and moves on.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Repetitive tickets eat hours" icon="rotate">
+    The same 20 question types make up 70% of inbound. Agents type the same answer with slight variation, all day.
+  </Card>
+  <Card title="KB underused" icon="book">
+    You've got a knowledge base but tickets get answered from agent memory — and the KB grows stale.
+  </Card>
+  <Card title="Tone drift across agents" icon="comments">
+    Tone varies wildly between new hires and tenured agents — customer experience is uneven.
+  </Card>
+  <Card title="Onboarding takes too long" icon="user-clock">
+    New agents take weeks to become productive because there's no fast path to "right answer + right voice".
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A response Agent takes a ticket and returns a drafted reply with citations.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Ticket body, customer record, prior tickets, channel-specific format hints.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Knowledge base, prior resolutions, tone-of-voice guide, product status / changelog, account history.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A drafted reply with cited KB articles and a confidence indicator — ready for agent review and send.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Inserted as a draft in Zendesk / Intercom for agent review, posted in a comment for visibility, attached as a macro suggestion.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone a support Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. An agent pastes a ticket and asks for a starter reply.
+
+Example prompts:
+
+- *"Draft a reply to this ticket — the customer can't activate their account and we've seen this before with their email domain."*
+- *"What's our standard response when someone asks about the new billing cycle? Cite the KB articles."*
+- *"Customer is asking for a refund — what's the playbook and what should I check first?"*
+
+### L2 — Give it a playbook
+
+When the same response shape repeats, codify the format:
+
+- Define reply length, tone, signature, and citation style in the [prompt](/build/agents/build-your-agent/prompt)
+- Upload your full KB, tone-of-voice guide, refund / escalation policies, and product changelog to [Knowledge](/build/knowledge/create-knowledge)
+- Configure tools so the Agent can search the KB and CRM consistently per draft
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- A new ticket lands → reply auto-drafts, surfaces in the ticket as a suggested response for the agent to approve
+- A ticket gets re-opened → re-evaluation drafts a fresh reply, accounting for what happened since
+- A high-confidence FAQ-style ticket → reply auto-sends with logging (only for narrowly-defined cases you've audited)
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which drafts agents shipped untouched vs. which got rewritten. It evolves its tone, structure, and KB-citation choices against what your team actually sends — and against CSAT outcomes.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that drafts a reply for every new Zendesk ticket using our KB, posts the draft as an internal note for agent review, and includes citation links."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Drafts agents have to rewrite" icon="circle-exclamation">
+    If agents are rewriting every draft, the Agent isn't actually saving time — it's adding a step. Watch the edit-rate; rebuild the prompt or Knowledge if it climbs.
+  </Accordion>
+  <Accordion title="Hallucinated KB references" icon="circle-exclamation">
+    The Agent cites articles that don't exist or fabricates policy. Force citations to KB IDs from your actual catalog and fail visibly when there's no match.
+  </Accordion>
+  <Accordion title="Tone gets robotic" icon="circle-exclamation">
+    Without a strong tone-of-voice doc, every draft sounds like the same chatbot. Upload your best past replies as examples in Knowledge.
+  </Accordion>
+  <Accordion title="Auto-send before you're ready" icon="circle-exclamation">
+    Auto-sending replies before you've watched the Agent on real tickets for a month is how you ship a bad answer at scale. Start with drafts only.
+  </Accordion>
+</AccordionGroup>

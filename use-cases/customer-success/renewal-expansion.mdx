@@ -1,0 +1,98 @@
+---
+title: "Renewal and expansion outreach"
+sidebarTitle: "Renewal & expansion"
+description: "Draft account-aware renewal and expansion plays for every account, every quarter — so no opportunity slips."
+---
+
+The accounts most likely to expand and the accounts most likely to churn both want personalized attention at renewal. With 80 accounts per CSM, "personalized" usually means "whoever has the loudest email this week." A renewal Agent drafts the playbook touch for every account so nothing is on autopilot — and nothing falls through.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Renewals are scattergun" icon="shuffle">
+    Some accounts get a renewal plan three months out, others get a check-in email two weeks before.
+  </Card>
+  <Card title="Expansion is missed" icon="chart-line">
+    Accounts that look healthy don't get expansion conversations because nobody flagged them.
+  </Card>
+  <Card title="Renewal emails sound canned" icon="comments">
+    Every renewal email reads the same — the customer can tell.
+  </Card>
+  <Card title="QBR action items don't follow through" icon="hourglass-half">
+    Promises made at QBR aren't being tracked into the renewal cycle.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A renewal Agent takes an account + renewal window and returns a tailored plan with drafted outreach.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Account, renewal date, health score, segmentation, last touch, prior QBR commitments.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, prior QBRs, support history, usage data, your renewal playbook, expansion criteria.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A renewal plan — recommended action sequence, drafted outreach for each step, expansion talking points where they apply.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Plan saved to the CRM, outreach drafts queued in [Gmail](/integrations/popular-integrations/gmail), expansion intel posted to the AE in Slack.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone a CS Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A CSM asks 90 days before a renewal.
+
+Example prompts:
+
+- *"Acme Corp renews in 90 days — give me a 3-touch renewal plan with drafted emails, plus any expansion angle worth raising."*
+- *"What did we promise Globex at the last QBR? Draft a follow-up confirming we delivered before their renewal."*
+- *"Is Initech worth a price increase conversation this renewal? Pull usage and engagement signals to make the case."*
+
+### L2 — Give it a playbook
+
+When the same renewal motion repeats, codify it so every account gets your team's full playbook:
+
+- Define your renewal motion in the [prompt](/build/agents/build-your-agent/prompt) — touchpoint sequence, when to escalate, when to involve the AE
+- Upload your renewal playbook, expansion criteria, and prior QBR notes to [Knowledge](/build/knowledge/create-knowledge)
+- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to draft renewal plans for the next quarter's book in one pass
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- 90 days before renewal → plan drafted, outreach queued, CSM notified
+- A trigger signal (health score crosses threshold, exec change, support spike) → renewal plan updates mid-cycle
+- A renewal closes → the Agent logs outcome to inform the next cycle
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which renewal plays actually saved accounts vs. which were performative. Drops touch types that don't move outcomes, doubles down on the ones that did — different patterns by segment.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that drafts a 3-touch renewal plan 90 days before every renewal date in HubSpot and queues the outreach in Gmail for CSM review."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Same template for every account" icon="circle-exclamation">
+    Without per-account context (last QBR commitments, segment, usage pattern), every renewal email reads identical. Pull from past account interactions, not just static templates.
+  </Accordion>
+  <Accordion title="Auto-sending the renewal pitch" icon="circle-exclamation">
+    Renewal outreach to a strategic account that goes out without a human read is how trust gets burned. Keep CSM-in-the-loop until you've watched it for several cycles.
+  </Accordion>
+  <Accordion title="Missing the expansion moment" icon="circle-exclamation">
+    A healthy renewal that doesn't ask about expansion is a missed quarter. Build expansion checks into the same motion, not as a separate pass.
+  </Accordion>
+  <Accordion title="No tracking of what's been said" icon="circle-exclamation">
+    The renewal pitch contradicts what got said at QBR. Have the Agent reference prior commitments from CRM notes before drafting.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,205 @@
+---
+title: "Customer Support"
+sidebarTitle: "Getting started"
+description: "Put AI Agents to work across the support queue — triage, drafting, knowledge — so agents handle the cases that need a human."
+---
+
+Support teams are buried in repetitive volume that's faster to answer than to escalate. AI Agents take the routine — triaging tickets, drafting first replies, generating knowledge base articles from resolved cases — so human agents handle the cases that need judgment.
+
+## Start with a Marketplace template
+
+The Marketplace ships pre-built Agents you can clone in one click. Adapt them to your products, your tone of voice, your escalation rules.
+
+<CardGroup cols={3}>
+  <Card title="Lead Enricher" icon="database" href="https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b">
+    Keep customer records current — useful for context when a ticket lands.
+  </Card>
+  <Card title="LinkedIn Outreach" icon="linkedin" href="https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4">
+    Reach customers proactively when their account signals warrant outreach beyond the ticket.
+  </Card>
+  <Card title="Browse the Marketplace" icon="store" href="/get-started/marketplace/introduction">
+    The full catalog of Agents — ticket triage, response drafting, KB management, escalation routing.
+  </Card>
+</CardGroup>
+
+Click **Clone to my workspace** on any listing, connect your support tools (Zendesk / Intercom / Salesforce Service Cloud), and run on a real ticket.
+
+## Pick your path
+
+How hands-on do you want to be? Pick a tab — the rest of the page is written for you.
+
+<div className="path-picker">
+<Tabs>
+<Tab title="No build" id="no-build">
+  <Info>
+    You're on the **no-build path**. Switch tabs above if you'd rather build visually or drive everything from your editor.
+  </Info>
+
+  You don't need to touch the builder. Open the cloned Agent above in chat, ask in plain English, and let it work across the systems it's connected to.
+
+  ## Sharpen the answers with knowledge
+
+  Upload your support playbook, tone-of-voice doc, escalation rules, and knowledge base articles. Every conversation references them — same chat, sharper output.
+
+  <Card title="Add knowledge" icon="book" href="/build/knowledge/create-knowledge">
+    Upload context once. Every conversation references it.
+  </Card>
+
+  ## Make it run on its own
+
+  When the same kinds of tickets keep landing, set a trigger — every billing question gets first-touch drafted, every refund request gets routed to the right team. One toggle, no code, no builder.
+
+  <Card title="Triggers" icon="bolt" href="/build/agents/build-your-agent/triggers">
+    Schedule runs, fire on ticket events, listen to webhooks.
+  </Card>
+
+  ## Ready to go further?
+
+  When chat and templates stop being enough — when you want the Agent to follow your playbook word for word and orchestrate triage across channels — pick the **Build visually** tab above.
+</Tab>
+
+<Tab title="Build visually" id="build-visually">
+  <Info>
+    You're on the **visual-build path**. Switch tabs above for the no-build option, or to graduate to driving Agents from your editor.
+  </Info>
+
+  You're comfortable in product UIs. You don't want to wire up an Agent from scratch, but you do want it to follow your support playbook ticket by ticket. Open the cloned Agent in the builder and shape every piece.
+
+  ## Connect the tools it needs
+
+  Support Agents work best when they can read from and write to the systems your team already uses.
+
+  - **Ticketing** — Zendesk, Intercom, or Salesforce Service Cloud for tickets and case history
+  - **Knowledge base** — your KB system for citation-grounded responses
+  - **CRM** — [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) for customer context
+  - **Comms** — [Gmail](/integrations/popular-integrations/gmail), [Slack](/integrations/popular-integrations/slack) for follow-up and internal escalation
+
+  Full list at [Integrations](/integrations/introduction).
+
+  ## Shape every surface
+
+  Each piece below changes how the Agent behaves. Run it on a real ticket between every change — small iterations beat big rewrites.
+
+  <CardGroup cols={2}>
+    <Card title="Prompt" icon="message" href="/build/agents/build-your-agent/prompt">
+      Edit the system prompt to match your tone, your escalation rules, your tier-1 boundary.
+    </Card>
+    <Card title="Tools" icon="wrench" href="/build/agents/build-your-agent/tools">
+      Add or remove the actions the Agent can take — search the KB, query the CRM, draft replies, route tickets.
+    </Card>
+    <Card title="Knowledge" icon="book" href="/build/knowledge/create-knowledge">
+      Upload your KB articles, support playbook, and tone-of-voice guides. The Agent draws on these in every reply.
+    </Card>
+    <Card title="Triggers" icon="bolt" href="/build/agents/build-your-agent/triggers">
+      Run the Agent automatically — on every new ticket, on tag updates, on SLA breaches.
+    </Card>
+    <Card title="Alerts" icon="bell" href="/build/agents/build-your-agent/alerts">
+      Get notified when CSAT drops, when an SLA is at risk, when an escalation pattern emerges.
+    </Card>
+    <Card title="Memory" icon="brain" href="/build/agents/build-your-agent/memory">
+      Persistent context per customer — past tickets, known account context, prior resolutions.
+    </Card>
+  </CardGroup>
+
+  ## Chain Agents into a workforce
+
+  When a single Agent isn't enough — triage, then draft, then update the CRM, then notify the team — wire them on the workforce canvas.
+
+  <Card title="Build a workforce" icon="diagram-project" href="/build/workforces/create-a-workforce">
+    Drag, connect, and run multi-Agent pipelines without code.
+  </Card>
+
+  ## Test before you trust
+
+  Set up evals so regressions in tone or accuracy get caught before the Agent replies to a customer.
+
+  <Card title="Evals" icon="vial" href="/build/agents/build-your-agent/evals">
+    Define test cases in the UI. Run them on every change.
+  </Card>
+
+  ## Ready to go further?
+
+  When clicking through the builder starts to feel slow — when you'd rather have your AI coding assistant build and edit Agents for you, drop into custom Python or JS code blocks, or call Agents from your own app via the SDK — pick the **Build with AI** tab above.
+</Tab>
+
+<Tab title="Build with AI" id="build-with-ai">
+  <Info>
+    You're on the **build-with-AI path**. Switch tabs above if you'd rather work in product UIs or skip building entirely.
+  </Info>
+
+  You already work in an AI coding environment. Clicking through a UI to edit response templates feels slow. Have your AI assistant build, shape, and orchestrate Agents directly from your editor.
+
+  ## Programmatic GTM
+
+  Programmatic GTM is an MCP server that connects your AI coding environment to Relevance AI. Describe what you want in natural language; your AI assistant reads and writes your Relevance workspace — system prompts, Tools, knowledge, triggers, workforces, evals.
+
+  <CardGroup cols={2}>
+    <Card title="Claude Code plugin" icon="terminal" href="/integrations/mcp/programmatic-gtm/claude-code">
+      The fastest setup. Install the Relevance AI plugin and build Agents from your terminal.
+    </Card>
+    <Card title="MCP server" icon="plug" href="/integrations/mcp/programmatic-gtm/mcp-server">
+      Connect from Claude Desktop, Cursor, VS Code, ChatGPT, OpenAI Codex, or any MCP client.
+    </Card>
+    <Card title="Agent skills" icon="graduation-cap" href="/integrations/mcp/programmatic-gtm/agent-skills">
+      Clone the skills repo so your coding assistant has built-in knowledge of Relevance patterns.
+    </Card>
+    <Card title="Programmatic GTM overview" icon="book" href="/get-started/core-concepts/programmatic-gtm">
+      The full reference for what you can do programmatically.
+    </Card>
+  </CardGroup>
+
+  ## Drop into code when you need to
+
+  Programmatic GTM covers the building. Two escape hatches for when canned Tool steps fall short:
+
+  - **Custom Python and JS code blocks** live inside Tools. Parse a custom ticket payload, apply business logic to routing, transform support data — drop a code block in and write the logic directly.
+  - **The JS SDK** lets you call Agents and Tools from your own Node.js app. Useful when embedding into a custom support dashboard or building a ticketing webhook handler.
+</Tab>
+</Tabs>
+</div>
+
+## The four levels in support
+
+How the [autonomy ladder](/use-cases/guides) plays out across the support queue:
+
+<CardGroup cols={2}>
+  <Card title="L1 — Assisted" icon="hand">
+    An agent opens a ticket and asks the Agent to summarize the customer's history and suggest a reply — the Agent returns context with a draft response.
+  </Card>
+  <Card title="L2 — Copilot" icon="map" href="/build/agents/give-your-agent-tasks/approval-mode">
+    An agent reviews a batch of new tickets — the Agent has already drafted replies and triage suggestions, the agent approves and sends.
+  </Card>
+  <Card title="L3 — Autopilot" icon="bolt" href="/build/workforces/create-a-workforce">
+    A new ticket lands → triaged, tagged, routed, first-reply drafted and auto-sent on simple cases, all without an agent touching the queue.
+  </Card>
+  <Card title="L4 — Self-driving" icon="infinity">
+    "Reduce time-to-first-response by 30%" — the Agent learns which ticket patterns get fastest resolution, evolves its triage and draft templates against CSAT outcomes.
+  </Card>
+</CardGroup>
+
+## Zoom into a single motion
+
+Each motion below is a working entry point — clone a template, then run it, shape it visually, or build with AI depending on which tab fit you.
+
+<CardGroup cols={3}>
+  <Card title="Ticket triage and routing" icon="route" href="/use-cases/customer-support/ticket-triage">
+    Classify, tag, and route every inbound ticket so the right agent picks it up first.
+  </Card>
+  <Card title="Response drafting from KB" icon="reply" href="/use-cases/customer-support/response-drafting">
+    First-draft replies grounded in your knowledge base, with citations so the agent can spot-check.
+  </Card>
+  <Card title="KB article generation" icon="book-open" href="/use-cases/customer-support/kb-generation">
+    Turn resolved tickets into knowledge base articles — close the loop without writing them by hand.
+  </Card>
+</CardGroup>
+
+## See it in production
+
+<Frame caption="Behind the scenes of Canva's AI agent strategy.">
+  <iframe
+    className="w-full aspect-video rounded-xl"
+    src="https://www.youtube.com/embed/GJ40ZmqdcW4"
+    title="Canva x Relevance AI — Agents@Work"
+    allowFullScreen
+  ></iframe>
+</Frame>

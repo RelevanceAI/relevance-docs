@@ -1,0 +1,98 @@
+---
+title: "Account health and churn signals"
+sidebarTitle: "Account health"
+description: "Score every account on health with reasoning, not just a number. Surface risk before renewal so CSMs can act in time."
+---
+
+Health scores that are just numbers don't get used. A health Agent rates accounts across the signals that actually predict churn — usage drops, support spikes, exec turnover, deal-stage stalls — and surfaces the *why* so CSMs can do something about it.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="CSMs are reactive" icon="rotate-right">
+    Churn risks are caught at renewal, not 90 days out when there's still time to fix them.
+  </Card>
+  <Card title="Health score is ignored" icon="eye-slash">
+    The existing red/yellow/green field doesn't influence CSM action — nobody trusts the rollup.
+  </Card>
+  <Card title="Signals live in silos" icon="puzzle-piece">
+    Usage data, support tickets, deal notes, exec changes — all in different tools, nobody synthesizes them.
+  </Card>
+  <Card title="Book of business is too big" icon="building-columns">
+    Each CSM has 80+ accounts and there's no way to triage which ones need attention this week.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A health Agent takes an account and returns a score, the reasoning behind it, and a recommended next action.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Account record, time window, segmentation cut.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, support tickets, product usage / analytics, deal history, exec change tracking, your CS playbook.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A health score with cited signals, a short summary of the risk picture, and a recommended outreach action.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Written back to the CRM as a field plus a note, posted in Slack for at-risk accounts, surfaced in a CSM digest.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone a CS Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A CSM drops an account in before a check-in.
+
+Example prompts:
+
+- *"How is Acme Corp doing right now? Usage, tickets, last contact, anything I should worry about?"*
+- *"Which 5 accounts in my book look highest-risk for Q1 renewal?"*
+- *"Compare Globex's engagement this quarter vs. last — what changed?"*
+
+### L2 — Give it a playbook
+
+When the same scoring pattern repeats, codify it:
+
+- Define your scoring framework in the [prompt](/build/agents/build-your-agent/prompt) — what counts as a signal, how to weight, when to flag
+- Upload your CS playbook, segmentation rules, and churn post-mortems to [Knowledge](/build/knowledge/create-knowledge)
+- Run on a backfill of last quarter's accounts via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to validate the scoring matches what you saw happen
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- Every Monday → CSM digest of book-of-business health drops in Slack
+- Usage drops more than 30% week-over-week → account re-scored, CSM alerted with context
+- 90 days before renewal → automated health re-evaluation triggers a renewal-prep workflow
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which signals actually predicted cancellation in your historical data. Drops weight on noisy signals, increases it on predictive ones, evolves the scoring framework based on outcomes — not your team's intuition from two years ago.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that scores every account weekly across usage, tickets, and deal-stage, writes the result to HubSpot, and alerts CSMs in Slack on red accounts."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Score without reasoning" icon="circle-exclamation">
+    A number alone is unactionable. CSMs need to see *which* signals moved and *why* the Agent flagged the account — otherwise they ignore it.
+  </Accordion>
+  <Accordion title="Stale signal definitions" icon="circle-exclamation">
+    Your churn drivers shift over time. Review the prompt's scoring criteria each quarter against actual churned accounts.
+  </Accordion>
+  <Accordion title="Overweighting product usage" icon="circle-exclamation">
+    Some segments use the product weekly and never churn; others log in monthly and stay loyal. Weight signals by segment, not globally.
+  </Accordion>
+  <Accordion title="No feedback loop from churned accounts" icon="circle-exclamation">
+    Without piping churn outcomes back to the Agent's evals, the scoring can't learn. Connect closed-lost / churned status to evaluation runs.
+  </Accordion>
+</AccordionGroup>

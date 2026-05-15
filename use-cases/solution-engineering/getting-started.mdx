@@ -1,0 +1,214 @@
+---
+title: "Solution Engineering"
+sidebarTitle: "Getting started"
+description: "Put AI Agents to work across pre-sales technical work — RFPs, demos, discovery — so SEs spend time architecting solutions, not chasing documents."
+---
+
+Solution engineers spend half their time on document work — RFP responses, security questionnaires, demo prep — and half on the strategic conversations that actually win deals. AI Agents take the document work so SEs can focus on the architecture and the relationships.
+
+## Start with a Marketplace template
+
+The Marketplace ships pre-built Agents you can clone in one click. Adapt them to your products, your security posture, your standard demo flow.
+
+<CardGroup cols={3}>
+  <Card title="Sales Researcher" icon="magnifying-glass" href="https://marketplace.relevanceai.com/listing/4b454347-0656-4fee-9c15-8fb2f2713424">
+    Build account briefs covering company, contacts, tech stack — useful as a starting point for technical discovery.
+  </Card>
+  <Card title="Lead Enricher" icon="database" href="https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b">
+    Pull firmographics and tech-stack details on every account before a demo.
+  </Card>
+  <Card title="Browse the Marketplace" icon="store" href="/get-started/marketplace/introduction">
+    The full catalog of Agents — RFP, security review, demo prep, discovery synthesis.
+  </Card>
+</CardGroup>
+
+Click **Clone to my workspace** on any listing, connect the systems it needs (CRM, document storage, security reference docs), and run on a real opportunity.
+
+## Pick your path
+
+How hands-on do you want to be? Pick a tab — the rest of the page is written for you.
+
+<div className="path-picker">
+<Tabs>
+<Tab title="No build" id="no-build">
+  <Info>
+    You're on the **no-build path**. Switch tabs above if you'd rather build visually or drive everything from your editor.
+  </Info>
+
+  You don't need to touch the builder. Open the cloned Agent above in chat, ask in plain English, and let it work across the systems it's connected to.
+
+  ## Sharpen the answers with knowledge
+
+  Upload your security questionnaire archive, prior RFP responses, architecture diagrams, and standard demo scripts. Every conversation references them — same chat, sharper output.
+
+  <Card title="Add knowledge" icon="book" href="/build/knowledge/create-knowledge">
+    Upload context once. Every conversation references it.
+  </Card>
+
+  ## Make it run on its own
+
+  When the same kinds of opportunities keep landing, set a trigger — every new SE-flagged deal gets a demo-prep brief, every inbound RFP triggers a first-pass response. One toggle, no code, no builder.
+
+  <Card title="Triggers" icon="bolt" href="/build/agents/build-your-agent/triggers">
+    Schedule runs, fire on CRM events, listen to webhooks.
+  </Card>
+
+  ## Ready to go further?
+
+  When chat and templates stop being enough — when you want the Agent to follow your exact security posture and orchestrate multi-doc deliverables — pick the **Build visually** tab above.
+</Tab>
+
+<Tab title="Build visually" id="build-visually">
+  <Info>
+    You're on the **visual-build path**. Switch tabs above for the no-build option, or to graduate to driving Agents from your editor.
+  </Info>
+
+  You're comfortable in product UIs. You don't want to wire up an Agent from scratch, but you do want it to draft RFP answers in your exact voice and reference your real architecture decisions. Open the cloned Agent in the builder and shape every piece.
+
+  ## Connect the tools it needs
+
+  SE Agents work best when they can read from and write to the systems your team already uses.
+
+  - **CRM** — [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) for opportunity context
+  - **Document storage** — Google Drive, [Notion](/integrations/popular-integrations/notion), Confluence for prior RFPs and architecture docs
+  - **Security reference** — your past security questionnaires, SOC 2 evidence, policy docs
+  - **Comms** — [Gmail](/integrations/popular-integrations/gmail), [Slack](/integrations/popular-integrations/slack) for delivery and internal review
+
+  Full list at [Integrations](/integrations/introduction).
+
+  ## Shape every surface
+
+  Each piece below changes how the Agent behaves. Run it on a real opportunity between every change — small iterations beat big rewrites.
+
+  <CardGroup cols={2}>
+    <Card title="Prompt" icon="message" href="/build/agents/build-your-agent/prompt">
+      Edit the system prompt to match your team's tone, your security posture, your standard demo flow.
+    </Card>
+    <Card title="Tools" icon="wrench" href="/build/agents/build-your-agent/tools">
+      Add or remove the actions the Agent can take — search past RFPs, query the CRM, draft response docs, run another Agent.
+    </Card>
+    <Card title="Knowledge" icon="book" href="/build/knowledge/create-knowledge">
+      Upload prior RFP responses, security artifacts, architecture diagrams, demo scripts. The Agent draws on these whenever it works.
+    </Card>
+    <Card title="Triggers" icon="bolt" href="/build/agents/build-your-agent/triggers">
+      Run the Agent automatically — on a schedule, when a new opportunity needs SE involvement, when an RFP lands.
+    </Card>
+    <Card title="Alerts" icon="bell" href="/build/agents/build-your-agent/alerts">
+      Get notified when a security question can't be answered confidently or when a demo prep flags missing info.
+    </Card>
+    <Card title="Memory" icon="brain" href="/build/agents/build-your-agent/memory">
+      Persistent context across deals — prior architecture discussions, previously raised security concerns, repeated objections.
+    </Card>
+  </CardGroup>
+
+  ## Chain Agents into a workforce
+
+  When a single Agent isn't enough — discovery summary, then demo prep, then technical proposal — wire them together on the workforce canvas.
+
+  <Card title="Build a workforce" icon="diagram-project" href="/build/workforces/create-a-workforce">
+    Drag, connect, and run multi-Agent pipelines without code.
+  </Card>
+
+  ## Test before you trust
+
+  Set up evals so a wrong security answer or hallucinated architecture detail gets caught before it lands in front of a prospect.
+
+  <Card title="Evals" icon="vial" href="/build/agents/build-your-agent/evals">
+    Define test cases in the UI. Run them on every change.
+  </Card>
+
+  ## Ready to go further?
+
+  When clicking through the builder starts to feel slow — when you'd rather have your AI coding assistant build and edit Agents for you, drop into custom Python or JS code blocks, or call Agents from your own app via the SDK — pick the **Build with AI** tab above.
+</Tab>
+
+<Tab title="Build with AI" id="build-with-ai">
+  <Info>
+    You're on the **build-with-AI path**. Switch tabs above if you'd rather work in product UIs or skip building entirely.
+  </Info>
+
+  You already work in an AI coding environment. Clicking through a UI to edit RFP response logic feels slow. Have your AI assistant build, shape, and orchestrate Agents directly from your editor.
+
+  ## Programmatic GTM
+
+  Programmatic GTM is an MCP server that connects your AI coding environment to Relevance AI. Describe what you want in natural language; your AI assistant reads and writes your Relevance workspace — system prompts, Tools, knowledge, triggers, workforces, evals.
+
+  <CardGroup cols={2}>
+    <Card title="Claude Code plugin" icon="terminal" href="/integrations/mcp/programmatic-gtm/claude-code">
+      The fastest setup. Install the Relevance AI plugin and build Agents from your terminal.
+    </Card>
+    <Card title="MCP server" icon="plug" href="/integrations/mcp/programmatic-gtm/mcp-server">
+      Connect from Claude Desktop, Cursor, VS Code, ChatGPT, OpenAI Codex, or any MCP client.
+    </Card>
+    <Card title="Agent skills" icon="graduation-cap" href="/integrations/mcp/programmatic-gtm/agent-skills">
+      Clone the skills repo so your coding assistant has built-in knowledge of Relevance patterns.
+    </Card>
+    <Card title="Programmatic GTM overview" icon="book" href="/get-started/core-concepts/programmatic-gtm">
+      The full reference for what you can do programmatically.
+    </Card>
+  </CardGroup>
+
+  ## Drop into code when you need to
+
+  Programmatic GTM covers the building. Two escape hatches for when canned Tool steps fall short:
+
+  - **Custom Python and JS code blocks** live inside Tools. Parse a complex RFP format, transform discovery notes into a structured schema, apply business logic to scoping decisions — drop a code block in and write the logic directly.
+  - **The JS SDK** lets you call Agents and Tools from your own Node.js app. Useful when embedding into an SE workspace or wiring up a webhook from your RFP intake tool.
+</Tab>
+</Tabs>
+</div>
+
+## The four levels in solution engineering
+
+How the [autonomy ladder](/use-cases/guides) plays out across pre-sales:
+
+<CardGroup cols={2}>
+  <Card title="L1 — Assisted" icon="hand">
+    An SE asks the Agent to answer a specific security question or summarize prior architecture work for an account — the Agent returns a draft with sources.
+  </Card>
+  <Card title="L2 — Copilot" icon="map" href="/build/agents/give-your-agent-tasks/approval-mode">
+    An SE asks for an 80-question security questionnaire response — the Agent drafts all 80, the SE reviews and finalizes.
+  </Card>
+  <Card title="L3 — Autopilot" icon="bolt" href="/build/workforces/create-a-workforce">
+    A new opportunity hits Stage 2 → discovery summary, demo prep, and a first-draft technical proposal all generate, the SE reviews and refines.
+  </Card>
+  <Card title="L4 — Self-driving" icon="infinity">
+    "Improve technical win rate by 15%" — the Agent learns which RFP answer styles and demo approaches landed deals, evolves its drafting against actual win/loss outcomes.
+  </Card>
+</CardGroup>
+
+## Zoom into a single motion
+
+Each motion below is a working entry point — clone a template, then run it, shape it visually, or build with AI depending on which tab fit you.
+
+<CardGroup cols={3}>
+  <Card title="RFP & security questionnaires" icon="file-shield" href="/use-cases/solution-engineering/rfp-responses">
+    Pull from your archive of prior answers to draft consistent, accurate responses to questionnaires.
+  </Card>
+  <Card title="Demo prep & pre-call briefs" icon="presentation-screen" href="/use-cases/solution-engineering/demo-prep">
+    Account-aware technical briefs the SE can read in five minutes before any call.
+  </Card>
+  <Card title="Technical discovery summaries" icon="clipboard-list" href="/use-cases/solution-engineering/discovery-summaries">
+    Post-call writeups that turn an hour of conversation into a structured summary with action items.
+  </Card>
+</CardGroup>
+
+## See it in production
+
+<Frame caption="Canva's Global Head of IT on rolling AI agents across the company.">
+  <iframe
+    className="w-full aspect-video rounded-xl"
+    src="https://www.youtube.com/embed/clvRK2SSJe4"
+    title="Canva x Relevance AI — Agents@Work"
+    allowFullScreen
+  ></iframe>
+</Frame>
+
+<Frame caption="A KPMG Partner on moving AI agents from demo into an enterprise operating model.">
+  <iframe
+    className="w-full aspect-video rounded-xl"
+    src="https://www.youtube.com/embed/WU1qThsQ_es"
+    title="KPMG x Relevance AI — Agents@Work"
+    allowFullScreen
+  ></iframe>
+</Frame>
