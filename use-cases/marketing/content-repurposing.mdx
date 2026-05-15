@@ -1,0 +1,98 @@
+---
+title: "Content creation and repurposing"
+sidebarTitle: "Content & repurposing"
+description: "Turn one piece of content into many — blog posts, social snippets, ad copy, email teasers — without losing the source voice."
+---
+
+Every long-form asset is supposed to become a quarter's worth of derivative content. In practice, the blog goes up, the webinar drops, and the LinkedIn posts never get written. A content Agent does the derivative work — fast, on-brand, in the formats each channel needs.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Content backlog never ships" icon="boxes-stacked">
+    Long-form is published; the social/email/ad versions are sitting in a Slack channel labelled "todo".
+  </Card>
+  <Card title="Channel-specific rewriting" icon="repeat">
+    Every channel needs its own voice — copying the headline into Twitter doesn't work. Manual rewrites take hours per asset.
+  </Card>
+  <Card title="Webinar / podcast assets sit idle" icon="microphone">
+    Hours of recorded content with no repurposing — clips, summaries, follow-up emails are all theoretically going to happen.
+  </Card>
+  <Card title="Big launch coming up" icon="rocket">
+    A product launch needs 30+ derivative pieces and the content team has time for 5.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A content Agent takes a source asset + target formats and returns ready-to-publish derivatives.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Source asset (blog, webinar transcript, video, whitepaper), target channels and formats, campaign goal.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Brand voice docs, channel-specific style guides, past top-performing posts per channel.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A bundle of derivatives — blog posts, LinkedIn carousels, X threads, email teasers, ad copy variations — each tuned to its channel.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Posted to Notion or a content doc for review, drafted into your scheduler (Buffer / Hootsuite), pushed to ad platforms via integration.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone a content Agent from the [Marketplace](/get-started/marketplace/introduction) and open it in chat. Drop the source asset; ask for the derivatives you need.
+
+Example prompts:
+
+- *"Turn this blog post into 5 LinkedIn posts, 3 X threads, and a teaser email. Match our voice — direct, no hype."*
+- *"Pull the 4 strongest quotes from this webinar transcript and write them as standalone social posts."*
+- *"Take this product launch one-pager and give me 10 ad headline variations for paid social."*
+
+### L2 — Give it a playbook
+
+When the same asset → derivative pattern repeats, codify it:
+
+- Define the channels and target formats you always derive into via the [prompt](/build/agents/build-your-agent/prompt)
+- Upload channel-specific style guides, top-performing post archives, and brand voice docs to [Knowledge](/build/knowledge/create-knowledge)
+- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to process a backlog of long-form content in one pass
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- A new blog post is published → derivatives generate and post to a Notion review board
+- A webinar recording lands in Drive → transcript pulled, clips and follow-up email drafted
+- A campaign launches in HubSpot → ad copy variations drop into your ad platform queue
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent tracks which derivative formats actually performed per channel — which post types drove engagement, which headlines pulled clicks. It drops formats that don't earn attention and doubles down on what does.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that turns every new blog post into 5 LinkedIn posts, 3 X threads, and a teaser email, and posts them to a Notion review board."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Same voice across every channel" icon="circle-exclamation">
+    LinkedIn voice, X voice, and email voice are different. Upload per-channel style guides and force the prompt to reference them, otherwise everything ends up sounding LinkedIn-flavored.
+  </Accordion>
+  <Accordion title="Auto-publishing without review" icon="circle-exclamation">
+    Generated content that goes live without a human read is how brand misfires happen. Keep marketing review gates until you've watched a quarter of output.
+  </Accordion>
+  <Accordion title="Generic repurposing" icon="circle-exclamation">
+    "Turn this blog into a tweet thread" produces something forgettable without strong style references. Show the Agent your best past threads, not just the source asset.
+  </Accordion>
+  <Accordion title="Losing the source voice" icon="circle-exclamation">
+    Heavy rewriting can flatten the original author's perspective. If the source is a guest post or executive POV, prompt the Agent to preserve the speaker's voice in derivatives.
+  </Accordion>
+</AccordionGroup>
