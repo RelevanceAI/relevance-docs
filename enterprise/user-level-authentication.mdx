@@ -107,6 +107,10 @@ When this is enabled, any agent using this tool will require each user to authen
 If you have [asset-level authentication controls](/enterprise/rbac#permissions) enabled through RBAC, users can also choose from project-level shared accounts instead of authorizing their individual accounts.
 </Note>
 
+<Info>
+When dynamic authentication is enabled on a shared agent, all team members — not just admins — can add their own OAuth accounts. Members can only manage their own private accounts and cannot view or modify project-level shared accounts, which remain admin-managed.
+</Info>
+
 ## User experience in Chat
 
 When users interact with an agent in Chat that has User Level Authentication enabled, the authentication flow is seamless and intuitive.
@@ -117,11 +121,14 @@ When users interact with an agent in Chat that has User Level Authentication ena
 
 ### First-time authentication
 
-When a user runs an agent that requires User Level Authentication for the first time:
+All team members — not just admins — will see the authentication prompt when using an agent with dynamic authentication enabled for the first time.
 
-1. If you call an Agent that requires User Level Authentication for the first time, you will see a pop up appear when you need to connect an account.
-2. To do this, click the 'Select connected account' dropdown, and choose a shared account from here, or add your own private account.
-3. Then, click 'Add account' to continue onto your account log in, and follow the next steps to log into your account on the integration you're connecting to.
+1. When you run an agent that requires User Level Authentication for the first time, a pop-up appears with the guidance "Connect your account to use this tool."
+2. Click the 'Select connected account' dropdown to choose an account. If your project has shared accounts available, they appear here alongside your personal options.
+3. To connect your own account, click 'Add account' to start the OAuth login flow for that integration.
+4. Follow the on-screen steps to log in. Your credentials are saved automatically for future runs.
+
+Members can only add and manage their own private accounts. Project-level shared accounts are managed by project admins and cannot be modified by members.
 
 ### Subsequent uses
 
@@ -151,6 +158,8 @@ Integration defaults pre-populate when you create new assets or use assets for t
 </Tip>
 
 ### Privacy and account visibility
+
+All team members — not just admins — can add their own OAuth accounts when dynamic authentication is enabled on an agent. Members can connect their own private credentials without needing admin intervention, and can only see and manage their own private accounts. They cannot view or modify project-level shared accounts.
 
 To protect privacy and security:
 
@@ -192,5 +201,9 @@ To protect privacy and security:
 
   <Accordion title="My integration uses API keys or Python code steps. Can I use User Level Authentication?">
     No. User Level Authentication only supports OAuth-based integrations. If your integration uses API key authentication, Python code steps, or custom API calls with bearer tokens, you'll need to use a shared account instead. Only integrations that use OAuth to connect user accounts (like Google Sheets, Slack, HubSpot, Notion, etc.) are compatible with User Level Authentication.
+  </Accordion>
+
+  <Accordion title="Can non-admin team members add their own OAuth accounts?">
+    Yes. When dynamic authentication is enabled on a shared agent, all team members can add their own OAuth accounts — this is not limited to admins. Members see an "Add account" button with the guidance "Connect your account to use this tool." Members can only manage their own private accounts; they cannot view or modify project-level shared accounts, which remain admin-managed.
   </Accordion>
 </AccordionGroup>
