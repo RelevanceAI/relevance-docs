@@ -154,7 +154,7 @@ This role is ideal for end users, external collaborators, or team members who on
 
 ## Asset level controls
 
-An asset is an Agent, Tool, Knowledge or Workforce.
+An asset is an Agent, Tool, Knowledge, Data Table, or Workforce.
 
 Upon asset creation, the creator becomes the admin. An asset can have multiple admins (project admin is by default).
 
@@ -207,6 +207,51 @@ This means when sharing a workforce, you must:
 
 <Tip>
 Learn more about [sharing workforces](/build/workforces/share-your-workforce) as cloneable templates.
+</Tip>
+
+----
+
+## Data table permissions
+
+Data tables (also called entity tables) support fine-grained access control using the same three-tier permission system as other assets. Project admins control both the default visibility of each table and which users or groups can access it.
+
+### Table access configuration
+
+Each data table can be set to one of two access modes:
+
+- **Private (invite-only)** — only users explicitly granted a role on the table can view or modify it. This is the default for tables created by project Members.
+- **Open to project members** — all project members are granted access at a specified role (Admin, Operator, or Viewer). Project Admins and Editors have full access by default.
+
+### Roles
+
+| **Role**     | **Capabilities**                                                 |
+| ------------ | ---------------------------------------------------------------- |
+| **Admin**    | Manage table schema, configuration, and assign table-level users |
+| **Operator** | Read and write data in the table                                 |
+| **Viewer**   | View table data only, cannot modify records or configuration     |
+
+### Permissions
+
+| **Permission**              | **Admin** | **Operator** | **Viewer** |
+| :-------------------------- | :-------- | :----------- | :--------- |
+| Edit table schema           | ✅         | ❌            | ❌          |
+| Delete table                | ✅         | ❌            | ❌          |
+| Assign roles on table       | ✅         | ❌            | ❌          |
+| Configure table access mode | ✅         | ❌            | ❌          |
+| Insert, update, or delete rows | ✅      | ✅            | ❌          |
+| View table data             | ✅         | ✅            | ✅          |
+
+### Granting access to a data table
+
+Permissions can be granted to individual users or groups. To configure access:
+
+1. Open the data table you want to share.
+2. Click **Share**.
+3. Set the access mode (private or open to project members).
+4. To grant access to specific users or groups, enter their name or email and select a role.
+
+<Tip>
+Use the Operator role for team members who need to read and write records, and Viewer for stakeholders who only need to review the data.
 </Tip>
 
 ----
