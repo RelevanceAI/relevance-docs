@@ -44,6 +44,9 @@ Enterprise features in Relevance AI provide your organization with advanced secu
   <Card title="User Level Authentication" icon="user-lock">
     Enable agents to use each user's own credentials for integrations
   </Card>
+  <Card title="Visual Data Masking" icon="eye-slash">
+    Mask PII in agent conversation histories and task views for UI privacy (limited beta)
+  </Card>
 </Columns>
 
 ## Prerequisites
@@ -218,6 +221,27 @@ Follow these steps in order for the smoothest Enterprise onboarding experience. 
 
     [View User Level Authentication guide →](/enterprise/user-level-authentication)
   </Step>
+
+  <Step title="Enable Visual Data Masking on sensitive agents (Optional)" icon="eye-slash">
+    **Why this matters**: Visual Data Masking automatically masks PII (email addresses, phone numbers, credit card numbers, and names) in agent conversation histories and task views. This protects sensitive information during screen sharing, team reviews, and demos — while agents continue to process the actual unmasked data.
+
+    **What you'll do**:
+    - Request Visual Data Masking enablement from your account manager
+    - Enable the toggle in agent or workforce Advanced settings
+    - Verify masking behavior with sample data before rolling out to production agents
+
+    **Time required**: 5-10 minutes per agent (after feature is enabled)
+
+    <Info>
+    **Feature Status**: Visual Data Masking is in limited beta. Contact your account manager or [reach out to support](/get-started/support) to have it enabled for your organization.
+    </Info>
+
+    <Warning>
+    If any agent in a workforce has Visual Data Masking enabled, PII will be masked across the entire workforce. Plan your enablement accordingly.
+    </Warning>
+
+    [View Visual Data Masking guide →](/build/agents/build-your-agent/agent-settings/visual-data-masking)
+  </Step>
 </Steps>
 
 ---
@@ -237,6 +261,7 @@ Some Enterprise features are being gradually rolled out. Here's what to expect:
 | Organization & Project-level API Keys | ✅ Available | Now |
 | Asset-level Authentication Controls | ✅ Available | Now |
 | User Level Authentication | 🔄 Rolling out | Contact sales to enable |
+| Visual Data Masking | 🔄 Limited beta | Contact account manager to enable |
 
 <Info>
 If you have an Enterprise subscription but don't have access to a feature marked as "Beta" or "Gradual rollout," contact your sales representative to express interest and get early access.

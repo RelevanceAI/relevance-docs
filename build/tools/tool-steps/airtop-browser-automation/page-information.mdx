@@ -12,8 +12,8 @@ The Airtop Page Information & Monitoring tool steps allow you to extract informa
 
 ## Add the 'Airtop - Query Page' Tool step
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmheetwsr3onffatido9cv2qf" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmheetwsr3onffatido9cv2qf" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 You can add the 'Airtop - Query Page' Tool step to your Tool by:
@@ -25,14 +25,15 @@ You can add the 'Airtop - Query Page' Tool step to your Tool by:
 5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
 6. **Prompt to query the page** (Required): Enter a natural language prompt describing what information you want to extract from the page (e.g., "extract all product names and prices"). Type `{{` to select a variable.
 7. **Use paginated extraction** (Optional): Check this box if the page contains paginated content and you want to extract data from multiple pages automatically.
-8. Clicking `Run step` to test out the Tool
+8. **Output JSON schema** (Optional): Provide a JSON schema (as a string) describing the structure you want returned. When set, Airtop returns structured JSON matching the schema instead of free-form text. Airtop requires draft-07 — include `"$schema": "http://json-schema.org/draft-07/schema#"` at the top of your schema, or the request will fail with HTTP 422.
+9. Clicking `Run step` to test out the Tool
 
-The step extracts information from the page based on your prompt. The extracted data is returned and can be used in subsequent steps.
+The step extracts information from the page based on your prompt. The extracted data is returned and can be used in subsequent steps. When 'Output JSON schema' is set, the output is a structured JSON object matching the schema, which is useful when downstream steps expect a consistent shape.
 
 ## Add the 'Airtop - Screenshot Page' Tool step
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmhef3f553p8pfati4tpvummu" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmhef3f553p8pfati4tpvummu" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 You can add the 'Airtop - Screenshot Page' Tool step to your Tool by:
@@ -42,14 +43,20 @@ You can add the 'Airtop - Screenshot Page' Tool step to your Tool by:
 3. Clicking 'Expand' to see the full Tool step
 4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
 5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
-6. Clicking `Run step` to test out the Tool
+6. **Capture scope** (Optional): Choose what to capture. `viewport` captures only what's currently visible, `page` captures the entire scrollable page in one shot, `scan` performs a scroll-based capture for sites that don't render correctly with `page`, and `auto` lets Airtop choose. Defaults to `auto`.
+7. **Response format from Airtop** (Optional): How Airtop returns the raw screenshot before Relevance re-hosts it. `base64` returns inline image data; `url` returns a signed download URL from Airtop's storage. Either way, the step returns a Relevance-hosted URL. Defaults to `base64` for viewport scope and `url` for full-page scopes.
+8. **Max scan scrolls** (Optional): Scan scope only. Maximum number of scrolls performed while capturing. Defaults to `50`.
+9. **Scan scroll delay (ms)** (Optional): Scan scope only. Delay in milliseconds between scrolls. Defaults to `1000`.
+10. **Overlap percentage** (Optional): Percentage of overlap between captured chunks, between `0` and `100`. Defaults to `30`.
+11. **Partition direction** (Optional): How the screenshot is split into chunks: `vertical` (default, recommended for most pages), `horizontal` (for very wide pages), or `bidirectional`.
+12. Clicking `Run step` to test out the Tool
 
-The step captures a screenshot of the current page. The screenshot is returned as image data that can be used in subsequent steps or stored for later use.
+The step returns `screenshot_url` (the first chunk, kept for backward compatibility) and `screenshot_urls` (an array of every chunk, all re-hosted on Relevance storage). For `scope: viewport` there is one chunk; for `scope: page` and `scope: scan` there may be several depending on page dimensions and partition direction.
 
 ## Add the 'Airtop - Monitor Page for Condition' Tool step
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmheffjvk3pdufati74xdced0" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmheffjvk3pdufati74xdced0" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 You can add the 'Airtop - Monitor Page for Condition' Tool step to your Tool by:
@@ -69,7 +76,7 @@ The step continuously monitors the page for the specified condition. Once the co
 ## Common use cases
 
 - Extracting data from web pages for processing or storage
-- Capturing visual proof of automation actions
+- Capturing a full-page screenshot as visual proof of automation actions
 - Waiting for dynamic content to load before proceeding with automation
 - Monitoring pages for specific states or changes
 
@@ -77,7 +84,13 @@ The step continuously monitors the page for the specified condition. Once the co
 
 <AccordionGroup>
   <Accordion title="Can I use screenshots in subsequent steps?">
-    Screenshots are returned as image data that can be used in other tool steps or stored for later use.
+    Yes. Every chunk is re-hosted on Relevance storage and returned as a URL in `screenshot_urls`. Pass an entry to any step that accepts an image URL.
+  </Accordion>
+  <Accordion title="When should I use viewport, page, or scan capture scope?">
+    Use `viewport` for the visible area only — fastest and always one chunk. Use `page` for the entire scrollable content in one Airtop call. Use `scan` for sites that don't render correctly with `page` (typically infinite-scroll or lazy-loaded pages); scan performs a scroll-based capture and returns one chunk per scroll position.
+  </Accordion>
+  <Accordion title="Why do I get multiple URLs in 'screenshot_urls'?">
+    `scope: page` and `scope: scan` can return more than one chunk depending on page dimensions and the partition direction. `screenshot_url` always points to the first chunk for backward compatibility; iterate over `screenshot_urls` to access them all.
   </Accordion>
   <Accordion title="What conditions can I monitor for?">
     Common conditions include element visibility, text content, and element count.

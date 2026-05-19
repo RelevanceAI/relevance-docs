@@ -1,0 +1,145 @@
+---
+title: 'Content Snare'
+description: 'Automate client onboarding, information collection, and document gathering workflows with the Content Snare integration.'
+---
+
+Content Snare is a client information gathering and content management platform used by digital agencies, accountants, lawyers, and consultants to streamline collecting documents and information from clients. It eliminates email back-and-forth and reduces information gathering time significantly through structured, trackable requests.
+
+Key concepts in Content Snare:
+
+- **Clients** — individual client profiles that requests are sent to
+- **Requests** — customized information collection forms sent to clients
+- **Templates** — reusable request structures for repeatable workflows
+
+This is a native OAuth integration. It replaces the older Pipedream-based method and requires no manual API token configuration.
+
+## Connect the integration
+
+<Steps>
+  <Step title="Navigate to the Integrations page">
+    Go to the **Integrations** page in your Relevance AI dashboard.
+  </Step>
+  <Step title="Find Content Snare">
+    Search for or scroll to **Content Snare** in the integrations list and select it.
+  </Step>
+  <Step title="Add the integration">
+    Click **Add Integration**.
+  </Step>
+  <Step title="Complete OAuth authorization">
+    You will be redirected to Content Snare to authorize access. Log in to your Content Snare account and grant the requested permissions.
+  </Step>
+  <Step title="Confirm the connection">
+    Once authorized, you will be redirected back to Relevance AI. The integration will appear as connected and is ready to use.
+  </Step>
+</Steps>
+
+## Tools & tool steps
+
+The following pre-built tool steps are available once you connect Content Snare.
+
+### Client management
+
+<AccordionGroup>
+  <Accordion title="Content Snare - Create Client">
+    Creates a new client profile in your Content Snare account. Use this when onboarding a new client — typically triggered by a new contact being added to your CRM or a form submission.
+
+    Required inputs include the client's name and email address. Optional fields allow you to set additional profile details.
+  </Accordion>
+</AccordionGroup>
+
+### Request management
+
+<AccordionGroup>
+  <Accordion title="Content Snare - Create Request">
+    Initiates an information collection request and sends it to a specific client. Use this to trigger a document or data gathering workflow — for example, sending a tax document request after a new engagement is created.
+
+    You specify the client, the template to use, and any deadline or customization options.
+  </Accordion>
+</AccordionGroup>
+
+### Advanced
+
+<AccordionGroup>
+  <Accordion title="Content Snare API Call">
+    A generic tool step for making direct calls to the Content Snare API. Use this when you need to access an endpoint not covered by the dedicated tool steps — for example, listing existing requests, retrieving client details, or checking request status.
+
+    Authentication is handled automatically via OAuth. You provide the HTTP method, endpoint path, and any request body or query parameters.
+  </Accordion>
+</AccordionGroup>
+
+## Use the integration's API tool step (advanced)
+
+The **Content Snare API Call** tool step gives you access to any endpoint in the Content Snare Partner API. This is useful when the dedicated tool steps don't cover your specific workflow.
+
+### Example: create a client
+
+```json
+POST /partner_api/v1/clients
+{
+  "name": "Acme Corp",
+  "email": "contact@acmecorp.com"
+}
+```
+
+### Example: create a request
+
+```json
+POST /partner_api/v1/requests
+{
+  "client_id": "abc123",
+  "template_id": "tmpl_456",
+  "name": "2024 Tax Documents",
+  "due_date": "2025-03-31"
+}
+```
+
+<Note>
+  OAuth handles authentication automatically — you do not need to include any authorization headers manually.
+</Note>
+
+<Warning>
+  Content Snare enforces rate limits of 50 read requests and 20 write requests per 10 seconds. Build in error handling for 429 responses if your workflow sends many requests in quick succession.
+</Warning>
+
+For the full list of available endpoints and request/response schemas, see the [Content Snare Partner API documentation](https://api.contentsnare.com/partner_api/v1/documentation).
+
+## Example use cases
+
+<CardGroup cols={2}>
+  <Card title="Digital agency client onboarding" icon="building">
+    Trigger a Content Snare request automatically when a new project is created. Collect brand assets, copy, logins, and briefing documents without chasing clients over email.
+  </Card>
+  <Card title="Accountant tax document collection" icon="calculator">
+    Send a tax document request to each client at the start of the filing season. Use templates to standardize what's collected and track completion status across your client list.
+  </Card>
+  <Card title="Lawyer client intake" icon="scale-balanced">
+    Automate intake workflows by sending a Content Snare request when a new matter is opened. Collect identification documents, signed forms, and background information before the first meeting.
+  </Card>
+  <Card title="Consultant discovery phase" icon="magnifying-glass">
+    Kick off engagements by sending a structured discovery questionnaire. Combine with a CRM integration so requests are sent automatically when a deal moves to a new stage.
+  </Card>
+</CardGroup>
+
+### CRM-triggered workflows
+
+Combine Content Snare with CRM integrations such as Salesforce or HubSpot to create end-to-end onboarding automation. When a new contact is created or a deal reaches a certain stage, an agent can create the client in Content Snare and immediately send an information request — with no manual steps required.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What permissions are granted during OAuth authorization?">
+    The OAuth flow grants Relevance AI access to create and manage clients and requests in your Content Snare account. The exact scopes are defined by Content Snare's Partner API and cover the operations needed for the available tool steps.
+  </Accordion>
+  <Accordion title="Can I connect multiple Content Snare accounts?">
+    Yes. You can add multiple Content Snare connections from the Integrations page — for example, if you manage separate Content Snare accounts for different business units. Each connection is authorized independently and can be selected when configuring tool steps.
+  </Accordion>
+  <Accordion title="How is authentication handled?">
+    Authentication uses OAuth 2.0 only. There is no option to configure manual API tokens for this integration. If you need to rotate or revoke access, disconnect and reconnect the integration from the Integrations page.
+  </Accordion>
+  <Accordion title="What happens if I exceed the rate limit?">
+    Content Snare returns a 429 status code when rate limits are exceeded (50 read or 20 write requests per 10 seconds). Your tool or agent should handle this response and retry after a short delay. Avoid designing workflows that send large batches of write requests simultaneously.
+  </Accordion>
+  <Accordion title="How do I troubleshoot connection issues?">
+    If the integration fails to connect or becomes disconnected, try removing the integration from the Integrations page and reconnecting. Make sure you are logging in to the correct Content Snare account during the OAuth flow. If the issue persists, [contact Relevance AI support](/get-started/support).
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,177 @@
+---
+title: "Tasks"
+sidebarTitle: "Tasks"
+description: "Task lifecycle, status model, events, subscriptions, and cleanup."
+---
+
+A task represents a single conversation thread between your application and an agent or workforce. When you send a message, the SDK returns a `Task` — everything that happens next flows through it.
+
+## The shape of a task
+
+```typescript
+const task = await agent.sendMessage("Hello");
+
+console.log(task.id);     // unique task identifier
+console.log(task.name);   // display title
+console.log(task.status); // current status
+```
+
+## Task status
+
+Every task has a `status` field. The SDK simplifies the platform's internal states into a concise set:
+
+| Status        | Meaning                            |
+| ------------- | ---------------------------------- |
+| `not-started` | Created locally, not yet sent      |
+| `idle`        | Agent is idle, awaiting input      |
+| `paused`      | Execution has been paused          |
+| `queued`      | Waiting to start (capacity, queue) |
+| `running`     | Agent is actively processing       |
+| `action`      | Requires approval or has escalated |
+| `completed`   | Finished successfully              |
+| `cancelled`   | Cancelled before completion        |
+| `error`       | Encountered a failure              |
+
+<Accordion title="How internal platform states map to SDK statuses">
+  The platform uses more granular internal states. The SDK maps them to the statuses above so application code doesn't need to handle every variation.
+
+  | Platform state             | SDK status  |
+  | -------------------------- | ----------- |
+  | `idle`                     | `idle`      |
+  | `starting-up`              | `queued`    |
+  | `waiting-for-capacity`     | `queued`    |
+  | `queued-for-approval`      | `queued`    |
+  | `queued-for-rerun`         | `queued`    |
+  | `running`                  | `running`   |
+  | `pending-approval`         | `action`    |
+  | `escalated`                | `action`    |
+  | `paused`                   | `paused`    |
+  | `completed`                | `completed` |
+  | `cancelled`                | `cancelled` |
+  | `timed-out`                | `error`     |
+  | `unrecoverable`            | `error`     |
+  | `errored-pending-approval` | `error`     |
+
+  For workforce state mappings, see [Workforces](/sdk/workforces).
+</Accordion>
+
+## Is the task still active?
+
+`isRunning` returns `true` when the status is `queued` or `running`:
+
+```typescript
+if (task.isRunning()) {
+  console.log("Agent is working...");
+}
+```
+
+## Fetch message history
+
+Retrieve every message on a task with `getMessages`:
+
+```typescript
+const messages = await task.getMessages();
+```
+
+To fetch only messages after a specific point, pass an `after` date:
+
+```typescript
+const recent = await task.getMessages({
+  after: new Date("2025-06-01T00:00:00Z"),
+});
+```
+
+Each message is one of the types described in [Messaging](/sdk/messaging). The same type guard methods (`isAgent`, `isTool`, and so on) work here.
+
+## Listen for events
+
+Tasks emit events in real time as the conversation progresses. There are three event types:
+
+| Event       | When it fires                        |
+| ----------- | ------------------------------------ |
+| `"message"` | A new message is received            |
+| `"error"`   | An agent error occurs                |
+| `"update"`  | Task metadata changes (e.g., status) |
+
+### The "message" event
+
+The primary event for agent responses, tool executions, and streaming content:
+
+```typescript
+task.addEventListener("message", ({ detail }) => {
+  const { message } = detail;
+
+  if (message.isAgent()) {
+    console.log("Agent:", message.text);
+  }
+});
+```
+
+For the full set of message types and their fields, see [Messaging](/sdk/messaging).
+
+### The "error" event
+
+Fires when the agent runs into a failure:
+
+```typescript
+task.addEventListener("error", ({ detail }) => {
+  console.error(detail.message.lastError);
+});
+```
+
+### The "update" event
+
+Fires when the task's metadata changes, such as a status transition:
+
+```typescript
+task.addEventListener("update", () => {
+  console.log("New status:", task.status);
+});
+```
+
+<Warning>
+The current SDK has a TypeScript type mismatch on this event — the declared event map key differs from the string dispatched at runtime. The `"update"` string shown above is correct and events fire as expected. If the type checker complains, add `// @ts-expect-error` above the line until the upstream fix lands.
+</Warning>
+
+## Subscriptions are automatic
+
+The first call to `addEventListener` on a task activates its subscription. There's no need to call `subscribe` manually.
+
+Once subscribed, the SDK keeps the task up to date by polling for new messages and metadata changes, and opens a streaming connection when available to deliver real-time thinking and typing events. See [Streaming](/sdk/streaming) for details.
+
+The SDK manages the polling frequency internally — faster when the task is active, slower when idle. This is transparent to the application.
+
+## Clean up
+
+Always call `unsubscribe` when a task is no longer needed. This stops the polling loop and closes any active connections, freeing network and memory resources.
+
+```typescript
+task.unsubscribe();
+```
+
+Failing to unsubscribe from tasks that have left scope is a common source of resource leaks. In component-based UI frameworks, call `unsubscribe` from the cleanup or teardown handler.
+
+<CodeGroup>
+
+```typescript React
+useEffect(() => {
+  const handler = ({ detail }) => {
+    setMessages((prev) => [...prev, detail.message]);
+  };
+
+  task.addEventListener("message", handler);
+
+  return () => {
+    task.unsubscribe();
+  };
+}, [task]);
+```
+
+```typescript Vanilla JavaScript
+// When navigating away from a conversation view
+function teardown() {
+  task.unsubscribe();
+}
+```
+
+</CodeGroup>

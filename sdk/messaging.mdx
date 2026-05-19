@@ -1,0 +1,217 @@
+---
+title: "Messaging"
+sidebarTitle: "Messaging"
+description: "Send messages, work with message types, manage file attachments, and handle errors."
+---
+
+Messages are how your application and an agent exchange information inside a task. This page covers sending messages, the different kinds of incoming messages, and how to handle them.
+
+## Send a message
+
+Both agents and workforces use `sendMessage`. It accepts a string and returns a `Task` representing the conversation thread.
+
+```typescript
+const task = await agent.sendMessage("What can you help me with?");
+```
+
+The returned task begins processing immediately. The promise resolves as soon as the message is sent — not when the agent responds. To receive the response, listen for events on the task. See [Tasks](/sdk/tasks) for event handling.
+
+## Continue a conversation
+
+To send a follow-up message within the same conversation, pass the existing task as the second argument:
+
+```typescript
+const task = await agent.sendMessage("Hello");
+
+// Later, continue the same conversation
+await agent.sendMessage("Tell me more", task);
+```
+
+Each call with an existing task appends to the conversation history. The agent has full context of the prior messages.
+
+## File attachments
+
+Attach files by passing an array of `File` objects as the second argument. The SDK handles the upload.
+
+```typescript
+const pdf = new File([bytes], "contract.pdf", {
+  type: "application/pdf",
+});
+
+const task = await agent.sendMessage("Summarize this contract", [pdf]);
+```
+
+Multiple files in a single message:
+
+```typescript
+const task = await agent.sendMessage(
+  "Compare these two documents",
+  [fileA, fileB]
+);
+```
+
+To send attachments while continuing a conversation, pass the attachments array and the task:
+
+```typescript
+await agent.sendMessage(
+  "Here is an updated version",
+  [updatedFile],
+  task
+);
+```
+
+Pre-uploaded attachments (objects with `fileName` and `fileUrl` fields) can be mixed in with `File` objects in the same array.
+
+<Note>
+Workforce tasks don't support file attachments. Only agent tasks accept files.
+</Note>
+
+## Handle incoming messages
+
+Messages arrive through the `"message"` event on a task. Each event's `detail` includes a `message` property. Use the type guard methods to determine the kind and access the right fields.
+
+```typescript
+task.addEventListener("message", ({ detail }) => {
+  const { message } = detail;
+
+  if (message.isAgent()) {
+    console.log("Agent:", message.text);
+  } else if (message.isTool()) {
+    console.log("Tool:", message.status);
+  } else if (message.isThinking()) {
+    console.log("Thinking:", message.text);
+  } else if (message.isTyping()) {
+    console.log("Typing:", message.text);
+  }
+});
+```
+
+The type guards narrow the TypeScript type — properties specific to each message kind become available after the check.
+
+## Agent responses
+
+When `message.isAgent()` returns `true`, the message is an `AgentMessage` carrying the agent's response text.
+
+```typescript
+if (message.isAgent()) {
+  console.log(message.text);
+  console.log(message.agentId);
+}
+```
+
+## Tool executions
+
+When `message.isTool()` returns `true`, the message is a `ToolMessage` representing a tool or subagent execution inside the agent's pipeline.
+
+```typescript
+if (message.isTool()) {
+  console.log("Tool:", message.tool?.name);
+  console.log("Status:", message.status);
+}
+```
+
+The `status` field tracks where the tool is in its lifecycle:
+
+| Status      | Meaning                    |
+| ----------- | -------------------------- |
+| `pending`   | Scheduled, not yet started |
+| `running`   | Currently executing        |
+| `completed` | Finished successfully      |
+| `error`     | Failed with an error       |
+| `cancelled` | Execution was cancelled    |
+
+### Read tool output
+
+Once a tool completes, its output is available:
+
+```typescript
+if (message.isTool() && message.status === "completed") {
+  console.log(message.output);
+}
+```
+
+### Detect subagents
+
+A tool message may represent a subagent rather than a standalone tool. Use `isSubAgent` to check, and `subAgentTaskId` to access the subagent's task:
+
+```typescript
+if (message.isTool() && message.isSubAgent()) {
+  console.log("Sub-agent task:", message.subAgentTaskId);
+}
+```
+
+### Tool errors
+
+Check for errors on a tool message with `hasErrors`:
+
+```typescript
+if (message.isTool() && message.hasErrors()) {
+  for (const error of message.errors) {
+    console.error(error.stepName, error.message);
+  }
+}
+```
+
+## User messages
+
+User messages represent input sent by the application or end user. They show up in the message history alongside agent responses.
+
+```typescript
+task.addEventListener("message", ({ detail }) => {
+  const { message } = detail;
+
+  if (message.isUser()) {
+    console.log("User:", message.text);
+
+    if (message.hasAttachments()) {
+      for (const attachment of message.attachments) {
+        console.log("File:", attachment.fileName);
+      }
+    }
+  }
+});
+```
+
+`isTrigger` returns `true` for the first message in a conversation — the one that created the task:
+
+```typescript
+if (message.isUser() && message.isTrigger()) {
+  console.log("Conversation started with:", message.text);
+}
+```
+
+## Error handling
+
+Agent errors are delivered through the `"error"` event on the task. The event detail contains an `AgentErrorMessage` with one or more error strings.
+
+```typescript
+task.addEventListener("error", ({ detail }) => {
+  const { message } = detail;
+  console.error("Last error:", message.lastError);
+
+  // All errors in this cycle
+  for (const error of message.errors) {
+    console.error(error);
+  }
+});
+```
+
+Error events mean the agent ran into a problem during execution. The task may transition to an `"error"` or `"action"` status depending on the nature of the failure. See [Tasks](/sdk/tasks) for status details.
+
+## Workforce messages
+
+Workforce tasks include two additional message types for multi-agent coordination:
+
+- **`WorkforceAgentMessage`** — an agent within the workforce is executing a subtask. Includes details about which agent is running and the state of its work.
+- **`WorkforceAgentHandoverMessage`** — work is being delegated from one agent to another within the workforce. Includes the trigger message and details about the receiving agent.
+
+These messages appear alongside standard agent and tool messages in the event stream. See [Workforces](/sdk/workforces) for workforce-specific behavior.
+
+## Streaming messages
+
+Two message types represent real-time incremental output from the agent:
+
+- **`ThinkingMessage`** — the agent's intermediate reasoning as it processes.
+- **`TypingMessage`** — the agent's response text as it's being generated.
+
+Both are identified with the `isThinking` and `isTyping` type guards shown above. For streaming behavior and live typing indicators, see [Streaming](/sdk/streaming).
