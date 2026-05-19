@@ -40,6 +40,16 @@ Use recurring schedules for:
 - Monthly analytics and summaries
 - Periodic system checks and maintenance tasks
 
+#### Filesystem sync triggers
+
+Filesystem sync triggers automatically activate agents when files change in filesystem volumes. You can monitor an entire volume or use glob patterns to include or exclude specific files and folders, giving you precise control over what changes trigger your agents.
+
+Filesystem sync triggers are useful for:
+- Processing new documents as they're uploaded to a volume
+- Monitoring specific folders for file additions or modifications
+- Automating workflows based on file updates
+- Triggering analysis when reports or data files are generated
+
 #### External Triggers (Zapier)
 
 External triggers like Zapier are configured and managed outside of Relevance AI. In Zapier, you can use the "Message Workforce" event to send data to your Workforce whenever a Zap fires — connecting your Workforce to any app or service that Zapier supports without needing a native integration in Relevance AI.
@@ -150,6 +160,25 @@ minute hour day-of-month month day-of-week year
 
 <Note>
 AWS EventBridge cron expressions use 6 fields, unlike traditional Unix cron which uses 5 fields. Always include the year field, and use `?` for either day-of-month or day-of-week when specifying the other.
+</Note>
+
+### Filesystem sync trigger configuration
+
+To configure a filesystem sync trigger:
+
+1. Select the filesystem sync trigger in your workspace.
+2. Choose the filesystem volume you want to monitor.
+3. Optionally, configure **include patterns** to watch only specific files. Examples:
+   - `**/*.pdf` — all PDF files in the volume
+   - `/docs/**` — all files in the `/docs` folder
+4. Optionally, configure **exclude patterns** to ignore certain files. Examples:
+   - `**/temp/**` — ignore files in any `temp` folder
+   - `**/*.tmp` — ignore temporary files
+5. Connect the trigger to the agent that should process file changes.
+6. Test the configuration by adding or modifying a file in the monitored volume.
+
+<Note>
+Include and exclude patterns use glob syntax. If no include pattern is specified, the trigger watches all files in the volume. Exclude patterns take precedence over include patterns.
 </Note>
 
 ## Pausing triggers
