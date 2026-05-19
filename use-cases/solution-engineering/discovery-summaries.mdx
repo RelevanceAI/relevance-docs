@@ -1,0 +1,98 @@
+---
+title: "Technical discovery summaries"
+sidebarTitle: "Discovery summaries"
+description: "Post-call writeups that turn an hour of conversation into a structured summary with action items."
+---
+
+The richest part of a deal is the technical discovery call — and the writeup is usually a CRM note half the team won't read. A discovery Agent turns the transcript into a structured summary: requirements, decisions, open questions, next steps. Everyone joining the next call walks in with the same picture.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Writeups slip" icon="hourglass">
+    The SE meant to write up the call. Three days later, it's vibes-in-a-CRM-note.
+  </Card>
+  <Card title="Stakeholder handoffs lose detail" icon="user-group">
+    The next SE / AE on the deal can't pick up where the last call left off because the writeup is too sparse.
+  </Card>
+  <Card title="Action items get forgotten" icon="list-check">
+    "We'll send you the SAML doc" — and then nobody does, because it wasn't tracked.
+  </Card>
+  <Card title="Demo prompts repeat themselves" icon="rotate">
+    The next call repeats discovery because the last one wasn't captured well.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A discovery Agent takes a call recording or transcript and returns a structured summary.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Call recording or transcript, opportunity context, prior call notes.
+  </Card>
+  <Card title="Sources" icon="globe">
+    [Fireflies](/integrations/popular-integrations/fireflies) or other transcript source, CRM history, your discovery framework / MEDDICC template.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A structured summary — requirements, technical decisions, open questions, action items per party, links to relevant Knowledge.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Written back to the CRM as a structured note, posted in the deal Slack channel, emailed to attendees with a "did we get this right?" prompt.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone an SE Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. An SE pastes a transcript and asks for the summary.
+
+Example prompts:
+
+- *"Summarize this discovery call with Acme — pull out their requirements, our open questions, and the action items per side."*
+- *"What were the technical concerns raised on the Globex call last week, and which ones did we resolve?"*
+- *"Walk me through the SSO discussion from yesterday's Initech call — what did they say their constraint was?"*
+
+### L2 — Give it a playbook
+
+When the same summary shape repeats, codify the structure:
+
+- Define the summary format in the [prompt](/build/agents/build-your-agent/prompt) — sections, length, action-item format
+- Upload your discovery framework, MEDDICC template, and standard categorization (must-have, nice-to-have, dealbreaker) to [Knowledge](/build/knowledge/create-knowledge)
+- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to back-fill summaries on past calls when joining a deal
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- A discovery call wraps in Fireflies → transcript pulled, summary generated, posted to the CRM and deal Slack channel
+- A new SE joins a deal → Agent generates a back-fill summary from prior call transcripts
+- An action item passes its due date → Agent surfaces it back in the deal channel
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which summary sections actually got referenced in subsequent calls vs. which got ignored. The format adapts toward what SEs actually use — fewer empty sections, more depth where it matters.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that summarizes every Fireflies discovery call, writes a structured summary to the matching HubSpot opportunity, and posts action items in a deal Slack channel."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Summary that loses the actual technical content" icon="circle-exclamation">
+    Generic LLM summarization smooths out the specifics. Force the prompt to preserve technical terms, exact constraints, and the customer's literal phrasing.
+  </Accordion>
+  <Accordion title="No action-item ownership" icon="circle-exclamation">
+    Action items without an owner and a due date don't get done. Require the Agent to assign and date each.
+  </Accordion>
+  <Accordion title="Auto-emailing without SE review" icon="circle-exclamation">
+    Sending an inaccurate summary to the customer hurts trust. Keep SE review on the customer-facing copy until you've watched it for several deals.
+  </Accordion>
+  <Accordion title="Missing the implied dealbreakers" icon="circle-exclamation">
+    Some constraints are stated as "wishes" but they're really hard requirements. Have the prompt flag any ambiguous language for SE review.
+  </Accordion>
+</AccordionGroup>

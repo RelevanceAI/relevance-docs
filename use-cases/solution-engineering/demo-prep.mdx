@@ -1,0 +1,98 @@
+---
+title: "Demo prep and pre-call briefs"
+sidebarTitle: "Demo prep"
+description: "Account-aware technical briefs the SE can read in five minutes before any call."
+---
+
+SEs walk into demos blind more often than they'd admit — they know the prospect's name and the deal size, not their tech stack, integration patterns, or what their team has been Googling. A demo-prep Agent builds the brief the SE wishes they had, every time.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Back-to-back demos" icon="calendar-days">
+    SEs run 4+ demos a day and prep blurs into the prior one.
+  </Card>
+  <Card title="Technical context is shallow" icon="layer-group">
+    The CRM has firmographics; the SE needs tech stack, scale, and likely integration patterns.
+  </Card>
+  <Card title="Demos feel generic" icon="copy">
+    SEs use the same demo flow for every prospect because there's no time to tailor.
+  </Card>
+  <Card title="Tribal knowledge in handoffs" icon="user-group">
+    AE-to-SE deal handoffs lose detail. The SE rediscovers what the AE already learned.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A demo-prep Agent takes a calendar event + opportunity and returns a structured technical brief.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Calendar event, opportunity record, attendees, deal stage, prior conversation notes.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, prior call notes, public tech stack signals, past similar deals, your demo playbook.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A one-page brief — account context, likely tech stack, integration angles, suggested demo flow, anticipated objections.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Emailed to the SE before the call, attached to the calendar event, posted in Slack to the deal channel.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone an SE Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. An SE asks before each call.
+
+Example prompts:
+
+- *"Demo with Acme tomorrow — what's their tech stack, what integration angles should I lean on, and what objections has the AE flagged?"*
+- *"Globex is on my calendar next Tuesday. Walk me through how to position our enterprise SSO story for their auth setup."*
+- *"What's the right demo flow for a mid-market manufacturing prospect comparing us against Competitor X?"*
+
+### L2 — Give it a playbook
+
+When the same demo shape repeats, codify the brief structure:
+
+- Define brief format and length in the [prompt](/build/agents/build-your-agent/prompt) — what an SE actually scans, not a wall of data
+- Upload your demo playbook, competitive battle cards, common integration patterns, and objection-handling docs to [Knowledge](/build/knowledge/create-knowledge)
+- Branch the prompt by deal segment / vertical so SMB briefs and enterprise briefs differ appropriately
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- A demo is scheduled on the calendar → brief generates 24 hours before, lands in the SE's email
+- A deal moves to "Technical Validation" → exec-level brief generates for leadership join-ins
+- A prospect re-engages after silence → updated brief includes recent signals and changed context
+
+See [Triggers](/build/agents/build-your-agent/triggers), [Google Calendar](/integrations/popular-integrations/google-calendar), and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which brief sections SEs actually used in calls (vs. skipped), which suggested demo flows landed, which objection-handling angles got cited. The brief format evolves toward what actually changes deal outcomes.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that generates a one-page SE demo brief 24 hours before every scheduled demo and emails it to the assigned SE."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Briefs that are too long" icon="circle-exclamation">
+    A five-page brief doesn't get read in the five minutes before a call. Cap the length and force the prompt to prioritize.
+  </Accordion>
+  <Accordion title="Generic recommendations" icon="circle-exclamation">
+    Without segment-specific Knowledge, the brief recommends the same demo flow for every prospect. Branch on segment and use real exemplars.
+  </Accordion>
+  <Accordion title="Stale prospect data" icon="circle-exclamation">
+    The CRM hasn't been updated since the discovery call but the brief reads as if it were live. Have the Agent disclose when the freshest signal is and flag stale data.
+  </Accordion>
+  <Accordion title="Missing the AE's context" icon="circle-exclamation">
+    The brief ignores what the AE already learned because notes live in another tool. Pull AE notes into the source set explicitly.
+  </Accordion>
+</AccordionGroup>

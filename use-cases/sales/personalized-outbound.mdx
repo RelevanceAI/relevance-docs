@@ -1,0 +1,100 @@
+---
+title: "Personalized outbound"
+sidebarTitle: "Personalized outbound"
+description: "Draft tailored emails and LinkedIn messages at scale so personalization stops being a tax on volume."
+---
+
+Generic outreach gets ignored. Hand-crafted messages get replies — but they don't scale to a list of 500 prospects. An outbound Agent uses real prospect context to draft personalized messages at the volume your pipeline needs.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="High outbound volume" icon="paper-plane">
+    SDRs running 100+ touches a week and personalization is collapsing into copy-paste.
+  </Card>
+  <Card title="Flatlining reply rates" icon="chart-line-down">
+    The team is writing more emails and getting fewer replies — the messages stopped sounding different.
+  </Card>
+  <Card title="Top-10% personalization" icon="medal">
+    Reps only hand-personalize their A-list. Everyone else gets a template they're not happy with.
+  </Card>
+  <Card title="Multi-channel sequences" icon="shuffle">
+    Email + LinkedIn + follow-up timing is breaking down because no human is orchestrating it.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+An outbound Agent takes a prospect and produces a message ready to send.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Prospect name, company, role, recent activity, CRM history.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, LinkedIn, web and news, your messaging playbooks, ICP and persona docs.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A drafted email or LinkedIn message tuned to that prospect, in your team's voice.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Queued in Gmail/Outlook, posted to LinkedIn, written to the CRM, or dropped in a rep's queue for review.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone [LinkedIn Outreach](https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4) from the Marketplace and open it in chat. Drop a prospect in, ask for a message, edit, send.
+
+Example prompts:
+
+- *"Draft a LinkedIn DM to Sarah at Initech — she just got promoted to VP of Sales last month."*
+- *"Write a follow-up email to Acme Corp referencing our last call notes in HubSpot."*
+- *"Give me three subject line options for a re-engagement email to dormant trial users."*
+
+See the [Marketplace](/get-started/marketplace/introduction) for the full catalog.
+
+### L2 — Give it a playbook
+
+When ad-hoc chat starts to feel slow, shape the Agent so every draft sounds like your team without re-explaining the rules each time:
+
+- Adapt the [prompt](/build/agents/build-your-agent/prompt) to your tone and value props
+- Upload messaging playbooks, email templates, and tone-of-voice guides to [Knowledge](/build/knowledge/create-knowledge)
+- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to draft outreach for an entire prospect list in one pass
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow that fires automatically. Common triggers:
+
+- A new lead enters HubSpot → first-touch email drafted and queued for rep approval
+- A LinkedIn connection is accepted → follow-up DM drafted automatically
+- A prospect engages with content → re-engagement sequence drafts itself
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+
+### L4 — Let it tune itself
+
+The Agent A/B tests subject lines, opening hooks, CTAs, and follow-up timing against reply rates and meetings booked. It evolves its own playbook based on what actually converts for your team, not your last guess.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that drafts personalized first-touch emails for new HubSpot leads and queues them for rep approval."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Personalization that's surface-level" icon="circle-exclamation">
+    Mentioning the company name doesn't count. The opening line has to reference something the prospect would only believe you noticed if you actually paid attention — a post, a launch, a role change.
+  </Accordion>
+  <Accordion title="Sending too fast" icon="circle-exclamation">
+    Volume plus zero warm-up equals the spam folder. Use sending caps and a warm-up schedule on new domains.
+  </Accordion>
+  <Accordion title="Every message reads the same" icon="circle-exclamation">
+    If your reply rates flatline as volume grows, the Agent has converged on a template. Force structural variation in the prompt — different opens, different CTA placements.
+  </Accordion>
+  <Accordion title="No human gate on exec accounts" icon="circle-exclamation">
+    Use [Alerts](/build/agents/build-your-agent/alerts) to route messages for high-value accounts through human review before they send.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,98 @@
+---
+title: "RFP and security questionnaire responses"
+sidebarTitle: "RFP responses"
+description: "Pull from your archive of prior answers to draft consistent, accurate responses to questionnaires."
+---
+
+Every SE team has the same archive — last year's RFPs, last quarter's security questionnaires, the architecture answers written six different ways across six different deals. An RFP Agent reads each new question and pulls the best prior answer, adapts it to the deal context, and flags anything that needs human judgment.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Same answers, six versions" icon="copy">
+    The data-residency answer exists in 12 prior RFPs, all slightly different. New responses pick whatever's easiest to find.
+  </Card>
+  <Card title="Questionnaires take days" icon="hourglass">
+    An 80-question security questionnaire eats two SE days. The deal slows because the document is the bottleneck.
+  </Card>
+  <Card title="Inconsistent answers across deals" icon="scale-unbalanced">
+    Security or compliance answers vary by who wrote them, not by what's true. Risky for trust and contracts.
+  </Card>
+  <Card title="Archive is unsearchable" icon="folder-magnifying-glass">
+    "Have we answered this before?" requires a 20-minute hunt across Drive, Notion, and Slack.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+An RFP Agent takes a question + opportunity context and returns a drafted answer with sources.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Question text, opportunity context (segment, geography, deal size), prior-answer archive.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Past RFP and security questionnaire responses, policy docs, architecture artifacts, product changelog.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A drafted answer with citations to source documents and a confidence indicator — high-confidence answers ready to send, low-confidence flagged for SE review.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Drafted into the response doc (Google Doc, Notion, Loopio export), posted in Slack for SE review on flagged answers.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone an SE Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. An SE drops a question in and asks for a draft.
+
+Example prompts:
+
+- *"What's our standard answer to 'describe your data residency options'? Cite past responses."*
+- *"This question is asking about SOC 2 controls around access. Pull the right answer and adapt it for an enterprise EU customer."*
+- *"Walk me through these 30 questions from Acme's questionnaire — flag the ones that need real SE attention."*
+
+### L2 — Give it a playbook
+
+When the same questionnaire shape repeats, codify the answer logic:
+
+- Define answer length, tone, hedging rules, and citation format in the [prompt](/build/agents/build-your-agent/prompt)
+- Upload your full prior-response archive, policy docs, and "answer this way" guidance to [Knowledge](/build/knowledge/create-knowledge)
+- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to process a long questionnaire all at once and flag uncertain answers
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- An RFP doc lands in the SE Slack channel → questions extracted, draft answers generated, SE reviews
+- A questionnaire imports into Loopio / Responsive → Agent populates first-pass answers
+- A new policy ships internally → Agent re-checks recent responses for now-stale answers and flags them
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which prior answers got accepted by customers vs. which got pushed back on. It promotes the better-performing phrasings, demotes the stale or weak ones, and surfaces gaps where no good prior answer exists.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that ingests RFP docs uploaded to a shared Drive folder, drafts answers using our prior-response archive, and posts the drafts for SE review."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Hallucinated security claims" icon="circle-exclamation">
+    The Agent confidently states a control you don't have. Force citations to actual policy / past-answer documents and fail visibly when the question isn't covered.
+  </Accordion>
+  <Accordion title="Stale answers" icon="circle-exclamation">
+    Last year's accurate answer is this year's misrepresentation. Tag prior responses with dates and have the Agent prefer recent over old when in conflict.
+  </Accordion>
+  <Accordion title="No human review on legal/security" icon="circle-exclamation">
+    Some questions need legal sign-off. Always route security and contractual answers through human review until you've watched it for several deals.
+  </Accordion>
+  <Accordion title="Auto-applying without deal context" icon="circle-exclamation">
+    A "yes" to a feature in mid-market might be a "yes, but" in enterprise. Have the Agent read the opportunity record and adapt — not just look up the question.
+  </Accordion>
+</AccordionGroup>

@@ -1,0 +1,109 @@
+---
+title: "Prospect research"
+sidebarTitle: "Prospect research"
+description: "Automate company and contact research so reps walk into every call already prepared."
+---
+
+Reps spend hours digging through LinkedIn, company websites, and news to prep for a single call. Relevance can produce the same brief in seconds — at whatever level of automation you're ready for.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="High call volume" icon="phone">
+    Reps run more than five discovery calls a week and prep is eating their selling time.
+  </Card>
+  <Card title="Uneven prep" icon="scale-unbalanced">
+    Some calls get deeply prepped, others get a quick scan — output quality is inconsistent.
+  </Card>
+  <Card title="Inbound triage" icon="filter">
+    Inbound leads need quick context before a rep is assigned.
+  </Card>
+  <Card title="Baseline context" icon="layer-group">
+    Every meeting starts with the same baseline brief, not whatever the rep happens to find.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A prospect research workflow takes a company name or contact and returns a structured brief.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Company domain, contact email, or CRM record.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Web search, LinkedIn, news, your CRM, and any internal knowledge — ICP, personas, battle cards.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A brief covering company overview, recent news, key contacts, likely pain points, and conversation hooks.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Pasted into chat, posted to Slack, written back to the CRM, or attached to a calendar event.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone the [Sales Researcher](https://marketplace.relevanceai.com/listing/4b454347-0656-4fee-9c15-8fb2f2713424) from the Marketplace and open it in chat. It uses your connected CRM, calendar, and web tools to pull the brief together on demand.
+
+Example prompts your reps can use today:
+
+- *"Research Acme Corp ahead of my 2pm call. Pull recent news, the buyer's LinkedIn, and any open deals in HubSpot."*
+- *"Summarize the last three meetings with Globex and what's still open."*
+- *"Who at Initech should I be talking to if we're selling into RevOps?"*
+
+See the [Marketplace](/get-started/marketplace/introduction) for the full catalog.
+
+### L2 — Give it a playbook
+
+When the same research pattern repeats, codify how the Agent works so every run applies the same lens:
+
+- Refine the [prompt](/build/agents/build-your-agent/prompt) for the output structure your reps want
+- Upload ICP definitions, personas, and battle cards to [Knowledge](/build/knowledge/create-knowledge) so the brief reads through your team's lens
+- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to research a list of accounts in one pass
+
+<Frame caption="Walkthrough — build an AI sales research agent that saves teams 15+ hours a week.">
+  <iframe
+    className="w-full aspect-video rounded-xl"
+    src="https://www.youtube.com/embed/7X8Co6G7oo0"
+    title="Build an AI sales research agent"
+    allowFullScreen
+  ></iframe>
+</Frame>
+
+### L3 — Run it on pipeline signals
+
+Wrap the agent in a workflow that fires automatically. Common triggers:
+
+- A new lead enters the CRM → research runs, brief lands in Slack and on the CRM record
+- A meeting is booked → brief is generated 24 hours before and emailed to the rep
+- A deal moves to "Discovery" → research re-runs with deeper account context
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The research Agent tracks which brief sections reps actually cite in close-won deals, which sources matter for which segments, and adjusts depth and structure over time. Briefs sharpen against outcomes, not your gut.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that researches inbound leads and posts the brief to Slack."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Researching accounts you already own" icon="circle-exclamation">
+    Gate the trigger on lifecycle stage so you don't burn credits re-researching closed-won customers.
+  </Accordion>
+  <Accordion title="Generic briefs" icon="circle-exclamation">
+    Without an ICP or persona in knowledge, the output reads like a Wikipedia summary. Add the lens.
+  </Accordion>
+  <Accordion title="Stale data" icon="circle-exclamation">
+    Set a freshness window — e.g. re-research only if the last brief is more than 30 days old — instead of regenerating on every interaction.
+  </Accordion>
+  <Accordion title="Over-trusting recency" icon="circle-exclamation">
+    Web search returns whatever ranks, not what's true. Cite sources in the brief so reps can spot-check.
+  </Accordion>
+</AccordionGroup>

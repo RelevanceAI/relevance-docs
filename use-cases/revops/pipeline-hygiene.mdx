@@ -1,0 +1,98 @@
+---
+title: "Pipeline forecasting and hygiene"
+sidebarTitle: "Pipeline hygiene"
+description: "Spot stalled deals, missing fields, and at-risk forecast slippage before pipeline review."
+---
+
+The Monday pipeline review depends on data that's only as fresh as the rep updated it on Friday — which is to say, not very. A pipeline Agent reads the whole pipeline state, flags what's stalled, what's missing, what's likely to slip, and writes the gaps back so the review actually starts with reality.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Stale pipeline" icon="hourglass">
+    Half the deals in pipeline haven't been touched in 30 days; reps update only when forced.
+  </Card>
+  <Card title="Forecast accuracy poor" icon="chart-line-down">
+    Commit vs. close-rate gap grows quarter over quarter — leadership stops trusting the forecast.
+  </Card>
+  <Card title="Pipeline review is data hunting" icon="binoculars">
+    The first 20 minutes of every pipeline review is reps explaining missing data.
+  </Card>
+  <Card title="Slipping deals caught late" icon="alarm-clock">
+    Deals slip the week before the quarter ends — when it's too late to do anything.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A pipeline Agent takes a pipeline snapshot and returns a structured analysis with flags.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Pipeline state (deals, stages, dates, amounts), historical close-rate benchmarks, your forecast definitions.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, prior quarter close data, deal activity logs, your sales methodology / MEDDICC framework.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A pipeline brief — stalled deals, missing critical fields, slippage risk per deal, forecast vs. commit gap with reasoning.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Posted to Slack ahead of pipeline review, written to a Notion ops doc, surfaced as deal-level alerts to AEs.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone a RevOps Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A RevOps analyst asks before pipeline review.
+
+Example prompts:
+
+- *"What deals look at-risk for Q3? Pull stalled deals, missing close dates, and weak MEDDICC scores."*
+- *"Compare this week's commit vs. last quarter's commit-vs-close at the same point in the cycle — are we tracking?"*
+- *"Which 10 deals should the team focus on this week to hit number?"*
+
+### L2 — Give it a playbook
+
+When the same pipeline analysis repeats, codify it:
+
+- Define what "stalled," "at-risk," and "slipping" mean in the [prompt](/build/agents/build-your-agent/prompt)
+- Upload your sales methodology, historical close-rate benchmarks, and deal-stage definitions to [Knowledge](/build/knowledge/create-knowledge)
+- Configure the Agent's tools to query the CRM consistently for every run
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- Sunday 8pm → pipeline-review prep doc drops in the RevOps Slack ahead of Monday's meeting
+- A deal hits "stalled" criteria → the AE gets a notification with the missing fields and a suggested action
+- A deal moves stages → automatic MEDDICC field validation, posted to the deal channel
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which "at-risk" signals actually predicted slippage last quarter. Stops alerting on signals that were noise; tightens criteria that caught real risks. The forecast model sharpens against actual outcomes.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that scans HubSpot pipeline every Sunday night, flags stalled / missing-field / at-risk deals, and posts a pipeline-review prep doc to #revops."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Noise overwhelms signal" icon="circle-exclamation">
+    If the Agent flags every deal as "at risk", the team stops reading. Tighten criteria to what actually predicts slippage.
+  </Accordion>
+  <Accordion title="No outcome feedback" icon="circle-exclamation">
+    Without piping won/lost / slipped outcomes back to the Agent's evals, the criteria can't improve. Pipe deal outcomes to evaluations.
+  </Accordion>
+  <Accordion title="Missing the qualitative" icon="circle-exclamation">
+    Pure field-based analysis misses what AEs hear on calls. Have the Agent read recent activity notes and pick up sentiment signals.
+  </Accordion>
+  <Accordion title="Auto-changing CRM fields" icon="circle-exclamation">
+    Letting the Agent overwrite stage or amount fields without rep review breaks trust and reporting. Surface recommendations; the rep changes the field.
+  </Accordion>
+</AccordionGroup>

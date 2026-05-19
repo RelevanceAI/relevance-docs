@@ -1,0 +1,98 @@
+---
+title: "Campaign performance analytics"
+sidebarTitle: "Campaign analytics"
+description: "Pull cross-channel campaign reports together and surface what's working — without hours of spreadsheet wrangling."
+---
+
+Performance data lives in seven tools. The weekly campaign review takes someone half a day to pull together and another half day to translate into insight. A campaign analytics Agent does the pulling and the translating — so the review meeting starts with answers, not data hunting.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Reports take half a day" icon="hourglass-half">
+    Pulling Google Ads + HubSpot + LinkedIn + GA into one slide takes the same person, the same way, every Monday.
+  </Card>
+  <Card title="Channel performance is opaque" icon="eye-slash">
+    You know spend by channel but not what each channel is actually doing for the funnel.
+  </Card>
+  <Card title="Campaign comparisons are manual" icon="scale-balanced">
+    Was this campaign better than the last one? Nobody can answer without an hour of cross-referencing.
+  </Card>
+  <Card title="Leadership wants weekly digests" icon="newspaper">
+    The CMO wants a Friday "what worked, what didn't" — and it always slips because it's not anyone's job.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A campaign analytics Agent takes a time window + campaign set and returns a report with reasoning.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Time window, campaign set (specific campaigns or all), channels to include, segmentation cuts.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Marketing automation (HubSpot, Marketo), ad platforms (Google, Meta, LinkedIn), web analytics, CRM, your own benchmark docs.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A digest — top performers, underperformers, key shifts vs. last period, suggested actions — with cited data and reasoning.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Posted to Slack, written to a Notion page for the team review, emailed to the CMO Friday morning.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone an analytics Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. Ask the question you'd otherwise dig through dashboards to answer.
+
+Example prompts:
+
+- *"Pull last week's campaign performance from HubSpot and Google Ads — top 3 winners, top 3 losers, with reasons."*
+- *"Compare the Q3 onboarding sequence against Q2 — what shifted in open and click rates?"*
+- *"Which channels drove qualified pipeline last month? Cite the data."*
+
+### L2 — Give it a playbook
+
+When the same report repeats, codify the format and sources:
+
+- Define the report structure in the [prompt](/build/agents/build-your-agent/prompt) — sections, metrics, cuts
+- Upload benchmark docs, KPI definitions, and channel attribution rules to [Knowledge](/build/knowledge/create-knowledge)
+- Configure the Agent's [Tools](/build/agents/build-your-agent/tools) to query each platform consistently
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- Every Monday 7am → weekly digest drops into the marketing Slack channel
+- A campaign ends → post-mortem report is generated and emailed to the campaign owner
+- A KPI crosses a threshold (CTR drop, CAC spike) → alert + diagnostic report fires
+
+See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which metrics actually predicted campaign success in your historical data. It stops surfacing vanity metrics that don't correlate with pipeline, weights the ones that do, and proposes new segmentation cuts based on what's been predictive.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that pulls Monday-morning campaign performance from HubSpot, Google Ads, and LinkedIn, and posts a digest with reasoning to #marketing-weekly."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Pulling data without interpreting it" icon="circle-exclamation">
+    A wall of numbers in Slack isn't useful. Force the Agent to explain *why* metrics moved and *what to do* — not just *what they are*.
+  </Accordion>
+  <Accordion title="Inconsistent attribution" icon="circle-exclamation">
+    HubSpot's "campaign" and your ad platform's "campaign" probably aren't the same thing. Define attribution rules in Knowledge once and reference them every time.
+  </Accordion>
+  <Accordion title="No benchmark for 'good'" icon="circle-exclamation">
+    Without baselines, every CTR looks normal. Upload your historical benchmarks to Knowledge so the Agent flags actual outliers.
+  </Accordion>
+  <Accordion title="Stale data sources" icon="circle-exclamation">
+    Ad platforms can lag 24-48 hours. Have the Agent disclose data freshness in the report so the team knows what's preliminary.
+  </Accordion>
+</AccordionGroup>

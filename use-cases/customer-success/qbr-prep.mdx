@@ -1,0 +1,98 @@
+---
+title: "QBR and business review prep"
+sidebarTitle: "QBR prep"
+description: "Auto-generate exec-ready QBR decks from CRM, support, and usage data — minutes, not hours."
+---
+
+A QBR is supposed to take an hour to prep and instead takes half a day. The CSM pulls usage data, support history, deal notes, and an exec summary into a slide deck — and does that for 12 accounts a quarter. A QBR Agent does the assembly so the CSM spends time on the *insight*, not the data hunting.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="QBRs slip or shrink" icon="calendar-xmark">
+    Reviews get cancelled or shortened because nobody had time to prep — the customer notices.
+  </Card>
+  <Card title="Inconsistent across CSMs" icon="scale-unbalanced">
+    Senior CSMs ship excellent QBRs; newer ones ship rough ones — the customer experience varies wildly.
+  </Card>
+  <Card title="Manual data pulling" icon="hammer">
+    CSMs are exporting from HubSpot, screenshotting Looker, copying from Zendesk — the same way every time.
+  </Card>
+  <Card title="Strategic content is rushed" icon="hourglass">
+    The "next quarter recommendation" slide always gets written last, briefly, because data prep ate the time.
+  </Card>
+</CardGroup>
+
+## The shape of this motion
+
+A QBR Agent takes an account + time window and returns a structured review with sourced data.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Account, review period, audience (operational vs exec), template / brand to follow.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM activity, support ticket history, product analytics, deal notes, your QBR template, segment playbooks.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A draft QBR — usage summary, support summary, business outcomes, recommended next quarter, cited data — in your team's format.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Posted to a Notion or Google Doc for the CSM to refine, emailed as a draft, dropped into a Slack thread for review.
+  </Card>
+</CardGroup>
+
+## Climb the ladder
+
+### L1 — Ask the Agent in chat
+
+Clone a CS Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A CSM asks the night before a QBR.
+
+Example prompts:
+
+- *"Draft a QBR for Acme Corp covering last quarter — usage, support summary, business wins, recommended next steps."*
+- *"What did Globex achieve this year vs. their stated goals? Pull from CRM notes and product usage."*
+- *"Give me the operational summary slide for Initech's QBR — usage trends and support trend only."*
+
+### L2 — Give it a playbook
+
+When the same QBR shape repeats, codify the structure and tone:
+
+- Define the QBR template in the [prompt](/build/agents/build-your-agent/prompt) — sections, slide order, target length, exec-friendly tone
+- Upload your QBR template, segment playbooks, and example exemplars to [Knowledge](/build/knowledge/create-knowledge)
+- Connect [CRM](/integrations/popular-integrations/hubspot), support, and product analytics so the Agent draws from the full picture
+
+### L3 — Run it on pipeline signals
+
+Wrap the Agent in a workflow:
+
+- 14 days before a QBR date → draft generated automatically, posted to a CSM Notion space
+- An exec QBR is on the calendar → exec-flavored version drafted and shared with the AE
+- A QBR completes → action items lifted and tracked back to the CRM
+
+See [Triggers](/build/agents/build-your-agent/triggers), [Google Calendar](/integrations/popular-integrations/google-calendar), and [Workforces](/build/workforces/create-a-workforce).
+
+### L4 — Let it tune itself
+
+The Agent learns which QBR sections actually got the customer to nod, which sections got skipped, which recommendations got actioned. The format adapts to what reps and customers actually engage with.
+
+<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
+  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that generates a QBR doc from CRM + support + usage 14 days before every scheduled QBR meeting and posts it to Notion."* See Programmatic GTM.
+</Card>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Data without narrative" icon="circle-exclamation">
+    A QBR that lists metrics without telling a story is just a report. Force the prompt to summarize what changed and why it matters.
+  </Accordion>
+  <Accordion title="Same QBR for every segment" icon="circle-exclamation">
+    Enterprise QBRs and mid-market QBRs should look different. Branch the prompt on segment so the depth and audience tone shift accordingly.
+  </Accordion>
+  <Accordion title="Auto-sending without CSM review" icon="circle-exclamation">
+    Tempting to skip the CSM read. Don't — a misread on a strategic account is a relationship cost. The Agent drafts, the CSM ships.
+  </Accordion>
+  <Accordion title="Stale or wrong attribution" icon="circle-exclamation">
+    If the Agent pulls product usage but doesn't filter by account properly, you get the wrong numbers in front of an exec. Validate the data sources for the top 10 accounts before going live.
+  </Accordion>
+</AccordionGroup>
