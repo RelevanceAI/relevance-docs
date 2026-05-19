@@ -8,6 +8,10 @@ description: 'Test and evaluate your AI Agents with scenario-based evaluations a
 **Rollout Status**: Evals is currently being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
+<Note>
+The **Checks tab** is available to accounts with the **evals-checks-tab** feature flag enabled. If you see **Evaluators** instead of **Checks** in your interface, you are on the previous version of this feature.
+</Note>
+
 The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Monitor** tab (next to the Run tab) in the Agent builder, Evals enables you to create Test Suites, define evaluation criteria (Evaluators), run automated evaluations, and monitor ongoing performance—all without manual testing.
 
 ![Evals section showing Test Suites, Evaluators, Runs, and Performance](/images/agent/agent-evals.png)
@@ -33,7 +37,7 @@ The Evals section is your command center for testing and evaluating AI Agent per
 The Evals section contains five main sections, accessible from the left sidebar:
 
 - **Test Suites** — Create and manage groups of Test scenarios for your Agent. Each Test Suite can contain multiple scenarios with different prompts and evaluation criteria.
-- **Evaluators** — Configure global evaluation criteria that can be applied across any Test Suite or scenario without needing to set them up each time.
+- **Checks** — Manage your global evaluation criteria in a card-based library. Each check can be applied across any Test Suite or scenario. The Checks tab shows which scenarios and dashboards each rule is used in, and lets you filter by usage to find unused rules or rules tied to specific scenarios or dashboards.
 - **Runs** — View your evaluation run history and results. See average scores, number of conversations evaluated, progress status, credit spend, and creation dates for all past runs.
 - **Publish Checks** — Configure which Test Suites must pass before your Agent can be published. Set a pass threshold and optionally block publishing if evaluations fail.
 - **Performance** — Automatically evaluate live Agent conversations by selecting a global Evaluator, setting a sample rate, and filtering by conversation status.
@@ -54,9 +58,9 @@ Scenario Evaluators are created within individual Test scenarios. They evaluate 
 
 ### Global Evaluators
 
-Global Evaluators are configured in the **Evaluators** tab. They can be selected to run on any Test Suite or scenario without needing to configure them each time — think of them as reusable defaults.
+Global Evaluators are configured in the **Checks** tab. They can be selected to run on any Test Suite or scenario without needing to configure them each time — think of them as reusable defaults.
 
-- Created in the **Evaluators** tab (separate from Test Suites)
+- Created in the **Checks** tab (separate from Test Suites)
 - Can be selected when running any Test Suite or individual scenario
 - Useful for standard criteria you want checked across scenarios, such as professional tone, no hallucinations, or brand voice compliance
 - Also used in the **Performance** tab to automatically evaluate live conversations
@@ -103,13 +107,19 @@ When creating an Evaluator (either scenario-level or global), you choose from th
   </Accordion>
 </AccordionGroup>
 
+### AI Judge presets
+
+The Checks tab includes built-in AI Judge presets that serve as quick-start templates for common evaluation criteria. Rather than writing evaluation prompts from scratch, you can select a preset and use it as a starting point, then customize the prompt to match your specific requirements.
+
+Available presets include criteria such as **Helpful response** (checks whether the Agent provided a useful, actionable reply) and **Professional tone** (checks whether the Agent maintained a professional and courteous tone throughout the conversation).
+
 To create a global Evaluator:
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
 <iframe src="https://app.supademo.com/embed/cmmmtwq7z1lsj9cvj5kwwifwi" frameBorder="0" title="Creating a global Evaluator" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-1. Go to the **Monitor** tab and select **Evals**, then select **Evaluators**
+1. Go to the **Monitor** tab and select **Evals**, then select **Checks**
 2. Click **+ New Evaluator**
 3. Select a **Type** (LLM Judge, String Contains, String Equals, or Tool Usage)
 4. Enter a **Name** for the Evaluator (e.g., "Professional Tone")
@@ -117,8 +127,22 @@ To create a global Evaluator:
 6. Click **Create Evaluator**
 
 <Note>
-When you run a Test scenario, scenario-level Evaluators are always included automatically. You can also add or remove global Evaluators (from the Evaluators tab) before each run, allowing you to mix standard criteria with scenario-specific evaluation rules.
+When you run a Test scenario, scenario-level Evaluators are always included automatically. You can also add or remove global Evaluators (from the Checks tab) before each run, allowing you to mix standard criteria with scenario-specific evaluation rules.
 </Note>
+
+### Managing and organizing your checks
+
+The Checks tab provides a centralized, card-based library for managing reusable evaluation rules across multiple scenarios and dashboards. Each check is displayed as a card, giving you a clear view of all your global evaluation criteria at a glance.
+
+Each check displays **Used in** pills showing which scenarios and dashboards reference that rule. These pills link directly to the relevant scenario or dashboard, so you can quickly navigate to see where a rule is applied.
+
+To find specific checks, use the filter options:
+
+- **Scenarios** — Show only rules used in a specific scenario
+- **Dashboards** — Show only rules used in a specific dashboard
+- **Unused** — Show rules that are not currently referenced by any scenario or dashboard
+
+When you edit or delete a check that is already in use, a confirmation modal appears to prevent accidental changes that could affect existing scenarios and dashboards.
 
 ---
 
@@ -273,7 +297,7 @@ The Performance tab lets you automatically evaluate live Agent conversations wit
 ### Setting up Performance monitoring
 
 1. Go to the **Monitor** tab, select **Evals**, then select **Performance**.
-2. Select a **global Evaluator** you've created in the Evaluators tab.
+2. Select a **global Evaluator** you've created in the Checks tab.
 3. Set a **Sample rate** — the percentage of conversations to evaluate.
 4. (Optional) Set a **Conversation status filter** to only evaluate conversations with specific statuses (e.g., completed, escalated). Leave blank to evaluate all conversations.
 5. Save your settings.
@@ -369,7 +393,7 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
   </Accordion>
 
   <Accordion title="What's the difference between scenario Evaluators and global Evaluators?">
-    Scenario Evaluators are created within Test scenarios and only evaluate conversations generated by that specific scenario. Global Evaluators are created in the Evaluators tab and can be selected to run on any Test Suite or scenario, providing reusable evaluation criteria across all your tests. Global Evaluators are also used in the Performance tab for monitoring live conversations.
+    Scenario Evaluators are created within Test scenarios and only evaluate conversations generated by that specific scenario. Global Evaluators are created in the Checks tab and can be selected to run on any Test Suite or scenario, providing reusable evaluation criteria across all your tests. Global Evaluators are also used in the Performance tab for monitoring live conversations.
   </Accordion>
 
   <Accordion title="Can the LLM Judge evaluate long conversations?">
