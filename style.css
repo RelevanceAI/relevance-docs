@@ -93,21 +93,28 @@ div#content-side-layout {
     background-color: rgba(129, 140, 248, 0.45);
   }
 
-  /* First entry: extend the segment 12px above the card and fade it in over
-     exactly that 12px so the rail is fully solid when it reaches the card. */
-  .mdx-content[data-page-title^="Changelog"] > .update-container:first-child::before {
+  /* Top fade-in: 12px gradient above the first entry. Anchored to the content
+     wrapper rather than `.update-container:first-child` because Mintlify prod
+     can wrap the entries differently and the :first-child match drops out. */
+  .mdx-content[data-page-title^="Changelog"]::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
     top: -12px;
+    width: 2px;
+    height: 12px;
     background: linear-gradient(
       to bottom,
-      rgba(79, 70, 229, 0) 0px,
+      rgba(79, 70, 229, 0) 0,
       rgba(79, 70, 229, 0.35) 12px
     );
+    z-index: 1;
   }
 
-  .dark .mdx-content[data-page-title^="Changelog"] > .update-container:first-child::before {
+  .dark .mdx-content[data-page-title^="Changelog"]::before {
     background: linear-gradient(
       to bottom,
-      rgba(129, 140, 248, 0) 0px,
+      rgba(129, 140, 248, 0) 0,
       rgba(129, 140, 248, 0.45) 12px
     );
   }
