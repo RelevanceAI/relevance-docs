@@ -91,3 +91,42 @@ Think of the Tasks Page as your collaboration space with your AI assistant:
 4. Check the **right sidebar** for technical details and resource usage
 
 This integrated view ensures you always know what your agent is doing, why it made certain decisions, and how you can work together to get better results.
+
+## Filtering tasks
+
+The task filter builder in the Task List lets you narrow the list to exactly the tasks you need. Filters work directly from the run tab — you don't need to create a custom Task View to use them.
+
+### Available filters
+
+- **Status** — filter by task state (Running, Completed, Paused, Timed out, Unrecoverable error, Pending approval, and others)
+- **Agent** — filter to tasks from a specific agent
+- **Tool usage** — filter by which tools the task used
+- **Errors** — filter by failure type, including **Has active tool failures** and **Agent has errored**
+- **Metadata (Memory)** — filter on custom metadata fields attached to tasks
+- **Date created / Last updated** — filter by time range
+- **Email tracking** — filter by email open events
+- **Created by** — filter by who or what triggered the task
+- **Advanced filters** — combine custom conditions for more specific queries
+
+### Filtering for failures
+
+The **Errors** filter has two options that surface different kinds of failure:
+
+- **Agent has errored** — shows tasks where the agent itself encountered an error and stopped
+- **Has active tool failures** — shows tasks where one or more tools failed during execution, even if the agent continued running
+
+**Why both matter:** Tool failures don't always cause the agent to stop. An agent may retry, skip a step, or continue with degraded output while a tool failure goes unnoticed. The **Has active tool failures** filter surfaces those tasks so you can review them, even when overall task status appears normal.
+
+Combine both filters to see tasks with any kind of failure — both agent-level errors and tool-level failures.
+
+**Common use cases:**
+
+- Debugging: pinpoint which tasks had tool issues after a configuration change
+- Monitoring agent reliability: check periodically for tool failures that didn't surface as errors
+- Identifying problematic tools: if the same tool keeps appearing in filtered results, it likely needs attention
+
+### The Errors tab
+
+The **Errors tab** in the Task List is a pre-built view focused entirely on failed and errored tasks. When you open it, the **Has active tool failures** filter is automatically enabled and locked — you'll see explanatory text below the filter explaining why. This prevents accidental removal of the filter and ensures the Errors tab always reflects its intended purpose.
+
+Use the Errors tab as your go-to starting point when an agent run produces unexpected results and you need to quickly identify which tasks had tool failures.
