@@ -1,0 +1,48 @@
+---
+title: "Tasks page"
+sidebarTitle: "Tasks page"
+description: "Monitor, troubleshoot, and resolve Agent and Workforce tasks in bulk from one place"
+---
+
+The Tasks page is where you monitor everything your Agents and Workforces are doing — reviewing outputs, replying to escalations, approving pending actions, and rerunning failed runs. You can act on a single task or apply the same action across every matching task at once.
+
+Tasks from both Agents and Workforces appear here. The same triage and bulk action flows apply to both.
+
+<Note>
+The Tasks page is the project-level monitoring surface. For the per-Agent view inside the Agent builder, see the [Run tab](/build/agents/give-your-agent-tasks/task-overview).
+</Note>
+
+## Tabs
+
+The page is split into tabs, with a subheading below the tab bar describing what the active tab contains:
+
+- **All tasks** — every conversation across your Agents and Workforces.
+- **To review** — tasks waiting on an approval before they can continue.
+- **Escalated** — tasks the Agent paused on to ask you a question.
+- **Errors** — tasks that hit a tool failure or runtime error.
+
+## Side panel
+
+Selecting any task opens a side panel with three sections:
+
+- **Output** — what the Agent produced and a summary of the actions it took.
+- **Chat** — message the Agent about the task, ask follow-ups, or guide a rerun.
+- **Details** — created timestamp, status, credits used, metadata, schedule, linked Tools, linked Agents.
+
+Failed tool steps show an **Edit tool** action on hover. Clicking it opens the Tool builder in a new tab so you can fix the failing step and publish. Come back to the Tasks page to rerun the affected tasks.
+
+## Bulk actions
+
+When you open a task in the side panel, the page checks for other tasks with the same shape and surfaces a bottom sheet so you can act on the whole group at once. Matching means the same Agent, the same failing tool step (or the same escalation / approval type), and the same payload shape — for example, a Python tool that threw the same `KeyError` across three conversations would group into one bulk action.
+
+Available bulk actions:
+
+- **Reply** to escalations with a single shared response.
+- **Approve** or **Reject** pending approvals.
+- **Rerun** errored tasks from the failing step.
+
+A confirmation modal shows the count before anything is sent (for example, "Reply to 4 agent tasks", "Approve 3 agent tasks"). Tab counts refresh after the operation completes.
+
+<Note>
+Bulk actions only appear for tasks with prefilled inputs ready to review — tasks that need you to type a custom reply or pick from a dropdown stay one-at-a-time. Up to 50 matching tasks are processed in one bulk run; for larger batches, run the action again, since already-queued tasks are excluded from the next match.
+</Note>
