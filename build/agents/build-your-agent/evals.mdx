@@ -1,28 +1,28 @@
 ---
 title: 'Evals'
 sidebarTitle: 'Evals'
-description: 'Test and evaluate your AI Agents with scenario-based evaluations and automated Evaluators'
+description: 'Test and evaluate your AI Agents with scenario-based evaluations and reusable Checks'
 ---
 
 <Info>
-**Rollout Status**: Evals is currently being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see this feature in your account yet, reach out to your account manager to discuss access.
+**Rollout Status**: Evals is rolling out progressively, starting with Enterprise customers and design-partner pilots. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Monitor** tab (next to the Run tab) in the Agent builder, Evals enables you to create Test Suites, define evaluation criteria (Evaluators), run automated evaluations, and monitor ongoing performance—all without manual testing.
+The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing.
 
-![Evals section showing Test Suites, Evaluators, Runs, and Performance](/images/agent/agent-evals.png)
+![Evals section showing Test, Runs, Checks, Publish, and Monitor](/images/agent/agent-evals.png)
 
 ## What you can do with Evals
 
 <CardGroup cols={3}>
-  <Card title="Conduct Tests" icon="flask-vial">
-    Create Test Suites with scenarios that simulate real user interactions. Combine scenarios with Evaluators to measure accuracy and evaluate Agent performance automatically.
+  <Card title="Run tests" icon="flask-vial">
+    Build test sets with scenarios that simulate real user interactions, then attach Checks to score every conversation automatically.
   </Card>
-  <Card title="Create Evaluators" icon="scale-balanced">
-    Define evaluation criteria that automatically assess Agent responses. Evaluators look for specific conditions and score conversations based on your defined rules.
+  <Card title="Reuse Checks" icon="scale-balanced">
+    Define evaluation criteria once in the Checks library and attach them to scenarios, Monitor dashboards, or ad-hoc evaluations of completed tasks.
   </Card>
-  <Card title="Monitor Performance" icon="chart-line">
-    Automatically evaluate live Agent conversations using global Evaluators. Track scores, view insights, and monitor quality over time without running manual tests.
+  <Card title="Monitor live tasks" icon="chart-line">
+    Create Monitor dashboards that score live Agent tasks against your Checks, with sample-rate controls and per-Check trend charts over time.
   </Card>
 </CardGroup>
 
@@ -30,40 +30,29 @@ The Evals section is your command center for testing and evaluating AI Agent per
 
 ## Evals sections
 
-The Evals section contains five main sections, accessible from the left sidebar:
+The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 
-- **Test Suites** — Create and manage groups of Test scenarios for your Agent. Each Test Suite can contain multiple scenarios with different prompts and evaluation criteria.
-- **Evaluators** — Configure global evaluation criteria that can be applied across any Test Suite or scenario without needing to set them up each time.
-- **Runs** — View your evaluation run history and results. See average scores, number of conversations evaluated, progress status, credit spend, and creation dates for all past runs.
-- **Publish Checks** — Configure which Test Suites must pass before your Agent can be published. Set a pass threshold and optionally block publishing if evaluations fail.
-- **Performance** — Automatically evaluate live Agent conversations by selecting a global Evaluator, setting a sample rate, and filtering by conversation status.
+- **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached Checks.
+- **Runs** — Past evaluation run results. Browse average scores, conversations evaluated, progress status, credit spend, and creation date for every run.
+- **Checks** — The reusable library of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
+- **Publish** — Choose which test sets must pass before your Agent can be published. Set a threshold and optionally block publishing on failure.
+- **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
 
 ---
 
-## Understanding Evaluators
+## Understanding Checks
 
-Evaluators are evaluation criteria that automatically assess Agent conversations. There are two types of Evaluators:
+Checks are the reusable evaluation criteria that score Agent conversations. You create a Check once in the **Checks** library and then attach it wherever you need it:
 
-### Scenario Evaluators
+- **To a scenario** in a test set — the Check runs every time that scenario is evaluated.
+- **To a Monitor dashboard** — the Check runs on a sampled portion of live Agent tasks.
+- **To a one-off evaluation** of already-completed tasks (see [Evaluate completed tasks](#evaluate-completed-tasks)).
 
-Scenario Evaluators are created within individual Test scenarios. They evaluate the specific conversation generated by that scenario's prompt.
+The Checks library has filter tabs that show where each Check is currently used — **All checks**, **Scenarios**, **Dashboard**, and **Unused** — so you can quickly find Checks that aren't attached anywhere yet.
 
-- Created inside a Test scenario
-- Only apply to the scenario they're defined in
-- Scenario-specific evaluation criteria
+### Check types
 
-### Global Evaluators
-
-Global Evaluators are configured in the **Evaluators** tab. They can be selected to run on any Test Suite or scenario without needing to configure them each time — think of them as reusable defaults.
-
-- Created in the **Evaluators** tab (separate from Test Suites)
-- Can be selected when running any Test Suite or individual scenario
-- Useful for standard criteria you want checked across scenarios, such as professional tone, no hallucinations, or brand voice compliance
-- Also used in the **Performance** tab to automatically evaluate live conversations
-
-### Evaluator types
-
-When creating an Evaluator (either scenario-level or global), you choose from the following types:
+When creating a Check, you choose one of the following types:
 
 <AccordionGroup>
   <Accordion title="LLM Judge" icon="brain-circuit">
@@ -103,113 +92,123 @@ When creating an Evaluator (either scenario-level or global), you choose from th
   </Accordion>
 </AccordionGroup>
 
-To create a global Evaluator:
+To create a Check in the library:
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
-<iframe src="https://app.supademo.com/embed/cmmmtwq7z1lsj9cvj5kwwifwi" frameBorder="0" title="Creating a global Evaluator" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+<iframe src="https://app.supademo.com/embed/cmmmtwq7z1lsj9cvj5kwwifwi" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-1. Go to the **Monitor** tab and select **Evals**, then select **Evaluators**
-2. Click **+ New Evaluator**
-3. Select a **Type** (LLM Judge, String Contains, String Equals, or Tool Usage)
-4. Enter a **Name** for the Evaluator (e.g., "Professional Tone")
-5. Configure the type-specific settings (see table above)
-6. Click **Create Evaluator**
+1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
+2. Click **+ New Check**.
+3. Select a **Type** (LLM Judge, String Contains, String Equals, or Tool Usage).
+4. Enter a **Name** for the Check (e.g., "Professional tone").
+5. Configure the type-specific settings (see table above).
+6. Click **Create Check**.
 
 <Note>
-When you run a Test scenario, scenario-level Evaluators are always included automatically. Global Evaluators are not included by default — you must explicitly select them in the evaluation modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) before each run.
+Checks attached to a scenario are always included when you run that scenario. Additional Checks from your library are not auto-included — tick the ones you want under **Additional global checks** in the run modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) before kicking off the run.
 </Note>
 
 ---
 
-## Creating a Test Suite with a scenario
+## Creating a test set with a scenario
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
-<iframe src="https://app.supademo.com/embed/cmmmvldns1nlq9cvjzy4nkpe0" frameBorder="0" title="Creating a Test Suite" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+<iframe src="https://app.supademo.com/embed/cmmmvldns1nlq9cvjzy4nkpe0" frameBorder="0" title="Creating a test set" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-Follow these steps to create your first evaluation Test Suite:
+Follow these steps to create your first test set:
 
-1. Open your Agent in the builder and click the **Monitor** tab (next to the Run tab). Select **Evals** from the left sidebar, then select **Test Suites**.
-2. Click the **+ New test suite** button. Enter a name for your Test Suite and click **Create**.
-3. Click on the Test Suite you just created to open it.
-4. Click the **+ New Test** button to create a scenario within your Test Suite.
+1. Open your Agent in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
+2. Click the **+ New test set** button. Enter a name for your test set and click **Create**.
+3. Click on the test set you just created to open it.
+4. Click the **+ New scenario** button to add a scenario to your test set. You can either start from a [scenario preset](#scenario-presets) or build one from scratch.
 5. Fill in the scenario details:
 
     | Field | Description | Example |
     |-------|-------------|---------|
-    | **Scenario name** | A descriptive name for this Test case | "Response Empathy" |
+    | **Scenario name** | A descriptive name for this scenario | "Response empathy" |
     | **Persona & situation** | The persona or situation the simulated user will adopt | "You are an impatient customer who wants quick answers about their bill." |
-    | **First message** | A fixed message the simulated user sends to your Agent as the opening message (optional) | "Hi, I need help with my bill." |
+    | **First message** | A fixed opening message from the simulated user (optional) | "Hi, I need help with my bill." |
     | **Max turns** | Maximum conversation turns (1-50) | 10 |
     | **Number of runs** | How many times this scenario should be executed | 3 |
 
-6. Add Evaluators to define how this specific scenario should be evaluated:
+6. Attach Checks to define how this scenario is scored. You can either pick existing Checks from the library or create new ones inline:
 
     | Field | Description | Example |
     |-------|-------------|---------|
-    | **Type** | The Evaluator type | LLM Judge |
-    | **Name** | Name of the evaluation criterion | "Empathy Shown" |
-    | **Type-specific config** | Settings based on the chosen type (see [Evaluator types](#evaluator-types)) | *Evaluation Prompt*: "Did the Agent acknowledge the customer's frustration and express empathy before offering solutions?" |
+    | **Type** | The Check type | LLM Judge |
+    | **Name** | Name of the evaluation criterion | "Empathy shown" |
+    | **Type-specific config** | Settings based on the chosen type (see [Check types](#check-types)) | *Evaluation Prompt*: "Did the Agent acknowledge the customer's frustration and express empathy before offering solutions?" |
 
-    Click **Create Evaluator** to save it. You can then create additional Evaluators to add more evaluation criteria to the scenario.
+    Newly created Checks land in your Checks library and can be reused on other scenarios or Monitor dashboards.
 
-7. (Optional) Add **Tool simulations** to emulate tool usage without actually calling the tools. Tool simulations are configured at the scenario level:
-    - Select a tool to simulate
-    - Provide a prompt describing what the tool should return (a fake response is generated based on your prompt)
-    - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response
+7. (Optional) Add **Tool simulations** to emulate Tool usage without actually calling the underlying Tools. Tool simulations are configured per scenario:
+    - Select a Tool to simulate.
+    - Provide a prompt describing what the Tool should return (a fake response is generated based on your prompt).
+    - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response.
 
-8. Click **Save Test scenario** to save your configuration.
+8. Click **Save scenario** to save your configuration.
 
 <Tip>
-You can add multiple scenarios to a single Test Suite to evaluate different aspects of your Agent's behavior. Each scenario can have its own prompt, max turns, number of runs, Evaluators, and tool simulations.
+You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own prompt, max turns, number of runs, attached Checks, and Tool simulations.
 </Tip>
 
-### Managing test scenarios
+### Scenario presets
 
-Test scenarios can be reorganized across Test Suites as your testing strategy evolves. Each scenario has a dropdown menu (accessible via the three-dot icon next to the scenario name) that provides three operations:
+When creating a new scenario, you can start from a built-in preset that ships with a persona, opening message, and a couple of pre-wired LLM Judge Checks. Available presets include:
+
+- **Happy path** — a friendly user with a straightforward request.
+- **Vague request** — an open-ended user who needs the Agent to clarify.
+- **Frustrated user** — an impatient customer who's already tried twice.
+
+Presets are a fast way to seed a test set; you can edit any of the persona, message, or Checks afterwards.
+
+### Managing scenarios
+
+Scenarios can be reorganized across test sets as your testing strategy evolves. Each scenario has a dropdown menu (the three-dot icon next to the scenario name) with three operations:
 
 | Operation | What it does | When to use it |
 |-----------|-------------|----------------|
-| **Move** | Relocates the scenario to another Test Suite | Reorganizing suites or consolidating related scenarios |
-| **Copy** | Creates a duplicate of the scenario in another Test Suite | Reusing a scenario as a baseline in a different suite |
-| **Duplicate** | Creates a copy of the scenario in the same Test Suite | Quickly creating a variation of an existing scenario |
+| **Move** | Relocates the scenario to another test set | Reorganizing test sets or consolidating related scenarios |
+| **Copy** | Creates a duplicate of the scenario in another test set | Reusing a scenario as a baseline in a different test set |
+| **Duplicate** | Creates a copy of the scenario in the same test set | Quickly creating a variation of an existing scenario |
 
 ### Example scenarios
 
-Here are some example Test scenarios you might create:
+Here are some example scenarios you might create:
 
 <AccordionGroup>
-  <Accordion title="Customer Support - Empathy test">
-    **Scenario name**: Response Empathy
+  <Accordion title="Customer support - empathy test">
+    **Scenario name**: Response empathy
 
     **Persona & situation**: You are a long-time customer who was recently charged twice for the same order. You've already contacted support once without resolution and are feeling frustrated but willing to give the Agent a chance to help. Express your concerns clearly and see if the Agent acknowledges your situation before jumping to solutions.
 
     **Max turns**: 10
 
-    **Evaluator**: Empathy Shown (LLM Judge)
+    **Check**: Empathy shown (LLM Judge)
     - *Evaluation Prompt*: Did the Agent acknowledge the customer's frustration and express empathy before offering solutions? The response should show understanding of the emotional state and validate their concerns.
   </Accordion>
 
-  <Accordion title="Sales - Product knowledge test">
-    **Scenario name**: Product Expertise
+  <Accordion title="Sales - product knowledge test">
+    **Scenario name**: Product expertise
 
     **Persona & situation**: You are a procurement manager at a mid-sized company evaluating solutions for your team. You need specific details about enterprise pricing tiers, integration capabilities with existing tools like Salesforce and HubSpot, and data security certifications. Ask clarifying questions and compare features against competitors you're also considering.
 
     **Max turns**: 15
 
-    **Evaluator**: Accurate Information (LLM Judge)
+    **Check**: Accurate information (LLM Judge)
     - *Evaluation Prompt*: Did the Agent provide accurate product information without making claims that cannot be verified? Responses should be factual, reference actual product capabilities, and acknowledge when information needs to be confirmed by a sales representative.
   </Accordion>
 
-  <Accordion title="Support - Escalation handling">
-    **Scenario name**: Escalation Request
+  <Accordion title="Support - escalation handling">
+    **Scenario name**: Escalation request
 
     **Persona & situation**: You are a paying customer who has experienced a service outage affecting your business operations. You've already troubleshooted with the knowledge base articles and need to speak with a senior support engineer or account manager. Be firm but professional in your request, and provide context about the business impact.
 
     **Max turns**: 5
 
-    **Evaluator**: Appropriate Escalation (LLM Judge)
+    **Check**: Appropriate escalation (LLM Judge)
     - *Evaluation Prompt*: Did the Agent acknowledge the severity of the situation, validate the customer's need for escalation, and initiate a handoff to a human representative while maintaining a professional and empathetic tone throughout?
   </Accordion>
 </AccordionGroup>
@@ -218,13 +217,13 @@ Here are some example Test scenarios you might create:
 
 ## Running evaluations
 
-You can run an entire Test Suite or an individual Test scenario from within a Test Suite by clicking the **Run** button on either.
+You can run an entire test set or an individual scenario from within a test set by clicking the **Run** button on either.
 
-You can select specific Test scenarios within a Test Suite to run certain ones at once, or run all scenarios in the Test Suite together. Note that you cannot bulk select and run multiple Test Suites at the same time.
+You can select specific scenarios within a test set to run a subset at once, or run all scenarios in the test set together. Note that you cannot bulk-select and run multiple test sets at the same time.
 
-1. Enter a name for the evaluation run (e.g., "Scenario Run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
-2. Scenario-level Evaluators are always included automatically. Global Evaluators are not included by default — to include them, tick the ones you want under the **Additional global checks** section.
-3. Click **Run** to begin. The system will simulate conversations with your Agent based on your scenario prompts and evaluate them with your selected Evaluators.
+1. Enter a name for the run (e.g., "Scenario run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
+2. Checks already attached to the scenarios are always included. To add Checks from your library, tick the ones you want under **Additional global checks**.
+3. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
 
 ---
 
@@ -238,7 +237,7 @@ The top of the results page shows key metrics:
 
 | Metric | Description |
 |--------|-------------|
-| **Average Score** | Overall pass rate across all scenarios and Evaluators |
+| **Average Score** | Overall pass rate across all scenarios and Checks |
 | **Number of Conversations** | How many Test conversations were evaluated |
 | **Agent Version** | The version of the Agent that was tested |
 
@@ -250,68 +249,84 @@ Each scenario displays:
 |--------|-------------|
 | **Status** | Running, Completed, or Failed |
 | **Name** | The scenario name |
-| **Score** | Percentage of Evaluators that passed (shown with progress bar) |
-| **Evaluators** | Pass/fail count (e.g., "1/1 passed") |
+| **Score** | Percentage of Checks that passed (shown with progress bar) |
+| **Checks** | Pass/fail count (e.g., "1/1 passed") |
 | **Credits** | Credits consumed for this scenario |
 
 ### Viewing conversation details
 
 Click **View Conversation** on any scenario to see:
 
-1. **The full conversation** between the simulated user and your Agent
-2. **Evaluator verdicts** from all Evaluators included in the run, with detailed explanations of why each Evaluator passed or failed
+1. **The full conversation** between the simulated user and your Agent.
+2. **Check verdicts** from every Check included in the run, with detailed explanations of why each Check passed or failed.
 
-For example, an "Empathy Shown" Evaluator might show:
+For example, an "Empathy shown" Check might show:
 > **Pass**: The Agent demonstrated strong empathy throughout the conversation. Key examples include: acknowledging the customer's frustration with being transferred multiple times ("I completely understand how upsetting it must be to feel like you're not getting the help you need"), validating her experience with the double charge ("I truly understand how frustrating it is to be charged twice"), and directly addressing her skepticism by saying "I completely understand your concerns, especially given your previous experience."
 
 ---
 
-## Performance tab
+## Evaluate completed tasks
 
-The Performance tab lets you automatically evaluate live Agent conversations without manually running Test Suites. This is useful for ongoing quality monitoring.
+You don't have to run a simulated scenario to score a conversation. From the Agent's task list, you can select one or more completed tasks and run any Check from your library against them. The results land in **Runs** alongside scenario-based evaluation runs.
 
-### Setting up Performance monitoring
+1. Open the Agent's task list.
+2. Select the tasks you want to evaluate.
+3. Click **Evaluate**.
+4. Pick the Checks to run, give the evaluation a name, and confirm.
 
-1. Go to the **Monitor** tab, select **Evals**, then select **Performance**.
-2. Select a **global Evaluator** you've created in the Evaluators tab.
-3. Set a **Sample rate** — the percentage of conversations to evaluate.
-4. (Optional) Set a **Conversation status filter** to only evaluate conversations with specific statuses (e.g., completed, escalated). Leave blank to evaluate all conversations.
-5. Save your settings.
+This is useful for retroactively grading real production conversations, or for spot-checking specific tasks that surfaced through a Monitor dashboard.
 
-Once configured, conversations matching your criteria will be automatically evaluated at the sample rate you've set.
+---
 
-### Viewing Performance insights
+## Monitor
 
-After the Performance evaluator has processed conversations, you can view:
+The **Monitor** section continuously scores live Agent tasks against Checks from your library. Unlike Test, which runs simulated conversations, Monitor evaluates the real conversations your Agent is having.
+
+Monitor is organized into **dashboards** — you can create more than one (for example, one focused on tone, another on tool-use accuracy) and configure each independently.
+
+### Creating a Monitor dashboard
+
+1. Go to the **Evaluate** tab and select **Monitor** from the left sidebar.
+2. Click **+ New dashboard** and give it a name.
+3. Attach one or more Checks from your library.
+4. Set a **Sample rate** — the percentage of incoming tasks to evaluate.
+5. (Optional) Set a **Conversation status filter** to only evaluate tasks with specific statuses (e.g., completed, escalated). Leave blank to evaluate all tasks.
+6. Save the dashboard.
+
+Once configured, qualifying tasks are automatically scored at the sample rate you've set.
+
+### Viewing dashboard insights
+
+Each Monitor dashboard shows:
 
 | Metric | Description |
 |--------|-------------|
-| **Overall Score** | Aggregate score across all evaluated conversations |
-| **Total Runs** | Number of conversations evaluated |
-| **Evaluators** | Which Evaluators are active |
+| **Overall score** | Aggregate score across all evaluated tasks in the selected date range |
+| **Total runs** | Number of tasks evaluated |
+| **Checks** | Which Checks are attached to the dashboard |
 
-The Performance tab also includes:
+You also get:
 
-- **Data points** for the overall score over time
-- **Evaluator breakdown** showing individual scoring per Evaluator
-- **Graphs** visualizing Evaluator performance trends
-- **List of evaluation runs** with score, name, and the ability to view the full conversation
+- **Overall score timeseries** to spot regressions or improvements over time.
+- **Per-Check charts** so you can see which criteria are slipping.
+- **Version markers** that line up score changes with Agent publishes.
+- **A list of evaluation runs** with score, name, and a drill-in to the full conversation.
 
 <Tip>
-To adjust Performance settings after initial setup, click the **Settings** button in the top right corner of the Performance tab.
+To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
 </Tip>
 
 ---
 
-## Publish Checks
+## Publish
 
-Publish Checks let you choose which Test Suites to run before your Agent is published. If the results don't meet your threshold, publishing can be blocked.
+The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your threshold, publishing can be blocked.
 
-You can configure Publish Checks from the **Publish Checks** section in Evals.
+You can configure Publish from the **Publish** section in the Evaluate tab.
 
 ### Test sets to run
 
-Select which Test Suites to run before publishing. Click **Add test sets** to choose them — all scenarios in the selected Test Suites will be evaluated.
+Select which test sets to run before publishing. Click **Add test sets** to choose them — all scenarios in the selected test sets will be evaluated.
 
 ### Publish settings
 
@@ -322,7 +337,7 @@ Configure how evaluations affect the publish process:
 | **Pass threshold (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
 | **Block publish if evaluation fails** | When checked, the Agent will only be published if the evaluation score meets or exceeds the pass threshold. If unchecked, the Agent will be published even if the evaluation fails the threshold. |
 
-Once configured, click **Save**. When you next publish your Agent, the selected Test Suites will run automatically and the results will be checked against your threshold.
+Once configured, click **Save**. When you next publish your Agent, the selected test sets will run automatically and the results will be checked against your threshold.
 
 ---
 
@@ -332,27 +347,36 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
   <Card title="Start simple" icon="seedling">
     Begin with a few core scenarios that test your Agent's primary use cases. Add complexity as you learn what matters most.
   </Card>
-  <Card title="Be specific with Evaluators" icon="bullseye">
-    Write detailed evaluation rules. Vague criteria lead to inconsistent results. Include specific examples of what passing looks like.
+  <Card title="Be specific with Checks" icon="bullseye">
+    Write detailed Check prompts. Vague criteria lead to inconsistent scoring. Include specific examples of what passing looks like.
   </Card>
   <Card title="Test edge cases" icon="triangle-exclamation">
     Create scenarios for difficult situations: angry customers, off-topic requests, requests to bypass rules, etc.
   </Card>
-  <Card title="Use Performance monitoring" icon="chart-line">
-    Set up global Evaluators in the Performance tab to continuously monitor live Agent conversations without manual testing.
+  <Card title="Run Monitor on live tasks" icon="chart-line">
+    Stand up a Monitor dashboard with your most important Checks so you catch regressions on real conversations, not just simulated ones.
   </Card>
-  <Card title="Organize scenarios across suites" icon="folder-tree">
-    Group related scenarios into dedicated Test Suites (e.g., one for edge cases, one for happy paths). Use Move, Copy, and Duplicate to reorganize as your testing strategy evolves.
+  <Card title="Keep your Checks library tidy" icon="folder-tree">
+    Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
+  </Card>
+  <Card title="Evaluate real tasks too" icon="magnifying-glass-chart">
+    When something looks off in production, select those tasks from the task list and evaluate them against your Checks for a quick retroactive read.
   </Card>
 </CardGroup>
+
+---
+
+## Workforces
+
+Workforces have their own evaluation flow that mirrors the Agent flow above — same Test, Runs, Checks, and Monitor sections — with the exception of Publish (workforces don't have a publish gate). Workforce evals are currently in private pilot; if you're interested, reach out to your account manager.
 
 ---
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
-  <Accordion title="How many scenarios can I have in a Test Suite?">
-    You can add as many scenarios as needed to a single Test Suite. Each scenario is evaluated independently and can have its own Evaluators.
+  <Accordion title="How many scenarios can I have in a test set?">
+    You can add as many scenarios as needed to a single test set. Each scenario is evaluated independently and can have its own attached Checks.
   </Accordion>
 
   <Accordion title="How many Evaluators can I add to a scenario?">
@@ -362,33 +386,33 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
   <Accordion title="How are credits calculated for evaluations?">
     Credits consumed for each scenario are calculated by adding together:
     - The Agent task run (the conversation with your Agent)
-    - The simulator (the persona/user simulation) - uses an LLM to simulate the user persona
-    - The Evaluator evaluations (both scenario Evaluators and global Evaluators) - each Evaluator uses an LLM to evaluate the conversation
+    - The simulator (the persona/user simulation) — uses an LLM to simulate the user persona
+    - Every Check that runs on the conversation — each Check (especially LLM Judge) uses an LLM call
 
     Each scenario shows its total credit usage in the results.
   </Accordion>
 
   <Accordion title="Can I rerun a previous evaluation?">
-    Yes, you can run the same Test scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
+    Yes, you can run the same scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
   </Accordion>
 
-  <Accordion title="What's the difference between scenario Evaluators and global Evaluators?">
-    Scenario Evaluators are created within Test scenarios and only evaluate conversations generated by that specific scenario. Global Evaluators are created in the Evaluators tab and can be selected to run on any Test Suite or scenario, providing reusable evaluation criteria across all your tests. Global Evaluators are also used in the Performance tab for monitoring live conversations.
+  <Accordion title="Where do my Checks live?">
+    All Checks live in the **Checks** library in the Evaluate tab. From there you can attach them to scenarios (for evaluation runs), to Monitor dashboards (for live tasks), or to one-off evaluations of completed tasks. The library's **Scenarios**, **Dashboard**, and **Unused** filters show where each Check is currently attached.
   </Accordion>
 
   <Accordion title="Can the LLM Judge evaluate long conversations?">
-    Yes, with configuration. The LLM Judge Evaluator includes a **Truncate long conversations** toggle in the **Advanced** section when creating an Evaluator. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
+    Yes, with configuration. The LLM Judge Check includes a **Truncate long conversations** toggle in the **Advanced** section when creating a Check. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
   </Accordion>
 
   <Accordion title="What happens when a conversation is truncated?">
     The oldest messages are removed from the start of the conversation until it fits within the judge model's context window. The judge is notified that truncation occurred and evaluates the remaining portion. If your evaluation criteria depend on early context — such as the user's original request or instructions given at the start of the conversation — the result may be less accurate. In those cases, disabling truncation and selecting a model with a larger context window is preferable.
   </Accordion>
 
-  <Accordion title="Can I move test scenarios between test suites?">
-    Yes. Each scenario has a dropdown menu (three-dot icon) with three options: **Move** relocates the scenario to another Test Suite, **Copy** creates a duplicate in another suite, and **Duplicate** creates a copy in the same suite.
+  <Accordion title="Can I move scenarios between test sets?">
+    Yes. Each scenario has a dropdown menu (three-dot icon) with three options: **Move** relocates the scenario to another test set, **Copy** creates a duplicate in another test set, and **Duplicate** creates a copy in the same test set.
   </Accordion>
 
   <Accordion title="I don't see the Evals section. How do I get access?">
-    Evals is being rolled out progressively, starting with Enterprise customers. If you're an Enterprise customer and don't see the Evals section in the Monitor tab yet, reach out to your account manager to discuss access.
+    Evals is rolling out progressively, starting with Enterprise customers and design-partner pilots. If you don't see the Evaluate tab in the Agent builder, reach out to your account manager to discuss access.
   </Accordion>
 </AccordionGroup>
