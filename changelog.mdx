@@ -8,7 +8,29 @@ mode: "wide"
 
 ## MCP access for the Member role
 
-The Relevance MCP is now available to users with the Member role in RBAC-enabled organizations. Previously, this required the Editor role or above. Requests use the user's own auth, so Members only see and operate on resources they already have access to.
+The Relevance MCP is now available to users with the Member role in RBAC-enabled organizations.
+
+The role gate that previously required Editor or above has been lowered to Member for configuring, deleting, and authenticating MCP servers; viewing them is unchanged. Requests run with the user's own auth, so a Member only sees and operates on Agents they already have access to.
+
+See the [MCP server documentation](/integrations/mcp/programmatic-gtm/mcp-server).
+
+<AccordionGroup>
+  <Accordion title="Fixes">
+    - <span className="cl-tag cl-tag-agent-chat">Agent chat</span> Fixed highlights on the Agent chat buttons.
+    - <span className="cl-tag cl-tag-mcp">MCP</span> Fixed an issue where reconnecting an MCP server lost previously authorized scopes.
+    - <span className="cl-tag cl-tag-triggers">Triggers</span> Resolved a race where webhook triggers could fire twice if the request landed during a deploy.
+  </Accordion>
+
+  <Accordion title="Improvements">
+    - <span className="cl-tag cl-tag-tools">Tools</span> Reduced cold-start time on the first Tool execution after a deploy.
+    - <span className="cl-tag cl-tag-mcp">MCP</span> Clearer error messages when an MCP request hits a permission boundary.
+  </Accordion>
+
+  <Accordion title="Extras">
+    - <span className="cl-tag cl-tag-api">API</span> Added a `cursor` query parameter to the Agent list endpoint for stable pagination.
+    - <span className="cl-tag cl-tag-cli">CLI</span> New `--dry-run` flag on the `relevance deploy` command.
+  </Accordion>
+</AccordionGroup>
 
 </Update>
 
@@ -18,15 +40,19 @@ The Relevance MCP is now available to users with the Member role in RBAC-enabled
 
 ![Confluence Knowledge Sync](/images/changelog/changelog-confluence.webp)
 
-Knowledge tables can now sync from Confluence. Pages are polled every 5 minutes and changes flow back into the connected table — same model as the existing Google Drive, Notion, and SharePoint sync.
+Confluence is now available as a source for Knowledge tables.
 
-Connect in **Knowledge → Add Source → Confluence** and authenticate your workspace.
+Pages are polled every 5 minutes; changes flow back into the connected table. Same sync model as the existing Google Drive, Notion, and SharePoint integrations.
+
+Connect in **Knowledge → Add Source → Confluence**.
 
 ## Project-level public Agent controls
 
 ![Project-level public Agent controls](/images/changelog/changelog-public-access.webp)
 
-Admins can now disable public cloning and embedding for every Agent, Workforce, and Tool in a project from one place. Toggling these off at the project level overrides individual asset settings and stops users from re-enabling them.
+Admins can now disable public cloning and embedding at the project level for every Agent, Workforce, and Tool.
+
+Toggling these settings off at the project level overrides individual asset settings and prevents users from re-enabling them on specific assets.
 
 Manage in **Project Settings → Manage Access**.
 
@@ -34,9 +60,28 @@ Manage in **Project Settings → Manage Access**.
 
 ![Relevance AI Android app](/images/changelog/changelog-google-play-2.webp)
 
-The Android app is live on the Google Play Store. Trigger Agents, view runs, and receive notifications from your phone.
+The Relevance AI Android app is live on the Google Play Store.
+
+Trigger Agents, view runs, and receive push notifications from your phone. Sign in with the same credentials as the web app.
 
 [Get it on Google Play](https://play.google.com/store/apps/details?id=com.relevanceai.android).
+
+<AccordionGroup>
+  <Accordion title="Fixes">
+    - <span className="cl-tag cl-tag-knowledge">Knowledge</span> Fixed a case where large Notion pages were truncated mid-sync.
+    - <span className="cl-tag cl-tag-workforce">Workforce</span> Resolved a UI flicker when switching between Workforce tabs.
+  </Accordion>
+
+  <Accordion title="Improvements">
+    - <span className="cl-tag cl-tag-permissions">Permissions</span> Faster permission checks on projects with large asset counts.
+    - <span className="cl-tag cl-tag-mobile">Mobile</span> Smoother scroll performance on long Agent run histories.
+  </Accordion>
+
+  <Accordion title="Extras">
+    - <span className="cl-tag cl-tag-api">API</span> Added a `source_type` field to the Knowledge sync webhook payload.
+    - <span className="cl-tag cl-tag-agent-chat">Agent chat</span> New keyboard shortcut `⌘/` to focus the message input.
+  </Accordion>
+</AccordionGroup>
 
 </Update>
 

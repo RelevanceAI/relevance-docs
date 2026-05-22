@@ -23,6 +23,12 @@ main > div {
   padding-right: 1.5rem;
 }
 
+/* Let changelog pages use the full viewport so the sidebar doesn't get
+   pushed inward by the 1400px centering rule above. */
+body:has(.mdx-content[data-page-title^="Changelog"]) main > div {
+  max-width: 100%;
+}
+
 /* Pull left sidebar slightly away from edge */
 #sidebar {
   left: 2.5rem !important;
@@ -177,3 +183,78 @@ div#content-side-layout {
 .dark .mdx-content[data-page-title^="Changelog"] [data-component-part="update-content"] img {
   box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.55);
 }
+
+/* Shrink body text inside accordions on changelog pages so the secondary
+   "Fixes / Improvements / Extras" content reads as supporting info, not
+   as loud as the main entry body. */
+.mdx-content[data-page-title^="Changelog"] .accordion ul,
+.mdx-content[data-page-title^="Changelog"] .accordion li,
+.mdx-content[data-page-title^="Changelog"] .accordion p {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* Also shrink the accordion title (the summary row) so it matches the
+   supporting-info weight of the body inside. */
+.mdx-content[data-page-title^="Changelog"] .accordion > summary,
+.mdx-content[data-page-title^="Changelog"] .accordion > summary * {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Category chip — same class everywhere ⇒ same colour, always.
+   Keep the chip baseline-aligned with surrounding text. */
+.mdx-content[data-page-title^="Changelog"] .cl-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.05rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-right: 0.35rem;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+/* Small leading dot inside the chip, matching the screenshot. */
+.mdx-content[data-page-title^="Changelog"] .cl-tag::before {
+  content: '';
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.85;
+}
+
+/* Per-tag palette. Same tag class everywhere = same colour. */
+.mdx-content[data-page-title^="Changelog"] .cl-tag-permissions { background: #ede9fe; color: #5b21b6; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-permissions { background: rgba(139, 92, 246, 0.18); color: #c4b5fd; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-mcp { background: #dbeafe; color: #1e40af; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-mcp { background: rgba(59, 130, 246, 0.18); color: #93c5fd; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-agent-chat { background: #ffedd5; color: #9a3412; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-agent-chat { background: rgba(249, 115, 22, 0.20); color: #fdba74; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-triggers { background: #dcfce7; color: #166534; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-triggers { background: rgba(34, 197, 94, 0.18); color: #86efac; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-tools { background: #ccfbf1; color: #115e59; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-tools { background: rgba(20, 184, 166, 0.18); color: #5eead4; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-api { background: #e0e7ff; color: #3730a3; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-api { background: rgba(99, 102, 241, 0.18); color: #a5b4fc; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-cli { background: #f3f4f6; color: #374151; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-cli { background: rgba(156, 163, 175, 0.18); color: #d1d5db; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-knowledge { background: #fef3c7; color: #92400e; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-knowledge { background: rgba(245, 158, 11, 0.20); color: #fcd34d; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-workforce { background: #fce7f3; color: #9d174d; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-workforce { background: rgba(236, 72, 153, 0.18); color: #f9a8d4; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-mobile { background: #cffafe; color: #155e75; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-mobile { background: rgba(6, 182, 212, 0.18); color: #67e8f9; }
