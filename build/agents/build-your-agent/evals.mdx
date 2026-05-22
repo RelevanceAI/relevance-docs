@@ -65,7 +65,7 @@ When creating a Check, you choose one of the following types:
     | **Truncate long conversations** | When enabled, conversations that exceed the judge model's context window are trimmed from the oldest messages first, and the eval runs on the remaining portion. When disabled, oversized conversations fail with an error instead. Note that trimming removes early context, which can affect score accuracy if your evaluation criteria depend on the beginning of the conversation. |
   </Accordion>
 
-  <Accordion title="String Contains" icon="text">
+  <Accordion title="Text Includes" icon="text">
     Checks whether the Agent's response includes specific text.
 
     | Field | Description |
@@ -73,7 +73,7 @@ When creating a Check, you choose one of the following types:
     | **Required text** | The text that must appear in the response |
   </Accordion>
 
-  <Accordion title="String Equals" icon="equals">
+  <Accordion title="Text Equals" icon="equals">
     Checks whether the Agent's response exactly matches an expected value.
 
     | Field | Description |
@@ -100,7 +100,7 @@ To create a Check in the library:
 
 1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
 2. Click **+ New Check**.
-3. Select a **Type** (LLM Judge, String Contains, String Equals, or Tool Usage).
+3. Select a **Type** (LLM Judge, Text Includes, Text Equals, or Tool Usage).
 4. Enter a **Name** for the Check (e.g., "Professional tone").
 5. Configure the type-specific settings (see table above).
 6. Click **Create Check**.
@@ -122,16 +122,16 @@ Follow these steps to create your first test set:
 1. Open your Agent in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
 2. Click the **+ New test set** button. Enter a name for your test set and click **Create**.
 3. Click on the test set you just created to open it.
-4. Click the **+ New scenario** button to add a scenario to your test set. You can either start from a [scenario preset](#scenario-presets) or build one from scratch.
+4. Click the **+ Add scenario** button to add a scenario to your test set. You can either start from a [scenario preset](#scenario-presets) or build one from scratch.
 5. Fill in the scenario details:
 
     | Field | Description | Example |
     |-------|-------------|---------|
     | **Scenario name** | A descriptive name for this scenario | "Response empathy" |
-    | **Persona & situation** | The persona or situation the simulated user will adopt | "You are an impatient customer who wants quick answers about their bill." |
-    | **First message** | A fixed opening message from the simulated user (optional) | "Hi, I need help with my bill." |
-    | **Max turns** | Maximum conversation turns (1-50) | 10 |
-    | **Number of runs** | How many times this scenario should be executed | 3 |
+    | **Scenario description** | Describe a persona and situation — the AI generates realistic messages from this | "You are an impatient customer who wants quick answers about their bill." |
+    | **Run X times** | How many times to execute this scenario | 3 |
+    | **Up to X messages** | Maximum conversation length, where each message is one back-and-forth between the simulated user and the Agent | 10 |
+    | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with my bill." |
 
 6. Attach Checks to define how this scenario is scored. You can either pick existing Checks from the library or create new ones inline:
 
@@ -148,10 +148,10 @@ Follow these steps to create your first test set:
     - Provide a prompt describing what the Tool should return (a fake response is generated based on your prompt).
     - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response.
 
-8. Click **Save scenario** to save your configuration.
+8. Click **Save test scenario** to save your configuration.
 
 <Tip>
-You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own prompt, max turns, number of runs, attached Checks, and Tool simulations.
+You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached Checks, and Tool simulations.
 </Tip>
 
 ### Scenario presets
@@ -182,9 +182,9 @@ Here are some example scenarios you might create:
   <Accordion title="Customer support - empathy test">
     **Scenario name**: Response empathy
 
-    **Persona & situation**: You are a long-time customer who was recently charged twice for the same order. You've already contacted support once without resolution and are feeling frustrated but willing to give the Agent a chance to help. Express your concerns clearly and see if the Agent acknowledges your situation before jumping to solutions.
+    **Description**: You are a long-time customer who was recently charged twice for the same order. You've already contacted support once without resolution and are feeling frustrated but willing to give the Agent a chance to help. Express your concerns clearly and see if the Agent acknowledges your situation before jumping to solutions.
 
-    **Max turns**: 10
+    **Up to**: 10 messages
 
     **Check**: Empathy shown (LLM Judge)
     - *Evaluation Prompt*: Did the Agent acknowledge the customer's frustration and express empathy before offering solutions? The response should show understanding of the emotional state and validate their concerns.
@@ -193,9 +193,9 @@ Here are some example scenarios you might create:
   <Accordion title="Sales - product knowledge test">
     **Scenario name**: Product expertise
 
-    **Persona & situation**: You are a procurement manager at a mid-sized company evaluating solutions for your team. You need specific details about enterprise pricing tiers, integration capabilities with existing tools like Salesforce and HubSpot, and data security certifications. Ask clarifying questions and compare features against competitors you're also considering.
+    **Description**: You are a procurement manager at a mid-sized company evaluating solutions for your team. You need specific details about enterprise pricing tiers, integration capabilities with existing tools like Salesforce and HubSpot, and data security certifications. Ask clarifying questions and compare features against competitors you're also considering.
 
-    **Max turns**: 15
+    **Up to**: 15 messages
 
     **Check**: Accurate information (LLM Judge)
     - *Evaluation Prompt*: Did the Agent provide accurate product information without making claims that cannot be verified? Responses should be factual, reference actual product capabilities, and acknowledge when information needs to be confirmed by a sales representative.
@@ -204,9 +204,9 @@ Here are some example scenarios you might create:
   <Accordion title="Support - escalation handling">
     **Scenario name**: Escalation request
 
-    **Persona & situation**: You are a paying customer who has experienced a service outage affecting your business operations. You've already troubleshooted with the knowledge base articles and need to speak with a senior support engineer or account manager. Be firm but professional in your request, and provide context about the business impact.
+    **Description**: You are a paying customer who has experienced a service outage affecting your business operations. You've already troubleshooted with the knowledge base articles and need to speak with a senior support engineer or account manager. Be firm but professional in your request, and provide context about the business impact.
 
-    **Max turns**: 5
+    **Up to**: 5 messages
 
     **Check**: Appropriate escalation (LLM Judge)
     - *Evaluation Prompt*: Did the Agent acknowledge the severity of the situation, validate the customer's need for escalation, and initiate a handoff to a human representative while maintaining a professional and empathetic tone throughout?
