@@ -10,7 +10,7 @@ description: 'Test and evaluate your AI Agents with scenario-based evaluations a
 
 The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing.
 
-![Evals section showing Test, Runs, Checks, Publish, and Monitor](/images/agent/agent-evals.png)
+![Evaluate tab showing the Evals sidebar (Test, Runs, Checks, Publish, Monitor) and a Monitor dashboard with overall score, total runs, and Checks breakdown](/images/agent/agent-evals.png)
 
 ## What you can do with Evals
 
@@ -19,7 +19,7 @@ The Evals section is your command center for testing and evaluating AI Agent per
     Build test sets with scenarios that simulate real user interactions, then attach Checks to score every conversation automatically.
   </Card>
   <Card title="Reuse Checks" icon="scale-balanced">
-    Define evaluation criteria once in the Checks library and attach them to scenarios, Monitor dashboards, or ad-hoc evaluations of completed tasks.
+    Define evaluation criteria once in the Checks tab and attach them to scenarios, Monitor dashboards, or ad-hoc evaluations of completed tasks.
   </Card>
   <Card title="Monitor live tasks" icon="chart-line">
     Create Monitor dashboards that score live Agent tasks against your Checks, with sample-rate controls and per-Check trend charts over time.
@@ -33,8 +33,8 @@ The Evals section is your command center for testing and evaluating AI Agent per
 The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 
 - **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached Checks.
-- **Runs** — Past evaluation run results. Browse average scores, conversations evaluated, progress status, credit spend, and creation date for every run.
-- **Checks** — The reusable library of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
+- **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, credit spend, and creation date for every run.
+- **Checks** — The reusable set of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
 - **Publish** — Choose which test sets must pass before your Agent can be published. Set a threshold and optionally block publishing on failure.
 - **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
 
@@ -42,13 +42,13 @@ The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 
 ## Understanding Checks
 
-Checks are the reusable evaluation criteria that score Agent conversations. You create a Check once in the **Checks** library and then attach it wherever you need it:
+Checks are the reusable evaluation criteria that score Agent conversations. You create a Check once in the **Checks** tab and then attach it wherever you need it:
 
 - **To a scenario** in a test set — the Check runs every time that scenario is evaluated.
 - **To a Monitor dashboard** — the Check runs on a sampled portion of live Agent tasks.
-- **To a one-off evaluation** of already-completed tasks (see [Evaluate completed tasks](#evaluate-completed-tasks)).
+- **To a one-off evaluation** of already-completed tasks selected from the Agent's task list.
 
-The Checks library has filter tabs that show where each Check is currently used — **All checks**, **Scenarios**, **Dashboard**, and **Unused** — so you can quickly find Checks that aren't attached anywhere yet.
+The Checks tab has filters that show where each Check is currently used — **All checks**, **Scenarios**, **Dashboard**, and **Unused** — so you can quickly find Checks that aren't attached anywhere yet.
 
 ### Check types
 
@@ -92,10 +92,10 @@ When creating a Check, you choose one of the following types:
   </Accordion>
 </AccordionGroup>
 
-To create a Check in the library:
+To create a Check from the Checks tab:
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
-<iframe src="https://app.supademo.com/embed/cmmmtwq7z1lsj9cvj5kwwifwi" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+<iframe src="https://app.supademo.com/embed/cmpkr397l2hbdqms9w5xddjno" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
@@ -106,7 +106,7 @@ To create a Check in the library:
 6. Click **Create Check**.
 
 <Note>
-Checks attached to a scenario are always included when you run that scenario. Additional Checks from your library are not auto-included — tick the ones you want under **Additional global checks** in the run modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) before kicking off the run.
+Checks attached to a scenario are always included when you run that scenario. Additional Checks from the Checks tab are not auto-included — tick the ones you want under **Additional global checks** in the run modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) before kicking off the run.
 </Note>
 
 ---
@@ -114,7 +114,7 @@ Checks attached to a scenario are always included when you run that scenario. Ad
 ## Creating a test set with a scenario
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
-<iframe src="https://app.supademo.com/embed/cmmmvldns1nlq9cvjzy4nkpe0" frameBorder="0" title="Creating a test set" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+<iframe src="https://app.supademo.com/embed/cmpks4e442iakqms93emtc5jn" frameBorder="0" title="Creating a test set" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 Follow these steps to create your first test set:
@@ -133,7 +133,7 @@ Follow these steps to create your first test set:
     | **Up to X messages** | Maximum conversation length, where each message is one back-and-forth between the simulated user and the Agent | 10 |
     | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with my bill." |
 
-6. Attach Checks to define how this scenario is scored. You can either pick existing Checks from the library or create new ones inline:
+6. Attach Checks to define how this scenario is scored. You can either pick existing Checks from the Checks tab or create new ones inline:
 
     | Field | Description | Example |
     |-------|-------------|---------|
@@ -141,7 +141,7 @@ Follow these steps to create your first test set:
     | **Name** | Name of the evaluation criterion | "Empathy shown" |
     | **Type-specific config** | Settings based on the chosen type (see [Check types](#check-types)) | *Evaluation Prompt*: "Did the Agent acknowledge the customer's frustration and express empathy before offering solutions?" |
 
-    Newly created Checks land in your Checks library and can be reused on other scenarios or Monitor dashboards.
+    Newly created Checks land in the Checks tab and can be reused on other scenarios or Monitor dashboards.
 
 7. (Optional) Add **Tool simulations** to emulate Tool usage without actually calling the underlying Tools. Tool simulations are configured per scenario:
     - Select a Tool to simulate.
@@ -222,7 +222,7 @@ You can run an entire test set or an individual scenario from within a test set 
 You can select specific scenarios within a test set to run a subset at once, or run all scenarios in the test set together. Note that you cannot bulk-select and run multiple test sets at the same time.
 
 1. Enter a name for the run (e.g., "Scenario run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
-2. Checks already attached to the scenarios are always included. To add Checks from your library, tick the ones you want under **Additional global checks**.
+2. Checks already attached to the scenarios are always included. To add Checks from the Checks tab, tick the ones you want under **Additional global checks**.
 3. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
 
 ---
@@ -238,7 +238,7 @@ The top of the results page shows key metrics:
 | Metric | Description |
 |--------|-------------|
 | **Average Score** | Overall pass rate across all scenarios and Checks |
-| **Number of Conversations** | How many Test conversations were evaluated |
+| **Tasks** | How many Agent tasks were evaluated |
 | **Agent Version** | The version of the Agent that was tested |
 
 ### Scenario results
@@ -265,22 +265,9 @@ For example, an "Empathy shown" Check might show:
 
 ---
 
-## Evaluate completed tasks
-
-You don't have to run a simulated scenario to score a conversation. From the Agent's task list, you can select one or more completed tasks and run any Check from your library against them. The results land in **Runs** alongside scenario-based evaluation runs.
-
-1. Open the Agent's task list.
-2. Select the tasks you want to evaluate.
-3. Click **Evaluate**.
-4. Pick the Checks to run, give the evaluation a name, and confirm.
-
-This is useful for retroactively grading real production conversations, or for spot-checking specific tasks that surfaced through a Monitor dashboard.
-
----
-
 ## Monitor
 
-The **Monitor** section continuously scores live Agent tasks against Checks from your library. Unlike Test, which runs simulated conversations, Monitor evaluates the real conversations your Agent is having.
+The **Monitor** section continuously scores live Agent tasks against Checks from the Checks tab. Unlike Test, which runs simulated conversations, Monitor evaluates the real conversations your Agent is having.
 
 Monitor is organized into **dashboards** — you can create more than one (for example, one focused on tone, another on tool-use accuracy) and configure each independently.
 
@@ -288,7 +275,7 @@ Monitor is organized into **dashboards** — you can create more than one (for e
 
 1. Go to the **Evaluate** tab and select **Monitor** from the left sidebar.
 2. Click **+ New dashboard** and give it a name.
-3. Attach one or more Checks from your library.
+3. Attach one or more Checks from the Checks tab.
 4. Set a **Sample rate** — the percentage of incoming tasks to evaluate.
 5. (Optional) Set a **Conversation status filter** to only evaluate tasks with specific statuses (e.g., completed, escalated). Leave blank to evaluate all tasks.
 6. Save the dashboard.
@@ -356,19 +343,13 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
   <Card title="Run Monitor on live tasks" icon="chart-line">
     Stand up a Monitor dashboard with your most important Checks so you catch regressions on real conversations, not just simulated ones.
   </Card>
-  <Card title="Keep your Checks library tidy" icon="folder-tree">
+  <Card title="Keep your Checks tab tidy" icon="folder-tree">
     Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
   </Card>
-  <Card title="Evaluate real tasks too" icon="magnifying-glass-chart">
-    When something looks off in production, select those tasks from the task list and evaluate them against your Checks for a quick retroactive read.
+  <Card title="Sample wisely in Monitor" icon="percent">
+    Match the sample rate to your task volume. A low-traffic Agent can run at 100%; high-volume Agents can sample lower to keep credit spend in check without losing the signal.
   </Card>
 </CardGroup>
-
----
-
-## Workforces
-
-Workforces have their own evaluation flow that mirrors the Agent flow above — same Test, Runs, Checks, and Monitor sections — with the exception of Publish (workforces don't have a publish gate). Workforce evals are currently in private pilot; if you're interested, reach out to your account manager.
 
 ---
 
@@ -397,7 +378,7 @@ Workforces have their own evaluation flow that mirrors the Agent flow above — 
   </Accordion>
 
   <Accordion title="Where do my Checks live?">
-    All Checks live in the **Checks** library in the Evaluate tab. From there you can attach them to scenarios (for evaluation runs), to Monitor dashboards (for live tasks), or to one-off evaluations of completed tasks. The library's **Scenarios**, **Dashboard**, and **Unused** filters show where each Check is currently attached.
+    All Checks live in the **Checks** tab under Evaluate. From there you can attach them to scenarios (for evaluation runs), to Monitor dashboards (for live tasks), or to one-off evaluations of completed tasks. The **Scenarios**, **Dashboard**, and **Unused** filters show where each Check is currently attached.
   </Accordion>
 
   <Accordion title="Can the LLM Judge evaluate long conversations?">
