@@ -35,7 +35,7 @@ The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 - **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached Checks.
 - **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, credit spend, and creation date for every run.
 - **Checks** — The reusable set of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
-- **Publish** — Choose which test sets must pass before your Agent can be published. Set a threshold and optionally block publishing on failure.
+- **Publish** — Choose which test sets must pass before your Agent can be published. Set a minimum pass rate and optionally block publishing on failure.
 - **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
 
 ---
@@ -122,7 +122,7 @@ Follow these steps to create your first test set:
 1. Open your Agent in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
 2. Click the **+ New test set** button. Enter a name for your test set and click **Create**.
 3. Click on the test set you just created to open it.
-4. Click the **+ Add scenario** button to add a scenario to your test set. You can either start from a [scenario preset](#scenario-presets) or build one from scratch.
+4. Click the **+ Add scenario** button to add a scenario to your test set.
 5. Fill in the scenario details:
 
     | Field | Description | Example |
@@ -153,16 +153,6 @@ Follow these steps to create your first test set:
 <Tip>
 You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached Checks, and Tool simulations.
 </Tip>
-
-### Scenario presets
-
-When creating a new scenario, you can start from a built-in preset that ships with a persona, opening message, and a couple of pre-wired LLM Judge Checks. Available presets include:
-
-- **Happy path** — a friendly user with a straightforward request.
-- **Vague request** — an open-ended user who needs the Agent to clarify.
-- **Frustrated user** — an impatient customer who's already tried twice.
-
-Presets are a fast way to seed a test set; you can edit any of the persona, message, or Checks afterwards.
 
 ### Managing scenarios
 
@@ -307,7 +297,7 @@ To adjust dashboard settings after initial setup, click the **Settings** button 
 
 ## Publish
 
-The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your threshold, publishing can be blocked.
+The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
 
 You can configure Publish from the **Publish** section in the Evaluate tab.
 
@@ -321,10 +311,10 @@ Configure how evaluations affect the publish process:
 
 | Setting | Description |
 |---------|-------------|
-| **Pass threshold (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
-| **Block publish if evaluation fails** | When checked, the Agent will only be published if the evaluation score meets or exceeds the pass threshold. If unchecked, the Agent will be published even if the evaluation fails the threshold. |
+| **Minimum pass rate (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
+| **Allow publishing even if eval fails** | When unchecked (the default), the Agent will only be published if the evaluation score meets or exceeds the minimum pass rate. When checked, the Agent publishes regardless of whether the evaluation passes. |
 
-Once configured, click **Save**. When you next publish your Agent, the selected test sets will run automatically and the results will be checked against your threshold.
+Once configured, click **Save**. When you next publish your Agent, the selected test sets will run automatically and the results will be checked against your minimum pass rate.
 
 ---
 
