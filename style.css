@@ -125,24 +125,6 @@ div#content-side-layout {
     );
   }
 
-  /* Last entry: extend 12px below the card and fade out over that 12px. */
-  .mdx-content[data-page-title^="Changelog"] > .update-container:not(:has(+ .update-container))::before {
-    bottom: -12px;
-    background: linear-gradient(
-      to bottom,
-      rgba(79, 70, 229, 0.35) calc(100% - 12px),
-      rgba(79, 70, 229, 0) 100%
-    );
-  }
-
-  .dark .mdx-content[data-page-title^="Changelog"] > .update-container:not(:has(+ .update-container))::before {
-    background: linear-gradient(
-      to bottom,
-      rgba(129, 140, 248, 0.45) calc(100% - 12px),
-      rgba(129, 140, 248, 0) 100%
-    );
-  }
-
   /* Indigo dot sitting on the line, vertically centered with the date label.
      Math: update-container has py-8 (2rem top padding), date label is text-sm
      (~28px tall with py-1). Center of label is ~2rem + 14px from container top.
