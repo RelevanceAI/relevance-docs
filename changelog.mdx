@@ -11,7 +11,7 @@ mode: "wide"
 
 ![Microsoft Teams trigger settings showing the new Outreach replies only toggle enabled](/images/changelog/changelog-teams-outreach.png)
 
-When a Microsoft Teams Agent runs proactive outreach, it often shouldn't react to unrelated @mentions in the channel. Microsoft Teams triggers now support an **Outreach replies only** mode that limits responses to direct replies on the Agent's own outbound DMs.
+Microsoft Teams triggers now support an **Outreach replies only** mode that limits responses to direct replies on the Agent's own outbound DMs.
 
 The trigger distinguishes between inbound replies (replies to messages your Agent sent) and channel mentions. In outreach-only mode, only inbound replies route to the Agent — channel chatter doesn't trigger a run.
 
@@ -27,7 +27,7 @@ Configure the toggle on your Microsoft Teams trigger in **Agent → Triggers →
 
 The Relevance MCP is now available to users with the Member role in RBAC-enabled organizations.
 
-The role gate that previously required Editor or above has been lowered to Member for configuring, deleting, and authenticating MCP servers; viewing them is unchanged. Requests run with the user's own auth, so a Member only sees and operates on Agents they already have access to.
+The role gate that previously required Editor or above has been lowered to Member for connecting an MCP client to a Relevance project. Requests run with the user's own auth, so a Member only sees and operates on Agents they already have access to.
 
 See our [MCP server documentation](/integrations/mcp/programmatic-gtm/mcp-server) for setup steps and supported clients.
 
