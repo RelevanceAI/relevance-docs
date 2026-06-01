@@ -1,0 +1,166 @@
+---
+title: "FullEnrich"
+description: "FullEnrich is a B2B contact enrichment platform that finds verified email addresses and phone numbers using a waterfall across 20+ premium data providers."
+sidebarTitle: "FullEnrich"
+---
+
+FullEnrich is a B2B contact enrichment platform that finds verified email addresses and phone numbers using a waterfall across 20+ premium data providers. With Relevance AI's native FullEnrich integration, you can connect your FullEnrich API key directly and enrich contacts inside tools and agents, monitor credits, validate credentials, and run asynchronous enrichment jobs — no third-party middleware required.
+
+<Warning>
+  The FullEnrich integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not FullEnrich. If you have a question or issue with using FullEnrich in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about FullEnrich, you can reach out to FullEnrich support directly.
+</Warning>
+
+<Note>
+  This is a native integration that replaces the previous Pipedream-based FullEnrich actions. If you were using Pipedream to run FullEnrich workflows, you can now connect directly without the Pipedream middleman.
+</Note>
+
+## Connect the integration
+
+Connecting your FullEnrich account to Relevance AI is a straightforward process:
+
+1. Go to the "Integrations" page in the sidebar of your Relevance AI dashboard.
+2. Click on "FullEnrich" from the available integrations.
+3. Click on the "Add Integration" button.
+4. Enter your FullEnrich API key when prompted.
+5. Once authenticated, your FullEnrich account will appear as a connected integration.
+
+<Tip>
+  You can find your FullEnrich API key in your FullEnrich account settings under API Keys. If you don't have a FullEnrich account yet, you can sign up at fullenrich.com.
+</Tip>
+
+<Info>
+  If you don't yet see FullEnrich in your workspace, it may still be rolling out behind a feature flag. Contact our [support team](/get-started/support) if you need access sooner.
+</Info>
+
+## Tool steps for FullEnrich
+
+The FullEnrich integration provides five native actions that your agents can use to enrich contacts, manage credits, and run enrichment jobs. These actions can be incorporated into your agent's workflows as tool steps.
+
+### Contact enrichment
+<CardGroup cols={2}>
+  <Card title="Enrich contacts" icon="user-plus">
+    Enrich B2B contacts with verified email addresses and phone numbers using FullEnrich's waterfall across 20+ data providers
+  </Card>
+</CardGroup>
+
+### Account & authentication
+<CardGroup cols={2}>
+  <Card title="Check credit balance" icon="coins">
+    Check the remaining FullEnrich credits available on the connected account
+  </Card>
+  <Card title="Verify API key" icon="key">
+    Validate that the connected FullEnrich API key is active and working
+  </Card>
+</CardGroup>
+
+### Enrichment jobs
+<CardGroup cols={2}>
+  <Card title="Start enrichment job" icon="play">
+    Submit a contact enrichment job for asynchronous processing
+  </Card>
+  <Card title="Retrieve enrichment results" icon="download">
+    Fetch the results of a previously started enrichment job
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "FullEnrich" in the tool step search bar to see all available actions when building your tools.
+</Tip>
+
+## Example use cases
+
+Here are some ways you can use the FullEnrich integration with your agents:
+
+<AccordionGroup>
+  <Accordion title="Outbound prospect enrichment" icon="user-plus">
+    Create an agent that takes a list of prospect names, company domains, or LinkedIn URLs and enriches each contact with a verified work email and phone number, ready for your sales engagement platform. The waterfall approach means FullEnrich checks 20+ data providers in sequence, giving you higher find rates than single-provider tools.
+  </Accordion>
+
+  <Accordion title="CRM data completion" icon="database">
+    Build an agent that connects to Salesforce or HubSpot, identifies contacts with missing email addresses or phone numbers, and runs them through FullEnrich to fill the gaps before your sales team starts outreach. This avoids bounce rates and wasted time on incomplete records.
+  </Accordion>
+
+  <Accordion title="Lead qualification workflows" icon="filter">
+    Deploy an agent that enriches inbound leads as they arrive — before routing them to SDRs or AEs. By ensuring each lead has verified contact details, you reduce time spent on uncontactable prospects.
+  </Accordion>
+
+  <Accordion title="Batch enrichment pipelines" icon="layer-group">
+    For larger prospect lists, use the Start enrichment job and Retrieve enrichment results steps together. Submit a batch job for async processing, then retrieve results once complete. This avoids timeouts that would occur with synchronous requests on large datasets.
+  </Accordion>
+
+  <Accordion title="International prospecting" icon="globe">
+    Use FullEnrich when your prospecting spans multiple regions. The platform provides coverage across the US, Canada, EMEA, LATAM, and APAC, making it suitable for global outbound campaigns rather than regional-only tools.
+  </Accordion>
+
+  <Accordion title="Credit-aware enrichment agents" icon="coins">
+    Build an agent that checks the credit balance before starting a large enrichment job. If credits are too low, the agent can pause, notify the team, or trigger a partial run — preventing failed jobs mid-batch.
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Respect privacy and outreach laws" icon="shield-check">
+    Always comply with GDPR, CCPA, and other applicable data privacy regulations when using enriched contact data. FullEnrich finds contact information through its provider network, but you are responsible for how you use that data in outreach — including providing opt-out mechanisms and respecting do-not-contact lists. Review FullEnrich's terms of service and your own regional obligations before running enrichment at scale.
+  </Accordion>
+
+  <Accordion title="Validate enrichment data before outreach" icon="star">
+    Enriched contact data can change over time. Add an email verification step before sending campaigns to avoid bounces and protect your sender reputation. Build your agent to flag records where enrichment returned low-confidence results rather than treating all output as equally reliable.
+  </Accordion>
+
+  <Accordion title="Check credits before large jobs" icon="coins">
+    Before starting a batch enrichment job, use the Check credit balance step to verify you have enough credits. Running out mid-job produces partial results with no straightforward way to resume from where you left off. Checking first lets your agent make an informed decision about whether to proceed, split the job, or wait.
+  </Accordion>
+
+  <Accordion title="Use async jobs for larger runs" icon="play">
+    For enriching more than a handful of contacts at a time, use the Start enrichment job step rather than the synchronous Enrich contacts step. Async jobs are built for scale and don't risk timing out, whereas synchronous enrichment is better suited for single-record or small-batch lookups within an agent's flow.
+  </Accordion>
+
+  <Accordion title="Handle no-match cases gracefully" icon="circle-exclamation">
+    Not every contact will have data available across FullEnrich's provider network. Build fallback logic into your agent — flag unmatched contacts for manual review rather than silently dropping them from your pipeline. Knowing your match rate also helps you estimate credit spend for future jobs.
+  </Accordion>
+
+  <Accordion title="Store enriched contact data securely" icon="lock">
+    Enriched contact data (email addresses, phone numbers) is personal information. Store it in systems with appropriate access controls, limit who can export it, and only retain it for as long as your legitimate purpose requires.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What is FullEnrich?">
+    FullEnrich is a B2B contact enrichment platform that finds verified email addresses and phone numbers for business contacts. Rather than relying on a single data provider, it uses a waterfall approach across 20+ premium sources to maximize find rates. It is particularly useful for outbound sales teams that need contact data across multiple geographies including the US, Canada, EMEA, LATAM, and APAC.
+  </Accordion>
+
+  <Accordion title="Do I need a FullEnrich account?">
+    Yes, you need an active FullEnrich account with an API key to use this integration. You can sign up at fullenrich.com. Once you have an account, generate an API key from your account settings and use it to connect FullEnrich to Relevance AI.
+  </Accordion>
+
+  <Accordion title="How do I get my API key?">
+    Log in to your FullEnrich account and navigate to your account settings. Look for an API Keys section, generate a new key if you don't have one, and copy it. Paste that key into the Add Integration prompt in Relevance AI. Keep your API key secure and do not share it publicly.
+  </Accordion>
+
+  <Accordion title="What data does FullEnrich return?">
+    FullEnrich returns verified email addresses and direct phone numbers for B2B contacts. The waterfall approach means it queries multiple data providers in sequence and returns the best available match. Not every contact will have both email and phone — coverage depends on what the provider network has indexed for that individual.
+  </Accordion>
+
+  <Accordion title="Why would I use Start enrichment job vs Enrich contacts?">
+    Enrich contacts is a synchronous step suited for single-record or small-batch lookups within a running agent flow. Start enrichment job submits a batch for async processing, which is better for larger lists where a synchronous request would time out. After starting a job, use Retrieve enrichment results later (in a separate agent run or scheduled check) to fetch the completed output.
+  </Accordion>
+
+  <Accordion title="How do I check my remaining credits?">
+    Add the Check credit balance step to your tool or agent. It connects to your FullEnrich account and returns the current credit count. You can use this as a conditional check before a large enrichment job — if credits fall below a threshold, branch the agent to notify your team instead of proceeding.
+  </Accordion>
+
+  <Accordion title="What happens if no match is found?">
+    When FullEnrich cannot find data for a contact across its provider network, the enrichment step returns an empty or null result for that record. Your agent should handle this case explicitly — for example, by writing the contact to a "no match" list for manual follow-up rather than treating it as a successful enrichment with blank fields.
+  </Accordion>
+
+  <Accordion title="Is this different from the old Pipedream integration?">
+    Yes. The previous approach required Pipedream as a middleware layer to connect FullEnrich actions to Relevance AI. This native integration removes that dependency entirely — you connect your FullEnrich API key directly in Relevance AI and use the five built-in tool steps without any Pipedream account or workflow. If you have existing Pipedream-based FullEnrich workflows, you can migrate them to use this integration instead.
+  </Accordion>
+
+  <Accordion title="Why can't I see FullEnrich in my workspace yet?">
+    The FullEnrich integration may still be rolling out behind a feature flag in some workspaces. If it doesn't appear in your Integrations page, [contact our support team](/get-started/support) to request early access.
+  </Accordion>
+</AccordionGroup>
