@@ -13,8 +13,8 @@ Organization and project-level API keys are an Enterprise feature. Enterprise su
   If you set an API key at the organization level, any projects in this organization will use this API key _unless_ an API key is added at the project level.
 </Note>
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cme10kddt06vfg56jwgh7p747" frameBorder="0" title="How to set organization level API keys" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cme10kddt06vfg56jwgh7p747" frameBorder="0" title="How to set organization level API keys" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 1. First, click 'Settings' in the sidebar of Relevance AI
@@ -30,8 +30,8 @@ Organization and project-level API keys are an Enterprise feature. Enterprise su
   If you set an API key at the project level, **_this will override the organization level API key_**.
 </Note>
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cme10ovod072vg56j4cucbap4" frameBorder="0" title="How to set project level API keys" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cme10ovod072vg56j4cucbap4" frameBorder="0" title="How to set project level API keys" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 1. First, navigate to your project in Relevance AI and click 'Integrations & API Keys'
@@ -67,6 +67,20 @@ Important security points:
 - **Automatic redaction**: Custom API Keys are protected from accidental exposure in logs and outputs
 - **Shared access risk**: Any builder in the project can use Custom API Keys to access external systems with the permissions granted to those credentials
 - **Project membership matters**: Carefully consider who has builder access to projects containing sensitive API credentials
+
+---
+
+## Member self-service API keys
+
+On enterprise plans, users with the **Member** role can create and manage their own personal Relevance API keys. This lets Members set up programmatic access independently, without needing an administrator to provision credentials.
+
+<Note>
+Members can only create and manage API keys for their own account. They cannot manage API keys for other users, or set organization- or project-level integration keys.
+</Note>
+
+The primary use case is connecting MCP clients to Relevance AI. A Member who needs to configure a client like Claude Desktop, Cursor, or VS Code can generate their own API key without waiting for admin intervention.
+
+For more on generating Relevance API keys, see [API integration](/get-started/core-concepts/api-integration#relevance-api-key).
 
 ---
 
