@@ -1,0 +1,63 @@
+---
+title: 'Tool Library'
+description: 'Browse, search, and filter existing tools in your project to discover cloneable tools, embeddable tools, and tools that may benefit from migration to native integrations.'
+---
+
+The Tool Library is a browsable catalog of all tools in your project. Use it to discover existing tools, find ones you can clone or embed, and identify tools that contain legacy integration steps that could be migrated to newer native alternatives.
+
+## Accessing the Tool Library
+
+You can open the Tool Library from several places in the product:
+
+- **Agent settings** — when adding tools to an agent, click **+ Add tool** to open the library.
+- **Tool builder** — browse existing tools before starting a new one.
+- **Tools page** — the main tools listing in the left-hand menu.
+
+## Searching for tools
+
+The search bar at the top of the Tool Library lets you find tools by name or description. As you type, the list narrows to matching results. Search is case-insensitive and matches partial strings, so searching "slack" will surface any tool with "slack" in the name or description.
+
+## Filtering your tools
+
+The Tool Library includes filter options to help you narrow down which tools are shown. Select one filter at a time — with no filter active, all tools in the project are shown.
+
+- **Cloneable tools** — shows tools that have been made cloneable. Cloneable tools can be copied into another project, which is useful for sharing templates across teams or reusing tools in a new context.
+- **Embeddable tools** — shows tools that have been made embeddable. Embeddable tools can be surfaced in external interfaces, such as a widget or custom UI, outside of Relevance AI.
+- **Contains legacy tool-steps** — shows tools that include older Pipedream-based integration steps where a native replacement is now available. See [Legacy tool-steps](#legacy-tool-steps) below for details.
+
+## Legacy tool-steps
+
+Legacy tool-steps are integration steps that were built on top of Pipedream. Relevance AI now provides native integrations for many of these services, which are built and maintained directly by the platform and offer improved reliability and performance.
+
+The **Contains legacy tool-steps** filter surfaces any tool marked as containing at least one of these older steps. This gives you a clear starting point for auditing your tools and planning migration to native alternatives.
+
+<Tip>
+Bookmark the filtered URL or share it with teammates to give your team a quick view of tools that need attention.
+</Tip>
+
+### Why migrate legacy steps?
+
+Native integration steps offer several advantages over their Pipedream-based counterparts:
+
+- More reliable execution with fewer external dependencies
+- Closer integration with agent triggers and tool configuration
+- Ongoing support and updates from the Relevance AI team
+
+### How to migrate
+
+1. Use the **Contains legacy tool-steps** filter to identify affected tools.
+2. Open each tool and locate the steps flagged as legacy.
+3. Replace each legacy step with the equivalent native tool step from the **+ Add step** menu.
+4. Test the tool to confirm behavior is unchanged.
+
+For a full overview of the difference between native and Pipedream integrations, see [Integrations](/integrations/introduction).
+
+## URL bookmarking
+
+Applying a filter updates the page URL with a query parameter, for example:
+
+- `?filter=containsLegacy`
+- `?filter=cloneable`
+- `?filter=embeddable`
+
+You can bookmark these URLs or share them with team members to jump directly to a filtered view — useful when coordinating a migration effort or reviewing a specific subset of tools.
