@@ -324,14 +324,14 @@ div#content-side-layout {
 }
 
 /* In-page Tabs — pill-style buttons, centered, distinct active state */
-[data-component-part="tabs-list"] {
+.path-picker [data-component-part="tabs-list"] {
   justify-content: center;
   gap: 0.5rem;
   border-bottom: none !important;
   padding: 0.5rem 0 1rem;
 }
 
-[data-component-part="tab-button"] {
+.path-picker [data-component-part="tab-button"] {
   padding: 0.5rem 1.25rem !important;
   border-radius: 0.625rem !important;
   border-bottom: none !important;
@@ -343,13 +343,13 @@ div#content-side-layout {
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
-[data-component-part="tab-button"]:hover {
+.path-picker [data-component-part="tab-button"]:hover {
   background-color: #ffffff;
   color: rgba(17, 24, 39, 0.95);
   box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1);
 }
 
-[data-component-part="tab-button"][data-active="true"] {
+.path-picker [data-component-part="tab-button"][data-active="true"] {
   background: linear-gradient(135deg, #4F46E5, #6366F1) !important;
   color: #ffffff !important;
   box-shadow:
@@ -357,19 +357,19 @@ div#content-side-layout {
     0 4px 12px rgba(79, 70, 229, 0.35);
 }
 
-.dark [data-component-part="tab-button"] {
+.dark .path-picker [data-component-part="tab-button"] {
   background-color: rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.dark [data-component-part="tab-button"]:hover {
+.dark .path-picker [data-component-part="tab-button"]:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
 }
 
-.dark [data-component-part="tab-button"][data-active="true"] {
+.dark .path-picker [data-component-part="tab-button"][data-active="true"] {
   background: linear-gradient(135deg, #6366F1, #818CF8) !important;
   color: #ffffff !important;
   box-shadow:
