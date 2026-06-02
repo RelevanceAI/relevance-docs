@@ -23,8 +23,14 @@ main > div {
   padding-right: 1.5rem;
 }
 
+/* Let changelog pages use the full viewport so the sidebar doesn't get
+   pushed inward by the 1400px centering rule above. */
+body:has(.mdx-content[data-page-title^="Changelog"]) main > div {
+  max-width: 100%;
+}
+
 /* Pull left sidebar slightly away from edge */
-div#sidebar {
+#sidebar {
   left: 2.5rem !important;
   padding-left: 0.5rem !important;
 }
@@ -39,7 +45,7 @@ div#content-side-layout {
 
 /* Prevent content from extending under the fixed right sidebar (only when sidebar is visible) */
 @media (min-width: 1280px) {
-  div#content-area {
+  body:has(div#content-side-layout) div#content-area {
     /* Matches the width of the right sidebar */
     padding-right: 20rem !important;
   }
@@ -59,6 +65,238 @@ div#content-side-layout {
   justify-content: center !important;
   width: 100% !important;
 }
+
+/* =========================================================
+   Changelog visual styling — timeline + dividers + accents
+   Scoped to pages whose data-page-title starts with "Changelog"
+   (main page + /changelog/2025, /2024, /2023 archives)
+   ========================================================= */
+
+@media (min-width: 1024px) {
+  /* Each entry sits to the right of the indigo rail. No background, no
+     border — just space in the left margin for the rail and dot. */
+  .mdx-content[data-page-title^="Changelog"] .update-container {
+    position: relative;
+    margin-left: 3rem;
+  }
+
+  /* Continuous indigo vertical line in the margin to the left of each card.
+     Each segment exactly matches its card's height — adjacent cards touch
+     edge to edge so the segments meet without overlapping (no double-opacity
+     bands) and without gaps. */
+  .mdx-content[data-page-title^="Changelog"] .update-container::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: rgba(79, 70, 229, 0.35);
+    z-index: 1;
+  }
+
+  .dark .mdx-content[data-page-title^="Changelog"] .update-container::before {
+    background-color: rgba(129, 140, 248, 0.45);
+  }
+
+  /* Top fade-in: 12px gradient above the first entry. Anchored to the content
+     wrapper rather than `.update-container:first-child` because Mintlify prod
+     can wrap the entries differently and the :first-child match drops out. */
+  .mdx-content[data-page-title^="Changelog"]::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: -12px;
+    width: 2px;
+    height: 12px;
+    background: linear-gradient(
+      to bottom,
+      rgba(79, 70, 229, 0) 0,
+      rgba(79, 70, 229, 0.35) 12px
+    );
+    z-index: 1;
+  }
+
+  .dark .mdx-content[data-page-title^="Changelog"]::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(129, 140, 248, 0) 0,
+      rgba(129, 140, 248, 0.45) 12px
+    );
+  }
+
+  /* Indigo dot sitting on the line, vertically centered with the date label.
+     Math: update-container has py-8 (2rem top padding), date label is text-sm
+     (~28px tall with py-1). Center of label is ~2rem + 14px from container top.
+     Dot is 12px, so its top is (2rem + 14px - 6px) ≈ 2.5rem.
+     pointer-events: none so it never intercepts hover/clicks. */
+  .mdx-content[data-page-title^="Changelog"] .update-container::after {
+    content: '';
+    position: absolute;
+    left: calc(-1.5rem - 5px);
+    top: 2.5rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 9999px;
+    background-color: #4F46E5;
+    box-shadow: 0 0 0 4px #ffffff;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .dark .mdx-content[data-page-title^="Changelog"] .update-container::after {
+    box-shadow: 0 0 0 4px rgb(15, 23, 42);
+  }
+
+  /* Push Mintlify's anchor-link button further to the left so it doesn't
+     sit under the dot. Default is -ml-10 (-2.5rem); we shift to -3.75rem
+     so the button's right edge clears the dot with breathing room. */
+  .mdx-content[data-page-title^="Changelog"] .update-container > div:first-child a[href^="#"] {
+    margin-left: -3.75rem !important;
+  }
+}
+
+/* Hero image polish — rounded + soft shadow */
+.mdx-content[data-page-title^="Changelog"] [data-component-part="update-content"] img {
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 18px -4px rgba(15, 23, 42, 0.12);
+}
+
+.dark .mdx-content[data-page-title^="Changelog"] [data-component-part="update-content"] img {
+  box-shadow: 0 4px 18px -4px rgba(0, 0, 0, 0.55);
+}
+
+/* Shrink body text inside accordions on changelog pages so the secondary
+   "Fixes / Improvements / Extras" content reads as supporting info, not
+   as loud as the main entry body. */
+.mdx-content[data-page-title^="Changelog"] .accordion ul,
+.mdx-content[data-page-title^="Changelog"] .accordion li,
+.mdx-content[data-page-title^="Changelog"] .accordion p {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+/* Also shrink the accordion title (the summary row) so it matches the
+   supporting-info weight of the body inside. */
+.mdx-content[data-page-title^="Changelog"] .accordion > summary,
+.mdx-content[data-page-title^="Changelog"] .accordion > summary * {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Category chip — same class everywhere ⇒ same colour, always.
+   Keep the chip baseline-aligned with surrounding text. */
+.mdx-content[data-page-title^="Changelog"] .cl-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.05rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-right: 0.35rem;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+/* Small leading dot inside the chip, matching the screenshot. */
+.mdx-content[data-page-title^="Changelog"] .cl-tag::before {
+  content: '';
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0.85;
+}
+
+/* Per-tag palette. Same tag class everywhere = same colour. */
+.mdx-content[data-page-title^="Changelog"] .cl-tag-permissions { background: #ede9fe; color: #5b21b6; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-permissions { background: rgba(139, 92, 246, 0.18); color: #c4b5fd; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-mcp { background: #dbeafe; color: #1e40af; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-mcp { background: rgba(59, 130, 246, 0.18); color: #93c5fd; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-agent-chat { background: #ffedd5; color: #9a3412; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-agent-chat { background: rgba(249, 115, 22, 0.20); color: #fdba74; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-triggers { background: #dcfce7; color: #166534; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-triggers { background: rgba(34, 197, 94, 0.18); color: #86efac; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-tools { background: #ccfbf1; color: #115e59; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-tools { background: rgba(20, 184, 166, 0.18); color: #5eead4; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-api { background: #e0e7ff; color: #3730a3; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-api { background: rgba(99, 102, 241, 0.18); color: #a5b4fc; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-cli { background: #f3f4f6; color: #374151; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-cli { background: rgba(156, 163, 175, 0.18); color: #d1d5db; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-knowledge { background: #fef3c7; color: #92400e; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-knowledge { background: rgba(245, 158, 11, 0.20); color: #fcd34d; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-workforce { background: #fce7f3; color: #9d174d; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-workforce { background: rgba(236, 72, 153, 0.18); color: #f9a8d4; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-mobile { background: #cffafe; color: #155e75; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-mobile { background: rgba(6, 182, 212, 0.18); color: #67e8f9; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-tasks { background: #d1fae5; color: #047857; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-tasks { background: rgba(16, 185, 129, 0.18); color: #6ee7b7; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-evals { background: #f3e8ff; color: #7e22ce; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-evals { background: rgba(168, 85, 247, 0.18); color: #d8b4fe; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-teams { background: #dbeafe; color: #1e3a8a; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-teams { background: rgba(37, 99, 235, 0.18); color: #93c5fd; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-inventor { background: #fae8ff; color: #a21caf; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-inventor { background: rgba(217, 70, 239, 0.18); color: #f0abfc; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-builder { background: #e5e7eb; color: #3f3f46; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-builder { background: rgba(113, 113, 122, 0.22); color: #d4d4d8; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-integrations { background: #e0f2fe; color: #075985; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-integrations { background: rgba(14, 165, 233, 0.20); color: #7dd3fc; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-filesystem { background: #f5f5f4; color: #44403c; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-filesystem { background: rgba(120, 113, 108, 0.22); color: #d6d3d1; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-slides { background: #fee2e2; color: #b91c1c; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-slides { background: rgba(239, 68, 68, 0.18); color: #fca5a5; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-agents { background: #ffe4e6; color: #9f1239; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-agents { background: rgba(244, 63, 94, 0.18); color: #fda4af; }
+
+.mdx-content[data-page-title^="Changelog"] .cl-tag-onboarding { background: #ecfccb; color: #4d7c0f; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-tag-onboarding { background: rgba(132, 204, 22, 0.18); color: #bef264; }
+
+/* Availability chip — sits next to the entry heading to flag rollout gates
+   ("Beta", "Enterprise", "Internal"). Slightly bolder than the inline-bullet
+   surface chips so it reads as a status, not a category. */
+.mdx-content[data-page-title^="Changelog"] .cl-availability {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-left: 0.55rem;
+  vertical-align: middle;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.mdx-content[data-page-title^="Changelog"] .cl-availability-beta { background: #ffedd5; color: #9a3412; border: 1px solid #fdba74; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-availability-beta { background: rgba(249, 115, 22, 0.18); color: #fdba74; border-color: rgba(249, 115, 22, 0.40); }
+
+.mdx-content[data-page-title^="Changelog"] .cl-availability-enterprise { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-availability-enterprise { background: rgba(139, 92, 246, 0.18); color: #c4b5fd; border-color: rgba(139, 92, 246, 0.40); }
+
+.mdx-content[data-page-title^="Changelog"] .cl-availability-internal { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+.dark .mdx-content[data-page-title^="Changelog"] .cl-availability-internal { background: rgba(239, 68, 68, 0.18); color: #fca5a5; border-color: rgba(239, 68, 68, 0.40); }
 
 /* Path-picker wrapper — frames the Tabs as one controlled unit */
 .path-picker {
