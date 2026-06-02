@@ -38,47 +38,44 @@ A health Agent takes an account and returns a score, the reasoning behind it, an
     A health score with cited signals, a short summary of the risk picture, and a recommended outreach action.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Written back to the CRM as a field plus a note, posted in Slack for at-risk accounts, surfaced in a CSM digest.
+    Written back to the CRM as a field plus a note, posted in [Slack](/integrations/popular-integrations/slack) for at-risk accounts, surfaced in a CSM digest.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone a CS Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A CSM drops an account in before a check-in.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Customer Success Manager](https://marketplace.relevanceai.com/listing/b9b5e05c-4512-4749-8f66-4623ab895e21)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your CSMs can use on day one:
 
 - *"How is Acme Corp doing right now? Usage, tickets, last contact, anything I should worry about?"*
 - *"Which 5 accounts in my book look highest-risk for Q1 renewal?"*
 - *"Compare Globex's engagement this quarter vs. last — what changed?"*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same scoring pattern repeats, codify it:
+Once it's running, deepen it in three moves:
 
-- Define your scoring framework in the [prompt](/build/agents/build-your-agent/prompt) — what counts as a signal, how to weight, when to flag
-- Upload your CS playbook, segmentation rules, and churn post-mortems to [Knowledge](/build/knowledge/create-knowledge)
-- Run on a backfill of last quarter's accounts via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to validate the scoring matches what you saw happen
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- Every Monday → CSM digest of book-of-business health drops in Slack
-- Usage drops more than 30% week-over-week → account re-scored, CSM alerted with context
-- 90 days before renewal → automated health re-evaluation triggers a renewal-prep workflow
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which signals actually predicted cancellation in your historical data. Drops weight on noisy signals, increases it on predictive ones, evolves the scoring framework based on outcomes — not your team's intuition from two years ago.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that scores every account weekly across usage, tickets, and deal-stage, writes the result to HubSpot, and alerts CSMs in Slack on red accounts."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your CS playbook in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Pipe churn outcomes back into the Agent's [evals](/build/agents/build-your-agent/evals) so scoring tracks what predicted cancellation.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

@@ -8,21 +8,21 @@ Support teams are buried in repetitive volume that's faster to answer than to es
 
 ## Start with a Marketplace template
 
-The Marketplace ships pre-built Agents you can clone in one click. Adapt them to your products, your tone of voice, your escalation rules.
+The Marketplace ships pre-built Agents you can clone in one click. Adapt them to your products, your tone of voice, your escalation rules. Or [build a custom Agent from scratch](/build/introduction).
 
 <CardGroup cols={3}>
-  <Card title="Lead Enricher" icon="database" href="https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b">
-    Keep customer records current — useful for context when a ticket lands.
+  <Card title="Customer Query Handler" icon="message" href="https://marketplace.relevanceai.com/listing/5dc6f8ea-a087-4f7f-a053-5870d9292891">
+    Answers customer questions from your knowledge base — useful for first-response drafts and self-serve flows.
   </Card>
-  <Card title="LinkedIn Outreach" icon="linkedin" href="https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4">
-    Reach customers proactively when their account signals warrant outreach beyond the ticket.
+  <Card title="Customer Support Categorization" icon="tags" href="https://marketplace.relevanceai.com/listing/bffa15a4-5d7c-4408-82a0-6a09fa3d02a9">
+    Classifies tickets into billing / technical / account / feature / bug and assigns P1–P4 priority on the way in.
   </Card>
   <Card title="Browse the Marketplace" icon="store" href="/get-started/marketplace/introduction">
     The full catalog of Agents — ticket triage, response drafting, KB management, escalation routing.
   </Card>
 </CardGroup>
 
-Click **Clone to my workspace** on any listing, connect your support tools (Zendesk / Intercom / Salesforce Service Cloud), and run on a real ticket.
+Click **Clone Agent** on any listing, connect your support tools (Zendesk / Intercom / Salesforce Service Cloud), and run on a real ticket.
 
 ## Pick your path
 
@@ -31,15 +31,11 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 <div className="path-picker">
 <Tabs>
 <Tab title="No build" id="no-build">
-  <Info>
-    You're on the **no-build path**. Switch tabs above if you'd rather build visually or drive everything from your editor.
-  </Info>
-
-  You don't need to touch the builder. Open the cloned Agent above in chat, ask in plain English, and let it work across the systems it's connected to.
+  You don't need to touch the builder. Open the cloned Agent above, ask in plain English, and let it work across the systems it's connected to.
 
   ## Sharpen the answers with knowledge
 
-  Upload your support playbook, tone-of-voice doc, escalation rules, and knowledge base articles. Every conversation references them — same chat, sharper output.
+  Upload your support playbook, tone-of-voice doc, escalation rules, and knowledge base articles. Every conversation references them — sharper output, no new setup.
 
   <Card title="Add knowledge" icon="book" href="/build/knowledge/create-knowledge">
     Upload context once. Every conversation references it.
@@ -55,26 +51,22 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 
   ## Ready to go further?
 
-  When chat and templates stop being enough — when you want the Agent to follow your playbook word for word and orchestrate triage across channels — pick the **Build visually** tab above.
+  When prompting and templates stop being enough — when you want the Agent to follow your playbook word for word and orchestrate triage across channels — pick the **Build visually** tab above.
 </Tab>
 
 <Tab title="Build visually" id="build-visually">
-  <Info>
-    You're on the **visual-build path**. Switch tabs above for the no-build option, or to graduate to driving Agents from your editor.
-  </Info>
-
   You're comfortable in product UIs. You don't want to wire up an Agent from scratch, but you do want it to follow your support playbook ticket by ticket. Open the cloned Agent in the builder and shape every piece.
 
   ## Connect the tools it needs
 
   Support Agents work best when they can read from and write to the systems your team already uses.
 
-  - **Ticketing** — Zendesk, Intercom, or Salesforce Service Cloud for tickets and case history
+  - **Ticketing** — [Zendesk](/integrations/popular-integrations/zendesk), Intercom, or Salesforce Service Cloud for tickets and case history
   - **Knowledge base** — your KB system for citation-grounded responses
   - **CRM** — [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) for customer context
   - **Comms** — [Gmail](/integrations/popular-integrations/gmail), [Slack](/integrations/popular-integrations/slack) for follow-up and internal escalation
 
-  Full list at [Integrations](/integrations/introduction).
+  See more about [Integrations](/integrations/introduction).
 
   ## Shape every surface
 
@@ -103,7 +95,7 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 
   ## Chain Agents into a workforce
 
-  When a single Agent isn't enough — triage, then draft, then update the CRM, then notify the team — wire them on the workforce canvas.
+  When a single Agent isn't enough — triage, then draft, then update the CRM, then notify the team — wire them on the Workforce canvas.
 
   <Card title="Build a workforce" icon="diagram-project" href="/build/workforces/create-a-workforce">
     Drag, connect, and run multi-Agent pipelines without code.
@@ -123,10 +115,6 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 </Tab>
 
 <Tab title="Build with AI" id="build-with-ai">
-  <Info>
-    You're on the **build-with-AI path**. Switch tabs above if you'd rather work in product UIs or skip building entirely.
-  </Info>
-
   You already work in an AI coding environment. Clicking through a UI to edit response templates feels slow. Have your AI assistant build, shape, and orchestrate Agents directly from your editor.
 
   ## Programmatic GTM
@@ -147,13 +135,6 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
       The full reference for what you can do programmatically.
     </Card>
   </CardGroup>
-
-  ## Drop into code when you need to
-
-  Programmatic GTM covers the building. Two escape hatches for when canned Tool steps fall short:
-
-  - **Custom Python and JS code blocks** live inside Tools. Parse a custom ticket payload, apply business logic to routing, transform support data — drop a code block in and write the logic directly.
-  - **The JS SDK** lets you call Agents and Tools from your own Node.js app. Useful when embedding into a custom support dashboard or building a ticketing webhook handler.
 </Tab>
 </Tabs>
 </div>
@@ -166,14 +147,14 @@ How the [autonomy ladder](/use-cases/guides) plays out across the support queue:
   <Card title="L1 — Assisted" icon="hand">
     An agent opens a ticket and asks the Agent to summarize the customer's history and suggest a reply — the Agent returns context with a draft response.
   </Card>
-  <Card title="L2 — Copilot" icon="map" href="/build/agents/give-your-agent-tasks/approval-mode">
+  <Card title="L2 — Copilot" icon="map">
     An agent reviews a batch of new tickets — the Agent has already drafted replies and triage suggestions, the agent approves and sends.
   </Card>
-  <Card title="L3 — Autopilot" icon="bolt" href="/build/workforces/create-a-workforce">
+  <Card title="L3 — Autopilot" icon="bolt">
     A new ticket lands → triaged, tagged, routed, first-reply drafted and auto-sent on simple cases, all without an agent touching the queue.
   </Card>
   <Card title="L4 — Self-driving" icon="infinity">
-    "Reduce time-to-first-response by 30%" — the Agent learns which ticket patterns get fastest resolution, evolves its triage and draft templates against CSAT outcomes.
+    You set the objective — "cut time-to-first-response" — and the Workforce triages, drafts, and routes, with its triage and template criteria tuned through evals as CSAT outcomes flow back.
   </Card>
 </CardGroup>
 
@@ -195,7 +176,7 @@ Each motion below is a working entry point — clone a template, then run it, sh
 
 ## See it in production
 
-<Frame caption="Behind the scenes of Canva's AI agent strategy.">
+<Frame caption="Behind the scenes of Canva's AI Agent strategy.">
   <iframe
     className="w-full aspect-video rounded-xl"
     src="https://www.youtube.com/embed/GJ40ZmqdcW4"

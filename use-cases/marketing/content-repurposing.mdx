@@ -4,7 +4,7 @@ sidebarTitle: "Content & repurposing"
 description: "Turn one piece of content into many — blog posts, social snippets, ad copy, email teasers — without losing the source voice."
 ---
 
-Every long-form asset is supposed to become a quarter's worth of derivative content. In practice, the blog goes up, the webinar drops, and the LinkedIn posts never get written. A content Agent does the derivative work — fast, on-brand, in the formats each channel needs.
+Every long-form asset is supposed to become a quarter's worth of derivative content. In practice, the blog goes up, the webinar drops, and the LinkedIn posts never get written. A content Agent turns one source asset into channel-specific drafts — pulling your brand voice and past top-performers from knowledge, then queuing each derivative for review before it ships.
 
 ## When this pays off
 
@@ -38,47 +38,44 @@ A content Agent takes a source asset + target formats and returns ready-to-publi
     A bundle of derivatives — blog posts, LinkedIn carousels, X threads, email teasers, ad copy variations — each tuned to its channel.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Posted to Notion or a content doc for review, drafted into your scheduler (Buffer / Hootsuite), pushed to ad platforms via integration.
+    Posted to [Notion](/integrations/popular-integrations/notion) or a content doc for review, drafted into your scheduler (Buffer / Hootsuite), pushed to ad platforms via integration.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone a content Agent from the [Marketplace](/get-started/marketplace/introduction) and open it in chat. Drop the source asset; ask for the derivatives you need.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Simple Content Repurposer](https://marketplace.relevanceai.com/listing/870991de-99fd-4453-83bf-084c872e7cb2)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your team can use on day one:
 
 - *"Turn this blog post into 5 LinkedIn posts, 3 X threads, and a teaser email. Match our voice — direct, no hype."*
 - *"Pull the 4 strongest quotes from this webinar transcript and write them as standalone social posts."*
 - *"Take this product launch one-pager and give me 10 ad headline variations for paid social."*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same asset → derivative pattern repeats, codify it:
+Once it's running, deepen it in three moves:
 
-- Define the channels and target formats you always derive into via the [prompt](/build/agents/build-your-agent/prompt)
-- Upload channel-specific style guides, top-performing post archives, and brand voice docs to [Knowledge](/build/knowledge/create-knowledge)
-- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to process a backlog of long-form content in one pass
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- A new blog post is published → derivatives generate and post to a Notion review board
-- A webinar recording lands in Drive → transcript pulled, clips and follow-up email drafted
-- A campaign launches in HubSpot → ad copy variations drop into your ad platform queue
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent tracks which derivative formats actually performed per channel — which post types drove engagement, which headlines pulled clicks. It drops formats that don't earn attention and doubles down on what does.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that turns every new blog post into 5 LinkedIn posts, 3 X threads, and a teaser email, and posts them to a Notion review board."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your brand voice in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed channel engagement back into the Agent's [evals](/build/agents/build-your-agent/evals) so it leans on what performed.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

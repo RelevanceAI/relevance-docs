@@ -32,7 +32,7 @@ An enrichment Agent takes a partial CRM record and fills in missing fields.
     Existing CRM record (contact or account) with partial data.
   </Card>
   <Card title="Sources" icon="globe">
-    Web search, LinkedIn, third-party data vendors, your own CRM history.
+    Web search, [LinkedIn](/integrations/popular-integrations/linkedin), third-party data vendors, your own CRM history.
   </Card>
   <Card title="Output" icon="file-lines">
     Filled-in fields — firmographics, contact details, tech stack, social profiles — with source attribution.
@@ -42,45 +42,40 @@ An enrichment Agent takes a partial CRM record and fills in missing fields.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone the [Lead Enricher](https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b) from the Marketplace and open it in chat. A rep drops an account in and asks for the missing fields before a call.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[Elli, the Enrichment Agent](https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your reps can use on day one:
 
 - *"Enrich Acme Corp — fill in industry, employee count, and any recent news."*
 - *"Find the head of RevOps at Initech and add them as a contact in HubSpot."*
 - *"What tech stack is Globex running? Web search and check LinkedIn."*
 
-See the [Marketplace](/get-started/marketplace/introduction) for the full catalog.
+## Where to take it
 
-### L2 — Give it a playbook
+Once it's running, deepen it in three moves:
 
-Shape the cloned Agent so every run produces the same clean output:
-
-- Define exactly which fields to enrich and in what format (e.g. employee count as a range, not a number) via the [prompt](/build/agents/build-your-agent/prompt)
-- Connect [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) for read and write
-- Document your enrichment rules in [Knowledge](/build/knowledge/create-knowledge) — what counts as authoritative, when to preserve human input, how to attribute sources
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- New record created → enriched within minutes, fields populated, sources logged
-- Existing record marked stale (no update in 90 days) → re-enriched in batch via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule)
-- Enrichment feeds into a Workforce that enriches → scores → routes leads automatically
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which fields actually drive downstream routing and segmentation accuracy. It stops enriching fields nobody uses and surfaces new fields that predict win rates. Your CRM schema evolves with what actually matters, not what someone added in 2023.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that enriches every new HubSpot contact with firmographics and tech stack data, then writes it back to the record."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), a connected [CRM](/integrations/popular-integrations/hubspot) for read/write, and rules in [Knowledge](/build/knowledge/create-knowledge).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Tune it through [evals](/build/agents/build-your-agent/evals) so it maintains the fields your team actually uses.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

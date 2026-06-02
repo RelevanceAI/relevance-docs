@@ -38,47 +38,44 @@ A lifecycle Agent takes a segment + trigger and returns a multi-step email seque
     A drafted sequence — subject lines, body copy, send timing, CTA per step — ready for review.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Drafted into HubSpot or Marketo for review, written to a doc for marketing approval, queued in your ESP.
+    Drafted into [HubSpot](/integrations/popular-integrations/hubspot) or [Marketo](/integrations/popular-integrations/marketo) for review, written to a doc for marketing approval, queued in your ESP.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone a Marketing Agent from the [Marketplace](/get-started/marketplace/introduction) and open it in chat. Drop in the segment and trigger; ask for the sequence.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Email Marketing Strategist](https://marketplace.relevanceai.com/listing/28783038-03f0-4aec-9c76-4b28452b6e33)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your team can use on day one:
 
 - *"Draft a 4-step welcome series for new free-trial users in HubSpot — friendly tone, focus on activating the dashboard feature."*
 - *"Write a re-engagement sequence for trial users who haven't logged in for 30 days."*
 - *"Give me a 3-touch renewal sequence for accounts in the 90-day renewal window."*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same campaign shape repeats, codify it so every sequence sounds like your team:
+Once it's running, deepen it in three moves:
 
-- Refine the [prompt](/build/agents/build-your-agent/prompt) for sequence structure, length, and tone
-- Upload brand voice docs, top-performing past campaigns, and persona definitions to [Knowledge](/build/knowledge/create-knowledge)
-- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to draft campaigns across multiple segments at once
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- A new MQL enters HubSpot → onboarding sequence drafts and queues for marketing review
-- A trial nears day 14 without conversion → re-engagement sequence drafts automatically
-- A renewal date hits 90 days out → renewal-prep sequence is generated, the rep is notified
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent A/B tests subject lines, body length, send timing, and CTA placement against opens, clicks, and conversion. It evolves its own playbook based on what actually drives revenue, not your last instinct.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that drafts a 4-step welcome sequence whenever a new MQL lands in HubSpot and posts the draft to #marketing-review."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your brand voice in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed opens, clicks, and conversion back into the Agent's [evals](/build/agents/build-your-agent/evals) so drafts track what converts.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

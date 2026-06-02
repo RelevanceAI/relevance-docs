@@ -38,49 +38,44 @@ A competitive intelligence Agent monitors a defined competitor set and surfaces 
     Updated battle cards, product comparison summaries, weekly digests.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Posted to Slack, written to your wiki or Notion, attached to deal records when a competitor shows up.
+    Posted to [Slack](/integrations/popular-integrations/slack), written to your wiki or [Notion](/integrations/popular-integrations/notion), attached to deal records when a competitor shows up.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-[Build a competitive intel Agent](/build/introduction) and open it in chat. A rep asks during a deal where a competitor surfaces.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Sales Battlecard Creator](https://marketplace.relevanceai.com/listing/ca29a93b-cca6-4238-95d0-84159c692241)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your reps can use on day one:
 
 - *"What did Acme Corp announce last quarter? They came up on a call this morning."*
 - *"Pull a quick comparison of our pricing vs. Globex for an exec on this deal."*
 - *"Summarize where we stand against Initech for a renewal conversation tomorrow."*
 
-See the [Marketplace](/get-started/marketplace/introduction) for related Agents to adapt.
+## Where to take it
 
-### L2 — Give it a playbook
+Once it's running, deepen it in three moves:
 
-Codify the patterns into the Agent so the same signals surface every time:
-
-- Refine the [prompt](/build/agents/build-your-agent/prompt) to track your top 5–10 competitors and define what counts as a signal vs noise
-- Upload existing battle cards, positioning docs, and win/loss notes into [Knowledge](/build/knowledge/create-knowledge) so the Agent builds on what you already have
-- Add web search and [Firecrawl](/build/tools/tool-steps/firecrawl) for crawling competitor sites and news
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- Weekly scan → digest posted to Slack every Monday morning
-- A competitor is mentioned in a deal note → the relevant battle card resurfaces to the rep
-- A competitor ships a product launch → battle card auto-updated and the team alerted
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which competitor signals actually predicted lost deals and weights monitoring accordingly. It stops alerting on noise nobody acts on, and surfaces only changes that should shift your positioning.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"set up an agent that scans our top competitors weekly and posts a digest to #gtm-intel in Slack."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), [Knowledge](/build/knowledge/create-knowledge), and [Firecrawl](/build/tools/tool-steps/firecrawl) for competitor sites.
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed win/loss notes back into the Agent's [evals](/build/agents/build-your-agent/evals) so it tracks the signals that matter.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

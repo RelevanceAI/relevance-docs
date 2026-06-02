@@ -8,21 +8,21 @@ RevOps owns the systems that everyone else depends on. Data hygiene, routing rul
 
 ## Start with a Marketplace template
 
-The Marketplace ships pre-built Agents you can clone in one click. Adapt them to your CRM, your segmentation, your pipeline definitions.
+The Marketplace ships pre-built Agents you can clone in one click. Adapt them to your CRM, your segmentation, your pipeline definitions. Or [build a custom Agent from scratch](/build/introduction).
 
 <CardGroup cols={3}>
-  <Card title="Lead Enricher" icon="database" href="https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b">
-    Fill in firmographics and contact details on every record — the foundation for everything else RevOps does.
+  <Card title="Elli, the Enrichment Agent" icon="database" href="https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b">
+    Fills in firmographics, contact details, and job-function classification on every record — the foundation for everything else.
   </Card>
-  <Card title="Sales Researcher" icon="magnifying-glass" href="https://marketplace.relevanceai.com/listing/4b454347-0656-4fee-9c15-8fb2f2713424">
-    Deep account research for pipeline review prep and territory planning.
+  <Card title="Lia, the LinkedIn Lead Researcher & Qualifier" icon="user-magnifying-glass" href="https://marketplace.relevanceai.com/listing/ba230945-e61a-4fb0-8c47-7e240f18456d">
+    Takes a LinkedIn profile or CRM record, researches the company, and returns a qualification read you can wire into routing.
   </Card>
   <Card title="Browse the Marketplace" icon="store" href="/get-started/marketplace/introduction">
     The full catalog of Agents — enrichment, routing, forecasting, data hygiene.
   </Card>
 </CardGroup>
 
-Click **Clone to my workspace** on any listing, connect your CRM and data sources, and run on real records.
+Click **Clone Agent** on any listing, connect your CRM and data sources, and run on real records.
 
 ## Pick your path
 
@@ -31,15 +31,11 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 <div className="path-picker">
 <Tabs>
 <Tab title="No build" id="no-build">
-  <Info>
-    You're on the **no-build path**. Switch tabs above if you'd rather build visually or drive everything from your editor.
-  </Info>
-
-  You don't need to touch the builder. Open the cloned Agent above in chat, ask in plain English, and let it work across the systems it's connected to.
+  You don't need to touch the builder. Open the cloned Agent above, ask in plain English, and let it work across the systems it's connected to.
 
   ## Sharpen the answers with knowledge
 
-  Upload your ICP definitions, segmentation rules, routing logic, and pipeline definitions. Every conversation references them — same chat, sharper output.
+  Upload your ICP definitions, segmentation rules, routing logic, and pipeline definitions. Every conversation references them — sharper output, no new setup.
 
   <Card title="Add knowledge" icon="book" href="/build/knowledge/create-knowledge">
     Upload context once. Every conversation references it.
@@ -55,14 +51,10 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 
   ## Ready to go further?
 
-  When chat and templates stop being enough — when you want the Agent to enforce your routing rules across the whole pipeline and orchestrate cross-system workflows — pick the **Build visually** tab above.
+  When prompting and templates stop being enough — when you want the Agent to enforce your routing rules across the whole pipeline and orchestrate cross-system workflows — pick the **Build visually** tab above.
 </Tab>
 
 <Tab title="Build visually" id="build-visually">
-  <Info>
-    You're on the **visual-build path**. Switch tabs above for the no-build option, or to graduate to driving Agents from your editor.
-  </Info>
-
   You're comfortable in product UIs. You don't want to wire up an Agent from scratch, but you do want it to enforce your routing logic record by record. Open the cloned Agent in the builder and shape every piece.
 
   ## Connect the tools it needs
@@ -70,11 +62,11 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
   RevOps Agents work best when they can read from and write to the systems your team already uses.
 
   - **CRM** — [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) — the system of record
-  - **Data sources** — [Apollo](/integrations/popular-integrations/apollo), ZoomInfo, web search for enrichment
+  - **Data sources** — [Apollo](/integrations/popular-integrations/apollo), [ZoomInfo](/integrations/popular-integrations/zoominfo), web search for enrichment
   - **BI / analytics** — [Google Sheets](/integrations/popular-integrations/google-sheets) or your warehouse for pipeline reporting
   - **Comms** — [Slack](/integrations/popular-integrations/slack), [Gmail](/integrations/popular-integrations/gmail) for alerts and ops notifications
 
-  Full list at [Integrations](/integrations/introduction).
+  See more about [Integrations](/integrations/introduction).
 
   ## Shape every surface
 
@@ -103,7 +95,7 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 
   ## Chain Agents into a workforce
 
-  When a single Agent isn't enough — enrich, then score, then route, then notify — wire them together on the workforce canvas.
+  When a single Agent isn't enough — enrich, then score, then route, then notify — wire them together on the Workforce canvas.
 
   <Card title="Build a workforce" icon="diagram-project" href="/build/workforces/create-a-workforce">
     Drag, connect, and run multi-Agent pipelines without code.
@@ -123,10 +115,6 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 </Tab>
 
 <Tab title="Build with AI" id="build-with-ai">
-  <Info>
-    You're on the **build-with-AI path**. Switch tabs above if you'd rather work in product UIs or skip building entirely.
-  </Info>
-
   You already work in an AI coding environment. Clicking through a UI to edit routing rules feels slow. Have your AI assistant build, shape, and orchestrate Agents directly from your editor.
 
   ## Programmatic GTM
@@ -147,13 +135,6 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
       The full reference for what you can do programmatically.
     </Card>
   </CardGroup>
-
-  ## Drop into code when you need to
-
-  Programmatic GTM covers the building. Two escape hatches for when canned Tool steps fall short:
-
-  - **Custom Python and JS code blocks** live inside Tools. Parse a custom dedup heuristic, apply business logic to routing edge cases, transform pipeline data — drop a code block in and write the logic directly.
-  - **The JS SDK** lets you call Agents and Tools from your own Node.js app. Useful when wiring up a CDP webhook, embedding into a custom RevOps dashboard, or integrating with your data warehouse pipeline.
 </Tab>
 </Tabs>
 </div>
@@ -166,14 +147,14 @@ How the [autonomy ladder](/use-cases/guides) plays out across your pipeline:
   <Card title="L1 — Assisted" icon="hand">
     A RevOps analyst asks the Agent which accounts in the new MQL batch look like a fit for the enterprise team — the Agent returns a list with reasoning.
   </Card>
-  <Card title="L2 — Copilot" icon="map" href="/build/agents/give-your-agent-tasks/approval-mode">
+  <Card title="L2 — Copilot" icon="map">
     A RevOps analyst asks the Agent to dedupe a list of 1,200 imported leads — the Agent flags clusters with merge recommendations, the analyst approves the merges.
   </Card>
-  <Card title="L3 — Autopilot" icon="bolt" href="/build/workforces/create-a-workforce">
+  <Card title="L3 — Autopilot" icon="bolt">
     A new lead enters the CRM → enriched, scored, routed to the right rep, posted to Slack, all without anyone touching it.
   </Card>
   <Card title="L4 — Self-driving" icon="infinity">
-    "Improve forecast accuracy by 20%" — the Agent learns which deal signals actually predicted close vs. slip, weighs them, and surfaces a sharpening forecast over time.
+    You set the objective — "improve forecast accuracy" — and the Workforce enriches, scores, and routes, with its deal-signal criteria tuned through evals as close-vs-slip outcomes flow back.
   </Card>
 </CardGroup>
 

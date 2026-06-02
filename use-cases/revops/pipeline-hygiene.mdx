@@ -4,7 +4,7 @@ sidebarTitle: "Pipeline hygiene"
 description: "Spot stalled deals, missing fields, and at-risk forecast slippage before pipeline review."
 ---
 
-The Monday pipeline review depends on data that's only as fresh as the rep updated it on Friday — which is to say, not very. A pipeline Agent reads the whole pipeline state, flags what's stalled, what's missing, what's likely to slip, and writes the gaps back so the review actually starts with reality.
+The Monday pipeline review depends on data that's only as fresh as the rep updated it on Friday — which is to say, not very. A pipeline Agent reads the whole pipeline state, flags what's stalled, what's missing, what's likely to slip, and surfaces the gaps so the review actually starts with reality.
 
 ## When this pays off
 
@@ -38,47 +38,44 @@ A pipeline Agent takes a pipeline snapshot and returns a structured analysis wit
     A pipeline brief — stalled deals, missing critical fields, slippage risk per deal, forecast vs. commit gap with reasoning.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Posted to Slack ahead of pipeline review, written to a Notion ops doc, surfaced as deal-level alerts to AEs.
+    Posted to [Slack](/integrations/popular-integrations/slack) ahead of pipeline review, written to a [Notion](/integrations/popular-integrations/notion) ops doc, surfaced as deal-level alerts to AEs.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone a RevOps Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A RevOps analyst asks before pipeline review.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Deal Health Analyst](https://marketplace.relevanceai.com/listing/5ecd3c3f-73ba-4f08-877c-bb68dde05387)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your team can use on day one:
 
 - *"What deals look at-risk for Q3? Pull stalled deals, missing close dates, and weak MEDDICC scores."*
 - *"Compare this week's commit vs. last quarter's commit-vs-close at the same point in the cycle — are we tracking?"*
 - *"Which 10 deals should the team focus on this week to hit number?"*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same pipeline analysis repeats, codify it:
+Once it's running, deepen it in three moves:
 
-- Define what "stalled," "at-risk," and "slipping" mean in the [prompt](/build/agents/build-your-agent/prompt)
-- Upload your sales methodology, historical close-rate benchmarks, and deal-stage definitions to [Knowledge](/build/knowledge/create-knowledge)
-- Configure the Agent's tools to query the CRM consistently for every run
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- Sunday 8pm → pipeline-review prep doc drops in the RevOps Slack ahead of Monday's meeting
-- A deal hits "stalled" criteria → the AE gets a notification with the missing fields and a suggested action
-- A deal moves stages → automatic MEDDICC field validation, posted to the deal channel
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which "at-risk" signals actually predicted slippage last quarter. Stops alerting on signals that were noise; tightens criteria that caught real risks. The forecast model sharpens against actual outcomes.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that scans HubSpot pipeline every Sunday night, flags stalled / missing-field / at-risk deals, and posts a pipeline-review prep doc to #revops."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your methodology in [Knowledge](/build/knowledge/create-knowledge), and [Tools](/build/agents/build-your-agent/tools) to query the CRM.
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which at-risk signals predicted slippage into the Agent's [evals](/build/agents/build-your-agent/evals) so flagging sharpens.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

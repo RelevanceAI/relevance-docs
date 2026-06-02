@@ -8,21 +8,21 @@ CSMs are stretched across too many accounts. AI Agents take the watchful work �
 
 ## Start with a Marketplace template
 
-The Marketplace ships pre-built Agents you can clone in one click. Adapt them to your segments, your renewal cadence, your playbook.
+The Marketplace ships pre-built Agents you can clone in one click. Adapt them to your segments, your renewal cadence, your playbook. Or [build a custom Agent from scratch](/build/introduction).
 
 <CardGroup cols={3}>
-  <Card title="Lead Enricher" icon="database" href="https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b">
-    Keep account records current — firmographics, contacts, recent changes — without manual lookup.
+  <Card title="Atlas, the Account Analyst" icon="magnifying-glass-chart" href="https://marketplace.relevanceai.com/listing/678c9cf9-9b64-467a-8c51-e2d3db409fb1">
+    In-depth research on an account, producing a structured report — useful before QBRs and renewal conversations.
   </Card>
-  <Card title="LinkedIn Outreach" icon="linkedin" href="https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4">
-    Reach champions and economic buyers for renewal and expansion conversations.
+  <Card title="Apla, the Account Planning Agent" icon="clipboard-list" href="https://marketplace.relevanceai.com/listing/fd712abc-66e4-4507-8f16-c4404cf5f5e5">
+    Researches an account and writes the plan back to your CRM — handy for expansion across the book.
   </Card>
   <Card title="Browse the Marketplace" icon="store" href="/get-started/marketplace/introduction">
     The full catalog of Agents — health scoring, renewals, QBR prep, customer comms.
   </Card>
 </CardGroup>
 
-Click **Clone to my workspace** on any listing, connect the systems it needs (CRM, support, product analytics), and run it on a real account.
+Click **Clone Agent** on any listing, connect the systems it needs (CRM, support, product analytics), and run it on a real account.
 
 ## Pick your path
 
@@ -31,15 +31,11 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 <div className="path-picker">
 <Tabs>
 <Tab title="No build" id="no-build">
-  <Info>
-    You're on the **no-build path**. Switch tabs above if you'd rather build visually or drive everything from your editor.
-  </Info>
-
-  You don't need to touch the builder. Open the cloned Agent above in chat, ask in plain English, and let it work across the systems it's connected to.
+  You don't need to touch the builder. Open the cloned Agent above, ask in plain English, and let it work across the systems it's connected to.
 
   ## Sharpen the answers with knowledge
 
-  Upload your CS playbooks, segmentation rules, renewal motion docs, and product positioning. Every conversation references them — same chat, sharper output.
+  Upload your CS playbooks, segmentation rules, renewal motion docs, and product positioning. Every conversation references them — sharper output, no new setup.
 
   <Card title="Add knowledge" icon="book" href="/build/knowledge/create-knowledge">
     Upload context once. Every conversation references it.
@@ -55,14 +51,10 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 
   ## Ready to go further?
 
-  When chat and templates stop being enough — when you want the Agent to follow your team's playbook word for word and orchestrate cross-system signal monitoring — pick the **Build visually** tab above.
+  When prompting and templates stop being enough — when you want the Agent to follow your team's playbook word for word and orchestrate cross-system signal monitoring — pick the **Build visually** tab above.
 </Tab>
 
 <Tab title="Build visually" id="build-visually">
-  <Info>
-    You're on the **visual-build path**. Switch tabs above for the no-build option, or to graduate to driving Agents from your editor.
-  </Info>
-
   You're comfortable in product UIs. You don't want to wire up an Agent from scratch, but you do want it to follow your CS playbook account by account. Open the cloned Agent in the builder and shape every piece.
 
   ## Connect the tools it needs
@@ -70,11 +62,11 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
   CS Agents work best when they can read from and write to the systems your team already uses.
 
   - **CRM** — [HubSpot](/integrations/popular-integrations/hubspot) or [Salesforce](/integrations/popular-integrations/salesforce) for account data, deal stage, and renewal timing
-  - **Support** — Zendesk or Intercom for ticket activity and CSAT
+  - **Support** — [Zendesk](/integrations/popular-integrations/zendesk) or Intercom for ticket activity and CSAT
   - **Product analytics** — your usage data source for engagement signals
   - **Comms** — [Gmail](/integrations/popular-integrations/gmail), [Slack](/integrations/popular-integrations/slack) for outreach and internal alerts
 
-  Full list at [Integrations](/integrations/introduction).
+  See more about [Integrations](/integrations/introduction).
 
   ## Shape every surface
 
@@ -103,7 +95,7 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 
   ## Chain Agents into a workforce
 
-  When a single Agent isn't enough — score health, then draft outreach, then schedule, then log to the CRM — wire them together on the workforce canvas.
+  When a single Agent isn't enough — score health, then draft outreach, then schedule, then log to the CRM — wire them together on the Workforce canvas.
 
   <Card title="Build a workforce" icon="diagram-project" href="/build/workforces/create-a-workforce">
     Drag, connect, and run multi-Agent pipelines without code.
@@ -123,10 +115,6 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
 </Tab>
 
 <Tab title="Build with AI" id="build-with-ai">
-  <Info>
-    You're on the **build-with-AI path**. Switch tabs above if you'd rather work in product UIs or skip building entirely.
-  </Info>
-
   You already work in an AI coding environment. Clicking through a UI to edit health-scoring rules feels slow. Have your AI assistant build, shape, and orchestrate Agents directly from your editor.
 
   ## Programmatic GTM
@@ -147,13 +135,6 @@ How hands-on do you want to be? Pick a tab — the rest of the page is written f
       The full reference for what you can do programmatically.
     </Card>
   </CardGroup>
-
-  ## Drop into code when you need to
-
-  Programmatic GTM covers the building. Two escape hatches for when canned Tool steps fall short:
-
-  - **Custom Python and JS code blocks** live inside Tools. Parse a weird product-analytics export, apply business logic to health scoring, transform support data — drop a code block in and write the logic directly.
-  - **The JS SDK** lets you call Agents and Tools from your own Node.js app. Useful when embedding into a CS dashboard or wiring up a webhook from your product to your CSM workflow.
 </Tab>
 </Tabs>
 </div>
@@ -166,14 +147,14 @@ How the [autonomy ladder](/use-cases/guides) plays out across your book of busin
   <Card title="L1 — Assisted" icon="hand">
     A CSM asks the Agent to summarize Acme's last quarter before a check-in — the Agent returns a snapshot with usage, tickets, and any deal-stage shifts.
   </Card>
-  <Card title="L2 — Copilot" icon="map" href="/build/agents/give-your-agent-tasks/approval-mode">
+  <Card title="L2 — Copilot" icon="map">
     A CSM asks for renewal plans across 12 accounts — the Agent drafts each plan, the CSM reviews and queues outreach.
   </Card>
-  <Card title="L3 — Autopilot" icon="bolt" href="/build/workforces/create-a-workforce">
+  <Card title="L3 — Autopilot" icon="bolt">
     Product usage drops on a key account → health score updates → the CSM is alerted with a draft outreach plan, all without anyone touching a dashboard.
   </Card>
   <Card title="L4 — Self-driving" icon="infinity">
-    "Reduce gross churn by 10%" — the Agent learns which signals actually predicted cancellation, weighs them more heavily, and proposes new outreach plays based on what's been saving accounts.
+    You set the objective — "reduce gross churn" — and the Workforce scores health, drafts outreach, and logs to the CRM, with its risk-signal criteria tuned through evals as churn outcomes flow back.
   </Card>
 </CardGroup>
 

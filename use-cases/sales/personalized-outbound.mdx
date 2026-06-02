@@ -1,10 +1,10 @@
 ---
 title: "Personalized outbound"
 sidebarTitle: "Personalized outbound"
-description: "Draft tailored emails and LinkedIn messages at scale so personalization stops being a tax on volume."
+description: "Draft tailored emails and LinkedIn messages from real prospect context, then queue them for the rep to approve and send."
 ---
 
-Generic outreach gets ignored. Hand-crafted messages get replies — but they don't scale to a list of 500 prospects. An outbound Agent uses real prospect context to draft personalized messages at the volume your pipeline needs.
+Generic outreach gets ignored. Hand-crafted messages get replies — but they don't scale to a list of 500 prospects. An outbound Agent reads each prospect's CRM and LinkedIn context, drafts a personalized message, and queues it for rep approval.
 
 ## When this pays off
 
@@ -32,7 +32,7 @@ An outbound Agent takes a prospect and produces a message ready to send.
     Prospect name, company, role, recent activity, CRM history.
   </Card>
   <Card title="Sources" icon="globe">
-    CRM, LinkedIn, web and news, your messaging playbooks, ICP and persona docs.
+    CRM, [LinkedIn](/integrations/popular-integrations/linkedin), web and news, your messaging playbooks, ICP and persona docs.
   </Card>
   <Card title="Output" icon="file-lines">
     A drafted email or LinkedIn message tuned to that prospect, in your team's voice.
@@ -42,45 +42,40 @@ An outbound Agent takes a prospect and produces a message ready to send.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone [LinkedIn Outreach](https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4) from the Marketplace and open it in chat. Drop a prospect in, ask for a message, edit, send.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[LinkedIn Outreach & Follow up](https://marketplace.relevanceai.com/listing/5508c7f6-f3a7-4593-8faf-22fbecc4e0d4)** — or **[Outbound Composer](https://marketplace.relevanceai.com/listing/42f2cab0-71d6-41ca-b71e-fbaa55dfc53a)** for multi-variant email. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your reps can use on day one:
 
 - *"Draft a LinkedIn DM to Sarah at Initech — she just got promoted to VP of Sales last month."*
 - *"Write a follow-up email to Acme Corp referencing our last call notes in HubSpot."*
 - *"Give me three subject line options for a re-engagement email to dormant trial users."*
 
-See the [Marketplace](/get-started/marketplace/introduction) for the full catalog.
+## Where to take it
 
-### L2 — Give it a playbook
+Once it's running, deepen it in three moves:
 
-When ad-hoc chat starts to feel slow, shape the Agent so every draft sounds like your team without re-explaining the rules each time:
-
-- Adapt the [prompt](/build/agents/build-your-agent/prompt) to your tone and value props
-- Upload messaging playbooks, email templates, and tone-of-voice guides to [Knowledge](/build/knowledge/create-knowledge)
-- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to draft outreach for an entire prospect list in one pass
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow that fires automatically. Common triggers:
-
-- A new lead enters HubSpot → first-touch email drafted and queued for rep approval
-- A LinkedIn connection is accepted → follow-up DM drafted automatically
-- A prospect engages with content → re-engagement sequence drafts itself
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
-
-### L4 — Let it tune itself
-
-The Agent A/B tests subject lines, opening hooks, CTAs, and follow-up timing against reply rates and meetings booked. It evolves its own playbook based on what actually converts for your team, not your last guess.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that drafts personalized first-touch emails for new HubSpot leads and queues them for rep approval."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed reply and meeting rates back into the Agent's [evals](/build/agents/build-your-agent/evals) so drafts work from what converts.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

@@ -32,53 +32,50 @@ A campaign analytics Agent takes a time window + campaign set and returns a repo
     Time window, campaign set (specific campaigns or all), channels to include, segmentation cuts.
   </Card>
   <Card title="Sources" icon="globe">
-    Marketing automation (HubSpot, Marketo), ad platforms (Google, Meta, LinkedIn), web analytics, CRM, your own benchmark docs.
+    Marketing automation ([HubSpot](/integrations/popular-integrations/hubspot), [Marketo](/integrations/popular-integrations/marketo)), ad platforms (Google, Meta, [LinkedIn](/integrations/popular-integrations/linkedin)), web analytics, CRM, your own benchmark docs.
   </Card>
   <Card title="Output" icon="file-lines">
     A digest — top performers, underperformers, key shifts vs. last period, suggested actions — with cited data and reasoning.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Posted to Slack, written to a Notion page for the team review, emailed to the CMO Friday morning.
+    Posted to [Slack](/integrations/popular-integrations/slack), written to a [Notion](/integrations/popular-integrations/notion) page for the team review, emailed to the CMO Friday morning.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone an analytics Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. Ask the question you'd otherwise dig through dashboards to answer.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Email Marketing Strategist](https://marketplace.relevanceai.com/listing/28783038-03f0-4aec-9c76-4b28452b6e33)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your team can use on day one:
 
 - *"Pull last week's campaign performance from HubSpot and Google Ads — top 3 winners, top 3 losers, with reasons."*
 - *"Compare the Q3 onboarding sequence against Q2 — what shifted in open and click rates?"*
 - *"Which channels drove qualified pipeline last month? Cite the data."*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same report repeats, codify the format and sources:
+Once it's running, deepen it in three moves:
 
-- Define the report structure in the [prompt](/build/agents/build-your-agent/prompt) — sections, metrics, cuts
-- Upload benchmark docs, KPI definitions, and channel attribution rules to [Knowledge](/build/knowledge/create-knowledge)
-- Configure the Agent's [Tools](/build/agents/build-your-agent/tools) to query each platform consistently
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- Every Monday 7am → weekly digest drops into the marketing Slack channel
-- A campaign ends → post-mortem report is generated and emailed to the campaign owner
-- A KPI crosses a threshold (CTR drop, CAC spike) → alert + diagnostic report fires
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which metrics actually predicted campaign success in your historical data. It stops surfacing vanity metrics that don't correlate with pipeline, weights the ones that do, and proposes new segmentation cuts based on what's been predictive.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that pulls Monday-morning campaign performance from HubSpot, Google Ads, and LinkedIn, and posts a digest with reasoning to #marketing-weekly."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), KPI definitions in [Knowledge](/build/knowledge/create-knowledge), and [Tools](/build/agents/build-your-agent/tools) to query each platform.
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Weight the Agent's [evals](/build/agents/build-your-agent/evals) toward the metrics that actually predicted pipeline.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

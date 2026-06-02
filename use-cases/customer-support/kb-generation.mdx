@@ -38,47 +38,44 @@ A KB Agent takes a resolved ticket (or cluster of tickets) and returns a publish
     A drafted KB article — title, summary, steps, screenshots placeholders, related-articles links — ready for review.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Posted to your KB platform as a draft, dropped in Notion for review, queued in a "needs editor" workflow.
+    Posted to your KB platform as a draft, dropped in [Notion](/integrations/popular-integrations/notion) for review, queued in a "needs editor" workflow.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone a support Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A KB owner asks the Agent to surface gaps or draft an article from a specific ticket cluster.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[Tim, Technical Documentation Generator](https://marketplace.relevanceai.com/listing/214b9ba5-7e83-4c54-8494-dcaed6557aeb)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your team can use on day one:
 
 - *"Look at the last 50 resolved tickets in the 'billing' category — what 3 articles should we write that we don't have?"*
 - *"Turn this ticket into a KB article. Customer hit the SSO bug last week and we resolved with workaround X."*
 - *"What's the most common search query on our help site this month that has no matching article?"*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same article shape repeats, codify it:
+Once it's running, deepen it in three moves:
 
-- Define article structure, tone, and target length in the [prompt](/build/agents/build-your-agent/prompt)
-- Upload your KB style guide, existing top-performing articles, and category taxonomy to [Knowledge](/build/knowledge/create-knowledge)
-- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to draft articles from the last quarter of resolved tickets in one pass
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- A ticket resolves with high CSAT → if no matching KB article exists, the Agent drafts one and posts to the KB owner
-- Same issue resolved 5+ times in a quarter → Agent drafts a consolidated article and tags it for review
-- A new product feature ships → Agent reviews tickets mentioning the feature and proactively drafts FAQs
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which articles actually got read, searched, and deflected tickets. Drops formats that don't help self-serve users; doubles down on the shapes that do — your KB evolves toward what your customers actually need.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that watches resolved Zendesk tickets, finds patterns without KB coverage, and drafts new articles into Notion for review."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your style guide in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed read and deflection data back into the Agent's [evals](/build/agents/build-your-agent/evals) so it drafts the formats that help.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

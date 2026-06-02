@@ -38,47 +38,44 @@ An RFP Agent takes a question + opportunity context and returns a drafted answer
     A drafted answer with citations to source documents and a confidence indicator — high-confidence answers ready to send, low-confidence flagged for SE review.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Drafted into the response doc (Google Doc, Notion, Loopio export), posted in Slack for SE review on flagged answers.
+    Drafted into the response doc (Google Doc, [Notion](/integrations/popular-integrations/notion), Loopio export), posted in [Slack](/integrations/popular-integrations/slack) for SE review on flagged answers.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone an SE Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. An SE drops a question in and asks for a draft.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[AI RFP Response Generator](https://marketplace.relevanceai.com/listing/d1092947-1746-4df1-9596-255d13796a2c)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your SEs can use on day one:
 
 - *"What's our standard answer to 'describe your data residency options'? Cite past responses."*
 - *"This question is asking about SOC 2 controls around access. Pull the right answer and adapt it for an enterprise EU customer."*
 - *"Walk me through these 30 questions from Acme's questionnaire — flag the ones that need real SE attention."*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same questionnaire shape repeats, codify the answer logic:
+Once it's running, deepen it in three moves:
 
-- Define answer length, tone, hedging rules, and citation format in the [prompt](/build/agents/build-your-agent/prompt)
-- Upload your full prior-response archive, policy docs, and "answer this way" guidance to [Knowledge](/build/knowledge/create-knowledge)
-- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to process a long questionnaire all at once and flag uncertain answers
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- An RFP doc lands in the SE Slack channel → questions extracted, draft answers generated, SE reviews
-- A questionnaire imports into Loopio / Responsive → Agent populates first-pass answers
-- A new policy ships internally → Agent re-checks recent responses for now-stale answers and flags them
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which prior answers got accepted by customers vs. which got pushed back on. It promotes the better-performing phrasings, demotes the stale or weak ones, and surfaces gaps where no good prior answer exists.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that ingests RFP docs uploaded to a shared Drive folder, drafts answers using our prior-response archive, and posts the drafts for SE review."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your prior-response archive in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which answers customers accepted into the Agent's [evals](/build/agents/build-your-agent/evals) so it promotes the strong ones.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

@@ -38,49 +38,44 @@ A scoring Agent takes a lead record and returns a qualification assessment.
     A score with a reasoning summary — not just a number — plus a recommended action.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Written back to the CRM as a field, posted to Slack for hot leads, used to auto-route to the right rep.
+    Written back to the CRM as a field, posted to [Slack](/integrations/popular-integrations/slack) for hot leads, used to auto-route to the right rep.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-[Build a scoring Agent](/build/introduction) and open it in chat. A rep or AE drops a lead in and asks for a quick read before committing time.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[Lia, the LinkedIn Lead Researcher & Qualifier](https://marketplace.relevanceai.com/listing/ba230945-e61a-4fb0-8c47-7e240f18456d)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your reps can use on day one:
 
 - *"Score this lead — they came in from the pricing page yesterday. Is it worth a first call?"*
 - *"Why did we lose Globex last quarter, and is this new account similar?"*
 - *"Walk me through the top 10 new leads from this week and what to do with each."*
 
-See the [Marketplace](/get-started/marketplace/introduction) for related Agents to adapt.
+## Where to take it
 
-### L2 — Give it a playbook
+Once it's running, deepen it in three moves:
 
-Codify your qualification framework into the Agent so every score reflects your team's lens:
-
-- Upload your ICP, persona definitions, and disqualification rules to [Knowledge](/build/knowledge/create-knowledge)
-- Refine the [prompt](/build/agents/build-your-agent/prompt) to produce consistent fit and intent scores plus the reasoning behind each one
-- Run it on a backfill of existing leads via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to validate the scoring matches your team's intuition
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- New lead lands in the CRM → scored within seconds, written back to the record
-- Score crosses a threshold → routed to the right rep and posted to Slack
-- Lead is enriched or updated → re-evaluated against the new data
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The scoring model retrains on win/loss outcomes — your closed-won deals teach it what "qualified" actually means. ICP definitions shift based on what closed, not what someone wrote a year ago.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that scores new leads against our ICP and routes hot ones to the right rep in Slack."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your ICP in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to backfill.
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed closed-won and closed-lost outcomes back into the Agent's [evals](/build/agents/build-your-agent/evals) so "qualified" tracks what closes.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

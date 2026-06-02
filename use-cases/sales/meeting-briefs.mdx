@@ -38,49 +38,44 @@ A meeting brief Agent compiles a one-page snapshot of the account ahead of a sch
     A brief covering deal context, recent activity, company updates, and suggested talking points.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Emailed to the rep before the meeting, attached to the calendar event, or posted in Slack.
+    Emailed to the rep before the meeting, attached to the calendar event, or posted in [Slack](/integrations/popular-integrations/slack).
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-[Build a brief Agent](/build/introduction) and open it in chat. A rep asks right before a call.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Pre-Meeting Prepper](https://marketplace.relevanceai.com/listing/e2bc9eb0-6afd-4e24-b2ba-16160259981a)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your reps can use on day one:
 
 - *"What do I need to know about Acme Corp before my 3pm? Pull the last three emails and recent deal activity."*
 - *"Summarize where we are with Globex — last call notes, open objections, next steps."*
 - *"Who from Initech is on my calendar tomorrow and what should I prep on each of them?"*
 
-See the [Marketplace](/get-started/marketplace/introduction) for related pre-built Agents you can adapt.
+## Where to take it
 
-### L2 — Give it a playbook
+Once it's running, deepen it in three moves:
 
-Shape the Agent so every brief lands in the same format your reps already trust:
-
-- Define the brief format in the [prompt](/build/agents/build-your-agent/prompt) — length, sections, tone
-- Upload account templates, your sales methodology, and key questions per deal stage into [Knowledge](/build/knowledge/create-knowledge)
-- Connect CRM, email, and calendar so the brief draws on the full account picture
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- A calendar event is scheduled → brief generated 24 hours before, emailed to the rep
-- A deal moves to a key stage (e.g. proposal) → exec-style brief generated for leadership review
-- A support ticket opens on an account with an active deal → brief regenerated and sent to the AE
-
-See [Triggers](/build/agents/build-your-agent/triggers), [Google Calendar](/integrations/popular-integrations/google-calendar), and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The brief format adapts to what reps actually use vs skip — which sections they cite in calls, which they ignore. Per-rep style tuning emerges. Briefs get shorter where shorter works, deeper where deeper matters.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that generates a meeting brief from CRM and email 24 hours before every scheduled call and emails it to the rep."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), [Knowledge](/build/knowledge/create-knowledge), and a connected CRM, email, and [calendar](/integrations/popular-integrations/google-calendar).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which sections reps actually use into the Agent's [evals](/build/agents/build-your-agent/evals) so briefs sharpen over time.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

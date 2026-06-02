@@ -38,47 +38,44 @@ A routing Agent takes a new lead and returns an assignment decision with reasoni
     A routing decision (rep / team, reasoning, confidence), with flags for edge cases that need human review.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Applied directly in the CRM as owner, posted to Slack on edge cases for RevOps to confirm, logged with reasoning for audit.
+    Applied directly in the CRM as owner, posted to [Slack](/integrations/popular-integrations/slack) on edge cases for RevOps to confirm, logged with reasoning for audit.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone a RevOps Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A RevOps analyst asks before assigning a contested lead.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[CRM Agent](https://marketplace.relevanceai.com/listing/f3e18700-27e2-477d-8eaa-4c6fa04282bf)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your team can use on day one:
 
 - *"Where should this lead go? Acme Corp, contact at the German subsidiary, parent account owned by the US enterprise team."*
 - *"This batch of 50 leads imported from a trade show — apply our routing rules and tell me which ones need a human decision."*
 - *"Is this lead a re-engagement of an existing opportunity or a new prospect? Check parent-child and prior history."*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same routing logic repeats, codify it:
+Once it's running, deepen it in three moves:
 
-- Define routing rules + edge-case handling in the [prompt](/build/agents/build-your-agent/prompt)
-- Upload territory definitions, segmentation criteria, parent-child mappings, and "when in doubt" guidance to [Knowledge](/build/knowledge/create-knowledge)
-- Run on a backfill of last month's leads via [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to validate the routing matches your team's calls
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- A new lead lands in HubSpot → routed within 30 seconds, owner field set, edge cases flagged to RevOps
-- A rep's territory changes → re-routing of affected open leads
-- A parent-child relationship is detected → consolidation routing decision triggers
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which routing decisions held up vs. which got re-assigned. It tightens edge-case handling against real outcomes, surfaces routing rules that are creating disputes, and proposes rule refinements.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"build an agent that routes every new HubSpot lead in 30 seconds using our territory rules, escalates edge cases to a Slack channel, and logs every decision."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your territory rules in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which routing held up into the Agent's [evals](/build/agents/build-your-agent/evals) so edge-case handling tracks real outcomes.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 

@@ -32,39 +32,52 @@ A prospect research workflow takes a company name or contact and returns a struc
     Company domain, contact email, or CRM record.
   </Card>
   <Card title="Sources" icon="globe">
-    Web search, LinkedIn, news, your CRM, and any internal knowledge — ICP, personas, battle cards.
+    Web search, [LinkedIn](/integrations/popular-integrations/linkedin), news, your CRM, and any internal knowledge — ICP, personas, battle cards.
   </Card>
   <Card title="Output" icon="file-lines">
     A brief covering company overview, recent news, key contacts, likely pain points, and conversation hooks.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Pasted into chat, posted to Slack, written back to the CRM, or attached to a calendar event.
+    Returned inline, posted to [Slack](/integrations/popular-integrations/slack), written back to the CRM, or attached to a calendar event.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone the [Sales Researcher](https://marketplace.relevanceai.com/listing/4b454347-0656-4fee-9c15-8fb2f2713424) from the Marketplace and open it in chat. It uses your connected CRM, calendar, and web tools to pull the brief together on demand.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Sales Researcher](https://marketplace.relevanceai.com/listing/4b454347-0656-4fee-9c15-8fb2f2713424)** — or **[Lia](https://marketplace.relevanceai.com/listing/ba230945-e61a-4fb0-8c47-7e240f18456d)** for LinkedIn-first. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts your reps can use today:
+Either way, these are prompts your reps can use on day one:
 
 - *"Research Acme Corp ahead of my 2pm call. Pull recent news, the buyer's LinkedIn, and any open deals in HubSpot."*
 - *"Summarize the last three meetings with Globex and what's still open."*
 - *"Who at Initech should I be talking to if we're selling into RevOps?"*
 
-See the [Marketplace](/get-started/marketplace/introduction) for the full catalog.
+## Where to take it
 
-### L2 — Give it a playbook
+Once it's running, deepen it in three moves:
 
-When the same research pattern repeats, codify how the Agent works so every run applies the same lens:
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed won-deal signals back into the Agent's [evals](/build/agents/build-your-agent/evals) so it tracks what closes.
+  </Card>
+</CardGroup>
 
-- Refine the [prompt](/build/agents/build-your-agent/prompt) for the output structure your reps want
-- Upload ICP definitions, personas, and battle cards to [Knowledge](/build/knowledge/create-knowledge) so the brief reads through your team's lens
-- Use [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule) to research a list of accounts in one pass
-
-<Frame caption="Walkthrough — build an AI sales research agent that saves teams 15+ hours a week.">
+<Frame caption="Walkthrough — build an AI sales research agent that preps call-ready briefs from a name.">
   <iframe
     className="w-full aspect-video rounded-xl"
     src="https://www.youtube.com/embed/7X8Co6G7oo0"
@@ -72,24 +85,6 @@ When the same research pattern repeats, codify how the Agent works so every run 
     allowFullScreen
   ></iframe>
 </Frame>
-
-### L3 — Run it on pipeline signals
-
-Wrap the agent in a workflow that fires automatically. Common triggers:
-
-- A new lead enters the CRM → research runs, brief lands in Slack and on the CRM record
-- A meeting is booked → brief is generated 24 hours before and emailed to the rep
-- A deal moves to "Discovery" → research re-runs with deeper account context
-
-See [Triggers](/build/agents/build-your-agent/triggers) and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The research Agent tracks which brief sections reps actually cite in close-won deals, which sources matter for which segments, and adjusts depth and structure over time. Briefs sharpen against outcomes, not your gut.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that researches inbound leads and posts the brief to Slack."* See Programmatic GTM.
-</Card>
 
 ## Common pitfalls
 

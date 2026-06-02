@@ -38,47 +38,44 @@ A QBR Agent takes an account + time window and returns a structured review with 
     A draft QBR — usage summary, support summary, business outcomes, recommended next quarter, cited data — in your team's format.
   </Card>
   <Card title="Delivery" icon="paper-plane">
-    Posted to a Notion or Google Doc for the CSM to refine, emailed as a draft, dropped into a Slack thread for review.
+    Posted to a [Notion](/integrations/popular-integrations/notion) or Google Doc for the CSM to refine, emailed as a draft, dropped into a [Slack](/integrations/popular-integrations/slack) thread for review.
   </Card>
 </CardGroup>
 
-## Climb the ladder
+## Where to start
 
-### L1 — Ask the Agent in chat
+Two ways in, depending on whether you want something running today or built to your exact spec.
 
-Clone a CS Agent from the [Marketplace](/get-started/marketplace/introduction) — or [build one](/build/introduction) — and open it in chat. A CSM asks the night before a QBR.
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Customer Success Manager](https://marketplace.relevanceai.com/listing/b9b5e05c-4512-4749-8f66-4623ab895e21)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
 
-Example prompts:
+Either way, these are prompts your CSMs can use on day one:
 
 - *"Draft a QBR for Acme Corp covering last quarter — usage, support summary, business wins, recommended next steps."*
 - *"What did Globex achieve this year vs. their stated goals? Pull from CRM notes and product usage."*
 - *"Give me the operational summary slide for Initech's QBR — usage trends and support trend only."*
 
-### L2 — Give it a playbook
+## Where to take it
 
-When the same QBR shape repeats, codify the structure and tone:
+Once it's running, deepen it in three moves:
 
-- Define the QBR template in the [prompt](/build/agents/build-your-agent/prompt) — sections, slide order, target length, exec-friendly tone
-- Upload your QBR template, segment playbooks, and example exemplars to [Knowledge](/build/knowledge/create-knowledge)
-- Connect [CRM](/integrations/popular-integrations/hubspot), support, and product analytics so the Agent draws from the full picture
-
-### L3 — Run it on pipeline signals
-
-Wrap the Agent in a workflow:
-
-- 14 days before a QBR date → draft generated automatically, posted to a CSM Notion space
-- An exec QBR is on the calendar → exec-flavored version drafted and shared with the AE
-- A QBR completes → action items lifted and tracked back to the CRM
-
-See [Triggers](/build/agents/build-your-agent/triggers), [Google Calendar](/integrations/popular-integrations/google-calendar), and [Workforces](/build/workforces/create-a-workforce).
-
-### L4 — Let it tune itself
-
-The Agent learns which QBR sections actually got the customer to nod, which sections got skipped, which recommendations got actioned. The format adapts to what reps and customers actually engage with.
-
-<Card title="For technical teams" icon="terminal" href="/get-started/core-concepts/programmatic-gtm">
-  Already using Claude Code or Cursor? Build this motion with natural language — *"create an agent that generates a QBR doc from CRM + support + usage 14 days before every scheduled QBR meeting and posts it to Notion."* See Programmatic GTM.
-</Card>
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your QBR template in [Knowledge](/build/knowledge/create-knowledge), and a connected [CRM](/integrations/popular-integrations/hubspot), support, and analytics.
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which QBR sections landed into the Agent's [evals](/build/agents/build-your-agent/evals) so the format tracks what's used.
+  </Card>
+</CardGroup>
 
 ## Common pitfalls
 
