@@ -1,0 +1,70 @@
+---
+title: 'Filesystem sync triggers'
+description: 'Trigger an agent automatically when files are written to your project memory or personal files volume'
+sidebarTitle: 'Filesystem sync'
+---
+
+Filesystem sync triggers watch for file writes in your project's shared memory volume or your personal files volume, then automatically send the file's metadata and content to a designated agent. This lets you build agents that react to file activity without polling or manual input.
+
+## How it works
+
+When a file is written to a watched volume, the trigger fires and sends the following to your agent as a message:
+
+- File metadata (name, path, size, last modified time)
+- File content, up to 100KB for text files
+
+If the same file is written to multiple times, each subsequent write continues the same conversation thread rather than opening a new one. This keeps all activity for a single file in a coherent conversation history.
+
+## Setting up a filesystem sync trigger
+
+1. Navigate to your agent and click **Triggers** in the sidebar
+2. Click **Add trigger**
+3. Select **Filesystem sync** from the available options
+4. Choose the volume to watch:
+   - **Shared memory volume** — files stored in your project's shared memory, accessible to all project members
+   - **Personal files volume** — files stored in your own personal files area
+5. Optionally configure glob patterns to filter which files trigger the sync (see [Filtering files with glob patterns](#filtering-files-with-glob-patterns))
+6. Save the trigger
+
+## Filtering files with glob patterns
+
+By default, any file write to the watched volume triggers the sync. You can narrow this down using glob patterns.
+
+- **Include patterns** — only files matching these patterns trigger the sync (e.g., `**/*.pdf` to watch only PDF files)
+- **Exclude patterns** — files matching these patterns are ignored even if they also match an include pattern (e.g., `**/tmp/**` to skip temporary files)
+
+If both include and exclude patterns are configured, a file must match an include pattern and not match any exclude pattern to trigger the sync.
+
+<Accordion title="Glob pattern examples">
+| Pattern | Matches |
+| --- | --- |
+| `**/*.csv` | Any CSV file in any subfolder |
+| `reports/**` | All files inside a `reports/` directory |
+| `**/tmp/**` | Any file inside a `tmp/` directory |
+| `invoices/2025-*.pdf` | PDF files in `invoices/` whose names start with `2025-` |
+</Accordion>
+
+## Access controls
+
+- **Shared memory volume**: only file writes made by the user who created the sync trigger cause the sync to fire. Writes by other project members do not trigger it.
+- **Personal files volume**: only the owner of the personal files volume can create a sync on it, and only their own writes trigger the sync.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens when the same file is written to multiple times?">
+    Each write to the same file appends a new message to the existing conversation thread for that file. This keeps all activity related to a single file in one continuous thread rather than creating separate conversations.
+  </Accordion>
+  <Accordion title="Is there a file size limit?">
+    Text file content is sent to the agent up to 100KB per file write. Files larger than 100KB will have their content truncated; file metadata is always sent in full regardless of file size.
+  </Accordion>
+  <Accordion title="Can other team members' file writes trigger my sync?">
+    No. Only file writes made by the user who created the sync trigger cause it to fire, even when watching the shared memory volume.
+  </Accordion>
+  <Accordion title="Can I watch both volumes with a single trigger?">
+    No. Each filesystem sync trigger watches one volume. Create a separate trigger for each volume if you need to watch both.
+  </Accordion>
+  <Accordion title="Do glob patterns affect the exclude list independently?">
+    Yes. If you configure both include and exclude patterns, a file triggers the sync only when it matches at least one include pattern and does not match any exclude pattern. Exclude patterns always take precedence.
+  </Accordion>
+</AccordionGroup>
