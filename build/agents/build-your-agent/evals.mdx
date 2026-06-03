@@ -1,28 +1,28 @@
 ---
 title: 'Evals'
 sidebarTitle: 'Evals'
-description: 'Test and evaluate your AI Agents with scenario-based evaluations and reusable Checks'
+description: 'Test and evaluate your AI Agents with scenario-based evaluations and reusable checks'
 ---
 
 <Info>
 **Rollout Status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing.
+The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable checks, run automated evaluations, and track live Agent quality — all without manual testing.
 
-![Evaluate tab showing the Evals sidebar (Test, Runs, Checks, Publish, Monitor) and a Monitor dashboard with overall score, total runs, and Checks breakdown](/images/agent/agent-evals.png)
+![Evaluate tab showing the Evals sidebar (Test, Runs, Checks, Publish, Performance) and a Performance dashboard with overall score, total runs, and checks breakdown](/images/agent/agent-evals.png)
 
 ## What you can do with Evals
 
 <CardGroup cols={3}>
   <Card title="Run tests" icon="flask-vial">
-    Build test sets with scenarios that simulate real user interactions, then attach Checks to score every conversation automatically.
+    Build test sets with scenarios that simulate real user interactions, then attach checks to score every conversation automatically.
   </Card>
-  <Card title="Reuse Checks" icon="scale-balanced">
-    Define evaluation criteria once in the Checks tab and attach them to scenarios, Monitor dashboards, or ad-hoc evaluations of completed tasks.
+  <Card title="Reuse checks" icon="scale-balanced">
+    Define evaluation criteria once in the Checks tab and attach them to scenarios, Performance dashboards, or ad-hoc evaluations of completed tasks.
   </Card>
-  <Card title="Monitor live tasks" icon="chart-line">
-    Create Monitor dashboards that score live Agent tasks against your Checks, with sample-rate controls and per-Check trend charts over time.
+  <Card title="Track live quality" icon="chart-line">
+    Create Performance dashboards that score live Agent tasks against your checks, with sample-rate controls and per-check trend charts over time.
   </Card>
 </CardGroup>
 
@@ -32,27 +32,27 @@ The Evals section is your command center for testing and evaluating AI Agent per
 
 The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 
-- **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached Checks.
+- **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached checks.
 - **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, credit spend, and creation date for every run.
-- **Checks** — The reusable set of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
+- **Checks** — The reusable set of evaluation criteria. Create a check once, then attach it to scenarios, to Performance dashboards, or to one-off evaluations of completed tasks.
 - **Publish** — Choose which test sets must pass before your Agent can be published. Set a minimum pass rate and optionally block publishing on failure.
-- **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
+- **Performance** — Track live Agent quality on real tasks. Create one or more Performance dashboards, each with its own checks, sample rate, and conversation filters.
 
 ---
 
-## Understanding Checks
+## Understanding checks
 
-Checks are the reusable evaluation criteria that score Agent conversations. You create a Check once in the **Checks** tab and then attach it wherever you need it:
+Checks are the reusable evaluation criteria that score Agent conversations. You create a check once in the **Checks** tab and then attach it wherever you need it:
 
-- **To a scenario** in a test set — the Check runs every time that scenario is evaluated.
-- **To a Monitor dashboard** — the Check runs on a sampled portion of live Agent tasks.
+- **To a scenario** in a test set — the check runs every time that scenario is evaluated.
+- **To a Performance dashboard** — the check runs on a sampled portion of live Agent tasks.
 - **To a one-off evaluation** of already-completed tasks selected from the Agent's task list.
 
-The Checks tab has filters that show where each Check is currently used — **All checks**, **Scenarios**, **Dashboard**, and **Unused** — so you can quickly find Checks that aren't attached anywhere yet.
+The Checks tab has filters that show where each check is currently used — **All checks**, **Scenarios**, **Dashboard**, and **Unused** — so you can quickly find checks that aren't attached anywhere yet.
 
 ### Check types
 
-When creating a Check, you choose one of the following types:
+When creating a check, you choose one of the following types:
 
 <AccordionGroup>
   <Accordion title="LLM Judge" icon="brain-circuit">
@@ -62,7 +62,7 @@ When creating a Check, you choose one of the following types:
     |-------|-------------|
     | **Evaluation Prompt** | Describe the criteria for passing |
     | **Judge model** | Select which model evaluates the conversation |
-    | **Truncate long conversations** | When enabled, conversations that exceed the judge model's context window are trimmed from the oldest messages first, and the eval runs on the remaining portion. When disabled, oversized conversations fail with an error instead. Note that trimming removes early context, which can affect score accuracy if your evaluation criteria depend on the beginning of the conversation. |
+    | **Truncate long conversations** | When enabled, conversations that exceed the judge model's context window are trimmed from the oldest messages first, and the check runs on the remaining portion. When disabled, oversized conversations fail with an error instead. Note that trimming removes early context, which can affect score accuracy if your evaluation criteria depend on the beginning of the conversation. |
   </Accordion>
 
   <Accordion title="Text Includes" icon="text">
@@ -92,21 +92,21 @@ When creating a Check, you choose one of the following types:
   </Accordion>
 </AccordionGroup>
 
-To create a Check from the Checks tab:
+To create a check from the Checks tab:
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
-<iframe src="https://app.supademo.com/embed/cmpkr397l2hbdqms9w5xddjno" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+<iframe src="https://app.supademo.com/embed/cmpkr397l2hbdqms9w5xddjno" frameBorder="0" title="Creating a check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
 2. Click **+ New Check**.
 3. Select a **Type** (LLM Judge, Text Includes, Text Equals, or Tool Usage).
-4. Enter a **Name** for the Check (e.g., "Professional tone").
+4. Enter a **Name** for the check (e.g., "Professional tone").
 5. Configure the type-specific settings (see table above).
 6. Click **Create Check**.
 
 <Note>
-Checks attached to a scenario are always included when you run that scenario. Additional Checks from the Checks tab are not auto-included — select the ones you want under **Additional global checks** in the run modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) before kicking off the run.
+Checks attached to a scenario are always included when you run that scenario. Additional checks from the Checks tab are not auto-included — select the ones you want under **Additional global checks** in the run modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) before kicking off the run.
 </Note>
 
 ---
@@ -133,15 +133,15 @@ Follow these steps to create your first test set:
     | **Up to X messages** | Maximum conversation length, where each message is one back-and-forth between the simulated user and the Agent | 10 |
     | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with my bill." |
 
-6. Attach Checks to define how this scenario is scored. You can either pick existing Checks from the Checks tab or create new ones inline:
+6. Attach checks to define how this scenario is scored. You can either pick existing checks from the Checks tab or create new ones inline:
 
     | Field | Description | Example |
     |-------|-------------|---------|
-    | **Type** | The Check type | LLM Judge |
+    | **Type** | The check type | LLM Judge |
     | **Name** | Name of the evaluation criterion | "Empathy shown" |
     | **Type-specific config** | Settings based on the chosen type (see [Check types](#check-types)) | *Evaluation Prompt*: "Did the Agent acknowledge the customer's frustration and express empathy before offering solutions?" |
 
-    Newly created Checks land in the Checks tab and can be reused on other scenarios or Monitor dashboards.
+    Newly created checks land in the Checks tab and can be reused on other scenarios or Performance dashboards.
 
 7. (Optional) Add **Tool simulations** to emulate Tool usage without actually calling the underlying Tools. Tool simulations are configured per scenario:
     - Select a Tool to simulate.
@@ -151,7 +151,7 @@ Follow these steps to create your first test set:
 8. Click **Save test scenario** to save your configuration.
 
 <Tip>
-You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached Checks, and Tool simulations.
+You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached checks, and Tool simulations.
 </Tip>
 
 ### Managing scenarios
@@ -212,8 +212,8 @@ You can run an entire test set or an individual scenario from within a test set 
 You can select specific scenarios within a test set to run a subset at once, or run all scenarios in the test set together. Note that you cannot bulk-select and run multiple test sets at the same time.
 
 1. Enter a name for the run (e.g., "Scenario run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
-2. Checks already attached to the scenarios are always included. To add Checks from the Checks tab, select the ones you want under **Additional global checks**.
-3. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
+2. Checks already attached to the scenarios are always included. To add checks from the Checks tab, select the ones you want under **Additional global checks**.
+3. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected checks score each conversation.
 
 ---
 
@@ -227,7 +227,7 @@ The top of the results page shows key metrics:
 
 | Metric | Description |
 |--------|-------------|
-| **Average Score** | Overall pass rate across all scenarios and Checks |
+| **Average Score** | Overall pass rate across all scenarios and checks |
 | **Tasks** | How many Agent tasks were evaluated |
 | **Agent Version** | The version of the Agent that was tested |
 
@@ -239,7 +239,7 @@ Each scenario displays:
 |--------|-------------|
 | **Status** | Running, Completed, or Failed |
 | **Name** | The scenario name |
-| **Score** | Percentage of Checks that passed (shown with progress bar) |
+| **Score** | Percentage of checks that passed (shown with progress bar) |
 | **Checks** | Pass/fail count (e.g., "1/1 passed") |
 | **Credits** | Credits consumed for this scenario |
 
@@ -248,50 +248,89 @@ Each scenario displays:
 Click **View Conversation** on any scenario to see:
 
 1. **The full conversation** between the simulated user and your Agent.
-2. **Check verdicts** from every Check included in the run, with detailed explanations of why each Check passed or failed.
+2. **Check verdicts** from every check included in the run, with detailed explanations of why each check passed or failed.
 
-For example, an "Empathy shown" Check might show:
+For example, an "Empathy shown" check might show:
 > **Pass**: The Agent demonstrated strong empathy throughout the conversation. Key examples include: acknowledging the customer's frustration with being transferred multiple times ("I completely understand how upsetting it must be to feel like you're not getting the help you need"), validating her experience with the double charge ("I truly understand how frustrating it is to be charged twice"), and directly addressing her skepticism by saying "I completely understand your concerns, especially given your previous experience."
 
 ---
 
-## Monitor
+## Performance dashboards
 
-The **Monitor** section continuously scores live Agent tasks against Checks from the Checks tab. Unlike Test, which runs simulated conversations, Monitor evaluates the real conversations your Agent is having.
+The **Performance** section continuously scores live Agent tasks using checks you define. Unlike Test, which runs simulated conversations, Performance evaluates the real conversations your Agent is having.
 
-Monitor is organized into **dashboards** — you can create more than one (for example, one focused on tone, another on tool-use accuracy) and configure each independently.
+Performance is organized into dashboards — you can create as many as you need for different aspects of Agent quality, different conversation types, or different teams. Each dashboard is configured independently with its own set of checks, sample rate, and conversation filters.
 
-### Creating a Monitor dashboard
+### Viewing your dashboards
 
-1. Go to the **Evaluate** tab and select **Monitor** from the left sidebar.
+When you open **Performance** from the left sidebar, you see a list of all dashboards for this Agent. Each card shows a preview of the dashboard's key metrics: overall score, total runs, and which checks are active. Click a card to open the dashboard's detail view.
+
+### Creating a Performance dashboard
+
+1. Go to the **Evaluate** tab and select **Performance** from the left sidebar.
 2. Click **+ New dashboard** and give it a name.
-3. Attach one or more Checks from the Checks tab.
-4. Set a **Sample rate** — the percentage of incoming tasks to evaluate.
-5. (Optional) Set a **Conversation status filter** to only evaluate tasks with specific statuses (e.g., completed, escalated). Leave blank to evaluate all tasks.
-6. Save the dashboard.
+3. A settings drawer opens on the right. Configure the dashboard:
 
-Once configured, qualifying tasks are automatically scored at the sample rate you've set.
+   | Setting | Description |
+   |---------|-------------|
+   | **Checks** | Select which checks from the Checks tab to track on this dashboard |
+   | **Sample rate** | The percentage of incoming tasks to evaluate (e.g., 50% evaluates one in every two tasks) |
+   | **Conversation filter** | Optional. Limit evaluations to tasks with specific statuses (e.g., completed, escalated). Leave blank to evaluate all tasks. |
 
-### Viewing dashboard insights
+4. Click **Save**.
 
-Each Monitor dashboard shows:
+Once saved, qualifying tasks are automatically scored at the sample rate you set.
 
-| Metric | Description |
-|--------|-------------|
+### Individual dashboard view
+
+Each dashboard has its own detail page showing:
+
+| Section | Description |
+|---------|-------------|
 | **Overall score** | Aggregate score across all evaluated tasks in the selected date range |
 | **Total runs** | Number of tasks evaluated |
-| **Checks** | Which Checks are attached to the dashboard |
+| **Overall score timeseries** | Chart showing how the aggregate score changes over time |
+| **Per-check charts** | Individual trend charts for each check attached to this dashboard |
+| **Version markers** | Markers aligned with Agent publishes so you can correlate score changes with specific versions |
+| **Run history table** | All evaluation runs with score, task name, and a link to drill into the full conversation |
 
-You also get:
+### Updating dashboard settings
 
-- **Overall score timeseries** to spot regressions or improvements over time.
-- **Per-Check charts** so you can see which criteria are slipping.
-- **Version markers** that line up score changes with Agent publishes.
-- **A list of evaluation runs** with score, name, and a drill-in to the full conversation.
+To change a dashboard's checks, sample rate, or conversation filter after initial setup:
+
+1. Open the dashboard you want to update.
+2. Click **Settings** in the top-right corner of the dashboard.
+3. The settings drawer opens — make your changes.
+4. Click **Save**.
+
+### Managing multiple dashboards
+
+You can create multiple Performance dashboards for a single Agent. Each dashboard tracks independently — scores, run counts, and charts are separate per dashboard.
 
 <Tip>
-To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
+To delete a dashboard, open it, click **Settings**, then select **Delete dashboard**.
 </Tip>
+
+---
+
+## Use cases for multiple dashboards
+
+Multiple dashboards let you segment Agent quality by what matters to each team or use case without mixing signals in a single view.
+
+<CardGroup cols={2}>
+  <Card title="Track different quality dimensions" icon="chart-bar">
+    Create one dashboard for tone and empathy checks, and a separate dashboard for tool accuracy and escalation handling. Each team sees only the checks they own.
+  </Card>
+  <Card title="Separate by conversation type" icon="filter">
+    Set a conversation filter to score completed conversations on one dashboard and escalated conversations on another. Different conversation outcomes often need different quality criteria.
+  </Card>
+  <Card title="Manage credit spend by priority" icon="coins">
+    Run high-priority dashboards at 100% sample rate for maximum signal. Use a lower rate (10–25%) on lower-priority dashboards to keep credit spend proportional to importance.
+  </Card>
+  <Card title="Isolate post-publish regressions" icon="code-branch">
+    Create a dashboard focused on your most critical checks. After publishing a new Agent version, the version markers on this dashboard make it easy to spot regressions introduced by the update.
+  </Card>
+</CardGroup>
 
 ---
 
@@ -324,19 +363,19 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
   <Card title="Start simple" icon="seedling">
     Begin with a few core scenarios that test your Agent's primary use cases. Add complexity as you learn what matters most.
   </Card>
-  <Card title="Be specific with Checks" icon="bullseye">
-    Write detailed Check prompts. Vague criteria lead to inconsistent scoring. Include specific examples of what passing looks like.
+  <Card title="Be specific with checks" icon="bullseye">
+    Write detailed check prompts. Vague criteria lead to inconsistent scoring. Include specific examples of what passing looks like.
   </Card>
   <Card title="Test edge cases" icon="triangle-exclamation">
     Create scenarios for difficult situations: angry customers, off-topic requests, requests to bypass rules, etc.
   </Card>
-  <Card title="Run Monitor on live tasks" icon="chart-line">
-    Stand up a Monitor dashboard with your most important Checks so you catch regressions on real conversations, not just simulated ones.
+  <Card title="Set up Performance dashboards" icon="chart-line">
+    Create at least one Performance dashboard with your most important checks so you catch regressions on real conversations, not just simulated ones.
   </Card>
   <Card title="Keep your Checks tab tidy" icon="folder-tree">
-    Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
+    Use the **Unused** filter to clean up checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
   </Card>
-  <Card title="Sample wisely in Monitor" icon="percent">
+  <Card title="Sample wisely" icon="percent">
     Match the sample rate to your task volume. A low-traffic Agent can run at 100%; high-volume Agents can sample lower to keep credit spend in check without losing the signal.
   </Card>
 </CardGroup>
@@ -347,18 +386,18 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
 
 <AccordionGroup>
   <Accordion title="How many scenarios can I have in a test set?">
-    You can add as many scenarios as needed to a single test set. Each scenario is evaluated independently and can have its own attached Checks.
+    You can add as many scenarios as needed to a single test set. Each scenario is evaluated independently and can have its own attached checks.
   </Accordion>
 
-  <Accordion title="How many Checks can I add to a scenario?">
-    Each scenario supports up to 10 Checks. This applies to scenario-level Checks defined within the scenario itself. Checks added via **Additional global checks** at run time are counted separately.
+  <Accordion title="How many checks can I add to a scenario?">
+    Each scenario supports up to 10 checks. This applies to scenario-level checks defined within the scenario itself. Checks added via **Additional global checks** at run time are counted separately.
   </Accordion>
 
   <Accordion title="How are credits calculated for evaluations?">
     Credits consumed for each scenario are calculated by adding together:
     - The Agent task run (the conversation with your Agent)
     - The simulator (the persona/user simulation) — uses an LLM to simulate the user persona
-    - Every Check that runs on the conversation — each Check (especially LLM Judge) uses an LLM call
+    - Every check that runs on the conversation — each check (especially LLM Judge) uses an LLM call
 
     Each scenario shows its total credit usage in the results.
   </Accordion>
@@ -367,12 +406,12 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
     Yes, you can run the same scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
   </Accordion>
 
-  <Accordion title="Where do my Checks live?">
-    All Checks live in the **Checks** tab under Evaluate. From there you can attach them to scenarios (for evaluation runs), to Monitor dashboards (for live tasks), or to one-off evaluations of completed tasks. The **Scenarios**, **Dashboard**, and **Unused** filters show where each Check is currently attached.
+  <Accordion title="Where do my checks live?">
+    All checks live in the **Checks** tab under Evaluate. From there you can attach them to scenarios (for evaluation runs), to Performance dashboards (for live tasks), or to one-off evaluations of completed tasks. The **Scenarios**, **Dashboard**, and **Unused** filters show where each check is currently attached.
   </Accordion>
 
   <Accordion title="Can the LLM Judge evaluate long conversations?">
-    Yes, with configuration. The LLM Judge Check includes a **Truncate long conversations** toggle in the **Advanced** section when creating a Check. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
+    Yes, with configuration. The LLM Judge check includes a **Truncate long conversations** toggle in the **Advanced** section when creating a check. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
   </Accordion>
 
   <Accordion title="What happens when a conversation is truncated?">
@@ -381,6 +420,14 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
 
   <Accordion title="Can I move scenarios between test sets?">
     Yes. Each scenario has a dropdown menu (three-dot icon) with three options: **Move** relocates the scenario to another test set, **Copy** creates a duplicate in another test set, and **Duplicate** creates a copy in the same test set.
+  </Accordion>
+
+  <Accordion title="How many Performance dashboards can I create?">
+    You can create as many dashboards as you need for a single Agent. Each dashboard has independent configuration, metrics tracking, and run history.
+  </Accordion>
+
+  <Accordion title="Can I use the same check on multiple Performance dashboards?">
+    Yes. Checks are defined once in the Checks tab and can be attached to any number of Performance dashboards, scenarios, or one-off evaluations. Editing a check in the Checks tab updates it everywhere it's attached.
   </Accordion>
 
   <Accordion title="I don't see the Evals section. How do I get access?">
