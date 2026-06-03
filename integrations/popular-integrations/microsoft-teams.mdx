@@ -214,26 +214,6 @@ Once a trigger fires, the agent responds directly inside Teams with the followin
 
 <Note>Messages that contain only attachments with no text will show a "[N attachments]" indicator to the agent.</Note>
 
-### Two-way conversations
-
-When an agent sends a message in Teams, it arrives as an Adaptive Card with a text input and a **Send** button. Users type their reply directly in the card and click **Send** to continue the conversation. The agent receives the reply with full context of the prior exchange — no @mentions needed.
-
-Conversation context is maintained automatically across multiple message exchanges within the same thread, so users can have a natural back-and-forth with the agent without any re-initialization.
-
-### Proactive DM conversations
-
-Agents can initiate conversations by sending a direct message to a user in Teams without waiting for the user to reach out first. When the user responds, the agent picks up the conversation with full context intact, allowing multi-turn exchanges that continue naturally from the opening message.
-
-This enables outreach workflows where an agent contacts a user, the user replies, and the agent continues the conversation — all within a DM thread in Teams.
-
-### Outreach-only mode
-
-Outreach-only is a trigger mode where the Teams trigger responds only to replies within conversations the agent started. It does not respond to new root-level messages that users send to the bot directly.
-
-This is the right choice when an agent is doing outreach — for example, proactively DMing a group of users and following up on their responses — and you don't want it to act on unrelated inbound messages in the same channel or chat.
-
-To enable this mode, open your trigger settings and set the trigger mode to **Outreach only**. The trigger will then watch only for replies to threads or DMs that the agent opened, leaving all other conversations unaffected.
-
 ## Tool steps for Microsoft Teams
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
