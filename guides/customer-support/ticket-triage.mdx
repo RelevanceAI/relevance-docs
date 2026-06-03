@@ -23,7 +23,7 @@ The first 30 seconds of a ticket's life shapes its whole trajectory. If it's mis
   </Card>
 </CardGroup>
 
-## The shape of this motion
+## The shape of this use case
 
 A triage Agent takes an inbound ticket and returns a structured classification.
 
@@ -80,16 +80,16 @@ Once it's running, deepen it in three moves:
 ## Common pitfalls
 
 <AccordionGroup>
-  <Accordion title="Tag drift" icon="circle-exclamation">
+  <Accordion title="Tag drift" icon="tag">
     The Agent invents new tags rather than using your existing taxonomy. Force the prompt to choose from a fixed Knowledge list — and fail closed if no tag fits.
   </Accordion>
-  <Accordion title="Overconfident priority decisions" icon="circle-exclamation">
+  <Accordion title="Overconfident priority decisions" icon="scale-unbalanced">
     The Agent marks every "urgent"-flagged email as P1. Train it to read the actual issue against your priority matrix, not the customer's adjective.
   </Accordion>
-  <Accordion title="Routing without account context" icon="circle-exclamation">
+  <Accordion title="Routing without account context" icon="route">
     Tickets get routed by topic only and miss the account dimension — a P3 from a churning enterprise account isn't a P3. Pull CRM context into the triage prompt.
   </Accordion>
-  <Accordion title="Auto-applying without review" icon="circle-exclamation">
+  <Accordion title="Auto-applying without review" icon="robot">
     A wrong tag at scale corrupts reporting and routing. Start with Agent-as-suggester (writes to a "suggested_priority" field) and graduate to direct application after a quarter of audit.
   </Accordion>
 </AccordionGroup>

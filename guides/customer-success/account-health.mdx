@@ -23,7 +23,7 @@ Health scores that are just numbers don't get used. A health Agent rates account
   </Card>
 </CardGroup>
 
-## The shape of this motion
+## The shape of this use case
 
 A health Agent takes an account and returns a score, the reasoning behind it, and a recommended next action.
 
@@ -80,16 +80,16 @@ Once it's running, deepen it in three moves:
 ## Common pitfalls
 
 <AccordionGroup>
-  <Accordion title="Score without reasoning" icon="circle-exclamation">
+  <Accordion title="Score without reasoning" icon="magnifying-glass">
     A number alone is unactionable. CSMs need to see *which* signals moved and *why* the Agent flagged the account — otherwise they ignore it.
   </Accordion>
-  <Accordion title="Stale signal definitions" icon="circle-exclamation">
+  <Accordion title="Stale signal definitions" icon="clock-rotate-left">
     Your churn drivers shift over time. Review the prompt's scoring criteria each quarter against actual churned accounts.
   </Accordion>
-  <Accordion title="Overweighting product usage" icon="circle-exclamation">
+  <Accordion title="Overweighting product usage" icon="scale-unbalanced">
     Some segments use the product weekly and never churn; others log in monthly and stay loyal. Weight signals by segment, not globally.
   </Accordion>
-  <Accordion title="No feedback loop from churned accounts" icon="circle-exclamation">
+  <Accordion title="No feedback loop from churned accounts" icon="arrows-rotate">
     Without piping churn outcomes back to the Agent's evals, the scoring can't learn. Connect closed-lost / churned status to evaluation runs.
   </Accordion>
 </AccordionGroup>

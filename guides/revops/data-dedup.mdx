@@ -23,7 +23,7 @@ CRMs accrete duplicate records the way oceans accrete plastic. The exact-match d
   </Card>
 </CardGroup>
 
-## The shape of this motion
+## The shape of this use case
 
 A dedup Agent takes a candidate pair (or a list of candidates) and returns a merge decision with reasoning.
 
@@ -80,16 +80,16 @@ Once it's running, deepen it in three moves:
 ## Common pitfalls
 
 <AccordionGroup>
-  <Accordion title="Auto-merging without audit" icon="circle-exclamation">
+  <Accordion title="Auto-merging without audit" icon="clock-rotate-left">
     A wrong merge loses deal history. Always log what got merged and offer one-click undo for the first quarter of running.
   </Accordion>
-  <Accordion title="Confidence thresholds set too loose" icon="circle-exclamation">
+  <Accordion title="Confidence thresholds set too loose" icon="gauge-high">
     Aggressive auto-merge merges records that should have stayed separate. Start with high thresholds and loosen as you watch outcomes.
   </Accordion>
-  <Accordion title="Ignoring field-level conflicts" icon="circle-exclamation">
+  <Accordion title="Ignoring field-level conflicts" icon="scale-unbalanced">
     Merging accounts without a rule for which address / industry / size wins produces garbled records. Document field priority rules in Knowledge.
   </Accordion>
-  <Accordion title="No relationship to ongoing deals" icon="circle-exclamation">
+  <Accordion title="No relationship to ongoing deals" icon="link-slash">
     Merging an account with an active opportunity into one without can break attribution and rep ownership. Have the Agent factor open-deal status into the decision.
   </Accordion>
 </AccordionGroup>

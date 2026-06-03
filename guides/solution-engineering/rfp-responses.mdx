@@ -23,7 +23,7 @@ Every SE team has the same archive — last year's RFPs, last quarter's security
   </Card>
 </CardGroup>
 
-## The shape of this motion
+## The shape of this use case
 
 An RFP Agent takes a question + opportunity context and returns a drafted answer with sources.
 
@@ -80,16 +80,16 @@ Once it's running, deepen it in three moves:
 ## Common pitfalls
 
 <AccordionGroup>
-  <Accordion title="Hallucinated security claims" icon="circle-exclamation">
+  <Accordion title="Hallucinated security claims" icon="user-shield">
     The Agent confidently states a control you don't have. Force citations to actual policy / past-answer documents and fail visibly when the question isn't covered.
   </Accordion>
-  <Accordion title="Stale answers" icon="circle-exclamation">
+  <Accordion title="Stale answers" icon="calendar-xmark">
     Last year's accurate answer is this year's misrepresentation. Tag prior responses with dates and have the Agent prefer recent over old when in conflict.
   </Accordion>
-  <Accordion title="No human review on legal/security" icon="circle-exclamation">
+  <Accordion title="No human review on legal/security" icon="scale-unbalanced">
     Some questions need legal sign-off. Always route security and contractual answers through human review until you've watched it for several deals.
   </Accordion>
-  <Accordion title="Auto-applying without deal context" icon="circle-exclamation">
+  <Accordion title="Auto-applying without deal context" icon="sitemap">
     A "yes" to a feature in mid-market might be a "yes, but" in enterprise. Have the Agent read the opportunity record and adapt — not just look up the question.
   </Accordion>
 </AccordionGroup>
