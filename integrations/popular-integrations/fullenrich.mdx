@@ -39,7 +39,10 @@ The FullEnrich integration provides five native actions that your agents can use
 ### Contact enrichment
 <CardGroup cols={2}>
   <Card title="Enrich contacts" icon="user-plus">
-    Enrich B2B contacts with verified email addresses and phone numbers using FullEnrich's waterfall across 20+ data providers
+    Submit B2B contacts for enrichment with verified email addresses and phone numbers, using FullEnrich's waterfall across 20+ data providers. Enrichment runs asynchronously — this step starts the job and returns an enrichment ID.
+  </Card>
+  <Card title="Retrieve enrichment results" icon="download">
+    Fetch the results of an enrichment job using the enrichment ID returned when the job was started.
   </Card>
 </CardGroup>
 
@@ -53,13 +56,10 @@ The FullEnrich integration provides five native actions that your agents can use
   </Card>
 </CardGroup>
 
-### Enrichment jobs
+### Advanced
 <CardGroup cols={2}>
-  <Card title="Start enrichment job" icon="play">
-    Submit a contact enrichment job for asynchronous processing
-  </Card>
-  <Card title="Retrieve enrichment results" icon="download">
-    Fetch the results of a previously started enrichment job
+  <Card title="FullEnrich API call" icon="code">
+    Make a direct call to any FullEnrich API endpoint for capabilities not covered by the dedicated steps above.
   </Card>
 </CardGroup>
 
@@ -85,7 +85,7 @@ Here are some ways you can use the FullEnrich integration with your agents:
   </Accordion>
 
   <Accordion title="Batch enrichment pipelines" icon="layer-group">
-    For larger prospect lists, use the Start enrichment job and Retrieve enrichment results steps together. Submit a batch job for async processing, then retrieve results once complete. This avoids timeouts that would occur with synchronous requests on large datasets.
+    For larger prospect lists, pair the Enrich contacts and Retrieve enrichment results steps. Enrich contacts submits the batch and returns an enrichment ID; retrieve the completed results in a later step (or a separate scheduled run) using that ID. Because enrichment is asynchronous, this avoids the timeouts you'd hit waiting inline on large datasets.
   </Accordion>
 
   <Accordion title="International prospecting" icon="globe">
@@ -112,8 +112,8 @@ Here are some ways you can use the FullEnrich integration with your agents:
     Before starting a batch enrichment job, use the Check credit balance step to verify you have enough credits. Running out mid-job produces partial results with no straightforward way to resume from where you left off. Checking first lets your agent make an informed decision about whether to proceed, split the job, or wait.
   </Accordion>
 
-  <Accordion title="Use async jobs for larger runs" icon="play">
-    For enriching more than a handful of contacts at a time, use the Start enrichment job step rather than the synchronous Enrich contacts step. Async jobs are built for scale and don't risk timing out, whereas synchronous enrichment is better suited for single-record or small-batch lookups within an agent's flow.
+  <Accordion title="Plan for asynchronous enrichment" icon="clock">
+    FullEnrich enrichment is asynchronous: Enrich contacts starts a job and returns an enrichment ID rather than results directly. Design your agent to fetch the output with Retrieve enrichment results — either later in the same flow or in a separate scheduled run — rather than expecting the contact data inline from the enrich step.
   </Accordion>
 
   <Accordion title="Handle no-match cases gracefully" icon="circle-exclamation">
@@ -144,8 +144,8 @@ Here are some ways you can use the FullEnrich integration with your agents:
     FullEnrich returns verified email addresses and direct phone numbers for B2B contacts. The waterfall approach means it queries multiple data providers in sequence and returns the best available match. Not every contact will have both email and phone — coverage depends on what the provider network has indexed for that individual.
   </Accordion>
 
-  <Accordion title="Why would I use Start enrichment job vs Enrich contacts?">
-    Enrich contacts is a synchronous step suited for single-record or small-batch lookups within a running agent flow. Start enrichment job submits a batch for async processing, which is better for larger lists where a synchronous request would time out. After starting a job, use Retrieve enrichment results later (in a separate agent run or scheduled check) to fetch the completed output.
+  <Accordion title="How does FullEnrich enrichment work?">
+    Enrichment is a two-step asynchronous flow. Enrich contacts submits your contacts as a job and returns an enrichment ID — it does not return the enriched data directly. You then use Retrieve enrichment results with that ID (later in the same flow, or in a separate agent run or scheduled check) to fetch the completed output once the job has processed.
   </Accordion>
 
   <Accordion title="How do I check my remaining credits?">
