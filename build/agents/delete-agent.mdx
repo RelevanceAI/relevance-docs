@@ -4,7 +4,7 @@ description: "Remove agents from Relevance AI"
 
 ---
 
-You can delete agents from the Relevance AI interface or from within Inventor. Deleted agents can be restored if needed.
+You can delete agents from the Relevance AI interface or from within Inventor. Deleting an agent is permanent and cannot be undone — it also removes the agent's syncs and scheduled triggers.
 
 ## Delete via the UI
 
@@ -28,17 +28,18 @@ You can ask Inventor to delete an agent during a conversation.
 If you delete the agent you are currently editing in Inventor, you will be automatically redirected away from that agent's view.
 </Note>
 
-## Restore a deleted agent
+## Restore a previous agent version
 
-Deleted agents can be restored via Inventor.
+Inventor can roll an existing agent back to an earlier version. This restores a previous *version* of an agent — it does not recover a deleted agent.
 
 1. Open Inventor from the sidebar
-2. Ask Inventor to restore the agent, for example: "Restore the [agent name] agent"
-3. Inventor will prompt you to confirm the restoration — confirmation is always required for restore actions, even when auto-approve is enabled
+2. Ask Inventor to restore an earlier version, for example: "Restore the previous version of this agent"
+3. Inventor copies the chosen version into the current draft. The live (published) version is unchanged until you publish the draft.
+4. Inventor will prompt you to confirm — confirmation is always required for restore actions, even when auto-approve is enabled
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
     <Accordion title="What happens if my deleted agent is clonable?">If your deleted agent is clonable, it will no longer be available for cloning. People who have already cloned it will still be able to use their copy.</Accordion>
-    <Accordion title="I accidentally deleted an agent, can I recover it?">Yes, deleted agents can be restored via Inventor. Ask Inventor to restore the agent by name and confirm when prompted.</Accordion>
+    <Accordion title="I accidentally deleted an agent, can I recover it?">No. Deleting an agent is permanent and cannot be undone. Inventor can restore a previous *version* of an existing agent, but it cannot recover one that has been deleted — so confirm carefully before deleting.</Accordion>
 </AccordionGroup>

@@ -7,12 +7,12 @@ description: 'How to delete tools and individual tool steps'
 ## Differences between deleting a tool and deleting a tool step
 
 **Tool deletion vs. tool step deletion:**
-- **Delete tool** (Tools section): Removes the tool from your project and all agents. Deleted tools can be restored via Inventor.
+- **Delete tool** (Tools section): Removes the tool from your project and all agents. This is permanent and cannot be undone.
 - **Delete a tool step** (Agent Builder → Tools): Removes a single action within an existing tool's workflow. This cannot be undone.
 
 # Delete a tool
 
-When you no longer need a tool, you can delete it from your project. If you change your mind, deleted tools can be restored via Inventor.
+When you no longer need a tool, you can delete it from your project. Deleting a tool is permanent and cannot be undone, so check that no agents still depend on it first.
 
 <Warning>
 Any agents using this tool will lose access when it is deleted, which may cause errors during task execution. Check which agents use this tool before deleting.
@@ -57,15 +57,16 @@ When you delete a tool:
 - Any agents using this tool will no longer have access to it
 - Bulk runs in progress using this tool may fail
 - Shared links to the tool will stop working
-- The tool can be restored via Inventor if needed
+- The deletion is permanent and cannot be undone
 
-## Restore a deleted tool
+## Restore a previous tool version
 
-Deleted tools can be restored via Inventor.
+Inventor can roll an existing tool back to an earlier version. This restores a previous *version* of a tool — it does not recover a deleted tool.
 
 1. Open Inventor from the sidebar
-2. Ask Inventor to restore the tool, for example: "Restore the [tool name] tool"
-3. Inventor will prompt you to confirm the restoration — confirmation is always required for restore actions, even when auto-approve is enabled
+2. Ask Inventor to restore an earlier version, for example: "Restore the previous version of this tool"
+3. Inventor copies the chosen version into the current draft. The live (published) version is unchanged until you publish the draft.
+4. Inventor will prompt you to confirm — confirmation is always required for restore actions, even when auto-approve is enabled
 
 
 # Delete individual tool steps

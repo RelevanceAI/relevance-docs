@@ -3,7 +3,7 @@ title: "Delete a workforce"
 description: "Remove workforces from Relevance AI"
 ---
 
-You can delete workforces from the Relevance AI interface or from within Inventor. Deleted workforces can be restored if needed.
+You can delete workforces from the Relevance AI interface or from within Inventor. Deleting a workforce is permanent and cannot be undone.
 
 ## Delete via the UI
 
@@ -19,16 +19,17 @@ You can ask Inventor to delete a workforce during a conversation.
 2. Ask Inventor to delete a workforce, for example: "Delete the [workforce name] workforce"
 3. Inventor will prompt you to confirm before proceeding — confirmation is always required for deletions, even when auto-approve is enabled for other actions
 
-## Restore a deleted workforce
+## Restore a previous workforce version
 
-Deleted workforces can be restored via Inventor.
+Inventor can roll an existing workforce back to an earlier version. This restores a previous *version* of a workforce — it does not recover a deleted workforce.
 
 1. Open Inventor from the sidebar
-2. Ask Inventor to restore the workforce, for example: "Restore the [workforce name] workforce"
-3. Inventor will prompt you to confirm the restoration — confirmation is always required for restore actions, even when auto-approve is enabled
+2. Ask Inventor to restore an earlier version, for example: "Restore the previous version of this workforce"
+3. Inventor copies the chosen version into the current draft. The live (published) version is unchanged until you publish the draft.
+4. Inventor will prompt you to confirm — confirmation is always required for restore actions, even when auto-approve is enabled
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
-    <Accordion title="I accidentally deleted a workforce, can I recover it?">Yes, deleted workforces can be restored via Inventor. Ask Inventor to restore the workforce by name and confirm when prompted.</Accordion>
+    <Accordion title="I accidentally deleted a workforce, can I recover it?">No. Deleting a workforce is permanent and cannot be undone. Inventor can restore a previous *version* of an existing workforce, but it cannot recover one that has been deleted — so confirm carefully before deleting.</Accordion>
 </AccordionGroup>
