@@ -171,6 +171,22 @@ The Relevance AI app is available on the Microsoft Teams marketplace. Users can 
 
 <Tip>Set tool permissions to "approval mode" initially so your agent asks before sending messages. Switch to autopilot once you're confident.</Tip>
 
+### Advanced trigger settings
+
+#### Outreach replies only
+
+Enable this toggle to restrict the agent to responding only to replies to messages it previously sent in the channel, rather than all new messages.
+
+This is useful for outreach workflows where the agent sends messages to users and needs to follow up only with those who respond. Rather than monitoring all channel activity, the agent stays focused on conversations it initiated.
+
+**To enable:**
+1. Open your Microsoft Teams trigger settings
+2. Locate the **Outreach replies only** toggle
+3. Toggle it on
+4. Save your configuration
+
+When enabled, the trigger subtitle changes to **"On replies to outreach messages"**. The agent triggers only when a user replies to a message the agent itself sent — new messages posted by other users will not activate it.
+
 ### How triggered conversations work
 
 Once a trigger fires, the agent responds directly inside Teams with the following capabilities:
