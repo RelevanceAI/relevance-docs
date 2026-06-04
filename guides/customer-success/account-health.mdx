@@ -1,0 +1,95 @@
+---
+title: "Account health and churn signals"
+sidebarTitle: "Account health"
+description: "Score every account on health with reasoning, not just a number. Surface risk before renewal so CSMs can act in time."
+---
+
+Health scores that are just numbers don't get used. A health Agent rates accounts across the signals that actually predict churn — usage drops, support spikes, exec turnover, deal-stage stalls — and surfaces the *why* so CSMs can do something about it.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="CSMs are reactive" icon="rotate-right">
+    Churn risks are caught at renewal, not 90 days out when there's still time to fix them.
+  </Card>
+  <Card title="Health score is ignored" icon="eye-slash">
+    The existing red/yellow/green field doesn't influence CSM action — nobody trusts the rollup.
+  </Card>
+  <Card title="Signals live in silos" icon="puzzle-piece">
+    Usage data, support tickets, deal notes, exec changes — all in different tools, nobody synthesizes them.
+  </Card>
+  <Card title="Book of business is too big" icon="building-columns">
+    Each CSM has 80+ accounts and there's no way to triage which ones need attention this week.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A health Agent takes an account and returns a score, the reasoning behind it, and a recommended next action.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Account record, time window, segmentation cut.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, support tickets, product usage / analytics, deal history, exec change tracking, your CS playbook.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A health score with cited signals, a short summary of the risk picture, and a recommended outreach action.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Written back to the CRM as a field plus a note, posted in [Slack](/integrations/popular-integrations/slack) for at-risk accounts, surfaced in a CSM digest.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Customer Success Manager](https://marketplace.relevanceai.com/listing/b9b5e05c-4512-4749-8f66-4623ab895e21)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your CSMs can use on day one:
+
+- *"How is Acme Corp doing right now? Usage, tickets, last contact, anything I should worry about?"*
+- *"Which 5 accounts in my book look highest-risk for Q1 renewal?"*
+- *"Compare Globex's engagement this quarter vs. last — what changed?"*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your CS playbook in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Pipe churn outcomes back into the Agent's [evals](/build/agents/build-your-agent/evals) so scoring tracks what predicted cancellation.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Score without reasoning" icon="magnifying-glass">
+    A number alone is unactionable. CSMs need to see *which* signals moved and *why* the Agent flagged the account — otherwise they ignore it.
+  </Accordion>
+  <Accordion title="Stale signal definitions" icon="clock-rotate-left">
+    Your churn drivers shift over time. Review the prompt's scoring criteria each quarter against actual churned accounts.
+  </Accordion>
+  <Accordion title="Overweighting product usage" icon="scale-unbalanced">
+    Some segments use the product weekly and never churn; others log in monthly and stay loyal. Weight signals by segment, not globally.
+  </Accordion>
+  <Accordion title="No feedback loop from churned accounts" icon="arrows-rotate">
+    Without piping churn outcomes back to the Agent's evals, the scoring can't learn. Connect closed-lost / churned status to evaluation runs.
+  </Accordion>
+</AccordionGroup>

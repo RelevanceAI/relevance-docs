@@ -1,0 +1,95 @@
+---
+title: "Lead routing and territory assignment"
+sidebarTitle: "Lead routing"
+description: "Apply your routing rules — plus the judgment edge cases — to every new lead automatically."
+---
+
+Routing rules in Salesforce or HubSpot handle 80% of inbound leads. The other 20% are the edge cases that eat hours — accounts spanning multiple territories, ambiguous industries, parent-child company tangles, region overrides. A routing Agent reads each lead, applies your rules where they're clear, and handles the judgment where they aren't.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Routing rules are too brittle" icon="route">
+    Existing logic handles the easy 80%; the rest end up in a queue waiting for RevOps to manually route.
+  </Card>
+  <Card title="Region overlaps cause disputes" icon="map">
+    Reps argue over who owns a lead because firmographic data disagrees about region or segment.
+  </Card>
+  <Card title="Routing latency" icon="hourglass">
+    Hours pass between lead landing and lead getting picked up because manual routing is the bottleneck.
+  </Card>
+  <Card title="Parent-child confusion" icon="sitemap">
+    A new contact at a subsidiary lands without recognizing the parent already has an open opportunity.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A routing Agent takes a new lead and returns an assignment decision with reasoning.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Lead record, account context, territory boundaries, current rep workload.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, territory / segmentation rules, rep capacity data, parent-child account hierarchy, your routing playbook.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A routing decision (rep / team, reasoning, confidence), with flags for edge cases that need human review.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Applied directly in the CRM as owner, posted to [Slack](/integrations/popular-integrations/slack) on edge cases for RevOps to confirm, logged with reasoning for audit.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[CRM Agent](https://marketplace.relevanceai.com/listing/f3e18700-27e2-477d-8eaa-4c6fa04282bf)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your team can use on day one:
+
+- *"Where should this lead go? Acme Corp, contact at the German subsidiary, parent account owned by the US enterprise team."*
+- *"This batch of 50 leads imported from a trade show — apply our routing rules and tell me which ones need a human decision."*
+- *"Is this lead a re-engagement of an existing opportunity or a new prospect? Check parent-child and prior history."*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your territory rules in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which routing held up into the Agent's [evals](/build/agents/build-your-agent/evals) so edge-case handling tracks real outcomes.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Overconfident decisions on ambiguous leads" icon="bullseye">
+    Force the Agent to flag low-confidence decisions for human review rather than making a guess. Wrong assignments are expensive to undo.
+  </Accordion>
+  <Accordion title="Missing parent-child relationships" icon="sitemap">
+    Without hierarchy data in Knowledge, the Agent treats subsidiaries as net-new accounts. Document the parent-child structure explicitly.
+  </Accordion>
+  <Accordion title="Ignoring rep capacity" icon="users">
+    Routing on rules alone overloads top reps. Have the Agent factor current pipeline volume into the routing decision.
+  </Accordion>
+  <Accordion title="No audit trail" icon="list-check">
+    Reps dispute routing decisions. Log every Agent decision with its reasoning so you can review later.
+  </Accordion>
+</AccordionGroup>

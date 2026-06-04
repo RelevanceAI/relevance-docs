@@ -1,0 +1,95 @@
+---
+title: "KB article generation from resolved tickets"
+sidebarTitle: "KB generation"
+description: "Turn resolved tickets into knowledge base articles — close the loop without writing them by hand."
+---
+
+Every support team has the same problem: the KB is the most leveraged thing in the operation, and it's the thing nobody has time to write. A KB Agent watches resolved tickets, spots the patterns worth documenting, and drafts the articles — so the next ticket of that shape gets a faster answer.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="KB hasn't grown in months" icon="calendar-xmark">
+    New product features ship every sprint; the KB last got an article six months ago.
+  </Card>
+  <Card title="Same questions, same drafting" icon="rotate">
+    Agents answer the same niche question 30 times a quarter — and never have time to write the article.
+  </Card>
+  <Card title="Tribal knowledge in agent heads" icon="user-group">
+    Senior agents know the answers; new hires don't, because nobody documented them.
+  </Card>
+  <Card title="Self-serve is underperforming" icon="user-magnifying-glass">
+    Customer self-serve traffic is low because there's no article matching their search.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A KB Agent takes a resolved ticket (or cluster of tickets) and returns a publishable article.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Resolved ticket(s), category, prior similar resolutions, your KB style guide.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Ticket conversations, agent resolution notes, product changelog, your KB style and structure guides.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A drafted KB article — title, summary, steps, screenshots placeholders, related-articles links — ready for review.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Posted to your KB platform as a draft, dropped in [Notion](/integrations/popular-integrations/notion) for review, queued in a "needs editor" workflow.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[Tim, Technical Documentation Generator](https://marketplace.relevanceai.com/listing/214b9ba5-7e83-4c54-8494-dcaed6557aeb)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your team can use on day one:
+
+- *"Look at the last 50 resolved tickets in the 'billing' category — what 3 articles should we write that we don't have?"*
+- *"Turn this ticket into a KB article. Customer hit the SSO bug last week and we resolved with workaround X."*
+- *"What's the most common search query on our help site this month that has no matching article?"*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your style guide in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed read and deflection data back into the Agent's [evals](/build/agents/build-your-agent/evals) so it drafts the formats that help.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Articles that paraphrase one ticket" icon="clone">
+    Drafting from a single ticket gives you an article that only solves that exact case. Cluster similar tickets first so the article generalizes.
+  </Accordion>
+  <Accordion title="Stale or contradictory content" icon="clock-rotate-left">
+    Auto-drafting without checking existing articles produces overlap and contradiction. Have the Agent search the KB first and propose an *edit* if an article already covers it.
+  </Accordion>
+  <Accordion title="Auto-publishing without review" icon="eye">
+    KB articles are externally visible — bad ones cost trust. Always gate publishing with a human editor until you've watched it for two quarters.
+  </Accordion>
+  <Accordion title="No tie to actual search demand" icon="magnifying-glass">
+    Drafting articles agents *would have used* is fine, but missing the bigger win: articles for what customers *search and can't find*. Connect the Agent to KB search analytics.
+  </Accordion>
+</AccordionGroup>

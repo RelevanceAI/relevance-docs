@@ -1,0 +1,95 @@
+---
+title: "Response drafting from KB"
+sidebarTitle: "Response drafting"
+description: "First-draft replies grounded in your knowledge base, with citations so the agent can spot-check before sending."
+---
+
+The fastest support team isn't the one with the most agents — it's the one whose agents don't start replies from a blank page. A response Agent drafts the first reply for every ticket, pulling the right KB articles, the right account context, the right tone. The agent edits, sends, and moves on.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Repetitive tickets eat hours" icon="rotate">
+    The same 20 question types make up 70% of inbound. Agents type the same answer with slight variation, all day.
+  </Card>
+  <Card title="KB underused" icon="book">
+    You've got a knowledge base but tickets get answered from agent memory — and the KB grows stale.
+  </Card>
+  <Card title="Tone drift across agents" icon="comments">
+    Tone varies wildly between new hires and tenured agents — customer experience is uneven.
+  </Card>
+  <Card title="Onboarding takes too long" icon="user-clock">
+    New agents take weeks to become productive because there's no fast path to "right answer + right voice".
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A response Agent takes a ticket and returns a drafted reply with citations.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Ticket body, customer record, prior tickets, channel-specific format hints.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Knowledge base, prior resolutions, tone-of-voice guide, product status / changelog, account history.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A drafted reply with cited KB articles and a confidence indicator — ready for agent review and send.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Inserted as a draft in [Zendesk](/integrations/popular-integrations/zendesk) / Intercom for agent review, posted in a comment for visibility, attached as a macro suggestion.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Customer Query Handler](https://marketplace.relevanceai.com/listing/5dc6f8ea-a087-4f7f-a053-5870d9292891)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your team can use on day one:
+
+- *"Draft a reply to this ticket — the customer can't activate their account and we've seen this before with their email domain."*
+- *"What's our standard response when someone asks about the new billing cycle? Cite the KB articles."*
+- *"Customer is asking for a refund — what's the playbook and what should I check first?"*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your KB in [Knowledge](/build/knowledge/create-knowledge), and [Tools](/build/agents/build-your-agent/tools) for KB and CRM search.
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which drafts shipped untouched, plus CSAT, into the Agent's [evals](/build/agents/build-your-agent/evals) so it matches what your team sends.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Drafts agents have to rewrite" icon="pen">
+    If agents are rewriting every draft, the Agent isn't actually saving time — it's adding a step. Watch the edit-rate; rebuild the prompt or Knowledge if it climbs.
+  </Accordion>
+  <Accordion title="Hallucinated KB references" icon="link-slash">
+    The Agent cites articles that don't exist or fabricates policy. Force citations to KB IDs from your actual catalog and fail visibly when there's no match.
+  </Accordion>
+  <Accordion title="Tone gets robotic" icon="robot">
+    Without a strong tone-of-voice doc, every draft sounds like the same chatbot. Upload your best past replies as examples in Knowledge.
+  </Accordion>
+  <Accordion title="Auto-send before you're ready" icon="paper-plane">
+    Auto-sending replies before you've watched the Agent on real tickets for a month is how you ship a bad answer at scale. Start with drafts only.
+  </Accordion>
+</AccordionGroup>

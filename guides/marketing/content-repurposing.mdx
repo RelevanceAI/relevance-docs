@@ -1,0 +1,95 @@
+---
+title: "Content creation and repurposing"
+sidebarTitle: "Content & repurposing"
+description: "Turn one piece of content into many — blog posts, social snippets, ad copy, email teasers — without losing the source voice."
+---
+
+Every long-form asset is supposed to become a quarter's worth of derivative content. In practice, the blog goes up, the webinar drops, and the LinkedIn posts never get written. A content Agent turns one source asset into channel-specific drafts — pulling your brand voice and past top-performers from knowledge, then queuing each derivative for review before it ships.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Content backlog never ships" icon="boxes-stacked">
+    Long-form is published; the social/email/ad versions are sitting in a Slack channel labelled "todo".
+  </Card>
+  <Card title="Channel-specific rewriting" icon="repeat">
+    Every channel needs its own voice — copying the headline into Twitter doesn't work. Manual rewrites take hours per asset.
+  </Card>
+  <Card title="Webinar / podcast assets sit idle" icon="microphone">
+    Hours of recorded content with no repurposing — clips, summaries, follow-up emails are all theoretically going to happen.
+  </Card>
+  <Card title="Big launch coming up" icon="rocket">
+    A product launch needs 30+ derivative pieces and the content team has time for 5.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A content Agent takes a source asset + target formats and returns ready-to-publish derivatives.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Source asset (blog, webinar transcript, video, whitepaper), target channels and formats, campaign goal.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Brand voice docs, channel-specific style guides, past top-performing posts per channel.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A bundle of derivatives — blog posts, LinkedIn carousels, X threads, email teasers, ad copy variations — each tuned to its channel.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Posted to [Notion](/integrations/popular-integrations/notion) or a content doc for review, drafted into your scheduler (Buffer / Hootsuite), pushed to ad platforms via integration.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Simple Content Repurposer](https://marketplace.relevanceai.com/listing/870991de-99fd-4453-83bf-084c872e7cb2)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your team can use on day one:
+
+- *"Turn this blog post into 5 LinkedIn posts, 3 X threads, and a teaser email. Match our voice — direct, no hype."*
+- *"Pull the 4 strongest quotes from this webinar transcript and write them as standalone social posts."*
+- *"Take this product launch one-pager and give me 10 ad headline variations for paid social."*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your brand voice in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed channel engagement back into the Agent's [evals](/build/agents/build-your-agent/evals) so it leans on what performed.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Same voice across every channel" icon="clone">
+    LinkedIn voice, X voice, and email voice are different. Upload per-channel style guides and force the prompt to reference them, otherwise everything ends up sounding LinkedIn-flavored.
+  </Accordion>
+  <Accordion title="Auto-publishing without review" icon="paper-plane">
+    Generated content that goes live without a human read is how brand misfires happen. Keep marketing review gates until you've watched a quarter of output.
+  </Accordion>
+  <Accordion title="Generic repurposing" icon="copy">
+    "Turn this blog into a tweet thread" produces something forgettable without strong style references. Show the Agent your best past threads, not just the source asset.
+  </Accordion>
+  <Accordion title="Losing the source voice" icon="comment">
+    Heavy rewriting can flatten the original author's perspective. If the source is a guest post or executive POV, prompt the Agent to preserve the speaker's voice in derivatives.
+  </Accordion>
+</AccordionGroup>
