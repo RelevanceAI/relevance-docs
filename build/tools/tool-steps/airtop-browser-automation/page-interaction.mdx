@@ -12,8 +12,8 @@ The Airtop Page Interaction tool steps allow you to interact with web page eleme
 
 ## Add the 'Airtop - Click Element' Tool step
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmhecnx2i3nczfati4w6aqt43" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmhecnx2i3nczfati4w6aqt43" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 You can add the 'Airtop - Click Element' Tool step to your Tool by:
@@ -26,14 +26,15 @@ You can add the 'Airtop - Click Element' Tool step to your Tool by:
 6. **Element Description** (Required): Enter a description of the element you want to click. This can be a natural language description (e.g., "the submit button") or a CSS selector/XPath. Type `{{` to select a variable.
 7. **Wait Until Timeout Seconds** (Optional): Enter the maximum time in seconds to wait for the element to become clickable.
 8. **Wait For Navigation** (Optional): Check this box if you want the step to wait for page navigation after clicking the element (useful when clicking links or buttons that cause page loads).
-9. Clicking `Run step` to test out the Tool
+9. **Wait For Navigation Condition** (Optional): When 'Wait For Navigation' is checked, choose which event to wait for: `load`, `domcontentloaded`, `networkidle0`, or `networkidle2`. `networkidle0` and `networkidle2` are the most reliable for detecting that a post-submit page has fully settled.
+10. Clicking `Run step` to test out the Tool
 
 The step clicks the specified element on the page. If the element is not found or not clickable within the timeout period, the step will fail.
 
 ## Add the 'Airtop - Type Text' Tool step
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmhedzpg43nuffatiatv4l6bx" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmhedzpg43nuffatiatv4l6bx" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 You can add the 'Airtop - Type Text' Tool step to your Tool by:
@@ -45,17 +46,20 @@ You can add the 'Airtop - Type Text' Tool step to your Tool by:
 5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
 6. **Element Description** (Required): Enter a description of the input field where you want to type. This can be a natural language description (e.g., "the email input field") or a CSS selector/XPath. Type `{{` to select a variable.
 7. **Text to Type** (Required): Enter the text you want to type into the element. Type `{{` to select a variable, or enter the text directly.
-8. **Press Enter Key** (Optional): Check this box if you want to press the Enter key after typing the text (useful for submitting forms or triggering search).
-9. **Wait Until Timeout Seconds** (Required): Enter the maximum time in seconds to wait for the element to become available.
-10. **Wait For Navigation** (Optional): Check this box if you want the step to wait for page navigation after typing (useful when typing triggers a page load).
-11. Clicking `Run step` to test out the Tool
+8. **Press Enter Key** (Optional): Check this box to press the Enter key after typing the text (useful for submitting forms or triggering search).
+9. **Press Tab Key** (Optional): Check this box to press the Tab key after typing the text. If both Enter and Tab are enabled, Enter is pressed first. Useful for advancing focus to the next field in a form.
+10. **Clear Input Field** (Optional): Check this box to clear the input field's existing value before typing. Use this when filling fields that may already contain a value.
+11. **Wait Until Timeout Seconds** (Required): Enter the maximum time in seconds to wait for the element to become available.
+12. **Wait For Navigation** (Optional): Check this box if you want the step to wait for page navigation after typing (useful when typing triggers a page load).
+13. **Wait For Navigation Condition** (Optional): When 'Wait For Navigation' is checked, choose which event to wait for: `load`, `domcontentloaded`, `networkidle0`, or `networkidle2`.
+14. Clicking `Run step` to test out the Tool
 
 The step types the specified text into the target element. If the element is not found within the timeout period, the step will fail.
 
 ## Add the 'Airtop - Scroll Page' Tool step
 
-<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
-<iframe src="https://app.supademo.com/embed/cmheef3bi3o39fati8hrr5u3y" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmheef3bi3o39fati8hrr5u3y" frameBorder="0" title="Add the Confluence - Create Post Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 You can add the 'Airtop - Scroll Page' Tool step to your Tool by:
@@ -65,17 +69,19 @@ You can add the 'Airtop - Scroll Page' Tool step to your Tool by:
 3. Clicking 'Expand' to see the full Tool step
 4. **Window ID** (Required): Enter the identifier of the browser window containing the page. Type `{{` to select a variable from a previous step.
 5. **Session ID** (Required): Enter the identifier of the browser session. Type `{{` to select a variable.
-6. **X Scroll Amount in pixels** (Required): Enter the number of pixels to scroll horizontally. Use positive numbers to scroll right, negative numbers to scroll left, or `0` for no horizontal scrolling.
-7. **Y Scroll Amount in pixels** (Required): Enter the number of pixels to scroll vertically. Use positive numbers to scroll down, negative numbers to scroll up, or `0` for no vertical scrolling.
-8. Clicking `Run step` to test out the Tool
+6. **X Scroll Amount in pixels** (Optional): Number of pixels to scroll horizontally. Positive scrolls right, negative scrolls left. Ignored when 'Scroll To Element' is set.
+7. **Y Scroll Amount in pixels** (Optional): Number of pixels to scroll vertically. Positive scrolls down, negative scrolls up. Ignored when 'Scroll To Element' is set.
+8. **Scroll To Element** (Optional): Natural-language description of what to scroll to (e.g., "the first name field", "the pricing section"). Takes precedence over the pixel-based X/Y values.
+9. **Scroll Within** (Optional): Natural-language description of the scrollable container to scroll inside (e.g., "the modal dialog"). If left blank, the entire page is scrolled.
+10. Clicking `Run step` to test out the Tool
 
-The step scrolls the page by the specified pixel amounts. This is useful for loading dynamic content or reaching specific sections of a page.
+The step scrolls the page (or a named container) by the specified pixel amounts, or scrolls to a described element. Use pixel-based scrolling for precise control such as paging through an infinite scroll list, and 'Scroll To Element' when you want to reach a named section without knowing its exact position.
 
 ## Common use cases
 
-- Filling out forms automatically
+- Filling out forms automatically, including advancing fields with Tab and clearing pre-filled values before typing
 - Clicking buttons and links to navigate through a website
-- Scrolling to load dynamic content or reach specific page sections
+- Scrolling to load dynamic content, either by pixel amount or by natural-language description of the target
 - Automating repetitive user interactions
 
 ## Common errors
@@ -90,9 +96,18 @@ The step scrolls the page by the specified pixel amounts. This is useful for loa
 
 <AccordionGroup>
   <Accordion title="Can I wait for an element to appear before clicking?">
-    For dynamic content that loads asynchronously, consider using the 'Airtop - Monitor page for condition' step to wait for elements before interacting with them.
+    For dynamic content that loads asynchronously, consider using the 'Airtop - Monitor Page for Condition' step to wait for elements before interacting with them.
   </Accordion>
-  <Accordion title="How do I type special characters or keyboard shortcuts?">
-    The Type Text step handles standard text input. For special keys or keyboard shortcuts, you may need to use additional automation steps.
+  <Accordion title="How do I advance focus to the next field without identifying it?">
+    Enable 'Press Tab Key' on the 'Airtop - Type Text' step after typing into a field. The next focusable element receives focus, which is useful for filling multi-field forms without separately describing each input.
+  </Accordion>
+  <Accordion title="How do I overwrite a pre-filled input field?">
+    Enable 'Clear Input Field' on the 'Airtop - Type Text' step. The existing value is cleared before the new text is typed, which is more reliable than simulating Ctrl+A then Delete because it works regardless of the current cursor position or selection state.
+  </Accordion>
+  <Accordion title="When should I use 'Scroll To Element' vs pixel-based scrolling?">
+    Use 'Scroll To Element' when you want to reach a named section or element and don't know its exact pixel position. Use the X/Y pixel inputs when you need precise control over the scroll distance, such as paging through an infinite scroll list a fixed amount at a time.
+  </Accordion>
+  <Accordion title="What does 'Wait For Navigation Condition' do?">
+    When 'Wait For Navigation' is enabled on the click or type step, the condition controls which page-load event the step waits for. `load` and `domcontentloaded` complete earlier, while `networkidle0` and `networkidle2` wait for network activity to settle and are more reliable for detecting that a post-submit page has fully rendered.
   </Accordion>
 </AccordionGroup>

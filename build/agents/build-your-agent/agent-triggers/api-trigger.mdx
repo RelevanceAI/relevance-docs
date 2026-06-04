@@ -1,0 +1,122 @@
+---
+title: 'API Triggers'
+description: 'Trigger your Agent with direct HTTP requests'
+sidebarTitle: 'API Triggers'
+---
+
+API Triggers let you trigger your Agent programmatically with direct HTTP requests to the Relevance AI API. Use them to integrate from custom backends, automation scripts, or any environment that can make HTTP calls.
+
+<Callout icon="code" color="#4F46E5" iconType="regular">
+For a higher-level interface in JavaScript or TypeScript, use the [Relevance AI SDK](/sdk/introduction) — it wraps this endpoint with type-safe primitives, automatic event handling, and runtime support across Node.js, Deno, Bun, Cloudflare Workers, and the browser.
+</Callout>
+
+<Warning>
+The Relevance AI API is officially supported only for triggering Agents and Tools. All other usage is currently unsupported.
+</Warning>
+
+## Setting up an API trigger
+
+1. Navigate to the Agents page and select the agent you want to configure
+2. In the sidebar on the left, go to **Triggers** and click the **Add trigger** button
+3. Under the **Build your own triggers** section, click the **API** trigger
+
+The API trigger configuration popup displays the endpoint, a button to generate your API key, and a pre-filled request body with your `agent_id`. Code examples in cURL, JavaScript, and Python are also provided.
+
+<Warning>
+Save your API key somewhere safe — once generated, you won't be able to view it again. You can regenerate one at any time.
+</Warning>
+
+## API reference
+
+**Endpoint:**
+```http
+POST https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
+```
+
+<Info>
+The endpoint URL differs based on your organization's region. The example above shows the AU region endpoint. When you set up your API trigger in the UI, the correct endpoint for your region will be displayed in the configuration popup.
+</Info>
+
+**Request body:**
+```json
+{
+  "message": {
+    "role": "user",
+    "content": "Hello"
+  },
+  "agent_id": "[YOUR_AGENT_ID_GOES_HERE]"
+}
+```
+
+<Note>
+The response isn't returned directly. The agent's result must be sent to a destination you configure, such as Google Sheets, a webhook, or another integration.
+</Note>
+
+## Code examples
+
+**cURL**
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "Authorization: [YOUR_API_KEY]" \
+  -d '{"message":{"role":"user","content":"Hello"},"agent_id":"[YOUR_AGENT_ID_GOES_HERE]"}' \
+  https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger
+```
+
+**JavaScript (Fetch)**
+```js
+fetch('https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger', {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "[YOUR_API_KEY]"
+  },
+  body: JSON.stringify({
+    message: { role: "user", content: "Hello" },
+    agent_id: "[YOUR_AGENT_ID_GOES_HERE]"
+  })
+});
+```
+
+**Python (requests)**
+```python
+import requests
+import json
+
+requests.post(
+  'https://api-f1db6c.stack.tryrelevance.com/latest/agents/trigger',
+  headers={
+    "Content-Type": "application/json",
+    "Authorization": "[YOUR_API_KEY]"
+  },
+  data=json.dumps({
+    "message": { "role": "user", "content": "Hello" },
+    "agent_id": "[YOUR_AGENT_ID_GOES_HERE]"
+  })
+)
+```
+
+## Best practices
+
+- **Error handling**: implement error handling in your integration code
+- **Rate limiting**: be mindful of API rate limits and throttle accordingly
+- **Security**: store API keys in environment variables rather than hardcoding them
+- **Monitoring**: set up monitoring for your trigger usage to detect issues early
+- **Testing**: test your implementation in a development environment before deploying to production
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What programming languages can I use?">
+    The API trigger works with any language capable of making HTTP requests. For JavaScript and TypeScript, the [Relevance AI SDK](/sdk/introduction) provides a higher-level interface with built-in authentication and event handling.
+  </Accordion>
+  <Accordion title="Are there rate limits?">
+    Yes, usage is subject to rate limits based on your subscription plan. Refer to your plan details for specific limitations.
+  </Accordion>
+  <Accordion title="Can I use this with serverless functions?">
+    Yes — the API works with serverless architectures like AWS Lambda, Google Cloud Functions, and Azure Functions.
+  </Accordion>
+  <Accordion title="How secure is the API trigger?">
+    All requests must be authenticated with your API key, and all data is transmitted over HTTPS.
+  </Accordion>
+</AccordionGroup>
