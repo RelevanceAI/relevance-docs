@@ -14,15 +14,13 @@ With the native Gong integration in Relevance AI, your agents can retrieve call 
 
 ## Connect the integration
 
-The Gong integration uses OAuth, so no API keys are required. You authenticate directly with your Gong account.
-
 <div style={{ width:"100%",position:"relative","padding-top":"44.5%" }}>
 <iframe src="https://app.supademo.com/embed/cmpyx986aa4a9qmy7nfug9r7z" frameBorder="0" title="How to connect the Gong integration" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
 </div>
 
-1. Go to the **Integrations & API Keys** page in the sidebar of your Relevance AI dashboard.
-2. In the **Integrations** section, search for **Gong**.
-3. Click the **Gong** result — the native integration with the blue tick (not **Gong API Key** or **Gong (Pipedream)**).
+1. Go to the Integrations & API Keys page in the sidebar of your Relevance AI dashboard.
+2. In the Integrations section, search for Gong.
+3. Click the Gong — the native integration with the blue tick.
 4. In the pop-up window, sign into your Gong account and authorize the requested permissions.
 5. Once authenticated, your Gong account appears as a connected integration.
 
@@ -32,60 +30,72 @@ The Gong integration uses OAuth, so no API keys are required. You authenticate d
 
 ## Tool steps for Gong
 
-The Gong integration provides five tool steps that your agents can use to interact with your call data. Add these to any tool in the tool builder by searching for "Gong" in the tool step search bar.
+<img src="/images/gong-tools.png" alt="Gong tool steps in the tool step search bar" />
 
-### Call data
+The Gong integration provides a range of tool steps that your agents can use to interact with your call data and Engage flows. Add these to any tool in the tool builder by searching for "Gong" in the tool step search bar.
 
-<CardGroup cols={2}>
-  <Card title="List Calls" icon="list">
-    Retrieve a list of calls from your Gong account, filterable by date range, participants, and other criteria.
-  </Card>
-  <Card title="Get Extensive Call Data" icon="chart-bar">
-    Fetch detailed metadata and analytics for a specific call, including duration, participants, talk ratios, and engagement metrics.
-  </Card>
-  <Card title="Retrieve Call Transcripts" icon="file-lines">
-    Pull the full transcript for a call, with speaker-identified turns and timestamps.
-  </Card>
-  <Card title="Add New Calls" icon="plus">
-    Add call records to Gong, such as uploading recordings from other platforms or logging external conversations.
-  </Card>
-</CardGroup>
+Select a category below, then expand any tool step to see what it does.
 
-### Advanced
+<Tabs>
+  <Tab title="Calls">
+    <AccordionGroup>
+      <Accordion title="List Calls" icon="list">
+        Retrieve a list of calls from your Gong account, filterable by date range, participants, and other criteria.
+      </Accordion>
+      <Accordion title="Get Extensive Data" icon="chart-bar">
+        Fetch detailed metadata and analytics for a specific call, including duration, participants, talk ratios, and engagement metrics.
+      </Accordion>
+      <Accordion title="Retrieve Transcripts" icon="file-lines">
+        Pull the full transcript for a call, with speaker-identified turns and timestamps.
+      </Accordion>
+      <Accordion title="Add New Call" icon="plus">
+        Add a call record to Gong, such as uploading recordings from other platforms or logging external conversations.
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  <Tab title="Engage flows">
+    <AccordionGroup>
+      <Accordion title="List Engage Flows" icon="diagram-project">
+        Retrieve the Gong Engage flows in your account.
+      </Accordion>
+      <Accordion title="List Engage Flow Folders" icon="folder">
+        Retrieve the folders that organize your Gong Engage flows.
+      </Accordion>
+      <Accordion title="Assign Prospects to Flow" icon="user-plus">
+        Add prospects to a Gong Engage flow.
+      </Accordion>
+      <Accordion title="List Assigned Flow For Prospects" icon="users">
+        See which flows a set of prospects are currently assigned to.
+      </Accordion>
+      <Accordion title="Unassign Prospects by CRM ID" icon="user-minus">
+        Remove prospects from a flow using their CRM ID.
+      </Accordion>
+      <Accordion title="Unassign Prospects by Flow Instance ID" icon="user-xmark">
+        Remove prospects from a flow using the flow instance ID.
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  <Tab title="API access">
+    <AccordionGroup>
+      <Accordion title="API Call" icon="plug">
+        Call a specific Gong API endpoint.
+      </Accordion>
+      <Accordion title="Generic API Call" icon="code">
+        Make any request to the Gong REST API. Use this when you need functionality beyond the pre-built tool steps.
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
 
-<CardGroup cols={1}>
-  <Card title="Generic Gong API Call" icon="code">
-    Make any request to the Gong REST API. Use this when you need functionality beyond the pre-built tool steps.
-  </Card>
-</CardGroup>
+### How to add a tool step
+
+<div style={{ width:"100%",position:"relative","padding-top":"44.5%" }}>
+<iframe src="https://app.supademo.com/embed/cmpyz3e04a5taqmy7xymz1kxw" frameBorder="0" title="How to add a Gong tool step" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
 <Tip>
   Type "Gong" in the tool step search bar to see all available Gong actions when building your tools.
 </Tip>
-
-## Example use cases
-
-<AccordionGroup>
-  <Accordion title="Automated deal briefings from call data" icon="briefcase">
-    After a sales call is processed in Gong, an agent retrieves the transcript and key moments, then generates a deal briefing summarizing the prospect's pain points, objections, and agreed next steps. The briefing is pushed to your CRM automatically.
-  </Accordion>
-
-  <Accordion title="Call coaching summaries" icon="chalkboard-user">
-    An agent pulls recent calls for a sales rep, analyzes the transcripts for coaching signals (talk ratio, question frequency, filler words), and produces a personalized coaching report for their manager.
-  </Accordion>
-
-  <Accordion title="CRM enrichment after calls" icon="database">
-    When a call ends, an agent retrieves the extensive call data and transcript, extracts relevant fields (budget mentioned, decision-maker identified, competitor named), and updates the corresponding CRM record.
-  </Accordion>
-
-  <Accordion title="Competitive intelligence tracking" icon="magnifying-glass-chart">
-    An agent regularly scans call transcripts for competitor mentions, aggregates the findings, and produces a weekly competitive intelligence digest for the product and sales leadership teams.
-  </Accordion>
-
-  <Accordion title="Customer feedback extraction" icon="comments">
-    An agent retrieves transcripts from customer success calls, identifies recurring feedback themes, and routes them to the appropriate product or support teams.
-  </Accordion>
-</AccordionGroup>
 
 ## Frequently asked questions (FAQs)
 
