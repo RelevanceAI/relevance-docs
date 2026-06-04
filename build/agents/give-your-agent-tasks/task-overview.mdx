@@ -11,58 +11,59 @@ description: "What are tasks and how do they differ from prompt?"
 
 ## Tasks Page: Your Command Center for Agent Activity
 
-The Tasks Page is your central dashboard for managing everything your AI agent does. Think of it as a mission control center where you can see, review, and interact with all your agent's work in one place.
+The Tasks Page is your central dashboard for managing everything your AI Agent does. Think of it as a mission control center where you can see, review, and interact with all your Agent's work in one place.
 
-### Your Workspace at a Glance
+### Your workspace at a glance
 
 The Tasks Page is divided into four intuitive sections that work together to give you complete visibility and control:
 
-### 1. Task List (Left Sidebar)
+### 1. Task list (left sidebar)
 
 <img 
   height="200"  
   src="/images/agent/tasks-left.png" 
 />
 
-This works like your email inbox, showing all your agent's activities:
+This works like your email inbox, showing all your Agent's activities:
 
-- **All Tasks** - Complete history of everything your agent has handled
+- **All Tasks** - Complete history of everything your Agent has handled
 - **To Review** - Tasks that need your attention or input
+- **Errors** - Tasks that failed or encountered errors
 - **Saved Filters** - Your custom views (like "High Priority" or "Customer Support Tasks")
 
 <Tip> Quick Tip: Use the search and filter options to quickly find specific tasks when your list grows.</Tip>
 
-### 2. Agent Output (Middle Section - Top)
+### 2. Agent output (middle section - top)
 
 <img 
   height="200"  
   src="/images/agent/tasks-middle-top.png" 
 />
 
-See exactly what your agent produced for any task you select:
+See exactly what your Agent produced for any task you select:
 
 - Task title and where it came from
-- The complete output your agent generated
+- The complete output your Agent generated
 - Summary of actions taken (like "Sent email to customer" or "Updated database")
 
-<Tip> Quick Tip: This area shows you the "what happened" - perfect for quickly checking your agent's work. </Tip>
+<Tip> Quick Tip: This area shows you the "what happened" - perfect for quickly checking your Agent's work. </Tip>
 
-### 3. Agent Chat (Middle Section - Bottom)
+### 3. Agent chat (middle section - bottom)
 
 <img 
   height="200"  
   src="/images/agent/tasks-middle-bottom.png" 
 />
 
-A chat interface where you can talk directly with your agent about the task:
+A chat interface where you can talk directly with your Agent about the task:
 
-- Ask questions about what the agent did or why
+- Ask questions about what the Agent did or why
 - Provide additional information or instructions
-- Guide your agent to improve its work in real-time
+- Guide your Agent to improve its work in real-time
 
-<Tip> Quick Tip: Use this chat to refine outputs or teach your agent how to better meet your needs next time. </Tip>
+<Tip> Quick Tip: Use this chat to refine outputs or teach your Agent how to better meet your needs next time. </Tip>
 
-### 4. Task Details (Right Sidebar)
+### 4. Task details (right sidebar)
 
 <img 
   height="200"  
@@ -76,21 +77,21 @@ All the technical information and metadata about each task:
 - **Credits Used:** How many Relevance AI credits this task consumed
 - **Metadata:** Any custom tags you've added
 - **Schedule:** Timing details for recurring tasks
-- **Linked Tools:** What Tools your agent accessed/uses
-- **Linked Agents:** Any other agents (subagents) that helped with this task
+- **Linked Tools:** What Tools your Agent accessed/uses
+- **Linked Agents:** Any other Agents (subagents) that helped with this task
 
 <Tip> Quick Tip: This section is your audit trail - helpful for troubleshooting or understanding exactly how a task was processed.</Tip>
 
-### How to Use Your Workspace Effectively
+### How to use your workspace effectively
 
 Think of the Tasks Page as your collaboration space with your AI assistant:
 
 1. Use the **left sidebar** to find and select tasks (like choosing emails in your inbox)
-2. Review your agent's work in the **middle section**
-3. Chat with your agent about the task if needed
+2. Review your Agent's work in the **middle section**
+3. Chat with your Agent about the task if needed
 4. Check the **right sidebar** for technical details and resource usage
 
-This integrated view ensures you always know what your agent is doing, why it made certain decisions, and how you can work together to get better results.
+This integrated view ensures you always know what your Agent is doing, why it made certain decisions, and how you can work together to get better results.
 
 ## Filtering tasks
 
@@ -99,7 +100,7 @@ The task filter builder in the Task List lets you narrow the list to exactly the
 ### Available filters
 
 - **Status** — filter by task state (Running, Completed, Paused, Timed out, Unrecoverable error, Pending approval, and others)
-- **Agent** — filter to tasks from a specific agent
+- **Agent** — filter to tasks from a specific Agent
 - **Tool usage** — filter by which tools the task used
 - **Errors** — filter by failure type, including **Has active tool failures** and **Agent has errored**
 - **Metadata (Memory)** — filter on custom metadata fields attached to tasks
@@ -112,21 +113,15 @@ The task filter builder in the Task List lets you narrow the list to exactly the
 
 The **Errors** filter has two options that surface different kinds of failure:
 
-- **Agent has errored** — shows tasks where the agent itself encountered an error and stopped
-- **Has active tool failures** — shows tasks where one or more tools failed during execution, even if the agent continued running
+- **Agent has errored** — shows tasks where the Agent itself encountered an error and stopped
+- **Has active tool failures** — shows tasks where one or more tools failed during execution, even if the Agent continued running
 
-**Why both matter:** Tool failures don't always cause the agent to stop. An agent may retry, skip a step, or continue with degraded output while a tool failure goes unnoticed. The **Has active tool failures** filter surfaces those tasks so you can review them, even when overall task status appears normal.
+**Why both matter:** Tool failures don't always cause the Agent to stop. An Agent may retry, skip a step, or continue with degraded output while a tool failure goes unnoticed. The **Has active tool failures** filter surfaces those tasks so you can review them, even when overall task status appears normal.
 
 Combine both filters to see tasks with any kind of failure — both agent-level errors and tool-level failures.
-
-**Common use cases:**
-
-- Debugging: pinpoint which tasks had tool issues after a configuration change
-- Monitoring agent reliability: check periodically for tool failures that didn't surface as errors
-- Identifying problematic tools: if the same tool keeps appearing in filtered results, it likely needs attention
 
 ### The Errors tab
 
 The **Errors tab** in the Task List is a pre-built view focused entirely on failed and errored tasks. When you open it, the **Has active tool failures** filter is automatically enabled and locked — you'll see explanatory text below the filter explaining why. This prevents accidental removal of the filter and ensures the Errors tab always reflects its intended purpose.
 
-Use the Errors tab as your go-to starting point when an agent run produces unexpected results and you need to quickly identify which tasks had tool failures.
+Use the Errors tab as your go-to starting point when an Agent run produces unexpected results and you need to quickly identify which tasks had tool failures.

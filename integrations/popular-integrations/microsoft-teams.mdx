@@ -6,7 +6,7 @@ sidebarTitle: "Microsoft Teams"
 
 With Relevance AI's Microsoft Teams integration, you can connect your Teams workspace to your AI agents, enabling them to monitor channels, respond to messages, and automate communication workflows directly within Teams.
 
-Relevance AI uses a unified Microsoft authentication that works across **Teams**, **Outlook**, **SharePoint**, and **OneDrive** — connecting one account gives you access to all services.
+Relevance AI uses a unified Microsoft authentication that works across **Teams**, **Outlook**, **SharePoint**, and **OneDrive** — connecting one account gives you access to all services. See the [Outlook integration](/integrations/popular-integrations/outlook) and [SharePoint knowledge source](/build/knowledge/integrated-knowledge-sources/sharepoint) pages for details on those services.
 
 ## Prerequisites
 
@@ -20,45 +20,89 @@ Before setting up the Microsoft Teams integration, ensure you have:
     Desktop or web app within your organization
   </Card>
   <Card title="Sufficient permissions" icon="lock">
-    Enterprise organizations may require admin consent (see [Admin consent & permissions](#admin-consent-permissions))
+    Enterprise organizations may require admin consent from a Global Administrator or Teams Administrator (see [Admin consent & permissions](#admin-consent-permissions))
   </Card>
   <Card title="A Teams channel or chat" icon="hashtag">
     At least one channel or chat where you want your agent to operate
   </Card>
 </CardGroup>
 
-<Info>Setup is a two-step process: first connect your Microsoft account via OAuth in Relevance AI, then install the Relevance AI app in Microsoft Teams. Both steps are required.</Info>
+## Setup overview
 
-## Step 1: Connect the integration
+Setting up Microsoft Teams requires two separate steps. Both are required — completing only one is not enough.
 
-<div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
-<iframe src="https://app.supademo.com/embed/cmmech3sm2nyinr99n7ztmcpx?embed_v=2" frameBorder="0" title="Connect Microsoft Teams integration" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+<CardGroup cols={2}>
+  <Card title="1. Connect your Microsoft account" icon="plug">
+    Authenticate via OAuth in Relevance AI to grant access to Microsoft services.
+  </Card>
+  <Card title="2. Install the Relevance AI app in Teams" icon="microsoft">
+    Add the app from the Teams app store to the channels and chats where your agent should operate.
+  </Card>
+</CardGroup>
+
+## Step 1 - Connect the integration
+
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmmech3sm2nyinr99n7ztmcpx?embed_v=2" frameBorder="0" title="Connect Microsoft Teams integration" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-1. Go to **Integrations & API Keys** in the sidebar of your Relevance AI dashboard.
-2. Click **Microsoft (Teams, Outlook, SharePoint, OneDrive)** and then click **Add Integration**.
-3. In the pop-up window, sign into your Microsoft account and approve the requested permissions.
-4. Once complete, you'll see a green **Connected** status indicator in Relevance AI.
+<Steps>
+  <Step title="Open the Integrations page">
+    In the Relevance AI dashboard, click **Integrations & API Keys** in the sidebar.
+  </Step>
 
-**Note:** If a pop-up window doesn't appear, check your browser's pop-up blocker settings. If you see a "Need admin approval" message, see [Admin consent & permissions](#admin-consent-permissions).
+  <Step title="Find the Microsoft integration">
+    Locate **Microsoft (Teams, Outlook, SharePoint, OneDrive)** in the list of available integrations.
+  </Step>
 
-## Step 2: Install the Relevance AI app in Microsoft Teams
+  <Step title="Add the integration">
+    Click **Add Integration**. A pop-up window will open for Microsoft sign-in.
+
+    <Tip>If a pop-up window doesn't appear, check your browser's pop-up blocker settings and allow pop-ups from Relevance AI.</Tip>
+  </Step>
+
+  <Step title="Sign in to your Microsoft account">
+    Enter your Microsoft credentials in the pop-up window and sign in.
+
+    <Warning>The Microsoft account you sign in with determines which Teams, channels, and chats are visible to the integration. Use the account that has access to the channels your agent needs to operate in.</Warning>
+  </Step>
+
+  <Step title="Grant permissions">
+    Review the requested permissions and click **Accept**. These permissions allow Relevance AI to read and send messages, access channel and team information, and maintain a persistent connection.
+
+    <Warning>If you see a "Need admin approval" message, your organization's Azure AD / Entra ID tenant restricts third-party app consent. See [Admin consent & permissions](#admin-consent-permissions) for next steps.</Warning>
+
+    For a full list of requested scopes, see the [Permissions reference](#permissions-reference).
+  </Step>
+
+  <Step title="Confirm the connection">
+    Once complete, you'll see a green **Connected** status indicator next to the Microsoft integration in Relevance AI.
+  </Step>
+</Steps>
+
+## Step 2 - Install the Relevance AI app in Microsoft Teams
 
 After connecting your Microsoft account, you need to install the Relevance AI app in Teams so your agents can interact with channels and chats.
+
+<Warning>The Relevance AI app must be added to every channel and group chat where you want your agent to respond. Triggers and tool steps will not work in channels or chats where the app has not been added.</Warning>
 
 <Steps>
   <Step title="Open the Teams app store">
     In Microsoft Teams, click on **Apps** in the left sidebar.
   </Step>
 
-  <Step title="Search and install">
-    Search for **Relevance AI**, then click **Add** or **Install** to add it to your workspace.
+  <Step title="Search for the Relevance AI app">
+    Type **Relevance AI** in the search bar and locate the app in the results.
 
-    <Info>If you don't see an install button, your organization may require admin approval. See [Admin consent & permissions](#admin-consent-permissions).</Info>
+    <Note>If you don't see the Relevance AI app, your organization may restrict third-party app installations. See [Admin consent & permissions](#admin-consent-permissions) for how to request approval.</Note>
   </Step>
 
-  <Step title="Add the app to channels and chats">
-    After installing, add the app to each channel or chat where you want your agent to operate.
+  <Step title="Install the app">
+    Click **Add** or **Install** to add the Relevance AI app to your Teams workspace.
+  </Step>
+
+  <Step title="Add the app to specific channels and chats">
+    After installing, add the app to each channel or group chat where you want your agent to operate.
 
     <Tabs>
       <Tab title="Channels">
@@ -74,8 +118,6 @@ After connecting your Microsoft account, you need to install the Relevance AI ap
         4. Add the app to the chat
       </Tab>
     </Tabs>
-
-    **Important:** The app must be added to every channel and chat where you want your agent to respond. Triggers will not work for channels without the app.
   </Step>
 
   <Step title="Verify the app is active">
@@ -83,69 +125,83 @@ After connecting your Microsoft account, you need to install the Relevance AI ap
   </Step>
 </Steps>
 
-## Set up Microsoft Teams as a trigger
+## Triggers
 
-You can configure your agents to automatically respond to Teams messages by setting up a trigger. Your agent will process messages in real-time as they are posted.
+<Frame caption="A two-way conversation between a user and a Relevance AI agent in a Teams channel.">
+  ![Trigger conversation in Teams](/images/trigger-agent-from-teams.png)
+</Frame>
 
-**Important:** Teams triggers activate only on new messages. They do not trigger on new chat creation, group creation, or webhooks.
+Triggers let your agents respond to Teams messages automatically, so your team can get answers, run workflows, and escalate issues without leaving their existing conversations. Instead of switching to a separate tool, users interact with agents right where they already communicate.
 
-<div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
-<iframe src="https://app.supademo.com/embed/cmmec8qme2nvjnr99ijtnqf0k?embed_v=2" frameBorder="0" title="Set up Microsoft Teams trigger" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+The Relevance AI app is available on the Microsoft Teams marketplace. Users can @mention or message the app in channels, group chats, or direct messages to trigger agents and have two-way conversations directly in Teams. The same trigger setup also works for [workforces](/build/workforces/create-a-workforce).
+
+<Warning>Teams triggers activate only on new messages. They do not trigger on new chat creation, group creation, or webhooks.</Warning>
+
+### Setting up a trigger
+
+<Note>Before setting up a trigger, confirm that you have completed both <a href="#step-1-connect-the-integration">Step 1: Connect the integration</a> and <a href="#step-2-install-the-relevance-ai-app-in-microsoft-teams">Step 2: Install the Relevance AI app</a>.</Note>
+
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmmec8qme2nvjnr99ijtnqf0k?embed_v=2" frameBorder="0" title="Set up Microsoft Teams trigger" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-1. Navigate to your agent in Relevance AI and go to the **Triggers** section.
-2. Click **Add Trigger** and select **Microsoft Teams** from the list.
-3. Choose the Microsoft account you connected, then select the **Team** and specific **channel** or **chat** you want to monitor.
-4. Optionally, set up **keyword matching** to filter which messages activate your agent. Leave the keyword field empty to trigger on all messages, or enter specific keywords separated by commas.
-5. In the **Core Instructions** section, write a prompt that guides how your agent should respond — including its role, tone, and when to respond.
+<Steps>
+  <Step title="Open your agent's settings">
+    Navigate to your agent in Relevance AI and go to the **Triggers** section.
+  </Step>
 
-**Note:** Only channels where the authenticated user is a member and the Relevance AI app has been added will appear in the dropdown.
+  <Step title="Add a Microsoft Teams trigger">
+    Click **Add Trigger** and select **Microsoft Teams** from the list.
+  </Step>
+
+  <Step title="Select the Team and channel">
+    Choose the Microsoft account you connected, then select the **Team** and specific **channel** or **chat** you want to monitor.
+
+    <Note>Only channels where the authenticated user is a member and the Relevance AI app has been added will appear in the dropdown.</Note>
+  </Step>
+
+  <Step title="Configure trigger conditions (optional)">
+    Set up **keyword matching** to filter which messages activate your agent. Leave the keyword field empty to trigger on all messages, or enter specific keywords separated by commas. The trigger checks whether any of the keywords appear anywhere in the message text (case-insensitive).
+  </Step>
+
+  <Step title="Write agent instructions">
+    In the **Core Instructions** section, write a prompt that guides how your agent should respond — including its role, tone, and when to respond.
+  </Step>
+</Steps>
 
 <Tip>Set tool permissions to "approval mode" initially so your agent asks before sending messages. Switch to autopilot once you're confident.</Tip>
 
-## Agent Notifications
+### How triggered conversations work
 
-![Agent notification rule configuration](/images/team-agent-notifications.png)
+Once a trigger fires, the agent responds directly inside Teams with the following capabilities:
 
-<Warning>
-  This feature is currently in beta for some users
-</Warning>
+<CardGroup cols={3}>
+  <Card title="Threaded conversations" icon="comments">
+    Agent replies are threaded in the channel. Conversation threads stay active for 30 minutes.
+  </Card>
+  <Card title="Adaptive Cards" icon="table-layout">
+    Responses are delivered as Microsoft Adaptive Cards — rich, interactive messages inside Teams.
+  </Card>
+  <Card title="Typing indicator" icon="ellipsis">
+    Teams displays a typing indicator while the agent is processing a response.
+  </Card>
+  <Card title="File and image attachments" icon="paperclip">
+    Agents can receive and process inline images, pasted screenshots, and uploaded files (PDFs, documents, images) from Teams conversations.
+  </Card>
+  <Card title="Proactive messages" icon="paper-plane">
+    Agents can send direct messages to users without the user initiating first.
+  </Card>
+  <Card title="Workforce triggers" icon="users-gear">
+    Teams messages can trigger an entire workforce, not just an individual agent.
+  </Card>
+</CardGroup>
 
-You can receive notifications in Microsoft Teams when your agents enter specific statuses or encounter tool errors. This helps you monitor agent activity and respond quickly when issues occur.
-
-### Setting up Teams notifications
-
-1. Navigate to your agent and click the **Build** tab
-2. In the left sidebar, click **Escalations**
-3. Under "Agent Notifications", click **Add agent notification**
-4. Configure your notification settings:
-   - Select **Microsoft Teams** as the platform
-   - Choose the notification trigger:
-     - **Agent enters status** - Select specific task statuses (e.g., "Running", "Completed", "Failed")
-     - **Tool errors (any tool)** - Get notified when any tool encounters an error
-   - Select a Microsoft Teams account that you have previously connected, or add a new Teams account
-   - Select the Teams channel where you want to receive notifications
-5. Click **Publish changes** to save your notification configuration
-6. Test the notification by running your agent - you should receive a notification in your selected Teams channel based on your configured triggers
-
-<Note>
-  Make sure you have a Microsoft Teams account connected in your Integrations & API Keys page before setting up agent notifications.
-</Note>
-
-### What you'll receive
-
-When a notification is triggered, you'll receive a message in your Teams channel with:
-- Agent name and status
-- Task details and context
-- A link to view the full task in Relevance AI
-- For tool errors: information about which tool failed and why
-
-You can click through to the task in Relevance AI to take further action or investigate issues.
+<Note>Messages that contain only attachments with no text will show a "[N attachments]" indicator to the agent.</Note>
 
 ## Tool steps for Microsoft Teams
 
-<div style={{ width:"100%",position:"relative",paddingTop:"56.25%"}}>
-<iframe src="https://app.supademo.com/embed/cmmbee6og0j1y22c40mj0hzvt?embed_v=2" frameBorder="0" title="Microsoft Teams tool steps" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmmbee6og0j1y22c40mj0hzvt?embed_v=2" frameBorder="0" title="Microsoft Teams tool steps" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 The Microsoft Teams integration provides actions your agents can use as tool steps in their workflows.
@@ -160,8 +216,17 @@ The Microsoft Teams integration provides actions your agents can use as tool ste
   <Card title="Create Channel" icon="plus">
     Create a new channel in a Team
   </Card>
+  <Card title="List Teams" icon="users">
+    Get all teams the authenticated user belongs to
+  </Card>
   <Card title="List Channels" icon="list">
     Get all channels in a Team
+  </Card>
+  <Card title="Retrieve Chat Messages" icon="inbox">
+    Fetch messages from a specific chat conversation
+  </Card>
+  <Card title="Search Messages" icon="magnifying-glass">
+    Search for messages across Teams channels and chats
   </Card>
   <Card title="List Shifts" icon="calendar-days">
     Retrieve shift information from Teams
@@ -175,20 +240,51 @@ The Microsoft Teams integration provides actions your agents can use as tool ste
   Most Microsoft Teams tool steps are currently in beta. Please report any issues to our support team.
 </Note>
 
-## Example use cases
+## Agent alerts
+
+<Frame caption="Configuring agent notification rules in Relevance AI.">
+  ![Agent notification configuration](/images/team-agent-notifications.png)
+</Frame>
+
+You can receive notifications in Microsoft Teams when your agents enter specific statuses or encounter tool errors. This helps you monitor agent activity and respond quickly when issues occur.
+
+<Note>Agent notifications are currently in beta and may not be available for all accounts.</Note>
+
+### Setting up Teams notifications
+
+<Steps>
+  <Step title="Open the escalations panel">
+    Navigate to your agent and click the **Build** tab, then click **Escalations** in the left sidebar.
+  </Step>
+
+  <Step title="Add an agent notification">
+    Under "Agent Notifications", click **Add agent notification**.
+  </Step>
+
+  <Step title="Configure notification settings">
+    Select **Microsoft Teams** as the platform, then choose the notification trigger: **Agent enters status** (select specific task statuses such as "Running", "Completed", or "Failed") or **Tool errors (any tool)** to get notified when any tool encounters an error. Select a Microsoft Teams account and the channel where you want to receive notifications. If no accounts appear, complete the [connection steps](#step-1-connect-the-integration) first.
+  </Step>
+
+  <Step title="Publish changes">
+    Click **Publish changes** to save your notification configuration.
+  </Step>
+</Steps>
+
+<Tip>Test the notification by running your agent — you should receive a notification in your selected Teams channel based on your configured triggers.</Tip>
+
+### What you'll receive
+
+When a notification is triggered, you'll receive a message in your Teams channel containing:
 
 <CardGroup cols={2}>
-  <Card title="IT support bot" icon="headset">
-    Monitor your IT support channel and automatically respond to common technical questions, provide troubleshooting steps, and escalate urgent problems.
+  <Card title="Agent status and context" icon="circle-info">
+    Agent name, status, and task details
   </Card>
-  <Card title="Onboarding assistant" icon="user-plus">
-    Welcome new team members, answer questions about company policies, share relevant documentation, and guide new hires through their first week.
+  <Card title="Direct link" icon="arrow-up-right-from-square">
+    Link to view the full task in Relevance AI
   </Card>
-  <Card title="Customer success agent" icon="handshake">
-    Monitor customer inquiries, provide initial responses, search for relevant case history, and route complex issues to the appropriate team member.
-  </Card>
-  <Card title="Sales pipeline assistant" icon="chart-line">
-    Log deal updates to your CRM, remind team members of follow-up tasks, and post daily pipeline summaries.
+  <Card title="Error details" icon="triangle-exclamation">
+    For tool errors: which tool failed and why
   </Card>
 </CardGroup>
 
@@ -196,78 +292,110 @@ The Microsoft Teams integration provides actions your agents can use as tool ste
 
 Enterprise organizations often require administrator approval before users can connect third-party applications or install apps in Microsoft Teams.
 
+### Understanding admin consent
+
+Microsoft Azure AD (Entra ID) allows tenant administrators to restrict whether users can grant consent to third-party apps on their own. When this restriction is active, individual users will see a "Need admin approval" screen during the OAuth flow instead of the standard consent prompt. This is a tenant-level policy — it is not specific to Relevance AI.
+
 If you see "Need admin approval" or "This app requires admin approval", follow the steps below.
 
 <Tabs>
   <Tab title="OAuth connection approval">
     If you see an admin approval message when connecting your Microsoft account:
 
-    1. Copy the **consent URL** that appears in the Microsoft login window.
-    2. Forward the URL to your **Microsoft 365 admin** with a request to grant consent, including what Relevance AI is and how it will be used.
-    3. Your administrator will open the URL, review the requested permissions, and grant consent on behalf of the organization.
-    4. Return to Relevance AI and **retry the Microsoft integration connection**.
+    <Steps>
+      <Step title="Copy the consent URL">
+        Copy the **consent URL** that appears in the Microsoft login window. This URL contains the specific permissions Relevance AI is requesting.
+      </Step>
+      <Step title="Forward the URL to your administrator">
+        Send the URL to your **Microsoft 365 Global Administrator or Application Administrator** with a request to grant consent. Include a brief explanation of what Relevance AI is and how it will be used.
+      </Step>
+      <Step title="Wait for admin approval">
+        Your administrator will open the URL, review the requested permissions, and click **Accept** to grant consent on behalf of the organization.
+      </Step>
+      <Step title="Retry the connection">
+        Return to Relevance AI and **retry the Microsoft integration connection**. The consent prompt should no longer appear.
+      </Step>
+    </Steps>
   </Tab>
 
   <Tab title="Teams app installation approval">
     If your organization requires admin approval for app installations:
 
-    1. Contact your **IT administrator** and request approval to install the Relevance AI app.
-    2. Your administrator will go to the [Microsoft Teams Admin Center](https://admin.teams.microsoft.com), navigate to **Teams apps** > **Manage apps**, search for **Relevance AI**, and change the app status to **Allowed**.
-    3. Once approved, follow the steps in [Step 2: Install the Relevance AI app](#step-2-install-the-relevance-ai-app-in-microsoft-teams).
+    <Steps>
+      <Step title="Contact your IT administrator">
+        Request approval to install the Relevance AI app in Microsoft Teams.
+      </Step>
+      <Step title="Wait for admin approval">
+        Your administrator will go to the [Microsoft Teams Admin Center](https://admin.teams.microsoft.com), navigate to **Teams apps** > **Manage apps**, search for **Relevance AI**, and change the app status to **Allowed**.
+      </Step>
+      <Step title="Install the app">
+        Once approved, follow the steps in [Step 2: Install the Relevance AI app](#step-2-install-the-relevance-ai-app-in-microsoft-teams).
+      </Step>
+    </Steps>
   </Tab>
 </Tabs>
 
-<Tip>Work with your IT team early in the process to avoid delays.</Tip>
+## Permissions reference
+
+The following OAuth scopes are requested when you connect your Microsoft account. These permissions allow Relevance AI to read and send messages, access team and channel metadata, and maintain persistent access.
+
+| Scope | Description |
+|---|---|
+| `offline_access` | Maintains access without requiring frequent re-authentication |
+| `Chat.Create` | Create new chats |
+| `Chat.ReadWrite` | Read and write to chats the user has access to |
+| `ChatMessage.Read` | Read chat messages |
+| `ChatMessage.Send` | Send chat messages |
+| `ChannelMessage.Read.All` | Read messages in channels the user has access to |
+| `ChannelMessage.Send` | Send messages to channels |
+| `Channel.ReadBasic.All` | Read basic channel information (name, description, ID) |
+| `Team.ReadBasic.All` | Read basic team information (name, description, ID) |
+| `User.Read` | Read the signed-in user's profile |
+| `User.Read.All` | List users in the organization (used for trigger user filters) |
+
+<Note>These permissions may evolve as new features are added to the integration. Any changes will be reflected in the OAuth consent prompt.</Note>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="'The application is not authorized' error">
+    This error means your Azure AD / Entra ID tenant has not granted consent for Relevance AI. Ask your Microsoft 365 Global Administrator to grant admin consent using the steps in [Admin consent & permissions](#admin-consent-permissions). Once consent is granted, retry the connection from the Integrations page.
+  </Accordion>
+
+  <Accordion title="'Consent was denied' error">
+    This occurs when you or your administrator explicitly declined the permissions request during the OAuth flow. To resolve this, retry the integration connection from the Integrations page and click **Accept** when prompted. If the consent was denied by an admin policy, your administrator will need to grant consent on your behalf.
+  </Accordion>
+
+  <Accordion title="Relevance AI app not visible in the Teams app store">
+    If the Relevance AI app does not appear in the Teams app store, your organization likely restricts third-party app installations. Ask your IT administrator to allow the app in the [Microsoft Teams Admin Center](https://admin.teams.microsoft.com) under **Teams apps** > **Manage apps**. See [Admin consent & permissions](#admin-consent-permissions) for detailed steps.
+  </Accordion>
+
+  <Accordion title="Teams trigger option not visible in agent settings">
+    Some Teams features are controlled by feature flags and may not be enabled for all accounts. If you don't see Microsoft Teams as a trigger option in your agent or workforce settings, [contact our support team](/get-started/support) to check whether the feature needs to be enabled for your account.
+  </Accordion>
+
+  <Accordion title="Trigger is configured but the agent isn't responding">
+    Verify that the Relevance AI app has been added to the specific channel or chat being monitored (not just installed in Teams), and that the Microsoft account used for the trigger is a member of the channel. Confirm the trigger is enabled and published in your agent's settings. If keyword matching is configured, check that messages contain the expected keywords. Review the agent's task logs in Relevance AI for errors — a `401 Unauthorized` error indicates the OAuth token has expired or been revoked, and you should reconnect the Microsoft integration.
+  </Accordion>
+</AccordionGroup>
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
   <Accordion title="Who supports the Microsoft Teams integration?">
-    The Microsoft Teams integration was built by Relevance AI and is supported by our team, not Microsoft. If you have a question or issue, please [reach out to our support team](/get-started/support). For Microsoft Teams-specific issues, contact [Microsoft support](https://support.microsoft.com/).
-  </Accordion>
-
-  <Accordion title="What is Microsoft Teams and why should I use it with Relevance AI?">
-    Microsoft Teams is a collaboration platform that combines workplace chat, video meetings, and file storage. Using it with Relevance AI allows you to automate responses to messages, trigger workflows from Teams conversations, and send automated messages to channels or chats.
-  </Accordion>
-
-  <Accordion title="What's the difference between connecting my Microsoft account and installing the Teams app?">
-    These are two separate required steps:
-
-    1. **OAuth connection** (in Relevance AI): Authenticates your Microsoft account and grants Relevance AI permission to access Microsoft services
-    2. **App installation** (in Microsoft Teams): Installs the Relevance AI app so it can interact with channels and chats
-
-    Both steps are necessary for the integration to work.
+    The Microsoft Teams integration is built and maintained by Relevance AI. For integration-specific questions, [contact our support team](/get-started/support). For Microsoft Teams platform issues, contact [Microsoft support](https://support.microsoft.com/).
   </Accordion>
 
   <Accordion title="Why don't I see my Teams channel in the dropdown when setting up a trigger?">
-    Common reasons:
-
-    1. **App not installed**: The Relevance AI app must be installed in Teams and added to the specific channel
-    2. **User not a member**: The Microsoft account you connected must be a member of the channel
-    3. **Permissions issue**: You may not have sufficient permissions to access the channel
-    4. **Admin approval needed**: Your organization may require admin consent
-
-    Verify that you've completed both setup steps and added the app to the channel.
+    The most common cause is that the Relevance AI app has not been installed in Teams or added to the specific channel. The Microsoft account you connected must also be a member of that channel. If your organization requires admin consent, the app may not be visible until an administrator approves it. Verify that you've completed both setup steps and added the app to the channel.
   </Accordion>
 
   <Accordion title="Can I connect multiple Microsoft accounts?">
     Yes, you can connect multiple Microsoft accounts through the Integrations & API Keys page. Each account can be used for different triggers and tool steps.
   </Accordion>
 
-  <Accordion title="What permissions does the integration require?">
-    The integration requires permissions to read messages, send messages, and access team/channel information. The exact permissions are shown during the OAuth flow. You may need admin consent depending on your organization's policies.
-  </Accordion>
-
   <Accordion title="Do triggers work for private messages?">
-    Yes, Teams triggers can monitor both channel messages and private chats, depending on your configuration.
-  </Accordion>
-
-  <Accordion title="Can I filter which messages trigger my Agent?">
-    Yes, you can configure keyword matching in trigger conditions to have your agent respond only to relevant messages rather than every message in a channel.
-  </Accordion>
-
-  <Accordion title="How do I prevent my agent from sending messages automatically?">
-    Set your message-sending tools to "approval mode" in the agent settings. Your agent will ask for permission before sending a Teams message, and you can review, edit, approve, or reject.
+    Yes, Teams triggers can monitor both channel messages and private chats. To monitor direct messages, select the "Direct chats with Relevance AI" option when configuring your trigger instead of a specific channel.
   </Accordion>
 
   <Accordion title="Can my agent access files shared in Teams?">
@@ -283,11 +411,6 @@ If you see "Need admin approval" or "This app requires admin approval", follow t
   </Accordion>
 
   <Accordion title="How do I remove the Microsoft Teams integration?">
-    1. Go to the **Integrations & API Keys** page from the sidebar
-    2. Find **Microsoft (Teams, Outlook, SharePoint, OneDrive)**
-    3. Click "..." on the account you want to remove
-    4. Click "Remove" and confirm
-
-    This will disable all triggers and tool steps using this account across Teams, Outlook, SharePoint, and OneDrive.
+    Go to the **Integrations & API Keys** page from the sidebar, find **Microsoft (Teams, Outlook, SharePoint, OneDrive)**, click "..." on the account you want to remove, and click "Remove" and confirm. This will disable all triggers and tool steps using this account across Teams, Outlook, SharePoint, and OneDrive. To also remove the app from Microsoft Teams, go to **Apps** in Teams, find Relevance AI, and click **Uninstall**.
   </Accordion>
 </AccordionGroup>

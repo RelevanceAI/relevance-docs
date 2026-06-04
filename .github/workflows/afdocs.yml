@@ -11,5 +11,17 @@ jobs:
     # Continue even if the check fails — this is informational only
     continue-on-error: true
     steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Run afdocs checks
-        run: npx afdocs@latest check https://docs.relevanceai.com --format text --verbose
+        # docs.relevanceai.com 301s cross-host to relevanceai.com/docs.
+        # Targeting the canonical URL avoids the cross-host redirect
+        # warning and lets all checks operate on same-origin content.
+        # Skips and parity exclusions live in agent-docs.config.yml.
+        run: |
+          npx afdocs@0.18.7 check https://relevanceai.com/docs \
+            --format text --verbose
