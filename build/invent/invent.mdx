@@ -1,44 +1,44 @@
 ---
 title: "Build with Inventor"
 sidebarTitle: "Build with Inventor"
-description: "Build and edit agents, tools, and workforces, and run project analysis, by describing what you want in plain language."
+description: "A copilot agent inside the Relevance AI UI that builds, debugs, and iterates on agents, tools, workforces, and triggers from a natural-language description."
 ---
+
+<Warning>
+  Invent is in **beta** for Enterprise plans only — contact your account manager to express interest or join beta testing. On another plan? See how to [invent an agent](/build/agents/create-an-agent#option-1-invent-an-agent) or [invent a tool](/build/tools/create-a-tool#option-1-invent-a-tool).
+</Warning>
 
 <img src="/images/inventor.png" alt="The Inventor panel in Relevance AI" />
 
-<Warning>
-  Invent is in **beta** for enterprise plans. On another plan? See how to [invent an agent](/build/agents/create-an-agent#option-1-invent-an-agent) or [invent a tool](/build/tools/create-a-tool#option-1-invent-a-tool).
-</Warning>
+## What is Inventor
 
-Invent is Relevance AI's creation flow: you describe what you want in plain language and Inventor generates a working agent, tool, or workforce for you. You build directly in Relevance AI — there's no external AI client or MCP setup to wire up first.
-
-Inventor doesn't only create from scratch. Point it at an existing agent, tool, or workforce and describe the change you want, and it edits what you already have.
-
-If you've used a coding or AI-client workflow (such as Claude Code) to assemble agents and tools, Invent covers the same ground inside the platform. You describe the outcome, Inventor builds the first version, and you iterate from there.
-
-{/* TODO: confirm MCP vs Invent distinction with Danial — how the two relate, when you'd reach for an external MCP client over Invent. */}
+Inventor is a copilot agent that builds agents, surfaced inside the Relevance AI UI. It uses the Relevance AI MCP under the hood to take real actions on your project, so from a single chat surface you can build, debug, and iterate without leaving the platform.
 
 ## What you can do
 
 <CardGroup cols={2}>
-  <Card title="Build and edit agents" icon="robot">
-    Describe the agent you want and Inventor sets up the prompt and suggests tools — or edits an existing agent.
+  <Card title="Build from a description" icon="wand-magic-sparkles">
+    Create new agents, tools, workforces, and triggers from a natural-language description.
   </Card>
-  <Card title="Build and edit tools" icon="wand-magic-sparkles">
-    Describe a task and Inventor sets up the inputs, steps, and outputs — or revises a tool you already have.
+  <Card title="Debug failing agents" icon="bug">
+    Inventor reads run history, identifies the failing step, explains what went wrong, and proposes a fix.
   </Card>
-  <Card title="Build and edit workforces" icon="users-gear">
-    Describe how your agents and tools should work together, and Inventor assembles or updates the workforce.
+  <Card title="Iterate on existing assets" icon="pen-to-square">
+    Change a prompt, swap a model, restructure a workforce, or regenerate a tool's schema.
   </Card>
-  <Card title="Run evals" icon="flask">
-    Go beyond building — use Invent to set up evaluations of how your agents and tools perform.
+  <Card title="Discover before you build" icon="magnifying-glass">
+    Find existing agents and tools before building duplicates.
   </Card>
-  <Card title="Set up alerts and monitoring" icon="bell">
-    Describe the alerts and performance checks you want on your runs.
+  <Card title="Recommend the right abstraction" icon="sitemap">
+    Get a recommendation on tool vs. agent vs. workforce based on your use case.
   </Card>
 </CardGroup>
 
 ## How to use Invent
+
+<div style={{ width:"100%",position:"relative","padding-top":"44%"}}>
+<iframe src="https://app.supademo.com/embed/cmq65ouq340ajqm6u2uly8nst?embed_v=2" frameBorder="0" title="How to use Invent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
 
 <Warning>
   Invent is expensive to run and consumes significant credits. Use it deliberately and keep an eye on your usage.
@@ -67,6 +67,23 @@ Inventor settings tailor how Invent works for you and your project. They apply t
 
 About You is a free-text field of up to 5,000 characters, set per project. Set it once and it persists for that project. Inventor injects it into the model's user context to tailor tone, domain assumptions, and personalization.
 
+Without About You, Inventor starts every conversation with zero context about who you are. With it, Inventor can:
+
+<CardGroup cols={2}>
+  <Card title="Tailor tone and language" icon="comments">
+    Simpler explanations for non-technical users, more precise technical language for engineers.
+  </Card>
+  <Card title="Make smarter domain assumptions" icon="lightbulb">
+    If you're in sales, it won't default to engineering-flavored tool designs.
+  </Card>
+  <Card title="Personalize responses naturally" icon="user">
+    Addresses you by first name at natural moments like greetings and acknowledgements, not robotically in every message.
+  </Card>
+  <Card title="Reduce back-and-forth" icon="arrows-rotate">
+    You don't have to re-explain your context every session.
+  </Card>
+</CardGroup>
+
 It's descriptive only — it shapes how Inventor talks to you and what it assumes about your work, but it doesn't change Inventor's role or hardcode any tool configuration.
 
 Describe who you are and what you're working on. For example:
@@ -82,6 +99,15 @@ Turn on this toggle to let Inventor remember specific facts across sessions — 
 ### Model
 
 The model dropdown sets which LLM powers your Invent session. Choose from the configurable list; there's a default if you don't change it.
+
+## MCP vs Inventor
+
+{/* TODO: confirm MCP vs Invent distinction with Danial — how the two relate, when you'd reach for an external MCP client over Invent. */}
+
+- TODO: what the Relevance AI MCP is and how Inventor uses it under the hood
+- TODO: what Inventor adds on top of the raw MCP
+- TODO: when to use Inventor inside the platform vs. an external MCP client (such as Claude Code)
+- TODO: actions available through one but not the other
 
 ## Known issues
 
