@@ -1,0 +1,95 @@
+---
+title: "Lifecycle email campaigns"
+sidebarTitle: "Lifecycle email campaigns"
+description: "Draft nurture, re-engagement, and onboarding sequences in your brand voice at the moments that matter."
+---
+
+Lifecycle email is the workhorse of B2B marketing — and the place that scales worst with headcount. A lifecycle Agent drafts the sequences that match each segment, lifecycle stage, and trigger so you can run more campaigns without copying templates into Google Docs.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Lifecycle is templated" icon="files">
+    You're copy-pasting "Welcome Series v3" docs between every product launch instead of running per-launch sequences.
+  </Card>
+  <Card title="Trigger moments are missed" icon="bell-slash">
+    Trial ending, contract renewing, feature unused — these moments deserve sequences and currently get nothing.
+  </Card>
+  <Card title="Brand voice drift" icon="comments">
+    Different team members write each campaign and the voice has slipped across them.
+  </Card>
+  <Card title="Re-engagement is overdue" icon="hourglass">
+    A dormant-list re-engagement campaign keeps getting deprioritized because the copy work is the bottleneck.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A lifecycle Agent takes a segment + trigger and returns a multi-step email sequence in your voice.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Segment definition, lifecycle stage, triggering event, campaign goal.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Brand voice docs, past-campaign copy, persona definitions, product positioning, your marketing automation platform.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A drafted sequence — subject lines, body copy, send timing, CTA per step — ready for review.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Drafted into [HubSpot](/integrations/popular-integrations/hubspot) or [Marketo](/integrations/popular-integrations/marketo) for review, written to a doc for marketing approval, queued in your ESP.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Email Marketing Strategist](https://marketplace.relevanceai.com/listing/28783038-03f0-4aec-9c76-4b28452b6e33)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your team can use on day one:
+
+- *"Draft a 4-step welcome series for new free-trial users in HubSpot — friendly tone, focus on activating the dashboard feature."*
+- *"Write a re-engagement sequence for trial users who haven't logged in for 30 days."*
+- *"Give me a 3-touch renewal sequence for accounts in the 90-day renewal window."*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your brand voice in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed opens, clicks, and conversion back into the Agent's [evals](/build/agents/build-your-agent/evals) so drafts track what converts.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Sequences that all sound the same" icon="clone">
+    Without persona-specific Knowledge, every sequence reads like a watered-down version of the welcome email. Upload distinct persona docs and force the prompt to reference them.
+  </Accordion>
+  <Accordion title="Trigger drift" icon="route">
+    The HubSpot trigger fires on the wrong field and the sequence drafts the wrong campaign. Gate triggers tightly and review what actually causes them to fire in week one.
+  </Accordion>
+  <Accordion title="Brand-voice regressions" icon="clock-rotate-left">
+    A prompt tweak changes tone everywhere. Use [evals](/build/agents/build-your-agent/evals) on a few canonical drafts to catch drift before it ships to subscribers.
+  </Accordion>
+  <Accordion title="Auto-sending without review" icon="paper-plane">
+    Tempting to skip marketing approval and queue directly. Don't — one bad subject line in production costs trust. Gate L3 with a Slack approval until you've watched it run for a quarter.
+  </Accordion>
+</AccordionGroup>

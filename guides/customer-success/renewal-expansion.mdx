@@ -1,0 +1,95 @@
+---
+title: "Renewal and expansion outreach"
+sidebarTitle: "Renewal & expansion"
+description: "Draft account-aware renewal and expansion plays for every account, every quarter — so no opportunity slips."
+---
+
+The accounts most likely to expand and the accounts most likely to churn both want personalized attention at renewal. With 80 accounts per CSM, "personalized" usually means "whoever has the loudest email this week." A renewal Agent drafts the playbook touch for every account so nothing is on autopilot — and nothing falls through.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Renewals are scattergun" icon="shuffle">
+    Some accounts get a renewal plan three months out, others get a check-in email two weeks before.
+  </Card>
+  <Card title="Expansion is missed" icon="chart-line">
+    Accounts that look healthy don't get expansion conversations because nobody flagged them.
+  </Card>
+  <Card title="Renewal emails sound canned" icon="comments">
+    Every renewal email reads the same — the customer can tell.
+  </Card>
+  <Card title="QBR action items don't follow through" icon="hourglass-half">
+    Promises made at QBR aren't being tracked into the renewal cycle.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A renewal Agent takes an account + renewal window and returns a tailored plan with drafted outreach.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Account, renewal date, health score, segmentation, last touch, prior QBR commitments.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, prior QBRs, support history, usage data, your renewal playbook, expansion criteria.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A renewal plan — recommended action sequence, drafted outreach for each step, expansion talking points where they apply.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Plan saved to the CRM, outreach drafts queued in [Gmail](/integrations/popular-integrations/gmail), expansion intel posted to the AE in [Slack](/integrations/popular-integrations/slack).
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[Apla, the Account Planning Agent](https://marketplace.relevanceai.com/listing/fd712abc-66e4-4507-8f16-c4404cf5f5e5)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your CSMs can use on day one:
+
+- *"Acme Corp renews in 90 days — give me a 3-touch renewal plan with drafted emails, plus any expansion angle worth raising."*
+- *"What did we promise Globex at the last QBR? Draft a follow-up confirming we delivered before their renewal."*
+- *"Is Initech worth a price increase conversation this renewal? Pull usage and engagement signals to make the case."*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your renewal playbook in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed renewal outcomes back into the Agent's [evals](/build/agents/build-your-agent/evals) so it leans on the plays that saved accounts.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Same template for every account" icon="copy">
+    Without per-account context (last QBR commitments, segment, usage pattern), every renewal email reads identical. Pull from past account interactions, not just static templates.
+  </Accordion>
+  <Accordion title="Auto-sending the renewal pitch" icon="paper-plane">
+    Renewal outreach to a strategic account that goes out without a human read is how trust gets burned. Keep CSM-in-the-loop until you've watched it for several cycles.
+  </Accordion>
+  <Accordion title="Missing the expansion moment" icon="bullseye">
+    A healthy renewal that doesn't ask about expansion is a missed quarter. Build expansion checks into the same use case, not as a separate pass.
+  </Accordion>
+  <Accordion title="No tracking of what's been said" icon="list-check">
+    The renewal pitch contradicts what got said at QBR. Have the Agent reference prior commitments from CRM notes before drafting.
+  </Accordion>
+</AccordionGroup>

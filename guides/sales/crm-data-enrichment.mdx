@@ -1,0 +1,95 @@
+---
+title: "CRM data enrichment"
+sidebarTitle: "CRM data enrichment"
+description: "Fill in missing CRM fields automatically so reps stop wasting time looking up basics."
+---
+
+Incomplete CRM data slows everything down — reps waste time looking up basics, lead routing breaks, and reporting becomes unreliable. An enrichment Agent fills in the gaps automatically so your data stays clean without manual effort.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Routing rules can't fire" icon="route">
+    Lead-routing logic depends on fields that are blank for half the records.
+  </Card>
+  <Card title="Unreliable reporting" icon="chart-pie">
+    Industry and company-size data is inconsistent, so segmentation reports are useless.
+  </Card>
+  <Card title="LinkedIn URL as research" icon="link">
+    Reps are pasting LinkedIn profile links into the CRM and calling it enrichment.
+  </Card>
+  <Card title="New ICP rollout" icon="rotate">
+    You're redefining your ICP and need to re-evaluate every existing record against the new lens.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+An enrichment Agent takes a partial CRM record and fills in missing fields.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Existing CRM record (contact or account) with partial data.
+  </Card>
+  <Card title="Sources" icon="globe">
+    Web search, [LinkedIn](/integrations/popular-integrations/linkedin), third-party data vendors, your own CRM history.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    Filled-in fields — firmographics, contact details, tech stack, social profiles — with source attribution.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Written back to the CRM in the correct fields, with sourcing notes attached.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[Elli, the Enrichment Agent](https://marketplace.relevanceai.com/listing/88ab63e7-f357-48ad-84c6-463be16d850b)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your reps can use on day one:
+
+- *"Enrich Acme Corp — fill in industry, employee count, and any recent news."*
+- *"Find the head of RevOps at Initech and add them as a contact in HubSpot."*
+- *"What tech stack is Globex running? Web search and check LinkedIn."*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), a connected [CRM](/integrations/popular-integrations/hubspot) for read/write, and rules in [Knowledge](/build/knowledge/create-knowledge).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Tune it through [evals](/build/agents/build-your-agent/evals) so it maintains the fields your team actually uses.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Enriching every record on every event" icon="coins">
+    Credit-burn at scale. Gate enrichment on lifecycle stage and a freshness window — don't re-enrich records that were updated last week.
+  </Accordion>
+  <Accordion title="Overwriting human-entered data" icon="user-shield">
+    A rep's hand-typed value usually beats whatever the web returns. Preserve human overrides, or write to a parallel "enriched_*" field that reports can choose to use.
+  </Accordion>
+  <Accordion title="No source attribution" icon="link-slash">
+    Reps can't trust a value if they can't see where it came from. Have the Agent attach a source URL and timestamp to every enriched field.
+  </Accordion>
+  <Accordion title="Stale data without a freshness check" icon="clock-rotate-left">
+    Pulling 2019 data into a 2026 record looks like enrichment but isn't. Filter sources by recency where it matters — leadership, headcount, funding.
+  </Accordion>
+</AccordionGroup>

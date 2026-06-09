@@ -1,0 +1,95 @@
+---
+title: "Data dedup and cleanup"
+sidebarTitle: "Data dedup"
+description: "Find and merge duplicate records, fix inconsistent fields, surface the records that need a human."
+---
+
+CRMs accrete duplicate records the way oceans accrete plastic. The exact-match dedup is easy; the fuzzy cases — "Acme Corp" vs "Acme Corporation" vs "Acme Inc" — eat hours of RevOps time. A dedup Agent does the fuzzy matching with reasoning, merges what's safe, and surfaces the ambiguous cases for a human to decide.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Duplicate accounts everywhere" icon="copy">
+    Sales operations reports keep getting flagged because the same company exists under three names.
+  </Card>
+  <Card title="Manual dedup is hours" icon="hourglass">
+    Each quarter, someone spends a day or two going through dedup candidates and merging by hand.
+  </Card>
+  <Card title="Conflicting fields after merge" icon="scale-unbalanced">
+    Even when records get merged, field-level conflicts (which address? which industry?) get resolved arbitrarily.
+  </Card>
+  <Card title="Bad merge erodes trust" icon="triangle-exclamation">
+    A wrong merge wipes deal history; teams stop trusting the dedup process and the queue grows.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A dedup Agent takes a candidate pair (or a list of candidates) and returns a merge decision with reasoning.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Candidate records, full field-level data, related activity / deal history.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, your dedup heuristics / playbook, parent-child hierarchy, third-party data for ground-truth checks.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A decision (merge / keep separate / human review) with confidence, plus field-level conflict resolution recommendations.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    High-confidence merges applied directly (with audit log); ambiguous cases queued in a review tool or posted to RevOps [Slack](/integrations/popular-integrations/slack).
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[CRM Agent](https://marketplace.relevanceai.com/listing/f3e18700-27e2-477d-8eaa-4c6fa04282bf)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your team can use on day one:
+
+- *"These two HubSpot accounts both look like Acme Corp — are they the same company? Compare addresses, websites, contact overlap."*
+- *"Run dedup on the leads imported from this trade-show CSV — flag the high-confidence matches and the ones I should look at."*
+- *"Did we already have a record for this contact? Check across CRM and prior tickets."*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your matching rules in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed merge undos and disputes back into the Agent's [evals](/build/agents/build-your-agent/evals) so its confidence thresholds track what's reliable.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Auto-merging without audit" icon="clock-rotate-left">
+    A wrong merge loses deal history. Always log what got merged and offer one-click undo for the first quarter of running.
+  </Accordion>
+  <Accordion title="Confidence thresholds set too loose" icon="gauge-high">
+    Aggressive auto-merge merges records that should have stayed separate. Start with high thresholds and loosen as you watch outcomes.
+  </Accordion>
+  <Accordion title="Ignoring field-level conflicts" icon="scale-unbalanced">
+    Merging accounts without a rule for which address / industry / size wins produces garbled records. Document field priority rules in Knowledge.
+  </Accordion>
+  <Accordion title="No relationship to ongoing deals" icon="link-slash">
+    Merging an account with an active opportunity into one without can break attribution and rep ownership. Have the Agent factor open-deal status into the decision.
+  </Accordion>
+</AccordionGroup>
