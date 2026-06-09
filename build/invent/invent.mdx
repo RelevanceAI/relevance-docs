@@ -1,0 +1,111 @@
+---
+title: "Build with Inventor"
+sidebarTitle: "Build with Inventor"
+description: "Build and edit agents, tools, and workforces, and run project analysis, by describing what you want in plain language."
+---
+
+<img src="/images/inventor.png" alt="The Inventor panel in Relevance AI" />
+
+<Warning>
+  Invent is in **beta** for enterprise plans. On another plan? See how to [invent an agent](/build/agents/create-an-agent#option-1-invent-an-agent) or [invent a tool](/build/tools/create-a-tool#option-1-invent-a-tool).
+</Warning>
+
+Invent is Relevance AI's creation flow: you describe what you want in plain language and Inventor generates a working agent, tool, or workforce for you. You build directly in Relevance AI — there's no external AI client or MCP setup to wire up first.
+
+Inventor doesn't only create from scratch. Point it at an existing agent, tool, or workforce and describe the change you want, and it edits what you already have.
+
+If you've used a coding or AI-client workflow (such as Claude Code) to assemble agents and tools, Invent covers the same ground inside the platform. You describe the outcome, Inventor builds the first version, and you iterate from there.
+
+{/* TODO: confirm MCP vs Invent distinction with Danial — how the two relate, when you'd reach for an external MCP client over Invent. */}
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Build and edit agents" icon="robot">
+    Describe the agent you want and Inventor sets up the prompt and suggests tools — or edits an existing agent.
+  </Card>
+  <Card title="Build and edit tools" icon="wand-magic-sparkles">
+    Describe a task and Inventor sets up the inputs, steps, and outputs — or revises a tool you already have.
+  </Card>
+  <Card title="Build and edit workforces" icon="users-gear">
+    Describe how your agents and tools should work together, and Inventor assembles or updates the workforce.
+  </Card>
+  <Card title="Run evals" icon="flask">
+    Go beyond building — use Invent to set up evaluations of how your agents and tools perform.
+  </Card>
+  <Card title="Set up alerts and monitoring" icon="bell">
+    Describe the alerts and performance checks you want on your runs.
+  </Card>
+</CardGroup>
+
+## How to use Invent
+
+<Warning>
+  Invent is expensive to run and consumes significant credits. Use it deliberately and keep an eye on your usage.
+</Warning>
+
+<Steps>
+  <Step title="Open the Inventor panel">
+    Open Inventor from the side panel on a tool, agent, or workforce page, or go to the `/invent/` page.
+  </Step>
+  <Step title="Describe what you want">
+    Write what you want to build, edit, or analyze in plain language. Be specific about the outcome you're after.
+  </Step>
+  <Step title="Review and iterate">
+    Inventor generates a first version or applies your edit. Review it, then refine by describing the changes you want.
+  </Step>
+  <Step title="Connect integrations">
+    Connect any integrations the agent, tool, or workforce needs to run.
+  </Step>
+</Steps>
+
+## Inventor settings
+
+Inventor settings tailor how Invent works for you and your project. They apply to Invent v3 (the Inventor panel and the `/invent/` page), not the legacy Blackbox tool Invent flow at `/tool/.../invent`.
+
+### About You
+
+About You is a free-text field of up to 5,000 characters, set per project. Set it once and it persists for that project. Inventor injects it into the model's user context to tailor tone, domain assumptions, and personalization.
+
+It's descriptive only — it shapes how Inventor talks to you and what it assumes about your work, but it doesn't change Inventor's role or hardcode any tool configuration.
+
+Describe who you are and what you're working on. For example:
+
+- A recruiter sourcing candidates and screening applications.
+- A developer building internal tooling and integrations.
+- A marketer running campaigns and analyzing performance.
+
+### Save and reference memories
+
+Turn on this toggle to let Inventor remember specific facts across sessions — for example, "always return JSON, not markdown." This is separate from the static About You text: use About You for who you are, and memories for standing instructions you want Inventor to carry between sessions.
+
+### Model
+
+The model dropdown sets which LLM powers your Invent session. Choose from the configurable list; there's a default if you don't change it.
+
+## Known issues
+
+<AccordionGroup>
+  <Accordion title="The page sometimes needs a manual refresh">
+    Results and state don't always update live. If something looks out of date, refresh the page to see the latest.
+  </Accordion>
+  <Accordion title="Credit usage isn't surfaced clearly">
+    Invent consumes significant credits, and current usage isn't always easy to see in the interface. Check your usage separately to stay on top of cost.
+  </Accordion>
+</AccordionGroup>
+
+## Coming soon
+
+{/* TODO: confirm roadmap wording and how much of this in-development work should be public-facing. */}
+
+<CardGroup cols={2}>
+  <Card title="Alarms on eval runs" icon="bell-ring">
+    Set alarms that trigger on the results of your evaluation runs.
+  </Card>
+  <Card title="More alerts on monitoring checks" icon="chart-line">
+    A wider range of alerts on your monitoring checks.
+  </Card>
+  <Card title="Conversation task status filtering" icon="filter">
+    Improved filtering by conversation task status in monitoring runs.
+  </Card>
+</CardGroup>
