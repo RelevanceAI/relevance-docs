@@ -20,39 +20,15 @@ Follow these steps to remove an integration from your Relevance AI account:
 
 Once disconnected, the integration will no longer appear in your list of available connections, and your AI agents will no longer have access to that service.
 
-## Understanding integration dependencies (Enterprise)
-
-<Info>The "Used by" annotations described in this section are available for Enterprise organizations only.</Info>
-
-Enterprise organizations can see which native tool steps depend on each integration directly in the Integration Controls panel. This helps admins make informed decisions before toggling or removing integrations.
-
-### How it works
-
-1. Navigate to **Settings** in the sidebar.
-2. Click **Integration controls**.
-3. Look beneath each integration toggle for a **"Used by"** annotation listing the native tool steps that depend on it.
-
-For example:
-- **Serper** displays "Used by: Google Search"
-- **Browserless** displays "Used by: Web Scrape, Extract Content"
-
-### When to use this
-
-- Before disabling an integration, check which tool steps will be affected.
-- To understand the impact on your workflows before making changes.
-- When auditing which integrations your organization's tools rely on.
-
-<Note>The "Used by" annotations reflect native tool step dependencies only. They do not cover custom tools or agent-level configurations.</Note>
-
 ## Important Considerations
 
 Before removing an integration, consider the following:
 
-### Impact on agents
+### Impact on Agents
 
-* **Check dependencies**: Verify which agents are currently using the integration before removing it. Enterprise organizations can check "Used by" annotations in **Settings > Integration controls** to see which native tool steps depend on each integration. Non-Enterprise users should check each agent's tools and connected resources manually.
-* **Update agent workflows**: Agents that rely on the removed integration may need reconfiguration to prevent workflow disruptions.
-* **Tool availability**: Tools that depend on the removed integration will no longer function properly.
+* **Check Dependencies**: Verify which agents are currently using the integration before removing it.
+* **Update Agent Workflows**: Agents that rely on the removed integration may need reconfiguration to prevent workflow disruptions.
+* **Tool Availability**: Tools that depend on the removed integration will no longer function properly.
 
 ## Reconnecting Integrations
 
@@ -65,8 +41,5 @@ If you need to reconnect an integration after removing it:
 
 ## Frequently asked questions (FAQs)
 
-**Q: How do I know which agents or tools are using a particular integration?**
-
-**Enterprise organizations:** Navigate to **Settings > Integration controls** and look for "Used by" annotations beneath each integration toggle. These show which native tool steps depend on the integration — for example, Serper shows "Used by: Google Search".
-
-**Non-Enterprise users:** Go to each agent's settings and check the "Connected Resources" or "Tools" section to see which integrations they're using.
+**Q: How do I know which agents are using a particular integration?**  
+A: Before removing an integration, go to each agent's settings and check the "Connected Resources" or "Tools" section to see which integrations they're using.
