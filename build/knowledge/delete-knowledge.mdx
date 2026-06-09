@@ -1,0 +1,37 @@
+---
+title: "Delete Knowledge"
+sidebarTitle: "Delete Knowledge"
+description: "Delete a Knowledge table from your Relevance AI project."
+---
+
+This page covers deleting an entire Knowledge table from your project. To delete specific rows from inside a Tool, use the [Delete Knowledge Tool step](/build/knowledge/knowledge-tool-steps#delete-knowledge) instead.
+
+## How to delete a Knowledge table
+
+{/* TODO: Supademo recording of the delete flow */}
+
+1. Click **Knowledge** in the left sidebar of Relevance AI.
+2. Click the three dots button next to the Knowledge table you want to delete, then select **Delete**.
+3. On the pop-up that appears, click **Delete** to confirm.
+
+<Warning>
+Deleting a Knowledge table is permanent and cannot be undone. All rows, columns, and uploaded files in that table are removed, and any Agent or Tool that referenced it will no longer find it.
+</Warning>
+
+<Note>
+Knowledge tables on long-inactive, non-Enterprise accounts were subject to a [one-time cleanup](/build/knowledge/inactive-table-deletion). It was a single past event, not a recurring policy.
+</Note>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I recover a deleted Knowledge table?">
+    No. Once a Knowledge table is deleted it cannot be recovered, and our support team cannot restore it. Export anything you want to keep before deleting.
+  </Accordion>
+  <Accordion title="What happens to Agents that used the deleted table?">
+    The Agent keeps running, but it can no longer retrieve from that table. Remove the Knowledge reference from the Agent or connect a different table.
+  </Accordion>
+  <Accordion title="How do I delete only some rows instead of the whole table?">
+    Use the [Delete Knowledge Tool step](/build/knowledge/knowledge-tool-steps#delete-knowledge) inside a Tool to delete rows that match a filter, leaving the rest of the table intact.
+  </Accordion>
+</AccordionGroup>

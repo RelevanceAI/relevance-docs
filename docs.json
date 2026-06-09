@@ -209,18 +209,6 @@
                         ]
                       },
                       {
-                        "group": "Knowledge Tool Steps",
-                        "pages": [
-                          "build/tools/tool-steps/knowledge/insert-knowledge",
-                          "build/tools/tool-steps/knowledge/delete-knowledge",
-                          "build/tools/tool-steps/knowledge/update-knowledge",
-                          "build/tools/tool-steps/knowledge/advanced-knowledge-search-2m",
-                          "build/tools/tool-steps/knowledge/knowledge-search",
-                          "build/tools/tool-steps/knowledge/get-knowledge",
-                          "build/tools/tool-steps/knowledge/using-variables-in-json"
-                        ]
-                      },
-                      {
                         "group": "Confluence Tool Steps",
                         "pages": [
                           "build/tools/tool-steps/confluence/create-post",
@@ -368,17 +356,22 @@
                 "pages": [
                   "build/knowledge/create-knowledge",
                   {
-                    "group": "Integrated Knowledge Sources",
+                    "group": "Build with Knowledge",
                     "pages": [
-                      "build/knowledge/integrated-knowledge-sources/google-drive",
-                      "build/knowledge/integrated-knowledge-sources/sharepoint",
-                      "build/knowledge/integrated-knowledge-sources/notion"
+                      "build/knowledge/knowledge-tool-steps",
+                      "build/knowledge/enrich-with-tool",
+                      {
+                        "group": "Knowledge Sources",
+                        "pages": [
+                          "build/knowledge/integrated-knowledge-sources/google-drive",
+                          "build/knowledge/integrated-knowledge-sources/sharepoint",
+                          "build/knowledge/integrated-knowledge-sources/notion",
+                          "build/knowledge/integrated-knowledge-sources/confluence"
+                        ]
+                      }
                     ]
                   },
-                  "build/knowledge/find-and-use-knowledge",
-                  "build/knowledge/enrich-with-tool",
-                  "build/knowledge/inactive-table-deletion",
-                  "build/knowledge/knowledge-tool-steps",
+                  "build/knowledge/delete-knowledge",
                   "build/knowledge/use-snippets-for-quick-access"
                 ]
               }
@@ -775,6 +768,38 @@
   },
   "redirects": [
     {
+      "source": "/build/tools/tool-steps/knowledge/insert-knowledge",
+      "destination": "/build/knowledge/knowledge-tool-steps#insert-knowledge"
+    },
+    {
+      "source": "/build/tools/tool-steps/knowledge/update-knowledge",
+      "destination": "/build/knowledge/knowledge-tool-steps#update-knowledge"
+    },
+    {
+      "source": "/build/tools/tool-steps/knowledge/delete-knowledge",
+      "destination": "/build/knowledge/knowledge-tool-steps#delete-knowledge"
+    },
+    {
+      "source": "/build/tools/tool-steps/knowledge/get-knowledge",
+      "destination": "/build/knowledge/knowledge-tool-steps#get-knowledge"
+    },
+    {
+      "source": "/build/tools/tool-steps/knowledge/knowledge-search",
+      "destination": "/build/knowledge/knowledge-tool-steps#knowledge-search"
+    },
+    {
+      "source": "/build/tools/tool-steps/knowledge/advanced-knowledge-search",
+      "destination": "/build/knowledge/knowledge-tool-steps#advanced-knowledge-search-2m-context"
+    },
+    {
+      "source": "/build/tools/tool-steps/knowledge/advanced-knowledge-search-2m",
+      "destination": "/build/knowledge/knowledge-tool-steps#advanced-knowledge-search-2m-context"
+    },
+    {
+      "source": "/build/tools/tool-steps/knowledge/using-variables-in-json",
+      "destination": "/build/knowledge/knowledge-tool-steps#using-variables-in-json"
+    },
+    {
       "source": "/use-cases/enrichment",
       "destination": "/guides/revops/getting-started"
     },
@@ -825,6 +850,22 @@
     {
       "source": "/templates/bulk-run",
       "destination": "/build/knowledge/enrich-with-tool"
+    },
+    {
+      "source": "/build/knowledge/find-and-use-knowledge",
+      "destination": "/get-started/core-concepts/knowledge"
+    },
+    {
+      "source": "/build/knowledge/access-knowledge",
+      "destination": "/get-started/core-concepts/knowledge"
+    },
+    {
+      "source": "/build/knowledge/advanced-knowledge-retrieval",
+      "destination": "/get-started/core-concepts/knowledge"
+    },
+    {
+      "source": "/get-started/key-concepts/knowledge",
+      "destination": "/get-started/core-concepts/knowledge"
     },
     {
       "source": "/templates/faq",
@@ -916,7 +957,7 @@
     },
     {
       "source": "/tool/tool-steps/knowledge-search",
-      "destination": "/build/tools/tool-steps/knowledge/knowledge-search"
+      "destination": "/build/knowledge/knowledge-tool-steps#knowledge-search"
     },
     {
       "source": "/templates/sentiment-analysis",
