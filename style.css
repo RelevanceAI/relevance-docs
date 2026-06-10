@@ -301,9 +301,9 @@ div#content-side-layout {
 /* Path-picker wrapper — frames the Tabs as one controlled unit */
 .path-picker {
   border: none;
-  border-radius: 1rem;
-  padding: 1.5rem;
-  margin: 1.5rem 0 2rem;
+  border-radius: 0.875rem;
+  padding: 1rem;
+  margin: 1rem 0 1.5rem;
   background:
     linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(99, 102, 241, 0.02) 45%, rgba(165, 180, 252, 0.04));
   box-shadow:
@@ -323,17 +323,24 @@ div#content-side-layout {
     0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* In-page Tabs — pill-style buttons, centered, distinct active state */
+/* In-page Tabs — pill-style buttons, distinct active state.
+   "safe center" keeps a short tab row centered but falls back to left-aligned
+   when the row overflows, so the first/last tabs aren't clipped out of reach. */
 .path-picker [data-component-part="tabs-list"] {
-  justify-content: center;
+  justify-content: safe center;
   gap: 0.5rem;
   border-bottom: none !important;
-  padding: 0.5rem 0 1rem;
+  /* vertical padding only — gives the active button's glow room to fade inside the
+     scroll box. No horizontal padding, so the first/last tabs sit flush to the scroll
+     edges and stay symmetric when scrolled (the panel's own frame supplies the margin). */
+  padding: 0.75rem 0 1rem;
+  overflow-x: auto;
 }
 
 .path-picker [data-component-part="tab-button"] {
-  padding: 0.5rem 1.25rem !important;
-  border-radius: 0.625rem !important;
+  padding: 0.375rem 0.875rem !important;
+  border-radius: 0.5rem !important;
+  white-space: nowrap;
   border-bottom: none !important;
   margin-bottom: 0 !important;
   background-color: rgba(255, 255, 255, 0.7);
@@ -354,7 +361,7 @@ div#content-side-layout {
   color: #ffffff !important;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.2) inset,
-    0 4px 12px rgba(79, 70, 229, 0.35);
+    0 2px 8px rgba(79, 70, 229, 0.28);
 }
 
 .dark .path-picker [data-component-part="tab-button"] {
@@ -374,5 +381,11 @@ div#content-side-layout {
   color: #ffffff !important;
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.15) inset,
-    0 4px 16px rgba(99, 102, 241, 0.5);
+    0 2px 10px rgba(99, 102, 241, 0.4);
+}
+
+/* Active tab icon: Mintlify paints it with the primary color (purple), which
+   disappears against our purple active pill. Force it white to match the label. */
+.path-picker [data-component-part="tab-button"][data-active="true"] .tab-icon {
+  background-color: #ffffff !important;
 }

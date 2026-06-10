@@ -3,20 +3,16 @@ title: 'Knowledge Tool steps'
 description: 'Use Tool steps to read from and write to your Knowledge tables inside a Tool'
 ---
 
-Knowledge Tool steps let a Tool read from and write to your knowledge tables. Use them to insert, upsert, update, delete, and retrieve rows, or to run semantic search over a knowledge set. Pick a step from the tabs below for its fields and examples.
+Knowledge Tool steps let a Tool read from and write to your Knowledge tables. Use them to insert, upsert, update, delete, and retrieve rows, or to run semantic search over a Knowledge set. Pick a step from the tabs below for its fields and examples.
 
-## Writing knowledge
+## Writing Knowledge
 
-These steps add, change, or remove rows in your knowledge table.
+These steps add, change, or remove rows in your Knowledge table.
 
+<div className="path-picker">
 <Tabs>
-  <Tab title="Insert knowledge" id="insert-knowledge" icon="circle-plus">
-    The Insert Knowledge step saves information by adding new rows to your knowledge table — useful for capturing and storing data dynamically as a Tool or agent runs.
-
-    <div style={{ width:"100%",position:"relative","padding-top":"56.75%",paddingTop:"75%" }}>
-    <iframe src="https://app.supademo.com/embed/cmcskqz8x0dx09st8u6v0t5ka" frameBorder="0" title="Add the Insert Knowledge Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
-
-    </div>
+  <Tab title="Insert Knowledge" id="insert-knowledge" icon="circle-plus">
+    The Insert Knowledge step saves information by adding new rows to your Knowledge table — useful for capturing and storing data dynamically as a Tool or agent runs.
 
     ### Inputs
 
@@ -58,7 +54,7 @@ Separate each object with a comma when inserting multiple rows.
     </Note>
   </Tab>
 
-  <Tab title="Upsert knowledge" id="upsert-knowledge" icon="arrows-rotate">
+  <Tab title="Upsert Knowledge" id="upsert-knowledge" icon="arrows-rotate">
     The Upsert Knowledge step inserts new rows and updates existing ones in a single step, matching on an identifier field. Use it when you're syncing data that may or may not already exist — unlike Insert Knowledge, which always adds, and Update Knowledge, which only changes rows that already match.
 
     ### Inputs
@@ -89,13 +85,8 @@ Separate each object with a comma when inserting multiple rows.
     </AccordionGroup>
   </Tab>
 
-  <Tab title="Update knowledge" id="update-knowledge" icon="pen-to-square">
-    The Update Knowledge step changes existing rows in your knowledge table, keeping your data current and accurate.
-
-    <div style={{ width:"95%",position:"relative",paddingTop:"62.5%" }}>
-    <iframe src="https://app.supademo.com/embed/cmcu7bc9z1pd69st851b05iwu" frameBorder="0" title="Add the Update Knowledge Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
-
-    </div>
+  <Tab title="Update Knowledge" id="update-knowledge" icon="pen-to-square">
+    The Update Knowledge step changes existing rows in your Knowledge table, keeping your data current and accurate.
 
     ### Inputs
 
@@ -170,13 +161,8 @@ Separate each object with a comma when filtering multiple rows.
     </AccordionGroup>
   </Tab>
 
-  <Tab title="Delete knowledge" id="delete-knowledge" icon="trash">
-    The Delete Knowledge step removes rows from your knowledge table, so you can keep your data relevant and up to date.
-
-    <div style={{ width:"100%",position:"relative","padding-top":"56.75%",paddingTop:"75%" }}>
-    <iframe src="https://app.supademo.com/embed/cmcsl75ju0e0e9st8xzau7o3z?embed_v=2" frameBorder="0" title="Add the Delete Knowledge Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
-
-    </div>
+  <Tab title="Delete Knowledge" id="delete-knowledge" icon="trash">
+    The Delete Knowledge step removes rows from your Knowledge table, so you can keep your data relevant and up to date.
 
     ### Inputs
 
@@ -240,19 +226,16 @@ Separate each object with a comma when filtering multiple rows.
     </AccordionGroup>
   </Tab>
 </Tabs>
+</div>
 
-## Searching and reading knowledge
+## Searching and reading Knowledge
 
 These steps retrieve rows by filter or rank them by relevance to a query.
 
+<div className="path-picker">
 <Tabs>
-  <Tab title="Get knowledge" id="get-knowledge" icon="filter">
-    The Get Knowledge step retrieves rows directly from your knowledge table using filters, without RAG. Use it when you know which rows you want rather than searching by meaning.
-
-    <div style={{ width:"90%",position:"relative",paddingTop:"75%" }}>
-    <iframe src="https://app.supademo.com/embed/cmd2oyxum341oc4kj3skjizmf" frameBorder="0" title="Add the Get Knowledge Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
-
-    </div>
+  <Tab title="Get Knowledge" id="get-knowledge" icon="filter">
+    The Get Knowledge step retrieves rows directly from your Knowledge table using filters, without RAG. Use it when you know which rows you want rather than searching by meaning.
 
     ### Inputs
 
@@ -305,12 +288,7 @@ These steps retrieve rows by filter or rank them by relevance to a query.
   </Tab>
 
   <Tab title="Knowledge search" id="knowledge-search" icon="magnifying-glass">
-    The Knowledge Search step searches a knowledge table with RAG and returns the most relevant rows for a query.
-
-    <div style={{ width:"90%",position:"relative",paddingTop:"55%" }}>
-    <iframe src="https://app.supademo.com/embed/cmd7198g26fevc4kjjsus430b?embed_v=2" frameBorder="0" title="Add the Knowledge Search tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
-
-    </div>
+    The Knowledge Search step searches a Knowledge table with RAG and returns the most relevant rows for a query.
 
     ### Inputs
 
@@ -322,7 +300,7 @@ These steps retrieve rows by filter or rank them by relevance to a query.
     - **Output all fields** — when on, every field is returned including the similarity score; when off, only the content field is returned.
     - **Max records to return** — the number of results to return (top k).
     - **Similarity threshold** — the minimum score a result must reach to be returned. For vector search this is cosine similarity (0–1); for keyword search it's a BM25 score (0+). Raise it for fewer, more accurate results; lower it to be more inclusive.
-    - **Use exact search** — runs exact search (good for smaller knowledge sets) when on, or faster approximate search when off.
+    - **Use exact search** — runs exact search (good for smaller Knowledge sets) when on, or faster approximate search when off.
     - **Filters** — restrict the search to a subset of rows, defined as JSON objects.
 
     With the `exact_match` filter type, pass an array to `condition_value` to match any value in it (OR semantics). A single value (`"condition_value": "x"`) matches rows where the field equals x; an array (`"condition_value": ["a", "b"]`) matches rows where the field equals a or b.
@@ -339,13 +317,8 @@ These steps retrieve rows by filter or rank them by relevance to a query.
     This filter returns results where `call_id` matches either value.
   </Tab>
 
-  <Tab title="Advanced knowledge search (2m)" id="advanced-knowledge-search-2m-context" icon="wand-magic-sparkles">
-    The Advanced Knowledge Search (2M context) step searches your knowledge table with a prompt using CAG (Cache Augmented Generation), loading your entire knowledge set into the model's long context window and generating an answer directly.
-
-    <div style={{ width:"100%",position:"relative","padding-top":"56.75%",paddingTop:"75%" }}>
-    <iframe src="https://app.supademo.com/embed/cmcwogmal1l5n9emp09x9eqv7" frameBorder="0" title="Add the Advanced Knowledge Search (2m) Tool step to your Tool" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px",objectFit:"cover" }} />
-
-    </div>
+  <Tab title="Advanced Knowledge search (2m)" id="advanced-knowledge-search-2m-context" icon="wand-magic-sparkles">
+    The Advanced Knowledge Search (2M context) step searches your Knowledge table with a prompt using CAG (Cache Augmented Generation), loading your entire Knowledge set into the model's long context window and generating an answer directly.
 
     ### Inputs
 
@@ -358,15 +331,16 @@ These steps retrieve rows by filter or rank them by relevance to a query.
     - **System prompt** — the first message that instructs the model on its role, for example expert researcher, analyst, or tutor.
     - **Temperature** — controls how creative or random the model's responses are. Lower is more focused; higher is more creative.
     - **Enable grounding** — integrates Google Search results to inform and support the model's responses.
-    - **Max documents to search** — the number of documents retrieved from the knowledge set.
+    - **Max documents to search** — the number of documents retrieved from the Knowledge set.
   </Tab>
 </Tabs>
+</div>
 
 ## Using variables in JSON
 
-When building Tools with the Insert, Upsert, Update, Get, and Delete steps, you can pass data from earlier steps or user input into your knowledge operations. Reference a Tool input with `{{input_variable_name}}` or a previous step's output with `{{steps.step_name.output.variable_name}}`, and press the **{}** button beside any JSON input field to switch it to variable mode.
+When building Tools with the Insert, Upsert, Update, Get, and Delete steps, you can pass data from earlier steps or user input into your Knowledge operations. Reference a Tool input with `{{input_variable_name}}` or a previous step's output with `{{steps.step_name.output.variable_name}}`, and press the **{}** button beside any JSON input field to switch it to variable mode.
 
-Always wrap variables in quotes — `"{{variable_name}}"`. The final type is set by the column type in your knowledge table and converted to match on insert: a value bound for a number column becomes a number even though it's quoted, a text column keeps it as text, and a boolean column stores it as a boolean. Make sure your column types match the data you're storing.
+Always wrap variables in quotes — `"{{variable_name}}"`. The final type is set by the column type in your Knowledge table and converted to match on insert: a value bound for a number column becomes a number even though it's quoted, a text column keeps it as text, and a boolean column stores it as a boolean. Make sure your column types match the data you're storing.
 
 For example:
 
@@ -425,10 +399,10 @@ For example:
   <Accordion title="What if my filters don't match any rows?">
     Nothing is deleted or returned. Make sure your filter values exactly match the data in the table, including casing and field names.
   </Accordion>
-  <Accordion title="What's the difference between Get knowledge and Knowledge search?">
-    Get knowledge retrieves rows by exact filter match, without RAG. Knowledge search ranks rows by semantic or keyword relevance to a query. Use Get knowledge when you know the exact values to match, and Knowledge search when you want the most relevant results for a question.
+  <Accordion title="What's the difference between Get Knowledge and Knowledge search?">
+    Get Knowledge retrieves rows by exact filter match, without RAG. Knowledge search ranks rows by semantic or keyword relevance to a query. Use Get Knowledge when you know the exact values to match, and Knowledge search when you want the most relevant results for a question.
   </Accordion>
-  <Accordion title="What's the difference between Knowledge search and Advanced knowledge search (2m context)?">
-    Knowledge search runs RAG retrieval and returns the most relevant rows for a query, with control over search type, filters, and thresholds. Advanced knowledge search (2m context) loads your entire knowledge set into a long-context model and answers the query directly, which suits broad questions across the whole set. Start with Knowledge search for targeted retrieval.
+  <Accordion title="What's the difference between Knowledge search and Advanced Knowledge search (2m context)?">
+    Knowledge search runs RAG retrieval and returns the most relevant rows for a query, with control over search type, filters, and thresholds. Advanced Knowledge search (2m context) loads your entire Knowledge set into a long-context model and answers the query directly, which suits broad questions across the whole set. Start with Knowledge search for targeted retrieval.
   </Accordion>
 </AccordionGroup>
