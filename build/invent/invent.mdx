@@ -59,26 +59,25 @@ Inventor is a copilot agent that builds agents, surfaced inside the Relevance AI
 ## Inventor features
 
 <Tabs>
-  <Tab title="Homepage and side panel">
+  <Tab title="New dedicated home page">
     <img src="/images/Invent%20dashboard%20access.png" alt="The Inventor homepage and sidebar access point in Relevance AI" />
 
     Inventor has its own item in the sidebar and a full homepage — a central hub for all your Inventor conversations, instead of opening Inventor only from within a tool or agent page. The side panel is also available from any page in the builder — tool, agent, workforce, knowledge, and home pages — as a persistent panel, so you can reach Inventor without navigating to a specific route.
   </Tab>
-  <Tab title="Model">
+  <Tab title="Model selection">
     <img src="/images/invent%20model%20selector.png" alt="The model selector in Inventor" />
 
     The model dropdown sets which LLM powers your Invent session. Choose from the configurable list; there's a default if you don't change it.
+  </Tab>
+  <Tab title="Auto-accept">
+    <img src="/images/Auto%20accept.png" alt="The auto-accept setting in Inventor" />
+
+    By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
   </Tab>
   <Tab title="About You">
     <img src="/images/about-you-invent.png" alt="The About You setting in Inventor" />
 
     About You tells Inventor who you are so it tailors every response to your role and work from the first message — no re-explaining your context each session. It's descriptive only: it shapes how Inventor talks to you and what it assumes about your work, but it doesn't change Inventor's role or hardcode any tool configuration.
-
-    Describe your role, industry, and what you're working on. For example:
-
-    - A recruiter sourcing candidates and screening applications.
-    - A developer building internal tooling and integrations.
-    - A marketer running campaigns and analyzing performance.
 
     What it changes:
 
@@ -93,12 +92,17 @@ Inventor is a copilot agent that builds agents, surfaced inside the Relevance AI
         Addresses you by first name at natural moments like greetings, not robotically in every message.
       </Card>
     </CardGroup>
-  </Tab>
-  <Tab title="Auto-accept">
-    By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
-  </Tab>
-  <Tab title="Attachments">
-    Attach files to your Inventor messages to give it direct context about what you're building or referencing.
+
+    To set it up:
+
+    <Steps>
+      <Step title="Open Inventor">
+        Open the Inventor side panel or home page.
+      </Step>
+      <Step title="Click Settings">
+        The settings pop up — enter your details under **About You**.
+      </Step>
+    </Steps>
   </Tab>
 </Tabs>
 
@@ -126,11 +130,8 @@ Inventor and the Relevance AI MCP are often compared, but they solve different p
 ## Known issues
 
 <AccordionGroup>
-  <Accordion title="The page sometimes needs a manual refresh">
-    Results and state don't always update live. If something looks out of date, refresh the page to see the latest.
-  </Accordion>
-  <Accordion title="Credit usage isn't surfaced clearly">
-    Invent consumes significant credits, and current usage isn't always easy to see in the interface. Check your usage separately to stay on top of cost.
+  <Accordion title="Inventor messages don't always update live">
+    Inventor messages can lag or not appear until you refresh, approval states can get stuck, and progress isn't always visible in real time. If something looks out of date or stalled, refresh or reopen the page to see the latest state.
   </Accordion>
 </AccordionGroup>
 
