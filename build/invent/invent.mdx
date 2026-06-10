@@ -5,7 +5,7 @@ description: "A copilot agent inside the Relevance AI UI that builds, debugs, an
 ---
 
 <Warning>
-  Invent is in **beta** for Enterprise plans only — contact your account manager to express interest or join beta testing. On another plan? See how to [invent an agent](/build/agents/create-an-agent#option-1-invent-an-agent) or [invent a tool](/build/tools/create-a-tool#option-1-invent-a-tool).
+  Inventor is a **pilot for Enterprise plans only**. To request access, reach out to your account team. On another plan? See how to [invent an agent](/build/agents/create-an-agent#option-1-invent-an-agent) or [invent a tool](/build/tools/create-a-tool#option-1-invent-a-tool).
 </Warning>
 
 <img src="/images/inventor.png" alt="The Inventor panel in Relevance AI" />
@@ -45,17 +45,14 @@ Inventor is a copilot agent that builds agents, surfaced inside the Relevance AI
 </Warning>
 
 <Steps>
-  <Step title="Open the Inventor panel">
-    Open Inventor from the side panel on a tool, agent, or workforce page, or go to the `/invent/` page.
+  <Step title="Open Inventor">
+    From the Relevance AI home dashboard, click **Inventor**.
   </Step>
   <Step title="Describe what you want">
-    Write what you want to build, edit, or analyze in plain language. Be specific about the outcome you're after.
+    Type a natural-language description of what you want to build, debug, or iterate on — agents, tools, workforces, and triggers. Be specific about the outcome you're after.
   </Step>
   <Step title="Review and iterate">
     Inventor generates a first version or applies your edit. Review it, then refine by describing the changes you want.
-  </Step>
-  <Step title="Connect integrations">
-    Connect any integrations the agent, tool, or workforce needs to run.
   </Step>
 </Steps>
 
@@ -63,42 +60,37 @@ Inventor is a copilot agent that builds agents, surfaced inside the Relevance AI
 
 Inventor settings tailor how Invent works for you and your project. They apply to Invent v3 (the Inventor panel and the `/invent/` page), not the legacy Blackbox tool Invent flow at `/tool/.../invent`.
 
-### About You
+<Tabs>
+  <Tab title="About You">
+    About You tells Inventor who you are so it tailors every response to your role and work from the first message — no re-explaining your context each session. It's descriptive only: it shapes how Inventor talks to you and what it assumes about your work, but it doesn't change Inventor's role or hardcode any tool configuration.
 
-About You is a free-text field of up to 5,000 characters, set per project. Set it once and it persists for that project. Inventor injects it into the model's user context to tailor tone, domain assumptions, and personalization.
+    Describe your role, industry, and what you're working on. For example:
 
-Without About You, Inventor starts every conversation with zero context about who you are. With it, Inventor can:
+    - A recruiter sourcing candidates and screening applications.
+    - A developer building internal tooling and integrations.
+    - A marketer running campaigns and analyzing performance.
 
-<CardGroup cols={2}>
-  <Card title="Tailor tone and language" icon="comments">
-    Simpler explanations for non-technical users, more precise technical language for engineers.
-  </Card>
-  <Card title="Make smarter domain assumptions" icon="lightbulb">
-    If you're in sales, it won't default to engineering-flavored tool designs.
-  </Card>
-  <Card title="Personalize responses naturally" icon="user">
-    Addresses you by first name at natural moments like greetings and acknowledgements, not robotically in every message.
-  </Card>
-  <Card title="Reduce back-and-forth" icon="arrows-rotate">
-    You don't have to re-explain your context every session.
-  </Card>
-</CardGroup>
+    What it changes:
 
-It's descriptive only — it shapes how Inventor talks to you and what it assumes about your work, but it doesn't change Inventor's role or hardcode any tool configuration.
-
-Describe who you are and what you're working on. For example:
-
-- A recruiter sourcing candidates and screening applications.
-- A developer building internal tooling and integrations.
-- A marketer running campaigns and analyzing performance.
-
-### Save and reference memories
-
-Turn on this toggle to let Inventor remember specific facts across sessions — for example, "always return JSON, not markdown." This is separate from the static About You text: use About You for who you are, and memories for standing instructions you want Inventor to carry between sessions.
-
-### Model
-
-The model dropdown sets which LLM powers your Invent session. Choose from the configurable list; there's a default if you don't change it.
+    <CardGroup cols={3}>
+      <Card title="Tone and language" icon="comments">
+        Simpler explanations for non-technical users, more precise technical language for engineers.
+      </Card>
+      <Card title="Domain assumptions" icon="lightbulb">
+        If you're in sales, it won't default to engineering-flavored tool designs.
+      </Card>
+      <Card title="Personalization" icon="user">
+        Addresses you by first name at natural moments like greetings, not robotically in every message.
+      </Card>
+    </CardGroup>
+  </Tab>
+  <Tab title="Save and reference memories">
+    Turn on this toggle to let Inventor remember specific facts across sessions — for example, "always return JSON, not markdown." This is separate from the static About You text: use About You for who you are, and memories for standing instructions you want Inventor to carry between sessions.
+  </Tab>
+  <Tab title="Model">
+    The model dropdown sets which LLM powers your Invent session. Choose from the configurable list; there's a default if you don't change it.
+  </Tab>
+</Tabs>
 
 ## MCP vs Inventor
 
