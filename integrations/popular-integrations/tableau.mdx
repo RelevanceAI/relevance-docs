@@ -1,0 +1,151 @@
+---
+title: "Tableau Cloud"
+description: "Tableau Cloud is a visual analytics platform for creating and sharing interactive dashboards, managing projects, and querying data at scale."
+sidebarTitle: "Tableau Cloud"
+---
+
+Tableau Cloud is a hosted visual analytics platform for building and sharing interactive dashboards and data visualizations. With Relevance AI's Tableau Cloud integration, you can build agents that manage projects, query data, and automate analytics workflows — all using your connected Tableau Cloud account.
+
+<Warning>
+  The Tableau Cloud integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Tableau. If you have a question or issue with using Tableau Cloud in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Tableau Cloud, you can reach out to Tableau support directly.
+</Warning>
+
+## Connect the integration
+
+1. Go to the **Integrations** page in the sidebar of your Relevance AI dashboard.
+2. Click on **Tableau** from the available integrations.
+3. Click **Add Integration**.
+4. Fill in the connection form with your credentials:
+
+   **Personal access token**
+   - **Token name** — the name you gave your Personal Access Token when creating it in Tableau Cloud.
+   - **Token secret** — the secret value generated when you created the token.
+
+   **Site**
+   - **Server URL** — the base URL of your Tableau Cloud instance (e.g., `https://us-east-1.online.tableau.com`).
+   - **Content URL** — the site name that appears in your Tableau Cloud URL (e.g., `CuratorDemo`).
+
+### How to get your Personal Access Token (PAT)
+
+1. Log in to Tableau Cloud.
+2. Click your profile icon in the top-right corner and go to **My Account Settings**.
+3. Scroll to the **Personal Access Tokens** section.
+4. Enter a name for your token and click **Create new token**.
+5. Copy both the token name and the token secret.
+
+<Warning>
+  The token secret is only shown once at the time of creation. Copy it immediately and store it somewhere safe. If you lose it, you will need to create a new token.
+</Warning>
+
+### How to find your Server URL and Content URL
+
+Both values come from the URL you see in your browser when logged in to Tableau Cloud.
+
+For example, if your browser URL is:
+
+```
+https://us-east-1.online.tableau.com/#/site/CuratorDemo/home
+```
+
+- **Server URL**: `https://us-east-1.online.tableau.com`
+- **Content URL**: `CuratorDemo`
+
+<Note>
+  The Server URL is just the domain — do not include the `/#/site/...` path. Only the base domain goes in the Server URL field.
+</Note>
+
+## Tool steps for Tableau
+
+The following tool steps are available for the Tableau Cloud integration. All are currently in beta.
+
+<CardGroup cols={2}>
+  <Card title="Tableau - Create project" icon="folder-plus">
+    Create a new project in your Tableau Cloud site to organize workbooks, data sources, and other content.
+  </Card>
+  <Card title="Tableau - Query projects" icon="magnifying-glass">
+    Retrieve a list of projects from your Tableau Cloud site, with optional filters.
+  </Card>
+  <Card title="Tableau API call" icon="code">
+    Make a custom call to any Tableau REST API endpoint for advanced use cases not covered by the pre-built steps.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Tableau" in the tool step search bar to see all available Tableau actions when building your tools.
+</Tip>
+
+## Use the integration's API tool step (Advanced)
+
+In addition to the pre-built tool steps, you can make custom API calls to any Tableau REST API endpoint using the Tableau API Call tool step.
+
+<Steps>
+  <Step title="Create or open a tool">
+    Create a new tool in Relevance AI, or open an existing tool you want to add Tableau functionality to.
+  </Step>
+
+  <Step title="Add the Tableau API Call tool step">
+    1. Scroll down to **Tool steps**.
+    2. Search for **Tableau API Call** in the tool step search bar.
+    3. Add it to your workflow.
+  </Step>
+
+  <Step title="Select your Tableau account">
+    Select your connected Tableau Cloud account from the dropdown.
+  </Step>
+
+  <Step title="Configure the API endpoint">
+    Set the HTTP method, endpoint path, and any request body parameters. Refer to the [Tableau REST API documentation](https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api.htm) for available endpoints and required fields.
+  </Step>
+
+  <Step title="Test your configuration">
+    Run a test to confirm the call returns the expected data before deploying your agent.
+  </Step>
+</Steps>
+
+## Example use cases
+
+<AccordionGroup>
+  <Accordion title="Automated dashboard deployment" icon="chart-bar">
+    Build an agent that creates projects, publishes workbooks, and assigns permissions whenever a new team or data source is onboarded. Replaces a manual deployment process that typically requires a Tableau admin to perform each step.
+  </Accordion>
+
+  <Accordion title="Project management automation" icon="folder-tree">
+    Create an agent that organizes your Tableau Cloud site by automatically creating projects based on incoming requests (from a form, Slack message, or CRM event) and notifying the requester once the project is ready.
+  </Accordion>
+
+  <Accordion title="Data refresh workflows" icon="arrows-rotate">
+    Deploy an agent that triggers extract refreshes for specific data sources on a schedule or in response to an upstream data pipeline event, then reports success or failure to a Slack channel or ticketing system.
+  </Accordion>
+
+  <Accordion title="Report distribution automation" icon="share-nodes">
+    Build an agent that queries your Tableau Cloud site for specific views, generates download links or PDFs using the REST API, and distributes them to stakeholders via email or Slack on a recurring schedule.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Do I need a Tableau Cloud account?">
+    Yes, you need an active Tableau Cloud account. This integration does not work with Tableau Public (the free hosted version) because Personal Access Tokens are not available on that plan.
+  </Accordion>
+
+  <Accordion title="What Tableau plan do I need?">
+    API access is available on Tableau Cloud plans that include REST API support. At minimum, you need a Basic (formerly Viewer) seat to generate a Personal Access Token, but the actions you can perform through the API are determined by your site role. Creator and Explorer roles have broader permissions for publishing and managing content.
+  </Accordion>
+
+  <Accordion title="How do I find my Server URL and Content URL?">
+    Look at the URL in your browser when you are logged in to Tableau Cloud. The Server URL is the domain portion (e.g., `https://us-east-1.online.tableau.com`) and the Content URL is the site name that appears after `/site/` in the URL path (e.g., `CuratorDemo` from `/#/site/CuratorDemo/home`).
+  </Accordion>
+
+  <Accordion title="What happens if my PAT expires?">
+    Tableau Cloud Personal Access Tokens expire after 15 consecutive days of non-use. If your token expires, the integration will stop working. Generate a new PAT in your Tableau Cloud account settings and update the credentials in your Relevance AI integration.
+  </Accordion>
+
+  <Accordion title="Can I use this with Tableau Server (on-premise)?">
+    This integration is designed for Tableau Cloud (the hosted SaaS product). Tableau Server (on-premise or self-hosted) uses a different authentication flow and URL structure. On-premise Tableau Server is not supported by this integration.
+  </Accordion>
+
+  <Accordion title="How do I revoke or rotate my PAT?">
+    To revoke a PAT, go to **My Account Settings** in Tableau Cloud, find the token under **Personal Access Tokens**, and click **Revoke**. To rotate a token, revoke the existing one and create a new one, then update the credentials in your Relevance AI integration with the new token name and secret.
+  </Accordion>
+</AccordionGroup>
