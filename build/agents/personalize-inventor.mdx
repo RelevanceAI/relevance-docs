@@ -1,0 +1,75 @@
+---
+title: "Personalize Inventor"
+sidebarTitle: "Personalize Inventor"
+description: "Set up an 'About You' profile so Inventor understands your role and context from the start of every conversation."
+---
+
+Inventor includes a settings panel where you can describe yourself once, and that context is automatically included in every Inventor conversation going forward. You no longer need to explain your role, industry, or preferences at the start of each new session.
+
+<Note>
+This feature is behind the `inventor-user-settings-be` and `inventor-user-settings-fe` feature flags. Contact your account team if you do not see it in your workspace.
+</Note>
+
+## About You
+
+The **About You** field is a free-form text area where you describe yourself in your own words. There are no required fields or structured forms — write whatever context would help Inventor work better for you.
+
+For example:
+
+- *"I'm a marketing lead at a SaaS company focused on B2B demand generation. I work primarily with HubSpot and Salesforce."*
+- *"I'm a software engineer on the platform team. I work in Python and care a lot about performance and observability."*
+- *"I manage a team of 6 account executives. I want concise outputs with clear next actions."*
+
+In addition to what you write, Inventor automatically includes your full name from your Relevance AI profile. You do not need to add your name manually.
+
+## How to access settings
+
+<Steps>
+  <Step title="Open Inventor">
+    Navigate to **Agents** in the left sidebar and open Inventor, or start a new Inventor session.
+  </Step>
+  <Step title="Open settings">
+    Click the **cog icon** in the Inventor interface to open the settings modal.
+  </Step>
+  <Step title="Fill in About You">
+    In the **About You** section, enter a description of yourself — your role, team, tools you use, communication preferences, or any other context that would help Inventor give you better results.
+  </Step>
+  <Step title="Save">
+    Save the settings. Your description is now part of Inventor's system prompt and will be included in all future Inventor conversations automatically.
+  </Step>
+</Steps>
+
+## What to include
+
+Focus on information that changes how Inventor should respond to you, rather than one-off task details.
+
+<AccordionGroup>
+  <Accordion title="Your role and team">
+    Describing your job function, seniority, and team size helps Inventor calibrate its outputs. A CMO and a junior content writer both need different levels of detail and different formats in their outputs. For example: *"I'm the Head of Revenue Operations at a 200-person Series B company. I manage a team of 4 RevOps analysts."*
+  </Accordion>
+  <Accordion title="Your industry and company context">
+    Context about your industry or business model means Inventor can make accurate assumptions without you explaining them each time. For example: *"We're a vertical SaaS company selling to mid-market healthcare providers. Our sales cycle is typically 3–6 months."*
+  </Accordion>
+  <Accordion title="Tools and systems you use">
+    Mentioning the tools in your stack means Inventor can reference them in its suggestions and workflows. For example: *"We use HubSpot as our CRM, Outreach for sequencing, and Slack for internal communication."*
+  </Accordion>
+  <Accordion title="Preferences and working style">
+    If you have strong preferences about output format, communication style, or how you like to work, include those here. For example: *"I prefer concise outputs with clear bullet points. I don't want lengthy preambles before the actual answer."*
+  </Accordion>
+</AccordionGroup>
+
+## Benefits
+
+- **No repeated context.** You no longer need to re-explain your role or company at the start of every session. Inventor already knows.
+- **More relevant outputs.** Responses are tailored to your actual situation rather than generic defaults.
+- **Consistent behavior.** Every Inventor conversation starts with the same baseline understanding of who you are and what you care about.
+
+## Scope and privacy
+
+Your **About You** settings are scoped to your user account. They are not shared with other members of your workspace, and they are not used outside of Inventor conversations. Other users in your project have their own separate settings.
+
+## Related
+
+- [Create an agent](/build/agents/create-an-agent) — how to use Inventor to generate an agent from a description
+- [Prompt](/build/agents/build-your-agent/prompt) — configure what an agent knows and how it behaves for all users
+- [Memory](/build/agents/build-your-agent/memory) — how agents retain context across conversations
