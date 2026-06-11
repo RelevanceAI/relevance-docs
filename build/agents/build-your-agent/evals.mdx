@@ -267,7 +267,21 @@ Monitor is organized into **dashboards** — you can create more than one (for e
 2. Click **+ New dashboard** and give it a name.
 3. Attach one or more Checks from the Checks tab.
 4. Set a **Sample rate** — the percentage of incoming tasks to evaluate.
-5. (Optional) Set a **Conversation status filter** to only evaluate tasks with specific statuses (e.g., completed, escalated). Leave blank to evaluate all tasks.
+5. (Optional) Set a **Task status filter** to control which task outcomes trigger evaluations.
+
+    For agent dashboards, select one or more statuses to restrict evaluations to matching tasks:
+
+    - **Completed** — the agent finished the task successfully
+    - **Escalated** — the task was handed off to a human
+    - **Pending approval** — the task is waiting for human approval before continuing
+    - **Execution limit reached** — the agent hit its step or time limit
+    - **Errored** — the task ended due to an error
+
+    Multiple statuses can be selected. Leave blank to evaluate all tasks. Filtering by status is useful when you want to focus evaluation credit on specific outcomes — for example, only scoring successfully completed tasks, or only scoring escalated tasks to evaluate handoff quality.
+
+    <Note>
+    Monitor dashboards also work for workforce evaluations. When monitoring a workforce, evaluations trigger on every state transition rather than only when a task reaches a final status. Available status options are tailored to the resource type, so workforce dashboards may show different statuses than agent dashboards.
+    </Note>
 6. Save the dashboard.
 
 Once configured, qualifying tasks are automatically scored at the sample rate you've set.
