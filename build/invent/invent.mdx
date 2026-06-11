@@ -67,15 +67,15 @@ Inventor is a copilot agent that builds agents, surfaced inside the Relevance AI
 
     Inventor has its own item in the sidebar and a full homepage — a central hub for all your Inventor conversations, instead of opening Inventor only from within a tool or agent page. The side panel is also available from any page in the builder — tool, agent, workforce, knowledge, and home pages — as a persistent panel, so you can reach Inventor without navigating to a specific route.
   </Tab>
-  <Tab title="Model selection">
-    <img src="/images/invent%20model%20selector.png" alt="The model selector in Inventor" />
-
-    The model dropdown sets which LLM powers your Invent session. Choose from the configurable list; there's a default if you don't change it.
-  </Tab>
   <Tab title="Auto-accept">
     <img src="/images/Auto%20accept.png" alt="The auto-accept setting in Inventor" />
 
     By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
+  </Tab>
+  <Tab title="Model selection">
+    <img src="/images/invent%20model%20selector.png" alt="The model selector in Inventor" />
+
+    The model dropdown sets which LLM powers your Invent session. Choose from the configurable list; there's a default if you don't change it.
   </Tab>
   <Tab title="About You">
     <img src="/images/about-you-invent.png" alt="The About You setting in Inventor" />
@@ -129,25 +129,3 @@ Inventor and the Relevance AI MCP are often compared, but they solve different p
 <Tip>
   The two are complementary, not competing. Inventor uses the same MCP tool surface under the hood — so a common pattern is to build your agents and tools with Inventor, then call them from Cursor or Claude through the MCP in your day-to-day work.
 </Tip>
-
-## Coming soon
-
-<CardGroup cols={2}>
-  <Card title="Alarms on eval runs" icon="bell-ring" href="/build/agents/build-your-agent/evals">
-    Set alarms that trigger on the results of your evaluation runs.
-  </Card>
-  <Card title="More alerts on monitoring checks" icon="chart-line">
-    A wider range of alerts on your monitoring checks.
-  </Card>
-  <Card title="Conversation task status filtering" icon="filter">
-    Improved filtering by conversation task status in monitoring runs.
-  </Card>
-</CardGroup>
-
-## Known issues
-
-<AccordionGroup>
-  <Accordion title="Inventor messages don't always update live">
-    Inventor messages can lag or not appear until you refresh, approval states can get stuck, and progress isn't always visible in real time. If something looks out of date or stalled, refresh or reopen the page to see the latest state.
-  </Accordion>
-</AccordionGroup>
