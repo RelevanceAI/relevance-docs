@@ -282,19 +282,19 @@ When triggering agents via MCP, you have two execution modes available depending
 
 ## Configuring tools via MCP
 
-The Relevance AI MCP server includes tools for managing your project's tools, not just triggering agents. `relevance_set_tool_output` lets you configure a tool's output transformation and schema after the tool has been created.
+The Relevance AI MCP server includes tools for managing your project's tools, not just triggering agents. `relevance_set_tool_output` lets you configure a tool's runtime output map and output schema after the tool has been created.
 
 This fills a gap in tool creation workflows: tools can be built via MCP, but output customization previously required opening the tool in the Relevance AI UI or recreating it from scratch. With `relevance_set_tool_output`, you can define and refine output formats entirely from your AI coding environment.
 
 ### `relevance_set_tool_output`
 
-Configures the output transformation and schema for an existing tool.
+Configures the runtime output map and output schema for an existing tool.
 
 | Parameter | Description |
 |---|---|
-| `tool_id` | The ID of the tool to configure |
-| `output_transformation` | Maps, filters, or reshapes the tool's raw output for downstream use |
-| `output_schema` | Enforces a specific structure for the tool's output |
+| `studio_id` | The `studio_id` of the tool to configure |
+| `output` | The runtime output map — an object mapping each returned key to a template (e.g. `{ "score": "{{steps.calc.output.value}}" }`). Pass `null` to clear it and return the last step's output unchanged |
+| `output_schema` | The display contract — controls field order and how each output renders. Pass `null` to clear it |
 
 <Note>
   For the full parameter schema, refer to the Relevance AI API documentation.
@@ -310,7 +310,7 @@ Configures the output transformation and schema for an existing tool.
 For the equivalent configuration in the UI, see [configure tool output](/build/tools/advanced-setup/output-configuration).
 
 <Accordion title="Typical workflow: create and configure a tool's output">
-  After creating a tool in your Relevance AI project, call `relevance_set_tool_output` with the tool's ID to define how its output is shaped. Provide an `output_transformation` to map or filter the raw result, and an `output_schema` to enforce the output structure. You can call this tool repeatedly as you iterate — no recreation needed. For the full programmatic GTM context, see [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction).
+  After creating a tool in your Relevance AI project, call `relevance_set_tool_output` with the tool's `studio_id` to define how its output is shaped. Provide an `output` map to set the runtime keys the tool returns, and an `output_schema` to control field order and rendering. Each field is independent — omit one to leave it unchanged, or pass `null` to clear it. You can call this tool repeatedly as you iterate — no recreation needed. For the full programmatic GTM context, see [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction).
 </Accordion>
 
 ---
