@@ -153,6 +153,12 @@ To escalate your agent to Slack, follow these steps:
 
 Once connected, your integration for Slack will be available for use with your Agents and Tools.
 
+## Evaluation alarm notifications
+
+Evaluation alarms can send notifications to Slack channels when your Agent's evaluation metrics breach configured thresholds. This lets you monitor Agent quality automatically — when a pass rate drops below your threshold and stays there for the configured evaluation period, a notification is posted to your chosen Slack channel.
+
+To receive evaluation alarm notifications in Slack, set up a Monitor dashboard in your Agent's Evaluate tab, then add an alarm and select Slack as a notification channel. Connect your workspace and choose the channel where alerts should be posted. See [evaluation alarms](/build/agents/build-your-agent/evals#alarms) for full configuration details.
+
 ## Making API calls with Slack using Tool steps
 
 You can configure your Slack agent to make API calls to Slack via Relevance AI's tool builder. This allows you to perform actions such as posting Slack messages to channels, or reading messages from channels. These are just a few examples of the many Slack actions available. Your agents can combine these actions with their reasoning capabilities to create sophisticated workflows that enhance team communication and productivity.

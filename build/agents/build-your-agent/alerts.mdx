@@ -10,6 +10,21 @@ Set up rules to get notified when your agent encounters an issue, reaches a thre
 Alerts are available on paid plans only.
 </Note>
 
+<Info>
+This page covers alert rules, which notify you about execution events such as task failures, tool errors, and status changes. For quality metric monitoring — like getting notified when evaluation pass rates drop — see [evaluation alarms](/build/agents/build-your-agent/evals#alarms).
+</Info>
+
+## When to use alert rules vs. evaluation alarms
+
+| | Alert rules | Evaluation alarms |
+|---|---|---|
+| **What it monitors** | Execution events (failures, errors, status changes, deployments) | Quality metrics (pass rates, Check scores from Monitor dashboards) |
+| **When it triggers** | When a specific event occurs | When a metric stays below a threshold for a configured period |
+| **Configured in** | Agent Alerts tab | Monitor dashboard in the Evaluate tab |
+| **Use for** | Catching execution problems and operational issues | Catching quality degradation and performance drops |
+
+---
+
 ## Alert rules
 
 Stay on top of agent issues by creating alert rules that notify you automatically when specific events occur. Each rule has a **trigger condition** (what happened) and one or more **notification channels** (where to send it).

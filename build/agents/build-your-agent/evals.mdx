@@ -24,6 +24,9 @@ The Evals section is your command center for testing and evaluating AI Agent per
   <Card title="Monitor live tasks" icon="chart-line">
     Create Monitor dashboards that score live Agent tasks against your Checks, with sample-rate controls and per-Check trend charts over time.
   </Card>
+  <Card title="Set up alarms" icon="bell">
+    Set up alarms on Monitor dashboards to get notified when evaluation metrics breach thresholds — without checking dashboards manually.
+  </Card>
 </CardGroup>
 
 ---
@@ -36,7 +39,7 @@ The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 - **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, credit spend, and creation date for every run.
 - **Checks** — The reusable set of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
 - **Publish** — Choose which test sets must pass before your Agent can be published. Set a minimum pass rate and optionally block publishing on failure.
-- **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
+- **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time. You can configure alarms on Monitor dashboards to get notified automatically when metrics breach thresholds.
 
 ---
 
@@ -292,6 +295,139 @@ You also get:
 <Tip>
 To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
 </Tip>
+
+Once you have a Monitor dashboard configured, you can set up evaluation alarms to receive automatic notifications when metric scores drop below your thresholds. See [Alarms](#alarms) below.
+
+---
+
+## Alarms
+
+<Info>
+Evaluation alarms are behind the AlarmEngine feature flag and are rolling out progressively. If you don't see the alarm configuration option in your Monitor dashboards, reach out to your account manager to request access.
+</Info>
+
+Evaluation alarms watch your Monitor dashboard metrics and notify you when performance drops below acceptable levels. Instead of checking dashboards manually, you configure a threshold and get notified when a metric breaches it and stays breached for a configured period.
+
+### How evaluation alarms compare to other notification types
+
+Relevance AI has several notification types that serve different purposes:
+
+| Notification type | What it monitors | When to use it |
+|---|---|---|
+| **Evaluation alarms** | Quality metrics (pass rates, Check scores) | Quality degradation, performance drops, metric thresholds |
+| **Alert rules** | Execution events (task failures, tool errors, status changes) | Execution problems, errors, deployment events |
+| **Publish gates** | Evaluation results before publishing | Blocking agent updates that fail evaluations |
+
+See [Alert rules](/build/agents/build-your-agent/alerts) for details on execution-level notifications.
+
+### Alarm states
+
+Each alarm is always in one of three states:
+
+<CardGroup cols={3}>
+  <Card title="OK" icon="circle-check">
+    Metrics are within the configured threshold. No notification is sent.
+  </Card>
+  <Card title="BREACHING" icon="circle-exclamation">
+    The threshold has been crossed, but the evaluation period has not fully elapsed yet. No notification is sent.
+  </Card>
+  <Card title="ALARM" icon="circle-xmark">
+    The threshold has been breached for the full evaluation period. A notification is sent to all configured channels.
+  </Card>
+</CardGroup>
+
+Alarms transition in one direction as a metric deteriorates: **OK → BREACHING → ALARM**. When the metric recovers above the threshold, the alarm returns to **OK**.
+
+The BREACHING state filters out transient dips. A single low-scoring task won't immediately fire a notification — the metric must stay below the threshold for the full evaluation period before the alarm transitions to ALARM.
+
+### Creating an alarm
+
+Alarms are created from within a Monitor dashboard:
+
+1. Go to the **Evaluate** tab and select **Monitor** from the left sidebar.
+2. Open the Monitor dashboard you want to monitor.
+3. Click **Add alarm** in the dashboard.
+4. Select the evaluation metric to monitor (for example, the pass rate of a specific Check).
+5. Set a **threshold** — the metric value that triggers a breach (for example, a pass rate below 80%).
+6. Set an **evaluation period** — how long the threshold must be breached before the alarm transitions to ALARM state.
+7. Set a **cooldown period** — the minimum time between alarm notifications.
+8. Add one or more notification channels.
+9. Save the alarm.
+
+### Configuring notifications
+
+Each alarm can send notifications to one or more channels simultaneously:
+
+<CardGroup cols={3}>
+  <Card title="Email" icon="envelope">
+    Add one or more email addresses. No OAuth connection required.
+  </Card>
+  <Card title="Slack" icon="slack" iconType="brand">
+    Connect your Slack workspace via OAuth, then select a channel. See [Slack integration](/integrations/popular-integrations/slack) for setup details.
+  </Card>
+  <Card title="Microsoft Teams" icon="microsoft" iconType="brand">
+    Connect your Microsoft Teams account via OAuth, then select a team and channel. See [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams) for setup details.
+  </Card>
+</CardGroup>
+
+You can add multiple channels to a single alarm — for example, send notifications to both an email address and a Slack channel.
+
+### Threshold and period configuration
+
+<AccordionGroup>
+  <Accordion title="Threshold">
+    The threshold is the metric value that triggers a breach. For pass-rate metrics, set a minimum acceptable percentage — for example, breach when the pass rate drops below 80%. Set the threshold high enough to catch real problems, but not so sensitive that normal variation triggers constant notifications.
+  </Accordion>
+
+  <Accordion title="Evaluation period">
+    The evaluation period is how long a threshold must remain continuously breached before the alarm transitions from BREACHING to ALARM and sends a notification. A longer evaluation period reduces false positives from transient dips. A shorter period catches degradation faster. Match the period to your Agent's task volume — a high-volume Agent accumulates signal quickly and can use a shorter period.
+  </Accordion>
+
+  <Accordion title="Cooldown period">
+    The cooldown period is the minimum time between alarm notifications. After an alarm fires, no further notifications are sent until the cooldown expires — even if the metric continues to breach. Cooldowns prevent notification fatigue: without one, a persistently breaching metric would send a notification every time new data arrives.
+  </Accordion>
+</AccordionGroup>
+
+### Managing alarms
+
+From the Monitor dashboard, you can view existing alarms and their current state (OK, BREACHING, or ALARM), edit alarm configuration including thresholds, periods, and notification channels, disable an alarm temporarily without deleting it, and delete an alarm permanently. Disabling is useful during planned maintenance or while an Agent update is in progress.
+
+### Use cases
+
+<AccordionGroup>
+  <Accordion title="Production quality monitoring">
+    Attach an alarm to your main Monitor dashboard with a pass-rate threshold that represents acceptable production quality. You get notified automatically if real conversations start failing your Checks — without logging in and checking the dashboard.
+  </Accordion>
+
+  <Accordion title="Regression detection after agent updates">
+    Configure an alarm before publishing Agent updates. If a new Agent version causes a quality regression in live tasks, the alarm catches it and alerts your team before it affects many users.
+  </Accordion>
+
+  <Accordion title="SLA compliance monitoring">
+    For Agents with quality commitments — for example, response accuracy above a certain threshold — evaluation alarms let you monitor compliance continuously and get notified if performance dips below the agreed level.
+  </Accordion>
+
+  <Accordion title="Early warning system">
+    Set thresholds slightly above your actual minimum acceptable level. This gives your team time to investigate and resolve issues before they breach your actual SLA.
+  </Accordion>
+</AccordionGroup>
+
+### Best practices for alarms
+
+<CardGroup cols={2}>
+  <Card title="Avoid over-sensitive thresholds" icon="sliders">
+    Set thresholds that represent genuinely problematic performance, not minor variations. A threshold that fires every day provides no signal and trains your team to ignore notifications.
+  </Card>
+  <Card title="Match evaluation periods to task volume" icon="clock">
+    High-volume Agents accumulate signal faster. Use shorter evaluation periods for busy Agents and longer ones for low-volume Agents to avoid acting on insufficient data.
+  </Card>
+  <Card title="Configure cooldowns to match your response cadence" icon="bell-slash">
+    Set cooldown periods that match how often your team can realistically act on a notification — once per hour, once per day, or similar.
+  </Card>
+  <Card title="Monitor the right metrics" icon="crosshairs">
+    Different Agents need different Checks. A customer support Agent should monitor empathy and resolution; a research Agent should monitor accuracy. Attach alarms to the Checks that matter most for your Agent's purpose.
+  </Card>
+</CardGroup>
 
 ---
 
