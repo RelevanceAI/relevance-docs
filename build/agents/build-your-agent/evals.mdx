@@ -274,13 +274,14 @@ Monitor is organized into **dashboards** — you can create more than one (for e
     - **Completed** — the agent finished the task successfully
     - **Escalated** — the task was handed off to a human
     - **Pending approval** — the task is waiting for human approval before continuing
-    - **Execution limit reached** — the agent hit its step or time limit
-    - **Errored** — the task ended due to an error
+    - **Timed out** — the agent exceeded its time limit
+    - **Unrecoverable error** — the agent hit an error it could not recover from
+    - **Exhausted retries** — the agent failed after exhausting its retry attempts
 
     Multiple statuses can be selected. Leave blank to evaluate all tasks. Filtering by status is useful when you want to focus evaluation credit on specific outcomes — for example, only scoring successfully completed tasks, or only scoring escalated tasks to evaluate handoff quality.
 
     <Note>
-    Monitor dashboards also work for workforce evaluations. When monitoring a workforce, evaluations trigger on every state transition rather than only when a task reaches a final status. Available status options are tailored to the resource type, so workforce dashboards may show different statuses than agent dashboards.
+    Monitor dashboards also work for workforce evaluations. Available status options are tailored to the resource type, so workforce dashboards show different statuses than agent dashboards — for example, **Execution limit reached** is a workforce-only status.
     </Note>
 6. Save the dashboard.
 
