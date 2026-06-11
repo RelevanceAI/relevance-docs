@@ -48,6 +48,30 @@ One of the most powerful features of the Workforce Builder is the ability to con
 
 For example, you might connect a tool that sends an email to another tool that summarizes responses, creating an automated follow-up workflow.
 
+## Managing tools in your workforce
+
+Once tools are added to your workforce, you can manage them directly from the agent node configuration panel.
+
+### Accessing tool management
+
+1. Click on an agent node to open the configuration panel
+2. In the right sidebar, navigate to the **Tools** section
+3. Each listed tool shows a set of available actions
+
+### Available tool actions
+
+- **Edit tool**: Opens the tool builder to modify the tool's code, steps, and configuration. This gives you quick access without leaving the workforce context.
+- **Disable**: Temporarily prevents the agent from using the tool without removing the connection
+- **Duplicate**: Creates a copy of the tool in your project
+- **Swap**: Replaces the tool with a different one while preserving the connection configuration
+- **Delete**: Removes the tool and its connection from the agent
+
+### Editing shared tools
+
+When you click **Edit tool** for a tool used by multiple agents, a warning banner appears in the tool editor showing how many agents are affected.
+
+If you need agent-specific modifications, clone the tool first to avoid changing behavior for other agents. See [Editing shared tools](/build/tools/create-a-tool#editing-shared-tools) for details on the cloning workflow.
+
 ## Edge Settings for Tool Connections
 
 When connecting tools in your Workforce, you can configure the following edge settings:
@@ -95,6 +119,8 @@ To get the most out of tools in your Workforce:
 3. **Document connections**: Use the description fields to explain how tools should work together
 4. **Test thoroughly**: Before deploying, test your tool connections with various inputs
 5. **Monitor performance**: Regularly review how your tools are performing and refine as needed
+6. **Use Edit tool for quick modifications**: Click **Edit tool** from an agent's **Tools** section to open the tool builder directly within the workforce context, without navigating away
+7. **Clone before editing shared tools**: If you need agent-specific changes to a tool used by multiple agents, clone the tool first — editing a shared tool affects all agents using it
 
 ## Related Features
 
