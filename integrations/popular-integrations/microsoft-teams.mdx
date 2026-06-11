@@ -198,6 +198,23 @@ Once a trigger fires, the agent responds directly inside Teams with the followin
 
 <Note>Messages that contain only attachments with no text will show a "[N attachments]" indicator to the agent.</Note>
 
+### Advanced trigger settings
+
+#### Thread reply method
+
+The Thread Reply Method controls whether your agent posts a response back to the Teams thread after processing a message. Two options are available:
+
+- **Agent auto-reply** (default) — the agent processes the message and posts its response back to the Teams thread.
+- **No reply** — the agent processes the message silently, without posting to Teams.
+
+The "No reply" option is useful when the agent's output goes somewhere other than Teams — for example, writing results to a database, sending an email, or triggering a downstream workflow. This setting is per-trigger and opt-in; the default maintains backward compatibility.
+
+To configure, open your MS Teams trigger settings in Relevance AI, expand **Advanced Settings**, and select your preferred option under **Thread Reply Method**.
+
+<Warning>
+When "No reply" is selected, you won't see confirmation in Teams that your agent processed the message. Monitor the agent's task history in Relevance AI to verify it's working correctly.
+</Warning>
+
 ## Tool steps for Microsoft Teams
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
@@ -396,6 +413,10 @@ The following OAuth scopes are requested when you connect your Microsoft account
 
   <Accordion title="Do triggers work for private messages?">
     Yes, Teams triggers can monitor both channel messages and private chats. To monitor direct messages, select the "Direct chats with Relevance AI" option when configuring your trigger instead of a specific channel.
+  </Accordion>
+
+  <Accordion title="Can my agent process Teams messages without replying?">
+    Yes. Set the Thread Reply Method to "No reply" in your MS Teams trigger's Advanced Settings. This allows your agent to process messages without posting a response back to Teams — useful when the agent's output goes somewhere else, such as a database, email, or another workflow. The default is "Agent auto-reply", which maintains existing behavior. To verify the agent is running correctly, check the task history in Relevance AI.
   </Accordion>
 
   <Accordion title="Can my agent access files shared in Teams?">
