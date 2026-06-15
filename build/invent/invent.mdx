@@ -1,0 +1,198 @@
+---
+title: "Build with Inventor"
+sidebarTitle: "Build with Inventor"
+description: "A copilot agent inside the Relevance AI UI that builds, debugs, and iterates on agents, tools, workforces, and triggers from a natural-language description."
+---
+
+<Warning>
+  Inventor is a **pilot for Enterprise plans only**. To request access, reach out to your account team. On another plan? See how to [invent an agent](/build/agents/create-an-agent#option-1-invent-an-agent) or [invent a tool](/build/tools/create-a-tool#option-1-invent-a-tool).
+</Warning>
+
+<img src="/images/inventor.png" alt="The Inventor panel in Relevance AI" />
+
+## What is Inventor
+
+Inventor is a copilot agent inside the Relevance AI UI. It uses the Relevance AI MCP under the hood to take real actions on your project, so from a single chat surface you can build, debug, and iterate without leaving the platform.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Build from a description" icon="wand-magic-sparkles">
+    Create new agents, tools, workforces, and triggers from a natural-language description.
+  </Card>
+  <Card title="Debug failing agents" icon="bug">
+    Inventor reads run history, identifies the failing step, explains what went wrong, and proposes a fix.
+  </Card>
+  <Card title="Iterate on existing assets" icon="pen-to-square">
+    Change a prompt, swap a model, restructure a workforce, or regenerate a tool's schema.
+  </Card>
+  <Card title="Discover before you build" icon="magnifying-glass">
+    Find existing agents and tools before building duplicates.
+  </Card>
+  <Card title="Recommend the right abstraction" icon="sitemap">
+    Get a recommendation on tool vs. agent vs. workforce based on your use case.
+  </Card>
+  <Card title="Build and improve evals" icon="flask-vial" href="/build/agents/build-your-agent/evals">
+    Diagnoses errored logs and tools, explains why a run failed, and proposes how to fix it — so you can build stronger evals.
+  </Card>
+</CardGroup>
+
+## Where to find Inventor
+
+Inventor is available from several places, so you can reach it wherever you're working.
+
+<Tabs>
+  <Tab title="Home page">
+    <img src="/images/Invent%20dashboard%20access.png" alt="The Inventor home page and sidebar access point in Relevance AI" />
+
+    Inventor has its own item in the left sidebar that opens a full home page — a central hub for all your Inventor conversations. The same Inventor is available as a persistent side panel from any builder page — tool, agent, workforce, knowledge, and home — so you can reach it without navigating to a specific route.
+
+    Start Inventor from the home page:
+
+    <Steps>
+      <Step title="Open Home">
+        Click **Home** in the left sidebar.
+      </Step>
+      <Step title="Open Inventor">
+        Click the **Inventor** button in the page header.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="While editing an agent">
+    <img src="/images/agent-inventor-access.png" alt="The Inventor entry point at the top of the agent builder panel in Relevance AI" />
+
+    Inventor sits at the top of the agent builder, above Prompt, Tools, Knowledge, and Triggers. Open it to iterate on the agent you're editing without leaving the page.
+
+    Start Inventor while editing an agent:
+
+    <Steps>
+      <Step title="Open the Agents page">
+        Click **Agents** in the left sidebar.
+      </Step>
+      <Step title="Open or create an agent">
+        Open an existing agent or create a new one to enter the agent editor.
+      </Step>
+      <Step title="Open Inventor">
+        Click the **Inventor** button in the left sidebar of the agent editor.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="When creating an agent">
+    <img src="/images/inventor-when-creating-agent.png" alt="The Invent option when creating an agent in Relevance AI" />
+
+    Start Inventor from the Agents page:
+
+    <Steps>
+      <Step title="Open the Agents page">
+        Click **Agents** in the left sidebar.
+      </Step>
+      <Step title="Build with Inventor">
+        Click the **Build with Inventor** button in the header.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="When creating a tool">
+    <img src="/images/inventor-when-creating-tool.png" alt="The Invent option when creating a tool in Relevance AI" />
+
+    Start Inventor from the Tools page:
+
+    <Steps>
+      <Step title="Open the Tools page">
+        Click **Tools** in the left sidebar.
+      </Step>
+      <Step title="Build with Inventor">
+        Click the **Build with Inventor** button in the header.
+      </Step>
+    </Steps>
+
+    You can also choose Invent when you [create a tool](/build/tools/create-a-tool#option-1-invent-a-tool) to generate a first version from a description.
+  </Tab>
+</Tabs>
+
+## How to use Inventor
+
+<div style={{ width:"100%",position:"relative","padding-top":"44%"}}>
+<iframe src="https://app.supademo.com/embed/cmq65ouq340ajqm6u2uly8nst?embed_v=2" frameBorder="0" title="How to use Invent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+<Warning>
+  Invent is expensive to run and consumes significant credits. Use it deliberately and keep an eye on your usage.
+</Warning>
+
+<Steps>
+  <Step title="Open Inventor">
+    From the Relevance AI home dashboard, click **Inventor**.
+  </Step>
+  <Step title="Describe what you want">
+    Type a natural-language description of what you want to build, debug, or iterate on — agents, tools, workforces, and triggers. Be specific about the outcome you're after.
+  </Step>
+  <Step title="Review and iterate">
+    Inventor generates a first version or applies your edit. Review it, then refine by describing the changes you want.
+  </Step>
+</Steps>
+
+## Inventor features
+
+<Tabs>
+  <Tab title="Auto-accept">
+    <img src="/images/Auto%20accept.png" alt="The auto-accept setting in Inventor" />
+
+    By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
+  </Tab>
+  <Tab title="Model selection">
+    <img src="/images/invent%20model%20selector.png" alt="The model selector in Inventor" />
+
+    The model dropdown sets which LLM powers your Invent session. Choose from the configurable list; there's a default if you don't change it.
+  </Tab>
+  <Tab title="About You">
+    <img src="/images/about-you-invent.png" alt="The About You setting in Inventor" />
+
+    About You tells Inventor who you are so it tailors every response to your role and work from the first message — no re-explaining your context each session. It's descriptive only: it shapes how Inventor talks to you and what it assumes about your work, but it doesn't change Inventor's role or hardcode any tool configuration.
+
+    What it changes:
+
+    <CardGroup cols={3}>
+      <Card title="Tone and language" icon="comments">
+        Simpler explanations for non-technical users, more precise technical language for engineers.
+      </Card>
+      <Card title="Domain assumptions" icon="lightbulb">
+        If you're in sales, it won't default to engineering-flavored tool designs.
+      </Card>
+      <Card title="Personalization" icon="user">
+        Addresses you by first name at natural moments like greetings, not robotically in every message.
+      </Card>
+    </CardGroup>
+
+    To set it up:
+
+    <Steps>
+      <Step title="Open Inventor">
+        Open the Inventor side panel or home page.
+      </Step>
+      <Step title="Click Settings">
+        The settings pop up — enter your details under **About You**.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## MCP vs Inventor
+
+Inventor and the Relevance AI MCP are often compared, but they solve different problems. Inventor builds things _inside_ Relevance AI from natural language. The MCP connects Relevance AI _to the outside world_ — letting external clients call your tools, and letting your agents reach into external services.
+
+<CardGroup cols={2}>
+  <Card title="Inventor" icon="wand-magic-sparkles">
+    A copilot inside Relevance AI. Describe what you want and it builds or edits agents, tools, and workforces for you, landing changes in draft for review.
+
+    Reach for it when you want to build, edit, or debug something inside Relevance AI by describing the outcome.
+  </Card>
+  <Card title="Relevance AI MCP" icon="plug">
+    A bridge to other tools. Call your existing Relevance AI tools from external clients like Cursor or Claude with the [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server), or let your agents call services like Notion and Linear with the [MCP Client](/integrations/mcp/mcp-client).
+
+    Reach for it when the tool already exists and you want to run it from Cursor or Claude, or let an agent call an outside service.
+  </Card>
+</CardGroup>
+
+<Tip>
+  The two are complementary, not competing. Inventor uses the same MCP tool surface under the hood — so a common pattern is to build your agents and tools with Inventor, then call them from Cursor or Claude through the MCP in your day-to-day work.
+</Tip>
