@@ -236,6 +236,74 @@ Each entry authenticates independently against its own project, so you can acces
 
 ---
 
+## Available MCP tools
+
+The Relevance AI MCP server exposes a set of built-in tools your AI assistant uses to read and manage your agents, tools, and workforces. This section documents the tools for working with agent system prompts.
+
+### Agent system prompt tools
+
+Agent system prompts can grow to hundreds or thousands of lines as you add instructions, examples, edge cases, and integration-specific rules. Loading an entire prompt into an AI assistant's context window at once becomes impractical — or impossible — once a prompt exceeds a few hundred lines. These three tools let your AI client navigate and edit prompts of any size by reading in pages, searching by pattern, and making targeted string replacements.
+
+<Note>These tools are designed for use with AI coding assistants — Claude Code, Cursor, VS Code — not for direct API calls. The web UI remains the better option for major prompt rewrites.</Note>
+
+The `relevance_get_agent` tool now includes a `system_prompt_line_count` field in its response. Your AI client can check this value before deciding whether to load the full prompt or use the paginated reading and search tools below.
+
+#### relevance_read_agent_system_prompt
+
+Reads a line-numbered window of an agent's system prompt, returning a specific range of lines rather than the full prompt. Call it multiple times with different `start_line` values to page through a large prompt section by section.
+
+`agent_id` identifies which agent to read from. `start_line` sets the first line to return (default: 1). `num_lines` controls how many lines to read in one call (default: 50). The tool returns the requested lines with their line numbers, the total line count in the prompt, and a `has_more` flag that indicates whether additional lines follow the returned window.
+
+This tool is auto-approved and runs without pausing for user confirmation.
+
+<Accordion title="Example: read lines 100–150 of a Support Agent's prompt">
+  Ask your AI client: *"Show me lines 100 to 150 of my Support Agent's system prompt."*
+
+  The AI client calls `relevance_read_agent_system_prompt` with `agent_id` set to your Support Agent's ID, `start_line: 100`, and `num_lines: 50`. It returns lines 100–150 with their line numbers, plus the total line count and whether there are more lines after line 150. You can then ask to continue reading from line 151, or search for a specific term using `relevance_search_agent_system_prompt`.
+</Accordion>
+
+#### relevance_search_agent_system_prompt
+
+Searches an agent's system prompt using a regex pattern and returns matching lines with surrounding context. Use this to find all references to a specific term, integration name, or instruction without reading through the full prompt.
+
+`agent_id` identifies which agent to search. `pattern` is a regex string matched against each line. `context_lines` controls how many surrounding lines to include with each match (default: 2). The tool returns each matching line with its line number plus the surrounding context lines, giving you enough orientation to understand how the term is used in each location.
+
+This tool is auto-approved and runs without pausing for user confirmation.
+
+<Accordion title="Example: find all HubSpot references in a Sales Agent's prompt">
+  Ask your AI client: *"Search my Sales Agent's system prompt for all references to 'HubSpot'."*
+
+  The AI client calls `relevance_search_agent_system_prompt` with `pattern: "HubSpot"` and returns each matching line along with two lines of context above and below. If HubSpot appears in five different places in the prompt, you see all five matches at once, making it easy to assess whether the references are consistent and up to date.
+</Accordion>
+
+#### relevance_edit_agent_system_prompt
+
+Replaces a specific string in an agent's system prompt and saves the result as a draft. Designed for targeted edits — changing a specific phrase, updating an integration name, or correcting a rule — without touching anything else in the prompt.
+
+`agent_id` identifies which agent to edit. `old_text` is the exact string to find and replace — it must match the existing text exactly, including whitespace and punctuation. `new_text` is the replacement string. The tool returns confirmation that the draft was created along with the line numbers affected by the replacement.
+
+This tool requires user approval. When your AI client calls it, your MCP client pauses and displays the proposed change — the exact text being replaced and what it will be replaced with — before applying it. Approve or reject the change before the draft is saved.
+
+<Accordion title="Example: update an escalation phrase in a Support Agent's prompt">
+  Ask your AI client: *"Replace 'escalate to tier 2' with 'escalate to senior support' in my Support Agent's system prompt."*
+
+  The AI client calls `relevance_edit_agent_system_prompt` with `old_text: "escalate to tier 2"` and `new_text: "escalate to senior support"`. Your MCP client pauses and shows you the proposed change. Once you approve, the replacement is applied and saved as a draft. If the phrase appeared in multiple locations, all instances are replaced in a single operation.
+</Accordion>
+
+### Approval workflow
+
+Read and search operations run automatically without requiring confirmation. Edit operations pause for explicit user approval before any change is saved.
+
+`relevance_read_agent_system_prompt` and `relevance_search_agent_system_prompt` are auto-approved — your AI client calls them in the background as part of exploring or analyzing a prompt.
+
+`relevance_edit_agent_system_prompt` always requires approval. Your MCP client surfaces the exact proposed change before applying it, so you can verify what is being modified before confirming. This applies even when the edit seems minor — agents handling live conversations should not be modified without review.
+
+### Complementary to the web UI
+
+These tools work alongside the Relevance AI web UI rather than replacing it. The web UI is better suited for major rewrites where you want to rework large sections of a prompt or restructure it significantly. The MCP tools are better for targeted refinements — updating a specific instruction, fixing a reference, or adjusting a single rule — especially in large prompts where navigating through the UI is time-consuming.
+
+---
+
 ## Add agent skills
 
 The MCP server gives your AI assistant the ability to call Relevance AI tools, but it doesn't know _how_ to use them well. For better results, pair it with the [agent skills](/integrations/mcp/programmatic-gtm/agent-skills) repository — a local reference that teaches your assistant how to work with agents, tools, workforces, knowledge, and more.
