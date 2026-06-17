@@ -293,6 +293,58 @@ You also get:
 To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
 </Tip>
 
+### Setting up alarms
+
+Monitor alarms notify you when pass rates drop below a threshold you define. You can set alarms on individual Check pass rates or on the aggregate pass rate across all Checks in a Monitor.
+
+Alarms are available to all users and support email, Slack, and Microsoft Teams notifications.
+
+#### Per-check alarms
+
+Per-check alarms fire when a single Check's pass rate drops below your threshold within a time window. Use these when you want targeted alerts for a specific evaluation criterion — for example, to get notified immediately when your "Professional tone" Check starts failing more than 20% of the time.
+
+| Field | Description | Example |
+|-------|-------------|---------|
+| **Comparison operator** | How to compare the pass rate against your threshold | Less than |
+| **Threshold (%)** | The pass rate percentage to compare against | 80 |
+| **Time window** | How far back to look when calculating the pass rate | Last 7 days |
+
+The alarm uses M-of-N bucketed breach logic — it evaluates the Check's pass rate over the configured time window each time a new result arrives for that Check.
+
+#### Overall Monitor alarms
+
+Overall Monitor alarms fire when the aggregate pass rate across **all Checks** in a Monitor drops below your threshold. This catches broad performance degradation that per-check alarms might miss — for example, when several Checks each slip slightly but none individually triggers an alarm.
+
+The condition configuration is the same as per-check alarms (comparison operator, percentage threshold, time window). Rather than counting individual Check results, the alarm counts **distinct evaluation runs** across all Checks — a single task evaluation counts once regardless of how many Checks ran on it. The alarm re-evaluates whenever any result arrives for the Monitor.
+
+#### Notification channels
+
+Monitor alarms use the same notification channels as [Agent Alerts](/build/agents/build-your-agent/alerts):
+
+<CardGroup cols={3}>
+  <Card title="Email" icon="envelope">
+    Add one or more email addresses. No OAuth connection required.
+  </Card>
+  <Card title="Slack" icon="slack" iconType="brand">
+    Connect your Slack workspace via OAuth, then select a channel.
+  </Card>
+  <Card title="Microsoft Teams" icon="microsoft" iconType="brand">
+    Connect your Microsoft Teams account via OAuth, then select a team and channel.
+  </Card>
+</CardGroup>
+
+For Slack setup details, see [Slack integration](/integrations/popular-integrations/slack). For Teams, see [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams).
+
+#### Configuring an alarm
+
+1. Open your Monitor dashboard and click the **Settings** button in the top right corner.
+2. Select the **Alarms** tab.
+3. For a per-check alarm, choose the specific Check you want to monitor under **Check alarms** and click **+ Add alarm**.
+4. For an overall Monitor alarm, click **+ Add alarm** under **Overall alarms**.
+5. Set the **comparison operator**, **threshold (%)**, and **time window**.
+6. Select one or more **notification channels** (email, Slack, or Microsoft Teams).
+7. Click **Save**.
+
 ---
 
 ## Publish
