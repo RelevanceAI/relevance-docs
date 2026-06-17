@@ -1,0 +1,151 @@
+---
+title: "Context management"
+sidebarTitle: "Context management"
+description: "Configure how your agent handles conversation history and tool outputs as its context window fills up"
+---
+
+Context management gives you per-agent control over two aspects of how your agent handles information as conversations grow: how it compresses conversation history and how it processes large tool outputs. These are independent settings that you configure separately.
+
+<Note>
+Context management is feature-flagged. If the flags are not enabled for your account, you will see a legacy "conversation compression" toggle instead of the two dropdowns described on this page.
+</Note>
+
+---
+
+## Compaction mode
+
+Compaction mode determines what happens when your agent's conversation history approaches the context window limit of the language model it uses.
+
+As agents work through tasks, conversation history accumulates — messages, tool calls, reasoning steps. When that history grows large enough to threaten the model's context limit, compaction mode determines how older content is handled.
+
+### Off
+
+**What it is:** No compaction occurs. When the context limit is reached, older conversation turns are truncated to make room.
+
+**When to use it:**
+
+- Short, self-contained tasks where conversation history stays small
+- Workflows where preserving the exact content of all messages matters
+- Debugging agents where you need to inspect the unmodified history
+
+**Performance and cost:** No extra model calls are made. The tradeoff is that older turns are dropped silently when context fills up, so the agent loses access to earlier context with no recovery.
+
+---
+
+### Simple
+
+**What it is:** The agent automatically summarizes older conversation turns when approximately 70% of the context window is used. The summary replaces the original turns, freeing up space while preserving the substance of what happened.
+
+**When to use it:**
+
+- Long-running conversations that span many topics
+- Customer support agents handling extended back-and-forth sessions
+- Research agents that need to retain key findings from earlier in a task
+
+**Performance and cost:** Requires an additional model call to generate the summary. This adds a small amount of latency and cost. The benefit is that the agent retains the gist of earlier context rather than losing it entirely when context fills.
+
+---
+
+### Observational
+
+**What it is:** The agent maintains structured observation notes across conversation turns, updating them as the task progresses. Rather than a narrative summary, the agent builds a running set of notes it carries forward.
+
+**When to use it:**
+
+- Data processing agents that need to track state, running counts, or structured findings
+- Agents working on multi-step analysis where structured notes are more useful than a narrative
+- Workflows where the agent needs to reference specific observations made earlier in a session
+
+**Performance and cost:** Similar to Simple mode — an extra model call is needed to generate and update the observation notes. The structured format may produce more useful context than a narrative summary for agents doing systematic, note-heavy work.
+
+---
+
+## Tool output optimization
+
+Tool output optimization controls how the results of tool calls are passed to the language model.
+
+Some tools return large volumes of data — full document contents, database query results, API responses. This setting determines whether that data reaches the model unchanged or trimmed to fit within available context.
+
+### Pass full
+
+**What it is:** Complete tool outputs are passed to the language model unchanged.
+
+**When to use it:**
+
+- Tasks where every detail in a tool response may be relevant to the agent's decision
+- Tools returning structured data the agent needs to reason over precisely
+- Cases where you have verified that tool outputs fit comfortably within context limits
+
+**Impact on agent behavior:** The agent sees everything the tool returns, which improves accuracy on detail-sensitive tasks. Large tool outputs do consume more of the context window, leaving less space for conversation history and reasoning steps.
+
+---
+
+### Optimize
+
+**What it is:** Large tool outputs are trimmed before being passed to the language model, reducing how much context window space they consume.
+
+**When to use it:**
+
+- Tools that regularly return large volumes of data (document contents, search results, database exports)
+- Long-running agents where context space is at a premium
+- Cases where the agent needs key information from a large output but not every detail
+
+**Impact on agent behavior:** The agent receives a condensed version of large tool outputs. This preserves context window space for reasoning and history. Test with your specific tools to verify that trimming does not remove information your agent needs — if the agent makes errors on tasks that depend on precise tool output, switch to **Pass full** for those tools.
+
+---
+
+## How to configure
+
+<Steps>
+  <Step title="Open your agent in Agent Builder">
+    Navigate to your agent and click **Advanced** in the bottom-left corner of the builder.
+  </Step>
+  <Step title="Go to the General tab">
+    In the Advanced Settings panel, select the **General** tab.
+  </Step>
+  <Step title="Set Compaction mode">
+    Under **Context management**, use the **Compaction mode** dropdown to select **Off**, **Simple**, or **Observational**.
+  </Step>
+  <Step title="Set Tool output optimization">
+    Use the **Tool output optimization** dropdown to select **Pass full** or **Optimize**.
+  </Step>
+</Steps>
+
+The two dropdowns are independent — changing one has no effect on the other.
+
+---
+
+## Best practices
+
+<Columns cols={2}>
+  <Card title="Do" icon="circle-check" color="#10b981">
+    Match compaction mode to your agent's task type — use Simple or Observational for long-running agents and Off for short contained tasks. Test tool output optimization with your specific tools before deploying to production. Adjust one setting at a time when debugging so you can identify which change affects agent behavior. Use Observational mode when the agent needs to carry structured state forward across a long session.
+  </Card>
+  <Card title="Don't" icon="circle-xmark" color="#ef4444">
+    Don't leave compaction mode set to Off for agents that handle long conversations — context will fill up and older turns will be dropped silently. Don't assume Optimize is always safe for tools that return critical structured data. Don't change both settings simultaneously when diagnosing unexpected agent behavior. Don't treat these as set-and-forget settings — revisit them if your agent's task complexity or tool outputs change significantly.
+  </Card>
+</Columns>
+
+### Recommendations by agent type
+
+<AccordionGroup>
+  <Accordion title="Customer support agents">
+    Use **Simple** compaction mode so the agent retains a useful summary of earlier conversation turns as support interactions grow. Set tool output optimization to **Pass full** unless your support tools return unusually large payloads — in customer support, losing details from a ticket or CRM lookup can lead to incorrect responses.
+  </Accordion>
+
+  <Accordion title="Research agents">
+    Use **Observational** compaction mode so the agent builds up structured notes from findings as it works through a research task. If the agent queries large documents or search APIs, set tool output optimization to **Optimize** to preserve context space for synthesis and reasoning.
+  </Accordion>
+
+  <Accordion title="Data processing agents">
+    Use **Observational** compaction mode when the agent needs to track running totals, counts, or structured intermediate state. Set tool output optimization based on your data volume — **Optimize** for large database query results where only summary rows are needed, **Pass full** for targeted queries where precise values matter.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Related settings
+
+- [Language Model](/build/agents/build-your-agent/agent-settings/language-model) — configure the model, context window size, and maximum output tokens
+- [Memory](/build/agents/build-your-agent/memory) — store and retrieve information across tasks and sessions, separate from in-conversation context management
+- [Tools](/build/agents/build-your-agent/tools) — configure the tools your agent uses, including retry behavior and output handling at the tool level
