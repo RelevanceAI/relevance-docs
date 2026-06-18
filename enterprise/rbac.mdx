@@ -275,23 +275,23 @@ After migration, review every user mapped to Viewer and determine whether they s
 
 Once RBAC is active for your organization:
 
-<CardGroup cols={2}>
-  <Card title="Asset-level permissions are enforced" icon="lock">
+<AccordionGroup>
+  <Accordion title="Asset-level permissions are enforced" icon="lock">
     Access to individual agents, tools, and knowledge bases is controlled separately from project-level roles.
-  </Card>
-  <Card title="Editors and Admins keep full access" icon="user-shield">
+  </Accordion>
+  <Accordion title="Editors and Admins keep full access" icon="user-shield">
     Project Admin and Editor roles cascade to asset Admin on every asset in the project automatically.
-  </Card>
-  <Card title="Everyone else needs explicit grants" icon="ban">
+  </Accordion>
+  <Accordion title="Everyone else needs explicit grants" icon="ban">
     Members, Viewers, and Chat users receive a 403 error on any asset they have not been granted access to.
-  </Card>
-  <Card title="Credentials can be scoped per tool" icon="key">
+  </Accordion>
+  <Accordion title="Credentials can be scoped per tool" icon="key">
     Instead of one set of project-wide credentials, asset admins can assign specific authentication accounts per tool.
-  </Card>
-  <Card title="Permissions live in the Share modal" icon="share-nodes">
+  </Accordion>
+  <Accordion title="Permissions live in the Share modal" icon="share-nodes">
     Assign access on each individual agent, tool, or knowledge base from its Share modal.
-  </Card>
-</CardGroup>
+  </Accordion>
+</AccordionGroup>
 
 ### Action items for admins
 
