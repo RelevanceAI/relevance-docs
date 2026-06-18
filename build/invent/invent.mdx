@@ -26,6 +26,9 @@ Inventor is a copilot agent inside the Relevance AI UI. It uses the Relevance AI
   <Card title="Iterate on existing assets" icon="pen-to-square">
     Change a prompt, swap a model, restructure a workforce, or regenerate a tool's schema.
   </Card>
+  <Card title="Delete and restore" icon="trash-can-arrow-up">
+    Delete agents, tools, and workforces, or roll an existing asset back to an earlier version — each with a required confirmation step.
+  </Card>
   <Card title="Discover before you build" icon="magnifying-glass">
     Find existing agents and tools before building duplicates.
   </Card>
@@ -152,7 +155,7 @@ The counter lives in the Inventor panel and tracks only the credits used in your
   <Tab title="Auto-accept">
     <img src="/images/auto-accept.png" alt="The auto-accept setting in Inventor" />
 
-    By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
+    By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Deletes and version restores are the exception — Inventor always asks you to confirm those first. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
   </Tab>
   <Tab title="Model selection">
     <img src="/images/invent-model-selector.png" alt="The model selector in Inventor" />
@@ -209,6 +212,12 @@ The counter lives in the Inventor panel and tracks only the credits used in your
     </CardGroup>
 
     When you click thumbs down, a popup appears where you can submit a bug report directly to the Relevance AI team — without leaving the interface or sending a separate email. Describe what you asked Inventor to build, what it generated, what was wrong or missing, and what you expected instead.
+  </Tab>
+  <Tab title="Delete">
+    Ask Inventor to delete an agent, tool, or workforce from a conversation — for example, "Delete the [name] agent". Deletion is permanent and can't be undone, so Inventor always asks you to confirm first, even when auto-accept is on. If you delete the agent you're currently editing, Inventor redirects you away from its view.
+  </Tab>
+  <Tab title="Restore a version">
+    Ask Inventor to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Inventor copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
   </Tab>
 </Tabs>
 
