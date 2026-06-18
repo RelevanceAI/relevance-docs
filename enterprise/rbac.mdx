@@ -236,9 +236,17 @@ If your organization is being migrated from legacy permissions to RBAC, this sec
 
 The legacy permission system had three roles — Admin, Editor, and Viewer — applied at the project and organization level only:
 
-- **Admin** — full read and write access to all assets and settings
-- **Editor** — read and write access to all datasets, knowledge sets, and agents; could run agents and tools
-- **Viewer** — read access to all datasets, knowledge sets, and agents; could run agents
+<CardGroup cols={3}>
+  <Card title="Admin" icon="user-tie-hair-long" iconType="duotone">
+    Full read and write access to all assets and settings.
+  </Card>
+  <Card title="Editor" icon="pen-to-square" iconType="duotone">
+    Read and write access to all datasets, knowledge sets, and agents. Could run agents and tools.
+  </Card>
+  <Card title="Viewer" icon="book-open-reader" iconType="duotone">
+    Read access to all datasets, knowledge sets, and agents. Could run agents.
+  </Card>
+</CardGroup>
 
 There was no asset-level granularity. All users with a given role had the same access to every asset in the project by default. Shared credentials (API keys, OAuths) applied project-wide.
 
@@ -267,39 +275,64 @@ After migration, review every user mapped to Viewer and determine whether they s
 
 Once RBAC is active for your organization:
 
-- **Asset-level permissions are enforced.** Access to individual agents, tools, and knowledge bases is controlled separately from project-level roles.
-- **Project Editors and Admins retain full access** to all assets in that project automatically — project Admin and Editor roles cascade to asset Admin on all assets in the project.
-- **Members, Viewers, and Chat users need explicit asset-level permissions.** Without a grant, they will receive a 403 error when attempting to access an asset.
-- **Shared credentials can be scoped per tool.** Rather than all project members sharing one set of credentials, asset admins can assign specific authentication accounts per tool.
-- **Permissions are assigned via the Share modal** on each individual agent, tool, or knowledge base.
+<CardGroup cols={2}>
+  <Card title="Asset-level permissions are enforced" icon="lock">
+    Access to individual agents, tools, and knowledge bases is controlled separately from project-level roles.
+  </Card>
+  <Card title="Editors and Admins keep full access" icon="user-shield">
+    Project Admin and Editor roles cascade to asset Admin on every asset in the project automatically.
+  </Card>
+  <Card title="Everyone else needs explicit grants" icon="ban">
+    Members, Viewers, and Chat users receive a 403 error on any asset they have not been granted access to.
+  </Card>
+  <Card title="Credentials can be scoped per tool" icon="key">
+    Instead of one set of project-wide credentials, asset admins can assign specific authentication accounts per tool.
+  </Card>
+  <Card title="Permissions live in the Share modal" icon="share-nodes">
+    Assign access on each individual agent, tool, or knowledge base from its Share modal.
+  </Card>
+</CardGroup>
 
 ### Action items for admins
 
 After RBAC is enabled, complete these steps to restore appropriate access for your team:
 
-- **Review user roles immediately.** Check that the default role mappings match your intended access levels, particularly for legacy Viewer accounts.
-- **Assign asset-level permissions** using the Share modal on each agent, tool, and knowledge base that non-Admin/Editor users need to access.
-- **Use RBAC Groups for bulk assignment.** If many users need the same access, create a group and assign asset permissions to the group rather than individual users.
-- **Audit chat-only users.** Confirm that users who only need [Relevance Chat](/get-started/chat/introduction) access are assigned the Chat project role, not Viewer.
-- **Verify critical users can access required assets.** Test access for key team members, especially those with Member or Viewer roles, before announcing the migration is complete.
+<Steps>
+  <Step title="Review user roles immediately">
+    Check that the default role mappings match your intended access levels, particularly for legacy Viewer accounts.
+  </Step>
+  <Step title="Assign asset-level permissions">
+    Use the Share modal on each agent, tool, and knowledge base that non-Admin/Editor users need to access.
+  </Step>
+  <Step title="Use RBAC Groups for bulk assignment">
+    If many users need the same access, create a group and assign asset permissions to the group rather than to individual users.
+  </Step>
+  <Step title="Audit chat-only users">
+    Confirm that users who only need [Relevance Chat](/get-started/chat/introduction) access are assigned the Chat project role, not Viewer.
+  </Step>
+  <Step title="Verify critical users can access required assets">
+    Test access for key team members, especially those with Member or Viewer roles, before announcing the migration is complete.
+  </Step>
+</Steps>
 
 ----
 
 ## Permission inheritance and cascading
 
-Permissions cascade automatically from project level to assets within that project:
+Project roles fall into two groups: those that cascade Admin access to every asset automatically, and those that start with no asset access until it is explicitly granted.
 
-| Project role | Automatic asset access |
-| ------------ | ---------------------- |
-| **Admin**    | Admin on all assets    |
-| **Editor**   | Admin on all assets    |
-| **Viewer**   | Viewer on all assets   |
+<CardGroup cols={2}>
+  <Card title="Cascades to asset Admin" icon="circle-check" color="#16a34a" horizontal>
+    **Admin** and **Editor** automatically receive Admin access on every asset in the project — no per-asset setup required.
+  </Card>
+  <Card title="Starts with no access" icon="lock" color="#dc2626" horizontal>
+    **Member**, **Viewer**, and **Chat** receive nothing by default. Each asset must be shared with them explicitly, or they get a 403 error.
+  </Card>
+</CardGroup>
 
-<Warning>
-Read access cascades automatically, but execution permissions (run/trigger) may require explicit asset-level grants due to known gaps in the system. If a project Viewer needs to run specific agents, grant them Member access at the asset level explicitly.
-</Warning>
-
-Project Members do **not** automatically have access to all assets. Members must be granted asset-level permissions explicitly for each asset they need to access.
+<Note>
+To grant access at scale, assign asset permissions to an RBAC Group rather than to each user individually.
+</Note>
 
 ----
 
@@ -307,9 +340,17 @@ Project Members do **not** automatically have access to all assets. Members must
 
 The following is relevant primarily for API users and developers integrating directly with the authorization system.
 
-- **Member vs operator:** The "Member" role label in the UI maps to the `operator` role in the underlying authorization system. When querying permissions via the API, use `operator` rather than `member`.
-- **Authorization system:** The platform uses OpenFGA for authorization. Some parts of the system use a legacy authorization layer that may produce slightly different behavior in edge cases.
-- **Embeddable agents:** Agents shared via public embed links (Chat UI, Chat Widget) may behave differently under the legacy authorization system. Test permissions explicitly when deploying embedded agents.
+<Tabs>
+  <Tab title="Member/Operator">
+    The "Member" role label in the UI maps to the `operator` role in the authorization system. When querying permissions via the API, use `operator` rather than `member`.
+  </Tab>
+  <Tab title="OpenFGA">
+    The platform uses OpenFGA for authorization. Organizations not yet migrated to RBAC are still served by a legacy authorization layer.
+  </Tab>
+  <Tab title="Embeddable agents">
+    Agents shared via public embed links (Chat UI, Chat Widget) may use the legacy authorization layer. Test permissions explicitly when deploying embedded agents.
+  </Tab>
+</Tabs>
 
 ----
 
