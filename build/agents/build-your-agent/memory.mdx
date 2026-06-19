@@ -168,105 +168,138 @@ Long-Term Memory is particularly valuable for maintaining context across multipl
 
 Agents can capture and restore point-in-time snapshots of their memory. This lets you save the state of an agent's memory at a specific moment and roll back to it later — useful for debugging, testing, or recovering from unwanted memory changes.
 
+<CardGroup cols={3}>
+  <Card title="Capture" icon="camera">
+    Save the agent's full memory state and get back an ID you can restore from.
+  </Card>
+  <Card title="List" icon="layer-group">
+    Browse every snapshot taken for an agent, ordered newest first.
+  </Card>
+  <Card title="Restore" icon="clock-rotate-left">
+    Roll memory back to the exact state captured in any snapshot.
+  </Card>
+</CardGroup>
+
 ### MCP tools
 
-Three MCP tools are available for working with memory snapshots. Unlike the built-in tools described above, these are accessed programmatically by any client connected to the [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server).
+Unlike the built-in tools described above, these are accessed programmatically by any client connected to the [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server). Select a tool to see its parameters and response.
 
-#### `relevance_create_agent_memory_snapshot`
+<Tabs>
+  <Tab title="Create snapshot">
+    <Note>
+    `relevance_create_agent_memory_snapshot` captures the current memory state of an agent.
+    </Note>
 
-Captures the current memory state of an agent and returns a `memory_snapshot_id` that you can use to restore the snapshot later.
+    <ParamField body="agent_id" type="string" required>
+      The ID of the agent whose memory you want to snapshot.
+    </ParamField>
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `agent_id` | string | The ID of the agent whose memory you want to snapshot |
+    <ResponseField name="memory_snapshot_id" type="string">
+      A unique identifier for the created snapshot. Pass this to the restore tool to roll memory back later.
+    </ResponseField>
 
-**Returns:** An object containing `memory_snapshot_id` — a unique identifier for the created snapshot.
+    ```json Example response
+    {
+      "memory_snapshot_id": "snap_xyz789"
+    }
+    ```
+  </Tab>
+  <Tab title="List snapshots">
+    <Note>
+    `relevance_list_agent_memory_snapshots` lists every snapshot created for an agent, ordered by creation time.
+    </Note>
 
-#### `relevance_list_agent_memory_snapshots`
+    <ParamField body="agent_id" type="string" required>
+      The ID of the agent to list snapshots for.
+    </ParamField>
 
-Lists all memory snapshots that have been created for a given agent, ordered by creation time.
+    <ResponseField name="snapshots" type="array">
+      An array of snapshot objects, each containing a `memory_snapshot_id` and a `created_at` timestamp.
+    </ResponseField>
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `agent_id` | string | The ID of the agent to list snapshots for |
+    ```json Example response
+    [
+      {
+        "memory_snapshot_id": "snap_xyz789",
+        "created_at": "2026-06-18T10:00:00Z"
+      }
+    ]
+    ```
+  </Tab>
+  <Tab title="Restore snapshot">
+    <Note>
+    `relevance_restore_agent_memory_snapshot` rolls an agent's memory back to a captured snapshot.
+    </Note>
 
-**Returns:** An array of snapshot objects, each containing `memory_snapshot_id` and `created_at`.
+    <ParamField body="agent_id" type="string" required>
+      The ID of the agent to restore.
+    </ParamField>
 
-#### `relevance_restore_agent_memory_snapshot`
+    <ParamField body="memory_snapshot_id" type="string" required>
+      The ID of the snapshot to restore.
+    </ParamField>
 
-Rolls an agent's memory back to the state captured in a given snapshot. The agent's current memory is replaced with the snapshot state.
-
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `agent_id` | string | The ID of the agent to restore |
-| `memory_snapshot_id` | string | The ID of the snapshot to restore |
-
-<Warning>
-Restoring a snapshot replaces the agent's current memory state. Any memory changes made after the snapshot was created will be lost.
-</Warning>
+    <Warning>
+    Restoring a snapshot replaces the agent's current memory state. Any memory changes made after the snapshot was created will be lost.
+    </Warning>
+  </Tab>
+</Tabs>
 
 ### The `latest_memory_snapshot_id` field
 
-The get-agent API response includes a `latest_memory_snapshot_id` field. This field contains the ID of the most recently created snapshot for that agent, or `null` if no snapshots exist.
+The get-agent API response includes a `latest_memory_snapshot_id` field, which holds the ID of the most recently created snapshot — or `null` if the agent has none. Use it to check whether a recent snapshot exists before attempting a restore.
 
-```json
+<ResponseField name="latest_memory_snapshot_id" type="string | null">
+  The ID of the agent's most recent snapshot, or `null` when no snapshots exist.
+</ResponseField>
+
+```json get-agent response
 {
   "agent_id": "abc123",
   "name": "My agent",
-  "latest_memory_snapshot_id": "snap_xyz789",
-  ...
+  "latest_memory_snapshot_id": "snap_xyz789"
 }
 ```
-
-You can use this field to check whether an agent has a recent snapshot before attempting a restore.
 
 ### Usage example
 
 <Accordion title="Create, list, and restore a memory snapshot">
 
-This example shows a typical snapshot workflow: capture the current memory state, verify it was created, and restore it if needed.
+A typical snapshot workflow: capture the current memory state, verify it was created, then restore it if needed.
 
-**Step 1 — Create a snapshot**
+<Steps>
+  <Step title="Create a snapshot">
+    Capture the agent's current memory and keep the returned ID.
 
-```json
-// Tool: relevance_create_agent_memory_snapshot
-{
-  "agent_id": "abc123"
-}
+    ```json relevance_create_agent_memory_snapshot
+    // Request
+    { "agent_id": "abc123" }
 
-// Response
-{
-  "memory_snapshot_id": "snap_xyz789"
-}
-```
+    // Response
+    { "memory_snapshot_id": "snap_xyz789" }
+    ```
+  </Step>
+  <Step title="List snapshots to confirm">
+    Verify the snapshot was recorded against the agent.
 
-**Step 2 — List snapshots to confirm**
+    ```json relevance_list_agent_memory_snapshots
+    // Request
+    { "agent_id": "abc123" }
 
-```json
-// Tool: relevance_list_agent_memory_snapshots
-{
-  "agent_id": "abc123"
-}
+    // Response
+    [
+      { "memory_snapshot_id": "snap_xyz789", "created_at": "2026-06-18T10:00:00Z" }
+    ]
+    ```
+  </Step>
+  <Step title="Restore the snapshot">
+    Roll memory back to the captured state. Afterwards the agent's memory reflects the moment the snapshot was taken.
 
-// Response
-[
-  {
-    "memory_snapshot_id": "snap_xyz789",
-    "created_at": "2026-06-18T10:00:00Z"
-  }
-]
-```
-
-**Step 3 — Restore the snapshot**
-
-```json
-// Tool: relevance_restore_agent_memory_snapshot
-{
-  "agent_id": "abc123",
-  "memory_snapshot_id": "snap_xyz789"
-}
-```
-
-After the restore completes, the agent's memory reflects the state it was in when the snapshot was taken.
+    ```json relevance_restore_agent_memory_snapshot
+    // Request
+    { "agent_id": "abc123", "memory_snapshot_id": "snap_xyz789" }
+    ```
+  </Step>
+</Steps>
 
 </Accordion>
