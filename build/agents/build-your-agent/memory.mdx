@@ -161,3 +161,112 @@ From the Advanced Settings in Long-Term Memory, you can:
 <Info>
 Long-Term Memory is particularly valuable for maintaining context across multiple conversations, ensuring your agent can build upon previous interactions and provide more personalized experiences.
 </Info>
+
+----
+
+## Memory snapshots
+
+Agents can capture and restore point-in-time snapshots of their memory. This lets you save the state of an agent's memory at a specific moment and roll back to it later — useful for debugging, testing, or recovering from unwanted memory changes.
+
+### MCP tools
+
+Three MCP tools are available for working with memory snapshots. Unlike the built-in tools described above, these are accessed programmatically by any client connected to the [MCP Server](/integrations/mcp/programmatic-gtm/mcp-server).
+
+#### `relevance_create_agent_memory_snapshot`
+
+Captures the current memory state of an agent and returns a `memory_snapshot_id` that you can use to restore the snapshot later.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `agent_id` | string | The ID of the agent whose memory you want to snapshot |
+
+**Returns:** An object containing `memory_snapshot_id` — a unique identifier for the created snapshot.
+
+#### `relevance_list_agent_memory_snapshots`
+
+Lists all memory snapshots that have been created for a given agent, ordered by creation time.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `agent_id` | string | The ID of the agent to list snapshots for |
+
+**Returns:** An array of snapshot objects, each containing `memory_snapshot_id` and `created_at`.
+
+#### `relevance_restore_agent_memory_snapshot`
+
+Rolls an agent's memory back to the state captured in a given snapshot. The agent's current memory is replaced with the snapshot state.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `agent_id` | string | The ID of the agent to restore |
+| `memory_snapshot_id` | string | The ID of the snapshot to restore |
+
+<Warning>
+Restoring a snapshot replaces the agent's current memory state. Any memory changes made after the snapshot was created will be lost.
+</Warning>
+
+### The `latest_memory_snapshot_id` field
+
+The get-agent API response includes a `latest_memory_snapshot_id` field. This field contains the ID of the most recently created snapshot for that agent, or `null` if no snapshots exist.
+
+```json
+{
+  "agent_id": "abc123",
+  "name": "My agent",
+  "latest_memory_snapshot_id": "snap_xyz789",
+  ...
+}
+```
+
+You can use this field to check whether an agent has a recent snapshot before attempting a restore.
+
+### Usage example
+
+<Accordion title="Create, list, and restore a memory snapshot">
+
+This example shows a typical snapshot workflow: capture the current memory state, verify it was created, and restore it if needed.
+
+**Step 1 — Create a snapshot**
+
+```json
+// Tool: relevance_create_agent_memory_snapshot
+{
+  "agent_id": "abc123"
+}
+
+// Response
+{
+  "memory_snapshot_id": "snap_xyz789"
+}
+```
+
+**Step 2 — List snapshots to confirm**
+
+```json
+// Tool: relevance_list_agent_memory_snapshots
+{
+  "agent_id": "abc123"
+}
+
+// Response
+[
+  {
+    "memory_snapshot_id": "snap_xyz789",
+    "created_at": "2026-06-18T10:00:00Z"
+  }
+]
+```
+
+**Step 3 — Restore the snapshot**
+
+```json
+// Tool: relevance_restore_agent_memory_snapshot
+{
+  "agent_id": "abc123",
+  "memory_snapshot_id": "snap_xyz789"
+}
+```
+
+After the restore completes, the agent's memory reflects the state it was in when the snapshot was taken.
+
+</Accordion>
