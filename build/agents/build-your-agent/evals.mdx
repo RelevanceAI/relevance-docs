@@ -293,6 +293,54 @@ You also get:
 To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
 </Tip>
 
+### Monitor alarms
+
+Alarms extend Monitor dashboards with threshold-based notifications so you're alerted when Check scores drop below (or rise above) a defined limit, rather than discovering regressions during a manual dashboard review.
+
+<Note>
+Alarms for Eval Monitors are available on paid plans only.
+</Note>
+
+Access alarms via **Build** → **Alerts** → **Evals Monitor Alerts** section.
+
+#### Creating an alarm
+
+1. Navigate to **Build** → **Alerts** and scroll to **Evals Monitor Alerts**.
+2. Click **Create alarm**.
+3. Select the monitor and the target score — either an **individual evaluator check score** or the **overall monitor score**.
+4. Configure the alarm conditions:
+
+    | Setting | Description |
+    |---------|-------------|
+    | **Comparison operator** | Trigger when the score is greater than, less than, greater than or equal to, or less than or equal to the threshold |
+    | **Threshold (%)** | The score percentage at which the alarm fires |
+    | **Time window** | The period of data evaluated (e.g., last 1 hour, last 24 hours) |
+    | **Evaluation periods** | Number of consecutive periods the condition must hold before the alarm fires |
+
+5. Add one or more notification channels — [email, Slack, or Microsoft Teams](/build/agents/build-your-agent/alerts#notification-channels).
+6. Click **Save**.
+
+#### Alarm status indicators
+
+When an alarm is configured, the Monitor dashboard shows visual indicators directly on score charts:
+
+| Indicator | Meaning |
+|-----------|---------|
+| **OK** pill | The score is within the acceptable range |
+| **Alarm** pill | The threshold has been breached |
+| **No Data** pill | Not enough data to evaluate the condition |
+
+A **dashed line** on the chart marks the configured threshold so you can see at a glance how current scores relate to the limit.
+
+#### Managing alarms
+
+From the **Evals Monitor Alerts** section you can:
+
+- **Edit** — update conditions or notification channels on an existing alarm.
+- **Enable/disable** — toggle an alarm on or off without deleting it.
+- **Delete** — permanently remove an alarm.
+- **Navigate to monitor** — click the monitor name on an alarm card to jump to the associated Monitor dashboard.
+
 ---
 
 ## Publish
