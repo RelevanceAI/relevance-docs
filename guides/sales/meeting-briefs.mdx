@@ -1,0 +1,95 @@
+---
+title: "Meeting briefs"
+sidebarTitle: "Meeting briefs"
+description: "Generate structured call prep so reps walk into every meeting already up to speed."
+---
+
+Reps shouldn't be scrambling for context five minutes before a call. A meeting brief Agent pulls together everything relevant about the account — recent conversations, deal history, company updates — into a snapshot a rep can scan in under a minute.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Back-to-back calendars" icon="calendar-days">
+    Reps run meetings in sequence with no buffer to prep between them.
+  </Card>
+  <Card title="Context scattered everywhere" icon="puzzle-piece">
+    Account history lives across CRM, Slack, support tickets, and email — and key details get missed.
+  </Card>
+  <Card title="New reps inheriting accounts" icon="user-plus">
+    Reps joining mid-deal need to come up to speed without reading every email thread.
+  </Card>
+  <Card title="Exec drop-ins on deals" icon="user-tie">
+    Leadership joins late-stage calls and needs the picture in two minutes, not twenty.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A meeting brief Agent compiles a one-page snapshot of the account ahead of a scheduled call.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Calendar event — account, attendees, deal stage, meeting time.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM activity, past meeting notes, email threads, support tickets, company news.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A brief covering deal context, recent activity, company updates, and suggested talking points.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Emailed to the rep before the meeting, attached to the calendar event, or posted in [Slack](/integrations/popular-integrations/slack).
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Pre-Meeting Prepper](https://marketplace.relevanceai.com/listing/e2bc9eb0-6afd-4e24-b2ba-16160259981a)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your reps can use on day one:
+
+- *"What do I need to know about Acme Corp before my 3pm? Pull the last three emails and recent deal activity."*
+- *"Summarize where we are with Globex — last call notes, open objections, next steps."*
+- *"Who from Initech is on my calendar tomorrow and what should I prep on each of them?"*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), [Knowledge](/build/knowledge/create-knowledge), and a connected CRM, email, and [calendar](/integrations/popular-integrations/google-calendar).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which sections reps actually use into the Agent's [evals](/build/agents/build-your-agent/evals) so briefs sharpen over time.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Briefs that are too long" icon="hourglass-half">
+    If the brief takes more than a minute to scan, reps stop reading. Cap section lengths in the prompt and force prioritization.
+  </Accordion>
+  <Accordion title="Static account data with no recency" icon="clock-rotate-left">
+    A brief that just regurgitates the CRM record isn't useful. The Agent has to surface what's *new* — last contact, last news, last ticket.
+  </Accordion>
+  <Accordion title="Same depth for every meeting" icon="layer-group">
+    A discovery call and a renewal call need different briefs. Branch the prompt by meeting type or deal stage.
+  </Accordion>
+  <Accordion title="Raw data instead of insight" icon="wand-magic-sparkles">
+    "2 open tickets" is data. "Two open critical tickets opened this week — both about billing" is a talking point. Have the Agent interpret, not just enumerate.
+  </Accordion>
+</AccordionGroup>

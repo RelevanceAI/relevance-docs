@@ -1,0 +1,95 @@
+---
+title: "Technical discovery summaries"
+sidebarTitle: "Discovery summaries"
+description: "Post-call writeups that turn an hour of conversation into a structured summary with action items."
+---
+
+The richest part of a deal is the technical discovery call — and the writeup is usually a CRM note half the team won't read. A discovery Agent turns the transcript into a structured summary: requirements, decisions, open questions, next steps. Everyone joining the next call walks in with the same picture.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Writeups slip" icon="hourglass">
+    The SE meant to write up the call. Three days later, it's vibes-in-a-CRM-note.
+  </Card>
+  <Card title="Stakeholder handoffs lose detail" icon="user-group">
+    The next SE / AE on the deal can't pick up where the last call left off because the writeup is too sparse.
+  </Card>
+  <Card title="Action items get forgotten" icon="list-check">
+    "We'll send you the SAML doc" — and then nobody does, because it wasn't tracked.
+  </Card>
+  <Card title="Demo prompts repeat themselves" icon="rotate">
+    The next call repeats discovery because the last one wasn't captured well.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A discovery Agent takes a call recording or transcript and returns a structured summary.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Call recording or transcript, opportunity context, prior call notes.
+  </Card>
+  <Card title="Sources" icon="globe">
+    [Fireflies](/integrations/popular-integrations/fireflies) or other transcript source, CRM history, your discovery framework / MEDDICC template.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A structured summary — requirements, technical decisions, open questions, action items per party, links to relevant Knowledge.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Written back to the CRM as a structured note, posted in the deal [Slack](/integrations/popular-integrations/slack) channel, emailed to attendees with a "did we get this right?" prompt.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[Nate, Meeting Notetaker](https://marketplace.relevanceai.com/listing/693db710-3d82-4269-9bce-ab6c9199e122)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your SEs can use on day one:
+
+- *"Summarize this discovery call with Acme — pull out their requirements, our open questions, and the action items per side."*
+- *"What were the technical concerns raised on the Globex call last week, and which ones did we resolve?"*
+- *"Walk me through the SSO discussion from yesterday's Initech call — what did they say their constraint was?"*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), your discovery framework in [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which sections SEs reference into the Agent's [evals](/build/agents/build-your-agent/evals) so summaries track what matters.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Summary that loses the actual technical content" icon="magnifying-glass">
+    Generic LLM summarization smooths out the specifics. Force the prompt to preserve technical terms, exact constraints, and the customer's literal phrasing.
+  </Accordion>
+  <Accordion title="No action-item ownership" icon="list-check">
+    Action items without an owner and a due date don't get done. Require the Agent to assign and date each.
+  </Accordion>
+  <Accordion title="Auto-emailing without SE review" icon="paper-plane">
+    Sending an inaccurate summary to the customer hurts trust. Keep SE review on the customer-facing copy until you've watched it for several deals.
+  </Accordion>
+  <Accordion title="Missing the implied dealbreakers" icon="eye">
+    Some constraints are stated as "wishes" but they're really hard requirements. Have the prompt flag any ambiguous language for SE review.
+  </Accordion>
+</AccordionGroup>

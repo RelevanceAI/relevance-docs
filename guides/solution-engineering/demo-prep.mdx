@@ -1,0 +1,95 @@
+---
+title: "Demo prep and pre-call briefs"
+sidebarTitle: "Demo prep"
+description: "Account-aware technical briefs the SE can read in five minutes before any call."
+---
+
+SEs walk into demos blind more often than they'd admit — they know the prospect's name and the deal size, not their tech stack, integration patterns, or what their team has been Googling. A demo-prep Agent builds the brief the SE wishes they had, every time.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Back-to-back demos" icon="calendar-days">
+    SEs run 4+ demos a day and prep blurs into the prior one.
+  </Card>
+  <Card title="Technical context is shallow" icon="layer-group">
+    The CRM has firmographics; the SE needs tech stack, scale, and likely integration patterns.
+  </Card>
+  <Card title="Demos feel generic" icon="copy">
+    SEs use the same demo flow for every prospect because there's no time to tailor.
+  </Card>
+  <Card title="Tribal knowledge in handoffs" icon="user-group">
+    AE-to-SE deal handoffs lose detail. The SE rediscovers what the AE already learned.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A demo-prep Agent takes a calendar event + opportunity and returns a structured technical brief.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Calendar event, opportunity record, attendees, deal stage, prior conversation notes.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM, prior call notes, public tech stack signals, past similar deals, your demo playbook.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    A one-page brief — account context, likely tech stack, integration angles, suggested demo flow, anticipated objections.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Emailed to the SE before the call, attached to the calendar event, posted in [Slack](/integrations/popular-integrations/slack) to the deal channel.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open the **[Pre-Meeting Prepper](https://marketplace.relevanceai.com/listing/e2bc9eb0-6afd-4e24-b2ba-16160259981a)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your SEs can use on day one:
+
+- *"Demo with Acme tomorrow — what's their tech stack, what integration angles should I lean on, and what objections has the AE flagged?"*
+- *"Globex is on my calendar next Tuesday. Walk me through how to position our enterprise SSO story for their auth setup."*
+- *"What's the right demo flow for a mid-market manufacturing prospect comparing us against Competitor X?"*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt) and your demo playbook, battle cards, and objection docs in [Knowledge](/build/knowledge/create-knowledge).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed back which brief sections SEs use into the Agent's [evals](/build/agents/build-your-agent/evals) so briefs sharpen over time.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Briefs that are too long" icon="hourglass-half">
+    A five-page brief doesn't get read in the five minutes before a call. Cap the length and force the prompt to prioritize.
+  </Accordion>
+  <Accordion title="Generic recommendations" icon="clone">
+    Without segment-specific Knowledge, the brief recommends the same demo flow for every prospect. Branch on segment and use real exemplars.
+  </Accordion>
+  <Accordion title="Stale prospect data" icon="clock-rotate-left">
+    The CRM hasn't been updated since the discovery call but the brief reads as if it were live. Have the Agent disclose when the freshest signal is and flag stale data.
+  </Accordion>
+  <Accordion title="Missing the AE's context" icon="user-check">
+    The brief ignores what the AE already learned because notes live in another tool. Pull AE notes into the source set explicitly.
+  </Accordion>
+</AccordionGroup>

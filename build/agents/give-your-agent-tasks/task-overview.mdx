@@ -1,94 +1,52 @@
 ---
-title: "Give Your Agent Tasks"
-sidebarTitle: "Tasks Overview"
-description: "What are tasks and how do they differ from prompt?"
+title: "Tasks"
+sidebarTitle: "Tasks"
+description: "Learn what a Task is, where to view your Tasks, and how to read one in the Run tab"
 ---
 
-<img 
-  height="200"  
-  src="/images/agent/tasks.png" 
-/>
+A Task is a single run of work carried out by an Agent or a Workforce: a conversation with an Agent, or a workflow a Workforce runs. It's made up of the messages exchanged and the Tool runs along the way. You can view Tasks in a variety of places, but the two main ones are the Run tab of the Agent and Workforce builders and the Tasks page.
 
-## Tasks Page: Your Command Center for Agent Activity
+## Where you can view Tasks
 
-The Tasks Page is your central dashboard for managing everything your AI Agent does. Think of it as a mission control center where you can see, review, and interact with all your Agent's work in one place.
+<CardGroup cols={2}>
+  <Card title="Run tab" icon="play">
+    The Agent and Workforce builders each have a Run tab showing that Agent or Workforce's Tasks, where you can also start new ones.
+  </Card>
+  <Card title="Tasks page" icon="list-check" href="/build/agents/give-your-agent-tasks/tasks-page">
+    Every Task across all your Agents and Workforces in one list, for monitoring and acting in bulk.
+  </Card>
+</CardGroup>
 
-### Your workspace at a glance
+## What's inside a Task
 
-The Tasks Page is divided into four intuitive sections that work together to give you complete visibility and control:
+A Task is made up of the messages exchanged, the steps the Agent took, and the details of the run. The most common place to see all of it is the Run tab, where you interact with an Agent inside the Agent builder. The same Task can also open through an embed or in [Relevance Chat](/get-started/chat/introduction).
 
-### 1. Task list (left sidebar)
+<img src="/images/agent/run-tab-task.png" alt="A Task open in the Run tab, with the Task list on the left, the Timeline in the center, and the details on the right" />
 
-<img 
-  height="200"  
-  src="/images/agent/tasks-left.png" 
-/>
+### Task list
 
-This works like your email inbox, showing all your Agent's activities:
+The left side lists every conversation for the Agent, grouped by recency, with **All** and **To Review** tabs, search and filters, a **Tabular view**, and the **Agent queue**. Start a fresh one with **New task**.
 
-- **All Tasks** - Complete history of everything your Agent has handled
-- **To Review** - Tasks that need your attention or input
-- **Errors** - Tasks that failed or encountered errors
-- **Saved Filters** - Your custom views (like "High Priority" or "Customer Support Tasks")
+### Timeline
 
-<Tip> Quick Tip: Use the search and filter options to quickly find specific tasks when your list grows.</Tip>
+The center shows the Task thread (the messages exchanged and the Tool runs), with a comment box at the bottom to message the Task directly.
 
-### 2. Agent output (middle section - top)
+### Details
 
-<img 
-  height="200"  
-  src="/images/agent/tasks-middle-top.png" 
-/>
+The right side has **Pause Task** and **Mark as complete**, plus the Task's **Created** by, **Status**, **Date created**, **Credits used**, **Run time**, and **Linked tools**.
 
-See exactly what your Agent produced for any task you select:
+## Filtering Tasks
 
-- Task title and where it came from
-- The complete output your Agent generated
-- Summary of actions taken (like "Sent email to customer" or "Updated database")
+The Task list has a filter builder for narrowing down to exactly the Tasks you need. You can filter by:
 
-<Tip> Quick Tip: This area shows you the "what happened" - perfect for quickly checking your Agent's work. </Tip>
+- **Status** — Task state like Running, Completed, Paused, or Timed out
+- **Agent** — Tasks from a specific Agent
+- **Tool usage** — which Tools the Task used
+- **Errors** — failure type: **Agent has errored** (the Agent itself stopped on an error) or **Has active tool failures** (a Tool failed mid-run, even if the Agent kept going)
+- **Metadata, date, and more** — custom fields, time range, who triggered the Task, and other conditions
 
-### 3. Agent chat (middle section - bottom)
+Combine the two error filters to catch every kind of failure, including Tool failures that never surfaced as an obvious error.
 
-<img 
-  height="200"  
-  src="/images/agent/tasks-middle-bottom.png" 
-/>
+## Viewing Tasks across all your Agents
 
-A chat interface where you can talk directly with your Agent about the task:
-
-- Ask questions about what the Agent did or why
-- Provide additional information or instructions
-- Guide your Agent to improve its work in real-time
-
-<Tip> Quick Tip: Use this chat to refine outputs or teach your Agent how to better meet your needs next time. </Tip>
-
-### 4. Task details (right sidebar)
-
-<img 
-  height="200"  
-  src="/images/agent/tasks-right.png" 
-/>
-
-All the technical information and metadata about each task:
-
-- **Created:** When the task started and who/what triggered it
-- **Status:** Whether it's active, paused, or complete
-- **Credits Used:** How many Relevance AI credits this task consumed
-- **Metadata:** Any custom tags you've added
-- **Schedule:** Timing details for recurring tasks
-- **Linked Tools:** What Tools your Agent accessed/uses
-- **Linked Agents:** Any other Agents (subagents) that helped with this task
-
-<Tip> Quick Tip: This section is your audit trail - helpful for troubleshooting or understanding exactly how a task was processed.</Tip>
-
-### How to use your workspace effectively
-
-Think of the Tasks Page as your collaboration space with your AI assistant:
-
-1. Use the **left sidebar** to find and select tasks (like choosing emails in your inbox)
-2. Review your Agent's work in the **middle section**
-3. Chat with your Agent about the task if needed
-4. Check the **right sidebar** for technical details and resource usage
-
-This integrated view ensures you always know what your Agent is doing, why it made certain decisions, and how you can work together to get better results.
+The views above each focus on a single Agent or Workforce. To monitor and troubleshoot every Task across all your Agents and Workforces from one place, head to the [Tasks page](/build/agents/give-your-agent-tasks/tasks-page). It's where you triage escalations, errors, and approvals, and act in bulk when a whole group needs the same fix. Selecting any Task there opens the same conversation (its messages and Tool runs) in a side panel.

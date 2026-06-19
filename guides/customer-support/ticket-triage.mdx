@@ -1,0 +1,95 @@
+---
+title: "Ticket triage and routing"
+sidebarTitle: "Ticket triage"
+description: "Classify, tag, and route every inbound ticket so the right agent picks it up first."
+---
+
+The first 30 seconds of a ticket's life shapes its whole trajectory. If it's mis-tagged, mis-routed, or lands in the wrong queue, response time blows out. A triage Agent reads each inbound ticket the moment it lands and tags, prioritizes, and routes it so the right human picks it up.
+
+## When this pays off
+
+<CardGroup cols={2}>
+  <Card title="Manual triage backlog" icon="layer-group">
+    A lead or senior agent spends an hour every morning reading and routing the overnight backlog.
+  </Card>
+  <Card title="Mis-routed tickets" icon="route">
+    Tickets sit in the wrong queue for hours before someone re-routes them.
+  </Card>
+  <Card title="Inconsistent tagging" icon="tags">
+    Tags differ across agents, so reporting and trend analysis are unreliable.
+  </Card>
+  <Card title="VIP escalations are missed" icon="crown">
+    High-value account issues sit in the general queue because nobody flagged them.
+  </Card>
+</CardGroup>
+
+## The shape of this use case
+
+A triage Agent takes an inbound ticket and returns a structured classification.
+
+<CardGroup cols={2}>
+  <Card title="Inputs" icon="arrow-right-to-bracket">
+    Ticket body, subject, channel (email / chat / form), customer record, prior tickets.
+  </Card>
+  <Card title="Sources" icon="globe">
+    CRM for account context, prior tickets for pattern matching, your taxonomy / tag library, SLA / VIP rules.
+  </Card>
+  <Card title="Output" icon="file-lines">
+    Classification (category, priority, urgency), tags, recommended queue and assignee, with reasoning.
+  </Card>
+  <Card title="Delivery" icon="paper-plane">
+    Applied directly in [Zendesk](/integrations/popular-integrations/zendesk) / Intercom / Service Cloud, posted to [Slack](/integrations/popular-integrations/slack) for VIP escalations, written to a triage log for review.
+  </Card>
+</CardGroup>
+
+## Where to start
+
+Two ways in, depending on whether you want something running today or built to your exact spec.
+
+<CardGroup cols={2}>
+  <Card title="Clone a pre-built Agent" icon="copy">
+    Open **[Customer Support Categorization](https://marketplace.relevanceai.com/listing/bffa15a4-5d7c-4408-82a0-6a09fa3d02a9)**. More in the [Marketplace](/get-started/marketplace/introduction).
+  </Card>
+  <Card title="Build your own" icon="hammer">
+    Start from scratch in the [builder](/build/introduction), or by describing it in Claude Code or Cursor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Card>
+</CardGroup>
+
+Either way, these are prompts your team can use on day one:
+
+- *"How would you triage this ticket? Customer is on Enterprise tier, ticket mentions a billing error and a feature outage."*
+- *"Walk me through these 10 overnight tickets — what should we pick up first and why?"*
+- *"Is this a P1? Customer says 'urgent' but the issue is a typo in our marketing site."*
+
+## Where to take it
+
+Once it's running, deepen it in three moves:
+
+<CardGroup cols={3}>
+  <Card title="Give it a playbook" icon="book">
+    Shape it with a [prompt](/build/agents/build-your-agent/prompt), [Knowledge](/build/knowledge/create-knowledge), and [Bulk Schedule](/build/agents/give-your-agent-tasks/bulk-schedule).
+  </Card>
+  <Card title="Automate it on signals" icon="bolt">
+    Wrap it in a [workflow](/build/workforces/create-a-workforce) that fires on a [trigger](/build/agents/build-your-agent/triggers).
+  </Card>
+  <Card title="Let it improve" icon="arrows-rotate">
+    Feed resolved-ticket outcomes back into the Agent's [evals](/build/agents/build-your-agent/evals) so its triage tracks what actually held up.
+  </Card>
+</CardGroup>
+
+## Common pitfalls
+
+<AccordionGroup>
+  <Accordion title="Tag drift" icon="tag">
+    The Agent invents new tags rather than using your existing taxonomy. Force the prompt to choose from a fixed Knowledge list — and fail closed if no tag fits.
+  </Accordion>
+  <Accordion title="Overconfident priority decisions" icon="scale-unbalanced">
+    The Agent marks every "urgent"-flagged email as P1. Train it to read the actual issue against your priority matrix, not the customer's adjective.
+  </Accordion>
+  <Accordion title="Routing without account context" icon="route">
+    Tickets get routed by topic only and miss the account dimension — a P3 from a churning enterprise account isn't a P3. Pull CRM context into the triage prompt.
+  </Accordion>
+  <Accordion title="Auto-applying without review" icon="robot">
+    A wrong tag at scale corrupts reporting and routing. Start with Agent-as-suggester (writes to a "suggested_priority" field) and graduate to direct application after a quarter of audit.
+  </Accordion>
+</AccordionGroup>
