@@ -89,7 +89,7 @@ Project admins will be able to set a users role upon invite. Organization admins
 | ---------- | ------------------------------------------------------------------------------------------ |
 | **Admin**  | Manage users, agents, tools, knowledge and project-level integrations. Can create assets   |
 | **Editor** | Can edit and create assets, does not manage users                                          |
-| **Member** | Can create their own assets (private by default). Can only see and use assets that have been explicitly shared with them — project Members do not automatically see all assets in the project. To give a Member access to a specific asset, use the **Share** button on that asset. |
+| **Member** | Can create their own assets (private by default). Can only see and use assets explicitly shared with them — project Members do not automatically see all assets in the project. To give a Member access to a specific asset, use the **Share** button on that asset. |
 | **Chat**   | Access [Relevance Chat](/get-started/chat/introduction) only - cannot access the web app. Requires asset-level permissions to run agents. |
 | **Viewer** | View agents, tools, and knowledge outputs only, cannot run or edit anything                |
 
@@ -181,15 +181,9 @@ Upon asset creation, the creator becomes the admin. An asset can have multiple a
 | View asset outputs              | ✅         | ✅          | ✅          |
 | View asset audit logs           | ✅         | ✅          | ✅          |
 
-----
-
-## Managing asset-level access
+### Sharing an asset with a user
 
 Project-level roles control what a user can do within a project overall, but they do not automatically grant access to every asset. Members and Viewers must be explicitly shared on individual assets before they can see or use them.
-
-This applies to agents, tools, knowledge bases, and workforces.
-
-### Sharing an asset with a user
 
 <Steps>
   <Step title="Open the asset">
@@ -233,53 +227,41 @@ Project-level roles and asset-level roles work as two separate layers. A project
   Project Admins and Editors can view and run all assets by default, regardless of asset-level permissions. Only Members, Chat users, and Viewers require explicit asset-level access.
 </Info>
 
+<Warning>
+  Agent permissions do not automatically grant access to tools used within that agent. If you add a user as a Member of an agent, they will still need Member access to each individual tool that agent uses — provided those tools are set to allow only invited users. Each nested asset requires its own explicit permission grant.
+</Warning>
+
 ----
 
-## Workforce Permissions
+## Workforce permissions
 
-Workforces are treated as first-class assets in the RBAC system. However, running a workforce requires permissions at two levels:
+Workforces are treated as first-class assets in the RBAC system. Running a workforce requires permissions at three separate levels — missing access at any level will prevent the workforce from functioning for that user.
 
-1. **Workforce permission** - The user must have at least Member (run) access to the workforce itself
-2. **Agent permissions** - The user must have at least Member (run) access to each agent used within the workforce
+<Warning>
+  Workforce permissions do not cascade. Granting a user access to a workforce does not automatically grant them access to the agents inside it, and granting access to an agent does not grant access to the tools that agent uses. Each level must be granted individually.
+</Warning>
 
-This means when sharing a workforce, you must:
-- Share the workforce with the user at the desired permission level
-- Share each agent in the workforce at a matching (or higher) permission level
+1. **Workforce access** — the user must have at least Member access to the workforce itself
+2. **Agent access** — the user must have at least Member access to each agent used within the workforce
+3. **Tool access** — the user must have at least Member access to each tool used by those agents (if those tools are set to allow only invited users)
+
+When sharing a workforce, share the workforce first, then share each agent it contains, then share each tool used by those agents.
 
 ### Example scenarios
 
-| Goal | Workforce Role | Agent Roles |
-|------|----------------|-------------|
-| User can run workforce | Member | Member on all agents |
-| User can edit workforce | Admin | Admin on all agents |
-| User can view but not run | Viewer | Viewer on all agents |
+| Goal | Workforce role | Agent roles | Tool roles |
+|------|----------------|-------------|------------|
+| User can run workforce | Member | Member on all agents | Member on all invited-only tools |
+| User can edit workforce | Admin | Admin on all agents | Admin on all invited-only tools |
+| User can view but not run | Viewer | Viewer on all agents | Viewer on all invited-only tools |
 
 <Info>
-**Note:** If a user has run access to a workforce but lacks permissions on one or more agents, they will see a "Cannot run agent" warning in the workforce builder and will be unable to execute the workflow.
+  If a user has access to a workforce but lacks permissions on one or more agents or tools, they will see a "Cannot run agent" warning and will be unable to execute the workflow.
 </Info>
 
 <Tip>
-Learn more about [sharing workforces](/build/workforces/share-your-workforce) as cloneable templates.
+  Learn more about [sharing workforces](/build/workforces/share-your-workforce) as cloneable templates.
 </Tip>
-
-----
-
-## Troubleshooting common permission issues
-
-<AccordionGroup>
-  <Accordion title="I can't see a specific agent or tool">
-    Project Members only see assets that have been explicitly shared with them. If you can't see an agent or tool, ask an asset Admin or project Admin to share it with you using the **Share** button on that asset. See [Sharing an asset with a user](#sharing-an-asset-with-a-user) for the steps.
-  </Accordion>
-  <Accordion title="I can't trigger or run an agent">
-    To run an agent, you need at least Member-level access on that specific asset. Viewer access lets you see the agent but not run it. Ask an asset Admin to update your role from Viewer to Member on that asset.
-  </Accordion>
-  <Accordion title="A user I invited can't see any tools">
-    Assigning a user the project-level Member role does not automatically grant them access to tools or agents in the project. Each asset must be shared individually using the **Share** button, or you can use [Groups](/enterprise/rbac-groups) to manage access at scale.
-  </Accordion>
-  <Accordion title="A user can't run a workforce">
-    Running a workforce requires Member access to both the workforce itself and every agent it contains. Share the workforce with the user, then share each agent within the workforce as well. See [Workforce Permissions](#workforce-permissions) for details.
-  </Accordion>
-</AccordionGroup>
 
 ----
 
@@ -290,4 +272,6 @@ Learn more about [sharing workforces](/build/workforces/share-your-workforce) as
   <Accordion title="I'm on an Enterprise subscription but do not have access to this feature yet. How do I get access?">This feature is gradually being rolled out to Enterprise customers. Please reach out to your sales representative to express your interest in receiving this feature.</Accordion>
   <Accordion title="How do I limit someone to only access Chat?">To limit a user to only access [Relevance Chat](/get-started/chat/introduction), assign them the **Chat** role at the project level. Users with the Chat role are automatically redirected to Chat and cannot access the main web application. They can still interact with agents and have LLM conversations, but will need appropriate asset-level permissions (Member or higher) on specific agents to run them in Chat.</Accordion>
   <Accordion title="Is there a role that allows a user to approve escalations or interact with agent tasks, but not edit the agent?">Yes, assigning a user the Asset Member role for a specific agent allows them to create tasks on the agent, approve/reject escalations, and view outputs, but not edit or delete the agent's configuration.</Accordion>
+  <Accordion title="A user I invited can't see a specific agent or tool">Project Members only see assets that have been explicitly shared with them. Ask an asset Admin or project Admin to share the asset using the **Share** button. You can also use [Groups](/enterprise/rbac-groups) to manage access at scale.</Accordion>
+  <Accordion title="A user can't run a workforce">Running a workforce requires Member access to the workforce itself, every agent it contains, and every tool used by those agents (if set to invited-only). Share all three levels individually. See [Workforce permissions](#workforce-permissions) for details.</Accordion>
 </AccordionGroup>
