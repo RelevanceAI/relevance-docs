@@ -184,17 +184,53 @@ The Relevance AI app is available on the Microsoft Teams marketplace. Users can 
 
 ### Advanced trigger settings
 
+#### Thread reply method
+
+<Frame caption="Selecting the Thread Reply Method in a Microsoft Teams trigger's advanced settings.">
+  ![Thread Reply Method setting in Microsoft Teams trigger advanced settings](/images/teams-thread-reply-method.png)
+</Frame>
+
+The Thread Reply Method controls whether your agent posts a response back to the Teams thread after processing a message. The setting is per-trigger and opt-in, so the default keeps existing triggers behaving exactly as before.
+
+<CardGroup cols={2}>
+  <Card title="Agent auto-reply" icon="reply">
+    Default. The agent processes the message and posts its response back into the Teams thread.
+  </Card>
+  <Card title="No reply" icon="comment-slash">
+    The agent processes the message silently. Use this when the output goes somewhere other than Teams — a database write, an email, or a downstream workflow.
+  </Card>
+</CardGroup>
+
+<Steps>
+  <Step title="Open your trigger">
+    Go to your agent's **Microsoft Teams** trigger in Relevance AI.
+  </Step>
+  <Step title="Expand Advanced Settings">
+    Click **Advanced Settings** to reveal the additional trigger options.
+  </Step>
+  <Step title="Choose a reply method">
+    Select **Agent auto-reply** or **No reply** under **Thread Reply Method**.
+  </Step>
+</Steps>
+
+<Warning>
+When "No reply" is selected, you won't see confirmation in Teams that your agent processed the message. Monitor the agent's task history in Relevance AI to verify it's working correctly.
+</Warning>
+
 #### Outreach replies only
 
 Enable this toggle to restrict the agent to responding only to replies to messages it previously sent in the channel, rather than all new messages.
 
 This is useful for outreach workflows where the agent sends messages to users and needs to follow up only with those who respond. Rather than monitoring all channel activity, the agent stays focused on conversations it initiated.
 
-**To enable:**
-1. Open your Microsoft Teams trigger settings
-2. Locate the **Outreach replies only** toggle
-3. Toggle it on
-4. Save your configuration
+<Steps>
+  <Step title="Open your trigger settings">
+    Go to your agent's **Microsoft Teams** trigger in Relevance AI.
+  </Step>
+  <Step title="Enable the toggle">
+    Locate the **Outreach replies only** toggle, turn it on, and save your configuration.
+  </Step>
+</Steps>
 
 When enabled, the trigger subtitle changes to **"On replies to outreach messages"**. The agent triggers only when a user replies to a message the agent itself sent — new messages posted by other users will not activate it.
 
@@ -431,6 +467,10 @@ The following OAuth scopes are requested when you connect your Microsoft account
 
   <Accordion title="Do triggers work for private messages?">
     Yes, Teams triggers can monitor both channel messages and private chats. To monitor direct messages, select the "Direct chats with Relevance AI" option when configuring your trigger instead of a specific channel.
+  </Accordion>
+
+  <Accordion title="Can my agent process Teams messages without replying?">
+    Yes. Set the Thread Reply Method to "No reply" in your MS Teams trigger's Advanced Settings. This allows your agent to process messages without posting a response back to Teams — useful when the agent's output goes somewhere else, such as a database, email, or another workflow. The default is "Agent auto-reply", which maintains existing behavior. To verify the agent is running correctly, check the task history in Relevance AI.
   </Accordion>
 
   <Accordion title="Can my agent access files shared in Teams?">
