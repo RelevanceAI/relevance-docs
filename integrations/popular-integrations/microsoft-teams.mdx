@@ -80,6 +80,17 @@ Setting up Microsoft Teams requires two separate steps. Both are required — co
   </Step>
 </Steps>
 
+### Linking your account via magic link
+
+<Note>Both the magic link flow and the standard OAuth flow achieve the same outcome — your Microsoft Teams account is linked to your Relevance AI account.</Note>
+
+You may receive a magic link from Microsoft Teams or via email inviting you to connect your accounts. This is an alternative to the standard OAuth flow above and achieves the same result.
+
+1. Click the magic link in Microsoft Teams or your email.
+2. If you're not logged in to Relevance AI, you'll be redirected to sign in first. After signing in, you'll be returned to the consent page automatically.
+3. On the consent page, review your Relevance AI account email and your Microsoft Teams account details shown.
+4. Click **Confirm** to link the accounts, or **Cancel** to abort the connection.
+
 ## Step 2 - Install the Relevance AI app in Microsoft Teams
 
 After connecting your Microsoft account, you need to install the Relevance AI app in Teams so your agents can interact with channels and chats.
@@ -173,6 +184,8 @@ The Relevance AI app is available on the Microsoft Teams marketplace. Users can 
 
 ### Advanced trigger settings
 
+#### Thread reply method
+
 <Frame caption="Selecting the Thread Reply Method in a Microsoft Teams trigger's advanced settings.">
   ![Thread Reply Method setting in Microsoft Teams trigger advanced settings](/images/teams-thread-reply-method.png)
 </Frame>
@@ -204,6 +217,23 @@ The Thread Reply Method controls whether your agent posts a response back to the
 When "No reply" is selected, you won't see confirmation in Teams that your agent processed the message. Monitor the agent's task history in Relevance AI to verify it's working correctly.
 </Warning>
 
+#### Outreach replies only
+
+Enable this toggle to restrict the agent to responding only to replies to messages it previously sent in the channel, rather than all new messages.
+
+This is useful for outreach workflows where the agent sends messages to users and needs to follow up only with those who respond. Rather than monitoring all channel activity, the agent stays focused on conversations it initiated.
+
+<Steps>
+  <Step title="Open your trigger settings">
+    Go to your agent's **Microsoft Teams** trigger in Relevance AI.
+  </Step>
+  <Step title="Enable the toggle">
+    Locate the **Outreach replies only** toggle, turn it on, and save your configuration.
+  </Step>
+</Steps>
+
+When enabled, the trigger subtitle changes to **"On replies to outreach messages"**. The agent triggers only when a user replies to a message the agent itself sent — new messages posted by other users will not activate it.
+
 ### How triggered conversations work
 
 Once a trigger fires, the agent responds directly inside Teams with the following capabilities:
@@ -222,7 +252,7 @@ Once a trigger fires, the agent responds directly inside Teams with the followin
     Agents can receive and process inline images, pasted screenshots, and uploaded files (PDFs, documents, images) from Teams conversations.
   </Card>
   <Card title="Proactive messages" icon="paper-plane">
-    Agents can send direct messages to users without the user initiating first.
+    Agents can proactively initiate conversations in Teams DMs without waiting for user input first. Context is maintained across the full conversation, enabling back-and-forth exchanges after the initial outreach.
   </Card>
   <Card title="Workforce triggers" icon="users-gear">
     Teams messages can trigger an entire workforce, not just an individual agent.
@@ -410,6 +440,14 @@ The following OAuth scopes are requested when you connect your Microsoft account
   <Accordion title="Trigger is configured but the agent isn't responding">
     Verify that the Relevance AI app has been added to the specific channel or chat being monitored (not just installed in Teams), and that the Microsoft account used for the trigger is a member of the channel. Confirm the trigger is enabled and published in your agent's settings. If keyword matching is configured, check that messages contain the expected keywords. Review the agent's task logs in Relevance AI for errors — a `401 Unauthorized` error indicates the OAuth token has expired or been revoked, and you should reconnect the Microsoft integration.
   </Accordion>
+
+  <Accordion title="Magic link expired or not working">
+    Magic links are time-limited and may expire before you click them. If your magic link no longer works, connect your Microsoft Teams account directly through the standard OAuth flow: go to **Integrations & API Keys** in the sidebar, find the Microsoft integration, and click **Add Integration**.
+  </Accordion>
+
+  <Accordion title="Consent page shows wrong email address">
+    The consent page shows two email addresses: your Relevance AI account email and your Microsoft Teams account email. If either address looks incorrect, click **Cancel** and verify that you're logged in to the correct Relevance AI account before trying again. To switch accounts, sign out of Relevance AI and sign in with the correct account, then click the magic link again.
+  </Accordion>
 </AccordionGroup>
 
 ## Frequently asked questions (FAQs)
@@ -449,5 +487,17 @@ The following OAuth scopes are requested when you connect your Microsoft account
 
   <Accordion title="How do I remove the Microsoft Teams integration?">
     Go to the **Integrations & API Keys** page from the sidebar, find **Microsoft (Teams, Outlook, SharePoint, OneDrive)**, click "..." on the account you want to remove, and click "Remove" and confirm. This will disable all triggers and tool steps using this account across Teams, Outlook, SharePoint, and OneDrive. To also remove the app from Microsoft Teams, go to **Apps** in Teams, find Relevance AI, and click **Uninstall**.
+  </Accordion>
+
+  <Accordion title="What is the magic link I received from Microsoft Teams?">
+    A magic link is an alternative way to connect your Microsoft Teams account to Relevance AI. When you click the link, you're taken to a consent page in Relevance AI that shows your Relevance AI account email and your Microsoft Teams account details. Click **Confirm** to complete the connection or **Cancel** to abort it. The magic link method achieves the same result as connecting via the standard OAuth flow on the Integrations page.
+  </Accordion>
+
+  <Accordion title="Do I need to use the magic link or can I connect directly from Relevance AI?">
+    Both methods work and achieve the same result. You can connect your Microsoft Teams account through the standard OAuth flow on the **Integrations & API Keys** page, or by clicking a magic link you received from Microsoft Teams or via email. Use whichever is more convenient.
+  </Accordion>
+
+  <Accordion title="What happens if I'm not logged in when I click the magic link?">
+    If you're not logged in to Relevance AI when you click the magic link, you'll be redirected to the sign-in page. After signing in, you'll be automatically returned to the consent page to complete the account linking.
   </Accordion>
 </AccordionGroup>

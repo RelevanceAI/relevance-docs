@@ -1,0 +1,50 @@
+name: Notify Relevance Docs Workforce
+
+# Pushes PR + drafter:go events to the Relevance "Docs Workforce v2" custom webhook.
+# The Orchestrator routes: drafter:go -> re-ground + amend; review/merge/close -> Notifier reaction.
+# Requires repo secret RELEVANCE_DOCS_WEBHOOK_URL (Settings > Secrets and variables > Actions).
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed, labeled]
+  pull_request_review:
+    types: [submitted, dismissed]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    # Only doc-workforce PRs: drafter:go label events, Claude-authored PRs, or docs-drafter-labelled PRs.
+    if: >-
+      (github.event.action == 'labeled' && github.event.label.name == 'drafter:go') ||
+      github.event.pull_request.user.login == 'claude[bot]' ||
+      contains(github.event.pull_request.labels.*.name, 'docs-drafter')
+    steps:
+      - name: POST event to Relevance Docs Workforce
+        env:
+          WEBHOOK_URL: ${{ secrets.RELEVANCE_DOCS_WEBHOOK_URL }}
+          EVENT_TYPE: ${{ github.event_name }}.${{ github.event.action }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          LABEL: ${{ github.event.label.name }}
+          REVIEW_STATE: ${{ github.event.review.state }}
+          MERGED: ${{ github.event.pull_request.merged }}
+          DELIVERY_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+        run: |
+          if [ -z "$WEBHOOK_URL" ]; then
+            echo "RELEVANCE_DOCS_WEBHOOK_URL not set yet — skipping (no-op until the secret is added)." >&2
+            exit 0
+          fi
+          jq -n \
+            --arg event_type "$EVENT_TYPE" \
+            --arg repo "$REPO" \
+            --arg pr_number "$PR_NUMBER" \
+            --arg pr_url "$PR_URL" \
+            --arg title "$PR_TITLE" \
+            --arg label "$LABEL" \
+            --arg review_state "$REVIEW_STATE" \
+            --arg merged "$MERGED" \
+            --arg delivery_id "$DELIVERY_ID" \
+            '{event_type:$event_type, repo:$repo, pr_number:($pr_number|tonumber? // null), pr_url:$pr_url, title:$title, label:$label, review_state:$review_state, merged:$merged, delivery_id:$delivery_id}' \
+          | curl -sS -X POST "$WEBHOOK_URL" -H "Content-Type: application/json" -d @-
