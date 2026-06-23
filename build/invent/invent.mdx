@@ -26,6 +26,9 @@ Inventor is a copilot agent inside the Relevance AI UI. It uses the Relevance AI
   <Card title="Iterate on existing assets" icon="pen-to-square">
     Change a prompt, swap a model, restructure a workforce, or regenerate a tool's schema.
   </Card>
+  <Card title="Restore a version" icon="clock-rotate-left">
+    Roll an existing agent, tool, or workforce back to an earlier version, with a required confirmation step.
+  </Card>
   <Card title="Discover before you build" icon="magnifying-glass">
     Find existing agents and tools before building duplicates.
   </Card>
@@ -138,13 +141,21 @@ Inventor is available from several places, so you can reach it wherever you're w
   </Step>
 </Steps>
 
+## Credit usage
+
+<img src="/images/invent-credit-counter.png" alt="The real-time credit counter in the Inventor panel" />
+
+The Inventor panel shows a real-time credit counter — "X credits used" with a coins icon — that updates with each interaction, such as generating an agent, requesting an adjustment, or asking a follow-up question.
+
+The counter lives in the Inventor panel and tracks only the credits used in your current session.
+
 ## Inventor features
 
 <Tabs>
   <Tab title="Auto-accept">
     <img src="/images/auto-accept.png" alt="The auto-accept setting in Inventor" />
 
-    By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
+    By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Version restores are the exception — Inventor always asks you to confirm before restoring. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
   </Tab>
   <Tab title="Model selection">
     <img src="/images/invent-model-selector.png" alt="The model selector in Inventor" />
@@ -180,6 +191,30 @@ Inventor is available from several places, so you can reach it wherever you're w
         The settings pop up — enter your details under **About You**.
       </Step>
     </Steps>
+  </Tab>
+  <Tab title="Conversations">
+    Inventor saves each conversation as a session automatically. Opening the panel starts a new chat, and your past sessions stay available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
+
+    <Info>
+      Closing the panel or refreshing the page doesn't delete your conversation history — sessions persist and can be resumed at any time.
+    </Info>
+  </Tab>
+  <Tab title="Feedback">
+    Inventor has built-in feedback tools that help improve its output over time. Each AI message in the panel has thumbs up and thumbs down buttons.
+
+    <CardGroup cols={2}>
+      <Card title="Thumbs up" icon="thumbs-up">
+        The response was accurate and helpful.
+      </Card>
+      <Card title="Thumbs down" icon="thumbs-down">
+        The response was incorrect, unhelpful, or the generated agent or tool didn't match what you described.
+      </Card>
+    </CardGroup>
+
+    When you click thumbs down, a popup appears where you can submit a bug report directly to the Relevance AI team — without leaving the interface or sending a separate email. Describe what you asked Inventor to build, what it generated, what was wrong or missing, and what you expected instead.
+  </Tab>
+  <Tab title="Restore a version">
+    Ask Inventor to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Inventor copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
   </Tab>
 </Tabs>
 
