@@ -199,6 +199,10 @@ Upon asset creation, the creator becomes the admin. An asset can have multiple a
 Asset Viewer access grants read-only visibility to full asset configurations — including prompts, tools, and steps. There is no field-level redaction. If a Viewer cannot see an agent's internals, it's because they lack asset-level access entirely, not because their read access is limited to metadata.
 </Info>
 
+<Warning>
+Adding someone as a Member on an agent does not give them access to the agent's tools. If a tool is set to **Only invited**, you must also add that person as a Member on each of those tools, otherwise the tool is silently dropped when they run the agent.
+</Warning>
+
 ----
 
 ## Workforce Permissions
