@@ -225,6 +225,44 @@ Any of the following actions in your Identity Provider (IdP) will deprovision a 
   If your app is assigned to only one group, removing a user from that group (or removing the group itself) will deprovision the user. **Best practice:** Assign the Relevance app to a dedicated group (e.g., "Relevance App Users") to ensure that removing users from other role-based groups like "Marketing" or "Engineering" does not accidentally deprovision them from the application.
 </Warning>
 
+## Email address updates for IdP-managed users
+
+Email address changes are not currently supported for SSO/SCIM managed users. When a user's email address changes in your identity provider, Relevance AI treats it as a new user — the original account's permissions, group memberships, owned assets, and history are not transferred to the new email address.
+
+### What happens when an email changes
+
+If you rename an existing IdP user's email address, the Directory Sync process provisions a new Relevance AI account for the new email address. The original account remains active until deprovisioned separately, and no data or permissions are transferred between the two accounts.
+
+<Warning>
+  Do not rename an existing IdP user to change their email address. This creates a new account rather than updating the existing one, and the original account's assets and history cannot be automatically transferred.
+</Warning>
+
+### Workaround for email address changes
+
+To move a user to a new email address while preserving their access:
+
+<Steps>
+  <Step title="Create a new user in your IdP">
+    Create a new identity provider user with the new email address. Do not rename the existing user.
+  </Step>
+
+  <Step title="Assign the new user to SSO and Directory Sync groups">
+    Add the new user to the Relevance AI SSO application and assign them to the appropriate Directory Sync groups in your identity provider.
+  </Step>
+
+  <Step title="User signs in with the new email">
+    The new user signs in to Relevance AI via SSO. Their group-based permissions are applied automatically during sign-up.
+  </Step>
+
+  <Step title="Remove the old user from your IdP">
+    Deprovision the original user in your identity provider. This removes their access from Relevance AI automatically. See [User deprovisioning](#user-deprovisioning) for details.
+  </Step>
+</Steps>
+
+<Note>
+  Assets, agents, tools, or history owned by the original account are not automatically transferred to the new account. If you need to transfer ownership, do so manually before deprovisioning the old user.
+</Note>
+
 ## Setting Up Directory Sync
 
 To use RBAC Groups, you need to configure directory sync between your identity provider and Relevance AI through WorkOS. This guide walks you through the complete setup process.
@@ -290,6 +328,10 @@ The following features are not yet supported in the current version of RBAC Grou
   <Accordion title="Permission Downgrade">
     Users can downgrade their own group's permissions without warning or confirmation. Exercise caution when assigning admin permissions.
   </Accordion>
+  
+  <Accordion title="Email address updates for SSO/SCIM users">
+    Changing a user's email address in your identity provider creates a new Relevance AI account rather than updating the existing one. Permissions, group memberships, and owned assets are not transferred automatically. See [Email address updates for IdP-managed users](#email-address-updates-for-idp-managed-users) for the recommended workaround.
+  </Accordion>
 </AccordionGroup>
 
 <Tip>
@@ -323,5 +365,9 @@ The following features are not yet supported in the current version of RBAC Grou
   
   <Accordion title="What's the difference between RBAC and RBAC Groups?">
     RBAC (Role-Based Access Control) provides the permission framework and roles at organization, project, and asset levels. RBAC Groups extends this by allowing you to assign those roles to entire groups of users at once, rather than individually.
+  </Accordion>
+  
+  <Accordion title="What happens if a user's email address changes in our identity provider?">
+    Email address updates are not currently supported for SSO/SCIM managed users. Changing a user's email in your IdP provisions a new Relevance AI account — the original account's permissions, group memberships, and owned assets are not transferred. See [Email address updates for IdP-managed users](#email-address-updates-for-idp-managed-users) for the step-by-step workaround.
   </Accordion>
 </AccordionGroup>
