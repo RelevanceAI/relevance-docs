@@ -225,6 +225,42 @@ Any of the following actions in your Identity Provider (IdP) will deprovision a 
   If your app is assigned to only one group, removing a user from that group (or removing the group itself) will deprovision the user. **Best practice:** Assign the Relevance app to a dedicated group (e.g., "Relevance App Users") to ensure that removing users from other role-based groups like "Marketing" or "Engineering" does not accidentally deprovision them from the application.
 </Warning>
 
+## Email address updates for IdP-managed users
+
+Email address changes are not currently supported for SSO/SCIM-managed users. Because email is the unique identifier for each Relevance AI account, changing a user's email address in your identity provider does not update their existing account—it creates a new one instead.
+
+The original account retains all permissions, group memberships, asset ownership, and history. None of this transfers automatically to the new email address.
+
+### Workaround
+
+To move a user to a new email address, create a new account with the new email rather than renaming the existing IdP user:
+
+<Steps>
+  <Step title="Create a new IdP user">
+    Create a new user in your identity provider with the new email address.
+  </Step>
+
+  <Step title="Assign to SSO and Directory Sync groups">
+    Assign the new user to the Relevance AI SSO application and the appropriate Directory Sync groups in your identity provider.
+  </Step>
+
+  <Step title="User signs in">
+    The user signs in to Relevance AI using the new email address. Their group-based permissions are applied automatically.
+  </Step>
+
+  <Step title="Remove the old user from your IdP">
+    Deprovision or delete the original user from your identity provider. This removes their access to Relevance AI via Directory Sync.
+  </Step>
+</Steps>
+
+<Warning>
+  Do not rename or update the email address on the existing IdP user. This creates a new Relevance AI account and leaves the original account orphaned. Always create a new IdP user with the new email address instead.
+</Warning>
+
+<Note>
+  Any assets or history associated with the original account are not transferred automatically. If you need to preserve ownership or history, these must be manually reassigned after the new account is created.
+</Note>
+
 ## Setting Up Directory Sync
 
 To use RBAC Groups, you need to configure directory sync between your identity provider and Relevance AI through WorkOS. This guide walks you through the complete setup process.
@@ -290,6 +326,10 @@ The following features are not yet supported in the current version of RBAC Grou
   <Accordion title="Permission Downgrade">
     Users can downgrade their own group's permissions without warning or confirmation. Exercise caution when assigning admin permissions.
   </Accordion>
+
+  <Accordion title="Email address updates for IdP-managed users">
+    Changing a user's email address in your identity provider creates a new Relevance AI account rather than updating the existing one. See [Email address updates for IdP-managed users](#email-address-updates-for-idp-managed-users) for the recommended workaround.
+  </Accordion>
 </AccordionGroup>
 
 <Tip>
@@ -323,5 +363,9 @@ The following features are not yet supported in the current version of RBAC Grou
   
   <Accordion title="What's the difference between RBAC and RBAC Groups?">
     RBAC (Role-Based Access Control) provides the permission framework and roles at organization, project, and asset levels. RBAC Groups extends this by allowing you to assign those roles to entire groups of users at once, rather than individually.
+  </Accordion>
+
+  <Accordion title="What happens if a user's email address changes in our identity provider?">
+    Email address changes are not currently supported for IdP-managed users. Changing a user's email in your identity provider creates a new Relevance AI account rather than updating the existing one—permissions, group memberships, and history do not transfer automatically. See [Email address updates for IdP-managed users](#email-address-updates-for-idp-managed-users) for the recommended workaround.
   </Accordion>
 </AccordionGroup>
