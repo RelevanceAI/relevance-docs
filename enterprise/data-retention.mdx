@@ -313,7 +313,7 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
   <Accordion title="Audit and compliance records" icon="file-lines">
     Consider your audit and compliance requirements when setting retention periods. Some regulations require specific retention periods for audit trails.
     
-    If you use [S3 Event Streaming](/enterprise/streaming-events), those audit logs are stored in your own S3 bucket and are not affected by Data Retention policies in Relevance AI.
+    If you use [S3 Event Streaming](/enterprise/streaming-events), those audit logs and traces are delivered to your own S3 bucket and are not affected by Data Retention policies in Relevance AI. Their retention is governed by your bucket's own lifecycle policy. On the Relevance side, telemetry only passes through a temporary staging bucket that is automatically purged after 30 days.
   </Accordion>
 </AccordionGroup>
 
@@ -355,7 +355,7 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
   </Accordion>
 
   <Accordion title="Does this affect my S3 Event Streaming data?">
-    No. If you use [S3 Event Streaming](/enterprise/streaming-events), audit logs and events stored in your own S3 bucket are not affected by Data Retention policies in Relevance AI. You control the lifecycle of data in your own S3 bucket.
+    No. If you use [S3 Event Streaming](/enterprise/streaming-events), audit logs and events delivered to your own S3 bucket are not affected by Data Retention policies in Relevance AI. You control the lifecycle of data in your own S3 bucket through its lifecycle policy. On the Relevance side, telemetry only passes through a temporary staging bucket that is automatically purged after 30 days.
   </Accordion>
 
   <Accordion title="Who can configure Data Retention settings?">

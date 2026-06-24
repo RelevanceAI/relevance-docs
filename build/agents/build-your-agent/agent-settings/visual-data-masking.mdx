@@ -159,7 +159,7 @@ Visual Data Masking does NOT apply to:
 - **Tool execution** - Tools receive and process unmasked data
 - **LLM requests** - Language models receive unmasked data for processing
 - **API responses** - Data returned via API is unmasked
-- **Data exports** - Exported data contains unmasked information
+- **Exported message content** - Conversation message bodies in data exports are unmasked. The one exception is the CSV conversation export, which masks the agent name ("Run By") column when Visual Data Masking is enabled
 - **Backend logs** - Internal system logs contain unmasked data
 - **Event streaming** - OTEL events exported to S3 contain unmasked data (unless PII Redaction is enabled)
 
@@ -358,7 +358,7 @@ We're actively improving Visual Data Masking based on user feedback. If you enco
   </Accordion>
 
   <Accordion title="Can I export unmasked data for analysis?">
-    Yes. Visual Data Masking only affects the UI display. Data exports, API responses, and backend storage all contain unmasked data. If you need masked exports, you'll need to implement masking in your export pipeline or use PII Redaction (Enterprise) for S3 event streaming.
+    Yes. Visual Data Masking primarily affects the UI display, so API responses and backend storage always contain unmasked data, and conversation message content in exports is unmasked. The one exception is the CSV conversation export, which masks the agent name ("Run By") column when Visual Data Masking is enabled. If you need broader masking of exported data, implement masking in your export pipeline or use PII Redaction (Enterprise) for S3 event streaming.
   </Accordion>
 
   <Accordion title="Does this protect data sent to LLMs?">

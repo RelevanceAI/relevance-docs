@@ -25,6 +25,8 @@ You don't need to run an OTEL collector to use this feature. Events are delivere
 
 <Note>**S3 is currently the only supported destination**. Support for direct OTEL collector endpoints is on our roadmap.</Note>
 
+<Note>Because events are delivered to your own bucket, you control their retention through your bucket's lifecycle policy. On the Relevance side, telemetry only passes through a temporary staging bucket that is automatically purged after 30 days. This is independent of the [Data Retention](/enterprise/data-retention) policy, which governs platform data such as conversations, tool runs, and versions.</Note>
+
 ---
 
 ## Setup
@@ -158,6 +160,27 @@ Before configuring PII redaction, ensure:
 | `score_threshold` | float | No | Minimum confidence level for PII detection (0.0–1.0). Higher values require more confidence |
 
 <Warning>There is currently no self-serve UI to toggle PII redaction. It is configured at the organization level by the Relevance AI team. Contact your Account Manager to have it enabled.</Warning>
+
+---
+
+## Prompt injection detection (Enterprise feature)
+
+Prompt injection detection is an org-level feature that scans incoming user input for prompt injection attempts. When an attempt is detected, the result is recorded on the agent's execution trace so you can monitor and alert on it in your own observability stack.
+
+Detection runs as a post-processing scan that is independent of the underlying LLM model. It flags and records attempts; it does not block or rewrite the user's message.
+
+<Note>Prompt injection detection requires event streaming to be enabled, because results surface only on the OTEL traces delivered to your S3 bucket. It is a contractual Enterprise feature with no self-serve UI — contact your Account Manager to enable it for your organization.</Note>
+
+### Where it surfaces
+
+Detection results are added as attributes on the [`invoke_agent`](#invoke_agent) span:
+
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `relevance_ai.prompt_injection.detected` | boolean | Whether a prompt injection attempt was detected in the user input |
+| `relevance_ai.prompt_injection.confidence` | double | Confidence score for the detection (0.0–1.0) |
+
+These attributes are only present when prompt injection detection is enabled for your organization. Query them in your observability tool the same way you would any other span attribute.
 
 ---
 
@@ -471,6 +494,8 @@ Records a complete agent conversation/invocation.
 | `relevance_ai.agent.escalation.reason` | string | No | Escalation reason |
 | `relevance_ai.agent.escalation.context` | string | No | Escalation context |
 | `relevance_ai.agent.version_id` | string | No | The active version ID of the agent at invocation time. Use this to compare performance across agent versions |
+| `relevance_ai.prompt_injection.detected` | boolean | No | Whether a prompt injection attempt was detected in the user input. Only present when [prompt injection detection](#prompt-injection-detection-enterprise-feature) is enabled |
+| `relevance_ai.prompt_injection.confidence` | double | No | Confidence score (0.0–1.0) for the prompt injection detection. Only present when prompt injection detection is enabled |
 
 ### `chat`
 
