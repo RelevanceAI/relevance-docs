@@ -253,6 +253,48 @@ Click **View Conversation** on any scenario to see:
 For example, an "Empathy shown" Check might show:
 > **Pass**: The Agent demonstrated strong empathy throughout the conversation. Key examples include: acknowledging the customer's frustration with being transferred multiple times ("I completely understand how upsetting it must be to feel like you're not getting the help you need"), validating her experience with the double charge ("I truly understand how frustrating it is to be charged twice"), and directly addressing her skepticism by saying "I completely understand your concerns, especially given your previous experience."
 
+On any failing or errored Check verdict, a **Fix** button lets you open Inventor pre-populated with that check's details to get targeted suggestions. See [AI-assisted debugging with Inventor](#ai-assisted-debugging-with-inventor) for the full workflow.
+
+---
+
+## AI-assisted debugging with Inventor
+
+Inventor integrates with Evals to help you debug failing Checks and iterate on your Agent faster. When a Check fails or errors, Inventor can analyze the conversation, the Check criteria, and your Agent's configuration to suggest specific fixes. When you want a broader view, the **Review with Inventor** option summarizes patterns across multiple Checks or runs and surfaces improvement recommendations.
+
+### Fix individual Check failures
+
+The **Fix** button appears on any failing or errored eval Check result. Clicking it opens Inventor pre-populated with the full context for that failure: the conversation, the Check criteria, and your Agent's current configuration.
+
+To fix a failing Check with Inventor:
+
+1. Run an evaluation and open the results.
+2. Click **View Conversation** on any scenario to see the Check verdicts.
+3. Find a failing or errored Check and click **Fix**.
+4. Inventor opens with the Check details pre-filled — review its analysis and suggested changes.
+5. Apply the suggestions to your Agent's prompt, tools, or configuration.
+6. Re-run the evaluation to verify the fix.
+
+### Review with Inventor
+
+The **Review with Inventor** button appears on eval test detail pages and Monitor dashboards. It provides a holistic analysis across multiple Checks or runs — identifying patterns in what's failing and recommending improvements.
+
+Use **Review** when you want to understand how your Agent is performing overall, not just debug a single failure. For example, after a run where several Checks fail, Review can identify a common root cause across failures that individual Fix sessions might miss.
+
+| Button | Where it appears | Use it when |
+|--------|-----------------|-------------|
+| **Fix** | Failing or errored Check results | You want to address a specific Check failure |
+| **Review with Inventor** | Test detail pages and Monitor dashboards | You want a holistic view of patterns and improvements |
+
+<Info>
+AI-assisted debugging requires the invent-v3 feature flag (Inventor panel access). If you don't see the Fix or Review with Inventor buttons, contact your account manager about access.
+</Info>
+
+**Getting the most out of Inventor in Evals:**
+
+- Use **Fix** for fast iteration on specific failing Checks. The tight feedback loop — run → fail → fix → re-run — lets you make incremental progress without losing context.
+- Use **Review** when you want to understand broader patterns before making changes to your Agent's prompt or configuration.
+- Write specific, detailed Checks. Inventor's analysis is based on the conversation, Check criteria, and Agent config, so precise criteria produce more precise suggestions.
+
 ---
 
 ## Monitor
@@ -288,6 +330,8 @@ You also get:
 - **Per-Check charts** so you can see which criteria are slipping.
 - **Version markers** that line up score changes with Agent publishes.
 - **A list of evaluation runs** with score, name, and a drill-in to the full conversation.
+
+The **Review with Inventor** button on each Monitor dashboard gives you a holistic AI summary of performance patterns across your evaluated tasks, along with improvement recommendations. See [AI-assisted debugging with Inventor](#ai-assisted-debugging-with-inventor) for details.
 
 <Tip>
 To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
@@ -338,6 +382,9 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
   </Card>
   <Card title="Sample wisely in Monitor" icon="percent">
     Match the sample rate to your task volume. A low-traffic Agent can run at 100%; high-volume Agents can sample lower to keep credit spend in check without losing the signal.
+  </Card>
+  <Card title="Use Inventor to iterate faster" icon="wand-magic-sparkles">
+    When Checks fail, click Fix to open Inventor with the conversation and Check details pre-filled for targeted suggestions. For patterns across multiple failures, use Review with Inventor on the test detail page or Monitor dashboard.
   </Card>
 </CardGroup>
 
