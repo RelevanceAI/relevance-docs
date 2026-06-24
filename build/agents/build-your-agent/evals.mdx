@@ -8,7 +8,7 @@ description: 'Test and evaluate your AI Agents with scenario-based evaluations a
 **Rollout Status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing.
+The Evals section is your command center for testing and evaluating AI performance. Located in the **Evaluate** tab in the Agent builder and on the Workforce canvas, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing.
 
 ![Evaluate tab showing the Evals sidebar (Test, Runs, Checks, Publish, Monitor) and a Monitor dashboard with overall score, total runs, and Checks breakdown](/images/agent/agent-evals.png)
 
@@ -89,6 +89,7 @@ When creating a Check, you choose one of the following types:
     | **Tool** | Select the tool to check for |
     | **Position** | Whether the tool was used anywhere, used first, or used last |
     | **Comparison** | Check if the tool was used at least, exactly, or at most X times |
+    | **Node** | Optional. When evaluating a Workforce, use the node picker to scope this check to a specific graph node (Agent or Tool). If the same Agent appears more than once in the graph, each occurrence is listed separately with a connection label for disambiguation. Leave blank to check across the whole conversation. |
   </Accordion>
 </AccordionGroup>
 
@@ -148,6 +149,8 @@ Follow these steps to create your first test set:
     - Provide a prompt describing what the Tool should return (a fake response is generated based on your prompt).
     - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response.
 
+    When running a **Workforce** scenario, simulations are configured per node instead of globally. Each Agent and Tool node in the Workforce graph appears as a separate entry, so you can assign different simulated responses to the same Tool depending on which node calls it. If the same Agent appears in multiple positions in the graph, each occurrence is listed separately with a connection label (for example, "Research Agent ← Coordinator") so you can identify which instance you're configuring and simulate each independently.
+
 8. Click **Save test scenario** to save your configuration.
 
 <Tip>
@@ -202,6 +205,20 @@ Here are some example scenarios you might create:
     - *Evaluation Prompt*: Did the Agent acknowledge the severity of the situation, validate the customer's need for escalation, and initiate a handoff to a human representative while maintaining a professional and empathetic tone throughout?
   </Accordion>
 </AccordionGroup>
+
+---
+
+## Evaluating Workforces
+
+The **Evaluate** tab is also available on the Workforce canvas. Workforce evals work the same way as individual Agent evals — you create test sets, define Checks, run scenarios, and view results — with two additions for multi-agent graphs.
+
+### Tool Usage checks with node scoping
+
+When creating a Tool Usage check in a Workforce eval, a **Node** picker appears alongside the standard check fields. Select a specific Agent or Tool node to scope the check to that node's tool calls only. If the same Agent appears more than once in the graph, each occurrence is listed separately with a connection label so you can target the right instance. Leave the node field blank to check for tool usage anywhere in the conversation.
+
+### Per-node tool simulation
+
+Tool simulations in Workforce scenarios target individual nodes rather than tools globally. Each Agent and Tool node in the Workforce graph is listed as a separate simulation entry, letting you assign different fake responses to the same Tool depending on which node calls it. Duplicate Agent nodes appear with connection labels — for example, "Research Agent ← Coordinator" — so you can configure each occurrence independently.
 
 ---
 
