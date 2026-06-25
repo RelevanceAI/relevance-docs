@@ -55,20 +55,12 @@ Enable Visual Data Masking when you need to protect sensitive information from b
 
 Visual Data Masking automatically detects and masks the following types of sensitive information:
 
-<CardGroup cols={2}>
-  <Card title="Email addresses" icon="envelope">
-    Masks email addresses like `user@example.com` → `***@***.com`
-  </Card>
-  <Card title="Phone numbers" icon="phone">
-    Masks phone numbers like `(555) 123-4567` → `***-***-1234`
-  </Card>
-  <Card title="Credit card numbers" icon="credit-card">
-    Masks credit card numbers like `4532 1234 5678 9010` → `****-****-****-9010`
-  </Card>
-  <Card title="Person names" icon="user">
-    Masks person names like `John Smith` → `**** *****`
-  </Card>
-</CardGroup>
+| PII type | Example input | Masked output |
+|----------|---------------|---------------|
+| Email addresses | `user@example.com` | `***@***.com` |
+| Phone numbers | `(555) 123-4567` | `***-***-1234` |
+| Credit card numbers | `4532 1234 5678 9010` | `****-****-****-9010` |
+| Person names | `John Smith` | `**** *****` |
 
 Detection happens automatically in real-time as conversations are displayed in the UI using AI-powered pattern recognition.
 
