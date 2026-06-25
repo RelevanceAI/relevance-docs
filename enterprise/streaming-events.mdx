@@ -36,7 +36,7 @@ You don't need to run an OTEL collector to use this feature. Events are delivere
 - AWS account with permissions to create S3 buckets and bucket policies
 - Relevance AI Enterprise plan
 
-### 1. Create an S3 Bucket
+### 1. Create an S3 bucket
 
 Create a bucket in the **same AWS region** as your Relevance data:
 
@@ -46,7 +46,7 @@ Create a bucket in the **same AWS region** as your Relevance data:
 | Europe | `eu-west-2` (London) |
 | US | `us-east-1` (N. Virginia) |
 
-### 2. Configure Bucket Policy
+### 2. Configure bucket policy
 
 Add this policy to allow Relevance to write events to your bucket:
 
@@ -75,7 +75,7 @@ Replace:
 - `YOUR_BUCKET_NAME`: Your S3 bucket name
 - `RELEVANCE_EVENT_CONSUMER_ROLE_ARN`: Contact your Relevance team for the region-specific IAM role ARN
 
-### 3. Provide Configuration to Relevance
+### 3. Provide configuration to Relevance
 
 Send your Account Manager or support team:
 
@@ -85,7 +85,7 @@ Send your Account Manager or support team:
 
 ---
 
-## PII Redaction (Enterprise Feature)
+## PII Redaction (Enterprise feature)
 
 PII (Personally Identifiable Information) redaction is an org-level feature that automatically scrubs sensitive information like email addresses, phone numbers, credit card numbers, and names before your event data leaves the platform and is delivered to your S3 destination.
 
@@ -184,7 +184,7 @@ These attributes are only present when prompt injection detection is enabled for
 
 ---
 
-## Delivery Format
+## Delivery format
 
 **Format**: Gzipped JSON following the OpenTelemetry JSON specification.
 
@@ -219,7 +219,7 @@ Audit logs provide a complete record of activity across your organization for se
 }
 ```
 
-### Base Attributes
+### Base attributes
 
 Included on all log records:
 
@@ -233,7 +233,7 @@ Included on all log records:
 | `relevance_ai.ip_address` | string | No | IP address of the request |
 | `relevance_ai.device_info` | string | No | User agent / device information |
 
-### Log Record Properties
+### Log record properties
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -243,9 +243,9 @@ Included on all log records:
 | `body.stringValue` | string | The event name |
 | `attributes` | array | Key-value pairs with base + event attributes |
 
-### Supported Events
+### Supported events
 
-### Agent Events
+### Agent events
 
 **`agent_created`** - Emitted when a new agent is created (from scratch, cloned, or duplicated).
 
@@ -282,7 +282,7 @@ Included on all log records:
 | `relevance_ai.event.agent_id` | string | Yes | ID of the agent being published |
 | `relevance_ai.event.version_id` | string | Yes | ID of the version now live |
 
-### Tool Events
+### Tool events
 
 **`tool_created`** - Emitted when a new tool is created (from scratch or cloned).
 
@@ -313,7 +313,7 @@ Included on all log records:
 | `relevance_ai.event.tool_id` | string | Yes | ID of the tool being published |
 | `relevance_ai.event.version_id` | string | Yes | ID of the version now live |
 
-### Workforce Events
+### Workforce events
 
 **`workforce_created`** - Emitted when a new workforce is created (from scratch, cloned, or duplicated).
 
@@ -344,7 +344,7 @@ Included on all log records:
 | `relevance_ai.event.workforce_id` | string | Yes | ID of the workforce being published |
 | `relevance_ai.event.version_id` | string | No | ID of the version now live |
 
-### Permission Events
+### Permission events
 
 **`project_user_role_updated`** - Emitted when a user's role within a project is updated. This occurs when an admin changes another user's access level in the project settings.
 
@@ -360,7 +360,7 @@ Included on all log records:
 | `relevance_ai.event.target_user_id` | string | Yes | ID of the user whose role was changed |
 | `relevance_ai.event.organization_role` | string | Yes | The new organization role assigned to the user |
 
-### Example Log Record
+### Example log record
 
 ```json
 {
@@ -410,7 +410,7 @@ Traces track execution flows for agents, workforces, and LLM completions. Use tr
 }
 ```
 
-### Resource Attributes
+### Resource attributes
 
 Resource attributes identify the service producing telemetry data. These attributes are attached to all spans and logs exported from Relevance AI.
 
@@ -434,7 +434,7 @@ This attribute is applied to all spans - `chat`, `invoke_agent`, `multi_agent_sy
 }
 ```
 
-### Base Attributes
+### Base attributes
 
 Included on all spans:
 
@@ -445,7 +445,7 @@ Included on all spans:
 | `relevance_ai.user_id` | string | No | User ID that triggered the run |
 | `relevance_ai.user_email` | string | No | Email of the user |
 
-### Span Properties
+### Span properties
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -459,7 +459,7 @@ Included on all spans:
 | `attributes` | array | Key-value pairs with span details |
 | `status.code` | int | 1 = OK, 2 = ERROR |
 
-### Trace Hierarchy
+### Trace hierarchy
 
 Spans share `traceId` and link via `parentSpanId`:
 
@@ -472,7 +472,7 @@ multi_agent_system_trigger
         └── chat
 ```
 
-### Supported Spans
+### Supported spans
 
 ### `invoke_agent`
 
@@ -564,7 +564,7 @@ Records a condition node evaluation in a workforce.
 
 ---
 
-## Attribute Value Types
+## Attribute value types
 
 | Type | JSON Format |
 | --- | --- |
@@ -583,12 +583,12 @@ Records a condition node evaluation in a workforce.
 
 - [What is OpenTelemetry?](https://opentelemetry.io/docs/what-is-opentelemetry/) - Official introduction to OTEL concepts
 
-### Compatible Observability Platforms
+### Compatible observability platforms
 
 OTEL is supported by most major observability platforms. See the [OpenTelemetry Registry](https://opentelemetry.io/ecosystem/registry/) for a full list of compatible vendors and integrations.
 
 For a detailed example of ingesting OTEL data, see [Honeycomb's OpenTelemetry guide](https://docs.honeycomb.io/send-data/opentelemetry/).
 
-### Querying OTEL Data Directly
+### Querying OTEL data directly
 
 OTEL JSON files in S3 can be queried directly using SQL tools like [AWS Athena](https://docs.aws.amazon.com/athena/latest/ug/what-is.html).
