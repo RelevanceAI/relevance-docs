@@ -21,11 +21,12 @@ This page provides a security overview of our product and its key features. We a
 
 ### Data retention 
 
-**Default retention policies:**
+#### Default retention policies
+
 - **Agent and tool run logs**: 30 days (free tier). For other tiers, the data is stored until you choose to delete it
 - **API keys**: Fully self-managed. Relevance will store certs, service accounts, API keys etc securely and encrypted
 
-**Enterprise Data Retention:**
+#### Enterprise Data Retention
 
 For Enterprise customers, Relevance AI offers advanced [Data Retention](/enterprise/data-retention) capabilities that allow organizations to automatically manage the lifecycle of sensitive data. This Enterprise feature enables you to:
 
@@ -110,7 +111,7 @@ We regularly undergo third-party assessments to ensure that we are compliant wit
 
 ### Authentication
 
-- We support SSO and MFA supported via your identity provider for Enterprise customers
+- SSO and MFA are supported via your identity provider for Enterprise customers
 - [Role-based access control (RBAC)](/enterprise/rbac) for organizations and projects is available for Enterprise customers
 - [Fine-grained access control (FGA)](/enterprise/asset-controls) is available for Enterprise customers
 
@@ -125,7 +126,7 @@ We regularly undergo third-party assessments to ensure that we are compliant wit
 
 - You control data sources and can pre-scrub for PII
 - Human-in-the-loop escalation and monitoring features are available
-- Governance agents can be built to pro-actively manage Agent security
+- Governance Agents can be built to proactively manage Agent security
 - S3 Audit events can be used to reactively manage Agent security
 - [Visual Data Masking](/build/agents/build-your-agent/agent-settings/visual-data-masking) protects sensitive information in the UI during screen sharing and team reviews
 
@@ -150,11 +151,11 @@ We have multiple controls, including prompt management, escalation, and paramete
 
 ## Self-hosted models that are multi-region
 
-We don't train any models on your data, ever. Similarly, usually when you access API endpoints for LLMs, the processing agreement states that they don't train on that data. We take it one step further and host our own OpenAI models, and open source ones like LAMA and fireworks that we host within our own AWS and Azure environments which are multi-region as well.
+We don't train any models on your data, ever. Similarly, usually when you access API endpoints for LLMs, the processing agreement states that they don't train on that data. We take it one step further and host our own OpenAI models, and open source ones like LLaMA and Fireworks that we host within our own AWS and Azure environments which are multi-region as well.
 
 ## Key features
 
-Relevance AI offers three key features: Tools, Agents, and Data. Each feature has its own data retention and storage policies, which we will explain in detail below.
+Relevance AI offers three key features: Tools, Agents, and Knowledge. Each feature has its own data retention and storage policies, which we will explain in detail below.
 
 ### Tools
 

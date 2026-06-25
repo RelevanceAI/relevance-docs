@@ -181,7 +181,7 @@ Visual Data Masking does NOT apply to:
     Conversation message bodies in data exports are unmasked. The one exception is the CSV conversation export, which masks the agent name ("Run By") column when Visual Data Masking is enabled
   </Card>
   <Card title="Event streaming" icon="cloud-arrow-up">
-    OTEL events exported to S3 contain unmasked data, unless PII Redaction is enabled
+    OTEL events exported to S3 are unmasked, except structured fields like email and IP that are always scrubbed. Unstructured content is scrubbed only when PII Redaction is enabled
   </Card>
 </CardGroup>
 
