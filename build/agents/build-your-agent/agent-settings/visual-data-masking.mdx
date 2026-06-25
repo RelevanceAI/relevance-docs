@@ -144,24 +144,54 @@ To enable Visual Data Masking on a workforce:
 
 Visual Data Masking applies to these UI elements:
 
-- **Agent conversation histories** in the Task View
-- **Workforce task displays** showing agent interactions
-- **Message content** displayed in conversation logs
-- **Tool inputs and outputs** visible in the UI conversation flow
-- **Any front-end conversation data display** in the Relevance AI platform
+<CardGroup cols={2}>
+  <Card title="Agent conversation histories" icon="messages">
+    Conversations shown in the Task View
+  </Card>
+  <Card title="Workforce task displays" icon="list-check">
+    Task views showing agent interactions
+  </Card>
+  <Card title="Message content" icon="comment">
+    Messages displayed in conversation logs
+  </Card>
+  <Card title="Tool inputs and outputs" icon="wrench">
+    Tool data visible in the UI conversation flow
+  </Card>
+  <Card title="Front-end conversation displays" icon="display">
+    Anywhere conversation data appears in the Relevance AI platform UI
+  </Card>
+</CardGroup>
 
 ### What ISN'T masked
 
 Visual Data Masking does NOT apply to:
 
-- **Backend data storage** - Data is stored unmasked in the database
-- **Agent processing** - Agents always work with unmasked, actual data
-- **Tool execution** - Tools receive and process unmasked data
-- **LLM requests** - Language models receive unmasked data for processing
-- **API responses** - Data returned via API is unmasked
-- **Exported message content** - Conversation message bodies in data exports are unmasked. The one exception is the CSV conversation export, which masks the agent name ("Run By") column when Visual Data Masking is enabled
-- **Backend logs** - Internal system logs contain unmasked data
-- **Event streaming** - OTEL events exported to S3 contain unmasked data (unless PII Redaction is enabled)
+<CardGroup cols={2}>
+  <Card title="Backend data storage" icon="database">
+    Data is stored unmasked in the database
+  </Card>
+  <Card title="Agent processing" icon="robot">
+    Agents always work with unmasked, actual data
+  </Card>
+  <Card title="Tool execution" icon="gear">
+    Tools receive and process unmasked data
+  </Card>
+  <Card title="LLM requests" icon="brain">
+    Language models receive unmasked data for processing
+  </Card>
+  <Card title="API responses" icon="code">
+    Data returned via API is unmasked
+  </Card>
+  <Card title="Backend logs" icon="file-lines">
+    Internal system logs contain unmasked data
+  </Card>
+  <Card title="Exported message content" icon="file-export">
+    Conversation message bodies in data exports are unmasked. The one exception is the CSV conversation export, which masks the agent name ("Run By") column when Visual Data Masking is enabled
+  </Card>
+  <Card title="Event streaming" icon="cloud-arrow-up">
+    OTEL events exported to S3 contain unmasked data, unless PII Redaction is enabled
+  </Card>
+</CardGroup>
 
 <Warning>
 Visual Data Masking is a UI-only feature. It does not modify, encrypt, or redact data at the storage or processing level. Backend data remains completely unchanged. For backend data protection, see [PII Redaction](#visual-data-masking-vs-pii-redaction).
