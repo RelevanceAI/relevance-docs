@@ -21,11 +21,12 @@ This page provides a security overview of our product and its key features. We a
 
 ### Data retention 
 
-**Default retention policies:**
+#### Default retention policies
+
 - **Agent and tool run logs**: 30 days (free tier). For other tiers, the data is stored until you choose to delete it
 - **API keys**: Fully self-managed. Relevance will store certs, service accounts, API keys etc securely and encrypted
 
-**Enterprise Data Retention:**
+#### Enterprise Data Retention
 
 For Enterprise customers, Relevance AI offers advanced [Data Retention](/enterprise/data-retention) capabilities that allow organizations to automatically manage the lifecycle of sensitive data. This Enterprise feature enables you to:
 
@@ -39,7 +40,7 @@ For Enterprise customers, Relevance AI offers advanced [Data Retention](/enterpr
 Data Retention is an Enterprise feature that must be enabled by the Relevance AI team. [Learn more about Data Retention →](/enterprise/data-retention)
 </Info>
 
-## Data Residency & Storage
+## Data residency & storage
 
 ### Choose your region
 
@@ -52,7 +53,7 @@ Data is stored in Australia, the US, or the EU/UK, based on your selection at si
 You can choose the region that best suits your needs when setting up your Relevance AI account.
 
 <Note>
-Your organization's region is selected during signup and cannot be changed after your organization is created. If you need to change regions, [contact support](/support) to discuss your options. Learn more about [organization regions and how to identify yours](/admin/project-management/ids#organization-region).
+Your organization's region is selected during signup and cannot be changed after your organization is created. If you need to change regions, [contact support](/get-started/support) to discuss your options. Learn more about [organization regions and how to identify yours](/admin/project-management/ids#organization-region).
 </Note>
 
 ### Tenant isolation
@@ -74,7 +75,7 @@ Your organization's region is selected during signup and cannot be changed after
 - Workstations are configured with encryption by default, data exfiltration prevention and lock when idle
 - Up to date software is enforced to prevent malware
 
-## Security Certifications and Compliance 
+## Security certifications and compliance
 
 ### SOC2 Type II compliant
 
@@ -94,7 +95,7 @@ We offer security questionnaire completion for Enterprise customers. We only sha
 
 We regularly undergo third-party assessments to ensure that we are compliant with the latest security standards. These are performed by independent security firms. Reports are available to Enterprise customers under NDA.
 
-## Encryption & Key Management
+## Encryption & key management
 
 ### Encryption everywhere
 
@@ -106,41 +107,41 @@ We regularly undergo third-party assessments to ensure that we are compliant wit
 - Relevance provides a mechanism to securely store keys
 - Customers must manage the scope of the keys at the underlying integration
 
-## Access Management
+## Access management
 
 ### Authentication
 
-- We support SSO and MFA supported via your identity provider for Enterprise customers
-- [Role-based access control (RBAC)](https://relevanceai.com/docs/enterprise/rbac) for organizations and projects is available for Enterprise customers
-- [Fine-grained access control (FGA)](https://relevanceai.com/docs/enterprise/asset-controls) is available for Enterprise customers
+- SSO and MFA are supported via your identity provider for Enterprise customers
+- [Role-based access control (RBAC)](/enterprise/rbac) for organizations and projects is available for Enterprise customers
+- [Fine-grained access control (FGA)](/enterprise/asset-controls) is available for Enterprise customers
 
 ### Administrative controls
 
 - Fine-grained RBAC and escalation features for sensitive actions is available for Enterprise customers
 - Least-privilege access by default
 
-## AI Agent Security
+## AI Agent security
 
-### Preventing data leaks and monitoring Agent behavior:
+### Preventing data leaks and monitoring Agent behavior
 
 - You control data sources and can pre-scrub for PII
 - Human-in-the-loop escalation and monitoring features are available
-- Governance agents can be built to pro-actively manage Agent security
+- Governance Agents can be built to proactively manage Agent security
 - S3 Audit events can be used to reactively manage Agent security
 - [Visual Data Masking](/build/agents/build-your-agent/agent-settings/visual-data-masking) protects sensitive information in the UI during screen sharing and team reviews
 
 ### Prompt injection protection
 
-We have multiple controls, including prompt management, escalation, and parameterized inputs to protect you from prompt injection.
+We have multiple controls, including prompt management, escalation, and parameterized inputs to protect you from prompt injection. Enterprise customers can also enable [prompt injection detection](/enterprise/streaming-events#prompt-injection-detection-enterprise-feature), which scans user input for injection attempts and records them on the OTEL traces streamed to your own infrastructure.
 
-## Vendor & Supply Chain Security
+## Vendor & supply chain security
 
 ### Third-party risk management
 
 - All subprocessors are listed at https://trust.relevanceai.com/subprocessors
 - We conduct annual reviews and risk assessments for all vendors
 
-## Disaster Recovery & Business Continuity
+## Disaster recovery & business continuity
 
 ### Resilience
 
@@ -150,15 +151,15 @@ We have multiple controls, including prompt management, escalation, and paramete
 
 ## Self-hosted models that are multi-region
 
-We don't train any models on your data, ever. Similarly, usually when you access API endpoints for LLMs, the processing agreement states that they don't train on that data. We take it one step further and host our own OpenAI models, and open source ones like LAMA and fireworks that we host within our own AWS and Azure environments which are multi-region as well.
+We don't train any models on your data, ever. Similarly, usually when you access API endpoints for LLMs, the processing agreement states that they don't train on that data. We take it one step further and host our own OpenAI models, and open source ones like LLaMA and Fireworks that we host within our own AWS and Azure environments which are multi-region as well.
 
-## Key Features
+## Key features
 
-Relevance AI offers three key features: Tools, Agents, and Data. Each feature has its own data retention and storage policies, which we will explain in detail below.
+Relevance AI offers three key features: Tools, Agents, and Knowledge. Each feature has its own data retention and storage policies, which we will explain in detail below.
 
 ### Tools
 
-Tools in Relevance AI are powerful workflows that allow you to transform and process input data. It's important to note that neither the input nor the output of these tools is logged by Relevance AI. However, some steps within the tools may require the use of external vendors for processing. For example, LLM steps utilize different vendors depending on the specific model being used.
+Tools in Relevance AI are workflows that transform and process input data. It's important to note that neither the input nor the output of these tools is logged by Relevance AI. However, some steps within the tools may require the use of external vendors for processing. For example, LLM steps utilize different vendors depending on the specific model being used.
 
 ### Agents
 
@@ -168,7 +169,7 @@ Agents in Relevance AI enable conversations and maintain a history of interactio
 
 Knowledge is a feature in Relevance AI that allows you to store data in a table, enabling bulk runs of tools on entire datasets. You have full control over your stored data and can delete it at any time. Similar to agents, your data is stored securely within the region you have selected for your Relevance AI account.
 
-### LLM Models
+### LLM models
 
 If you provide an OpenAI API Key, it will be passed through OpenAI's API service. No data is stored or trained on during this process. You can review the Data Processing Agreement (DPA) on our website for more information.
 

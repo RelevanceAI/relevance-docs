@@ -5,9 +5,7 @@ description: "Control how long sensitive data is stored in your Relevance AI org
 ---
 
 <Warning>
-Data Retention is an Enterprise feature that must be enabled by the Relevance AI team. If you have an Enterprise subscription and would like to use this feature, please contact your sales representative or [reach out to support](/get-started/support).
-
-You will not be able to access this feature if you are not on an Enterprise subscription.
+Data Retention is an Enterprise feature that must be enabled by the Relevance AI team and is not available on other plans. Contact your sales representative or [reach out to support](/get-started/support) to request enablement.
 </Warning>
 
 Data Retention is an Enterprise feature that allows organizations to automatically manage the lifecycle of sensitive data stored in Relevance AI. By configuring retention policies, you can ensure that data is automatically deleted after a specified period, supporting compliance requirements, security best practices, and storage optimization.
@@ -22,34 +20,34 @@ This feature gives organization admins control over how long different types of 
   />
 </Frame>
 
-## Why Use Data Retention?
+## Why use Data Retention?
 
 <CardGroup cols={2}>
-  <Card title="Compliance & Governance" icon="scale-balanced">
+  <Card title="Compliance & governance" icon="scale-balanced">
     Meet regulatory requirements for data retention limits (GDPR, industry-specific regulations) and demonstrate compliance with data minimization principles
   </Card>
   
-  <Card title="Security & Risk Management" icon="shield-check">
+  <Card title="Security & risk management" icon="shield-check">
     Reduce your organization's data exposure by automatically removing old, potentially sensitive information that's no longer needed
   </Card>
   
-  <Card title="Storage Optimization" icon="database">
+  <Card title="Storage optimization" icon="database">
     Manage storage costs and platform performance by automatically cleaning up historical data that's no longer actively used
   </Card>
   
-  <Card title="Operational Control" icon="gears">
+  <Card title="Operational control" icon="gears">
     Establish consistent data lifecycle policies across your entire organization without manual intervention
   </Card>
 </CardGroup>
 
 ---
 
-## What Data Is Covered?
+## What data is covered?
 
 Data Retention policies apply to four main categories of data in Relevance AI. Each category has specific conditions that determine when data is eligible for deletion.
 
 <AccordionGroup>
-  <Accordion title="Tool Runs & Sync Items" icon="wrench">
+  <Accordion title="Tool runs & sync items" icon="wrench">
     **What's included:**
     - Individual tool execution records
     - Sync items from integrated data sources
@@ -61,7 +59,7 @@ Data Retention policies apply to four main categories of data in Relevance AI. E
     **Example:** If you set a 90-day retention period, any tool run older than 90 days will be automatically deleted.
   </Accordion>
 
-  <Accordion title="Agent Conversations" icon="messages">
+  <Accordion title="Agent conversations" icon="messages">
     **What's included:**
     - Complete conversation threads with agents
     - All messages within conversations
@@ -74,7 +72,7 @@ Data Retention policies apply to four main categories of data in Relevance AI. E
     **Example:** A conversation started 100 days ago with a message added 50 days ago will NOT be deleted if your retention period is 90 days. The conversation is only deleted when both the conversation AND all its messages exceed the retention period.
   </Accordion>
 
-  <Accordion title="Workforce Tasks" icon="list-check">
+  <Accordion title="Workforce tasks" icon="list-check">
     **What's included:**
     - Workforce task records
     - All conversations within workforce tasks
@@ -87,7 +85,7 @@ Data Retention policies apply to four main categories of data in Relevance AI. E
     **Example:** A workforce task from 100 days ago with an associated conversation that has a recent message will NOT be deleted until both the task and all its conversations (including all messages) exceed the retention period.
   </Accordion>
 
-  <Accordion title="Agent, Tool & Workforce Versions" icon="code-branch">
+  <Accordion title="Agent, Tool & Workforce versions" icon="code-branch">
     **What's included:**
     - Historical versions of agents
     - Historical versions of tools
@@ -109,39 +107,37 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
 </Note>
 
 <Warning>
-  The Data Retention feature applies to data stored and managed by Relevance AI only. It does not apply to data processed or stored by our subprocessors (third-party service providers).
-
-  For questions about data retention policies for specific subprocessors or integrations, please contact your Account Manager or reach out to our [support team](/get-started/support).
+The Data Retention feature applies only to data stored and managed by Relevance AI, not to data processed or stored by our subprocessors. For questions about subprocessor or integration retention policies, contact your Account Manager or [reach out to support](/get-started/support).
 </Warning>
 
 ---
 
-## How to Configure Data Retention
+## How to configure Data Retention
 
 <Info>
   To configure Data Retention, you must have an Enterprise subscription, the feature must be enabled by Relevance AI, and you must be an organization admin or owner.
 </Info>
 
 <Steps>
-  <Step title="Request Feature Enablement" icon="envelope">
+  <Step title="Request feature enablement" icon="envelope">
     Contact the Relevance AI team to enable Data Retention for your organization. This is not a self-serve feature and must be activated by our team.
     
     Reach out to your sales representative or [contact support](/get-started/support) to request enablement.
   </Step>
 
-  <Step title="Navigate to Data Management" icon="gear">
+  <Step title="Navigate to data management" icon="gear">
     Once enabled, click **"Settings"** in the sidebar, then select **"Manage organization"** to access organization-level settings.
     
     Navigate to the **"Data management"** section where you'll find Data Retention controls.
   </Step>
 
-  <Step title="Create Configuration" icon="plus">
+  <Step title="Create configuration" icon="plus">
     Click **"Create configuration"** to set up your organization's data retention policy.
     
     This opens the configuration interface where you can define your retention settings.
   </Step>
 
-  <Step title="Enable and Set Retention Period" icon="clock">
+  <Step title="Enable and set retention period" icon="clock">
     Toggle the **"Enable"** slider to activate data retention for your organization.
     
     Set your desired **retention period in days**. This determines how long data is kept before being automatically deleted.
@@ -153,7 +149,7 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
     - 365 days - Annual retention for long-term records
   </Step>
 
-  <Step title="Save Configuration" icon="floppy-disk">
+  <Step title="Save configuration" icon="floppy-disk">
     Click **"Save"** to apply your data retention policy.
     
     The policy takes effect immediately and will begin automatically deleting data that exceeds the retention period.
@@ -161,16 +157,16 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
 </Steps>
 
 <Warning>
-**Data deletion is permanent and cannot be undone.** Once data is deleted through retention policies, it cannot be recovered. Ensure your retention period aligns with your organization's compliance, legal, and operational requirements before enabling this feature.
+Data deletion is permanent and cannot be undone. Once data is deleted through retention policies, it cannot be recovered, so ensure your retention period aligns with your organization's compliance, legal, and operational requirements before enabling this feature.
 </Warning>
 
 ---
 
-## Use Cases & Compliance Considerations
+## Use cases & compliance considerations
 
 <Tabs>
-  <Tab title="Compliance Requirements" icon="scale-balanced">
-    ### Meeting Regulatory Standards
+  <Tab title="Compliance requirements" icon="scale-balanced">
+    ### Meeting regulatory standards
     
     Data Retention helps organizations comply with various regulatory frameworks that mandate data retention limits:
     
@@ -189,8 +185,8 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
     </Tip>
   </Tab>
   
-  <Tab title="Security Best Practices" icon="shield-check">
-    ### Reducing Data Exposure
+  <Tab title="Security best practices" icon="shield-check">
+    ### Reducing data exposure
     
     Implementing data retention policies reduces your organization's security risk profile:
     
@@ -214,8 +210,8 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
     </Note>
   </Tab>
   
-  <Tab title="Operational Efficiency" icon="gauge-high">
-    ### Optimizing Platform Performance
+  <Tab title="Operational efficiency" icon="gauge-high">
+    ### Optimizing platform performance
     
     Data Retention supports operational efficiency and cost management:
     
@@ -240,8 +236,8 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
     - Aligns storage costs with business value
   </Tab>
   
-  <Tab title="Planning Your Policy" icon="clipboard-list">
-    ### Determining the Right Retention Period
+  <Tab title="Planning your policy" icon="clipboard-list">
+    ### Determining the right retention period
     
     Consider these factors when setting your retention period:
     
@@ -273,7 +269,7 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
 
 ---
 
-## Important Considerations
+## Important considerations
 
 <AccordionGroup>
   <Accordion title="Data deletion is permanent" icon="triangle-exclamation">
@@ -313,7 +309,7 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
   <Accordion title="Audit and compliance records" icon="file-lines">
     Consider your audit and compliance requirements when setting retention periods. Some regulations require specific retention periods for audit trails.
     
-    If you use [S3 Event Streaming](/enterprise/streaming-events), those audit logs are stored in your own S3 bucket and are not affected by Data Retention policies in Relevance AI.
+    If you use [S3 Event Streaming](/enterprise/streaming-events), those audit logs and traces are delivered to your own S3 bucket and are not affected by Data Retention policies in Relevance AI. Their retention is governed by your bucket's own lifecycle policy. On the Relevance side, telemetry only passes through a temporary staging bucket that is automatically purged after 30 days.
   </Accordion>
 </AccordionGroup>
 
@@ -347,7 +343,7 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
   </Accordion>
 
   <Accordion title="How do I know what data will be deleted?">
-    Data is deleted based on the conditions outlined in the "What Data Is Covered?" section above. Review those conditions carefully to understand what data is eligible for deletion based on your retention period.
+    Data is deleted based on the conditions outlined in the "What data is covered?" section above. Review those conditions carefully to understand what data is eligible for deletion based on your retention period.
   </Accordion>
 
   <Accordion title="Can I temporarily disable Data Retention?">
@@ -355,7 +351,7 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
   </Accordion>
 
   <Accordion title="Does this affect my S3 Event Streaming data?">
-    No. If you use [S3 Event Streaming](/enterprise/streaming-events), audit logs and events stored in your own S3 bucket are not affected by Data Retention policies in Relevance AI. You control the lifecycle of data in your own S3 bucket.
+    No. If you use [S3 Event Streaming](/enterprise/streaming-events), audit logs and events delivered to your own S3 bucket are not affected by Data Retention policies in Relevance AI. You control the lifecycle of data in your own S3 bucket through its lifecycle policy. On the Relevance side, telemetry only passes through a temporary staging bucket that is automatically purged after 30 days.
   </Accordion>
 
   <Accordion title="Who can configure Data Retention settings?">
@@ -365,14 +361,14 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
 
 ---
 
-## Related Enterprise Features
+## Related Enterprise features
 
 <CardGroup cols={2}>
   <Card title="S3 Event Streaming" icon="database" href="/enterprise/streaming-events">
     Stream audit logs and compliance data to your own S3 bucket for long-term retention
   </Card>
   
-  <Card title="Role-Based Access Controls" icon="shield-halved" href="/enterprise/rbac">
+  <Card title="Role-based access controls" icon="shield-halved" href="/enterprise/rbac">
     Control who can access and manage data with granular permissions
   </Card>
   
@@ -380,7 +376,7 @@ Data Retention policies do not affect knowledge bases, integrations, API keys, o
     Monitor usage patterns to inform your retention policy decisions
   </Card>
   
-  <Card title="Integration Controls" icon="plug" href="/enterprise/integration-controls">
+  <Card title="Integration controls" icon="plug" href="/enterprise/integration-controls">
     Govern which integrations can access your organization's data
   </Card>
 </CardGroup>
