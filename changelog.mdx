@@ -5,6 +5,20 @@ mode: "wide"
 ---
 
 
+<Update label="June 29, 2026" description="Eval action billing, cost breakdowns, and Workforce sub-agent/tool support">
+
+## Eval action billing, cost breakdowns, and Workforce sub-agent/tool support
+
+Three changes to Evals and Workforces are now live for all users.
+
+Eval Checks now consume 1 action per check run — this applies to all check types, including LLM as Judge and Tool Usage checks. Each completed Eval run now renders a cost breakdown panel that lists action consumption per individual check, so users can see exactly how a run's total action count is composed. Separately, Workforces now support sub-agent and tool invocations within their runs; previously this tracking and invocation layer was only wired up for individual Agent runs. Workforce runs that include sub-agent calls or tool usage will now correctly process and record those interactions in the same way individual Agent runs do.
+
+For example, a Workforce that orchestrates multiple agents — each calling external tools — can now be fully evaluated with accurate action counts attributed per check.
+
+To view cost breakdowns, open any completed Eval run; the breakdown panel appears alongside the results. Workforce sub-agent and tool support is enabled automatically with no configuration required. See the [Evals documentation](/evals) for full details.
+
+</Update>
+
 <Update label="May 29, 2026" description="Timeline view added to Tasks page">
 
 ## Timeline view added to Tasks page
