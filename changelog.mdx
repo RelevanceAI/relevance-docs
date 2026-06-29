@@ -5,17 +5,29 @@ mode: "wide"
 ---
 
 
-<Update label="June 29, 2026" description="Eval action billing, cost breakdowns, and Workforce sub-agent/tool support">
+<Update label="June 29, 2026" description="Per-check Eval billing and Workforce evaluations">
 
-## Eval action billing, cost breakdowns, and Workforce sub-agent/tool support
+## Per-check Eval billing and Workforce evaluations
 
-Three changes to Evals and Workforces are now live for all users.
+Evals now bill per check, break down action cost per run, and cover full Workforce runs including sub-agent and tool calls — for all users.
 
-Eval Checks now consume 1 action per check run — this applies to all check types, including LLM as Judge and Tool Usage checks. Each completed Eval run now renders a cost breakdown panel that lists action consumption per individual check, so users can see exactly how a run's total action count is composed. Separately, Workforces now support sub-agent and tool invocations within their runs; previously this tracking and invocation layer was only wired up for individual Agent runs. Workforce runs that include sub-agent calls or tool usage will now correctly process and record those interactions in the same way individual Agent runs do.
+Eval Checks consume 1 action per check run, across every check type including LLM as Judge and Tool Usage. Each completed Eval run renders a cost breakdown panel that itemizes action consumption per individual check. Workforce runs that fan out to sub-agents or call tools record and evaluate each of those interactions, the same as individual Agent runs.
 
-For example, a Workforce that orchestrates multiple agents — each calling external tools — can now be fully evaluated with accurate action counts attributed per check.
+To see the breakdown, open any completed Eval run; the panel appears alongside the results. Workforce sub-agent and tool evaluation runs automatically, with no configuration required. See the [Evals documentation](/evals) for full details.
 
-To view cost breakdowns, open any completed Eval run; the breakdown panel appears alongside the results. Workforce sub-agent and tool support is enabled automatically with no configuration required. See the [Evals documentation](/evals) for full details.
+</Update>
+
+<Update label="June 12, 2026" description="Gemini 3.5 Flash now available">
+
+## Gemini 3.5 Flash now available
+
+![Gemini 3.5 Flash model card on the Relevance AI purple background, showing the Gemini spark icon and the model name](/images/changelog/changelog-gemini-3.5-flash.png)
+
+Google's Gemini 3.5 Flash is now available in production for all users, selectable anywhere you configure a language model.
+
+The model has a 1M-token context window and returns up to 64K tokens per response. It supports function calling and accepts image and file inputs alongside text. Reasoning runs at four configurable thinking levels — minimal, low, medium, and high — defaulting to minimal, so you can raise the depth for harder tasks or keep it low for faster, cheaper responses.
+
+Where to find it: select Gemini 3.5 Flash from the model dropdown in any agent, tool, or workflow. See [language model settings](/build/agents/build-your-agent/agent-settings/language-model) for how to change an agent's model.
 
 </Update>
 
