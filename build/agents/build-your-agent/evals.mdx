@@ -8,7 +8,7 @@ description: 'Test and evaluate your AI Agents with scenario-based evaluations a
 **Rollout Status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing.
+The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing. Evals apply to both individual Agents and Workforces, including the sub-agents and tools inside a Workforce.
 
 ![Evaluate tab showing the Evals sidebar (Test, Runs, Checks, Publish, Monitor) and a Monitor dashboard with overall score, total runs, and Checks breakdown](/images/agent/agent-evals.png)
 
@@ -33,7 +33,7 @@ The Evals section is your command center for testing and evaluating AI Agent per
 The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 
 - **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached Checks.
-- **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, credit spend, and creation date for every run.
+- **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, cost (Credits and Actions), and creation date for every run.
 - **Checks** — The reusable set of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
 - **Publish** — Choose which test sets must pass before your Agent can be published. Set a minimum pass rate and optionally block publishing on failure.
 - **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
@@ -89,6 +89,8 @@ When creating a Check, you choose one of the following types:
     | **Tool** | Select the tool to check for |
     | **Position** | Whether the tool was used anywhere, used first, or used last |
     | **Comparison** | Check if the tool was used at least, exactly, or at most X times |
+
+    When evaluating a Workforce, you can scope a Tool Usage Check to a specific node — a sub-agent or tool in the Workforce — so you can assert that a particular sub-agent used a given tool.
   </Accordion>
 </AccordionGroup>
 
@@ -147,6 +149,8 @@ Follow these steps to create your first test set:
     - Select a Tool to simulate.
     - Provide a prompt describing what the Tool should return (a fake response is generated based on your prompt).
     - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response.
+
+    When evaluating a Workforce, Tool simulations can be configured per node, so each sub-agent uses its own simulated Tool responses.
 
 8. Click **Save test scenario** to save your configuration.
 
@@ -242,6 +246,8 @@ Each scenario displays:
 | **Score** | Percentage of Checks that passed (shown with progress bar) |
 | **Checks** | Pass/fail count (e.g., "1/1 passed") |
 | **Credits** | Credits consumed for this scenario |
+| **Actions** | Actions consumed for this scenario — each Check plus the agent's tool runs |
+| **Run time** | How long the scenario took to complete |
 
 ### Viewing conversation details
 
@@ -318,6 +324,30 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
 
 ---
 
+## Cost and billing
+
+![Evaluation run results showing the Credits, Actions, and Run time columns for each scenario](/images/agent/evals-cost-breakdown.png)
+
+Evaluations are billed in credits and actions. Each scenario reports what it consumed:
+
+| Column | What it shows |
+|--------|---------------|
+| **Credits** | Vendor credits consumed by the scenario — the user-simulation LLM calls, the agent's own run, and any LLM-based Checks. Click the value to open the full breakdown. |
+| **Actions** | Actions consumed by the scenario — one for each Check, plus the actions from the agent's own tool runs during the conversation. The evaluation run itself isn't charged a separate action. This column only appears on usage-based plans; on legacy plans the action cost is included in Credits. |
+| **Run time** | The wall-clock duration of the scenario's conversation, measured from its first message to its last. A timing metric, not a charge, and shown per scenario only (the Average Score row doesn't total it). |
+
+Clicking a **Credits** or **Actions** value opens a breakdown of where that scenario's cost went. It separates the user simulation, the agent's own run, and the Checks that scored the conversation, so you can see which part drives the cost — usually the agent's own execution. The breakdown is split across three components:
+
+![Cost breakdown modal splitting a scenario's credits across Scenario Runner, Agent Execution, and Checks](/images/agent/cost-breakdown.png)
+
+| Component | What it covers |
+|-----------|----------------|
+| **Scenario Runner** | The LLM calls used to simulate the user. Uses credits only. |
+| **Agent Execution** | The agent's own run during the test. Uses credits, plus the actions from each tool the agent runs. These actions were already billed when the agent ran — they're shown here for attribution, not charged again. Workforces have no action-level data, so only credits appear. |
+| **Checks** | Each Check that scores the conversation, broken down by model. Each Check uses credits and counts as one action. |
+
+---
+
 ## Best practices
 
 <CardGroup cols={2}>
@@ -337,7 +367,7 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
     Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
   </Card>
   <Card title="Sample wisely in Monitor" icon="percent">
-    Match the sample rate to your task volume. A low-traffic Agent can run at 100%; high-volume Agents can sample lower to keep credit spend in check without losing the signal.
+    Match the sample rate to your task volume. A low-traffic Agent can run at 100%; high-volume Agents can sample lower to keep costs in check without losing the signal.
   </Card>
 </CardGroup>
 
@@ -354,13 +384,8 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
     Each scenario supports up to 10 Checks. This applies to scenario-level Checks defined within the scenario itself. Checks added via **Additional global checks** at run time are counted separately.
   </Accordion>
 
-  <Accordion title="How are credits calculated for evaluations?">
-    Credits consumed for each scenario are calculated by adding together:
-    - The Agent task run (the conversation with your Agent)
-    - The simulator (the persona/user simulation) — uses an LLM to simulate the user persona
-    - Every Check that runs on the conversation — each Check (especially LLM Judge) uses an LLM call
-
-    Each scenario shows its total credit usage in the results.
+  <Accordion title="How are evaluations billed?">
+    Evaluations consume both Actions and Vendor Credits. Each Check costs 1 Action, while Vendor Credits cover the LLM costs of the task run, the user simulator, and any LLM-based Check. Each scenario shows its full breakdown in the results — see [Cost and billing](#cost-and-billing) for details.
   </Accordion>
 
   <Accordion title="Can I rerun a previous evaluation?">
