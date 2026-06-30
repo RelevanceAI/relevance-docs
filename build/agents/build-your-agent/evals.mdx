@@ -301,6 +301,29 @@ To adjust dashboard settings after initial setup, click the **Settings** button 
 
 ---
 
+## Publish
+
+The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
+
+You can configure Publish from the **Publish** section in the Evaluate tab.
+
+### Test sets to run
+
+Select which test sets to run before publishing. Click **Add test sets** to choose them — all scenarios in the selected test sets will be evaluated.
+
+### Publish settings
+
+Configure how evaluations affect the publish process:
+
+| Setting | Description |
+|---------|-------------|
+| **Minimum pass rate (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
+| **Allow publishing even if eval fails** | When unchecked (the default), the Agent will only be published if the evaluation score meets or exceeds the minimum pass rate. When checked, the Agent publishes regardless of whether the evaluation passes. |
+
+Once configured, click **Save**. When you next publish your Agent, the selected test sets will run automatically and the results will be checked against your minimum pass rate.
+
+---
+
 ## Cost and billing
 
 ![Evaluation run results showing the Credits, Actions, and Run time columns for each scenario](/images/agent/evals-cost-breakdown.png)
@@ -322,29 +345,6 @@ Clicking a **Credits** or **Actions** value opens a breakdown of where that scen
 | **Scenario Runner** | The LLM calls used to simulate the user. Uses credits only. |
 | **Agent Execution** | The agent's own run during the test. Uses credits, plus the actions from each tool the agent runs. These actions were already billed when the agent ran — they're shown here for attribution, not charged again. Workforces have no action-level data, so only credits appear. |
 | **Checks** | Each Check that scores the conversation, broken down by model. Each Check uses credits and counts as one action. |
-
----
-
-## Publish
-
-The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
-
-You can configure Publish from the **Publish** section in the Evaluate tab.
-
-### Test sets to run
-
-Select which test sets to run before publishing. Click **Add test sets** to choose them — all scenarios in the selected test sets will be evaluated.
-
-### Publish settings
-
-Configure how evaluations affect the publish process:
-
-| Setting | Description |
-|---------|-------------|
-| **Minimum pass rate (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
-| **Allow publishing even if eval fails** | When unchecked (the default), the Agent will only be published if the evaluation score meets or exceeds the minimum pass rate. When checked, the Agent publishes regardless of whether the evaluation passes. |
-
-Once configured, click **Save**. When you next publish your Agent, the selected test sets will run automatically and the results will be checked against your minimum pass rate.
 
 ---
 
