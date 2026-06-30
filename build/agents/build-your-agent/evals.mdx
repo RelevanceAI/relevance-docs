@@ -263,17 +263,25 @@ For example, an "Empathy shown" Check might show:
 
 ## Cost and billing
 
-Each run and scenario has a **Costs** breakdown showing two totals — credits and actions — split across three components:
+![Evaluation run results showing the Credits, Actions, and Run time columns for each scenario](/images/agent/evals-cost-breakdown.png)
+
+Evaluations are billed in credits and actions. Each scenario reports what it consumed:
+
+| Column | What it shows |
+|--------|---------------|
+| **Credits** | Vendor credits consumed by the scenario — the user-simulation LLM calls, the agent's own run, and any LLM-based Checks. Click the value to open the full breakdown. |
+| **Actions** | Actions consumed by the scenario — one for each Check, plus the actions from the agent's own tool runs during the conversation. The evaluation run itself isn't charged a separate action. This column only appears on usage-based plans; on legacy plans the action cost is included in Credits. |
+| **Run time** | The wall-clock duration of the scenario's conversation, measured from its first message to its last. A timing metric, not a charge, and shown per scenario only (the Average Score row doesn't total it). |
+
+### Cost breakdown
+
+Clicking a **Credits** or **Actions** value opens a breakdown split across three components:
 
 | Component | What it covers |
 |-----------|----------------|
 | **Scenario Runner** | The LLM calls used to simulate the user. Uses credits only. |
-| **Agent Execution** | The cost of running the agent for the test. Uses credits, plus one action for each tool the agent runs during the conversation. |
+| **Agent Execution** | The agent's own run during the test. Uses credits, plus the actions from each tool the agent runs. These actions were already billed when the agent ran — they're shown here for attribution, not charged again. Workforces have no action-level data, so only credits appear. |
 | **Checks** | Each Check that scores the conversation, broken down by model. Each Check uses credits and counts as one action. |
-
-The evaluation run itself isn't charged a separate action — actions come from the agent's tool runs and from each Check.
-
-For how credits and actions work across your plan, see [Plans and credits](/admin/subscriptions/plans).
 
 ---
 
