@@ -33,7 +33,7 @@ The Evals section is your command center for testing and evaluating AI Agent per
 The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 
 - **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached Checks.
-- **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, credit spend, and creation date for every run.
+- **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, credit spend, and creation date for every run. On new billing, an **Actions** column shows total action consumption per run.
 - **Checks** — The reusable set of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
 - **Publish** — Choose which test sets must pass before your Agent can be published. Set a minimum pass rate and optionally block publishing on failure.
 - **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
@@ -318,6 +318,33 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
 
 ---
 
+## Billing for eval runs
+
+Each evaluator Check (scoring rule) that runs on a conversation during an eval costs 1 action. This applies to every Check that scores a conversation across all scenarios in a run.
+
+| Cost component | Charge |
+|----------------|--------|
+| Each evaluator Check per conversation | 1 action |
+| Per-run platform fee | 0 (currently waived) |
+
+### Cost breakdown modal
+
+All customers can open a cost breakdown modal for any eval run by clicking through from the Runs list. The modal itemizes scenario runner costs, evaluator check costs, and the platform fee.
+
+### Actions column
+
+On new billing (Actions and Vendor Credits), the Runs table includes an **Actions** column showing total action consumption per eval run.
+
+### Credit-billed customers
+
+On legacy credit-based billing, eval run fees are automatically converted to credits and deducted from your credit balance.
+
+<Note>
+Action usage for Workforce eval runs is not yet itemized in the cost breakdown modal.
+</Note>
+
+---
+
 ## Best practices
 
 <CardGroup cols={2}>
@@ -354,13 +381,12 @@ Once configured, click **Save**. When you next publish your Agent, the selected 
     Each scenario supports up to 10 Checks. This applies to scenario-level Checks defined within the scenario itself. Checks added via **Additional global checks** at run time are counted separately.
   </Accordion>
 
-  <Accordion title="How are credits calculated for evaluations?">
-    Credits consumed for each scenario are calculated by adding together:
-    - The Agent task run (the conversation with your Agent)
-    - The simulator (the persona/user simulation) — uses an LLM to simulate the user persona
-    - Every Check that runs on the conversation — each Check (especially LLM Judge) uses an LLM call
+  <Accordion title="How are eval runs billed?">
+    Billing depends on your plan type.
 
-    Each scenario shows its total credit usage in the results.
+    On new billing (Actions and Vendor Credits), each evaluator Check that runs on a conversation costs 1 action. The per-run platform fee is currently waived. You can see total action consumption in the **Actions** column of the Runs table, or open the cost breakdown modal for a full itemization.
+
+    On legacy credit-based billing, credits consumed for each scenario are calculated by adding together the Agent task run, the simulator (the LLM that generates user messages), and every Check that runs on the conversation. Eval run fees are automatically converted to credits and deducted from your balance.
   </Accordion>
 
   <Accordion title="Can I rerun a previous evaluation?">
