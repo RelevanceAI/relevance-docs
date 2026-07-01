@@ -1,0 +1,123 @@
+---
+title: "Reviewing publish impact"
+sidebarTitle: "Reviewing publish impact"
+description: "Before publishing changes to an agent, tool, or workforce, review which downstream consumers will be affected."
+---
+
+## Overview
+
+When you publish changes to an agent, tool, or workforce in Relevance AI, those changes go live immediately and affect every downstream consumer — agents that use it as a sub-agent or tool, workforces that embed it, and triggers associated with it.
+
+The publish impact confirmation modal lets you review exactly what will be affected before committing your changes. When you click **Publish**, the modal appears automatically and lists all direct consumers with contextual metadata to help you assess the scope of your change.
+
+## When the modal appears
+
+The modal appears whenever you click **Publish** on:
+
+- An **agent** — including agents built from scratch, cloned from the marketplace, or created via Invent
+- A **tool** — including direct tools, embedded tools, and tools created via Invent
+- A **workforce** — when publishing changes to the workforce configuration or its embedded components
+
+<Note>
+If a resource has no downstream consumers, the modal does not appear and the publish action proceeds immediately.
+</Note>
+
+## What the modal shows
+
+The modal lists all direct consumers of the resource you are publishing, organized by type. Each entry includes contextual metadata to help you understand how actively the consumer is being used.
+
+### Agents
+
+Agents that use this resource either as a **sub-agent** (called directly by another agent) or as a **tool** (an action the agent can invoke) appear here. Publishing your changes updates what those agents use the next time they run.
+
+Each agent entry shows:
+
+| Field | Description |
+|-------|-------------|
+| **Last run time** | When the agent last executed a task |
+| **Run count** | Total number of tasks the agent has run |
+| **Public badge** | Indicates the agent is accessible via a public share link or embed |
+| **Embedded badge** | Indicates the agent is embedded on an external site |
+
+### Tools
+
+Tools that call this resource as part of their step sequence appear here. Publishing your changes alters the behavior of those tools on their next run.
+
+Each tool entry shows:
+
+| Field | Description |
+|-------|-------------|
+| **Last run time** | When the tool was last executed |
+| **Run count** | Total number of runs |
+| **Public badge** | Indicates the tool is shared via a public link or embed |
+
+### Workforces
+
+Workforces that include this resource as a node in their workflow appear here. Publishing changes may alter how the workforce routes tasks or processes data.
+
+Each workforce entry shows:
+
+| Field | Description |
+|-------|-------------|
+| **Membership count** | Number of agents and tools currently in the workforce |
+| **Last trigger time** | When the workforce was last triggered |
+
+### Triggers
+
+Triggers actively associated with this resource appear here. They will use the updated version of the resource on their next execution.
+
+## How to interpret the impact information
+
+Use the metadata in the modal to assess the risk before publishing:
+
+<CardGroup cols={2}>
+  <Card title="High run count and recent activity" icon="chart-line">
+    The resource is actively in use. Verify your changes are intentional and well-tested before proceeding, especially if the change alters inputs, outputs, or behavior.
+  </Card>
+  <Card title="Public or embedded badge" icon="globe">
+    The consumer is accessible to external users. A breaking change will affect end-users immediately with no rollback mechanism.
+  </Card>
+  <Card title="Multiple downstream consumers" icon="diagram-project">
+    Changes propagate across many agents, tools, or workforces. Consider communicating the change to team members before publishing.
+  </Card>
+  <Card title="Active triggers" icon="clock">
+    Triggers will pick up the updated resource on their next scheduled or event-based execution. Verify that timing and behavior changes are safe to go live.
+  </Card>
+</CardGroup>
+
+## Proceeding with or cancelling a publish
+
+After reviewing the impact summary:
+
+- Click **Publish** to confirm and push your changes live. All listed consumers immediately use the updated version.
+- Click **Cancel** to return to the editor without publishing. No changes go live.
+
+<Warning>
+Publishing is immediate and there is no automatic rollback. If you need to undo a change, you must manually update the resource again.
+</Warning>
+
+## Best practices
+
+<AccordionGroup>
+  <Accordion title="Test changes before publishing to active consumers">
+    If a resource is used by high-traffic agents or publicly embedded tools, duplicate the resource first and validate your changes on the copy. Once confirmed, apply the same changes to the original and publish.
+  </Accordion>
+
+  <Accordion title="Check public and embedded consumers carefully">
+    Resources marked as public or embedded are accessible to users outside your project. Review the change impact on these consumers before publishing to avoid disrupting external-facing workflows.
+  </Accordion>
+
+  <Accordion title="Coordinate with team members for shared resources">
+    If the modal shows that multiple agents, tools, or workforces consume the resource, notify team members who may be relying on the current behavior before publishing changes that alter inputs, outputs, or logic.
+  </Accordion>
+
+  <Accordion title="Review trigger timing for scheduled resources">
+    If a resource has scheduled triggers, consider whether your changes should take effect before or after the next scheduled run. Publish at an appropriate time to avoid unintended behavior mid-cycle.
+  </Accordion>
+</AccordionGroup>
+
+## Related
+
+- [Share your agent](/build/agents/share-your-agent)
+- [Share your tool](/build/tools/share-your-tool)
+- [Share your workforce](/build/workforces/share-your-workforce)
