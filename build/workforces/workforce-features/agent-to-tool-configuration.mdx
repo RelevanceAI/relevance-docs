@@ -22,6 +22,28 @@ To configure an Agent to Tool connection in your workforce:
 3. Click and drag from the agent's output connector to the input connector of your desired tool
 4. Once connected, click on the connecting line (edge) to access configuration settings
 
+## Managing tools in agent configuration
+
+Once tools are connected to an agent, you can manage them from the agent configuration panel.
+
+### Accessing tool management
+
+1. Open your workforce in the Workforce interface
+2. Click on the agent node to open the configuration panel
+3. Navigate to the **Tools** section in the right sidebar
+
+### Available tool actions
+
+For each tool listed in the configuration panel, you can:
+
+- **Edit tool**: Opens the tool builder where you can modify the tool's code, steps, and configuration without leaving the workforce context
+- **Disable**: Temporarily prevents the agent from using the tool without removing the connection
+- **Duplicate**: Creates a copy of the tool
+- **Swap**: Replaces the current tool with a different one while preserving the connection configuration
+- **Delete**: Removes the tool connection from the agent
+
+<Warning>When you click Edit tool for a tool shared by multiple agents, a warning banner appears in the tool editor showing how many agents are affected. Clone the tool first if you want changes that only apply to this specific agent. See [Editing shared tools](/build/tools/create-a-tool#editing-shared-tools) for details.</Warning>
+
 ## Configuration Options
 
 ### Connection type
@@ -97,6 +119,10 @@ Consider how tool connections affect the overall workflow:
    - Set appropriate "Max auto runs" limits
    - Make instructions more specific about when to use the tool
    - Consider changing to "Approval required" mode temporarily
+4. **Tool needs modification**
+   - Click on the agent node and navigate to the **Tools** section in the configuration panel
+   - Click **Edit tool** next to the relevant tool to open the tool builder
+   - Update the tool's code, steps, or configuration as needed, then save your changes
 
 ## Advanced Agent to Tool Configurations
 
