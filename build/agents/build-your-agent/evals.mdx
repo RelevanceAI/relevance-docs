@@ -89,6 +89,23 @@ When creating a Check, you choose one of the following types:
     | **Tool** | Select the tool to check for |
     | **Position** | Whether the tool was used anywhere, used first, or used last |
     | **Comparison** | Check if the tool was used at least, exactly, or at most X times |
+
+    #### Argument conditions
+
+    You can add conditions to verify the specific arguments passed to tool calls, not just whether the tool was called. Each condition specifies an argument path and a match type, and all conditions must be satisfied for the check to pass.
+
+    | Match type | Description |
+    |------------|-------------|
+    | **Exact match** | The argument value must equal the specified value. Optionally enable case-insensitive matching to ignore capitalization. |
+    | **Contains** | The argument value must include the specified substring. |
+    | **Regex** | The argument value must match the specified regular expression pattern. |
+    | **Not empty** | The argument must have any non-empty value. |
+
+    To add conditions, click **+ Add condition** in the **Conditions** section of the eval rule form. For each condition, specify the argument path and the value or pattern to match against. A plain-English preview of your conditions appears in the form.
+
+    <Info>
+    Argument conditions work for both single-agent evals and workforce (node-scoped) evals. This feature is currently behind the `evals-toolusage-argument-matcher` feature flag.
+    </Info>
   </Accordion>
 </AccordionGroup>
 
