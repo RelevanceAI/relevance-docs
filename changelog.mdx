@@ -5,15 +5,17 @@ mode: "wide"
 ---
 
 
-<Update label="June 29, 2026" description="Per-check Eval billing and Workforce evaluations">
+<Update label="June 29, 2026" description="Eval cost breakdowns and Workforce evaluations">
 
-## Per-check Eval billing and Workforce evaluations
+## Eval cost breakdowns and Workforce evaluations
 
-Evals now bill per check, break down action cost per run, and cover full Workforce runs including sub-agent and tool calls — for all users.
+![Eval run cost breakdown panel showing total credits and actions, with per-component rows for Scenario Runner, Agent Execution, and Checks broken down by AI Judge model and Tool Usage](/images/changelog/changelog-eval-cost-breakdown.png)
 
-Eval Checks consume 1 action per check run, across every check type including LLM as Judge and Tool Usage. Each completed Eval run renders a cost breakdown panel that itemizes action consumption per individual check. Workforce runs that fan out to sub-agents or call tools record and evaluate each of those interactions, the same as individual Agent runs.
+Eval runs now show exactly where their cost goes, itemized per check, and cover full Workforce runs including sub-agent and tool calls.
 
-To see the breakdown, open any completed Eval run; the panel appears alongside the results. Workforce sub-agent and tool evaluation runs automatically, with no configuration required. See the [Evals documentation](/evals) for full details.
+Each completed Eval run renders a cost breakdown panel that itemizes credit and action consumption per component. Checks account for 1 action per run across every check type, including LLM as Judge and Tool Usage, so the panel's totals reconcile to the exact source of every credit and action. Workforce runs that fan out to sub-agents or call tools record and evaluate each of those interactions, the same as individual Agent runs.
+
+To see the breakdown, open any completed Eval run; the panel appears alongside the results. See the [Evals documentation](/evals) for full details.
 
 </Update>
 
