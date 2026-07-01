@@ -5,6 +5,20 @@ mode: "wide"
 ---
 
 
+<Update label="June 29, 2026" description="Eval cost breakdowns and Workforce evaluations">
+
+## Eval cost breakdowns and Workforce evaluations
+
+![Eval run cost breakdown panel showing total credits and actions, with per-component rows for Scenario Runner, Agent Execution, and Checks broken down by AI Judge model and Tool Usage](/images/changelog/changelog-eval-cost-breakdown.png)
+
+Eval runs now show exactly where their cost goes, itemized per check, and cover full Workforce runs including sub-agent and tool calls.
+
+Each completed Eval run renders a cost breakdown panel that itemizes credit and action consumption per component. Checks account for 1 action per run across every check type, including LLM as Judge and Tool Usage, so the panel's totals reconcile to the exact source of every credit and action. Workforce runs that fan out to sub-agents or call tools record and evaluate each of those interactions, the same as individual Agent runs.
+
+To see the breakdown, open any completed Eval run; the panel appears alongside the results. See the [Evals documentation](/build/agents/build-your-agent/evals) for full details.
+
+</Update>
+
 <Update label="June 12, 2026" description="Gemini 3.5 Flash now available">
 
 ## Gemini 3.5 Flash now available
