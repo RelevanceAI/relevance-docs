@@ -41,6 +41,9 @@ Inventor is a copilot agent inside the Relevance AI UI. It uses the Relevance AI
   <Card title="Log bugs to engineering" icon="bug-slash">
     When Inventor hits a platform issue it can't fix, it logs a bug to our engineering team on your behalf.
   </Card>
+  <Card title="Schedule check-ins" icon="calendar-check">
+    Ask Inventor to review agents, tools, or workforces on a schedule and notify you via your configured channel only when something needs your attention.
+  </Card>
 </CardGroup>
 
 <Warning>
@@ -192,6 +195,33 @@ The counter lives in the Inventor panel and tracks only the credits used in your
       </Step>
     </Steps>
   </Tab>
+  <Tab title="Escalation alerts">
+    The **Escalation alerts** section in Inventor Settings is where you configure the channels Inventor uses to notify you.
+
+    To set it up:
+
+    <Steps>
+      <Step title="Open Inventor Settings">
+        Open the Inventor panel and click the settings icon.
+      </Step>
+      <Step title="Find Escalation alerts">
+        Locate the **Escalation alerts** section in the settings modal.
+      </Step>
+      <Step title="Add your channels">
+        Add one or more email addresses, or connect a [Slack channel](/integrations/popular-integrations/slack). You can configure both.
+      </Step>
+    </Steps>
+
+    Channel configuration is project-level: set it once and it applies across all check-ins in your project.
+
+    <Note>
+      Escalation alerts must be configured before you can use scheduled check-ins. If no channel is set up, Inventor will guide you through setup when you first try to schedule one.
+    </Note>
+
+    <Info>
+      This is separate from [agent Alerts](/build/agents/build-your-agent/alerts). Agent Alerts monitor task statuses — notifying you when a run succeeds, fails, or stalls. Inventor escalation alerts are how Inventor itself reaches out to you when it determines something needs your attention.
+    </Info>
+  </Tab>
   <Tab title="Conversations">
     Inventor saves each conversation as a session automatically. Opening the panel starts a new chat, and your past sessions stay available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
 
@@ -217,6 +247,50 @@ The counter lives in the Inventor panel and tracks only the credits used in your
     Ask Inventor to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Inventor copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
   </Tab>
 </Tabs>
+
+## Scheduled check-ins
+
+Scheduled check-ins let you ask Inventor to periodically review an agent, tool, or workforce and notify you only when something needs your attention. Set a schedule once and Inventor handles the monitoring — it reviews the resource, evaluates whether there's something actionable, and escalates through your configured channel with a link to the conversation.
+
+<Note>
+  Scheduled check-ins require an escalation alert channel configured in Inventor Settings. If no channel is set up, Inventor will guide you through setup before scheduling your first check-in.
+</Note>
+
+### How to set up a scheduled check-in
+
+<Steps>
+  <Step title="Ask Inventor in natural language">
+    Describe what you want Inventor to check and how often — for example, "Check my lead qualification agent every Monday morning and let me know if anything looks wrong."
+  </Step>
+  <Step title="Inventor confirms the schedule">
+    Inventor confirms what it will review, when it will check, and how it will reach you.
+  </Step>
+  <Step title="Check-in fires and Inventor reviews">
+    At the scheduled time, Inventor reviews the resource and determines whether there's something actionable. If there is, it sends a notification through your configured escalation alert channel with a link back to the conversation.
+  </Step>
+</Steps>
+
+### What gets checked
+
+<CardGroup cols={3}>
+  <Card title="Agents" icon="robot">
+    Inventor evaluates recent run history, error rates, and output patterns to determine whether there's something worth flagging.
+  </Card>
+  <Card title="Tools" icon="wrench">
+    Inventor checks for errors, schema issues, or configuration problems that may affect tool performance.
+  </Card>
+  <Card title="Workforces" icon="people-group">
+    Inventor reviews workforce activity and the agents within it to identify coordination issues or underperforming members.
+  </Card>
+</CardGroup>
+
+### When check-ins escalate
+
+Inventor only sends a notification when it finds something actionable. Routine check-ins where everything looks healthy don't trigger an alert — you only hear from Inventor when there's a reason to. When it does escalate, the notification includes a link to the Inventor conversation where you can review its findings and take action.
+
+<Info>
+  This is different from [Scheduled Triggers](/build/agents/build-your-agent/agent-triggers/scheduled-triggers). Scheduled Triggers make your agents run tasks on a timer. Scheduled check-ins have Inventor review an existing resource and decide whether to escalate — no agent tasks run.
+</Info>
 
 ## MCP vs Inventor
 
