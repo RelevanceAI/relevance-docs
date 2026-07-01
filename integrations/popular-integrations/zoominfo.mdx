@@ -4,7 +4,9 @@ description: "Search ZoomInfo's B2B database and enrich contact and company reco
 sidebarTitle: 'ZoomInfo'
 ---
 
-ZoomInfo is a B2B database and intelligence platform that provides contact and company information for sales and marketing teams. With the Relevance AI ZoomInfo integration, your AI agents can search ZoomInfo's database for free and enrich records with detailed contact and company data using ZoomInfo credits. This integration is compatible with GTM agents.
+ZoomInfo is a B2B database and intelligence platform that provides contact and company information for sales and marketing teams. With the Relevance AI ZoomInfo integration, your AI agents can search ZoomInfo's database and enrich records with detailed contact and company data using ZoomInfo credits.
+
+Two integration methods are available: the ZoomInfo GTM (OAuth) integration, recommended for new setups, and the legacy credential-based integration for existing users. Both can coexist as separate providers in your Relevance AI workspace, so you can run them in parallel if needed.
 
 <Warning>
   The ZoomInfo integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not ZoomInfo. If you have a question or issue with using ZoomInfo in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about ZoomInfo, you can reach out to ZoomInfo support directly.
@@ -12,7 +14,43 @@ ZoomInfo is a B2B database and intelligence platform that provides contact and c
 
 ## Connect the integration
 
-The ZoomInfo integration uses credential-based authentication. You will need three values from your ZoomInfo account: your ZoomInfo email address, a client ID, and a private key.
+### ZoomInfo GTM (OAuth) — recommended
+
+<Note>
+  The ZoomInfo GTM OAuth integration is in early access. Contact your Relevance AI account team to enable it for your workspace.
+</Note>
+
+The GTM integration connects your ZoomInfo account through OAuth. Token refresh is handled automatically — no credential management required after the initial sign-in.
+
+<Steps>
+  <Step title="Open the Integrations page in Relevance AI">
+    Go to **Integrations & API Keys** in the sidebar of your Relevance AI dashboard.
+  </Step>
+
+  <Step title="Select ZoomInfo GTM">
+    Find and click on **ZoomInfo GTM** from the available integrations list.
+  </Step>
+
+  <Step title="Click Add Integration">
+    Click **Add Integration** to start the OAuth flow.
+  </Step>
+
+  <Step title="Sign in to your ZoomInfo account">
+    A browser window will open. Sign in to your ZoomInfo account and authorize Relevance AI to access your data.
+  </Step>
+
+  <Step title="Confirm the connection">
+    Once authorized, your ZoomInfo GTM account will appear as a connected integration. Access is managed through OAuth tokens that refresh automatically.
+  </Step>
+</Steps>
+
+### Legacy (credential-based)
+
+<Note>
+  For new setups, use the ZoomInfo GTM OAuth integration described above. The credential-based integration remains fully supported for teams already using it.
+</Note>
+
+The legacy integration uses credential-based authentication. You will need three values from your ZoomInfo account: your ZoomInfo email address, a client ID, and a private key.
 
 <Steps>
   <Step title="Find your ZoomInfo API credentials">
@@ -58,6 +96,7 @@ ZoomInfo uses a credit-based system for data enrichment. It is important to unde
 - Searching for contacts by name, title, company, location, or other criteria
 - Searching for companies by name, industry, size, location, or other filters
 - Browsing and filtering ZoomInfo's database to build prospect lists
+- Looking up taxonomy values (industries, job functions, seniority levels)
 
 ### Credit-consuming operations
 
@@ -77,9 +116,54 @@ The integration includes built-in credit safeguards to help prevent unexpected c
 
 ## Tools & tool steps
 
-The ZoomInfo integration provides actions for both free search and credit-based enrichment. You can add these as tool steps when building tools in Relevance AI.
+ZoomInfo provides two sets of tool steps corresponding to each integration method. GTM tool steps require a ZoomInfo GTM (OAuth) connection; legacy tool steps require a credential-based connection.
 
-### Search operations (free)
+### GTM tool steps (OAuth)
+
+<Note>
+  These tool steps require a ZoomInfo GTM (OAuth) connection. See the GTM connection setup above.
+</Note>
+
+#### Search and enrichment
+
+<CardGroup cols={2}>
+  <Card title="Search contacts (GTM)" icon="magnifying-glass">
+    Search for contacts by criteria such as job title, company, location, or industry. Does not consume credits.
+  </Card>
+  <Card title="Enrich contacts (GTM)" icon="user-plus">
+    Retrieve detailed contact data including email addresses, phone numbers, and professional details. Consumes credits.
+  </Card>
+  <Card title="Search companies (GTM)" icon="buildings">
+    Find companies matching filters like industry, employee count, revenue range, or location. Does not consume credits.
+  </Card>
+  <Card title="Enrich companies (GTM)" icon="building">
+    Retrieve detailed company data including revenue, employee count, and firmographic details. Consumes credits.
+  </Card>
+</CardGroup>
+
+#### Taxonomy lookup
+
+<CardGroup cols={1}>
+  <Card title="Taxonomy lookup" icon="list-tree">
+    Browse ZoomInfo's taxonomy to discover valid filter values for industries, job functions, and seniority levels. Use this step when building search queries to find the exact values ZoomInfo recognizes, so your filters return accurate results. This step does not consume credits.
+  </Card>
+</CardGroup>
+
+#### Advanced API access
+
+<CardGroup cols={1}>
+  <Card title="ZoomInfo GTM API call" icon="code">
+    Make custom API calls to any ZoomInfo GTM endpoint for advanced use cases not covered by the pre-built steps.
+  </Card>
+</CardGroup>
+
+### Legacy tool steps (credential-based)
+
+<Note>
+  These tool steps require a ZoomInfo credential-based connection. See the legacy connection setup above.
+</Note>
+
+#### Search operations (free)
 
 <CardGroup cols={2}>
   <Card title="Search contacts" icon="magnifying-glass">
@@ -90,7 +174,7 @@ The ZoomInfo integration provides actions for both free search and credit-based 
   </Card>
 </CardGroup>
 
-### Enrichment operations (consumes credits)
+#### Enrichment operations (consumes credits)
 
 <CardGroup cols={2}>
   <Card title="Enrich contact" icon="user-plus">
@@ -107,10 +191,61 @@ The ZoomInfo integration provides actions for both free search and credit-based 
 2. Scroll down to **Tool steps**.
 3. Search for "ZoomInfo" in the tool step search bar.
 4. Select the desired ZoomInfo action.
-5. Select your connected ZoomInfo account from the dropdown.
+5. Select your connected ZoomInfo account from the dropdown (choose your GTM or legacy account depending on the step).
 6. Configure the action parameters and connect the tool to your agent.
 
-## Use the ZoomInfo API tool step (advanced)
+## Use the ZoomInfo API Call tool step (advanced)
+
+### ZoomInfo GTM API Call
+
+Advanced users can make custom API calls to any ZoomInfo GTM endpoint using the ZoomInfo GTM API Call tool step.
+
+<Steps>
+  <Step title="Create or open a tool">
+    Create a new tool in Relevance AI or open an existing tool you want to add ZoomInfo functionality to.
+  </Step>
+
+  <Step title="Add the ZoomInfo GTM API Call tool step">
+    Scroll down to Tool steps, search for "ZoomInfo GTM API Call", and add it to your workflow.
+  </Step>
+
+  <Step title="Select your ZoomInfo GTM account">
+    Select your connected ZoomInfo GTM (OAuth) account from the dropdown.
+  </Step>
+
+  <Step title="Configure the API endpoint">
+    Set the HTTP method, endpoint path, and request body parameters according to the ZoomInfo API documentation.
+  </Step>
+
+  <Step title="Test your configuration">
+    Test your API call before deploying to confirm it returns the expected data.
+  </Step>
+</Steps>
+
+<Accordion title="Example: Search for contacts by job title">
+
+```json
+{
+  "endpoint": "/search/contact",
+  "method": "POST",
+  "body": {
+    "searchField": [
+      {
+        "fieldName": "jobTitle",
+        "value": "VP of Sales"
+      }
+    ],
+    "rpp": 10,
+    "page": 1
+  }
+}
+```
+
+This call searches for contacts with the job title "VP of Sales" and returns up to 10 results. Search calls do not consume ZoomInfo credits.
+
+</Accordion>
+
+### ZoomInfo API Call (legacy)
 
 Advanced users can make custom API calls to any ZoomInfo endpoint using the ZoomInfo API Call tool step.
 
@@ -124,7 +259,7 @@ Advanced users can make custom API calls to any ZoomInfo endpoint using the Zoom
   </Step>
 
   <Step title="Select your ZoomInfo account">
-    Select your connected ZoomInfo account from the dropdown.
+    Select your connected ZoomInfo (credential-based) account from the dropdown.
   </Step>
 
   <Step title="Configure the API endpoint">
@@ -172,17 +307,25 @@ This call retrieves specific company attributes for use in lead qualification. N
   <Accordion title="CRM data enrichment" icon="database">
     Build an agent that identifies incomplete records in your CRM and uses ZoomInfo to fill in missing email addresses, phone numbers, and company details. Implement logic to skip records that already have complete data to avoid unnecessary credit consumption.
   </Accordion>
+
+  <Accordion title="Taxonomy-driven search" icon="list-tree">
+    Use the Taxonomy Lookup step to retrieve valid industry codes or seniority levels, then feed those values into a Search Contacts (GTM) or Search Companies (GTM) step. This pattern ensures your filters match ZoomInfo's accepted values and improves search accuracy.
+  </Accordion>
 </AccordionGroup>
 
 ## Best practices
 
 <AccordionGroup>
+  <Accordion title="Choose the right integration method" icon="split">
+    For new setups, use the ZoomInfo GTM (OAuth) integration. It handles token refresh automatically, requires no private key management, and uses the same tool step pattern as other OAuth-based integrations in Relevance AI. Keep the legacy credential-based integration if you already have it configured and working — there is no need to migrate unless you want to.
+  </Accordion>
+
   <Accordion title="Minimize credit consumption" icon="coins">
     Use search operations to filter your prospect pool before enriching. Only enrich records that meet your qualification criteria, and implement checks to avoid enriching the same record twice. Monitor credit usage in your ZoomInfo dashboard and set up alerts if available.
   </Accordion>
 
   <Accordion title="Secure your credentials" icon="shield-check">
-    Store your ZoomInfo client ID and private key securely. Do not hard-code credentials in tool configurations visible to other team members. Rotate your private key if you suspect it has been compromised.
+    Store your ZoomInfo client ID and private key securely when using the legacy integration. Do not hard-code credentials in tool configurations visible to other team members. Rotate your private key if you suspect it has been compromised. The GTM OAuth integration avoids this concern entirely since no credentials are stored.
   </Accordion>
 
   <Accordion title="Data privacy and compliance" icon="scale-balanced">
@@ -193,16 +336,32 @@ This call retrieves specific company attributes for use in lead qualification. N
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
+  <Accordion title="What's the difference between the GTM and legacy integration?">
+    The GTM integration uses OAuth to connect your ZoomInfo account. You sign in once and Relevance AI manages token refresh automatically — no credential storage or rotation required. The legacy integration uses PKI/JWT credentials (email, client ID, and private key) that you generate from your ZoomInfo API settings and paste into Relevance AI. Both integrations give you access to ZoomInfo's search and enrichment capabilities, but the GTM integration is simpler to set up and maintain for new users. The tool steps available also differ between the two — GTM tool steps include the Taxonomy Lookup step and updated search/enrich steps, while legacy tool steps use the original credential-authenticated endpoints.
+  </Accordion>
+
+  <Accordion title="Do I need a specific ZoomInfo account type for GTM OAuth?">
+    The ZoomInfo GTM OAuth integration is available to ZoomInfo customers with GTM Intelligence access. If you are unsure whether your ZoomInfo account supports the GTM OAuth flow, check with your ZoomInfo account manager before setting up the integration in Relevance AI.
+  </Accordion>
+
+  <Accordion title="What is the Taxonomy Lookup tool step?">
+    The Taxonomy Lookup step lets your agent browse ZoomInfo's reference taxonomy — the set of accepted values for fields like industry, job function, and seniority level. When building search queries, using exact taxonomy values improves match accuracy. For example, instead of passing "tech" as an industry filter, you can first run Taxonomy Lookup to get the correct industry code, then use that value in a Search Companies (GTM) step. Taxonomy Lookup does not consume ZoomInfo credits.
+  </Accordion>
+
+  <Accordion title="Can I use both integrations simultaneously?">
+    Yes. The GTM (OAuth) and legacy (credential-based) integrations exist as separate providers in Relevance AI, so you can connect both and use them in different tools or workflows. GTM tool steps will always prompt you to select a GTM account, and legacy tool steps will prompt for a credential-based account. There is no conflict between the two.
+  </Accordion>
+
   <Accordion title="Does using ZoomInfo consume credits?">
     It depends on the operation. **Search operations are free** — searching for contacts or companies does not consume ZoomInfo credits. **Enrichment operations consume credits** — retrieving detailed data such as email addresses, phone numbers, revenue figures, or employee counts for a specific record uses credits. Design your workflows to search first and enrich only when needed.
   </Accordion>
 
-  <Accordion title="What credentials do I need to connect ZoomInfo?">
+  <Accordion title="What credentials do I need to connect the legacy ZoomInfo integration?">
     You need three credentials from your ZoomInfo account: your ZoomInfo email address, a client ID, and a private key. These are available in the API or integrations section of your ZoomInfo account settings. Contact your ZoomInfo account administrator if you do not have API access.
   </Accordion>
 
   <Accordion title="Does ZoomInfo work with GTM agents?">
-    Yes. The ZoomInfo integration is compatible with GTM agents in Relevance AI. You can use ZoomInfo search and enrichment tool steps in GTM agent workflows.
+    Yes. Both the ZoomInfo GTM (OAuth) and legacy integrations are compatible with GTM agents in Relevance AI. You can use ZoomInfo search and enrichment tool steps in GTM agent workflows.
   </Accordion>
 
   <Accordion title="What happens if I run out of ZoomInfo credits?">
@@ -210,6 +369,6 @@ This call retrieves specific company attributes for use in lead qualification. N
   </Accordion>
 
   <Accordion title="Do I need a ZoomInfo account to use this integration?">
-    Yes. You need an active ZoomInfo account with API access and valid API credentials (email, client ID, and private key) to connect the integration.
+    Yes. You need an active ZoomInfo account to connect either integration. For the GTM (OAuth) integration, you also need a ZoomInfo account with GTM Intelligence access. For the legacy integration, you need API access and valid API credentials (email, client ID, and private key).
   </Accordion>
 </AccordionGroup>
