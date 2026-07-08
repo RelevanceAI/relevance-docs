@@ -330,6 +330,12 @@ Included on all log records:
 | --- | --- | --- | --- |
 | `relevance_ai.event.workforce_id` | string | Yes | ID of the deleted workforce |
 
+**`workforce_task_deleted`** - Emitted when a workforce task (a single execution run of a workforce) is deleted. One event is emitted per deleted task ID, including during bulk deletes.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.workforce_task_id` | string | Yes | ID of the deleted workforce task. Matches the `relevance_ai.workforce.workforce_task_id` attribute on workforce execution spans |
+
 **`workforce_draft_saved`** - Emitted when work-in-progress changes are saved to a workforce.
 
 | Attribute | Type | Required | Description |
