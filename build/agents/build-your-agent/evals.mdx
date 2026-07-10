@@ -33,7 +33,7 @@ The Evals section is your command center for testing and evaluating AI Agent per
 The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
 
 - **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached Checks.
-- **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, cost (Credits and Actions), and creation date for every run.
+- **Runs** — Past evaluation run results. Browse scores, status, cost, and creation date for every run. The table supports sorting, column resizing, and a column visibility picker to show or hide optional cost breakdown columns.
 - **Checks** — The reusable set of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
 - **Publish** — Choose which test sets must pass before your Agent can be published. Set a minimum pass rate and optionally block publishing on failure.
 - **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
@@ -239,15 +239,23 @@ The top of the results page shows key metrics:
 
 Each scenario displays:
 
+<Note>
+The table supports column sorting (click any column header to sort server-side, works across pages), column resizing (drag the edge of any header), and a column visibility picker to toggle optional columns. Column visibility choices are saved per view — batch detail and monitor views remember their settings independently. The Test column is pinned and stays visible when scrolling horizontally.
+</Note>
+
 | Column | Description |
 |--------|-------------|
+| **Test** | The scenario name — pinned as the first column and always visible |
 | **Status** | Running, Completed, or Failed |
-| **Name** | The scenario name |
 | **Score** | Percentage of Checks that passed (shown with progress bar) |
 | **Checks** | Pass/fail count (e.g., "1/1 passed") |
 | **Credits** | Credits consumed for this scenario |
-| **Actions** | Actions consumed for this scenario — each Check plus the agent's tool runs |
+| **Actions** | Actions consumed for this scenario — each Check plus the agent's tool runs. Only appears on usage-based plans. |
 | **Run time** | How long the scenario took to complete |
+| **Scenario credits** | Credits consumed by the scenario runner (user simulation LLM calls). Toggle on via the column visibility picker. |
+| **Execution credits** | Credits consumed by the agent's own execution. Toggle on via the column visibility picker. |
+| **Checks credits** | Credits consumed by Check evaluations. Toggle on via the column visibility picker. |
+| **Checks actions** | Actions consumed by Check evaluations. Toggle on via the column visibility picker. |
 
 ### Viewing conversation details
 
@@ -293,7 +301,27 @@ You also get:
 - **Overall score timeseries** to spot regressions or improvements over time.
 - **Per-Check charts** so you can see which criteria are slipping.
 - **Version markers** that line up score changes with Agent publishes.
-- **A list of evaluation runs** with score, name, and a drill-in to the full conversation.
+- **A runs list** showing each evaluated task — columns described below.
+
+<Note>
+The runs list supports column sorting (click any header), column resizing (drag header edges), and a column visibility picker for optional cost breakdown columns. Visibility choices in this view are saved separately from the batch detail view. The Name column is pinned and stays visible when scrolling horizontally.
+</Note>
+
+| Column | Description |
+|--------|-------------|
+| **Name** | The evaluated task's name — pinned as the first column and always visible |
+| **Status** | Completed or Failed |
+| **Score** | Percentage of Checks that passed |
+| **Checks** | Pass/fail count for this run |
+| **Credits** | Credits consumed for this run |
+| **Actions** | Actions consumed for this run. Only appears on usage-based plans. |
+| **Run time** | How long the evaluation took to complete |
+| **Scenario credits** | Credits consumed by the scenario runner. Toggle on via the column visibility picker. |
+| **Execution credits** | Credits consumed by the agent's own execution. Toggle on via the column visibility picker. |
+| **Checks credits** | Credits consumed by Check evaluations. Toggle on via the column visibility picker. |
+| **Checks actions** | Actions consumed by Check evaluations. Toggle on via the column visibility picker. |
+
+Click any row to drill into the full evaluated conversation.
 
 <Tip>
 To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
@@ -336,7 +364,9 @@ Evaluations are billed in credits and actions. Each scenario reports what it con
 | **Actions** | Actions consumed by the scenario — one for each Check, plus the actions from the agent's own tool runs during the conversation. The evaluation run itself isn't charged a separate action. This column only appears on usage-based plans; on legacy plans the action cost is included in Credits. |
 | **Run time** | The wall-clock duration of the scenario's conversation, measured from its first message to its last. A timing metric, not a charge, and shown per scenario only (the Average Score row doesn't total it). |
 
-Clicking a **Credits** or **Actions** value opens a breakdown of where that scenario's cost went. It separates the user simulation, the agent's own run, and the Checks that scored the conversation, so you can see which part drives the cost — usually the agent's own execution. The breakdown is split across three components:
+For a quick per-component view without leaving the table, use the column visibility picker to enable the **Scenario credits**, **Execution credits**, **Checks credits**, and **Checks actions** columns — each shows one component's cost inline.
+
+For the full breakdown, click any **Credits** or **Actions** value to open a modal that separates the user simulation, the agent's own run, and the Checks that scored the conversation, so you can see which part drives the cost — usually the agent's own execution. The breakdown is split across three components:
 
 ![Cost breakdown modal splitting a scenario's credits across Scenario Runner, Agent Execution, and Checks](/images/agent/cost-breakdown.png)
 
