@@ -1,0 +1,81 @@
+---
+title: 'Migrate legacy integrations'
+description: 'Use the migration wizard to upgrade tools from Pipedream-based integrations to native integrations.'
+sidebarTitle: 'Migrate legacy integrations'
+---
+
+## Overview
+
+Legacy tool integrations are tools that connect to external services using Pipedream-based transformations. These were created before Relevance AI introduced native integrations, and they rely on Pipedream as an intermediary layer to handle authentication and API calls.
+
+Native integrations are built directly by Relevance AI and offer several improvements over Pipedream-based ones:
+
+<CardGroup cols={2}>
+  <Card title="Better performance" icon="bolt">
+    Native integrations communicate directly with external services, reducing latency and improving reliability.
+  </Card>
+  <Card title="Pre-built actions" icon="puzzle-piece">
+    Native integrations come with ready-made tool steps so you can get started without manual configuration.
+  </Card>
+  <Card title="Trigger events" icon="bell">
+    Native integrations support trigger events that can automatically activate your agents when something happens in a connected platform.
+  </Card>
+  <Card title="First-party support" icon="headset">
+    Native integrations are maintained by the Relevance AI team, so issues are resolved faster.
+  </Card>
+</CardGroup>
+
+<Note>
+  The migration wizard is rolling out gradually to eligible tools. If your tool has a legacy Pipedream-based integration, you may see the migration banner on its configuration page.
+</Note>
+
+## When you'll see the migration banner
+
+If you have a tool that uses a legacy Pipedream-based transformation, a banner notification will appear at the top of that tool's configuration page. The banner indicates that a native integration is now available for that service.
+
+Click the banner to open the migration wizard modal. The wizard guides you through the migration process step by step and does not require any manual re-configuration of your tool settings.
+
+## Migration process
+
+<Steps>
+  <Step title="Connect OAuth accounts">
+    The wizard first prompts you to connect your account for the native integration. Click **Connect account** to be redirected to the third-party service's authentication page. Grant the necessary permissions, then you'll be redirected back to the wizard to continue.
+
+    If you have already connected a native integration account for this service on your **Integrations & API Keys** page, the wizard may allow you to select that existing connection instead.
+  </Step>
+
+  <Step title="Review parameter changes">
+    The wizard displays a side-by-side comparison of your current Pipedream-based configuration and the equivalent native integration configuration. Review how your existing parameters map to the new integration's fields.
+
+    Check that all settings carry over correctly before proceeding. If a parameter does not have a direct equivalent, the wizard will indicate this so you can decide how to handle it.
+  </Step>
+
+  <Step title="Complete migration">
+    Once you've reviewed the parameter mapping, click **Complete migration** to finalize the process. Your tool will be updated to use the native integration, and the legacy Pipedream transformation will be replaced.
+  </Step>
+</Steps>
+
+## After migration
+
+After the migration completes, test your tool to confirm it behaves as expected. Run it with representative inputs and verify the outputs match what you'd receive before migration.
+
+Your existing tool run history is preserved. Agents that use the tool continue to work without requiring reconfiguration — the migration updates the tool's underlying integration while keeping its interface and parameters intact.
+
+The tool now has access to all features available in the native integration, including any pre-built actions and trigger events added in the future.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens to my existing tool configurations?">
+    The migration wizard maps your existing Pipedream-based parameters to their native integration equivalents. The wizard shows you this mapping before you finalize the migration, so you can review any differences. Your tool's name, description, and overall structure remain unchanged.
+  </Accordion>
+  <Accordion title="Will my agents be affected during migration?">
+    Migration is applied at the tool level, not the agent level. During the migration process, avoid running the tool until the migration is complete. Once finished, your agents can use the tool immediately — no changes to your agent configuration are needed.
+  </Accordion>
+  <Accordion title="Can I undo a migration?">
+    Migrations cannot be reversed automatically. If you need to revert to the previous Pipedream-based integration, contact the [Relevance AI support team](/get-started/support) for assistance.
+  </Accordion>
+  <Accordion title="What if I encounter issues during migration?">
+    If the wizard encounters a problem — such as an authentication failure or an unmappable parameter — it will display an error message explaining what went wrong. You can retry the relevant step or reach out to the [Relevance AI support team](/get-started/support) for help.
+  </Accordion>
+</AccordionGroup>
