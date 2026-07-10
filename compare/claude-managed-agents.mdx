@@ -1,0 +1,90 @@
+---
+title: "Relevance AI vs Claude Managed Agents"
+sidebarTitle: "Claude Managed Agents"
+description: "How Relevance AI compares to Anthropic's Claude Managed Agents, and which one fits the way your team works."
+---
+
+Claude Managed Agents is Anthropic's hosted agent harness: an API for running Claude as an autonomous agent in a managed sandbox. Relevance AI is an agent platform that go-to-market and operations teams run through a workspace. They sit at different layers of the stack — this page maps where each one fits.
+
+## What Claude Managed Agents is
+
+Claude Managed Agents (in beta) gives developers a pre-built agent loop on the Claude API. You define an agent — model, system prompt, tools, MCP servers, skills — through API calls, then start sessions that run in an Anthropic-managed cloud sandbox or a self-hosted sandbox on your own infrastructure. Inside a session, Claude can run shell commands, read and write files, search the web, and call MCP servers, streaming results back to your application over server-sent events.
+
+There is no management UI. Creating, running, steering, and monitoring agents all happen through the API, so it's infrastructure for engineering teams building agent capabilities into their own products — not a workspace that business teams log into.
+
+## How they compare
+
+|  | Relevance AI | Claude Managed Agents |
+| --- | --- | --- |
+| **Who manages agents day-to-day?** | Your ops and revenue teams — the people closest to the work — through dashboards built for agent management. | Developers, through API calls and code. There is no interface for non-technical operators. |
+| **Who owns agent quality?** | Domain experts, with pre-deployment scenarios, production checks, and monitoring they manage themselves. | Your engineering team. Evaluation and monitoring are layers you design and build on top of the API. |
+| **How do agents receive tasks?** | Native triggers for CRMs, email, calendar, and more — plus webhooks, cron, and custom triggers built in platform. | Events your application sends to a session through the API, plus scheduled deployments for cron-style runs. Connecting business systems is integration work you own. |
+| **What can my agents access?** | 1,000+ native connectors plus MCP support. | Built-in hosted tools (shell, files, web search, code execution) plus MCP servers. There is no native connector library — every SaaS integration goes through MCP or tools you build. |
+
+The pattern is the same in every row: Claude Managed Agents hands the integration and operations work to your engineering team, while Relevance AI ships it as product surface that business teams use directly.
+
+## Where Claude Managed Agents fits
+
+<CardGroup cols={2}>
+  <Card title="You're shipping a product" icon="box">
+    You're building agent capabilities into your own application and want the agent loop, sandbox, and context management handled for you.
+  </Card>
+  <Card title="The work is code" icon="terminal">
+    Your tasks are mostly executing code and shell commands in a sandbox for minutes or hours at a time.
+  </Card>
+  <Card title="Compliance needs your infrastructure" icon="server">
+    Self-hosted sandboxes keep tool execution and sensitive data on infrastructure you control.
+  </Card>
+  <Card title="You want harness-level control" icon="sliders">
+    Your engineering team wants to program every part of agent behavior directly against the API.
+  </Card>
+</CardGroup>
+
+## Where Relevance AI fits
+
+<CardGroup cols={2}>
+  <Card title="Business teams run the agents" icon="users">
+    Ops and revenue teams manage agents day-to-day through dashboards designed for agent management — no engineering ticket required to adjust a prompt or a tool.
+  </Card>
+  <Card title="Domain experts own quality" icon="vial">
+    [Evals](/build/agents/build-your-agent/evals) let the people who know the work test agents against pre-deployment scenarios and monitor them in production, without writing an evaluation framework.
+  </Card>
+  <Card title="Work starts in your business systems" icon="bolt">
+    Native [triggers](/build/agents/build-your-agent/triggers) fire on CRM events, inbound email, and calendar activity — plus webhooks, cron, and custom triggers built in platform.
+  </Card>
+  <Card title="Connectors out of the box" icon="plug">
+    1,000+ native [integrations](/integrations/introduction) plus [MCP support](/integrations/mcp/mcp-client), so agents reach your stack without custom integration work.
+  </Card>
+</CardGroup>
+
+## Using them together
+
+The two products sit at different layers, so this is less either/or than it looks. Relevance AI agents run on the model you choose — including [Anthropic's Claude models](/integrations/llm-integrations/anthropic) — and connect to tools exposed over [MCP](/integrations/mcp/mcp-client). Choosing Relevance AI doesn't mean choosing against Claude; it means putting a management layer your business teams can operate on top of the same models.
+
+## Common questions
+
+<AccordionGroup>
+  <Accordion title="Can Relevance AI agents use Claude models?" icon="asterisk">
+    Yes. You can set any agent to run on Anthropic models, and switch models without rebuilding the agent. See [Anthropic LLM integration](/integrations/llm-integrations/anthropic) for setup.
+  </Accordion>
+  <Accordion title="Do we need engineers to run agents in Relevance AI?" icon="users">
+    No. The builder is designed for non-technical operators, and evals, triggers, and monitoring are all managed in the UI. Teams that prefer working in code can build and edit agents from their editor with [Programmatic GTM](/get-started/core-concepts/programmatic-gtm).
+  </Accordion>
+  <Accordion title="Can Relevance AI connect to MCP servers?" icon="plug">
+    Yes. Agents can call tools from external MCP servers alongside native connectors — see [MCP client](/integrations/mcp/mcp-client). Relevance AI also exposes its own MCP server so coding assistants can build agents for you.
+  </Accordion>
+  <Accordion title="What stage of release is Claude Managed Agents in?" icon="flask">
+    As of mid-2026 it's in beta: all endpoints require a beta header, and some capabilities (MCP tunnels, for example) are in a more limited research preview that requires requesting access from Anthropic.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Start building" icon="rocket" href="/get-started/introduction">
+    Create your first agent and see the platform from the inside.
+  </Card>
+  <Card title="Talk to the team" icon="messages" href="/get-started/support">
+    Questions about how Relevance AI fits your stack? Reach out.
+  </Card>
+</CardGroup>
