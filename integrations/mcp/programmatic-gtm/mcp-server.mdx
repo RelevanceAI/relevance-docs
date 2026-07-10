@@ -242,6 +242,19 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
 
 ---
 
+## Available tools
+
+The Relevance AI MCP server exposes the following tools to connected AI clients:
+
+| Tool | Description |
+|------|-------------|
+| `relevance_trigger_agent` | Triggers an agent synchronously and waits up to 120 seconds for the result. |
+| `relevance_trigger_agent_async` | Triggers an agent and returns immediately with a `conversation_id` for polling. Use for long-running agents. |
+| `relevance_poll_agent_result` | Polls for the result of an async agent run using the `conversation_id`. |
+| `relevance_run_evaluation` | Runs an evaluation test set against an agent or workforce. Accepts `agent_id` (required), `test_set_id` (required), and an optional `version_id` to evaluate a specific historical or draft version instead of the current active version. |
+
+---
+
 ## Handling long-running agent executions
 
 When triggering agents via MCP, you have two execution modes available depending on how long your agent takes to complete.

@@ -216,8 +216,23 @@ You can run an entire test set or an individual scenario from within a test set 
 You can select specific scenarios within a test set to run a subset at once, or run all scenarios in the test set together. Note that you cannot bulk-select and run multiple test sets at the same time.
 
 1. Enter a name for the run (e.g., "Scenario run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
-2. Checks already attached to the scenarios are always included. To add Checks from the Checks tab, select the ones you want under **Additional global checks**.
-3. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
+2. Select which version to evaluate from the **Version** dropdown. It defaults to the current active version. Select any historical or draft version to test against instead. This applies to both individual agents and workforces.
+3. Checks already attached to the scenarios are always included. To add Checks from the Checks tab, select the ones you want under **Additional global checks**.
+4. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
+
+### Running evaluations via MCP
+
+You can trigger evaluation runs programmatically using the `relevance_run_evaluation` MCP tool available through the [Relevance AI MCP server](/integrations/mcp/programmatic-gtm/mcp-server). This mirrors the version picker available in the run modals.
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `agent_id` | Yes | The ID of the agent or workforce to evaluate |
+| `test_set_id` | Yes | The ID of the test set to run |
+| `version_id` | No | A specific agent version ID to evaluate against. Omit to use the current active version |
+
+<Note>
+Workforce evaluations now correctly run against the version specified — either via the Version dropdown in the run modal or the `version_id` parameter via MCP. Previously, workforce evaluations always used the active published version regardless of the selection.
+</Note>
 
 ---
 
@@ -233,7 +248,7 @@ The top of the results page shows key metrics:
 |--------|-------------|
 | **Average Score** | Overall pass rate across all scenarios and Checks |
 | **Tasks** | How many Agent tasks were evaluated |
-| **Agent Version** | The version of the Agent that was tested |
+| **Agent Version** | The version of the agent or workforce that was evaluated, as selected in the run modal |
 
 ### Scenario results
 
@@ -389,7 +404,7 @@ Clicking a **Credits** or **Actions** value opens a breakdown of where that scen
   </Accordion>
 
   <Accordion title="Can I rerun a previous evaluation?">
-    Yes, you can run the same scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
+    Yes, you can run the same scenarios again at any time. Each run is saved in your Runs history. You can also target a specific historical or draft version using the **Version** dropdown in the run modal, letting you compare results across different agent versions directly.
   </Accordion>
 
   <Accordion title="Where do my Checks live?">
