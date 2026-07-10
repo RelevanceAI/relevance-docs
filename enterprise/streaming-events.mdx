@@ -282,6 +282,13 @@ Included on all log records:
 | `relevance_ai.event.agent_id` | string | Yes | ID of the agent being published |
 | `relevance_ai.event.version_id` | string | Yes | ID of the version now live |
 
+**`conversation_deleted`** - Emitted when an agent conversation is deleted, either individually or as part of a bulk deletion. Each deleted conversation produces a separate event.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.conversation_id` | string | Yes | ID of the deleted conversation |
+| `relevance_ai.event.agent_id` | string | Yes | ID of the agent the conversation belonged to |
+
 ### Tool events
 
 **`tool_created`** - Emitted when a new tool is created (from scratch or cloned).
@@ -343,6 +350,13 @@ Included on all log records:
 | --- | --- | --- | --- |
 | `relevance_ai.event.workforce_id` | string | Yes | ID of the workforce being published |
 | `relevance_ai.event.version_id` | string | No | ID of the version now live |
+
+**`workforce_task_deleted`** - Emitted when a workforce task is deleted. This fires when tasks are deleted from the workforce UI, from the chat interface, or by automated data retention policies.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.workforce_id` | string | Yes | ID of the workforce the task belonged to |
+| `relevance_ai.event.workforce_task_id` | string | Yes | ID of the deleted task |
 
 ### Permission events
 
