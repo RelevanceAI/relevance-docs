@@ -360,6 +360,24 @@ Included on all log records:
 | `relevance_ai.event.target_user_id` | string | Yes | ID of the user whose role was changed |
 | `relevance_ai.event.organization_role` | string | Yes | The new organization role assigned to the user |
 
+### Trigger events
+
+**`trigger_deleted`** - Emitted when a trigger is permanently deleted. Only emitted for organizations with the customer OTEL integration configured.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.trigger_id` | string | Yes | ID of the deleted trigger |
+| `relevance_ai.event.trigger_type` | string | Yes | Type of trigger: `recurring`, `tool_trigger`, or `external_relay` |
+| `relevance_ai.event.integration_provider` | string | No | Integration provider for relay-type triggers (e.g., `Slack`, `Gmail`). Only present when `trigger_type` is `external_relay` |
+
+### Knowledge events
+
+**`knowledge_table_deleted`** - Emitted when a knowledge table is permanently deleted. Only emitted for organizations with the customer OTEL integration configured.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.knowledge_table_id` | string | Yes | ID of the deleted knowledge table |
+
 ### Example log record
 
 ```json
