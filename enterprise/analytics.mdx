@@ -129,7 +129,22 @@ Each metric shows percentage change from the previous period. For example, "+45.
 
 ## Concurrency usage
 
-The Analytics page includes a concurrency usage chart. The chart shows organization-wide concurrency data — not data specific to a single agent — so you can correlate agent activity with overall concurrency patterns and see which agents are most active during peak periods.
+The Analytics page includes a concurrency usage chart showing how your organization's concurrent agent runs are distributed over time. Use it to spot peak usage periods and understand how demand is spread across your projects.
+
+Organization managers can switch between two views using the toggle in the chart header:
+
+<CardGroup cols={2}>
+  <Card title="Org total" icon="chart-column">
+    Displays aggregate organization-wide concurrency as a single chart. Use this to see overall demand patterns and correlate concurrency with agent activity.
+  </Card>
+  <Card title="By project" icon="chart-bar">
+    Switches to a stacked bar chart that breaks down concurrency by project, with each project shown in a distinct color. Hover over any bar to see each project's individual usage alongside the organization's concurrency limit.
+  </Card>
+</CardGroup>
+
+<Note>
+  The "Org total" / "By project" toggle is visible to organization managers only.
+</Note>
 
 <Note>
   For information about concurrency limits by subscription tier and how to monitor usage from the Plan & Billing page, see [Plans and credits](/admin/subscriptions/plans#monitoring-concurrency-usage).
