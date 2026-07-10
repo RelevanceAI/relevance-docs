@@ -1,6 +1,6 @@
 ---
-title: "MCP Server"
-sidebarTitle: "MCP Server"
+title: "MCP server"
+sidebarTitle: "MCP server"
 description: "Connect to Relevance AI from Claude Desktop, Cursor, VS Code, ChatGPT, and other MCP-compatible AI clients."
 ---
 
@@ -99,17 +99,14 @@ https://mcp.relevanceai.com/
   </Accordion>
 
   <Accordion title="Codex" icon="robot">
-    Run the following command:
+    Register the MCP server, then log in:
 
     ```bash
-    codex --mcp-server https://mcp.relevanceai.com/
+    codex mcp add relevance-ai --url https://mcp.relevanceai.com/
+    codex mcp login relevance-ai
     ```
 
-    You can also set the MCP server via an environment variable:
-
-    ```bash
-    export CODEX_MCP_SERVER=https://mcp.relevanceai.com/
-    ```
+    See the [OpenAI Codex](/integrations/mcp/codex) page for the full setup, including cloning the agent skills.
   </Accordion>
 
   <Accordion title="Zed" icon="pen-nib">
