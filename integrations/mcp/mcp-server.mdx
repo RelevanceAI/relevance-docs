@@ -1,6 +1,6 @@
 ---
-title: "MCP Server"
-sidebarTitle: "MCP Server"
+title: "MCP server"
+sidebarTitle: "MCP server"
 description: "Connect to Relevance AI from Claude Desktop, Cursor, VS Code, ChatGPT, and other MCP-compatible AI clients."
 ---
 
@@ -12,7 +12,7 @@ The MCP server is available at:
 https://mcp.relevanceai.com/
 ```
 
-<Tip>For Claude Code, we recommend using the [Relevance AI plugin](/integrations/mcp/programmatic-gtm/claude-code) instead of a manual MCP connection — it includes built-in skills and context that make the experience significantly better.</Tip>
+<Tip>For Claude Code, we recommend using the [Relevance AI plugin](/integrations/mcp/claude-code) instead of a manual MCP connection — it includes built-in skills and context that make the experience significantly better.</Tip>
 
 <Warning>
   This page is about using Relevance AI **from** external AI clients. If you want to connect an external MCP server **to** a Relevance AI agent, see [MCP Client](/integrations/mcp/mcp-client).
@@ -99,17 +99,14 @@ https://mcp.relevanceai.com/
   </Accordion>
 
   <Accordion title="Codex" icon="robot">
-    Run the following command:
+    Register the MCP server, then log in:
 
     ```bash
-    codex --mcp-server https://mcp.relevanceai.com/
+    codex mcp add relevance-ai --url https://mcp.relevanceai.com/
+    codex mcp login relevance-ai
     ```
 
-    You can also set the MCP server via an environment variable:
-
-    ```bash
-    export CODEX_MCP_SERVER=https://mcp.relevanceai.com/
-    ```
+    See the [OpenAI Codex](/integrations/mcp/codex) page for the full setup, including cloning the agent skills.
   </Accordion>
 
   <Accordion title="Zed" icon="pen-nib">
@@ -238,7 +235,7 @@ Each entry authenticates independently against its own project, so you can acces
 
 ## Add agent skills
 
-The MCP server gives your AI assistant the ability to call Relevance AI tools, but it doesn't know _how_ to use them well. For better results, pair it with the [agent skills](/integrations/mcp/programmatic-gtm/agent-skills) repository — a local reference that teaches your assistant how to work with agents, tools, workforces, knowledge, and more.
+The MCP server gives your AI assistant the ability to call Relevance AI tools, but it doesn't know _how_ to use them well. For better results, pair it with the [agent skills](/integrations/mcp/agent-skills) repository — a local reference that teaches your assistant how to work with agents, tools, workforces, knowledge, and more.
 
 ---
 
