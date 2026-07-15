@@ -1,6 +1,7 @@
 ---
-title: "Organization / project controls and governance"
-description: "Use the API to automate project controls and governance"
+title: "Managing projects and users with the API"
+sidebarTitle: "Managing projects and users with the API"
+description: "Use the API to create projects, manage invites, and control user access"
 ---
 
 Relevance AI has APIs for teams to automate their project controls and governance. For up-to-date API docs, please visit the API documentation for the region your organization is hosted in:
@@ -15,7 +16,7 @@ In order to use these APIs, you must create an Relevance AI API Key which will h
 
 ## Projects
 
-### Create Projects
+### Create projects
 
 Creates a project in the specified organization.
 
@@ -41,7 +42,7 @@ curl https://api-f1db6c.stack.tryrelevance.com/latest/projects/create \
 
 ---
 
-### Delete Projects
+### Delete projects
 
 This API endpoint is currently being worked on and is not yet available.
 
@@ -49,7 +50,7 @@ This API endpoint is currently being worked on and is not yet available.
 
 ## Invites
 
-### Invite User to Project
+### Invite a user to a project
 
 **Permissions Required**: Admin
 
@@ -93,7 +94,7 @@ curl https://api-f1db6c.stack.tryrelevance.com/latest/auth/invite/create \
 
 ---
 
-### Update User Role On Project
+### Update a user's role on a project
 
 **Permissions Required**: Admin
 
@@ -117,7 +118,7 @@ curl 'https://api-f1db6c.stack.tryrelevance.com/latest/auth/users/<user_id>/upda
 
 ---
 
-### Delete Project Invite
+### Delete a project invite
 
 **Permissions Required**: Admin
 
@@ -133,7 +134,7 @@ curl https://api-f1db6c.stack.tryrelevance.com/latest/auth/invite/delete \
 
 ---
 
-### Remove User From Project
+### Remove a user from a project
 
 **Permissions Required**: Admin
 
@@ -147,7 +148,7 @@ curl 'https://api-f1db6c.stack.tryrelevance.com/latest/auth/users/{user_id}/dele
 
 ---
 
-## SCIM - Enterprise User Management
+## SCIM - enterprise user management
 
 <Warning>This feature is coming soon!</Warning>
 
