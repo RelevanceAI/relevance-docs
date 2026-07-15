@@ -129,7 +129,16 @@ Each metric shows percentage change from the previous period. For example, "+45.
 
 ## Concurrency usage
 
-The Analytics page includes a concurrency usage chart. The chart shows organization-wide concurrency data — not data specific to a single agent — so you can correlate agent activity with overall concurrency patterns and see which agents are most active during peak periods.
+The Analytics page includes a concurrency usage chart — a stacked bar chart showing how many tasks were running and queued across your organization over time. Each bar represents a point in time and is split into two bands:
+
+- **Blue band — Running:** tasks that were actively executing at that moment.
+- **Red band — Queued:** tasks that were waiting for capacity because the organization had reached its concurrent task limit. The queued band is stacked on top of the running band, so the total bar height represents the combined load.
+
+Queued tasks only appear when your organization hits its concurrent task limit. If you regularly see a red queued band, it may indicate that your current plan's concurrency limit is a bottleneck. See [System Quotas](/admin/system-limits#concurrent-tasks) for per-tier limits.
+
+### Per-project breakdown
+
+The chart always shows a breakdown by project. Hover over any bar to see a tooltip with two columns — **Running** and **Queued** — with one row per project and a **Total** row at the bottom. This lets you identify which projects are contributing most to concurrency load at any given time.
 
 <Note>
   For information about concurrency limits by subscription tier and how to monitor usage from the Plan & Billing page, see [Plans and credits](/admin/subscriptions/plans#monitoring-concurrency-usage).
