@@ -5,6 +5,20 @@ mode: "wide"
 ---
 
 
+<Update label="July 15, 2026" description="Tool Argument Matching checks in Evals">
+
+## Tool Argument Matching checks in Evals
+
+Evals now supports a Tool Argument Matching check type, letting teams write assertions against the actual arguments passed to a tool during an agent run.
+
+When adding a check, select a target tool and define assertions using four operators: Equality (exact value match), Contains (substring or partial match), RegEx (pattern match), and Has Value / Exists (confirms the argument was present at all). These checks layer on top of the existing Tool Usage and Sub-agent Tool Usage check types, which previously only recorded whether a tool was invoked and how many times — without access to the inputs. All four operators apply to any argument key in the tool's input schema.
+
+As a concrete example: if an agent is expected to send an email, you can pair a Contains check on the `to` argument to confirm the recipient address with an Equality check on the `subject` argument to pin the exact subject line — within the same eval run.
+
+To use it, open any Eval, add or edit a check, and select "Tool Argument Matching" from the check type picker. See the [Evals documentation](/build/agents/build-your-agent/evals) for full details.
+
+</Update>
+
 <Update label="June 29, 2026" description="Eval cost breakdowns and Workforce evaluations">
 
 ## Eval cost breakdowns and Workforce evaluations
