@@ -69,55 +69,29 @@ Conversation history is useful in conversational agents and help AI to know more
 
 ### Thinking / Reasoning Configuration
 
-For supported OpenAI, Google, and Anthropic models, you can configure how much the model reasons before responding. Enabling this makes the model think more before answering, which improves performance on complex problems.
+For supported OpenAI, Google, and Anthropic models, you can configure how much the model reasons before responding. Reasoning uses output tokens to work through complex problems, which improves quality on hard tasks but is slower and costs more.
 
 #### Legacy thinking toggle
 
-You may see a legacy "thinking" toggle in the UI. This element predates native model reasoning capabilities and is non-functional — ignore it. Use the settings below instead.
+You may see a legacy "thinking" toggle in the UI. It predates native model reasoning and is non-functional — ignore it. If the model still produces thinking output when this toggle is off, that is expected: native reasoning is controlled by the per-model settings below, not by the toggle.
 
-If you see thinking output even when the legacy toggle appears off, this is expected. Native model reasoning cannot be disabled through the legacy toggle; control it through the per-model settings below.
+#### How to configure
 
-#### Which models support reasoning
-
-Reasoning configuration only applies when the selected model supports it. The setting appears in the step configuration for that model. Reasoning is supported across current thinking-capable models from all three providers:
-
-| Provider | Reasoning-capable models |
-|---|---|
-| **Anthropic** | Claude 3.7 Sonnet and later, including current Sonnet, Opus, and Haiku thinking models |
-| **Google** | Gemini 2.5 and Gemini 3 models |
-| **OpenAI** | o-series models (o1, o3, o4-mini, etc.) and the GPT-5 family (GPT-5, GPT-5 mini/nano, and later GPT-5.x releases) |
-
-<Note>
-Because support is per-model, the options that appear can change when you switch models. If model and vendor options are mismatched, or the model does not support configurable reasoning, these settings are ignored.
-</Note>
-
-#### Settings by provider
+Reasoning settings are per-model, so the available options depend on the model and provider you select, and are ignored if they don't match:
 
 - **OpenAI:** Select **Reasoning effort** — Low, Medium, or High. The default depends on the model.
-- **Google:** Enter a **Thinking budget** — any positive integer value
-- **Anthropic:** Enter a **Thinking budget** — must be 1024 or above to enable thinking
-- **Claude Opus 4.5:** Configure the **Effort** parameter
-- **GPT-5:** Configure the **Verbosity** parameter
+- **Google:** Enter a **Thinking budget** — any positive integer value.
+- **Anthropic:** Enter a **Thinking budget** — must be 1024 or above to enable thinking.
+- **Claude Opus 4.5:** Configure the **Effort** parameter.
+- **GPT-5:** Configure the **Verbosity** parameter.
+
+Some Claude models use adaptive thinking and adjust their reasoning depth automatically, with effort levels up to high and max. You can also influence reasoning through the system prompt.
 
 #### Cost impact
 
 <Warning>
-Reasoning and thinking tokens count as output tokens, not a separate category. Enabling thinking increases the cost of your LLM Tool step. Monitor usage when enabling these features.
+Reasoning and thinking tokens count as output tokens, not a separate category, so enabling thinking increases the cost of your LLM Tool step. Monitor usage when you turn it on.
 </Warning>
-
-#### Adaptive thinking
-
-Some models adjust their reasoning depth based on task complexity. You can also influence reasoning behavior through the system prompt, not just through these explicit settings.
-
-#### Known UI issue
-
-<Note>
-Reasoning settings may disappear from the UI after switching between models. To restore them, switch to a different model and then back to your original model.
-</Note>
-
-<Accordion title="Reasoning feature history">
-Configurable thinking launched for the LLM Tool Step on June 4, 2025. GPT-5 support with the verbosity parameter launched on August 7, 2025. Claude Opus 4.5 with the Effort parameter was added on November 30, 2025.
-</Accordion>
 
 ### Force response format
 
