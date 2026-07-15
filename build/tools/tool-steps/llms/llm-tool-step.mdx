@@ -79,23 +79,25 @@ If you see thinking output even when the legacy toggle appears off, this is expe
 
 #### Which models support reasoning
 
-| Provider | Supported models |
+Reasoning configuration only applies when the selected model supports it. The setting appears in the step configuration for that model. Reasoning is supported across current thinking-capable models from all three providers:
+
+| Provider | Reasoning-capable models |
 |---|---|
-| **Anthropic** | Claude 3.7 Sonnet, Claude 4.0 Sonnet, Claude 4.0 Opus, Claude Opus 4.5 |
-| **Google** | Gemini 2.5 models |
-| **OpenAI** | o-series models (o1, o3, etc.), GPT-5 |
+| **Anthropic** | Claude 3.7 Sonnet and later, including current Sonnet, Opus, and Haiku thinking models |
+| **Google** | Gemini 2.5 and Gemini 3 models |
+| **OpenAI** | o-series models (o1, o3, o4-mini, etc.) and the GPT-5 family (GPT-5, GPT-5 mini/nano, and later GPT-5.x releases) |
 
 <Note>
-Standard Claude Sonnet (non-thinking variants) does not support reasoning configuration. If model and vendor options are mismatched, these settings are ignored.
+Because support is per-model, the options that appear can change when you switch models. If model and vendor options are mismatched, or the model does not support configurable reasoning, these settings are ignored.
 </Note>
 
 #### Settings by provider
 
-- **OpenAI:** Select **Reasoning effort** — Low, Medium (default), or High
+- **OpenAI:** Select **Reasoning effort** — Low, Medium, or High. The default depends on the model.
 - **Google:** Enter a **Thinking budget** — any positive integer value
 - **Anthropic:** Enter a **Thinking budget** — must be 1024 or above to enable thinking
 - **Claude Opus 4.5:** Configure the **Effort** parameter
-- **GPT-5:** Configure the **Verbosity** parameter (may be feature-flagged for some accounts)
+- **GPT-5:** Configure the **Verbosity** parameter
 
 #### Cost impact
 
