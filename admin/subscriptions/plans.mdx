@@ -105,10 +105,17 @@ Concurrency is a system capacity metric — it measures how many tasks are runni
   For detailed information about concurrent task limits for each subscription tier, see the [System Quotas](/admin/system-limits#concurrent-tasks) page.
 </Note>
 
-A time-series area chart displays your Organization's concurrency usage over time, helping you identify peak usage periods and determine when to upgrade for increased capacity. You can view this same chart in two places:
+A stacked bar chart displays your Organization's concurrency usage over time, helping you identify peak usage periods and determine when to upgrade for increased capacity. Each bar is split into two bands:
+
+- **Blue band — Running:** tasks that were actively executing at that moment.
+- **Red band — Queued:** tasks waiting for capacity because the concurrent task limit was reached.
+
+The chart breaks usage down by project. Hover over any bar to see a tooltip showing **Running** and **Queued** counts for each project, plus a **Total** row at the bottom.
+
+You can view this same chart in two places:
 
 - On the **Plan & Billing** page: click 'Settings' in the sidebar, then open Plan & Billing.
-- On the **Analytics** page, where the same chart shows organization-wide concurrency data, so you can correlate agent activity with overall concurrency patterns.
+- On the **Analytics** page, where the chart shows organization-wide concurrency data so you can correlate agent activity with overall concurrency patterns and see which projects are most active during peak periods.
 
 ## Credit allocation and reset
 
