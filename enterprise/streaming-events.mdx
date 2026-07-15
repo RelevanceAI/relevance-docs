@@ -282,6 +282,16 @@ Included on all log records:
 | `relevance_ai.event.agent_id` | string | Yes | ID of the agent being published |
 | `relevance_ai.event.version_id` | string | Yes | ID of the version now live |
 
+### Conversation events
+
+**`conversation_deleted`** - Emitted when an agent conversation is deleted, covering both single deletions from the chat app and bulk deletions.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.conversation_id` | string | Yes | ID of the deleted conversation |
+| `relevance_ai.event.agent_id` | string | Yes | ID of the agent the conversation belonged to |
+| `relevance_ai.event.workforce_task_id` | string | No | Workforce task ID, present when the conversation was part of a workforce execution. Use this to correlate with `workforce_task_deleted` events |
+
 ### Tool events
 
 **`tool_created`** - Emitted when a new tool is created (from scratch or cloned).
@@ -329,6 +339,7 @@ Included on all log records:
 | Attribute | Type | Required | Description |
 | --- | --- | --- | --- |
 | `relevance_ai.event.workforce_id` | string | Yes | ID of the deleted workforce |
+| `relevance_ai.event.workforce_type` | string | No | Whether the workforce was deleted directly (`"direct"`) or as a cascade side effect of deleting a chat task (`"cascade"`) |
 
 **`workforce_draft_saved`** - Emitted when work-in-progress changes are saved to a workforce.
 
@@ -343,6 +354,13 @@ Included on all log records:
 | --- | --- | --- | --- |
 | `relevance_ai.event.workforce_id` | string | Yes | ID of the workforce being published |
 | `relevance_ai.event.version_id` | string | No | ID of the version now live |
+
+**`workforce_task_deleted`** - Emitted when a workforce task is deleted. This covers both single deletions from the chat app and bulk deletions via the Workforce UI.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.workforce_id` | string | Yes | ID of the workforce the task belonged to |
+| `relevance_ai.event.workforce_task_id` | string | Yes | ID of the deleted workforce task |
 
 ### Permission events
 
