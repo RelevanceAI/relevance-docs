@@ -69,14 +69,29 @@ The Task View provides a chronological timeline of all activities, giving you vi
 
 ## Working with the Task View
 
-### Monitoring Multiple Tasks
+### Monitoring multiple tasks
 
 The Task View allows you to monitor multiple concurrent tasks across your workforce:
 
 1. Tasks are organized chronologically with the most recent at the top
 2. Use filters to focus on specific task types, agents, or statuses
-3. Expand individual tasks to see detailed information
+3. Switch to "By Agent" view to group tasks by the agent that ran them and expand each agent row for details
 4. Toggle between different workforces if you have multiple configured
+
+#### By agent grouped view
+
+The "By Agent" grouped view organizes the task list by agent rather than chronologically. Each row represents one agent and shows a summary of that agent's task activity.
+
+Click the expand chevron on any agent row to open a nested task sub-table showing that agent's individual tasks. The sub-table displays up to 25 tasks at a time. If there are more tasks matching the current filters, a **Show more** button appears at the bottom of the sub-table to load the next page.
+
+Click any task row in the sub-table to open the full task detail drawer, where you can review conversation history, tool usage, outputs, and errors.
+
+The sub-table automatically reflects any filters and search terms active in the parent view — only tasks matching those criteria appear.
+
+**Sub-table states:**
+- **Loading** — A loading indicator appears while tasks are being fetched.
+- **Error** — If the fetch fails, an error message is shown in place of the task list.
+- **Empty** — If the agent has no tasks matching the current filters, the sub-table shows "No tasks to show".
 
 ### Handling Escalations
 
