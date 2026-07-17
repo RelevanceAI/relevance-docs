@@ -54,10 +54,6 @@ Adjust based on whether you need brief updates or comprehensive explanations fro
 
 For supported models, you can configure how much the model reasons before responding. Reasoning uses output tokens to work through complex problems, which improves quality on hard tasks but is slower and costs more.
 
-#### Legacy thinking toggle
-
-You may see a legacy "thinking" toggle in the UI. It predates native model reasoning and is non-functional — ignore it. If the model still produces thinking output when this toggle is off, that is expected: native reasoning is controlled by the per-model settings below, not by the toggle.
-
 #### Thinking type and effort level
 
 For supported Claude models, the Thinking setting has two controls: set **Thinking Type** to **Adaptive** to enable reasoning, and use **Effort Level** (Low, Medium, or High — up to Max on some models) to balance quality against speed and cost.
@@ -66,23 +62,12 @@ For supported Claude models, the Thinking setting has two controls: set **Thinki
   src="/images/agent/advanced-settings-thinking.png"
 />
 
+To reach these settings, go to **Agent → Settings → Advanced settings → Language Model**.
+
 These controls appear on:
 
 - Claude Opus 4.6, 4.7, and 4.8
 - Claude Sonnet 4.6
-
-#### How to configure
-
-Reasoning settings are per-model, so the available options depend on the model and provider you select, and are ignored if they don't match. Using the **Provider** dropdown, select the provider that matches your model:
-
-- **OpenAI:** Select **Reasoning effort** — Low, Medium, or High. The default depends on the model.
-- **Google:** Enter a **Thinking budget** — any positive integer value.
-- **Anthropic:** Enter a **Thinking budget** — must be 1024 or above to enable thinking.
-- **Claude Opus 4.5:** Configure the **Effort** parameter.
-
-Some Claude models use adaptive thinking and adjust their reasoning depth automatically, with effort levels up to high and max. You can also influence reasoning through the agent's system prompt.
-
-#### Cost impact
 
 <Warning>
 Thinking tokens count as output tokens, not a separate category, so enabling reasoning increases your cost. Monitor usage when you turn it on.
