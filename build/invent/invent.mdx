@@ -216,6 +216,29 @@ The counter lives in the Inventor panel and tracks only the credits used in your
   <Tab title="Restore a version">
     Ask Inventor to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Inventor copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
   </Tab>
+  <Tab title="Web search">
+    <Note>
+      Web search is currently behind feature flags and is not yet available to all users.
+    </Note>
+
+    Inventor has built-in web access that lets it perform real-time web searches and fetch content from web pages, so you can ask it about current information without leaving the platform.
+
+    ### Enabling web access
+
+    A globe icon in the message composer lets you enable or disable web access on a per-message basis. It's opt-in — toggle the globe on before sending a message to give Inventor web access for that request. The toggle state persists across session remounts, so you don't need to re-enable it each time you open Inventor.
+
+    ### What Inventor can do with web access on
+
+    When web access is enabled, Inventor can search the web in real time (powered by Exa), fetch and read the content of web pages, and access current information beyond its training data. This is useful for researching competitors, checking documentation, or pulling in recent data while you're building.
+
+    ### URL paste prompt
+
+    If you paste a URL into the message composer while web access is disabled, a banner appears prompting you to enable it so Inventor can fetch that page.
+
+    ### Safety guard
+
+    Inventor won't attempt to fetch authenticated Relevance AI app pages. For Relevance-specific content, it uses its built-in tools instead.
+  </Tab>
 </Tabs>
 
 ## MCP vs Inventor
