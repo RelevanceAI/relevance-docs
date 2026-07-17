@@ -1,8 +1,408 @@
 ---
 title: 'Knowledge Tool steps'
-description: 'Use Tool steps to interact with your Knowledge tables'
+description: 'Use Tool steps to read from and write to your Knowledge tables inside a Tool'
 ---
 
-You can use Tool steps to interact with your Knowledge tables. 
+Knowledge Tool steps let a Tool read from and write to your Knowledge tables. Use them to insert, upsert, update, delete, and retrieve rows, or to run semantic search over a Knowledge set. Pick a step from the tabs below for its fields and examples.
 
-<Snippet file="components/integrations/knowledge-tool-steps.mdx" />
+## Writing Knowledge
+
+These steps add, change, or remove rows in your Knowledge table.
+
+<div className="path-picker">
+<Tabs>
+  <Tab title="Insert Knowledge" id="insert-knowledge" icon="circle-plus">
+    The Insert Knowledge step saves information by adding new rows to your Knowledge table — useful for capturing and storing data dynamically as a Tool or agent runs.
+
+    ### Inputs
+
+    - **New data to insert** — a JSON array of objects, where each object is a row. Add more objects to insert multiple rows at once (see the examples below).
+    - **Sync on upload** — whether the data is vectorized when added. In most cases keep this on, so your agents can semantically search and retrieve the rows.
+
+    ### Formatting examples
+
+    <AccordionGroup>
+      <Accordion title="Insert a single row">
+```json
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }
+]
+```
+      </Accordion>
+      <Accordion title="Insert multiple rows">
+```json
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  },
+  {
+    "breed": "great dane",
+    "size": "large"
+  }
+]
+```
+Separate each object with a comma when inserting multiple rows.
+      </Accordion>
+    </AccordionGroup>
+
+    <Note>
+      When you wrap the Insert Knowledge step in a Tool for an agent to call, set the Tool input for the new data to the **JSON** input type (not Text), since the step expects a JSON array of objects. Optionally provide a JSON Schema matching your table's structure, and reference the input in the **New data to insert** field using variable mode (`{{input_variable_name}}`).
+    </Note>
+  </Tab>
+
+  <Tab title="Upsert Knowledge" id="upsert-knowledge" icon="arrows-rotate">
+    The Upsert Knowledge step inserts new rows and updates existing ones in a single step, matching on an identifier field. Use it when you're syncing data that may or may not already exist — unlike Insert Knowledge, which always adds, and Update Knowledge, which only changes rows that already match.
+
+    ### Inputs
+
+    - **Identifier field** — the column used to match existing rows. A row whose identifier value already exists is updated; otherwise it's inserted as a new row.
+    - **Rows to upsert** — a JSON array of objects, where each object is a row. Each object should include the identifier field.
+    - **Sync on upload** — whether the data is vectorized on upsert. Keep this on so search stays accurate.
+
+    ### Formatting examples
+
+    <AccordionGroup>
+      <Accordion title="Upsert rows matched on 'breed'">
+```json
+// With identifier field set to "breed":
+// "poodle" is updated if it exists, "corgi" is inserted if it doesn't
+[
+  {
+    "breed": "poodle",
+    "size": "medium"
+  },
+  {
+    "breed": "corgi",
+    "size": "small"
+  }
+]
+```
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Update Knowledge" id="update-knowledge" icon="pen-to-square">
+    The Update Knowledge step changes existing rows in your Knowledge table, keeping your data current and accurate.
+
+    ### Inputs
+
+    - **Filter condition** — `and` requires all conditions to match before a row is updated; `or` matches when any condition does. Only applies when the filter has more than one object.
+    - **Filters** — a JSON array of objects describing which rows to match.
+    - **Update value** — an object of new values. Each key matches a column name, and its value replaces the current value in matching rows.
+    - **Sync on upload** — whether the updated data is re-vectorized. Keep this on so search stays accurate.
+
+    ### Formatting examples
+
+    <AccordionGroup>
+      <Accordion title="Replace all poodles with bulldogs">
+```json
+// Filters
+[
+  {
+    "breed": "poodle"
+  }
+]
+```
+```json
+// Update value
+[
+  {
+    "breed": "bulldog"
+  }
+]
+```
+      </Accordion>
+      <Accordion title="Replace all small poodles with large bulldogs">
+```json
+// Filters
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }
+]
+```
+```json
+// Update value
+[
+  {
+    "breed": "bulldog",
+    "size": "large"
+  }
+]
+```
+      </Accordion>
+      <Accordion title="Replace all poodles and bulldogs with cats">
+```json
+// Filters
+[
+  {
+    "breed": "poodle"
+  },
+  {
+    "breed": "bulldog"
+  }
+]
+```
+```json
+// Update value
+[
+  {
+    "breed": "cat"
+  }
+]
+```
+Separate each object with a comma when filtering multiple rows.
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Delete Knowledge" id="delete-knowledge" icon="trash">
+    The Delete Knowledge step removes rows from your Knowledge table, so you can keep your data relevant and up to date.
+
+    ### Inputs
+
+    - **Filter condition** — `and` requires all conditions to match before a row is deleted; `or` matches when any condition does. Only applies when the filter has more than one object.
+    - **Filters** — a JSON array of objects describing which rows to delete.
+
+    <Warning>
+      Deletion is permanent. Every row matching the filter is removed, so test your filter with Get Knowledge first if you're unsure what it will match.
+    </Warning>
+
+    ### Formatting examples
+
+    <AccordionGroup>
+      <Accordion title="Delete all poodles">
+```json
+[
+  {
+    "breed": "poodle"
+  }
+]
+```
+      </Accordion>
+      <Accordion title="Delete all small poodles">
+```json
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  }
+]
+```
+      </Accordion>
+      <Accordion title="Delete small poodles or any dog aged 4 (or)">
+```json
+// With filter condition set to "or"
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  },
+  {
+    "age": 4
+  }
+]
+```
+      </Accordion>
+      <Accordion title="Delete only small poodles aged 4 (and)">
+```json
+// With filter condition set to "and"
+[
+  {
+    "breed": "poodle",
+    "size": "small"
+  },
+  {
+    "age": 4
+  }
+]
+```
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
+</div>
+
+## Searching and reading Knowledge
+
+These steps retrieve rows by filter or rank them by relevance to a query.
+
+<div className="path-picker">
+<Tabs>
+  <Tab title="Get Knowledge" id="get-knowledge" icon="filter">
+    The Get Knowledge step retrieves rows directly from your Knowledge table using filters, without RAG. Use it when you know which rows you want rather than searching by meaning.
+
+    ### Inputs
+
+    - **Filter condition** — `and` requires all conditions to match before a row is returned; `or` matches when any condition does. Only applies when the filter has more than one object.
+    - **Filters** — a JSON array of objects describing which rows to retrieve.
+
+    ### Advanced
+
+    - **Fields to include** — the columns returned in the response. All fields are included by default. To target a specific field, prefix it with `data.` (for example, a `breed` field becomes `data.breed`).
+    - **Max records to return** — defaults to **20**.
+
+    ### Formatting examples
+
+    <AccordionGroup>
+      <Accordion title="Retrieve all large dogs">
+```json
+[
+  {
+    "size": "large"
+  }
+]
+```
+      </Accordion>
+      <Accordion title="Retrieve all large French Bulldogs">
+```json
+[
+  {
+    "breed": "French Bulldog",
+    "size": "large"
+  }
+]
+```
+      </Accordion>
+      <Accordion title="Retrieve all large French Bulldogs or small poodles (or)">
+```json
+// With filter condition set to "or"
+[
+  {
+    "size": "large",
+    "breed": "French Bulldog"
+  },
+  {
+    "size": "small",
+    "breed": "poodle"
+  }
+]
+```
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Knowledge search" id="knowledge-search" icon="magnifying-glass">
+    The Knowledge Search step searches a Knowledge table with RAG and returns the most relevant rows for a query.
+
+    ### Inputs
+
+    - **Query** — the text to search for.
+    - **Search type** — **Vector** finds results by meaning (semantic similarity), even when the exact words don't match; **Keyword** finds results by exact word match and is better for names and proper nouns.
+
+    ### Advanced
+
+    - **Output all fields** — when on, every field is returned including the similarity score; when off, only the content field is returned.
+    - **Max records to return** — the number of results to return (top k).
+    - **Similarity threshold** — the minimum score a result must reach to be returned. For vector search this is cosine similarity (0–1); for keyword search it's a BM25 score (0+). Raise it for fewer, more accurate results; lower it to be more inclusive.
+    - **Use exact search** — runs exact search (good for smaller Knowledge sets) when on, or faster approximate search when off.
+    - **Filters** — restrict the search to a subset of rows, defined as JSON objects.
+
+    With the `exact_match` filter type, pass an array to `condition_value` to match any value in it (OR semantics). A single value (`"condition_value": "x"`) matches rows where the field equals x; an array (`"condition_value": ["a", "b"]`) matches rows where the field equals a or b.
+
+```json
+{
+  "field": "call_id",
+  "filter_type": "exact_match",
+  "condition": "==",
+  "condition_value": ["45eb244f-5008-4b7f-bfab-6f4db2189d2e", "4a678557-700e-407f-ab62-23d0decf1b52"]
+}
+```
+
+    This filter returns results where `call_id` matches either value.
+  </Tab>
+
+  <Tab title="Advanced Knowledge search (2m)" id="advanced-knowledge-search-2m-context" icon="wand-magic-sparkles">
+    The Advanced Knowledge Search (2M context) step searches your Knowledge table with a prompt using CAG (Cache Augmented Generation), loading your entire Knowledge set into the model's long context window and generating an answer directly.
+
+    ### Inputs
+
+    - **Query** — the text to search for.
+    - **Knowledge source** — the set to search.
+    - **Gemini model** — the model used (currently two are available).
+
+    ### Advanced
+
+    - **System prompt** — the first message that instructs the model on its role, for example expert researcher, analyst, or tutor.
+    - **Temperature** — controls how creative or random the model's responses are. Lower is more focused; higher is more creative.
+    - **Enable grounding** — integrates Google Search results to inform and support the model's responses.
+    - **Max documents to search** — the number of documents retrieved from the Knowledge set.
+  </Tab>
+</Tabs>
+</div>
+
+## Using variables in JSON
+
+When building Tools with the Insert, Upsert, Update, Get, and Delete steps, you can pass data from earlier steps or user input into your Knowledge operations. Reference a Tool input with `{{input_variable_name}}` or a previous step's output with `{{steps.step_name.output.variable_name}}`, and press the **{}** button beside any JSON input field to switch it to variable mode.
+
+Always wrap variables in quotes — `"{{variable_name}}"`. The final type is set by the column type in your Knowledge table and converted to match on insert: a value bound for a number column becomes a number even though it's quoted, a text column keeps it as text, and a boolean column stores it as a boolean. Make sure your column types match the data you're storing.
+
+For example:
+
+<AccordionGroup>
+  <Accordion title="Using variables in filters">
+```json
+[
+  {
+    "breed": "{{user_breed_input}}",
+    "size": "{{user_size_input}}",
+    "age": "{{previous_step.output.age}}"
+  }
+]
+```
+  </Accordion>
+  <Accordion title="Using variables in data objects">
+```json
+[
+  {
+    "breed": "{{user_breed_input}}",
+    "size": "{{user_size_input}}",
+    "age": "{{user_age_input}}",
+    "weight": "{{previous_step.output.weight}}",
+    "is_active": "{{previous_step.output.is_active}}"
+  }
+]
+```
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  This quoting rule is specific to Knowledge Tool steps. In other Tool steps that accept JSON, `"{{variable}}"` is passed as a string while `{{variable}}` without quotes is passed as a number or boolean — the input box may flag a syntax error but still runs correctly.
+</Note>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="When should I use Upsert instead of Insert or Update?">
+    Upsert inserts new rows and updates existing ones in one step, matching on the identifier field. Use it when syncing data that may already exist. Use Insert when rows are always new, and Update when you only want to change rows that already match.
+  </Accordion>
+  <Accordion title="What happens if I don't enable 'Sync on upload'?">
+    The data is stored but not vectorized, so your agents can't semantically search or reference it until you vectorize it. This applies to the Insert, Upsert, and Update steps.
+  </Accordion>
+  <Accordion title="What data types can I write?">
+    Text, numbers, booleans, or any JSON-serializable value. Make sure each object in the array follows the correct formatting.
+  </Accordion>
+  <Accordion title="How do I update a field to be empty?">
+    Set the value to empty quote marks `""`.
+  </Accordion>
+  <Accordion title="When does the 'and' vs 'or' filter condition apply?">
+    Use `and` when all filter conditions must be true for a row to match; use `or` when any one of them can match. It only applies when the filter array has more than one object, and affects the Update, Delete, and Get steps.
+  </Accordion>
+  <Accordion title="What format should filters use?">
+    A JSON array of objects, where each object holds the field name and the value to filter by.
+  </Accordion>
+  <Accordion title="What if my filters don't match any rows?">
+    Nothing is deleted or returned. Make sure your filter values exactly match the data in the table, including casing and field names.
+  </Accordion>
+  <Accordion title="What's the difference between Get Knowledge and Knowledge search?">
+    Get Knowledge retrieves rows by exact filter match, without RAG. Knowledge search ranks rows by semantic or keyword relevance to a query. Use Get Knowledge when you know the exact values to match, and Knowledge search when you want the most relevant results for a question.
+  </Accordion>
+  <Accordion title="What's the difference between Knowledge search and Advanced Knowledge search (2m context)?">
+    Knowledge search runs RAG retrieval and returns the most relevant rows for a query, with control over search type, filters, and thresholds. Advanced Knowledge search (2m context) loads your entire Knowledge set into a long-context model and answers the query directly, which suits broad questions across the whole set. Start with Knowledge search for targeted retrieval.
+  </Accordion>
+</AccordionGroup>
