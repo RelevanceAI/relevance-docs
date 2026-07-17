@@ -32,11 +32,13 @@ Keep permissions simple. Assign roles based on who needs to build, who needs to 
 
 ### Project Level
 
-- **Admins** — own the project setup and governance. They control permission and authentication accounts.
-- **Editors** — build, edit, and run all assets in the project. Treat them as your core contributors.
-- **Members** — can build their own assets but don't automatically see or edit others'. Great for independent work within shared projects.
-- **Chat** — access [Relevance Chat](/get-started/chat/introduction) only, cannot access the web app. Perfect for users who only need to interact with agents through chat. Requires asset-level permissions to run specific agents.
-- **Viewers** — can't build or edit. Add them only to the specific assets they need to see.
+| Role        | When to use it                                                                                                                          |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **Admins**  | Own the project setup and governance. They control permissions and authentication accounts.                                            |
+| **Editors** | Build, edit, and run all assets in the project. Treat them as your core contributors.                                                  |
+| **Members** | Can build their own assets but don't automatically see or edit others'. Best for independent work within shared projects.              |
+| **Chat**    | Access [Relevance Chat](/get-started/chat/introduction) only, cannot access the web app. Requires asset-level permissions to run agents. |
+| **Viewers** | Can't build or edit. Add them only to the specific assets they need to see.                                                            |
 
 <Tip>Keep admin/editor access limited to people actively managing or building. Everyone else should be a member or viewer by default.</Tip>
 
@@ -77,6 +79,10 @@ New organization members will be given viewer permissions by default. If invited
 | Create projects                                        | ✅         | ✅         | ❌          | ❌          |
 | View organization members / admins                     | ✅         | ✅         | ✅          | ✅          |
 
+<Tip>
+If your only org Admin becomes unavailable, no one else can manage members, organization settings, org-level API keys and OAuth connections, or project roles. Assign the Admin role to more than one person so access isn't lost if someone leaves or needs to hand over control.
+</Tip>
+
 ----
 
 ## Project level controls
@@ -93,6 +99,10 @@ Project admins will be able to set a users role upon invite. Organization admins
 | **Chat**   | Access [Relevance Chat](/get-started/chat/introduction) only - cannot access the web app. Requires asset-level permissions to run agents. |
 | **Viewer** | View agents, tools, and knowledge outputs only, cannot run or edit anything                |
 
+<Info>
+Editor is a project-level role only and does not exist at organization or asset levels. Project Editors automatically have Admin permissions on all assets within the project.
+</Info>
+
 ### Permissions
 
 <Tip>
@@ -104,6 +114,7 @@ Scroll horizontally to view all columns, including the Chat role permissions.
 | Delete project                         | ✅         | ❌          | ❌          | ❌          | ❌        |
 | Assign project roles to users          | ✅         | ❌          | ❌          | ❌          | ❌        |
 | Manage project-level API keys & OAuths | ✅         | ❌          | ❌          | ❌          | ❌        |
+| Add personal OAuth accounts (dynamic auth) | ✅    | ✅          | ✅          | ✅          | ✅        |
 | Delete agents                          | ✅         | ✅          | ❌          | ❌          | ❌        |
 | View all assets by default             | ✅         | ✅          | ❌          | ❌          | ❌        |
 | Edit/run assets they did not create    | ✅         | ✅          | ❌          | ❌          | ❌        |
@@ -114,6 +125,13 @@ Scroll horizontally to view all columns, including the Chat role permissions.
 | Access Web App                         | ✅         | ✅          | ✅          | ✅          | ❌        |
 | Run a chat (LLM)                       | ✅         | ✅          | ✅          | ✅          | ✅        |
 
+<Info>
+Project Viewer access grants read-only visibility to full asset configurations — including prompts, tools, and steps. There is no field-level redaction. If a Viewer cannot see an agent's internals, it's because they lack asset-level access entirely, not because their read access is limited to metadata.
+</Info>
+
+<Note>
+"Manage project-level API keys & OAuths" refers to shared, project-wide accounts only. All team members can add their own personal OAuth accounts when [dynamic authentication](/enterprise/user-level-authentication) is enabled on a shared agent — this is not restricted to admins.
+</Note>
 
 ### Chat Role Details
 
@@ -181,6 +199,14 @@ Upon asset creation, the creator becomes the admin. An asset can have multiple a
 | View asset outputs              | ✅         | ✅          | ✅          |
 | View asset audit logs           | ✅         | ✅          | ✅          |
 
+<Info>
+Asset Viewer access grants read-only visibility to full asset configurations — including prompts, tools, and steps. There is no field-level redaction. If a Viewer cannot see an agent's internals, it's because they lack asset-level access entirely, not because their read access is limited to metadata.
+</Info>
+
+<Warning>
+Adding someone as a Member on an agent does not give them access to the agent's tools. If a tool is set to **Only invited**, you must also add that person as a Member on each of those tools, otherwise the tool is silently dropped when they run the agent.
+</Warning>
+
 ----
 
 ## Workforce Permissions
@@ -212,6 +238,132 @@ Learn more about [sharing workforces](/build/workforces/share-your-workforce) as
 
 ----
 
+## Transitioning to RBAC
+
+If your organization is being migrated from legacy permissions to RBAC, this section covers what changes, what stays the same, and what actions you need to take.
+
+### Before RBAC (legacy permissions)
+
+The legacy permission system had three roles — Admin, Editor, and Viewer — applied at the project and organization level only:
+
+<CardGroup cols={3}>
+  <Card title="Admin" icon="user-tie-hair-long" iconType="duotone">
+    Full read and write access to all assets and settings.
+  </Card>
+  <Card title="Editor" icon="pen-to-square" iconType="duotone">
+    Read and write access to all datasets, knowledge sets, and agents. Could run agents and tools.
+  </Card>
+  <Card title="Viewer" icon="book-open-reader" iconType="duotone">
+    Read access to all datasets, knowledge sets, and agents. Could run agents.
+  </Card>
+</CardGroup>
+
+There was no asset-level granularity. All users with a given role had the same access to every asset in the project by default. Shared credentials (API keys, OAuths) applied project-wide.
+
+### During the migration
+
+The Relevance AI team handles the technical migration to RBAC. You do not need to manually migrate roles, but you should review and adjust assignments after migration is complete.
+
+**How legacy roles map to RBAC roles by default:**
+
+| Legacy role | Default RBAC role (project level) |
+|-------------|-----------------------------------|
+| Admin       | Admin                             |
+| Editor      | Editor                            |
+| Viewer      | Viewer                            |
+
+<Warning>
+  The Viewer role changes significantly under RBAC. Legacy Viewers could run agents — RBAC Viewers cannot run anything and can only view assets they have been explicitly granted access to. Users who only need to interact with agents via chat should be assigned the Chat role, not Viewer.
+</Warning>
+
+After migration, review every user mapped to Viewer and determine whether they should be:
+- **Chat** — for users who only need to use agents through [Relevance Chat](/get-started/chat/introduction)
+- **Viewer** — for users who genuinely only need read access to asset configurations and outputs
+- **Member** — for users who need to run agents
+
+### After RBAC is enabled
+
+Once RBAC is active for your organization:
+
+<AccordionGroup>
+  <Accordion title="Asset-level permissions are enforced" icon="lock">
+    Access to individual agents, tools, and knowledge bases is controlled separately from project-level roles.
+  </Accordion>
+  <Accordion title="Editors and Admins keep full access" icon="user-shield">
+    Project Admin and Editor roles cascade to asset Admin on every asset in the project automatically.
+  </Accordion>
+  <Accordion title="Everyone else needs explicit grants" icon="ban">
+    Members, Viewers, and Chat users receive a 403 error on any asset they have not been granted access to.
+  </Accordion>
+  <Accordion title="Credentials can be scoped per tool" icon="key">
+    Instead of one set of project-wide credentials, asset admins can assign specific authentication accounts per tool.
+  </Accordion>
+  <Accordion title="Permissions live in the Share modal" icon="share-nodes">
+    Assign access on each individual agent, tool, or knowledge base from its Share modal.
+  </Accordion>
+</AccordionGroup>
+
+### Action items for admins
+
+After RBAC is enabled, complete these steps to restore appropriate access for your team:
+
+<Steps>
+  <Step title="Review user roles immediately">
+    Check that the default role mappings match your intended access levels, particularly for legacy Viewer accounts.
+  </Step>
+  <Step title="Assign asset-level permissions">
+    Use the Share modal on each agent, tool, and knowledge base that non-Admin/Editor users need to access.
+  </Step>
+  <Step title="Use RBAC Groups for bulk assignment">
+    If many users need the same access, create a group and assign asset permissions to the group rather than to individual users.
+  </Step>
+  <Step title="Audit chat-only users">
+    Confirm that users who only need [Relevance Chat](/get-started/chat/introduction) access are assigned the Chat project role, not Viewer.
+  </Step>
+  <Step title="Verify critical users can access required assets">
+    Test access for key team members, especially those with Member or Viewer roles, before announcing the migration is complete.
+  </Step>
+</Steps>
+
+----
+
+## Permission inheritance and cascading
+
+Project roles fall into two groups: those that cascade Admin access to every asset automatically, and those that start with no asset access until it is explicitly granted.
+
+<CardGroup cols={2}>
+  <Card title="Cascades to asset Admin" icon="circle-check" color="#16a34a" horizontal>
+    **Admin** and **Editor** automatically receive Admin access on every asset in the project — no per-asset setup required.
+  </Card>
+  <Card title="Starts with no access" icon="lock" color="#dc2626" horizontal>
+    **Member**, **Viewer**, and **Chat** receive nothing by default. Each asset must be shared with them explicitly, or they get a 403 error.
+  </Card>
+</CardGroup>
+
+<Note>
+To grant access at scale, assign asset permissions to an RBAC Group rather than to each user individually.
+</Note>
+
+----
+
+## Technical implementation notes
+
+The following is relevant primarily for API users and developers integrating directly with the authorization system.
+
+<Tabs>
+  <Tab title="Member/Operator">
+    The "Member" role label in the UI maps to the `operator` role in the authorization system. When querying permissions via the API, use `operator` rather than `member`.
+  </Tab>
+  <Tab title="OpenFGA">
+    The platform uses OpenFGA for authorization. Organizations not yet migrated to RBAC are still served by a legacy authorization layer.
+  </Tab>
+  <Tab title="Embeddable agents">
+    Agents shared via public embed links (Chat UI, Chat Widget) may use the legacy authorization layer. Test permissions explicitly when deploying embedded agents.
+  </Tab>
+</Tabs>
+
+----
+
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
@@ -219,4 +371,5 @@ Learn more about [sharing workforces](/build/workforces/share-your-workforce) as
   <Accordion title="I'm on an Enterprise subscription but do not have access to this feature yet. How do I get access?">This feature is gradually being rolled out to Enterprise customers. Please reach out to your sales representative to express your interest in receiving this feature.</Accordion>
   <Accordion title="How do I limit someone to only access Chat?">To limit a user to only access [Relevance Chat](/get-started/chat/introduction), assign them the **Chat** role at the project level. Users with the Chat role are automatically redirected to Chat and cannot access the main web application. They can still interact with agents and have LLM conversations, but will need appropriate asset-level permissions (Member or higher) on specific agents to run them in Chat.</Accordion>
   <Accordion title="Is there a role that allows a user to approve escalations or interact with agent tasks, but not edit the agent?">Yes, assigning a user the Asset Member role for a specific agent allows them to create tasks on the agent, approve/reject escalations, and view outputs, but not edit or delete the agent's configuration.</Accordion>
+  <Accordion title="How many organization admins should I have?">At least two. Besides the Owner, Admin is the only organization role that can manage users, settings, API keys, and project roles, so a single Admin is a continuity risk if they leave or are unavailable. Keeping two or more preserves access while still maintaining clear accountability.</Accordion>
 </AccordionGroup>

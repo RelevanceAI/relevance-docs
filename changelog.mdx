@@ -5,6 +5,34 @@ mode: "wide"
 ---
 
 
+<Update label="June 29, 2026" description="Eval cost breakdowns and Workforce evaluations">
+
+## Eval cost breakdowns and Workforce evaluations
+
+![Eval run cost breakdown panel showing total credits and actions, with per-component rows for Scenario Runner, Agent Execution, and Checks broken down by AI Judge model and Tool Usage](/images/changelog/changelog-eval-cost-breakdown.png)
+
+Eval runs now show exactly where their cost goes, itemized per check, and cover full Workforce runs including sub-agent and tool calls.
+
+Each completed Eval run renders a cost breakdown panel that itemizes credit and action consumption per component. Checks account for 1 action per run across every check type, including LLM as Judge and Tool Usage, so the panel's totals reconcile to the exact source of every credit and action. Workforce runs that fan out to sub-agents or call tools record and evaluate each of those interactions, the same as individual Agent runs.
+
+To see the breakdown, open any completed Eval run; the panel appears alongside the results. See the [Evals documentation](/build/agents/build-your-agent/evals) for full details.
+
+</Update>
+
+<Update label="June 12, 2026" description="Gemini 3.5 Flash now available">
+
+## Gemini 3.5 Flash now available
+
+![Gemini 3.5 Flash model card on the Relevance AI purple background, showing the Gemini spark icon and the model name](/images/changelog/changelog-gemini-3.5-flash.png)
+
+Google's Gemini 3.5 Flash is now available in production for all users, selectable anywhere you configure a language model.
+
+The model has a 1M-token context window and returns up to 64K tokens per response. It supports function calling and accepts image and file inputs alongside text. Reasoning runs at four configurable thinking levels — minimal, low, medium, and high — defaulting to minimal, so you can raise the depth for harder tasks or keep it low for faster, cheaper responses.
+
+Where to find it: select Gemini 3.5 Flash from the model dropdown in any agent, tool, or workflow. See [language model settings](/build/agents/build-your-agent/agent-settings/language-model) for how to change an agent's model.
+
+</Update>
+
 <Update label="May 29, 2026" description="Timeline view added to Tasks page">
 
 ## Timeline view added to Tasks page
@@ -43,7 +71,7 @@ The Relevance MCP is now available to users with the Member role in RBAC-enabled
 
 The role gate that previously required Editor or above has been lowered to Member for connecting an MCP client to a Relevance project. Requests run with the user's own auth, so a Member only sees and operates on Agents they already have access to.
 
-See our [MCP server documentation](/integrations/mcp/programmatic-gtm/mcp-server) for setup steps and supported clients.
+See our [MCP server documentation](/integrations/mcp/mcp-server) for setup steps and supported clients.
 
 </Update>
 

@@ -1,13 +1,13 @@
 ---
-title: "MCP Client"
-sidebarTitle: "MCP Client"
+title: "MCP client"
+sidebarTitle: "MCP client"
 description: "Connect external MCP servers to your Relevance AI Agents, giving them access to Tools and resources from other services."
 ---
 
 The MCP client integration lets you connect remote MCP servers to your Relevance AI Agents — either through preset connections (Notion, Canva, Atlassian) or by manually connecting any custom server URL. This gives your Agents access to Tools and resources hosted on external platforms without rebuilding them in Relevance AI.
 
 <Warning>
-  This page is about connecting external MCP servers **to** Relevance AI Agents. If you want to use Relevance AI **from** an AI client like Claude or Cursor, see [Programmatic GTM](/integrations/mcp/programmatic-gtm/introduction).
+  This page is about connecting external MCP servers **to** Relevance AI Agents. If you want to use Relevance AI **from** an AI client like Claude or Cursor, see [MCP & Plugins](/get-started/core-concepts/mcp-plugins).
 </Warning>
 
 ## Setting up an MCP connection for Agents
@@ -18,12 +18,21 @@ Agents can connect to remote MCP servers to run Tools and read resources exposed
 <iframe src="https://app.supademo.com/embed/cmg8tiu3h23ii2nomxtqolybm" frameBorder="0" title="How to set up an MCP Server connection for an Agent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-1. Open the Agent you want to connect
-2. Navigate to the **Tools** tab in the Agent builder
-3. Click **Add MCP**
-4. Choose your connection type:
-   - **Preset connections**: Select from Notion, Canva, or Atlassian — follow the OAuth flow to authorize access and Tools are configured automatically
-   - **Custom connection**: Click **Connect my own**, add the server URL, label the connection, and enter any required authentication details
+<Steps>
+  <Step title="Open the Agent">
+    Open the Agent you want to connect.
+  </Step>
+  <Step title="Go to the Tools tab">
+    Navigate to the **Tools** tab in the Agent builder.
+  </Step>
+  <Step title="Add an MCP connection">
+    Click **Add MCP**.
+  </Step>
+  <Step title="Choose your connection type">
+    - **Preset connections**: Select from Notion, Canva, or Atlassian — follow the OAuth flow to authorize access and Tools are configured automatically.
+    - **Custom connection**: Click **Connect my own**, add the server URL, label the connection, and enter any required authentication details.
+  </Step>
+</Steps>
 
 <Note>
   The connection label you provide will appear in Tool descriptions as `(MCP: connection-name)`. This helps Agents distinguish between Tools from different connections, especially when using multiple instances of the same MCP server.
