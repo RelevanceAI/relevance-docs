@@ -69,28 +69,11 @@ Conversation history is useful in conversational agents and help AI to know more
 
 ### Thinking / Reasoning Configuration
 
-For supported OpenAI, Google, and Anthropic models, you can configure how much the model reasons before responding. Reasoning uses output tokens to work through complex problems, which improves quality on hard tasks but is slower and costs more.
+For OpenAI, Claude and Gemini models, you can select a thinking configuration. Enabling this will make the model 'think' more before answering, which is useful for complex problems.
 
-#### Legacy thinking toggle
+Reasoning / thinking tokens are charged as output tokens and will be added to the cost of your LLM Tool step. 
 
-You may see a legacy "thinking" toggle in the UI. It predates native model reasoning and is non-functional — ignore it. If the model still produces thinking output when this toggle is off, that is expected: native reasoning is controlled by the per-model settings below, not by the toggle.
-
-#### How to configure
-
-Reasoning settings are per-model, so the available options depend on the model and provider you select, and are ignored if they don't match:
-
-- **OpenAI:** Select **Reasoning effort** — Low, Medium, or High. The default depends on the model.
-- **Google:** Enter a **Thinking budget** — any positive integer value.
-- **Anthropic:** Enter a **Thinking budget** — must be 1024 or above to enable thinking.
-- **Claude Opus 4.5:** Configure the **Effort** parameter.
-
-Some Claude models use adaptive thinking and adjust their reasoning depth automatically, with effort levels up to high and max. You can also influence reasoning through the system prompt. See [thinking type and effort level](/build/agents/build-your-agent/agent-settings/language-model#thinking-type-and-effort-level) for the Claude models that support it.
-
-#### Cost impact
-
-<Warning>
-Reasoning and thinking tokens count as output tokens, not a separate category, so enabling thinking increases the cost of your LLM Tool step. Monitor usage when you turn it on.
-</Warning>
+<Warning>If model and vendor options are mismatched, this option will be ignored.</Warning>
 
 ### Force response format
 
