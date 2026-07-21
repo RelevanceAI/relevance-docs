@@ -172,7 +172,28 @@ https://mcp.relevanceai.com/
 
 ## Authentication
 
-When you first connect, you will be prompted to authenticate with your Relevance AI account. Authentication is **per project** — you will be connected to a specific Relevance AI project after logging in.
+When you first connect, you will be prompted to authenticate with your Relevance AI account via an OAuth consent page. Authentication is **per project** — you will be connected to a specific Relevance AI project after logging in.
+
+### OAuth consent and access control
+
+The OAuth consent page lets you review the access being granted to the connecting AI client before completing authentication. It includes a **Run-only access** toggle that controls what the connected AI agent can do within your project.
+
+When run-only access is enabled, the connected AI agent can view and execute agents, tools, and workforces — but write and delete tools are entirely absent from the MCP tool list (not just blocked; they do not appear at all). The agent cannot create, edit, publish, or delete any assets. When run-only access is disabled, the agent has the same capabilities your account role allows.
+
+### Roles & access levels
+
+Your project role determines the default access mode and whether you can change it:
+
+| Role | Can connect via MCP | Default mode | Can toggle run-only |
+|------|---------------------|--------------|---------------------|
+| Viewer | ✅ | Run-only | ❌ (locked) |
+| Member / Editor / Admin | ✅ | Full access | ✅ |
+
+Viewer-role users are automatically placed in run-only mode — the toggle is locked for them and cannot be changed. Users with Member, Editor, or Admin roles connect in full access mode by default but can enable run-only access voluntarily on the consent page to limit what the connected AI agent can do.
+
+<Note>
+Viewer-role users can now connect to Relevance AI via MCP. Previously, only Editor-role and above could connect.
+</Note>
 
 ### Working with multiple projects
 
@@ -326,6 +347,10 @@ When triggering agents via MCP, you have two execution modes available depending
   </Accordion>
 
   <Accordion title="Can I restrict which tools are available via MCP?">
-    The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each connection to the appropriate project.
+    There are two ways to restrict MCP tool access.
+
+    The first is the Run-only access toggle on the OAuth consent page. When enabled, write and delete tools are entirely absent from the MCP tool list, so the connected AI agent can only view and execute assets. Viewer-role users are placed in run-only mode automatically. See [OAuth consent and access control](#oauth-consent-and-access-control) for details.
+
+    The second is project separation. Organize your tools across different Relevance AI projects and authenticate each MCP connection to the appropriate project.
   </Accordion>
 </AccordionGroup>

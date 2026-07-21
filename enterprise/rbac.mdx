@@ -97,7 +97,7 @@ Project admins will be able to set a users role upon invite. Organization admins
 | **Editor** | Can edit and create assets, does not manage users                                          |
 | **Member** | Use shared assets, provide inputs and view outputs. Can create assets, private by default. |
 | **Chat**   | Access [Relevance Chat](/get-started/chat/introduction) only - cannot access the web app. Requires asset-level permissions to run agents. |
-| **Viewer** | View agents, tools, and knowledge outputs only, cannot run or edit anything                |
+| **Viewer** | View agents, tools, and knowledge outputs only, cannot run or edit anything. Can view and execute assets via MCP in run-only mode. |
 
 <Info>
 Editor is a project-level role only and does not exist at organization or asset levels. Project Editors automatically have Admin permissions on all assets within the project.
@@ -119,7 +119,7 @@ Scroll horizontally to view all columns, including the Chat role permissions.
 | View all assets by default             | ✅         | ✅          | ❌          | ❌          | ❌        |
 | Edit/run assets they did not create    | ✅         | ✅          | ❌          | ❌          | ❌        |
 | View project activity logs             | ✅         | ✅          | ❌          | ❌          | ❌        |
-| Manage personal Relevance API key      | ✅         | ✅          | ✅          | ❌          | ❌        |
+| Manage personal Relevance API key      | ✅         | ✅          | ✅          | ✅†         | ❌        |
 | Create assets                          | ✅         | ✅          | ✅          | ❌          | ❌        |
 | View Project                           | ✅         | ✅          | ✅          | ✅          | ❌        |
 | Access Web App                         | ✅         | ✅          | ✅          | ✅          | ❌        |
@@ -131,6 +131,10 @@ Project Viewer access grants read-only visibility to full asset configurations �
 
 <Note>
 "Manage project-level API keys & OAuths" refers to shared, project-wide accounts only. All team members can add their own personal OAuth accounts when [dynamic authentication](/enterprise/user-level-authentication) is enabled on a shared agent — this is not restricted to admins.
+</Note>
+
+<Note>
+† Viewer-role users can mint a personal API key as part of the [MCP OAuth consent flow](/integrations/mcp/mcp-server#oauth-consent-and-access-control). This is specific to MCP connections — Viewers are not granted general API key management. Viewers connecting via MCP are automatically placed in run-only mode and cannot create, edit, publish, or delete assets.
 </Note>
 
 ### Chat Role Details
