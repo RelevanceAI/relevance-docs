@@ -275,6 +275,26 @@ When triggering agents via MCP, you have two execution modes available depending
   </Step>
 </Steps>
 
+### Cancelling executions
+
+Three tools are available to stop in-progress tasks:
+
+<AccordionGroup>
+  <Accordion title="relevance_cancel_agent_task">
+    Cancels a running agent task. Pass the `conversation_id` returned by `relevance_trigger_agent_async` to identify which task to stop.
+
+    Cancellation is not instant — the current step finishes before the task is stopped. There is no hard-stop mid-step.
+  </Accordion>
+
+  <Accordion title="relevance_cancel_workforce_task">
+    Cancels a running workforce task. Pass the `task_id` of the workforce task to stop.
+  </Accordion>
+
+  <Accordion title="relevance_cancel_tool_run">
+    Cancels a currently-running tool execution. Pass the `studio_run_id` of the tool run to stop.
+  </Accordion>
+</AccordionGroup>
+
 ---
 
 ## Troubleshooting
