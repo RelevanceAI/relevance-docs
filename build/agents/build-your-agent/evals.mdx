@@ -301,6 +301,49 @@ To adjust dashboard settings after initial setup, click the **Settings** button 
 
 ---
 
+## Alarms
+
+An alarm monitors scores on a Monitor dashboard and sends a notification when the overall score drops below a threshold you set. Configure alarms per dashboard to catch regressions as they happen.
+
+### Creating an alarm
+
+To create or edit an alarm:
+
+1. Go to the **Evaluate** tab and select **Monitor** from the left sidebar.
+2. Open the dashboard you want to monitor.
+3. Click the **Alarms** button in the top right corner of the dashboard.
+4. Click **+ New alarm** to create one, or click an existing alarm to edit it.
+5. Configure the alarm settings (see table below).
+6. Click **Save**.
+
+Alarms fire on the initial breach only. During a cooldown period, additional breaches do not trigger new notifications. Alarms do not send a notification when scores recover.
+
+| Setting | Description |
+|---------|-------------|
+| **Score threshold (%)** | The minimum acceptable score. The alarm fires when the dashboard's overall score drops below this value. |
+| **Notification channels** | Where to send the alert — email, Slack, or both. At least one channel must be configured. |
+| **Cooldown period** | How long to suppress repeat notifications after an alarm fires. During this window, additional breaches do not trigger new notifications. |
+
+### Auto-diagnosis by Inventor
+
+When the **Auto-diagnosis by Inventor** toggle is enabled on an alarm, the Inventor AI assistant automatically investigates the breach the moment the alarm first fires and delivers a diagnosis to the alert channels configured by the alarm creator.
+
+The diagnosis identifies which Checks degraded, which tasks contributed to the drop, and likely causes — giving you a starting point for investigation without manually reviewing the Monitor dashboard.
+
+To enable auto-diagnosis:
+
+1. Open the alarm create or edit modal.
+2. Toggle on **Auto-diagnosis by Inventor**.
+3. Save the alarm.
+
+Auto-diagnosis fires only on the initial alarm trigger. It does not run during cooldown re-notifications or on score recovery.
+
+<Info>
+Auto-diagnosis by Inventor requires at least one alert channel configured on the alarm — see [Alerts](/build/agents/build-your-agent/alerts) for setup instructions. Inventor is an Enterprise-only feature — see [Invent](/build/invent/invent) for details. This feature is currently behind a feature flag and may not be available in all accounts.
+</Info>
+
+---
+
 ## Publish
 
 The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
