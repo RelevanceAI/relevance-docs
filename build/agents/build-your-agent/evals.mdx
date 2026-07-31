@@ -8,7 +8,7 @@ description: 'Test and evaluate your AI Agents with scenario-based evaluations a
 **Rollout Status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing. Evals apply to both individual Agents and Workforces, including the sub-agents and tools inside a Workforce.
+The Evals section is your command center for testing and evaluating AI performance. Located in the **Evaluate** tab in the Agent builder and on the Workforce canvas, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live quality — all without manual testing. Evals apply to both individual Agents and Workforces, including the sub-agents and tools inside a Workforce.
 
 ![Evaluate tab showing the Evals sidebar (Test, Runs, Checks, Publish, Monitor) and a Monitor dashboard with overall score, total runs, and Checks breakdown](/images/agent/agent-evals.png)
 
@@ -99,6 +99,26 @@ When creating a Check, you choose one of the following types:
     | **Tool** | Select the tool to check for |
     | **Position** | Whether the tool was used anywhere, used first, or used last |
     | **Comparison** | Check if the tool was used at least, exactly, or at most X times |
+    | **Node** | Optional. When evaluating a Workforce, scope the Check to a specific graph node (Agent or Tool). If the same Agent appears more than once in the graph, each occurrence is listed separately with a connection label. Leave blank to check across the whole conversation. |
+
+    #### Argument conditions
+
+    You can add conditions that verify the specific arguments passed to a tool call, not just whether the tool was called. Each condition specifies an argument path and a match type, and every condition must be satisfied for the Check to pass.
+
+    | Match type | Description |
+    |------------|-------------|
+    | **Exact match** | The argument value must equal the specified value. Optionally enable case-insensitive matching to ignore capitalization. |
+    | **Contains** | The argument value must include the specified substring. Text only. |
+    | **Regex** | The argument value must match the specified regular expression pattern. |
+    | **Not empty** | The argument must have any non-empty value. |
+
+    To add conditions, click **+ Add condition** in the **Conditions** section of the eval rule form. For each condition, specify the argument path and the value or pattern to match against. A plain-English preview of your conditions appears in the form.
+
+    The available match types depend on the argument's type: **Contains** applies to text arguments, while **Exact match** is bound to the argument's own type or enum values. Conditions whose argument path can't be resolved against the tool's schema are dropped.
+
+    <Info>
+    Argument conditions work for both single-Agent evals and node-scoped Workforce evals.
+    </Info>
 
     When evaluating a Workforce, you can scope a Tool Usage Check to a specific node — a sub-agent or tool in the Workforce — so you can assert that a particular sub-agent used a given tool.
   </Accordion>
@@ -160,7 +180,7 @@ Follow these steps to create your first test set:
     - Provide a prompt describing what the Tool should return (a fake response is generated based on your prompt).
     - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response.
 
-    When evaluating a Workforce, Tool simulations can be configured per node, so each sub-agent uses its own simulated Tool responses.
+    When evaluating a Workforce, Tool simulations are configured per node rather than globally. Each Agent and Tool node in the graph appears as a separate entry, so you can assign different simulated responses to the same Tool depending on which node calls it. If the same Agent appears in more than one position in the graph, each occurrence is listed separately with a connection label — for example, "Research Agent ← Coordinator" — so you can configure each instance independently.
 
 8. Click **Save test scenario** to save your configuration.
 
@@ -226,8 +246,15 @@ You can run an entire test set or an individual scenario from within a test set 
 You can select specific scenarios within a test set to run a subset at once, or run all scenarios in the test set together. Note that you cannot bulk-select and run multiple test sets at the same time.
 
 1. Enter a name for the run (e.g., "Scenario run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
-2. Checks already attached to the scenarios are always included. To add Checks from the Checks tab, select the ones you want under **Additional global checks**.
-3. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
+2. Select which version to evaluate from the **Version** dropdown. It defaults to the current active version; select any historical or draft version to test against instead. This applies to both Agents and Workforces.
+3. Checks already attached to the scenarios are always included. To add Checks from the Checks tab, select the ones you want under **Additional global checks**.
+4. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
+
+<Note>
+For Workforces, the selected version pins the graph topology. Nested Agents inside the Workforce still run their own latest version.
+</Note>
+
+You can also start a run programmatically with the `relevance_run_evaluation` MCP tool — see [Running evaluations](/integrations/mcp/mcp-server#running-evaluations) on the MCP server page.
 
 ---
 
@@ -243,20 +270,24 @@ The top of the results page shows key metrics:
 |--------|-------------|
 | **Average Score** | Overall pass rate across all scenarios and Checks |
 | **Tasks** | How many Agent tasks were evaluated |
-| **Agent Version** | The version of the Agent that was tested |
+| **Agent Version** | The version of the Agent or Workforce that was evaluated, as selected in the run modal |
 
 ### Scenario results
+
+<Note>
+The results table supports column sorting (click any column header — sorting is applied server-side, so it works across pages) and column resizing (drag the edge of any header). A column visibility picker lets you show or hide optional columns, and your choices are saved per view: the batch detail and monitor views remember their settings independently. The **Test** column is pinned and stays visible when scrolling horizontally.
+</Note>
 
 Each scenario displays:
 
 | Column | Description |
 |--------|-------------|
 | **Status** | Running, Completed, or Failed |
-| **Name** | The scenario name |
+| **Test** | The scenario name — pinned as the first column and always visible |
 | **Score** | Percentage of Checks that passed (shown with progress bar) |
 | **Checks** | Pass/fail count (e.g., "1/1 passed") |
 | **Credits** | Credits consumed for this scenario |
-| **Actions** | Actions consumed for this scenario — each Check plus the agent's tool runs |
+| **Actions** | Actions consumed for this scenario — each Check plus the agent's tool runs. Only appears on usage-based plans |
 | **Run time** | How long the scenario took to complete |
 
 ### Viewing conversation details
@@ -303,11 +334,64 @@ You also get:
 - **Overall score timeseries** to spot regressions or improvements over time.
 - **Per-Check charts** so you can see which criteria are slipping.
 - **Version markers** that line up score changes with Agent publishes.
-- **A list of evaluation runs** with score, name, and a drill-in to the full conversation.
+- **A runs list** showing each evaluated task, with the columns below.
+
+| Column | Description |
+|--------|-------------|
+| **Name** | The evaluated task's name — pinned as the first column and always visible |
+| **Status** | Completed or Failed |
+| **Score** | Percentage of Checks that passed |
+| **Checks** | Pass/fail count for this run |
+| **Credits** | Credits consumed for this run |
+| **Actions** | Actions consumed for this run. Only appears on usage-based plans |
+| **Run time** | How long the evaluation took to complete |
+
+Click any row to drill into the full evaluated conversation. Like the scenario results table, the runs list supports column sorting, column resizing, and a column visibility picker — and its visibility choices are saved separately from the batch detail view.
 
 <Tip>
 To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
 </Tip>
+
+---
+
+## Alarms
+
+An alarm watches the scores on a Monitor dashboard and sends a notification when the overall score drops below a threshold you set. Alarms are configured per dashboard, so you can catch regressions as they happen.
+
+### Creating an alarm
+
+1. Go to the **Evaluate** tab and select **Monitor** from the left sidebar.
+2. Open the dashboard you want to monitor.
+3. Click the **Alarms** button in the top right corner of the dashboard.
+4. Click **+ New alarm** to create one, or click an existing alarm to edit it.
+5. Configure the alarm settings (see below).
+6. Click **Save**.
+
+| Setting | Description |
+|---------|-------------|
+| **Score threshold (%)** | The minimum acceptable score. The alarm fires when the dashboard's overall score drops below this value. |
+| **Notification channels** | Where to send the alert — email, Slack, or both. At least one channel must be configured. |
+| **Cooldown period** | How long to suppress repeat notifications after an alarm fires. During this window, additional breaches do not trigger new notifications. |
+
+Alarms fire on the initial breach only. Additional breaches during the cooldown period do not trigger new notifications, and no notification is sent when scores recover.
+
+### Auto-diagnosis by Inventor
+
+When the **Auto-diagnosis by Inventor** toggle is enabled on an alarm, Inventor automatically investigates the breach the moment the alarm first fires and delivers a diagnosis to the configured alert channels.
+
+The diagnosis identifies which Checks degraded, which tasks contributed to the drop, and likely causes — giving you a starting point without manually reviewing the Monitor dashboard.
+
+To enable it:
+
+1. Open the alarm create or edit modal.
+2. Toggle on **Auto-diagnosis by Inventor**.
+3. Save the alarm.
+
+Auto-diagnosis runs on the initial alarm trigger only. It does not run for cooldown re-notifications or on score recovery.
+
+<Info>
+  Auto-diagnosis requires at least one alert channel on your **Inventor notification settings** (Inventor settings modal → Alerts tab), not on the alarm itself — the toggle stays hidden until that is set up. Once enabled, diagnoses are delivered to the channels of whoever turned the toggle on. Auto-diagnosis depends on [Inventor](/build/invent/invent), which is a pilot for Enterprise plans, so it may not be available on your account yet.
+</Info>
 
 ---
 
@@ -399,7 +483,7 @@ Clicking a **Credits** or **Actions** value opens a breakdown of where that scen
   </Accordion>
 
   <Accordion title="Can I rerun a previous evaluation?">
-    Yes, you can run the same scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
+    Yes, you can run the same scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions. You can also target a specific historical or draft version using the **Version** dropdown in the run modal, so you can compare versions directly.
   </Accordion>
 
   <Accordion title="Where do my Checks live?">
