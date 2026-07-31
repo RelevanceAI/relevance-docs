@@ -41,6 +41,12 @@ Inventor is a copilot agent inside the Relevance AI UI. It uses the Relevance AI
   <Card title="Log bugs to engineering" icon="bug-slash">
     When Inventor hits a platform issue it can't fix, it logs a bug to our engineering team on your behalf.
   </Card>
+  <Card title="Enable or disable agent triggers" icon="toggle-on">
+    Ask Inventor to turn individual agent triggers on or off conversationally — without navigating to the Triggers section of the agent builder.
+  </Card>
+  <Card title="Enable or disable workforce auto-triggers" icon="network-wired">
+    Toggle workforce-level auto-triggers via Inventor. The workforce must be published before Inventor can manage its trigger states.
+  </Card>
 </CardGroup>
 
 <Warning>
@@ -193,7 +199,10 @@ The counter lives in the Inventor panel and tracks only the credits used in your
     </Steps>
   </Tab>
   <Tab title="Conversations">
-    Inventor saves each conversation as a session automatically. Opening the panel starts a new chat, and your past sessions stay available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
+    Inventor saves each conversation as a session automatically. Opening the panel starts a new chat. How you reach past sessions depends on the panel width:
+
+    - **Default (narrow) panel:** past sessions are available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
+    - **Wide panel (1024px or wider):** a sidebar nav appears inside the panel showing your past conversations and a new chat button, replacing the header dropdown with a persistent left rail.
 
     <Info>
       Closing the panel or refreshing the page doesn't delete your conversation history — sessions persist and can be resumed at any time.
@@ -215,6 +224,38 @@ The counter lives in the Inventor panel and tracks only the credits used in your
   </Tab>
   <Tab title="Restore a version">
     Ask Inventor to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Inventor copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
+  </Tab>
+  <Tab title="Panel size">
+    The Inventor panel can be expanded to fill the full workspace width, giving you more room when writing detailed prompts or reviewing Inventor's output.
+
+    **How to maximize the panel:**
+
+    - Click the **maximize** button in the panel header to expand it to full width. Click it again to return to the default size.
+    - Or drag the resize handle on the left edge of the panel all the way to the left edge of the screen.
+
+    When the panel is maximized, the main left navigation collapses automatically to free up the full screen width. Navigating to a different page returns the panel to its default size.
+
+    At 1024px panel width or wider, a sidebar nav appears inside the panel showing your past conversations and a new chat button — the same access you'd otherwise get from the **Chats** dropdown, but always visible in a persistent left rail.
+  </Tab>
+  <Tab title="Scheduled check-ins">
+    Click the **clock icon** in the Inventor toolbar to open the scheduled check-ins panel. It lists all pending check-ins your agents have scheduled — up to 200 at a time — in one place, so you don't have to open each agent individually. From there you can reschedule any check-in by editing its time, or cancel it entirely.
+  </Tab>
+  <Tab title="Web search">
+    Inventor has built-in web access that lets it perform real-time web searches and fetch content from web pages, so you can ask it about current information without leaving the platform.
+
+    **Enabling web access**
+
+    A globe icon in the message composer lets you enable or disable web access per message. It's opt-in — toggle the globe on before sending a message to give Inventor web access for that request. The toggle state persists across session remounts, so you don't need to re-enable it each time you open Inventor.
+
+    If you paste a URL into the composer while web access is disabled, a banner appears prompting you to enable it so Inventor can fetch that page.
+
+    **What Inventor can do with web access on**
+
+    Inventor can search the web in real time (powered by Exa), fetch and read the content of web pages, and access current information beyond its training data. This is useful for researching competitors, checking documentation, or pulling in recent data while you're building.
+
+    <Note>
+      Inventor won't attempt to fetch authenticated Relevance AI app pages. For Relevance-specific content it uses its built-in tools instead.
+    </Note>
   </Tab>
 </Tabs>
 
