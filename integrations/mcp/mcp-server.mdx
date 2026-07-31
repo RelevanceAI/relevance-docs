@@ -172,7 +172,24 @@ https://mcp.relevanceai.com/
 
 ## Authentication
 
-When you first connect, you will be prompted to authenticate with your Relevance AI account. Authentication is **per project** — you will be connected to a specific Relevance AI project after logging in.
+When you first connect, you will be prompted to authenticate with your Relevance AI account via an OAuth consent page. Authentication is **per project** — you will be connected to a specific Relevance AI project after logging in.
+
+### OAuth consent and access control
+
+The OAuth consent page lets you review the access being granted to the connecting AI client before completing authentication. It includes a **Run-only access** toggle that controls what the connected AI agent can do within your project.
+
+When run-only access is enabled, the connected AI agent can view and execute agents, tools, and workforces — but write and delete tools are entirely absent from the MCP tool list, not just blocked. The agent cannot create, edit, publish, or delete any assets. When run-only access is disabled, the agent has the same capabilities your account role allows.
+
+### Roles and access levels
+
+Your project role determines the default access mode and whether you can change it:
+
+| Role | Can connect via MCP | Default mode | Can toggle run-only |
+|------|---------------------|--------------|---------------------|
+| Viewer | ✅ | Run-only | ❌ (locked) |
+| Member / Editor / Admin | ✅ | Full access | ✅ |
+
+Viewer-role users are always placed in run-only mode — the toggle is locked for them and cannot be changed. Users with Member, Editor, or Admin roles connect in full access mode by default, but can enable run-only access voluntarily on the consent page to limit what the connected AI agent can do.
 
 ### Working with multiple projects
 
@@ -241,39 +258,64 @@ The MCP server gives your AI assistant the ability to call Relevance AI tools, b
 
 ## Handling long-running agent executions
 
-When triggering agents via MCP, you have two execution modes available depending on how long your agent takes to complete.
+Triggering an agent via MCP never blocks on the agent finishing. `relevance_trigger_agent` returns immediately, and you poll for the result separately — so the pattern is the same whether an agent takes two seconds or twenty minutes.
 
-### Execution modes
-
-<Tabs>
-  <Tab title="Synchronous">
-    The `relevance_trigger_agent` tool waits for the agent to finish and returns the result directly. It has a 120-second timeout, so use it for agents that complete quickly — single-step agents with minimal tool usage and no workforce nodes.
-  </Tab>
-
-  <Tab title="Asynchronous">
-    The `relevance_trigger_agent_async` and `relevance_poll_agent_result` tools work together with no timeout limit. The trigger returns immediately with a conversation ID, which you then poll to check status and retrieve results. Use this for agents with workforce nodes, multi-step chains, external API calls, or any execution expected to exceed 2 minutes.
-  </Tab>
-</Tabs>
-
-<Warning>
-  If you encounter timeout errors with `relevance_trigger_agent`, switch to the async pattern. Agents with workforce nodes should always use async execution.
-</Warning>
-
-### Async execution workflow
+### Execution workflow
 
 <Steps>
   <Step title="Trigger the agent">
-    Call `relevance_trigger_agent_async` with your agent parameters. This returns immediately with a `conversation_id`.
+    Call `relevance_trigger_agent` with the agent ID and your message. It returns immediately with a `conversation_id` — the same value other agent task tools call `task_id`. It does not wait for the agent to finish.
   </Step>
 
   <Step title="Poll for results">
-    Use `relevance_poll_agent_result` with the `conversation_id` to check the execution status. Poll every 3-5 seconds until the status is `complete` or `failed`.
+    Call `relevance_poll_agent_result` with the `agent_id` and `conversation_id`. Pass `wait_seconds` to long-poll until the run reaches a terminal state — the default window is 50 seconds and the maximum is 300. Pass `0` for a single-shot check.
   </Step>
 
-  <Step title="Retrieve the results">
-    The status will be `working` or `in progress` while the agent is executing, `complete` when results are available, or `failed` if an error occurred. Once complete, the poll response contains the agent's output.
+  <Step title="Read the status">
+    `in_progress` means keep polling. `completed` means the response contains the agent's output. `failed` means the agent itself terminated. `pending_approval` means a human needs to act — the response includes the conversation URL to visit.
   </Step>
 </Steps>
+
+<Note>
+  If a tool errored but the agent recovered, the status stays `completed` or `in_progress` and the response includes `had_recoverable_tool_errors: true`. That flag reflects only the most recent messages inspected, so treat its presence as a positive signal and not its absence as proof no tool ever failed.
+</Note>
+
+### Running evaluations
+
+`relevance_run_evaluation` starts an evaluation run against an agent or workforce, so you can score changes without leaving your AI client.
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `resource_type` | Yes | Either `agent` or `workforce` |
+| `resource_id` | Yes | The agent or workforce ID to evaluate |
+| `evaluation_run_name` | Yes | A name for this run |
+| `test_set_id` | No | Test set to run every scenario from. Mutually exclusive with `scenario_ids` |
+| `scenario_ids` | No | Ad-hoc scenario IDs to run. Mutually exclusive with `test_set_id` |
+| `version_id` | No | A specific version to evaluate. Omit to use the active published version |
+
+Pass either `test_set_id` or `scenario_ids`, not both. Poll for the outcome with `relevance_poll_eval_batch_result`, and stop a run in progress with `relevance_cancel_eval_batch`.
+
+<Note>
+  For workforces, `version_id` pins the graph topology only — nested agents still run their latest version.
+</Note>
+
+### Cancelling executions
+
+Three tools stop in-progress work:
+
+<AccordionGroup>
+  <Accordion title="relevance_cancel_agent_task">
+    Cancels a running agent task. Pass `task_id` — the `conversation_id` returned by `relevance_trigger_agent`. New turns are blocked and the run halts at its next step boundary: the in-flight step finishes first, so there is no hard abort mid-step. The task stays stopped.
+  </Accordion>
+
+  <Accordion title="relevance_cancel_workforce_task">
+    Cancels a running workforce task, halting routing and signalling the running step to stop. Pass both `workforce_id` and `task_id`.
+  </Accordion>
+
+  <Accordion title="relevance_cancel_tool_run">
+    Cancels a single in-flight tool run on a best-effort basis. Pass `task_id`, the run ID from `relevance_list_tool_runs`.
+  </Accordion>
+</AccordionGroup>
 
 ---
 
@@ -299,8 +341,8 @@ When triggering agents via MCP, you have two execution modes available depending
     - Try clearing the auth cache: `rm -rf ~/.mcp-auth`
   </Accordion>
 
-  <Accordion title="Agent execution timeouts">
-    Timeout errors from `relevance_trigger_agent` mean your agent exceeded the 120-second synchronous limit. Switch to `relevance_trigger_agent_async` and `relevance_poll_agent_result` instead. See [handling long-running agent executions](#handling-long-running-agent-executions) for the full workflow. Agents with workforce nodes, multi-step chains, or complex workflows should always use the async pattern.
+  <Accordion title="An agent run never seems to finish">
+    `relevance_trigger_agent` returns as soon as the run starts, so a long-running agent is expected rather than a timeout. Poll with `relevance_poll_agent_result` and a `wait_seconds` window (up to 300) until the status becomes `completed`, `failed`, or `pending_approval` — `in_progress` means keep polling. A run sitting at `pending_approval` is waiting on a human, not stuck; the poll response includes the conversation URL to visit. To stop a run outright, see [cancelling executions](#cancelling-executions).
   </Accordion>
 </AccordionGroup>
 
@@ -326,6 +368,10 @@ When triggering agents via MCP, you have two execution modes available depending
   </Accordion>
 
   <Accordion title="Can I restrict which tools are available via MCP?">
-    The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each connection to the appropriate project.
+    There are two ways to restrict MCP tool access.
+
+    The first is the **Run-only access** toggle on the OAuth consent page. When enabled, write and delete tools are entirely absent from the MCP tool list, so the connected AI agent can only view and execute assets. Viewer-role users are placed in run-only mode automatically. See [OAuth consent and access control](#oauth-consent-and-access-control).
+
+    The second is project separation. The MCP server exposes the tools and agents available in the project you authenticated against, so you can organize tools across different projects and authenticate each connection to the appropriate one.
   </Accordion>
 </AccordionGroup>
