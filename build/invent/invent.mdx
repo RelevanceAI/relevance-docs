@@ -41,6 +41,9 @@ Inventor is a copilot agent inside the Relevance AI UI. It uses the Relevance AI
   <Card title="Log bugs to engineering" icon="bug-slash">
     When Inventor hits a platform issue it can't fix, it logs a bug to our engineering team on your behalf.
   </Card>
+  <Card title="Talk to Inventor by voice" icon="microphone">
+    Start a live voice conversation with Inventor. It asks spoken questions about what you want to build, then creates the agent from your answers.
+  </Card>
 </CardGroup>
 
 <Warning>
@@ -117,6 +120,23 @@ Inventor is available from several places, so you can reach it wherever you're w
 
     You can also choose Invent when you [create a tool](/build/tools/create-a-tool#option-1-invent-a-tool) to generate a first version from a description.
   </Tab>
+  <Tab title="Talk to Inventor button">
+    The **Talk to Inventor** button appears in the Inventor panel for eligible accounts. Click it to start a voice interview — Inventor asks spoken questions about what you want to build, and you respond by speaking.
+
+    Start a voice interview from Inventor:
+
+    <Steps>
+      <Step title="Open Inventor">
+        Open the Inventor side panel or home page.
+      </Step>
+      <Step title="Click Talk to Inventor">
+        Click the **Talk to Inventor** button to open the voice session overlay.
+      </Step>
+      <Step title="Wait for connection">
+        The overlay shows the connection status while it establishes the audio session. Once connected, start speaking.
+      </Step>
+    </Steps>
+  </Tab>
 </Tabs>
 
 ## How to use Inventor
@@ -141,6 +161,47 @@ Inventor is available from several places, so you can reach it wherever you're w
   </Step>
 </Steps>
 
+## Voice interview mode
+
+<Note>
+  Voice interview mode is experimental and available to select users. If you don't see the **Talk to Inventor** button, it hasn't been enabled for your account yet.
+</Note>
+
+Voice interview mode lets you describe what you want to build by speaking with Inventor directly. Instead of typing, you have a live voice conversation — Inventor asks questions, you answer, and at the end it builds the agent from the discussion.
+
+### How to start a voice interview
+
+<Steps>
+  <Step title="Open Inventor">
+    Open the Inventor side panel or home page.
+  </Step>
+  <Step title="Click Talk to Inventor">
+    Click the **Talk to Inventor** button. A full-screen overlay opens and begins connecting.
+  </Step>
+  <Step title="Speak when connected">
+    Once the session is live, speak naturally. Inventor asks questions about what you want to build — answer them out loud.
+  </Step>
+</Steps>
+
+### What you see during a session
+
+The full-screen overlay shows:
+
+- **Connection status** — indicates when the session is connecting, live, or ending.
+- **Live transcript** — real-time captions of the conversation with speaker labels so you can follow who said what.
+- **Voice activity indicators** — shows when Inventor or you are speaking.
+
+### Ending the session
+
+<CardGroup cols={2}>
+  <Card title="End & build" icon="hammer">
+    Ends the conversation and has Inventor immediately build the agent based on what you discussed.
+  </Card>
+  <Card title="End conversation" icon="phone-slash">
+    Ends the conversation without building. Use this if you want to review before proceeding or decide not to build.
+  </Card>
+</CardGroup>
+
 ## Credit usage
 
 <img src="/images/invent-credit-counter.png" alt="The real-time credit counter in the Inventor panel" />
@@ -148,6 +209,8 @@ Inventor is available from several places, so you can reach it wherever you're w
 The Inventor panel shows a real-time credit counter — "X credits used" with a coins icon — that updates with each interaction, such as generating an agent, requesting an adjustment, or asking a follow-up question.
 
 The counter lives in the Inventor panel and tracks only the credits used in your current session.
+
+Voice interview sessions charge LLM and speech costs at standard rates. The realtime platform fee is waived for Inventor interviews.
 
 ## Inventor features
 
