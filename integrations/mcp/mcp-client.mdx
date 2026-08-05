@@ -60,6 +60,56 @@ This is useful when you need different authentication contexts (e.g. separate us
   </Accordion>
 </AccordionGroup>
 
+## MCP tool behavior in the API
+
+If you interact with Relevance AI programmatically via the API, several additions make it easier to inspect and work with MCP-connected agents.
+
+### mcp_servers field on agent summaries
+
+When reading or listing agents via the API, an agent summary carries a top-level `mcp_servers` field listing the MCP servers attached to that agent. The field is omitted entirely when the agent has no MCP connections, so treat a missing `mcp_servers` as "none attached" rather than an error:
+
+```json
+{
+  "agent_id": "agent_abc123",
+  "name": "My Research Agent",
+  "mcp_servers": [
+    {
+      "mcp_server_config_id": "mcp_conn_xyz789",
+      "label": "github-prod",
+      "url": "https://mcp.github.com/"
+    },
+    {
+      "mcp_server_config_id": "mcp_conn_def456",
+      "label": "notion-workspace",
+      "url": "https://mcp.notion.com/"
+    }
+  ]
+}
+```
+
+An entry gains `"status": "disconnected"` when it is still attached to the agent but no longer matches a connection on the project.
+
+### mcp_tool kind in get_agent_tools
+
+The `get_agent_tools` endpoint now returns tools sourced from MCP connections with a `kind` of `mcp_tool`. These tools include a `mcp_server_config_id` property identifying which connected server the tool belongs to:
+
+```json
+{
+  "name": "search_pages",
+  "kind": "mcp_tool",
+  "mcp_server_config_id": "mcp_conn_def456",
+  "description": "Search pages in Notion (MCP: notion-workspace)"
+}
+```
+
+This lets programmatic callers distinguish native Relevance AI tools from MCP-backed ones and trace each tool back to its source server.
+
+### Security: MCP credentials are write-only
+
+<Warning>
+  API keys and custom headers configured for MCP connections are automatically stripped from all agent read, list, and version API responses. Credentials cannot be retrieved after being set — they are write-only. To rotate credentials, set new values through the Agent builder or the API write endpoints.
+</Warning>
+
 ## Troubleshooting
 
 <AccordionGroup>
