@@ -182,7 +182,6 @@ Your project role determines what you can access through the MCP server.
 
 **Chat role** users can connect with restricted access. Chat-role users can list the agents shared with them, trigger those agents, poll for run results, list tasks, and cancel runs. They cannot reach tools, knowledge, or the rest of the project's resources.
 
-<Note>Chat-role MCP access is off by default and is rolling out progressively — reach out to your account manager to have it enabled for your project.</Note>
 
 ### Working with multiple projects
 
@@ -257,16 +256,12 @@ The Relevance AI MCP server exposes the following tools to connected clients.
 
 | Tool | Description |
 |------|-------------|
-| `relevance_list_project_mcp_servers` | Returns all MCP servers connected to the authenticated project. Each entry includes an `id` (unique identifier), `label` (human-readable connection name), `url` (server endpoint), and a flag indicating if the server is disconnected. Use this to discover what MCP servers are available before calling tools on them. |
-| `relevance_list_project_mcp_server_tools` | Makes a live call to a specific MCP server and returns its currently available tools. Takes a server reference (`id` from the list above) as input. Reflects real-time state of the external server for dynamic capability discovery. |
+| `relevance_list_project_mcp_servers` | Returns the MCP servers connected to the authenticated project. Each entry carries `mcp_server_config_id`, `label` (the connection name), `url` (server endpoint), and a `status` of `disconnected` when the server is attached to an agent but no longer matches a project connection. Use this to discover what MCP servers are available before calling tools on them. |
+| `relevance_list_project_mcp_server_tools` | Makes a live call to a specific MCP server and returns its currently available tools. Takes the `mcp_server_config_id` from the list above. Reflects the real-time state of the external server, so a tool missing here means the server is unreachable rather than that the tool was removed. |
 
 ### Execution tools
 
-| Tool | Description |
-|------|-------------|
-| `relevance_trigger_agent` | Triggers an agent synchronously and waits for it to complete. Has a 120-second timeout — use for agents that complete quickly. |
-| `relevance_trigger_agent_async` | Triggers an agent and returns a `conversation_id` immediately without waiting for completion. Use for long-running agents. |
-| `relevance_poll_agent_result` | Polls for the result of an async agent execution using the `conversation_id` returned by `relevance_trigger_agent_async`. |
+`relevance_trigger_agent` sends a message to an agent and `relevance_poll_agent_result` retrieves the outcome. See [handling long-running agent executions](#handling-long-running-agent-executions) for how the two work together.
 
 ---
 

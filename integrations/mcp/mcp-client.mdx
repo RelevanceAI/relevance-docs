@@ -66,7 +66,7 @@ If you interact with Relevance AI programmatically via the API, several addition
 
 ### mcp_servers field on agent summaries
 
-When reading or listing agents via the API, each agent summary now includes a top-level `mcp_servers` field listing the MCP servers attached to that agent:
+When reading or listing agents via the API, an agent summary carries a top-level `mcp_servers` field listing the MCP servers attached to that agent. The field is omitted entirely when the agent has no MCP connections, so treat a missing `mcp_servers` as "none attached" rather than an error:
 
 ```json
 {
@@ -74,18 +74,20 @@ When reading or listing agents via the API, each agent summary now includes a to
   "name": "My Research Agent",
   "mcp_servers": [
     {
-      "id": "mcp_conn_xyz789",
+      "mcp_server_config_id": "mcp_conn_xyz789",
       "label": "github-prod",
       "url": "https://mcp.github.com/"
     },
     {
-      "id": "mcp_conn_def456",
+      "mcp_server_config_id": "mcp_conn_def456",
       "label": "notion-workspace",
       "url": "https://mcp.notion.com/"
     }
   ]
 }
 ```
+
+An entry gains `"status": "disconnected"` when it is still attached to the agent but no longer matches a connection on the project.
 
 ### mcp_tool kind in get_agent_tools
 
