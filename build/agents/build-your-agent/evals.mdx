@@ -311,6 +311,73 @@ To adjust dashboard settings after initial setup, click the **Settings** button 
 
 ---
 
+## Eval monitoring alarms
+
+<Info>
+Eval monitoring alarms are a new feature rolling out progressively. If you don't see this capability in your account yet, reach out to your account manager to discuss access.
+</Info>
+
+Eval monitoring alarms send a notification when a Check's pass rate drops below a threshold you define. Instead of manually watching Monitor dashboards, you configure an alarm once and get alerted automatically when agent quality slips.
+
+You create and manage alarms by asking **Inventor** (Relevance AI's AI assistant) directly — there is no separate UI for alarms. Inventor can create, list, update, and delete alarms on your behalf.
+
+### Creating an alarm via Inventor
+
+Ask Inventor to set up an alarm for any Monitor Check. Some example prompts:
+
+- "Set up an alarm for my eval check to notify me if the pass rate drops below 80%"
+- "Create a monitoring alert for the 'Empathy shown' check that emails me when it falls below 90%"
+- "Add a Slack notification if the professional tone check drops below 75%"
+
+When creating an alarm, Inventor will ask for:
+
+| Detail | Description |
+|--------|-------------|
+| **Check** | Which eval check to monitor |
+| **Threshold** | The pass rate below which the alarm fires |
+| **Notification channel** | How you want to be notified (email, Slack, or Microsoft Teams) |
+
+### Notification channels
+
+Alarms can notify through any of the following channels:
+
+- **Email** — specify one or more email addresses
+- **Slack** — provide a Slack webhook URL
+- **Microsoft Teams** — provide a Teams webhook URL
+
+You can configure multiple notification channels on a single alarm. Tell Inventor which channel to use when you create or update the alarm.
+
+### Pass rate thresholds
+
+Thresholds are expressed as fractions between 0 and 1, not as percentages. When you tell Inventor "notify me if the pass rate drops below 80%", Inventor stores this as `0.8`. If you need to specify a threshold directly, use the decimal form (e.g., `0.75` for 75%).
+
+An alarm fires when the measured pass rate in a given evaluation period falls strictly below the configured threshold.
+
+### Evaluation periods
+
+Alarms evaluate pass rates over discrete time windows called **buckets**. A bucket is a fixed time period over which the pass rate is calculated from the tasks Monitor has scored. When the evaluation period for a bucket completes, the alarm checks whether the pass rate met the threshold and sends a notification if it didn't.
+
+This means alarms reflect recent performance rather than all-time averages, so a dip in quality triggers a timely alert rather than being diluted by historical data.
+
+### Managing alarms via Inventor
+
+Inventor handles the full alarm lifecycle:
+
+| Action | Example prompt |
+|--------|----------------|
+| **List alarms** | "Show me all my eval alarms" |
+| **Get alarm details** | "What are the settings for my tone check alarm?" |
+| **Update an alarm** | "Change the threshold on my empathy alarm to 85%" |
+| **Delete an alarm** | "Remove the alarm on the product knowledge check" |
+
+When you ask Inventor to update an alarm, it reads the existing configuration, applies only the fields you specified, and writes the result back — so you don't need to re-specify settings you want to keep.
+
+### Post-publish alarm suggestions
+
+After you successfully publish an agent, Inventor proactively suggests setting up a monitoring alarm. This is a nudge to help you move from one-off testing to continuous quality monitoring. You can accept the suggestion, customize the threshold or notification channel, or skip it.
+
+---
+
 ## Publish
 
 The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
