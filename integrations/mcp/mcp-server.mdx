@@ -174,6 +174,21 @@ https://mcp.relevanceai.com/
 
 When you first connect, you will be prompted to authenticate with your Relevance AI account. Authentication is **per project** — you will be connected to a specific Relevance AI project after logging in.
 
+### Role-based access
+
+Your project role determines what you can access through the MCP server.
+
+**Member role and above** have full access to all tools, agents, knowledge, and project resources in the connected project.
+
+**Chat role** users can connect with restricted access when the `mcp-chat-mode` feature flag is enabled for your project. Chat-role users can:
+- List agents shared with them
+- Trigger those agents
+- Poll for run results
+- List tasks
+- Cancel runs
+
+<Note>Chat-role MCP access is disabled by default and requires the `mcp-chat-mode` feature flag to be enabled on your project.</Note>
+
 ### Working with multiple projects
 
 If you work across multiple Relevance AI projects, add a separate MCP server entry for each:
