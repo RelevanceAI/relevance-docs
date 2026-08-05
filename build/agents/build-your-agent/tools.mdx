@@ -109,3 +109,9 @@ The number of times the agent will retry a tool that errors before marking the t
 #### Behavior after max tool retries
 
 Decide what should happen when the maximum number of retries is reached: either **Terminate task** immediately or **Escalate** it to a human for help. Terminating is faster and simpler, but escalation gives you a chance to fix things manually when it matters most.
+
+---
+
+## Using tools as custom evaluators
+
+Any tool you build can be used as an evaluator in the Evals system. When a tool accepts a `conversation` input and returns a `passed` boolean output, it meets the evaluator contract and will appear in the Custom Tool check picker. This lets you apply external API calls, complex business rules, or deterministic algorithms as evaluation criteria. See [Custom Tool checks](/build/agents/build-your-agent/evals#check-types) for details.

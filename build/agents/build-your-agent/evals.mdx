@@ -102,6 +102,35 @@ When creating a Check, you choose one of the following types:
 
     When evaluating a Workforce, you can scope a Tool Usage Check to a specific node — a sub-agent or tool in the Workforce — so you can assert that a particular sub-agent used a given tool.
   </Accordion>
+
+  <Accordion title="Custom Tool" icon="wrench">
+    Sends the full conversation to a custom tool you've built and uses its response to determine pass/fail. Use this when you need evaluation logic beyond what other check types can express, such as calling external APIs, applying complex business rules, or implementing deterministic algorithms.
+
+    #### Evaluator tool contract
+
+    The tool must meet a specific contract to be used as an evaluator:
+
+    - Must have a `conversation` input parameter
+    - Must return a `passed` boolean output
+
+    Only tools that meet this contract will appear in the tool picker.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Tool** | Select a custom tool that meets the evaluator contract (conversation input + passed boolean output). Only compliant tools will appear in the picker. |
+
+    #### Creating an evaluator tool
+
+    Click **Create evaluator tool** to scaffold a compliant template and open it in-place for editing. This is the fastest way to create a tool that meets the evaluator contract — the required `conversation` input and `passed` boolean output are pre-wired for you.
+
+    #### Deleted or non-compliant tools
+
+    If a referenced tool is deleted or modified so it no longer meets the evaluator contract, a warning badge will appear on the check and saving will be disabled until the issue is resolved — either by selecting a different tool or fixing the original tool to restore the required contract.
+
+    <Note>
+    Custom Tool checks are gated behind the `evals-custom-tool-check` feature flag. Contact your account manager if you don't see this option.
+    </Note>
+  </Accordion>
 </AccordionGroup>
 
 To create a Check from the Checks tab:
@@ -112,7 +141,7 @@ To create a Check from the Checks tab:
 
 1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
 2. Click **+ New Check**.
-3. Select a **Type** (LLM Judge, Text Includes, Text Equals, or Tool Usage).
+3. Select a **Type** (LLM Judge, Text Includes, Text Equals, Tool Usage, or Custom Tool).
 4. Enter a **Name** for the Check (e.g., "Professional tone").
 5. Configure the type-specific settings (see table above).
 6. Click **Create Check**.
@@ -416,6 +445,10 @@ Clicking a **Credits** or **Actions** value opens a breakdown of where that scen
 
   <Accordion title="Can I move scenarios between test sets?">
     Yes. Each scenario has a dropdown menu (three-dot icon) with three options: **Move** relocates the scenario to another test set, **Copy** creates a duplicate in another test set, and **Duplicate** creates a copy in the same test set.
+  </Accordion>
+
+  <Accordion title="What is a Custom Tool check and how do I create an evaluator tool?">
+    A Custom Tool check sends the full conversation to a custom tool you've built and uses its response to determine pass/fail. This is useful when you need evaluation logic that goes beyond built-in check types — for example, calling an external API or applying complex business rules. To create a compliant evaluator tool quickly, click **Create evaluator tool** when configuring the check; this scaffolds a template with the required `conversation` input and `passed` boolean output pre-wired. See [Custom Tool](#check-types) in the check types section for full details on the evaluator contract and how to handle deleted or non-compliant tools.
   </Accordion>
 
   <Accordion title="I don't see the Evals section. How do I get access?">
