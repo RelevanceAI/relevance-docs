@@ -102,6 +102,7 @@ When creating a Check, you choose one of the following types:
 
     When evaluating a Workforce, you can scope a Tool Usage Check to a specific node — a sub-agent or tool in the Workforce — so you can assert that a particular sub-agent used a given tool.
   </Accordion>
+
 </AccordionGroup>
 
 To create a Check from the Checks tab:
@@ -313,7 +314,7 @@ To adjust dashboard settings after initial setup, click the **Settings** button 
 
 ## Publish
 
-The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
+The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your minimum pass rate, publishing can be blocked. Gates can be configured through the Evaluate tab in the builder, or managed programmatically via Inventor or MCP tools.
 
 You can configure Publish from the **Publish** section in the Evaluate tab.
 
@@ -331,6 +332,25 @@ Configure how evaluations affect the publish process:
 | **Allow publishing even if eval fails** | When unchecked (the default), the Agent will only be published if the evaluation score meets or exceeds the minimum pass rate. When checked, the Agent publishes regardless of whether the evaluation passes. |
 
 Once configured, click **Save**. When you next publish your Agent, the selected test sets will run automatically and the results will be checked against your minimum pass rate.
+
+### Managing pre-publish gates via Inventor or MCP
+
+When a pre-publish gate is configured, publishing your Agent via Inventor or an MCP client automatically runs the gate check before proceeding. If the check passes, the Agent is published immediately. If it fails, publishing is blocked and the check result is returned.
+
+Four MCP tools are available for managing pre-publish gates programmatically:
+
+| Tool | Description |
+|------|-------------|
+| `relevance_get_pre_publish_status` | View the current gate configuration and check history for an Agent |
+| `relevance_upsert_pre_publish_config` | Create or replace a gate with 1–10 eval test sets and per-test-set pass thresholds |
+| `relevance_delete_pre_publish_config` | Remove the gate from an Agent |
+| `relevance_poll_pre_publish_check` | Wait for an in-progress check to complete and return the result |
+
+To bypass a configured gate when publishing via Inventor or MCP, pass the `skip_checks` parameter. Use this only when you have a deliberate reason to skip evaluation — for example, an urgent hotfix where you have already validated the change.
+
+<Warning>
+If the gate configuration cannot be read at publish time, the publish is blocked. This fail-closed behavior prevents accidental publishes when gate config is unavailable.
+</Warning>
 
 ---
 
