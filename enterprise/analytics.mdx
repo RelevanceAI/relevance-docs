@@ -129,7 +129,33 @@ Each metric shows percentage change from the previous period. For example, "+45.
 
 ## Concurrency usage
 
-The Analytics page includes a concurrency usage chart. The chart shows organization-wide concurrency data — not data specific to a single agent — so you can correlate agent activity with overall concurrency patterns and see which agents are most active during peak periods.
+The Analytics page includes a concurrency usage chart — a stacked bar chart showing how many tasks were running and queued across your organization over time. The chart shows organization-wide concurrency data, not data specific to a single agent, so you can correlate agent activity with overall concurrency patterns and spot peak usage periods.
+
+Each bar represents a point in time and is split into two bands:
+
+- **Running (purple):** tasks that were actively executing at that moment.
+- **Queued (red):** tasks waiting for capacity because your organization had reached its concurrent task limit. The queued band stacks on top of the running band, so the full bar height represents the combined load.
+
+Queued tasks only appear once your organization hits its concurrent task limit. If you regularly see a red queued band, your current plan's concurrency limit is likely a bottleneck — see [System Quotas](/admin/system-limits#concurrent-tasks) for per-tier limits.
+
+### Per-project breakdown
+
+Use the toggle in the chart header to switch between two views:
+
+<CardGroup cols={2}>
+  <Card title="Org total" icon="chart-column">
+    Displays aggregate organization-wide concurrency as a single set of bands. Use this to see overall demand patterns and correlate concurrency with agent activity.
+  </Card>
+  <Card title="By project" icon="chart-bar">
+    Breaks the bars down by project, with each project in a distinct color and its own running and queued bands.
+  </Card>
+</CardGroup>
+
+In the **By project** view, hovering over any bar opens a tooltip with **Running** and **Queued** columns, one row per project, and a **Total** row at the bottom — so you can identify which projects contribute most to concurrency load at any given time, alongside the organization's concurrency limit.
+
+<Note>
+  Organization managers see every project by name. Project admins get the same breakdown, but projects other than their own are anonymized.
+</Note>
 
 <Note>
   For information about concurrency limits by subscription tier and how to monitor usage from the Plan & Billing page, see [Plans and credits](/admin/subscriptions/plans#monitoring-concurrency-usage).
