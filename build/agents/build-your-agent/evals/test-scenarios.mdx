@@ -14,14 +14,20 @@ The **Test** section lets you create test sets containing scenarios that simulat
 <iframe src="https://app.supademo.com/embed/cmpks4e442iakqms93emtc5jn" frameBorder="0" title="Creating a test set" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-Follow these steps to create your first test set:
-
-1. Open your Agent in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
-2. Click the **+ New test set** button. Enter a name for your test set and click **Create**.
-3. Click on the test set you just created to open it.
-4. Click the **+ Add scenario** button to add a scenario to your test set.
-5. Fill in the scenario details:
-
+<Steps>
+  <Step title="Open the Evaluate tab">
+    Open your Agent in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
+  </Step>
+  <Step title="Create a new test set">
+    Click the **+ New test set** button. Enter a name for your test set and click **Create**.
+  </Step>
+  <Step title="Open the test set">
+    Click on the test set you just created to open it.
+  </Step>
+  <Step title="Add a scenario">
+    Click the **+ Add scenario** button to add a scenario to your test set.
+  </Step>
+  <Step title="Fill in the scenario details">
     | Field | Description | Example |
     |-------|-------------|---------|
     | **Scenario name** | A descriptive name for this scenario | "Response empathy" |
@@ -29,8 +35,9 @@ Follow these steps to create your first test set:
     | **Run X times** | How many times to execute this scenario | 3 |
     | **Up to X messages** | Maximum conversation length, where each message is one back-and-forth between the simulated user and the Agent | 10 |
     | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with my bill." |
-
-6. Attach Checks to define how this scenario is scored. You can either pick existing Checks from the Checks tab or create new ones inline:
+  </Step>
+  <Step title="Attach Checks">
+    Attach Checks to define how this scenario is scored. You can either pick existing Checks from the Checks tab or create new ones inline:
 
     | Field | Description | Example |
     |-------|-------------|---------|
@@ -39,15 +46,19 @@ Follow these steps to create your first test set:
     | **Type-specific config** | Settings based on the chosen type (see [Check types](/build/agents/build-your-agent/evals/checks#check-types)) | *Evaluation Prompt*: "Did the Agent acknowledge the customer's frustration and express empathy before offering solutions?" |
 
     Newly created Checks land in the Checks tab and can be reused on other scenarios or Monitor dashboards.
-
-7. (Optional) Add **Tool simulations** to emulate Tool usage without actually calling the underlying Tools. Tool simulations are configured per scenario:
+  </Step>
+  <Step title="Add Tool simulations (optional)">
+    Add **Tool simulations** to emulate Tool usage without actually calling the underlying Tools. Tool simulations are configured per scenario:
     - Select a Tool to simulate.
     - Provide a prompt describing what the Tool should return (a fake response is generated based on your prompt).
     - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response.
 
     When evaluating a Workforce, Tool simulations can be configured per node, so each sub-agent uses its own simulated Tool responses.
-
-8. Click **Save test scenario** to save your configuration.
+  </Step>
+  <Step title="Save the scenario">
+    Click **Save test scenario** to save your configuration.
+  </Step>
+</Steps>
 
 <Tip>
 You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached Checks, and Tool simulations.
