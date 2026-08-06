@@ -1,0 +1,43 @@
+---
+title: 'FAQs'
+sidebarTitle: 'FAQs'
+description: 'Answers to common questions about Evals limits, billing, and access'
+---
+
+<AccordionGroup>
+  <Accordion title="How many scenarios can I have in a test set?">
+    You can add as many scenarios as needed to a single test set. Each scenario is evaluated independently and can have its own attached Checks.
+  </Accordion>
+
+  <Accordion title="How many Checks can I add to a scenario?">
+    Each scenario supports up to 10 Checks. This applies to scenario-level Checks defined within the scenario itself. Checks added via **Additional global checks** at run time are counted separately.
+  </Accordion>
+
+  <Accordion title="How are evaluations billed?">
+    Evaluations consume both Actions and Vendor Credits. Each Check costs 1 Action, while Vendor Credits cover the LLM costs of the task run, the user simulator, and any LLM-based Check. Each scenario shows its full breakdown in the results — see [Credits and billing](/build/agents/build-your-agent/evals/cost-billing) for details.
+  </Accordion>
+
+  <Accordion title="Can I rerun a previous evaluation?">
+    Yes, you can run the same scenarios again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
+  </Accordion>
+
+  <Accordion title="Where do my Checks live?">
+    All Checks live in the **Checks** tab under Evaluate. From there you can attach them to scenarios (for evaluation runs), to Monitor dashboards (for live tasks), or to one-off evaluations of completed tasks. The **Scenarios**, **Dashboard**, and **Unused** filters show where each Check is currently attached.
+  </Accordion>
+
+  <Accordion title="Can the LLM Judge evaluate long conversations?">
+    Yes, with configuration. The LLM Judge Check includes a **Truncate long conversations** toggle in the **Advanced** section when creating a Check. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
+  </Accordion>
+
+  <Accordion title="What happens when a conversation is truncated?">
+    The oldest messages are removed from the start of the conversation until it fits within the judge model's context window. The judge is notified that truncation occurred and evaluates the remaining portion. If your evaluation criteria depend on early context — such as the user's original request or instructions given at the start of the conversation — the result may be less accurate. In those cases, disabling truncation and selecting a model with a larger context window is preferable.
+  </Accordion>
+
+  <Accordion title="Can I move scenarios between test sets?">
+    Yes. Each scenario has a dropdown menu (three-dot icon) with three options: **Move** relocates the scenario to another test set, **Copy** creates a duplicate in another test set, and **Duplicate** creates a copy in the same test set.
+  </Accordion>
+
+  <Accordion title="I don't see the Evals section. How do I get access?">
+    Evals is rolling out progressively, starting with Enterprise customers. If you don't see the Evaluate tab in the Agent builder, reach out to your account manager to discuss access.
+  </Accordion>
+</AccordionGroup>

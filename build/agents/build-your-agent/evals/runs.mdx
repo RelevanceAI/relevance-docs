@@ -1,0 +1,54 @@
+---
+title: 'Understanding results'
+sidebarTitle: 'Runs'
+description: 'Interpret evaluation run summaries, scenario scores, and conversation details'
+---
+
+After running an evaluation, you'll see a detailed results screen. Past runs are accessible from the **Runs** section in the left sidebar of the Evaluate tab — you can browse average scores, tasks evaluated, progress status, cost (Credits and Actions), and creation date for every run.
+
+---
+
+## Run summary
+
+The top of the results page shows key metrics:
+
+| Metric | Description |
+|--------|-------------|
+| **Average Score** | Overall pass rate across all scenarios and Checks |
+| **Tasks** | How many Agent tasks were evaluated |
+| **Agent Version** | The version of the Agent that was tested |
+
+---
+
+## Scenario results
+
+Each scenario displays:
+
+| Column | Description |
+|--------|-------------|
+| **Status** | Running, Completed, or Failed |
+| **Name** | The scenario name |
+| **Score** | Percentage of Checks that passed (shown with progress bar) |
+| **Checks** | Pass/fail count (e.g., "1/1 passed") |
+| **Credits** | Credits consumed for this scenario |
+| **Actions** | Actions consumed for this scenario — each Check plus the agent's tool runs |
+| **Run time** | How long the scenario took to complete |
+
+---
+
+## Viewing conversation details
+
+Click **View Conversation** on any scenario to see:
+
+1. **The full conversation** between the simulated user and your Agent.
+2. **Check verdicts** from every Check included in the run, with detailed explanations of why each Check passed or failed.
+
+For example, an "Empathy shown" Check might show:
+> **Pass**: The Agent demonstrated strong empathy throughout the conversation. Key examples include: acknowledging the customer's frustration with being transferred multiple times ("I completely understand how upsetting it must be to feel like you're not getting the help you need"), validating her experience with the double charge ("I truly understand how frustrating it is to be charged twice"), and directly addressing her skepticism by saying "I completely understand your concerns, especially given your previous experience."
+
+---
+
+## Related pages
+
+- [Test scenarios](/build/agents/build-your-agent/evals/test-scenarios) — set up the scenarios that produce these runs
+- [Cost and billing](/build/agents/build-your-agent/evals/cost-billing) — understand the Credits and Actions shown in run results

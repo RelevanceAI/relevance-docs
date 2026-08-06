@@ -1,0 +1,34 @@
+---
+title: 'Best practices'
+sidebarTitle: 'Best practices'
+description: 'Six practices for getting the most out of your Evals setup'
+---
+
+<CardGroup cols={2}>
+  <Card title="Start simple" icon="seedling">
+    Begin with a few core scenarios that test your Agent's primary use cases. Add complexity as you learn what matters most.
+  </Card>
+  <Card title="Be specific with Checks" icon="bullseye">
+    Write detailed Check prompts. Vague criteria lead to inconsistent scoring. Include specific examples of what passing looks like.
+  </Card>
+  <Card title="Test edge cases" icon="triangle-exclamation">
+    Create scenarios for difficult situations: angry customers, off-topic requests, requests to bypass rules, etc.
+  </Card>
+  <Card title="Run Monitor on live tasks" icon="chart-line">
+    Stand up a Monitor dashboard with your most important Checks so you catch regressions on real conversations, not just simulated ones.
+  </Card>
+  <Card title="Keep your Checks tab tidy" icon="folder-tree">
+    Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
+  </Card>
+  <Card title="Sample wisely in Monitor" icon="percent">
+    Match the sample rate to your task volume. A low-traffic Agent can run at 100%; high-volume Agents can sample lower to keep costs in check without losing the signal.
+  </Card>
+</CardGroup>
+
+---
+
+## Related pages
+
+- [Understanding Checks](/build/agents/build-your-agent/evals/checks) — create well-crafted evaluation criteria
+- [Monitor dashboards](/build/agents/build-your-agent/evals/monitor) — set up continuous scoring on live tasks
+- [Test scenarios](/build/agents/build-your-agent/evals/test-scenarios) — build comprehensive test sets
