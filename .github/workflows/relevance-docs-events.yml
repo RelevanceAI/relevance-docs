@@ -11,9 +11,14 @@ name: Notify Relevance Docs Workforce
 # the workforce task that created the PR. Falls back to the PR URL when no marker is present
 # (hand-made PRs, or PRs opened before the marker existed).
 
+# NOTE: `opened` is deliberately NOT forwarded. The authoring run posts the status card
+# itself, with the full context (reviewer, summary, rollout). Forwarding `opened` gave the
+# card two independent creators racing each other — on PR #758 the webhook won by 49s,
+# posted a thinner card, and the authoring run then posted a second and took the ledger
+# with it, orphaning the first. Card creation belongs to the authoring run alone.
 on:
   pull_request:
-    types: [opened, synchronize, closed, labeled]
+    types: [synchronize, closed, labeled]
   pull_request_review:
     types: [submitted, dismissed]
 
