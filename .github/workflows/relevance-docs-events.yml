@@ -1,8 +1,15 @@
 name: Notify Relevance Docs Workforce
 
-# Pushes PR + drafter:go events to the Relevance "Docs Workforce v2" custom webhook.
-# The Orchestrator routes: drafter:go -> re-ground + amend; review/merge/close -> Notifier reaction.
-# Requires repo secret RELEVANCE_DOCS_WEBHOOK_URL (Settings > Secrets and variables > Actions).
+# Pushes PR + drafter:go events to the Relevance "Docs Workforce v2" custom webhooks.
+#
+# Two doors, so a review and a drafter:go label can never race each other:
+#   door A  RELEVANCE_DOCS_WEBHOOK_URL         -> Docs Orchestrator.  drafter:go only.  kind=drafter_go
+#   door B  RELEVANCE_DOCS_STATUS_WEBHOOK_URL  -> Docs Notifier.      status only.      kind=status
+#
+# Both carry correlation_id, recovered from the <!-- docs-run-id: ... --> marker the Docs
+# Drafter has Claude write into the PR body. That is what threads every later event back to
+# the workforce task that created the PR. Falls back to the PR URL when no marker is present
+# (hand-made PRs, or PRs opened before the marker existed).
 
 on:
   pull_request:
@@ -13,30 +20,69 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
-    # Only doc-workforce PRs: drafter:go label events, Claude-authored PRs, or docs-drafter-labelled PRs.
+    # Doc-workforce PRs only: Claude-authored, or docs-drafter-labelled, or a drafter:go label event.
+    # A `labeled` event for any OTHER label is ignored — it is neither a status change nor an action signal.
     if: >-
-      (github.event.action == 'labeled' && github.event.label.name == 'drafter:go') ||
-      github.event.pull_request.user.login == 'claude[bot]' ||
-      contains(github.event.pull_request.labels.*.name, 'docs-drafter')
+      (
+        github.event.action != 'labeled' &&
+        (
+          github.event.pull_request.user.login == 'claude[bot]' ||
+          contains(github.event.pull_request.labels.*.name, 'docs-drafter')
+        )
+      ) ||
+      (github.event.action == 'labeled' && github.event.label.name == 'drafter:go')
     steps:
-      - name: POST event to Relevance Docs Workforce
+      - name: POST event to the Relevance Docs Workforce
         env:
-          WEBHOOK_URL: ${{ secrets.RELEVANCE_DOCS_WEBHOOK_URL }}
+          ACTION_WEBHOOK_URL: ${{ secrets.RELEVANCE_DOCS_WEBHOOK_URL }}
+          STATUS_WEBHOOK_URL: ${{ secrets.RELEVANCE_DOCS_STATUS_WEBHOOK_URL }}
           EVENT_TYPE: ${{ github.event_name }}.${{ github.event.action }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           PR_URL: ${{ github.event.pull_request.html_url }}
           PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
           LABEL: ${{ github.event.label.name }}
           REVIEW_STATE: ${{ github.event.review.state }}
           MERGED: ${{ github.event.pull_request.merged }}
           DELIVERY_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+          IS_DRAFTER_GO: ${{ github.event.action == 'labeled' && github.event.label.name == 'drafter:go' }}
         run: |
+          set -euo pipefail
+
+          # Pick the door. drafter:go is the only thing that wakes the Orchestrator.
+          if [ "$IS_DRAFTER_GO" = "true" ]; then
+            KIND="drafter_go"
+            WEBHOOK_URL="$ACTION_WEBHOOK_URL"
+            DOOR="A (orchestrator)"
+          else
+            KIND="status"
+            WEBHOOK_URL="$STATUS_WEBHOOK_URL"
+            DOOR="B (notifier)"
+          fi
+
           if [ -z "$WEBHOOK_URL" ]; then
-            echo "RELEVANCE_DOCS_WEBHOOK_URL not set yet — skipping (no-op until the secret is added)." >&2
+            echo "No webhook URL configured for door $DOOR — skipping (no-op until the secret is added)." >&2
             exit 0
           fi
+
+          # correlation_id: the marker the Drafter stamped into the PR body, else the PR URL.
+          # PR_BODY is read from the environment, never interpolated into this script.
+          MARKER="$(printf '%s' "$PR_BODY" \
+            | grep -oiE 'docs-run-id:[[:space:]]*[A-Za-z0-9._-]+' \
+            | head -n1 || true)"
+          CORRELATION_ID="$(printf '%s' "$MARKER" | sed -E 's/^.*:[[:space:]]*//')"
+
+          if [ -z "$CORRELATION_ID" ]; then
+            CORRELATION_ID="$PR_URL"
+            echo "No docs-run-id marker on PR #${PR_NUMBER} — falling back to the PR URL as correlation_id." >&2
+          fi
+
+          echo "door=${DOOR} kind=${KIND} event=${EVENT_TYPE} correlation_id=${CORRELATION_ID}"
+
           jq -n \
+            --arg kind "$KIND" \
+            --arg correlation_id "$CORRELATION_ID" \
             --arg event_type "$EVENT_TYPE" \
             --arg repo "$REPO" \
             --arg pr_number "$PR_NUMBER" \
@@ -46,5 +92,19 @@ jobs:
             --arg review_state "$REVIEW_STATE" \
             --arg merged "$MERGED" \
             --arg delivery_id "$DELIVERY_ID" \
-            '{event_type:$event_type, repo:$repo, pr_number:($pr_number|tonumber? // null), pr_url:$pr_url, title:$title, label:$label, review_state:$review_state, merged:$merged, delivery_id:$delivery_id}' \
-          | curl -sS -X POST "$WEBHOOK_URL" -H "Content-Type: application/json" -d @-
+            '{
+              kind:           $kind,
+              correlation_id: $correlation_id,
+              event_type:     $event_type,
+              repo:           $repo,
+              pr_number:      ($pr_number|tonumber? // null),
+              pr_url:         $pr_url,
+              title:          $title,
+              label:          $label,
+              review_state:   $review_state,
+              merged:         $merged,
+              delivery_id:    $delivery_id
+            }' \
+          | curl -sS --fail-with-body -X POST "$WEBHOOK_URL" \
+              -H "Content-Type: application/json" \
+              -d @-
