@@ -68,10 +68,23 @@ jobs:
 
           # correlation_id: the marker the Drafter stamped into the PR body, else the PR URL.
           # PR_BODY is read from the environment, never interpolated into this script.
+          #
+          # Requires the FULL HTML-comment form, and takes the LAST match. Both matter:
+          #  - anchoring on <!-- ... --> stops a body that merely *mentions* "docs-run-id:"
+          #    in prose from beating the real marker;
+          #  - taking the last match stops a worked example beating the real one;
+          #  - requiring the closing --> stops the `-` in the character class from eating
+          #    into it (`<!--docs-run-id:pr-321-->` would otherwise yield "pr-321--").
+          # Every malformed case falls through to the PR-URL fallback below. That is the safe
+          # direction: a bogus id is worse than none, because it is non-empty, so the fallback
+          # would never fire and the PR would thread silently under a garbage key.
+          #
+          # Correlation ids are contracted to [A-Za-z0-9._-] — intake must mint them in that
+          # set (pr-1234, slack-1754449731.482, pylon-<id>).
           MARKER="$(printf '%s' "$PR_BODY" \
-            | grep -oiE 'docs-run-id:[[:space:]]*[A-Za-z0-9._-]+' \
-            | head -n1 || true)"
-          CORRELATION_ID="$(printf '%s' "$MARKER" | sed -E 's/^.*:[[:space:]]*//')"
+            | grep -oiE '<!--[[:space:]]*docs-run-id:[[:space:]]*[A-Za-z0-9._-]+[[:space:]]*-->' \
+            | tail -n1 || true)"
+          CORRELATION_ID="$(printf '%s' "$MARKER" | sed -E 's/[[:space:]]*-->$//; s/^.*:[[:space:]]*//')"
 
           if [ -z "$CORRELATION_ID" ]; then
             CORRELATION_ID="$PR_URL"
