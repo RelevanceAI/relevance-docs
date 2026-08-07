@@ -11,14 +11,25 @@ name: Notify Relevance Docs Workforce
 # the workforce task that created the PR. Falls back to the PR URL when no marker is present
 # (hand-made PRs, or PRs opened before the marker existed).
 
-# NOTE: `opened` is deliberately NOT forwarded. The authoring run posts the status card
-# itself, with the full context (reviewer, summary, rollout). Forwarding `opened` gave the
-# card two independent creators racing each other — on PR #758 the webhook won by 49s,
-# posted a thinner card, and the authoring run then posted a second and took the ledger
-# with it, orphaning the first. Card creation belongs to the authoring run alone.
+# `opened` IS forwarded, and it is what announces a finished PR.
+#
+# History, because this has been both ways: originally the authoring run posted the card
+# AND `opened` was forwarded, which gave the card two independent creators racing each
+# other — on #758 the webhook won by 49s with a thinner card, the authoring run posted a
+# second, and the ledger kept only one. #759 dropped `opened` to fix that.
+#
+# But Claude Code is asynchronous. On a large job the authoring run finishes long before
+# the PR exists, so it has no URL to post and the PR landed in silence. So the shape is
+# now the async-correct one: the authoring run never creates the card, and `opened` does.
+# One creator again, just a different one.
+#
+# `authored` tells the Notifier whether this is a PR the workforce produced — true when the
+# body carries the docs-run-id marker. Only those may create a card; a hand-made PR is
+# still ignored, which is the documented behaviour (Slack only shows PRs that came
+# through the gate).
 on:
   pull_request:
-    types: [synchronize, closed, labeled]
+    types: [opened, synchronize, closed, labeled]
   pull_request_review:
     types: [submitted, dismissed]
 
@@ -91,12 +102,17 @@ jobs:
             | tail -n1 || true)"
           CORRELATION_ID="$(printf '%s' "$MARKER" | sed -E 's/[[:space:]]*-->$//; s/^.*:[[:space:]]*//')"
 
-          if [ -z "$CORRELATION_ID" ]; then
+          # The marker is also how we know this is our own PR rather than a hand-made one.
+          # Only our own may create a status card.
+          if [ -n "$CORRELATION_ID" ]; then
+            AUTHORED="true"
+          else
+            AUTHORED="false"
             CORRELATION_ID="$PR_URL"
-            echo "No docs-run-id marker on PR #${PR_NUMBER} — falling back to the PR URL as correlation_id." >&2
+            echo "No docs-run-id marker on PR #${PR_NUMBER} — not workforce-authored; falling back to the PR URL as correlation_id." >&2
           fi
 
-          echo "door=${DOOR} kind=${KIND} event=${EVENT_TYPE} correlation_id=${CORRELATION_ID}"
+          echo "door=${DOOR} kind=${KIND} event=${EVENT_TYPE} authored=${AUTHORED} correlation_id=${CORRELATION_ID}"
 
           jq -n \
             --arg kind "$KIND" \
@@ -109,10 +125,12 @@ jobs:
             --arg label "$LABEL" \
             --arg review_state "$REVIEW_STATE" \
             --arg merged "$MERGED" \
+            --arg authored "$AUTHORED" \
             --arg delivery_id "$DELIVERY_ID" \
             '{
               kind:           $kind,
               correlation_id: $correlation_id,
+              authored:       $authored,
               event_type:     $event_type,
               repo:           $repo,
               pr_number:      ($pr_number|tonumber? // null),
