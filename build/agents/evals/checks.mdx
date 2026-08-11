@@ -1,0 +1,117 @@
+---
+title: 'Checks'
+sidebarTitle: 'Checks'
+description: 'Create reusable evaluation criteria that score Agent conversations across test sets and Monitor dashboards'
+---
+
+<Info>
+**Rollout status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
+</Info>
+
+Checks are the reusable evaluation criteria that score Agent conversations. You create a Check once in the **Checks** tab and then attach it wherever you need it:
+
+- **To a scenario** in a test set — the Check runs every time that scenario is evaluated.
+- **To a Monitor dashboard** — the Check runs on a sampled portion of live Agent tasks.
+- **To a one-off evaluation** of already-completed tasks selected from the Agent's task list.
+
+The Checks tab has filters that show where each Check is currently used — **All checks**, **Scenarios**, **Dashboard**, and **Unused** — so you can quickly find Checks that aren't attached anywhere yet.
+
+---
+
+## Check types
+
+When creating a Check, you choose one of the following types:
+
+<AccordionGroup>
+  <Accordion title="LLM Judge" icon="brain-circuit">
+    Uses an LLM to evaluate conversations against a prompt you define.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Evaluation Prompt** | Describe the criteria for passing |
+    | **Judge model** | Select which model evaluates the conversation |
+    | **Truncate long conversations** | When enabled, conversations that exceed the judge model's context window are trimmed from the oldest messages first, and the eval runs on the remaining portion. When disabled, oversized conversations fail with an error instead. Note that trimming removes early context, which can affect score accuracy if your evaluation criteria depend on the beginning of the conversation. |
+  </Accordion>
+
+  <Accordion title="Text Includes" icon="text">
+    Checks whether the Agent's response includes specific text.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Required text** | The text that must appear in the response |
+  </Accordion>
+
+  <Accordion title="Text Equals" icon="equals">
+    Checks whether the Agent's response exactly matches an expected value.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Expected value** | The exact message the Agent should have sent |
+  </Accordion>
+
+  <Accordion title="Tool Usage" icon="screwdriver-wrench">
+    Checks whether a specific tool was used during the conversation.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Tool** | Select the tool to check for |
+    | **Position** | Whether the tool was used anywhere, used first, or used last |
+    | **Comparison** | Check if the tool was used at least, exactly, or at most X times |
+
+    When evaluating a Workforce, you can scope a Tool Usage Check to a specific node — a sub-agent or tool in the Workforce — so you can assert that a particular sub-agent used a given tool.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Creating a Check
+
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmpkr397l2hbdqms9w5xddjno" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+</div>
+
+1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
+2. Click **+ New Check**.
+3. Select a **Type** (LLM Judge, Text Includes, Text Equals, or Tool Usage).
+4. Enter a **Name** for the Check (e.g., "Professional tone").
+5. Configure the type-specific settings (see [Check types](#check-types) above).
+6. Click **Create Check**.
+
+<Note>
+Checks attached to a scenario are always included when you run that scenario. Additional Checks from the Checks tab are not auto-included — select the ones you want under **Additional global checks** in the run modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) before kicking off the run.
+</Note>
+
+---
+
+## Best practices for Checks
+
+<CardGroup cols={2}>
+  <Card title="Be specific with Checks" icon="bullseye">
+    Write detailed Check prompts. Vague criteria lead to inconsistent scoring. Include specific examples of what passing looks like.
+  </Card>
+  <Card title="Keep your Checks tab tidy" icon="folder-tree">
+    Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
+  </Card>
+</CardGroup>
+
+---
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Where do my Checks live?">
+    All Checks live in the **Checks** tab under Evaluate. From there you can attach them to scenarios (for evaluation runs), to Monitor dashboards (for live tasks), or to one-off evaluations of completed tasks. The **Scenarios**, **Dashboard**, and **Unused** filters show where each Check is currently attached.
+  </Accordion>
+
+  <Accordion title="Can the LLM Judge evaluate long conversations?">
+    Yes, with configuration. The LLM Judge Check includes a **Truncate long conversations** toggle in the **Advanced** section when creating a Check. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
+  </Accordion>
+
+  <Accordion title="What happens when a conversation is truncated?">
+    The oldest messages are removed from the start of the conversation until it fits within the judge model's context window. The judge is notified that truncation occurred and evaluates the remaining portion. If your evaluation criteria depend on early context — such as the user's original request or instructions given at the start of the conversation — the result may be less accurate. In those cases, disabling truncation and selecting a model with a larger context window is preferable.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+Next: Learn how to [create test sets](/build/agents/evals/test-sets) to organize your evaluation scenarios.

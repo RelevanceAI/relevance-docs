@@ -1,0 +1,66 @@
+---
+title: 'Monitor'
+sidebarTitle: 'Monitor'
+description: 'Score live Agent tasks against Checks with sample-rate controls and trend charts over time'
+---
+
+<Info>
+**Rollout status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
+</Info>
+
+The **Monitor** section continuously scores live Agent tasks against [Checks](/build/agents/evals/checks). Unlike Test, which runs simulated conversations, Monitor evaluates the real conversations your Agent is having.
+
+Monitor is organized into **dashboards** — you can create more than one (for example, one focused on tone, another on tool-use accuracy) and configure each independently.
+
+---
+
+## Creating a Monitor dashboard
+
+1. Go to the **Evaluate** tab and select **Monitor** from the left sidebar.
+2. Click **+ New dashboard** and give it a name.
+3. Attach one or more Checks from the Checks tab.
+4. Set a **Sample rate** — the percentage of incoming tasks to evaluate.
+5. (Optional) Set a **Filter tasks** option to control which task statuses trigger evaluations. Leave blank to evaluate all tasks.
+6. Save the dashboard.
+
+Once configured, qualifying tasks are automatically scored at the sample rate you've set.
+
+---
+
+## Viewing dashboard insights
+
+Each Monitor dashboard shows:
+
+| Metric | Description |
+|--------|-------------|
+| **Overall score** | Aggregate score across all evaluated tasks in the selected date range |
+| **Total runs** | Number of tasks evaluated |
+| **Checks** | Which Checks are attached to the dashboard |
+
+You also get:
+
+- **Overall score timeseries** to spot regressions or improvements over time.
+- **Per-Check charts** so you can see which criteria are slipping.
+- **Version markers** that line up score changes with Agent publishes.
+- **A list of evaluation runs** with score, name, and a drill-in to the full conversation.
+
+<Tip>
+To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
+</Tip>
+
+---
+
+## Best practices for Monitor
+
+<CardGroup cols={2}>
+  <Card title="Run Monitor on live tasks" icon="chart-line">
+    Stand up a Monitor dashboard with your most important Checks so you catch regressions on real conversations, not just simulated ones.
+  </Card>
+  <Card title="Sample wisely" icon="percent">
+    Match the sample rate to your task volume. A low-traffic Agent can run at 100%; high-volume Agents can sample lower to keep costs in check without losing the signal.
+  </Card>
+</CardGroup>
+
+---
+
+Next: Learn how to configure [Publish gates](/build/agents/evals/publish) to require evaluations before publishing your Agent.
