@@ -1,47 +1,7 @@
 ---
 title: 'Cost and billing'
 sidebarTitle: 'Cost and billing'
-description: 'Understand how evaluations consume credits and actions, and how to read cost breakdowns'
+description: 'Cost and billing information for Evals'
 ---
 
-<Info>
-**Rollout status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
-</Info>
-
-Evaluations are billed in credits and actions. Each scenario reports what it consumed in the results view.
-
----
-
-## Cost columns
-
-![Evaluation run results showing the Credits, Actions, and Run time columns for each scenario](/images/agent/evals-cost-breakdown.png)
-
-| Column | What it shows |
-|--------|---------------|
-| **Credits** | Vendor credits consumed by the scenario — the user-simulation LLM calls, the agent's own run, and any LLM-based Checks. Click the value to open the full breakdown. |
-| **Actions** | Actions consumed by the scenario — one for each Check, plus the actions from the agent's own tool runs during the conversation. The evaluation run itself isn't charged a separate action. This column only appears on usage-based plans; on legacy plans the action cost is included in Credits. |
-| **Run time** | The wall-clock duration of the scenario's conversation, measured from its first message to its last. A timing metric, not a charge, and shown per scenario only (the Average Score row doesn't total it). |
-
----
-
-## Cost breakdown
-
-Clicking a **Credits** or **Actions** value opens a breakdown of where that scenario's cost went. It separates the user simulation, the agent's own run, and the Checks that scored the conversation, so you can see which part drives the cost — usually the agent's own execution. The breakdown is split across three components:
-
-![Cost breakdown modal splitting a scenario's credits across Scenario Runner, Agent Execution, and Checks](/images/agent/cost-breakdown.png)
-
-| Component | What it covers |
-|-----------|----------------|
-| **Scenario Runner** | The LLM calls used to simulate the user. Uses credits only. |
-| **Agent Execution** | The agent's own run during the test. Uses credits, plus the actions from each tool the agent runs. These actions were already billed when the agent ran — they're shown here for attribution, not charged again. Workforces have no action-level data, so only credits appear. |
-| **Checks** | Each Check that scores the conversation, broken down by model. Each Check uses credits and counts as one action. |
-
----
-
-## Frequently asked questions
-
-<AccordionGroup>
-  <Accordion title="How are evaluations billed?">
-    Evaluations consume both Actions and Vendor Credits. Each Check costs 1 Action, while Vendor Credits cover the LLM costs of the task run, the user simulator, and any LLM-based Check. Each scenario shows its full breakdown in the results — see [Cost columns](#cost-columns) above for details.
-  </Accordion>
-</AccordionGroup>
+This page has moved. See [Introduction to Evals](/build/agents/evals/introduction#cost-and-billing) for cost and billing details.

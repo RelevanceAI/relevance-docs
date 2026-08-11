@@ -5,10 +5,10 @@ description: 'Execute test sets and individual scenarios to evaluate your Agent 
 ---
 
 <Info>
-**Rollout status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
+Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-Once you've created [test sets](/build/agents/evals/test-sets) and defined [Checks](/build/agents/evals/checks), you're ready to run evaluations and see how your Agent performs.
+Once you've created [test sets](/build/agents/evals/test-sets) and defined [Evaluation checks](/build/agents/evals/checks), you're ready to run evaluations and see how your Agent performs.
 
 ---
 
@@ -18,9 +18,17 @@ You can run an entire test set or an individual scenario from within a test set 
 
 You can select specific scenarios within a test set to run a subset at once, or run all scenarios in the test set together. Note that you cannot bulk-select and run multiple test sets at the same time.
 
-1. Enter a name for the run (e.g., "Scenario run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
-2. Checks already attached to the scenarios are always included. To add Checks from the Checks tab, select the ones you want under **Additional global checks**.
-3. Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
+<Steps>
+  <Step title="Name the run">
+    Enter a name for the run (e.g., "Scenario run - Jan 14, 12:14 PM"). A default name with timestamp is provided.
+  </Step>
+  <Step title="Add global Checks (optional)">
+    Checks already attached to the scenarios are always included. To add Checks from the Checks tab, select the ones you want under **Additional global checks**.
+  </Step>
+  <Step title="Run">
+    Click **Run** to begin. The simulator generates conversations with your Agent based on your scenario prompts and the selected Checks score each conversation.
+  </Step>
+</Steps>
 
 ---
 

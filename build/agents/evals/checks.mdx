@@ -1,11 +1,11 @@
 ---
-title: 'Checks'
-sidebarTitle: 'Checks'
+title: 'Evaluation checks'
+sidebarTitle: 'Evaluation checks'
 description: 'Create reusable evaluation criteria that score Agent conversations across test sets and Monitor dashboards'
 ---
 
 <Info>
-**Rollout status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
+Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
 Checks are the reusable evaluation criteria that score Agent conversations. You create a Check once in the **Checks** tab and then attach it wherever you need it:
@@ -70,29 +70,37 @@ When creating a Check, you choose one of the following types:
 <iframe src="https://app.supademo.com/embed/cmpkr397l2hbdqms9w5xddjno" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
-2. Click **+ New Check**.
-3. Select a **Type** (LLM Judge, Text Includes, Text Equals, or Tool Usage).
-4. Enter a **Name** for the Check (e.g., "Professional tone").
-5. Configure the type-specific settings (see [Check types](#check-types) above).
-6. Click **Create Check**.
+<Steps>
+  <Step title="Open Checks">
+    Go to the **Evaluate** tab and select **Checks** from the left sidebar.
+  </Step>
+  <Step title="Create a new Check">
+    Click **+ New Check**.
+  </Step>
+  <Step title="Select a type">
+    Select a **Type** (LLM Judge, Text Includes, Text Equals, or Tool Usage).
+  </Step>
+  <Step title="Name your Check">
+    Enter a **Name** for the Check (e.g., "Professional tone").
+  </Step>
+  <Step title="Configure settings">
+    Configure the type-specific settings (see [Check types](#check-types) above).
+  </Step>
+  <Step title="Save">
+    Click **Create Check**.
+  </Step>
+</Steps>
 
 <Note>
-Checks attached to a scenario are always included when you run that scenario. Additional Checks from the Checks tab are not auto-included — select the ones you want under **Additional global checks** in the run modal (Run Test Set, Run Scenario, or Evaluate Selected Tasks) before kicking off the run.
+Each scenario supports up to 10 Checks at the scenario level. Checks attached to a scenario are always included when you run that scenario. Additional Checks from the Checks tab are not auto-included — select the ones you want under **Additional global checks** in the run modal before kicking off the run. These global Checks are counted separately from the per-scenario limit.
 </Note>
 
 ---
 
 ## Best practices for Checks
 
-<CardGroup cols={2}>
-  <Card title="Be specific with Checks" icon="bullseye">
-    Write detailed Check prompts. Vague criteria lead to inconsistent scoring. Include specific examples of what passing looks like.
-  </Card>
-  <Card title="Keep your Checks tab tidy" icon="folder-tree">
-    Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
-  </Card>
-</CardGroup>
+- **Be specific with Check prompts.** Write detailed prompts with concrete criteria. Vague prompts lead to inconsistent scoring — include specific examples of what passing looks like.
+- **Keep your Checks tab tidy.** Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
 
 ---
 
@@ -101,6 +109,10 @@ Checks attached to a scenario are always included when you run that scenario. Ad
 <AccordionGroup>
   <Accordion title="Where do my Checks live?">
     All Checks live in the **Checks** tab under Evaluate. From there you can attach them to scenarios (for evaluation runs), to Monitor dashboards (for live tasks), or to one-off evaluations of completed tasks. The **Scenarios**, **Dashboard**, and **Unused** filters show where each Check is currently attached.
+  </Accordion>
+
+  <Accordion title="How many Checks can I add to a scenario?">
+    Each scenario supports up to 10 Checks at the scenario level. Checks added via **Additional global checks** at run time are counted separately.
   </Accordion>
 
   <Accordion title="Can the LLM Judge evaluate long conversations?">
