@@ -5,10 +5,10 @@ description: 'Create and manage test scenarios that simulate real user interacti
 ---
 
 <Info>
-**Rollout status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
+Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-Test sets group related evaluation scenarios together. Each scenario simulates a user interacting with your Agent; running it produces a conversation that gets scored by the [Checks](/build/agents/evals/checks) you've attached.
+Test sets group related evaluation scenarios together. Each scenario simulates a user interacting with your Agent; running it produces a conversation that gets scored by the [Evaluation checks](/build/agents/evals/checks) you've attached.
 
 ---
 
@@ -18,13 +18,21 @@ Test sets group related evaluation scenarios together. Each scenario simulates a
 <iframe src="https://app.supademo.com/embed/cmpks4e442iakqms93emtc5jn" frameBorder="0" title="Creating a test set" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-Follow these steps to create your first test set:
-
-1. Open your Agent in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
-2. Click the **+ New test set** button. Enter a name for your test set and click **Create**.
-3. Click on the test set you just created to open it.
-4. Click the **+ Add scenario** button to add a scenario to your test set.
-5. Fill in the scenario details:
+<Steps>
+  <Step title="Open the Test tab">
+    Open your Agent in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
+  </Step>
+  <Step title="Create a test set">
+    Click the **+ New test set** button. Enter a name for your test set and click **Create**.
+  </Step>
+  <Step title="Open the test set">
+    Click on the test set you just created to open it.
+  </Step>
+  <Step title="Add a scenario">
+    Click the **+ Add scenario** button to add a scenario to your test set.
+  </Step>
+  <Step title="Fill in scenario details">
+    Fill in the scenario details:
 
     | Field | Description | Example |
     |-------|-------------|---------|
@@ -33,8 +41,9 @@ Follow these steps to create your first test set:
     | **Run X times** | How many times to execute this scenario | 3 |
     | **Up to X messages** | Maximum conversation length, where each message is one back-and-forth between the simulated user and the Agent | 10 |
     | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with my bill." |
-
-6. Attach Checks to define how this scenario is scored. You can either pick existing Checks from the [Checks tab](/build/agents/evals/checks) or create new ones inline:
+  </Step>
+  <Step title="Attach Checks">
+    Attach Checks to define how this scenario is scored. You can either pick existing Checks from the [Evaluation checks](/build/agents/evals/checks) tab or create new ones inline:
 
     | Field | Description | Example |
     |-------|-------------|---------|
@@ -44,14 +53,23 @@ Follow these steps to create your first test set:
 
     Newly created Checks land in the Checks tab and can be reused on other scenarios or Monitor dashboards.
 
-7. (Optional) Add **Tool simulations** to emulate Tool usage without actually calling the underlying Tools. Tool simulations are configured per scenario:
+    <Tip>
+    Each scenario supports up to 10 Checks. Checks added via **Additional global checks** at run time are counted separately.
+    </Tip>
+  </Step>
+  <Step title="Add tool simulations (optional)">
+    Add **Tool simulations** to emulate Tool usage without actually calling the underlying Tools. Tool simulations are configured per scenario:
+
     - Select a Tool to simulate.
     - Provide a prompt describing what the Tool should return (a fake response is generated based on your prompt).
     - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response.
 
     When evaluating a Workforce, Tool simulations can be configured per node, so each sub-agent uses its own simulated Tool responses.
-
-8. Click **Save test scenario** to save your configuration.
+  </Step>
+  <Step title="Save">
+    Click **Save test scenario** to save your configuration.
+  </Step>
+</Steps>
 
 <Tip>
 You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached Checks, and Tool simulations.
@@ -112,14 +130,8 @@ Scenarios can be reorganized across test sets as your testing strategy evolves. 
 
 ## Best practices for test sets
 
-<CardGroup cols={2}>
-  <Card title="Test edge cases" icon="triangle-exclamation">
-    Create scenarios for difficult situations: angry customers, off-topic requests, requests to bypass rules, etc.
-  </Card>
-  <Card title="Start simple" icon="seedling">
-    Begin with a few core scenarios that test your Agent's primary use cases. Add complexity as you learn what matters most.
-  </Card>
-</CardGroup>
+- **Test edge cases.** Create scenarios for difficult situations: angry customers, off-topic requests, requests to bypass rules.
+- **Start simple.** Begin with a few core scenarios that test your Agent's primary use cases. Add complexity as you learn what matters most.
 
 ---
 
