@@ -1,0 +1,36 @@
+---
+title: 'Publish gates'
+sidebarTitle: 'Publish'
+description: 'Require evaluations to pass before your Agent can be published'
+---
+
+<Info>
+**Rollout status**: Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
+</Info>
+
+The **Publish** section lets you choose which test sets must pass before your Agent can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
+
+You can configure Publish from the **Publish** section in the Evaluate tab.
+
+---
+
+## Test sets to run
+
+Select which test sets to run before publishing. Click **Add test sets** to choose them — all scenarios in the selected test sets will be evaluated.
+
+---
+
+## Publish settings
+
+Configure how evaluations affect the publish process:
+
+| Setting | Description |
+|---------|-------------|
+| **Minimum pass rate (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
+| **Allow publishing even if eval fails** | When unchecked (the default), the Agent will only be published if the evaluation score meets or exceeds the minimum pass rate. When checked, the Agent publishes regardless of whether the evaluation passes. |
+
+Once configured, click **Save**. When you next publish your Agent, the selected test sets will run automatically and the results will be checked against your minimum pass rate.
+
+---
+
+Next: Understand [cost and billing](/build/agents/evals/cost-billing) for evaluation runs.
