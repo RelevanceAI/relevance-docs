@@ -16,6 +16,40 @@ Zoom offers the ability to create cloud web meetings.
 
 Once your account is connected, you can use Zoom steps in the Tool builder. You will have access to a "Zoom API Call" step which you will be able to use to create a meeting, update a meeting, delete a meeting, and more. You can run that step with the required API call for scheduling a meeting.
 
+#### Advanced settings — response format
+
+The Zoom API Call step includes a **Response format** option in its Advanced settings. This controls how the API response body is parsed before being passed to the next step.
+
+| Option | When to use |
+|--------|-------------|
+| `string` | Use when fetching binary content, such as recording caption files (`application/octet-stream`). Returns the raw response body as a string. |
+| `json` | Use when the API returns a JSON object or array. |
+| `arrayBuffer` | Use when you need a raw binary buffer, for example to pass data to another binary-aware step. |
+| `blob` | Use when you need a Blob object for browser-compatible binary handling. |
+
+If you leave this field unset, the step uses automatic detection based on the response's `Content-Type` header — the same behavior as before this setting was added.
+
+<Warning>
+If you have a Zoom API Call step that fetches recording captions or other binary files, those tools were silently returning an empty response body. Deploying this update alone does not fix affected tools — you must manually set the Response format option on each existing step (see steps below).
+</Warning>
+
+**To fix existing tools that download binary files:**
+
+1. Open the tool in the Tool builder.
+2. Find your Zoom API Call step.
+3. Expand **Advanced settings**.
+4. Set **Response format** to `string`.
+5. Save and republish the tool.
+
+#### Downloading recording captions
+
+Zoom's recording caption files are served as binary content. Without setting the response format, the response body is silently discarded even though the request succeeds. To retrieve caption content:
+
+1. Call the Zoom API endpoint for the recording file (e.g., `GET /recordings/{meetingId}/participant_files`).
+2. In the Zoom API Call step, expand **Advanced settings**.
+3. Set **Response format** to `string`.
+4. The step output will contain the caption file content as a string, which you can then pass to downstream steps for processing.
+
 ### How to remove integration?
 
 1. Go to the **Integrations & API Keys** page from the sidebar
@@ -44,5 +78,11 @@ Once your account is connected, you can use Zoom steps in the Tool builder. You 
     6. Retry connecting your Zoom account in Relevance AI.
 
     This applies whether you're connecting directly through Relevance AI or via third-party services like Pipedream.
+  </Accordion>
+
+  <Accordion title="Why does my Zoom API Call step return an empty response body for recording files?">
+    Recording caption files and other binary responses from Zoom are served with `Content-Type: application/octet-stream`. Previously, these responses were discarded and the step returned an empty body despite the request succeeding with a 200 OK status.
+
+    To fix this, expand **Advanced settings** on your Zoom API Call step and set **Response format** to `string`. This tells the step to return the raw response body rather than attempting to parse it as JSON. If you set up this step before the Response format option was introduced, you must make this change manually — redeploying your tool does not apply the fix automatically.
   </Accordion>
 </AccordionGroup>
