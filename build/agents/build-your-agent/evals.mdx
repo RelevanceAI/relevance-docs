@@ -166,6 +166,7 @@ Follow these steps to create your first test set:
     | **Run X times** | How many times to execute this scenario | 3 |
     | **Up to X messages** | Maximum conversation length, where each message is one back-and-forth between the simulated user and the Agent | 10 |
     | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with my bill." |
+    | **Approval handling** | How the eval handles tool approval requests — prevents the eval from hanging when your agent or workforce has approval-gated tools. See [Approval handling](#approval-handling) for details on each mode. | auto |
 
 6. Attach Checks to define how this scenario is scored. You can either pick existing Checks from the Checks tab or create new ones inline:
 
@@ -189,6 +190,20 @@ Follow these steps to create your first test set:
 <Tip>
 You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached Checks, and Tool simulations.
 </Tip>
+
+### Approval handling
+
+When an agent or workforce uses tools that require human approval before running, a running eval would pause and wait indefinitely for a human to respond — causing the eval to hang. The **Approval handling** dropdown in the scenario configuration form lets the eval resolve those requests automatically.
+
+| Mode | Behavior |
+|------|----------|
+| **auto** | A simulated AI evaluates each approval request based on conversation context and decides whether to approve or deny it. This is the default. |
+| **approve_all** | Every approval request is automatically confirmed. The approved tools execute and their real output becomes part of the conversation. |
+| **reject_all** | Every approval request is automatically denied. The agent receives a rejection and continues from there. |
+
+Use **auto** when you want realistic approval decisions that vary with context — the simulated AI may approve some requests and deny others based on what makes sense in the conversation. Use **approve_all** when you need to test the full tool execution path end-to-end, such as verifying that downstream steps behave correctly after an approval. Use **reject_all** when you want to verify that your agent handles denied requests gracefully — for example, that it informs the user, escalates, or falls back to an alternative.
+
+Approval handling works for both agent and workforce scenarios.
 
 ### Managing scenarios
 
@@ -442,5 +457,9 @@ Clicking a **Credits** or **Actions** value opens a breakdown of where that scen
 
   <Accordion title="I don't see the Evals section. How do I get access?">
     Evals is rolling out progressively, starting with Enterprise customers. If you don't see the Evaluate tab in the Agent builder, reach out to your account manager to discuss access.
+  </Accordion>
+
+  <Accordion title="What happens when my agent has approval-gated tools?">
+    If your agent or workforce uses a tool that requires human approval, an eval scenario would pause indefinitely waiting for a response. The **Approval handling** setting in the scenario configuration prevents this by automatically resolving approval requests. Set it to **auto** to let a simulated AI decide each request contextually, **approve_all** to confirm every request so the tools actually execute, or **reject_all** to deny every request and test how your agent handles rejection. See [Approval handling](#approval-handling) for details.
   </Accordion>
 </AccordionGroup>
