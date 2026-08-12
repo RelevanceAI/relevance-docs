@@ -16,6 +16,16 @@ Zoom offers the ability to create cloud web meetings.
 
 Once your account is connected, you can use Zoom steps in the Tool builder. You will have access to a "Zoom API Call" step which you will be able to use to create a meeting, update a meeting, delete a meeting, and more. You can run that step with the required API call for scheduling a meeting.
 
+#### Zoom API Call tool step
+
+To add a Zoom API Call step to your tool, type "Zoom" in the tool step search bar and select the step from the results.
+
+The step has the following fields:
+
+- **Method**: The HTTP method for the API request (e.g., GET, POST, DELETE).
+- **Endpoint**: The Zoom API endpoint path (e.g., `/v2/users/me/meetings`).
+- **Zoom subdomain** *(optional)*: Your organization's Zoom vanity subdomain. Enter only the subdomain prefix — for example, if your Zoom account is at `acme.zoom.us`, enter `acme`. This is required for Business, Enterprise, and Education accounts where Zoom API responses return asset download URLs on a custom subdomain. Leaving this blank uses the default `zoom.us` domain and is fully backward compatible.
+
 ### How to remove integration?
 
 1. Go to the **Integrations & API Keys** page from the sidebar
