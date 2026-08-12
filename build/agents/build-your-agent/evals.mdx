@@ -185,7 +185,17 @@ Follow these steps to create your first test set:
 
     When evaluating a Workforce, Tool simulations can be configured per node, so each sub-agent uses its own simulated Tool responses.
 
-8. Click **Save test scenario** to save your configuration.
+8. (Optional) Set the **Approval handling** mode to control how the eval handles approval-gated tools. If your agent or workforce has tools that require human approval before executing, eval runs would otherwise hang indefinitely while waiting for a human who never arrives.
+
+    | Mode | Behavior |
+    |------|----------|
+    | **Auto** (default) | The simulated user decides each approval request intelligently based on the scenario context |
+    | **Approve all** | Every approval request is automatically confirmed; the tool executes |
+    | **Reject all** | Every approval request is automatically denied; the tool does not execute |
+
+    When an approval is granted, the tool actually executes during the eval — the run tests end-to-end behavior rather than stopping at the approval gate. Use **Approve all** when testing what your agent does after a tool runs, **Reject all** when testing how your agent handles a denied tool, and **Auto** for contextual decisions that reflect realistic user behavior.
+
+9. Click **Save test scenario** to save your configuration.
 
 <Tip>
 You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached Checks, and Tool simulations.
@@ -453,6 +463,10 @@ Clicking a **Credits** or **Actions** value opens a breakdown of where that scen
 
   <Accordion title="Can I move scenarios between test sets?">
     Yes. Each scenario has a dropdown menu (three-dot icon) with three options: **Move** relocates the scenario to another test set, **Copy** creates a duplicate in another test set, and **Duplicate** creates a copy in the same test set.
+  </Accordion>
+
+  <Accordion title="My agent uses approval-gated tools — will evals hang waiting for approval?">
+    No. Use the **Approval handling** dropdown in the scenario configuration to control what happens when the eval reaches an approval gate. Set it to **Approve all** to automatically confirm every approval request (the tool will execute), **Reject all** to automatically deny every request, or leave it on **Auto** to let the simulated user decide based on context. Without this setting configured for approval-gated tools, an eval run would pause indefinitely waiting for a human who never arrives.
   </Accordion>
 
   <Accordion title="I don't see the Evals section. How do I get access?">
