@@ -1,18 +1,22 @@
 ---
-title: "Build with Inventor"
-sidebarTitle: "Build with Inventor"
-description: "A copilot agent inside the Relevance AI UI that builds, debugs, and iterates on agents, tools, workforces, and triggers from a natural-language description."
+title: "Build with Invent"
+sidebarTitle: "Build with Invent"
+description: "A built-in agent in Relevance AI that builds, debugs, and monitors Agents, Tools, Workforces, and Triggers from natural-language descriptions."
 ---
 
-<img src="/images/inventor.png" alt="The Inventor panel in Relevance AI" />
+<img src="/images/invent-start-menu.png" alt="The Invent start menu in Relevance AI" />
 
-## What is Inventor
+## What is Invent
 
-Inventor is a forward deployed agent inside the Relevance AI UI. Rather than doing every job itself, it staffs a team of specialist agents and manages them: it learns your processes, connects the systems those processes run on, builds an agent for each job, sets the quality bar each one has to pass, then monitors, fixes, and measures the results.
+Invent is a forward deployed agent inside the Relevance AI UI. Rather than doing every job itself, it staffs a team of specialist agents and manages them: it learns your processes, connects the systems those processes run on, builds an Agent for each job, sets the quality bar each one has to pass, then monitors, fixes, and measures the results.
 
 It uses the Relevance AI MCP under the hood to take real actions on your project, so from a single chat surface you can build, debug, and iterate without leaving the platform.
 
-Give Inventor to a single leader, a team, or every individual contributor — it builds and manages the agents underneath it in each case.
+Give Invent to a single leader, a team, or every individual contributor — it builds and manages the Agents underneath it in each case.
+
+## Access
+
+Invent is available by default for all org admins, and no one else. For each project, org admins have a toggle to turn Invent on for all users in that project.
 
 ## What you can do
 
@@ -20,25 +24,22 @@ Give Inventor to a single leader, a team, or every individual contributor — it
 
 <CardGroup cols={2}>
   <Card title="Learn your processes" icon="book-open">
-    Inventor works through your standard operating procedures with you, reading them back and checking the judgment calls, so the agents it builds reflect how the work is actually done.
+    Invent works through your standard operating procedures with you, reading them back and checking the judgment calls, so the Agents it builds reflect how the work is actually done.
   </Card>
   <Card title="Connect your systems" icon="plug">
     Connect the systems your processes already run on, across [1,000+ integrations](/build/agents/build-your-agent/agent-triggers/integrations), plus custom connectors where an integration doesn't exist.
   </Card>
   <Card title="Staff the agent team" icon="users">
-    Instead of one agent doing everything, Inventor creates a specialist agent per job, gives each one the tools it needs, and wires the triggers that fire them.
+    Instead of one Agent doing everything, Invent creates a specialist Agent per job, gives each one the Tools it needs, and wires the Triggers that fire them.
   </Card>
   <Card title="Build from a description" icon="wand-magic-sparkles">
-    Create new agents, tools, workforces, and triggers from a natural-language description.
+    Create new Agents, Tools, Workforces, and Triggers from a natural-language description.
   </Card>
   <Card title="Recommend the right abstraction" icon="sitemap">
-    Get a recommendation on tool vs. agent vs. workforce based on your use case.
+    Get a recommendation on Tool vs. Agent vs. Workforce based on your use case.
   </Card>
   <Card title="Discover before you build" icon="magnifying-glass">
-    Find existing agents and tools before building duplicates.
-  </Card>
-  <Card title="Build with your voice" icon="microphone">
-    Start a voice session with Inventor to describe what you want to build, then conclude the conversation and apply changes when you're done.
+    Find existing Agents and Tools before building duplicates.
   </Card>
 </CardGroup>
 
@@ -46,110 +47,99 @@ Give Inventor to a single leader, a team, or every individual contributor — it
 
 <CardGroup cols={2}>
   <Card title="Set performance requirements" icon="flask-vial" href="/build/agents/build-your-agent/evals">
-    Define the checks an agent has to pass before it handles real work. Inventor diagnoses errored logs and tools, explains why a run failed, and proposes how to fix it — so you can build stronger evals.
+    Define the checks an Agent has to pass before it handles real work. Invent diagnoses errored logs and Tools, explains why a run failed, and proposes how to fix it — so you can build stronger evals.
   </Card>
   <Card title="Detect issues" icon="gauge">
-    Inventor tracks agent pass rates and flags when performance drifts below the threshold you set.
+    Invent tracks Agent pass rates and flags when performance drifts below the threshold you set.
   </Card>
   <Card title="Debug failing agents" icon="bug">
-    Inventor reads run history, identifies the failing step, explains what went wrong, and proposes a fix.
+    Invent reads run history, identifies the failing step, explains what went wrong, and proposes a fix.
   </Card>
   <Card title="Improve and optimize" icon="pen-to-square">
-    Get recommended edits across prompts, tools, examples, and models to fix quality problems — change a prompt, swap a model, restructure a workforce, or regenerate a tool's schema.
+    Get recommended edits across prompts, Tools, examples, and models to fix quality problems — change a prompt, swap a model, restructure a Workforce, or regenerate a Tool's schema.
+  </Card>
+  <Card title="Schedule check-ins" icon="calendar-check">
+    Ask Invent to check back on an Agent in a few days. It schedules a review, checks in at the agreed time, and only surfaces something if it finds an issue.
+  </Card>
+  <Card title="Set alarms" icon="bell">
+    Configure eval-based alerts. Invent watches your evals and notifies you when pass rates cross the threshold you set, then suggests a fix.
   </Card>
   <Card title="Measure business impact" icon="chart-line">
-    Inventor reads metrics from the source systems themselves, not just from agent logs, so results tie back to real outcomes.
-  </Card>
-  <Card title="Suggest new agents" icon="lightbulb">
-    Inventor analyzes your data and identifies additional agents worth building.
-  </Card>
-  <Card title="Run tasks in parallel" icon="network-wired">
-    Inventor spawns child agents to handle parallel tasks, enabling fan-out execution for complex, multi-step workflows.
+    Invent reads metrics from the source systems themselves, not just from Agent logs, so results tie back to real outcomes.
   </Card>
   <Card title="Restore a version" icon="clock-rotate-left">
-    Roll an existing agent, tool, or workforce back to an earlier version, with a required confirmation step.
-  </Card>
-  <Card title="Log bugs to engineering" icon="bug-slash">
-    When Inventor hits a platform issue it can't fix, it logs a bug to our engineering team on your behalf.
+    Roll an existing Agent, Tool, or Workforce back to an earlier version, with a required confirmation step.
   </Card>
 </CardGroup>
 
-<Warning>
-  Inventor can log bugs on your behalf. These go to our engineering team, not support, so you won't receive updates on their progress.
-</Warning>
+## Where to find Invent
 
-## Where to find Inventor
-
-Inventor is available as a persistent side panel from any builder page — tool, agent, workforce, knowledge, and home. The universal side panel is the primary way to access Inventor.
-
-<Info>
-  The standalone `/invent` route is being deprecated. Use the side panel instead.
-</Info>
+Invent is available as a persistent side panel from any builder page — Tool, Agent, Workforce, Knowledge, and home.
 
 <Tabs>
   <Tab title="Side panel">
-    The Inventor side panel is accessible from any page in the Relevance AI builder. Look for the **Inventor** button in the left sidebar or page header — clicking it opens the panel without navigating away from your current page.
+    The Invent side panel is accessible from any page in the Relevance AI builder. Look for the **Invent** button in the left sidebar or page header — clicking it opens the panel without navigating away from your current page.
   </Tab>
   <Tab title="Home page">
-    <img src="/images/invent-dashboard-access.png" alt="The Inventor home page and sidebar access point in Relevance AI" />
+    <img src="/images/invent-dashboard-access.png" alt="The Invent home page and sidebar access point in Relevance AI" />
 
-    Inventor has its own item in the left sidebar that opens a full home page — a central hub for all your Inventor conversations.
+    Invent has its own item in the left sidebar that opens a full home page — a central hub for all your Invent conversations.
 
-    Start Inventor from the home page:
+    Start Invent from the home page:
 
     <Steps>
       <Step title="Open Home">
         Click **Home** in the left sidebar.
       </Step>
-      <Step title="Open Inventor">
-        Click the **Inventor** button in the page header.
+      <Step title="Open Invent">
+        Click the **Invent** button in the page header.
       </Step>
     </Steps>
   </Tab>
   <Tab title="While editing an agent">
-    <img src="/images/agent-inventor-access.png" alt="The Inventor entry point at the top of the agent builder panel in Relevance AI" />
+    <img src="/images/agent-inventor-access.png" alt="The Invent entry point at the top of the agent builder panel in Relevance AI" />
 
-    Inventor sits at the top of the agent builder, above Prompt, Tools, Knowledge, and Triggers. Open it to iterate on the agent you're editing without leaving the page.
+    Invent sits at the top of the agent builder, above Prompt, Tools, Knowledge, and Triggers. Open it to iterate on the Agent you're editing without leaving the page.
 
-    Start Inventor while editing an agent:
+    Start Invent while editing an Agent:
 
     <Steps>
       <Step title="Open the Agents page">
         Click **Agents** in the left sidebar.
       </Step>
       <Step title="Open or create an agent">
-        Open an existing agent or create a new one to enter the agent editor.
+        Open an existing Agent or create a new one to enter the agent editor.
       </Step>
-      <Step title="Open Inventor">
-        Click the **Inventor** button in the left sidebar of the agent editor.
+      <Step title="Open Invent">
+        Click the **Invent** button in the left sidebar of the agent editor.
       </Step>
     </Steps>
   </Tab>
   <Tab title="When creating an agent">
-    <img src="/images/inventor-when-creating-agent.png" alt="The Invent option when creating an agent in Relevance AI" />
+    <img src="/images/inventor-when-creating-agent.png" alt="The Invent option when creating an Agent in Relevance AI" />
 
-    Start Inventor from the Agents page:
+    Start Invent from the Agents page:
 
     <Steps>
       <Step title="Open the Agents page">
         Click **Agents** in the left sidebar.
       </Step>
-      <Step title="Build with Inventor">
-        Click the **Build with Inventor** button in the header.
+      <Step title="Build with Invent">
+        Click the **Build with Invent** button in the header.
       </Step>
     </Steps>
   </Tab>
   <Tab title="When creating a tool">
-    <img src="/images/inventor-when-creating-tool.png" alt="The Invent option when creating a tool in Relevance AI" />
+    <img src="/images/inventor-when-creating-tool.png" alt="The Invent option when creating a Tool in Relevance AI" />
 
-    Start Inventor from the Tools page:
+    Start Invent from the Tools page:
 
     <Steps>
       <Step title="Open the Tools page">
         Click **Tools** in the left sidebar.
       </Step>
-      <Step title="Build with Inventor">
-        Click the **Build with Inventor** button in the header.
+      <Step title="Build with Invent">
+        Click the **Build with Invent** button in the header.
       </Step>
     </Steps>
 
@@ -157,233 +147,210 @@ Inventor is available as a persistent side panel from any builder page — tool,
   </Tab>
 </Tabs>
 
-## How to use Inventor
+## How to use Invent
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
 <iframe src="https://app.supademo.com/embed/cmq65ouq340ajqm6u2uly8nst?embed_v=2" frameBorder="0" title="How to use Invent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
 <Warning>
-  Inventor is expensive to run and consumes significant credits. Use it deliberately and keep an eye on your usage.
+  Invent is expensive to run and consumes significant credits. Use it deliberately and keep an eye on your usage.
 </Warning>
 
 <Steps>
-  <Step title="Open Inventor">
-    From the Relevance AI home dashboard, click **Inventor**.
+  <Step title="Open Invent">
+    From the Relevance AI home dashboard, click **Invent**.
   </Step>
   <Step title="Describe what you want">
-    Type a natural-language description of what you want to build, debug, or iterate on — agents, tools, workforces, and triggers. Be specific about the outcome you're after.
+    Type a natural-language description of what you want to build, debug, or iterate on — Agents, Tools, Workforces, and Triggers. Be specific about the outcome you're after.
   </Step>
   <Step title="Review and iterate">
-    Inventor generates a first version or applies your edit. Review it, then refine by describing the changes you want.
+    Invent generates a first version or applies your edit. Review it, then refine by describing the changes you want.
   </Step>
 </Steps>
 
 ## Credit usage
 
-<img src="/images/invent-credit-counter.png" alt="The real-time credit counter in the Inventor panel" />
+<img src="/images/invent-credit-counter.png" alt="The real-time credit counter in the Invent panel" />
 
-The Inventor panel shows a real-time credit counter — "X credits used" with a coins icon — that updates with each interaction, such as generating an agent, requesting an adjustment, or asking a follow-up question.
+The Invent panel shows a real-time credit counter — "X credits used" with a coins icon — that updates with each interaction, such as generating an Agent, requesting an adjustment, or asking a follow-up question.
 
-The counter lives in the Inventor panel and tracks only the credits used in your current session.
+The counter lives in the Invent panel and tracks only the credits used in your current session.
 
-## Inventor features
+<img src="/images/invent-task-statuses.png" alt="Invent task history showing approve, idle, and other statuses" />
 
-<Tabs>
-  <Tab title="Auto-accept and tool approval">
-    <img src="/images/auto-accept.png" alt="The auto-accept setting in Inventor" />
+Past sessions in your conversation history show each task with a status: approved (the action was applied), idle (waiting for your input), or completed. You can review what Invent did and track credit spend across sessions from the history view.
 
-    By default, the changes Inventor makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Inventor apply its changes as it works, without stopping for your approval. Version restores are the exception — Inventor always asks you to confirm before restoring. Keep it off when you want a checkpoint on each change, and turn it on when you trust Inventor to iterate quickly.
+## Invent features
 
-    When auto-accept is off, tool runs that require your approval appear in the approval queue. The queue shows pending actions and lets you approve or reject each one before Inventor proceeds. This gives you fine-grained control over exactly what Inventor executes.
-  </Tab>
-  <Tab title="Model selection">
-    <img src="/images/invent-model-selector.png" alt="The model selector in Inventor" />
+<AccordionGroup>
+  <Accordion title="Auto-accept and tool approval">
+    <img src="/images/auto-accept.png" alt="The auto-accept setting in Invent" />
 
-    The model dropdown sets which LLM powers your Invent session. Models are grouped into three tiers:
+    By default, the changes Invent makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Invent apply its changes as it works, without stopping for your approval. Version restores are the exception — Invent always asks you to confirm before restoring. Keep it off when you want a checkpoint on each change, and turn it on when you trust Invent to iterate quickly.
 
-    <CardGroup cols={3}>
-      <Card title="Cheapest" icon="piggy-bank">
-        Cost-optimized models. Free plan users default to this tier to preserve credits.
-      </Card>
-      <Card title="Balanced" icon="scale-balanced">
-        A middle ground between cost and capability. Includes models like Claude Sonnet 4.6.
-      </Card>
-      <Card title="Most capable" icon="brain">
-        Highest-capability models for complex tasks. Includes models like Claude Opus 4.8.
-      </Card>
-    </CardGroup>
+    When auto-accept is off, tool runs that require your approval appear in the approval queue. The queue shows pending actions and lets you approve or reject each one before Invent proceeds. This gives you fine-grained control over exactly what Invent executes.
+  </Accordion>
+  <Accordion title="Model selection">
+    <img src="/images/invent-model-selector.png" alt="The model selector in Invent" />
 
-    Your plan determines the default model. You can switch models at any time from the dropdown in the Inventor panel.
-  </Tab>
-  <Tab title="Memories">
-    Inventor automatically learns about you across conversations and stores what it learns as memories. You don't add memories manually — Inventor builds them passively as you work.
+    The model dropdown sets which large language model (LLM) powers your Invent session. Models are grouped into three tiers:
 
-    Memories let Inventor carry context between sessions: your role, the kinds of things you build, naming conventions you prefer, and other patterns it picks up over time.
+    - **Cheapest** — Cost-optimized models. Free plan users default to this tier to preserve credits.
+    - **Balanced** — A middle ground between cost and capability. Includes models like Claude Sonnet 4.6.
+    - **Most capable** — Highest-capability models for complex tasks. Includes models like Claude Opus 4.7.
+
+    <img src="/images/invent-model-capabilities.png" alt="The model list showing which models support text and images" />
+
+    When you click on a model, you can see its capabilities — including whether it supports text only or text and images.
+
+    Your plan determines the default model. You can switch models at any time from the dropdown in the Invent panel.
+  </Accordion>
+  <Accordion title="Memories">
+    Invent automatically learns about you across conversations and stores what it learns as memories. You don't add memories manually — Invent builds them passively as you work.
+
+    Memories let Invent carry context between sessions: your role, the kinds of things you build, naming conventions you prefer, and other patterns it picks up over time.
 
     To view, search, edit, or delete your memories:
 
     <Steps>
-      <Step title="Open Inventor settings">
-        Click the settings icon in the Inventor panel header, or open **Memories** from the sidebar.
+      <Step title="Open Invent settings">
+        Click the settings icon in the Invent panel header, or open **Memories** from the sidebar.
       </Step>
       <Step title="Manage your memories">
-        Browse the list, search for a specific memory, edit its content, or delete memories you don't want Inventor to carry forward.
+        Browse the list, search for a specific memory, edit its content, or delete memories you don't want Invent to carry forward.
       </Step>
     </Steps>
 
-    <Info>
-      Deleting a memory removes it permanently. Inventor will re-learn that information if it comes up again in future conversations.
-    </Info>
-  </Tab>
-  <Tab title="Scheduled check-ins">
-    You can schedule recurring Inventor conversations so Inventor checks in with you at regular intervals — useful for standing reviews, periodic status summaries, or recurring build sessions.
+    <Warning>
+      Deleting a memory removes it permanently. Invent will re-learn that information if it comes up again in future conversations.
+    </Warning>
+  </Accordion>
+  <Accordion title="Scheduled check-ins">
+    Invent can check back in on your work later. Ask it to review an Agent in a few days and it will schedule a message to itself, then look again at the time you agreed. If it finds something worth your attention, it lets you know. If everything looks fine, it stays quiet.
 
-    To set up a scheduled check-in:
+    **Scheduling a check-in**
 
-    <Steps>
-      <Step title="Open the overflow menu">
-        In the chat toolbar or task board header, click the overflow menu (three dots).
-      </Step>
-      <Step title="Select Scheduled check-ins">
-        Choose **Scheduled check-ins** from the menu.
-      </Step>
-      <Step title="Configure the schedule">
-        Set the recurrence, time, and what you want Inventor to do at each check-in.
-      </Step>
-    </Steps>
-  </Tab>
-  <Tab title="Voice sessions">
-    Voice sessions let you describe what you want to build by speaking rather than typing. Inventor listens, processes your request, and responds — then when you're done, you conclude the session and Inventor builds from the conversation.
+    Just ask. There's no form to fill in. Tell Invent to check back on an Agent later and it will suggest a sensible interval based on how busy that Agent is — from about a day for Agents running many tasks a day, up to a week for quiet ones. You can pick a different time if you'd rather.
 
-    To start a voice session:
+    **What happens when a check-in runs**
 
-    <Steps>
-      <Step title="Open the voice session">
-        Click the microphone icon in the Inventor panel.
-      </Step>
-      <Step title="Describe what you want">
-        Speak your request. Inventor shows a breathing animation while it listens and processes.
-      </Step>
-      <Step title="Conclude and build">
-        When you're finished, click **Conclude**. Inventor transitions from the voice interface and applies your request.
-      </Step>
-    </Steps>
-  </Tab>
-  <Tab title="Subagent spawning">
-    For complex workflows, Inventor can spawn child agents to handle parallel tasks. Instead of executing steps sequentially, Inventor fans out work across multiple subagents and coordinates their results.
+    Invent reviews the resource the way you would: test results and monitoring first, then errors, then recent activity. If nothing needs attention, you won't hear from it. If something does, it sends you a short summary of the problem along with a suggested fix. Approve the fix and Invent applies it to your draft, then offers to check back again to confirm it worked.
+  </Accordion>
+  <Accordion title="Alarms and alerts">
+    <img src="/images/invent-alarms.png" alt="The alarms and alerts configuration in Invent" />
 
-    When Inventor spawns subagents, the panel shows the status of each child agent — running, completed, or failed — so you can follow along as the work progresses. Results are collected and surfaced back to you in the main conversation once all subagents complete.
+    Invent watches your evals and makes suggestions when performance drifts. Configure an alarm by setting a threshold and sensitivity level — Invent notifies you when pass rates cross the threshold, then suggests a fix.
 
-    This happens automatically when Inventor determines that a task is better handled in parallel. You don't need to configure it manually.
-  </Tab>
-  <Tab title="Suggested actions">
-    When you open a new Inventor conversation, the empty state shows suggested actions to help you get started. The suggestions are context-aware — they change based on what you're working on.
+    You set up alarms the same way you schedule check-ins: just ask. Tell Invent what eval you want to monitor and at what threshold, and it will configure the alarm for you.
 
-    When you have an agent open:
+    <img src="/images/invent-evals-monitor.png" alt="Invent monitoring eval results" />
+
+    <img src="/images/invent-create-evals.png" alt="Creating evals with Invent" />
+
+    <img src="/images/invent-fix-failing-evals.png" alt="Invent proposing fixes for failing evals" />
+
+    When an alarm fires, Invent reviews the failing evals, explains what's wrong, and proposes a fix. Approve the fix and Invent applies it to your draft.
+  </Accordion>
+  <Accordion title="Suggested actions">
+    When you open a new Invent conversation, the empty state shows suggested actions to help you get started. The suggestions are context-aware — they change based on what you're working on.
+
+    When you have an Agent open:
 
     <CardGroup cols={2}>
       <Card title="Add test coverage" icon="flask-vial">
-        Suggested when your agent doesn't have evals set up.
+        Suggested when your Agent doesn't have evals set up.
       </Card>
       <Card title="Add production monitoring" icon="chart-line">
-        Suggested when your agent doesn't have a monitoring dashboard.
+        Suggested when your Agent doesn't have a monitoring dashboard.
       </Card>
       <Card title="Summarize test runs" icon="list-check">
-        Suggested when your agent has existing eval runs to review.
+        Suggested when your Agent has existing eval runs to review.
       </Card>
       <Card title="Summarize performance" icon="gauge">
-        Suggested when your agent has monitoring dashboards with data.
+        Suggested when your Agent has monitoring dashboards with data.
       </Card>
     </CardGroup>
 
-    Without a specific agent context, Inventor shows general starting points:
+    Without a specific Agent context, Invent shows general starting points:
 
-    <CardGroup cols={1}>
-      <Card title="Build from a discussion" icon="comments">
-        Start by talking through what you want to build before Inventor generates anything.
-      </Card>
-      <Card title="Discuss best practices" icon="book-open">
-        Ask Inventor to walk through patterns and approaches for your use case.
-      </Card>
-      <Card title="Improve reliability" icon="shield-check">
-        Get Inventor to audit an existing agent or tool for reliability gaps.
-      </Card>
-    </CardGroup>
-  </Tab>
-  <Tab title="About you">
-    <img src="/images/about-you-invent.png" alt="The About You setting in Inventor" />
+    - **Build from a discussion** — start by talking through what you want to build before Invent generates anything.
+    - **Discuss best practices** — ask Invent to walk through patterns and approaches for your use case.
+    - **Improve reliability** — get Invent to audit an existing Agent or Tool for reliability gaps.
+  </Accordion>
+  <Accordion title="About you">
+    <img src="/images/about-you-invent.png" alt="The About You setting in Invent" />
 
-    About You tells Inventor who you are so it tailors every response to your role and work from the first message — no re-explaining your context each session. It's descriptive only: it shapes how Inventor talks to you and what it assumes about your work, but it doesn't change Inventor's role or hardcode any tool configuration.
+    About You tells Invent who you are so it tailors every response to your role and work from the first message — no re-explaining your context each session. It shapes how Invent talks to you and what it assumes about your work, but it doesn't change Invent's role or hardcode any Tool configuration.
 
     What it changes:
 
-    <CardGroup cols={3}>
-      <Card title="Tone and language" icon="comments">
-        Simpler explanations for non-technical users, more precise technical language for engineers.
-      </Card>
-      <Card title="Domain assumptions" icon="lightbulb">
-        If you're in sales, it won't default to engineering-flavored tool designs.
-      </Card>
-      <Card title="Personalization" icon="user">
-        Addresses you by first name at natural moments like greetings, not robotically in every message.
-      </Card>
-    </CardGroup>
+    - More precise technical language for engineers, simpler explanations for non-technical users.
+    - Domain-aware defaults — if you're in sales, Invent won't default to engineering-flavored Tool designs.
+    - First-name address at natural moments like greetings, not robotically in every message.
 
     To set it up:
 
     <Steps>
-      <Step title="Open Inventor">
-        Open the Inventor side panel or home page.
+      <Step title="Open Invent">
+        Open the Invent side panel or home page.
       </Step>
       <Step title="Click Settings">
         The settings pop up — enter your details under **About You**.
       </Step>
     </Steps>
-  </Tab>
-  <Tab title="Conversations">
-    Inventor saves each conversation as a session automatically. Opening the panel starts a new chat, and your past sessions stay available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
+  </Accordion>
+  <Accordion title="Conversations">
+    Invent saves each conversation as a session automatically. Opening the panel starts a new chat, and your past sessions stay available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
 
-    <Info>
+    <img src="/images/invent-history.png" alt="Invent conversation history showing sessions" />
+
+    <Check>
       Closing the panel or refreshing the page doesn't delete your conversation history — sessions persist and can be resumed at any time.
-    </Info>
-  </Tab>
-  <Tab title="Feedback">
-    Inventor has built-in feedback tools that help improve its output over time. Each AI message in the panel has thumbs up and thumbs down buttons.
+    </Check>
+  </Accordion>
+  <Accordion title="Restore a version">
+    Ask Invent to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Invent copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
+  </Accordion>
+</AccordionGroup>
 
-    <CardGroup cols={2}>
-      <Card title="Thumbs up" icon="thumbs-up">
-        The response was accurate and helpful.
-      </Card>
-      <Card title="Thumbs down" icon="thumbs-down">
-        The response was incorrect, unhelpful, or the generated agent or tool didn't match what you described.
-      </Card>
-    </CardGroup>
+## MCP vs Invent
 
-    When you click thumbs down, a popup appears where you can submit a bug report directly to the Relevance AI team — without leaving the interface or sending a separate email. Describe what you asked Inventor to build, what it generated, what was wrong or missing, and what you expected instead.
-  </Tab>
-  <Tab title="Restore a version">
-    Ask Inventor to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Inventor copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
-  </Tab>
-</Tabs>
-
-## MCP vs Inventor
-
-Inventor and the Relevance AI MCP are often compared, but they solve different problems. Inventor builds things _inside_ Relevance AI from natural language. The MCP connects Relevance AI _to the outside world_ — letting external clients call your tools, and letting your agents reach into external services.
+Invent and the Relevance AI MCP are often compared, but they solve different problems. Invent builds things _inside_ Relevance AI from natural language. The MCP connects Relevance AI _to the outside world_ — letting external clients call your Tools, and letting your Agents reach into external services.
 
 <CardGroup cols={2}>
-  <Card title="Inventor" icon="wand-magic-sparkles">
-    A copilot inside Relevance AI. Describe what you want and it builds or edits agents, tools, and workforces for you, landing changes in draft for review.
+  <Card title="Invent" icon="wand-magic-sparkles">
+    A copilot inside Relevance AI. Describe what you want and it builds or edits Agents, Tools, and Workforces for you, landing changes in draft for review.
 
     Reach for it when you want to build, edit, or debug something inside Relevance AI by describing the outcome.
   </Card>
   <Card title="Relevance AI MCP" icon="plug">
-    A bridge to other tools. Call your existing Relevance AI tools from external clients like Cursor or Claude with the [MCP Server](/integrations/mcp/mcp-server), or let your agents call services like Notion and Linear with the [MCP Client](/integrations/mcp/mcp-client).
+    A bridge to other tools. Call your existing Relevance AI tools from external clients like Cursor or Claude with the [MCP Server](/integrations/mcp/mcp-server), or let your Agents call services like Notion and Linear with the [MCP Client](/integrations/mcp/mcp-client).
 
-    Reach for it when the tool already exists and you want to run it from Cursor or Claude, or let an agent call an outside service.
+    Reach for it when the Tool already exists and you want to run it from Cursor or Claude, or let an Agent call an outside service.
   </Card>
 </CardGroup>
 
 <Tip>
-  The two are complementary, not competing. Inventor uses the same MCP tool surface under the hood — so a common pattern is to build your agents and tools with Inventor, then call them from Cursor or Claude through the MCP in your day-to-day work.
+  The two are complementary, not competing. Invent uses the same MCP tool surface under the hood — so a common pattern is to build your Agents and Tools with Invent, then call them from Cursor or Claude through the MCP in your day-to-day work.
 </Tip>
+
+## FAQ
+
+<Accordion title="Does Invent log bugs automatically?">
+  When Invent hits a platform issue it can't fix, it logs a bug to the Relevance AI engineering team on your behalf. These go directly to the engineering team, not support, so you won't receive updates on their progress.
+</Accordion>
+
+## What's next?
+
+<CardGroup cols={3}>
+  <Card title="Build your first agent" icon="robot" href="/build/agents/build-your-agent/overview">
+    Start with the agent builder overview to understand the structure before using Invent to generate one.
+  </Card>
+  <Card title="Create a tool" icon="wrench" href="/build/tools/create-a-tool">
+    Learn how to create Tools manually or use Invent to generate one from a description.
+  </Card>
+  <Card title="Set up evals" icon="flask-vial" href="/build/agents/build-your-agent/evals">
+    Define performance requirements for your Agents so Invent can monitor and fix them automatically.
+  </Card>
+</CardGroup>
