@@ -8,40 +8,69 @@ description: "A copilot agent inside the Relevance AI UI that builds, debugs, an
 
 ## What is Inventor
 
-Inventor is a copilot agent inside the Relevance AI UI. It uses the Relevance AI MCP under the hood to take real actions on your project, so from a single chat surface you can build, debug, and iterate without leaving the platform.
+Inventor is a forward deployed agent inside the Relevance AI UI. Rather than doing every job itself, it staffs a team of specialist agents and manages them: it learns your processes, connects the systems those processes run on, builds an agent for each job, sets the quality bar each one has to pass, then monitors, fixes, and measures the results.
+
+It uses the Relevance AI MCP under the hood to take real actions on your project, so from a single chat surface you can build, debug, and iterate without leaving the platform.
+
+Give Inventor to a single leader, a team, or every individual contributor — it builds and manages the agents underneath it in each case.
 
 ## What you can do
 
+### Build the agent team
+
 <CardGroup cols={2}>
+  <Card title="Learn your processes" icon="book-open">
+    Inventor works through your standard operating procedures with you, reading them back and checking the judgment calls, so the agents it builds reflect how the work is actually done.
+  </Card>
+  <Card title="Connect your systems" icon="plug">
+    Connect the systems your processes already run on, across [1,000+ integrations](/build/agents/build-your-agent/agent-triggers/integrations), plus custom connectors where an integration doesn't exist.
+  </Card>
+  <Card title="Staff the agent team" icon="users">
+    Instead of one agent doing everything, Inventor creates a specialist agent per job, gives each one the tools it needs, and wires the triggers that fire them.
+  </Card>
   <Card title="Build from a description" icon="wand-magic-sparkles">
     Create new agents, tools, workforces, and triggers from a natural-language description.
-  </Card>
-  <Card title="Debug failing agents" icon="bug">
-    Inventor reads run history, identifies the failing step, explains what went wrong, and proposes a fix.
-  </Card>
-  <Card title="Iterate on existing assets" icon="pen-to-square">
-    Change a prompt, swap a model, restructure a workforce, or regenerate a tool's schema.
-  </Card>
-  <Card title="Restore a version" icon="clock-rotate-left">
-    Roll an existing agent, tool, or workforce back to an earlier version, with a required confirmation step.
-  </Card>
-  <Card title="Discover before you build" icon="magnifying-glass">
-    Find existing agents and tools before building duplicates.
   </Card>
   <Card title="Recommend the right abstraction" icon="sitemap">
     Get a recommendation on tool vs. agent vs. workforce based on your use case.
   </Card>
-  <Card title="Build and improve evals" icon="flask-vial" href="/build/agents/build-your-agent/evals">
-    Diagnoses errored logs and tools, explains why a run failed, and proposes how to fix it — so you can build stronger evals.
-  </Card>
-  <Card title="Log bugs to engineering" icon="bug-slash">
-    When Inventor hits a platform issue it can't fix, it logs a bug to our engineering team on your behalf.
+  <Card title="Discover before you build" icon="magnifying-glass">
+    Find existing agents and tools before building duplicates.
   </Card>
   <Card title="Build with your voice" icon="microphone">
     Start a voice session with Inventor to describe what you want to build, then conclude the conversation and apply changes when you're done.
   </Card>
+</CardGroup>
+
+### Run and improve it
+
+<CardGroup cols={2}>
+  <Card title="Set performance requirements" icon="flask-vial" href="/build/agents/build-your-agent/evals">
+    Define the checks an agent has to pass before it handles real work. Inventor diagnoses errored logs and tools, explains why a run failed, and proposes how to fix it — so you can build stronger evals.
+  </Card>
+  <Card title="Detect issues" icon="gauge">
+    Inventor tracks agent pass rates and flags when performance drifts below the threshold you set.
+  </Card>
+  <Card title="Debug failing agents" icon="bug">
+    Inventor reads run history, identifies the failing step, explains what went wrong, and proposes a fix.
+  </Card>
+  <Card title="Improve and optimize" icon="pen-to-square">
+    Get recommended edits across prompts, tools, examples, and models to fix quality problems — change a prompt, swap a model, restructure a workforce, or regenerate a tool's schema.
+  </Card>
+  <Card title="Measure business impact" icon="chart-line">
+    Inventor reads metrics from the source systems themselves, not just from agent logs, so results tie back to real outcomes.
+  </Card>
+  <Card title="Suggest new agents" icon="lightbulb">
+    Inventor analyzes your data and identifies additional agents worth building.
+  </Card>
   <Card title="Run tasks in parallel" icon="network-wired">
     Inventor spawns child agents to handle parallel tasks, enabling fan-out execution for complex, multi-step workflows.
+  </Card>
+  <Card title="Restore a version" icon="clock-rotate-left">
+    Roll an existing agent, tool, or workforce back to an earlier version, with a required confirmation step.
+  </Card>
+  <Card title="Log bugs to engineering" icon="bug-slash">
+    When Inventor hits a platform issue it can't fix, it logs a bug to our engineering team on your behalf.
   </Card>
 </CardGroup>
 
