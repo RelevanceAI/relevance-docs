@@ -140,21 +140,12 @@ Queued tasks only appear once your organization hits its concurrent task limit. 
 
 ### Per-project breakdown
 
-Use the toggle in the chart header to switch between two views:
+There is no view switcher on this chart — what you see depends on your permissions. If you can manage the organization, the bars are split by project: each project gets its own running and queued bands, ordered so the highest-demand project is the darkest shade. Everyone else sees the whole organization as a single band labeled **Concurrency**.
 
-<CardGroup cols={2}>
-  <Card title="Org total" icon="chart-column">
-    Displays aggregate organization-wide concurrency as a single set of bands. Use this to see overall demand patterns and correlate concurrency with agent activity.
-  </Card>
-  <Card title="By project" icon="chart-bar">
-    Breaks the bars down by project, with each project in a distinct color and its own running and queued bands.
-  </Card>
-</CardGroup>
-
-In the **By project** view, hovering over any bar opens a tooltip with **Running** and **Queued** columns, one row per project, and a **Total** row at the bottom — so you can identify which projects contribute most to concurrency load at any given time, alongside the organization's concurrency limit.
+When the breakdown is shown, hovering over any bar opens a tooltip with **Running** and **Queued** columns, one row per project, and a **Total** row at the bottom — so you can identify which projects contribute most to concurrency load at any given time, alongside the organization's concurrency limit.
 
 <Note>
-  Organization managers see every project by name. Project admins get the same breakdown, but projects other than their own are anonymized.
+  The **Org-wide** / **This project** toggle sits in the Live jobs table below the chart and filters that table only. It does not change what the chart shows.
 </Note>
 
 <Note>
