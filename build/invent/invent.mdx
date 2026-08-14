@@ -1,163 +1,49 @@
 ---
 title: "Build with Invent"
 sidebarTitle: "Build with Invent"
-description: "Invent is the Relevance AI expert built into the platform. It builds the agents that run your processes, then looks after them once they're live."
+description: "Invent is a forward deployed agent that builds, manages, and improves the specialist Agents that run your business processes."
 ---
 
 <img src="/images/what-is-invent.png" alt="The Invent panel in Relevance AI" />
 
 ## What is Invent
 
-Invent is the Relevance AI expert built into the platform. It builds the agents that run your processes, then looks after them once they're live.
+Invent is a forward deployed agent built into Relevance AI. Give it a business process and it works with you to understand how that process runs, including the systems involved and the decisions that require judgment.
 
-You brief it the way you'd brief a new hire. It asks about the parts that need judgment, connects the systems the work already runs on, and builds a specialist Agent for each step. Then it sets the checks each one has to pass before it touches real work, and watches them once they're live.
+Invent then builds a team of specialist Agents to perform the work. It equips each Agent with the right Tools, connects them through Triggers and Workforces, and defines the performance requirements they must meet before handling real tasks.
 
-Whether you're automating a sales process, a support queue, or an internal workflow, you don't need to know how to build agents. You need to know your process.
+Its job continues after launch. Invent monitors live performance, detects quality problems, proposes and tests improvements, and measures the results in the systems where the work lands. You bring the process knowledge; Invent builds and manages the Agent team underneath it.
 
-Give Invent to a single leader, a team, or every individual contributor. It builds and manages the Agents underneath it in each case.
+## What can Invent do?
 
-## Access
-
-Invent is available by default for all org admins, and no one else. For each project, org admins have a toggle to turn Invent on for all users in that project.
-
-## What you can do
-
-### Build the agent team
-
-<CardGroup cols={2}>
-  <Card title="Learn your processes" icon="book-open">
-    Invent works through your standard operating procedures with you, reading them back and checking the judgment calls, so the Agents it builds reflect how the work is actually done.
-  </Card>
-  <Card title="Connect your systems" icon="plug">
-    Connect the systems your processes already run on, across [1,000+ integrations](/build/agents/build-your-agent/agent-triggers/integrations), plus custom connectors where an integration doesn't exist.
-  </Card>
-  <Card title="Staff the agent team" icon="users">
-    Instead of one Agent doing everything, Invent creates a specialist Agent per job, gives each one the Tools it needs, and wires the Triggers that fire them.
-  </Card>
-  <Card title="Build from a description" icon="wand-magic-sparkles">
-    Create new Agents, Tools, Workforces, and Triggers from a natural-language description.
-  </Card>
-  <Card title="Recommend the right abstraction" icon="sitemap">
-    Get a recommendation on Tool vs. Agent vs. Workforce based on your use case.
-  </Card>
-  <Card title="Discover before you build" icon="magnifying-glass">
-    Find existing Agents and Tools before building duplicates.
-  </Card>
-</CardGroup>
-
-### Run and improve it
-
-<CardGroup cols={2}>
-  <Card title="Set performance requirements" icon="flask-vial" href="/build/agents/build-your-agent/evals">
-    Define the checks an Agent has to pass before it handles real work. Invent diagnoses errored logs and Tools, explains why a run failed, and proposes how to fix it — so you can build stronger evals.
-  </Card>
-  <Card title="Detect issues" icon="gauge">
-    Invent tracks Agent pass rates and flags when performance drifts below the threshold you set.
-  </Card>
-  <Card title="Debug failing agents" icon="bug">
-    Invent reads run history, identifies the failing step, explains what went wrong, and proposes a fix.
-  </Card>
-  <Card title="Improve and optimize" icon="pen-to-square">
-    Get recommended edits across prompts, Tools, examples, and models to fix quality problems — change a prompt, swap a model, restructure a Workforce, or regenerate a Tool's schema.
-  </Card>
-  <Card title="Schedule check-ins" icon="calendar-check">
-    Ask Invent to check back on an Agent in a few days. It schedules a review, checks in at the agreed time, and only surfaces something if it finds an issue.
-  </Card>
-  <Card title="Set alarms" icon="bell">
-    Configure eval-based alerts. Invent watches your evals and notifies you when pass rates cross the threshold you set, then suggests a fix.
-  </Card>
-  <Card title="Measure business impact" icon="chart-line">
-    Invent reads metrics from the source systems themselves, not just from Agent logs, so results tie back to real outcomes.
-  </Card>
-  <Card title="Restore a version" icon="clock-rotate-left">
-    Roll an existing Agent, Tool, or Workforce back to an earlier version, with a required confirmation step.
-  </Card>
-</CardGroup>
+<AccordionGroup>
+  <Accordion title="Understand your process" description="Learn the work, systems, and judgment calls" defaultOpen={true}>
+    Invent works through your process with you, including its inputs, systems, judgment calls, exceptions, and definition of success. It can read the process back to you, identify missing information, and help determine which parts should become Tools, Agents, or Workforces.
+  </Accordion>
+  <Accordion title="Build and connect the Agent team" description="Create and coordinate specialists from end to end">
+    Invent creates a specialist Agent for each job, equips it with the required Tools and context, connects the systems where the work happens, and wires the Triggers and Workforces that coordinate the process from end to end.
+  </Accordion>
+  <Accordion title="Set and maintain the quality bar" description="Test live work and improve performance">
+    Invent defines the checks each Agent must pass before launch and samples live runs after deployment. When quality drops, it diagnoses the problem and proposes changes to prompts, Tools, examples, models, or orchestration. It can test those changes against the same requirements before you approve them.
+  </Accordion>
+  <Accordion title="Measure results and find the next opportunity" description="Connect Agent activity to business outcomes">
+    Invent reads outcomes from the systems where the work lands, not only from Agent logs, so it can connect Agent activity to measures such as response time, qualified leads, meetings booked, or cases resolved. It can also identify recurring manual work and recommend additional Agents worth building.
+  </Accordion>
+</AccordionGroup>
 
 ## Where to find Invent
 
-Invent is available as a persistent side panel from any builder page — Tool, Agent, Workforce, Knowledge, and home.
+<img src="/images/invent-dashboard-access.png" alt="The Invent entry points on the Relevance AI home page" />
 
-<Tabs>
-  <Tab title="Side panel">
-    The Invent side panel is accessible from any page in the Relevance AI builder. Look for the **Invent** button in the left sidebar or page header — clicking it opens the panel without navigating away from your current page.
-  </Tab>
-  <Tab title="Home page">
-    <img src="/images/invent-dashboard-access.png" alt="The Invent home page and sidebar access point in Relevance AI" />
+Look for **Invent** in the left sidebar, **Build with Invent** on the home page, or the blue Invent button in the bottom-right corner.
 
-    Invent has its own item in the left sidebar that opens a full home page — a central hub for all your Invent conversations.
-
-    Start Invent from the home page:
-
-    <Steps>
-      <Step title="Open Home">
-        Click **Home** in the left sidebar.
-      </Step>
-      <Step title="Open Invent">
-        Click the **Invent** button in the page header.
-      </Step>
-    </Steps>
-  </Tab>
-  <Tab title="While editing an agent">
-    <img src="/images/agent-inventor-access.png" alt="The Invent entry point at the top of the agent builder panel in Relevance AI" />
-
-    Invent sits at the top of the agent builder, above Prompt, Tools, Knowledge, and Triggers. Open it to iterate on the Agent you're editing without leaving the page.
-
-    Start Invent while editing an Agent:
-
-    <Steps>
-      <Step title="Open the Agents page">
-        Click **Agents** in the left sidebar.
-      </Step>
-      <Step title="Open or create an agent">
-        Open an existing Agent or create a new one to enter the agent editor.
-      </Step>
-      <Step title="Open Invent">
-        Click the **Invent** button in the left sidebar of the agent editor.
-      </Step>
-    </Steps>
-  </Tab>
-  <Tab title="When creating an agent">
-    <img src="/images/inventor-when-creating-agent.png" alt="The Invent option when creating an Agent in Relevance AI" />
-
-    Start Invent from the Agents page:
-
-    <Steps>
-      <Step title="Open the Agents page">
-        Click **Agents** in the left sidebar.
-      </Step>
-      <Step title="Build with Invent">
-        Click the **Build with Invent** button in the header.
-      </Step>
-    </Steps>
-  </Tab>
-  <Tab title="When creating a tool">
-    <img src="/images/inventor-when-creating-tool.png" alt="The Invent option when creating a Tool in Relevance AI" />
-
-    Start Invent from the Tools page:
-
-    <Steps>
-      <Step title="Open the Tools page">
-        Click **Tools** in the left sidebar.
-      </Step>
-      <Step title="Build with Invent">
-        Click the **Build with Invent** button in the header.
-      </Step>
-    </Steps>
-
-    You can also choose Invent when you [create a tool](/build/tools/create-a-tool#option-1-invent-a-tool) to generate a first version from a description.
-  </Tab>
-</Tabs>
+Invent is available to organization admins by default. An organization admin can turn on Invent for everyone in an individual project from that project's settings.
 
 ## How to use Invent
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
 <iframe src="https://app.supademo.com/embed/cmq65ouq340ajqm6u2uly8nst?embed_v=2" frameBorder="0" title="How to use Invent" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
-
-<Warning>
-  Invent is expensive to run and consumes significant credits. Use it deliberately and keep an eye on your usage.
-</Warning>
 
 <Steps>
   <Step title="Open Invent">
@@ -171,88 +57,45 @@ Invent is available as a persistent side panel from any builder page — Tool, A
   </Step>
 </Steps>
 
-## Credit usage
-
-<img src="/images/invent-credit-counter.png" alt="The real-time credit counter in the Invent panel" />
-
-The Invent panel shows a real-time credit counter — "X credits used" with a coins icon — that updates with each interaction, such as generating an Agent, requesting an adjustment, or asking a follow-up question.
-
-The counter lives in the Invent panel and tracks only the credits used in your current session.
-
-<img src="/images/invent-task-statuses.png" alt="Invent task history showing approve, idle, and other statuses" />
-
-Past sessions in your conversation history show each task with a status: approved (the action was applied), idle (waiting for your input), or completed. You can review what Invent did and track credit spend across sessions from the history view.
+<Warning>
+  Invent is expensive to run and consumes significant credits. Use it deliberately and keep an eye on your usage.
+</Warning>
 
 ## Invent features
 
+### Get started
+
 <AccordionGroup>
-  <Accordion title="Auto-accept and tool approval">
-    <img src="/images/auto-accept.png" alt="The auto-accept setting in Invent" />
+  <Accordion title="About you">
+    <img src="/images/about-you-invent.png" alt="The About You setting in Invent" />
 
-    By default, the changes Invent makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Invent apply its changes as it works, without stopping for your approval. Version restores are the exception — Invent always asks you to confirm before restoring. Keep it off when you want a checkpoint on each change, and turn it on when you trust Invent to iterate quickly.
+    About You tells Invent who you are so it tailors every response to your role and work from the first message — no re-explaining your context each session. It shapes how Invent talks to you and what it assumes about your work, but it doesn't change Invent's role or hardcode any Tool configuration.
 
-    When auto-accept is off, tool runs that require your approval appear in the approval queue. The queue shows pending actions and lets you approve or reject each one before Invent proceeds. This gives you fine-grained control over exactly what Invent executes.
+    It adjusts the level of technical detail, makes domain-aware assumptions, and lets Invent address you by name at natural moments.
+
+    To set it up:
+
+    <Steps>
+      <Step title="Open Invent">
+        Open the Invent side panel or home page.
+      </Step>
+      <Step title="Click Settings">
+        Enter your details under **About You**.
+      </Step>
+    </Steps>
   </Accordion>
   <Accordion title="Model selection">
     <img src="/images/invent-model-selector.png" alt="The model selector in Invent" />
 
+    <img src="/images/invent-model-capabilities.png" alt="The model list showing which models support text and images" />
+
     The model dropdown sets which large language model (LLM) powers your Invent session. Models are grouped into three tiers:
 
-    - **Cheapest** — Cost-optimized models. Free plan users default to this tier to preserve credits.
-    - **Balanced** — A middle ground between cost and capability. Includes models like Claude Sonnet 4.6.
-    - **Most capable** — Highest-capability models for complex tasks. Includes models like Claude Opus 4.7.
-
-    <img src="/images/invent-model-capabilities.png" alt="The model list showing which models support text and images" />
+    The **Cheapest** tier prioritizes cost, the **Balanced** tier provides a middle ground between cost and capability, and the **Most capable** tier is intended for complex tasks. Free plan users default to the Cheapest tier to preserve credits.
 
     When you click on a model, you can see its capabilities — including whether it supports text only or text and images.
 
     Your plan determines the default model. You can switch models at any time from the dropdown in the Invent panel.
-  </Accordion>
-  <Accordion title="Memories">
-    Invent automatically learns about you across conversations and stores what it learns as memories. You don't add memories manually — Invent builds them passively as you work.
-
-    Memories let Invent carry context between sessions: your role, the kinds of things you build, naming conventions you prefer, and other patterns it picks up over time.
-
-    To view, search, edit, or delete your memories:
-
-    <Steps>
-      <Step title="Open Invent settings">
-        Click the settings icon in the Invent panel header, or open **Memories** from the sidebar.
-      </Step>
-      <Step title="Manage your memories">
-        Browse the list, search for a specific memory, edit its content, or delete memories you don't want Invent to carry forward.
-      </Step>
-    </Steps>
-
-    <Warning>
-      Deleting a memory removes it permanently. Invent will re-learn that information if it comes up again in future conversations.
-    </Warning>
-  </Accordion>
-  <Accordion title="Scheduled check-ins">
-    Invent can check back in on your work later. Ask it to review an Agent in a few days and it will schedule a message to itself, then look again at the time you agreed. If it finds something worth your attention, it lets you know. If everything looks fine, it stays quiet.
-
-    **Scheduling a check-in**
-
-    Just ask. There's no form to fill in. Tell Invent to check back on an Agent later and it will suggest a sensible interval based on how busy that Agent is — from about a day for Agents running many tasks a day, up to a week for quiet ones. You can pick a different time if you'd rather.
-
-    **What happens when a check-in runs**
-
-    Invent reviews the resource the way you would: test results and monitoring first, then errors, then recent activity. If nothing needs attention, you won't hear from it. If something does, it sends you a short summary of the problem along with a suggested fix. Approve the fix and Invent applies it to your draft, then offers to check back again to confirm it worked.
-  </Accordion>
-  <Accordion title="Alarms and alerts">
-    <img src="/images/invent-alarms.png" alt="The alarms and alerts configuration in Invent" />
-
-    Invent watches your evals and makes suggestions when performance drifts. Configure an alarm by setting a threshold and sensitivity level — Invent notifies you when pass rates cross the threshold, then suggests a fix.
-
-    You set up alarms the same way you schedule check-ins: just ask. Tell Invent what eval you want to monitor and at what threshold, and it will configure the alarm for you.
-
-    <img src="/images/invent-evals-monitor.png" alt="Invent monitoring eval results" />
-
-    <img src="/images/invent-create-evals.png" alt="Creating evals with Invent" />
-
-    <img src="/images/invent-fix-failing-evals.png" alt="Invent proposing fixes for failing evals" />
-
-    When an alarm fires, Invent reviews the failing evals, explains what's wrong, and proposes a fix. Approve the fix and Invent applies it to your draft.
   </Accordion>
   <Accordion title="Suggested actions">
     When you open a new Invent conversation, the empty state shows suggested actions to help you get started. The suggestions are context-aware — they change based on what you're working on.
@@ -276,45 +119,109 @@ Past sessions in your conversation history show each task with a status: approve
 
     Without a specific Agent context, Invent shows general starting points:
 
-    - **Build from a discussion** — start by talking through what you want to build before Invent generates anything.
-    - **Discuss best practices** — ask Invent to walk through patterns and approaches for your use case.
-    - **Improve reliability** — get Invent to audit an existing Agent or Tool for reliability gaps.
+    Choose **Build from a discussion** to talk through what you want before Invent generates anything, **Discuss best practices** to explore approaches for your use case, or **Improve reliability** to audit an existing Agent or Tool for gaps.
   </Accordion>
-  <Accordion title="About you">
-    <img src="/images/about-you-invent.png" alt="The About You setting in Invent" />
+</AccordionGroup>
 
-    About You tells Invent who you are so it tailors every response to your role and work from the first message — no re-explaining your context each session. It shapes how Invent talks to you and what it assumes about your work, but it doesn't change Invent's role or hardcode any Tool configuration.
+### Work with Invent
 
-    What it changes:
+<AccordionGroup>
+  <Accordion title="Auto-accept and tool approval">
+    <img src="/images/auto-accept.png" alt="The auto-accept setting in Invent" />
 
-    - More precise technical language for engineers, simpler explanations for non-technical users.
-    - Domain-aware defaults — if you're in sales, Invent won't default to engineering-flavored Tool designs.
-    - First-name address at natural moments like greetings, not robotically in every message.
+    By default, the changes Invent makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Invent apply its changes as it works, without stopping for your approval. Version restores are the exception — Invent always asks you to confirm before restoring. Keep it off when you want a checkpoint on each change, and turn it on when you trust Invent to iterate quickly.
 
-    To set it up:
-
-    <Steps>
-      <Step title="Open Invent">
-        Open the Invent side panel or home page.
-      </Step>
-      <Step title="Click Settings">
-        The settings pop up — enter your details under **About You**.
-      </Step>
-    </Steps>
+    When auto-accept is off, tool runs that require your approval appear in the approval queue. The queue shows pending actions and lets you approve or reject each one before Invent proceeds. This gives you fine-grained control over exactly what Invent executes.
   </Accordion>
   <Accordion title="Conversations">
-    Invent saves each conversation as a session automatically. Opening the panel starts a new chat, and your past sessions stay available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
-
     <img src="/images/invent-history.png" alt="Invent conversation history showing sessions" />
+
+    Invent saves each conversation as a session automatically. Opening the panel starts a new chat, and your past sessions stay available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
 
     <Check>
       Closing the panel or refreshing the page doesn't delete your conversation history — sessions persist and can be resumed at any time.
     </Check>
   </Accordion>
+  <Accordion title="Memories">
+    Invent automatically learns about you across conversations and stores what it learns as memories. You don't add memories manually — Invent builds them passively as you work.
+
+    Memories let Invent carry context between sessions: your role, the kinds of things you build, naming conventions you prefer, and other patterns it picks up over time.
+
+    To view, search, edit, or delete your memories:
+
+    <Steps>
+      <Step title="Open Invent settings">
+        Click the settings icon in the Invent panel header, or open **Memories** from the sidebar.
+      </Step>
+      <Step title="Manage your memories">
+        Browse the list, search for a specific memory, edit its content, or delete memories you don't want Invent to carry forward.
+      </Step>
+    </Steps>
+
+    <Warning>
+      Deleting a memory removes it permanently. Invent will re-learn that information if it comes up again in future conversations.
+    </Warning>
+  </Accordion>
+  <Accordion title="Bug reporting">
+    When Invent hits a platform issue it can't fix, it logs a bug to the Relevance AI engineering team on your behalf. These reports go directly to engineering rather than support, so you won't receive progress updates.
+  </Accordion>
+</AccordionGroup>
+
+### Manage performance
+
+<AccordionGroup>
+  <Accordion title="Scheduled check-ins">
+    Invent can check back in on your work later. Ask it to review an Agent in a few days and it will schedule a message to itself, then look again at the time you agreed. If it finds something worth your attention, it lets you know. If everything looks fine, it stays quiet.
+
+    #### Schedule a check-in
+
+    Just ask. There's no form to fill in. Tell Invent to check back on an Agent later and it will suggest a sensible interval based on how busy that Agent is — from about a day for Agents running many tasks a day, up to a week for quiet ones. You can pick a different time if you'd rather.
+
+    #### What happens when a check-in runs
+
+    Invent reviews the resource the way you would: test results and monitoring first, then errors, then recent activity. If nothing needs attention, you won't hear from it. If something does, it sends you a short summary of the problem along with a suggested fix. Approve the fix and Invent applies it to your draft, then offers to check back again to confirm it worked.
+  </Accordion>
+  <Accordion title="Alarms and alerts">
+    <img src="/images/invent-alarms.png" alt="The alarms and alerts configuration in Invent" />
+
+    Configure an alarm by setting a threshold and sensitivity level. You set up alarms the same way you schedule check-ins: tell Invent which eval you want to monitor and the threshold to use.
+
+    #### Monitor eval performance
+
+    <img src="/images/invent-evals-monitor.png" alt="Invent monitoring eval results" />
+
+    Invent watches your evals and notifies you when pass rates cross the threshold you set.
+
+    #### Create evals
+
+    <img src="/images/invent-create-evals.png" alt="Creating evals with Invent" />
+
+    Ask Invent to create the checks an Agent should pass and add them to your eval suite.
+
+    #### Fix failing evals
+
+    <img src="/images/invent-fix-failing-evals.png" alt="Invent proposing fixes for failing evals" />
+
+    When an alarm fires, Invent reviews the failing evals, explains what's wrong, and proposes a fix. Approve the fix and Invent applies it to your draft.
+  </Accordion>
   <Accordion title="Restore a version">
     Ask Invent to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Invent copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
   </Accordion>
 </AccordionGroup>
+
+## Credit usage
+
+<img src="/images/invent-credit-counter.png" alt="The real-time credit counter in the Invent panel" />
+
+The Invent panel shows a real-time credit counter — "X credits used" with a coins icon — that updates with each interaction, such as generating an Agent, requesting an adjustment, or asking a follow-up question.
+
+The counter lives in the Invent panel and tracks only the credits used in your current session.
+
+### Task status and history
+
+<img src="/images/invent-task-statuses.png" alt="Invent task history showing approve, idle, and other statuses" />
+
+Past sessions in your conversation history show each task with a status: approved (the action was applied), idle (waiting for your input), or completed. You can review what Invent did and track credit spend across sessions from the history view.
 
 ## MCP vs Invent
 
@@ -322,7 +229,7 @@ Invent and the Relevance AI MCP are often compared, but they solve different pro
 
 <CardGroup cols={2}>
   <Card title="Invent" icon="wand-magic-sparkles">
-    A copilot inside Relevance AI. Describe what you want and it builds or edits Agents, Tools, and Workforces for you, landing changes in draft for review.
+    A forward deployed agent inside Relevance AI. Describe the process you want to run and it builds or edits Agents, Tools, and Workforces for you, landing changes in draft for review.
 
     Reach for it when you want to build, edit, or debug something inside Relevance AI by describing the outcome.
   </Card>
@@ -337,26 +244,6 @@ Invent and the Relevance AI MCP are often compared, but they solve different pro
   The two are complementary, not competing. Invent uses the same MCP tool surface under the hood — so a common pattern is to build your Agents and Tools with Invent, then call them from Cursor or Claude through the MCP in your day-to-day work.
 </Tip>
 
-## FAQ
+## Start with one process
 
-<Accordion title="Who can access Invent?">
-  Invent is available by default for all org admins, and no one else. For each project, org admins have a toggle to turn Invent on for all users in that project.
-</Accordion>
-
-<Accordion title="Does Invent log bugs automatically?">
-  When Invent hits a platform issue it can't fix, it logs a bug to the Relevance AI engineering team on your behalf. These go directly to the engineering team, not support, so you won't receive updates on their progress.
-</Accordion>
-
-## What's next?
-
-<CardGroup cols={3}>
-  <Card title="Build your first agent" icon="robot" href="/build/agents/build-your-agent/overview">
-    Start with the agent builder overview to understand the structure before using Invent to generate one.
-  </Card>
-  <Card title="Create a tool" icon="wrench" href="/build/tools/create-a-tool">
-    Learn how to create Tools manually or use Invent to generate one from a description.
-  </Card>
-  <Card title="Set up evals" icon="flask-vial" href="/build/agents/build-your-agent/evals">
-    Define performance requirements for your Agents so Invent can monitor and fix them automatically.
-  </Card>
-</CardGroup>
+Choose a process you know well and can explain from beginning to end. Tell Invent the outcome you need, the systems involved, the decisions that require judgment, and how you measure success. Invent will work through the process with you before it builds the Agent team.
