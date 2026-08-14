@@ -27,6 +27,10 @@ Pick the setup that matches your AI client.
 
 ---
 
+<Note>
+  This page focuses on what builders can create and manage via MCP. MCP connections also work for team members who only need to run existing agents — not build or edit them. Users with Viewer or Chat project roles are automatically placed into a restricted access mode when they authenticate, so they can view and run agents without any write access. See [Access control](/integrations/mcp/mcp-server#access-control) for details.
+</Note>
+
 ## What you can do
 
 Once connected, your AI client gets full access to your Relevance AI project. This goes far beyond running existing tools — you can build and manage everything in your project from clients like Claude Code.
@@ -207,6 +211,6 @@ Once connected, your AI client gets full access to your Relevance AI project. Th
   </Accordion>
 
   <Accordion title="Can I restrict which tools are available?">
-    The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each connection to the appropriate project.
+    Run-Only mode is the primary way to restrict MCP access. Assign a user the Viewer or Chat project role to force them into a restricted mode automatically — Viewers get run-only access (no write or destructive operations), and Chat users are limited to an even narrower set of tools. Member, Editor, and Admin users can opt into run-only mode from the toggle on the OAuth consent screen. For finer-grained control — such as exposing only a specific subset of agents — organize your tools across separate projects and authenticate each connection to the appropriate project. See [Access control on the MCP server page](/integrations/mcp/mcp-server#access-control) for the full role matrix.
   </Accordion>
 </AccordionGroup>

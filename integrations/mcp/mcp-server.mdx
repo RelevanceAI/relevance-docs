@@ -233,6 +233,38 @@ Each entry authenticates independently against its own project, so you can acces
 
 ---
 
+## Access control
+
+When you authenticate via OAuth, the level of access your MCP session gets depends on your project role. Some roles have a fixed mode; others can opt in to a restriction.
+
+### Run-Only mode
+
+Run-Only mode limits the MCP session to viewing and running existing agents. Write and destructive tools are removed from the tool list server-side — they are not present in the session at all, not merely hidden on the client.
+
+The OAuth consent screen shows a **Run-Only mode** toggle for Member, Editor, and Admin users. The toggle defaults to off (full access). Viewer and Chat users do not see the toggle — their access mode is fixed and cannot be changed.
+
+| Project role | MCP access mode | Configurable? |
+| :----------- | :-------------- | :------------ |
+| Admin | Full access | Yes — opt into run-only at OAuth consent |
+| Editor | Full access | Yes — opt into run-only at OAuth consent |
+| Member | Full access | Yes — opt into run-only at OAuth consent |
+| Viewer | Run-only | No — forced, cannot disable |
+| Chat | Chat mode | No — forced, cannot disable |
+
+Chat mode is a stricter subset of run-only: it covers read access and running agents, with no write or destructive operations.
+
+<Note>
+  To guarantee that a user's MCP session cannot create, edit, or delete assets: assign them the Viewer or Chat project role. The restriction is enforced server-side regardless of which MCP client they use.
+</Note>
+
+<Warning>
+  Chat role users cannot set up dynamic (user-level) OAuth connections via MCP. If an agent requires dynamic authentication, assign the user a Member role in a dedicated project instead.
+</Warning>
+
+MCP access is bounded by your project role — the API enforces a ceiling so a session never grants more than the role allows.
+
+---
+
 ## Add agent skills
 
 The MCP server gives your AI assistant the ability to call Relevance AI tools, but it doesn't know _how_ to use them well. For better results, pair it with the [agent skills](/integrations/mcp/agent-skills) repository — a local reference that teaches your assistant how to work with agents, tools, workforces, knowledge, and more.
@@ -326,6 +358,6 @@ When triggering agents via MCP, you have two execution modes available depending
   </Accordion>
 
   <Accordion title="Can I restrict which tools are available via MCP?">
-    The MCP server exposes the tools and agents available in the project you authenticated against. To control access, organize your tools across different projects and authenticate each connection to the appropriate project.
+    Run-Only mode is the primary way to restrict MCP access. Assign a user the Viewer or Chat project role to force them into a restricted mode automatically — Viewers get run-only access (no write or destructive operations), and Chat users are limited to an even narrower set of tools. Member, Editor, and Admin users can opt into run-only mode from the toggle on the OAuth consent screen. For finer-grained control — such as exposing only a specific subset of agents — organize your tools across separate projects and authenticate each connection to the appropriate project. See [Access control](#access-control) for the full role matrix.
   </Accordion>
 </AccordionGroup>

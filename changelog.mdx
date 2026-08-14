@@ -4,6 +4,20 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
+<Update label="July 30, 2026" description="MCP Run-Only Mode and Chat Role Access">
+
+## MCP Run-Only Mode and Chat Role Access
+
+MCP connections now support role-based access modes, giving admins control over what authenticated users can do via MCP.
+
+The OAuth consent screen shows a Run-Only mode toggle for Member, Editor, and Admin users — it defaults to off (full access), but users can opt in to restrict the session to viewing and running existing agents only. Viewer and Chat users are automatically placed into restricted modes and cannot change them.
+
+Run-Only mode is enforced server-side: write and destructive tools are removed from the tool list at the session level, not filtered on the client. Chat role users are placed into Chat mode, a narrower subset that covers read access and running agents with no write or destructive operations.
+
+To guarantee that a user's MCP session cannot create, edit, or delete assets, assign them the Viewer or Chat project role. See [Access control](/integrations/mcp/mcp-server#access-control) for the full role matrix.
+
+</Update>
+
 <Update label="July 22, 2026" description="Concurrency visibility for project and organization admins">
 
 ## Concurrency visibility for project and organization admins
