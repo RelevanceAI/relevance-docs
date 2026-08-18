@@ -35,6 +35,26 @@ Key rules:
 - Don't mix bold text (`**Feature Name**`) with heading formats for section titles — use a proper heading.
 - Long examples go in `<Accordion>` components with specific, descriptive titles (not generic ones like "Example").
 
+## Invent callout
+
+A styled bubble that tells readers Invent can do the thing the page is teaching them to do by hand. Blobby (the Invent mascot) sits on the left and tracks the cursor.
+
+Drop it in after the intro of any page where Invent can do the job:
+
+```mdx
+<div className="invent-callout">
+  <strong>Invent can do this for you.</strong> Ask Invent to create an Agent with a name and a purpose, and it sets up the system prompt, picks the Tools, and connects the integrations it needs.
+</div>
+```
+
+Rules:
+- Only the copy changes between usages — never the markup, the class name, or the structure. All styling lives in `style.css` so one edit there updates every bubble.
+- Keep it to one short paragraph, lead-in bolded. Say what to ask Invent for, not what Invent is.
+- Don't nest it inside a Mintlify callout, `<Card>`, or `<Accordion>`.
+- Don't put more than one on a page.
+
+Supporting files, none of which need touching to add a bubble: `invent-callout.js` (builds Blobby and animates his eyes), `images/invent-blobby-seal.svg` (the `pd/inventor` sprite from relevance-api-node), `images/invent-blobby.svg` (static fallback when JS is off). Blobby's size and the spacing around him are the `--blobby-size` and `--blobby-gap` custom properties on `.invent-callout`.
+
 ## Navigation
 
 - `docs.json` controls the page tree. There is no `mint.json`.
