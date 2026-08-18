@@ -55,6 +55,46 @@ Its job continues after launch. Invent monitors live performance, detects qualit
 
 Invent is available to organization admins by default. An organization admin can turn on Invent for everyone in an individual project from that project's settings.
 
+### Approval controls
+
+<Tabs>
+  <Tab title="Session approvals">
+    <img src="/images/invent-ask-first.png" alt="The Ask first and Auto-accept options in the Invent message composer" />
+
+    Use the approval control beside the message composer to set how Invent handles tool approvals for the current session:
+
+    - **Ask first** pauses before tools set to **Ask** or **Always ask** run. Tools set to **Auto** still run without approval.
+    - **Auto-accept** lets tools set to **Ask** run without approval. Tools set to **Always ask** still require your approval.
+  </Tab>
+
+  <Tab title="Tool permissions">
+    <img src="/images/invent-permissions.png" alt="Invent Permissions settings showing approval controls for individual tools" />
+
+    Tool permissions save how Invent should handle each action for you in the current project. Set an entire category at once or choose a different setting for an individual tool.
+
+    | Setting | What it means |
+    | --- | --- |
+    | **Auto** | Runs without asking. |
+    | **Ask** | Requests approval unless **Auto-accept** is on for the session. |
+    | **Always ask** | Requests approval every time, even when **Auto-accept** is on. |
+
+    Run actions default to **Auto**, create and edit actions to **Ask**, and destructive actions such as deleting or publishing to **Always ask**. Setting a destructive action to **Auto** allows Invent to perform it without another tool-approval prompt.
+
+    <Steps>
+      <Step title="Open Invent settings">
+        In the Invent panel, click the three-dot menu, then select **Invent settings**.
+      </Step>
+      <Step title="Open Permissions">
+        Select **Permissions**, configure categories or individual tools, then click **Save**.
+      </Step>
+    </Steps>
+
+    <Note>
+      These settings control approval prompts, not access. Invent still uses your existing project, asset, and integration permissions. Each user manages their own preferences in each project; organization and project admins cannot use this screen to grant access or set approval rules for other users.
+    </Note>
+  </Tab>
+</Tabs>
+
 ### Enterprise security controls
 
 <AccordionGroup>
