@@ -23,15 +23,15 @@ When you edit an Agent, Tool, or Workforce, your changes go to a **draft** first
 
 Each saved draft state and each published state becomes a distinct version in the history list.
 
-### Version naming and descriptions
+### Version names and descriptions
 
-Version descriptions are optional when saving from the UI, but recommended — they make it much easier to identify a specific version when you need to restore it. Invent enforces descriptions when it creates or restores versions, so versions touched by Invent always have a description.
+Each version has a short name and a longer description, and both are optional. A version saved without a name is listed by its timestamp instead — for example, `Aug 18, 2:30 am` — so naming the versions you might want to return to makes them much easier to find later. Invent sets a name and description when it publishes changes, but neither field is enforced by the platform.
 
 <Tip>
   Use descriptions that capture intent, not just the change. "Added web search tool" is more useful than "Updated version 3" when you're scanning a list of 20 versions.
 </Tip>
 
-When you restore a version, the restored state is saved as a new draft with `(restored)` appended to the version description. This distinguishes restored versions from original saves in the history list, which is useful when reviewing the audit trail.
+When you restore a version, the restored state is saved as a new draft with `(restored)` appended to the version name. The description carries over unchanged from the version you restored.
 
 ## Accessing and restoring versions
 
@@ -39,13 +39,13 @@ Version history is available in the builder UI for each asset type.
 
 <Tabs>
   <Tab title="Agents">
-    Open the right sidebar panel inside the Agent builder. The version history panel lists all saved versions with their timestamps and optional descriptions. Click any version to preview it.
+    In the Agent builder, click **Versions** in the top bar to open the **Version history** panel in the right sidebar. The panel lists every saved version with its name, author, and timestamp.
   </Tab>
   <Tab title="Tools">
-    Use the topbar toggle in the Tool builder to switch into the version history view. From there you can browse and restore previous versions.
+    In the Tool builder, open the **Versions** menu in the header to show the version history panel in the right sidebar. This is available on the standalone Tool page — the Tool builder embedded inside the Agent builder doesn't include the entry point, so open the Tool directly to reach its history.
   </Tab>
   <Tab title="Workforces">
-    Open the version panel inside the Workforce builder. The panel shows the full version list for that Workforce.
+    In the Workforce builder, open **More actions**, then select **Versions** to show the version history panel.
   </Tab>
 </Tabs>
 
@@ -55,7 +55,7 @@ You can restore a previous version from the builder UI or by asking [Invent](/bu
 
 1. Open the version history panel for your Agent, Tool, or Workforce (see the tabs above)
 2. Find the version you want to restore
-3. Click **Restore** on that version
+3. Click the three-dot menu on that version, then select **Restore this version**
 4. The restored version becomes the current draft — review it before publishing
 
 ### With Invent
@@ -64,7 +64,15 @@ Ask Invent to restore a version by describing what you want — for example:
 
 > "Restore the previous version of this Tool"
 
-Invent always asks you to confirm before applying the restore. Once confirmed, the earlier state lands in draft, leaving the published version unchanged. Invent also requires a version description when creating or restoring versions, making it easy to identify the right one later.
+Invent always asks you to confirm before applying the restore. Once confirmed, the earlier state lands in draft, leaving the published version unchanged. Invent can also rename an existing version for you if you'd rather not open the panel yourself.
+
+### Edit a version name or description
+
+You can relabel any version after it's been saved, including the current draft, the active version, and historical versions. In the version history panel, click the three-dot menu on a version, then select **Edit name / description**. This changes only the label — the configuration stored in that version is untouched, as are its author and timestamp.
+
+<Note>
+  Renaming an Agent version requires admin permission on that Agent, while Tools and Workforces also accept project editor permission.
+</Note>
 
 ## Version retention
 
@@ -83,8 +91,8 @@ For details on retention periods and how deletion conditions work, see [Data ret
   <Accordion title="Why is there no version history for assets I haven't edited recently?">
     Version history only exists for changes made after the feature was released. Assets that weren't edited after the release date won't have a history to restore from.
   </Accordion>
-  <Accordion title="Can I rename a version from the builder UI?">
-    You can't rename a version from the builder UI after it's been saved. To rename, use Invent — it can update the version description on an existing version.
+  <Accordion title="Can I rename a version after it's been saved?">
+    Yes. Open the version history panel, click the three-dot menu on the version, then select **Edit name / description**. This works for Agents, Tools, and Workforces, and applies to the current draft, the active version, and historical versions alike. You can also ask Invent to rename a version.
   </Accordion>
   <Accordion title="Why doesn't restoring a version publish it automatically?">
     Restoring a version always lands in draft. You have to publish the restored draft yourself before it becomes the active version. This gives you a chance to review before going live.
