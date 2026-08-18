@@ -89,7 +89,9 @@ Invent is available to organization admins by default. An organization admin can
   <Accordion title="Start a task" icon="wand-magic-sparkles">
     <img src="/images/invent-start-menu.png" alt="The Invent start menu with suggested prompts and the message composer" />
 
-    Choose a suggested prompt or describe what you want Invent to build, improve, or investigate in the message composer.
+    Describe a process you know end to end, including the outcome, systems, judgment calls, and measure of success. Invent works through it with you before building the Agent team.
+
+    You can also choose a task suggested from your project setup, such as creating evals if none exist.
   </Accordion>
   <Accordion title="About you" icon="user">
     <img src="/images/about-you-invent.png" alt="The About You setting in Invent" />
@@ -101,56 +103,37 @@ Invent is available to organization admins by default. An organization admin can
     To set it up:
 
     <Steps>
-      <Step title="Open Invent">
-        Open the Invent side panel or home page.
+      <Step title="Open Invent settings">
+        In the Invent panel, click the three-dot menu, then select **Invent settings**.
       </Step>
-      <Step title="Click Settings">
-        Enter your details under **About You**.
+      <Step title="Open General">
+        Select **General**, enter your details under **About You**, then click **Save**.
       </Step>
     </Steps>
   </Accordion>
-  <Accordion title="Model selection" icon="brain">
-    <img src="/images/invent-model-selector.png" alt="The model selector in Invent" />
+  <Accordion title="Model selection and credit usage" icon="brain">
+    <img src="/images/invent-model-capabilities.png" alt="The Invent model list showing each model's cost, performance profile, and support for images and files" />
 
-    <img src="/images/invent-model-capabilities.png" alt="The model list showing which models support text and images" />
+    #### Model selection
 
-    The model dropdown sets which large language model (LLM) powers your Invent session. Models are grouped into three tiers:
+    The model dropdown sets which large language model (LLM) powers your Invent session.
 
-    The **Cheapest** tier prioritizes cost, the **Balanced** tier provides a middle ground between cost and capability, and the **Most capable** tier is intended for complex tasks. Free plan users default to the Cheapest tier to preserve credits.
-
-    When you click on a model, you can see its capabilities — including whether it supports text only or text and images.
+    The dollar signs show each model's relative credit cost. Labels such as **Fast**, **Balanced**, **Powerful**, and **Thorough** summarize the trade-off between speed, cost, and capability. The icons beside each model show whether it can work with images and file attachments.
 
     Your plan determines the default model. You can switch models at any time from the dropdown in the Invent panel.
-  </Accordion>
-  <Accordion title="Auto-accept and tool approval" icon="shield-check">
-    <img src="/images/auto-accept.png" alt="The auto-accept setting in Invent" />
 
-    By default, the changes Invent makes land in draft so you can review and approve them before they go live. Turn on auto-accept to let Invent apply its changes as it works, without stopping for your approval. Version restores are the exception — Invent always asks you to confirm before restoring. Keep it off when you want a checkpoint on each change, and turn it on when you trust Invent to iterate quickly.
+    #### Credit usage
 
-    When auto-accept is off, tool runs that require your approval appear in the approval queue. The queue shows pending actions and lets you approve or reject each one before Invent proceeds. This gives you fine-grained control over exactly what Invent executes.
-  </Accordion>
-  <Accordion title="Conversation history" icon="clock-rotate-left">
-    <img src="/images/invent-history.png" alt="Invent conversation history showing sessions" />
-
-    Invent saves each conversation as a session automatically. Opening the panel starts a new chat, and your past sessions stay available from the **Chats** dropdown in the panel header — browse or search them, then select one to resume where you left off.
-
-    <Check>
-      Closing the panel or refreshing the page doesn't delete your conversation history — sessions persist and can be resumed at any time.
-    </Check>
+    The counter beside the model selector shows the credits used in your current session and updates with each interaction.
   </Accordion>
   <Accordion title="Task status and history" icon="list-check">
     <img src="/images/invent-task-statuses.png" alt="Invent task history showing approve, idle, and other statuses" />
 
     Past sessions in your conversation history show each task with a status: approved (the action was applied), idle (waiting for your input), or completed. You can review what Invent did and track credit spend across sessions from the history view.
   </Accordion>
-  <Accordion title="Credit usage" icon="coins">
-    <img src="/images/invent-credit-counter.png" alt="The real-time credit counter in the Invent panel" />
-
-    The Invent panel shows a real-time credit counter — "X credits used" with a coins icon — that updates with each interaction, such as generating an Agent, requesting an adjustment, or asking a follow-up question.
-
-    The counter tracks only the credits used in your current session.
-  </Accordion>
   <Accordion title="Memories" icon="brain">
+    <img src="/images/invent-memories.png" alt="The Memory settings in Invent" />
+
     Invent automatically learns about you across conversations and stores what it learns as memories. You don't add memories manually — Invent builds them passively as you work.
 
     Memories let Invent carry context between sessions: your role, the kinds of things you build, naming conventions you prefer, and other patterns it picks up over time.
@@ -159,10 +142,10 @@ Invent is available to organization admins by default. An organization admin can
 
     <Steps>
       <Step title="Open Invent settings">
-        Click the settings icon in the Invent panel header, or open **Memories** from the sidebar.
+        In the Invent panel, click the three-dot menu, then select **Invent settings**.
       </Step>
-      <Step title="Manage your memories">
-        Browse the list, search for a specific memory, edit its content, or delete memories you don't want Invent to carry forward.
+      <Step title="Open Memory">
+        Select **Memory**, manage your memory settings, then click **Save**.
       </Step>
     </Steps>
 
@@ -178,43 +161,77 @@ Invent is available to organization admins by default. An organization admin can
   <Tab title="Manage performance">
     <AccordionGroup>
   <Accordion title="Scheduled check-ins" icon="calendar-clock">
-    Invent can check back in on your work later. Ask it to review an Agent in a few days and it will schedule a message to itself, then look again at the time you agreed. If it finds something worth your attention, it lets you know. If everything looks fine, it stays quiet.
+    <img src="/images/invent-scheduled-check-ins.png" alt="A scheduled check-in in Invent" />
+
+    <Note>
+      Before setting up a scheduled check-in, add an email or Slack notification channel in [Alerts](/build/invent/invent#alerts) so Invent can notify you about the result.
+    </Note>
 
     #### Schedule a check-in
 
-    Just ask. There's no form to fill in. Tell Invent to check back on an Agent later and it will suggest a sensible interval based on how busy that Agent is — from about a day for Agents running many tasks a day, up to a week for quiet ones. You can pick a different time if you'd rather.
+    Tell Invent what to review and when. It can suggest an interval based on the Agent's activity.
 
     #### What happens when a check-in runs
 
-    Invent reviews the resource the way you would: test results and monitoring first, then errors, then recent activity. If nothing needs attention, you won't hear from it. If something does, it sends you a short summary of the problem along with a suggested fix. Approve the fix and Invent applies it to your draft, then offers to check back again to confirm it worked.
+    Invent reviews evals, errors, and recent activity. If it finds an issue, it sends a summary and suggested fix. If everything looks healthy, it stays quiet.
   </Accordion>
-  <Accordion title="Alarms and alerts" icon="bell">
-    <img src="/images/invent-alarms.png" alt="The alarms and alerts configuration in Invent" />
+  <Accordion title="Alerts" icon="envelope">
+    <img src="/images/invent-alerts.png" alt="The email and Slack alert settings in Invent" />
 
-    Configure an alarm by setting a threshold and sensitivity level. You set up alarms the same way you schedule check-ins: tell Invent which eval you want to monitor and the threshold to use.
+    Add at least one email address or Slack channel so Invent can notify you when a scheduled check-in finds something.
 
-    #### Monitor eval performance
-
-    <img src="/images/invent-evals-monitor.png" alt="Invent monitoring eval results" />
-
-    Invent watches your evals and notifies you when pass rates cross the threshold you set.
-
-    #### Create evals
-
-    <img src="/images/invent-create-evals.png" alt="Creating evals with Invent" />
-
-    Ask Invent to create the checks an Agent should pass and add them to your eval suite.
-
-    #### Fix failing evals
-
-    <img src="/images/invent-fix-failing-evals.png" alt="Invent proposing fixes for failing evals" />
-
-    When an alarm fires, Invent reviews the failing evals, explains what's wrong, and proposes a fix. Approve the fix and Invent applies it to your draft.
+    <Steps>
+      <Step title="Open Invent settings">
+        In the Invent panel, click the three-dot menu, then select **Invent settings**.
+      </Step>
+      <Step title="Open Alerts">
+        Select **Alerts**, add an email address or Slack channel, then click **Save**.
+      </Step>
+    </Steps>
   </Accordion>
   <Accordion title="Restore a version" icon="clock-rotate-left">
     Ask Invent to roll an asset back to an earlier version — for example, "Restore the previous version of this tool". Invent copies that version into the current draft, leaving the live published version unchanged until you publish. This restores an earlier version of an existing asset; it doesn't recover one that's been deleted.
   </Accordion>
     </AccordionGroup>
+  </Tab>
+</Tabs>
+
+## Creating Evals with Invent
+
+Invent can create evals, monitor live Agent and Workforce performance, and propose fixes when quality drops.
+
+<Card title="Learn more about Evals" icon="chart-line" href="/build/agents/build-your-agent/evals">
+  Learn how to create scenarios and reusable Checks, run evaluations, and monitor live performance.
+</Card>
+
+<Tabs>
+  <Tab title="Create evals">
+    Ask Invent to create the checks an Agent should pass and add them to your eval suite.
+
+    <img src="/images/invent-create-evals.png" alt="Creating evals with Invent" />
+  </Tab>
+  <Tab title="Monitor performance">
+    Invent watches your evals and notifies you when pass rates cross the threshold you set.
+
+    <img src="/images/invent-evals-monitor.png" alt="Invent monitoring eval results" />
+  </Tab>
+  <Tab title="Configure an alarm">
+    <Note>
+      Alarms are configured in an Agent or Workforce's **Evaluations / Monitoring** area, not in Invent settings.
+    </Note>
+
+    Create or open a Performance dashboard, then select **Create alert** or **Add alarm**. Choose the overall score or an evaluator check to monitor, then set its threshold and sensitivity.
+
+    <img src="/images/invent-alarms.png" alt="The alarm configuration in Invent" />
+
+    #### Turn on auto-diagnosis
+
+    Turn on **Auto-diagnosis by Invent** to have Invent investigate when the alarm first breaches. Invent sends a root-cause summary and proposed fix to your configured [Invent alert channels](/build/invent/invent#alerts). Changes are only applied after you approve them.
+  </Tab>
+  <Tab title="Fix failing evals">
+    When an alarm fires, Invent reviews the failing evals, explains what's wrong, and proposes a fix. Approve the fix and Invent applies it to your draft.
+
+    <img src="/images/invent-fix-failing-evals.png" alt="Invent proposing fixes for failing evals" />
   </Tab>
 </Tabs>
 
