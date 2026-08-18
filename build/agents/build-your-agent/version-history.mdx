@@ -35,25 +35,23 @@ When you restore a version, the restored state is saved as a new draft with `(re
 
 ## Accessing and restoring versions
 
-Version history is available in the builder UI for each asset type.
+Version history works the same way for Agents, Tools, and Workforces:
 
-<Tabs>
-  <Tab title="Agents">
-    In the Agent builder, click **Versions** in the top bar to open the **Version history** panel in the right sidebar. The panel lists every saved version with its name, author, and timestamp.
-  </Tab>
-  <Tab title="Tools">
-    In the Tool builder, open the **Versions** menu in the header to show the version history panel in the right sidebar. This is available on the standalone Tool page — the Tool builder embedded inside the Agent builder doesn't include the entry point, so open the Tool directly to reach its history.
-  </Tab>
-  <Tab title="Workforces">
-    In the Workforce builder, open **More actions**, then select **Versions** to show the version history panel.
-  </Tab>
-</Tabs>
+1. Open the Agent, Tool, or Workforce in the builder
+2. Click the three-dot menu in the top right
+3. Select **Versions**
+
+The version history panel lists every saved version with its name, author, and timestamp.
+
+<Note>
+  The three-dot menu only lists **Versions** on the build view — it's hidden on an Agent's Use tab, outside a Workforce's Build tab, and in the Tool builder embedded inside the Agent builder, where you need to open the Tool on its own page instead.
+</Note>
 
 You can restore a previous version from the builder UI or by asking [Invent](/build/invent/invent) in plain language. Both approaches land the restored state in draft — you review it and publish when ready.
 
 ### From the UI
 
-1. Open the version history panel for your Agent, Tool, or Workforce (see the tabs above)
+1. Open the version history panel using the steps above
 2. Find the version you want to restore
 3. Click the three-dot menu on that version, then select **Restore this version**
 4. The restored version becomes the current draft — review it before publishing
