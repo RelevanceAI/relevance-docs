@@ -1,0 +1,108 @@
+---
+title: "Version history"
+sidebarTitle: "Version history"
+description: "Track, restore, and manage versions of your agents, tools, and workforces."
+---
+
+Version history gives you a complete record of every saved state for your agents, tools, and workforces. Every time you save a draft or publish, a new version is created automatically — so you can experiment freely and roll back if something breaks.
+
+## When versions are created
+
+A new version is created in two situations:
+
+- **On every draft save** — whenever you make a change and save without publishing
+- **On publish** — when you publish a draft to make it the active version
+
+This means every meaningful edit is captured. You don't need to manually create snapshots or remember to save before experimenting.
+
+## Accessing version history
+
+Version history is available in the builder UI for each asset type.
+
+<Tabs>
+  <Tab title="Agents">
+    Open the right sidebar panel inside the Agent builder. The version history panel lists all saved versions with their timestamps and optional descriptions. Click any version to preview it.
+  </Tab>
+  <Tab title="Tools">
+    Use the topbar toggle in the Tool builder to switch into the version history view. From there you can browse and restore previous versions.
+  </Tab>
+  <Tab title="Workforces">
+    Open the version panel inside the Workforce builder. The panel shows the full version list for that workforce.
+  </Tab>
+</Tabs>
+
+## The draft/active model
+
+When you edit an agent, tool, or workforce, your changes go to a **draft** first — they don't affect the live, published version until you explicitly publish. This means:
+
+- Your published (active) version keeps running while you iterate
+- Draft changes are saved automatically as you work
+- Publishing is an intentional step — you decide when changes go live
+
+Each saved draft state and each published state becomes a distinct version in the history list.
+
+## Restoring a version
+
+You can restore a previous version from the UI or via Inventor.
+
+### Restore from the UI
+
+1. Open the version history panel for your agent, tool, or workforce (see [Accessing version history](#accessing-version-history) above)
+2. Find the version you want to restore
+3. Click **Restore** on that version
+4. The restored version becomes the current draft — review it before publishing
+
+Publishing is a separate step. Restoring doesn't immediately overwrite your live version.
+
+### Restore via Inventor
+
+You can ask [Inventor](/build/invent/invent) to restore a previous version in plain language:
+
+> "Restore the previous version of this tool"
+
+Inventor always asks you to confirm before applying the restore. The restored state lands in draft, leaving the published version unchanged until you publish.
+
+<Info>
+  Inventor requires a version description when creating versions. This makes it easier to identify which version to restore later.
+</Info>
+
+## Version naming and descriptions
+
+Version descriptions are optional when saving from the UI, but recommended — they make it much easier to identify a specific version later when you need to restore it.
+
+Inventor enforces descriptions when it creates versions, so versions created via Inventor always have a description.
+
+<Tip>
+  Use descriptions that capture intent, not just the change. "Added web search tool" is more useful than "Updated version 3" when you're scanning a list of 20 versions.
+</Tip>
+
+## The "(restored)" suffix
+
+When you restore a version, the restored state is saved as a new draft with `(restored)` appended to the version description. This suffix is applied automatically and indicates the version originated from a restore operation, not a fresh edit.
+
+This lets you distinguish restored versions from original saves in the history list, which is useful when reviewing the audit trail.
+
+## Version retention
+
+Old versions are automatically deleted according to your organization's data retention policy, with two exceptions:
+
+- The **active version** (the currently published one) is always protected
+- The **draft version** (your current work in progress) is always protected
+
+Only old, inactive versions that aren't the current draft are eligible for deletion. Your working versions are never at risk.
+
+For details on retention periods and how deletion conditions work, see [Data retention](/enterprise/data-retention).
+
+## Things to know
+
+<AccordionGroup>
+  <Accordion title="No version history before the feature shipped">
+    Version history only exists for changes made after the feature was released. Assets that weren't edited after the release date won't have a history to restore from.
+  </Accordion>
+  <Accordion title="No UI for renaming versions">
+    You can't rename a version from the builder UI after it's been saved. To rename, use Inventor — it can update the version description on an existing version.
+  </Accordion>
+  <Accordion title="Restore doesn't publish automatically">
+    Restoring a version always lands in draft. You have to publish the restored draft yourself before it becomes the active version. This gives you a chance to review before going live.
+  </Accordion>
+</AccordionGroup>
