@@ -196,42 +196,78 @@ Invent is available to organization admins by default. An organization admin can
   </Tab>
 </Tabs>
 
-## Creating Evals with Invent
+## Manage Evals with Invent
 
-Invent can create evals, monitor live Agent and Workforce performance, and propose fixes when quality drops.
+Invent can build an initial Evals suite, review results, investigate failed Checks, and diagnose performance alarms for Agents and Workforces.
 
 <Card title="Learn more about Evals" icon="chart-line" href="/build/agents/build-your-agent/evals">
   Learn how to create scenarios and reusable Checks, run evaluations, and monitor live performance.
 </Card>
 
 <Tabs>
-  <Tab title="Create evals">
-    Ask Invent to create the checks an Agent should pass and add them to your eval suite.
-
+  <Tab title="Create Evals">
     <img src="/images/invent-create-evals.png" alt="Creating evals with Invent" />
-  </Tab>
-  <Tab title="Monitor performance">
-    Invent watches your evals and notifies you when pass rates cross the threshold you set.
 
-    <img src="/images/invent-evals-monitor.png" alt="Invent monitoring eval results" />
+    Invent can turn an Agent or Workforce's real usage into a starting Evals suite, including a test set, scenarios, and reusable Checks.
+
+    <Steps>
+      <Step title="Start from your Agent or Workforce">
+        On the **Run** page, select **Create with Invent** from the testing banner. If a recent Agent task is available, you can instead select **Automate testing** beside it so Invent uses that run as the example.
+      </Step>
+      <Step title="Describe what success looks like">
+        Add any outcomes, edge cases, or requirements that the Evals should cover. A representative task gives Invent useful context about the inputs, expected behavior, and tools involved.
+      </Step>
+      <Step title="Review and run the Evals">
+        Invent creates the Evals setup and runs the test. Open **Evaluate → Runs** to review the score and see which Checks passed or failed.
+      </Step>
+    </Steps>
+
+    <Tip>
+      Start with a task that represents normal production use, then ask Invent to add edge cases once the baseline Evals are working.
+    </Tip>
+  </Tab>
+  <Tab title="Review performance">
+    <img src="/images/invent-evals-monitor.png" alt="Reviewing performance results with Invent" />
+
+    Use **Review with Invent** for an on-demand analysis of a completed Evals run or Performance dashboard. Selecting it starts a fresh conversation with the relevant page as context, including the dashboard name when applicable. Invent summarizes the results and recommends improvements, and you can ask it to compare Checks, explain score changes, identify recurring weak points, or prioritize the highest-impact recommendations.
+
+    <Note>
+      A review is requested manually; it does not watch performance continuously. Configure an alarm if you want to be notified when a score crosses a threshold.
+    </Note>
+  </Tab>
+  <Tab title="Fix failing Evals">
+    <img src="/images/invent-fix-failing-evals.png" alt="Invent proposing fixes for failing evals" />
+
+    Target a specific failed or errored Check when you already know which result needs attention. Invent receives the Check name and run page, investigates why it did not pass, and works with you on a fix.
+
+    <Steps>
+      <Step title="Open the failed result">
+        Go to **Evaluate → Runs**, open a completed Evals run, then expand a failed test to see its Check results and failure reasons.
+      </Step>
+      <Step title="Select Fix">
+        The **Fix** button appears beside each Check that failed or returned an error. Selecting it starts a new Invent conversation focused on that Check.
+      </Step>
+      <Step title="Review and verify the fix">
+        Invent identifies the likely cause and proposes changes to the Agent, Workforce, or Evals setup. Review the proposed actions before applying them, then rerun the Evals to confirm the Check passes without breaking other behavior.
+      </Step>
+    </Steps>
+
+    <Tip>
+      Use **Review with Invent** for a summary of the entire run; use **Fix** when you want Invent to investigate one failed Check.
+    </Tip>
   </Tab>
   <Tab title="Configure an alarm">
-    <Note>
-      Alarms are configured in an Agent or Workforce's **Evaluations / Monitoring** area, not in Invent settings.
-    </Note>
-
-    Create or open a Performance dashboard, then select **Create alert** or **Add alarm**. Choose the overall score or an evaluator check to monitor, then set its threshold and sensitivity.
-
     <img src="/images/invent-alarms.png" alt="The alarm configuration in Invent" />
 
     #### Turn on auto-diagnosis
 
-    Turn on **Auto-diagnosis by Invent** to have Invent investigate when the alarm first breaches. Invent sends a root-cause summary and proposed fix to your configured [Invent alert channels](/build/invent/invent#alerts). Changes are only applied after you approve them.
-  </Tab>
-  <Tab title="Fix failing evals">
-    When an alarm fires, Invent reviews the failing evals, explains what's wrong, and proposes a fix. Approve the fix and Invent applies it to your draft.
+    Turn on **Auto-diagnosis by Invent** to investigate the first breach and send a diagnosis and proposed fix to the alarm creator's [Invent alert channels](/build/invent/invent#alerts). Invent still shares its findings if the cause is unclear and never applies changes without your approval.
 
-    <img src="/images/invent-fix-failing-evals.png" alt="Invent proposing fixes for failing evals" />
+    <Note>
+      Alarms are configured in an Agent or Workforce's **Evaluate → Monitor** area, not in Invent settings.
+    </Note>
+
+    Alarms evaluate the scores collected by a Performance dashboard and notify you when an overall score or individual Check crosses the condition you set.
   </Tab>
 </Tabs>
 
