@@ -69,16 +69,14 @@ You can relabel any version after it's been saved, including the current draft, 
 
 ## Version retention
 
-Versions are kept indefinitely by default. Nothing is pruned unless an organization admin configures a data retention policy and turns on version pruning, which is off until they do.
+Versions are kept indefinitely by default. They are only deleted if your organization has the Enterprise Data Retention feature enabled and an admin has turned retention on. There is no setting specific to versions — the same switch covers logs and asset versions together.
 
-Pruning is switched on separately for Agent, Tool, and Workforce versions, and the three are independent — an organization can prune old Agent versions while keeping every Tool version.
+Where retention is on, a version is deleted only if both of these hold:
 
-Where pruning is enabled, a version is removed only if both of these hold:
-
-- It is older than the retention period, measured from when the version was created rather than when it was last edited
+- It is older than the retention window, measured from when the version was created rather than when it was last edited
 - It is neither the **active version** (the currently published one) nor the **draft version** (your current work in progress) — those two are always protected, at any age
 
-For retention periods and how to configure them, see [Data retention](/enterprise/data-retention).
+For retention windows and how to configure them, see [Data retention](/enterprise/data-retention).
 
 ## Frequently asked questions (FAQs)
 
