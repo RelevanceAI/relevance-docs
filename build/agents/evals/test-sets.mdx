@@ -1,18 +1,20 @@
 ---
-title: 'Test sets'
-sidebarTitle: 'Test sets'
-description: 'Create and manage test scenarios that simulate real user interactions with your Agent'
+title: 'Creating tests (Test sets)'
+sidebarTitle: 'Creating tests'
+description: 'Create tests that simulate real user conversations with your Agent or Workforce, and group them into test sets'
 ---
 
 <Info>
 Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-Test sets group related evaluation scenarios together. Each scenario simulates a user interacting with your Agent; running it produces a conversation that gets scored by the [Evaluation checks](/build/agents/evals/checks) you've attached.
+A **test** simulates one conversation with your Agent or Workforce. You describe a user in the **Scenario** field — *"You are a long-time customer who was charged twice for the same order"* — and Relevance plays that user, generates their messages, and hands back the transcript. The [Checks](/build/agents/evals/checks) you attach score it.
+
+Each test also sets how long the conversation may run and how many times to repeat it. Tests live in a **test set**, which is what a run points at — run the whole set, or a single test inside it.
 
 ---
 
-## Creating a test set with a scenario
+## Creating a test set and your first test
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
 <iframe src="https://app.supademo.com/embed/cmpks4e442iakqms93emtc5jn" frameBorder="0" title="Creating a test set" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
@@ -20,137 +22,142 @@ Test sets group related evaluation scenarios together. Each scenario simulates a
 
 <Steps>
   <Step title="Open the Test tab">
-    Open your Agent in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
+    Open your Agent or Workforce in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
   </Step>
   <Step title="Create a test set">
-    Click the **+ New test set** button. Enter a name for your test set and click **Create**.
+    Click **New test set**, name it in the **Create new test set** modal, and click **Create**.
   </Step>
   <Step title="Open the test set">
     Click on the test set you just created to open it.
   </Step>
-  <Step title="Add a scenario">
-    Click the **+ Add scenario** button to add a scenario to your test set.
+  <Step title="Add a test">
+    Click **Add test**. The **Add new test** modal opens.
   </Step>
-  <Step title="Fill in scenario details">
-    Fill in the scenario details:
-
+  <Step title="Start from a preset (optional)">
+    Under **Start with a preset or write your own**, pick one of the five presets — **Happy path**, **Vague request**, **Frustrated user**, **Off-topic request**, or **Follow-up**. Each fills in the Scenario and an exact first message for you, which you can then edit.
+  </Step>
+  <Step title="Name the test and write the Scenario">
     | Field | Description | Example |
     |-------|-------------|---------|
-    | **Scenario name** | A descriptive name for this scenario | "Response empathy" |
-    | **Scenario description** | Describe a persona and situation — the AI generates realistic messages from this | "You are an impatient customer who wants quick answers about their bill." |
-    | **Run X times** | How many times to execute this scenario | 3 |
-    | **Up to X messages** | Maximum conversation length, where each message is one back-and-forth between the simulated user and the Agent | 10 |
-    | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with my bill." |
+    | **Test name** | A descriptive name for this test | "Frustrated Customer Complaint" |
+    | **Scenario** | Describe a persona and situation — the AI generates realistic messages from this | "You are an impatient customer who wants quick answers about their bill." |
+    | **Run N times** | How many times to repeat the test, 1 to 10. AI responses vary run to run, so repeating shows whether it handles the test consistently | 3 |
+    | **Up to N messages** | Maximum conversation length, 1 to 50, where each message is one back-and-forth between the simulated user and the Agent or Workforce | 10 |
+    | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with a refund for a defective product." |
   </Step>
   <Step title="Attach Checks">
-    Attach Checks to define how this scenario is scored. You can either pick existing Checks from the [Evaluation checks](/build/agents/evals/checks) tab or create new ones inline:
+    Under **Checks**, decide how this test is scored. Checks pass or fail, and are combined into the test score. Two ways in:
 
-    | Field | Description | Example |
-    |-------|-------------|---------|
-    | **Type** | The Check type | LLM Judge |
-    | **Name** | Name of the evaluation criterion | "Empathy shown" |
-    | **Type-specific config** | Settings based on the chosen type (see [Check types](/build/agents/evals/checks#check-types)) | *Evaluation Prompt*: "Did the Agent acknowledge the customer's frustration and express empathy before offering solutions?" |
+    <Tabs>
+      <Tab title="Reuse an existing check">
+        **+ Add existing check** opens your Checks library. Pick the ones you want, up to 10 per test.
+      </Tab>
+      <Tab title="Write a new one here">
+        **+ New check** opens the editor without leaving the test. Enter a **Check name**, choose a type, configure it, and click **Save check**.
+      </Tab>
+    </Tabs>
 
-    Newly created Checks land in the Checks tab and can be reused on other scenarios or Monitor dashboards.
+    <Note>
+    Both routes create the same thing — a Check on the Agent or Workforce, reusable on other tests and on Monitor dashboards. There is no Check that exists only inside one test.
+    </Note>
 
-    <Tip>
-    Each scenario supports up to 10 Checks. Checks added via **Additional global checks** at run time are counted separately.
-    </Tip>
+    See [Check types](/build/agents/evals/checks) for what each type scores and the fields it takes.
   </Step>
-  <Step title="Add tool simulations (optional)">
-    Add **Tool simulations** to emulate Tool usage without actually calling the underlying Tools. Tool simulations are configured per scenario:
+  <Step title="Choose how approvals are handled">
+    **When the test hits an approval** controls how the test resolves tool approvals and escalations mid-conversation:
 
-    - Select a Tool to simulate.
-    - Provide a prompt describing what the Tool should return (a fake response is generated based on your prompt).
-    - In the **Advanced** dropdown, you can select a **Simulation model** to control which model generates the simulated response.
+    | Option | What it does |
+    |--------|--------------|
+    | **Auto** (default) | The AI approves or rejects based on what a real user in this scenario would do |
+    | **Approve all** | Every approval request is approved automatically |
+    | **Reject all** | Every approval request is rejected automatically |
+  </Step>
+  <Step title="Set tool simulation (optional)">
+    Under **Tool simulation**, each Tool on your Agent or Workforce has a **Live** / **Simulated** toggle. Live means the Tool actually runs during the test — real emails sent, real records updated. Simulated replaces the call with a fake-but-realistic response.
 
-    When evaluating a Workforce, Tool simulations can be configured per node, so each sub-agent uses its own simulated Tool responses.
+    In Simulated mode you can optionally describe what the Tool should return (leave it empty for a generic response), and open **Advanced** to pick the model that generates the simulated response. **Simulate all tools** and **Reset all to live** flip every Tool at once, and the section header shows how many are currently simulated.
+
+    When evaluating a Workforce, Tool simulation is configured per node, so each sub-agent uses its own simulated Tool responses.
   </Step>
   <Step title="Save">
-    Click **Save test scenario** to save your configuration.
+    Click **Save test**. Reopening an existing test shows the same form titled **Edit test**, with **Update test** to save.
   </Step>
 </Steps>
 
 <Tip>
-You can add multiple scenarios to a single test set to evaluate different aspects of your Agent's behavior. Each scenario can have its own description, message cap, run count, attached Checks, and Tool simulations.
+You can add multiple tests to a single test set to evaluate different aspects of its behavior. Each test can have its own Scenario, message cap, run count, attached Checks, and Tool simulations.
 </Tip>
 
 ---
 
-## Managing scenarios
+## Managing tests
 
-Scenarios can be reorganized across test sets as your testing strategy evolves. Each scenario has a dropdown menu (the three-dot icon next to the scenario name) with three operations:
+Tests can be reorganized across test sets as your testing strategy evolves. Each test has a dropdown menu (the three-dot icon next to the test name):
 
 | Operation | What it does | When to use it |
 |-----------|-------------|----------------|
-| **Move** | Relocates the scenario to another test set | Reorganizing test sets or consolidating related scenarios |
-| **Copy** | Creates a duplicate of the scenario in another test set | Reusing a scenario as a baseline in a different test set |
-| **Duplicate** | Creates a copy of the scenario in the same test set | Quickly creating a variation of an existing scenario |
+| **Move** | Relocates the test to another test set | Reorganizing test sets or consolidating related tests |
+| **Copy** | Creates a duplicate of the test in another test set | Reusing a test as a baseline in a different test set |
+| **Duplicate** | Creates a copy of the test in the same test set | Quickly creating a variation of an existing test |
+| **Delete test** | Removes the test from the set | Retiring a test you no longer run. Selecting several tests first gives you a bulk **Delete tests** action |
 
 ---
 
-## Example scenarios
+## Example tests
 
 <AccordionGroup>
   <Accordion title="Customer support - empathy test">
-    **Scenario name**: Response empathy
+    **Name**: Response empathy
 
-    **Description**: You are a long-time customer who was recently charged twice for the same order. You've already contacted support once without resolution and are feeling frustrated but willing to give the Agent a chance to help. Express your concerns clearly and see if the Agent acknowledges your situation before jumping to solutions.
+    **Scenario**: You are a long-time customer who was recently charged twice for the same order. You've already contacted support once without resolution and are feeling frustrated but willing to give the Agent a chance to help. Express your concerns clearly and see if the Agent acknowledges your situation before jumping to solutions.
 
     **Up to**: 10 messages
 
-    **Check**: Empathy shown (LLM Judge)
+    **Check**: Empathy shown (AI Judge)
     - *Evaluation Prompt*: Did the Agent acknowledge the customer's frustration and express empathy before offering solutions? The response should show understanding of the emotional state and validate their concerns.
   </Accordion>
 
   <Accordion title="Sales - product knowledge test">
-    **Scenario name**: Product expertise
+    **Name**: Product expertise
 
-    **Description**: You are a procurement manager at a mid-sized company evaluating solutions for your team. You need specific details about enterprise pricing tiers, integration capabilities with existing tools like Salesforce and HubSpot, and data security certifications. Ask clarifying questions and compare features against competitors you're also considering.
+    **Scenario**: You are a procurement manager at a mid-sized company evaluating solutions for your team. You need specific details about enterprise pricing tiers, integration capabilities with existing tools like Salesforce and HubSpot, and data security certifications. Ask clarifying questions and compare features against competitors you're also considering.
 
     **Up to**: 15 messages
 
-    **Check**: Accurate information (LLM Judge)
+    **Check**: Accurate information (AI Judge)
     - *Evaluation Prompt*: Did the Agent provide accurate product information without making claims that cannot be verified? Responses should be factual, reference actual product capabilities, and acknowledge when information needs to be confirmed by a sales representative.
   </Accordion>
 
   <Accordion title="Support - escalation handling">
-    **Scenario name**: Escalation request
+    **Name**: Escalation request
 
-    **Description**: You are a paying customer who has experienced a service outage affecting your business operations. You've already troubleshooted with the knowledge base articles and need to speak with a senior support engineer or account manager. Be firm but professional in your request, and provide context about the business impact.
+    **Scenario**: You are a paying customer who has experienced a service outage affecting your business operations. You've already troubleshooted with the knowledge base articles and need to speak with a senior support engineer or account manager. Be firm but professional in your request, and provide context about the business impact.
 
     **Up to**: 5 messages
 
-    **Check**: Appropriate escalation (LLM Judge)
+    **Check**: Appropriate escalation (AI Judge)
     - *Evaluation Prompt*: Did the Agent acknowledge the severity of the situation, validate the customer's need for escalation, and initiate a handoff to a human representative while maintaining a professional and empathetic tone throughout?
   </Accordion>
 </AccordionGroup>
 
 ---
 
-## Best practices for test sets
-
-- **Test edge cases.** Create scenarios for difficult situations: angry customers, off-topic requests, requests to bypass rules.
-- **Start simple.** Begin with a few core scenarios that test your Agent's primary use cases. Add complexity as you learn what matters most.
+Next: Read the [Check types](/build/agents/evals/checks) reference — what each type scores and how the Checks library works.
 
 ---
 
-## Frequently asked questions
+## Frequently asked questions (FAQs)
 
 <AccordionGroup>
-  <Accordion title="How many scenarios can I have in a test set?">
-    You can add as many scenarios as needed to a single test set. Each scenario is evaluated independently and can have its own attached Checks.
+  <Accordion title="How many tests can I have in a test set?">
+    You can add as many tests as needed to a single test set. Each test is evaluated independently and can have its own attached Checks.
   </Accordion>
 
-  <Accordion title="How many Checks can I add to a scenario?">
-    Each scenario supports up to 10 Checks. This applies to scenario-level Checks defined within the scenario itself. Checks added via **Additional global checks** at run time are counted separately.
+  <Accordion title="How many Checks can I add to a test?">
+    Each test supports up to 10 Checks. This applies to Checks defined on the test itself. Checks added under **Additional checks** at run time are counted separately.
   </Accordion>
 
-  <Accordion title="Can I move scenarios between test sets?">
-    Yes. Each scenario has a dropdown menu (three-dot icon) with three options: **Move** relocates the scenario to another test set, **Copy** creates a duplicate in another test set, and **Duplicate** creates a copy in the same test set.
+  <Accordion title="Can I move tests between test sets?">
+    Yes. Each test has a dropdown menu (three-dot icon) with three options: **Move** relocates the test to another test set, **Copy** creates a duplicate in another test set, and **Duplicate** creates a copy in the same test set.
   </Accordion>
 </AccordionGroup>
-
----
-
-Next: Learn how to [run evaluations](/build/agents/evals/running-evaluations) against your test sets.

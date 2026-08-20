@@ -1,16 +1,20 @@
 ---
-title: 'Dashboards & monitoring'
-sidebarTitle: 'Dashboards & monitoring'
-description: 'Score live Agent tasks against Checks with sample-rate controls and trend charts over time'
+title: 'Monitoring live conversations'
+sidebarTitle: 'Monitoring live conversations'
+description: 'Score the real conversations your Agent or Workforce is having against Checks, on dashboards you configure per sample rate'
 ---
 
 <Info>
 Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-The **Monitor** section continuously scores live Agent tasks against [Evaluation checks](/build/agents/evals/checks). Unlike Test, which runs simulated conversations, Monitor evaluates the real conversations your Agent is having.
+The **Monitor** section continuously scores live tasks against [Checks](/build/agents/evals/checks). Unlike Test, which runs simulated conversations, Monitor evaluates the real conversations your Agent or Workforce is having.
 
 Monitor is organized into **dashboards** — you can create more than one (for example, one focused on tone, another on tool-use accuracy) and configure each independently.
+
+<Note>
+Dashboards only score the latest published version of your Agent or Workforce, so a resource with no published version collects no data.
+</Note>
 
 ---
 
@@ -55,20 +59,9 @@ You also get:
 
 - **Overall score timeseries** to spot regressions or improvements over time.
 - **Per-Check charts** so you can see which criteria are slipping.
-- **Version markers** that line up score changes with Agent publishes.
+- **Version markers** that line up score changes with each publish.
 - **A list of evaluation runs** with score, name, and a drill-in to the full conversation.
 
 <Tip>
 To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
 </Tip>
-
----
-
-## Best practices for Monitor
-
-- **Run Monitor on live tasks.** Set up a dashboard with your most important Checks so you catch regressions on real conversations, not just simulated ones.
-- **Sample wisely.** Match the sample rate to your task volume. A low-traffic Agent can run at 100%; high-volume Agents can sample lower to keep costs down without losing signal.
-
----
-
-Next: Learn how to configure [Publish gates](/build/agents/evals/publish) to require evaluations before publishing your Agent.

@@ -1,14 +1,14 @@
 ---
 title: 'Introduction to Evals'
 sidebarTitle: 'Introduction to Evals'
-description: 'Test and evaluate your AI Agents with scenario-based evaluations and reusable Checks'
+description: 'Test and evaluate Agents and Workforces with simulated conversations and reusable scoring criteria'
 ---
 
 <Info>
 Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-The Evals section is your command center for testing and evaluating AI Agent performance. Located in the **Evaluate** tab (next to the Build and Use tabs) in the Agent builder, Evals lets you create test sets, define reusable Checks, run automated evaluations, and monitor live Agent quality — all without manual testing. Evals apply to both individual Agents and Workforces, including the sub-agents and tools inside a Workforce.
+Evals is where you test and measure performance. It works on both Agents and Workforces, and lives in the **Evaluate** tab of either builder, next to **Build** and **Run**. Use it to create test sets, define reusable scoring criteria, run evaluations, and monitor quality on live conversations.
 
 <div
   className="video-embed"
@@ -34,84 +34,79 @@ The Evals section is your command center for testing and evaluating AI Agent per
   ></iframe>
 </div>
 
-## What you can do with Evals
+## Why use Evals?
+
+Agents and Workforces are non-deterministic — the same input can produce a different answer, and a change to a prompt, a Tool, or a model can shift behavior somewhere you weren't looking. Evals give you a fixed set of conversations, scored the same way every time, so you can compare one version against the next instead of spot-checking by hand.
+
+The same setup answers cost questions. Running the same tests across different models shows where a cheaper model holds up and where it degrades, so you can choose per use case rather than guessing.
 
 <CardGroup cols={3}>
   <Card title="Run tests" icon="flask-vial">
-    Build test sets with scenarios that simulate real user interactions, then attach Checks to score every conversation automatically.
+    Build test sets holding tests that simulate real user conversations, then attach criteria to score every one automatically.
   </Card>
-  <Card title="Reuse Checks" icon="scale-balanced">
-    Define evaluation criteria once in the Checks tab and attach them to scenarios, Monitor dashboards, or ad-hoc evaluations of completed tasks.
+  <Card title="Reuse criteria" icon="scale-balanced">
+    Define a criterion once in the **Checks** tab and attach it to tests, Monitor dashboards, or ad-hoc evaluations of completed tasks.
   </Card>
   <Card title="Monitor live tasks" icon="chart-line">
-    Create Monitor dashboards that score live Agent tasks against your Checks, with sample-rate controls and per-Check trend charts over time.
+    Create Monitor dashboards that score live tasks against the same criteria, with sample-rate controls and per-criterion trend charts over time.
   </Card>
 </CardGroup>
-
----
-
-## Why use Evals?
-
-Any time we are using Agents we want to be sure that they are accomplishing our business outcomes. This might be increasing Marketing Qualified Leads, or reducing the time it takes to respond to a lead. Evals give you the confidence that your Agents are hitting the mark with their target audience.
-
-On top of that, Evals enables testing Agents across a spectrum of LLMs in order to optimize costs while maintaining a high degree of effectiveness. Fine-tuning Agent cost effectiveness can have an immediate impact on a company's bottom line. And, because you can see that Agents can run effectively on lower-cost models, you can broaden the scope of where you can deploy Agents. You can now have Agents focus on additional business outcomes without worrying about costs as much.
 
 If you have questions on how to track value effectively with Evals, please [contact Relevance](/get-started/support).
 
 ---
 
-## Evals sections
+## What's inside Evals
 
-The Evals area has five sections, shown in the left sidebar of the Evaluate tab:
+Evals has five sections, shown in the left sidebar of the Evaluate tab:
 
-- **Test** — Create and manage test sets. Each test set holds scenarios that simulate users; running a scenario produces a conversation with your Agent that gets scored by attached Checks.
+- **Test** — Create and manage test sets. Each test set holds tests that simulate users; running a test produces a conversation with the Agent or Workforce that gets scored by the criteria you attach.
 - **Runs** — Past evaluation run results. Browse average scores, tasks evaluated, progress status, cost (Credits and Actions), and creation date for every run.
-- **Checks** — The reusable set of evaluation criteria. Create a Check once, then attach it to scenarios, to Monitor dashboards, or to one-off evaluations of completed tasks.
-- **Publish** — Choose which test sets must pass before your Agent can be published. Set a minimum pass rate and optionally block publishing on failure.
-- **Monitor** — Track live Agent quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
-
+- **Checks** — Your library of scoring criteria; each one is called a Check. Create a Check once, then attach it to tests, to Monitor dashboards, or to one-off evaluations of completed tasks.
+- **Publish** — Choose which test sets must pass before your Agent or Workforce can be published. Set a minimum pass rate and optionally block publishing on failure.
+- **Monitor** — Track quality on real tasks. Create one or more Monitor dashboards, attach Checks, set a sample rate, and watch scores trend over time.
 ---
 
 ## Cost and billing
 
-Evaluations are billed in credits and actions. Each scenario reports what it consumed in the results view.
+Evaluations are billed in credits and actions. Each test reports what it consumed in the results view.
 
 ### Cost columns
 
-![Evaluation run results showing the Credits, Actions, and Run time columns for each scenario](/images/agent/evals-cost-breakdown.png)
+![Evaluation run results showing the Credits, Actions, and Run time columns for each test](/images/agent/evals-cost-breakdown.png)
 
 | Column | What it shows |
 |--------|---------------|
-| **Credits** | Vendor credits consumed by the scenario — the user-simulation LLM calls, the agent's own run, and any LLM-based Checks. Click the value to open the full breakdown. |
-| **Actions** | Actions consumed by the scenario — one for each Check, plus the actions from the agent's own tool runs during the conversation. The evaluation run itself isn't charged a separate action. This column only appears on usage-based plans; on legacy plans the action cost is included in Credits. |
-| **Run time** | The wall-clock duration of the scenario's conversation, measured from its first message to its last. A timing metric, not a charge, and shown per scenario only (the Average Score row doesn't total it). |
+| **Credits** | Vendor credits consumed by the test — the user-simulation LLM calls, the Agent or Workforce's own run, and any LLM-based Checks. Click the value to open the full breakdown. |
+| **Actions** | Actions consumed by the test — one for each Check, plus the actions from its own Tool runs during the conversation. The evaluation run itself isn't charged a separate action. This column only appears on usage-based plans; on legacy plans the action cost is included in Credits. |
+| **Run time** | The wall-clock duration of the test's conversation, measured from its first message to its last. A timing metric, not a charge, and shown per test only (the Average Score row doesn't total it). |
 
 ### Cost breakdown
 
-Clicking a **Credits** or **Actions** value opens a breakdown of where that scenario's cost went. It separates the user simulation, the agent's own run, and the Checks that scored the conversation, so you can see which part drives the cost — usually the agent's own execution.
+Clicking a **Credits** or **Actions** value opens a breakdown of where that test's cost went. It separates the user simulation, the Agent or Workforce's own run, and the Checks that scored the conversation, so you can see which part drives the cost — usually its own execution.
 
-![Cost breakdown modal splitting a scenario's credits across Scenario Runner, Agent Execution, and Checks](/images/agent/cost-breakdown.png)
+![Cost breakdown modal splitting a test's credits across Scenario Runner, Agent Execution, and Checks](/images/agent/cost-breakdown.png)
 
 | Component | What it covers |
 |-----------|----------------|
 | **Scenario Runner** | The LLM calls used to simulate the user. Uses credits only. |
-| **Agent Execution** | The agent's own run during the test. Uses credits, plus the actions from each tool the agent runs. These actions were already billed when the agent ran — they're shown here for attribution, not charged again. Workforces have no action-level data, so only credits appear. |
+| **Agent Execution** | The Agent or Workforce's own run during the test. Uses credits, plus the actions from each Tool it runs. These actions were already billed when it ran — they're shown here for attribution, not charged again. Workforces have no action-level data, so only credits appear. |
 | **Checks** | Each Check that scores the conversation, broken down by model. Each Check uses credits and counts as one action. |
 
 ---
 
-## Frequently asked questions
-
-<AccordionGroup>
-  <Accordion title="I don't see the Evals section. How do I get access?">
-    Evals is rolling out progressively, starting with Enterprise customers. If you don't see the Evaluate tab in the Agent builder, reach out to your account manager to discuss access.
-  </Accordion>
-
-  <Accordion title="How are evaluations billed?">
-    Evaluations consume both Actions and Vendor Credits. Each Check costs 1 Action, while Vendor Credits cover the LLM costs of the task run, the user simulator, and any LLM-based Check. Each scenario shows its full breakdown in the results — see [Cost columns](#cost-columns) above for details.
-  </Accordion>
-</AccordionGroup>
+Next: Learn how to [create tests](/build/agents/evals/test-sets) — the simulated conversations your Agent gets evaluated against.
 
 ---
 
-Next: Learn about [Evaluation checks](/build/agents/evals/checks) — the reusable evaluation criteria that score Agent conversations.
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="I don't see Evals. How do I get access?">
+    Evals is rolling out progressively, starting with Enterprise customers. If you don't see the Evaluate tab in the Agent or Workforce builder, reach out to your account manager to discuss access.
+  </Accordion>
+
+  <Accordion title="How are evaluations billed?">
+    Evaluations consume both Actions and Vendor Credits. Each Check costs 1 Action, while Vendor Credits cover the LLM costs of the task run, the user simulator, and any LLM-based Check. Each test shows its full breakdown in the results — see [Cost columns](#cost-columns) above for details.
+  </Accordion>
+</AccordionGroup>
