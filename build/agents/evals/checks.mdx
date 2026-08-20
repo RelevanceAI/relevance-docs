@@ -1,20 +1,20 @@
 ---
 title: 'Check types'
 sidebarTitle: 'Check types'
-description: 'What each Check type scores, the fields it takes, and how the Checks library works'
+description: 'What each Check type scores, the fields it takes, and how the Checks tab works'
 ---
 
 <Info>
-Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
+Evals is progressively rolling out to all users. If you don't see the **Evaluate** tab yet, the rollout hasn't reached your account.
 </Info>
 
 A Check is one pass-or-fail criterion. Every Agent and Workforce has its own library of them in the **Checks** tab, and the same Check can be attached in three places:
 
-- **To a test** in a test set — it runs every time that test is evaluated.
+- **To a Test** in a Test set — it runs every time that Test is evaluated.
 - **To a Monitor dashboard** — it runs on a sampled portion of live tasks.
 - **To a one-off evaluation** of already-completed tasks selected from the task list.
 
-This page is the reference for what each type scores. To attach one while building a test, see [creating tests](/build/agents/evals/test-sets).
+This page is the reference for what each type scores. To attach one while building a Test, see [creating Tests](/build/agents/evals/test-sets).
 
 ---
 
@@ -50,7 +50,7 @@ When creating a Check, you choose one of the following types:
   </Accordion>
 
   <Accordion title="Tool Usage" icon="screwdriver-wrench">
-    Checks whether a specific tool was used during the conversation.
+    Checks whether a specific Tool was used during the conversation.
 
     | Field | Description |
     |-------|-------------|
@@ -68,62 +68,54 @@ When creating a Check, you choose one of the following types:
 
 ## Creating a Check in the Checks tab
 
-Checks can be created from inside a test as you build it, or on their own here in the library. Either route produces the same reusable Check.
+Checks can be created from inside a Test as you build it, or on their own here in the library. Either route produces the same reusable Check.
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
 <iframe src="https://app.supademo.com/embed/cmpkr397l2hbdqms9w5xddjno" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
 </div>
 
-<Steps>
-  <Step title="Open Checks">
-    Go to the **Evaluate** tab and select **Checks** from the left sidebar.
-  </Step>
-  <Step title="Start a new Check">
-    Click **New check**.
-  </Step>
-  <Step title="Name it and pick a type">
-    Enter a **Check name** (e.g., "Professional tone"), then choose a type from the **Select check type...** picker.
-  </Step>
-  <Step title="Configure the type">
-    Fill in the fields for that type — see [Check types](#check-types) above.
-  </Step>
-  <Step title="Save">
-    Click **Save check**. Reopening an existing Check shows **Update check** instead.
-  </Step>
-</Steps>
+1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
+
+2. Click **New check**.
+
+3. Enter a **Check name** (e.g., "Professional tone"), then choose a type from the **Select check type...** picker.
+
+4. Fill in the fields for that type — see [Check types](#check-types) above.
+
+5. Click **Save check**. Reopening an existing Check shows **Update check** instead.
 
 <Note>
-Each test supports up to 10 Checks of its own. Checks attached to a test are always included when you run that test. Additional Checks from the Checks tab are not auto-included — expand **Additional options** in the run modal and select them under **Additional checks** before kicking off the run. Those are counted separately from the per-test limit.
+Each Test supports up to 10 Checks of its own. Checks attached to a Test are always included when you run that Test. Additional Checks from the Checks tab are not auto-included — expand **Additional options** in the run modal and select them under **Additional checks** before kicking off the run. Those are counted separately from the per-Test limit.
 </Note>
 
 ---
 
-## The Checks library
+## The Checks tab
 
-The **Checks** tab lists every Check on the Agent or Workforce, grouped by type. Filters across the top show where each one is currently attached:
+The Checks tab lists every Check on the Agent or Workforce, grouped by type. Filters across the top show where each one is currently attached:
 
 | Filter | Shows |
 |--------|-------|
 | **All checks** | Every Check on the Agent or Workforce |
-| **In tests** | Checks attached to at least one test |
+| **In tests** | Checks attached to at least one Test |
 | **In dashboard** | Checks attached to a Monitor dashboard |
 | **Unused** | Checks attached nowhere — safe to clean up |
 
 ---
 
-Next: Learn how to [run evaluations](/build/agents/evals/running-evaluations) against your test sets.
+Next: Learn how to [run Evals](/build/agents/evals/running-evaluations) against your Test sets.
 
 ---
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
-  <Accordion title="Does a Check made inside a test stay inside that test?">
-    No. Creating one with **+ New check** while building a test saves it to the Checks library like any other, so you can attach it to other tests and to Monitor dashboards afterwards.
+  <Accordion title="Does a Check made inside a Test stay inside that Test?">
+    No. Creating one with **+ New check** while building a Test saves it to your library like any other, so you can attach it to other Tests and to Monitor dashboards afterwards.
   </Accordion>
 
-  <Accordion title="How many Checks can I add to a test?">
-    Each test supports up to 10 Checks of its own. Checks added under **Additional checks** at run time are counted separately.
+  <Accordion title="How many Checks can I add to a Test?">
+    Each Test supports up to 10 Checks of its own. Checks added under **Additional checks** at run time are counted separately.
   </Accordion>
 
   <Accordion title="Can the AI Judge evaluate long conversations?">

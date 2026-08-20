@@ -1,42 +1,35 @@
 ---
-title: 'Running evaluations'
-sidebarTitle: 'Running evaluations'
-description: 'Run test sets and individual tests, read the scores that come back, and require evals to pass before publishing'
+title: 'Running Evals'
+sidebarTitle: 'Running Evals'
+description: 'Run Test sets and individual Tests, read the scores that come back, and require evals to pass before publishing'
 ---
 
 <Info>
-Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
+Evals is progressively rolling out to all users. If you don't see the **Evaluate** tab yet, the rollout hasn't reached your account.
 </Info>
 
-Once you've created [tests](/build/agents/evals/test-sets) and defined [Checks](/build/agents/evals/checks), you're ready to run evaluations and see how your Agent performs. You can run them by hand, or have a publish run them for you.
+Once you've created [Tests](/build/agents/evals/test-sets) and defined [Checks](/build/agents/evals/checks), you're ready to run evaluations and see how your Agent or Workforce performs. You can run them by hand, or have a publish run them for you.
 
 ---
 
-## Running a test set or a single test
+## Running a Test set or a single Test
 
-You can run an entire test set or an individual test from within a test set by clicking the **Run** button on either.
+You can run an entire Test set or an individual Test from within a Test set by clicking the **Run** button on either.
 
-You can select specific tests within a test set to run a subset at once, or run all tests in the test set together. Note that you cannot bulk-select and run multiple test sets at the same time.
+You can select specific Tests within a Test set to run a subset at once, or run all Tests in the Test set together. Note that you cannot bulk-select and run multiple Test sets at the same time.
 
-Running a whole set opens the **Run test set** modal, which tells you how many tests it's about to run. Running a single test opens **Run evaluation**. Both take the same fields.
+Running a whole set opens the **Run test set** modal, which tells you how many Tests it's about to run. Running a single Test opens **Run evaluation**. Both take the same fields.
 
-<Steps>
-  <Step title="Name the run">
-    **Evaluation run name** is pre-filled with the test set name plus a timestamp. Edit it if you want something you'll recognize later in Runs.
-  </Step>
-  <Step title="Pick a version">
-    **Version** chooses which version of the Agent or Workforce to evaluate. Defaults to the current version.
-  </Step>
-  <Step title="Add Checks for this run only (optional)">
-    Checks already attached to the tests are always included. To pull in extra Checks from the Checks tab for this run, expand **Additional options** and select them under **Additional checks**.
-  </Step>
-  <Step title="Run">
-    Click **Run** to begin. The simulator generates conversations with your Agent or Workforce from each test's Scenario, and the selected Checks score each conversation.
-  </Step>
-</Steps>
+1. **Evaluation run name** is pre-filled with the Test set name plus a timestamp. Edit it if you want something you'll recognize later in Runs.
+
+2. **Version** chooses which version of the Agent or Workforce to evaluate. Defaults to the current version.
+
+3. Optionally expand **Additional options** and select extra Checks from the Checks tab under **Additional checks**. Checks already attached to the Tests are always included.
+
+4. Click **Run** to begin. The simulator generates conversations with your Agent or Workforce from each Test's Scenario, and the selected Checks score each conversation.
 
 <Note>
-A test set with no tests in it can't be run — the modal shows **No tests** and asks you to add at least one first.
+A Test set with no Tests in it can't be run — the modal shows **No tests** and asks you to add at least one first.
 </Note>
 
 ---
@@ -47,7 +40,7 @@ The top of the results page shows key metrics:
 
 | Metric | Description |
 |--------|-------------|
-| **Average Score** | Overall pass rate across all tests and Checks |
+| **Average Score** | Overall pass rate across all Tests and Checks |
 | **Tasks** | How many tasks were evaluated |
 | **Agent Version** | The version that was tested |
 
@@ -55,45 +48,40 @@ The top of the results page shows key metrics:
 
 ## Test results
 
-Each test displays:
+Each Test displays:
 
 | Column | Description |
 |--------|-------------|
 | **Status** | Running, Completed, or Failed |
-| **Name** | The test name |
+| **Name** | The Test name |
 | **Score** | Percentage of Checks that passed (shown with progress bar) |
 | **Checks** | Pass/fail count (e.g., "1/1 passed") |
-| **Credits** | Credits consumed for this test |
-| **Actions** | Actions consumed for this test — each Check plus its own Tool runs |
-| **Run time** | How long the test took to complete |
+| **Credits** | Credits consumed for this Test |
+| **Actions** | Actions consumed for this Test — each Check plus its own Tool runs |
+| **Run time** | How long the Test took to complete |
 
 ---
 
 ## Viewing conversation details
 
-Click **View Conversation** on any test to see:
+Click **View Conversation** on any Test to see:
 
-<Steps>
-  <Step title="Review the conversation">
-    See the full conversation between the simulated user and your Agent or Workforce.
-  </Step>
-  <Step title="Review Check verdicts">
-    See verdicts from every Check included in the run, with detailed explanations of why each Check passed or failed.
-  </Step>
-</Steps>
+1. The full conversation between the simulated user and your Agent or Workforce.
+
+2. Verdicts from every Check included in the run, with detailed explanations of why each Check passed or failed.
 
 For example, an "Empathy shown" Check might show:
 > **Pass**: The Agent demonstrated strong empathy throughout the conversation. Key examples include: acknowledging the customer's frustration with being transferred multiple times ("I completely understand how upsetting it must be to feel like you're not getting the help you need"), validating her experience with the double charge ("I truly understand how frustrating it is to be charged twice"), and directly addressing her skepticism by saying "I completely understand your concerns, especially given your previous experience."
 
 ---
 
-## Running evals before publishing
+## Running Evals before publishing
 
-The **Publish** section of the Evaluate tab lets you choose which test sets must pass before your Agent or Workforce can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
+The **Publish** section of the Evaluate tab lets you choose which Test sets must pass before your Agent or Workforce can be published. If the results don't meet your minimum pass rate, publishing can be blocked.
 
 ### Test sets to run
 
-Select which test sets to run before publishing. Click **Add test sets** to choose them — all tests in the selected test sets will be evaluated.
+Select which Test sets to run before publishing. Click **Add test sets** to choose them — all Tests in the selected Test sets will be evaluated.
 
 ### Publish settings
 
@@ -102,11 +90,11 @@ Select which test sets to run before publishing. Click **Add test sets** to choo
 | **Minimum pass rate (%)** | The minimum score percentage required for the evaluation to pass (e.g., 100%) |
 | **Allow publishing even if eval fails** | When unchecked (the default), publishing only goes ahead if the evaluation score meets or exceeds the minimum pass rate. When checked, it publishes regardless of whether the evaluation passes. |
 
-Once configured, click **Save**. When you next publish your Agent, the selected test sets will run automatically and the results will be checked against your minimum pass rate.
+Once configured, click **Save**. When you next publish your Agent, the selected Test sets will run automatically and the results will be checked against your minimum pass rate.
 
 ---
 
-Next: Learn about [monitoring live conversations](/build/agents/evals/monitor) — scoring the real conversations your Agent is having.
+Next: Learn about [monitoring Evals](/build/agents/evals/monitor) — scoring the real conversations your Agent or Workforce is having.
 
 ---
 
@@ -114,7 +102,7 @@ Next: Learn about [monitoring live conversations](/build/agents/evals/monitor) �
 
 <AccordionGroup>
   <Accordion title="Can I rerun a previous evaluation?">
-    Yes, you can run the same tests again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
+    Yes, you can run the same Tests again at any time. Each run is saved in your Runs history, allowing you to compare results across different Agent versions.
   </Accordion>
 
   <Accordion title="Why is my publish going through when the evaluation failed?">
