@@ -1,20 +1,20 @@
 ---
-title: 'Evaluation checks'
-sidebarTitle: 'Evaluation checks'
-description: 'Create reusable evaluation criteria that score Agent conversations across test sets and Monitor dashboards'
+title: 'Check types'
+sidebarTitle: 'Check types'
+description: 'What each Check type scores, the fields it takes, and how the Checks library works'
 ---
 
 <Info>
 Evals is rolling out progressively, starting with Enterprise customers. If you don't see this feature in your account yet, reach out to your account manager to discuss access.
 </Info>
 
-Checks are the reusable evaluation criteria that score Agent conversations. You create a Check once in the **Checks** tab and then attach it wherever you need it:
+A Check is one pass-or-fail criterion. Every Agent and Workforce has its own library of them in the **Checks** tab, and the same Check can be attached in three places:
 
-- **To a scenario** in a test set — the Check runs every time that scenario is evaluated.
-- **To a Monitor dashboard** — the Check runs on a sampled portion of live Agent tasks.
-- **To a one-off evaluation** of already-completed tasks selected from the Agent's task list.
+- **To a test** in a test set — it runs every time that test is evaluated.
+- **To a Monitor dashboard** — it runs on a sampled portion of live tasks.
+- **To a one-off evaluation** of already-completed tasks selected from the task list.
 
-The Checks tab has filters that show where each Check is currently used — **All checks**, **Scenarios**, **Dashboard**, and **Unused** — so you can quickly find Checks that aren't attached anywhere yet.
+This page is the reference for what each type scores. To attach one while building a test, see [creating tests](/build/agents/evals/test-sets).
 
 ---
 
@@ -23,18 +23,18 @@ The Checks tab has filters that show where each Check is currently used — **Al
 When creating a Check, you choose one of the following types:
 
 <AccordionGroup>
-  <Accordion title="LLM Judge" icon="brain-circuit">
-    Uses an LLM to evaluate conversations against a prompt you define.
+  <Accordion title="AI Judge" icon="brain-circuit">
+    Uses AI to evaluate the response against criteria you define.
 
     | Field | Description |
     |-------|-------------|
-    | **Evaluation Prompt** | Describe the criteria for passing |
-    | **Judge model** | Select which model evaluates the conversation |
-    | **Truncate long conversations** | When enabled, conversations that exceed the judge model's context window are trimmed from the oldest messages first, and the eval runs on the remaining portion. When disabled, oversized conversations fail with an error instead. Note that trimming removes early context, which can affect score accuracy if your evaluation criteria depend on the beginning of the conversation. |
+    | **Evaluation prompt** | Describe the criteria for passing |
+    | **Judge model** | Under **Advanced** — select which model evaluates the conversation |
+    | **Truncate long conversations** | Under **Advanced** — When enabled, conversations that exceed the judge model's context window are trimmed from the oldest messages first, and the eval runs on the remaining portion. When disabled, oversized conversations fail with an error instead. Note that trimming removes early context, which can affect score accuracy if your evaluation criteria depend on the beginning of the conversation. |
   </Accordion>
 
   <Accordion title="Text Includes" icon="text">
-    Checks whether the Agent's response includes specific text.
+    Checks whether the response includes specific text.
 
     | Field | Description |
     |-------|-------------|
@@ -42,11 +42,11 @@ When creating a Check, you choose one of the following types:
   </Accordion>
 
   <Accordion title="Text Equals" icon="equals">
-    Checks whether the Agent's response exactly matches an expected value.
+    Checks whether the response exactly matches an expected value.
 
     | Field | Description |
     |-------|-------------|
-    | **Expected value** | The exact message the Agent should have sent |
+    | **Expected value** | The exact message that should have been sent |
   </Accordion>
 
   <Accordion title="Tool Usage" icon="screwdriver-wrench">
@@ -55,8 +55,10 @@ When creating a Check, you choose one of the following types:
     | Field | Description |
     |-------|-------------|
     | **Tool** | Select the tool to check for |
-    | **Position** | Whether the tool was used anywhere, used first, or used last |
-    | **Comparison** | Check if the tool was used at least, exactly, or at most X times |
+    | **When the tool is used by the agent** | **At least**, **At most**, **Exactly**, **Used first**, or **Used last** |
+    | **Number of times** | The count to compare against, for the At least, At most, and Exactly options |
+
+    You can also assert what the tool was *called with*. Click **Add input condition** to check that an input matched — **Equals**, **Contains**, **Has a value**, or **Matches pattern** for a regular expression.
 
     When evaluating a Workforce, you can scope a Tool Usage Check to a specific node — a sub-agent or tool in the Workforce — so you can assert that a particular sub-agent used a given tool.
   </Accordion>
@@ -64,7 +66,9 @@ When creating a Check, you choose one of the following types:
 
 ---
 
-## Creating a Check
+## Creating a Check in the Checks tab
+
+Checks can be created from inside a test as you build it, or on their own here in the library. Either route produces the same reusable Check.
 
 <div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
 <iframe src="https://app.supademo.com/embed/cmpkr397l2hbdqms9w5xddjno" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
@@ -74,56 +78,59 @@ When creating a Check, you choose one of the following types:
   <Step title="Open Checks">
     Go to the **Evaluate** tab and select **Checks** from the left sidebar.
   </Step>
-  <Step title="Create a new Check">
-    Click **+ New Check**.
+  <Step title="Start a new Check">
+    Click **New check**.
   </Step>
-  <Step title="Select a type">
-    Select a **Type** (LLM Judge, Text Includes, Text Equals, or Tool Usage).
+  <Step title="Name it and pick a type">
+    Enter a **Check name** (e.g., "Professional tone"), then choose a type from the **Select check type...** picker.
   </Step>
-  <Step title="Name your Check">
-    Enter a **Name** for the Check (e.g., "Professional tone").
-  </Step>
-  <Step title="Configure settings">
-    Configure the type-specific settings (see [Check types](#check-types) above).
+  <Step title="Configure the type">
+    Fill in the fields for that type — see [Check types](#check-types) above.
   </Step>
   <Step title="Save">
-    Click **Create Check**.
+    Click **Save check**. Reopening an existing Check shows **Update check** instead.
   </Step>
 </Steps>
 
 <Note>
-Each scenario supports up to 10 Checks at the scenario level. Checks attached to a scenario are always included when you run that scenario. Additional Checks from the Checks tab are not auto-included — select the ones you want under **Additional global checks** in the run modal before kicking off the run. These global Checks are counted separately from the per-scenario limit.
+Each test supports up to 10 Checks of its own. Checks attached to a test are always included when you run that test. Additional Checks from the Checks tab are not auto-included — expand **Additional options** in the run modal and select them under **Additional checks** before kicking off the run. Those are counted separately from the per-test limit.
 </Note>
 
 ---
 
-## Best practices for Checks
+## The Checks library
 
-- **Be specific with Check prompts.** Write detailed prompts with concrete criteria. Vague prompts lead to inconsistent scoring — include specific examples of what passing looks like.
-- **Keep your Checks tab tidy.** Use the **Unused** filter to clean up Checks that aren't attached anywhere. Group related scenarios into dedicated test sets and reorganize with Move, Copy, and Duplicate as your strategy evolves.
+The **Checks** tab lists every Check on the Agent or Workforce, grouped by type. Filters across the top show where each one is currently attached:
+
+| Filter | Shows |
+|--------|-------|
+| **All checks** | Every Check on the Agent or Workforce |
+| **In tests** | Checks attached to at least one test |
+| **In dashboard** | Checks attached to a Monitor dashboard |
+| **Unused** | Checks attached nowhere — safe to clean up |
 
 ---
 
-## Frequently asked questions
+Next: Learn how to [run evaluations](/build/agents/evals/running-evaluations) against your test sets.
+
+---
+
+## Frequently asked questions (FAQs)
 
 <AccordionGroup>
-  <Accordion title="Where do my Checks live?">
-    All Checks live in the **Checks** tab under Evaluate. From there you can attach them to scenarios (for evaluation runs), to Monitor dashboards (for live tasks), or to one-off evaluations of completed tasks. The **Scenarios**, **Dashboard**, and **Unused** filters show where each Check is currently attached.
+  <Accordion title="Does a Check made inside a test stay inside that test?">
+    No. Creating one with **+ New check** while building a test saves it to the Checks library like any other, so you can attach it to other tests and to Monitor dashboards afterwards.
   </Accordion>
 
-  <Accordion title="How many Checks can I add to a scenario?">
-    Each scenario supports up to 10 Checks at the scenario level. Checks added via **Additional global checks** at run time are counted separately.
+  <Accordion title="How many Checks can I add to a test?">
+    Each test supports up to 10 Checks of its own. Checks added under **Additional checks** at run time are counted separately.
   </Accordion>
 
-  <Accordion title="Can the LLM Judge evaluate long conversations?">
-    Yes, with configuration. The LLM Judge Check includes a **Truncate long conversations** toggle in the **Advanced** section when creating a Check. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
+  <Accordion title="Can the AI Judge evaluate long conversations?">
+    Yes, with configuration. The AI Judge Check includes a **Truncate long conversations** toggle in the **Advanced** section when creating a Check. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
   </Accordion>
 
   <Accordion title="What happens when a conversation is truncated?">
     The oldest messages are removed from the start of the conversation until it fits within the judge model's context window. The judge is notified that truncation occurred and evaluates the remaining portion. If your evaluation criteria depend on early context — such as the user's original request or instructions given at the start of the conversation — the result may be less accurate. In those cases, disabling truncation and selecting a model with a larger context window is preferable.
   </Accordion>
 </AccordionGroup>
-
----
-
-Next: Learn how to [create test sets](/build/agents/evals/test-sets) to organize your evaluation scenarios.
