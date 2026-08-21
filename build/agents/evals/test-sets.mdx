@@ -1,0 +1,150 @@
+---
+title: 'Creating Tests'
+sidebarTitle: 'Creating Tests'
+description: 'Create Tests that simulate real user conversations with your Agent or Workforce, and group them into Test sets'
+---
+
+<Info>
+Evals is progressively rolling out to all users. If you don't see the **Evaluate** tab yet, the rollout hasn't reached your account.
+</Info>
+
+A **Test** simulates one conversation with your Agent or Workforce. You describe a user in the **Scenario** field — *"You are a long-time customer who was charged twice for the same order"* — and Relevance plays that user, generates their messages, and hands back the transcript. The [Checks](/build/agents/evals/checks) you attach score it.
+
+Tests live in a **Test set**, which is what a run points at — run the whole set, or a single Test inside it.
+
+---
+
+## How to Create a Test
+
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmpks4e442iakqms93emtc5jn" frameBorder="0" title="Creating a test set" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+</div>
+
+1. Open your Agent or Workforce in the builder and click the **Evaluate** tab. Select **Test** from the left sidebar.
+
+2. Click **New test set**, name it in the **Create new test set** modal, and click **Create**.
+
+3. Click the Test set you just created to open it.
+
+4. Click **Add test**. The **Add new test** modal opens.
+
+5. Optionally pick one of the five presets under **Start with a preset or write your own** — **Happy path**, **Vague request**, **Frustrated user**, **Off-topic request**, or **Follow-up**. Each fills in the Scenario and an exact first message for you, which you can then edit.
+
+6. Fill in the Test:
+
+   | Field | Description | Example |
+   |-------|-------------|---------|
+   | **Test name** | A descriptive name for this Test | "Frustrated Customer Complaint" |
+   | **Scenario** | Describe a persona and situation — the AI generates realistic messages from this | "You are an impatient customer who wants quick answers about their bill." |
+   | **Run N times** | How many times to repeat the Test, 1 to 10. AI responses vary run to run, so repeating shows whether it handles the Test consistently | 3 |
+   | **Up to N messages** | Maximum conversation length, 1 to 50, where each message is one back-and-forth between the simulated user and the Agent or Workforce | 10 |
+   | **+ Set exact first message** | Optional — pin the simulated user's opening message instead of letting the AI generate it | "Hi, I need help with a refund for a defective product." |
+
+7. Under **Checks**, attach the criteria this Test is scored against. Checks pass or fail, and are combined into the Test score.
+
+   <Tabs>
+     <Tab title="Reuse an existing Check">
+       **+ Add existing check** opens your library of existing Checks. Pick the ones you want, up to 10 per Test.
+     </Tab>
+     <Tab title="Write a new one">
+       **+ New check** opens the editor without leaving the Test. Enter a **Check name**, choose a type, configure it, and click **Save check**.
+     </Tab>
+   </Tabs>
+
+   <Note>
+   Both routes create the same thing — a Check on the Agent or Workforce, reusable on other Tests and on Monitor dashboards. There is no Check that exists only inside one Test.
+   </Note>
+
+   See [Check types](/build/agents/evals/checks) for what each type scores and the fields it takes.
+
+8. Set **When the test hits an approval** to control how the Test resolves Tool approvals and escalations mid-conversation:
+
+   | Option | What it does |
+   |--------|--------------|
+   | **Auto** (default) | The AI approves or rejects based on what a real user in this scenario would do |
+   | **Approve all** | Every approval request is approved automatically |
+   | **Reject all** | Every approval request is rejected automatically |
+
+9. Optionally set **Tool simulation**. Each Tool on your Agent or Workforce has a **Live** / **Simulated** toggle. Live means the Tool actually runs during the Test — real emails sent, real records updated. Simulated replaces the call with a fake-but-realistic response.
+
+   In Simulated mode you can describe what the Tool should return (leave it empty for a generic response), and open **Advanced** to pick the model that generates it. **Simulate all tools** and **Reset all to live** flip every Tool at once, and the section header shows how many are currently simulated.
+
+   When evaluating a Workforce, Tool simulation is configured per node, so each sub-agent uses its own simulated Tool responses.
+
+10. Click **Save test**. Reopening an existing Test shows the same form titled **Edit test**, with **Update test** to save.
+
+<Tip>
+You can add multiple Tests to a single Test set to evaluate different aspects of its behavior. Each Test can have its own Scenario, message cap, run count, attached Checks, and Tool simulations.
+</Tip>
+
+---
+
+## Managing Tests
+
+Tests can be reorganized across Test sets as your testing strategy evolves. Each Test has a dropdown menu (the three-dot icon next to the Test name):
+
+| Operation | What it does | When to use it |
+|-----------|-------------|----------------|
+| **Move** | Relocates the Test to another Test set | Reorganizing Test sets or consolidating related Tests |
+| **Copy** | Creates a duplicate of the Test in another Test set | Reusing a Test as a baseline in a different Test set |
+| **Duplicate** | Creates a copy of the Test in the same Test set | Quickly creating a variation of an existing Test |
+| **Delete test** | Removes the Test from the set | Retiring a Test you no longer run. Selecting several Tests first gives you a bulk **Delete tests** action |
+
+---
+
+## Example Tests
+
+<AccordionGroup>
+  <Accordion title="Customer support - empathy Test">
+    **Name**: Response empathy
+
+    **Scenario**: You are a long-time customer who was recently charged twice for the same order. You've already contacted support once without resolution and are feeling frustrated but willing to give the Agent a chance to help. Express your concerns clearly and see if the Agent acknowledges your situation before jumping to solutions.
+
+    **Up to**: 10 messages
+
+    **Check**: Empathy shown (AI Judge)
+    - *Evaluation Prompt*: Did the Agent acknowledge the customer's frustration and express empathy before offering solutions? The response should show understanding of the emotional state and validate their concerns.
+  </Accordion>
+
+  <Accordion title="Sales - product knowledge Test">
+    **Name**: Product expertise
+
+    **Scenario**: You are a procurement manager at a mid-sized company evaluating solutions for your team. You need specific details about enterprise pricing tiers, integration capabilities with existing tools like Salesforce and HubSpot, and data security certifications. Ask clarifying questions and compare features against competitors you're also considering.
+
+    **Up to**: 15 messages
+
+    **Check**: Accurate information (AI Judge)
+    - *Evaluation Prompt*: Did the Agent provide accurate product information without making claims that cannot be verified? Responses should be factual, reference actual product capabilities, and acknowledge when information needs to be confirmed by a sales representative.
+  </Accordion>
+
+  <Accordion title="Support - escalation handling">
+    **Name**: Escalation request
+
+    **Scenario**: You are a paying customer who has experienced a service outage affecting your business operations. You've already troubleshooted with the knowledge base articles and need to speak with a senior support engineer or account manager. Be firm but professional in your request, and provide context about the business impact.
+
+    **Up to**: 5 messages
+
+    **Check**: Appropriate escalation (AI Judge)
+    - *Evaluation Prompt*: Did the Agent acknowledge the severity of the situation, validate the customer's need for escalation, and initiate a handoff to a human representative while maintaining a professional and empathetic tone throughout?
+  </Accordion>
+</AccordionGroup>
+
+---
+
+Next: Read the [Check types](/build/agents/evals/checks) reference — what each type scores and how the Checks tab works.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="How many Tests can I have in a Test set?">
+    You can add as many Tests as needed to a single Test set. Each Test is evaluated independently and can have its own attached Checks.
+  </Accordion>
+
+  <Accordion title="How many Checks can I add to a Test?">
+    Each Test supports up to 10 Checks. This applies to Checks defined on the Test itself. Checks added under **Additional checks** at run time are counted separately.
+  </Accordion>
+
+  <Accordion title="Can I move Tests between Test sets?">
+    Yes. Each Test has a dropdown menu (three-dot icon) with three options: **Move** relocates the Test to another Test set, **Copy** creates a duplicate in another Test set, and **Duplicate** creates a copy in the same Test set.
+  </Accordion>
+</AccordionGroup>

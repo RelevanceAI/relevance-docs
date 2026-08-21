@@ -1,0 +1,58 @@
+---
+title: 'Monitoring Evals'
+sidebarTitle: 'Monitoring Evals'
+description: 'Score the real conversations your Agent or Workforce is having against Checks, on dashboards you configure per sample rate'
+---
+
+<Info>
+Evals is progressively rolling out to all users. If you don't see the **Evaluate** tab yet, the rollout hasn't reached your account.
+</Info>
+
+The **Monitor** section continuously scores live tasks against [Checks](/build/agents/evals/checks). Unlike the **Test** section, which runs simulated conversations, Monitor evaluates the real conversations your Agent or Workforce is having.
+
+Monitor is organized into **dashboards** — you can create more than one (for example, one focused on tone, another on tool-use accuracy) and configure each independently.
+
+<Note>
+Dashboards only score the latest published version of your Agent or Workforce, so a resource with no published version collects no data.
+</Note>
+
+---
+
+## Creating a Monitor dashboard
+
+1. Go to the **Evaluate** tab and select **Monitor** from the left sidebar.
+
+2. Click **+ New dashboard** and give it a name.
+
+3. Attach one or more Checks from the Checks tab.
+
+4. Set a **Sample rate** — the percentage of incoming tasks to evaluate.
+
+5. Optionally set **Filter tasks** to control which task statuses trigger evaluations. Leave it blank to evaluate all tasks.
+
+6. Save the dashboard.
+
+Once configured, qualifying tasks are automatically scored at the sample rate you've set.
+
+---
+
+## Viewing dashboard insights
+
+Each Monitor dashboard shows:
+
+| Metric | Description |
+|--------|-------------|
+| **Overall score** | Aggregate score across all evaluated tasks in the selected date range |
+| **Total runs** | Number of tasks evaluated |
+| **Checks** | Which Checks are attached to the dashboard |
+
+You also get:
+
+- **Overall score timeseries** to spot regressions or improvements over time.
+- **Per-Check charts** so you can see which criteria are slipping.
+- **Version markers** that line up score changes with each publish.
+- **A list of evaluation runs** with score, name, and a drill-in to the full conversation.
+
+<Tip>
+To adjust dashboard settings after initial setup, click the **Settings** button in the top right corner of the dashboard.
+</Tip>

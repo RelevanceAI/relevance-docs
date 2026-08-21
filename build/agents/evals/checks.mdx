@@ -1,0 +1,126 @@
+---
+title: 'Check types'
+sidebarTitle: 'Check types'
+description: 'What each Check type scores, the fields it takes, and how the Checks tab works'
+---
+
+<Info>
+Evals is progressively rolling out to all users. If you don't see the **Evaluate** tab yet, the rollout hasn't reached your account.
+</Info>
+
+A Check is one pass-or-fail criterion. Every Agent and Workforce has its own library of them in the **Checks** tab, and the same Check can be attached in three places:
+
+- **To a Test** in a Test set — it runs every time that Test is evaluated.
+- **To a Monitor dashboard** — it runs on a sampled portion of live tasks.
+- **To a one-off evaluation** of already-completed tasks selected from the task list.
+
+This page is the reference for what each type scores. To attach one while building a Test, see [creating Tests](/build/agents/evals/test-sets).
+
+---
+
+## Check types
+
+When creating a Check, you choose one of the following types:
+
+<AccordionGroup>
+  <Accordion title="AI Judge" icon="brain-circuit">
+    Uses AI to evaluate the response against criteria you define.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Evaluation prompt** | Describe the criteria for passing |
+    | **Judge model** | Under **Advanced** — select which model evaluates the conversation |
+    | **Truncate long conversations** | Under **Advanced** — When enabled, conversations that exceed the judge model's context window are trimmed from the oldest messages first, and the eval runs on the remaining portion. When disabled, oversized conversations fail with an error instead. Note that trimming removes early context, which can affect score accuracy if your evaluation criteria depend on the beginning of the conversation. |
+  </Accordion>
+
+  <Accordion title="Text Includes" icon="text">
+    Checks whether the response includes specific text.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Required text** | The text that must appear in the response |
+  </Accordion>
+
+  <Accordion title="Text Equals" icon="equals">
+    Checks whether the response exactly matches an expected value.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Expected value** | The exact message that should have been sent |
+  </Accordion>
+
+  <Accordion title="Tool Usage" icon="screwdriver-wrench">
+    Checks whether a specific Tool was used during the conversation.
+
+    | Field | Description |
+    |-------|-------------|
+    | **Tool** | Select the tool to check for |
+    | **When the tool is used by the agent** | **At least**, **At most**, **Exactly**, **Used first**, or **Used last** |
+    | **Number of times** | The count to compare against, for the At least, At most, and Exactly options |
+
+    You can also assert what the tool was *called with*. Click **Add input condition** to check that an input matched — **Equals**, **Contains**, **Has a value**, or **Matches pattern** for a regular expression.
+
+    When evaluating a Workforce, you can scope a Tool Usage Check to a specific node — a sub-agent or tool in the Workforce — so you can assert that a particular sub-agent used a given tool.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Creating a Check in the Checks tab
+
+Checks can be created from inside a Test as you build it, or on their own here in the library. Either route produces the same reusable Check.
+
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmpkr397l2hbdqms9w5xddjno" frameBorder="0" title="Creating a Check" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+</div>
+
+1. Go to the **Evaluate** tab and select **Checks** from the left sidebar.
+
+2. Click **New check**.
+
+3. Enter a **Check name** (e.g., "Professional tone"), then choose a type from the **Select check type...** picker.
+
+4. Fill in the fields for that type — see [Check types](#check-types) above.
+
+5. Click **Save check**. Reopening an existing Check shows **Update check** instead.
+
+<Note>
+Each Test supports up to 10 Checks of its own. Checks attached to a Test are always included when you run that Test. Additional Checks from the Checks tab are not auto-included — expand **Additional options** in the run modal and select them under **Additional checks** before kicking off the run. Those are counted separately from the per-Test limit.
+</Note>
+
+---
+
+## The Checks tab
+
+The Checks tab lists every Check on the Agent or Workforce, grouped by type. Filters across the top show where each one is currently attached:
+
+| Filter | Shows |
+|--------|-------|
+| **All checks** | Every Check on the Agent or Workforce |
+| **In tests** | Checks attached to at least one Test |
+| **In dashboard** | Checks attached to a Monitor dashboard |
+| **Unused** | Checks attached nowhere — safe to clean up |
+
+---
+
+Next: Learn how to [run Evals](/build/agents/evals/running-evaluations) against your Test sets.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Does a Check made inside a Test stay inside that Test?">
+    No. Creating one with **+ New check** while building a Test saves it to your library like any other, so you can attach it to other Tests and to Monitor dashboards afterwards.
+  </Accordion>
+
+  <Accordion title="How many Checks can I add to a Test?">
+    Each Test supports up to 10 Checks of its own. Checks added under **Additional checks** at run time are counted separately.
+  </Accordion>
+
+  <Accordion title="Can the AI Judge evaluate long conversations?">
+    Yes, with configuration. The AI Judge Check includes a **Truncate long conversations** toggle in the **Advanced** section when creating a Check. When enabled, conversations that exceed the judge model's context window are trimmed and evaluated. When disabled, those conversations fail with an error rather than producing a partial result.
+  </Accordion>
+
+  <Accordion title="What happens when a conversation is truncated?">
+    The oldest messages are removed from the start of the conversation until it fits within the judge model's context window. The judge is notified that truncation occurred and evaluates the remaining portion. If your evaluation criteria depend on early context — such as the user's original request or instructions given at the start of the conversation — the result may be less accurate. In those cases, disabling truncation and selecting a model with a larger context window is preferable.
+  </Accordion>
+</AccordionGroup>
