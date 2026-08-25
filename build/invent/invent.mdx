@@ -301,6 +301,29 @@ Invent can build an initial Evals suite, review results, investigate failed Chec
   </Tab>
 </Tabs>
 
+## Review tasks with Invent
+
+Invent can triage and debug task failures from the Tasks and Monitor pages. Each entry point opens an Invent conversation pre-filled with the relevant task error context. All prompts are sanitized against prompt injection before they reach Invent.
+
+<Note>
+  These entry points are controlled by a feature flag and are off by default. Contact your account team to enable them for your organization.
+</Note>
+
+<Tabs>
+  <Tab title="Review all tasks">
+    The **Review with Inventor** button in the Tasks page header starts a broad triage session. Use it to surface patterns across recent task failures before investigating specific errors.
+  </Tab>
+  <Tab title="Review an approval group">
+    The **Review** button appears in the bulk actions menu for approval groups. Select one or more tasks in the group, then select **Review** to start an Invent conversation scoped to those items.
+  </Tab>
+  <Tab title="Fix an errored group">
+    The **Fix it** button in the bulk actions menu for errored task groups opens an Invent conversation with the raw error message included in the prompt. Invent starts from the specific failure rather than a general overview.
+  </Tab>
+  <Tab title="Fix a failing step">
+    **Fix it** buttons appear on individual failing steps and on error banners within the task timeline. Selecting one starts an Invent conversation focused on that step's error, with the error context pre-filled.
+  </Tab>
+</Tabs>
+
 ## MCP vs Invent
 
 Invent and the Relevance AI MCP are often compared, but they solve different problems. Invent builds things _inside_ Relevance AI from natural language. The MCP connects Relevance AI _to the outside world_ — letting external clients call your Tools, and letting your Agents reach into external services.
