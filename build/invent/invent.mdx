@@ -43,7 +43,15 @@ Its job continues after launch. Invent reviews live performance, detects quality
 
 ### Availability
 
-Invent is available to organization admins by default. An organization admin can turn on Invent for everyone in an individual project from that project's settings.
+Invent is always available to organization admins and owners, regardless of any project-level settings.
+
+For all other team members, Invent access is controlled per project. A project admin can enable or disable Invent from **Settings → Organization → Projects → Manage settings → Features**. The setting defaults to disabled, so Invent must be explicitly enabled for each project where you want team members to access it.
+
+<Note>
+  When Invent is disabled for a project, all Invent runs are blocked at the API level and all Invent entry points are hidden for team members — including the sidebar navigation, floating button, chat panel, and evaluation CTAs.
+</Note>
+
+To configure per-project Invent access, see [Project features](/admin/project-management/project-features).
 
 ### Approval controls
 
@@ -330,7 +338,7 @@ Invent and the Relevance AI MCP are often compared, but they solve different pro
   </Accordion>
 
   <Accordion title="Who can use Invent?">
-    Invent is available to organization admins by default. An organization admin can turn on Invent for everyone in an individual project from that project's settings.
+    Invent is always available to organization admins and owners. For all other team members, access is controlled per project. A project admin can enable Invent from **Settings → Organization → Projects → Manage settings → Features**. The toggle defaults to disabled — Invent must be explicitly enabled for each project where you want team members to use it.
   </Accordion>
 
   <Accordion title="How does project isolation work for Enterprise customers?">

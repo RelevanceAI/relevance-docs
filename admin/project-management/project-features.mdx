@@ -1,0 +1,61 @@
+---
+title: Project features
+sidebarTitle: Project features
+description: "Enable or disable platform features for individual projects."
+---
+
+Project admins can control which platform features are available to team members within a specific project. These controls are in **Settings → Organization → Projects → Manage settings → Features**.
+
+## Invent access
+
+The **Features** section includes a toggle that controls whether team members can use [Invent](/build/invent/invent) in the project.
+
+| | Detail |
+| --- | --- |
+| **Who can change it** | Project admins |
+| **Default state** | Disabled |
+| **Exempt roles** | Organization admins and owners always retain Invent access, regardless of this setting |
+
+<Info>
+  The toggle defaults to disabled. You must explicitly enable Invent for each project where you want team members to access it.
+</Info>
+
+### What changes when Invent is disabled
+
+When Invent is disabled for a project, team members in that project cannot use Invent. Specifically:
+
+- All Invent runs are blocked at the API level.
+- All Invent entry points are hidden in the UI — the sidebar navigation item, the floating button, the chat panel, and evaluation CTAs.
+
+Organization admins and owners are exempt and continue to see and use Invent regardless of the project setting.
+
+### How to enable Invent for a project
+
+<Steps>
+  <Step title="Open Settings">
+    Click **Settings** in the left sidebar.
+  </Step>
+  <Step title="Go to Organization → Projects">
+    Under **Organization**, select **Projects**, then click **Manage settings** next to the project you want to configure.
+  </Step>
+  <Step title="Open the Features section">
+    Scroll to the **Features** section.
+  </Step>
+  <Step title="Enable the Invent toggle">
+    Turn on the Invent toggle, then save your changes.
+  </Step>
+</Steps>
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Who can change project feature settings?">
+    Only organization admins and owners can access the Features section in project settings.
+  </Accordion>
+  <Accordion title="Does disabling Invent affect org admins?">
+    No. Organization admins and owners always retain Invent access, regardless of the project-level toggle.
+  </Accordion>
+  <Accordion title="Do I need to enable Invent separately for each project?">
+    Yes. The toggle is per-project and defaults to disabled, so you must enable it individually for each project where you want team members to use Invent.
+  </Accordion>
+</AccordionGroup>
