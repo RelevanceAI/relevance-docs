@@ -118,4 +118,7 @@ Connect to custom webhooks, APIs, and SDKs to trigger your Agent programmaticall
     
     This is useful for testing, maintenance, cost control, or any time you need to temporarily disable triggers without losing your setup.
   </Accordion>
+  <Accordion title="Do Slack DM triggers require users to message the app first?">
+    Not anymore. Previously, each user had to send a message to the Relevance AI Slack app before a DM channel could be opened with them. You can now proactively open DM channels by providing a list of email addresses via the Relevance AI API (`POST auth/accounts/:account_id/slack/dms/open`), so Slack DM triggers can reach users who haven't yet interacted with the app. See [opening DM channels proactively](/integrations/popular-integrations/slack#opening-dm-channels-proactively) for details.
+  </Accordion>
 </AccordionGroup>

@@ -140,6 +140,28 @@ When using the Send Message (advanced) tool step, you can send messages through 
 2. **Bolded text:** Use bold formatting to highlight important information.
 3. **Images:** Include images to provide visual context or instructions.
 
+## Opening DM channels proactively
+
+Before you can send a Slack DM to someone, the Relevance AI Slack app needs an open DM channel with that user. Normally, this requires the user to send a message to the app first. The open DM endpoint lets you bypass this by proactively opening channels with users via their email addresses — no prior interaction needed.
+
+This is useful when building agents with Slack DM triggers that need to reach users who haven't yet messaged the Relevance AI app.
+
+To open DM channels, call:
+
+```http
+POST auth/accounts/:account_id/slack/dms/open
+```
+
+Pass a list of up to 200 email addresses in the request body. The API resolves each address against your connected Slack workspace, opens a DM channel for each matched user, and returns per-email results showing success or failure for each address.
+
+- Duplicate email addresses are removed before processing.
+- A single unresolvable or failed email does not block the others from being processed.
+- Results are returned per email, so you can identify which users were reached and which were not.
+
+<Note>
+This endpoint requires Editor permissions or higher.
+</Note>
+
 ## Escalate your Agent to Slack
 
 <Warning>
@@ -249,7 +271,7 @@ This will disconnect your Slack workspace from Relevance AI, and your agents wil
   </Accordion>
 
   <Accordion title="How do I send specific messages to someone on Slack?">
-    If you want to be able to send a message to a specific person in Slack, that person will first need to send a message to the Relevance AI bot in Slack. Once they do this, their name will appear as a destination option when sending Slack messages.
+    To send a DM to a specific person, a DM channel must first be open between the Relevance AI app and that user. You can establish this in two ways. The first is to have the user send any message to the Relevance AI bot in Slack — their name will then appear as a destination option when sending Slack messages from Relevance AI. The second is to use the open DM channels endpoint (`POST auth/accounts/:account_id/slack/dms/open`), which lets you proactively open channels by providing a list of email addresses without requiring the user to initiate contact first. See [opening DM channels proactively](/integrations/popular-integrations/slack#opening-dm-channels-proactively) for details.
   </Accordion>
   
   <Accordion title="Slack isn't working as intended, how do I fix it?">
