@@ -43,17 +43,13 @@ Tests live in a **Test set**, which is what a run points at — run the whole se
 7. Under **Checks**, attach the criteria this Test is scored against. Checks pass or fail, and are combined into the Test score.
 
    <Tabs>
-     <Tab title="Reuse an existing Check">
+     <Tab title="Use existing Check">
        **+ Add existing check** opens your library of existing Checks. Pick the ones you want, up to 10 per Test.
      </Tab>
-     <Tab title="Write a new one">
+     <Tab title="Create new Check">
        **+ New check** opens the editor without leaving the Test. Enter a **Check name**, choose a type, configure it, and click **Save check**.
      </Tab>
    </Tabs>
-
-   <Note>
-   Both routes create the same thing — a Check on the Agent or Workforce, reusable on other Tests and on Monitor dashboards. There is no Check that exists only inside one Test.
-   </Note>
 
    See [Check types](/build/agents/evals/checks) for what each type scores and the fields it takes.
 
@@ -95,18 +91,7 @@ Tests can be reorganized across Test sets as your testing strategy evolves. Each
 ## Example Tests
 
 <AccordionGroup>
-  <Accordion title="Customer support - empathy Test">
-    **Name**: Response empathy
-
-    **Scenario**: You are a long-time customer who was recently charged twice for the same order. You've already contacted support once without resolution and are feeling frustrated but willing to give the Agent a chance to help. Express your concerns clearly and see if the Agent acknowledges your situation before jumping to solutions.
-
-    **Up to**: 10 messages
-
-    **Check**: Empathy shown (AI Judge)
-    - *Evaluation Prompt*: Did the Agent acknowledge the customer's frustration and express empathy before offering solutions? The response should show understanding of the emotional state and validate their concerns.
-  </Accordion>
-
-  <Accordion title="Sales - product knowledge Test">
+  <Accordion title="Sales - product knowledge">
     **Name**: Product expertise
 
     **Scenario**: You are a procurement manager at a mid-sized company evaluating solutions for your team. You need specific details about enterprise pricing tiers, integration capabilities with existing tools like Salesforce and HubSpot, and data security certifications. Ask clarifying questions and compare features against competitors you're also considering.
