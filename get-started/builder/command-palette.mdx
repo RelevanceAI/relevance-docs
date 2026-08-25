@@ -1,0 +1,87 @@
+---
+title: "Command palette"
+sidebarTitle: "Command palette"
+description: "Keyboard-first access to navigation, actions, and resources anywhere in the Builder"
+---
+
+<Note>
+The command palette is rolling out gradually and is currently gated behind the `cmd-k-spotlight` feature flag.
+</Note>
+
+The command palette gives you keyboard-first access to navigation, actions, and resources from anywhere in the Builder. Press `Cmd+K` on Mac or `Ctrl+K` on Windows and Linux to open it.
+
+**Send a message to Invent** is always pinned at the top of the palette.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Quick actions" icon="bolt">
+    Create agents, tools, workforces, and knowledge tables, or open docs, copy the current URL, and contact support
+  </Card>
+  <Card title="Navigation search" icon="magnifying-glass">
+    Find any page in the Builder instantly by typing its name
+  </Card>
+  <Card title="Resource search" icon="layer-group">
+    Jump directly to any agent, tool, workforce, or knowledge set in your project
+  </Card>
+  <Card title="Project switching" icon="arrows-rotate">
+    Type a project name to switch to another project across any region
+  </Card>
+</CardGroup>
+
+## Quick actions
+
+The following actions are available in the palette:
+
+- **Create tool** — open the tool creation flow
+- **Create agent** — open the agent creation flow
+- **Create workforce** — open the workforce creation flow
+- **Create knowledge table** — open the knowledge table creation flow
+- **Open docs** — go to the Relevance AI documentation
+- **Copy URL** — copy the current page URL to your clipboard
+- **Contact support** — open a support request
+
+<Note>
+Contact support replaces the old Cmd+K support drawer that previously opened in the Builder.
+</Note>
+
+## Navigation search
+
+Type any page name to find it in the Builder. Results appear as you type, with matched characters highlighted. Select a result to navigate directly to that page.
+
+## Resource search
+
+Type the name of an agent, tool, workforce, or knowledge set to jump to it directly. Resource results are mixed with navigation results and ranked by relevance.
+
+## Project switching
+
+Type a project name to search across all your projects, including projects in other regions. Select a result to switch to that project immediately.
+
+If you're on a page that exists in the destination project — for example, viewing an Agent — the palette will try to land you on the same page type after switching.
+
+## Smart ordering
+
+When the palette opens with no query, results are ranked by frecency: a combination of how recently and how frequently you've accessed each item. Items you use often appear near the top. The frecency score uses a 14-day half-life decay, so recent activity has more weight than older usage.
+
+## Keyboard navigation
+
+| Action | Shortcut |
+|--------|----------|
+| Open palette | `Cmd+K` (Mac) / `Ctrl+K` (Windows/Linux) |
+| Navigate results | Arrow keys `↑` / `↓` |
+| Select result by position | Number keys `1`–`9` |
+| Clear query | `Esc` |
+| Close palette | `Esc` (when query is already empty) |
+
+Pressing `Esc` clears the current query first. Pressing it again when the query is empty closes the palette.
+
+## How results are ranked
+
+The palette uses tiered scoring to match your query against result names:
+
+1. Exact match
+2. Prefix match — query matches the start of the result
+3. Acronym match — query matches the initials of a multi-word result
+4. Fuzzy match — characters in the query appear in order within the result
+
+Matched characters are highlighted in each result so you can see why it was returned.
