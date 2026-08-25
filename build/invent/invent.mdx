@@ -55,6 +55,10 @@ Invent is available to organization admins by default. An organization admin can
 
     - **Ask first** pauses before tools set to **Ask** or **Always ask** run. Tools set to **Auto** still run without approval.
     - **Auto-accept** lets tools set to **Ask** run without approval. Tools set to **Always ask** still require your approval.
+
+    <Note>
+      Ask first and Auto-accept control tool approvals during execution. Plan first mode is a separate, independent setting that requires explicit sign-off on a written plan before any execution begins — the two controls serve different purposes.
+    </Note>
   </Tab>
 
   <Tab title="Tool permissions">
@@ -122,6 +126,41 @@ Invent is available to organization admins by default. An organization admin can
     Describe a process you know end to end, including the outcome, systems, judgment calls, and measure of success. Invent works through it with you before building the Agent team.
 
     You can also choose a task suggested from your project setup, such as creating evals if none exist.
+  </Accordion>
+  <Accordion title="Plan first" icon="clipboard-list">
+    Plan first mode is an opt-in workflow that adds a structured planning phase before Invent makes any changes. Invent interviews you, checks feasibility, and writes a plan — then waits for your explicit approval before building anything. Use it for complex tasks where you want to review the approach before any changes are made.
+
+    <Note>
+      Plan first mode is only available to organizations where Relevance AI has enabled it. Contact your account team to request access.
+    </Note>
+
+    #### How to enable
+
+    Before starting a new conversation, click the **+** button in the Invent composer to open the options menu, then toggle **Plan first** on.
+
+    #### Workflow
+
+    <Steps>
+      <Step title="Interview">
+        Invent interviews you to understand the problem, systems involved, judgment calls required, and definition of success.
+      </Step>
+      <Step title="Feasibility check">
+        Invent checks what the current project setup and connected integrations can support.
+      </Step>
+      <Step title="Plan presentation">
+        Invent writes a plan and presents it inline in the conversation, with an **Expand** button for full-screen viewing.
+      </Step>
+      <Step title="Sign-off">
+        An **Approve** button appears. Invent will not begin building until you click it, even if Auto-accept is on for the session.
+      </Step>
+      <Step title="Revision">
+        To request changes, reply in the chat or click **Reject**. Invent incorporates your feedback and presents an updated plan.
+      </Step>
+    </Steps>
+
+    <Note>
+      Subagent tasks and evaluation runs bypass the plan sign-off step automatically. These are platform-initiated operations, not new build requests, so the planning phase does not apply to them.
+    </Note>
   </Accordion>
   <Accordion title="About you" icon="user">
     <img src="/images/about-you-invent.png" alt="The About You setting in Invent" />
@@ -346,7 +385,11 @@ Invent and the Relevance AI MCP are often compared, but they solve different pro
   </Accordion>
 
   <Accordion title="Does Invent publish changes automatically?">
-    By default, Invent makes changes in draft so you can review them before they go live. Auto-accept lets Invent apply changes without pausing for each approval, but restoring an earlier version always requires confirmation.
+    By default, Invent makes changes in draft so you can review them before they go live. Auto-accept lets Invent apply changes without pausing for each approval, but restoring an earlier version always requires confirmation. With [Plan first mode](/build/invent/invent#plan-first) enabled, Invent also requires you to approve a written plan before any changes are attempted.
+  </Accordion>
+
+  <Accordion title="What is Plan first mode?">
+    Plan first mode is an opt-in workflow where Invent interviews you, checks feasibility, and writes a plan for your explicit approval before making any changes — regardless of your Auto-accept setting. It is designed for complex tasks where you want to review the approach before any execution begins. For setup instructions and the full workflow, see [Plan first](/build/invent/invent#plan-first) in the Invent features section.
   </Accordion>
 
   <Accordion title="Can I resume a previous Invent conversation?">
@@ -356,4 +399,5 @@ Invent and the Relevance AI MCP are often compared, but they solve different pro
   <Accordion title="How does Invent track credit usage?">
     The Invent panel displays a real-time credit counter that updates with each interaction. The counter tracks the credits used in your current session.
   </Accordion>
+
 </AccordionGroup>
