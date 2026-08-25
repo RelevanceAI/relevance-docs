@@ -202,6 +202,45 @@ You can learn more about each of the Slack Tool steps on the following pages.
 
 <Snippet file="components/integrations/slack-tool-steps.mdx" />
 
+## Interactive buttons and form modals
+
+Agents can send interactive Slack messages with custom buttons that recipients can click to respond quickly or open editable forms.
+
+### Custom canned-message buttons
+
+Agents can attach up to 5 interactive buttons to any Slack message sent via the advanced Slack send tool. Each button has a display label visible to the recipient and a pre-written reply message.
+
+When a recipient clicks a button, the stored message is injected into the agent conversation and attributed to the clicker's display name — for example, "Jane chose 'Enroll in sequence'". Buttons are single-use: once clicked, they cannot be clicked again. Each button is independently tokenized for security.
+
+<Note>
+  The `slack_custom_buttons` organization configuration flag must be enabled before agents can use this feature. It is disabled by default — contact [Relevance AI support](/get-started/support) to enable it.
+</Note>
+
+### Form modals
+
+Buttons can alternatively open a prefilled, editable form (Slack modal) when clicked, letting recipients review and modify content before submitting.
+
+When clicked, the button opens a Slack modal with prefilled form fields. Recipients can edit the content — for example, modify a draft email — before submitting. Submitted values are sent back to the agent conversation. If the modal is dismissed without submitting, the button remains clickable.
+
+A button with a form modal is configured with the following properties:
+
+- `title`: The modal's title
+- `fields`: An array of form fields, each containing:
+  - `key`: Unique identifier for the field
+  - `label`: Display label for the field
+  - `initial_value`: Pre-filled content
+
+<Note>
+  Both the `slack_custom_buttons` and `slack_modals` organization configuration flags must be enabled to use form modals. Both are disabled by default — contact [Relevance AI support](/get-started/support) to enable them.
+</Note>
+
+### Button limits and behavior
+
+- Maximum of 5 buttons per Slack message
+- Buttons are single-use: once clicked or a form submitted, they become inactive
+- Button clicks are attributed to the Slack user who clicked them in the agent conversation
+- All interactions flow back to the agent conversation for context and follow-up
+
 ## Remove integration for Slack
 
 If you need to remove the integration for Slack:
