@@ -108,3 +108,7 @@ Once enabled, you can reference the tool in your agent's prompt using the **/** 
     Opportunities requiring personalized human attention.
   </Card>
 </CardGroup>
+
+<Note>
+If your agent is triggered by a webhook rather than from Slack, it can still route approval requests to specific people via Slack DM. Configure `approval_recipients` in your Slack trigger sync settings to send each recipient an Approve/Reject card when human approval is needed. See [Slack approval DMs for webhook-triggered agents](/integrations/popular-integrations/slack#slack-approval-dms-for-webhook-triggered-agents).
+</Note>
