@@ -161,6 +161,26 @@ Invent is available to organization admins by default. An organization admin can
 
     Past sessions in your conversation history show each task with a status: approved (the action was applied), idle (waiting for your input), or completed. You can review what Invent did and track credit spend across sessions from the history view.
   </Accordion>
+  <Accordion title="Resources panel" icon="layer-group">
+    {/* TODO: add screenshot of the Resources panel — placeholder until asset is ready */}
+
+    The Resources panel shows a categorized list of every Agent, Tool, and Workforce the current conversation has touched. Open it by clicking the **Resources** toggle button in the Invent toolbar.
+
+    | Category | What it shows |
+    | --- | --- |
+    | **Edited** | Agents, Tools, and Workforces that Invent created or modified this session. A dot next to the item indicates whether the current version is draft or published. |
+    | **Used** | Resources that were run during the session, including Subagents. |
+    | **Evaluated** | Resources that had Evals run against them. |
+    | **Viewed** | Resources that Invent read but did not modify or run. |
+
+    Each item in the panel links directly to that resource's builder so you can review or edit it without searching through the sidebar.
+
+    The panel adapts to your screen size. On wide screens (1440 px and above) it floats in the gutter alongside the conversation. On medium screens it slides the conversation left to make room. On narrow screens the panel starts closed.
+
+    <Note>
+      The dot indicator next to Edited resources reflects the [version history](/build/agents/build-your-agent/version-history) draft/published state. Evaluated resources are those that have had [Evals](/build/agents/build-your-agent/evals) run against them this session.
+    </Note>
+  </Accordion>
   <Accordion title="Memories" icon="brain">
     <img src="/images/invent-memories.png" alt="The Memory settings in Invent" />
 
