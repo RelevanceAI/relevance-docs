@@ -87,25 +87,6 @@ Invent is available to organization admins by default. An organization admin can
       These settings control approval prompts, not access. Invent still uses your existing project, asset, and integration permissions. Each user manages their own preferences in each project; organization and project admins cannot use this screen to grant access or set approval rules for other users.
     </Note>
   </Tab>
-
-  <Tab title="Plan first">
-    Enable Plan first from the **+** menu in the Invent composer. The toggle persists across navigation until you turn it off.
-
-    When Plan first is on, Invent follows this sequence before building anything:
-
-    1. **Interview** — Invent asks questions to understand your problem and the outcome you need.
-    2. **Feasibility check** — Invent checks what can be built given your project's current setup.
-    3. **Written plan** — Invent drafts a plan as prose in the transcript. An expand button opens it full-screen for easier reading. The plan content is surfaced directly in the transcript rather than buried in collapsed timeline blocks.
-    4. **Sign-off** — Invent pauses and presents an **Approve** button. Nothing is built until you approve.
-
-    To request changes before approving, reply in the chat. The old **Deny** button has been replaced with a "Want it changed? Reply below" hint.
-
-    Subagents and evaluation runs skip the plan sign-off step automatically.
-
-    <Note>
-      Plan first requires the InventorPlanMode flag to be enabled on your account. The toggle only appears in the + menu if your backend supports it.
-    </Note>
-  </Tab>
 </Tabs>
 
 ### Enterprise security controls
@@ -145,8 +126,6 @@ Invent is available to organization admins by default. An organization admin can
     Describe a process you know end to end, including the outcome, systems, judgment calls, and measure of success. Invent works through it with you before building the Agent team.
 
     You can also choose a task suggested from your project setup, such as creating evals if none exist.
-
-    The **+** menu beside the composer also contains the [Plan first](/build/invent/invent#approval-controls) toggle, which adds a structured interview and sign-off step before Invent builds anything.
   </Accordion>
   <Accordion title="Plan first" icon="clipboard-list">
     Plan first mode is an opt-in workflow that adds a structured planning phase before Invent makes any changes. Invent interviews you, checks feasibility, and writes a plan — then waits for your explicit approval before building anything. Use it for complex tasks where you want to review the approach before any changes are made.
@@ -421,7 +400,4 @@ Invent and the Relevance AI MCP are often compared, but they solve different pro
     The Invent panel displays a real-time credit counter that updates with each interaction. The counter tracks the credits used in your current session.
   </Accordion>
 
-  <Accordion title="What does Plan first mode do?">
-    Plan first mode adds a structured review step before Invent builds anything. When enabled, Invent interviews you to understand your problem, checks what can be built, and drafts a written plan in the transcript for you to read and approve. Nothing is built until you click **Approve**. To request changes, reply in the chat. Enable it from the **+** menu in the composer; the toggle persists until you turn it off.
-  </Accordion>
 </AccordionGroup>
