@@ -226,6 +226,52 @@ Invent is available to organization admins by default. An organization admin can
   </Tab>
 </Tabs>
 
+## Plan first mode
+
+Plan first mode is an opt-in setting that adds a structured planning phase before Invent builds anything. By default, Invent starts construction as soon as it has enough context. With Plan first mode on, Invent works through a sequence of phases — interviewing, checking feasibility, and drafting a written plan — and waits for your explicit sign-off before making any changes.
+
+<Note>
+  Plan first mode is only available to organizations where Relevance AI has enabled it. Contact your account team to request access.
+</Note>
+
+### Enabling plan first mode
+
+Before starting a new conversation, click the **+** button in the Invent composer to open the options menu, then toggle **Plan first** on.
+
+### The planning workflow
+
+When Plan first mode is active, Invent follows a structured sequence before building:
+
+| Phase | What Invent does |
+| --- | --- |
+| **FRAME** | Interviews you to understand your goal, the systems involved, the judgment calls required, and what success looks like. |
+| **GROUND** | Checks platform feasibility — what the current project setup and connected integrations can support. |
+| **BRIEF** | Drafts a written plan describing the Agent team it will build and how each part maps to your process. |
+| **SLICE** | Breaks the plan into reviewable implementation steps. |
+| **VERIFY** | Presents the plan inline in the conversation with an **Expand** button for full-screen viewing. |
+| **WATCH** | Monitors the conversation for scope changes or new constraints that might affect the plan. |
+| **CLOSE** | Finalizes the agreed plan and moves to implementation. |
+
+#### Sign-off
+
+An **Approve** button appears when the plan is ready. Invent will not begin building until you click it — even if Auto-accept is on for the session. Plan first mode overrides session-level approval settings.
+
+If the plan needs revision, reply in the chat. Invent incorporates your feedback and presents the updated plan for another round of sign-off.
+
+### Behavioral gates
+
+Plan first mode enforces three gates that keep the process disciplined:
+
+| Gate | Constraint |
+| --- | --- |
+| **G0** | Invent will not draft a plan until it has completed a feasibility check. |
+| **G1** | Invent will not make any project changes until the outcome is agreed. |
+| **G2** | Invent will not publish until a success criterion has been run. |
+
+### Special cases
+
+Subagent tasks and evaluation runs bypass the plan sign-off step automatically. These are platform-initiated operations rather than new build requests, so the planning phase does not apply to them.
+
 ## Manage Evals with Invent
 
 Invent can build an initial Evals suite, review results, investigate failed Checks, and diagnose performance alarms for Agents and Workforces.
