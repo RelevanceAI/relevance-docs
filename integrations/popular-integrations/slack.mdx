@@ -133,6 +133,32 @@ Enable this setting to have your Agent process Slack messages without posting a 
 When "No Agent Reply" is enabled, you won't receive confirmation in Slack that your Agent processed the message. Monitor your Agent's task history in Relevance AI to verify it's working correctly.
 </Warning>
 
+### Slack approval DMs for webhook-triggered agents
+
+When an agent is triggered by a webhook (not from a Slack message), it can still send approval requests as direct messages to specific people in Slack. Configure an `approval_recipients` list in the Slack trigger sync settings, and the agent will DM each recipient an Approve/Reject card whenever it needs human approval.
+
+This differs from the Slack thread approval flow, which only works when a task originates from a Slack channel or DM. With `approval_recipients`, the DMs are agent-initiated — the agent proactively reaches out regardless of how it was started.
+
+<Note>
+This feature requires two org-level settings enabled by the Relevance AI team: `slack_agent_initiated_dms` and `workforce_slack_approve_reject`. Contact [Relevance AI support](/get-started/support) to request access.
+</Note>
+
+#### How to configure
+
+1. Open your agent's trigger settings in Relevance AI.
+2. Select your Slack trigger and open **Sync settings**.
+3. Add an `approval_recipients` field with a list of up to 20 email addresses.
+4. Save and publish your agent.
+
+When the agent needs human approval, it sends a Slack DM with an Approve/Reject card to each recipient. Recipient responses update the task status in Relevance AI.
+
+#### Behavior notes
+
+- Invalid or unknown email addresses are silently skipped — no error is raised.
+- Each DM is independently deduplicated, so a recipient won't receive duplicate messages for the same approval request.
+- The `approval_recipients` list supports up to 20 email addresses.
+- Recipients must have a Slack account in the connected workspace.
+
 ### Customize Message Formatting
 
 When using the Send Message (advanced) tool step, you can send messages through Slack with enhanced formatting. This includes:
