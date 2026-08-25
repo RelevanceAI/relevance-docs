@@ -265,6 +265,13 @@ Invent can build an initial Evals suite, review results, investigate failed Chec
       A review is requested manually; it does not watch performance continuously. Configure an alarm if you want to be notified when a score crosses a threshold.
     </Note>
   </Tab>
+  <Tab title="Monitor dashboard preview cards">
+    When Invent references a Monitor dashboard link in the same project, the chat automatically renders an inline preview card after the response finishes streaming. Each card shows the dashboard name, overall score, run count over the last 7 days, and a score-over-time chart. Click the card to open the full dashboard in a new tab.
+
+    If the same dashboard is referenced more than once in a response, only one preview card appears. Cards disappear silently if the underlying data fails to load.
+
+    Preview cards appear for any user who has access to Monitor dashboards. For more on setting up Monitor dashboards, see [Monitor](/build/agents/build-your-agent/evals#monitor).
+  </Tab>
   <Tab title="Fix failing Evals">
     <img src="/images/invent-fix-failing-evals.png" alt="Invent proposing fixes for failing evals" />
 
