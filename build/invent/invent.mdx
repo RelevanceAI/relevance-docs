@@ -141,6 +141,28 @@ Invent is available to organization admins by default. An organization admin can
       </Step>
     </Steps>
   </Accordion>
+  <Accordion title="Sounds" icon="volume-high">
+    The Sounds preference in Invent Settings → General lets you configure audio notifications for when Invent turns end. This helps you stay informed about important events without constantly watching the screen. The preference is saved per-device and does not sync across devices.
+
+    <Steps>
+      <Step title="Open Invent settings">
+        In the Invent panel, click the three-dot menu, then select **Invent settings**.
+      </Step>
+      <Step title="Open General">
+        Select **General**, choose your preferred sound setting under **Sounds**, then click **Save**.
+      </Step>
+    </Steps>
+
+    | Option | Description |
+    | --- | --- |
+    | **Off** | No audio notifications. |
+    | **Needs attention** | Plays sounds for approvals, questions, and errors. |
+    | **All messages** | Plays sounds for all Invent responses. |
+
+    <Note>
+      Four distinct sound types are used: attention (for pending approvals and questions), error, build (when builds complete), and message (for plain replies). The preference is stored in localStorage per-device and does not sync across devices. Only one tab plays audio at a time — the active viewing tab stays silent. Sounds requires the `inventor-turn-sounds-fe` feature flag.
+    </Note>
+  </Accordion>
   <Accordion title="Model selection and credit usage" icon="brain">
     <img src="/images/invent-model-capabilities.png" alt="The Invent model list showing each model's cost, performance profile, and support for images and files" />
 
