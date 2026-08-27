@@ -282,6 +282,15 @@ Included on all log records:
 | `relevance_ai.event.agent_id` | string | Yes | ID of the agent being published |
 | `relevance_ai.event.version_id` | string | Yes | ID of the version now live |
 
+### Conversation events
+
+**`conversation_deleted`** - Emitted when an agent conversation is permanently deleted, either individually or as part of a bulk deletion. Each deleted conversation produces a separate event.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.conversation_id` | string | Yes | ID of the deleted conversation. Matches `gen_ai.conversation.id` on `invoke_agent` spans |
+| `relevance_ai.event.agent_id` | string | No | ID of the agent the conversation belonged to, when known |
+
 ### Tool events
 
 **`tool_created`** - Emitted when a new tool is created (from scratch or cloned).
@@ -329,6 +338,13 @@ Included on all log records:
 | Attribute | Type | Required | Description |
 | --- | --- | --- | --- |
 | `relevance_ai.event.workforce_id` | string | Yes | ID of the deleted workforce |
+| `relevance_ai.event.workforce_type` | string | No | The workforce's configured type, when known. `chat` workforces are auto-created wrappers around a single chat task and are deleted together with it, so their deletion is a side effect of deleting the task rather than a user action on the workforce itself |
+
+**`workforce_task_deleted`** - Emitted when a workforce task is deleted, once per task (a bulk delete emits one event per task). Fires for deletions from the Workforce UI, deletions from the chat interface, and deletions performed by automated data retention policies. A workforce task is a single run of a workforce, which is distinct from an agent conversation.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.workforce_task_id` | string | Yes | ID of the deleted workforce task. Equals the `relevance_ai.workforce.workforce_task_id` attribute on multi-agent-system execution spans |
 
 **`workforce_draft_saved`** - Emitted when work-in-progress changes are saved to a workforce.
 
@@ -343,6 +359,24 @@ Included on all log records:
 | --- | --- | --- | --- |
 | `relevance_ai.event.workforce_id` | string | Yes | ID of the workforce being published |
 | `relevance_ai.event.version_id` | string | No | ID of the version now live |
+
+### Trigger events
+
+**`trigger_deleted`** - Emitted when a trigger is deleted from the project.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.trigger_id` | string | Yes | ID of the deleted trigger |
+| `relevance_ai.event.trigger_type` | string | Yes | The trigger's configured type, for example `recurring`, `tool_trigger`, or `external_relay` |
+| `relevance_ai.event.trigger_provider` | string | No | For triggers backed by an integration, the integration provider, for example `slack` or `gmail` |
+
+### Knowledge events
+
+**`knowledge_table_deleted`** - Emitted when a knowledge table is permanently deleted, once per table.
+
+| Attribute | Type | Required | Description |
+| --- | --- | --- | --- |
+| `relevance_ai.event.knowledge_table_id` | string | Yes | ID of the deleted knowledge table. Matches entries in `relevance_ai.agent.knowledge_used` on `invoke_agent` spans |
 
 ### Permission events
 
