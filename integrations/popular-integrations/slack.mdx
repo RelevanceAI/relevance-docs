@@ -236,6 +236,44 @@ You can learn more about each of the Slack Tool steps on the following pages.
 
 <Snippet file="components/integrations/slack-tool-steps.mdx" />
 
+## Agent-sent Slack cards
+
+When an agent sends a message to Slack, it can include interactive buttons that let recipients take action without leaving Slack. Each button has a type that determines what happens when a user clicks it.
+
+<CardGroup cols={3}>
+  <Card title="Message" icon="message">
+    Clicking the button sends a predefined message back to the agent as if the user typed it. Use this for quick confirmations or simple one-click replies.
+  </Card>
+  <Card title="Form" icon="table-list">
+    Clicking the button opens a modal in Slack with one or more input fields. The user fills in the form and submits, and the agent receives the collected data.
+  </Card>
+  <Card title="Wizard" icon="list-check">
+    Clicking the button opens a multi-step modal in Slack. The user moves through a guided sequence of steps, completing inputs at each stage before advancing to the next. The agent receives all responses once the final step is submitted.
+  </Card>
+</CardGroup>
+
+### Using the wizard button type
+
+The wizard type is suited for workflows where collecting information in a single form would be overwhelming, or where later steps depend on earlier answers. Each step in the wizard can present different input fields, and users can navigate forward through the sequence.
+
+<Note>
+Wizard buttons are configured when building the card your agent sends. The number of steps and the fields at each step are defined at build time, not at runtime.
+</Note>
+
+To send a Slack card with a wizard button, use the **Slack: Send Message (Advanced)** tool step and include a button with type set to `wizard`. Define each step as an object with a title and its list of input fields. When the user submits the final step, the wizard closes and the responses are delivered to the agent.
+
+<AccordionGroup>
+  <Accordion title="Example: multi-step intake wizard">
+    A support agent sends a card asking a user to submit a request. The wizard walks them through three steps:
+
+    1. **Request type** — a dropdown asking whether the request is a bug report, feature request, or general question.
+    2. **Details** — a text area for a description and an optional file attachment field.
+    3. **Priority and contact** — a priority selector and an email field.
+
+    The agent receives all three steps' data as a single payload once the user submits step 3.
+  </Accordion>
+</AccordionGroup>
+
 ## Remove integration for Slack
 
 If you need to remove the integration for Slack:
