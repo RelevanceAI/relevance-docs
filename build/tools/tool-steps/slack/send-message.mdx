@@ -24,3 +24,21 @@ You can add the 'Slack - Send Message' Tool step to your Tool by:
 3. Select the Slack channel you want to send the message to
 4. Add your message in the 'Message' field
 5. Click 'Run step' to test out your Tool step
+
+## Advanced settings
+
+These optional settings let you control message appearance in Slack. Leaving them unselected preserves existing behavior — they are fully backward-compatible.
+
+### Link previews
+
+A **Show/Hide** dropdown that controls whether Slack automatically expands URLs in your message into preview cards. This maps to the `unfurl_links` parameter in the Slack API.
+
+Set to **Hide** to suppress link unfurling — useful when you want to keep messages compact or avoid generating previews for URLs that don't benefit from them.
+
+### Media previews
+
+A **Show/Hide** dropdown that controls whether Slack automatically expands media (images, videos, and other media URLs) into inline preview cards. This maps to the `unfurl_media` parameter in the Slack API.
+
+Set to **Hide** to prevent Slack from embedding media previews inline — useful when sharing links to media files where the expanded card would clutter the message.
+
+<Note>Both settings are available in the 'Slack - Send Message', 'Slack - Send Message (Advanced)', and 'Slack - Send Message V2' Tool steps.</Note>
