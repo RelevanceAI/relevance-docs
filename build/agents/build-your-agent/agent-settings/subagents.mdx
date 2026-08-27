@@ -68,6 +68,37 @@ Example: "Please research {{topic}} and focus on {{specific_aspect}}. The inform
 
 Variables like `{{topic}}` will be filled in by the parent Agent when making requests. This creates consistency and ensures all necessary context is included with each request.
 
+## Monitoring sub-agent activity
+
+When your agent calls a sub-agent, a live activity card appears in the parent agent's conversation timeline. This replaces the previous static spawn receipt and gives you real-time visibility into what the child agent is doing.
+
+### Status progression
+
+Each activity card shows the current status of the sub-agent run:
+
+| Status | Description |
+|--------|-------------|
+| Queued | The sub-agent has been invoked and is waiting to start |
+| Starting | The sub-agent is initializing |
+| Working | The sub-agent is actively processing, with a live step count and current tool activity shown |
+| Done | The sub-agent completed successfully |
+| Failed | The sub-agent encountered an error and stopped |
+| Stopped | The sub-agent was manually stopped |
+
+### Step count and tool activity
+
+While the sub-agent is working, the activity card shows how many steps the sub-agent has completed and which tool it is currently using. This updates live as the sub-agent progresses through its task.
+
+### Expandable conversation history
+
+Click the activity card to expand the full conversation history for that sub-agent run. The expanded view shows each tool step in order, along with tool outputs and any error messages if the run failed.
+
+<Tip>
+Use the expandable view to debug a failed sub-agent run — it shows exactly which step failed and what error was returned.
+</Tip>
+
+This feature is available to all users.
+
 ## Task View Settings
 
 ### View Title
