@@ -140,6 +140,40 @@ When using the Send Message (advanced) tool step, you can send messages through 
 2. **Bolded text:** Use bold formatting to highlight important information.
 3. **Images:** Include images to provide visual context or instructions.
 
+## Agent-sent Slack cards
+
+When an agent responds to a user in Slack, it can include interactive cards with action buttons. These cards appear in the thread and let users take structured actions without leaving Slack.
+
+### Button types
+
+Agent-sent cards support three button types:
+
+- **message** — clicking the button sends a predefined message back into the agent conversation.
+- **form** — clicking the button opens a single-page form for collecting user input, which the agent receives as a message.
+- **wizard** — clicking the button opens a multi-step modal form. Users navigate through steps with Next and Back buttons, and all collected answers are delivered to the agent as a single message when they complete the final step.
+
+You can configure button types when building an agent that uses the Send Message tool step to post cards to Slack.
+
+### Wizard button type
+
+The wizard button type opens a multi-step modal when a user clicks an action button on an agent-sent Slack card. Users move through steps in sequence using the Next and Back navigation buttons.
+
+**Draft persistence.** Progress is saved automatically at each step. If a user closes the modal partway through, their answers are preserved and the modal resumes from where they left off when reopened.
+
+**Typed confirmation.** The final step can optionally require users to type a specific phrase before they can submit — useful for confirming destructive or high-stakes actions.
+
+**Single-message delivery.** When a user completes all steps, every answer from every step is compiled and sent to the agent conversation as one message.
+
+<Warning>
+  The wizard button type is currently available to users with early access. If this feature isn't showing on your account, [contact support](/get-started/support) to request access.
+</Warning>
+
+<Accordion title="Technical details for workspace admins">
+  The wizard button type is enabled via the config flag `integration-slack_setup_wizard`, which is off by default. Contact [support](/get-started/support) to have it enabled for your account.
+
+  Wizard drafts include optimistic concurrency controls to handle simultaneous edits correctly. A cross-region relay mechanism ensures the feature works across distributed deployments.
+</Accordion>
+
 ## Escalate your Agent to Slack
 
 <Warning>
