@@ -23,7 +23,7 @@ Think of it as your agent's reference library. When an agent needs to answer a q
     Update your knowledge bases as things change. Your agents automatically use the latest information.
   </Card>
   <Card title="Works across your stack" icon="plug">
-    Pull in data from files, websites, Google Drive, SharePoint, Notion, and more.
+    Pull in data from files, websites, Google Drive, SharePoint, Notion, Confluence, and more.
   </Card>
 </CardGroup>
 
@@ -44,6 +44,10 @@ When you add a knowledge base to an agent, you choose how the agent uses it:
 
 - **Add all to prompt** — the entire knowledge set is included in the prompt every time the agent runs. Best for small or simple datasets.
 - **Allow agent to search** — the agent searches the knowledge base using RAG and pulls only what's relevant. Best for large or complex datasets.
+
+### Using Knowledge in Tools
+
+You can also read from and write to Knowledge directly inside a Tool using [Knowledge Tool steps](/build/knowledge/knowledge-tool-steps) — including [Knowledge search](/build/knowledge/knowledge-tool-steps#knowledge-search) for everyday retrieval and [Advanced knowledge search (2M context)](/build/knowledge/knowledge-tool-steps#advanced-knowledge-search-2m-context) when you want to query your whole knowledge set with a prompt.
 
 ## Where is Knowledge most useful?
 
@@ -67,7 +71,7 @@ Knowledge is most effective when your agents need access to specific, proprietar
 
 <AccordionGroup>
   <Accordion title="What file types can I upload to Knowledge?">
-    You can upload CSV, PDF, Excel, JSON, and audio files. You can also pull content from websites or sync from integrations like Google Drive, SharePoint, and Notion.
+    You can upload CSV, PDF, Excel, JSON, and audio files. You can also pull content from websites or sync from integrations like Google Drive, SharePoint, Notion, and Confluence.
   </Accordion>
 
   <Accordion title="How does semantic search differ from keyword search?">
