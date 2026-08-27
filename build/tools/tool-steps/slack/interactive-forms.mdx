@@ -1,0 +1,94 @@
+---
+title: "Slack interactive forms"
+sidebarTitle: "Interactive forms"
+description: "Configure pop-up forms and wizard steps that agents send to Slack users, with text inputs and dropdown fields."
+---
+
+Agents can send interactive cards to Slack that prompt users for input before the workflow continues. When a Slack user clicks a button on the card, they see either a pop-up form or a multi-step wizard that collects the information the agent needs.
+
+<Note>You can learn more about the Slack integration [here](/integrations/popular-integrations/slack).</Note>
+
+## Button types
+
+Each button on an agent's Slack card has a type that controls what happens when a user clicks it:
+
+<CardGroup cols={3}>
+  <Card title="Message" icon="message">
+    Sends a predefined message back to the agent. No additional input is required from the Slack user.
+  </Card>
+  <Card title="Form" icon="rectangle-list">
+    Opens a single-page pop-up form with one or more fields for the Slack user to fill in before submitting.
+  </Card>
+  <Card title="Wizard" icon="list-check">
+    Opens a multi-step form that walks the Slack user through a sequence of pages, each with its own fields.
+  </Card>
+</CardGroup>
+
+## Configuring form fields
+
+Both form and wizard button types support one or more fields per step. Whether a field renders as a text input or a dropdown depends on whether you include an `options` array in the field definition.
+
+### Text input
+
+A field without an `options` array renders as a free-text input box. Use this when the user's response is open-ended or the set of valid values isn't fixed.
+
+```json
+{
+  "label": "Describe the issue",
+  "name": "issue_description"
+}
+```
+
+### Dropdown fields
+
+Adding an `options` array to a field definition makes it render as a single-select dropdown menu instead of a text input box. Each option has two properties:
+
+- **`label`** — the text the Slack user sees in the dropdown menu
+- **`value`** — the string the agent receives when the user selects that option
+
+```json
+{
+  "label": "Priority",
+  "name": "priority",
+  "options": [
+    { "label": "High",   "value": "high" },
+    { "label": "Medium", "value": "medium" },
+    { "label": "Low",    "value": "low" }
+  ]
+}
+```
+
+<Note>The `value` sent to the agent can differ from the `label` shown to the Slack user. Use `label` for human-readable display text and `value` for the identifier your agent acts on.</Note>
+
+You can mix field types within the same form — for example, a dropdown for structured choices and a text input for free-form notes:
+
+<Accordion title="Example: form with a dropdown and a text input">
+```json
+{
+  "fields": [
+    {
+      "label": "Priority",
+      "name": "priority",
+      "options": [
+        { "label": "High",   "value": "high" },
+        { "label": "Medium", "value": "medium" },
+        { "label": "Low",    "value": "low" }
+      ]
+    },
+    {
+      "label": "Additional notes",
+      "name": "notes"
+    }
+  ]
+}
+```
+</Accordion>
+
+#### Constraints
+
+<Warning>Dropdowns are single-select only. Multi-select is not supported.</Warning>
+
+- Maximum **100 options** per dropdown field.
+- Option labels are capped at **75 characters**.
+- Each option's `value` must be unique within the field — duplicate values are not allowed.
+- A field configured with an `options` array cannot also be set to multi-line text input mode.
