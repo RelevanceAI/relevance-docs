@@ -1,10 +1,10 @@
 ---
 title: 'ZoomInfo'
-description: "Search ZoomInfo's B2B database and enrich contact and company records from your AI agents."
+description: "Search ZoomInfo's B2B database and enrich contact and company records from your AI Agents."
 sidebarTitle: 'ZoomInfo'
 ---
 
-ZoomInfo is a B2B database and intelligence platform that provides contact and company information for sales and marketing teams. With the Relevance AI ZoomInfo integration, your AI agents can search ZoomInfo's database for free and enrich records with detailed contact and company data using ZoomInfo credits. This integration is compatible with GTM agents.
+ZoomInfo is a B2B database and intelligence platform that provides contact and company information for sales and marketing teams. With the Relevance AI ZoomInfo integration, your AI Agents can search ZoomInfo's database and enrich records with detailed contact and company data using ZoomInfo credits. This integration is compatible with GTM Agents.
 
 <Warning>
   The ZoomInfo integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not ZoomInfo. If you have a question or issue with using ZoomInfo in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about ZoomInfo, you can reach out to ZoomInfo support directly.
@@ -61,7 +61,7 @@ ZoomInfo uses a credit-based system for data enrichment. It is important to unde
 
 ### Credit-consuming operations
 
-**Enrichment operations consume ZoomInfo credits.** Credits are used when you retrieve detailed data for a specific record, including:
+**Enrichment operations consume ZoomInfo credits.** Credits are charged when you retrieve detailed data for a specific record, including:
 
 - Email addresses
 - Phone numbers
@@ -69,7 +69,7 @@ ZoomInfo uses a credit-based system for data enrichment. It is important to unde
 - Employee counts
 - Other detailed contact and company attributes
 
-The integration includes built-in credit safeguards to help prevent unexpected credit usage. Monitor your credit balance in your ZoomInfo dashboard and design workflows to enrich only when necessary.
+Search results identify matching records without returning contact details, which is why searching stays free. Monitor your credit balance in your ZoomInfo dashboard and design workflows to enrich only when necessary.
 
 <Tip>
   Use search operations to filter and qualify prospects first, then enrich only the records that meet your criteria. This approach minimizes credit consumption.
@@ -77,100 +77,76 @@ The integration includes built-in credit safeguards to help prevent unexpected c
 
 ## Tools & tool steps
 
-The ZoomInfo integration provides actions for both free search and credit-based enrichment. You can add these as tool steps when building tools in Relevance AI.
+ZoomInfo operations run through a single tool step, **Zoominfo API call**, which sends an authorized request to a ZoomInfo API endpoint. Search, enrichment, and lookup are all reached by pointing that step at the relevant endpoint, so the same step covers free and credit-consuming operations depending on what you call.
 
-### Search operations (free)
-
-<CardGroup cols={2}>
-  <Card title="Search contacts" icon="magnifying-glass">
-    Search for contacts matching criteria such as job title, company, location, or industry. Does not consume credits.
-  </Card>
-  <Card title="Search companies" icon="buildings">
-    Find companies matching filters like industry, employee count, revenue range, or location. Does not consume credits.
+<CardGroup cols={1}>
+  <Card title="Zoominfo API call" icon="code">
+    Send an authorized request to a ZoomInfo API endpoint. You choose the HTTP method, the relative path, and the request body. Authorization is attached from your connected ZoomInfo credentials.
   </Card>
 </CardGroup>
 
-### Enrichment operations (consumes credits)
-
-<CardGroup cols={2}>
-  <Card title="Enrich contact" icon="user-plus">
-    Retrieve detailed contact data including email addresses, phone numbers, and professional details for a specific person. Consumes credits.
-  </Card>
-  <Card title="Enrich company" icon="building">
-    Retrieve detailed company data including revenue, employee count, technologies used, and firmographic details. Consumes credits.
-  </Card>
-</CardGroup>
-
-### How to add ZoomInfo tool steps to your agent
+### How to add the ZoomInfo tool step to your Agent
 
 1. Create a new tool in your Relevance AI workspace or open an existing one.
 2. Scroll down to **Tool steps**.
 3. Search for "ZoomInfo" in the tool step search bar.
-4. Select the desired ZoomInfo action.
-5. Select your connected ZoomInfo account from the dropdown.
-6. Configure the action parameters and connect the tool to your agent.
+4. Select **Zoominfo API call**.
+5. Configure the request and connect the tool to your Agent.
 
-## Use the ZoomInfo API tool step (advanced)
-
-Advanced users can make custom API calls to any ZoomInfo endpoint using the ZoomInfo API Call tool step.
+## Configure the Zoominfo API call tool step
 
 <Steps>
   <Step title="Create or open a tool">
     Create a new tool in Relevance AI or open an existing tool you want to add ZoomInfo functionality to.
   </Step>
 
-  <Step title="Add the ZoomInfo API Call tool step">
-    Scroll down to Tool steps, search for "ZoomInfo API Call", and add it to your workflow.
+  <Step title="Add the Zoominfo API call tool step">
+    Scroll down to **Tool steps**, search for "Zoominfo API call", and add it to your workflow.
   </Step>
 
-  <Step title="Select your ZoomInfo account">
-    Select your connected ZoomInfo account from the dropdown.
+  <Step title="Set the method and path">
+    Choose a **Method** (GET, POST, PUT, DELETE, or PATCH) and enter the **Relative path** for the ZoomInfo endpoint you are calling.
   </Step>
 
-  <Step title="Configure the API endpoint">
-    Set the HTTP method, endpoint path, and request body parameters according to the ZoomInfo API documentation.
+  <Step title="Add a body or headers if the endpoint needs them">
+    Supply a JSON **Body** for endpoints that take one. Add **Headers** only where required — the `Authorization` header is always sent and cannot be overwritten.
   </Step>
 
   <Step title="Test your configuration">
-    Test your API call before deploying to confirm it returns the expected data.
+    Run the step before deploying to confirm it returns the expected data. The step outputs `response_body` and `status`.
   </Step>
 </Steps>
 
-<Accordion title="Example: Custom company enrichment">
+<Accordion title="Example: Check which fields a contact search accepts">
 
 ```json
 {
-  "endpoint": "/companies/enrich",
-  "method": "POST",
-  "body": {
-    "company_name": "{{input.company_name}}",
-    "domain": "{{input.domain}}",
-    "include_attributes": ["industry", "revenue", "employee_count", "technologies", "location"]
-  }
+  "method": "GET",
+  "path": "/lookup/inputfields/contact/search"
 }
 ```
 
-This call retrieves specific company attributes for use in lead qualification. Note that enrichment calls consume ZoomInfo credits.
+Lookup calls like this one are free. They return the fields and values ZoomInfo accepts for a search, which is worth doing before you build a query — filters that use values ZoomInfo does not recognize return empty result sets rather than an error.
 
 </Accordion>
 
 ## Example use cases
 
 <AccordionGroup>
-  <Accordion title="GTM agent prospect research" icon="magnifying-glass-chart">
-    Build a GTM agent that searches ZoomInfo for companies matching your ideal customer profile, then enriches only the top-scoring matches with detailed contact and company data. The agent can prepare outreach briefs and route leads to the appropriate sales representatives.
+  <Accordion title="GTM Agent prospect research" icon="magnifying-glass-chart">
+    Build a GTM Agent that searches ZoomInfo for companies matching your ideal customer profile, then enriches only the top-scoring matches with detailed contact and company data. The Agent can prepare outreach briefs and route leads to the appropriate sales representatives.
   </Accordion>
 
   <Accordion title="Credit-efficient lead enrichment" icon="coins">
-    Create an agent that first searches ZoomInfo to filter and qualify leads based on free criteria (company size, industry, location), then enriches only the records that pass qualification with email addresses and phone numbers. This pattern keeps credit usage low while maximizing data quality.
+    Create an Agent that first searches ZoomInfo to filter and qualify leads based on free criteria (company size, industry, location), then enriches only the records that pass qualification with email addresses and phone numbers. This pattern keeps credit usage low while maximizing data quality.
   </Accordion>
 
   <Accordion title="Account-based marketing research" icon="bullseye">
-    Deploy an agent that searches ZoomInfo for decision-makers at target accounts, enriches their contact details, and compiles account briefs for your marketing team without consuming credits on records outside your target list.
+    Deploy an Agent that searches ZoomInfo for decision-makers at target accounts, enriches their contact details, and compiles account briefs for your marketing team without consuming credits on records outside your target list.
   </Accordion>
 
   <Accordion title="CRM data enrichment" icon="database">
-    Build an agent that identifies incomplete records in your CRM and uses ZoomInfo to fill in missing email addresses, phone numbers, and company details. Implement logic to skip records that already have complete data to avoid unnecessary credit consumption.
+    Build an Agent that identifies incomplete records in your CRM and uses ZoomInfo to fill in missing email addresses, phone numbers, and company details. Implement logic to skip records that already have complete data to avoid unnecessary credit consumption.
   </Accordion>
 </AccordionGroup>
 
@@ -201,12 +177,16 @@ This call retrieves specific company attributes for use in lead qualification. N
     You need three credentials from your ZoomInfo account: your ZoomInfo email address, a client ID, and a private key. These are available in the API or integrations section of your ZoomInfo account settings. Contact your ZoomInfo account administrator if you do not have API access.
   </Accordion>
 
-  <Accordion title="Does ZoomInfo work with GTM agents?">
-    Yes. The ZoomInfo integration is compatible with GTM agents in Relevance AI. You can use ZoomInfo search and enrichment tool steps in GTM agent workflows.
+  <Accordion title="Is there an OAuth version of this integration?">
+    An OAuth-based ZoomInfo integration is in development and is not yet available. Until it is released, use the credential-based connection described on this page.
+  </Accordion>
+
+  <Accordion title="Does ZoomInfo work with GTM Agents?">
+    Yes. The ZoomInfo integration is compatible with GTM Agents in Relevance AI. You can use the ZoomInfo tool step in GTM Agent workflows.
   </Accordion>
 
   <Accordion title="What happens if I run out of ZoomInfo credits?">
-    Enrichment operations will fail when your ZoomInfo credit balance is exhausted. Search operations will continue to work since they do not consume credits. Monitor your credit balance in your ZoomInfo dashboard and top up as needed. The integration includes built-in credit safeguards to help prevent unexpected over-usage.
+    Enrichment operations will fail when your ZoomInfo credit balance is exhausted. Search operations will continue to work since they do not consume credits. Monitor your credit balance in your ZoomInfo dashboard and top up as needed.
   </Accordion>
 
   <Accordion title="Do I need a ZoomInfo account to use this integration?">
