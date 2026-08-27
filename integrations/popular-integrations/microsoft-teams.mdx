@@ -234,6 +234,34 @@ This is useful for outreach workflows where the agent sends messages to users an
 
 When enabled, the trigger subtitle changes to **"On replies to outreach messages"**. The agent triggers only when a user replies to a message the agent itself sent — new messages posted by other users will not activate it.
 
+### Teams calendar trigger
+
+The calendar trigger lets agents respond automatically when calendar events occur in the connected Microsoft or Teams calendar. Instead of triggering on incoming messages, the agent fires based on scheduled events — allowing it to run tasks before a meeting starts, send follow-ups after an event, or take action whenever a calendar entry is created or updated.
+
+#### Advanced settings
+
+##### Event sensitivity
+
+The **Event sensitivity** setting controls which calendar events activate the trigger, based on how the event is marked in Outlook or Teams.
+
+<CardGroup cols={2}>
+  <Card title="Normal" icon="calendar">
+    Regular calendar events with standard visibility.
+  </Card>
+  <Card title="Private" icon="lock">
+    Events marked as Private in Outlook or Teams, which hide details from others in the calendar view.
+  </Card>
+</CardGroup>
+
+Both options are selected by default, so the agent triggers on all calendar events regardless of sensitivity. You can deselect either option to filter which events activate the agent:
+
+- Deselect **Private** to prevent private calendar events from triggering agent tasks.
+- Deselect **Normal** to trigger the agent only on private events.
+
+This is useful when you want to keep personal or private meetings from activating automated workflows.
+
+<Note>Existing calendar trigger setups continue to work unchanged — Event sensitivity is an optional filter added for new and existing configurations.</Note>
+
 ### How triggered conversations work
 
 Once a trigger fires, the agent responds directly inside Teams with the following capabilities:
