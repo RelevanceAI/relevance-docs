@@ -184,6 +184,28 @@ These attributes are only present when prompt injection detection is enabled for
 
 ---
 
+## Credit consumption tracking (Enterprise feature)
+
+The `relevance_ai.billing.credits_used` attribute appears on `invoke_agent` spans when the agent run completes, showing the total credits consumed by that agent execution. This attribute is available automatically for enterprise customers with OTEL streaming enabled — no additional configuration is required beyond the existing `customer_otel` flag.
+
+Use this attribute to build credit consumption dashboards directly from your own observability tooling (Datadog, New Relic, or any OTEL-compatible backend) without needing to query Relevance AI's APIs separately.
+
+### Where it surfaces
+
+The attribute is added to [`invoke_agent`](#invoke_agent) spans:
+
+| Attribute | Type | Description |
+|-----------|------|-------------|
+| `relevance_ai.billing.credits_used` | double | Total credits consumed by the agent run. Present when the run completes. |
+
+### Credit rollup behavior
+
+When an agent calls sub-agents, the credits consumed by those nested calls are rolled up into the parent span's total. The root span's `relevance_ai.billing.credits_used` value represents the complete credit consumption for the entire agent execution tree.
+
+<Warning>Do not sum `relevance_ai.billing.credits_used` across all spans in a trace. Because nested sub-agent credits are already included in parent span totals, summing all spans results in double-counting. To get total credit consumption for an agent run, read the value from the root `invoke_agent` span only.</Warning>
+
+---
+
 ## Delivery format
 
 **Format**: Gzipped JSON following the OpenTelemetry JSON specification.
@@ -496,6 +518,7 @@ Records a complete agent conversation/invocation.
 | `relevance_ai.agent.version_id` | string | No | The active version ID of the agent at invocation time. Use this to compare performance across agent versions |
 | `relevance_ai.prompt_injection.detected` | boolean | No | Whether a prompt injection attempt was detected in the user input. Only present when [prompt injection detection](#prompt-injection-detection-enterprise-feature) is enabled |
 | `relevance_ai.prompt_injection.confidence` | double | No | Confidence score (0.0–1.0) for the prompt injection detection. Only present when prompt injection detection is enabled |
+| `relevance_ai.billing.credits_used` | double | No | Total credits consumed by the agent run. Present when the run completes and [credit consumption tracking](#credit-consumption-tracking-enterprise-feature) is enabled |
 
 ### `chat`
 
