@@ -4,6 +4,20 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
+<Update label="July 31, 2026" description="Relevance MCP adds run-only mode and Chat role support">
+
+## Relevance MCP adds run-only mode and Chat role support
+
+Two new access controls shipped for Relevance MCP on July 31, available to all users who authenticate agents via MCP.
+
+During the MCP OAuth flow, a "Run-only access" toggle now appears on the consent screen. When enabled, the authorized session can view and run agents, tools, and workforces the authenticating user has access to, but all write operations — creating, editing, publishing, or deleting — are blocked for that session. For users assigned the Chat role in a project, run-only access is enforced automatically and the toggle is locked on. Previously, Chat-role users could not authenticate via MCP at all; they can now complete the OAuth flow and invoke any agent shared with them.
+
+A Chat-role user opening an MCP connection reaches the OAuth consent screen, sees "Run-only access" pre-enforced with a note ("Your access level in this project enforces run-only access automatically"), and can proceed to trigger any agents shared with their account — without the ability to modify anything in the project.
+
+To authenticate with run-only mode, open the Relevance AI OAuth consent screen via your MCP client and toggle "Run-only access" before clicking Authorize. Chat-role users are scoped automatically. See the [Relevance MCP documentation](/integrations/mcp/mcp-server) for full setup steps.
+
+</Update>
+
 <Update label="July 22, 2026" description="Concurrency visibility for project and organization admins">
 
 ## Concurrency visibility for project and organization admins
