@@ -4,19 +4,17 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
-<Update label="July 31, 2026" description="Relevance MCP gains run-only mode and Chat role support">
+<Update label="July 31, 2026" description="Relevance MCP adds run-only mode and Chat role support">
 
-New Features
+## Relevance MCP adds run-only mode and Chat role support
 
-## Relevance MCP gains run-only mode and Chat role support
+Two new access controls shipped for Relevance MCP on July 31, available to all users who authenticate agents via MCP.
 
-Two new access controls have been added to Relevance MCP, available to all users.
+During the MCP OAuth flow, a "Run-only access" toggle now appears on the consent screen. When enabled, the authorized session can view and run agents, tools, and workforces the authenticating user has access to, but all write operations — creating, editing, publishing, or deleting — are blocked for that session. For users assigned the Chat role in a project, run-only access is enforced automatically and the toggle is locked on. Previously, Chat-role users could not authenticate via MCP at all; they can now complete the OAuth flow and invoke any agent shared with them.
 
-In **run-only mode**, users generate MCP credentials that restrict the connected client to listing and executing agents only — the create, publish, and edit agent endpoints are blocked for that token. For **Chat role support**, users assigned the Chat role — previously unable to authenticate with MCP — can now connect and invoke any agent shared with them via the standard agent-sharing flow. The two controls are independent: a Chat-role user can authenticate with a run-only token, applying both restrictions simultaneously. Existing MCP credentials and full-access tokens are unaffected by these additions.
+A Chat-role user opening an MCP connection reaches the OAuth consent screen, sees "Run-only access" pre-enforced with a note ("Your access level in this project enforces run-only access automatically"), and can proceed to trigger any agents shared with their account — without the ability to modify anything in the project.
 
-**Example:** A team member with the Chat role connects their MCP client using a run-only token. They can list and invoke the "Summarise support ticket" agent shared with them, but cannot modify it, publish it, or create new agents.
-
-Select the **Run only** permission level when generating MCP credentials in your Relevance AI settings. Chat-role users follow the same MCP authentication flow. See the [MCP documentation](/integrations/mcp/mcp-server) for full setup instructions.
+To authenticate with run-only mode, open the Relevance AI OAuth consent screen via your MCP client and toggle "Run-only access" before clicking Authorize. Chat-role users are scoped automatically. See the [Relevance MCP documentation](/integrations/mcp/mcp-server) for full setup steps.
 
 </Update>
 
