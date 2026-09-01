@@ -10,19 +10,27 @@ Once you've created [Tests](/build/agents/evals/test-sets) and defined [Checks](
 
 ## Running a Test set or a single Test
 
-You can run an entire Test set or an individual Test from within a Test set by clicking the **Run** button on either.
+<div style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}>
+<iframe src="https://app.supademo.com/embed/cmti7qasj1cldqmctrdurd8yj" frameBorder="0" title="Running an evaluation" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '3px solid #5E43CE', borderRadius: '10px' }} />
+</div>
 
-You can select specific Tests within a Test set to run a subset at once, or run all Tests in the Test set together. Note that you cannot bulk-select and run multiple Test sets at the same time.
+You can run an entire Test set at once, or select individual Tests inside it. Note that you cannot bulk-select and run multiple Test sets at the same time.
 
-Either way a modal opens, asking for the following:
+1. Click the **Evaluate** tab, then select **Test** from the left sidebar to see your Test sets.
 
-1. **Evaluation run name** is pre-filled with the Test set name plus a timestamp. Edit it if you want something you'll recognize later in Runs.
+2. Open the Test set you want to run.
 
-2. **Version** chooses which version of the Agent or Workforce to evaluate. Defaults to the current version.
+3. Tick the checkbox next to each Test you want to include. The run button in the header counts your selection, so it reads **Run 1 test**, **Run 3 tests**, and so on. To run the whole set instead, click **Run all** on the Test set itself. Either way, the run modal opens.
 
-3. Optionally expand **Additional options** and select extra Checks from the Checks tab under **Additional checks**. Checks already attached to the Tests are always included.
+4. **Evaluation run name** is pre-filled with the Test set name plus a timestamp. Edit it if you want something you'll recognize later in Runs.
 
-4. Click **Run** to begin. The simulator generates conversations with your Agent or Workforce from each Test's Scenario, and the selected Checks score each conversation.
+5. **Version** chooses which version of the Agent or Workforce to evaluate. Defaults to the current version.
+
+6. Optionally expand **Additional options** and select extra Checks from the Checks tab under **Additional checks**. Checks already attached to the Tests are always included.
+
+7. Click **Run** to begin. The simulator generates conversations with your Agent or Workforce from each Test's Scenario, and the selected Checks score each conversation.
+
+8. Click **View task** on any Test to watch its simulated conversation while the run is still going.
 
 ---
 
