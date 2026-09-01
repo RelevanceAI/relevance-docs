@@ -85,6 +85,10 @@ Each metric shows percentage change from the previous period. For example, "+45.
   </Accordion>
 
   <Accordion title="Workforce Breakdown" icon="users-gear">
+    <Info>
+    **Evals feature flag**: The Eval score, Alarm status, and Live evals columns are only visible if Evals is enabled on your account. Evals is rolling out progressively, starting with Enterprise customers — reach out to your account manager to discuss access.
+    </Info>
+
     See performance metrics for each of your AI workforces:
     
     | Metric | What It Shows |
@@ -92,13 +96,20 @@ Each metric shows percentage change from the previous period. For example, "+45.
     | **Workforce Tasks** | Tasks handled by the workforce |
     | **Agent Tasks** | Individual agent activities within the workforce |
     | **Error Rate** | Percentage of failed tasks |
-    | **Actions & Credits** | Resource consumption per workforce |
+    | **Actions & Credits** | Resource consumption per workforce, including live eval monitoring spend |
     | **Credits/Task** | Cost efficiency metric |
+    | **Eval score** | Pass rate from the default [Monitor](/build/agents/build-your-agent/evals#monitor) dashboard, shown with the sample size of evaluated tasks. Workforces without evals configured show a **Set up evals →** link; those with evals but insufficient data show **Insufficient data**. |
+    | **Alarm status** | Color-coded pill showing the worst alarm state across all enabled [eval alarms](/build/agents/build-your-agent/evals#monitor) |
+    | **Live evals** | Count of eval runs triggered by live monitoring in the selected date range |
     
     **How to use it:** Compare Credits/Task across workforces to find your most cost-effective teams. Click into any workforce row to see more details. Check the summary stats at the bottom (e.g., "Avg: 95 credits/task") to gauge overall performance.
   </Accordion>
 
   <Accordion title="Agent Breakdown" icon="robot">
+    <Info>
+    **Evals feature flag**: The Eval score, Alarm status, and Live evals columns are only visible if Evals is enabled on your account. Evals is rolling out progressively, starting with Enterprise customers — reach out to your account manager to discuss access.
+    </Info>
+
     Drill down to individual agent performance:
     
     | Metric | What It Tells You |
@@ -107,8 +118,18 @@ Each metric shows percentage change from the previous period. For example, "+45.
     | **Error Rate** | Reliability and success rate |
     | **Actions/Task** | Complexity indicator (more actions = more complex workflows) |
     | **Credits/Task** | Cost per task for efficiency comparison |
+    | **Actions & Credits** | Total resource consumption per agent, including live eval monitoring spend |
+    | **Eval score** | Pass rate from the default [Monitor](/build/agents/build-your-agent/evals#monitor) dashboard, shown with the sample size of evaluated tasks. Agents without evals configured show a **Set up evals →** link; those with evals but insufficient data show **Insufficient data**. |
+    | **Alarm status** | Color-coded pill showing the worst alarm state across all enabled [eval alarms](/build/agents/build-your-agent/evals#monitor) |
+    | **Live evals** | Count of eval runs triggered by live monitoring in the selected date range |
     
     **How to use it:** Sort by Credits/Task to find your most efficient agents (e.g., agent with 5 credits/task vs 3,500 credits/task). Use "Show 35 more agents" to view your full agent list. Investigate agents with high error rates or unusually high Actions/Task ratios.
+  </Accordion>
+
+  <Accordion title="Cost breakdown modal" icon="receipt">
+    Click any **Credits** or **Actions** value in the Workforce or Agent breakdown tables to open the cost breakdown modal for that resource. The modal separates task execution spend from live eval monitoring spend, giving you a clear view of where costs are coming from.
+
+    Live eval spend is itemized by evaluator type and check name, so you can identify which checks are driving the most cost. This breakdown is distinct from the eval run cost breakdown available on individual eval results in the [Evals](/build/agents/build-your-agent/evals#cost-and-billing) page, which shows costs split across the scenario runner, agent execution, and checks for a specific evaluation run.
   </Accordion>
 
   <Accordion title="Action Breakdown" icon="bolt">
