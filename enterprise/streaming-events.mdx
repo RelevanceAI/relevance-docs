@@ -232,6 +232,7 @@ Included on all log records:
 | `relevance_ai.user_type` | string | No | Type of user (`user`, `api_key`, etc.) |
 | `relevance_ai.ip_address` | string | No | IP address of the request |
 | `relevance_ai.device_info` | string | No | User agent / device information |
+| `relevance_ai.request_id` | string | No | The request ID that produced this record. Matches the `x-request-id` response header returned by the Relevance AI API, enabling correlation between API responses and the OTEL records they generated. |
 
 ### Log record properties
 
@@ -379,6 +380,7 @@ Included on all log records:
           { "key": "relevance_ai.user_type", "value": { "stringValue": "user" }},
           { "key": "relevance_ai.ip_address", "value": { "stringValue": "119.18.1.156" }},
           { "key": "relevance_ai.device_info", "value": { "stringValue": "Mozilla/5.0..." }},
+          { "key": "relevance_ai.request_id", "value": { "stringValue": "01966e4e-1234-7abc-def0-1234567890ab" }},
           { "key": "relevance_ai.event.agent_id", "value": { "stringValue": "3d47a9f5-..." }}
         ],
         "droppedAttributesCount": 0,
@@ -389,6 +391,35 @@ Included on all log records:
   }]
 }
 ```
+
+---
+
+## Correlating API responses to OTEL records
+
+Both log and trace records include a `relevance_ai.request_id` attribute that matches the `x-request-id` response header returned by the Relevance AI API. Capture this header from your API responses to filter your S3 or Databricks exports and find the exact records produced by a specific call.
+
+Workflows this enables:
+
+- **Debugging**: isolate all OTEL records for a specific invocation when investigating unexpected behavior
+- **Correlation**: link your application logs to OTEL records when both reference the same request ID
+- **Compliance audits**: retrieve a complete record of activity tied to a known request
+- **Troubleshooting**: respond to user-reported issues by pulling the exact execution trace
+
+<Accordion title="Filtering by request ID using AWS Athena">
+
+If you store your OTEL exports in S3 and query them with Athena, use `UNNEST` to expand the attributes array and filter by `relevance_ai.request_id`:
+
+```sql
+SELECT *
+FROM your_otel_logs_table
+CROSS JOIN UNNEST(attributes) AS t(attr)
+WHERE attr.key = 'relevance_ai.request_id'
+  AND attr.value.stringvalue = '01966e4e-1234-7abc-def0-1234567890ab'
+```
+
+Run the same query against your traces table to retrieve the corresponding spans. The `x-request-id` header is present on every Relevance AI API response — store it alongside any user-facing identifiers in your application logs to enable end-to-end tracing from your application through to the OTEL export.
+
+</Accordion>
 
 ---
 
@@ -444,6 +475,7 @@ Included on all spans:
 | `relevance_ai.project_id` | string | Yes | Project ID |
 | `relevance_ai.user_id` | string | No | User ID that triggered the run |
 | `relevance_ai.user_email` | string | No | Email of the user |
+| `relevance_ai.request_id` | string | No | The request ID that produced this record. Matches the `x-request-id` response header returned by the Relevance AI API, enabling correlation between API responses and the OTEL records they generated. |
 
 ### Span properties
 
