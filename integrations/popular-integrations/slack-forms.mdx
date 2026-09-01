@@ -1,0 +1,103 @@
+---
+title: "Slack Forms"
+sidebarTitle: "Slack Forms"
+description: "Collect structured input from users in Slack using native modal forms with text fields and dropdown menus."
+---
+
+Slack Forms are native Slack modals that pop up mid-conversation to collect structured input from users. When an agent needs specific information to continue a task — such as a selection from a predefined list or a short text response — it can display a form directly in Slack rather than parsing a free-form message.
+
+Forms support two field types: **text input** and **dropdown** (single-choice select). You can combine both types in a single form, and you can group forms into multi-step wizard flows.
+
+<Note>Slack Forms require the Slack integration to be connected. See the [Slack integration page](/integrations/popular-integrations/slack) for setup instructions.</Note>
+
+## When forms appear
+
+A form appears in Slack when an agent triggers a form step during a task. The user sees a modal overlay with the fields you've configured. When the user submits the form, the agent receives the input and continues processing.
+
+Forms are useful when:
+
+- You need the user to pick from a fixed set of options (for example, choosing a priority level or selecting a team)
+- You need a short, specific text response that would be ambiguous if sent as a chat message
+- You want to collect several pieces of information at once without a back-and-forth conversation
+
+## Field types
+
+<CardGroup cols={2}>
+  <Card title="Text input" icon="input-text">
+    A plain single-line text field. The user types a response and the agent receives the entered text. Limited to 3,000 characters.
+  </Card>
+  <Card title="Dropdown" icon="chevron-down">
+    A single-choice select menu. The user picks one option from a list. The agent receives the option's value (not its display label).
+  </Card>
+</CardGroup>
+
+### Text input
+
+Text input fields accept any free-form text up to 3,000 characters. Use them when the response is open-ended or unpredictable.
+
+### Dropdown
+
+Dropdown fields present the user with a list of options. Each option has two parts:
+
+- **Label** — the text shown to the user in the Slack modal
+- **Value** — the string the agent receives when the user selects that option
+
+The label and value can be the same string, or different. Use different values when you want user-friendly display text but need a specific identifier for the agent to act on (for example, showing "High priority" but sending `high` to the agent).
+
+<Warning>
+  Dropdowns are single-choice only. Users can select one option per field. Multi-select is not supported.
+</Warning>
+
+#### Configuring a dropdown field
+
+When defining a dropdown field, include an `options` array. Each entry in the array is an object with `label` and `value` keys:
+
+<Accordion title="Example: dropdown field definition">
+```json
+{
+  "type": "select",
+  "label": "Priority level",
+  "options": [
+    { "label": "High", "value": "high" },
+    { "label": "Medium", "value": "medium" },
+    { "label": "Low", "value": "low" }
+  ]
+}
+```
+
+When the user selects **High**, the agent receives the string `"high"`.
+</Accordion>
+
+<Note>
+  The agent always receives the option's `value`, not its `label`. If you need the agent to act on a specific identifier, set the `value` accordingly — the `label` is for display only.
+</Note>
+
+## Wizard steps (multi-step forms)
+
+You can group multiple forms into a wizard — a sequence of steps the user moves through in order. Each step is a separate Slack modal. The user completes one step and clicks **Next** to advance, or **Submit** on the final step.
+
+Use wizard steps when you need to collect information across several screens rather than presenting everything at once. Each step can contain any combination of text input and dropdown fields.
+
+The agent receives all values from all steps when the wizard is complete, not after each individual step.
+
+## Limitations
+
+- Text input fields have a 3,000-character limit per field.
+- Dropdowns support single selection only — there is no multi-select option.
+- Form fields cannot have conditional visibility (showing or hiding a field based on another field's value).
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The form isn't appearing in Slack">
+    Make sure the Relevance AI Slack app has been installed in your workspace and invited to the relevant channel or DM. Forms require the same bot token permissions as other Slack agent features. See the [Slack integration page](/integrations/popular-integrations/slack) for setup steps.
+  </Accordion>
+
+  <Accordion title="The agent received the wrong value from a dropdown">
+    Check your field definition. The agent receives the `value` field from the selected option, not the `label`. Verify that your `value` strings are what the agent expects, and that labels and values are mapped correctly in the `options` array.
+  </Accordion>
+
+  <Accordion title="My text input is being cut off">
+    Text input fields have a 3,000-character limit. If users need to provide longer responses, consider splitting the input across multiple fields or using a different collection method.
+  </Accordion>
+</AccordionGroup>
