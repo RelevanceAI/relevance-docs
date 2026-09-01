@@ -206,7 +206,7 @@ Invent is available to organization admins by default. An organization admin can
   <Accordion title="Alerts" icon="envelope">
     <img src="/images/invent-alerts.png" alt="The email and Slack alert settings in Invent" />
 
-    Add at least one email address or Slack channel so Invent can notify you when a scheduled check-in finds something.
+    Add at least one email address or Slack channel so Invent can notify you when a scheduled check-in finds something or when an alarm fires with [Auto-diagnosis by Invent](/build/invent/invent#turn-on-auto-diagnosis) enabled.
 
     <Steps>
       <Step title="Open Invent settings">
@@ -289,15 +289,17 @@ Invent can build an initial Evals suite, review results, investigate failed Chec
   <Tab title="Configure an alarm">
     <img src="/images/invent-alarms.png" alt="The alarm configuration in Invent" />
 
-    #### Turn on auto-diagnosis
-
-    Turn on **Auto-diagnosis by Invent** to investigate the first breach and send a diagnosis and proposed fix to the alarm creator's [Invent alert channels](/build/invent/invent#alerts). Invent still shares its findings if the cause is unclear and never applies changes without your approval.
+    Alarms evaluate the scores collected by a Performance dashboard and notify you when an overall score or individual Check crosses the condition you set.
 
     <Note>
       Alarms are configured in an Agent or Workforce's **Evaluate → Monitor** area, not in Invent settings.
     </Note>
 
-    Alarms evaluate the scores collected by a Performance dashboard and notify you when an overall score or individual Check crosses the condition you set.
+    #### Turn on auto-diagnosis
+
+    When you configure an alarm, Invent proactively offers **Auto-diagnosis by Invent** and explains what it does. Turn it on to have Invent investigate the first breach and deliver a diagnosis and proposed fix to the alarm creator's configured [Invent alert channel](/build/invent/invent#alerts) (email or Slack).
+
+    If no alert channel is configured yet, Invent shows a **SETUP REQUIRED** warning and guides you to set one up before enabling auto-diagnosis — this prevents silently enabling a feature that can't deliver its findings. Invent still shares its findings if the cause is unclear and never applies changes without your approval.
   </Tab>
 </Tabs>
 
