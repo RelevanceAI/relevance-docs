@@ -123,7 +123,6 @@
                       "build/agents/build-your-agent/alerts",
                       "build/agents/build-your-agent/memory",
                       "build/agents/build-your-agent/variables",
-                      "build/agents/build-your-agent/version-history",
                       {
                         "group": "Trigger Types",
                         "pages": [
@@ -167,27 +166,6 @@
                       }
                     ]
                   },
-                  {
-                    "group": "Evaluating Performance",
-                    "pages": [
-                      "build/agents/evals/introduction",
-                      "build/agents/evals/test-sets",
-                      "build/agents/evals/checks",
-                      "build/agents/evals/running-evaluations",
-                      "build/agents/evals/monitor"
-                    ]
-                  },
-                  {
-                    "group": "Running Tasks",
-                    "pages": [
-                      "build/agents/give-your-agent-tasks/task-overview",
-                      "build/agents/give-your-agent-tasks/tasks-page",
-                      "build/agents/give-your-agent-tasks/interact-with-your-agent",
-                      "build/agents/give-your-agent-tasks/bulk-schedule",
-                      "build/agents/give-your-agent-tasks/task-queue"
-                    ]
-                  },
-                  "build/agents/share-your-agent",
                   "build/agents/delete-agent"
                 ]
               },
@@ -207,7 +185,6 @@
                     ]
                   },
                   "build/tools/delete-tool",
-                  "build/tools/share-your-tool",
                   {
                     "group": "Tool Steps",
                     "pages": [
@@ -369,8 +346,7 @@
                       "build/workforces/workforce-features/workforce-task-view",
                       "build/workforces/workforce-features/approvals-and-escalations"
                     ]
-                  },
-                  "build/workforces/share-your-workforce"
+                  }
                 ]
               },
               {
@@ -390,6 +366,40 @@
                   "build/knowledge/inactive-table-deletion",
                   "build/knowledge/knowledge-tool-steps",
                   "build/knowledge/use-snippets-for-quick-access"
+                ]
+              },
+              {
+                "group": "Platform",
+                "pages": [
+                  {
+                    "group": "Evaluating Performance",
+                    "pages": [
+                      "build/platform/evals/introduction",
+                      "build/platform/evals/test-sets",
+                      "build/platform/evals/checks",
+                      "build/platform/evals/running-evaluations",
+                      "build/platform/evals/monitor"
+                    ]
+                  },
+                  {
+                    "group": "Running Tasks",
+                    "pages": [
+                      "build/platform/tasks/task-overview",
+                      "build/platform/tasks/tasks-page",
+                      "build/platform/tasks/interact-with-your-agent",
+                      "build/platform/tasks/bulk-schedule",
+                      "build/platform/tasks/task-queue"
+                    ]
+                  },
+                  {
+                    "group": "Sharing",
+                    "pages": [
+                      "build/platform/sharing/share-your-agent",
+                      "build/platform/sharing/share-your-tool",
+                      "build/platform/sharing/share-your-workforce"
+                    ]
+                  },
+                  "build/platform/version-history"
                 ]
               }
             ]
@@ -784,6 +794,62 @@
   },
   "redirects": [
     {
+      "source": "/build/agents/evals/introduction",
+      "destination": "/build/platform/evals/introduction"
+    },
+    {
+      "source": "/build/agents/evals/test-sets",
+      "destination": "/build/platform/evals/test-sets"
+    },
+    {
+      "source": "/build/agents/evals/checks",
+      "destination": "/build/platform/evals/checks"
+    },
+    {
+      "source": "/build/agents/evals/running-evaluations",
+      "destination": "/build/platform/evals/running-evaluations"
+    },
+    {
+      "source": "/build/agents/evals/monitor",
+      "destination": "/build/platform/evals/monitor"
+    },
+    {
+      "source": "/build/agents/give-your-agent-tasks/task-overview",
+      "destination": "/build/platform/tasks/task-overview"
+    },
+    {
+      "source": "/build/agents/give-your-agent-tasks/tasks-page",
+      "destination": "/build/platform/tasks/tasks-page"
+    },
+    {
+      "source": "/build/agents/give-your-agent-tasks/interact-with-your-agent",
+      "destination": "/build/platform/tasks/interact-with-your-agent"
+    },
+    {
+      "source": "/build/agents/give-your-agent-tasks/bulk-schedule",
+      "destination": "/build/platform/tasks/bulk-schedule"
+    },
+    {
+      "source": "/build/agents/give-your-agent-tasks/task-queue",
+      "destination": "/build/platform/tasks/task-queue"
+    },
+    {
+      "source": "/build/agents/share-your-agent",
+      "destination": "/build/platform/sharing/share-your-agent"
+    },
+    {
+      "source": "/build/tools/share-your-tool",
+      "destination": "/build/platform/sharing/share-your-tool"
+    },
+    {
+      "source": "/build/workforces/share-your-workforce",
+      "destination": "/build/platform/sharing/share-your-workforce"
+    },
+    {
+      "source": "/build/agents/build-your-agent/version-history",
+      "destination": "/build/platform/version-history"
+    },
+    {
       "source": "/enterprise/org-project-controls-governance",
       "destination": "/enterprise/manage-projects-and-users-api"
     },
@@ -1145,15 +1211,15 @@
     },
     {
       "source": "/evals",
-      "destination": "/build/agents/evals/introduction"
+      "destination": "/build/platform/evals/introduction"
     },
     {
       "source": "/build/agents/evals",
-      "destination": "/build/agents/evals/introduction"
+      "destination": "/build/platform/evals/introduction"
     },
     {
       "source": "/build/agents/build-your-agent/evals",
-      "destination": "/build/agents/evals/introduction"
+      "destination": "/build/platform/evals/introduction"
     }
   ]
 }
