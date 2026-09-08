@@ -1,0 +1,44 @@
+---
+title: "Integrate with Invent"
+sidebarTitle: "Integrate with Invent"
+description: "How Invent uses your connected integrations, and where the access boundary sits."
+---
+
+Invent builds the Tools a process needs and connects them to the systems where the work happens. Describe the process in terms of your systems — "read the account from Salesforce, draft the follow-up in Gmail" — and Invent equips the Agent with the Tools and integrations required to do it.
+
+## What Invent can reach
+
+Within the active project, Invent can use integrations that are already connected, with the credentials available to that project. It cannot reach a system nobody has connected, and it cannot borrow credentials from another project.
+
+<CardGroup cols={2}>
+  <Card title="Connect an integration first" icon="plug" href="/integrations/add-integrations">
+    Authenticating an account is yours to do. Connect it once and Invent can use it in every Tool it builds in that project.
+  </Card>
+  <Card title="Then describe the process" icon="wand-magic-sparkles" href="/build/invent/invent">
+    Invent picks the right Tools for the systems involved and wires them into the Agent, rather than you configuring each step.
+  </Card>
+</CardGroup>
+
+<Note>
+  The project is the access boundary. If a project must stay isolated from production data, connect only sandbox credentials to it — enabling Invent in a sandbox project does not grant it access to assets or credentials in a production project.
+</Note>
+
+## Invent and the MCP are not the same thing
+
+They are easy to confuse because both let natural language drive Relevance AI. The difference is direction: Invent builds things inside Relevance AI, and the MCP connects Relevance AI to the outside world.
+
+| | Reach for it when |
+| --- | --- |
+| **Invent** | You want an Agent, Tool, or Workforce built or fixed, and you would rather describe the outcome than configure it. |
+| **[MCP Server](/integrations/mcp/mcp-server)** | The Tool already exists and you want to call it from an external client such as Claude Code or Codex. |
+| **[MCP Client](/integrations/mcp/mcp-client)** | You want your Agents to call an outside service such as Notion or Linear. |
+
+<Tip>
+  The two work together. A common pattern is to build your Agents and Tools with Invent, then call them from your editor through the MCP during day-to-day work.
+</Tip>
+
+## Learn more
+
+<Card title="Build with Invent" icon="wand-magic-sparkles" href="/build/invent/invent">
+  The full reference, including the integration reach and data egress details behind Invent's Enterprise security controls.
+</Card>

@@ -555,3 +555,167 @@ div#content-side-layout {
     transition: none;
   }
 }
+
+/* =========================================================
+   "Build with Invent" — the Invent-themed row that sits above every
+   tab's groups. It is a global nav anchor, not a page in any tab:
+   Mintlify points a tab at its first page, so listing this page first
+   in each tab made all six tabs link to it and tab navigation died.
+   The anchor lives in docs.json under navigation.global.anchors.
+
+   Styled to read as one of the app's buttons rather than a nav link,
+   on the product's own tokens: brand #685FFF, hover #4D40EC, pressed
+   #321AD5, and the elevation-bulge shadow (0 2px 3px -1px + a 1px
+   inset ring).
+
+   Deliberately NOT a brand tint: Mintlify marks the page you are on
+   with bg-primary/10 + text-primary in a rounded pill, and a tinted
+   fill here read as a second active page. So this one carries a plain
+   surface with a hairline ring — emphasis by edge and elevation, which
+   the active row never uses.
+
+   Blobby sits fixed in the right-hand corner at full colour — only
+   his eyes move, tracking the cursor. The live badge
+   (.invent-blobby--nav) is mounted by /invent-callout.js; ::after is
+   the no-JS fallback, same geometry, minus the eyes.
+   ========================================================= */
+
+/* Each tab's Invent page needs a home in that tab's groups — without one
+   Mintlify can't tell which tab you're on while you're reading it, and the
+   tab's own anchor (the pill) doesn't render at all. `hidden: true` on the
+   group hides it from that resolution too, so the groups stay visible in
+   docs.json and their headings and rows are dropped here instead.
+
+   Every one of those pages is named `invent`, which is what the $= hooks
+   below match; the pill is a nav anchor, not one of these rows, so it is
+   untouched. Name a new one to that convention and it needs no CSS. */
+.sidebar-group-header:has(+ ul.sidebar-group li[id$="/invent"]),
+li[id$="/invent"] {
+  display: none;
+}
+
+/* The tab's own anchor renders ahead of the shared ones (Community,
+   Contact Support, JavaScript SDK, Changelog), which left four links
+   between the pill and the first group. They all share one <ul>, so a
+   flex column reorders it to last — flush against the group below. */
+#navigation-items > ul:has(> li > a.nav-anchor[href$="/invent"]) {
+  display: flex;
+  flex-direction: column;
+}
+
+#navigation-items > ul > li:has(> a.nav-anchor[href$="/invent"]) {
+  order: 1;
+}
+
+a.nav-anchor[href$="/invent"] {
+  /* Slight overshoot, so the row's lift settles rather than stops. */
+  --invent-pop: cubic-bezier(0.34, 1.46, 0.58, 1);
+
+  position: relative;
+  /* Keeps the gradient layers inside the corner radius. */
+  overflow: hidden;
+  /* Drops Mintlify's ml-4 so the pill starts at the rail edge and lines
+     up with the page rows below, and leaves him his corner on the
+     right so a long label never runs underneath. */
+  margin-left: 0;
+  /* Mintlify only gives the anchors a bottom margin, which left the pill
+     crowding the link above it. Inside the flex column above, margins no
+     longer collapse — they add — so 1rem on top of Changelog's mb-4 is
+     the ~2rem gap. The matching gap below is the first group's own mt-8,
+     which is why this row gives up its own bottom margin. */
+  margin-top: 1rem;
+  margin-bottom: 0;
+  padding: 0.375rem 2.6rem 0.375rem 1rem;
+  border-radius: 0.875rem;
+  font-weight: 600;
+  color: #4D40EC;
+  background: #FFFFFF;
+  box-shadow:
+    0 2px 3px -1px rgba(13, 0, 26, 0.05),
+    0 0 0 1px rgba(104, 95, 255, 0.22) inset;
+  transition:
+    background 260ms ease,
+    box-shadow 260ms ease,
+    color 180ms ease,
+    transform 260ms var(--invent-pop);
+}
+
+/* The other global anchors lead with a boxed icon. Blobby is this
+   row's mark, so the default one goes. */
+a.nav-anchor[href$="/invent"] > div:first-child {
+  display: none;
+}
+
+/* Hover washes the surface faintly, firms the ring, and lifts the row a
+   single pixel — a button's response, not a page highlight. */
+a.nav-anchor[href$="/invent"]:hover {
+  color: #321AD5;
+  background:
+    linear-gradient(135deg, rgba(104, 95, 255, 0.06), rgba(104, 95, 255, 0.03)),
+    #FFFFFF;
+  box-shadow:
+    0 4px 10px -7px rgba(104, 95, 255, 0.32),
+    0 0 0 1px rgba(104, 95, 255, 0.34) inset;
+  transform: translateY(-1px);
+}
+
+/* Pressed: back down, the way the app's buttons settle. */
+a.nav-anchor[href$="/invent"]:active {
+  transform: translateY(0);
+  box-shadow:
+    0 2px 3px -1px rgba(13, 0, 26, 0.05),
+    0 0 0 1px rgba(104, 95, 255, 0.38) inset;
+}
+
+.dark a.nav-anchor[href$="/invent"] {
+  color: #C4B5FD;
+  background: rgba(255, 255, 255, 0.045);
+  box-shadow:
+    0 2px 3px -1px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(165, 180, 252, 0.2) inset;
+}
+
+.dark a.nav-anchor[href$="/invent"]:hover {
+  color: #EDE9FE;
+  background:
+    linear-gradient(135deg, rgba(104, 95, 255, 0.16), rgba(104, 95, 255, 0.09)),
+    rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 4px 10px -7px rgba(104, 95, 255, 0.42),
+    0 0 0 1px rgba(165, 180, 252, 0.3) inset;
+}
+
+/* One geometry for the live badge and the no-JS fallback. */
+a.nav-anchor[href$="/invent"] .invent-blobby--nav,
+a.nav-anchor[href$="/invent"]::after {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  left: auto;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin-top: -0.6875rem;
+}
+
+a.nav-anchor[href$="/invent"]::after {
+  content: '';
+  background-image: url("/images/invent-blobby.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+a.nav-anchor[href$="/invent"].has-blobby::after {
+  display: none;
+}
+
+/* He is decorative; the whole row is the link. */
+a.nav-anchor[href$="/invent"] .invent-blobby--nav {
+  cursor: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.nav-anchor[href$="/invent"] {
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,0 +1,53 @@
+---
+title: "Configure with Invent"
+sidebarTitle: "Configure with Invent"
+description: "Who can use Invent, what it is allowed to do without asking, and where its data goes."
+---
+
+Invent acts inside a project with the caller's own permissions. This page covers the decisions an admin makes about it: who gets access, what it can do unattended, and what leaves the platform.
+
+## Who can use Invent
+
+Invent is available to organization admins by default. An organization admin can turn it on for everyone in an individual project from that project's settings, which makes access a per-project decision rather than an all-or-nothing one.
+
+## What Invent can do without asking
+
+Two separate controls decide when Invent pauses for approval.
+
+<AccordionGroup>
+  <Accordion title="Session approvals">
+    The control beside the message composer applies to the current session only. **Ask first** pauses before tools set to **Ask** or **Always ask** run, while **Auto-accept** lets tools set to **Ask** run unattended. Tools set to **Always ask** still require approval either way.
+  </Accordion>
+  <Accordion title="Tool permissions">
+    Tool permissions persist per project. Run actions default to **Auto**, create and edit actions to **Ask**, and destructive actions such as deleting or publishing to **Always ask**. Setting a destructive action to **Auto** lets Invent perform it without another prompt.
+  </Accordion>
+</AccordionGroup>
+
+<Warning>
+  These settings control approval prompts, not access. Each user manages their own preferences in each project, so an organization or project admin cannot use them to grant access or set approval rules on someone else's behalf.
+</Warning>
+
+## Where Invent's data goes
+
+Conversation content is sent to the selected LLM provider to generate responses. Web search is off by default and used only when enabled for a message, voice is feature-gated and off by default, and memory is off unless the user turns it on. Audit data and operational metrics stay within Relevance AI unless your organization has configured enterprise event streaming to a destination you control.
+
+Invent's access to Relevance AI is scoped to the active project at the API-key and fine-grained authorization layers, not only in the interface, so enabling it in a sandbox project does not expose a production project.
+
+## Keeping spend predictable
+
+Invent consumes significant credits. The Invent panel shows a real-time counter for the current session, and the usual account controls apply to what it spends.
+
+<CardGroup cols={2}>
+  <Card title="Spend controls" icon="shield-check" href="/admin/subscriptions/spend-controls">
+    Cap what a project can spend before Invent or any Agent runs against it.
+  </Card>
+  <Card title="Usage alerts" icon="bell" href="/admin/project-management/usage-alerts">
+    Get notified as credit usage climbs, rather than after the fact.
+  </Card>
+</CardGroup>
+
+## Learn more
+
+<Card title="Build with Invent" icon="wand-magic-sparkles" href="/build/invent/invent">
+  The full reference, including the Enterprise security controls and the frequently asked questions on isolation and data egress.
+</Card>
