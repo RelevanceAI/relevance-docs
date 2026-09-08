@@ -55,6 +55,34 @@ Rules:
 
 Supporting files, none of which need touching to add a bubble: `invent-callout.js` (builds Blobby and animates his eyes), `images/invent-blobby-seal.svg` (the `pd/inventor` sprite from relevance-api-node), `images/invent-blobby.svg` (static fallback when JS is off). Blobby's size and the spacing around him are the `--blobby-size` and `--blobby-gap` custom properties on `.invent-callout`.
 
+## Invent demo
+
+The Invent panel itself, playing the task the page is about, floating on the page. It stands where a hero screenshot would and replaces one.
+
+The arc: Invent greets you, the prompt types itself into the composer, the panel goes to work, then the thing that now exists takes the stage. Then it starts over. While it is working, the composer and its toolbar stand down — there is nothing to type into a panel that is working — and the thread gets the room: your message, the list of calls made so far, and the window playing the current one. The panel's own height never changes, so the page holds still.
+
+One anchor per page, `data-demo` picking which script plays:
+
+```mdx
+<div className="invent-demo" data-demo="meet"></div>
+```
+
+The five scripts, one per Invent page: `meet` (get-started), `build` (build), `explore` (guides), `configure` (admin), `integrate` (integrations).
+
+Rules:
+- The markup never changes — only the `data-demo` key. Copy, timings, and beats live in `invent-demo.js`; everything visual lives in `style.css` under the `.ivd-` prefix.
+- It leads the page, directly under the intro prose and above the first heading. One per page, and never inside a Mintlify callout, `<Card>`, `<Accordion>`, or `<Tab>`.
+- The panel is white in both themes, because the product's panel is white. Don't add dark-mode overrides for it.
+- Two things carry a call, and they are not interchangeable. The step list is one line per call — state tile, then `Verb · target` — and it is the context: it says which call of how many. The window plays one call at a time and is the subject, so it stays a tier louder than the list and a card's width rather than the panel's.
+- The window's wash is derived from the call's `kind`, never set per beat — that is what keeps a Create Tool the same colour on every page it appears on. The rule is the app's own (`InventorToolScreen`'s `windowWash`): violet only for work that touches live state (`run`, `publish`, `bulk`, `chart`) and for the receipt at the end; creating and editing land in draft, so they read on the neutral wash. A call held on your approval drains to grey.
+- Editing a script: a beat is one call (chrome title, `kind`, `target` for its line, mark, body, how long it holds). Bodies are `search`, `list`, `form`, `approve`, and `finale`. `state`/`settled` are the labels before and after the call settles, and a `list` headline carries the same pair as `[present, past]`. A `finale` is the group's receipt, not another call, so it takes the window without adding a line.
+- A result row only wears a colored mark when the thing it names has an identity of its own — a Tool, an integration. Questions, Checks, and audit lines pass `mark: null` and lead with a pip instead; a repeated glyph down a list says the rows are interchangeable.
+- Nothing is scaled down to fit. Every measurement is the app's own, at the app's own size — `InventorGreeting` (56px badge, 18/24 bubble and its rotated caret), `InventorSuggestedActions` (18px reply pills), `InventorToolStepRow` (the `Verb · target` line), `InventorMessageInput` (the field and its Ask first / model toolbar), `InventorToolScreen` (40px chrome, 13/20 result rows on a 28px pitch, 20px entity marks). The panel is sized around them: `640 × 408` is a 16:9 window at a card's width plus everything above it. Read those components in relevance-api-node before inventing a new body kind.
+- The greeting's badge is the real Blobby, mounted into `.ivd-mark` by `invent-callout.js` — the same badge the callout bubble and the sidebar rows carry, cursor-tracking eyes and all. The two files know about each other through that one class.
+- The footer's model label is a constant (`MODEL_LABEL`) so it is one line to change when the app's default moves on.
+
+Nothing needs configuring to add one — the script is off while it is off-screen, and a reader who has asked for less motion gets the finished task held still.
+
 ## Navigation
 
 - `docs.json` controls the page tree. There is no `mint.json`.

@@ -1,6 +1,7 @@
-// Blobby — the live Invent badge. Two placements:
+// Blobby — the live Invent badge. Three placements:
 //   .invent-callout            the bubble; he sits at its left edge
 //   the sidebar               the Invent-themed nav rows named in NAV_ROWS
+//   .ivd-mark                 the greeting inside an Invent demo panel
 // Auto-loaded by Mintlify on every page; no-ops where neither applies.
 //
 // Ported from the product's useInventorEyes / InventorBuddyEyes so the eyes
@@ -17,6 +18,10 @@
   // tab's global.anchors), pointing at that tab's Invent page. They all
   // end in /invent, which is what this matches.
   var NAV_ROWS = ['a.nav-anchor[href$="/invent"]'];
+
+  // The greeting slot inside an Invent demo panel, built by /invent-demo.js.
+  // It persists across the demo's loop, so he is mounted there exactly once.
+  var DEMO_MARKS = ".invent-demo .ivd-mark:not(.has-blobby)";
 
   // The mobile drawer renders its own copy of the sidebar, so collect every
   // match rather than the first.
@@ -208,6 +213,17 @@
     });
   }
 
+  function mountDemoMarks(seal) {
+    document.querySelectorAll(DEMO_MARKS).forEach(function (slot) {
+      if (slot.classList.contains("has-blobby")) return;
+      var link = buildBadge(seal);
+      slot.appendChild(link);
+      slot.classList.add("has-blobby");
+      // He greets when you hover what he said, not just when you hover him.
+      animate(link, slot.closest(".ivd-greet-row") || slot);
+    });
+  }
+
   function mountNav(seal) {
     navRows().forEach(function (row) {
       if (row.classList.contains("has-blobby")) return;
@@ -222,12 +238,15 @@
 
   function mount() {
     var wanted =
-      document.querySelector(".invent-callout:not(.has-blobby)") || navRows().length;
+      document.querySelector(".invent-callout:not(.has-blobby)") ||
+      document.querySelector(DEMO_MARKS) ||
+      navRows().length;
     if (!wanted) return;
     loadSeal().then(function (seal) {
       if (!seal) return;
       mountBubbles(seal);
       mountNav(seal);
+      mountDemoMarks(seal);
     });
   }
 

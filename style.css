@@ -719,3 +719,1097 @@ a.nav-anchor[href$="/invent"] .invent-blobby--nav {
     transform: none;
   }
 }
+
+
+/* =========================================================
+   Invent demo — the Invent panel itself, playing a task, floating on the
+   page. It leads a page rather than illustrating a paragraph: it stands
+   where a hero screenshot would.
+
+     <div className="invent-demo" data-demo="meet"></div>
+
+   The scripts (which prompt, which calls, what comes out) live in
+   /invent-demo.js; only the look lives here.
+
+   Every measurement is the app's own, at the app's own size — builder-app's
+   InventorGreeting (56px badge, 18/24 bubble with its rotated caret),
+   InventorSuggestedActions (18px reply pills, staggered in),
+   InventorMessageInput (the field and the Ask first / model toolbar under
+   it), and InventorToolScreen for the window a call plays in: 40px chrome,
+   13/20 result rows on a 28px pitch, 20px entity marks, the 12px form the
+   call's arguments are written into. Nothing is scaled down to fit — the
+   panel is sized around them instead.
+
+   The panel's height is fixed, so the page never jumps. What moves is what
+   is inside it: the composer and its toolbar leave while a call has the
+   floor and come back when Invent is waiting on you again, and the window
+   grows into the room they free up.
+
+   Nothing here is interactive — no cursor affordances, no hit targets, no
+   text to select. Blobby is the exception, and only because he already
+   tracks the cursor everywhere else in these docs.
+   ========================================================= */
+
+.invent-demo {
+  margin: 1.5rem 0 2rem;
+}
+
+.ivd {
+  --ivd-brand: 104 95 255;
+  --ivd-ink: 13 0 26;
+
+  max-width: 40rem;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* 640 × 408 is what the parts add up to: a 16:9 window at the panel's inner
+   width, the message above it, and the panel's own padding. Fixed, so the
+   page holds still while the inside of the panel changes. */
+.ivd-panel {
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 640 / 408;
+  padding: 0.875rem 0.875rem 0.625rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px rgba(13, 0, 26, 0.07),
+    0 18px 40px -24px rgba(38, 20, 84, 0.28),
+    0 2px 8px -4px rgba(38, 20, 84, 0.12);
+}
+
+.ivd-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* The panel holds one state at a time. Both are flex containers, so the
+   hidden attribute needs saying twice to win. */
+.ivd-greeting[hidden],
+.ivd-thread[hidden] {
+  display: none;
+}
+
+/* ---------------------------------------------------------
+   Greeting: the first turn of a chat. He speaks from the bubble, and the
+   suggestions are the replies you could give him.
+   --------------------------------------------------------- */
+
+.ivd-greeting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin: auto 0;
+}
+
+/* On its way out, so the window can have the floor. */
+.ivd-greeting.is-out {
+  animation: ivd-greeting-out 260ms ease both;
+}
+
+@keyframes ivd-greeting-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+.ivd-greet-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Blobby is mounted here by /invent-callout.js, the same badge the callout
+   bubble and the sidebar rows carry. The soft brand halo behind him is the
+   product's, so he reads as the focal point rather than an icon. */
+.ivd-mark {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-image: url("/images/invent-blobby.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.ivd-mark.has-blobby {
+  background-image: none;
+}
+
+.ivd-mark::before {
+  content: "";
+  position: absolute;
+  inset: -55%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(99, 85, 245, 0.16), transparent 70%);
+}
+
+/* The badge is absolutely placed inside the callout bubble; here it fills
+   its own slot instead. */
+.ivd-mark .invent-blobby {
+  position: relative;
+  z-index: 1;
+  top: auto;
+  left: auto;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+/* Bordered speech bubble with a left-pointing caret: a bordered square
+   rotated 45°, drawn in the border colour flattened onto white so its
+   hairline matches the bubble's apparent one exactly. */
+.ivd-bubble {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(13, 0, 26, 0.1);
+  border-radius: 1rem;
+  background: #fff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: rgb(var(--ivd-ink));
+}
+
+.ivd-greeting.is-in .ivd-bubble {
+  animation: ivd-bubble-in 340ms cubic-bezier(0.34, 1.55, 0.5, 1) both;
+}
+
+.ivd-bubble::before {
+  content: "";
+  position: absolute;
+  left: -0.40625rem;
+  top: calc(50% - 0.375rem);
+  width: 0.75rem;
+  height: 0.75rem;
+  background: #fff;
+  border-width: 0 0 1px 1px;
+  border-style: solid;
+  border-color: rgb(231 230 232);
+  transform: rotate(45deg);
+}
+
+@keyframes ivd-bubble-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Quick replies, offered one after another rather than all at once. */
+.ivd-replies {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: fit-content;
+  max-width: 100%;
+  gap: 0.5rem;
+}
+
+.ivd-reply {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: -0.01em;
+  color: rgb(var(--ivd-ink));
+}
+
+.ivd-greeting.is-in .ivd-reply {
+  animation: ivd-reply-in 320ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--i) * 80ms + 260ms);
+}
+
+.ivd-reply svg {
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  flex-shrink: 0;
+  color: rgb(190 188 199);
+}
+
+@keyframes ivd-reply-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------
+   Thread: the message you sent, and the window the calls play in. It
+   arrives rather than appearing — the message first, the window behind it.
+   --------------------------------------------------------- */
+
+.ivd-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Your own turn, right-aligned the way the panel sets it. */
+.ivd-sent {
+  display: flex;
+  max-width: 82%;
+  margin-left: auto;
+  min-width: 0;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.875rem;
+  background: rgba(13, 0, 26, 0.05);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(var(--ivd-ink));
+}
+
+.ivd-thread.is-in .ivd-sent {
+  animation: ivd-sent-in 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ivd-sent-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The calls made so far, one compact line each — the app's own timeline
+   row: tinted state tile, then the verb with its target trailing in a
+   quieter tier. This is the context the window can't give on its own; the
+   window only ever shows one call, and this says which of how many.
+
+   Anchored to the bottom so the newest line is always the one you can see,
+   with the older ones running off under a fade rather than the list
+   scrolling out of the panel. */
+.ivd-steps {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 24%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 24%);
+}
+
+.ivd-step {
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+  flex-shrink: 0;
+  min-width: 0;
+  padding: 0.25rem 0.3125rem;
+  border-radius: 0.4375rem;
+  animation: ivd-step-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ivd-step-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The line for the call the window is currently showing. */
+.ivd-step[data-live="true"] {
+  background: rgba(104, 95, 255, 0.1);
+}
+
+.ivd-step[data-live="true"] .ivd-step-label {
+  color: rgb(var(--ivd-brand));
+}
+
+/* Each step's designed anchor. Live and finished share the neutral tile —
+   the spinning icon is what says "working", not a change of colour. */
+.ivd-step-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.375rem;
+  background: rgba(13, 0, 26, 0.05);
+  color: rgba(13, 0, 26, 0.6);
+}
+
+.ivd-step-tile svg {
+  width: 0.8125rem;
+  height: 0.8125rem;
+}
+
+.ivd-step[data-live="true"] .ivd-step-tile svg {
+  animation: ivd-spin 900ms linear infinite;
+}
+
+/* Verb medium/secondary, target regular/tertiary — two tiers inside one
+   line, both below prose in the ladder. */
+.ivd-step-label {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.125rem;
+  color: rgba(13, 0, 26, 0.7);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ivd-step-target {
+  font-weight: 400;
+  color: rgba(13, 0, 26, 0.6);
+}
+
+.ivd-step[data-live="true"] .ivd-step-target {
+  color: rgb(var(--ivd-brand) / 0.7);
+}
+
+/* The window a call plays in: one surface, no border of its own — the
+   hairline ring is drawn inset so its rounded corners stay untouched. It is
+   one card in the thread rather than the whole panel, so it keeps the app's
+   16:9 at a card's width and sits on the agent's side of the column. */
+.ivd-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: 100%;
+  max-width: 26rem;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0.875rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 0 0 1px rgba(27, 27, 35, 0.1);
+}
+
+.ivd-thread.is-in .ivd-screen {
+  animation: ivd-card-in 340ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 90ms;
+}
+
+/* Aurora washes, kind-tinted the way the app tints them: violet for work
+   that makes something, neutral for work that reads, grey for a call that is
+   holding on you. */
+.ivd-screen[data-wash="neutral"] {
+  background-image:
+    radial-gradient(240px 190px at 86% 92%, rgba(196, 181, 253, 0.18), rgba(196, 181, 253, 0)),
+    radial-gradient(220px 170px at 12% 2%, rgba(165, 180, 252, 0.14), rgba(165, 180, 252, 0)),
+    linear-gradient(180deg, #f5f5fb 0%, #fdfdff 100%);
+}
+
+.ivd-screen[data-wash="violet"] {
+  background-image:
+    radial-gradient(240px 190px at 88% 94%, rgba(128, 191, 255, 0.3), rgba(128, 191, 255, 0)),
+    radial-gradient(220px 170px at 10% 0%, rgba(140, 128, 255, 0.32), rgba(140, 128, 255, 0)),
+    linear-gradient(180deg, #ecebff 0%, #fafaff 100%);
+}
+
+.ivd-screen[data-wash="grey"] {
+  background-image:
+    radial-gradient(240px 190px at 86% 92%, rgba(120, 124, 140, 0.1), rgba(120, 124, 140, 0)),
+    linear-gradient(180deg, #f4f4f6 0%, #fcfcfd 100%);
+}
+
+/* Chrome: traffic lights, the call's own identity, its state as plain text.
+   Left dots and right state carry the same width, so the title is centred on
+   the window rather than on what is left over beside them. */
+.ivd-chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  height: 2.125rem;
+  padding: 0 0.75rem;
+}
+
+.ivd-dots {
+  display: flex;
+  flex-shrink: 0;
+  gap: 5px;
+  width: 4rem;
+}
+
+.ivd-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: rgba(27, 27, 35, 0.1);
+}
+
+.ivd-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  flex: 1;
+  min-width: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  color: rgba(13, 0, 26, 0.7);
+}
+
+.ivd-title svg {
+  flex-shrink: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+  color: rgba(13, 0, 26, 0.5);
+}
+
+.ivd-title span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ivd-title.is-spinning svg {
+  animation: ivd-spin 900ms linear infinite;
+}
+
+@keyframes ivd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ivd-state {
+  flex-shrink: 0;
+  width: 4rem;
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  color: rgba(13, 0, 26, 0.5);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ivd-state[data-tone="settled"] {
+  color: rgb(var(--ivd-brand));
+}
+
+/* The stage centres its scene: without the app's rolling result track there
+   is nothing to fill the space a top-anchored group leaves under it. */
+.ivd-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+  padding: 0 1rem 0.625rem;
+}
+
+/* A result list sits high in the window rather than dead-centre, the way the
+   app anchors it: the rows below need the headroom, and a list that reads
+   from the top reads as a list rather than as a group floating in a box. A
+   card — a form, an approval, the finished thing — takes the centre. */
+.ivd-stage[data-fill="top"] {
+  justify-content: flex-start;
+  padding-top: 0.625rem;
+}
+
+/* ---------------------------------------------------------
+   Scene bodies.
+   --------------------------------------------------------- */
+
+/* Narration for a call with no query to show — a tight frosted pill hugging
+   its words, so it never masquerades as something that was typed in. */
+.ivd-pill {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0.25rem 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: -0.01em;
+  color: rgba(13, 0, 26, 0.7);
+}
+
+.ivd-headline {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* A real query gets the input's glass instead: it was typed. */
+.ivd-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.4375rem 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: rgb(var(--ivd-ink));
+}
+
+.ivd-strip-glyph {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+  color: rgba(13, 0, 26, 0.5);
+}
+
+.ivd-strip-glyph svg,
+.ivd-approve-head svg,
+.ivd-foot-icon svg,
+.ivd-send svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Results sit directly on the wash under the narration, arriving in reading
+   order rather than all at once. Rows carry their rhythm as padding, on the
+   app's own 28px pitch. */
+.ivd-rows {
+  margin-top: 0.875rem;
+  padding: 0 0.9375rem;
+}
+
+.ivd-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-width: 0;
+  padding: 0.25rem 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  color: rgba(13, 0, 26, 0.72);
+  animation: ivd-row-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i) * 110ms + 180ms);
+}
+
+@keyframes ivd-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ivd-row-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Each row's own face. A list never shows a column of identical glyphs, so
+   the tint and the letter come from the entity, not from the call. */
+.ivd-mark-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.375rem;
+  background: rgb(var(--tint) / 0.16);
+  color: rgb(var(--tint));
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.ivd-mark-tile svg {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* Rows whose subject has no face of its own — a question, a Check, an audit
+   line — lead with a pip instead. A repeated glyph down a list says the rows
+   are interchangeable, which is only true here. */
+.ivd-pip {
+  flex-shrink: 0;
+  width: 0.5625rem;
+  height: 0.5625rem;
+  margin: 0 0.34375rem;
+  border-radius: 9999px;
+  background: rgb(var(--ivd-brand) / 0.35);
+}
+
+/* Short facts, muted and pushed to the row's right edge. A negative one
+   keeps its words in a quiet tint pill; a positive one collapses to the
+   seal, because "Passed" repeated down a list is noise. */
+.ivd-detail {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  padding-left: 0.5rem;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(13, 0, 26, 0.45);
+  white-space: nowrap;
+}
+
+.ivd-detail[data-tone="negative"] {
+  padding: 1px 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgb(174 49 41);
+  background: rgba(199, 56, 47, 0.1);
+}
+
+.ivd-row .ivd-seal {
+  margin-left: auto;
+  margin-top: -4px;
+  margin-bottom: -4px;
+}
+
+.ivd-seal {
+  flex-shrink: 0;
+  width: 1.0625rem;
+  height: 1.0625rem;
+}
+
+/* The call's arguments as the form they are: each field labelled above the
+   value it was filled in with, one line each — the window previews the call
+   rather than reproducing it. */
+.ivd-glass {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5625rem;
+  min-width: 0;
+  padding: 0.8125rem 0.9375rem;
+  border: 1px solid #fff;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.06),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: ivd-card-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ivd-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ivd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3125rem;
+  min-width: 0;
+}
+
+.ivd-label {
+  font-size: 0.6875rem;
+  line-height: 0.875rem;
+  color: rgba(13, 0, 26, 0.7);
+}
+
+.ivd-input {
+  display: flex;
+  min-width: 0;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid rgba(13, 0, 26, 0.1);
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.65);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgba(13, 0, 26, 0.72);
+}
+
+/* Paused on you: a muted lead-in, then the reason the call is asking. The
+   accent belongs to the answer below, which is where it gets given. */
+.ivd-approve-head {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  color: rgba(13, 0, 26, 0.5);
+}
+
+.ivd-approve-head svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+
+.ivd-approve-body {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  color: rgb(var(--ivd-ink));
+}
+
+.ivd-approve-actions {
+  display: flex;
+  gap: 0.375rem;
+  margin-top: 0.125rem;
+}
+
+.ivd-btn {
+  padding: 0.125rem 0.625rem;
+  border: 1px solid rgba(13, 0, 26, 0.1);
+  border-radius: 0.375rem;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1rem;
+  color: rgba(13, 0, 26, 0.7);
+}
+
+.ivd-btn-primary {
+  border-color: rgb(var(--ivd-brand));
+  background: rgb(var(--ivd-brand));
+  color: #fff;
+}
+
+/* The answer, given: the button takes the press rather than the state label
+   changing on its own. */
+.ivd-btn-primary.is-pressed {
+  animation: ivd-press 420ms ease both;
+}
+
+@keyframes ivd-press {
+  40% {
+    transform: scale(0.94);
+    box-shadow: 0 0 0 4px rgba(104, 95, 255, 0.18);
+  }
+  to {
+    transform: none;
+    box-shadow: 0 0 0 0 rgba(104, 95, 255, 0);
+  }
+}
+
+/* What now exists takes the stage: one thing, named, with the seal on it. */
+.ivd-finale {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  gap: 0.375rem;
+  min-width: 0;
+  max-width: 15rem;
+  text-align: center;
+  animation: ivd-card-in 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ivd-finale-tile {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 0.125rem;
+  border: 1px solid rgba(27, 27, 35, 0.06);
+  border-radius: 0.875rem;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 10px 24px rgba(70, 60, 180, 0.1),
+    0 3px 8px rgba(0, 0, 0, 0.05);
+  color: rgb(var(--tint));
+}
+
+.ivd-finale-tile svg:first-child {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* The seal overhangs the tile's corner, so it reads as a stamp on the thing
+   rather than part of its artwork. */
+.ivd-finale-tile .ivd-seal {
+  position: absolute;
+  right: -0.25rem;
+  bottom: -0.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ivd-finale-name {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.375rem;
+  letter-spacing: -0.01em;
+  color: rgb(var(--ivd-ink));
+}
+
+.ivd-finale-meta {
+  font-size: 0.75rem;
+  line-height: 1.0625rem;
+  color: rgba(13, 0, 26, 0.5);
+}
+
+/* ---------------------------------------------------------
+   The dock: the composer and the toolbar under it. It stands down while a
+   call has the floor — there is nothing to type into a panel that is
+   working — and comes back when Invent is waiting on you again. The window
+   above grows into the room, so the panel's own height never changes.
+   --------------------------------------------------------- */
+
+.ivd-dock {
+  flex-shrink: 0;
+  overflow: hidden;
+  max-height: 6rem;
+  opacity: 1;
+  transition:
+    max-height 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 240ms ease;
+}
+
+.ivd-panel[data-state="working"] .ivd-dock {
+  max-height: 0;
+  opacity: 0;
+}
+
+.ivd-composer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+  border: 1px solid rgba(13, 0, 26, 0.1);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: rgb(var(--ivd-ink));
+}
+
+/* A typing run: the text being typed, and the caret sitting right after it.
+   The text is genuinely as long as what has been typed so far — one
+   character added at a time by /invent-demo.js — rather than a full string
+   revealed under a clip. That is the whole point: a caret in normal flow
+   after it is then always exactly on the last character typed, with no
+   arithmetic to keep the two in step.
+
+   The run clips and scrolls, the way a real field does, so the caret stays
+   in view even when what has been typed is longer than the field. */
+.ivd-run {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.ivd-typed {
+  flex: none;
+  white-space: pre;
+}
+
+.ivd-composer-field {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Nothing typed yet, so the field is showing its own prompt. */
+.ivd-placeholder {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgba(13, 0, 26, 0.4);
+}
+
+.ivd-caret {
+  flex: none;
+  width: 1.5px;
+  height: 1rem;
+  margin-left: 1px;
+  border-radius: 1px;
+  background: rgb(var(--ivd-brand));
+  animation: ivd-blink 1s step-end infinite;
+}
+
+@keyframes ivd-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.ivd-mic,
+.ivd-send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ivd-mic {
+  width: 1.0625rem;
+  height: 1.0625rem;
+  color: rgba(13, 0, 26, 0.5);
+}
+
+.ivd-mic svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ivd-send {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.5rem;
+  background: rgba(13, 0, 26, 0.05);
+  color: rgba(13, 0, 26, 0.6);
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+
+.ivd-send svg {
+  width: 0.9375rem;
+  height: 0.9375rem;
+}
+
+/* There is something to send: the button lights the way it does in the app. */
+.ivd-composer[data-ready="true"] .ivd-send {
+  background: rgb(var(--ivd-brand));
+  color: #fff;
+}
+
+.ivd-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4375rem 0.25rem 0.0625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  color: rgba(13, 0, 26, 0.6);
+}
+
+.ivd-foot-icon {
+  display: inline-flex;
+  width: 0.9375rem;
+  height: 0.9375rem;
+  color: rgba(13, 0, 26, 0.5);
+}
+
+.ivd-footer .ivd-mic {
+  margin-left: auto;
+}
+
+/* ---------------------------------------------------------
+   Narrow: the panel gives up its fixed ratio and grows with its content,
+   because that ratio at phone width is too short to hold a thread. The
+   window keeps a floor so its scene never gets squeezed.
+   --------------------------------------------------------- */
+
+@media (max-width: 34rem) {
+  .ivd-panel {
+    aspect-ratio: auto;
+    min-height: 22rem;
+  }
+
+  .ivd-greet-row {
+    gap: 0.75rem;
+  }
+
+  .ivd-mark {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .ivd-bubble {
+    padding: 0.625rem 0.875rem;
+    font-size: 1rem;
+    line-height: 1.375rem;
+  }
+
+  .ivd-reply {
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  .ivd-screen {
+    max-width: 100%;
+  }
+
+  .ivd-rows {
+    padding: 0;
+  }
+}
+
+/* The demo is decoration; a reader who has asked for less motion gets the
+   outcome held still, which /invent-demo.js paints instead of playing. */
+@media (prefers-reduced-motion: reduce) {
+  .ivd-typed,
+  .ivd-caret,
+  .ivd-row,
+  .ivd-glass,
+  .ivd-finale,
+  .ivd-title.is-spinning svg,
+  .ivd-btn-primary.is-pressed,
+  .ivd-greeting.is-out,
+  .ivd-greeting.is-in .ivd-bubble,
+  .ivd-greeting.is-in .ivd-reply,
+  .ivd-thread.is-in .ivd-sent,
+  .ivd-thread.is-in .ivd-screen {
+    animation: none;
+  }
+
+  .ivd-dock {
+    transition: none;
+  }
+
+  .ivd-caret {
+    display: none;
+  }
+}
