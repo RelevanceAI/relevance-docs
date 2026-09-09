@@ -4,7 +4,7 @@ sidebarTitle: "MCP client"
 description: "Connect external MCP servers to your Relevance AI Agents, giving them access to Tools and resources from other services."
 ---
 
-The MCP client integration lets you connect remote MCP servers to your Relevance AI Agents — either through preset connections (Notion, Canva, Atlassian) or by manually connecting any custom server URL. This gives your Agents access to Tools and resources hosted on external platforms without rebuilding them in Relevance AI.
+The MCP client integration lets you connect remote MCP servers to your Relevance AI Agents — either through preset connections (Notion, Canva, Atlassian) or by manually connecting any custom server URL. This gives your Agents access to Tools and resources hosted on external platforms without rebuilding them in Relevance AI. Custom MCP servers you've connected to your project appear in a **Custom** category on the Connectors page, so you can discover and manage them without navigating into each Agent's Tools tab.
 
 <Warning>
   This page is about connecting external MCP servers **to** Relevance AI Agents. If you want to use Relevance AI **from** an AI client like Claude or Cursor, see [MCP & Plugins](/get-started/core-concepts/mcp-plugins).
@@ -41,6 +41,14 @@ Agents can connect to remote MCP servers to run Tools and read resources exposed
 Once connected, the Agent automatically fetches and displays the available Tools from the MCP server. Tools appear in the conversation task view and can be referenced in the Agent's core instructions.
 
 <Warning>Local MCP server support (e.g. JSON configuration) is not available.</Warning>
+
+## Managing custom MCP servers from the Connectors page
+
+Custom MCP servers you've connected to your project appear in a **Custom** category on the Connectors page. Each server shows as a card with the server's hostname as a subtitle. Click any card to open the server's configuration for editing. To connect a new custom MCP server directly from the Connectors page without opening an Agent, click the **Add custom MCP** action card.
+
+<Note>
+  The Custom category on the Connectors page is currently rolling out. If you don't see it yet, use the Tools tab path described above.
+</Note>
 
 ## Connecting multiple instances of the same MCP server
 
