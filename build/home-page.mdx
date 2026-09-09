@@ -1,0 +1,57 @@
+---
+title: 'Builder home page'
+sidebarTitle: 'Home page'
+description: 'An at-a-glance health overview of your agents and workforces on the builder home page.'
+---
+
+The builder home page includes a **Status** section that shows the recent health of your most important agents and workforces. The Status section is visible to project admins and editors.
+
+## What the Status section shows
+
+The section displays up to five agents or workforces. Each row contains three elements:
+
+| Element | Description |
+|---------|-------------|
+| **Name** | The agent or workforce name |
+| **30-day health strip** | Color-coded daily bars showing task health over the past 30 days |
+| **Performance score chart** | A compact chart of the agent's or workforce's recent performance score |
+
+## Clicking through to details
+
+Each row has three clickable areas that take you directly to the relevant page:
+
+<CardGroup cols={3}>
+  <Card title="Name" icon="robot" href="/build/agents/create-an-agent">
+    Clicking the agent or workforce name opens it in the builder.
+  </Card>
+  <Card title="Health strip" icon="chart-bar" href="/build/agents/give-your-agent-tasks/tasks-page">
+    Clicking a health bar opens Task Operations filtered to that agent or workforce.
+  </Card>
+  <Card title="Performance chart" icon="chart-line" href="/enterprise/analytics">
+    Clicking the performance chart opens the Analytics performance dashboard.
+  </Card>
+</CardGroup>
+
+<Note>
+The Analytics dashboard is an Enterprise feature. The performance chart links to it, but access depends on your plan. See [Analytics](/enterprise/analytics) for details.
+</Note>
+
+## Configuring the Status section
+
+By default, the Status section auto-selects agents and workforces ranked by most recent task activity. To control which items appear:
+
+<Steps>
+  <Step title="Open the configure panel">
+    Click **Configure** in the top-right corner of the Status section.
+  </Step>
+  <Step title="Select your items">
+    Choose the agents and workforces you want to track. You can select up to five items and drag them to set the display order.
+  </Step>
+  <Step title="Save">
+    Click **Save**. Your selection is saved per region and project.
+  </Step>
+</Steps>
+
+<Note>
+The Status section shows a maximum of five items. If you have not configured anything, the section falls back to the five agents or workforces with the most recent task activity.
+</Note>
