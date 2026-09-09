@@ -1,0 +1,61 @@
+---
+title: "'Slack - Update Message' Tool step"
+sidebarTitle: "Update Message"
+description: "Edit a previously sent Slack message in place using Relevance AI"
+---
+
+The 'Slack - Update Message' Tool step lets you edit the content of a previously sent Slack message. Use it together with the [Slack - Send Message](/build/tools/tool-steps/slack/send-message) step to update a message in place — for example, to show progress as a multi-step task completes.
+
+<Note>You can learn more about the Slack integration [here](/integrations/popular-integrations/slack).</Note>
+
+<Warning>This integration for Slack was developed by our team and is not affiliated with Slack. Please contact our Support for any questions/queries you may have.</Warning>
+
+## Inputs
+
+Two inputs identify which message to edit:
+
+| Input | Required | Description |
+|-------|----------|-------------|
+| `channel` | Yes | The ID of the channel containing the message. Use the `channel` output from a Send Message step. |
+| `ts` | Yes | The timestamp identifier of the message to edit. Use the `ts` output from a Send Message step. |
+
+At least one of the following must be provided to set the new content:
+
+| Input | Required | Description |
+|-------|----------|-------------|
+| `text` | No | The new plain-text or mrkdwn content for the message |
+| `blocks` | No | A [Block Kit](https://api.slack.com/block-kit) JSON array for richer message layouts |
+| `attachments` | No | A JSON array of legacy Slack message attachments |
+
+## Add the 'Slack - Update Message' Tool step to your Tool
+
+1. Create a new Tool, then search for the 'Slack: Update Message' Tool step
+2. Click 'Expand' to see the full Tool step
+3. Set the **Channel** field to the `channel` output from a preceding Send Message step
+4. Set the **Timestamp** field to the `ts` output from a preceding Send Message step
+5. Enter your updated message content in the **Text** field, or supply a Block Kit JSON array in the **Blocks** field
+6. Click 'Run step' to test
+
+## Updating a message in place
+
+Wire the `ts` and `channel` outputs from a [Send Message](/build/tools/tool-steps/slack/send-message) step directly into this step's inputs. Each time the Update Message step runs, it overwrites the content of that specific message — no new message is posted to the channel.
+
+<Accordion title="Example: updating a progress checklist">
+This pattern sends one status message at the start of a Tool run and edits it as each task completes, keeping the Slack channel tidy.
+
+**Send Message step** — posts the initial checklist:
+- Message: `Task progress:\n⬜ Step 1\n⬜ Step 2\n⬜ Step 3`
+- Outputs `ts` and `channel` for use in subsequent steps
+
+**Update Message step** (runs after Step 1 completes):
+- Channel: reference the `channel` output from the Send Message step
+- Timestamp: reference the `ts` output from the Send Message step
+- Text: `Task progress:\n✅ Step 1\n⬜ Step 2\n⬜ Step 3`
+
+**Update Message step** (runs after Step 2 completes):
+- Channel: reference the `channel` output from the Send Message step
+- Timestamp: reference the `ts` output from the Send Message step
+- Text: `Task progress:\n✅ Step 1\n✅ Step 2\n⬜ Step 3`
+
+Each Update Message step edits the same original message rather than posting new replies.
+</Accordion>
