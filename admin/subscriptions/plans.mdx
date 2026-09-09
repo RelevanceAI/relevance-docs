@@ -105,10 +105,12 @@ Concurrency is a system capacity metric — it measures how many tasks are runni
   For detailed information about concurrent task limits for each subscription tier, see the [System Quotas](/admin/system-limits#concurrent-tasks) page.
 </Note>
 
-A time-series area chart displays your Organization's concurrency usage over time, helping you identify peak usage periods and determine when to upgrade for increased capacity. You can view this same chart in two places:
+A time-series area chart displays your Organization's concurrency usage over time, helping you identify peak usage periods and determine when to upgrade for increased capacity. The chart shows both running and queued tasks by default. You can view this chart in two places:
 
 - On the **Plan & Billing** page: click 'Settings' in the sidebar, then open Plan & Billing.
 - On the **Analytics** page, where the same chart shows organization-wide concurrency data, so you can correlate agent activity with overall concurrency patterns.
+
+When queued task data exists in the selected time range, a **Show queued** toggle appears on the chart. Use it to hide queued bars when a large queue dominates the chart scale and makes running concurrency hard to see — hiding the queued bars rescales the y-axis so running concurrency is more visible. Bars with hidden queued work show a footnote in their tooltip (for example, "+4,000 queued (hidden)") so you can still see the queued volume. The toggle preference persists across page reloads.
 
 ## Credit allocation and reset
 
