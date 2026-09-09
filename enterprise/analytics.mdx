@@ -123,6 +123,23 @@ Each metric shows percentage change from the previous period. For example, "+45.
     
     **How to use it:** Check which actions have high execution counts to see your most-used tools. Actions with 0.00% error rates are working reliably. If an action shows error rates above 0%, investigate that integration. Sort by Credits/Exec to find expensive API calls or tool executions.
   </Accordion>
+
+  <Accordion title="Agent model breakdown" icon="microchip">
+    The Agent Model Breakdown table shows how credits are distributed across LLM models. Below it, the **Model usage by agent** table lets you expand each model row to see exactly which agents drove usage on that model.
+
+    When you expand a model row, the table shows each contributing agent's usage:
+
+    | Metric | What It Shows |
+    |--------|---------------|
+    | **Input tokens** | Tokens sent to the model by this agent |
+    | **Output tokens** | Tokens returned by the model to this agent |
+    | **Credits** | Credits this agent spent on this model |
+    | **Share** | This agent's percentage of the model's total spend |
+
+    **How to use it:** Click any model row to expand it and reveal the per-agent breakdown. Click an agent row to navigate directly to that agent. The table respects the date range and agent filters set at the top of the analytics page.
+
+    <Note>When the API caps results (for example, showing only the top 10 agents per model), the table displays a note indicating that results are truncated.</Note>
+  </Accordion>
 </AccordionGroup>
 
 ---
