@@ -4,7 +4,7 @@ sidebarTitle: "Send Message"
 description: "Send a message to a Slack channel from Relevance AI"
 ---
 
-The 'Slack - Send Message' Tool step allows you to send a message to one of your Slack channels from Relevance AI.
+The 'Slack - Send Message' Tool step allows you to send a message to one of your Slack channels from Relevance AI. Both the standard and advanced variants of this step return the same outputs.
 
 <Note>You can learn more about the Slack integration [here](/integrations/popular-integrations/slack).</Note>
 
@@ -24,3 +24,32 @@ You can add the 'Slack - Send Message' Tool step to your Tool by:
 3. Select the Slack channel you want to send the message to
 4. Add your message in the 'Message' field
 5. Click 'Run step' to test out your Tool step
+
+## Outputs
+
+After the message is sent, this Tool step returns two values you can reference in later steps:
+
+| Output | Description |
+|--------|-------------|
+| `ts` | The timestamp identifier of the sent message |
+| `channel` | The ID of the channel where the message was sent |
+
+Wire these outputs into a subsequent [Slack - Update Message](/build/tools/tool-steps/slack/update-message) step to edit the same message in place — for example, to show progress as a multi-step task completes.
+
+<Accordion title="Example: updating a progress checklist">
+This pattern sends one status message at the start of a run, then edits it as each task completes.
+
+**Send Message step** — posts the initial checklist:
+- Message: `Task progress:\n⬜ Step 1\n⬜ Step 2\n⬜ Step 3`
+- Outputs: `ts` and `channel` are saved for use in later steps
+
+**Update Message step** (after Step 1 completes):
+- Channel: reference the `channel` output from the Send Message step
+- Timestamp: reference the `ts` output from the Send Message step
+- Text: `Task progress:\n✅ Step 1\n⬜ Step 2\n⬜ Step 3`
+
+**Update Message step** (after Step 2 completes):
+- Text: `Task progress:\n✅ Step 1\n✅ Step 2\n⬜ Step 3`
+
+Each Update Message step edits the same original message rather than posting new replies, keeping the Slack channel tidy.
+</Accordion>
