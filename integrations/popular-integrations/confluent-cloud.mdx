@@ -11,23 +11,21 @@ Confluent Cloud is a fully managed Apache Kafka service. The Relevance AI integr
 Connecting Confluent Cloud requires four values: an API key and secret scoped to your cluster, the cluster's REST endpoint URL, and the cluster ID.
 
 <Warning>
-  Your API key must be **cluster-scoped**. Organization-level or Cloud API keys target the control plane and will return 401 errors when calling the Kafka REST API. Create a cluster-scoped API key from the Confluent Cloud console under **Cluster Overview → API Keys**.
+  Your API key must be cluster-scoped. Organization-level or Cloud API keys target the control plane and will return 401 errors when calling the Kafka REST API. Create a cluster-scoped API key from the Confluent Cloud console under **Cluster Overview → API Keys**.
 </Warning>
 
 ### API key credentials
 
 | Field | Description |
 |-------|-------------|
-| **API Key** | The key ID from your cluster-scoped Confluent Cloud API key pair |
-| **API Secret** | The secret from the same API key pair |
-
-Authentication uses HTTP Basic auth with the API key as the username and the API secret as the password.
+| **API Key** | The key ID from your cluster-scoped Confluent Cloud API key pair. |
+| **API Secret** | The secret from the same API key pair. |
 
 ### Cluster details
 
 | Field | Description |
 |-------|-------------|
-| **REST Endpoint URL** | The per-cluster REST Proxy endpoint (not the control plane URL). Find this under **Cluster Overview → Cluster Settings → Endpoints** in your Confluent Cloud console. It follows the format `https://<cluster-id>.<region>.confluent.cloud:443`. |
+| **REST Endpoint URL** | The per-cluster REST Proxy endpoint (not the control plane URL). Find this under **Cluster Overview → Cluster Settings → Endpoints**. It follows the format `https://<cluster-id>.<region>.confluent.cloud:443`. |
 | **Cluster ID** | The unique identifier for your cluster, visible in **Cluster Overview → Cluster Settings**. It looks like `lkc-xxxxxx`. |
 
 ### Steps to connect
@@ -55,40 +53,35 @@ Authentication uses HTTP Basic auth with the API key as the username and the API
 
 ## Available tool steps
 
-The Confluent Cloud integration provides the following tool steps for use in your agents and tools:
+The Confluent Cloud integration provides the following tool steps for use in your agents and tools.
 
-### Generic Confluent Cloud API call
-
-Make any request to the Confluent Cloud Kafka REST API. This tool step automatically substitutes the `cluster_id` into API paths, so you can use path templates like `/kafka/v3/clusters/{cluster_id}/topics` without manually inserting the ID.
-
-Use this for operations not covered by the purpose-built steps below.
-
-### List topics
-
-Retrieves all topics on the connected cluster, including their configuration and partition details.
-
-### Create topic
-
-Creates a new topic on the cluster. You can specify the topic name, number of partitions, and replication factor.
-
-### Delete topic
-
-Deletes a topic from the cluster by name. This action is irreversible.
-
-### Produce a record to a topic
-
-Publishes a record to a specified topic. You can set the record key, value, and optional headers.
-
-### List consumer groups
-
-Lists all consumer groups on the cluster along with their state, making it possible to monitor consumer lag and group activity.
+<CardGroup cols={2}>
+  <Card title="Generic Confluent Cloud API call" icon="bolt">
+    Makes any authenticated request to the Confluent Cloud Kafka REST API. Automatically substitutes the cluster ID into path placeholders, so you can write `{cluster_id}` in the path without hardcoding the value. Use this for operations not covered by the purpose-built steps below.
+  </Card>
+  <Card title="List topics" icon="list">
+    Retrieves all topics on the connected cluster, including their configuration and partition details.
+  </Card>
+  <Card title="Create topic" icon="plus">
+    Creates a new topic on the cluster. You can specify the topic name, number of partitions, and replication factor.
+  </Card>
+  <Card title="Delete topic" icon="trash">
+    Deletes a topic from the cluster by name. This action is irreversible — unconsumed records in the topic are lost.
+  </Card>
+  <Card title="Produce a record to a topic" icon="arrow-up-from-bracket">
+    Publishes a record to a specified topic. You can set the record key, value, and optional headers.
+  </Card>
+  <Card title="List consumer groups" icon="users">
+    Lists all consumer groups on the cluster along with their state, making it possible to monitor consumer lag and group activity.
+  </Card>
+</CardGroup>
 
 ## Example use cases
 
-- **Event streaming automation**: Trigger agent actions in response to Kafka topic data, or produce records that drive downstream systems.
-- **Topic management**: Automate topic creation and cleanup as part of environment provisioning workflows.
-- **Real-time data ingestion**: Use agents to produce enriched or transformed records to Kafka topics from external data sources.
-- **Monitoring consumer lag**: Regularly list consumer groups and alert when groups fall behind, enabling proactive incident response.
+- Trigger agent actions in response to Kafka topic data, or produce records that drive downstream systems.
+- Automate topic creation and cleanup as part of environment provisioning workflows.
+- Use agents to produce enriched or transformed records to Kafka topics from external data sources.
+- Regularly list consumer groups and alert when groups fall behind, enabling proactive incident response.
 
 ## Frequently asked questions (FAQs)
 
