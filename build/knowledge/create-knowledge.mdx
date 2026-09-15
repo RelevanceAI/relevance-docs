@@ -186,8 +186,15 @@ To maintain effective knowledge bases over time:
 6. **Quality Control**: Implement validation processes for new knowledge entries
 7. **Scalable Structure**: Design your knowledge organization to accommodate growth
 
-## Related Features
+## Knowledge vs Context
+
+Knowledge uses retrieval-augmented generation (RAG): the agent searches your knowledge base at runtime and retrieves the most relevant chunks for each query. This makes it well suited for large or frequently updated document sets where you only ever need a portion of the content at once.
+
+[Context](/build/agents/build-your-agent/context) works differently — it injects the full file into the agent's context on every run. Use Context for small, essential reference files that the agent always needs in full. Use Knowledge for larger datasets where selective retrieval is more practical.
+
+## Related features
 
 - [Access Knowledge](https://relevanceai.com/docs/build/knowledge/access-knowledge): Learn how to configure how your agents and tools access and use your knowledge bases.
 - [Enrich with Tool](https://relevanceai.com/docs/build/knowledge/enrich-with-tool): Discover how to enhance your knowledge bases with additional context using tools.
 - [Advanced Knowledge Retrieval](https://relevanceai.com/docs/build/knowledge/advanced-knowledge-retrieval): Explore advanced techniques for optimizing how your agents retrieve and use knowledge.
+- [Context](/build/agents/build-your-agent/context): Attach files directly to your agent's context window without setting up a knowledge base.
