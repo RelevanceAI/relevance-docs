@@ -1,5 +1,7 @@
-// Blobby — the live Invent badge inside .invent-callout bubbles.
-// Auto-loaded by Mintlify on every page; no-ops on pages without a bubble.
+// Blobby — the live Invent badge. Two placements:
+//   .invent-callout            the bubble; he sits at its left edge
+//   the sidebar               the Invent-themed nav rows named in NAV_ROWS
+// Auto-loaded by Mintlify on every page; no-ops where neither applies.
 //
 // Ported from the product's useInventorEyes / InventorBuddyEyes so the eyes
 // behave the same here as they do in-app: they follow the cursor across the
@@ -9,6 +11,24 @@
 // where he sits, the bubble itself — lives in /style.css.
 (function () {
   var SEAL_SRC = "/images/invent-blobby-seal.svg";
+
+  // Nav rows styled as Invent buttons in style.css — he sits fixed in the
+  // right-hand corner. Each tab declares its own anchor (docs.json → the
+  // tab's global.anchors), pointing at that tab's Invent page. They all
+  // end in /invent, which is what this matches.
+  var NAV_ROWS = ['a.nav-anchor[href$="/invent"]'];
+
+  // The mobile drawer renders its own copy of the sidebar, so collect every
+  // match rather than the first.
+  function navRows() {
+    var rows = [];
+    NAV_ROWS.forEach(function (selector) {
+      document.querySelectorAll(selector).forEach(function (row) {
+        rows.push(row);
+      });
+    });
+    return rows;
+  }
 
   // Eye travel limit, in viewBox units of the 2.4→45.6 badge.
   var MAX_EYE_TRAVEL = 2.6;
@@ -66,7 +86,7 @@
 
   var instance = 0;
 
-  function buildBadge(bubble, seal) {
+  function buildBadge(seal) {
     // Gradient ids are namespaced per badge so two bubbles on one page don't
     // collide on the same defs.
     var id = "ib" + ++instance;
@@ -95,12 +115,12 @@
       "</g>" +
       "</svg>";
 
-    bubble.insertBefore(link, bubble.firstChild);
-    bubble.classList.add("has-blobby");
     return link;
   }
 
-  function animate(link) {
+  // hoverTarget is what plays the ^ ^ greeting: the whole bubble, or the
+  // whole title when he's sitting in one.
+  function animate(link, hoverTarget) {
     var shift = link.querySelector(".invent-blobby-shift");
     var eyes = link.querySelector(".invent-blobby-eyes");
     var smile = link.querySelector(".invent-blobby-smile");
@@ -141,7 +161,7 @@
     // The ^ ^ greeting: plays once per hover of the whole bubble, then the
     // eyes reopen on their own even if the pointer never leaves.
     var happyTimer = null;
-    link.closest(".invent-callout").addEventListener("mouseenter", function () {
+    hoverTarget.addEventListener("mouseenter", function () {
       eyes.classList.add("is-happy");
       smile.classList.add("is-happy");
       if (happyTimer) clearTimeout(happyTimer);
@@ -178,15 +198,36 @@
     requestAnimationFrame(update);
   }
 
+  function mountBubbles(seal) {
+    document.querySelectorAll(".invent-callout:not(.has-blobby)").forEach(function (bubble) {
+      if (bubble.classList.contains("has-blobby")) return;
+      var link = buildBadge(seal);
+      bubble.insertBefore(link, bubble.firstChild);
+      bubble.classList.add("has-blobby");
+      animate(link, bubble);
+    });
+  }
+
+  function mountNav(seal) {
+    navRows().forEach(function (row) {
+      if (row.classList.contains("has-blobby")) return;
+      var link = buildBadge(seal);
+      link.classList.add("invent-blobby--nav");
+      row.appendChild(link);
+      row.classList.add("has-blobby");
+      // The greeting plays on the whole row, not just on him.
+      animate(link, row);
+    });
+  }
+
   function mount() {
-    var bubbles = document.querySelectorAll(".invent-callout:not(.has-blobby)");
-    if (!bubbles.length) return;
+    var wanted =
+      document.querySelector(".invent-callout:not(.has-blobby)") || navRows().length;
+    if (!wanted) return;
     loadSeal().then(function (seal) {
       if (!seal) return;
-      bubbles.forEach(function (bubble) {
-        if (bubble.classList.contains("has-blobby")) return;
-        animate(buildBadge(bubble, seal));
-      });
+      mountBubbles(seal);
+      mountNav(seal);
     });
   }
 
