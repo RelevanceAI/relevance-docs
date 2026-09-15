@@ -193,19 +193,23 @@ Invent is available to organization admins by default. An organization admin can
       Routines are available to accounts with the Inventor Routines feature enabled. Contact your account manager if you don't see this option.
     </Note>
 
-    Routines are recurring instructions that Invent runs on a schedule — daily, weekly, monthly, or annually. You or Invent can create a routine directly from a conversation when a recurring task is appropriate.
+    Routines are recurring instructions that Invent runs on a schedule — daily, weekly, monthly, or annually. You or Invent can create a routine directly from a conversation when a recurring task is appropriate. Each routine starts a fresh conversation thread with no access to previous conversation context.
 
-    Each routine runs as its creator, using their connected accounts and permissions. Only the creator can edit or re-arm a routine. Other team members can pause or delete a routine as an emergency stop.
+    <Callout icon="key" color="#FFC107" iconType="regular">
+      Each routine runs as its creator, using their connected accounts and permissions. Only the creator can edit or re-arm a routine. Any team member can pause or delete a routine as an emergency stop, but only the creator can modify its instructions or schedule.
+    </Callout>
 
-    Because routines run without access to previous conversation context, write instructions to be self-contained and understandable on a cold read.
+    Because each routine starts without conversation context, write instructions to be fully self-contained — each one should make sense on a cold read without relying on earlier messages.
 
     #### Create a routine
 
-    Tell Invent what you want done on a recurring basis and how often. Invent will suggest creating a routine when it identifies the task as recurring. Use the time-of-day picker in the schedule modal to set the exact hour, minute, and AM/PM.
+    Tell Invent what you want done on a recurring basis and how often. Invent suggests creating a routine when it identifies a recurring task. Use the time-of-day picker in the schedule modal to choose the exact hour, minute, and AM/PM. Available frequencies are daily, weekly, monthly, or annually.
 
     #### Manage routines
 
-    Open the schedule management modal to view, edit, or delete routines and check-ins from a single list.
+    In the Invent panel, open the schedule management modal to view, edit, pause, or delete scheduled items. Routines and check-ins appear together in a single merged list, and the same time picker is used to create or update either type.
+
+    For more on how Routines use identity and access, see [User level authentication](/enterprise/user-level-authentication), [RBAC](/enterprise/rbac), and [Integrations](/integrations/introduction). To schedule Agents directly at the agent level instead, see [Agent scheduled triggers](/build/agents/build-your-agent/agent-triggers/scheduled-triggers).
   </Accordion>
   <Accordion title="Check-ins" icon="calendar-clock">
     <img src="/images/invent-scheduled-check-ins.png" alt="A scheduled check-in in Invent" />
