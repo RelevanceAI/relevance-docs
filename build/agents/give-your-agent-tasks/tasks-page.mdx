@@ -37,3 +37,33 @@ A confirmation modal shows how many Tasks will be affected before anything is se
 <Note>
 A Task with more than one pending approval isn't bulk-actionable and stays one-at-a-time.
 </Note>
+
+## Cost visibility in task lists
+
+The task list table includes **Credits** and **Actions** columns at the per-task row level. These show the credit spend and action count for each individual task run.
+
+<Info>
+The Credits and Actions columns in the task list are gated behind the `MonitorTaskCostEnrichment` feature flag, which is off by default. This feature is rolling out progressively via PostHog — the columns may not be visible on all accounts immediately. Contact your account manager if you need early access.
+</Info>
+
+These per-task columns differ from the aggregate figures in the [Analytics](/enterprise/analytics) breakdown tables, which show rolled-up totals and averages across all tasks for a given agent or workforce over a date range.
+
+The Credits and Actions columns appear in both agent and workforce task list tables.
+
+### Cost breakdown modal
+
+Clicking a **Credits** value in the task list row opens the cost breakdown modal for that task. The modal shows:
+
+- Total credits and actions consumed by the task
+- A **by source** table splitting costs between task run spend and evaluation costs
+- Collapsible detail sections for inspecting each cost source individually
+
+The same modal opens from the Credits chip in the task sidebar — see [Tasks](/build/agents/give-your-agent-tasks/task-overview#details).
+
+<Note>
+This modal shows costs for a single task run. The cost breakdown accessible from the [Analytics](/enterprise/analytics) Workforce and Agent breakdown tables aggregates spend across all tasks for an agent or workforce.
+</Note>
+
+<Warning>
+**Deployment dependency for self-hosted and enterprise installations**: the frontend sends a `statuses` filter field that older nodeapi backend versions do not accept and will return a 400 error. Deploy the updated backend before or alongside the frontend update to avoid request failures.
+</Warning>
