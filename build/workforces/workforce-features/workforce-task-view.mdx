@@ -22,6 +22,14 @@ Track the status and progress of all tasks being handled by your workforce in re
 - Tasks awaiting approval or human intervention
 - Failed tasks that require attention
 
+The task list table includes **Credits** and **Actions** columns showing the per-task credit spend and action count for each individual run.
+
+<Info>
+The Credits and Actions columns are gated behind the `MonitorTaskCostEnrichment` feature flag (off by default) and are rolling out progressively. The columns may not be visible on all accounts immediately.
+</Info>
+
+Clicking a **Credits** value opens the cost breakdown modal for that task, showing total credits and actions with a **by source** table that splits task run spend from evaluation costs. The same modal is also accessible from the Credits chip in the task sidebar.
+
 ### Manual Trigger Activation
 
 Initiate workflows directly from the Task View interface:
