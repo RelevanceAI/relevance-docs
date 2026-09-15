@@ -188,20 +188,45 @@ Invent is available to organization admins by default. An organization admin can
   </Tab>
   <Tab title="Manage performance">
     <AccordionGroup>
-  <Accordion title="Scheduled check-ins" icon="calendar-clock">
-    <img src="/images/invent-scheduled-check-ins.png" alt="A scheduled check-in in Invent" />
-
+  <Accordion title="Routines" icon="repeat">
     <Note>
-      Before setting up a scheduled check-in, add an email or Slack notification channel in [Alerts](/build/invent/invent#alerts) so Invent can notify you about the result.
+      Routines are available to accounts with the Inventor Routines feature enabled. Contact your account manager if you don't see this option.
     </Note>
 
-    #### Schedule a check-in
+    Routines are recurring instructions that Invent runs on a schedule — daily, weekly, monthly, or annually. You or Invent can create a routine directly from a conversation when a recurring task is appropriate. Each routine starts a fresh conversation thread with no access to previous conversation context.
 
-    Tell Invent what to review and when. It can suggest an interval based on the Agent's activity.
+    <Callout icon="key" color="#FFC107" iconType="regular">
+      Each routine runs as its creator, using their connected accounts and permissions. Only the creator can edit or re-arm a routine. Any team member can pause or delete a routine as an emergency stop, but only the creator can modify its instructions or schedule.
+    </Callout>
+
+    Because each routine starts without conversation context, write instructions to be fully self-contained — each one should make sense on a cold read without relying on earlier messages.
+
+    #### Create a routine
+
+    Tell Invent what you want done on a recurring basis and how often. Invent suggests creating a routine when it identifies a recurring task. Use the time-of-day picker in the schedule modal to choose the exact hour, minute, and AM/PM. Available frequencies are daily, weekly, monthly, or annually.
+
+    #### Manage routines
+
+    In the Invent panel, open the schedule management modal to view, edit, pause, or delete scheduled items. Routines and check-ins appear together in a single merged list, and the same time picker is used to create or update either type.
+
+    For more on how Routines use identity and access, see [User level authentication](/enterprise/user-level-authentication), [RBAC](/enterprise/rbac), and [Integrations](/integrations/introduction). To schedule Agents directly at the agent level instead, see [Agent scheduled triggers](/build/agents/build-your-agent/agent-triggers/scheduled-triggers).
+  </Accordion>
+  <Accordion title="Check-ins" icon="calendar-clock">
+    <img src="/images/invent-scheduled-check-ins.png" alt="A scheduled check-in in Invent" />
+
+    A check-in is a one-time scheduled wake-up that runs within the current conversation. Tell Invent what to review and when — it picks up that conversation at the scheduled time and acts on the instruction. The Inventor will also suggest a check-in when you describe a task that needs a one-time follow-up.
+
+    Use check-ins for one-time reviews and follow-ups. For tasks that repeat on a schedule, use a Routine instead.
+
+    <Note>
+      Before setting up a check-in, add an email or Slack notification channel in [Alerts](/build/invent/invent#alerts) so Invent can notify you about the result.
+    </Note>
 
     #### What happens when a check-in runs
 
     Invent reviews evals, errors, and recent activity. If it finds an issue, it sends a summary and suggested fix. If everything looks healthy, it stays quiet.
+
+    Open the schedule management modal to view, edit, or delete check-ins alongside any active routines.
   </Accordion>
   <Accordion title="Alerts" icon="envelope">
     <img src="/images/invent-alerts.png" alt="The email and Slack alert settings in Invent" />
@@ -355,5 +380,17 @@ Invent and the Relevance AI MCP are often compared, but they solve different pro
 
   <Accordion title="How does Invent track credit usage?">
     The Invent panel displays a real-time credit counter that updates with each interaction. The counter tracks the credits used in your current session.
+  </Accordion>
+
+  <Accordion title="What is the difference between a routine and a check-in?">
+    A routine runs on a recurring schedule — daily, weekly, monthly, or annually. A check-in is a one-time wake-up that resumes the current conversation at a specific time. Use routines for standing recurring tasks and check-ins for one-time follow-ups.
+  </Accordion>
+
+  <Accordion title="Who can edit or delete a routine?">
+    Only the routine's creator can edit or re-arm it. Any team member can pause or delete a routine as an emergency stop.
+  </Accordion>
+
+  <Accordion title="How should I write routine instructions?">
+    Routines run without access to previous conversation context, so write instructions to be fully self-contained. Each instruction should make sense on a cold read without relying on earlier messages or session state.
   </Accordion>
 </AccordionGroup>
