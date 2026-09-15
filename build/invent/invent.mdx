@@ -210,13 +210,17 @@ Invent is available to organization admins by default. An organization admin can
   <Accordion title="Check-ins" icon="calendar-clock">
     <img src="/images/invent-scheduled-check-ins.png" alt="A scheduled check-in in Invent" />
 
+    A check-in is a one-time scheduled wake-up that runs within the current conversation. Tell Invent what to review and when — it picks up that conversation at the scheduled time and acts on the instruction. The Inventor will also suggest a check-in when you describe a task that needs a one-time follow-up.
+
+    Use check-ins for one-time reviews and follow-ups. For tasks that repeat on a schedule, use a Routine instead.
+
     <Note>
       Before setting up a check-in, add an email or Slack notification channel in [Alerts](/build/invent/invent#alerts) so Invent can notify you about the result.
     </Note>
 
-    A check-in is a one-time scheduled wake-up that resumes the current Invent conversation at a specific time. Use check-ins for one-time follow-ups — for example, to review results after a deployment or revisit a task once a process completes.
+    #### What happens when a check-in runs
 
-    You or Invent can schedule a check-in directly from a conversation. For recurring work, use routines instead.
+    Invent reviews evals, errors, and recent activity. If it finds an issue, it sends a summary and suggested fix. If everything looks healthy, it stays quiet.
 
     Open the schedule management modal to view, edit, or delete check-ins alongside any active routines.
   </Accordion>
