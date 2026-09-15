@@ -1,0 +1,98 @@
+---
+title: "Context"
+sidebarTitle: "Context"
+description: "Attach files directly to your agent's context window"
+---
+
+## Overview
+
+Context allows you to attach files directly to your agent's context window. Every file you add here is injected in full into the agent's context on every run — no search, no retrieval, just the raw file content available to the model at all times.
+
+<Columns cols={2}>
+  <Card title="Context" icon="file" href="#file-type-viewers">
+    Files injected directly and fully into the agent's context window on every run.
+  </Card>
+  <Card title="Knowledge" icon="database" href="/build/knowledge/create-knowledge">
+    Files stored in a searchable knowledge base. Relevant chunks are retrieved at runtime using RAG.
+  </Card>
+</Columns>
+
+<Note>
+Context is currently in preview and gated behind the ContextFiles feature flag. Contact support if you don't see the Context section in your agent builder.
+</Note>
+
+**Use Context when:**
+
+- The file is small enough to fit within your model's context window
+- The agent needs to reference the entire file, not just relevant sections
+- You want a simple setup without configuring a separate knowledge base
+
+**Use Knowledge when:**
+
+- You have large documents where only parts are relevant to each query
+- You need the agent to search across many files at once
+- You want semantic search over a large dataset
+
+## How to access Context
+
+1. Open your agent in the Builder
+2. Click **Context** in the left sidebar
+
+## File type viewers
+
+Each file type has an optimized viewer so you can inspect what the agent will see before it runs.
+
+### Markdown files
+
+Markdown files are rendered at reading width. A collapsible **Properties** section at the top of the viewer shows YAML frontmatter when the file includes it, so you can confirm metadata like title, tags, or date without scrolling the raw file.
+
+### CSV and TSV files
+
+CSV and TSV files are displayed as scrollable tables with row numbers. For large files, a truncation notice appears to indicate that only a portion of the file is shown in the preview — the full file is still injected into the agent's context.
+
+### Code files
+
+Code files are displayed with line numbers and syntax highlighting based on the file extension.
+
+### Images
+
+Images are displayed in a framed viewer.
+
+### Binary, Excel, and unknown files
+
+Files that cannot be previewed — including binary files, Excel workbooks (`.xlsx`, `.xls`), and unrecognized file types — show a fallback card explaining that a preview is not available. The card includes an **Open** or **Download** button so you can still access the file.
+
+<Note>
+Excel files cannot be rendered directly. To use spreadsheet data in an agent, convert the file to CSV first, or use the [Convert a spreadsheet to JSON](/build/tools/tool-steps/convert-spreadsheet-to-json) tool step in a tool.
+</Note>
+
+### Empty files
+
+If a file has no content, an explicit message is shown in the viewer confirming that the file is empty.
+
+## Unified file bar
+
+Each file viewer has a unified file bar at the top of the panel. It combines the file path and available actions — such as downloading or opening the file — into a single row, so you can identify the file and take action without scrolling.
+
+## Context vs Knowledge
+
+<Info>
+Context injects the full file into every agent run. Knowledge uses retrieval-augmented generation (RAG) to search your files and return only the most relevant chunks. Use Context for small, essential reference files. Use Knowledge for large or frequently updated document sets.
+</Info>
+
+For more on Knowledge, see [Create knowledge](/build/knowledge/create-knowledge).
+
+## Best practices
+
+- **Keep files small.** Context files are injected in full on every run and count toward the model's context window limit. Large files can reduce the space available for conversation and tool output.
+- **Prefer structured formats.** Markdown, CSV, and code files have dedicated viewers and are generally easier for models to parse than binary formats.
+- **Avoid Excel files.** Excel files cannot be previewed or read directly by the model. Convert to CSV before adding to Context.
+- **Review what the agent sees.** Use the file viewers to confirm the file content looks correct before running the agent. YAML frontmatter in Markdown files is visible in the Properties panel.
+- **Switch to Knowledge for large datasets.** If your file is too large to fit in context, or if only a portion of it is relevant to any given task, Knowledge with RAG search is more appropriate.
+
+## Related features
+
+- [Knowledge](/build/knowledge/create-knowledge) — store and search large document sets using RAG
+- [Prompt](/build/agents/build-your-agent/prompt) — define how the agent uses attached context in its instructions
+- [Convert a file to text](/build/tools/tool-steps/file-to-text) — extract text from files for use in tool steps
+- [Convert a spreadsheet to JSON](/build/tools/tool-steps/convert-spreadsheet-to-json) — convert CSV or Excel files to structured JSON for tool processing
