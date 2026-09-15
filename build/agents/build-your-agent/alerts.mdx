@@ -23,6 +23,9 @@ Stay on top of agent issues by creating alert rules that notify you automaticall
   <Card title="Tool error" icon="wrench">
     Triggers when a tool fails during execution, optionally scoped to specific tools.
   </Card>
+  <Card title="Trigger failure" icon="bell-exclamation">
+    Monitors when a specific trigger fails. Per-user subscription — each team member controls their own alerts independently.
+  </Card>
   <Card title="Agent published" icon="rocket">
     Triggers when the agent is published. No additional configuration needed.
   </Card>
@@ -43,6 +46,14 @@ A common configuration is to alert on failure states like **Timed out**, **Unrec
 #### Tool error
 
 Triggers when a tool fails during execution. You can optionally scope this to specific tools — leave the selection empty to watch all tools, or pick individual tools to monitor. This is useful for critical integrations where a tool failure could block your agent's workflow.
+
+#### Trigger failure
+
+Monitors when a specific trigger fails. Subscriptions are per-user — each team member manages their own alarms independently, so one person enabling or disabling an alarm has no effect on others. There is one alarm per trigger per user.
+
+Set up trigger failure alarms from the Triggers monitoring page using the alarm bell icon next to each trigger. The icon shows three states: on, off, or unavailable.
+
+When you create or re-enable an alarm, the watermark is set to the current time. Only failures that occur after that point will trigger a notification — failures that happened before the alarm was active are not reported.
 
 #### Agent published
 
