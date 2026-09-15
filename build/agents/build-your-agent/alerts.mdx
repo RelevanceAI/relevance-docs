@@ -66,6 +66,10 @@ Each alert rule can send notifications to one or more channels:
 
 For Slack setup details, see [Slack integration](/integrations/popular-integrations/slack). For Teams, see [Microsoft Teams integration](/integrations/popular-integrations/microsoft-teams).
 
+<Note>
+When you remove a connected OAuth account (Slack or Teams), a confirmation dialog shows how many alert rules route notifications through that account. Review those rules before disconnecting to avoid breaking alert delivery.
+</Note>
+
 ### Setting up an alert rule
 
 1. Navigate to your agent and open the **Alerts** tab
@@ -77,6 +81,22 @@ For Slack setup details, see [Slack integration](/integrations/popular-integrati
 7. Click **Save**
 
 You can create multiple alert rules, each with different triggers and channels. Existing rules appear as cards showing the trigger description, active channels, and controls to edit, delete, or toggle them on/off.
+
+### Notification channel health
+
+When a notification channel experiences a permanent delivery failure — such as a deleted OAuth account, a removed Slack bot, an archived channel, or a token that can no longer be renewed — Relevance AI surfaces warnings so you can identify and fix the issue before critical notifications are missed.
+
+#### Channel issue badge
+
+Alert rule cards display a yellow **Channel issue** badge when the rule's notification channel has a permanent delivery failure. The badge appears in both the agent and eval views, making broken channels easy to spot at a glance.
+
+#### Warning banner when editing
+
+When you open an alert rule with a broken channel for editing, a warning banner appears in the channel configuration step. The banner identifies which specific channel is broken and explains why delivery failed, so you know exactly what needs to be updated.
+
+#### Fallback-to-email delivery
+
+If all of an alert rule's configured notification channels are permanently broken, Relevance AI automatically falls back to emailing the alert rule's original creator. This ensures critical notifications are still delivered even when all configured channels fail.
 
 ---
 
