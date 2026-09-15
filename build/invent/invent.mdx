@@ -1,35 +1,123 @@
 ---
-title: "Build with Invent"
-sidebarTitle: "Build with Invent"
-description: "Invent is a forward deployed agent that builds, manages, and improves the specialist Agents that run your business processes."
+title: "Use Invent"
+sidebarTitle: "Use Invent"
+description: "Meet your personal forward deployed agent built into Relevance AI."
 ---
 
-<div className="invent-demo" data-demo="build"></div>
+Invent is a forward deployed AI Agent built into Relevance AI. You say how the work should run, and Invent builds and manages the Agent team that does it. It works across your entire project rather than inside any one Agent or Tool, so it can create, edit, and understand almost anything in the platform.
 
-## What is Invent
-
-Invent is a forward deployed agent built into Relevance AI. Give it a business process and it works with you to understand how that process runs, including the systems involved and the decisions that require judgment.
-
-It then creates and coordinates the Agents, Tools, Triggers, and Workforces needed to carry out the process, with performance requirements in place before real work begins.
-
-Its job continues after launch. Invent reviews live performance, detects quality problems, and proposes and tests improvements. You bring the process knowledge; Invent builds and manages the Agent team underneath it.
+<img src="/images/invent-panel.png" alt="The Invent panel showing its greeting, suggested actions, and the message composer" />
 
 ## What can Invent do?
 
-<CardGroup cols={2}>
-  <Card title="Understand your process" icon="magnifying-glass">
-    Invent works through your process with you, including its inputs, systems, judgment calls, exceptions, and definition of success. It can read the process back to you, identify missing information, and help determine which parts should become Tools, Agents, or Workforces.
-  </Card>
-  <Card title="Build and connect the Agent team" icon="diagram-project">
-    Invent creates the Agents needed for the process, equips them with the required Tools and context, connects the systems where the work happens, and wires the Triggers and Workforces that coordinate the process from end to end.
-  </Card>
-  <Card title="Set and maintain the quality bar" icon="gauge">
-    Invent defines the checks each Agent must pass before launch and samples live runs after deployment. When quality drops, it diagnoses the problem and proposes changes to prompts, Tools, examples, models, or orchestration. It can test those changes against the same requirements before you approve them.
-  </Card>
-  <Card title="Review performance and find opportunities" icon="chart-line">
-    Invent reviews Agent activity, errors, Evals, and performance dashboards to diagnose problems and recommend improvements. Describe a recurring process, and it can help identify where Agents, Tools, or Workforces could automate it.
-  </Card>
-</CardGroup>
+Each area below is something Invent can reach directly. In all of them it acts with your own permissions, inside the project you have open.
+
+<AccordionGroup>
+  <Accordion title="Agents" icon="robot">
+    Invent builds and runs your Agents end to end.
+
+    - Create, update, publish, and delete an Agent
+    - Read, search, and edit its system prompt
+    - Attach and detach the Tools it can use
+    - Trigger a run and poll the result
+    - Read a task's summary, messages, and metadata
+    - Cancel a running task
+  </Accordion>
+  <Accordion title="Tools" icon="screwdriver-wrench">
+    Invent assembles Tools a step at a time, or starts from one that already exists.
+
+    - Create, update, publish, delete, and bulk delete Tools
+    - Add, update, reorder, and remove steps
+    - Set what the Tool returns
+    - Trigger a run, poll the result, and cancel one mid-flight
+    - Read the latest run or look back through previous runs
+    - Search and clone public Tools and Marketplace listings
+    - Browse the Tool step library, check what a step needs, and build a Tool from one
+  </Accordion>
+  <Accordion title="Workforces" icon="users-gear">
+    Invent wires Agents into a Workforce and runs it.
+
+    - Create, update, publish, and delete a Workforce
+    - Turn its Trigger on or off
+    - Trigger a run and poll the result
+    - Read a task's messages and metadata
+    - Cancel a running task
+  </Accordion>
+  <Accordion title="Knowledge" icon="brain">
+    Invent manages the Knowledge tables your Agents read from.
+
+    - Create, update, and delete Knowledge tables
+    - Add, update, and delete rows
+    - Read a whole table or a single row
+    - Export the contents
+  </Accordion>
+  <Accordion title="Triggers" icon="bolt">
+    Invent sets up what starts an Agent without you.
+
+    - List the Triggers already on an Agent
+    - Create a Trigger
+    - Enable or disable one
+    - Delete one
+  </Accordion>
+  <Accordion title="Evals and performance" icon="gauge">
+    Invent can build the whole quality setup, run it, and watch it.
+
+    - Build and maintain the reusable Checks library
+    - Create scenarios, and attach or detach Checks on them
+    - Configure how a scenario is simulated
+    - Group scenarios into test sets
+    - Run an evaluation, poll it, and cancel or delete a run
+    - Read run summaries and individual test results
+    - Create Performance dashboards and attach Checks to them
+    - Read a dashboard's time series and its run history
+    - Create, update, and delete alarms
+    - Configure the pre-publish check and poll its status
+  </Accordion>
+  <Accordion title="Version control" icon="clock-rotate-left">
+    Agents, Tools, and Workforces all keep a version history, and Invent can move through it. It asks before restoring, and the live published version stays untouched until you publish.
+
+    - List the versions of an Agent, Tool, or Workforce
+    - Read any single version
+    - Rename a version
+    - Restore an earlier version into the current draft
+  </Accordion>
+  <Accordion title="Analytics and monitoring" icon="chart-line">
+    Invent reads the same numbers you do when something looks wrong.
+
+    - Pull a scorecard for an Agent, Tool, or Workforce
+    - Read the error records behind a problem
+    - Chart usage over time, or break it down by resource
+    - Chart Agent activity over time
+    - Read the current task counts, including what is waiting for review, escalated, or errored
+    - List the tasks themselves
+  </Accordion>
+  <Accordion title="Integrations and MCP" icon="plug">
+    Invent uses what you have already connected; authenticating an account stays yours to do.
+
+    - See which accounts are connected and which providers are available
+    - Check whether a Tool has the integrations it needs
+    - Check whether an API key is available
+    - List the Slack channels it can post to
+    - List your project's MCP servers and the Tools they expose, and call them
+  </Accordion>
+  <Accordion title="Working with you" icon="comments">
+    Invent works in the open rather than silently.
+
+    - Ask you questions before it builds
+    - Read a plan back and confirm it with you
+    - Spawn subagents to work in parallel
+    - Read, write, edit, list, and delete the files in a conversation
+  </Accordion>
+  <Accordion title="Project setup" icon="folder-tree">
+    Invent keeps the project around the work tidy.
+
+    - Read your project's details
+    - Create, rename, and delete folders
+    - List the LLM models available to you
+    - Set and clear task priority on a resource
+    - File a bug report to the Relevance AI engineering team
+  </Accordion>
+</AccordionGroup>
 
 ## Where to find Invent
 
@@ -187,6 +275,8 @@ Invent is available to organization admins by default. An organization admin can
     </AccordionGroup>
   </Tab>
   <Tab title="Manage performance">
+    Invent's job continues after launch. It watches live performance, spots where quality slips, and proposes improvements it has already tested.
+
     <AccordionGroup>
   <Accordion title="Scheduled check-ins" icon="calendar-clock">
     <img src="/images/invent-scheduled-check-ins.png" alt="A scheduled check-in in Invent" />
