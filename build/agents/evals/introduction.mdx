@@ -87,6 +87,10 @@ Clicking a **Credits** or **Actions** value opens a breakdown of where that Test
 | **Agent Execution** | The Agent or Workforce's own run during the Test. Uses credits, plus the actions from each Tool it runs. These actions were already billed when it ran — they're shown here for attribution, not charged again. Workforces have no action-level data, so only credits appear. |
 | **Checks** | Each Check that scores the conversation, broken down by model. Each Check uses credits and counts as one action. |
 
+<Note>
+If any component uses a BYOK (Bring Your Own Key) model — a model configured with your own API key via project keys — that component shows 0 credits in the breakdown. Relevance AI returns zero credits for BYOK model calls because those calls draw from your own API key, not from Relevance AI-provided credits. This applies to the Scenario Runner model, the Agent or Workforce's own model, and any LLM judge model used in Checks.
+</Note>
+
 ---
 
 Next: Learn how to [create Tests](/build/agents/evals/test-sets) — the simulated conversations your Agent gets evaluated against.
