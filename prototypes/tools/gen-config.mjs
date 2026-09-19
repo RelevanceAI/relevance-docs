@@ -104,6 +104,71 @@ fs.mkdirSync(path.join(ROOT, 'prototypes/starlight/public'), { recursive: true }
 fs.writeFileSync(path.join(ROOT, 'prototypes/starlight/public/_redirects'), redirectFile);
 out('prototypes/vercel.redirects.json', JSON.stringify(vercel, null, 2) + '\n');
 
+// ---- Fumadocs navigation -------------------------------------------------
+// Fumadocs builds its sidebar from a meta.json per directory, not one central
+// tree, so docs.json has to be projected onto the folder layout. Without this
+// it falls back to auto-generating nav from folder names, which loses
+// docs.json's grouping and ordering entirely.
+function emitFumadocsMeta(nodes) {
+  // dir -> { pages: [...], title }
+  const dirs = new Map();
+  const ensure = (d) => {
+    if (!dirs.has(d)) dirs.set(d, { pages: [], groups: new Map() });
+    return dirs.get(d);
+  };
+
+  const place = (node, dir) => {
+    if (node?.slug) {
+      if (!keep(node.slug)) return;
+      const rel = path.posix.relative(dir, node.slug);
+      ensure(dir).pages.push(rel);
+      return;
+    }
+    if (node?.items) {
+      // A group maps to a folder when its pages share one, else to a
+      // separator plus inline links in the parent meta.
+      const slugs = [];
+      const collect = (n) => n.slug ? slugs.push(n.slug) : (n.items ?? []).forEach(collect);
+      node.items.forEach(collect);
+      const kept = slugs.filter(keep);
+      if (kept.length === 0) return;
+
+      const common = kept.reduce((acc, s) => {
+        const a = acc.split('/'), b = s.split('/'), out = [];
+        for (let i = 0; i < Math.min(a.length, b.length) - 0; i++) {
+          if (a[i] === b[i]) out.push(a[i]); else break;
+        }
+        return out.join('/');
+      }, kept[0].split('/').slice(0, -1).join('/'));
+
+      if (common && kept.every((s) => s.startsWith(common + '/'))) {
+        ensure(dir).pages.push(path.posix.relative(dir, common));
+        const g = ensure(common);
+        g.title = node.label;
+        node.items.forEach((c) => place(c, common));
+      } else {
+        ensure(dir).pages.push(`---${node.label}---`);
+        node.items.forEach((c) => place(c, dir));
+      }
+    }
+  };
+
+  nodes.forEach((n) => place(n, ''));
+
+  let written = 0;
+  for (const [dir, cfg] of dirs) {
+    const meta = { pages: [...new Set(cfg.pages)] };
+    if (cfg.title) meta.title = cfg.title;
+    const f = path.join(ROOT, 'prototypes/fumadocs/content/docs', dir, 'meta.json');
+    fs.mkdirSync(path.dirname(f), { recursive: true });
+    fs.writeFileSync(f, JSON.stringify(meta, null, 2) + '\n');
+    written++;
+  }
+  return written;
+}
+
+const metaCount = emitFumadocsMeta(sidebar);
+
 const countLeaves = (n) => Array.isArray(n)
   ? n.reduce((a, x) => a + countLeaves(x), 0)
   : n?.items ? countLeaves(n.items) : (n?.slug ? 1 : 0);
@@ -111,5 +176,6 @@ const countLeaves = (n) => Array.isArray(n)
 console.log(`sidebar groups : ${sidebar.length}`);
 console.log(`sidebar pages  : ${countLeaves(sidebar)}`);
 console.log(`global anchors : ${anchors.length}`);
+console.log(`fumadocs meta  : ${metaCount} meta.json files`);
 console.log(`redirects      : ${all.length} (${exact.length} exact, ${wildcard.length} wildcard)`);
 console.log(`  exact -> astro config; wildcard -> host rules only`);

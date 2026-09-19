@@ -29,6 +29,9 @@ node prototypes/tools/setup.mjs                              # stage pages + ima
 node prototypes/tools/gen-config.mjs --only-prototype-pages  # nav + redirects
 ```
 
+Run them in that order — `setup.mjs` wipes and re-stages `content/docs`, which
+would delete the `meta.json` files `gen-config.mjs` writes into it.
+
 Then build either one:
 
 ```bash
@@ -65,6 +68,12 @@ Notes that changed the plan:
   `invent-callout.js` + `style.css`, but is used on **zero** pages.
 - One file has a `sidebardTitle` typo that Mintlify silently ignores. Both
   prototypes surface it at build time.
+- **Icons are a real line item.** Mintlify takes Font Awesome names
+  (`icon="chart-line"`), and the corpus uses **1,423 icon references across 297
+  distinct names**. 257 of those names are in Font Awesome Free; the remaining
+  **40 names (75 usages) are Font Awesome Pro only** — `chart-mixed`,
+  `megaphone`, `buildings`, `messages`, `calendar-clock` and similar. Going
+  self-hosted means buying an FA Pro licence or remapping those 40.
 
 ## Result
 
@@ -82,6 +91,7 @@ Both emit the same `rl-*` markup, element for element.
 | Per-page `.md` mirrors | must be built | **out of the box** |
 | OG images | must be built | **out of the box** |
 | Component wiring | remark plugin injects imports into the MDX AST | global `getMDXComponents()` map |
+| Navigation source | generated Starlight sidebar | generated `meta.json` per directory |
 | Snippets | `import.meta.glob` lookup | rewritten to native `<include>` |
 
 ### Where each one bit
@@ -103,6 +113,24 @@ hard-fails the build with `Badge is not defined`. Only 2 pages in the whole
 corpus do this, but it breaks the build, so Fumadocs needs import injection
 too — just narrowly. Its "no build-time codegen" advantage is real for body
 content and false for headings.
+
+### What the side-by-side recording caught
+
+Two defects that the build output alone did not show, both found by watching
+the three sites next to each other:
+
+1. **Icon names rendered as literal text.** A naive shim prints the `icon`
+   prop, so cards read "headset Customer Support". Fixed by rendering
+   `<i class="fa-solid fa-{name}">` in both prototypes, with unknown names
+   rendering as an empty slot rather than leaking the string.
+2. **Fumadocs was showing auto-generated navigation.** It builds its sidebar
+   from a `meta.json` per directory rather than one central tree, and without
+   those files it falls back to folder names — losing `docs.json`'s grouping
+   and ordering entirely. `gen-config.mjs` now projects `docs.json` onto the
+   folder layout and emits the `meta.json` set.
+
+Neither showed up in a passing build. Both made one prototype look worse than
+it is.
 
 ### The redirect finding
 
@@ -128,6 +156,10 @@ against the live sitemap, with zero exceptions.
 
 - Neither prototype themes the chrome (nav, sidebar, footer) — only content.
   A real redesign needs design direction first.
+- Absolute image paths (`/images/...`) in MDX are **not** rewritten to include
+  the `/docs` base by either framework, so images 404 under a base path unless
+  the host serves `/images` at the domain root or a rehype plugin prefixes
+  them. Affects every image reference in the corpus.
 - Search quality: Pagefind and Orama are both keyword search. Mintlify's is
   AI-backed. Replacing that is its own project.
 - `images/` is 246 MB in a 256 MB repo. Worth moving to a CDN or Git LFS
