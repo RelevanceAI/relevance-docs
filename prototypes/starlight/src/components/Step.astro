@@ -1,0 +1,7 @@
+---
+const { title, icon } = Astro.props;
+---
+<li class="rl-step">
+  {title && <p class="rl-step-title">{icon && <span aria-hidden="true">{icon}</span>}{title}</p>}
+  <slot />
+</li>

@@ -1,0 +1,7 @@
+---
+const { title, defaultOpen = false, icon } = Astro.props;
+---
+<details class="rl-accordion" open={defaultOpen}>
+  <summary>{icon && <span aria-hidden="true">{icon}</span>}{title}</summary>
+  <div class="rl-accordion-body"><slot /></div>
+</details>

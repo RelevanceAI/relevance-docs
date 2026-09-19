@@ -1,0 +1,11 @@
+---
+// Maps Mintlify's 6 built-in callouts + the custom <Callout> onto one shim.
+// Mintlify rule: the 6 built-ins take NO attributes, so we ignore everything
+// except `variant`; the custom <Callout> accepts icon/color.
+const { variant = 'note', icon, color } = Astro.props;
+const style = color ? `--rl-cal:${color}` : undefined;
+---
+<aside class={`rl-callout rl-callout--${variant}`} style={style}>
+  {icon && <span class="rl-callout-icon" aria-hidden="true">{icon}</span>}
+  <div><slot /></div>
+</aside>

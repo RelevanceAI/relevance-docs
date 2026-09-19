@@ -1,0 +1,4 @@
+---
+const { cols = 2 } = Astro.props;
+---
+<div class="rl-columns" style={`grid-template-columns:repeat(${cols},minmax(0,1fr))`}><slot /></div>

@@ -1,0 +1,47 @@
+/* Bridges Starlight's own CSS variables onto the shared design tokens.
+   This file is the Starlight-specific half of the theming work -- the
+   equivalent Fumadocs file does the same job against Tailwind variables.
+   Comparing the two is a fair read on per-framework theming cost. */
+:root {
+  --sl-font: var(--rl-font-sans);
+  --sl-font-system-mono: var(--rl-font-mono);
+  --sl-color-accent: var(--rl-accent);
+  --sl-color-accent-low: var(--rl-accent-deep);
+  --sl-color-accent-high: var(--rl-accent-soft);
+  --sl-color-white: var(--rl-text);
+  --sl-color-gray-1: var(--rl-text);
+  --sl-color-gray-2: var(--rl-text-muted);
+  --sl-color-gray-3: var(--rl-text-faint);
+  --sl-color-gray-5: var(--rl-border);
+  --sl-color-gray-6: var(--rl-bg-subtle);
+  --sl-color-black: var(--rl-bg);
+  --sl-color-bg: var(--rl-bg);
+  --sl-color-bg-nav: var(--rl-bg);
+  --sl-color-bg-sidebar: var(--rl-bg);
+  --sl-color-hairline: var(--rl-border);
+  --sl-color-hairline-light: var(--rl-border);
+  --sl-content-width: 50rem;
+}
+:root[data-theme='light'] {
+  --sl-color-white: var(--rl-text);
+  --sl-color-text: var(--rl-text);
+}
+
+/* Apply the editorial type scale to Starlight's content container. */
+.sl-markdown-content { max-width: var(--rl-measure); }
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.content-panel h1 {
+  font-family: var(--rl-font-head);
+  letter-spacing: -.012em;
+}
+.sl-markdown-content h2 {
+  padding-bottom: .28em;
+  border-bottom: 1px solid var(--rl-border);
+}
+/* Starlight injects margins between all siblings; our shims manage their own. */
+.sl-markdown-content .rl-callout,
+.sl-markdown-content .rl-card-group,
+.sl-markdown-content .rl-accordion-group,
+.sl-markdown-content .rl-steps { margin-block: 1.4rem; }
