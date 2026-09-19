@@ -1,0 +1,286 @@
+/* Relevance AI docs theme.
+   Tokens taken from relevanceai.com: Sora headings at regular weight with
+   tight negative tracking, Inter for body and UI, #6056FF primary, #0D162F
+   ink, hairline #E6E7EA rules, 8px radii and a lot of white space. */
+
+:root {
+  --rl-primary:      #6056FF;
+  --rl-primary-ink:  #4A41E0;
+  --rl-primary-soft: #EEEDFF;
+  --rl-teal:         #0E9384;
+  --rl-green:        #027A48;
+  --rl-amber:        #B54708;
+  --rl-red:          #D92D20;
+
+  --rl-ink:          #0D162F;
+  --rl-muted:        #5A6072;
+  --rl-faint:        #868A97;
+
+  --rl-bg:           #FFFFFF;
+  --rl-surface:      #F8FAFC;
+  --rl-surface-2:    #F3F3F4;
+  --rl-line:         #E6E7EA;
+  --rl-line-soft:    #F0F0F2;
+
+  --rl-radius:    8px;
+  --rl-radius-lg: 12px;
+
+  --rl-font-sans: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+  --rl-font-head: var(--font-sora), Sora, var(--rl-font-sans);
+  --rl-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  --rl-measure: 46rem;
+}
+
+.dark, :root[data-theme='dark'], [data-theme='dark'] {
+  --rl-primary:      #8C84FF;
+  --rl-primary-ink:  #A8A2FF;
+  --rl-primary-soft: #1C1A3A;
+  --rl-teal:         #2DD4BF;
+  --rl-green:        #4ADE80;
+  --rl-amber:        #FBBF24;
+  --rl-red:          #F87171;
+
+  --rl-ink:          #ECEEF4;
+  --rl-muted:        #A2A8BA;
+  --rl-faint:        #7A8095;
+
+  --rl-bg:           #0A0E1A;
+  --rl-surface:      #111726;
+  --rl-surface-2:    #171E30;
+  --rl-line:         #232B40;
+  --rl-line-soft:    #1B2234;
+}
+
+/* Map Fumadocs' own variables onto the brand so chrome matches content. */
+:root {
+  --color-fd-background: var(--rl-bg);
+  --color-fd-foreground: var(--rl-ink);
+  --color-fd-muted: var(--rl-surface);
+  --color-fd-muted-foreground: var(--rl-muted);
+  --color-fd-popover: var(--rl-bg);
+  --color-fd-popover-foreground: var(--rl-ink);
+  --color-fd-card: var(--rl-bg);
+  --color-fd-card-foreground: var(--rl-ink);
+  --color-fd-border: var(--rl-line);
+  --color-fd-primary: var(--rl-primary);
+  --color-fd-primary-foreground: #FFFFFF;
+  --color-fd-secondary: var(--rl-surface);
+  --color-fd-secondary-foreground: var(--rl-ink);
+  --color-fd-accent: var(--rl-primary-soft);
+  --color-fd-accent-foreground: var(--rl-primary-ink);
+  --color-fd-ring: var(--rl-primary);
+}
+
+body {
+  font-family: var(--rl-font-sans);
+  color: var(--rl-ink);
+  background: var(--rl-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------------------------------------------- type */
+
+#nd-docs-layout h1, #nd-docs-layout h2, #nd-docs-layout h3,
+.rl-prose h1, .rl-prose h2, .rl-prose h3,
+article h1, article h2, article h3 {
+  font-family: var(--rl-font-head);
+  font-weight: 400;
+  color: var(--rl-ink);
+}
+article h1 { font-size: 2.5rem; line-height: 1.1; letter-spacing: -0.05em; margin-bottom: .35em; }
+article h2 { font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.025em; margin-top: 2.4em; }
+article h3 { font-size: 1.2rem; line-height: 1.3; letter-spacing: -0.015em; margin-top: 1.9em; }
+article h4 { font-family: var(--rl-font-head); font-weight: 400; letter-spacing: -0.01em; }
+
+article p, article li { color: var(--rl-muted); line-height: 1.68; }
+article strong { color: var(--rl-ink); font-weight: 600; }
+article a { color: var(--rl-primary); text-underline-offset: 3px; }
+/* Fumadocs wraps headings in anchor links for deep-linking; without this they
+   inherit the link colour and every h2 renders purple. */
+article h1 a, article h2 a, article h3 a, article h4 a,
+article h5 a, article h6 a { color: inherit; text-decoration: none; }
+
+/* A hairline under h2 echoes the rule motif on relevanceai.com. */
+article h2 { padding-bottom: .38em; border-bottom: 1px solid var(--rl-line); }
+
+/* ----------------------------------------------------------------- icons */
+
+.rl-icon {
+  width: 1em; color: var(--rl-primary); font-size: .95em;
+  flex: none; text-align: center;
+}
+
+/* -------------------------------------------------------------- callouts */
+
+.rl-callout {
+  display: flex; gap: .7rem; align-items: flex-start;
+  margin: 1.5rem 0; padding: .85rem 1rem;
+  border: 1px solid var(--rl-line);
+  border-left: 3px solid var(--rl-cal, var(--rl-primary));
+  border-radius: var(--rl-radius);
+  background: var(--rl-surface);
+  font-size: .94rem;
+}
+.rl-callout-mark { color: var(--rl-cal, var(--rl-primary)); margin-top: .15rem; }
+.rl-callout-mark .rl-icon { color: inherit; }
+.rl-callout-body > :first-child { margin-top: 0; }
+.rl-callout-body > :last-child { margin-bottom: 0; }
+.rl-callout-body p { color: var(--rl-muted); margin: 0; }
+.rl-callout--note    { --rl-cal: var(--rl-primary); }
+.rl-callout--info    { --rl-cal: var(--rl-primary); }
+.rl-callout--tip     { --rl-cal: var(--rl-teal); }
+.rl-callout--check   { --rl-cal: var(--rl-green); }
+.rl-callout--warning { --rl-cal: var(--rl-amber); }
+.rl-callout--danger  { --rl-cal: var(--rl-red); }
+
+/* ------------------------------------------------------------- accordion */
+
+.rl-accordion {
+  border: 1px solid var(--rl-line); border-radius: var(--rl-radius);
+  background: var(--rl-bg); margin: .5rem 0; overflow: hidden;
+}
+.rl-accordion-summary {
+  cursor: pointer; padding: .8rem 1rem; list-style: none;
+  display: flex; align-items: center; gap: .6rem;
+  font-weight: 500; color: var(--rl-ink); font-size: .95rem;
+}
+.rl-accordion-summary::-webkit-details-marker { display: none; }
+.rl-accordion-summary:hover { background: var(--rl-surface); }
+.rl-accordion-title { flex: 1; min-width: 0; }
+.rl-chev { width: 1rem; height: 1rem; color: var(--rl-faint); transition: transform .18s ease; flex: none; }
+.rl-accordion[open] > .rl-accordion-summary > .rl-chev { transform: rotate(180deg); }
+.rl-accordion[open] > .rl-accordion-summary { border-bottom: 1px solid var(--rl-line); }
+.rl-accordion-body { padding: .95rem 1rem 1.05rem; font-size: .94rem; }
+.rl-accordion-body > :first-child { margin-top: 0; }
+.rl-accordion-body > :last-child { margin-bottom: 0; }
+
+.rl-accordion-group { margin: 1.5rem 0; border-radius: var(--rl-radius); overflow: hidden; border: 1px solid var(--rl-line); }
+.rl-accordion-group > .rl-accordion { border: 0; border-bottom: 1px solid var(--rl-line); border-radius: 0; margin: 0; }
+.rl-accordion-group > .rl-accordion:last-child { border-bottom: 0; }
+
+/* ----------------------------------------------------------------- cards */
+
+.rl-card-group { display: grid; gap: .8rem; margin: 1.6rem 0; }
+.rl-card-group[data-cols="1"] { grid-template-columns: 1fr; }
+.rl-card-group[data-cols="2"] { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.rl-card-group[data-cols="3"] { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.rl-card-group[data-cols="4"] { grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); }
+
+.rl-card {
+  display: flex; gap: .75rem; align-items: flex-start;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--rl-line); border-radius: var(--rl-radius-lg);
+  background: var(--rl-bg); color: inherit; text-decoration: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+a.rl-card:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
+a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
+.rl-card-icon { flex: none; display: grid; place-items: center;
+  width: 2rem; height: 2rem; border-radius: var(--rl-radius);
+  background: var(--rl-primary-soft); }
+.rl-card-icon .rl-icon { font-size: .9rem; }
+.rl-card-main { display: block; flex: 1; min-width: 0; }
+.rl-card-title { display: block; font-weight: 600; color: var(--rl-ink); font-size: .95rem; margin-bottom: .2rem; }
+.rl-card-body { display: block; color: var(--rl-muted); font-size: .88rem; line-height: 1.55; }
+.rl-card-body p { margin: 0; color: inherit; font-size: inherit; }
+.rl-card-arrow { width: .95rem; height: .95rem; flex: none; color: var(--rl-faint);
+  opacity: .55; transition: transform .15s ease, opacity .15s ease; margin-top: .2rem; }
+
+/* ----------------------------------------------------------------- steps */
+
+.rl-steps { margin: 1.6rem 0; }
+.rl-step { position: relative; display: flex; gap: 1rem; padding-bottom: 1.6rem; }
+.rl-step::before {
+  content: ""; position: absolute; left: .78rem; top: 1.7rem; bottom: 0;
+  width: 1px; background: var(--rl-line);
+}
+.rl-step:last-child { padding-bottom: 0; }
+.rl-step:last-child::before { display: none; }
+.rl-step-marker {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  background: var(--rl-bg); border: 1px solid var(--rl-line-strong, var(--rl-line));
+  position: relative; z-index: 1; margin-top: .1rem;
+}
+.rl-step-marker::after {
+  content: ""; position: absolute; inset: .42rem; border-radius: 50%;
+  background: var(--rl-primary);
+}
+.rl-step-content { flex: 1; min-width: 0; }
+.rl-step-title { font-weight: 600; color: var(--rl-ink); margin: .15rem 0 .45rem; display: flex; gap: .4rem; align-items: center; }
+.rl-step-content > :last-child { margin-bottom: 0; }
+
+/* Counter variant so numbered steps read like the live docs. */
+.rl-steps { counter-reset: rl-step; }
+.rl-step { counter-increment: rl-step; }
+.rl-step-marker::before {
+  content: counter(rl-step);
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: .72rem; font-weight: 600; color: var(--rl-primary);
+  font-family: var(--rl-font-sans);
+}
+.rl-step-marker::after { display: none; }
+
+/* ------------------------------------------------------------ api fields */
+
+.rl-param { border-top: 1px solid var(--rl-line); padding: .9rem 0; }
+.rl-param-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; }
+.rl-param-name { font-family: var(--rl-font-mono); font-size: .85rem; font-weight: 600;
+  color: var(--rl-ink); background: var(--rl-surface-2); padding: .08rem .35rem; border-radius: 4px; }
+.rl-param-type, .rl-param-default { font-family: var(--rl-font-mono); font-size: .76rem; color: var(--rl-faint); }
+.rl-param-req { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--rl-red); font-weight: 700; }
+.rl-param-dep { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; color: var(--rl-amber); font-weight: 700; }
+.rl-param-body { font-size: .9rem; color: var(--rl-muted); margin-top: .35rem; }
+.rl-param-body > :first-child { margin-top: 0; }
+.rl-expandable { margin: .6rem 0 0; border-left: 2px solid var(--rl-line); padding-left: .9rem; }
+.rl-expandable > summary { cursor: pointer; font-size: .85rem; color: var(--rl-primary); }
+
+/* ---------------------------------------------------- frames, tabs, misc */
+
+.rl-frame { margin: 1.6rem 0; }
+.rl-frame-inner { border: 1px solid var(--rl-line); border-radius: var(--rl-radius-lg);
+  overflow: hidden; background: var(--rl-surface); }
+.rl-frame img { display: block; width: 100%; height: auto; }
+.rl-frame-caption { margin-top: .55rem; font-size: .83rem; color: var(--rl-faint); text-align: center; }
+
+.rl-tabs { margin: 1.5rem 0; border: 1px solid var(--rl-line); border-radius: var(--rl-radius); overflow: hidden; }
+.rl-tab + .rl-tab { border-top: 1px solid var(--rl-line); }
+.rl-tab-label { margin: 0; padding: .6rem 1rem; background: var(--rl-surface);
+  font-size: .85rem; font-weight: 600; color: var(--rl-ink); font-family: var(--rl-font-sans); }
+.rl-tab-body { padding: .9rem 1rem; }
+.rl-tab-body > :first-child { margin-top: 0; }
+.rl-tab-body > :last-child { margin-bottom: 0; }
+
+.rl-badge { display: inline-block; padding: .08rem .45rem; border-radius: 99px;
+  background: var(--rl-primary-soft); color: var(--rl-primary-ink);
+  font-size: .72rem; font-weight: 600; vertical-align: middle; }
+.rl-badge[data-color="orange"] { background: #FEF0C7; color: var(--rl-amber); }
+.dark .rl-badge[data-color="orange"] { background: #3A2A0A; }
+.rl-tooltip { border-bottom: 1px dotted var(--rl-faint); cursor: help; }
+
+.rl-update { display: grid; grid-template-columns: minmax(0, 11rem) 1fr; gap: 2rem;
+  padding: 2.2rem 0; border-top: 1px solid var(--rl-line); }
+.rl-update-label { font-family: var(--rl-font-head); font-size: 1.05rem; color: var(--rl-ink); letter-spacing: -.02em; }
+.rl-update-desc { font-size: .83rem; color: var(--rl-faint); margin-top: .2rem; }
+.rl-update-tags { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: .3rem; }
+.rl-update-body > :first-child { margin-top: 0; }
+.rl-update-body h2 { border: 0; padding: 0; margin-top: 0; font-size: 1.35rem; }
+
+@media (max-width: 760px) {
+  article h1 { font-size: 1.95rem; }
+  .rl-update { grid-template-columns: 1fr; gap: .6rem; padding: 1.6rem 0; }
+}
+
+/* ----------------------------------------------------------------- brand */
+
+.rl-brand { display: inline-flex; align-items: center; gap: .5rem; min-width: 0; }
+.rl-brand-mark { height: 1.15rem; width: auto; display: block; }
+.rl-brand-mark--dark { display: none; }
+.dark .rl-brand-mark--light { display: none; }
+.dark .rl-brand-mark--dark { display: block; }
+.rl-brand-text {
+  font-family: var(--rl-font-head); font-weight: 400; font-size: .95rem;
+  letter-spacing: -.02em; color: var(--rl-faint); white-space: nowrap;
+  padding-left: .5rem; border-left: 1px solid var(--rl-line);
+}
