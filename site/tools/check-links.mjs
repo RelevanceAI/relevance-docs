@@ -22,7 +22,7 @@ const files = [];
       pages.add(p.slice(OUT.length).replace(/\.html$/, ''));
     }
   }
-})(OUT);
+})(path.join(OUT, 'docs'));
 
 // Redirect sources count as valid targets.
 const redirects = [];
@@ -38,11 +38,9 @@ if (fs.existsSync(rf)) {
 const matchesRedirect = (u) => redirects.some((r) =>
   r.endsWith('*') ? u.startsWith(r.slice(0, -1)) : r === u);
 
-const assetExists = (u) => {
-  const rel = u.replace(/^\//, '');
-  return fs.existsSync(path.join(OUT, rel)) ||
-         fs.existsSync(path.join(OUT, rel.replace(/^docs\//, '')));
-};
+// Assets referenced as /docs/x live at out/x (assetPrefix), pages at out/docs/x.
+const assetExists = (u) =>
+  u.startsWith('/docs/') && fs.existsSync(path.join(OUT, u.slice('/docs/'.length)));
 
 const broken = new Map();
 let checked = 0;

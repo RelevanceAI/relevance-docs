@@ -6,9 +6,15 @@ const withMDX = createMDX();
 const config = {
   output: 'export',
   reactStrictMode: true,
-  // Mintlify serves the docs at /docs with no trailing slash and no .html
-  // suffix. 289 URLs are indexed, so this has to match exactly.
-  basePath: '/docs',
+  // NOT basePath. basePath rewrites next/link at runtime but leaves plain
+  // <a> from MDX alone, so no single setting is correct for both: prefixing
+  // MDX links then produced /docs/docs/..., and not prefixing them left
+  // server-rendered hrefs that 404 for crawlers and with JS disabled.
+  //
+  // Instead the /docs segment is a real route (app/docs/**) so every page URL
+  // literally contains it, and assetPrefix points the _next chunks at /docs
+  // so the whole site can be served from one path.
+  assetPrefix: '/docs',
   trailingSlash: false,
   // Static export cannot run the Next image optimizer.
   images: { unoptimized: true },
