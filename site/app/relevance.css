@@ -284,3 +284,35 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
   letter-spacing: -.02em; color: var(--rl-faint); white-space: nowrap;
   padding-left: .5rem; border-left: 1px solid var(--rl-line);
 }
+
+/* ---------------------------------------------------------- page footer */
+
+.rl-page-footer {
+  display: flex; flex-wrap: wrap; gap: 1rem 2rem;
+  align-items: center; justify-content: space-between;
+  margin-top: 3rem; padding-top: 1.4rem;
+  border-top: 1px solid var(--rl-line);
+}
+.rl-feedback { display: flex; align-items: center; gap: .6rem; font-size: .88rem; color: var(--rl-muted); margin: 0; }
+.rl-feedback button {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .3rem .7rem; border: 1px solid var(--rl-line);
+  border-radius: var(--rl-radius); background: var(--rl-bg);
+  font-size: .85rem; color: var(--rl-ink); cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.rl-feedback button:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
+.rl-feedback--done { color: var(--rl-faint); }
+.rl-page-footer-links { display: flex; gap: 1.2rem; font-size: .85rem; }
+.rl-page-footer-links a {
+  display: inline-flex; align-items: center; gap: .4rem;
+  color: var(--rl-muted); text-decoration: none;
+}
+.rl-page-footer-links a:hover { color: var(--rl-primary); }
+.rl-page-footer-links .rl-icon { font-size: .8em; }
+
+/* --------------------------------------------- prev / next (fumadocs own) */
+
+/* The page footer sits above these, so pull the rule off the feedback row
+   and let the neighbour cards close the page. */
+.rl-page-footer { border-top: 1px solid var(--rl-line); }

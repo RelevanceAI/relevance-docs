@@ -7,10 +7,18 @@
  * over the first full build found 124 distinct broken targets across 1,547
  * internal links. Nothing in Next or Fumadocs rewrites them.
  *
- * Handled here:
- *   - markdown links          [x](/get-started/support)
- *   - JSX/HTML href, src, poster, srcSet
- *   - raw HTML blocks
+ * Scope is narrow and hard-won:
+ *
+ *   PREFIXED  - raw `src`/`poster`/`srcSet` attributes, and raw HTML `src`.
+ *               Plain <img> is emitted as-is, so nothing else adds the base.
+ *
+ *   PREFIXED  - markdown/JSX LINKS. Fumadocs renders absolute MDX links as
+ *               plain <a>, which nothing rewrites, so without this every
+ *               in-page link 404s for crawlers and with JS disabled.
+ *
+ *   NOT prefixed - markdown IMAGES. fumadocs-mdx converts those to static
+ *               imports resolved from public/, emitted as hashed
+ *               _next/static/media assets with the base already applied.
  *
  * Deliberately NOT handled: markdown IMAGES (`![](/images/x.png)`).
  * fumadocs-mdx turns those into static imports resolved from public/, and

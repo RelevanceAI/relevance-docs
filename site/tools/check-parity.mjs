@@ -39,6 +39,7 @@ function builtUrls() {
       const p = path.join(d, e.name);
       if (e.isDirectory()) walk(p);
       else if (e.name.endsWith('.html')) {
+        // out/ is the /docs tree, so the public URL is /docs + this path.
         out.add(p.slice(OUT.length).replace(/\.html$/, ''));
       }
     }

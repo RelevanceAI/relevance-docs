@@ -90,7 +90,13 @@ function place(node, dir) {
 
   const prefix = commonPrefix(slugs);
   const deeper = prefix && prefix !== dir && prefix.startsWith(dir === '' ? '' : `${dir}/`);
-  const foldable = deeper && slugs.every((s) => s === prefix || s.startsWith(`${prefix}/`));
+  // At least one page must live strictly BELOW the prefix, otherwise the
+  // prefix is the page itself and folding would create a directory named
+  // after it -- which shadows the .mdx and drops the page from the sidebar
+  // entirely. A single-page group is a separator, not a folder.
+  const hasDescendant = slugs.some((s) => s.startsWith(`${prefix}/`));
+  const foldable = deeper && hasDescendant &&
+    slugs.every((s) => s === prefix || s.startsWith(`${prefix}/`));
 
   if (foldable) {
     ensure(dir).pages.push(path.posix.relative(dir, prefix));
