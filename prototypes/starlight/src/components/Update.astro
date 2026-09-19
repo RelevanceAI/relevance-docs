@@ -1,0 +1,11 @@
+---
+const { label, description, tags } = Astro.props;
+---
+<article class="rl-update">
+  <div class="rl-update-meta">
+    <div>{label}</div>
+    {description && <div>{description}</div>}
+    {tags && <div>{Array.isArray(tags) ? tags.join(', ') : tags}</div>}
+  </div>
+  <div class="rl-update-body"><slot /></div>
+</article>

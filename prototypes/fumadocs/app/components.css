@@ -1,0 +1,114 @@
+/* Shared component styles. Both prototypes emit the same class contract
+   (.rl-*), so this file is byte-identical between them. Any visual delta
+   you see between the two prototypes comes from the framework, not here. */
+
+.rl-prose { max-width: var(--rl-measure); color: var(--rl-text); }
+.rl-prose h1, .rl-prose h2, .rl-prose h3 {
+  font-family: var(--rl-font-head); font-weight: 600; letter-spacing: -.012em;
+}
+.rl-prose h1 { font-size: 2.35rem; line-height: 1.15; margin: 0 0 .45em; }
+.rl-prose h2 {
+  font-size: 1.55rem; margin: 2.2em 0 .6em;
+  padding-bottom: .28em; border-bottom: 1px solid var(--rl-border);
+}
+.rl-prose h3 { font-size: 1.18rem; margin: 1.8em 0 .5em; }
+.rl-lede { font-size: 1.1rem; color: var(--rl-text-muted); line-height: 1.6; margin-bottom: 2rem; }
+
+/* ---- Callouts (Note / Tip / Warning / Info / Check / Danger / Callout) ---- */
+.rl-callout {
+  display: flex; gap: .7rem; align-items: flex-start;
+  margin: 1.4rem 0; padding: .85rem 1rem;
+  border: 1px solid var(--rl-border);
+  border-left: 3px solid var(--rl-cal, var(--rl-note));
+  border-radius: var(--rl-radius-sm);
+  background: var(--rl-bg-subtle);
+  font-size: .945rem; line-height: 1.6;
+}
+.rl-callout > svg, .rl-callout > .rl-callout-icon {
+  flex: none; width: 1.05rem; height: 1.05rem; margin-top: .18rem; color: var(--rl-cal, var(--rl-note));
+}
+.rl-callout > div > :first-child { margin-top: 0; }
+.rl-callout > div > :last-child  { margin-bottom: 0; }
+.rl-callout--note    { --rl-cal: var(--rl-note); }
+.rl-callout--tip     { --rl-cal: var(--rl-tip); }
+.rl-callout--warning { --rl-cal: var(--rl-warning); }
+.rl-callout--info    { --rl-cal: var(--rl-note); }
+.rl-callout--check   { --rl-cal: var(--rl-check); }
+.rl-callout--danger  { --rl-cal: var(--rl-danger); }
+
+/* ---- Accordion ---- */
+.rl-accordion {
+  border: 1px solid var(--rl-border); border-radius: var(--rl-radius);
+  background: var(--rl-bg); margin: .6rem 0; overflow: hidden;
+}
+.rl-accordion > summary {
+  cursor: pointer; padding: .8rem 1rem; font-weight: 550; list-style: none;
+  display: flex; align-items: center; gap: .6rem; color: var(--rl-text);
+}
+.rl-accordion > summary::-webkit-details-marker { display: none; }
+.rl-accordion > summary::after {
+  content: ""; margin-left: auto; width: .5rem; height: .5rem;
+  border-right: 2px solid var(--rl-text-faint); border-bottom: 2px solid var(--rl-text-faint);
+  transform: rotate(45deg); transition: transform .18s ease;
+}
+.rl-accordion[open] > summary::after { transform: rotate(-135deg); }
+.rl-accordion[open] > summary { border-bottom: 1px solid var(--rl-border); }
+.rl-accordion > summary:hover { background: var(--rl-bg-subtle); }
+.rl-accordion-body { padding: .9rem 1rem 1rem; font-size: .95rem; }
+.rl-accordion-body > :first-child { margin-top: 0; }
+.rl-accordion-body > :last-child { margin-bottom: 0; }
+.rl-accordion-group > .rl-accordion { border-radius: 0; margin: 0; border-bottom: none; }
+.rl-accordion-group { border-radius: var(--rl-radius); overflow: hidden; border-bottom: 1px solid var(--rl-border); margin: 1.4rem 0; }
+
+/* ---- Cards ---- */
+.rl-card-group { display: grid; gap: .85rem; margin: 1.5rem 0; }
+.rl-card-group[data-cols="2"] { grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); }
+.rl-card-group[data-cols="3"] { grid-template-columns: repeat(auto-fit, minmax(205px, 1fr)); }
+.rl-card-group[data-cols="4"] { grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); }
+.rl-card {
+  display: block; padding: 1.05rem; border: 1px solid var(--rl-border);
+  border-radius: var(--rl-radius); background: var(--rl-bg);
+  text-decoration: none; color: inherit; transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+a.rl-card:hover { border-color: var(--rl-accent); box-shadow: var(--rl-shadow); transform: translateY(-1px); }
+.rl-card-title { font-weight: 600; margin-bottom: .3rem; display: flex; align-items: center; gap: .45rem; }
+.rl-card-body { color: var(--rl-text-muted); font-size: .9rem; line-height: 1.55; }
+.rl-card-body > :first-child { margin-top: 0; } .rl-card-body > :last-child { margin-bottom: 0; }
+
+/* ---- Steps ---- */
+.rl-steps { counter-reset: rl-step; margin: 1.5rem 0; padding: 0; list-style: none; }
+.rl-step { position: relative; padding: 0 0 1.5rem 2.6rem; border-left: 1px solid var(--rl-border); margin-left: .85rem; }
+.rl-step:last-child { border-left-color: transparent; padding-bottom: 0; }
+.rl-step::before {
+  counter-increment: rl-step; content: counter(rl-step);
+  position: absolute; left: -.85rem; top: -.15rem;
+  width: 1.7rem; height: 1.7rem; border-radius: 50%;
+  background: var(--rl-bg-inset); color: var(--rl-text);
+  border: 1px solid var(--rl-border-strong);
+  display: grid; place-items: center; font-size: .78rem; font-weight: 600;
+  font-family: var(--rl-font-sans);
+}
+.rl-step-title { font-weight: 600; margin: 0 0 .4rem; }
+
+/* ---- ParamField / API fields ---- */
+.rl-param { border-top: 1px solid var(--rl-border); padding: .85rem 0; }
+.rl-param-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; }
+.rl-param-name { font-family: var(--rl-font-mono); font-size: .875rem; font-weight: 600; }
+.rl-param-type { font-family: var(--rl-font-mono); font-size: .78rem; color: var(--rl-text-faint); }
+.rl-param-req { font-size: .7rem; text-transform: uppercase; letter-spacing: .04em; color: var(--rl-danger); font-weight: 700; }
+.rl-param-body { font-size: .92rem; color: var(--rl-text-muted); margin-top: .35rem; }
+
+/* ---- Frame / Columns / Badge / Tooltip / Update ---- */
+.rl-frame { margin: 1.5rem 0; border: 1px solid var(--rl-border); border-radius: var(--rl-radius); overflow: hidden; background: var(--rl-bg-subtle); }
+.rl-frame img { display: block; width: 100%; height: auto; }
+.rl-frame-caption { padding: .55rem .8rem; font-size: .83rem; color: var(--rl-text-muted); border-top: 1px solid var(--rl-border); text-align: center; }
+.rl-columns { display: grid; gap: 1.1rem; margin: 1.4rem 0; }
+.rl-badge { display: inline-block; padding: .1rem .45rem; border-radius: 99px; background: var(--rl-bg-inset); border: 1px solid var(--rl-border); font-size: .74rem; font-weight: 600; color: var(--rl-text-muted); vertical-align: middle; }
+.rl-tooltip { border-bottom: 1px dotted var(--rl-text-faint); cursor: help; }
+.rl-update { display: grid; grid-template-columns: minmax(0,9rem) 1fr; gap: 1.6rem; padding: 2rem 0; border-top: 1px solid var(--rl-border); }
+.rl-update-meta { font-size: .85rem; color: var(--rl-text-faint); font-family: var(--rl-font-mono); }
+.rl-update-body > :first-child { margin-top: 0; }
+@media (max-width: 720px) {
+  .rl-update { grid-template-columns: 1fr; gap: .5rem; }
+  .rl-prose h1 { font-size: 1.9rem; }
+}
