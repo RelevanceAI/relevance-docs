@@ -27,6 +27,15 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Relevance AI Documentation',
+      // Mintlify ships Font Awesome. 257/297 of the icon names this repo uses
+      // are in FA Free; the other 40 need FA Pro or a remap.
+      head: [{
+        tag: 'link',
+        attrs: {
+          rel: 'stylesheet',
+          href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
+        },
+      }],
       favicon: '/favicon.png',
       logo: { light: './public/images/logo/light.png', dark: './public/images/logo/dark.png' },
       customCss: [

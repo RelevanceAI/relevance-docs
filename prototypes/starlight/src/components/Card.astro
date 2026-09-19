@@ -1,8 +1,9 @@
 ---
+import Icon from './Icon.astro';
 const { title, icon, href, horizontal } = Astro.props;
 const Tag = href ? 'a' : 'div';
 ---
 <Tag class="rl-card" href={href} data-horizontal={horizontal ? '' : undefined}>
-  {title && <div class="rl-card-title">{icon && <span aria-hidden="true">{icon}</span>}{title}</div>}
+  {title && <div class="rl-card-title"><Icon name={icon} />{title}</div>}
   <div class="rl-card-body"><slot /></div>
 </Tag>

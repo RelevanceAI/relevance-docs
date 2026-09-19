@@ -13,6 +13,17 @@ import * as React from 'react';
 
 type Kids = { children?: React.ReactNode };
 
+/**
+ * Mintlify icons are Font Awesome names (`icon="chart-line"`). Rendering the
+ * prop directly prints the NAME as text. 257 of the 297 distinct names used
+ * in this repo are in FA Free; 40 (75 usages) are Pro-only. Unknown names
+ * render as an empty slot rather than leaking the raw string.
+ */
+function Icon({ name, style = 'solid' }: { name?: unknown; style?: string }) {
+  if (typeof name !== 'string' || !name) return null;
+  return <i className={`fa-${style} fa-${name} rl-icon`} aria-hidden />;
+}
+
 const variants = ['note', 'tip', 'warning', 'info', 'check', 'danger'] as const;
 type Variant = (typeof variants)[number];
 
@@ -40,10 +51,10 @@ export const Danger = (p: Kids) => <Callout variant="danger" {...p} />;
 
 export function Accordion({
   title, children, defaultOpen, icon,
-}: Kids & { title?: string; defaultOpen?: boolean; icon?: React.ReactNode }) {
+}: Kids & { title?: string; defaultOpen?: boolean; icon?: unknown }) {
   return (
     <details className="rl-accordion" open={defaultOpen}>
-      <summary>{icon ? <span aria-hidden>{icon}</span> : null}{title}</summary>
+      <summary><Icon name={icon} />{title}</summary>
       <div className="rl-accordion-body">{children}</div>
     </details>
   );
@@ -54,10 +65,10 @@ export const AccordionGroup = ({ children }: Kids) => (
 
 export function Card({
   title, icon, href, children,
-}: Kids & { title?: string; icon?: React.ReactNode; href?: string }) {
+}: Kids & { title?: string; icon?: unknown; href?: string }) {
   const inner = (
     <>
-      {title ? <div className="rl-card-title">{icon ? <span aria-hidden>{icon}</span> : null}{title}</div> : null}
+      {title ? <div className="rl-card-title"><Icon name={icon} />{title}</div> : null}
       <div className="rl-card-body">{children}</div>
     </>
   );
