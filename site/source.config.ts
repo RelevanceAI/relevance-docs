@@ -1,13 +1,16 @@
 import { defineConfig } from 'fumadocs-mdx/config';
-import { remarkSnippet } from './lib/remark-snippet.mjs';
 import { remarkHeadingComponents } from './lib/remark-heading-components.mjs';
 import { remarkBasePath } from './lib/remark-base-path.mjs';
 import { rehypeAssetBase } from './lib/rehype-asset-base.mjs';
 import { remarkCodeLang } from './lib/remark-code-lang.mjs';
 
 /**
- * Global MDX options. The <Snippet> rewrite must run BEFORE fumadocs' own
- * remarkInclude, which is what actually inlines the snippet file.
+ * Global MDX options.
+ *
+ * Snippets are NOT handled here. fumadocs composes its processor as
+ * [remarkInclude, ...these, remarkPostprocess], so remarkInclude always runs
+ * first and never sees nodes a plugin here creates. Sources therefore use
+ * fumadocs' native <include> directly -- see tools/convert-snippets.mjs.
  */
 export default defineConfig({
   mdxOptions: {
@@ -31,7 +34,7 @@ export default defineConfig({
     remarkImageOptions: { useImport: false },
     // remarkBasePath runs LAST: remarkImage rewrites images into elements
     // with a `src`, and that src needs the /docs prefix applying after it.
-    remarkPlugins: (v) => [remarkSnippet, remarkHeadingComponents, remarkCodeLang, ...v, remarkBasePath],
+    remarkPlugins: (v) => [remarkHeadingComponents, remarkCodeLang, ...v, remarkBasePath],
     // Last word on asset URLs -- see lib/rehype-asset-base.mjs.
     rehypePlugins: (v) => [...v, rehypeAssetBase],
   },
