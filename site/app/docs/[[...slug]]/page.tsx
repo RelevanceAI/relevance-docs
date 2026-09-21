@@ -10,6 +10,7 @@ import {
 import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/components/mdx';
 import type { Metadata } from 'next';
+import type * as React from 'react';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { getPageImageUrl, getPageMarkdownUrl, gitConfig, siteUrl, SITE_NAME } from '@/lib/shared';
 import { PageFooter } from '@/components/site/page-footer';
@@ -24,7 +25,31 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const markdownUrl = `/docs${getPageMarkdownUrl(page).url}`;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      /*
+       * The table of contents ships as a bare <div>, so its links sit in no
+       * landmark at all -- a screen reader reaches them only by walking the
+       * whole page. It already renders an <h3 id="toc-title">On this page</h3>
+       * to name it with.
+       */
+      tableOfContent={{ container: { role: 'navigation', 'aria-labelledby': 'toc-title' } }}
+      /*
+       * The mobile popover renders its trigger inside a <header>, which at
+       * the top level is a second banner landmark. A <header> is only a
+       * banner when it is not inside sectioning content, and that is decided
+       * by the element, not by an ARIA role -- so the container has to BE a
+       * <nav>. Base UI's `render` does that; it is absent from fumadocs'
+       * ComponentProps<'div'> typing, hence the cast.
+       */
+      tableOfContentPopover={{
+        container: {
+          'aria-label': 'On this page',
+          render: <nav />,
+        } as React.ComponentProps<'div'>,
+      }}
+    >
       {/* Mintlify gives the page h1 this id; keep it so #page-title links work. */}
       <DocsTitle id="page-title">{page.data.title}</DocsTitle>
       <DocsDescription className="mb-0">{page.data.description}</DocsDescription>

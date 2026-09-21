@@ -9,6 +9,12 @@
  * Rules: lower-case, apply aliases, and fall back to `text` for anything
  * Shiki does not bundle, so a future bad fence degrades to plain text
  * instead of breaking the build.
+ *
+ * It also carries the fence title across. Mintlify writes it as a bare word
+ * after the language (```json Cursor); fumadocs wants title="Cursor". 119
+ * fences use it, and inside a <CodeGroup> it IS the tab label -- without it
+ * the three-way MCP config on /docs/integrations/mcp/mcp-server reads
+ * "Tab 1 / Tab 2 / Tab 3" instead of "Cursor / VS Code / Windsurf".
  */
 import { bundledLanguages } from 'shiki';
 
@@ -35,11 +41,14 @@ export function remarkCodeLang() {
     const walk = (node) => {
       if (!node || typeof node !== 'object') return;
       if (node.type === 'code' && typeof node.lang === 'string') {
-        // Mintlify allows `js title="x"` style metadata in the info string.
         let lang = node.lang.trim().toLowerCase();
         lang = ALIASES[lang] ?? lang;
         if (!KNOWN.has(lang) && !PLAIN.has(lang)) lang = 'text';
         node.lang = lang;
+
+        // A meta string with no `key=value` in it is a Mintlify title.
+        const meta = node.meta?.trim();
+        if (meta && !meta.includes('=')) node.meta = `title="${meta.replace(/"/g, '&quot;')}"`;
       }
       for (const c of node.children ?? []) walk(c);
     };

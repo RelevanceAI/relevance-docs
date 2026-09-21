@@ -59,22 +59,48 @@ const rewrite = (v) => {
  */
 const LAZY = { loading: 'lazy', decoding: 'async' };
 
-function visitJsx(node) {
+/**
+ * An <iframe> with no accessible name is a serious axe failure: a screen
+ * reader announces "frame" and nothing else. 22 embeds across 16 pages had
+ * none. Most sit inside a <Frame caption="...">, which describes them
+ * exactly -- so the caption becomes the name, and the embed host supplies a
+ * fallback for the rest.
+ */
+const EMBED_NAMES = [
+  [/wistia|loom|youtube|vimeo|embedly/, 'Video'],
+  [/supademo/, 'Interactive walkthrough'],
+  [/app\.relevanceai\.com/, 'Relevance AI tool'],
+];
+
+function frameTitle(src) {
+  const name = EMBED_NAMES.find(([re]) => re.test(src ?? ''))?.[1];
+  return name ? `${name} embed` : 'Embedded content';
+}
+
+const attr = (node, name) =>
+  node.attributes?.find((a) => a.type === 'mdxJsxAttribute' && a.name === name)?.value;
+
+function visitJsx(node, caption) {
   if (!Array.isArray(node.attributes)) return;
-  const isImage = node.name === 'img';
-  for (const attr of node.attributes) {
-    if (attr.type !== 'mdxJsxAttribute') continue;
-    if (attr.name === 'src' || attr.name === 'poster') attr.value = rewrite(attr.value);
+  for (const a of node.attributes) {
+    if (a.type !== 'mdxJsxAttribute') continue;
+    if (a.name === 'src' || a.name === 'poster') a.value = rewrite(a.value);
   }
-  if (!isImage) return;
-  for (const [name, value] of Object.entries(LAZY)) {
+  const push = (name, value) => {
     if (!node.attributes.some((a) => a.type === 'mdxJsxAttribute' && a.name === name)) {
       node.attributes.push({ type: 'mdxJsxAttribute', name, value });
     }
+  };
+  if (node.name === 'img') {
+    for (const [name, value] of Object.entries(LAZY)) push(name, value);
+  } else if (node.name === 'iframe') {
+    push('title', typeof caption === 'string' && caption.trim()
+      ? caption.trim()
+      : frameTitle(attr(node, 'src')));
   }
 }
 
-function visitElement(node) {
+function visitElement(node, caption) {
   const p = node.properties;
   for (const key of ['src', 'poster']) {
     if (typeof p[key] === 'string') p[key] = rewrite(p[key]);
@@ -89,16 +115,26 @@ function visitElement(node) {
     p.loading = 'lazy';
     p.decoding ??= 'async';
   }
+  if (node.tagName === 'iframe' && !p.title) {
+    p.title = typeof caption === 'string' && caption.trim() ? caption.trim() : frameTitle(p.src);
+  }
 }
 
 export function rehypeAssetBase() {
   return (tree) => {
-    const walk = (node) => {
+    // `caption` carries the nearest enclosing <Frame caption="...">, which is
+    // what an embed inside one should be announced as.
+    const walk = (node, caption) => {
       if (!node || typeof node !== 'object') return;
-      if (node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') visitJsx(node);
-      else if (node.properties) visitElement(node);
-      for (const c of node.children ?? []) walk(c);
+      const isJsx = node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement';
+      if (isJsx) visitJsx(node, caption);
+      else if (node.properties) visitElement(node, caption);
+
+      const inherited = isJsx && node.name === 'Frame'
+        ? (attr(node, 'caption') ?? caption)
+        : caption;
+      for (const c of node.children ?? []) walk(c, inherited);
     };
-    walk(tree);
+    walk(tree, undefined);
   };
 }

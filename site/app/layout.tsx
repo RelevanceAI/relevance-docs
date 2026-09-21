@@ -105,7 +105,12 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       <body className="flex flex-col min-h-screen">
         <a className="rl-skip" href="#nd-page">Skip to main content</a>
         <Provider>
-          <DocsLayout tree={source.getPageTree()} {...baseOptions()}>
+          <DocsLayout
+            tree={source.getPageTree()}
+            {...baseOptions()}
+            /* Otherwise this is an unnamed "complementary" landmark. */
+            sidebar={{ 'aria-label': 'Documentation navigation' }}
+          >
             {children}
           </DocsLayout>
         </Provider>
