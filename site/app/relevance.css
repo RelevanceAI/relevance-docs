@@ -316,3 +316,23 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
 /* The page footer sits above these, so pull the rule off the feedback row
    and let the neighbour cards close the page. */
 .rl-page-footer { border-top: 1px solid var(--rl-line); }
+
+/* ------------------------------------------------------- prev / next nav */
+
+.rl-page-nav {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--rl-line);
+}
+.rl-page-nav-link {
+  display: flex; flex-direction: column; gap: .3rem;
+  padding: .85rem 1rem; border: 1px solid var(--rl-line);
+  border-radius: var(--rl-radius); text-decoration: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+.rl-page-nav-link:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
+.rl-page-nav-link--next { text-align: right; align-items: flex-end; }
+.rl-page-nav-dir { font-size: .78rem; color: var(--rl-faint); display: inline-flex; align-items: center; gap: .35rem; }
+.rl-page-nav-dir .rl-icon { color: var(--rl-faint); font-size: .75em; }
+.rl-page-nav-title { font-weight: 600; color: var(--rl-ink); font-size: .92rem; }
+.rl-page-footer { margin-top: 2rem; }
+@media (max-width: 640px) { .rl-page-nav { grid-template-columns: 1fr; } }

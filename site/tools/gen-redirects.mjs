@@ -126,6 +126,14 @@ fs.writeFileSync(path.join(ROOT, 'site/public/_redirects'), body);
  * export packed by tools/pack-dist.mjs, not a Next.js app for Vercel to
  * build and serve itself.
  */
+/**
+ * The /docs entry point. Mintlify 308s /docs to the introduction page.
+ * This was originally added to the Cloudflare _redirects body only, so on
+ * Vercel /docs itself 404'd -- the same one-host-not-the-other mistake as
+ * the bare wildcards. It belongs in both configs.
+ */
+const ENTRY_RULE = { source: '/docs', destination: '/docs/get-started/introduction' };
+
 const vercel = {
   $schema: 'https://openapi.vercel.sh/vercel.json',
   framework: null,
@@ -146,10 +154,13 @@ const vercel = {
   buildCommand: 'npm run build && node tools/pack-dist.mjs',
   outputDirectory: 'dist',
   trailingSlash: false,
-  redirects: [...all, ...folderRules].map((r) => ({
-    ...vercelRule(r),
-    permanent: !/[*:]/.test(r.source) && !folderRules.includes(r),
-  })),
+  redirects: [
+    { ...ENTRY_RULE, permanent: false },
+    ...[...all, ...folderRules].map((r) => ({
+      ...vercelRule(r),
+      permanent: !/[*:]/.test(r.source) && !folderRules.includes(r),
+    })),
+  ],
   headers: [
     {
       // Hashed build assets never change under a given name.
