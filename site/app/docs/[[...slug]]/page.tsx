@@ -13,7 +13,6 @@ import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { getPageImageUrl, getPageMarkdownUrl, gitConfig, siteUrl, SITE_NAME } from '@/lib/shared';
 import { PageFooter } from '@/components/site/page-footer';
-import { PageNav } from '@/components/site/page-nav';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -43,7 +42,6 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           })}
         />
       </DocsBody>
-      <PageNav url={page.url} />
       <PageFooter filePath={page.path} />
     </DocsPage>
   );

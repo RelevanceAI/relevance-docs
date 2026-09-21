@@ -10,12 +10,20 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = path.resolve(import.meta.dirname, '../..');
-const FA_CSS = process.argv[2];
+const FA_URL = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css';
+const FA_CSS = process.argv[2] ?? path.join(ROOT, 'site/node_modules/.cache/fontawesome-6.7.2.css');
 
-if (!FA_CSS || !fs.existsSync(FA_CSS)) {
-  console.error('usage: node site/tools/check-icons.mjs <path-to-fontawesome-all.min.css>');
-  console.error('  curl -sS https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css -o /tmp/fa.css');
-  process.exit(2);
+// Cache the stylesheet so `npm run check` needs no arguments and one offline
+// run does not fail the chain.
+if (!fs.existsSync(FA_CSS)) {
+  fs.mkdirSync(path.dirname(FA_CSS), { recursive: true });
+  const res = await fetch(FA_URL);
+  if (!res.ok) {
+    console.error(`could not fetch ${FA_URL} (${res.status})`);
+    console.error('pass a local copy: node site/tools/check-icons.mjs <path-to-all.min.css>');
+    process.exit(2);
+  }
+  fs.writeFileSync(FA_CSS, await res.text());
 }
 
 const free = new Set([...fs.readFileSync(FA_CSS, 'utf8').matchAll(/\.fa-([a-z0-9-]+)/g)].map((m) => m[1]));

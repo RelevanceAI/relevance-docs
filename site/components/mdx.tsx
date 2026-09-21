@@ -14,6 +14,8 @@ export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
     ...Mintlify,
+    // Give every markdown table a focusable, named scroll region.
+    table: Mintlify.ScrollableTable,
     ...components,
   } satisfies MDXComponents;
 }
