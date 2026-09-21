@@ -11,9 +11,12 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
-// Playwright is a dev-only dependency for this check; resolve it from
-// wherever it is installed rather than adding it to the site's bundle.
-const { chromium } = await import(process.env.PLAYWRIGHT_PATH ?? 'playwright');
+// Playwright is a dev-only dependency for this check; resolve it from the
+// project if it is installed there, otherwise from a global install. It is
+// CommonJS, so a global import lands on the default export.
+const pw = await import(process.env.PLAYWRIGHT_PATH ?? 'playwright')
+  .catch(() => import('/opt/node22/lib/node_modules/playwright/index.js'));
+const { chromium } = pw.chromium ? pw : pw.default;
 
 const DIST = path.resolve(import.meta.dirname, '../dist');
 const PORT = 4455;
