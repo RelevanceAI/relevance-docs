@@ -15,6 +15,7 @@ npx serve out          # or any static host
 Three checks guard the migration. All three must pass before cutover.
 
 ```bash
+node tools/check-tracked.mjs   # everything needed to build is committed
 node tools/check-redirects.mjs # host configs are valid for Vercel + CF
 node tools/check-parity.mjs   # every indexed URL still exists
 node tools/check-nav.mjs      # every docs.json page is in the sidebar
@@ -27,6 +28,7 @@ Current state:
 
 | Gate | Result |
 |---|---|
+| Build files committed | **12/12 tracked, 0 stray ignores** |
 | Redirect config validity | **165 Vercel routes, 164 CF rules, 0 errors** |
 | URL parity vs live sitemap | **289/289 present, 0 missing** |
 | Sidebar coverage | **289/289 listed, 0 shadowed** |
@@ -81,6 +83,27 @@ Free — `messages` alone appears 11 times. `PRO_TO_FREE` in
 `components/mintlify/index.tsx` maps all 41 to Free equivalents. Buying an FA
 Pro licence would let that table be deleted; `brand-android`, `notion` and
 `typewriter` are the only three with no close Free match.
+
+**The manifest was never committed.** The repo's root `.gitignore` carried
+bare `package.json` and `package-lock.json` patterns, and git matches those at
+ANY depth — so `site/package.json` was silently skipped by `git add -A`. Every
+local build worked, because the file exists on disk. Vercel cloned the repo,
+found no manifest, **skipped the install step entirely**, and died in 12
+seconds with `next: command not found`. The patterns are now scoped to the
+repo root (`/package.json`), and `tools/check-tracked.mjs` asserts that every
+file needed to build is committed — which is the only place this class of bug
+is visible, since building cannot reveal it.
+
+Related: the build command is `npm run build`, not a bare `next build`. npm
+puts `node_modules/.bin` on PATH; a plain shell does not.
+
+**Verify from a clean clone, not the working tree.** The single check that
+would have caught both of the above:
+
+```bash
+git clone <repo> /tmp/verify && cd /tmp/verify/site
+npm install && npm run build:deploy
+```
 
 **The two hosts want different wildcard syntax.** `docs.json` mixes two
 forms: `:slug*` and a bare `*`. Cloudflare wants `*` + `:splat`; Vercel wants
