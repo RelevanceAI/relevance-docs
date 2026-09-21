@@ -117,6 +117,47 @@ for (const slug of PAGES) {
   await page.close();
 }
 
+
+// --- Search -----------------------------------------------------------
+// The static index is fetched by the client at a hard-coded URL. It
+// defaulted to /api/search, which this deployment does not serve, so search
+// returned nothing at all while every other check passed.
+const sp = await browser.newPage({ viewport: { width: 1440, height: 950 } });
+const searchErrors = [];
+sp.on('response', (r) => {
+  if (r.url().includes('/api/search')) searchErrors.push(`${r.status()} ${r.url()}`);
+});
+await sp.goto(`http://localhost:${PORT}/docs/get-started/introduction`, { waitUntil: 'load', timeout: 60000 });
+await sp.keyboard.press('Control+k');
+let searchHits = 0;
+try {
+  await sp.locator('input[placeholder], [role="dialog"] input').first().fill('workforce');
+  // Fumadocs renders results as buttons, not links.
+  await sp.waitForFunction(
+    () => document.querySelectorAll('[role="dialog"] button[aria-selected]').length > 0,
+    null, { timeout: 25000 });
+  searchHits = await sp.locator('[role="dialog"] button[aria-selected]').count();
+} catch {}
+await sp.close();
+const searchIndexOk = searchErrors.some((e) => e.startsWith('200'));
+console.log(`\n  ${searchHits > 0 ? ' ok ' : 'FAIL'}  search: ${searchHits} results for "workforce"` +
+  ` (index fetch: ${searchErrors.join(', ') || 'none attempted'})`);
+if (searchHits === 0 || !searchIndexOk) {
+  failures.push({ slug: 'search', bad: searchErrors.length ? searchErrors : ['no request to /api/search'], broken: [] });
+}
+
+// --- Markdown mirrors -------------------------------------------------
+// Mintlify serves /docs/<slug>.md for every page; agents and the "copy as
+// markdown" links depend on it.
+const MIRRORS = ['community.md', 'get-started/introduction.md', 'sdk/streaming.md'];
+for (const m of MIRRORS) {
+  const r = await fetch(`http://localhost:${PORT}/docs/${m}`);
+  const body = r.ok ? await r.text() : '';
+  const ok = r.ok && body.startsWith('> ## Documentation Index');
+  console.log(`  ${ok ? ' ok ' : 'FAIL'}  /docs/${m}  (${r.status}, ${body.length} bytes)`);
+  if (!ok) failures.push({ slug: m, bad: [`${r.status} /docs/${m}`], broken: [] });
+}
+
 await browser.close();
 server.close();
 

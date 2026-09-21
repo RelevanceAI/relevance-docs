@@ -18,6 +18,11 @@ export default function DefaultSearchDialog(props: SharedProps) {
   const { locale } = useI18n(); // (optional) for i18n
   const { search, setSearch, query } = useDocsSearch({
     client: staticClient({
+      // The index is emitted at out/api/search, which pack-dist places under
+      // dist/docs/. The default '/api/search' points at the domain root,
+      // which the marketing site does not route here -- search silently
+      // returned nothing.
+      from: '/docs/api/search',
       locale,
     }),
   });

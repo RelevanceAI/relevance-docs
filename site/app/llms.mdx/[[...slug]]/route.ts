@@ -1,4 +1,5 @@
-import { docsLlms, source } from '@/lib/source';
+import { source } from '@/lib/source';
+import { renderPageMirror } from '@/lib/llms';
 import { getPageMarkdownUrl } from '@/lib/shared';
 import { notFound } from 'next/navigation';
 
@@ -10,10 +11,8 @@ export async function GET(_req: Request, { params }: RouteContext<'/llms.mdx/[[.
   const page = source.getPage(slug?.slice(0, -1));
   if (!page) notFound();
 
-  return new Response(await docsLlms.page(page), {
-    headers: {
-      'Content-Type': 'text/markdown',
-    },
+  return new Response(await renderPageMirror(page), {
+    headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
   });
 }
 
