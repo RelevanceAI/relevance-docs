@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import { siteUrl, SITE_NAME } from '@/lib/shared';
 import { Analytics } from '@/components/site/analytics';
 import { ChatWidget } from '@/components/site/chat-widget';
+import Script from 'next/script';
 import './global.css';
 // Font Awesome Free, subset to the ~280 icons this site actually renders and
 // bundled with the rest of the CSS. The full stylesheet from cdnjs was a
@@ -110,6 +111,11 @@ export default function Layout({ children }: LayoutProps<'/'>) {
         </Provider>
         <Analytics />
         <ChatWidget />
+        {/* Blobby, the live badge inside .invent-callout bubbles. Mintlify
+            auto-loaded any .js at the repo root; nothing does that here, so
+            the same file is served from public/ and loaded explicitly. It
+            no-ops on pages without a bubble and re-mounts on SPA navigation. */}
+        <Script src="/docs/invent-callout.js" strategy="lazyOnload" />
       </body>
     </html>
   );

@@ -282,17 +282,11 @@ export const Update = ({
 
 /* -------------------------------------------------------------------- tabs */
 
-export const Tabs = ({ children }: Kids) => <div className="rl-tabs">{children}</div>;
-export const Tab = ({ title, children }: Kids & { title?: React.ReactNode }) => (
-  // A <p>, not an <h4>: these label a panel rather than sectioning the
-  // document, and 166 injected h4s were breaking the heading outline on 45
-  // pages (h2 -> h4 skips).
-  <section className="rl-tab">
-    <p className="rl-tab-label">{title}</p>
-    <div className="rl-tab-body">{children}</div>
-  </section>
-);
-export const CodeGroup = ({ children }: Kids) => <div className="rl-codegroup">{children}</div>;
+// Tabs, Tab and CodeGroup need state, so they live behind a client boundary.
+// Tab labels its panel with a <p>, not an <h4>: they label rather than
+// section, and 166 injected h4s were breaking the heading outline on 45
+// pages (h2 -> h4 skips).
+export { Tabs, Tab, CodeGroup } from './tabs';
 
 /**
  * Tables scroll horizontally on narrow viewports. Without a focusable,
