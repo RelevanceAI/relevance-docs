@@ -11,9 +11,12 @@ export function baseOptions(): BaseLayoutProps {
         <span className="rl-brand">
           {/* Raw <img> is NOT rewritten by Next's basePath -- only next/image
               and _next assets are -- so these carry the /docs prefix
-              explicitly, matching how the MDX asset refs are rewritten. */}
-          <img src="/docs/images/logo/light.png" alt="" className="rl-brand-mark rl-brand-mark--light" />
-          <img src="/docs/images/logo/dark.png" alt="" className="rl-brand-mark rl-brand-mark--dark" />
+              explicitly, matching how the MDX asset refs are rewritten.
+              These reference the .webp that tools/optimize-images.mjs
+              produces: the .png sources are 1163px wide for a 107px slot and
+              both variants preload on every page, ahead of the LCP image. */}
+          <img src="/docs/images/_opt/logo/light.webp" alt="" className="rl-brand-mark rl-brand-mark--light" />
+          <img src="/docs/images/_opt/logo/dark.webp" alt="" className="rl-brand-mark rl-brand-mark--dark" />
           {/* The logo already carries the Relevance AI wordmark, so the text
               beside it is just the section name. */}
           <span className="rl-brand-text">Docs</span>
