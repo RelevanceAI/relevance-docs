@@ -47,31 +47,75 @@ const assetExists = (u) =>
   u.startsWith('/docs/') && fs.existsSync(path.join(OUT, u.slice('/docs/'.length)));
 
 const broken = new Map();
+const brokenFragments = new Map();
 let checked = 0;
+let fragmentsChecked = 0;
 
+// Every id on each page, so a #fragment can be resolved rather than skipped.
+// A link to a heading that no longer exists is invisible in a browser: the
+// page loads and quietly stays at the top.
+const idsByPage = new Map();
+const htmlByPage = new Map();
 for (const f of files) {
+  const url = f.slice(OUT.length).replace(/\.html$/, '');
   const html = fs.readFileSync(f, 'utf8');
-  const from = f.slice(OUT.length).replace(/\.html$/, '');
-  for (const m of html.matchAll(/(?:href|src)="(\/[^"#?]*)/g)) {
-    const url = m[1].replace(/\/$/, '') || '/';
+  htmlByPage.set(url, html);
+  idsByPage.set(url, new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, '&'))));
+}
+
+for (const [from, html] of htmlByPage) {
+  for (const m of html.matchAll(/(?:href|src)="([^"]*)"/g)) {
+    const raw = m[1];
+    if (!raw.startsWith('/') && !raw.startsWith('#')) continue;
     // `//host/path` is protocol-relative, i.e. external, despite the leading slash.
-    if (url.startsWith('//')) continue;
-    if (url.startsWith('/docs/_next') || url.startsWith('/_next')) continue;
-    checked++;
-    if (pages.has(url) || matchesRedirect(url) || assetExists(url)) continue;
-    if (!broken.has(url)) broken.set(url, new Set());
-    broken.get(url).add(from);
+    if (raw.startsWith('//')) continue;
+
+    const hash = raw.indexOf('#');
+    // Both sides go through the same decoding: ids and hrefs are HTML-escaped
+    // in the source, so `#a-&amp;-b` and id="a-&amp;-b" are the same anchor.
+    const fragment = hash === -1 ? ''
+      : decodeURIComponent(raw.slice(hash + 1)).replace(/&amp;/g, '&');
+    let url = (hash === -1 ? raw : raw.slice(0, hash)).split('?')[0];
+    url = url.replace(/\/$/, '');
+
+    if (url && !url.startsWith('/docs/_next') && !url.startsWith('/_next')) {
+      checked++;
+      if (!pages.has(url) && !matchesRedirect(url) && !assetExists(url)) {
+        if (!broken.has(url)) broken.set(url, new Set());
+        broken.get(url).add(from);
+        continue;
+      }
+    }
+
+    if (!fragment) continue;
+    const target = url || from;
+    const ids = idsByPage.get(target);
+    // Only pages we built can be checked; a fragment behind a redirect is not.
+    if (!ids) continue;
+    fragmentsChecked++;
+    if (ids.has(fragment)) continue;
+    const key = `${target}#${fragment}`;
+    if (!brokenFragments.has(key)) brokenFragments.set(key, new Set());
+    brokenFragments.get(key).add(from);
   }
 }
+
+const report = (label, map) => {
+  if (!map.size) return;
+  const sorted = [...map.entries()].sort((a, b) => b[1].size - a[1].size);
+  console.error(`\n${label} (target <- number of pages linking to it):`);
+  for (const [url, srcs] of sorted.slice(0, 30)) {
+    console.error(`  ${url}  <- ${srcs.size}  e.g. ${[...srcs][0]}`);
+  }
+  if (sorted.length > 30) console.error(`  ... and ${sorted.length - 30} more`);
+};
 
 console.log(`pages scanned  : ${files.length}`);
 console.log(`links checked  : ${checked}`);
+console.log(`fragments      : ${fragmentsChecked}`);
 console.log(`broken targets : ${broken.size}`);
-if (broken.size) {
-  const sorted = [...broken.entries()].sort((a, b) => b[1].size - a[1].size);
-  console.log('\nBroken internal links (target <- number of pages linking to it):');
-  for (const [url, srcs] of sorted.slice(0, 30)) {
-    console.log(`  ${url}  <- ${srcs.size}  e.g. ${[...srcs][0]}`);
-  }
-  if (sorted.length > 30) console.log(`  ... and ${sorted.length - 30} more`);
-}
+console.log(`broken anchors : ${brokenFragments.size}`);
+report('Broken internal links', broken);
+report('Links to anchors that do not exist', brokenFragments);
+if (broken.size || brokenFragments.size) process.exit(1);
+console.log('\nLINKS OK: every internal link, asset and anchor resolves.');

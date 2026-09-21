@@ -9,6 +9,7 @@
  * app/relevance.css so the design can change without touching these.
  */
 import * as React from 'react';
+import { mintlifyAccordionSlug } from '@/lib/mintlify-slug.mjs';
 
 type Kids = { children?: React.ReactNode };
 
@@ -118,6 +119,21 @@ export const Danger = (p: Kids) => <Callout variant="danger" {...p} />;
 
 /* --------------------------------------------------------------- accordion */
 
+/**
+ * Mintlify gives every accordion heading an id of `<slug>-accordion-title`,
+ * derived from the title with a different rule than it uses for headings --
+ * see lib/mintlify-slug.mjs. Nothing in the docs links to one today, but
+ * they are addressable URLs Mintlify serves, so they are reproduced.
+ */
+function accordionId(title: React.ReactNode): string | undefined {
+  const text = typeof title === 'string' ? title
+    : typeof title === 'number' ? String(title)
+    : undefined;
+  if (!text) return undefined;
+  const slug = mintlifyAccordionSlug(text);
+  return slug ? `${slug}-accordion-title` : undefined;
+}
+
 export function Accordion({
   title, children, defaultOpen, icon,
 }: Kids & { title?: React.ReactNode; defaultOpen?: boolean; icon?: unknown }) {
@@ -125,7 +141,7 @@ export function Accordion({
     <details className="rl-accordion" open={defaultOpen}>
       <summary className="rl-accordion-summary">
         <Icon name={icon} />
-        <span className="rl-accordion-title">{title}</span>
+        <span className="rl-accordion-title" id={accordionId(title)}>{title}</span>
         <svg className="rl-chev" viewBox="0 0 16 16" aria-hidden>
           <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6"
             strokeLinecap="round" strokeLinejoin="round" />

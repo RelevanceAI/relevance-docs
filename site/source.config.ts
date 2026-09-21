@@ -3,6 +3,8 @@ import { remarkHeadingComponents } from './lib/remark-heading-components.mjs';
 import { remarkBasePath } from './lib/remark-base-path.mjs';
 import { rehypeAssetBase } from './lib/rehype-asset-base.mjs';
 import { remarkCodeLang } from './lib/remark-code-lang.mjs';
+import { mintlifySlug } from './lib/mintlify-slug.mjs';
+import smartypants from 'remark-smartypants';
 
 /**
  * Global MDX options.
@@ -32,9 +34,24 @@ export default defineConfig({
      * for static export), so the static import bought nothing here.
      */
     remarkImageOptions: { useImport: false },
+    // Heading ids have to match Mintlify's, or every deep link into the docs
+    // lands at the top of the page -- see lib/mintlify-slug.mjs. This feeds
+    // the table of contents as well, so the two cannot drift apart.
+    remarkHeadingOptions: { slug: mintlifySlug },
     // remarkBasePath runs LAST: remarkImage rewrites images into elements
     // with a `src`, and that src needs the /docs prefix applying after it.
-    remarkPlugins: (v) => [remarkHeadingComponents, remarkCodeLang, ...v, remarkBasePath],
+    // Mintlify renders typographic apostrophes and quotes, and slugs headings
+    // from the result -- `What's next` becomes `#what’s-next`. Without this
+    // the text reads differently AND 85 deep links break. Dashes, ellipses
+    // and backticks stay off: Mintlify does not convert those, and `--` is a
+    // CLI flag in several code samples.
+    remarkPlugins: (v) => [
+      remarkHeadingComponents,
+      remarkCodeLang,
+      [smartypants, { dashes: false, ellipses: false, backticks: false }],
+      ...v,
+      remarkBasePath,
+    ],
     // Last word on asset URLs -- see lib/rehype-asset-base.mjs.
     rehypePlugins: (v) => [...v, rehypeAssetBase],
   },
