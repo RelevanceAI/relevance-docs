@@ -61,6 +61,14 @@ for (const entry of ['_redirects', '_headers']) {
   if (fs.existsSync(src)) fs.cpSync(src, path.join(DIST, entry));
 }
 
+// Both Vercel and Cloudflare Pages serve a custom 404 only from the OUTPUT
+// ROOT, and the root holds just docs/ plus the rule files -- so the branded
+// page built at docs/404.html was never reached and Vercel's generic black
+// 404 showed instead. Its assets are referenced as /docs/_next/... via
+// assetPrefix, so the same file renders correctly from either location.
+const notFound = path.join(DOCS, '404.html');
+if (fs.existsSync(notFound)) fs.copyFileSync(notFound, path.join(DIST, '404.html'));
+
 // Mintlify serves every page's markdown at /docs/<slug>.md. Next can only
 // emit that route as /llms.mdx/<slug>/content.md, so the file is copied to
 // the Mintlify path as well. Doing it here rather than with a host rewrite
@@ -96,7 +104,8 @@ let pruned = 0;
 const REQUIRED = ['docs/_next', 'docs/images', 'docs/sitemap.xml', 'docs/robots.txt',
   'docs/favicon.png', 'docs/favicon.ico', 'docs/favicon-32x32.png',
   'docs/apple-touch-icon.png', 'docs/android-chrome-192x192.png',
-  '_redirects', 'docs/llms.txt', 'docs/llms-full.txt', 'docs/og'];
+  '_redirects', 'docs/llms.txt', 'docs/llms-full.txt', 'docs/og',
+  '404.html', 'docs/api/search'];
 const missing = REQUIRED.filter((r) => !fs.existsSync(path.join(DIST, r)));
 
 const count = (d) => fs.readdirSync(d, { withFileTypes: true })
