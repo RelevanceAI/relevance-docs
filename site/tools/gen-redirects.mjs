@@ -129,7 +129,10 @@ fs.writeFileSync(path.join(ROOT, 'site/public/_redirects'), body);
 const vercel = {
   $schema: 'https://openapi.vercel.sh/vercel.json',
   framework: null,
-  buildCommand: 'next build && node tools/pack-dist.mjs',
+  // `npm run build`, not a bare `next build`: npm puts node_modules/.bin on
+  // PATH, a plain shell does not. A bare `next` fails with
+  // "next: command not found" wherever the runner has not already added it.
+  buildCommand: 'npm run build && node tools/pack-dist.mjs',
   outputDirectory: 'dist',
   trailingSlash: false,
   redirects: [...all, ...folderRules].map((r) => ({
