@@ -146,6 +146,16 @@ if (searchHits === 0 || !searchIndexOk) {
   failures.push({ slug: 'search', bad: searchErrors.length ? searchErrors : ['no request to /api/search'], broken: [] });
 }
 
+// --- Custom 404 -------------------------------------------------------
+// Hosts serve a custom 404 only from the output ROOT. The branded page was
+// built at docs/404.html, so Vercel fell back to its own generic page.
+for (const at of ['404.html', 'docs/404.html']) {
+  const f = path.join(DIST, at);
+  const ok = fs.existsSync(f) && fs.readFileSync(f, 'utf8').includes('rl-404-title');
+  console.log(`  ${ok ? ' ok ' : 'FAIL'}  ${at} is the branded 404`);
+  if (!ok) failures.push({ slug: at, bad: ['missing or not the branded 404'], broken: [] });
+}
+
 // --- Markdown mirrors -------------------------------------------------
 // Mintlify serves /docs/<slug>.md for every page; agents and the "copy as
 // markdown" links depend on it.
