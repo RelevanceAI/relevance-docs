@@ -23,6 +23,14 @@ const TYPES = { '.html':'text/html', '.css':'text/css', '.js':'text/javascript',
   '.txt':'text/plain', '.md':'text/markdown', '.xml':'application/xml', '.mp4':'video/mp4' };
 
 // Load the generated host rules so the check behaves like production.
+// Read the real host config so this check cannot drift from production.
+const vercelCfg = JSON.parse(
+  fs.readFileSync(path.resolve(import.meta.dirname, '../vercel.json'), 'utf8'));
+const CLEAN_URLS = vercelCfg.cleanUrls === true;
+if (!CLEAN_URLS) {
+  console.warn('  WARN  vercel.json has cleanUrls disabled -- extensionless URLs will 404 on Vercel');
+}
+
 const rules = [];
 const rf = path.join(DIST, '_redirects');
 if (fs.existsSync(rf)) {
@@ -48,8 +56,18 @@ const server = http.createServer((req, res) => {
   const hit = redirectFor(url);
   if (hit) { res.writeHead(hit.code, { location: hit.to }); return res.end(); }
   const rel = url.replace(/^\//, '');
-  // Exactly one fallback, the same one every static host does: `x` -> `x.html`.
-  const candidates = [path.join(DIST, rel), path.join(DIST, `${rel}.html`)];
+
+  // Model the host's ACTUAL extension handling rather than assuming it.
+  // Vercel defaults cleanUrls to false and then serves only .html paths;
+  // this check previously always fell back to `x.html`, which hid exactly
+  // that failure. The fallback now applies only when cleanUrls is on.
+  if (CLEAN_URLS && rel.endsWith('.html')) {
+    res.writeHead(308, { location: `/${rel.replace(/\.html$/, '')}` });
+    return res.end();
+  }
+  const candidates = CLEAN_URLS
+    ? [path.join(DIST, rel), path.join(DIST, `${rel}.html`)]
+    : [path.join(DIST, rel)];
   for (const f of candidates) {
     try {
       if (fs.statSync(f).isFile()) {
@@ -110,5 +128,9 @@ if (failures.length) {
   }
   process.exit(1);
 }
+if (!CLEAN_URLS) {
+  console.error('\nvercel.json must set cleanUrls: true, or every extensionless URL 404s.');
+  process.exit(1);
+}
 console.log('\nDIST OK: every page loads with no 404s and no broken images,');
-console.log('served with a single /docs -> dist mapping.');
+console.log(`served with a single /docs -> dist mapping (cleanUrls: ${CLEAN_URLS}).`);
