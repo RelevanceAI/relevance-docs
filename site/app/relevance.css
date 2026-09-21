@@ -261,13 +261,22 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
    above; two or more get a real tablist. */
 .rl-tablist { display: flex; flex-wrap: wrap; gap: .25rem; padding: .35rem;
   background: var(--rl-surface); border-bottom: 1px solid var(--rl-line); }
-.rl-tab-button { padding: .4rem .9rem; border: 0; border-radius: calc(var(--rl-radius) - 2px);
-  background: transparent; color: var(--rl-faint); cursor: pointer;
-  font-family: var(--rl-font-sans); font-size: .85rem; font-weight: 500; line-height: 1.4;
-  transition: background .15s ease, color .15s ease; }
-.rl-tab-button:hover { background: var(--rl-surface-2); color: var(--rl-ink); }
+/* Inactive tabs carry their own surface and border. Transparent ones looked
+   fine in a single row on desktop, but the strip wraps at 390px -- three
+   tabs become three rows -- and an unstyled row reads as body copy sitting
+   above the panel rather than as something to tap. */
+.rl-tab-button { padding: .4rem .9rem; border-radius: calc(var(--rl-radius) - 2px);
+  border: 1px solid var(--rl-line); background: var(--rl-bg); color: var(--rl-ink);
+  cursor: pointer; font-family: var(--rl-font-sans); font-size: .85rem; font-weight: 500;
+  line-height: 1.4; transition: background .15s ease, color .15s ease, border-color .15s ease; }
+.rl-tab-button:hover { background: var(--rl-surface-2); border-color: var(--rl-line-strong); }
 .rl-tab-button:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 1px; }
-.rl-tab-button[data-active] { background: var(--rl-primary); color: #fff; }
+.rl-tab-button[data-active] { background: var(--rl-primary); border-color: var(--rl-primary);
+  color: #fff; }
+/* Dark mode lightens --rl-primary to #8C84FF, where white text measures
+   3.06:1 -- under the 4.5:1 AA floor, and on the SELECTED tab of all
+   places. Page ink on that same fill is 6.29:1. */
+.dark .rl-tab-button[data-active] { color: var(--rl-bg); }
 .rl-tab-panel { padding: .9rem 1rem; }
 .rl-tab-panel > :first-child { margin-top: 0; }
 .rl-tab-panel > :last-child { margin-bottom: 0; }
@@ -292,6 +301,9 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
 .dark .path-picker { background: linear-gradient(135deg, rgba(96, 86, 255, .14), rgba(96, 86, 255, .04) 45%, rgba(165, 180, 252, .07));
   box-shadow: 0 0 0 1px rgba(165, 180, 252, .14), 0 8px 32px -12px rgba(96, 86, 255, .35); }
 .dark .path-picker .rl-tab-button { background: rgba(255, 255, 255, .07); color: var(--rl-ink); }
+/* Same 3.06:1 problem as the base tab strip -- this selector is more
+   specific, so it needs its own dark override. */
+.dark .path-picker .rl-tab-button[data-active] { color: var(--rl-bg); }
 
 /* Chrome composites a cross-origin iframe on its own layer, so rounding it
    leaves a light seam along the arc. Invisible on white; masked in dark. */
@@ -436,7 +448,37 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
 
 /* Tables overflow horizontally; without a focusable, named region the
    content is unreachable by keyboard. Live wraps them the same way. */
-.rl-table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+/* A wide table clips mid-word at the container edge with nothing to say it
+   continues, so the cut-off column reads as a rendering glitch. These two
+   gradients ride the scroll box (`local`) over a static pair pinned to the
+   edges (`scroll`), so a shadow shows only on the side that has more to
+   reveal. Worst on /docs/get-started/pricing, which has seven of them. */
+.rl-table-scroll { overflow-x: auto; margin: 1.5rem 0;
+  background:
+    linear-gradient(to right, var(--rl-bg) 30%, rgba(0, 0, 0, 0)) left center,
+    linear-gradient(to left, var(--rl-bg) 30%, rgba(0, 0, 0, 0)) right center,
+    radial-gradient(farthest-side at 0 50%, rgba(13, 22, 47, .16), rgba(0, 0, 0, 0)) left center,
+    radial-gradient(farthest-side at 100% 50%, rgba(13, 22, 47, .16), rgba(0, 0, 0, 0)) right center;
+  background-repeat: no-repeat;
+  background-size: 36px 100%, 36px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll; }
+.dark .rl-table-scroll {
+  background:
+    linear-gradient(to right, var(--rl-bg) 30%, rgba(0, 0, 0, 0)) left center,
+    linear-gradient(to left, var(--rl-bg) 30%, rgba(0, 0, 0, 0)) right center,
+    radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0)) left center,
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0)) right center;
+  background-repeat: no-repeat;
+  background-size: 36px 100%, 36px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll; }
+
+/* The prose preset decorates blockquotes with open-quote/close-quote
+   pseudo-elements. The source already writes its own quote marks, so every
+   quoted prompt rendered as ““like this””. */
+.prose blockquote p::before,
+.prose blockquote p::after,
+#nd-page blockquote p::before,
+#nd-page blockquote p::after { content: none; }
 .rl-table-scroll:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 2px; }
 
 /* =========================================================

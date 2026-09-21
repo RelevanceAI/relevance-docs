@@ -10,6 +10,13 @@
  * Samples every Nth page rather than all 385 -- the violations that matter
  * come from components, which repeat. Pass a count to widen it.
  *
+ * Both themes, because the first version of this gate tested light only and
+ * missed a real failure: dark mode lightens --rl-primary to #8C84FF, where
+ * the white label on the SELECTED tab measured 3.06:1. Three separate
+ * reviewers found it by eye while this gate reported zero violations. Theme
+ * comes from prefers-color-scheme rather than injecting a class, which races
+ * next-themes and leaves half the page in the other palette.
+ *
  * Scope: this gate covers what the BUILD controls -- markup, landmarks,
  * contrast, the component shims. It deliberately does not police the prose.
  * See EXCLUDED below.
@@ -89,9 +96,17 @@ const browser = await chromium.launch({
   executablePath: process.env.CHROMIUM_PATH ?? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
 });
 const found = new Map();
-for (const vp of [{ name: 'desktop', width: 1440, height: 950 }, { name: 'phone', width: 390, height: 844 }]) {
+const VIEWPORTS = [
+  { name: 'desktop', width: 1440, height: 950 },
+  { name: 'phone', width: 390, height: 844 },
+];
+for (const vp of VIEWPORTS) {
+  for (const theme of ['light', 'dark']) {
   for (const slug of pages) {
-    const p = await browser.newPage({ viewport: { width: vp.width, height: vp.height } });
+    const p = await browser.newPage({
+      viewport: { width: vp.width, height: vp.height },
+      colorScheme: theme,
+    });
     await p.goto(`http://localhost:${PORT}/docs/${slug}`, { waitUntil: 'load', timeout: 60000 });
     await p.waitForTimeout(1800);
     await p.addScriptTag({ content: AXE });
@@ -102,9 +117,10 @@ for (const vp of [{ name: 'desktop', width: 1440, height: 950 }, { name: 'phone'
       if (!found.has(k)) found.set(k, { nodes: 0, where: new Set(), help: v.help, sample: v.nodes[0]?.html?.slice(0, 120) });
       const e = found.get(k);
       e.nodes += v.nodes.length;
-      e.where.add(`${vp.name}:${slug}`);
+      e.where.add(`${vp.name}/${theme}:${slug}`);
     }
     await p.close();
+  }
   }
 }
 await browser.close();
@@ -114,14 +130,14 @@ const RANK = { critical: 0, serious: 1, moderate: 2, minor: 3 };
 const rows = [...found.entries()].sort(
   (a, b) => RANK[a[0].split('|')[0]] - RANK[b[0].split('|')[0]] || b[1].nodes - a[1].nodes);
 
-console.log(`pages sampled : ${pages.length} of ${all.length}, at 2 viewports`);
+console.log(`pages sampled : ${pages.length} of ${all.length}, at 2 viewports x 2 themes`);
 console.log(`rules excluded: ${Object.keys(EXCLUDED).join(', ')} (see the comment in this file)`);
 console.log(`rules violated: ${rows.length}`);
 console.log(`nodes         : ${rows.reduce((n, r) => n + r[1].nodes, 0)}`);
 if (rows.length) {
   console.error('\nACCESSIBILITY VIOLATIONS:');
   for (const [k, v] of rows) {
-    console.error(`  ${k}  -- ${v.nodes} nodes on ${v.where.size} page/viewport combos`);
+    console.error(`  ${k}  -- ${v.nodes} nodes on ${v.where.size} page/viewport/theme combos`);
     console.error(`     ${v.help}`);
     console.error(`     ${v.sample}`);
     console.error(`     e.g. ${[...v.where][0]}`);

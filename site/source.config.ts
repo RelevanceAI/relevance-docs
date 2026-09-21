@@ -39,6 +39,15 @@ export default defineConfig({
     // lands at the top of the page -- see lib/mintlify-slug.mjs. This feeds
     // the table of contents as well, so the two cannot drift apart.
     remarkHeadingOptions: { slug: mintlifySlug },
+    /**
+     * Shiki's `github-dark` colours comments #6A737D, which measures 3.71:1
+     * on this theme's code-block background -- under the 4.5:1 AA floor, so
+     * every commented sample was hard to read in dark mode.
+     * `github-dark-default` uses #8b949e for the same tokens: 5.81:1.
+     */
+    rehypeCodeOptions: {
+      themes: { light: 'github-light', dark: 'github-dark-default' },
+    },
     // remarkBasePath runs LAST: remarkImage rewrites images into elements
     // with a `src`, and that src needs the /docs prefix applying after it.
     // Mintlify renders typographic apostrophes and quotes, and slugs headings

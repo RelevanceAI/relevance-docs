@@ -22,15 +22,26 @@ const FIXTURE = path.join(ROOT, 'tools/fixtures/live-anchors.json');
 const isChrome = (id) => /^(_R_|base-ui)/.test(id);
 
 /**
- * Live capture: Mintlify puts content ids only on headings and on the <p>
- * that holds an accordion title, so restricting to those tags keeps its UI
+ * Live capture: Mintlify puts content ids on headings, on the <p> holding an
+ * accordion title, and on tab buttons. Restricting to those keeps its UI
  * chrome out of the fixture.
+ *
+ * Tab buttons were missed in the first version of this gate, so 152 anchors
+ * -- `#no-build`, `#mobile-only-features` and the like -- went unchecked and
+ * unbuilt. Their ids are percent-encoded in the attribute, so they are
+ * decoded here to compare against what this build emits raw.
  */
 const liveIds = (html) => {
   const out = new Set();
-  for (const m of html.matchAll(/<(?:h[1-6]|p)\b[^>]*\bid="([^"]+)"/g)) {
-    const id = m[1].replace(/&amp;/g, '&');
-    if (!isChrome(id)) out.add(id);
+  const take = (id) => {
+    let v = id.replace(/&amp;/g, '&');
+    try { v = decodeURIComponent(v); } catch {}
+    if (!isChrome(v)) out.add(v);
+  };
+  for (const m of html.matchAll(/<(?:h[1-6]|p)\b[^>]*\bid="([^"]+)"/g)) take(m[1]);
+  // Tab buttons: any element carrying role="tab", whichever tag Mintlify used.
+  for (const m of html.matchAll(/<\w+\b([^>]*?)\bid="([^"]+)"([^>]*)>/g)) {
+    if (/\brole="tab"/.test(m[1] + m[3])) take(m[2]);
   }
   return out;
 };
