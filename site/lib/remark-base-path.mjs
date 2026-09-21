@@ -16,9 +16,11 @@
  *               plain <a>, which nothing rewrites, so without this every
  *               in-page link 404s for crawlers and with JS disabled.
  *
- *   NOT prefixed - markdown IMAGES. fumadocs-mdx converts those to static
- *               imports resolved from public/, emitted as hashed
- *               _next/static/media assets with the base already applied.
+ *   PREFIXED  - markdown IMAGES. With remarkImageOptions.useImport disabled
+ *               these keep their own URL instead of becoming bundled static
+ *               imports, so they need the base like any other asset. This
+ *               plugin runs AFTER remarkImage so the file has already been
+ *               resolved and measured from its original path.
  *
  * Deliberately NOT handled: markdown IMAGES (`![](/images/x.png)`).
  * fumadocs-mdx turns those into static imports resolved from public/, and
@@ -42,7 +44,8 @@ export function remarkBasePath() {
     const walk = (node) => {
       if (!node || typeof node !== 'object') return;
 
-      if ((node.type === 'link' || node.type === 'definition') && typeof node.url === 'string') {
+      if ((node.type === 'link' || node.type === 'definition' || node.type === 'image')
+          && typeof node.url === 'string') {
         node.url = prefix(node.url);
       }
 

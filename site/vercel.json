@@ -1,4 +1,9 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "next build && node tools/pack-dist.mjs",
+  "outputDirectory": "dist",
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/docs/enterprise/org-project-controls-governance",
@@ -103,7 +108,7 @@
     {
       "source": "/docs/build-custom-tools/:slug*",
       "destination": "/docs/build/tools/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build-custom-tools/tool-steps/llms/prompt",
@@ -123,17 +128,17 @@
     {
       "source": "/docs/integrations/agent-integrations/build-your-own-triggers/*",
       "destination": "/docs/build/agents/build-your-agent/agent-triggers/*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/integrations/agent-integrations/premium-triggers/*",
       "destination": "/docs/integrations/popular-integrations/*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/integrations/agent-integrations/*",
       "destination": "/docs/integrations/popular-integrations/*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/plans",
@@ -343,17 +348,17 @@
     {
       "source": "/docs/chat/:slug*",
       "destination": "/docs/get-started/chat/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/marketplace/:slug*",
       "destination": "/docs/get-started/marketplace/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/agent/:slug*",
       "destination": "/docs/build/agents/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/tool/advanced-setup/loops",
@@ -368,32 +373,32 @@
     {
       "source": "/docs/tool/:slug*",
       "destination": "/docs/build/tools/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/workforce/:slug*",
       "destination": "/docs/build/workforces/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/knowledge/:slug*",
       "destination": "/docs/build/knowledge/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/account-management/:slug*",
       "destination": "/docs/admin/account-management/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/project-management/:slug*",
       "destination": "/docs/admin/project-management/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/subscriptions/:slug*",
       "destination": "/docs/admin/subscriptions/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/security",
@@ -408,7 +413,7 @@
     {
       "source": "/docs/get-started/enterprise/:slug*",
       "destination": "/docs/enterprise/:slug*",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/build-your-agent/agent-triggers/zapier",
@@ -468,352 +473,372 @@
     {
       "source": "/docs/admin/account-management",
       "destination": "/docs/admin/account-management/update-profile-info",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/admin/project-management",
       "destination": "/docs/admin/project-management/add-members",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/admin/subscriptions",
       "destination": "/docs/admin/subscriptions/plans",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/admin",
       "destination": "/docs/admin/account-management/update-profile-info",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/api-reference/endpoint",
       "destination": "/docs/api-reference/endpoint/create",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/api-reference",
       "destination": "/docs/api-reference/authentication",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/advanced-features",
       "destination": "/docs/build/agents/advanced-features/on-call-ai-commands",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/agent-examples",
       "destination": "/docs/build/agents/agent-examples/bosh-bdr-agent",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/assistants",
       "destination": "/docs/build/agents/assistants/assistants-overview",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/build-your-agent/agent-modes",
       "destination": "/docs/build/agents/build-your-agent/agent-modes/phone-calls",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/build-your-agent/agent-settings",
       "destination": "/docs/build/agents/build-your-agent/agent-settings/general",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/build-your-agent/agent-triggers",
       "destination": "/docs/build/agents/build-your-agent/agent-triggers/integrations",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/build-your-agent",
       "destination": "/docs/build/agents/build-your-agent/agent-modes/phone-calls",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/evals",
       "destination": "/docs/build/agents/evals/introduction",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/extend-your-agent",
       "destination": "/docs/build/agents/extend-your-agent/conversation",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/give-your-agent-tasks",
       "destination": "/docs/build/agents/give-your-agent-tasks/task-overview",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/manage-your-agent",
       "destination": "/docs/build/agents/manage-your-agent/activity-center",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents/use-cases",
       "destination": "/docs/build/agents/use-cases/calendar-scheduling",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/agents",
       "destination": "/docs/build/agents/create-an-agent",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/invent",
       "destination": "/docs/build/invent/invent",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/knowledge/integrated-knowledge-sources",
       "destination": "/docs/build/knowledge/integrated-knowledge-sources/google-drive",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/knowledge",
       "destination": "/docs/build/knowledge/create-knowledge",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/advanced-setup",
       "destination": "/docs/build/tools/advanced-setup/conditions",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/api",
       "destination": "/docs/build/tools/api/long-running-tools",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/customize-tool",
       "destination": "/docs/build/tools/customize-tool/tool-style-guide",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/knowledge",
       "destination": "/docs/build/tools/knowledge/knowledge",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/provider-setup",
       "destination": "/docs/build/tools/provider-setup/azure-openai",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/airtop-browser-automation",
       "destination": "/docs/build/tools/tool-steps/airtop-browser-automation/window-management",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/confluence",
       "destination": "/docs/build/tools/tool-steps/confluence/create-post",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/gmail",
       "destination": "/docs/build/tools/tool-steps/gmail/add-label-to-email",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/google-calendar",
       "destination": "/docs/build/tools/tool-steps/google-calendar/create-google-calendar-event",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/google-docs",
       "destination": "/docs/build/tools/tool-steps/google-docs/append-text",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/google-sheets",
       "destination": "/docs/build/tools/tool-steps/google-sheets/add-single-row",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/knowledge",
       "destination": "/docs/build/tools/tool-steps/knowledge/insert-knowledge",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/linkedin",
       "destination": "/docs/build/tools/tool-steps/linkedin/search-linkedin-profiles",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/llms",
       "destination": "/docs/build/tools/tool-steps/llms/llm-tool-step",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/python-code",
       "destination": "/docs/build/tools/tool-steps/python-code/code-python",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/slack",
       "destination": "/docs/build/tools/tool-steps/slack/send-message",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/tool-steps/trello",
       "destination": "/docs/build/tools/tool-steps/trello/add-comment",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools/user-inputs",
       "destination": "/docs/build/tools/user-inputs/check-box",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/tools",
       "destination": "/docs/build/tools/create-a-tool",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/workforces/build-an-ai-workforce",
       "destination": "/docs/build/workforces/build-an-ai-workforce/add-triggers",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/workforces/workforce-features",
       "destination": "/docs/build/workforces/workforce-features/trigger-to-agent-configuration",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build/workforces",
       "destination": "/docs/build/workforces/create-a-workforce",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/build",
       "destination": "/docs/build/introduction",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/embed",
       "destination": "/docs/embed/embed_agents",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/enterprise",
       "destination": "/docs/enterprise/quick-start-guide",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/example-use-cases",
       "destination": "/docs/example-use-cases/few-shot-prompting",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/chat/chat-agents",
       "destination": "/docs/get-started/chat/chat-agents/deep-researcher",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/chat/super-gtm",
       "destination": "/docs/get-started/chat/super-gtm/introduction",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/chat",
       "destination": "/docs/get-started/chat/introduction",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/core-concepts",
       "destination": "/docs/get-started/core-concepts/agents",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/key-concepts",
       "destination": "/docs/get-started/key-concepts/agent",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/marketplace/relevance-builders",
       "destination": "/docs/get-started/marketplace/relevance-builders/become-a-relevance-builder",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/marketplace",
       "destination": "/docs/get-started/marketplace/introduction",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started/troubleshooting",
       "destination": "/docs/get-started/troubleshooting/troubleshooting-agents-not-working",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/get-started",
       "destination": "/docs/get-started/introduction",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/guides/customer-success",
       "destination": "/docs/guides/customer-success/getting-started",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/guides/customer-support",
       "destination": "/docs/guides/customer-support/getting-started",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/guides/marketing",
       "destination": "/docs/guides/marketing/getting-started",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/guides/revops",
       "destination": "/docs/guides/revops/getting-started",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/guides/sales",
       "destination": "/docs/guides/sales/getting-started",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/guides/solution-engineering",
       "destination": "/docs/guides/solution-engineering/getting-started",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/integrations/integration-examples",
       "destination": "/docs/integrations/integration-examples/email-warmups",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/integrations/llm-integrations",
       "destination": "/docs/integrations/llm-integrations/openai",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/integrations/mcp",
       "destination": "/docs/integrations/mcp/claude-code",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/integrations/popular-integrations",
       "destination": "/docs/integrations/popular-integrations/hubspot",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/integrations",
       "destination": "/docs/integrations/introduction",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/sdk",
       "destination": "/docs/sdk/introduction",
-      "permanent": true
+      "permanent": false
     },
     {
       "source": "/docs/templates",
       "destination": "/docs/templates/analyze-responses-in-focus-groups",
-      "permanent": true
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/docs/_next/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/docs/(images|videos)/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
     }
   ]
 }

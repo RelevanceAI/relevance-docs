@@ -1,7 +1,8 @@
 /**
- * Proves site/dist is correct by serving it EXACTLY as a host would --
- * /docs/<path> maps to dist/<path>, with no fallbacks or path guessing --
- * then loading real pages in a browser and failing on any 404.
+ * Proves site/dist is correct by serving it EXACTLY as a host would -- the
+ * output root at the domain root, so /docs/<path> maps to dist/docs/<path>,
+ * with no fallbacks or path guessing -- then loading real pages in a browser
+ * and failing on any 404.
  *
  * The permissive dev server used earlier masked a real defect: raw asset
  * refs and _next chunks resolved only because it tried multiple candidate
@@ -44,10 +45,9 @@ const redirectFor = (url) => {
 
 const server = http.createServer((req, res) => {
   const url = decodeURIComponent(new URL(req.url, 'http://x').pathname);
-  if (!url.startsWith('/docs')) { res.writeHead(404); return res.end('outside /docs'); }
   const hit = redirectFor(url);
   if (hit) { res.writeHead(hit.code, { location: hit.to }); return res.end(); }
-  const rel = url.slice('/docs'.length).replace(/^\//, '');
+  const rel = url.replace(/^\//, '');
   // Exactly one fallback, the same one every static host does: `x` -> `x.html`.
   const candidates = [path.join(DIST, rel), path.join(DIST, `${rel}.html`)];
   for (const f of candidates) {
