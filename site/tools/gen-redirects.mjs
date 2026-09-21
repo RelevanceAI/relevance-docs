@@ -19,6 +19,22 @@ const withBase = (p) => `/docs${p}`.replace(/\/+/g, '/');
 const exact = all.filter((r) => !isWild(r));
 const wild = all.filter(isWild);
 
+/**
+ * Vercel uses path-to-regexp, which requires NAMED wildcards (`:path*`).
+ * Mintlify's docs.json mixes two forms -- `:slug*` (already valid) and a bare
+ * `*` (not valid). Passing the bare form straight through made Vercel reject
+ * the ENTIRE deployment at creation time with "invalid `source` pattern",
+ * before any build ran. Three rules were affected and they took the other 160
+ * down with them.
+ */
+const toVercelPattern = (p) => p.replace(/(?<!:[\w]{0,32})\*/g, ':path*').replace(/:(\w+)\*/g, ':$1*');
+const vercelRule = (r) => {
+  // A bare `*` becomes `:path*` on BOTH sides so the param names line up.
+  const hasBare = /(?<!\w)\*/.test(r.source.replace(/:\w+\*/g, ''));
+  const conv = (p) => (hasBare ? p.replace(/(?<!\w)\*/g, ':path*') : p);
+  return { source: withBase(conv(r.source)), destination: withBase(conv(r.destination)) };
+};
+
 // Cloudflare: `*` matches, `:splat` substitutes. Mintlify's `:slug*` is the same idea.
 const cf = (r) => {
   const from = withBase(r.source).replace(/:\w+\*/g, '*');
@@ -117,8 +133,7 @@ const vercel = {
   outputDirectory: 'dist',
   trailingSlash: false,
   redirects: [...all, ...folderRules].map((r) => ({
-    source: withBase(r.source),
-    destination: withBase(r.destination),
+    ...vercelRule(r),
     permanent: !/[*:]/.test(r.source) && !folderRules.includes(r),
   })),
   headers: [
