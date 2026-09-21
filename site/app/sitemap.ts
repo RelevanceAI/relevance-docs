@@ -1,60 +1,38 @@
 import type { MetadataRoute } from 'next';
-import fs from 'node:fs';
-import path from 'node:path';
+import { navPages } from '@/lib/llms';
 import { source } from '@/lib/source';
 import { siteUrl } from '@/lib/shared';
 
 export const dynamic = 'force-static';
 
 /**
- * Only pages listed in docs.json navigation are advertised.
+ * The 289 pages in docs.json navigation, plus the changelog archives.
  *
- * The build produces 385 pages, but 96 of them are orphans: served, but
- * unlinked and absent from Mintlify's sitemap today. Advertising them would
- * push 96 previously-unindexed pages — including the leftover Mintlify
- * starter-kit API stubs — into the index at cutover, which is a change in
- * behaviour, not a migration. They stay reachable; they just aren't listed,
- * exactly as now.
+ * The build produces 385 pages; 96 are orphans, served but unlinked from
+ * the navigation tree. Advertising all of them would push five leftover
+ * Mintlify starter-kit API stubs and ~50 pages with no inbound link at all
+ * into the index at cutover -- a content-quality change dressed up as a
+ * migration. They stay reachable; they just aren't listed, exactly as now.
+ *
+ * The three changelog year archives are the exception. They are current,
+ * substantive, and linked from the changelog's own sidebar; Mintlify leaves
+ * them out only because its sitemap walks navigation.products and the
+ * changelog is a global anchor. That is an artifact of how Mintlify builds
+ * sitemaps, not a decision about those pages.
  */
-function navSlugs(): Set<string> {
-  const docsJson = JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), '..', 'docs.json'), 'utf8'),
-  );
-  const out = new Set<string>();
-  const walk = (o: unknown) => {
-    if (typeof o === 'string') { out.add(o); return; }
-    if (Array.isArray(o)) { o.forEach(walk); return; }
-    if (o && typeof o === 'object') {
-      for (const v of Object.values(o)) if (v && typeof v === 'object') walk(v);
-    }
-  };
-  walk(docsJson.navigation?.products ?? []);
-
-  // Mintlify's sitemap covers the navigation.products tree only, so the
-  // global anchors (/docs/community and /docs/changelog) are absent from it
-  // today even though both are linked from every page. Matching that keeps
-  // the migration exactly neutral. Both are still crawlable via those links;
-  // flip this to true to advertise them as well -- a small opportunity, not
-  // a regression either way.
-  const INCLUDE_GLOBAL_ANCHORS = false;
-  if (INCLUDE_GLOBAL_ANCHORS) {
-    for (const a of docsJson.navigation?.global?.anchors ?? []) {
-      const href = String(a.href ?? '').replace('https://relevanceai.com/docs', '');
-      if (href.startsWith('/')) out.add(href.replace(/^\//, ''));
-    }
-  }
-  return out;
-}
+const EXTRA = ['/docs/changelog/2023', '/docs/changelog/2024', '/docs/changelog/2025'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const listed = navSlugs();
-  return source
-    .getPages()
-    .filter((page) => listed.has(page.url.replace(/^\/docs\//, '')))
-    .map((page) => ({
-      url: `${siteUrl}${page.url}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: page.url === '/docs/get-started/introduction' ? 1 : 0.7,
-    }));
+  const byUrl = new Map(source.getPages().map((p) => [p.url, p]));
+  const urls = [
+    ...navPages().map((p) => p.url),
+    ...EXTRA.filter((u) => byUrl.has(u)),
+  ];
+
+  return urls.map((url) => ({
+    url: `${siteUrl}${url}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: url === '/docs/get-started/introduction' ? 1 : 0.7,
+  }));
 }
