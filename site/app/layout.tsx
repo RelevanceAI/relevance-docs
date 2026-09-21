@@ -8,6 +8,11 @@ import { siteUrl, SITE_NAME } from '@/lib/shared';
 import { Analytics } from '@/components/site/analytics';
 import { ChatWidget } from '@/components/site/chat-widget';
 import './global.css';
+// Font Awesome Free, subset to the ~280 icons this site actually renders and
+// bundled with the rest of the CSS. The full stylesheet from cdnjs was a
+// render-blocking cross-origin request pulling a 158 KB webfont for 1,976
+// glyphs -- see tools/build-icon-font.mjs.
+import './icons.css';
 import './relevance.css';
 
 // Brand typefaces from relevanceai.com: Sora for headings, Inter for UI/body.
@@ -94,11 +99,6 @@ export default function Layout({ children }: LayoutProps<'/'>) {
           type="application/ld+json"
           // Static, build-time constant -- no user input reaches this.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        {/* Mintlify ships Font Awesome; 257/297 icon names used here are in Free. */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         />
       </head>
       <body className="flex flex-col min-h-screen">
