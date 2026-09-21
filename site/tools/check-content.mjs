@@ -10,6 +10,13 @@
  *
  * Every other gate passed throughout: the pages built, the links resolved,
  * the images loaded. Only reading the rendered text catches this.
+ *
+ * It also checks that the body is valid HTML in the one way that matters at
+ * runtime: a block element inside a <p> (or a <p> inside a <p>) makes the
+ * parser close the paragraph early, so the client tree stops matching the
+ * server tree and React throws #418 and re-renders the page on the client.
+ * A `<Tip>` on the line straight after a sentence did this on 22 pages, and
+ * a raw `<p style=...>` with its text on the next line on 3 more.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -33,7 +40,21 @@ const pages = [];
   }
 })(DIST);
 
+/** Block-level elements the HTML parser will not leave inside a <p>. */
+const BLOCK_IN_P = /<(p|div|aside|ul|ol|li|figure|pre|table|section|article|h[1-6])\b/;
+
+function badParagraphs(body) {
+  for (const m of body.matchAll(/<p\b[^>]*>/g)) {
+    const end = body.indexOf('</p>', m.index);
+    const inner = body.slice(m.index + m[0].length, end === -1 ? undefined : end);
+    const hit = BLOCK_IN_P.exec(inner);
+    if (hit) return hit[1];
+  }
+  return null;
+}
+
 const found = new Map();
+const nesting = [];
 for (const f of pages) {
   const html = fs.readFileSync(f, 'utf8');
   // Only the article body: code samples legitimately contain component tags.
@@ -41,6 +62,9 @@ for (const f of pages) {
   if (start === -1) continue;
   let body = html.slice(start, html.indexOf('</article>', start));
   body = body.replace(/<pre[\s\S]*?<\/pre>/g, '').replace(/<code[\s\S]*?<\/code>/g, '');
+
+  const tag = badParagraphs(body);
+  if (tag) nesting.push(`/docs${f.slice(DIST.length).replace(/\.html$/, '')} (<${tag}> inside <p>)`);
 
   for (const { re, name } of LEAKS) {
     if (re.test(body)) {
@@ -52,11 +76,19 @@ for (const f of pages) {
 
 console.log(`pages scanned : ${pages.length}`);
 console.log(`leak patterns : ${found.size}`);
+console.log(`bad <p> nesting: ${nesting.length}`);
 if (found.size) {
   console.error('\nSource syntax leaked into rendered output:');
   for (const [name, list] of found) {
     console.error(`  ${name} -- ${list.length} page(s), e.g. ${list[0]}`);
   }
-  process.exit(1);
 }
-console.log('\nCONTENT OK: no source syntax leaked into rendered pages.');
+if (nesting.length) {
+  console.error('\nBlock element inside a <p> -- this breaks hydration:');
+  for (const n of nesting.slice(0, 12)) console.error(`  ${n}`);
+  if (nesting.length > 12) console.error(`  ... and ${nesting.length - 12} more`);
+  console.error('\nAdd the component to BLOCK in lib/remark-unwrap-blocks.mjs, or put the');
+  console.error('raw JSX element\'s content on the same line as its tag.');
+}
+if (found.size || nesting.length) process.exit(1);
+console.log('\nCONTENT OK: no source syntax leaked, and no block element inside a <p>.');

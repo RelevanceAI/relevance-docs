@@ -3,6 +3,7 @@ import { remarkHeadingComponents } from './lib/remark-heading-components.mjs';
 import { remarkBasePath } from './lib/remark-base-path.mjs';
 import { rehypeAssetBase } from './lib/rehype-asset-base.mjs';
 import { remarkCodeLang } from './lib/remark-code-lang.mjs';
+import { remarkUnwrapBlocks } from './lib/remark-unwrap-blocks.mjs';
 import { mintlifySlug } from './lib/mintlify-slug.mjs';
 import smartypants from 'remark-smartypants';
 
@@ -48,6 +49,7 @@ export default defineConfig({
     remarkPlugins: (v) => [
       remarkHeadingComponents,
       remarkCodeLang,
+      remarkUnwrapBlocks,
       [smartypants, { dashes: false, ellipses: false, backticks: false }],
       ...v,
       remarkBasePath,
