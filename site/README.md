@@ -15,6 +15,7 @@ npx serve out          # or any static host
 Three checks guard the migration. All three must pass before cutover.
 
 ```bash
+node tools/check-redirects.mjs # host configs are valid for Vercel + CF
 node tools/check-parity.mjs   # every indexed URL still exists
 node tools/check-nav.mjs      # every docs.json page is in the sidebar
 node tools/check-links.mjs    # no broken internal links
@@ -26,6 +27,7 @@ Current state:
 
 | Gate | Result |
 |---|---|
+| Redirect config validity | **165 Vercel routes, 164 CF rules, 0 errors** |
 | URL parity vs live sitemap | **289/289 present, 0 missing** |
 | Sidebar coverage | **289/289 listed, 0 shadowed** |
 | Internal links + asset srcs | **11,151 checked, 0 broken** |
@@ -79,6 +81,16 @@ Free — `messages` alone appears 11 times. `PRO_TO_FREE` in
 `components/mintlify/index.tsx` maps all 41 to Free equivalents. Buying an FA
 Pro licence would let that table be deleted; `brand-android`, `notion` and
 `typewriter` are the only three with no close Free match.
+
+**The two hosts want different wildcard syntax.** `docs.json` mixes two
+forms: `:slug*` and a bare `*`. Cloudflare wants `*` + `:splat`; Vercel wants
+a named `:path*` and rejects a bare `*`. The generator originally normalised
+only the Cloudflare side, so three rules shipped to `vercel.json` with a bare
+`*` — and Vercel validates routes at deployment-CREATION time, so it threw out
+the **entire deployment** before any build ran. 3 bad rules took the other 160
+with them, and there was no build log to inspect; the error only surfaced as a
+bot comment on the PR. `tools/check-redirects.mjs` now validates both configs
+against each platform's actual syntax and limits.
 
 **Shiki is stricter than Mintlify.** Fence languages `Python` (6), `python3`
 (4), `https` (2) and `SOQL` (1) are not Shiki languages and threw
