@@ -42,7 +42,7 @@ directs the LLM model to a certain perspective. This objective-focused analysis 
 for your particular use case.
 
 ## How to use the Tool
-<Snippet file="how-to-use-a-tool.mdx" />
+<include>../../_snippets/how-to-use-a-tool.mdx</include>
 
 Follow these steps to extract categories from your text data:
 
@@ -86,7 +86,7 @@ the run options on your data table (bulk/single run) to initiate the categorizat
 generate a list of main categories, themes, and topics based on the content and context of the text.
 
     #### Tool execution at Relevance
-    <Snippet file="tool-execution.mdx" />
+    <include>../../_snippets/tool-execution.mdx</include>
         
 * **View Results**: The Tool will provide you with the extracted categories in a clear and organized format. You can explore the main categories, themes, 
 and topics identified in your data. The results will help you gain a deeper understanding of your text data and uncover valuable insights.
@@ -101,22 +101,22 @@ We Highly recommend
 
 ## Deep dive in the Tool
 
-<Snippet file="components/tools/tool-components.mdx" />
+<include>../../_snippets/components/tools/tool-components.mdx</include>
 
 ### User inputs
 ![User inputs](/images/templates/category-tag-suggester/category-tag-suggester-build-input.png)
 
-1. <Snippet file="components/inputs/file-to-url.mdx" />
+1. <include>../../_snippets/components/inputs/file-to-url.mdx</include>
 
-2. <Snippet file="components/inputs/text-input.mdx" />
+2. <include>../../_snippets/components/inputs/text-input.mdx</include>
     This component is used twice in this Tool. Target column and the objective are both of Text
     inputs.
 
-3. <Snippet file="components/inputs/table.mdx" />
+3. <include>../../_snippets/components/inputs/table.mdx</include>
     This component is used twice in this Tool. Row range (from - to) and well as Examples
     (Text - Categories/topics) are both samples of structured input data.
 
-4. <Snippet file="components/inputs/numeric-input.mdx" />
+4. <include>../../_snippets/components/inputs/numeric-input.mdx</include>
     This component is used twice in this Tool. Both maximum word count per category and maximum
     number of suggested categories are of numeric inputs.
 
@@ -128,22 +128,22 @@ and the LLM step.
 #### Loading the specified subset of the file
 1. Loading the file into readable json format
 ![CSV to JSON](/images/templates/category-tag-suggester/category-tag-suggester-build-csv-to-json.png)
-<Snippet file="components/tools/convert-spreadsheet-to-json.mdx" />
+<include>../../_snippets/components/tools/convert-spreadsheet-to-json.mdx</include>
 
 2. Selecting the specified subset of the data
 ![code](/images/templates/category-tag-suggester/category-tag-suggester-build-subset.png)
-<Snippet file="components/tools/code-python.mdx" />
+<include>../../_snippets/components/tools/code-python.mdx</include>
     In this case, the Python code, filters out any rows that is not in the specified range.
 
 #### Properly formatting the provided samples
 ![code](/images/templates/category-tag-suggester/category-tag-suggester-build-sample.png)
-<Snippet file="components/tools/code-python.mdx" />
+<include>../../_snippets/components/tools/code-python.mdx</include>
     In this case, the Python code, forms the entered samples in the format that is suitable
     abd compatible to the prompt.
 
 #### Large Language Model (LLM)
 ![LLM](/images/templates/category-tag-suggester/category-tag-suggester-build-llm.png)
-<Snippet file="components/tools/llm.mdx" />
+<include>../../_snippets/components/tools/llm.mdx</include>
 
 **[A Good Prompt](/build/tools/tool-steps/llms/prompt)**
 1. Be short and precise with your instruction/request from the LLM

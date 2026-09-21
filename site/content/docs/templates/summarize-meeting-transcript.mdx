@@ -43,7 +43,7 @@ themes and topics of interest. The Tool will process the transcript and generate
 The intuitive design ensures a seamless and enjoyable user experience, allowing you to focus on the insights rather than the technicalities.
 
 ## How to use the Tool
-<Snippet file="how-to-use-a-tool.mdx" />
+<include>../../_snippets/how-to-use-a-tool.mdx</include>
 
 Follow these steps to generate a summary of your meeting transcript:
 
@@ -60,22 +60,22 @@ the run options on your data table (bulk/single run) to initiate the the analysi
 generate a concise summary based on the content and context of the meeting discussion.
 
         #### Tool execution at Relevance
-        <Snippet file="tool-execution.mdx" />
+        <include>../../_snippets/tool-execution.mdx</include>
 
 ## Deep dive in the Tool
 
-<Snippet file="components/tools/tool-components.mdx" />
+<include>../../_snippets/components/tools/tool-components.mdx</include>
 
 ### User inputs
 ![User inputs](/images/templates/summarize-meeting-transcript/summarize-meeting-transcript-build-input.png)
 
-1. <Snippet file="components/inputs/long-text-input.mdx" />
+1. <include>../../_snippets/components/inputs/long-text-input.mdx</include>
     This component is to provide the transcription and is of type long tex inputs.
 
-2. <Snippet file="components/inputs/text-input.mdx" />
+2. <include>../../_snippets/components/inputs/text-input.mdx</include>
     This component is to briefly overview the meeting agenda and is of Text input type.
 
-3. <Snippet file="components/inputs/table.mdx" />
+3. <include>../../_snippets/components/inputs/table.mdx</include>
     This component is used twice both for providing names and roles of the people in the recording
     and to specify the objectives, goals and focus points for summarization.
     * Enter the names and roles (Use unknown if the data is not available)
@@ -86,7 +86,7 @@ There is only 1 LLM component under the Tool steps in this analysis flow.
 
 #### Large Language Model (LLM)
     ![LLM](/images/templates/summarize-meeting-transcript/summarize-meeting-transcript-build-llm.png)
-    <Snippet file="components/tools/llm.mdx" />
+    <include>../../_snippets/components/tools/llm.mdx</include>
 
     **[A Good Prompt](/build/tools/tool-steps/llms/prompt)**
     1. Be short and precise with your instruction/request from the LLM

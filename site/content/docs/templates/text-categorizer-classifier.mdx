@@ -40,7 +40,7 @@ This feature is particularly valuable when dealing with diverse or multi-dimensi
 With its intuitive design, you can effortlessly input text samples and taxonomies, allowing you to focus on the analysis rather than the technicalities. 
 
 ## How to use the Tool
-<Snippet file="how-to-use-a-tool.mdx" />
+<include>../../_snippets/how-to-use-a-tool.mdx</include>
 
 Follow these steps to categorize your text data effortlessly:
 
@@ -77,7 +77,7 @@ Since "Amenities" is not a near-synonym for any of those categories.
 on your data table (bulk/single run) to initiate the categorization process. Sit back and let the Tool do the heavy lifting.
 
         #### Tool execution at Relevance
-        <Snippet file="tool-execution.mdx" />
+        <include>../../_snippets/tool-execution.mdx</include>
 
 * **View Results**: The Tool will analyze the text and assign the appropriate categories based on the predefined taxonomy. 
 The results will be displayed in a clear and organized format, enabling you to easily review and analyze the categorization.
@@ -85,19 +85,19 @@ The results will be displayed in a clear and organized format, enabling you to e
 
 ## Deep dive in the Tool
 
-<Snippet file="components/tools/tool-components.mdx" />
+<include>../../_snippets/components/tools/tool-components.mdx</include>
 
 ### User inputs
 ![User inputs](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-input.png)
 
-1. <Snippet file="components/inputs/long-text-input.mdx" />
+1. <include>../../_snippets/components/inputs/long-text-input.mdx</include>
     This component is used twice in this Tool. Both input text (Text to categorize) and 
     the list of categories (List of categories) are of long tex inputs.
 
-2. <Snippet file="components/inputs/numeric-input.mdx" />
+2. <include>../../_snippets/components/inputs/numeric-input.mdx</include>
     Use the default value (3) or enter your preferred maximum number of categories to be assigned to each input.
 
-3. <Snippet file="components/inputs/table.mdx" />
+3. <include>../../_snippets/components/inputs/table.mdx</include>
     This component allows you to provide samples of text categorization done by you.
     * Enter the input sample under "text"
     * Enter matching categories under "topics"
@@ -111,13 +111,13 @@ tasks: properly formatting the provided categories/themes/topics, the LLM step a
 #### Properly formatting the provided categories/themes/topics
     String to List formatting
     ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-code1.png)
-    <Snippet file="components/Tools/code-python.mdx" />
+    <include>../../_snippets/components/tools/code-python.mdx</include>
         In this case, the Python code, filters out empty lines and creates a list of 
         categories/themes/topics from the provided text.
 
 #### Large Language Model (LLM)
     ![LLM](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-llm.png)
-    <Snippet file="components/Tools/llm.mdx" />
+    <include>../../_snippets/components/tools/llm.mdx</include>
 
     **[A Good Prompt](/build/tools/tool-steps/llms/prompt)**
     1. Be short and precise with your instruction/request from the LLM
@@ -129,14 +129,14 @@ tasks: properly formatting the provided categories/themes/topics, the LLM step a
 
 
 #### Properly formatting the output
-1. <Snippet file="components/Tools/convert-string-to-json.mdx" />
+1. <include>../../_snippets/components/tools/convert-string-to-json.mdx</include>
    ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-str-to-json.png)
    This is to make sure we can properly save the results in the desired structure.
    
 
 2. Filtering out unwanted categories/themes/topics
     ![code](/images/templates/text-categorizer-classifier/text-categorizer-classifier-build-code2.png)
-    <Snippet file="components/Tools/code-python.mdx" />
+    <include>../../_snippets/components/tools/code-python.mdx</include>
     Occasionally the LLM might output categories/themes/topics that are not in the pre-specified list.
     This is taken care of using a simple Python code snippet in this Tool.
     

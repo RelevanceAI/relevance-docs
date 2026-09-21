@@ -36,7 +36,7 @@ The "Extract data from PDF" Tool allows you to export the extracted data in the 
 making it easy to further analyze or process the extracted data.
 
 ## How to use the Tool
-<Snippet file="how-to-use-a-tool.mdx" />
+<include>../../_snippets/how-to-use-a-tool.mdx</include>
 
 Follow these steps to extract data from your PDF documents:
 
@@ -54,21 +54,21 @@ the run options on your data table (bulk/single run) to initiate the the analysi
 extract the specified data points. Sit back and relax while the Tool does the work for you.
 
         #### Tool execution at Relevance
-        <Snippet file="tool-execution.mdx" />
+        <include>../../_snippets/tool-execution.mdx</include>
 
 * **Export and Integrate**: Click on "Export" and the extracted data be downloaded to your computer as a CSV file. This CSV contains 
 columns representing the extracted data. You can then integrate the data with other tools or systems for further analysis or processing.
 
 ## Deep dive in the Tool
 
-<Snippet file="components/tools/tool-components.mdx" />
+<include>../../_snippets/components/tools/tool-components.mdx</include>
 
 ### User inputs
 ![User inputs](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-input.png)
 
-1. <Snippet file="components/inputs/file-to-url.mdx" />
+1. <include>../../_snippets/components/inputs/file-to-url.mdx</include>
 
-2. <Snippet file="components/inputs/text-list-input.mdx" />
+2. <include>../../_snippets/components/inputs/text-list-input.mdx</include>
 
 ### Tool steps
 There are 5 components under the Tool steps in this analysis flow. These components take care of three
@@ -76,13 +76,13 @@ tasks: converting PDF to text, the LLM step, and formatting for CSV export.
 
 #### Converting PDF to text
 ![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-convert-pdf-to-text.png)
-    <Snippet file="components/tools/pdf-to-text.mdx" />
+    <include>../../_snippets/components/tools/pdf-to-text.mdx</include>
 
 #### Large Language Model (LLM)
 ![LLM](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-llm.png)
-    <Snippet file="components/tools/llm.mdx" />
+    <include>../../_snippets/components/tools/llm.mdx</include>
 
-    <Snippet file="a-good-prompt.mdx" />
+    <include>../../_snippets/a-good-prompt.mdx</include>
     1. Be short and precise with your instruction/request from the LLM
     2. Include formatting instruction when necessary
     3. Specify the scope using `"`, `"""` or similar identifiers
@@ -90,15 +90,15 @@ tasks: converting PDF to text, the LLM step, and formatting for CSV export.
 #### Formatting for CSV export
 1. Markdown to CSV
 ![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-code1.png)
-    <Snippet file="components/tools/code-javascript.mdx" />
+    <include>../../_snippets/components/tools/code-javascript.mdx</include>
     In this Tool, the code-snippet turns the Markdown format to a CSV.
 
 2. A temporary downloadable file
 ![export](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-export1.png)
-    <Snippet file="components/tools/export-data-to-a-temporary-downloadable-file.mdx" />
+    <include>../../_snippets/components/tools/export-data-to-a-temporary-downloadable-file.mdx</include>
 
 
 3. Export to CSV
 ![code](/images/templates/extract-data-from-pdf/extract-data-from-pdf-build-code2.png)
-    <Snippet file="components/tools/code-javascript.mdx" />
+    <include>../../_snippets/components/tools/code-javascript.mdx</include>
     In this Tool, the second code-snippet simply returns the downloadable URL to the output file.
