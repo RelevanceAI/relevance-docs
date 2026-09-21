@@ -1,9 +1,13 @@
 /**
  * Internal link checker over the built output.
  *
- * Every internal href in the 385 built pages must resolve to a built page,
- * an asset, or a redirect rule. Mintlify tolerated dangling links silently;
- * this makes them visible.
+ * Every internal href AND asset src in the built pages must resolve to a
+ * built page, a file on disk, or a redirect rule. Mintlify tolerated dangling
+ * links silently; this makes them visible.
+ *
+ * `src` is checked too: 396 markdown images once shipped without the /docs
+ * prefix because fumadocs appends its own remarkImage after user plugins and
+ * reset the URL. Every one of them 404'd and only a browser check caught it.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -48,8 +52,10 @@ let checked = 0;
 for (const f of files) {
   const html = fs.readFileSync(f, 'utf8');
   const from = f.slice(OUT.length).replace(/\.html$/, '');
-  for (const m of html.matchAll(/href="(\/[^"#?]*)/g)) {
+  for (const m of html.matchAll(/(?:href|src)="(\/[^"#?]*)/g)) {
     const url = m[1].replace(/\/$/, '') || '/';
+    // `//host/path` is protocol-relative, i.e. external, despite the leading slash.
+    if (url.startsWith('//')) continue;
     if (url.startsWith('/docs/_next') || url.startsWith('/_next')) continue;
     checked++;
     if (pages.has(url) || matchesRedirect(url) || assetExists(url)) continue;
