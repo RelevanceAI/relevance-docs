@@ -105,4 +105,50 @@ if (errors.length) {
   for (const e of errors) console.error(`  ${e}`);
   process.exit(1);
 }
+/**
+ * Shadowing: both hosts match redirects top-down and the first hit wins, so
+ * a wildcard emitted before an exact rule it covers silently eats it. This
+ * gate previously checked only that each rule was SYNTACTICALLY valid for
+ * both hosts, so it passed while `/docs/build-custom-tools/tool-steps/
+ * code-python` -- a 200 on Mintlify -- redirected to a path with a segment
+ * missing and 404'd in production.
+ */
+function toRegExp(source) {
+  let out = '';
+  for (const part of source.split(/(:[A-Za-z_]+\*?)/)) {
+    if (part.startsWith(':')) out += part.endsWith('*') ? '(.*)' : '([^/]+)';
+    else out += part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+  return new RegExp(`^${out}$`);
+}
+
+function findShadowed(rules) {
+  const compiled = rules.map((r) => ({ ...r, re: toRegExp(r.source) }));
+  const out = [];
+  for (let i = 0; i < compiled.length; i++) {
+    for (let j = 0; j < i; j++) {
+      if (compiled[j].re.test(compiled[i].source)
+        && compiled[j].destination !== compiled[i].destination) {
+        out.push({ rule: compiled[i], by: compiled[j] });
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+const shadowed = findShadowed(
+  cfg.redirects.map((r) => ({ source: r.source, destination: r.destination })));
+console.log(`shadowed rules   : ${shadowed.length}`);
+if (shadowed.length) {
+  console.error('\nRules that can never fire -- an earlier rule matches them first:');
+  for (const { rule, by } of shadowed.slice(0, 10)) {
+    console.error(`  ${rule.source}`);
+    console.error(`     wants -> ${rule.destination}`);
+    console.error(`     but   -> ${by.source} -> ${by.destination}`);
+  }
+  console.error('\nEmit exact rules before wildcards in tools/gen-redirects.mjs.');
+  process.exit(1);
+}
+
 console.log('\nREDIRECTS OK: valid for both Vercel and Cloudflare Pages.');
