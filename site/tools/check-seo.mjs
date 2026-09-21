@@ -26,6 +26,9 @@ const REQUIRED = [
   { re: /<meta property="og:url" content="([^"]+)"/, name: 'og:url' },
   { re: /<meta property="og:site_name" content="([^"]+)"/, name: 'og:site_name' },
   { re: /application\/ld\+json/, name: 'json-ld' },
+  // The build once declared no icon tags at all, so the tab icon was lost.
+  { re: /<link rel="icon" href="([^"]+)"/, name: 'favicon' },
+  { re: /<link rel="apple-touch-icon" href="([^"]+)"/, name: 'apple-touch-icon' },
 ];
 
 const pages = [];
@@ -53,6 +56,21 @@ for (const f of pages) {
     }
   }
   if (/<meta name="robots"[^>]*noindex/.test(html)) problems.push(`${url}: has noindex`);
+}
+
+// Every icon a page declares must actually exist in the output. The icon
+// tags once pointed at files pack-dist was not copying, so all of them 404'd
+// while the HTML looked correct.
+const iconRefs = new Set();
+for (const f of pages.slice(0, 40)) {
+  const html = fs.readFileSync(f, 'utf8');
+  for (const m of html.matchAll(/<link rel="(?:shortcut )?(?:icon|apple-touch-icon)"[^>]*href="([^"]+)"/g)) {
+    iconRefs.add(m[1]);
+  }
+}
+for (const ref of iconRefs) {
+  const onDisk = path.join(DIST, ref.replace(/^\/docs\//, ''));
+  if (!fs.existsSync(onDisk)) problems.push(`icon declared but missing from output: ${ref}`);
 }
 
 // Sitemap must match the live set exactly unless a change is intended.

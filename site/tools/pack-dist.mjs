@@ -35,10 +35,24 @@ const DOCS = path.join(DIST, 'docs');
 // out/ root and is referenced under /docs thanks to assetPrefix, so both
 // halves are gathered under dist/docs/.
 fs.cpSync(path.join(OUT, 'docs'), DOCS, { recursive: true });
-for (const entry of ['_next', 'images', 'videos', 'og', 'llms.mdx', 'llms.txt',
-  'llms-full.txt', 'sitemap.xml', 'robots.txt', 'favicon.png', '404.html']) {
-  const src = path.join(OUT, entry);
-  if (fs.existsSync(src)) fs.cpSync(src, path.join(DOCS, entry), { recursive: true });
+
+// Copy everything ELSE at out/ root into dist/docs, rather than a whitelist.
+// A whitelist silently drops anything new in public/ -- it dropped the whole
+// generated favicon set, which then 404'd while the link tags pointed at it.
+// Host rule files are handled separately below; Next's internal build
+// metadata is not served.
+const ROOT_SKIP = new Set([
+  'docs',              // already copied above
+  '_redirects', '_headers', // belong at the output root, not under /docs
+]);
+// Next emits both 404.html and an app-router _not-found route. Static hosts
+// serve 404.html; shipping _not-found too would expose a thin, real URL at
+// /docs/_not-found that returns 200.
+const IS_BUILD_META = (n) => n.startsWith('__next.') || n.startsWith('_not-found');
+
+for (const e of fs.readdirSync(OUT, { withFileTypes: true })) {
+  if (ROOT_SKIP.has(e.name) || IS_BUILD_META(e.name)) continue;
+  fs.cpSync(path.join(OUT, e.name), path.join(DOCS, e.name), { recursive: true });
 }
 
 // Host rule files are read from the output ROOT, not from /docs.
@@ -61,7 +75,9 @@ let pruned = 0;
 })(DIST);
 
 const REQUIRED = ['docs/_next', 'docs/images', 'docs/sitemap.xml', 'docs/robots.txt',
-  'docs/favicon.png', '_redirects', 'docs/llms.txt', 'docs/llms-full.txt', 'docs/og'];
+  'docs/favicon.png', 'docs/favicon.ico', 'docs/favicon-32x32.png',
+  'docs/apple-touch-icon.png', 'docs/android-chrome-192x192.png',
+  '_redirects', 'docs/llms.txt', 'docs/llms-full.txt', 'docs/og'];
 const missing = REQUIRED.filter((r) => !fs.existsSync(path.join(DIST, r)));
 
 const count = (d) => fs.readdirSync(d, { withFileTypes: true })
