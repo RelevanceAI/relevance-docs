@@ -14,12 +14,16 @@
 
   --rl-ink:          #0D162F;
   --rl-muted:        #5A6072;
-  --rl-faint:        #868A97;
+  /* #868A97 measured 3.44:1 on white, 3.29 on --rl-surface and 3.11 on
+     --rl-surface-2 -- under the 4.5:1 minimum on every light surface, and
+     responsible for ~65 of 75 contrast failures. #6B7080 clears all three. */
+  --rl-faint:        #6B7080;
 
   --rl-bg:           #FFFFFF;
   --rl-surface:      #F8FAFC;
   --rl-surface-2:    #F3F3F4;
   --rl-line:         #E6E7EA;
+  --rl-line-strong:  #C9CBD2;
   --rl-line-soft:    #F0F0F2;
 
   --rl-radius:    8px;
@@ -49,6 +53,7 @@
   --rl-surface:      #111726;
   --rl-surface-2:    #171E30;
   --rl-line:         #232B40;
+  --rl-line-strong:  #39415A;
   --rl-line-soft:    #1B2234;
 }
 
@@ -361,3 +366,21 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
   background: var(--rl-primary); border-color: var(--rl-primary); color: #fff;
 }
 .rl-404-btn--primary:hover { background: var(--rl-primary-ink); border-color: var(--rl-primary-ink); color: #fff; }
+
+
+/* --------------------------------------------------------- skip link */
+
+/* Live Mintlify ships one on every page; the new build had none, which is
+   a WCAG 2.4.1 regression axe does not surface because <main> exists. */
+.rl-skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: .6rem 1rem; border-radius: var(--rl-radius);
+  background: var(--rl-primary); color: #fff; font-weight: 600;
+  text-decoration: none;
+}
+.rl-skip:focus { left: .75rem; top: .75rem; }
+
+/* Tables overflow horizontally; without a focusable, named region the
+   content is unreachable by keyboard. Live wraps them the same way. */
+.rl-table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+.rl-table-scroll:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 2px; }

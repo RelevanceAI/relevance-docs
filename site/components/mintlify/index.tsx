@@ -268,12 +268,26 @@ export const Update = ({
 
 export const Tabs = ({ children }: Kids) => <div className="rl-tabs">{children}</div>;
 export const Tab = ({ title, children }: Kids & { title?: React.ReactNode }) => (
+  // A <p>, not an <h4>: these label a panel rather than sectioning the
+  // document, and 166 injected h4s were breaking the heading outline on 45
+  // pages (h2 -> h4 skips).
   <section className="rl-tab">
-    <h4 className="rl-tab-label">{title}</h4>
+    <p className="rl-tab-label">{title}</p>
     <div className="rl-tab-body">{children}</div>
   </section>
 );
 export const CodeGroup = ({ children }: Kids) => <div className="rl-codegroup">{children}</div>;
+
+/**
+ * Tables scroll horizontally on narrow viewports. Without a focusable,
+ * named region the overflowed columns cannot be reached by keyboard at all
+ * -- 25 such regions per page on a phone. Mintlify wraps them identically.
+ */
+export const ScrollableTable = ({ children }: Kids) => (
+  <div className="rl-table-scroll" role="region" aria-label="Scrollable table" tabIndex={0}>
+    <table>{children}</table>
+  </div>
+);
 
 /* Mintlify API-example wrappers -- render as plain blocks. */
 export const RequestExample = ({ children }: Kids) => <div className="rl-example">{children}</div>;
