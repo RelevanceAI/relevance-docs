@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/components/mdx';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
-import { getPageImageUrl, getPageMarkdownUrl, gitConfig } from '@/lib/shared';
+import { getPageImageUrl, getPageMarkdownUrl, gitConfig, siteUrl, SITE_NAME } from '@/lib/shared';
 import { PageFooter } from '@/components/site/page-footer';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
@@ -56,10 +56,25 @@ export async function generateMetadata(props: PageProps<'/docs/[[...slug]]'>): P
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
+  // page.url already carries /docs.
+  const canonical = `${siteUrl}${page.url}`;
+
   return {
     title: page.data.title,
     description: page.data.description,
+    // Mintlify emits a self-referencing canonical on every page. With 163
+    // redirects and 96 unlisted-but-served pages, dropping canonicals invites
+    // duplicate-content dilution.
+    alternates: { canonical },
     openGraph: {
+      // Next does not apply the root title template to openGraph, and a
+      // page-level openGraph block replaces the root one rather than merging,
+      // so the suffix and siteName are restated here to match Mintlify.
+      title: `${page.data.title} - ${SITE_NAME}`,
+      description: page.data.description,
+      siteName: SITE_NAME,
+      url: canonical,
+      type: 'article',
       images: `/docs${getPageImageUrl(page).url}`,
     },
   };
