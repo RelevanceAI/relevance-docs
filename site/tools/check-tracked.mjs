@@ -51,7 +51,10 @@ for (const f of REQUIRED) {
 
 // Any source file under site/ that git is ignoring is suspicious. Build
 // output and dependencies are expected; anything else is probably a mistake.
-const EXPECTED_IGNORES = /(^|\/)(node_modules|\.next|out|dist|\.source)(\/|$)|next-env\.d\.ts$/;
+// `images/_opt` and `image-manifest.json` are written by
+// tools/optimize-images.mjs, which `npm run build` runs before next build.
+const EXPECTED_IGNORES =
+  /(^|\/)(node_modules|\.next|out|dist|\.source|_opt)(\/|$)|next-env\.d\.ts$|(^|\/)image-manifest\.json$/;
 const stray = git(['status', '--ignored', '--short', 'site/'])
   .split('\n')
   .filter((l) => l.startsWith('!!'))
