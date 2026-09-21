@@ -156,7 +156,16 @@ const vercel = {
   trailingSlash: false,
   redirects: [
     { ...ENTRY_RULE, permanent: false },
-    ...[...all, ...folderRules].map((r) => ({
+    /*
+     * Exact rules before wildcards, for the same reason the Cloudflare block
+     * above does it: Vercel matches redirects top-down and the first hit
+     * wins, so a wildcard emitted earlier silently eats every exact rule it
+     * covers. In docs.json order, `/docs/build-custom-tools/:slug*` preceded
+     * `/docs/build-custom-tools/tool-steps/code-python`, so that URL --
+     * a 200 on Mintlify today -- redirected to a path with a segment missing
+     * and 404'd on the deployed preview.
+     */
+    ...[...exact, ...folderRules, ...wild].map((r) => ({
       ...vercelRule(r),
       permanent: !/[*:]/.test(r.source) && !folderRules.includes(r),
     })),
