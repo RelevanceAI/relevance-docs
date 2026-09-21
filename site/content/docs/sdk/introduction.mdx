@@ -1,0 +1,50 @@
+---
+title: "JavaScript SDK"
+sidebarTitle: "Introduction"
+description: "Build apps on top of Relevance AI agents and workforces with the official JavaScript/TypeScript SDK."
+---
+
+`@relevanceai/sdk` is the official JavaScript and TypeScript SDK for the Relevance AI platform. Use it to start conversations with agents, trigger workforces, stream responses in real time, and handle file attachments — all from your own application code.
+
+## What's in the box
+
+<CardGroup cols={2}>
+  <Card title="Universal runtime support" icon="globe">
+    Works in Node.js, Deno, Bun, Cloudflare Workers, and the browser. Zero dependencies — built on web standards.
+  </Card>
+  <Card title="Event-driven" icon="rss">
+    Real-time updates through the native `EventTarget` API. No custom event system to learn.
+  </Card>
+  <Card title="Type-safe" icon="shield-check">
+    Full TypeScript definitions across agents, tasks, messages, and workforces. Type guards narrow message kinds automatically.
+  </Card>
+  <Card title="Streaming by default" icon="bolt">
+    Thinking and typing tokens arrive through the same event stream as final messages — no extra configuration.
+  </Card>
+</CardGroup>
+
+## When to use the SDK
+
+- Embedding chat into a web or mobile app
+- Triggering agents from a backend service, worker, or cron job
+- Running workforces from a server-side pipeline
+- Building custom dashboards on top of agent output
+
+If you just need to fire a one-off webhook or call from a language the SDK doesn't support, use the [API trigger](/build/agents/build-your-agent/agent-triggers/api-trigger) instead.
+
+## Where to next
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/sdk/quickstart">
+    Install, authenticate, and send your first message in under a minute.
+  </Card>
+  <Card title="Authentication" icon="key" href="/sdk/authentication">
+    API keys for server code, embed keys for the browser, and region selection.
+  </Card>
+  <Card title="Agents" icon="robot" href="/sdk/agents">
+    Load agents, send messages, and list tasks.
+  </Card>
+  <Card title="Workforces" icon="users" href="/sdk/workforces">
+    Trigger multi-agent workforces and handle handover messages.
+  </Card>
+</CardGroup>

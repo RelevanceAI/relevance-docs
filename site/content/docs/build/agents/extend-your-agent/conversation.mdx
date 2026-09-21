@@ -1,0 +1,144 @@
+---
+title: 'Conversation API for Agents'
+sidebarTitle: 'Conversation'
+description: 'How to create a task/conversation with an Agent'
+---
+
+## API authorization set up
+<include>../../../../_snippets/api-auth-setup.mdx</include>
+
+## Agent Id
+<include>../../../../_snippets/agent-id.mdx</include>
+
+## Trigger an agent / Start a conversation
+  
+  Agents are async and poll based so to interact with it you'll need to trigger a `job` to converse with an agent then continuously poll for updaes.
+    ```Python
+    import requests
+    
+    trigger_response = requests.post(
+      url + "/agents/trigger", 
+      headers=headers, 
+      json={
+        "message":{
+          "role":"user",
+          "content":"Hello"
+        },
+        "agent_id":agent_id
+      }
+    )
+
+    job = trigger_response.json()
+    ```
+
+## Poll the job for updates and replies from the agent.
+
+  This will poll the job every 3 minutes for updates.
+  ```Python
+  import time
+  studio_id = job["job_info"]["studio_id"]
+  job_id = job["job_info"]["job_id"]
+
+  done = False
+  status = None
+
+  while not done:
+    response = requests.get(
+      base_url + f"/studios/{studio_id}/async_poll/{job_id}", 
+      headers=headers
+    )
+
+    status = response.json()
+
+    for update in status['updates']:
+      if update['type'] == "chain-success":
+        done = True
+
+    if done:
+      break
+
+    time.sleep(3)
+  status
+  ```
+
+## Continue the conversation
+
+  To continue the conversation just call the trigger endpoint again with the `conversation_id`. This conversation id can also be found in the url on the agents page `https://app.relevanceai.com/agents/{region}/{project_id}/{agent_id}/{conversation_id}`.
+  ```Python
+  conversation_id = job["job_info"]["conversation_id"]
+
+  reply_response = requests.post(
+    base_url + "agents/trigger", 
+    headers=headers, 
+    json={
+      "message": {
+        "role": "user",
+        "content": "Hello again"
+      },
+      "agent_id": agent_id,
+      "conversation_id": conversation_id
+    }
+  )
+  reply_response.json()
+  ```
+
+## List messages in a conversation
+
+  To list all the messages in a conversation, you can use the following code snippet. The messages will be reverse chronological order, i.e. the newest message will be the first in the list.
+
+  ```Python
+  messages = requests.post(base_url + "knowledge/list", headers=headers, json={
+    "knowledge_set": conversation_id,
+    "page_size": 20,
+    "sort": [
+      {
+        "insert_date_": "desc"
+      }
+    ]
+  }).json()['results']
+  ```
+
+  The messages follow this general structure:
+
+  ```json
+
+  {
+    "data": {
+      "message": {
+        "role": "" // the type of message in the conversation history. e.g. "user", "agent", "action-request"
+        // ...other details dependent on the "role" above
+      }
+    }
+  }
+
+  ```
+
+
+## Confirm or reject a tool run
+
+  As above, you'll need the `conversation_id` returned when you triggered the agent.
+  You'll also need the `action_request_id` and `action` of the tool run that you want to confirm or reject.
+  You can find it using the api request [here](#list-messages-in-a-conversation) and it should
+  be the newest (first) message in your conversation.
+
+  ```Python
+
+  action_request_message = messages[0]['data']['message']
+  action = action_request_message['action']
+  action_request_id = action_request_message['action_request_id']
+
+  reply_response = requests.post(
+    base_url + "agents/trigger", 
+    headers=headers, 
+    json={
+      "message": {
+        "role": "action-confirm", # or "action-reject"!
+        "action": action,
+        "action_request_id": action_request_id
+      },
+      "agent_id": agent_id
+      "conversation_id": conversation_id
+    }
+  )
+  reply_response.json()
+  ```

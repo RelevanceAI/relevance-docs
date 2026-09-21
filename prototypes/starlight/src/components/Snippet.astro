@@ -1,0 +1,17 @@
+---
+// Mintlify resolves <Snippet file="x.mdx" /> against the _snippets/ dir.
+// Astro has no runtime FS access at build, so we eagerly glob the whole
+// snippet tree and look the file up by path.
+const { file } = Astro.props;
+const mods = import.meta.glob('../content/_snippets/**/*.mdx');
+const key = `../content/_snippets/${file}`;
+const loader = mods[key];
+if (!loader) {
+  throw new Error(
+    `<Snippet file="${file}" /> not found. Looked for ${key}. ` +
+    `Available: ${Object.keys(mods).join(', ')}`
+  );
+}
+const { Content } = await loader();
+---
+<Content />

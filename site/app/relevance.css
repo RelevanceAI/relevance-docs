@@ -1,0 +1,635 @@
+/* Relevance AI docs theme.
+   Tokens taken from relevanceai.com: Sora headings at regular weight with
+   tight negative tracking, Inter for body and UI, #6056FF primary, #0D162F
+   ink, hairline #E6E7EA rules, 8px radii and a lot of white space. */
+
+:root {
+  --rl-primary:      #6056FF;
+  --rl-primary-ink:  #4A41E0;
+  --rl-primary-soft: #EEEDFF;
+  --rl-teal:         #0E9384;
+  --rl-green:        #027A48;
+  --rl-amber:        #B54708;
+  --rl-red:          #D92D20;
+
+  --rl-ink:          #0D162F;
+  --rl-muted:        #5A6072;
+  /* #868A97 measured 3.44:1 on white, 3.29 on --rl-surface and 3.11 on
+     --rl-surface-2 -- under the 4.5:1 minimum on every light surface, and
+     responsible for ~65 of 75 contrast failures. #6B7080 clears all three. */
+  --rl-faint:        #6B7080;
+
+  --rl-bg:           #FFFFFF;
+  --rl-surface:      #F8FAFC;
+  --rl-surface-2:    #F3F3F4;
+  --rl-line:         #E6E7EA;
+  --rl-line-strong:  #C9CBD2;
+  --rl-line-soft:    #F0F0F2;
+
+  --rl-radius:    8px;
+  --rl-radius-lg: 12px;
+
+  --rl-font-sans: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
+  --rl-font-head: var(--font-sora), Sora, var(--rl-font-sans);
+  --rl-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  --rl-measure: 46rem;
+}
+
+.dark, :root[data-theme='dark'], [data-theme='dark'] {
+  --rl-primary:      #8C84FF;
+  --rl-primary-ink:  #A8A2FF;
+  --rl-primary-soft: #1C1A3A;
+  --rl-teal:         #2DD4BF;
+  --rl-green:        #4ADE80;
+  --rl-amber:        #FBBF24;
+  --rl-red:          #F87171;
+
+  --rl-ink:          #ECEEF4;
+  --rl-muted:        #A2A8BA;
+  --rl-faint:        #7A8095;
+
+  --rl-bg:           #0A0E1A;
+  --rl-surface:      #111726;
+  --rl-surface-2:    #171E30;
+  --rl-line:         #232B40;
+  --rl-line-strong:  #39415A;
+  --rl-line-soft:    #1B2234;
+}
+
+/* Map Fumadocs' own variables onto the brand so chrome matches content. */
+:root {
+  --color-fd-background: var(--rl-bg);
+  --color-fd-foreground: var(--rl-ink);
+  --color-fd-muted: var(--rl-surface);
+  --color-fd-muted-foreground: var(--rl-muted);
+  --color-fd-popover: var(--rl-bg);
+  --color-fd-popover-foreground: var(--rl-ink);
+  --color-fd-card: var(--rl-bg);
+  --color-fd-card-foreground: var(--rl-ink);
+  --color-fd-border: var(--rl-line);
+  --color-fd-primary: var(--rl-primary);
+  --color-fd-primary-foreground: #FFFFFF;
+  --color-fd-secondary: var(--rl-surface);
+  --color-fd-secondary-foreground: var(--rl-ink);
+  --color-fd-accent: var(--rl-primary-soft);
+  --color-fd-accent-foreground: var(--rl-primary-ink);
+  --color-fd-ring: var(--rl-primary);
+}
+
+body {
+  font-family: var(--rl-font-sans);
+  color: var(--rl-ink);
+  background: var(--rl-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------------------------------------------- type */
+
+#nd-docs-layout h1, #nd-docs-layout h2, #nd-docs-layout h3,
+.rl-prose h1, .rl-prose h2, .rl-prose h3,
+article h1, article h2, article h3 {
+  font-family: var(--rl-font-head);
+  font-weight: 400;
+  color: var(--rl-ink);
+}
+article h1 { font-size: 2.5rem; line-height: 1.1; letter-spacing: -0.05em; margin-bottom: .35em; }
+article h2 { font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.025em; margin-top: 2.4em; }
+article h3 { font-size: 1.2rem; line-height: 1.3; letter-spacing: -0.015em; margin-top: 1.9em; }
+article h4 { font-family: var(--rl-font-head); font-weight: 400; letter-spacing: -0.01em; }
+
+article p, article li { color: var(--rl-muted); line-height: 1.68; }
+article strong { color: var(--rl-ink); font-weight: 600; }
+article a { color: var(--rl-primary); text-underline-offset: 3px; }
+/* Fumadocs wraps headings in anchor links for deep-linking; without this they
+   inherit the link colour and every h2 renders purple. */
+article h1 a, article h2 a, article h3 a, article h4 a,
+article h5 a, article h6 a { color: inherit; text-decoration: none; }
+
+/* A hairline under h2 echoes the rule motif on relevanceai.com. */
+article h2 { padding-bottom: .38em; border-bottom: 1px solid var(--rl-line); }
+
+/* ----------------------------------------------------------------- icons */
+
+.rl-icon {
+  width: 1em; color: var(--rl-primary); font-size: .95em;
+  flex: none; text-align: center;
+}
+
+/* -------------------------------------------------------------- callouts */
+
+.rl-callout {
+  display: flex; gap: .7rem; align-items: flex-start;
+  margin: 1.5rem 0; padding: .85rem 1rem;
+  border: 1px solid var(--rl-line);
+  border-left: 3px solid var(--rl-cal, var(--rl-primary));
+  border-radius: var(--rl-radius);
+  background: var(--rl-surface);
+  font-size: .94rem;
+}
+.rl-callout-mark { color: var(--rl-cal, var(--rl-primary)); margin-top: .15rem; }
+.rl-callout-mark .rl-icon { color: inherit; }
+.rl-callout-body > :first-child { margin-top: 0; }
+.rl-callout-body > :last-child { margin-bottom: 0; }
+.rl-callout-body p { color: var(--rl-muted); margin: 0; }
+.rl-callout--note    { --rl-cal: var(--rl-primary); }
+.rl-callout--info    { --rl-cal: var(--rl-primary); }
+.rl-callout--tip     { --rl-cal: var(--rl-teal); }
+.rl-callout--check   { --rl-cal: var(--rl-green); }
+.rl-callout--warning { --rl-cal: var(--rl-amber); }
+.rl-callout--danger  { --rl-cal: var(--rl-red); }
+
+/* ------------------------------------------------------------- accordion */
+
+.rl-accordion {
+  border: 1px solid var(--rl-line); border-radius: var(--rl-radius);
+  background: var(--rl-bg); margin: .5rem 0; overflow: hidden;
+}
+.rl-accordion-summary {
+  cursor: pointer; padding: .8rem 1rem; list-style: none;
+  display: flex; align-items: center; gap: .6rem;
+  font-weight: 500; color: var(--rl-ink); font-size: .95rem;
+}
+.rl-accordion-summary::-webkit-details-marker { display: none; }
+.rl-accordion-summary:hover { background: var(--rl-surface); }
+.rl-accordion-title { flex: 1; min-width: 0; }
+.rl-chev { width: 1rem; height: 1rem; color: var(--rl-faint); transition: transform .18s ease; flex: none; }
+.rl-accordion[open] > .rl-accordion-summary > .rl-chev { transform: rotate(180deg); }
+.rl-accordion[open] > .rl-accordion-summary { border-bottom: 1px solid var(--rl-line); }
+.rl-accordion-body { padding: .95rem 1rem 1.05rem; font-size: .94rem; }
+.rl-accordion-body > :first-child { margin-top: 0; }
+.rl-accordion-body > :last-child { margin-bottom: 0; }
+
+.rl-accordion-group { margin: 1.5rem 0; border-radius: var(--rl-radius); overflow: hidden; border: 1px solid var(--rl-line); }
+.rl-accordion-group > .rl-accordion { border: 0; border-bottom: 1px solid var(--rl-line); border-radius: 0; margin: 0; }
+.rl-accordion-group > .rl-accordion:last-child { border-bottom: 0; }
+
+/* ----------------------------------------------------------------- cards */
+
+.rl-card-group { display: grid; gap: .8rem; margin: 1.6rem 0; }
+.rl-card-group[data-cols="1"] { grid-template-columns: 1fr; }
+.rl-card-group[data-cols="2"] { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.rl-card-group[data-cols="3"] { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.rl-card-group[data-cols="4"] { grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); }
+
+.rl-card {
+  display: flex; gap: .75rem; align-items: flex-start;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--rl-line); border-radius: var(--rl-radius-lg);
+  background: var(--rl-bg); color: inherit; text-decoration: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+a.rl-card:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
+a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
+.rl-card-icon { flex: none; display: grid; place-items: center;
+  width: 2rem; height: 2rem; border-radius: var(--rl-radius);
+  background: var(--rl-primary-soft); }
+.rl-card-icon .rl-icon { font-size: .9rem; }
+.rl-card-main { display: block; flex: 1; min-width: 0; }
+.rl-card-title { display: block; font-weight: 600; color: var(--rl-ink); font-size: .95rem; margin-bottom: .2rem; }
+.rl-card-body { display: block; color: var(--rl-muted); font-size: .88rem; line-height: 1.55; }
+.rl-card-body p { margin: 0; color: inherit; font-size: inherit; }
+.rl-card-arrow { width: .95rem; height: .95rem; flex: none; color: var(--rl-faint);
+  opacity: .55; transition: transform .15s ease, opacity .15s ease; margin-top: .2rem; }
+
+/* ----------------------------------------------------------------- steps */
+
+.rl-steps { margin: 1.6rem 0; }
+.rl-step { position: relative; display: flex; gap: 1rem; padding-bottom: 1.6rem; }
+.rl-step::before {
+  content: ""; position: absolute; left: .78rem; top: 1.7rem; bottom: 0;
+  width: 1px; background: var(--rl-line);
+}
+.rl-step:last-child { padding-bottom: 0; }
+.rl-step:last-child::before { display: none; }
+.rl-step-marker {
+  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  background: var(--rl-bg); border: 1px solid var(--rl-line-strong, var(--rl-line));
+  position: relative; z-index: 1; margin-top: .1rem;
+}
+.rl-step-marker::after {
+  content: ""; position: absolute; inset: .42rem; border-radius: 50%;
+  background: var(--rl-primary);
+}
+.rl-step-content { flex: 1; min-width: 0; }
+.rl-step-title { font-weight: 600; color: var(--rl-ink); margin: .15rem 0 .45rem; display: flex; gap: .4rem; align-items: center; }
+.rl-step-content > :last-child { margin-bottom: 0; }
+
+/* Counter variant so numbered steps read like the live docs. */
+.rl-steps { counter-reset: rl-step; }
+.rl-step { counter-increment: rl-step; }
+.rl-step-marker::before {
+  content: counter(rl-step);
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: .72rem; font-weight: 600; color: var(--rl-primary);
+  font-family: var(--rl-font-sans);
+}
+.rl-step-marker::after { display: none; }
+
+/* ------------------------------------------------------------ api fields */
+
+.rl-param { border-top: 1px solid var(--rl-line); padding: .9rem 0; }
+.rl-param-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; }
+.rl-param-name { font-family: var(--rl-font-mono); font-size: .85rem; font-weight: 600;
+  color: var(--rl-ink); background: var(--rl-surface-2); padding: .08rem .35rem; border-radius: 4px; }
+.rl-param-type, .rl-param-default { font-family: var(--rl-font-mono); font-size: .76rem; color: var(--rl-faint); }
+.rl-param-req { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--rl-red); font-weight: 700; }
+.rl-param-dep { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; color: var(--rl-amber); font-weight: 700; }
+.rl-param-body { font-size: .9rem; color: var(--rl-muted); margin-top: .35rem; }
+.rl-param-body > :first-child { margin-top: 0; }
+.rl-expandable { margin: .6rem 0 0; border-left: 2px solid var(--rl-line); padding-left: .9rem; }
+.rl-expandable > summary { cursor: pointer; font-size: .85rem; color: var(--rl-primary); }
+
+/* ---------------------------------------------------- frames, tabs, misc */
+
+.rl-frame { margin: 1.6rem 0; }
+.rl-frame-inner { border: 1px solid var(--rl-line); border-radius: var(--rl-radius-lg);
+  overflow: hidden; background: var(--rl-surface); }
+.rl-frame img { display: block; width: 100%; height: auto; }
+.rl-frame-caption { margin-top: .55rem; font-size: .83rem; color: var(--rl-faint); text-align: center; }
+
+.rl-tabs { margin: 1.5rem 0; border: 1px solid var(--rl-line); border-radius: var(--rl-radius); overflow: hidden; }
+.rl-tab + .rl-tab { border-top: 1px solid var(--rl-line); }
+.rl-tab-label { margin: 0; padding: .6rem 1rem; background: var(--rl-surface);
+  font-size: .85rem; font-weight: 600; color: var(--rl-ink); font-family: var(--rl-font-sans); }
+.rl-tab-body { padding: .9rem 1rem; }
+.rl-tab-body > :first-child { margin-top: 0; }
+.rl-tab-body > :last-child { margin-bottom: 0; }
+
+/* Tab strip. A single <Tab> outside a <Tabs> keeps the stacked treatment
+   above; two or more get a real tablist. */
+.rl-tablist { display: flex; flex-wrap: wrap; gap: .25rem; padding: .35rem;
+  background: var(--rl-surface); border-bottom: 1px solid var(--rl-line); }
+/* Inactive tabs carry their own surface and border. Transparent ones looked
+   fine in a single row on desktop, but the strip wraps at 390px -- three
+   tabs become three rows -- and an unstyled row reads as body copy sitting
+   above the panel rather than as something to tap. */
+.rl-tab-button { padding: .4rem .9rem; border-radius: calc(var(--rl-radius) - 2px);
+  border: 1px solid var(--rl-line); background: var(--rl-bg); color: var(--rl-ink);
+  cursor: pointer; font-family: var(--rl-font-sans); font-size: .85rem; font-weight: 500;
+  line-height: 1.4; transition: background .15s ease, color .15s ease, border-color .15s ease; }
+.rl-tab-button:hover { background: var(--rl-surface-2); border-color: var(--rl-line-strong); }
+.rl-tab-button:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 1px; }
+.rl-tab-button[data-active] { background: var(--rl-primary); border-color: var(--rl-primary);
+  color: #fff; }
+/* Dark mode lightens --rl-primary to #8C84FF, where white text measures
+   3.06:1 -- under the 4.5:1 AA floor, and on the SELECTED tab of all
+   places. Page ink on that same fill is 6.29:1. */
+.dark .rl-tab-button[data-active] { color: var(--rl-bg); }
+.rl-tab-panel { padding: .9rem 1rem; }
+.rl-tab-panel > :first-child { margin-top: 0; }
+.rl-tab-panel > :last-child { margin-bottom: 0; }
+.rl-codegroup { margin: 1.5rem 0; border: 1px solid var(--rl-line);
+  border-radius: var(--rl-radius); overflow: hidden; }
+.rl-codegroup .rl-tab-panel { padding: 0; }
+
+/* Six "pick your path" guides wrap their tabs in this to frame the choice.
+   Ported from the Mintlify custom stylesheet, retargeted at the markup
+   above -- Mintlify's data-component-part hooks do not exist here. */
+.path-picker { margin: 1.5rem 0 2rem; padding: 1.25rem; border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(96, 86, 255, .06), rgba(96, 86, 255, .02) 45%, rgba(165, 180, 252, .05));
+  box-shadow: 0 0 0 1px rgba(96, 86, 255, .10), 0 8px 32px -12px rgba(96, 86, 255, .18); }
+.path-picker .rl-tabs { margin: 0; border: 0; background: transparent; }
+.path-picker .rl-tablist { justify-content: center; background: transparent;
+  border-bottom: 0; padding: .25rem 0 1rem; gap: .5rem; }
+.path-picker .rl-tab-button { padding: .5rem 1.25rem; background: rgba(255, 255, 255, .75);
+  color: var(--rl-ink); box-shadow: 0 1px 2px rgba(15, 23, 42, .05); }
+.path-picker .rl-tab-button[data-active] { background: var(--rl-primary); color: #fff;
+  box-shadow: 0 4px 12px rgba(96, 86, 255, .3); }
+.path-picker .rl-tab-panel { padding: 0; }
+.dark .path-picker { background: linear-gradient(135deg, rgba(96, 86, 255, .14), rgba(96, 86, 255, .04) 45%, rgba(165, 180, 252, .07));
+  box-shadow: 0 0 0 1px rgba(165, 180, 252, .14), 0 8px 32px -12px rgba(96, 86, 255, .35); }
+.dark .path-picker .rl-tab-button { background: rgba(255, 255, 255, .07); color: var(--rl-ink); }
+/* Same 3.06:1 problem as the base tab strip -- this selector is more
+   specific, so it needs its own dark override. */
+.dark .path-picker .rl-tab-button[data-active] { color: var(--rl-bg); }
+
+/* Chrome composites a cross-origin iframe on its own layer, so rounding it
+   leaves a light seam along the arc. Invisible on white; masked in dark. */
+.video-embed { position: relative; }
+.dark .video-embed::after { content: ''; position: absolute; inset: 0; z-index: 1;
+  pointer-events: none; border-radius: .5rem; box-shadow: inset 0 0 0 2px var(--rl-bg); }
+
+/* Mintlify's `tag:` frontmatter pill, beside the sidebar entry. */
+.rl-nav-tag { margin-inline-start: .4rem; padding: .05rem .3rem; border-radius: .3rem;
+  background: var(--rl-primary-soft); color: var(--rl-primary-ink);
+  font-family: var(--rl-font-sans); font-size: .62rem; font-weight: 700;
+  letter-spacing: .02em; line-height: 1.5; vertical-align: middle; white-space: nowrap; }
+.dark .rl-nav-tag { background: rgba(96, 86, 255, .22); color: #C4B5FD; }
+
+.rl-badge { display: inline-block; padding: .08rem .45rem; border-radius: 99px;
+  background: var(--rl-primary-soft); color: var(--rl-primary-ink);
+  font-size: .72rem; font-weight: 600; vertical-align: middle; }
+.rl-badge[data-color="orange"] { background: #FEF0C7; color: var(--rl-amber); }
+.dark .rl-badge[data-color="orange"] { background: #3A2A0A; }
+.rl-tooltip { border-bottom: 1px dotted var(--rl-faint); cursor: help; }
+
+.rl-update { display: grid; grid-template-columns: minmax(0, 11rem) 1fr; gap: 2rem;
+  padding: 2.2rem 0; border-top: 1px solid var(--rl-line); }
+.rl-update-label { font-family: var(--rl-font-head); font-size: 1.05rem; color: var(--rl-ink); letter-spacing: -.02em; }
+.rl-update-desc { font-size: .83rem; color: var(--rl-faint); margin-top: .2rem; }
+.rl-update-tags { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: .3rem; }
+.rl-update-body > :first-child { margin-top: 0; }
+.rl-update-body h2 { border: 0; padding: 0; margin-top: 0; font-size: 1.35rem; }
+
+@media (max-width: 760px) {
+  article h1 { font-size: 1.95rem; }
+  .rl-update { grid-template-columns: 1fr; gap: .6rem; padding: 1.6rem 0; }
+}
+
+/* ----------------------------------------------------------------- brand */
+
+.rl-brand { display: inline-flex; align-items: center; gap: .5rem; min-width: 0; }
+.rl-brand-mark { height: 1.15rem; width: auto; display: block; }
+.rl-brand-mark--dark { display: none; }
+.dark .rl-brand-mark--light { display: none; }
+.dark .rl-brand-mark--dark { display: block; }
+.rl-brand-text {
+  font-family: var(--rl-font-head); font-weight: 400; font-size: .95rem;
+  letter-spacing: -.02em; color: var(--rl-faint); white-space: nowrap;
+  padding-left: .5rem; border-left: 1px solid var(--rl-line);
+}
+
+/* ---------------------------------------------------------- page footer */
+
+.rl-page-footer {
+  display: flex; flex-wrap: wrap; gap: 1rem 2rem;
+  align-items: center; justify-content: space-between;
+  margin-top: 3rem; padding-top: 1.4rem;
+  border-top: 1px solid var(--rl-line);
+}
+.rl-feedback { display: flex; align-items: center; gap: .6rem; font-size: .88rem; color: var(--rl-muted); margin: 0; }
+.rl-feedback button {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .3rem .7rem; border: 1px solid var(--rl-line);
+  border-radius: var(--rl-radius); background: var(--rl-bg);
+  font-size: .85rem; color: var(--rl-ink); cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+}
+.rl-feedback button:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
+.rl-feedback--done { color: var(--rl-faint); }
+.rl-page-footer-links { display: flex; gap: 1.2rem; font-size: .85rem; }
+.rl-page-footer-links a {
+  display: inline-flex; align-items: center; gap: .4rem;
+  color: var(--rl-muted); text-decoration: none;
+}
+.rl-page-footer-links a:hover { color: var(--rl-primary); }
+.rl-page-footer-links .rl-icon { font-size: .8em; }
+
+/* --------------------------------------------- prev / next (fumadocs own) */
+
+/* The page footer sits above these, so pull the rule off the feedback row
+   and let the neighbour cards close the page. */
+.rl-page-footer { border-top: 1px solid var(--rl-line); }
+
+/* ------------------------------------------------------- prev / next nav */
+
+.rl-page-nav {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--rl-line);
+}
+.rl-page-nav-link {
+  display: flex; flex-direction: column; gap: .3rem;
+  padding: .85rem 1rem; border: 1px solid var(--rl-line);
+  border-radius: var(--rl-radius); text-decoration: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+.rl-page-nav-link:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
+.rl-page-nav-link--next { text-align: right; align-items: flex-end; }
+.rl-page-nav-dir { font-size: .78rem; color: var(--rl-faint); display: inline-flex; align-items: center; gap: .35rem; }
+.rl-page-nav-dir .rl-icon { color: var(--rl-faint); font-size: .75em; }
+.rl-page-nav-title { font-weight: 600; color: var(--rl-ink); font-size: .92rem; }
+.rl-page-footer { margin-top: 2rem; }
+@media (max-width: 640px) { .rl-page-nav { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------------- 404 */
+
+.rl-404 { max-width: 34rem; padding: 4rem 0 6rem; }
+.rl-404-code {
+  font-family: var(--rl-font-head); font-size: 3.5rem; line-height: 1;
+  letter-spacing: -.04em; color: var(--rl-primary); margin: 0 0 .4rem;
+}
+.rl-404-title {
+  font-family: var(--rl-font-head); font-weight: 400; font-size: 1.9rem;
+  letter-spacing: -.03em; color: var(--rl-ink); margin: 0 0 .6rem;
+}
+.rl-404-body { color: var(--rl-muted); line-height: 1.65; margin: 0 0 1.6rem; }
+.rl-404-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.rl-404-btn {
+  display: inline-flex; align-items: center; padding: .5rem .95rem;
+  border: 1px solid var(--rl-line); border-radius: var(--rl-radius);
+  color: var(--rl-ink); text-decoration: none; font-size: .92rem; font-weight: 500;
+  transition: border-color .15s ease, background .15s ease;
+}
+.rl-404-btn:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
+.rl-404-btn--primary {
+  background: var(--rl-primary); border-color: var(--rl-primary); color: #fff;
+}
+.rl-404-btn--primary:hover { background: var(--rl-primary-ink); border-color: var(--rl-primary-ink); color: #fff; }
+
+
+/* --------------------------------------------------------- skip link */
+
+/* Live Mintlify ships one on every page; the new build had none, which is
+   a WCAG 2.4.1 regression axe does not surface because <main> exists. */
+/* Visually hidden but spoken -- carries a callout's variant, which is
+   otherwise conveyed by colour and a decorative glyph alone. */
+.rl-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+.rl-skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: .6rem 1rem; border-radius: var(--rl-radius);
+  background: var(--rl-primary); color: #fff; font-weight: 600;
+  text-decoration: none;
+}
+.rl-skip:focus { left: .75rem; top: .75rem; }
+
+/* Tables overflow horizontally; without a focusable, named region the
+   content is unreachable by keyboard. Live wraps them the same way. */
+/* A wide table clips mid-word at the container edge with nothing to say it
+   continues, so the cut-off column reads as a rendering glitch. These two
+   gradients ride the scroll box (`local`) over a static pair pinned to the
+   edges (`scroll`), so a shadow shows only on the side that has more to
+   reveal. Worst on /docs/get-started/pricing, which has seven of them. */
+.rl-table-scroll { overflow-x: auto; margin: 1.5rem 0;
+  background:
+    linear-gradient(to right, var(--rl-bg) 30%, rgba(0, 0, 0, 0)) left center,
+    linear-gradient(to left, var(--rl-bg) 30%, rgba(0, 0, 0, 0)) right center,
+    radial-gradient(farthest-side at 0 50%, rgba(13, 22, 47, .16), rgba(0, 0, 0, 0)) left center,
+    radial-gradient(farthest-side at 100% 50%, rgba(13, 22, 47, .16), rgba(0, 0, 0, 0)) right center;
+  background-repeat: no-repeat;
+  background-size: 36px 100%, 36px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll; }
+.dark .rl-table-scroll {
+  background:
+    linear-gradient(to right, var(--rl-bg) 30%, rgba(0, 0, 0, 0)) left center,
+    linear-gradient(to left, var(--rl-bg) 30%, rgba(0, 0, 0, 0)) right center,
+    radial-gradient(farthest-side at 0 50%, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0)) left center,
+    radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0)) right center;
+  background-repeat: no-repeat;
+  background-size: 36px 100%, 36px 100%, 14px 100%, 14px 100%;
+  background-attachment: local, local, scroll, scroll; }
+
+/* The prose preset decorates blockquotes with open-quote/close-quote
+   pseudo-elements. The source already writes its own quote marks, so every
+   quoted prompt rendered as ““like this””. */
+.prose blockquote p::before,
+.prose blockquote p::after,
+#nd-page blockquote p::before,
+#nd-page blockquote p::after { content: none; }
+.rl-table-scroll:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 2px; }
+
+/* =========================================================
+   Invent callout — a bubble that points readers at Invent as a
+   faster path through whatever the page teaches by hand.
+
+   Usage in any .mdx page — the markup never changes, only the copy:
+
+     <div className="invent-callout">
+       <strong>Invent can do this for you.</strong> Ask Invent to...
+     </div>
+
+   Everything visual lives in this file, so a change here changes every
+   bubble in the docs. Blobby himself (the seal, the cursor-tracking eyes)
+   is built by /invent-callout.js from /images/invent-blobby-seal.svg.
+   Two knobs below control his size and the spacing around him.
+   ========================================================= */
+
+.invent-callout {
+  --blobby-size: 2.75rem;
+  --blobby-gap: 1.375rem;
+
+  position: relative;
+  margin: 2rem 0;
+  /* Equal gap either side of him: edge → blobby → text. */
+  padding: 1.25rem var(--blobby-gap) 1.25rem
+    calc(var(--blobby-gap) * 2 + var(--blobby-size));
+  border-radius: 1.25rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  -webkit-user-select: none;
+  user-select: none;
+  color: rgba(17, 24, 39, 0.85);
+  /* The four layers the seal itself is built from, in the same places:
+     white sheen and cyan off the top-left, magenta off the bottom-right,
+     indigo base underneath. */
+  background:
+    radial-gradient(70% 120% at 17% 8%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 60%),
+    radial-gradient(75% 130% at 22% 0%, rgba(67, 227, 245, 0.42), rgba(67, 227, 245, 0) 66%),
+    radial-gradient(80% 130% at 88% 100%, rgba(240, 107, 216, 0.34), rgba(240, 107, 216, 0) 66%),
+    linear-gradient(135deg, rgba(99, 85, 245, 0.22), rgba(77, 64, 236, 0.18));
+  box-shadow:
+    0 0 0 1px rgba(99, 85, 245, 0.28),
+    0 12px 32px -20px rgba(99, 85, 245, 0.7);
+}
+
+.invent-callout strong {
+  color: #4D40EC;
+  font-weight: 600;
+}
+
+/* Dark mode runs deeper: the same four layers over a near-black page, which
+   lands on his indigo rather than washing out. */
+.dark .invent-callout {
+  color: rgba(255, 255, 255, 0.88);
+  background:
+    radial-gradient(70% 120% at 17% 8%, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 60%),
+    radial-gradient(75% 130% at 22% 0%, rgba(67, 227, 245, 0.26), rgba(67, 227, 245, 0) 66%),
+    radial-gradient(80% 130% at 88% 100%, rgba(240, 107, 216, 0.26), rgba(240, 107, 216, 0) 66%),
+    linear-gradient(135deg, rgba(99, 85, 245, 0.42), rgba(77, 64, 236, 0.34));
+  box-shadow:
+    0 0 0 1px rgba(165, 180, 252, 0.3),
+    0 12px 32px -20px rgba(99, 85, 245, 0.85);
+}
+
+.dark .invent-callout strong {
+  color: #C4B5FD;
+}
+
+/* ---------------------------------------------------------
+   Blobby — one geometry for both the live badge (.invent-blobby,
+   injected by the script) and the no-JS fallback (::before, a static
+   seal-with-eyes image). Editing the two custom properties above moves
+   and resizes both.
+   --------------------------------------------------------- */
+
+.invent-callout::before,
+.invent-blobby {
+  position: absolute;
+  top: 50%;
+  left: var(--blobby-gap);
+  width: var(--blobby-size);
+  height: var(--blobby-size);
+  margin-top: calc(var(--blobby-size) / -2);
+}
+
+.invent-callout::before {
+  content: '';
+  background-image: url("/docs/images/invent-blobby.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Once the script has mounted the live badge, drop the static fallback. */
+.invent-callout.has-blobby::before {
+  display: none;
+}
+
+.invent-blobby {
+  display: block;
+  line-height: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.invent-blobby svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: transform 120ms ease-out;
+}
+
+/* He presses when clicked, the way he does in the app. */
+.invent-blobby:active svg {
+  transform: scale(0.88);
+}
+
+/* Blink: a 100ms vertical squash of each pill about its own centre. */
+.invent-blobby-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 100ms ease;
+}
+
+.is-blinking .invent-blobby-eye {
+  transform: scaleY(0.12);
+}
+
+/* Hovering the bubble swaps his eyes for a `^ ^` greeting, then he reopens. */
+.invent-blobby-eyes {
+  transition: opacity 150ms ease;
+}
+
+.invent-blobby-eyes.is-happy {
+  opacity: 0;
+}
+
+.invent-blobby-smile {
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.invent-blobby-smile.is-happy {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invent-blobby svg,
+  .invent-blobby-eye,
+  .invent-blobby-eyes,
+  .invent-blobby-smile {
+    transition: none;
+  }
+}

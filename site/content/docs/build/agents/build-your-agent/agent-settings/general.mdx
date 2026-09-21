@@ -1,0 +1,247 @@
+---
+title: 'General'
+sidebarTitle: 'General'
+---
+
+<img 
+  height="200"  
+  src="/images/agent/advanced-general.png" alt="The General tab of an agent's advanced settings" />
+
+### Suggest Replies
+
+**What it is:** A toggle that enables automatic reply suggestions after each agent response.
+
+**When to use it:** Enable this feature when you want to:
+
+- Keep conversations flowing naturally
+- Save time on typing common responses
+- Provide users with quick response options
+
+Simply toggle this on, and your agent will offer clickable reply suggestions after each of its messages.
+
+---
+
+### Agent Timeout Time
+
+**What it is:** The maximum time your agent can work on a task before timing out.
+
+**How to choose:**
+
+- **Shorter timeouts:** More efficient for simple tasks, saves resources
+- **Longer timeouts:** Necessary for complex reasoning, research tasks, or when working with multiple tools
+
+Consider the complexity of your agent's typical tasks when setting this value.
+
+---
+
+### Instructions for Naming Tasks
+
+**What it is:** Guidelines that help your agent create clear, consistent names for new tasks.
+
+#### How It Works
+
+When your agent creates a task, it uses the LLM to generate a name based on your instructions. The agent considers the full context—trigger data, workflow, and tools—to create meaningful names. These instructions act as a prompt template guiding the LLM's naming decision.
+
+#### Writing Effective Instructions
+
+- **Think about scanning:** Put the most important information first
+- **Consider your workflow:** Align names with how you organize work
+- **Be consistent:** Use the same format across similar agents
+- **Include key identifiers:** Customer names, dates, action types, or outcomes
+- **Test and iterate:** Run a few tasks and refine based on results
+
+#### Examples by Use Case
+
+<AccordionGroup>
+  <Accordion title="Customer Support Agents">
+    ```
+    Name tasks using this format: [Customer Name] - [Request Type] - [Status]
+    Example: John Smith - Refund Request - Completed
+    ```
+  </Accordion>
+
+  <Accordion title="Content Creation Agents">
+    ```
+    Start with the content type, followed by the topic and date.
+    Example: Blog Post: AI Agents Guide - 2024-11-06
+    ```
+  </Accordion>
+
+  <Accordion title="Data Processing Agents">
+    ```
+    Include the data source and action performed.
+    Example: Processed: LinkedIn Data Export - 150 records
+    ```
+  </Accordion>
+
+  <Accordion title="Sales/Lead Management">
+    ```
+    Use format: [Company Name] - [Action] - [Outcome]
+    Example: Acme Corp - Outreach Email - Sent
+    ```
+  </Accordion>
+</AccordionGroup>
+
+#### Best Practices
+
+<Columns cols={2}>
+  <Card title="Do" icon="circle-check" color="#10b981">
+    Provide a clear format or structure for your task names, and make sure to include the most important identifying information first. Use consistent terminology that matches your workflow, and keep your instructions concise but specific. Don't forget to test with a few tasks and refine your instructions based on what works best for your needs.
+  </Card>
+
+  <Card title="Don't" icon="circle-xmark" color="#ef4444">
+    Avoid making your instructions too vague or generic—the agent needs clear guidance to create useful names. Don't include variables that might not always be available in your workflow, and steer clear of complex conditional logic that could confuse the naming process. Remember to specify the order of information so your task names stay consistent.
+  </Card>
+</Columns>
+
+#### Common Naming Patterns
+
+<AccordionGroup>
+  <Accordion title="Chronological">
+    **Format:** `[Date] - [Action] - [Subject]`
+    
+    **Example:** "2024-11-06 - Email Sent - Product Demo"
+    
+    **Best for:** Time-sensitive workflows, audit trails, sequential processes
+  </Accordion>
+
+  <Accordion title="Hierarchical">
+    **Format:** `[Project] > [Phase] > [Task]`
+    
+    **Example:** "Website Redesign > Development > API Integration"
+    
+    **Best for:** Complex projects with multiple levels, nested workflows
+  </Accordion>
+
+  <Accordion title="Status-based">
+    **Format:** `[Status] [Subject] - [Details]`
+    
+    **Example:** "Completed: Customer Onboarding - Acme Corp"
+    
+    **Best for:** Task tracking, progress monitoring, filtering by completion
+  </Accordion>
+
+  <Accordion title="Actor-focused">
+    **Format:** `[Who] - [What] - [When]`
+    
+    **Example:** "Sarah Johnson - Contract Review - Nov 6"
+    
+    **Best for:** Team collaboration, assignment tracking, accountability
+  </Accordion>
+</AccordionGroup>
+
+---
+
+### Guide for Using Agent
+
+**What it is:** Simple instructions shown to users when they start a conversation with your agent.
+
+**Best practices:**
+
+- Keep it brief (1-3 sentences)
+- Explain what the agent can help with
+- Include any specific information users should provide
+
+**Example:** "I'm your research assistant. Tell me what topic you're exploring, and I'll help find relevant information and summarize key points."
+
+---
+
+### Welcome Message
+
+**What it is:** The first message your agent automatically sends at the start of every new task.
+
+**Tips for effective welcome messages:**
+
+- Introduce the agent's purpose
+- Set clear expectations
+- Include a prompt for the user to get started
+
+**Example:** "Hi there! I'm Maya, your marketing assistant. I can help draft social posts, brainstorm campaign ideas, or analyze content performance. What would you like to work on today?"
+
+---
+
+### Default Prompt for Parent Agents
+
+**What it is:** Instructions that guide how other agents should interact with this agent when working together.
+
+**When to use it:** Configure this when building multi-agent workflows where agents need to collaborate.
+
+This ensures consistent communication between agents and helps maintain workflow integrity.
+
+---
+
+### Visible in Chat
+
+**What it is:** A toggle that controls whether the agent appears in Chat App discovery features — the @-mention menu and the "Browse agents" list. This is on by default.
+
+**When to use it:** Turn this off when you want to:
+
+- Hide internal or backend agents from casual discovery
+- Keep API-only agents out of the Chat UI
+- Maintain a cleaner agent list for end users
+- Prevent confusion when an agent is designed for programmatic use only
+
+**How to configure:**
+
+1. Open your agent in Agent Builder
+2. Navigate to **Advanced Settings** → **General**
+3. Toggle **Visible in Chat** off
+
+<Info>
+Turning off "Visible in Chat" only removes the agent from Chat discovery. Hidden agents remain fully accessible via API and direct links — this is a visibility setting, not an access control.
+</Info>
+
+---
+
+### Visual Data Masking
+
+**What it is:** A front-end privacy feature that automatically masks PII (email addresses, phone numbers, credit card numbers, person names) in conversation histories.
+
+**When to use it:** Enable this when handling sensitive customer information, during screen sharing, or when multiple team members review agent conversations.
+
+<Info>
+Visual Data Masking protects what you see in the UI while agents continue to work with actual, unmasked data. [Learn more about Visual Data Masking →](/build/agents/build-your-agent/agent-settings/visual-data-masking)
+</Info>
+
+---
+
+### Export Agent
+
+**What it is:** A button that downloads your agent's complete configuration as a .rai file (JSON format).
+
+**When to use it:**
+
+- Create backups before making major changes
+- Share agent configurations with team members
+- Transfer agents between environments
+- Create templates for similar agents
+
+Your exported file contains all settings, tools, and configurations.
+
+---
+
+### Agent Autonomy Limit
+
+**What it is:** The maximum number of consecutive tool executions your agent can perform without human approval.
+
+<Warning>
+  The autonomy limit tracks **all consecutive tool executions**, not distinct tool invocations. This means tool retries count as separate executions toward your autonomy limit.
+</Warning>
+
+#### How It Works
+
+The autonomy limit counts every tool execution, including retries. If a tool is configured to retry on failure, each retry counts as a separate execution toward your limit. For example, if Tool A runs 3 times and Tool B runs 7 times, your agent uses 10 of its autonomy limit. Retries also count toward credit usage.
+
+#### How to Set It
+
+Navigate to **Agent settings** → **General** → **Agent Autonomy Limit** to configure this value.
+
+<div style={{ width:"100%",position:"relative","padding-top":"56.75%" }}>
+<iframe src="https://app.supademo.com/embed/cmkc0llyl37xjke4x0a6y9bwr" frameBorder="0" title="How to set Agent Autonomy Limit" allow="clipboard-write; fullscreen" webkitAllowFullscreen="true" mozAllowFullscreen="true" allowFullscreen style={{ position:"absolute",top:0,left:0,width:"100%",height:"100%",border:"3px solid #5E43CE",borderRadius:"10px" }} />
+</div>
+
+<Tip>
+  If your tools have retry settings enabled, factor those potential retries into your autonomy limit. A tool configured to retry 3 times could consume up to 3 executions of your autonomy limit if it continues to fail.
+</Tip>
+
+**Important:** Higher autonomy limits may require longer timeout settings to allow the agent to complete its work.
