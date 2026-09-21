@@ -4,7 +4,7 @@ import { source } from '@/lib/source';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { baseOptions } from '@/lib/layout.shared';
 import type { Metadata } from 'next';
-import { siteUrl } from '@/lib/shared';
+import { siteUrl, SITE_NAME } from '@/lib/shared';
 import { Analytics } from '@/components/site/analytics';
 import { ChatWidget } from '@/components/site/chat-widget';
 import './global.css';
@@ -14,16 +14,68 @@ import './relevance.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 const sora = Sora({ subsets: ['latin'], variable: '--font-sora', display: 'swap', weight: ['400', '500', '600'] });
 
-// Anchors every relative metadata URL (og:image in particular) to the real
-// origin instead of localhost.
+/**
+ * Site-wide metadata, matched against what Mintlify emits today so the
+ * migration is SEO-neutral.
+ *
+ * metadataBase anchors every relative metadata URL (og:image in particular)
+ * to the real origin instead of localhost. The title template reproduces
+ * Mintlify's "<Page> - Relevance AI Documentation" format exactly: dropping
+ * the suffix would rewrite every SERP title on 289 indexed pages, and bare
+ * titles like "Introduction" are far less distinctive.
+ */
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  title: {
+    template: `%s - ${SITE_NAME}`,
+    default: SITE_NAME,
+  },
+  openGraph: {
+    siteName: SITE_NAME,
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: { card: 'summary_large_image' },
+};
+
+/**
+ * Organization + WebSite structured data. Mintlify injects equivalent
+ * JSON-LD on every page; without it we would drop those signals at cutover.
+ */
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: 'Relevance AI',
+      url: siteUrl,
+      logo: { '@type': 'ImageObject', url: `${siteUrl}/docs/images/logo/light.png` },
+      sameAs: [
+        'https://twitter.com/relevanceai_',
+        'https://github.com/relevanceai',
+        'https://linkedin.com/company/relevanceai',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/docs/#website`,
+      name: SITE_NAME,
+      url: `${siteUrl}/docs`,
+      publisher: { '@id': `${siteUrl}/#organization` },
+    },
+  ],
 };
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="en" className={`${inter.variable} ${sora.variable}`} suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          // Static, build-time constant -- no user input reaches this.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {/* Mintlify ships Font Awesome; 257/297 icon names used here are in Free. */}
         <link
           rel="stylesheet"

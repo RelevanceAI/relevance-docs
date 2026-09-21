@@ -2,6 +2,9 @@ import { createGetUrl } from 'fumadocs-core/source';
 
 export const appName = 'Relevance AI Docs';
 
+/** The name Mintlify uses in titles, og:site_name and structured data. */
+export const SITE_NAME = 'Relevance AI Documentation';
+
 /**
  * Canonical origin. Without this Next falls back to http://localhost:3000
  * and every og:image in the build points at localhost -- which is exactly

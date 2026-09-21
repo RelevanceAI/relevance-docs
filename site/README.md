@@ -17,6 +17,7 @@ Three checks guard the migration. All three must pass before cutover.
 ```bash
 node tools/check-tracked.mjs   # everything needed to build is committed
 node tools/check-redirects.mjs # host configs are valid for Vercel + CF
+node tools/check-seo.mjs       # canonical/title/og/JSON-LD on every page
 node tools/check-parity.mjs   # every indexed URL still exists
 node tools/check-nav.mjs      # every docs.json page is in the sidebar
 node tools/check-links.mjs    # no broken internal links
@@ -30,6 +31,8 @@ Current state:
 |---|---|
 | Build files committed | **12/12 tracked, 0 stray ignores** |
 | Redirect config validity | **165 Vercel routes, 164 CF rules, 0 errors** |
+| SEO head tags | **385/385 pages, 0 problems** |
+| Sitemap scope | **289 URLs, identical to Mintlify's** |
 | URL parity vs live sitemap | **289/289 present, 0 missing** |
 | Sidebar coverage | **289/289 listed, 0 shadowed** |
 | Internal links + asset srcs | **11,151 checked, 0 broken** |
@@ -206,6 +209,33 @@ and pointing `assetPrefix` at it prefixes everything exactly once.
 `tools/check-dist.mjs` guards this: it serves `dist/` the way a host would,
 with no path guessing, applies the generated redirect rules, and fails on any
 404 or broken image.
+
+## SEO parity
+
+Head tags were compared page-by-page against what Mintlify serves today, and
+the first build was missing five things that matter for search:
+
+| | Mintlify | First build | Now |
+|---|---|---|---|
+| `canonical` | yes | **missing** | yes |
+| `<title>` | `Page - Relevance AI Documentation` | `Page` | matches |
+| `og:url` / `og:site_name` | yes | **missing** | yes |
+| JSON-LD (Organization + WebSite) | yes | **missing** | yes |
+| Sitemap scope | 289 URLs | **385** | 289 |
+
+The sitemap one was the subtle one: the build produces 385 pages, but 96 are
+orphans that Mintlify serves without advertising. Listing them would have
+pushed 96 previously-unindexed pages — including the leftover Mintlify
+starter-kit API stubs — into the index at cutover. They stay reachable and
+unlisted, exactly as now.
+
+`robots.txt` mirrors Mintlify's, including its `Content-Signal` AI-usage
+declaration; changing that is a policy decision, not a migration detail.
+
+Two pages Mintlify omits from its own sitemap, `/docs/community` and
+`/docs/changelog`, are omitted here too for exact parity. Both are linked
+from every page so they remain crawlable. `INCLUDE_GLOBAL_ANCHORS` in
+`app/sitemap.ts` flips that on — a small opportunity, not a regression.
 
 ## Capabilities carried over from Mintlify
 
