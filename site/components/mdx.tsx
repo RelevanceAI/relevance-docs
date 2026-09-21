@@ -1,6 +1,7 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import type { MDXComponents } from 'mdx/types';
 import * as Mintlify from './mintlify';
+import { CodeBlock } from './code-block';
 
 /**
  * Every Mintlify component is registered globally here, which is why the
@@ -16,6 +17,8 @@ export function getMDXComponents(components?: MDXComponents) {
     ...Mintlify,
     // Give every markdown table a focusable, named scroll region.
     table: Mintlify.ScrollableTable,
+    // ...and name the one fumadocs wraps around each code block.
+    pre: CodeBlock,
     ...components,
   } satisfies MDXComponents;
 }

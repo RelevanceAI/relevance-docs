@@ -1,3 +1,4 @@
+import { createElement, Fragment } from 'react';
 import { loader } from 'fumadocs-core/source';
 import { docsContentRoute, docsImageRoute, docsRoute } from './shared';
 import { defineCollections, defineDocs } from 'fumadocs-mdx/macro';
@@ -52,4 +53,33 @@ export const source = loader({
   baseUrl: docsRoute,
   source: docs.toFumadocsSource(),
   plugins: [],
+  pageTree: {
+    transformers: [
+      {
+        /**
+         * Mintlify renders `tag:` frontmatter as a pill beside the page's
+         * sidebar entry -- how readers are told Subagents and Flow Builder
+         * are LEGACY before they open them. Three pages use it, and it was
+         * dropped silently.
+         */
+        file(node, filePath) {
+          const file = filePath ? this.storage.read(filePath) : undefined;
+          const tag = file?.format === 'page'
+            ? (file.data as { tag?: string }).tag
+            : undefined;
+          if (!tag) return node;
+
+          return {
+            ...node,
+            name: createElement(
+              Fragment,
+              null,
+              node.name,
+              createElement('span', { className: 'rl-nav-tag' }, tag),
+            ),
+          };
+        },
+      },
+    ],
+  },
 });

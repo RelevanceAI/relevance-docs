@@ -93,19 +93,38 @@ const CALLOUT_ICON: Record<Variant, string> = {
   danger: 'circle-exclamation',
 };
 
+/** Spoken before the body so the variant is not carried by colour alone. */
+const LABEL: Record<Variant, string> = {
+  note: 'Note',
+  info: 'Info',
+  tip: 'Tip',
+  check: 'Check',
+  warning: 'Warning',
+  danger: 'Danger',
+};
+
 export function Callout({
   children, variant = 'note', icon, color,
 }: Kids & { variant?: Variant; icon?: unknown; color?: string }) {
   return (
-    <aside
+    // A <div role="note">, not an <aside>: <aside> inside <main> is a
+    // complementary landmark that is not top level, which axe flags on every
+    // callout (30 on the five pages sampled). The glyph is decorative, so the
+    // variant is carried by visually hidden text instead -- without it a
+    // screen reader cannot tell a Warning from a Tip.
+    <div
+      role="note"
       className={`rl-callout rl-callout--${variant}`}
       style={color ? ({ ['--rl-cal' as string]: color } as React.CSSProperties) : undefined}
     >
       <span className="rl-callout-mark" aria-hidden>
         <Icon name={typeof icon === 'string' && icon ? icon : CALLOUT_ICON[variant]} />
       </span>
-      <div className="rl-callout-body">{children}</div>
-    </aside>
+      <div className="rl-callout-body">
+        <span className="rl-sr-only">{LABEL[variant]}: </span>
+        {children}
+      </div>
+    </div>
   );
 }
 
@@ -288,16 +307,46 @@ export const Update = ({
 // pages (h2 -> h4 skips).
 export { Tabs, Tab, CodeGroup } from './tabs';
 
+/** First line of text inside a node, for naming a table by its columns. */
+function firstText(node: React.ReactNode, limit = 6): string[] {
+  const out: string[] = [];
+  const walk = (n: React.ReactNode) => {
+    if (out.length >= limit || n == null || typeof n === 'boolean') return;
+    if (typeof n === 'string' || typeof n === 'number') {
+      const t = String(n).trim();
+      if (t) out.push(t);
+      return;
+    }
+    if (Array.isArray(n)) { n.forEach(walk); return; }
+    if (React.isValidElement(n)) {
+      const props = n.props as { children?: React.ReactNode };
+      walk(props.children);
+    }
+  };
+  walk(node);
+  return out;
+}
+
 /**
- * Tables scroll horizontally on narrow viewports. Without a focusable,
- * named region the overflowed columns cannot be reached by keyboard at all
- * -- 25 such regions per page on a phone. Mintlify wraps them identically.
+ * Tables scroll horizontally on narrow viewports. Without a focusable, named
+ * region the overflowed columns cannot be reached by keyboard at all -- 25
+ * such regions per page on a phone. Mintlify wraps them identically.
+ *
+ * The name comes from the column headers: naming them all "Scrollable table"
+ * is a landmark-unique violation and tells a screen reader user nothing about
+ * which of the 25 they are in.
  */
-export const ScrollableTable = ({ children }: Kids) => (
-  <div className="rl-table-scroll" role="region" aria-label="Scrollable table" tabIndex={0}>
-    <table>{children}</table>
-  </div>
-);
+export const ScrollableTable = ({ children }: Kids) => {
+  // Six cells rather than three: two tables on the same page sharing their
+  // first three column names is a landmark-unique violation.
+  const headers = firstText(children);
+  const label = headers.length ? `Table: ${headers.join(', ')}` : 'Table';
+  return (
+    <div className="rl-table-scroll" role="region" aria-label={label} tabIndex={0}>
+      <table>{children}</table>
+    </div>
+  );
+};
 
 /* Mintlify API-example wrappers -- render as plain blocks. */
 export const RequestExample = ({ children }: Kids) => <div className="rl-example">{children}</div>;
