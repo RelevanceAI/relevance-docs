@@ -61,6 +61,25 @@ for (const entry of ['_redirects', '_headers']) {
   if (fs.existsSync(src)) fs.cpSync(src, path.join(DIST, entry));
 }
 
+// Mintlify serves every page's markdown at /docs/<slug>.md. Next can only
+// emit that route as /llms.mdx/<slug>/content.md, so the file is copied to
+// the Mintlify path as well. Doing it here rather than with a host rewrite
+// keeps the two hosts identical and costs no route-table entries.
+let mirrors = 0;
+const LLMS = path.join(DOCS, 'llms.mdx');
+if (fs.existsSync(LLMS)) {
+  (function mirror(dir, slug) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (e.isDirectory()) { mirror(path.join(dir, e.name), [...slug, e.name]); continue; }
+      if (e.name !== 'content.md' || slug.length === 0) continue;
+      const dest = path.join(DOCS, ...slug.slice(0, -1), `${slug.at(-1)}.md`);
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.copyFileSync(path.join(dir, e.name), dest);
+      mirrors++;
+    }
+  })(LLMS, []);
+}
+
 // macOS/editor junk that Mintlify never served -- .DS_Store files were being
 // deployed alongside the images.
 let pruned = 0;
@@ -83,7 +102,7 @@ const missing = REQUIRED.filter((r) => !fs.existsSync(path.join(DIST, r)));
 const count = (d) => fs.readdirSync(d, { withFileTypes: true })
   .reduce((n, e) => n + (e.isDirectory() ? count(path.join(d, e.name)) : 1), 0);
 
-console.log(`dist/ files: ${count(DIST)} (pruned ${pruned} junk files)`);
+console.log(`dist/ files: ${count(DIST)} (${mirrors} .md mirrors, pruned ${pruned} junk files)`);
 if (missing.length) {
   console.error(`MISSING from dist: ${missing.join(', ')}`);
   process.exit(1);

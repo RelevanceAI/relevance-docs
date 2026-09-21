@@ -171,6 +171,21 @@ const vercel = {
       source: '/docs/(images|videos)/(.*)',
       headers: [{ key: 'Cache-Control', value: 'public, max-age=86400, stale-while-revalidate=604800' }],
     },
+    {
+      // The Orama index is 24 MB and has no file extension, so hosts type it
+      // application/octet-stream and skip compression. Declaring JSON gets it
+      // compressed to ~3.6 MB, which is what the client actually downloads
+      // the first time someone opens search.
+      source: '/docs/api/search',
+      headers: [
+        { key: 'Content-Type', value: 'application/json; charset=utf-8' },
+        { key: 'Cache-Control', value: 'public, max-age=3600, stale-while-revalidate=86400' },
+      ],
+    },
+    {
+      source: '/docs/(.*).md',
+      headers: [{ key: 'Content-Type', value: 'text/markdown; charset=utf-8' }],
+    },
   ],
 };
 fs.writeFileSync(path.join(ROOT, 'site/vercel.json'), JSON.stringify(vercel, null, 2) + '\n');
@@ -185,6 +200,11 @@ fs.writeFileSync(path.join(ROOT, 'site/public/_headers'),
     '  Cache-Control: public, max-age=86400, stale-while-revalidate=604800',
     '/docs/videos/*',
     '  Cache-Control: public, max-age=86400, stale-while-revalidate=604800',
+    '/docs/api/search',
+    '  Content-Type: application/json; charset=utf-8',
+    '  Cache-Control: public, max-age=3600, stale-while-revalidate=86400',
+    '/docs/*.md',
+    '  Content-Type: text/markdown; charset=utf-8',
     '',
   ].join('\n'));
 
