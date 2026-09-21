@@ -88,6 +88,35 @@ if (fs.existsSync(LLMS)) {
   })(LLMS, []);
 }
 
+/**
+ * Next emits each page's RSC payload twice: once as `<page>.txt` and again
+ * as `<page>/__next._full.txt`, byte for byte. Only the first is ever
+ * requested -- verified by serving dist with the duplicates removed and
+ * walking 12 client-side navigations plus the back stack: zero 404s, zero
+ * page errors. That is 385 files and 67.7 MB of deploy for nothing.
+ *
+ * The sibling `<page>.txt` IS requested (changelog/2023.txt and
+ * get-started/support.txt both showed up in that same walk), as are
+ * `__next._index.txt`, `__next._tree.txt` and the per-route
+ * `__next.docs.$oc$slug.__PAGE__.txt`. None of those are touched.
+ */
+let dupes = 0, dupeBytes = 0;
+(function dropDuplicatePayloads(dir) {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) { dropDuplicatePayloads(p); continue; }
+    if (e.name !== '__next._full.txt') continue;
+    // Only when it really is a duplicate of the sibling page payload.
+    const sibling = `${dir}.txt`;
+    if (!fs.existsSync(sibling)) continue;
+    if (fs.readFileSync(sibling).equals(fs.readFileSync(p))) {
+      dupeBytes += fs.statSync(p).size;
+      fs.rmSync(p);
+      dupes++;
+    }
+  }
+})(DOCS);
+
 // macOS/editor junk that Mintlify never served -- .DS_Store files were being
 // deployed alongside the images.
 let pruned = 0;
@@ -112,6 +141,7 @@ const count = (d) => fs.readdirSync(d, { withFileTypes: true })
   .reduce((n, e) => n + (e.isDirectory() ? count(path.join(d, e.name)) : 1), 0);
 
 console.log(`dist/ files: ${count(DIST)} (${mirrors} .md mirrors, pruned ${pruned} junk files)`);
+console.log(`dropped ${dupes} duplicate RSC payloads (${(dupeBytes / 1048576).toFixed(1)} MB)`);
 if (missing.length) {
   console.error(`MISSING from dist: ${missing.join(', ')}`);
   process.exit(1);
