@@ -176,7 +176,16 @@ though every URL in the HTML is prefixed with `/docs`.
 
 `vercel.json` is generated with the full project config — `framework: null`
 (this is a packed static export, not an app for Vercel to build itself),
-build command, output directory, the 163 redirects and cache headers.
+build command, output directory, the 163 redirects, cache headers and
+`cleanUrls`.
+
+`cleanUrls: true` is load-bearing. Vercel defaults it to **false**, and a
+plain static output is then served only at `.html` paths:
+`/docs/get-started/introduction` 404s while
+`/docs/get-started/introduction.html` renders. Cloudflare Pages strips the
+extension implicitly, which is why the omission was invisible until the site
+was actually on Vercel. With it on, `/x.html` also 308s to `/x`, so the
+`.html` forms cannot be indexed as duplicates of the canonical URLs.
 
 Project settings that are **not** in the file and must be set in the Vercel
 UI once:

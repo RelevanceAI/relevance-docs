@@ -129,6 +129,17 @@ fs.writeFileSync(path.join(ROOT, 'site/public/_redirects'), body);
 const vercel = {
   $schema: 'https://openapi.vercel.sh/vercel.json',
   framework: null,
+  /**
+   * Vercel defaults cleanUrls to FALSE, so a plain static output is served
+   * ONLY at .html paths: /docs/get-started/introduction 404s while
+   * /docs/get-started/introduction.html renders. Cloudflare Pages does this
+   * implicitly, which is why it went unnoticed.
+   *
+   * With it on, `about.html` is served at `/about` and `/about.html` 308s to
+   * `/about` -- so the .html forms cannot be indexed as duplicates of the
+   * canonical clean URLs.
+   */
+  cleanUrls: true,
   // `npm run build`, not a bare `next build`: npm puts node_modules/.bin on
   // PATH, a plain shell does not. A bare `next` fails with
   // "next: command not found" wherever the runner has not already added it.
