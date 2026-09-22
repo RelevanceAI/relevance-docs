@@ -50,6 +50,10 @@
   --rl-cal-yellow-bg:    #FEFCE8;  --rl-cal-yellow-line:  #FEF08A;
   --rl-cal-red-bg:       #FEF2F2;  --rl-cal-red-line:     #FECACA;
   /* Link colours inside a callout: the 800 weight of the same hue. */
+  /* Mintlify's inactive code-group tab is #727276, which measures 4.38:1 on
+     its own #F5F4F9 tray -- under the 4.5:1 AA floor, so its value cannot be
+     copied verbatim. #5F5F66 is the nearest grey that clears it, at 5.79:1. */
+  --rl-codetab: #5F5F66;
   --rl-cal-blue-link:    #1E40AF;  --rl-cal-green-link:   #166534;
   --rl-cal-neutral-link: #3F3F46;  --rl-cal-yellow-link:  #854D0E;
   --rl-cal-red-link:     #991B1B;
@@ -60,8 +64,10 @@
   --rl-font-head: var(--rl-font-sans);
   --rl-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
-  /* Mintlify's measured content column at every viewport above 1280px. */
+  /* Mintlify's measured content column at every viewport above 1280px, and
+     the wider one it uses for `mode: "wide"` pages. */
   --rl-measure: 677px;
+  --rl-measure-wide: 769px;
 }
 
 .dark, :root[data-theme='dark'], [data-theme='dark'] {
@@ -95,6 +101,8 @@
   --rl-cal-red-bg:       rgba(239, 68, 68, .2);   --rl-cal-red-line:     #7F1D1D;
   /* ...and the 300 weight on the dark fills. */
   --rl-tab-rule: var(--rl-line);
+  --rl-frame-mat: rgba(255, 255, 255, .04);
+  --rl-codetab: var(--rl-muted);
   --rl-cal-blue-link:    #93C5FD;  --rl-cal-green-link:   #86EFAC;
   --rl-cal-neutral-link: #D4D4D4;  --rl-cal-yellow-link:  #FDE047;
   --rl-cal-red-link:     #FCA5A5;
@@ -126,6 +134,9 @@
    ~200px wider and every paragraph broke in a different place. The id selector
    outranks that class without !important. */
 #nd-page > * { max-width: var(--rl-measure); }
+/* `mode: "wide"` pages, which fumadocs marks with data-full. Mintlify runs
+   these at 769px, not edge to edge -- its default here would be 1285px. */
+#nd-page[data-full="true"] > * { max-width: var(--rl-measure-wide); }
 
 body {
   font-family: var(--rl-font-sans);
@@ -229,7 +240,10 @@ article h5 a, article h6 a { color: inherit; text-decoration: none; }
 
 /* ----------------------------------------------------------------- cards */
 
-.rl-card-group { display: grid; gap: 16px; margin: 1.6rem 0; }
+/* Mintlify's grid has a 16px COLUMN gap and no row gap -- the vertical
+   rhythm comes from each card's own 8px margin, which .rl-card now carries,
+   so the group itself needs no margin either. */
+.rl-card-group { display: grid; gap: 0 16px; margin: 0; }
 .rl-card-group[data-cols="1"] { grid-template-columns: 1fr; }
 .rl-card-group[data-cols="2"] { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .rl-card-group[data-cols="3"] { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
@@ -327,9 +341,13 @@ a.rl-card:hover { border-color: rgba(0, 0, 0, .18); }
 
 /* ---------------------------------------------------- frames, tabs, misc */
 
-.rl-frame { margin: 1.6rem 0; }
-.rl-frame-inner { border: 1px solid var(--rl-line); border-radius: var(--rl-radius-lg);
-  overflow: hidden; background: var(--rl-surface); }
+/* Mintlify's <Frame> is a soft gray-50/50 mat with 8px of padding and a 16px
+   radius around the image -- not a bordered box. Measured on
+   /get-started/chat/super-gtm/integrations. */
+.rl-frame { margin: 1.6rem 0; padding: 8px; border-radius: var(--rl-radius-lg);
+  background: var(--rl-frame-mat, rgba(249, 250, 251, .5)); overflow: hidden; }
+.rl-frame-inner { border: 0; border-radius: 8px;
+  overflow: hidden; background: transparent; }
 .rl-frame img { display: block; width: 100%; height: auto; }
 .rl-frame-caption { margin-top: .55rem; font-size: .83rem; color: var(--rl-faint); text-align: center; }
 
@@ -405,8 +423,26 @@ a.rl-card:hover { border-color: rgba(0, 0, 0, .18); }
 .rl-tab-panel { padding: .9rem 1rem; }
 .rl-tab-panel > :first-child { margin-top: 0; }
 .rl-tab-panel > :last-child { margin-bottom: 0; }
-.rl-codegroup { margin: 1.5rem 0; border: 1px solid var(--rl-line);
-  border-radius: var(--rl-radius); overflow: hidden; }
+/*
+ * Mintlify's <CodeGroup> is a 2px-padded tray with a 16px radius and a
+ * #F5F4F9 fill, with the language switcher as small PLAIN TEXT inside it --
+ * 12px/500, indigo when active and #727276 when not, with no pill, fill or
+ * radius. This shared `.rl-tab-button` with <Tabs>, so it had inherited the
+ * pill treatment. Measured on /build/tools/customize-tool/inputs.
+ */
+.rl-codegroup { margin: 20px 0 32px; padding: 2px;
+  display: flex; flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, .1); border-radius: var(--rl-radius-lg);
+  background: var(--rl-surface-2); overflow: visible; }
+.rl-codegroup > .rl-tablist { background: transparent; border: 0;
+  padding: 0 10px 0 0; margin: 0; gap: 8px; }
+.rl-codegroup > .rl-tablist > .rl-tab-button {
+  padding: 0; margin: 4px 0 6px; border: 0; border-radius: 0;
+  background: transparent; font-size: 12px; font-weight: 500;
+  line-height: 24px; color: var(--rl-codetab); }
+.rl-codegroup > .rl-tablist > .rl-tab-button:hover { background: transparent; color: var(--rl-ink); }
+.rl-codegroup > .rl-tablist > .rl-tab-button[data-active] {
+  background: transparent; color: var(--rl-primary); }
 .rl-codegroup .rl-tab-panel { padding: 0; }
 
 /* Six "pick your path" guides wrap their tabs in this to frame the choice.

@@ -27,7 +27,14 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   return (
     <DocsPage
       toc={page.data.toc}
-      full={page.data.full}
+      /*
+       * Mintlify's `mode: "wide"` is fumadocs' `full`: a wider column and no
+       * table of contents. The key was parsed into the schema but never read,
+       * so all 5 pages that declare it -- every changelog archive, plus the
+       * Tool steps index -- rendered at the normal 677px WITH a ToC, against
+       * Mintlify's 769px without one.
+       */
+      full={page.data.full || page.data.mode === 'wide'}
       /*
        * The table of contents ships as a bare <div>, so its links sit in no
        * landmark at all -- a screen reader reaches them only by walking the
