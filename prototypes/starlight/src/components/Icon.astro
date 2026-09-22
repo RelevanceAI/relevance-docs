@@ -1,0 +1,12 @@
+---
+/**
+ * Mintlify icons are Font Awesome names (`icon="chart-line"`). Rendering the
+ * prop directly prints the NAME as text, which is what a naive shim does.
+ *
+ * 257 of the 297 distinct names used in this repo are in Font Awesome Free;
+ * 40 (75 usages) are Pro-only. Unknown names render as an empty slot rather
+ * than leaking the raw string.
+ */
+const { name, style = 'solid' } = Astro.props;
+---
+{name && <i class={`fa-${style} fa-${name} rl-icon`} aria-hidden="true"></i>}

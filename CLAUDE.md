@@ -48,12 +48,12 @@ Drop it in after the intro of any page where Invent can do the job:
 ```
 
 Rules:
-- Only the copy changes between usages — never the markup, the class name, or the structure. All styling lives in `style.css` so one edit there updates every bubble.
+- Only the copy changes between usages — never the markup, the class name, or the structure. All styling lives in `site/app/relevance.css` so one edit there updates every bubble.
 - Keep it to one short paragraph, lead-in bolded. Say what to ask Invent for, not what Invent is.
 - Don't nest it inside a Mintlify callout, `<Card>`, or `<Accordion>`.
 - Don't put more than one on a page.
 
-Supporting files, none of which need touching to add a bubble: `invent-callout.js` (builds Blobby and animates his eyes), `images/invent-blobby-seal.svg` (the `pd/inventor` sprite from relevance-api-node), `images/invent-blobby.svg` (static fallback when JS is off). Blobby's size and the spacing around him are the `--blobby-size` and `--blobby-gap` custom properties on `.invent-callout`.
+Supporting files, none of which need touching to add a bubble: `site/public/invent-callout.js` (builds Blobby and animates his eyes), `site/public/images/invent-blobby-seal.svg` (the `pd/inventor` sprite from relevance-api-node), `site/public/images/invent-blobby.svg` (static fallback when JS is off). Blobby's size and the spacing around him are the `--blobby-size` and `--blobby-gap` custom properties on `.invent-callout`.
 
 ## Navigation
 
