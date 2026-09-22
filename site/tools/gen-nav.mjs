@@ -88,7 +88,31 @@ const commonPrefix = (slugs) => {
  * the rest rendered as collapsed folders where Mintlify shows a bold heading
  * with every page listed beneath it.
  */
-function place(node, dir, depth = 0) {
+/*
+ * A nested group is a collapsible folder in Mintlify whatever its pages look
+ * like. Fumadocs folders are directories, so two sibling groups whose pages
+ * share one directory -- Popular Integrations' six, all in
+ * popular-integrations/ -- cannot each be one: they merged into a single
+ * folder named after the last ("Developer", 34 pages). Those, and nested
+ * groups that fold nowhere, are written as a run between
+ * `---@group:Label---` and `---@end---`, which lib/source.ts turns into a
+ * folder of its own.
+ */
+const GROUP_OPEN = (label) => `---@group:${label}---`;
+const GROUP_CLOSE = '---@end---';
+function sharedPrefixes(items) {
+  const seen = new Map();
+  for (const c of items) {
+    if (c.slug) continue;
+    const sl = slugsOf(c);
+    if (!sl.length) continue;
+    const pre = commonPrefix(sl);
+    seen.set(pre, (seen.get(pre) ?? 0) + 1);
+  }
+  return new Set([...seen].filter(([, n]) => n > 1).map(([k]) => k));
+}
+
+function place(node, dir, depth = 0, shared = new Set()) {
   if (node.slug) {
     // A folder's own page is referenced as `index`, not as an empty string.
     const rel = path.posix.relative(dir, node.slug) || 'index';
@@ -110,7 +134,13 @@ function place(node, dir, depth = 0) {
 
   if (depth === 1) {
     if (node.label) ensure(dir).pages.push(`---${node.label}---`);
-    node.items.forEach((c) => place(c, dir, 2));
+    const sh = sharedPrefixes(node.items);
+    node.items.forEach((c) => place(c, dir, 2, sh));
+  } else if (depth >= 2 && node.label && (!foldable || shared.has(prefix))) {
+    ensure(dir).pages.push(GROUP_OPEN(node.label));
+    const sh = sharedPrefixes(node.items);
+    node.items.forEach((c) => place(c, dir, depth + 1, sh));
+    ensure(dir).pages.push(GROUP_CLOSE);
   } else if (foldable) {
     ensure(dir).pages.push(path.posix.relative(dir, prefix));
     ensure(prefix).title = node.label;
@@ -128,10 +158,12 @@ function place(node, dir, depth = 0) {
      * the subsection and hide its siblings.
      */
     if (depth === 0) ensure(prefix).root = true;
-    node.items.forEach((c) => place(c, prefix, depth + 1));
+    const sh = sharedPrefixes(node.items);
+    node.items.forEach((c) => place(c, prefix, depth + 1, sh));
   } else {
     if (node.label) ensure(dir).pages.push(`---${node.label}---`);
-    node.items.forEach((c) => place(c, dir, depth + 1));
+    const sh = sharedPrefixes(node.items);
+    node.items.forEach((c) => place(c, dir, depth + 1, sh));
   }
 }
 
@@ -148,7 +180,9 @@ for (const [dir, cfg] of dirs) {
   const meta = {};
   if (cfg.title) meta.title = cfg.title;
   if (cfg.root) meta.root = true;
-  meta.pages = [...new Set(cfg.pages)];
+  // Dedupe pages, never separators: every `---@end---` closes its own group.
+  const seenPages = new Set();
+  meta.pages = cfg.pages.filter((p) => p.startsWith('---') || (seenPages.has(p) ? false : seenPages.add(p)));
   const f = path.join(DOCS, dir, 'meta.json');
   // Never write through a symlink into the source tree -- meta.json belongs to
   // the app, so materialise the directory locally when the target is linked.

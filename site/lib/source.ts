@@ -142,4 +142,36 @@ function fileOrphans(tree: PageTree.Root) {
     });
   }
 }
+/*
+ * gen-nav writes a nested group that has no directory of its own as a run
+ * between `---@group:Label---` and `---@end---` separators (see the note in
+ * tools/gen-nav.mjs). Here each run becomes the collapsible folder Mintlify
+ * shows -- "CRM & Sales", "Communication" and the rest under Popular
+ * Integrations -- nested as deeply as the markers are.
+ */
+function foldGroups(nodes: PageTree.Node[], idBase: string): PageTree.Node[] {
+  const out: PageTree.Node[] = [];
+  const stack: { folder: PageTree.Folder }[] = [];
+  const target = () => (stack.length ? stack[stack.length - 1].folder.children : out);
+  let n = 0;
+  for (const node of nodes) {
+    const name = node.type === 'separator' && typeof node.name === 'string' ? node.name : undefined;
+    if (name?.startsWith('@group:')) {
+      const folder: PageTree.Folder = {
+        type: 'folder', $id: `${idBase}:group:${n++}`, name: name.slice('@group:'.length), children: [],
+      };
+      target().push(folder);
+      stack.push({ folder });
+      continue;
+    }
+    if (name === '@end') { stack.pop(); continue; }
+    if (node.type === 'folder') node.children = foldGroups(node.children, node.$id ?? idBase);
+    target().push(node);
+  }
+  return out;
+}
+{
+  const tree = source.getPageTree();
+  tree.children = foldGroups(tree.children, 'root');
+}
 fileOrphans(source.getPageTree());
