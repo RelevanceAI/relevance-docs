@@ -4,6 +4,22 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
+<Update label="September 22, 2026" description="Large CSV bulk runs fixed — up to 10,000 rows now processed reliably">
+
+🐛 Bug Fix — Bulk Runs Back to Full Strength
+
+## Large CSV bulk runs fixed — up to 10,000 rows now processed reliably
+
+Bulk runs with large CSV uploads now process correctly for all users, with accurate status reporting and clear error handling replacing the previous silent-failure behavior.
+
+Previously, uploads above a few hundred rows would time out mid-process, silently drop every row, and report "Complete, 0 of 0" — giving the appearance of success with no results. Files are now processed in chunks of 500 rows, preventing timeouts for uploads of up to 10,000 rows; uploads exceeding that limit are rejected upfront with a descriptive error. Run status now moves through a **Preparing** state while the job initialises, and surfaces **Failed** if execution does not complete — rather than defaulting to a false success state. As part of this fix, 3,061 runs that had been stuck in a non-terminal state since 2024 have been retroactively marked as Failed; customers may see these appear in their run history.
+
+**Example:** A 4,000-row CSV upload will now show the run transition from *Preparing* → *Running* → *Complete* with all rows processed. If the run encounters a failure at any point, it will surface as *Failed* rather than *Complete, 0 of 0*.
+
+Use the CSV upload option in the bulk run panel on any Agent or Tool — no configuration changes are required. See the [Bulk Runs documentation](https://relevanceai.com/docs/bulk-run) for details.
+
+</Update>
+
 <Update label="September 3, 2026" description="Meet the new Invent">
 
 ## Meet the new Invent
