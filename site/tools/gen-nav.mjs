@@ -78,7 +78,17 @@ const commonPrefix = (slugs) => {
   return acc.join('/');
 };
 
-function place(node, dir, isTab = false) {
+/*
+ * `depth` mirrors how Mintlify draws docs.json:
+ *   0  a tab (or a product with no tabs)  -> a fumadocs root folder
+ *   1  a group directly inside a tab      -> a section: heading + pages, ALWAYS open
+ *   2+ a group nested inside a group      -> a collapsible folder, when foldable
+ *
+ * Depth 1 used to fold like any other group, so "Core Concepts", "Chat" and
+ * the rest rendered as collapsed folders where Mintlify shows a bold heading
+ * with every page listed beneath it.
+ */
+function place(node, dir, depth = 0) {
   if (node.slug) {
     // A folder's own page is referenced as `index`, not as an empty string.
     const rel = path.posix.relative(dir, node.slug) || 'index';
@@ -98,7 +108,10 @@ function place(node, dir, isTab = false) {
   const foldable = deeper && hasDescendant &&
     slugs.every((s) => s === prefix || s.startsWith(`${prefix}/`));
 
-  if (foldable) {
+  if (depth === 1) {
+    if (node.label) ensure(dir).pages.push(`---${node.label}---`);
+    node.items.forEach((c) => place(c, dir, 2));
+  } else if (foldable) {
     ensure(dir).pages.push(path.posix.relative(dir, prefix));
     ensure(prefix).title = node.label;
     /*
@@ -114,25 +127,23 @@ function place(node, dir, isTab = false) {
      * section in Mintlify too, and flagging those would scope the sidebar to
      * the subsection and hide its siblings.
      */
-    if (isTab) ensure(prefix).root = true;
-    node.items.forEach((c) => place(c, prefix));
+    if (depth === 0) ensure(prefix).root = true;
+    node.items.forEach((c) => place(c, prefix, depth + 1));
   } else {
     if (node.label) ensure(dir).pages.push(`---${node.label}---`);
-    node.items.forEach((c) => place(c, dir));
+    node.items.forEach((c) => place(c, dir, depth + 1));
   }
 }
 
-tree.forEach((n) => place(n, '', true));
+tree.forEach((n) => place(n, '', 0));
 
-// Global anchors are top-level links alongside the tree.
-for (const a of docsJson.navigation.global?.anchors ?? []) {
-  const href = a.href.replace('https://relevanceai.com/docs', '');
-  if (!href.startsWith('/')) continue;
-  const slug = href.replace(/^\//, '');
-  if (exists(slug)) ensure('').pages.push(slug);
-}
+// Global anchors are NOT written into the tree: components/site/global-anchors
+// renders them above every tab's sidebar, as Mintlify does. Listing their
+// pages here (community, changelog) put them under no tab, so they opened with
+// no tab row; left out, lib/source.ts files them into a tab as Mintlify does.
 
 let written = 0;
+const writtenFiles = new Set();
 for (const [dir, cfg] of dirs) {
   const meta = {};
   if (cfg.title) meta.title = cfg.title;
@@ -144,10 +155,28 @@ for (const [dir, cfg] of dirs) {
   const parent = path.dirname(f);
   if (!fs.existsSync(parent)) fs.mkdirSync(parent, { recursive: true });
   fs.writeFileSync(f, JSON.stringify(meta, null, 2) + '\n');
+  writtenFiles.add(f);
   written++;
 }
+
+/*
+ * Remove every meta.json this run did not write. They are all generated, so a
+ * leftover is a folder docs.json no longer describes -- inert while nothing
+ * references it, and silently back in the sidebar with a stale title and page
+ * list the moment something does. The tree is then a pure function of
+ * docs.json.
+ */
+let removed = 0;
+(function sweep(d) {
+  for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+    const p = path.join(d, e.name);
+    if (e.isDirectory() && !e.isSymbolicLink()) sweep(p);
+    else if (e.name === 'meta.json' && !writtenFiles.has(p)) { fs.unlinkSync(p); removed++; }
+  }
+})(DOCS);
 
 const leaves = [...dirs.values()].reduce(
   (a, c) => a + c.pages.filter((p) => !p.startsWith('---')).length, 0);
 console.log(`meta.json written : ${written}`);
+console.log(`meta.json removed : ${removed}`);
 console.log(`nav entries       : ${leaves}`);

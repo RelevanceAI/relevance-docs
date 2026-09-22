@@ -4,6 +4,7 @@ import { remarkBasePath } from './lib/remark-base-path.mjs';
 import { rehypeAssetBase } from './lib/rehype-asset-base.mjs';
 import { remarkCodeLang } from './lib/remark-code-lang.mjs';
 import { remarkUnwrapBlocks } from './lib/remark-unwrap-blocks.mjs';
+import { remarkApiExamples } from './lib/remark-api-examples.mjs';
 import { mintlifySlug } from './lib/mintlify-slug.mjs';
 import smartypants from 'remark-smartypants';
 
@@ -40,13 +41,16 @@ export default defineConfig({
     // the table of contents as well, so the two cannot drift apart.
     remarkHeadingOptions: { slug: mintlifySlug },
     /**
-     * Shiki's `github-dark` colours comments #6A737D, which measures 3.71:1
-     * on this theme's code-block background -- under the 4.5:1 AA floor, so
-     * every commented sample was hard to read in dark mode.
-     * `github-dark-default` uses #8b949e for the same tokens: 5.81:1.
+     * Mintlify's own pair: `github-light-default` and `dark-plus` -- read off
+     * the `shiki-themes` class on its rendered <pre>. `github-light` and
+     * `github-dark-default` gave every token a different colour in both modes.
+     *
+     * (The earlier choice of github-dark-default was for contrast: plain
+     * `github-dark` colours comments #6A737D, 3.71:1 on the dark block. The
+     * a11y gate re-checks dark-plus's comment colour on every build.)
      */
     rehypeCodeOptions: {
-      themes: { light: 'github-light', dark: 'github-dark-default' },
+      themes: { light: 'github-light-default', dark: 'dark-plus' },
     },
     // remarkBasePath runs LAST: remarkImage rewrites images into elements
     // with a `src`, and that src needs the /docs prefix applying after it.
@@ -59,6 +63,7 @@ export default defineConfig({
       remarkHeadingComponents,
       remarkCodeLang,
       remarkUnwrapBlocks,
+      remarkApiExamples,
       [smartypants, { dashes: false, ellipses: false, backticks: false }],
       ...v,
       remarkBasePath,

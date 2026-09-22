@@ -1,8 +1,10 @@
 import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Provider } from '@/components/provider';
 import { source } from '@/lib/source';
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import { baseOptions } from '@/lib/layout.shared';
+import { getProducts } from '@/lib/products';
 import type { Metadata } from 'next';
 import { siteUrl, SITE_NAME } from '@/lib/shared';
 import { Analytics } from '@/components/site/analytics';
@@ -22,6 +24,21 @@ import './relevance.css';
  * rule -- keeping it would download a second family on every page for nothing.
  */
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+
+/*
+ * Paper Mono is Mintlify's monospace -- every code block, inline code span and
+ * API field name is set in it. It is SIL OFL 1.1, taken from the upstream
+ * repository (paper-design/paper-mono, fonts/webfonts), not from Mintlify's
+ * CDN; the licence travels with it in app/fonts/PaperMono-OFL.txt. Variable,
+ * weights 100-800, 53 KB.
+ */
+const paperMono = localFont({
+  src: './fonts/PaperMono-Variable.woff2',
+  variable: '--font-paper-mono',
+  weight: '100 800',
+  display: 'swap',
+  fallback: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+});
 
 /**
  * Site-wide metadata, matched against what Mintlify emits today so the
@@ -97,7 +114,7 @@ const jsonLd = {
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${paperMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -127,7 +144,18 @@ export default function Layout({ children }: LayoutProps<'/'>) {
             {...baseOptions()}
             nav={{ ...baseOptions().nav, mode: 'top' }}
             tabMode="navbar"
-            tabs={{}}
+            /*
+             * The tab row belongs to the "Product" product. Every other product
+             * (today, the SDK) is reached from the navbar switcher instead and
+             * has no tabs of its own -- Mintlify shows six tabs, not seven.
+             */
+            tabs={{
+              transform: (option) => {
+                const url = option.url ?? '';
+                const other = getProducts().some((p) => p.prefix && (url === p.prefix || url.startsWith(`${p.prefix}/`)));
+                return other ? null : option;
+              },
+            }}
             /* Otherwise this is an unnamed "complementary" landmark. */
             sidebar={{ 'aria-label': 'Documentation navigation' }}
           >
