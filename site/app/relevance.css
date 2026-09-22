@@ -1,39 +1,67 @@
 /* Relevance AI docs theme.
-   Tokens taken from relevanceai.com: Sora headings at regular weight with
-   tight negative tracking, Inter for body and UI, #6056FF primary, #0D162F
-   ink, hairline #E6E7EA rules, 8px radii and a lot of white space. */
+
+   Tokens are MEASURED FROM MINTLIFY, not designed here: every value below was
+   read off the rendered Mintlify site with getComputedStyle so the self-hosted
+   build is visually indistinguishable from what readers had before.
+
+   Inter throughout at weight 600 for headings, #4F46E5 primary (the value
+   docs.json already declares), #19181D ink, #404045 body, 16px radii on cards,
+   callouts and accordions, and a 677px measure.
+
+   An earlier pass restyled this to relevanceai.com's marketing brand -- Sora
+   headings at weight 400 with -0.05em tracking, #6056FF primary, a 900px
+   column. That is what the team noticed as "not the same"; it is deliberately
+   reverted here. Re-theming is a token edit in this file, not a rebuild. */
 
 :root {
-  --rl-primary:      #6056FF;
-  --rl-primary-ink:  #4A41E0;
-  --rl-primary-soft: #EEEDFF;
+  --rl-primary:      #4F46E5;
+  --rl-primary-ink:  #4338CA;
+  --rl-primary-soft: #EEF2FF;
   --rl-teal:         #0E9384;
   --rl-green:        #027A48;
   --rl-amber:        #B54708;
   --rl-red:          #D92D20;
 
-  --rl-ink:          #0D162F;
-  --rl-muted:        #5A6072;
-  /* #868A97 measured 3.44:1 on white, 3.29 on --rl-surface and 3.11 on
-     --rl-surface-2 -- under the 4.5:1 minimum on every light surface, and
-     responsible for ~65 of 75 contrast failures. #6B7080 clears all three. */
-  --rl-faint:        #6B7080;
+  --rl-ink:          #19181D;
+  --rl-muted:        #404045;
+  /* Mintlify's eyebrow/muted grey. #868A97 measured 3.44:1 on white, 3.29 on
+     --rl-surface and 3.11 on --rl-surface-2 -- under the 4.5:1 minimum on
+     every light surface. #727276 is Mintlify's own value and measures
+     4.79:1 on white, so it clears AA without drifting from the original. */
+  --rl-faint:        #727276;
 
   --rl-bg:           #FFFFFF;
-  --rl-surface:      #F8FAFC;
-  --rl-surface-2:    #F3F3F4;
-  --rl-line:         #E6E7EA;
+  --rl-surface:      #FAFAFA;
+  --rl-surface-2:    #F5F4F9;
+  --rl-line:         #E5E5E5;
   --rl-line-strong:  #C9CBD2;
   --rl-line-soft:    #F0F0F2;
 
   --rl-radius:    8px;
-  --rl-radius-lg: 12px;
+  /* Mintlify's rounded-2xl, on cards, callouts and accordions. */
+  --rl-radius-lg: 16px;
+
+  /* Callout families, read off Mintlify and paired against the source order
+     of the components on the page, so the mapping is verified, not assumed:
+     Note->blue, Tip/Check->green, Info->neutral, Warning->yellow, Danger->red. */
+  --rl-cal-blue-bg:      #EFF6FF;  --rl-cal-blue-line:    #BFDBFE;
+  --rl-cal-green-bg:     #F0FDF4;  --rl-cal-green-line:   #BBF7D0;
+  --rl-cal-neutral-bg:   #FAFAFA;  --rl-cal-neutral-line: #E5E5E5;
+  --rl-cal-yellow-bg:    #FEFCE8;  --rl-cal-yellow-line:  #FEF08A;
+  --rl-cal-red-bg:       #FEF2F2;  --rl-cal-red-line:     #FECACA;
+  /* Link colours inside a callout: the 800 weight of the same hue. */
+  --rl-cal-blue-link:    #1E40AF;  --rl-cal-green-link:   #166534;
+  --rl-cal-neutral-link: #3F3F46;  --rl-cal-yellow-link:  #854D0E;
+  --rl-cal-red-link:     #991B1B;
 
   --rl-font-sans: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
-  --rl-font-head: var(--font-sora), Sora, var(--rl-font-sans);
+  /* Mintlify sets headings in the body face. Kept as its own token so a
+     display face can be reintroduced in one line. */
+  --rl-font-head: var(--rl-font-sans);
   --rl-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
-  --rl-measure: 46rem;
+  /* Mintlify's measured content column at every viewport above 1280px. */
+  --rl-measure: 677px;
 }
 
 .dark, :root[data-theme='dark'], [data-theme='dark'] {
@@ -55,6 +83,20 @@
   --rl-line:         #232B40;
   --rl-line-strong:  #39415A;
   --rl-line-soft:    #1B2234;
+
+  /* Mintlify's dark callouts: the 500-weight hue at 20% over the page rather
+     than the light 50-weight tint, with the 900-weight border. Measured with
+     the theme toggled, not derived -- keeping the light fills here put light
+     panels behind light text and was 682 contrast failures on its own. */
+  --rl-cal-blue-bg:      rgba(59, 130, 246, .2);  --rl-cal-blue-line:    #1E3A8A;
+  --rl-cal-green-bg:     rgba(34, 197, 94, .2);   --rl-cal-green-line:   #14532D;
+  --rl-cal-neutral-bg:   rgba(255, 255, 255, .1); --rl-cal-neutral-line: #404040;
+  --rl-cal-yellow-bg:    rgba(234, 179, 8, .2);   --rl-cal-yellow-line:  #713F12;
+  --rl-cal-red-bg:       rgba(239, 68, 68, .2);   --rl-cal-red-line:     #7F1D1D;
+  /* ...and the 300 weight on the dark fills. */
+  --rl-cal-blue-link:    #93C5FD;  --rl-cal-green-link:   #86EFAC;
+  --rl-cal-neutral-link: #D4D4D4;  --rl-cal-yellow-link:  #FDE047;
+  --rl-cal-red-link:     #FCA5A5;
 }
 
 /* Map Fumadocs' own variables onto the brand so chrome matches content. */
@@ -77,6 +119,13 @@
   --color-fd-ring: var(--rl-primary);
 }
 
+/* Mintlify holds the article column at 677px on every viewport above 1280px.
+   Fumadocs sets 900px through a Tailwind arbitrary variant on #nd-page
+   (`*:max-w-[900px]`, i.e. every direct child), which is why the same page ran
+   ~200px wider and every paragraph broke in a different place. The id selector
+   outranks that class without !important. */
+#nd-page > * { max-width: var(--rl-measure); }
+
 body {
   font-family: var(--rl-font-sans);
   color: var(--rl-ink);
@@ -86,19 +135,23 @@ body {
 
 /* ------------------------------------------------------------------- type */
 
+/* Sizes, weights, tracking and rhythm are Mintlify's measured values, in the
+   same px it uses -- em would drift against its fixed 16px root. */
 #nd-docs-layout h1, #nd-docs-layout h2, #nd-docs-layout h3,
 .rl-prose h1, .rl-prose h2, .rl-prose h3,
 article h1, article h2, article h3 {
   font-family: var(--rl-font-head);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--rl-ink);
 }
-article h1 { font-size: 2.5rem; line-height: 1.1; letter-spacing: -0.05em; margin-bottom: .35em; }
-article h2 { font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.025em; margin-top: 2.4em; }
-article h3 { font-size: 1.2rem; line-height: 1.3; letter-spacing: -0.015em; margin-top: 1.9em; }
-article h4 { font-family: var(--rl-font-head); font-weight: 400; letter-spacing: -0.01em; }
+article h1 { font-size: 36px; line-height: 40px; letter-spacing: -0.9px; margin-bottom: 0; }
+article h2 { font-size: 24px; line-height: 32px; letter-spacing: -0.6px;
+  margin-top: 36px; margin-bottom: 18px; color: #1E2939; }
+article h3 { font-size: 20px; line-height: 28px; letter-spacing: -0.5px;
+  margin-top: 32px; margin-bottom: 14px; color: #1E2939; }
+article h4 { font-family: var(--rl-font-head); font-weight: 600; letter-spacing: normal; }
 
-article p, article li { color: var(--rl-muted); line-height: 1.68; }
+article p, article li { color: var(--rl-muted); font-size: 16px; line-height: 28px; }
 article strong { color: var(--rl-ink); font-weight: 600; }
 article a { color: var(--rl-primary); text-underline-offset: 3px; }
 /* Fumadocs wraps headings in anchor links for deep-linking; without this they
@@ -106,8 +159,8 @@ article a { color: var(--rl-primary); text-underline-offset: 3px; }
 article h1 a, article h2 a, article h3 a, article h4 a,
 article h5 a, article h6 a { color: inherit; text-decoration: none; }
 
-/* A hairline under h2 echoes the rule motif on relevanceai.com. */
-article h2 { padding-bottom: .38em; border-bottom: 1px solid var(--rl-line); }
+/* Mintlify draws no rule under h2 -- the hairline here was a relevanceai.com
+   motif and is one of the differences the team spotted. */
 
 /* ----------------------------------------------------------------- icons */
 
@@ -118,37 +171,46 @@ article h2 { padding-bottom: .38em; border-bottom: 1px solid var(--rl-line); }
 
 /* -------------------------------------------------------------- callouts */
 
+/* Mintlify tints the whole box and borders it evenly -- no left accent bar,
+   which is what made these read as a different component. */
 .rl-callout {
-  display: flex; gap: .7rem; align-items: flex-start;
-  margin: 1.5rem 0; padding: .85rem 1rem;
-  border: 1px solid var(--rl-line);
-  border-left: 3px solid var(--rl-cal, var(--rl-primary));
-  border-radius: var(--rl-radius);
-  background: var(--rl-surface);
-  font-size: .94rem;
+  display: flex; gap: 12px; align-items: flex-start;
+  margin: 16px 0; padding: 16px 20px;
+  border: 1px solid var(--rl-cal-line, var(--rl-line));
+  border-radius: var(--rl-radius-lg);
+  background: var(--rl-cal-bg, var(--rl-surface));
+  font-size: 16px; line-height: 28px;
 }
 .rl-callout-mark { color: var(--rl-cal, var(--rl-primary)); margin-top: .15rem; }
 .rl-callout-mark .rl-icon { color: inherit; }
 .rl-callout-body > :first-child { margin-top: 0; }
 .rl-callout-body > :last-child { margin-bottom: 0; }
-.rl-callout-body p { color: var(--rl-muted); margin: 0; }
-.rl-callout--note    { --rl-cal: var(--rl-primary); }
-.rl-callout--info    { --rl-cal: var(--rl-primary); }
-.rl-callout--tip     { --rl-cal: var(--rl-teal); }
-.rl-callout--check   { --rl-cal: var(--rl-green); }
-.rl-callout--warning { --rl-cal: var(--rl-amber); }
-.rl-callout--danger  { --rl-cal: var(--rl-red); }
+.rl-callout-body p { color: var(--rl-muted); margin: 0; font-size: 16px; line-height: 28px; }
+/*
+ * Mintlify tints links inside a callout to the callout's own hue rather than
+ * the global accent -- measured as blue-800 on the light blue fill and
+ * blue-300 on the dark one. The global indigo over a green or yellow fill is
+ * both off-brief and the one contrast failure the a11y gate still caught.
+ */
+.rl-callout-body a, .rl-callout a { color: var(--rl-cal-link, var(--rl-primary)); }
+.rl-callout--note    { --rl-cal-bg: var(--rl-cal-blue-bg);    --rl-cal-line: var(--rl-cal-blue-line);    --rl-cal: #2563EB; --rl-cal-link: var(--rl-cal-blue-link); }
+.rl-callout--info    { --rl-cal-bg: var(--rl-cal-neutral-bg); --rl-cal-line: var(--rl-cal-neutral-line); --rl-cal: #52525B; --rl-cal-link: var(--rl-cal-neutral-link); }
+.rl-callout--tip     { --rl-cal-bg: var(--rl-cal-green-bg);   --rl-cal-line: var(--rl-cal-green-line);   --rl-cal: var(--rl-green); --rl-cal-link: var(--rl-cal-green-link); }
+.rl-callout--check   { --rl-cal-bg: var(--rl-cal-green-bg);   --rl-cal-line: var(--rl-cal-green-line);   --rl-cal: var(--rl-green); --rl-cal-link: var(--rl-cal-green-link); }
+.rl-callout--warning { --rl-cal-bg: var(--rl-cal-yellow-bg);  --rl-cal-line: var(--rl-cal-yellow-line);  --rl-cal: var(--rl-amber); --rl-cal-link: var(--rl-cal-yellow-link); }
+.rl-callout--danger  { --rl-cal-bg: var(--rl-cal-red-bg);     --rl-cal-line: var(--rl-cal-red-line);     --rl-cal: var(--rl-red); --rl-cal-link: var(--rl-cal-red-link); }
 
 /* ------------------------------------------------------------- accordion */
 
+/* Mintlify: rounded-2xl, 12px gap between siblings, hairline at 70% alpha. */
 .rl-accordion {
-  border: 1px solid var(--rl-line); border-radius: var(--rl-radius);
-  background: var(--rl-bg); margin: .5rem 0; overflow: hidden;
+  border: 1px solid rgba(229, 229, 229, .7); border-radius: var(--rl-radius-lg);
+  background: var(--rl-bg); margin: 0 0 12px; overflow: hidden;
 }
 .rl-accordion-summary {
   cursor: pointer; padding: .8rem 1rem; list-style: none;
   display: flex; align-items: center; gap: .6rem;
-  font-weight: 500; color: var(--rl-ink); font-size: .95rem;
+  font-weight: 600; color: var(--rl-ink); font-size: 16px;
 }
 .rl-accordion-summary::-webkit-details-marker { display: none; }
 .rl-accordion-summary:hover { background: var(--rl-surface); }
@@ -156,63 +218,82 @@ article h2 { padding-bottom: .38em; border-bottom: 1px solid var(--rl-line); }
 .rl-chev { width: 1rem; height: 1rem; color: var(--rl-faint); transition: transform .18s ease; flex: none; }
 .rl-accordion[open] > .rl-accordion-summary > .rl-chev { transform: rotate(180deg); }
 .rl-accordion[open] > .rl-accordion-summary { border-bottom: 1px solid var(--rl-line); }
-.rl-accordion-body { padding: .95rem 1rem 1.05rem; font-size: .94rem; }
+.rl-accordion-body { padding: .95rem 1rem 1.05rem; font-size: 16px; line-height: 28px; }
 .rl-accordion-body > :first-child { margin-top: 0; }
 .rl-accordion-body > :last-child { margin-bottom: 0; }
 
-.rl-accordion-group { margin: 1.5rem 0; border-radius: var(--rl-radius); overflow: hidden; border: 1px solid var(--rl-line); }
-.rl-accordion-group > .rl-accordion { border: 0; border-bottom: 1px solid var(--rl-line); border-radius: 0; margin: 0; }
+.rl-accordion-group { margin: 1.5rem 0; border-radius: var(--rl-radius-lg); overflow: hidden; border: 1px solid rgba(229, 229, 229, .7); }
+.rl-accordion-group > .rl-accordion { border: 0; border-bottom: 1px solid rgba(229, 229, 229, .7); border-radius: 0; margin: 0; }
 .rl-accordion-group > .rl-accordion:last-child { border-bottom: 0; }
 
 /* ----------------------------------------------------------------- cards */
 
-.rl-card-group { display: grid; gap: .8rem; margin: 1.6rem 0; }
+.rl-card-group { display: grid; gap: 16px; margin: 1.6rem 0; }
 .rl-card-group[data-cols="1"] { grid-template-columns: 1fr; }
 .rl-card-group[data-cols="2"] { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .rl-card-group[data-cols="3"] { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
 .rl-card-group[data-cols="4"] { grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); }
 
+/* Mintlify stacks the card: bare icon on its own line, then the title, then
+   the body. The previous inline icon-chip + chevron row was the single most
+   visible component difference. Measured: 20px/24px padding, 16px radius,
+   hairline rgba(0,0,0,.1), 8px vertical margin, 16px/600 title at 16px above. */
 .rl-card {
-  display: flex; gap: .75rem; align-items: flex-start;
-  padding: 1rem 1.05rem;
-  border: 1px solid var(--rl-line); border-radius: var(--rl-radius-lg);
+  display: block;
+  padding: 20px 24px;
+  margin: 8px 0;
+  border: 1px solid rgba(0, 0, 0, .1); border-radius: var(--rl-radius-lg);
   background: var(--rl-bg); color: inherit; text-decoration: none;
-  transition: border-color .15s ease, background .15s ease;
+  transition: border-color .15s ease, box-shadow .15s ease;
 }
-a.rl-card:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
-a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
-.rl-card-icon { flex: none; display: grid; place-items: center;
-  width: 2rem; height: 2rem; border-radius: var(--rl-radius);
-  background: var(--rl-primary-soft); }
-.rl-card-icon .rl-icon { font-size: .9rem; }
-.rl-card-main { display: block; flex: 1; min-width: 0; }
-.rl-card-title { display: block; font-weight: 600; color: var(--rl-ink); font-size: .95rem; margin-bottom: .2rem; }
-.rl-card-body { display: block; color: var(--rl-muted); font-size: .88rem; line-height: 1.55; }
-.rl-card-body p { margin: 0; color: inherit; font-size: inherit; }
-.rl-card-arrow { width: .95rem; height: .95rem; flex: none; color: var(--rl-faint);
-  opacity: .55; transition: transform .15s ease, opacity .15s ease; margin-top: .2rem; }
+a.rl-card:hover { border-color: rgba(0, 0, 0, .18); }
+.dark .rl-card, [data-theme='dark'] .rl-card { border-color: var(--rl-line); }
+.dark a.rl-card:hover, [data-theme='dark'] a.rl-card:hover { border-color: var(--rl-line-strong); }
+.dark .rl-card-title, [data-theme='dark'] .rl-card-title { color: var(--rl-ink); }
+.dark article h2, .dark article h3,
+[data-theme='dark'] article h2, [data-theme='dark'] article h3 { color: var(--rl-ink); }
+/* `horizontal` is the one Mintlify layout that does run the icon inline. */
+.rl-card--h { display: flex; gap: 12px; align-items: flex-start; }
+.rl-card--h .rl-card-title { margin-top: 0; }
+.rl-card-icon { display: block; color: var(--rl-primary); }
+.rl-card-icon .rl-icon { font-size: 1.25rem; }
+.rl-card-main { display: block; min-width: 0; }
+/* The card title is a real <h2>, so it inherits `article h2`'s display
+   tracking -- Mintlify sets none on it. Reset explicitly, and pin the margins
+   too so the 36px section rhythm does not apply inside a card. */
+.rl-card-title { display: block; font-weight: 600; color: #27272C;
+  font-size: 16px; line-height: 24px; letter-spacing: normal;
+  margin: 16px 0 0; }
+.rl-card-body { display: block; color: var(--rl-muted); font-size: 16px; line-height: 24px; }
+.rl-card-body p { margin: 0; color: inherit; font-size: inherit; line-height: inherit; }
+/* Mintlify draws no chevron on linked cards. Kept in the DOM-free sense:
+   the component no longer renders one at all. */
 
 /* ----------------------------------------------------------------- steps */
 
 .rl-steps { margin: 1.6rem 0; }
 .rl-step { position: relative; display: flex; gap: 1rem; padding-bottom: 1.6rem; }
 .rl-step::before {
-  content: ""; position: absolute; left: .78rem; top: 1.7rem; bottom: 0;
+  content: ""; position: absolute; left: 14px; top: 34px; bottom: 0;
   width: 1px; background: var(--rl-line);
 }
 .rl-step:last-child { padding-bottom: 0; }
 .rl-step:last-child::before { display: none; }
+/* Measured from Mintlify: 28px circle, #F5F4F9 fill, no border. */
 .rl-step-marker {
-  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%;
-  background: var(--rl-bg); border: 1px solid var(--rl-line-strong, var(--rl-line));
+  flex: none; width: 28px; height: 28px; border-radius: 9999px;
+  background: var(--rl-surface-2); border: 0;
   position: relative; z-index: 1; margin-top: .1rem;
+  display: grid; place-items: center; color: var(--rl-ink);
 }
+.rl-step-marker .rl-icon { font-size: .82rem; color: var(--rl-ink); }
 .rl-step-marker::after {
   content: ""; position: absolute; inset: .42rem; border-radius: 50%;
   background: var(--rl-primary);
 }
 .rl-step-content { flex: 1; min-width: 0; }
-.rl-step-title { font-weight: 600; color: var(--rl-ink); margin: .15rem 0 .45rem; display: flex; gap: .4rem; align-items: center; }
+.rl-step-title { font-weight: 600; color: var(--rl-ink); font-size: 16px;
+  margin: .15rem 0 .45rem; display: flex; gap: .4rem; align-items: center; }
 .rl-step-content > :last-child { margin-bottom: 0; }
 
 /* Counter variant so numbered steps read like the live docs. */
@@ -221,10 +302,12 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
 .rl-step-marker::before {
   content: counter(rl-step);
   position: absolute; inset: 0; display: grid; place-items: center;
-  font-size: .72rem; font-weight: 600; color: var(--rl-primary);
+  font-size: 12px; font-weight: 600; color: var(--rl-ink);
   font-family: var(--rl-font-sans);
 }
 .rl-step-marker::after { display: none; }
+/* An icon replaces the number rather than joining it. */
+.rl-step[data-icon] .rl-step-marker::before { content: none; }
 
 /* ------------------------------------------------------------ api fields */
 

@@ -179,19 +179,27 @@ export const AccordionGroup = ({ children }: Kids) => (
 export function Card({
   title, icon, href, horizontal, children,
 }: Kids & { title?: React.ReactNode; icon?: unknown; href?: string; horizontal?: boolean }) {
+  /*
+   * Mintlify's card: bare icon on its own line, then an <h2> title, then the
+   * body -- and no chevron on linked cards. The title really is a heading
+   * there, which is what fills the page's table of contents: rendering it as
+   * a <span> silently dropped 14 of the 20 entries Mintlify listed on
+   * /get-started/core-concepts/mcp-plugins alone.
+   *
+   * It is deliberately NOT given an id, exactly as Mintlify leaves it, so no
+   * new anchors appear and check-anchors stays green.
+   */
   const inner = (
     <>
       {icon ? <span className="rl-card-icon"><Icon name={icon} /></span> : null}
-      <span className="rl-card-main">
-        {title ? <span className="rl-card-title">{title}</span> : null}
-        {children ? <span className="rl-card-body">{children}</span> : null}
-      </span>
-      {href ? (
-        <svg className="rl-card-arrow" viewBox="0 0 16 16" aria-hidden>
-          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.6"
-            strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ) : null}
+      <div className="rl-card-main">
+        {title ? <h2 className="rl-card-title">{title}</h2> : null}
+        {/* A div, not a span: the body is MDX, so it arrives wrapped in <p>,
+            and block content inside phrasing content is what makes the parser
+            close the element early and desync hydration -- see
+            tools/check-content.mjs. */}
+        {children ? <div className="rl-card-body">{children}</div> : null}
+      </div>
     </>
   );
   const cls = `rl-card${horizontal ? ' rl-card--h' : ''}`;
@@ -211,11 +219,17 @@ export const Columns = ({ cols = 2, children }: Kids & { cols?: number | string 
 /* ------------------------------------------------------------------- steps */
 
 export const Steps = ({ children }: Kids) => <div className="rl-steps">{children}</div>;
+/*
+ * Mintlify puts the icon IN the marker, replacing the number -- it shows one
+ * or the other, never both. Rendering the number in the circle and the icon
+ * again beside the title was the difference that made numbered steps look
+ * doubled up.
+ */
 export const Step = ({ title, icon, children }: Kids & { title?: React.ReactNode; icon?: unknown }) => (
-  <div className="rl-step">
-    <div className="rl-step-marker" aria-hidden />
+  <div className="rl-step" data-icon={icon ? '' : undefined}>
+    <div className="rl-step-marker" aria-hidden>{icon ? <Icon name={icon} /> : null}</div>
     <div className="rl-step-content">
-      {title ? <p className="rl-step-title"><Icon name={icon} />{title}</p> : null}
+      {title ? <p className="rl-step-title">{title}</p> : null}
       {children}
     </div>
   </div>

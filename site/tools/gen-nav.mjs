@@ -78,7 +78,7 @@ const commonPrefix = (slugs) => {
   return acc.join('/');
 };
 
-function place(node, dir) {
+function place(node, dir, isTab = false) {
   if (node.slug) {
     // A folder's own page is referenced as `index`, not as an empty string.
     const rel = path.posix.relative(dir, node.slug) || 'index';
@@ -101,6 +101,20 @@ function place(node, dir) {
   if (foldable) {
     ensure(dir).pages.push(path.posix.relative(dir, prefix));
     ensure(prefix).title = node.label;
+    /*
+     * Mark a TAB's folder as a fumadocs "root" folder.
+     *
+     * Fumadocs only forms a tab group for folders flagged root, so without
+     * this the notebook layout has nothing to put in the navbar and silently
+     * falls back to nesting every tab as a collapsible sidebar section --
+     * which is exactly how the first cut of this site differed from Mintlify,
+     * where these are a horizontal row across the top.
+     *
+     * Only top-level nodes get it: a group NESTED inside a tab is a sidebar
+     * section in Mintlify too, and flagging those would scope the sidebar to
+     * the subsection and hide its siblings.
+     */
+    if (isTab) ensure(prefix).root = true;
     node.items.forEach((c) => place(c, prefix));
   } else {
     if (node.label) ensure(dir).pages.push(`---${node.label}---`);
@@ -108,7 +122,7 @@ function place(node, dir) {
   }
 }
 
-tree.forEach((n) => place(n, ''));
+tree.forEach((n) => place(n, '', true));
 
 // Global anchors are top-level links alongside the tree.
 for (const a of docsJson.navigation.global?.anchors ?? []) {
@@ -122,6 +136,7 @@ let written = 0;
 for (const [dir, cfg] of dirs) {
   const meta = {};
   if (cfg.title) meta.title = cfg.title;
+  if (cfg.root) meta.root = true;
   meta.pages = [...new Set(cfg.pages)];
   const f = path.join(DOCS, dir, 'meta.json');
   // Never write through a symlink into the source tree -- meta.json belongs to

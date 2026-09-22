@@ -1,7 +1,7 @@
-import { Inter, Sora } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { Provider } from '@/components/provider';
 import { source } from '@/lib/source';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import { baseOptions } from '@/lib/layout.shared';
 import type { Metadata } from 'next';
 import { siteUrl, SITE_NAME } from '@/lib/shared';
@@ -16,9 +16,12 @@ import './global.css';
 import './icons.css';
 import './relevance.css';
 
-// Brand typefaces from relevanceai.com: Sora for headings, Inter for UI/body.
+/*
+ * Inter only. Mintlify sets headings in the body face, so the Sora display
+ * face that the marketing-brand pass introduced is no longer referenced by any
+ * rule -- keeping it would download a second family on every page for nothing.
+ */
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const sora = Sora({ subsets: ['latin'], variable: '--font-sora', display: 'swap', weight: ['400', '500', '600'] });
 
 /**
  * Site-wide metadata, matched against what Mintlify emits today so the
@@ -94,7 +97,7 @@ const jsonLd = {
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={`${inter.variable} ${sora.variable}`} suppressHydrationWarning>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -105,9 +108,26 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       <body className="flex flex-col min-h-screen">
         <a className="rl-skip" href="#nd-page">Skip to main content</a>
         <Provider>
+          {/*
+            * Mintlify's chrome is a top navigation bar with the brand, search
+            * and the Log In / Sign Up pair, and a horizontal row of product
+            * tabs under it. Fumadocs' plain `docs` layout has neither: it
+            * folds all of that into the sidebar and nests every tab as a
+            * collapsible section, which is why the site read as a different
+            * product even though the content was byte-identical.
+            *
+            * The `notebook` layout is the one that renders both. `tabs` is
+            * derived from the page tree's root folders, which gen-nav.mjs
+            * builds straight from docs.json -- so the tab row is still
+            * docs.json's `tabs`, in docs.json's order, with no second list to
+            * maintain.
+            */}
           <DocsLayout
             tree={source.getPageTree()}
             {...baseOptions()}
+            nav={{ ...baseOptions().nav, mode: 'top' }}
+            tabMode="navbar"
+            tabs={{}}
             /* Otherwise this is an unnamed "complementary" landmark. */
             sidebar={{ 'aria-label': 'Documentation navigation' }}
           >
