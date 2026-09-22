@@ -36,8 +36,8 @@ const titleOf = (item: TabChild, i: number) =>
   typeof item.props.title === 'string' ? item.props.title : `Tab ${i + 1}`;
 
 function TabStrip({
-  children, className, label, slugged,
-}: { children: React.ReactNode; className: string; label: string; slugged: boolean }) {
+  children, className, label, slugged, whole = false,
+}: { children: React.ReactNode; className: string; label: string; slugged: boolean; whole?: boolean }) {
   const items = React.Children.toArray(children).filter(
     (c): c is TabChild => React.isValidElement(c),
   );
@@ -120,7 +120,11 @@ function TabStrip({
           className="rl-tab-panel"
           hidden={i !== active}
         >
-          {item.props.children}
+          {/* A CodeGroup's child IS the code block: render it whole, minus
+              the title the tab already shows. Unwrapping it to its children,
+              as a <Tab> is, dropped the .shiki figure that shiki's dual-theme
+              colours hang off -- every CodeGroup rendered as plain text. */}
+          {whole ? React.cloneElement(item, { title: undefined }) : item.props.children}
         </div>
       ))}
     </div>
@@ -143,5 +147,5 @@ export const Tab = ({ title, children }: { title?: React.ReactNode; children?: R
 );
 
 export const CodeGroup = ({ children }: { children?: React.ReactNode }) => (
-  <TabStrip className="rl-codegroup" label="Code examples" slugged={false}>{children}</TabStrip>
+  <TabStrip className="rl-codegroup" label="Code examples" slugged={false} whole>{children}</TabStrip>
 );

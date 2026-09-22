@@ -4,6 +4,8 @@ import { docsContentRoute, docsImageRoute, docsRoute } from './shared';
 import { defineCollections, defineDocs } from 'fumadocs-mdx/macro';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
 import { z } from 'zod';
+import type * as PageTree from 'fumadocs-core/page-tree';
+import { homeSlug } from './products';
 
 /**
  * Mintlify frontmatter, accepted verbatim so the .mdx files need no edits.
@@ -64,22 +66,112 @@ export const source = loader({
          */
         file(node, filePath) {
           const file = filePath ? this.storage.read(filePath) : undefined;
-          const tag = file?.format === 'page'
-            ? (file.data as { tag?: string }).tag
+          const data = file?.format === 'page'
+            ? (file.data as { tag?: string; sidebarTitle?: string })
             : undefined;
-          if (!tag) return node;
+          /*
+           * Mintlify labels a page in the sidebar by `sidebarTitle` when it has
+           * one, and by `title` only otherwise. The schema accepted the key but
+           * nothing read it, so 120 pages showed their full title instead --
+           * "Using Agents and Workforces in Relevance Chat" where Mintlify says
+           * "Using Agents and Workforces".
+           */
+          const label = data?.sidebarTitle ?? node.name;
+          const tag = data?.tag;
+          if (!tag && label === node.name) return node;
 
           return {
             ...node,
-            name: createElement(
-              Fragment,
-              null,
-              node.name,
-              createElement('span', { className: 'rl-nav-tag' }, tag),
-            ),
+            name: tag
+              ? createElement(Fragment, null, label, createElement('span', { className: 'rl-nav-tag' }, tag))
+              : label,
           };
         },
       },
     ],
   },
 });
+
+/*
+ * A page docs.json does not list still opens inside a tab on Mintlify: the
+ * tab row shows, that tab is active, and its sidebar is the one beside the
+ * page -- with nothing highlighted, since the page is not in it. Fumadocs
+ * finds a page's tab by searching the tree, so an unlisted page (it lands in
+ * the loader's `fallback` tree) found none: no tab row, and a sidebar of
+ * every tab at once.
+ *
+ * So each one is appended to the tab it is filed under (homeSlug) as an item
+ * the sidebar hides (.rl-nav-orphan in relevance.css), and that the eyebrow
+ * and prev / next skip by its `orphan:` id. This runs on the built tree, not
+ * as a `root` transformer: the loader adds its own fallback transformer
+ * after ours, so the fallback tree does not exist yet when ours runs. The
+ * loader caches the tree, so filing it once here is permanent.
+ */
+function fileOrphans(tree: PageTree.Root) {
+  const orphans: PageTree.Item[] = [];
+  (function collect(nodes: PageTree.Node[]) {
+    for (const n of nodes) {
+      if (n.type === 'page') orphans.push(n);
+      else if (n.type === 'folder') { if (n.index) orphans.push(n.index); collect(n.children); }
+    }
+  })(tree.fallback?.children ?? []);
+
+  const tabOf = (url: string): PageTree.Folder | undefined => {
+    let found: PageTree.Folder | undefined;
+    (function walk(nodes: PageTree.Node[], tab?: PageTree.Folder): boolean {
+      for (const n of nodes) {
+        if (n.type === 'page' && n.url === url) { found = tab; return true; }
+        if (n.type === 'folder') {
+          const t = n.root ? n : tab;
+          if (n.index?.url === url) { found = t; return true; }
+          if (walk(n.children, t)) return true;
+        }
+      }
+      return false;
+    })(tree.children);
+    return found;
+  };
+
+  for (const page of orphans) {
+    const tab = tabOf(`${docsRoute}/${homeSlug(page.url)}`);
+    if (!tab) continue;
+    tab.children.push({
+      ...page,
+      $id: `orphan:${page.url}`,
+      name: createElement('span', { className: 'rl-nav-orphan' }, page.name),
+    });
+  }
+}
+/*
+ * gen-nav writes a nested group that has no directory of its own as a run
+ * between `---@group:Label---` and `---@end---` separators (see the note in
+ * tools/gen-nav.mjs). Here each run becomes the collapsible folder Mintlify
+ * shows -- "CRM & Sales", "Communication" and the rest under Popular
+ * Integrations -- nested as deeply as the markers are.
+ */
+function foldGroups(nodes: PageTree.Node[], idBase: string): PageTree.Node[] {
+  const out: PageTree.Node[] = [];
+  const stack: { folder: PageTree.Folder }[] = [];
+  const target = () => (stack.length ? stack[stack.length - 1].folder.children : out);
+  let n = 0;
+  for (const node of nodes) {
+    const name = node.type === 'separator' && typeof node.name === 'string' ? node.name : undefined;
+    if (name?.startsWith('@group:')) {
+      const folder: PageTree.Folder = {
+        type: 'folder', $id: `${idBase}:group:${n++}`, name: name.slice('@group:'.length), children: [],
+      };
+      target().push(folder);
+      stack.push({ folder });
+      continue;
+    }
+    if (name === '@end') { stack.pop(); continue; }
+    if (node.type === 'folder') node.children = foldGroups(node.children, node.$id ?? idBase);
+    target().push(node);
+  }
+  return out;
+}
+{
+  const tree = source.getPageTree();
+  tree.children = foldGroups(tree.children, 'root');
+}
+fileOrphans(source.getPageTree());

@@ -1,8 +1,10 @@
-import { Inter, Sora } from 'next/font/google';
+import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 import { Provider } from '@/components/provider';
 import { source } from '@/lib/source';
-import { DocsLayout } from 'fumadocs-ui/layouts/docs';
+import { DocsLayout } from 'fumadocs-ui/layouts/notebook';
 import { baseOptions } from '@/lib/layout.shared';
+import { getProducts } from '@/lib/products';
 import type { Metadata } from 'next';
 import { siteUrl, SITE_NAME } from '@/lib/shared';
 import { Analytics } from '@/components/site/analytics';
@@ -16,9 +18,30 @@ import './global.css';
 import './icons.css';
 import './relevance.css';
 
-// Brand typefaces from relevanceai.com: Sora for headings, Inter for UI/body.
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
-const sora = Sora({ subsets: ['latin'], variable: '--font-sora', display: 'swap', weight: ['400', '500', '600'] });
+/*
+ * Inter only. Mintlify sets headings in the body face, so the Sora display
+ * face that the marketing-brand pass introduced is no longer referenced by any
+ * rule -- keeping it would download a second family on every page for nothing.
+ */
+/* Italic too: Mintlify loads Inter's real italic, which sets wider than the
+   upright face slanted -- without it an italic line that wraps there fit on
+   one line here (every quoted example prompt is italic). */
+const inter = Inter({ subsets: ['latin'], style: ['normal', 'italic'], variable: '--font-inter', display: 'swap' });
+
+/*
+ * Paper Mono is Mintlify's monospace -- every code block, inline code span and
+ * API field name is set in it. It is SIL OFL 1.1, taken from the upstream
+ * repository (paper-design/paper-mono, fonts/webfonts), not from Mintlify's
+ * CDN; the licence travels with it in app/fonts/PaperMono-OFL.txt. Variable,
+ * weights 100-800, 53 KB.
+ */
+const paperMono = localFont({
+  src: './fonts/PaperMono-Variable.woff2',
+  variable: '--font-paper-mono',
+  weight: '100 800',
+  display: 'swap',
+  fallback: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+});
 
 /**
  * Site-wide metadata, matched against what Mintlify emits today so the
@@ -94,7 +117,7 @@ const jsonLd = {
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (
-    <html lang="en" className={`${inter.variable} ${sora.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${paperMono.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -105,9 +128,37 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       <body className="flex flex-col min-h-screen">
         <a className="rl-skip" href="#nd-page">Skip to main content</a>
         <Provider>
+          {/*
+            * Mintlify's chrome is a top navigation bar with the brand, search
+            * and the Log In / Sign Up pair, and a horizontal row of product
+            * tabs under it. Fumadocs' plain `docs` layout has neither: it
+            * folds all of that into the sidebar and nests every tab as a
+            * collapsible section, which is why the site read as a different
+            * product even though the content was byte-identical.
+            *
+            * The `notebook` layout is the one that renders both. `tabs` is
+            * derived from the page tree's root folders, which gen-nav.mjs
+            * builds straight from docs.json -- so the tab row is still
+            * docs.json's `tabs`, in docs.json's order, with no second list to
+            * maintain.
+            */}
           <DocsLayout
             tree={source.getPageTree()}
             {...baseOptions()}
+            nav={{ ...baseOptions().nav, mode: 'top' }}
+            tabMode="navbar"
+            /*
+             * The tab row belongs to the "Product" product. Every other product
+             * (today, the SDK) is reached from the navbar switcher instead and
+             * has no tabs of its own -- Mintlify shows six tabs, not seven.
+             */
+            tabs={{
+              transform: (option) => {
+                const url = option.url ?? '';
+                const other = getProducts().some((p) => p.prefix && (url === p.prefix || url.startsWith(`${p.prefix}/`)));
+                return other ? null : option;
+              },
+            }}
             /* Otherwise this is an unnamed "complementary" landmark. */
             sidebar={{ 'aria-label': 'Documentation navigation' }}
           >

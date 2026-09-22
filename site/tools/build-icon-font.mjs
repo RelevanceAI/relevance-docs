@@ -98,6 +98,18 @@ for (const dir of ['components', 'app', 'lib']) {
     }
   })(path.join(ROOT, dir));
 }
+// docs.json declares icons too -- one per product (the navbar switcher) and
+// one per global anchor (the links pinned above the sidebar). Neither appears
+// in any .mdx or component source, so without this `sparkles` shipped blank.
+(function walk(n) {
+  if (Array.isArray(n)) return n.forEach(walk);
+  if (n && typeof n === 'object') {
+    if (typeof n.icon === 'string') add(n.icon);
+    Object.values(n).forEach(walk);
+  }
+})(JSON.parse(fs.readFileSync(path.join(ROOT, '..', 'docs.json'), 'utf8')).navigation);
+// ...and `footer.socials` names its brand icons by key: { "github": url }.
+for (const key of Object.keys(JSON.parse(fs.readFileSync(path.join(ROOT, '..', 'docs.json'), 'utf8')).footer?.socials ?? {})) add(key);
 // The callout glyphs are chosen in code, by variant.
 const shim = fs.readFileSync(path.join(ROOT, 'components/mintlify/index.tsx'), 'utf8');
 const calloutBlock = shim.slice(shim.indexOf('const CALLOUT_ICON'), shim.indexOf('export function Callout'));

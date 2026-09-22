@@ -1,39 +1,75 @@
 /* Relevance AI docs theme.
-   Tokens taken from relevanceai.com: Sora headings at regular weight with
-   tight negative tracking, Inter for body and UI, #6056FF primary, #0D162F
-   ink, hairline #E6E7EA rules, 8px radii and a lot of white space. */
+
+   Tokens are MEASURED FROM MINTLIFY, not designed here: every value below was
+   read off the rendered Mintlify site with getComputedStyle so the self-hosted
+   build is visually indistinguishable from what readers had before.
+
+   Inter throughout at weight 600 for headings, #4F46E5 primary (the value
+   docs.json already declares), #19181D ink, #404045 body, 16px radii on cards,
+   callouts and accordions, and a 677px measure.
+
+   An earlier pass restyled this to relevanceai.com's marketing brand -- Sora
+   headings at weight 400 with -0.05em tracking, #6056FF primary, a 900px
+   column. That is what the team noticed as "not the same"; it is deliberately
+   reverted here. Re-theming is a token edit in this file, not a rebuild. */
 
 :root {
-  --rl-primary:      #6056FF;
-  --rl-primary-ink:  #4A41E0;
-  --rl-primary-soft: #EEEDFF;
+  --rl-primary:      #4F46E5;
+  --rl-primary-ink:  #4338CA;
+  --rl-primary-soft: #EEF2FF;
   --rl-teal:         #0E9384;
   --rl-green:        #027A48;
   --rl-amber:        #B54708;
   --rl-red:          #D92D20;
 
-  --rl-ink:          #0D162F;
-  --rl-muted:        #5A6072;
-  /* #868A97 measured 3.44:1 on white, 3.29 on --rl-surface and 3.11 on
-     --rl-surface-2 -- under the 4.5:1 minimum on every light surface, and
-     responsible for ~65 of 75 contrast failures. #6B7080 clears all three. */
-  --rl-faint:        #6B7080;
+  --rl-ink:          #19181D;
+  --rl-muted:        #404045;
+  /* Mintlify's eyebrow/muted grey. #868A97 measured 3.44:1 on white, 3.29 on
+     --rl-surface and 3.11 on --rl-surface-2 -- under the 4.5:1 minimum on
+     every light surface. #727276 is Mintlify's own value and measures
+     4.79:1 on white, so it clears AA without drifting from the original. */
+  --rl-faint:        #727276;
 
   --rl-bg:           #FFFFFF;
-  --rl-surface:      #F8FAFC;
-  --rl-surface-2:    #F3F3F4;
-  --rl-line:         #E6E7EA;
+  --rl-surface:      #FAFAFA;
+  --rl-surface-2:    #F5F4F9;
+  --rl-line:         #E5E5E5;
   --rl-line-strong:  #C9CBD2;
   --rl-line-soft:    #F0F0F2;
 
   --rl-radius:    8px;
-  --rl-radius-lg: 12px;
+  /* Mintlify's rounded-2xl, on cards, callouts and accordions. */
+  --rl-radius-lg: 16px;
+
+  /* Callout families, read off Mintlify and paired against the source order
+     of the components on the page, so the mapping is verified, not assumed:
+     Note->blue, Tip/Check->green, Info->neutral, Warning->yellow, Danger->red. */
+  --rl-cal-blue-bg:      #EFF6FF;  --rl-cal-blue-line:    #BFDBFE;
+  --rl-cal-green-bg:     #F0FDF4;  --rl-cal-green-line:   #BBF7D0;
+  --rl-cal-neutral-bg:   #FAFAFA;  --rl-cal-neutral-line: #E5E5E5;
+  --rl-cal-yellow-bg:    #FEFCE8;  --rl-cal-yellow-line:  #FEF08A;
+  --rl-cal-red-bg:       #FEF2F2;  --rl-cal-red-line:     #FECACA;
+  /* Link colours inside a callout: the 800 weight of the same hue. */
+  /* Mintlify's inactive code-group tab is #727276, which measures 4.38:1 on
+     its own #F5F4F9 tray -- under the 4.5:1 AA floor, so its value cannot be
+     copied verbatim. #5F5F66 is the nearest grey that clears it, at 5.79:1. */
+  --rl-codetab: #5F5F66;
+  --rl-cal-blue-link:    #1E40AF;  --rl-cal-green-link:   #166534;
+  --rl-cal-neutral-link: #262626;  --rl-cal-yellow-link:  #854D0E;
+  --rl-cal-red-link:     #991B1B;
 
   --rl-font-sans: var(--font-inter), Inter, system-ui, -apple-system, sans-serif;
-  --rl-font-head: var(--font-sora), Sora, var(--rl-font-sans);
-  --rl-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  /* Mintlify sets headings in the body face. Kept as its own token so a
+     display face can be reintroduced in one line. */
+  --rl-font-head: var(--rl-font-sans);
+  --rl-font-mono: var(--font-paper-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Tailwind's `font-mono`, which fumadocs uses for every code block. */
+  --font-mono: var(--rl-font-mono);
 
-  --rl-measure: 46rem;
+  /* Mintlify's measured content column at every viewport above 1280px, and
+     the wider one it uses for `mode: "wide"` pages. */
+  --rl-measure: 988.8125px;
+  --rl-measure-wide: 768.8125px;
 }
 
 .dark, :root[data-theme='dark'], [data-theme='dark'] {
@@ -55,6 +91,26 @@
   --rl-line:         #232B40;
   --rl-line-strong:  #39415A;
   --rl-line-soft:    #1B2234;
+
+  /* Mintlify's dark callouts: the 500-weight hue at 20% over the page rather
+     than the light 50-weight tint, with the 900-weight border. Measured with
+     the theme toggled, not derived -- keeping the light fills here put light
+     panels behind light text and was 682 contrast failures on its own. */
+  --rl-cal-blue-bg:      rgba(59, 130, 246, .2);  --rl-cal-blue-line:    #1E3A8A;
+  --rl-cal-green-bg:     rgba(34, 197, 94, .2);   --rl-cal-green-line:   #14532D;
+  --rl-cal-neutral-bg:   rgba(255, 255, 255, .1); --rl-cal-neutral-line: #404040;
+  --rl-cal-yellow-bg:    rgba(234, 179, 8, .2);   --rl-cal-yellow-line:  #713F12;
+  --rl-cal-red-bg:       rgba(239, 68, 68, .2);   --rl-cal-red-line:     #7F1D1D;
+  /* ...and the 300 weight on the dark fills. */
+  --rl-tab-rule: var(--rl-line);
+  --rl-param-rule: rgba(30, 41, 57, .5);
+  --rl-bubble-bg: var(--rl-surface); --rl-bubble-ink: var(--rl-ink); --rl-bubble-line: var(--rl-line);
+  --rl-exp-line: var(--rl-line); --rl-exp-ink: var(--rl-muted); --rl-exp-rule: var(--rl-line);
+  --rl-frame-mat: rgba(255, 255, 255, .04);
+  --rl-codetab: var(--rl-muted);
+  --rl-cal-blue-link:    #93C5FD;  --rl-cal-green-link:   #86EFAC;
+  --rl-cal-neutral-link: #D4D4D4;  --rl-cal-yellow-link:  #FDE047;
+  --rl-cal-red-link:     #FCA5A5;
 }
 
 /* Map Fumadocs' own variables onto the brand so chrome matches content. */
@@ -77,6 +133,26 @@
   --color-fd-ring: var(--rl-primary);
 }
 
+/* Mintlify's article column is bounded by the table of contents, 80px
+   before it (60px from the viewport edge when there is none), and capped at
+   988.8px -- 677px at 1440, the full 988.8 from 1752 up. Measured at fifteen
+   widths from 1024 to 2560. Fumadocs sets 900px through a Tailwind arbitrary variant on #nd-page
+   (`*:max-w-[900px]`, i.e. every direct child), which is why the same page ran
+   ~200px wider and every paragraph broke in a different place. The id selector
+   outranks that class without !important. */
+#nd-page > * { max-width: var(--rl-measure); }
+/* `mode: "wide"` pages, which fumadocs marks with data-full. Mintlify runs
+   these at 769px, not edge to edge -- its default here would be 1285px. */
+#nd-page[data-full="true"] > * { max-width: var(--rl-measure-wide); }
+/* ...and they never centre: the column stays at x=387 at every width, with
+   no table-of-contents column reserved beside it. */
+@media (min-width: 768px) {
+  html #nd-notebook-layout[data-sidebar-collapsed] #nd-page[data-full="true"] { padding-left: 91.1875px; padding-right: 60px; }
+}
+@media (min-width: 1280px) {
+  html #nd-notebook-layout[data-sidebar-collapsed]:has(#nd-page[data-full="true"]) { --fd-toc-width: 0px; }
+}
+
 body {
   font-family: var(--rl-font-sans);
   color: var(--rl-ink);
@@ -86,28 +162,98 @@ body {
 
 /* ------------------------------------------------------------------- type */
 
+/* Sizes, weights, tracking and rhythm are Mintlify's measured values, in the
+   same px it uses -- em would drift against its fixed 16px root. */
 #nd-docs-layout h1, #nd-docs-layout h2, #nd-docs-layout h3,
 .rl-prose h1, .rl-prose h2, .rl-prose h3,
 article h1, article h2, article h3 {
   font-family: var(--rl-font-head);
-  font-weight: 400;
+  font-weight: 600;
   color: var(--rl-ink);
 }
-article h1 { font-size: 2.5rem; line-height: 1.1; letter-spacing: -0.05em; margin-bottom: .35em; }
-article h2 { font-size: 1.6rem; line-height: 1.2; letter-spacing: -0.025em; margin-top: 2.4em; }
-article h3 { font-size: 1.2rem; line-height: 1.3; letter-spacing: -0.015em; margin-top: 1.9em; }
-article h4 { font-family: var(--rl-font-head); font-weight: 400; letter-spacing: -0.01em; }
+article h1 { font-size: 36px; line-height: 40px; letter-spacing: -0.025em; /* -0.9px at 36px, -0.75px at the 30px phone size */ margin-bottom: 0; }
+article h2 { font-size: 24px; line-height: 32px; letter-spacing: -0.6px;
+  margin-top: 36px; margin-bottom: 18px; color: #1E2939; }
+article h3 { font-size: 20px; line-height: 28px; letter-spacing: -0.5px;
+  margin-top: 32px; margin-bottom: 14px; color: #1E2939; }
+/* 18px/27px with Typography's em margins at that size (1.6em / .6em). */
+article h4 { font-family: var(--rl-font-head); font-weight: 600; letter-spacing: normal;
+  font-size: 18px; line-height: 27px; margin: 28.8px 0 10.8px; }
 
-article p, article li { color: var(--rl-muted); line-height: 1.68; }
+article p, article li { color: var(--rl-muted); font-size: 16px; line-height: 28px; }
+/* The page description is Mintlify's 18px lead, which the body rule above
+   shrank to 16px -- invisible at 1440, where it fit the same lines, but on a
+   phone it wrapped one line shorter. The body starts 32px under it. */
+article p.rl-description { font-size: 18px; line-height: 28px; color: #404045; }
+.dark article p.rl-description, [data-theme='dark'] article p.rl-description { color: var(--rl-muted); }
+.rl-description + .prose, #page-title + .prose { margin-top: 16px; }
+/* Fumadocs grows the body to fill the viewport, which parked the feedback
+   row at the bottom of the screen on a short page. Mintlify puts it straight
+   under the content. */
+#nd-page > .prose { flex: none; }
+/* A page that opens on a heading: Mintlify drops the first block's top
+   margin, so an opening h2 sits where a paragraph would, not 36px lower. */
+#nd-page > .prose > :is(h1, h2, h3, h4, h5, h6, p, ul, ol):first-child { margin-top: 0; }
+/* A markdown image is a bare block in Mintlify: no margin of its own and
+   square corners, so the 20px paragraph margins around it are the only gap.
+   Typography's 32px image margin collapsed through the wrapping <p> and
+   added 12px above and below every screenshot. */
+#nd-page .prose p > img, #nd-page .prose > img { margin: 0; border-radius: 0; }
+/* A paragraph holding only an image is unwrapped on Mintlify, so it has no
+   margin either: stacked screenshots touch, and a heading's own margin sets
+   the gap after one. */
+#nd-page .prose p:has(> img:only-child) { margin-top: 0; margin-bottom: 0; }
+/* An h1 inside the body (a second title on the page) is 30px/36px with
+   40px above and 20px below; it had no margins and the page title's 36px. */
+#nd-page .prose h1 { font-size: 30px; line-height: 36px; letter-spacing: -0.75px; margin: 40px 0 20px; }
+/* Below 640px it steps down with the page title: 24px/32px, 16px below. */
+@media (max-width: 639px) { #nd-page .prose h1 { font-size: 24px; line-height: 32px; letter-spacing: -0.6px; margin: 40px 0 16px; } }
+/* A "loose" list -- items separated by blank lines -- wraps each item in a
+   <p>. Mintlify renders that paragraph as an inline span, so it adds no
+   margin and the items keep the tight list's 8px spacing; here each <p>
+   added 20px, 12px more per item than Mintlify. */
+#nd-page .prose li > p { margin-top: 0; margin-bottom: 0; }
 article strong { color: var(--rl-ink); font-weight: 600; }
 article a { color: var(--rl-primary); text-underline-offset: 3px; }
+/* In running text Mintlify sets a link in gray-900 at 600 over a 1px primary
+   rule rather than an underline. The weight is not cosmetic: it lengthens
+   lines, and a paragraph that wraps to four lines there wrapped to three
+   here. Class-less prose links only -- the heading anchors, cards and footer
+   buttons are links too and keep their own styles. */
+#nd-page .prose a:not([class]):not([data-card]) {
+  color: #101828; font-weight: 600; text-decoration: none;
+  border-bottom: 1px solid var(--rl-primary);
+}
+.dark #nd-page .prose a:not([class]):not([data-card]),
+[data-theme='dark'] #nd-page .prose a:not([class]):not([data-card]) { color: var(--rl-ink); }
+/* Inside a callout the link takes the callout's hue, rule included. */
+#nd-page .prose .rl-callout a:not([class]):not([data-card]) { color: inherit; border-bottom-color: currentColor; }
 /* Fumadocs wraps headings in anchor links for deep-linking; without this they
    inherit the link colour and every h2 renders purple. */
 article h1 a, article h2 a, article h3 a, article h4 a,
 article h5 a, article h6 a { color: inherit; text-decoration: none; }
 
-/* A hairline under h2 echoes the rule motif on relevanceai.com. */
-article h2 { padding-bottom: .38em; border-bottom: 1px solid var(--rl-line); }
+/* Mintlify draws no rule under h2 -- the hairline here was a relevanceai.com
+   motif and is one of the differences the team spotted. */
+
+/* Inter's character variants, set on <html> by Mintlify: open 4 and 6/9,
+   flat-topped 3, single-storey a. They narrow every line a little -- without
+   them a heading that fits one line on Mintlify wrapped onto two here. The
+   mono face is a different font, so it is left alone. */
+html { font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+code, pre, kbd, samp { font-feature-settings: normal; }
+
+/* The copy-link button fumadocs puts AFTER a heading's text took 24px of the
+   line, so a heading that fits on Mintlify wrapped here. Mintlify's link
+   icon sits out of flow in the left margin and appears on hover; so does
+   this one -- and on keyboard focus, so it is never invisible when reached. */
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6):has(> button) { position: relative; }
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6) > button {
+  position: absolute; left: -32px; top: 50%; translate: 0 -50%;
+  opacity: 0; transition: opacity .15s ease;
+}
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6):hover > button,
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6) > button:focus-visible { opacity: 1; }
 
 /* ----------------------------------------------------------------- icons */
 
@@ -118,102 +264,202 @@ article h2 { padding-bottom: .38em; border-bottom: 1px solid var(--rl-line); }
 
 /* -------------------------------------------------------------- callouts */
 
+/* Mintlify tints the whole box and borders it evenly -- no left accent bar,
+   which is what made these read as a different component. */
 .rl-callout {
-  display: flex; gap: .7rem; align-items: flex-start;
-  margin: 1.5rem 0; padding: .85rem 1rem;
-  border: 1px solid var(--rl-line);
-  border-left: 3px solid var(--rl-cal, var(--rl-primary));
-  border-radius: var(--rl-radius);
-  background: var(--rl-surface);
-  font-size: .94rem;
+  display: flex; gap: 12px; align-items: flex-start;
+  margin: 16px 0; padding: 16px 20px;
+  border: 1px solid var(--rl-cal-line, var(--rl-line));
+  border-radius: var(--rl-radius-lg);
+  background: var(--rl-cal-bg, var(--rl-surface));
+  font-size: 14px; line-height: 20px;
 }
-.rl-callout-mark { color: var(--rl-cal, var(--rl-primary)); margin-top: .15rem; }
-.rl-callout-mark .rl-icon { color: inherit; }
+/* The current preview sets callouts at 14px/20px -- the older snapshot this
+   was first matched to used body size -- and inks the text, its links and the
+   glyph in the callout's own hue: blue-800 on the blue fill, green-800 on the
+   green. The glyph sits in a 16px column, centred on the first line. */
+.rl-callout-mark {
+  flex: none; width: 16px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--rl-cal-icon, var(--rl-cal-link, var(--rl-primary)));
+}
+.rl-callout-mark .rl-icon, .rl-callout .rl-callout-mark .rl-icon { color: inherit; font-size: 16px; line-height: 16px; }
+.rl-callout-body { min-width: 0; color: var(--rl-cal-link, var(--rl-muted)); }
 .rl-callout-body > :first-child { margin-top: 0; }
 .rl-callout-body > :last-child { margin-bottom: 0; }
-.rl-callout-body p { color: var(--rl-muted); margin: 0; }
-.rl-callout--note    { --rl-cal: var(--rl-primary); }
-.rl-callout--info    { --rl-cal: var(--rl-primary); }
-.rl-callout--tip     { --rl-cal: var(--rl-teal); }
-.rl-callout--check   { --rl-cal: var(--rl-green); }
-.rl-callout--warning { --rl-cal: var(--rl-amber); }
-.rl-callout--danger  { --rl-cal: var(--rl-red); }
+.rl-callout-body p, .rl-callout-body li { color: inherit; margin: 0; font-size: 14px; line-height: 20px; }
+/* Doubled up so it wins inside a ParamField or accordion, whose own 24px/28px
+   paragraph rules otherwise set the lines of a callout nested in them. */
+#nd-page .rl-callout .rl-callout-body :is(p, li) { font-size: 14px; line-height: 20px; margin: 0; }
+#nd-page .rl-callout .rl-callout-body p + p { margin-top: 17.5px; }
+.rl-callout-body strong { color: inherit; }
+/* Two paragraphs in one callout sit 1.25em (17.5px) apart, as on the preview. */
+.rl-callout-body p + p { margin-top: 17.5px; }
+/*
+ * Links take the hue too, at 600 with a 1px currentColor rule beneath rather
+ * than an underline. The global indigo over a green or yellow fill was both
+ * off-brief and the one contrast failure the a11y gate still caught.
+ */
+.rl-callout-body a, .rl-callout a {
+  color: inherit; font-weight: 600; text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.rl-callout--custom { --rl-cal-bg: rgb(250 250 250 / .5); --rl-cal-line: rgb(114 114 118 / .2); --rl-cal-icon: #27272C; --rl-cal-link: #18181B; }
+.rl-callout--custom[style] {
+  --rl-cal-bg: color-mix(in srgb, var(--rl-cal-c) 10%, transparent);
+  --rl-cal-line: color-mix(in srgb, var(--rl-cal-c) 20%, transparent);
+  --rl-cal-icon: var(--rl-cal-c);
+  --rl-cal-link: color-mix(in srgb, var(--rl-cal-c) 50%, #000);
+}
+.dark .rl-callout--custom, [data-theme='dark'] .rl-callout--custom { --rl-cal-bg: rgb(255 255 255 / .03); --rl-cal-line: rgb(255 255 255 / .1); --rl-cal-icon: #D4D4D8; --rl-cal-link: #E4E4E7; }
+.dark .rl-callout--custom[style], [data-theme='dark'] .rl-callout--custom[style] {
+  --rl-cal-bg: color-mix(in srgb, var(--rl-cal-c) 10%, transparent);
+  --rl-cal-line: color-mix(in srgb, var(--rl-cal-c) 25%, transparent);
+  --rl-cal-icon: var(--rl-cal-c);
+  --rl-cal-link: color-mix(in srgb, var(--rl-cal-c) 50%, #fff);
+}
+.rl-callout--note    { --rl-cal-bg: var(--rl-cal-blue-bg);    --rl-cal-line: var(--rl-cal-blue-line);    --rl-cal: #2563EB; --rl-cal-link: var(--rl-cal-blue-link); }
+.rl-callout--info    { --rl-cal-bg: var(--rl-cal-neutral-bg); --rl-cal-line: var(--rl-cal-neutral-line); --rl-cal: #52525B; --rl-cal-link: var(--rl-cal-neutral-link); }
+.rl-callout--tip     { --rl-cal-bg: var(--rl-cal-green-bg);   --rl-cal-line: var(--rl-cal-green-line);   --rl-cal: var(--rl-green); --rl-cal-link: var(--rl-cal-green-link); }
+.rl-callout--check   { --rl-cal-bg: var(--rl-cal-green-bg);   --rl-cal-line: var(--rl-cal-green-line);   --rl-cal: var(--rl-green); --rl-cal-link: var(--rl-cal-green-link); }
+.rl-callout--warning { --rl-cal-bg: var(--rl-cal-yellow-bg);  --rl-cal-line: var(--rl-cal-yellow-line);  --rl-cal: var(--rl-amber); --rl-cal-link: var(--rl-cal-yellow-link); }
+.rl-callout--danger  { --rl-cal-bg: var(--rl-cal-red-bg);     --rl-cal-line: var(--rl-cal-red-line);     --rl-cal: var(--rl-red); --rl-cal-link: var(--rl-cal-red-link); }
 
 /* ------------------------------------------------------------- accordion */
 
+/* Mintlify: rounded-2xl, 12px gap between siblings, hairline at 70% alpha.
+   Measured on the current preview: a 14px 20px summary with a 12px caret
+   in a 16px box, 12px gaps, a 16px/24px title at 500; the body sits flush
+   under the summary with 20px sides and 14px below. */
 .rl-accordion {
-  border: 1px solid var(--rl-line); border-radius: var(--rl-radius);
-  background: var(--rl-bg); margin: .5rem 0; overflow: hidden;
+  border: 1px solid rgba(229, 229, 229, .7); border-radius: var(--rl-radius-lg);
+  background: var(--rl-bg); margin: 0 0 12px; overflow: hidden;
 }
 .rl-accordion-summary {
-  cursor: pointer; padding: .8rem 1rem; list-style: none;
-  display: flex; align-items: center; gap: .6rem;
-  font-weight: 500; color: var(--rl-ink); font-size: .95rem;
+  cursor: pointer; padding: 14px 20px; list-style: none;
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 500; color: var(--rl-ink); font-size: 16px; line-height: 24px;
 }
 .rl-accordion-summary::-webkit-details-marker { display: none; }
-.rl-accordion-summary:hover { background: var(--rl-surface); }
+.rl-accordion-summary:hover { background: #F0F0F5; }
+.dark .rl-accordion-summary:hover, [data-theme='dark'] .rl-accordion-summary:hover { background: rgb(255 255 255 / .05); }
+.rl-accordion-summary:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: -2px; }
+.rl-accordion-caret, .rl-accordion-icon {
+  flex: none; width: 16px; height: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.rl-accordion-caret { color: #525256; }
+.rl-accordion-caret svg { width: 12px; height: 12px; rotate: -90deg; transition: rotate .15s ease; }
+.rl-accordion[open] > .rl-accordion-summary .rl-accordion-caret svg { rotate: none; }
+.rl-accordion-icon { color: #27272C; }
+.rl-accordion-icon .rl-icon { font-size: 16px; line-height: 16px; color: inherit; }
+.dark .rl-accordion-caret, [data-theme='dark'] .rl-accordion-caret { color: var(--rl-faint); }
+.dark .rl-accordion-icon, [data-theme='dark'] .rl-accordion-icon { color: var(--rl-ink); }
 .rl-accordion-title { flex: 1; min-width: 0; }
-.rl-chev { width: 1rem; height: 1rem; color: var(--rl-faint); transition: transform .18s ease; flex: none; }
-.rl-accordion[open] > .rl-accordion-summary > .rl-chev { transform: rotate(180deg); }
-.rl-accordion[open] > .rl-accordion-summary { border-bottom: 1px solid var(--rl-line); }
-.rl-accordion-body { padding: .95rem 1rem 1.05rem; font-size: .94rem; }
+.rl-accordion-body { padding: 0 20px 14px; font-size: 16px; line-height: 28px; }
 .rl-accordion-body > :first-child { margin-top: 0; }
-.rl-accordion-body > :last-child { margin-bottom: 0; }
+.rl-accordion-body > :is(p, ul, ol):last-child { margin-bottom: 0; }
 
-.rl-accordion-group { margin: 1.5rem 0; border-radius: var(--rl-radius); overflow: hidden; border: 1px solid var(--rl-line); }
-.rl-accordion-group > .rl-accordion { border: 0; border-bottom: 1px solid var(--rl-line); border-radius: 0; margin: 0; }
+.rl-accordion-group { margin: 0 0 12px; border-radius: var(--rl-radius-lg); overflow: hidden; border: 1px solid rgba(229, 229, 229, .7); }
+.rl-accordion-group > .rl-accordion { border: 0; border-bottom: 1px solid rgba(229, 229, 229, .7); border-radius: 0; margin: 0; }
 .rl-accordion-group > .rl-accordion:last-child { border-bottom: 0; }
 
 /* ----------------------------------------------------------------- cards */
 
-.rl-card-group { display: grid; gap: .8rem; margin: 1.6rem 0; }
-.rl-card-group[data-cols="1"] { grid-template-columns: 1fr; }
-.rl-card-group[data-cols="2"] { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.rl-card-group[data-cols="3"] { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
-.rl-card-group[data-cols="4"] { grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); }
-
-.rl-card {
-  display: flex; gap: .75rem; align-items: flex-start;
-  padding: 1rem 1.05rem;
-  border: 1px solid var(--rl-line); border-radius: var(--rl-radius-lg);
-  background: var(--rl-bg); color: inherit; text-decoration: none;
-  transition: border-color .15s ease, background .15s ease;
+/* Mintlify's grid has a 16px COLUMN gap and no row gap -- the vertical
+   rhythm comes from each card's own 8px margin, which .rl-card now carries,
+   so the group itself needs no margin either. */
+.rl-card-group { display: grid; gap: 0 16px; margin: 0; }
+/* Mintlify: one column below 640px, then exactly `cols` equal columns --
+   never auto-fit, so a lone card in a two-column group stays half-width
+   rather than stretching across the page. */
+.rl-card-group { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) {
+  .rl-card-group[data-cols="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rl-card-group[data-cols="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .rl-card-group[data-cols="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
-a.rl-card:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
-a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
-.rl-card-icon { flex: none; display: grid; place-items: center;
-  width: 2rem; height: 2rem; border-radius: var(--rl-radius);
-  background: var(--rl-primary-soft); }
-.rl-card-icon .rl-icon { font-size: .9rem; }
-.rl-card-main { display: block; flex: 1; min-width: 0; }
-.rl-card-title { display: block; font-weight: 600; color: var(--rl-ink); font-size: .95rem; margin-bottom: .2rem; }
-.rl-card-body { display: block; color: var(--rl-muted); font-size: .88rem; line-height: 1.55; }
-.rl-card-body p { margin: 0; color: inherit; font-size: inherit; }
-.rl-card-arrow { width: .95rem; height: .95rem; flex: none; color: var(--rl-faint);
-  opacity: .55; transition: transform .15s ease, opacity .15s ease; margin-top: .2rem; }
+
+/* Mintlify stacks the card: bare icon on its own line, then the title, then
+   the body. The previous inline icon-chip + chevron row was the single most
+   visible component difference. Measured: 20px/24px padding, 16px radius,
+   hairline rgba(0,0,0,.1), 8px vertical margin, 16px/600 title at 16px above. */
+.rl-card {
+  display: block;
+  padding: 20px 24px;
+  margin: 8px 0;
+  border: 1px solid rgba(0, 0, 0, .1); border-radius: var(--rl-radius-lg);
+  background: var(--rl-bg); color: inherit; text-decoration: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+a.rl-card:hover { border-color: rgba(0, 0, 0, .18); }
+.dark .rl-card, [data-theme='dark'] .rl-card { border-color: var(--rl-line); }
+.dark a.rl-card:hover, [data-theme='dark'] a.rl-card:hover { border-color: var(--rl-line-strong); }
+.dark .rl-card-title, [data-theme='dark'] .rl-card-title { color: var(--rl-ink); }
+.dark article h2, .dark article h3,
+[data-theme='dark'] article h2, [data-theme='dark'] article h3 { color: var(--rl-ink); }
+/* `horizontal` is the one Mintlify layout that does run the icon inline. */
+.rl-card--h { display: flex; gap: 12px; align-items: flex-start; }
+.rl-card--h .rl-card-title { margin-top: 0; }
+/* A 24px glyph in a 24px box, as on the current preview; the title's 16px
+   margin then lands it 40px below the icon's top. */
+.rl-card-icon { display: flex; align-items: center; height: 24px; color: var(--rl-primary); }
+.rl-card-icon .rl-icon { font-size: 24px; line-height: 24px; width: auto; }
+.rl-card-main { display: block; min-width: 0; }
+/* With no icon above it, the title opens the card: no 16px gap. */
+.rl-card-main:first-child > .rl-card-title { margin-top: 0; }
+/* The card title is a real <h2>, so it inherits `article h2`'s display
+   tracking -- Mintlify sets none on it. Reset explicitly, and pin the margins
+   too so the 36px section rhythm does not apply inside a card. */
+.rl-card-title { display: block; font-weight: 600; color: #27272C;
+  font-size: 16px; line-height: 24px; letter-spacing: normal;
+  margin: 16px 0 0; }
+/* The body is 16px/400 #525256, 4px under the title. The card is an <a>, so
+   without the weight it inherited prose's 500 link weight and read as bold. */
+a.rl-card, div.rl-card { font-weight: 400; }
+.rl-card-body { display: block; color: #525256; font-size: 16px; line-height: 24px; margin-top: 4px; }
+.dark .rl-card-body, [data-theme='dark'] .rl-card-body { color: var(--rl-muted); }
+.rl-card-body p { margin: 0; color: inherit; font-size: inherit; line-height: inherit; }
+/* Paragraphs inside a card keep a 20px gap between them, as on the preview's
+   pricing cards ("From $19 / month" / "For solo GTM operators."). */
+.rl-card-body p + p { margin-top: 20px; }
+/* Mintlify draws no chevron on linked cards. Kept in the DOM-free sense:
+   the component no longer renders one at all. */
 
 /* ----------------------------------------------------------------- steps */
 
-.rl-steps { margin: 1.6rem 0; }
-.rl-step { position: relative; display: flex; gap: 1rem; padding-bottom: 1.6rem; }
+/* Measured on the current preview: 40px above the group and 24px below; each
+   step 20px of padding under its content -- the last one too, and its rail
+   runs to the bottom as well. The circle sits 8px down, the rail starts 8px
+   under it, and the title shares the circle's top with the text 46px in. */
+.rl-steps { margin: 40px 0 24px; }
+.rl-step { position: relative; display: flex; gap: 17px; padding-bottom: 20px; }
+/* Inside a tab panel Mintlify's step text sits 16px further in -- 48px from
+   the step's edge instead of 32 -- at every width. */
+.rl-tab-panel .rl-step { gap: 33px; }
 .rl-step::before {
-  content: ""; position: absolute; left: .78rem; top: 1.7rem; bottom: 0;
-  width: 1px; background: var(--rl-line);
+  content: ""; position: absolute; left: 14px; top: 44px; bottom: 0;
+  width: 1px; background: rgba(229, 229, 229, .7);
 }
-.rl-step:last-child { padding-bottom: 0; }
-.rl-step:last-child::before { display: none; }
+.dark .rl-step::before, [data-theme='dark'] .rl-step::before { background: var(--rl-line); }
+/* Measured from Mintlify: 28px circle, #F5F4F9 fill, no border. */
 .rl-step-marker {
-  flex: none; width: 1.6rem; height: 1.6rem; border-radius: 50%;
-  background: var(--rl-bg); border: 1px solid var(--rl-line-strong, var(--rl-line));
-  position: relative; z-index: 1; margin-top: .1rem;
+  flex: none; width: 28px; height: 28px; border-radius: 9999px;
+  background: var(--rl-surface-2); border: 0;
+  position: relative; z-index: 1; margin: 8px 0 0 1px;
+  display: grid; place-items: center; color: var(--rl-ink);
 }
+.rl-step-marker .rl-icon { font-size: .82rem; color: var(--rl-ink); }
 .rl-step-marker::after {
   content: ""; position: absolute; inset: .42rem; border-radius: 50%;
   background: var(--rl-primary);
 }
-.rl-step-content { flex: 1; min-width: 0; }
-.rl-step-title { font-weight: 600; color: var(--rl-ink); margin: .15rem 0 .45rem; display: flex; gap: .4rem; align-items: center; }
+.rl-step-content { flex: 1; min-width: 0; padding-right: 1px; } /* Mintlify's pr-px: the 1px decides some line breaks */
+.rl-step-title { font-weight: 600; color: var(--rl-ink); font-size: 16px; line-height: 28px;
+  margin: 8px 0 20px; display: flex; gap: .4rem; align-items: center; }
 .rl-step-content > :last-child { margin-bottom: 0; }
+/* ...except a trailing callout, which keeps its 16px, as Mintlify's does. */
+.rl-step-content > .rl-callout:last-child { margin-bottom: 16px; }
 
 /* Counter variant so numbered steps read like the live docs. */
 .rl-steps { counter-reset: rl-step; }
@@ -221,33 +467,96 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
 .rl-step-marker::before {
   content: counter(rl-step);
   position: absolute; inset: 0; display: grid; place-items: center;
-  font-size: .72rem; font-weight: 600; color: var(--rl-primary);
+  font-size: 12px; font-weight: 600; color: var(--rl-ink);
   font-family: var(--rl-font-sans);
 }
 .rl-step-marker::after { display: none; }
+/* An icon replaces the number rather than joining it. */
+.rl-step[data-icon] .rl-step-marker::before { content: none; }
 
 /* ------------------------------------------------------------ api fields */
 
-.rl-param { border-top: 1px solid var(--rl-line); padding: .9rem 0; }
-.rl-param-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; }
-.rl-param-name { font-family: var(--rl-font-mono); font-size: .85rem; font-weight: 600;
-  color: var(--rl-ink); background: var(--rl-surface-2); padding: .08rem .35rem; border-radius: 4px; }
-.rl-param-type, .rl-param-default { font-family: var(--rl-font-mono); font-size: .76rem; color: var(--rl-faint); }
-.rl-param-req { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em;
-  color: var(--rl-red); font-weight: 700; }
-.rl-param-dep { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; color: var(--rl-amber); font-weight: 700; }
-.rl-param-body { font-size: .9rem; color: var(--rl-muted); margin-top: .35rem; }
+/*
+ * <ParamField> / <ResponseField>, which Mintlify renders as one `.field`.
+ * Measured on /build/tools/tool-steps/linkedin/search-linkedin-profiles.
+ *
+ * The emphasis was inverted: Mintlify colours the NAME (14px/600, primary,
+ * no chip) and puts the TYPE in the chip; this chipped the name in ink and
+ * left the type as bare grey text. `required` is the same chip in red,
+ * lowercase -- it was uppercase 700 here. And the rule is a hairline BELOW
+ * each field, not a stronger one above it.
+ */
+.rl-param { padding: 10px 0 20px; margin: 10px 0;
+  border-bottom: 1px solid var(--rl-param-rule, #F5F4F9); }
+/* Mintlify's chips each carry an 8px right margin inside an inline wrapper,
+   so the row always ends 8px past its last chip -- which, with the 20px
+   reserve below, is what decides whether the chips wrap under a long name. */
+.rl-param-head > :is(.rl-param-type, .rl-param-req, .rl-param-dep, .rl-param-default):last-child { margin-right: 8px; }
+/* 20px held back on the right, as Mintlify does for its hover link icon:
+   it decides when a long name pushes the type chip onto a second line. */
+.rl-param-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-right: 20px;
+  font-family: var(--rl-font-mono); font-size: 14px; line-height: 20px; }
+.rl-param-name { font-family: var(--rl-font-mono); font-size: 14px; font-weight: 600;
+  line-height: 20px; color: var(--rl-primary); background: transparent;
+  padding: 0; border: 0; border-radius: 0; overflow-wrap: anywhere; }
+.rl-param-type, .rl-param-default, .rl-param-req, .rl-param-dep {
+  font-family: var(--rl-font-mono); font-size: 12px; font-weight: 500; line-height: 20px;
+  padding: 2px 8px; border-radius: 6px;
+  text-transform: none; letter-spacing: normal; }
+.rl-param-type, .rl-param-default { color: #57534E; background: rgba(245, 245, 244, .5); }
+.rl-param-default code { font: inherit; background: none; padding: 0; }
+.rl-param-req { color: #DC2626; background: rgba(254, 226, 226, .5); }
+.rl-param-dep { color: #B45309; background: rgba(254, 243, 199, .5); }
+.rl-param-body { font-size: 14px; line-height: 24px; color: var(--rl-muted); margin-top: 16px; }
+.rl-param-body p, .rl-param-body li { font-size: 14px; line-height: 24px; }
 .rl-param-body > :first-child { margin-top: 0; }
-.rl-expandable { margin: .6rem 0 0; border-left: 2px solid var(--rl-line); padding-left: .9rem; }
-.rl-expandable > summary { cursor: pointer; font-size: .85rem; color: var(--rl-primary); }
+/* Only text loses its closing margin: a callout inside a field keeps its
+   16px, as it does inside a step or a tab on the preview. */
+.rl-param-body > :is(p, ul, ol):last-child { margin-bottom: 0; }
+.dark .rl-param-type, .dark .rl-param-default,
+[data-theme='dark'] .rl-param-type, [data-theme='dark'] .rl-param-default {
+  color: var(--rl-muted); background: rgba(255, 255, 255, .05); }
+.dark .rl-param-req, [data-theme='dark'] .rl-param-req { color: #F87171; background: rgba(248, 113, 113, .1); }
+.dark .rl-param-dep, [data-theme='dark'] .rl-param-dep { color: #FBBF24; background: rgba(251, 191, 36, .1); }
+/* Measured on /api-reference/endpoint/create: a 12px-radius bordered box, not
+   a left rule; a muted 14px summary, not a primary-coloured link. */
+.rl-expandable { margin: 16px 0 0; padding: 0;
+  border: 1px solid var(--rl-exp-line, rgba(229, 229, 229, .7)); border-radius: 12px; }
+.rl-expandable > summary { list-style: none; cursor: pointer;
+  display: flex; align-items: center; padding: 12px 14px; border-radius: 12px;
+  font-size: 14px; line-height: 20px; color: var(--rl-exp-ink, #525256); }
+.rl-expandable > summary::-webkit-details-marker { display: none; }
+.rl-expandable[open] > summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.rl-expandable-chev { width: 10px; height: 10px; flex: none; color: #A1A1AA;
+  transition: transform .15s ease; }
+.rl-expandable[open] > summary .rl-expandable-chev { transform: rotate(90deg); }
+.rl-expandable-label { margin-left: 12px; line-height: 1.25; }
+/* Child combinators: an open Expandable must not flip the label of a closed
+   one nested inside it. */
+.rl-expandable[open] > summary .rl-exp-show,
+.rl-expandable:not([open]) > summary .rl-exp-hide { display: none; }
+.rl-expandable-body { margin: 0 12px; padding: 0 8px;
+  border-top: 1px solid var(--rl-exp-rule, #F0F0F5); font-size: 14px; line-height: 24px; }
 
 /* ---------------------------------------------------- frames, tabs, misc */
 
-.rl-frame { margin: 1.6rem 0; }
-.rl-frame-inner { border: 1px solid var(--rl-line); border-radius: var(--rl-radius-lg);
-  overflow: hidden; background: var(--rl-surface); }
-.rl-frame img { display: block; width: 100%; height: auto; }
-.rl-frame-caption { margin-top: .55rem; font-size: .83rem; color: var(--rl-faint); text-align: center; }
+/* Mintlify's <Frame> is a soft gray-50/50 mat with 8px of padding and a 16px
+   radius around the image -- not a bordered box. Measured on
+   /get-started/chat/super-gtm/integrations. */
+/* No margin of its own on the preview: the neighbours' margins set the gap,
+   and the image inside has none either (it had 32px, top and bottom). */
+.rl-frame { margin: 0; padding: 8px; border-radius: var(--rl-radius-lg);
+  background: var(--rl-frame-mat, rgba(249, 250, 251, .5)); overflow: hidden; }
+.rl-frame-inner { border: 0; border-radius: 12px;
+  overflow: hidden; background: transparent; }
+.rl-frame img { display: block; width: 100%; height: auto; margin: 0; border-radius: 0; }
+/* Caption: 14px/20px body gray, 12px under the image, 32px in each side and
+   8px of mat below. */
+.rl-frame-caption { margin: 12px 0 0; padding: 0 32px 8px; font-size: 14px; line-height: 20px; color: #404045; text-align: center; }
+.dark .rl-frame-caption, [data-theme='dark'] .rl-frame-caption { color: var(--rl-muted); }
+/* A component that follows a Frame directly gets 20px above it on the
+   preview; after a paragraph or heading it has none of its own. */
+.rl-frame + :is(.rl-accordion-group, .rl-accordion, .rl-card-group, .rl-tabs) { margin-top: 20px; }
 
 .rl-tabs { margin: 1.5rem 0; border: 1px solid var(--rl-line); border-radius: var(--rl-radius); overflow: hidden; }
 .rl-tab + .rl-tab { border-top: 1px solid var(--rl-line); }
@@ -277,33 +586,134 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
    3.06:1 -- under the 4.5:1 AA floor, and on the SELECTED tab of all
    places. Page ink on that same fill is 6.29:1. */
 .dark .rl-tab-button[data-active] { color: var(--rl-bg); }
+
+/*
+ * <Tabs> in Mintlify is an underlined text row, not a pill group. Measured:
+ * the list is a flex row with a 24px column gap and a 1px #E0E0E5 rule under
+ * it; each tab is 14px/600 with 12px 0 10px padding and a 1px bottom border --
+ * #4F46E5 text and underline when active, page ink and a transparent underline
+ * when not.
+ *
+ * The pill treatment this replaces existed because the strip WRAPPED at 390px
+ * and an unstyled wrapped row read as body copy. Mintlify solves the same
+ * problem by scrolling instead of wrapping, which is what `nowrap` +
+ * `overflow-x: auto` does here -- so the row stays one line at any width and
+ * the reason for the pills goes away.
+ *
+ * Scoped to `.rl-tabs` on purpose: `.rl-codegroup` and `.path-picker` share
+ * these class names and are NOT this component, so they keep the rules above.
+ */
+/* No margin of its own: the heading or paragraph before it sets the gap
+   (18px under an h2 on the preview, not 24px), and the panel keeps its last
+   block's bottom margin inside it, as Mintlify's does. The tab overhangs the
+   rule by 1px, so the row is 48px, not 49. */
+.rl-tabs { margin: 0; border: 0; border-radius: 0; overflow: visible; }
+.rl-tabs > .rl-tablist {
+  display: flex; flex-wrap: nowrap; gap: 24px;
+  padding: 0 0 1px; margin: 0 0 24px; background: transparent;
+  border-bottom: 1px solid var(--rl-tab-rule, #E0E0E5);
+  overflow-x: auto; scrollbar-width: none;
+}
+.rl-tabs > .rl-tablist::-webkit-scrollbar { display: none; }
+.rl-tabs > .rl-tablist > .rl-tab-button {
+  padding: 12px 0 10px; margin: 0;
+  border: 0; border-bottom: 1px solid transparent; border-radius: 0;
+  background: transparent; color: var(--rl-ink);
+  font-size: 14px; font-weight: 600; line-height: 24px;
+  white-space: nowrap; flex: none; margin-bottom: -1px;
+}
+.rl-tabs > .rl-tablist > .rl-tab-button:hover {
+  background: transparent; border-bottom-color: var(--rl-line-strong);
+}
+.rl-tabs > .rl-tablist > .rl-tab-button[data-active] {
+  background: transparent; color: var(--rl-primary);
+  border-bottom-color: var(--rl-primary);
+}
+.rl-tabs > .rl-tab-panel { padding: 0; display: flow-root; }
+/* ...but a closing paragraph or list loses its margin there, as text does
+   at the end of any Mintlify container; components keep theirs. */
+.rl-tabs > .rl-tab-panel > :is(p, ul, ol):last-child { margin-bottom: 0; }
+
 .rl-tab-panel { padding: .9rem 1rem; }
 .rl-tab-panel > :first-child { margin-top: 0; }
-.rl-tab-panel > :last-child { margin-bottom: 0; }
-.rl-codegroup { margin: 1.5rem 0; border: 1px solid var(--rl-line);
-  border-radius: var(--rl-radius); overflow: hidden; }
-.rl-codegroup .rl-tab-panel { padding: 0; }
+:not(.rl-tabs) > .rl-tab-panel > :last-child { margin-bottom: 0; }
+/*
+ * Mintlify's <CodeGroup> is a 2px-padded tray with a 16px radius and a
+ * #F5F4F9 fill, with the language switcher as small PLAIN TEXT inside it --
+ * 12px/500, indigo when active and #727276 when not, with no pill, fill or
+ * radius. This shared `.rl-tab-button` with <Tabs>, so it had inherited the
+ * pill treatment. Measured on /build/tools/customize-tool/inputs.
+ */
+.rl-codegroup { margin: 20px 0 32px; padding: 2px;
+  display: flex; flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, .1); border-radius: var(--rl-radius-lg);
+  background: var(--rl-surface-2); overflow: visible; }
+/* Labels: 0 6px padding, 4px apart from 10px in, the active one in primary
+   over a 2px bar that sits on the code panel's top edge. */
+.rl-codegroup > .rl-tablist { background: transparent; border: 0;
+  padding: 0 46px 0 10px; margin: 0; gap: 4px; }
+.rl-codegroup > .rl-tablist > .rl-tab-button {
+  position: relative; padding: 0 6px; margin: 4px 0 6px; border: 0; border-radius: 0;
+  background: transparent; font-size: 12px; font-weight: 500;
+  line-height: 24px; color: var(--rl-codetab); }
+.rl-codegroup > .rl-tablist > .rl-tab-button:hover { background: transparent; color: var(--rl-ink); }
+.rl-codegroup > .rl-tablist > .rl-tab-button[data-active] {
+  background: transparent; color: var(--rl-primary); }
+.rl-codegroup > .rl-tablist > .rl-tab-button[data-active]::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
+  border-radius: 9999px; background: var(--rl-primary); }
+.rl-codegroup .rl-tab-panel { padding: 0; position: relative; }
+/* The code block inside is the white panel: no border or margin of its own,
+   a 14px radius, 14px 16px of padding -- and its copy button rides up into
+   the tab row's right end, where Mintlify puts it. */
+.rl-codegroup { position: relative; }
+#nd-page .rl-codegroup figure.shiki {
+  margin: 0; border: 0; border-radius: 14px; overflow: visible;
+  background: var(--rl-code-panel, #FFFFFF); }
+#nd-page .rl-codegroup figure.shiki div[role="region"] { border-radius: 14px; }
+#nd-page .rl-codegroup figure.shiki > div.absolute:has(> button[aria-label="Copy Text"]) { top: -30px; right: 10px; }
 
 /* Six "pick your path" guides wrap their tabs in this to frame the choice.
    Ported from the Mintlify custom stylesheet, retargeted at the markup
    above -- Mintlify's data-component-part hooks do not exist here. */
-.path-picker { margin: 1.5rem 0 2rem; padding: 1.25rem; border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(96, 86, 255, .06), rgba(96, 86, 255, .02) 45%, rgba(165, 180, 252, .05));
-  box-shadow: 0 0 0 1px rgba(96, 86, 255, .10), 0 8px 32px -12px rgba(96, 86, 255, .18); }
+.path-picker { border: none; border-radius: 1rem; padding: 1.5rem; margin: 1.5rem 0 2rem;
+  background: linear-gradient(135deg, rgba(79, 70, 229, .05), rgba(99, 102, 241, .02) 45%, rgba(165, 180, 252, .04));
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, .08), 0 1px 0 rgba(255, 255, 255, .6) inset,
+    0 8px 32px -12px rgba(79, 70, 229, .18), 0 2px 4px rgba(15, 23, 42, .04); }
+.dark .path-picker {
+  background: linear-gradient(135deg, rgba(99, 102, 241, .12), rgba(99, 102, 241, .03) 45%, rgba(165, 180, 252, .06));
+  box-shadow: 0 0 0 1px rgba(165, 180, 252, .12), 0 1px 0 rgba(255, 255, 255, .04) inset,
+    0 8px 32px -12px rgba(99, 102, 241, .3), 0 2px 4px rgba(0, 0, 0, .2); }
+/* The rules are the Mintlify stylesheet's, verbatim, retargeted at this
+   markup -- and prefixed with .rl-tabs so they outrank the plain tab strip
+   rules, which the first port did not, leaving underlined text tabs here
+   instead of Mintlify's pills. */
 .path-picker .rl-tabs { margin: 0; border: 0; background: transparent; }
-.path-picker .rl-tablist { justify-content: center; background: transparent;
-  border-bottom: 0; padding: .25rem 0 1rem; gap: .5rem; }
-.path-picker .rl-tab-button { padding: .5rem 1.25rem; background: rgba(255, 255, 255, .75);
-  color: var(--rl-ink); box-shadow: 0 1px 2px rgba(15, 23, 42, .05); }
-.path-picker .rl-tab-button[data-active] { background: var(--rl-primary); color: #fff;
-  box-shadow: 0 4px 12px rgba(96, 86, 255, .3); }
+.path-picker .rl-tabs > .rl-tablist { justify-content: center; gap: .5rem;
+  border-bottom: 0; padding: .5rem 0 1rem; }
+.path-picker .rl-tabs > .rl-tablist > .rl-tab-button {
+  padding: .5rem 1.25rem; border-radius: .625rem; border-bottom: 0; margin-bottom: 0;
+  background-color: rgba(255, 255, 255, .7); color: rgba(17, 24, 39, .7);
+  /* 500 in that stylesheet, but it lands on Mintlify's button while the
+     label inside is font-semibold -- so the text renders at 600. */
+  font-weight: 600;
+  transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04); }
+.path-picker .rl-tabs > .rl-tablist > .rl-tab-button:hover {
+  background-color: #FFFFFF; color: rgba(17, 24, 39, .95); box-shadow: 0 2px 8px rgba(79, 70, 229, .1); }
+.path-picker .rl-tabs > .rl-tablist > .rl-tab-button[data-active] {
+  background: linear-gradient(135deg, #4F46E5, #6366F1); color: #FFFFFF;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .2) inset, 0 4px 12px rgba(79, 70, 229, .35); }
 .path-picker .rl-tab-panel { padding: 0; }
-.dark .path-picker { background: linear-gradient(135deg, rgba(96, 86, 255, .14), rgba(96, 86, 255, .04) 45%, rgba(165, 180, 252, .07));
-  box-shadow: 0 0 0 1px rgba(165, 180, 252, .14), 0 8px 32px -12px rgba(96, 86, 255, .35); }
-.dark .path-picker .rl-tab-button { background: rgba(255, 255, 255, .07); color: var(--rl-ink); }
-/* Same 3.06:1 problem as the base tab strip -- this selector is more
-   specific, so it needs its own dark override. */
-.dark .path-picker .rl-tab-button[data-active] { color: var(--rl-bg); }
+.dark .path-picker .rl-tabs > .rl-tablist > .rl-tab-button {
+  background-color: rgba(255, 255, 255, .06); color: rgba(255, 255, 255, .7); box-shadow: 0 1px 2px rgba(0, 0, 0, .2); }
+.dark .path-picker .rl-tabs > .rl-tablist > .rl-tab-button:hover {
+  background-color: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .95); box-shadow: 0 2px 8px rgba(99, 102, 241, .2); }
+/* Mintlify puts white on #6366F1 -> #818CF8 here, about 3.6:1 where the
+   label sits; the page ink clears AA on the same fill. */
+.dark .path-picker .rl-tabs > .rl-tablist > .rl-tab-button[data-active] {
+  background: linear-gradient(135deg, #6366F1, #818CF8); color: var(--rl-bg);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .15) inset, 0 4px 16px rgba(99, 102, 241, .5); }
 
 /* Chrome composites a cross-origin iframe on its own layer, so rounding it
    leaves a light seam along the arc. Invisible on white; masked in dark. */
@@ -318,25 +728,82 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
   letter-spacing: .02em; line-height: 1.5; vertical-align: middle; white-space: nowrap; }
 .dark .rl-nav-tag { background: rgba(96, 86, 255, .22); color: #C4B5FD; }
 
-.rl-badge { display: inline-block; padding: .08rem .45rem; border-radius: 99px;
-  background: var(--rl-primary-soft); color: var(--rl-primary-ink);
-  font-size: .72rem; font-weight: 600; vertical-align: middle; }
-.rl-badge[data-color="orange"] { background: #FEF0C7; color: var(--rl-amber); }
-.dark .rl-badge[data-color="orange"] { background: #3A2A0A; }
-.rl-tooltip { border-bottom: 1px dotted var(--rl-faint); cursor: help; }
+/*
+ * <Badge>: an 8px-radius chip at 14px/500, not a 99px pill at 11.5px/600.
+ * Measured on /build/agents/build-your-agent/agent-settings/language-model.
+ * Tracking and weight are reset because the corpus puts badges inside
+ * headings, which would otherwise pass their -0.5px and 600 through.
+ *
+ * Mintlify's orange is #C2410C on orange-600 at 20%, which measures 4.05:1
+ * at this size -- under the 4.5:1 AA floor. The fill is Mintlify's; the text
+ * is orange-800, the nearest step that clears it (5.72:1).
+ */
+.rl-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 8px;
+  background: rgba(79, 70, 229, .1); color: var(--rl-primary-ink);
+  font-size: 14px; font-weight: 500; line-height: 20px; letter-spacing: normal;
+  vertical-align: middle; }
+.rl-badge[data-color="orange"] { background: rgba(234, 88, 12, .2); color: #9A3412; }
+.dark .rl-badge[data-color="orange"],
+[data-theme='dark'] .rl-badge[data-color="orange"] { background: rgba(251, 146, 60, .2); color: #FDBA74; }
+/* <Tooltip>, see components/mintlify/tooltip.tsx. Mintlify underlines the
+   trigger with a 2px dotted text-decoration rather than a border, so it sits
+   on the baseline like a link underline instead of below the descenders. */
+.rl-tooltip { position: relative; cursor: pointer; border-bottom: 0;
+  text-decoration: underline dotted 2px #A0A0A5; }
+.rl-tooltip:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 2px; border-radius: 2px; }
+/* Out-of-flow, so the trigger's underline does not propagate into it. */
+.rl-tooltip-bubble { position: absolute; bottom: calc(100% + 4px); left: 50%;
+  transform: translateX(-50%); z-index: 30;
+  width: max-content; max-width: min(280px, 80vw); white-space: normal;
+  padding: 12px 16px; border: 1px solid var(--rl-bubble-line, #E0E0E5); border-radius: 12px;
+  background: var(--rl-bubble-bg, #FFFFFF); color: var(--rl-bubble-ink, #000000);
+  font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: normal;
+  box-shadow: 0 10px 16px -3px rgba(10, 10, 10, .05), 0 3px 10px -2px rgba(10, 10, 10, .02);
+  visibility: hidden; opacity: 0; transition: opacity .12s ease; pointer-events: none; }
+.rl-tooltip[data-open] > .rl-tooltip-bubble { visibility: visible; opacity: 1; }
 
-.rl-update { display: grid; grid-template-columns: minmax(0, 11rem) 1fr; gap: 2rem;
-  padding: 2.2rem 0; border-top: 1px solid var(--rl-line); }
-.rl-update-label { font-family: var(--rl-font-head); font-size: 1.05rem; color: var(--rl-ink); letter-spacing: -.02em; }
-.rl-update-desc { font-size: .83rem; color: var(--rl-faint); margin-top: .2rem; }
+/*
+ * <Update>, the changelog entry -- 165 of them. Measured on /changelog/2025.
+ *
+ * Mintlify runs these down a timeline: a 2px primary@35% rail with a 12px
+ * primary dot, ringed in the page colour, beside each entry. The date is an
+ * indigo chip, not plain heading text; the description sits under it at a
+ * readable 14px rather than 13px faint; the body is prose-sm (14px/24px);
+ * and there is no rule between entries. The meta column is sticky, so a long
+ * entry keeps its date in view.
+ *
+ * Below lg it stacks and drops the timeline, as Mintlify's does.
+ */
+.rl-update { position: relative; display: flex; flex-direction: column; align-items: flex-start;
+  gap: 8px; padding: 32px 0; border-top: 0; }
+.rl-update-meta { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+.rl-update-label { display: inline-flex; padding: 4px 8px; border-radius: 8px;
+  background: rgba(79, 70, 229, .1); color: var(--rl-primary);
+  font-family: var(--rl-font-sans); font-size: 14px; font-weight: 500;
+  line-height: 20px; letter-spacing: normal; }
+.rl-update-desc { margin-top: 12px; padding: 0 4px; max-width: 160px;
+  font-size: 14px; line-height: 20px; color: var(--rl-muted); }
 .rl-update-tags { margin-top: .5rem; display: flex; flex-wrap: wrap; gap: .3rem; }
+.rl-update-body { flex: 1; min-width: 0; max-width: 100%; padding: 0 2px;
+  font-size: 14px; line-height: 24px; }
+.rl-update-body p, .rl-update-body li { font-size: 14px; line-height: 24px; }
+.rl-update-body p { margin: 16px 0; }
 .rl-update-body > :first-child { margin-top: 0; }
-.rl-update-body h2 { border: 0; padding: 0; margin-top: 0; font-size: 1.35rem; }
+.rl-update-body h2 { border: 0; padding: 0; margin: 0 0 12px; font-size: 20px; line-height: 28px; }
+.rl-update-body h3 { margin: 24px 0 8px; font-size: 18px; line-height: 28px; }
 
-@media (max-width: 760px) {
-  article h1 { font-size: 1.95rem; }
-  .rl-update { grid-template-columns: 1fr; gap: .6rem; padding: 1.6rem 0; }
+@media (min-width: 1024px) {
+  .rl-update { flex-direction: row; gap: 24px; margin-left: 48px; }
+  .rl-update-meta { position: sticky; top: calc(var(--fd-header-height, 96px) + 24px);
+    width: 160px; flex: none; }
+  .rl-update::before { content: ""; position: absolute; top: 0; bottom: 0; left: -24px;
+    width: 2px; background: rgba(79, 70, 229, .35); }
+  .rl-update::after { content: ""; position: absolute; top: 40px; left: -29px;
+    width: 12px; height: 12px; border-radius: 9999px; background: var(--rl-primary);
+    box-shadow: 0 0 0 4px var(--rl-bg); }
 }
+
+
 
 /* ----------------------------------------------------------------- brand */
 
@@ -353,80 +820,107 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
 
 /* ---------------------------------------------------------- page footer */
 
-.rl-page-footer {
-  display: flex; flex-wrap: wrap; gap: 1rem 2rem;
+/* Mintlify's block under the content, measured on the preview at 1440 and
+   390: the feedback row 56px below the last content, 64px under it, then
+   prev / next, then the site footer 86px below whichever came last. */
+/* 40px, not 56: #nd-page's 16px flex gap supplies the rest. */
+.rl-page-end { margin-top: 40px; }
+.rl-feedback-toolbar { padding-bottom: 64px; }
+.rl-feedback-row {
+  display: flex; flex-wrap: wrap; gap: 16px;
   align-items: center; justify-content: space-between;
-  margin-top: 3rem; padding-top: 1.4rem;
-  border-top: 1px solid var(--rl-line);
 }
-.rl-feedback { display: flex; align-items: center; gap: .6rem; font-size: .88rem; color: var(--rl-muted); margin: 0; }
-.rl-feedback button {
-  display: inline-flex; align-items: center; gap: .35rem;
-  padding: .3rem .7rem; border: 1px solid var(--rl-line);
-  border-radius: var(--rl-radius); background: var(--rl-bg);
-  font-size: .85rem; color: var(--rl-ink); cursor: pointer;
-  transition: border-color .15s ease, background .15s ease;
+.rl-feedback-label { margin: 0; font-size: 14px; line-height: 20px; color: #525256; }
+.rl-feedback-actions {
+  flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 12px;
+  align-items: center; justify-content: space-between;
 }
-.rl-feedback button:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
-.rl-feedback--done { color: var(--rl-faint); }
-.rl-page-footer-links { display: flex; gap: 1.2rem; font-size: .85rem; }
-.rl-page-footer-links a {
-  display: inline-flex; align-items: center; gap: .4rem;
-  color: var(--rl-muted); text-decoration: none;
+.rl-feedback-group { display: flex; gap: 12px; align-items: center; }
+/* 34px: 8px 14px padding round 16px-tall 14px text, a 12px radius, and a
+   hairline of gray-200 at 70% over white at 50%. */
+.rl-fb-btn {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 14px; border: 1px solid rgb(223 223 228 / .7); border-radius: 12px;
+  background: rgb(255 255 255 / .5); color: #525256;
+  font: inherit; font-size: 14px; line-height: 16px; font-weight: 400;
+  text-decoration: none; cursor: pointer;
+  transition: border-color .15s ease, color .15s ease;
 }
-.rl-page-footer-links a:hover { color: var(--rl-primary); }
-.rl-page-footer-links .rl-icon { font-size: .8em; }
+.rl-fb-btn small { font-size: inherit; line-height: inherit; }
+.rl-fb-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+a.rl-fb-btn svg { width: 14px; height: 14px; }
+.rl-fb-btn:hover { color: #404045; border-color: #727276; }
+.rl-fb-btn[aria-pressed='true'] { color: var(--rl-primary); border-color: var(--rl-primary); }
+.rl-fb-btn:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: -2px; }
+.dark .rl-feedback-label, [data-theme='dark'] .rl-feedback-label { color: var(--rl-muted); }
+.dark .rl-fb-btn, [data-theme='dark'] .rl-fb-btn {
+  color: var(--rl-muted); border-color: var(--rl-line); background: rgb(255 255 255 / .02);
+}
+.dark .rl-fb-btn:hover, [data-theme='dark'] .rl-fb-btn:hover { color: var(--rl-ink); border-color: var(--rl-line-strong); }
 
-/* --------------------------------------------- prev / next (fumadocs own) */
-
-/* The page footer sits above these, so pull the rule off the feedback row
-   and let the neighbour cards close the page. */
-.rl-page-footer { border-top: 1px solid var(--rl-line); }
-
-/* ------------------------------------------------------- prev / next nav */
-
-.rl-page-nav {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
-  margin-top: 3rem; padding-top: 1.6rem; border-top: 1px solid var(--rl-line);
+/* Prev / next: plain 14px/600 links with a 6px chevron, the next one pushed
+   right -- not the bordered cards fumadocs draws. */
+.rl-pager {
+  display: flex; align-items: center; gap: 24px; padding: 0 2px;
+  font-size: 14px; line-height: 20px; font-weight: 600; color: #404045;
 }
-.rl-page-nav-link {
-  display: flex; flex-direction: column; gap: .3rem;
-  padding: .85rem 1rem; border: 1px solid var(--rl-line);
-  border-radius: var(--rl-radius); text-decoration: none;
-  transition: border-color .15s ease, background .15s ease;
+.rl-pager a {
+  display: flex; align-items: center; gap: 12px; min-width: 0;
+  color: inherit; text-decoration: none; border-radius: 2px;
 }
-.rl-page-nav-link:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
-.rl-page-nav-link--next { text-align: right; align-items: flex-end; }
-.rl-page-nav-dir { font-size: .78rem; color: var(--rl-faint); display: inline-flex; align-items: center; gap: .35rem; }
-.rl-page-nav-dir .rl-icon { color: var(--rl-faint); font-size: .75em; }
-.rl-page-nav-title { font-weight: 600; color: var(--rl-ink); font-size: .92rem; }
-.rl-page-footer { margin-top: 2rem; }
-@media (max-width: 640px) { .rl-page-nav { grid-template-columns: 1fr; } }
+.rl-pager a:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 2px; }
+.rl-pager-next { margin-left: auto; }
+.rl-pager svg { width: 3px; height: 6px; flex-shrink: 0; overflow: visible; stroke: #A0A0A5; }
+.rl-pager-next svg { transform: rotate(180deg); }
+.rl-pager a:hover svg { stroke: #525256; }
+.dark .rl-pager, [data-theme='dark'] .rl-pager { color: var(--rl-ink); }
+
+/* The site footer: a hairline, then the socials at 20px, 24px apart.
+   Mintlify draws the icons gray-400 (#A0A0A5), 2.6:1 on white; as the only
+   label a link has, an icon needs 3:1, so they are a step darker here. */
+.rl-site-footer {
+  display: flex; justify-content: space-between; gap: 48px;
+  margin-top: 86px; padding: 40px 0 112px; border-top: 1px solid #F0F0F5;
+}
+.rl-socials { display: flex; gap: 24px; margin: 0; padding: 0; list-style: none; }
+.rl-socials li { margin: 0; padding: 0; }
+.rl-socials a { display: block; width: 20px; height: 20px; color: #727276; transition: color .15s ease; }
+.rl-socials a:hover { color: #404045; }
+.rl-socials .rl-icon { display: block; font-size: 20px; line-height: 20px; width: 20px; text-align: center; }
+.dark .rl-site-footer, [data-theme='dark'] .rl-site-footer { border-top-color: var(--rl-line); }
+.dark .rl-socials a, [data-theme='dark'] .rl-socials a { color: var(--rl-faint); }
+.dark .rl-socials a:hover, [data-theme='dark'] .rl-socials a:hover { color: var(--rl-ink); }
+
+/* Pages docs.json does not list are filed into a tab's tree so the tab row
+   and that tab's sidebar show beside them (lib/source.ts), but Mintlify does
+   not list them in the sidebar, so neither do we. */
+a:has(> .rl-nav-orphan), a:has(.rl-nav-orphan) { display: none !important; }
 
 /* ------------------------------------------------------------------- 404 */
 
-.rl-404 { max-width: 34rem; padding: 4rem 0 6rem; }
+/* Mintlify's: the page's own grid area, no sidebar beside it, the block
+   centred 192px under the header with 96px of air and 192px of padding
+   below it. */
+.rl-404 {
+  grid-area: main; display: flex; flex-direction: column; align-items: center;
+  padding: 192px 20px 320px; text-align: center;
+}
+.rl-404-block { display: flex; flex-direction: column; align-items: center; gap: 24px; }
 .rl-404-code {
-  font-family: var(--rl-font-head); font-size: 3.5rem; line-height: 1;
-  letter-spacing: -.04em; color: var(--rl-primary); margin: 0 0 .4rem;
+  margin: 0 0 -8px; padding: 4px; font-size: 48px; line-height: 48px; font-weight: 600;
+  letter-spacing: normal; color: var(--rl-primary);
 }
 .rl-404-title {
-  font-family: var(--rl-font-head); font-weight: 400; font-size: 1.9rem;
-  letter-spacing: -.03em; color: var(--rl-ink); margin: 0 0 .6rem;
+  margin: 0; font-size: 24px; line-height: 32px; font-weight: 500;
+  letter-spacing: normal; color: #27272C;
 }
-.rl-404-body { color: var(--rl-muted); line-height: 1.65; margin: 0 0 1.6rem; }
-.rl-404-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
-.rl-404-btn {
-  display: inline-flex; align-items: center; padding: .5rem .95rem;
-  border: 1px solid var(--rl-line); border-radius: var(--rl-radius);
-  color: var(--rl-ink); text-decoration: none; font-size: .92rem; font-weight: 500;
-  transition: border-color .15s ease, background .15s ease;
+.rl-404-body { margin: 0; min-height: 56px; font-size: 16px; line-height: 28px; color: #404045; }
+.dark .rl-404-title, [data-theme='dark'] .rl-404-title { color: var(--rl-ink); }
+.dark .rl-404-body, [data-theme='dark'] .rl-404-body { color: var(--rl-muted); }
+@media (min-width: 768px) {
+  html #nd-notebook-layout[data-sidebar-collapsed]:has(> .rl-404, .rl-404) { --fd-sidebar-width: 0px; --fd-toc-width: 0px; }
+  #nd-notebook-layout:has(.rl-404) #nd-sidebar { display: none; }
 }
-.rl-404-btn:hover { border-color: var(--rl-primary); background: var(--rl-surface); }
-.rl-404-btn--primary {
-  background: var(--rl-primary); border-color: var(--rl-primary); color: #fff;
-}
-.rl-404-btn--primary:hover { background: var(--rl-primary-ink); border-color: var(--rl-primary-ink); color: #fff; }
 
 
 /* --------------------------------------------------------- skip link */
@@ -480,6 +974,36 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
 #nd-page blockquote p::before,
 #nd-page blockquote p::after { content: none; }
 .rl-table-scroll:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 2px; }
+/* Mintlify's table is unboxed: no outline, no header fill, no column rules.
+   14px/20px cells padded 8px (none on the left), the header bottom-aligned
+   at 600 over a gray-200 rule, gray-100 rules between rows but not after the
+   last, and 16px of air inside the scroll box above and below. The rounded,
+   bordered grid was fumadocs' prose preset. */
+/* The scroll box starts 20px left of the column and pads 20px each side, so
+   the table lines up with the text but ends 40px short of it (637px of 677),
+   and every body cell is at least 150px: a five-column table scrolls rather
+   than squeezing. That min-width is what made two-column tables wrap their
+   second column the way Mintlify's do. */
+#nd-page .rl-table-scroll { margin: 16px 0 16px -20px; padding: 16px 20px; width: 100%; box-sizing: border-box; }
+#nd-page .prose .rl-table-scroll td { min-width: 150px; }
+#nd-page .prose .rl-table-scroll > table {
+  margin: 0; width: 100%; border: 0; border-radius: 0; overflow: visible;
+  border-collapse: collapse; font-size: 14px; line-height: 20px;
+}
+#nd-page .prose .rl-table-scroll th, #nd-page .prose .rl-table-scroll td { border: 0; background: none; }
+#nd-page .prose .rl-table-scroll th {
+  padding: 0 8px 8px 0; color: #101828; font-weight: 600;
+  text-align: left; vertical-align: bottom;
+}
+#nd-page .prose .rl-table-scroll td { padding: 8px 8px 8px 0; color: #404045; vertical-align: baseline; }
+#nd-page .prose .rl-table-scroll :is(td, th) code { font-size: 12px; line-height: 18px; }
+#nd-page .prose .rl-table-scroll thead { border-bottom: 1px solid #E0E0E5; }
+#nd-page .prose .rl-table-scroll tbody tr { border-bottom: 1px solid #F0F0F5; }
+#nd-page .prose .rl-table-scroll tbody tr:last-child { border-bottom: 0; }
+.dark #nd-page .prose .rl-table-scroll th, [data-theme='dark'] #nd-page .prose .rl-table-scroll th { color: var(--rl-ink); }
+.dark #nd-page .prose .rl-table-scroll td, [data-theme='dark'] #nd-page .prose .rl-table-scroll td { color: var(--rl-muted); }
+.dark #nd-page .prose .rl-table-scroll thead, [data-theme='dark'] #nd-page .prose .rl-table-scroll thead { border-bottom-color: var(--rl-line-strong); }
+.dark #nd-page .prose .rl-table-scroll tbody tr, [data-theme='dark'] #nd-page .prose .rl-table-scroll tbody tr { border-bottom-color: var(--rl-line); }
 
 /* =========================================================
    Invent callout — a bubble that points readers at Invent as a
@@ -633,3 +1157,425 @@ a.rl-card:hover .rl-card-arrow { transform: translateX(2px); opacity: 1; }
     transition: none;
   }
 }
+
+/* ============================================================ page grid
+ *
+ * Mintlify's geometry, measured at eleven viewport widths from 1100 to 2560:
+ *
+ *   sidebar   pinned at x=40, 256px wide, at every width
+ *   TOC       starts 296px from the right edge, shown from 1280px up
+ *   content   x = max(387px, 50vw - 489px): fixed until ~1752px, then drifts
+ *             right at half speed; 677px wide, narrowing to keep 80px clear
+ *             of the TOC (517px at 1280)
+ *
+ * Fumadocs centres a 97rem layout instead, so at 1440 every page sat 87px
+ * left of where Mintlify put it, and at 1920 the sidebar floated in from the
+ * edge. Its grid is driven by three custom properties, overridden here.
+ *
+ * Specificity: fumadocs sets them from rules shaped like
+ * `:is(#nd-notebook-layout:has(.md\:layout\:[...]))`, which is (1,1,0). A bare
+ * `#nd-notebook-layout` loses silently; `html #id[attr]` is (1,1,1).
+ */
+html #nd-notebook-layout[data-sidebar-collapsed] { --fd-layout-width: 100%; }
+@media (min-width: 768px) {
+  /* 40px gutter + Mintlify's 256px sidebar. */
+  html #nd-notebook-layout[data-sidebar-collapsed] { --fd-sidebar-width: 296px; }
+  /* The offset is written against the main column rather than the viewport,
+     so a classic scrollbar cannot shift it: with the 296px sidebar column,
+     50vw - 489px from the page edge is 50% - 489px of <main>. */
+  #nd-page { padding-left: max(91.1875px, calc(50% - 488.8125px)); padding-right: 60px; }
+}
+/* The 80px gap to the table of contents replaces the 60px edge margin once
+   there is one. Mintlify's x is 387.19, not 387: that 0.19px decides where a
+   line that nearly fills the column breaks. */
+@media (min-width: 1280px) { #nd-page { padding-right: 80px; } }
+@media (min-width: 1280px) {
+  html #nd-notebook-layout[data-sidebar-collapsed] { --fd-toc-width: 296px; }
+}
+/* Mintlify's "On this page" sits at y=155 whatever the header's height -- on
+   the SDK's 64px header as on the 112px tabbed one -- with the first entry
+   21px under it. Fumadocs hangs the TOC 48px below the header, then pads its
+   list 12px, so it read 6px low on tabbed pages and 42px high on the SDK. */
+#nd-toc { padding-top: 42px; }
+html #nd-notebook-layout:has(#nd-page[data-product="no-tabs"]) #nd-toc { padding-top: 90px; }
+#nd-toc > #toc-title + div { padding-top: 2px; }
+/* Mintlify's entries are a plain list: 14px/24px with 4px above and below,
+   the top level #525256 at the column's edge, deeper levels #727276 and 16px
+   in per level, and ONE entry in primary -- the section being read. Fumadocs
+   draws a rail with a sliding thumb, pads every entry 20px for it, and
+   colours every heading in view. Its depth is only an inline padding, so
+   that is what the levels key off. */
+#nd-toc .relative.flex.flex-col > div.absolute, #nd-toc a > svg { display: none; }
+#nd-toc a {
+  padding: 4px 0 !important; line-height: 24px; color: #525256;
+}
+#nd-toc a[style*="start:32px"], #nd-toc a[style*="start: 32px"] { padding-inline-start: 16px !important; color: #727276; }
+#nd-toc a[style*="start:44px"], #nd-toc a[style*="start: 44px"] { padding-inline-start: 32px !important; color: #727276; }
+#nd-toc a:hover { color: var(--rl-ink); }
+#nd-toc a[data-active="true"]:not(a[data-active="true"] ~ a) { color: var(--rl-primary); }
+.dark #nd-toc a, [data-theme='dark'] #nd-toc a { color: var(--rl-muted); }
+.dark #nd-toc a[style*="start:32px"], .dark #nd-toc a[style*="start: 32px"],
+.dark #nd-toc a[style*="start:44px"], .dark #nd-toc a[style*="start: 44px"],
+[data-theme='dark'] #nd-toc a[style*="start:32px"], [data-theme='dark'] #nd-toc a[style*="start: 32px"],
+[data-theme='dark'] #nd-toc a[style*="start:44px"], [data-theme='dark'] #nd-toc a[style*="start: 44px"] { color: var(--rl-faint); }
+.dark #nd-toc a[data-active="true"]:not(a[data-active="true"] ~ a),
+[data-theme='dark'] #nd-toc a[data-active="true"]:not(a[data-active="true"] ~ a) { color: var(--rl-primary); }
+
+/* ================================================================ header
+ *
+ * Measured at 1440: a 64px top row and a 48px tab row, both with 48px side
+ * padding; hairlines at 5% gray-500, the upper one inset to the padding.
+ * Fumadocs' rows are 56px and 40px with 16-24px padding and #E5E5E5 rules.
+ */
+html #nd-notebook-layout[data-sidebar-collapsed] { --fd-header-height: 64px; }
+@media (min-width: 1024px) {
+  html #nd-notebook-layout[data-sidebar-collapsed]:has([data-header-tabs]) { --fd-header-height: 112px; }
+}
+#nd-subnav [data-header-body] { position: relative; height: 64px; border-bottom: 0; }
+@media (min-width: 768px) { #nd-subnav [data-header-body] { padding-inline: 48px; } }
+#nd-subnav [data-header-body]::after { content: ""; position: absolute; bottom: 0;
+  left: 48px; right: 48px; height: 1px; background: var(--rl-hairline, rgba(107, 114, 128, .05)); }
+
+/* Search: a 437x36 field centred in the viewport (the flex-1 columns either
+   side already centre it), 12px radius, a 1px 30% zinc ring, and a single
+   unboxed "Ctrl K" hint rather than two bordered keycaps. */
+#nd-subnav [data-search-full] { width: 437px; max-width: 100%; height: 36px;
+  padding: 0 12px 0 14px; gap: 8px; border: 0; border-radius: 12px;
+  background: var(--rl-bg); box-shadow: 0 0 0 1px var(--rl-search-ring, rgba(161, 161, 170, .3));
+  font-size: 14px; color: var(--rl-faint); }
+#nd-subnav [data-search-full]:hover { background: var(--rl-bg); color: var(--rl-muted); }
+#nd-subnav [data-search-full] > div { gap: 4px; }
+#nd-subnav [data-search-full] kbd { border: 0; background: none; padding: 0;
+  font: 600 12px/16px var(--rl-font-sans); color: var(--rl-faint); }
+
+/* Log In is 14px/500 in #525256; Sign Up is a filled button in docs.json's
+   `dark` colour (#3730A3) with a trailing chevron. The hrefs are the stable
+   hook: fumadocs gives these links no distinguishing class. */
+#nd-subnav a[href="https://app.relevanceai.com/"] { font-weight: 500; color: var(--rl-tab-ink, #525256); }
+#nd-subnav a[href="https://app.relevanceai.com/auth"] {
+  display: inline-flex; align-items: center; gap: 4px; height: 36px;
+  padding: 8px 8px 8px 12px; border-radius: 12px; background: #3730A3;
+  font-weight: 500; color: #FFFFFF; }
+#nd-subnav a[href="https://app.relevanceai.com/auth"]:hover { color: #FFFFFF; background: #312E81; }
+#nd-subnav a[href="https://app.relevanceai.com/auth"]::after { content: ""; width: 16px; height: 16px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6 4l4 4-4 4' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6 4l4 4-4 4' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px no-repeat; }
+/* Mintlify has no sidebar-collapse control in the navbar. */
+@media (min-width: 768px) { #nd-subnav [data-header-body] button[data-collapsed] { display: none; } }
+
+/* Tab row: centred, 48px, 24px apart; active tab in ink (not primary) with a
+   1.5px primary underline, inactive #525256. Fumadocs marks the active tab
+   only by class, hence `.border-fd-primary`. */
+#nd-subnav [data-header-tabs] { height: 48px; padding-inline: 48px; gap: 24px;
+  justify-content: center; align-items: stretch;
+  border-bottom: 1px solid var(--rl-hairline, rgba(107, 114, 128, .05)); }
+#nd-subnav [data-header-tabs] > a { position: relative; height: 48px; padding-bottom: 0;
+  border-bottom-width: 0; align-items: center;
+  font-size: 14px; font-weight: 500; color: var(--rl-tab-ink, #525256); }
+#nd-subnav [data-header-tabs] > a:hover { color: var(--rl-tab-active, #27272C); }
+#nd-subnav [data-header-tabs] > a.border-fd-primary { color: var(--rl-tab-active, #27272C); }
+#nd-subnav [data-header-tabs] > a.border-fd-primary::after { content: ""; position: absolute;
+  left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--rl-primary); }
+
+.dark, [data-theme='dark'] {
+  --rl-hairline: rgba(255, 255, 255, .07);
+  --rl-search-ring: rgba(255, 255, 255, .12);
+  --rl-tab-ink: var(--rl-muted);
+  --rl-tab-active: var(--rl-ink);
+}
+
+/* ============================================================ navbar brand
+ * Mintlify shows the logo alone at h-7 (28px) -- no "Docs" label beside it --
+ * and puts the product switcher 32px after it.
+ */
+.rl-brand-mark { height: 28px; }
+/* Visually hidden, not display:none: both logo images are alt="" (the
+   wordmark is decorative once named), so this text is the home link's only
+   accessible name. */
+.rl-brand-text { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ======================================================== product switcher */
+.rl-product { position: relative; margin-left: 32px; }
+.rl-product-trigger { display: inline-flex; align-items: center; gap: 8px; height: 32px;
+  padding: 6px 10px; border-radius: 12px; background: transparent; border: 0; cursor: pointer;
+  font: 500 14px/20px var(--rl-font-sans); color: var(--rl-ink); }
+.rl-product-trigger:hover, .rl-product-trigger[aria-expanded="true"] { background: var(--rl-press, rgba(0, 0, 0, .04)); }
+.rl-product-trigger:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: 1px; }
+.rl-product-icon { display: inline-flex; width: 16px; justify-content: center; }
+.rl-product-icon .rl-icon { font-size: 14px; color: currentColor; }
+.rl-product-chev { width: 12px; height: 12px; color: var(--rl-faint); transition: transform .15s ease; }
+.rl-product-trigger[aria-expanded="true"] .rl-product-chev { transform: rotate(180deg); }
+.rl-product-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40;
+  min-width: 204px; margin: 0; padding: 4px; list-style: none;
+  background: var(--rl-bg); border: 1px solid var(--rl-line); border-radius: 12px;
+  box-shadow: 0 10px 16px -3px rgba(10, 10, 10, .05), 0 3px 10px -2px rgba(10, 10, 10, .02); }
+.rl-product-menu[hidden] { display: none; }
+.rl-product-menu a { display: flex; align-items: center; gap: 12px; height: 36px;
+  padding: 8px 12px 8px 10px; border-radius: 8px; white-space: nowrap;
+  font: 500 14px/20px var(--rl-font-sans); color: var(--rl-muted); text-decoration: none; }
+.rl-product-menu a:hover { background: var(--rl-press, rgba(0, 0, 0, .04)); color: var(--rl-ink); }
+.rl-product-menu a[aria-current] { color: var(--rl-primary); }
+.rl-product-check { width: 16px; height: 16px; margin-left: auto; }
+.dark, [data-theme='dark'] { --rl-press: rgba(255, 255, 255, .06); }
+
+/* A product with no tabs (the SDK) has no tab row and a 64px header. The id
+   inside :has() lifts this over the 112px rule above. */
+html #nd-notebook-layout[data-sidebar-collapsed]:has(#nd-page[data-product="no-tabs"]) { --fd-header-height: 64px; }
+html #nd-notebook-layout:has(#nd-page[data-product="no-tabs"]) [data-header-tabs] { display: none; }
+
+/* ================================================================ sidebar
+ *
+ * Measured on the preview at 1440. Items: 36px rows (6px 12px 6px 16px), 12px
+ * radius, 1px apart, 14px/400; active in primary on primary@10%. Section
+ * headings: 24px, inset 16px, 14px/600 ink, 10px above their items and 32px
+ * below the previous block. The column content starts at x=40 and is 256px
+ * wide; the list starts 32px under the header.
+ */
+#nd-sidebar [data-id$="-viewport"] { padding: 32px 0 32px 40px; }
+#nd-sidebar [data-id$="-viewport"] > div { gap: 1px; }
+#nd-sidebar a[data-active], #nd-sidebar button[aria-expanded] {
+  min-height: 36px; padding: 6px 12px 6px 16px; border-radius: 12px;
+  font-size: 14px; font-weight: 400; line-height: 24px; color: var(--rl-muted); }
+#nd-sidebar a[data-active]:hover, #nd-sidebar button[aria-expanded]:hover {
+  background: var(--rl-press, rgba(0, 0, 0, .04)); color: var(--rl-ink); }
+#nd-sidebar a[data-active="true"] { background: rgba(79, 70, 229, .1); color: var(--rl-primary); }
+#nd-sidebar [data-id$="-viewport"] p { height: 24px; margin: 32px 0 10px; padding: 0 0 0 16px;
+  font-size: 14px; font-weight: 600; line-height: 24px; color: var(--rl-ink); }
+
+/* Global anchors: keep this one menu item visible at lg+ (see layout.shared). */
+#nd-sidebar div.lg\:hidden:has(> .rl-anchors) { display: block; margin-bottom: 0; }
+.rl-anchors { display: flex; flex-direction: column; gap: 16px; margin: 0; padding: 0; list-style: none; }
+.rl-anchors a { display: flex; align-items: center; gap: 16px; height: 24px; margin-left: 16px;
+  font: 500 14px/24px var(--rl-font-sans); color: var(--rl-tab-ink, #525256); text-decoration: none; }
+.rl-anchors a:hover { color: var(--rl-ink); }
+.rl-anchor-icon { display: grid; place-items: center; flex: none; width: 24px; height: 24px;
+  border-radius: 6px; color: #A0A0A5; box-shadow: 0 0 0 1px var(--rl-tile-ring, rgba(12, 12, 17, .07)); }
+.rl-anchor-icon .rl-icon { width: auto; font-size: 13px; color: inherit; }
+.dark, [data-theme='dark'] { --rl-tile-ring: rgba(255, 255, 255, .1); }
+
+/* Group eyebrow above the h1 (see groupOf in the page route). 14px/600 in
+   primary, as measured on Mintlify. */
+.rl-eyebrow { margin: 0 0 6px; font-size: 14px; font-weight: 600; line-height: 20px; color: var(--rl-primary); }
+
+/* ================================================================== code
+ *
+ * Measured on /build/tools/customize-tool/inputs and mcp-plugins. Blocks: Paper
+ * Mono 14px on 24px lines -- fumadocs set 13px tokens on 28px lines, which read
+ * noticeably looser. Inline code: 0.875em/500 in gray-800 on gray-100 at 50%,
+ * 2px 8px, 6px radius, no border -- fumadocs drew a bordered 13px chip.
+ *
+ * `code:not([class])` because the API field name is also a <code>, one with a
+ * class, and must not pick up the chip.
+ */
+#nd-page pre, #nd-page pre code, #nd-page pre code * { font-family: var(--rl-font-mono); }
+#nd-page pre code, #nd-page pre code .line { font-size: 14px; line-height: 24px; }
+.prose :not(pre):not(.rl-param-default) > code:not([class]) {
+  font-family: var(--rl-font-mono); font-size: .875em; font-weight: 500; line-height: 1.5;
+  padding: 2px 8px; border: 0; border-radius: 6px;
+  color: var(--rl-code-ink, #1E2939); background: var(--rl-code-bg, rgba(243, 244, 246, .5));
+  /* A long path or URL breaks inside the chip, as Mintlify's does, instead
+     of running off a phone screen. */
+  word-break: break-word; overflow-wrap: break-word;
+}
+/* Inside a callout, inline code takes the callout's hue, as links do. */
+.rl-callout :not(pre) > code:not([class]),
+#nd-page .prose .rl-callout :not(pre) > code:not([class]) { color: var(--rl-cal-link, var(--rl-code-ink, #1E2939)); }
+.dark, [data-theme='dark'] { --rl-code-ink: var(--rl-ink); --rl-code-bg: rgba(255, 255, 255, .06); }
+
+/* ========================================================= list markers
+ * Tailwind typography's prose-gray, as Mintlify uses it: bullets gray-300,
+ * counters gray-500 (prose-invert: gray-600 and gray-400). Fumadocs drew both
+ * in body ink, so every numbered step read as bold.
+ */
+article ol > li::marker { color: var(--rl-counter, #6A7282); }
+/* Bullets are no longer ::markers on the current preview: the list is
+   unstyled and each item carries a 6px #525256 dot, 8px in and 11px down --
+   centred on a 28px line -- with the text 32px in. Only class-less lists:
+   components that render a <ul> of their own keep their layout. */
+#nd-page .prose ul:not([class]) { list-style: none; padding-left: 0; }
+#nd-page .prose ul:not([class]) > li { position: relative; padding-left: 32px; }
+#nd-page .prose ul:not([class]) > li::before {
+  content: ''; position: absolute; left: 8px; top: 11px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--rl-bullet, #525256);
+}
+.dark, [data-theme='dark'] { --rl-bullet: #A0A0A5; --rl-counter: #99A1AF; }
+
+/* ======================================================= page decoration
+ * docs.json `background.decoration: "gradient"`. Mintlify paints a 64rem
+ * radial wash across the top of every page: the primary at 10% in light, and
+ * docs.json's `light` colour (#A5B4FC) at 10% in dark. It scrolls with the
+ * page. `isolation` gives the z-index:-1 layer a context of its own, so it
+ * sits above the body background and below every piece of content.
+ */
+#nd-notebook-layout { position: relative; isolation: isolate; }
+#nd-notebook-layout::before { content: ""; position: absolute; top: 0; left: 0; right: 0;
+  height: 64rem; z-index: -1; pointer-events: none;
+  background: radial-gradient(49.63% 57.02% at 58.99% -7.2%,
+    var(--rl-decoration, rgba(79, 70, 229, .1)) 39.4%, rgba(0, 0, 0, 0) 100%); }
+.dark, [data-theme='dark'] { --rl-decoration: rgba(165, 180, 252, .1); }
+
+/* ============================================================ code blocks
+ *
+ * Measured on the preview. Mintlify draws two shapes:
+ *
+ *   untitled  a white 16px-radius box with a 1px 10% hairline, code padded
+ *             14px 16px, the copy button floating 12px/16px from the corner
+ *   titled    the same white panel (14px radius) sitting in a #F5F4F9 tray
+ *             with 2px of padding, the title in 12px/500 above it on the tray
+ *
+ * Fumadocs draws one: a white 12px card with a drop shadow, a divider under
+ * a 14px title, and a language icon Mintlify does not show. Code was 13px on
+ * 18.6px lines against Mintlify's 14px on 24px. About 300 blocks site-wide.
+ */
+#nd-page figure.shiki { margin: 20px 0 32px; padding: 0; overflow: hidden;
+  border: 1px solid var(--rl-code-line, rgba(12, 12, 17, .1)); border-radius: 16px;
+  background: var(--rl-code-panel, #FFFFFF); box-shadow: none; }
+#nd-page figure.shiki > div[role="region"] { padding: 14px 0; font-size: 14px; line-height: 24px; }
+/* Mintlify shows a code block at full length; fumadocs caps it at 600px and
+   scrolls the rest, which hid 172px of the Outlook event payload. */
+#nd-page figure.shiki div[role="region"] { max-height: none; }
+#nd-page figure.shiki pre, #nd-page figure.shiki pre code { font-size: 14px; line-height: 24px; }
+/* The copy button: 26px, #A0A0A5, 12px/16px in from the corner when untitled. */
+#nd-page figure.shiki button[aria-label="Copy Text"] { width: 26px; height: 26px; color: #A0A0A5; }
+/* Mintlify's copy glyph is two overlapping squares (lucide "copy", ISC), not
+   fumadocs' clipboard. Swapped for the idle state only, so the check mark
+   fumadocs shows after a copy still appears. */
+#nd-page figure.shiki button[aria-label="Copy Text"] > svg.lucide-clipboard { display: none; }
+#nd-page figure.shiki button[aria-label="Copy Text"]:has(> svg.lucide-clipboard)::before {
+  content: ""; width: 16px; height: 16px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3E%3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3E%3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3E%3C/svg%3E") center / contain no-repeat; }
+#nd-page figure.shiki > div.absolute:has(> button[aria-label="Copy Text"]) {
+  top: 12px; right: 16px; backdrop-filter: none; background: transparent; }
+
+/* Titled: the tray. :has(figcaption) is the only reliable signal -- fumadocs
+   renders the title bar only when the fence has a title. */
+#nd-page figure.shiki:has(figcaption) { padding: 2px; background: var(--rl-surface-2); }
+#nd-page figure.shiki:has(figcaption) > div:has(> figcaption) {
+  height: 34px; padding: 4px 10px 4px 16px; gap: 6px; border-bottom: 0;
+  font-size: 12px; font-weight: 500; line-height: 24px; color: #A0A0A5; }
+#nd-page figure.shiki figcaption { font-size: 12px; font-weight: 500; color: var(--rl-muted); }
+/* Mintlify shows no language icon beside the title. */
+#nd-page figure.shiki > div:has(> figcaption) > div:first-child:has(> svg) { display: none; }
+#nd-page figure.shiki:has(figcaption) > div[role="region"] {
+  border-radius: 14px; background: var(--rl-code-panel, #FFFFFF); }
+.dark, [data-theme='dark'] { --rl-code-line: rgba(255, 255, 255, .1); --rl-code-panel: var(--rl-bg); }
+
+/* ============================================================== API pages
+ *
+ * Request/Response examples (lifted to the top of the body by
+ * lib/remark-api-examples.mjs). From 1280px Mintlify shows them in a 448px
+ * rail whose left edge is 480px from the viewport's right edge, Request above
+ * Response 24px apart, level with the title; below 1280 they sit inline after
+ * the description. Code in them is 12px on 21.6px lines.
+ *
+ * One deliberate deviation. Mintlify's content column keeps its full width and
+ * the rail overlays its last 104px, so the end of a field description and its
+ * rule run UNDER the panels. Here the column stops 24px short of the rail.
+ */
+.rl-api-examples { display: flex; flex-direction: column; gap: 24px; margin: 0 0 32px; }
+.rl-api-examples figure.shiki { margin: 0; }
+.rl-api-examples figure.shiki > div[role="region"],
+.rl-api-examples figure.shiki pre, .rl-api-examples figure.shiki pre code { font-size: 12px; line-height: 21.6px; }
+@media (min-width: 1280px) {
+  #nd-page:has(.rl-api-examples) { position: relative; padding-right: 208px; }
+  /* 100% is the article, which spans the main column; its left edge is the
+     296px sidebar column, so this lands at viewport - 480px. */
+  .rl-api-examples { position: absolute; top: 40px; left: calc(100% - 184px); width: 448px; margin: 0; }
+}
+/* Each example reads as a one-tab code group: the title in primary with an
+   underline, rather than the muted title of an ordinary block. */
+.rl-example figure.shiki figcaption { position: relative; flex: none; overflow: visible; color: var(--rl-primary); }
+.rl-example figure.shiki figcaption::after { content: ""; position: absolute; left: 0; right: 0;
+  bottom: -5px; height: 1.5px; background: var(--rl-primary); }
+.rl-example figure.shiki figcaption + div { margin-left: auto; }
+
+/* Endpoint bar, from `api:` frontmatter. Method colours are Mintlify's (700 on
+   400 at 20%) except GET and PUT: #15803D and #A16207 measure 4.45:1 and
+   4.49:1 on those fills, under AA, so they step to the 800 shade. */
+.rl-endpoint { display: flex; align-items: center; gap: 8px; margin-top: 24px; padding: 6px 0 6px 6px;
+  border: 1px solid var(--rl-exp-line, rgba(229, 229, 229, .7)); border-radius: 12px; }
+.rl-endpoint-method { padding: 2px 6px; border-radius: 8px; font: 700 14px/20px var(--rl-font-sans); }
+.rl-endpoint[data-method="get"] .rl-endpoint-method { color: #166534; background: rgba(74, 222, 128, .2); }
+.rl-endpoint[data-method="post"] .rl-endpoint-method { color: #1D4ED8; background: rgba(96, 165, 250, .2); }
+.rl-endpoint[data-method="put"] .rl-endpoint-method { color: #854D0E; background: rgba(250, 204, 21, .2); }
+.rl-endpoint[data-method="patch"] .rl-endpoint-method { color: #9A3412; background: rgba(251, 146, 60, .2); }
+.rl-endpoint[data-method="delete"] .rl-endpoint-method { color: #B91C1C; background: rgba(248, 113, 113, .2); }
+.rl-endpoint-path { display: flex; align-items: center; font: 500 14px/20px var(--rl-font-mono);
+  color: var(--rl-endpoint-ink, #27272C); }
+.rl-endpoint-sep { margin: 0 2px; font-weight: 400; color: #A0A0A5; }
+/* Dark: the 400 shade on its own 15% fill. */
+:is(.dark, [data-theme='dark']) .rl-endpoint[data-method="get"] .rl-endpoint-method { color: #4ADE80; background: rgba(74, 222, 128, .15); }
+:is(.dark, [data-theme='dark']) .rl-endpoint[data-method="post"] .rl-endpoint-method { color: #60A5FA; background: rgba(96, 165, 250, .15); }
+:is(.dark, [data-theme='dark']) .rl-endpoint[data-method="put"] .rl-endpoint-method { color: #FACC15; background: rgba(250, 204, 21, .15); }
+:is(.dark, [data-theme='dark']) .rl-endpoint[data-method="patch"] .rl-endpoint-method { color: #FB923C; background: rgba(251, 146, 60, .15); }
+:is(.dark, [data-theme='dark']) .rl-endpoint[data-method="delete"] .rl-endpoint-method { color: #F87171; background: rgba(248, 113, 113, .15); }
+.dark, [data-theme='dark'] { --rl-endpoint-ink: var(--rl-ink); }
+
+/* ======================================================== mobile header row
+ * See components/site/mobile-nav.tsx. Below 768px only: from there up,
+ * fumadocs switches to its in-grid sidebar (a hard-coded JS media query in
+ * fumadocs-ui/components/sidebar/base), so a drawer trigger has nothing to open.
+ */
+.rl-mobile-nav { position: sticky; top: var(--fd-docs-row-2); z-index: 10; grid-area: toc-popover;
+  display: none; height: 56px;
+  border-bottom: 1px solid var(--rl-hairline, rgba(107, 114, 128, .05));
+  background: color-mix(in srgb, var(--rl-bg) 80%, transparent); backdrop-filter: blur(8px); }
+@media (max-width: 767px) {
+  .rl-mobile-nav { display: block; }
+  html #nd-notebook-layout[data-sidebar-collapsed] { --fd-toc-popover-height: 56px; }
+  /* Row 2 is the drawer trigger now, as on Mintlify; the row-1 icon goes. */
+  #nd-subnav button[aria-label="Open Sidebar"] { display: none; }
+  /* Mintlify keeps the product switcher out of the mobile header. */
+  .rl-product { display: none; }
+}
+@media (min-width: 768px) { html #nd-notebook-layout[data-sidebar-collapsed] { --fd-toc-popover-height: 0px; } }
+.rl-mobile-nav-trigger { display: flex; align-items: center; gap: 12px; width: 100%; height: 100%;
+  padding: 0 20px; border: 0; background: transparent; cursor: pointer; text-align: start;
+  font: 400 14px/20px var(--rl-font-sans); color: var(--rl-faint); }
+.rl-mobile-nav-icon { width: 16px; height: 16px; flex: none; margin-right: 4px; color: var(--rl-faint); }
+.rl-mobile-nav-chev { width: 12px; height: 12px; flex: none; color: #A0A0A5; }
+.rl-mobile-nav-group { white-space: nowrap; }
+.rl-mobile-nav-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-weight: 600; color: var(--rl-ink); }
+
+/* ============================================== title block and page top
+ * Mintlify, at every width: the eyebrow 42px under the header, then 10px to
+ * the h1 and 8px to the description. The article's 16px flex gap is kept for
+ * everything else and trimmed here, and the 56px top padding comes down to 42.
+ */
+#nd-page { padding-top: 42px; }
+#nd-page > .rl-eyebrow { margin-bottom: -6px; }
+#nd-page > h1 + p { margin-top: -8px; }
+/* Mobile: Mintlify's 44px inset and 30px/36px h1 (text-3xl below 640px). */
+@media (max-width: 767px) { #nd-page { padding-inline: 44px; } }
+@media (max-width: 639px) { #nd-page > h1, article h1 { font-size: 30px; line-height: 36px; } }
+
+/* The logo is sized by height; without this flexbox narrows it instead of
+   the text beside it, and on a phone it rendered visibly squashed. */
+.rl-brand, .rl-brand-mark { flex-shrink: 0; }
+.rl-brand-mark { width: auto; }
+
+/* The sidebar's header strip holds the tab dropdown fumadocs shows while the
+   navbar tab row is hidden (below 1024px). From 1024 up it is empty but kept
+   its 24px of padding, pushing the tree 24px lower than Mintlify's. */
+@media (min-width: 1024px) { #nd-sidebar > div:first-child { padding: 0; } }
+
+/* Theme control: Mintlify's is one borderless 16px icon in a 32px target, not
+   a two-icon pill. Fumadocs' toggle is kept (it works, and persists the
+   choice); only the current mode's icon is shown. Mintlify's glyph is a
+   monitor while it follows the system setting; this shows sun or moon. */
+#nd-subnav [data-theme-toggle] { width: 32px; height: 32px; padding: 0; border: 0;
+  border-radius: 8px; justify-content: center; background: transparent; }
+#nd-subnav [data-theme-toggle]:hover { background: var(--rl-press, rgba(0, 0, 0, .04)); }
+#nd-subnav [data-theme-toggle] svg { width: 16px; height: 16px; padding: 0;
+  background: none !important; color: var(--rl-faint) !important; }
+html:not(.dark) #nd-subnav [data-theme-toggle] .lucide-moon,
+html.dark #nd-subnav [data-theme-toggle] .lucide-sun { display: none; }
+
+/* Folder chevrons: 12px in #A0A0A5, 12px after the label (8px row gap + 4),
+   as Mintlify draws them -- fumadocs pins a 16px ink chevron to the far edge. */
+#nd-sidebar :is(a, button) > svg.lucide-chevron-down { width: 12px; height: 12px;
+  margin-inline-start: 4px; color: #A0A0A5; }

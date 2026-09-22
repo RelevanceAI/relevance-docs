@@ -79,7 +79,7 @@ export function Icon({ name, style = 'solid' }: { name?: unknown; style?: string
 
 /* ---------------------------------------------------------------- callouts */
 
-const VARIANTS = ['note', 'tip', 'warning', 'info', 'check', 'danger'] as const;
+const VARIANTS = ['note', 'tip', 'warning', 'info', 'check', 'danger', 'custom'] as const;
 type Variant = (typeof VARIANTS)[number];
 
 // Mintlify shows a glyph per callout type; the 6 built-ins take no icon prop,
@@ -91,6 +91,7 @@ const CALLOUT_ICON: Record<Variant, string> = {
   check: 'circle-check',
   warning: 'triangle-exclamation',
   danger: 'circle-exclamation',
+  custom: 'circle-info',
 };
 
 /** Spoken before the body so the variant is not carried by colour alone. */
@@ -101,10 +102,17 @@ const LABEL: Record<Variant, string> = {
   check: 'Check',
   warning: 'Warning',
   danger: 'Danger',
+  custom: 'Note',
 };
 
+/*
+ * A bare <Callout> is its own style in Mintlify, not a Note: neutral gray
+ * (50% gray-50 fill, 20% gray-500 hairline, gray-900 text), or -- given
+ * `color` -- that colour at 10% for the fill, 20% for the hairline, and mixed
+ * half with black for the text. It rendered as a blue Note here.
+ */
 export function Callout({
-  children, variant = 'note', icon, color,
+  children, variant = 'custom', icon, color,
 }: Kids & { variant?: Variant; icon?: unknown; color?: string }) {
   return (
     // A <div role="note">, not an <aside>: <aside> inside <main> is a
@@ -115,7 +123,7 @@ export function Callout({
     <div
       role="note"
       className={`rl-callout rl-callout--${variant}`}
-      style={color ? ({ ['--rl-cal' as string]: color } as React.CSSProperties) : undefined}
+      style={color ? ({ ['--rl-cal-c' as string]: color } as React.CSSProperties) : undefined}
     >
       <span className="rl-callout-mark" aria-hidden>
         <Icon name={typeof icon === 'string' && icon ? icon : CALLOUT_ICON[variant]} />
@@ -158,13 +166,16 @@ export function Accordion({
 }: Kids & { title?: React.ReactNode; defaultOpen?: boolean; icon?: unknown }) {
   return (
     <details className="rl-accordion" open={defaultOpen}>
+      {/* Mintlify's order: a filled caret (pointing right until open), then
+          the optional icon, then the title at 500 -- not a trailing chevron. */}
       <summary className="rl-accordion-summary">
-        <Icon name={icon} />
+        <span className="rl-accordion-caret" aria-hidden>
+          <svg viewBox="0 0 12 12" focusable="false">
+            <path d="M2.3 3.4h7.4a.8.8 0 0 1 .64 1.28L6.64 9.5a.8.8 0 0 1-1.28 0L1.66 4.68A.8.8 0 0 1 2.3 3.4z" fill="currentColor" />
+          </svg>
+        </span>
+        {icon ? <span className="rl-accordion-icon"><Icon name={icon} /></span> : null}
         <span className="rl-accordion-title" id={accordionId(title)}>{title}</span>
-        <svg className="rl-chev" viewBox="0 0 16 16" aria-hidden>
-          <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.6"
-            strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
       </summary>
       <div className="rl-accordion-body">{children}</div>
     </details>
@@ -179,19 +190,27 @@ export const AccordionGroup = ({ children }: Kids) => (
 export function Card({
   title, icon, href, horizontal, children,
 }: Kids & { title?: React.ReactNode; icon?: unknown; href?: string; horizontal?: boolean }) {
+  /*
+   * Mintlify's card: bare icon on its own line, then an <h2> title, then the
+   * body -- and no chevron on linked cards. The title really is a heading
+   * there, which is what fills the page's table of contents: rendering it as
+   * a <span> silently dropped 14 of the 20 entries Mintlify listed on
+   * /get-started/core-concepts/mcp-plugins alone.
+   *
+   * It is deliberately NOT given an id, exactly as Mintlify leaves it, so no
+   * new anchors appear and check-anchors stays green.
+   */
   const inner = (
     <>
       {icon ? <span className="rl-card-icon"><Icon name={icon} /></span> : null}
-      <span className="rl-card-main">
-        {title ? <span className="rl-card-title">{title}</span> : null}
-        {children ? <span className="rl-card-body">{children}</span> : null}
-      </span>
-      {href ? (
-        <svg className="rl-card-arrow" viewBox="0 0 16 16" aria-hidden>
-          <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.6"
-            strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ) : null}
+      <div className="rl-card-main">
+        {title ? <h2 className="rl-card-title">{title}</h2> : null}
+        {/* A div, not a span: the body is MDX, so it arrives wrapped in <p>,
+            and block content inside phrasing content is what makes the parser
+            close the element early and desync hydration -- see
+            tools/check-content.mjs. */}
+        {children ? <div className="rl-card-body">{children}</div> : null}
+      </div>
     </>
   );
   const cls = `rl-card${horizontal ? ' rl-card--h' : ''}`;
@@ -211,11 +230,17 @@ export const Columns = ({ cols = 2, children }: Kids & { cols?: number | string 
 /* ------------------------------------------------------------------- steps */
 
 export const Steps = ({ children }: Kids) => <div className="rl-steps">{children}</div>;
+/*
+ * Mintlify puts the icon IN the marker, replacing the number -- it shows one
+ * or the other, never both. Rendering the number in the circle and the icon
+ * again beside the title was the difference that made numbered steps look
+ * doubled up.
+ */
 export const Step = ({ title, icon, children }: Kids & { title?: React.ReactNode; icon?: unknown }) => (
-  <div className="rl-step">
-    <div className="rl-step-marker" aria-hidden />
+  <div className="rl-step" data-icon={icon ? '' : undefined}>
+    <div className="rl-step-marker" aria-hidden>{icon ? <Icon name={icon} /> : null}</div>
     <div className="rl-step-content">
-      {title ? <p className="rl-step-title"><Icon name={icon} />{title}</p> : null}
+      {title ? <p className="rl-step-title">{title}</p> : null}
       {children}
     </div>
   </div>
@@ -259,10 +284,25 @@ export function ResponseField({
   );
 }
 
-// Mintlify nests <Expandable> inside a field to reveal sub-properties.
+/*
+ * Mintlify nests <Expandable> inside a field to reveal sub-properties. Its
+ * summary reads "Show {title}" closed and "Hide {title}" open, behind a small
+ * chevron. Both words are rendered and CSS keys the visible one off the
+ * native `open` attribute, so this stays a server component with no state --
+ * and the hidden word is display:none, so it is out of the accessible name
+ * rather than read as "Show Hide".
+ */
 export const Expandable = ({ title, children }: Kids & { title?: string }) => (
   <details className="rl-expandable">
-    <summary>{title ?? 'properties'}</summary>
+    <summary>
+      <svg className="rl-expandable-chev" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+        <path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="2"
+          strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span className="rl-expandable-label">
+        <span className="rl-exp-show">Show</span><span className="rl-exp-hide">Hide</span> {title ?? 'properties'}
+      </span>
+    </summary>
     <div className="rl-expandable-body">{children}</div>
   </details>
 );
@@ -280,9 +320,6 @@ export const Badge = ({ children, color }: Kids & { color?: string }) => (
   <span className="rl-badge" data-color={color}>{children}</span>
 );
 
-export const Tooltip = ({ tip, children }: Kids & { tip?: string }) => (
-  <span className="rl-tooltip" title={tip}>{children}</span>
-);
 
 export const Update = ({
   label, description, tags, children,
@@ -306,6 +343,7 @@ export const Update = ({
 // section, and 166 injected h4s were breaking the heading outline on 45
 // pages (h2 -> h4 skips).
 export { Tabs, Tab, CodeGroup } from './tabs';
+export { Tooltip } from './tooltip';
 
 /** First line of text inside a node, for naming a table by its columns. */
 function firstText(node: React.ReactNode, limit = 6): string[] {
@@ -348,6 +386,10 @@ export const ScrollableTable = ({ children }: Kids) => {
   );
 };
 
-/* Mintlify API-example wrappers -- render as plain blocks. */
+/*
+ * Mintlify's API examples. lib/remark-api-examples.mjs moves them into one
+ * <ApiExamples> at the top of the page; relevance.css puts that in the rail.
+ */
+export const ApiExamples = ({ children }: Kids) => <div className="rl-api-examples">{children}</div>;
 export const RequestExample = ({ children }: Kids) => <div className="rl-example">{children}</div>;
 export const ResponseExample = ({ children }: Kids) => <div className="rl-example">{children}</div>;
