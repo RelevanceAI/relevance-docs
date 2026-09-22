@@ -171,7 +171,7 @@ article h1, article h2, article h3 {
   font-weight: 600;
   color: var(--rl-ink);
 }
-article h1 { font-size: 36px; line-height: 40px; letter-spacing: -0.9px; margin-bottom: 0; }
+article h1 { font-size: 36px; line-height: 40px; letter-spacing: -0.025em; /* -0.9px at 36px, -0.75px at the 30px phone size */ margin-bottom: 0; }
 article h2 { font-size: 24px; line-height: 32px; letter-spacing: -0.6px;
   margin-top: 36px; margin-bottom: 18px; color: #1E2939; }
 article h3 { font-size: 20px; line-height: 28px; letter-spacing: -0.5px;
@@ -206,6 +206,8 @@ article p.rl-description { font-size: 18px; line-height: 28px; color: #404045; }
 /* An h1 inside the body (a second title on the page) is 30px/36px with
    40px above and 20px below; it had no margins and the page title's 36px. */
 #nd-page .prose h1 { font-size: 30px; line-height: 36px; letter-spacing: -0.75px; margin: 40px 0 20px; }
+/* Below 640px it steps down with the page title: 24px/32px, 16px below. */
+@media (max-width: 639px) { #nd-page .prose h1 { font-size: 24px; line-height: 32px; letter-spacing: -0.6px; margin: 40px 0 16px; } }
 /* A "loose" list -- items separated by blank lines -- wraps each item in a
    <p>. Mintlify renders that paragraph as an inline span, so it adds no
    margin and the items keep the tight list's 8px spacing; here each <p>
@@ -245,13 +247,13 @@ code, pre, kbd, samp { font-feature-settings: normal; }
    line, so a heading that fits on Mintlify wrapped here. Mintlify's link
    icon sits out of flow in the left margin and appears on hover; so does
    this one -- and on keyboard focus, so it is never invisible when reached. */
-#nd-page .prose :is(h2, h3, h4, h5, h6):has(> button) { position: relative; }
-#nd-page .prose :is(h2, h3, h4, h5, h6) > button {
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6):has(> button) { position: relative; }
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6) > button {
   position: absolute; left: -32px; top: 50%; translate: 0 -50%;
   opacity: 0; transition: opacity .15s ease;
 }
-#nd-page .prose :is(h2, h3, h4, h5, h6):hover > button,
-#nd-page .prose :is(h2, h3, h4, h5, h6) > button:focus-visible { opacity: 1; }
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6):hover > button,
+#nd-page .prose :is(h1, h2, h3, h4, h5, h6) > button:focus-visible { opacity: 1; }
 
 /* ----------------------------------------------------------------- icons */
 
@@ -432,6 +434,9 @@ a.rl-card, div.rl-card { font-weight: 400; }
    under it, and the title shares the circle's top with the text 46px in. */
 .rl-steps { margin: 40px 0 24px; }
 .rl-step { position: relative; display: flex; gap: 17px; padding-bottom: 20px; }
+/* Inside a tab panel Mintlify's step text sits 16px further in -- 48px from
+   the step's edge instead of 32 -- at every width. */
+.rl-tab-panel .rl-step { gap: 33px; }
 .rl-step::before {
   content: ""; position: absolute; left: 14px; top: 44px; bottom: 0;
   width: 1px; background: rgba(229, 229, 229, .7);
@@ -449,7 +454,7 @@ a.rl-card, div.rl-card { font-weight: 400; }
   content: ""; position: absolute; inset: .42rem; border-radius: 50%;
   background: var(--rl-primary);
 }
-.rl-step-content { flex: 1; min-width: 0; }
+.rl-step-content { flex: 1; min-width: 0; padding-right: 1px; } /* Mintlify's pr-px: the 1px decides some line breaks */
 .rl-step-title { font-weight: 600; color: var(--rl-ink); font-size: 16px; line-height: 28px;
   margin: 8px 0 20px; display: flex; gap: .4rem; align-items: center; }
 .rl-step-content > :last-child { margin-bottom: 0; }
@@ -483,7 +488,13 @@ a.rl-card, div.rl-card { font-weight: 400; }
  */
 .rl-param { padding: 10px 0 20px; margin: 10px 0;
   border-bottom: 1px solid var(--rl-param-rule, #F5F4F9); }
-.rl-param-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+/* Mintlify's chips each carry an 8px right margin inside an inline wrapper,
+   so the row always ends 8px past its last chip -- which, with the 20px
+   reserve below, is what decides whether the chips wrap under a long name. */
+.rl-param-head > :is(.rl-param-type, .rl-param-req, .rl-param-dep, .rl-param-default):last-child { margin-right: 8px; }
+/* 20px held back on the right, as Mintlify does for its hover link icon:
+   it decides when a long name pushes the type chip onto a second line. */
+.rl-param-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-right: 20px;
   font-family: var(--rl-font-mono); font-size: 14px; line-height: 20px; }
 .rl-param-name { font-family: var(--rl-font-mono); font-size: 14px; font-weight: 600;
   line-height: 20px; color: var(--rl-primary); background: transparent;
@@ -665,23 +676,44 @@ a.rl-card, div.rl-card { font-weight: 400; }
 /* Six "pick your path" guides wrap their tabs in this to frame the choice.
    Ported from the Mintlify custom stylesheet, retargeted at the markup
    above -- Mintlify's data-component-part hooks do not exist here. */
-.path-picker { margin: 1.5rem 0 2rem; padding: 1.25rem; border-radius: 1rem;
-  background: linear-gradient(135deg, rgba(96, 86, 255, .06), rgba(96, 86, 255, .02) 45%, rgba(165, 180, 252, .05));
-  box-shadow: 0 0 0 1px rgba(96, 86, 255, .10), 0 8px 32px -12px rgba(96, 86, 255, .18); }
+.path-picker { border: none; border-radius: 1rem; padding: 1.5rem; margin: 1.5rem 0 2rem;
+  background: linear-gradient(135deg, rgba(79, 70, 229, .05), rgba(99, 102, 241, .02) 45%, rgba(165, 180, 252, .04));
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, .08), 0 1px 0 rgba(255, 255, 255, .6) inset,
+    0 8px 32px -12px rgba(79, 70, 229, .18), 0 2px 4px rgba(15, 23, 42, .04); }
+.dark .path-picker {
+  background: linear-gradient(135deg, rgba(99, 102, 241, .12), rgba(99, 102, 241, .03) 45%, rgba(165, 180, 252, .06));
+  box-shadow: 0 0 0 1px rgba(165, 180, 252, .12), 0 1px 0 rgba(255, 255, 255, .04) inset,
+    0 8px 32px -12px rgba(99, 102, 241, .3), 0 2px 4px rgba(0, 0, 0, .2); }
+/* The rules are the Mintlify stylesheet's, verbatim, retargeted at this
+   markup -- and prefixed with .rl-tabs so they outrank the plain tab strip
+   rules, which the first port did not, leaving underlined text tabs here
+   instead of Mintlify's pills. */
 .path-picker .rl-tabs { margin: 0; border: 0; background: transparent; }
-.path-picker .rl-tablist { justify-content: center; background: transparent;
-  border-bottom: 0; padding: .25rem 0 1rem; gap: .5rem; }
-.path-picker .rl-tab-button { padding: .5rem 1.25rem; background: rgba(255, 255, 255, .75);
-  color: var(--rl-ink); box-shadow: 0 1px 2px rgba(15, 23, 42, .05); }
-.path-picker .rl-tab-button[data-active] { background: var(--rl-primary); color: #fff;
-  box-shadow: 0 4px 12px rgba(96, 86, 255, .3); }
+.path-picker .rl-tabs > .rl-tablist { justify-content: center; gap: .5rem;
+  border-bottom: 0; padding: .5rem 0 1rem; }
+.path-picker .rl-tabs > .rl-tablist > .rl-tab-button {
+  padding: .5rem 1.25rem; border-radius: .625rem; border-bottom: 0; margin-bottom: 0;
+  background-color: rgba(255, 255, 255, .7); color: rgba(17, 24, 39, .7);
+  /* 500 in that stylesheet, but it lands on Mintlify's button while the
+     label inside is font-semibold -- so the text renders at 600. */
+  font-weight: 600;
+  transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04); }
+.path-picker .rl-tabs > .rl-tablist > .rl-tab-button:hover {
+  background-color: #FFFFFF; color: rgba(17, 24, 39, .95); box-shadow: 0 2px 8px rgba(79, 70, 229, .1); }
+.path-picker .rl-tabs > .rl-tablist > .rl-tab-button[data-active] {
+  background: linear-gradient(135deg, #4F46E5, #6366F1); color: #FFFFFF;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .2) inset, 0 4px 12px rgba(79, 70, 229, .35); }
 .path-picker .rl-tab-panel { padding: 0; }
-.dark .path-picker { background: linear-gradient(135deg, rgba(96, 86, 255, .14), rgba(96, 86, 255, .04) 45%, rgba(165, 180, 252, .07));
-  box-shadow: 0 0 0 1px rgba(165, 180, 252, .14), 0 8px 32px -12px rgba(96, 86, 255, .35); }
-.dark .path-picker .rl-tab-button { background: rgba(255, 255, 255, .07); color: var(--rl-ink); }
-/* Same 3.06:1 problem as the base tab strip -- this selector is more
-   specific, so it needs its own dark override. */
-.dark .path-picker .rl-tab-button[data-active] { color: var(--rl-bg); }
+.dark .path-picker .rl-tabs > .rl-tablist > .rl-tab-button {
+  background-color: rgba(255, 255, 255, .06); color: rgba(255, 255, 255, .7); box-shadow: 0 1px 2px rgba(0, 0, 0, .2); }
+.dark .path-picker .rl-tabs > .rl-tablist > .rl-tab-button:hover {
+  background-color: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .95); box-shadow: 0 2px 8px rgba(99, 102, 241, .2); }
+/* Mintlify puts white on #6366F1 -> #818CF8 here, about 3.6:1 where the
+   label sits; the page ink clears AA on the same fill. */
+.dark .path-picker .rl-tabs > .rl-tablist > .rl-tab-button[data-active] {
+  background: linear-gradient(135deg, #6366F1, #818CF8); color: var(--rl-bg);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .15) inset, 0 4px 16px rgba(99, 102, 241, .5); }
 
 /* Chrome composites a cross-origin iframe on its own layer, so rounding it
    leaves a light seam along the arc. Invisible on white; masked in dark. */
@@ -1341,7 +1373,11 @@ html #nd-notebook-layout:has(#nd-page[data-product="no-tabs"]) [data-header-tabs
 .prose :not(pre):not(.rl-param-default) > code:not([class]) {
   font-family: var(--rl-font-mono); font-size: .875em; font-weight: 500; line-height: 1.5;
   padding: 2px 8px; border: 0; border-radius: 6px;
-  color: var(--rl-code-ink, #1E2939); background: var(--rl-code-bg, rgba(243, 244, 246, .5)); }
+  color: var(--rl-code-ink, #1E2939); background: var(--rl-code-bg, rgba(243, 244, 246, .5));
+  /* A long path or URL breaks inside the chip, as Mintlify's does, instead
+     of running off a phone screen. */
+  word-break: break-word; overflow-wrap: break-word;
+}
 /* Inside a callout, inline code takes the callout's hue, as links do. */
 .rl-callout :not(pre) > code:not([class]),
 #nd-page .prose .rl-callout :not(pre) > code:not([class]) { color: var(--rl-cal-link, var(--rl-code-ink, #1E2939)); }

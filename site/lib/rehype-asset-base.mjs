@@ -127,10 +127,16 @@ function visitJsx(node, caption) {
   };
   if (node.name === 'img') {
     for (const [name, value] of Object.entries(LAZY)) push(name, value);
-    if (typeof original === 'string' && !attr(node, 'width') && !attr(node, 'height')) {
+    // A lone `height="400"` (nine images) is ignored by Mintlify, which draws
+    // them full-width at their own ratio; here it left the image 0px wide
+    // until it loaded. So without a width, both come from the file.
+    if (typeof original === 'string' && !attr(node, 'width')) {
       const bare = original.startsWith(`${BASE}/`) ? original.slice(BASE.length) : original;
       const dim = ASSET.test(bare) ? sizeOf(bare) : undefined;
-      if (dim?.width && dim?.height) { push('width', String(dim.width)); push('height', String(dim.height)); }
+      if (dim?.width && dim?.height) {
+        node.attributes = node.attributes.filter((a) => !(a.type === 'mdxJsxAttribute' && a.name === 'height'));
+        push('width', String(dim.width)); push('height', String(dim.height));
+      }
     }
   } else if (node.name === 'iframe') {
     push('title', typeof caption === 'string' && caption.trim()
