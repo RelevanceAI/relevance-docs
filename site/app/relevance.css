@@ -68,8 +68,8 @@
 
   /* Mintlify's measured content column at every viewport above 1280px, and
      the wider one it uses for `mode: "wide"` pages. */
-  --rl-measure: 677px;
-  --rl-measure-wide: 769px;
+  --rl-measure: 988.8125px;
+  --rl-measure-wide: 768.8125px;
 }
 
 .dark, :root[data-theme='dark'], [data-theme='dark'] {
@@ -133,8 +133,10 @@
   --color-fd-ring: var(--rl-primary);
 }
 
-/* Mintlify holds the article column at 677px on every viewport above 1280px.
-   Fumadocs sets 900px through a Tailwind arbitrary variant on #nd-page
+/* Mintlify's article column is bounded by the table of contents, 80px
+   before it (60px from the viewport edge when there is none), and capped at
+   988.8px -- 677px at 1440, the full 988.8 from 1752 up. Measured at fifteen
+   widths from 1024 to 2560. Fumadocs sets 900px through a Tailwind arbitrary variant on #nd-page
    (`*:max-w-[900px]`, i.e. every direct child), which is why the same page ran
    ~200px wider and every paragraph broke in a different place. The id selector
    outranks that class without !important. */
@@ -142,6 +144,14 @@
 /* `mode: "wide"` pages, which fumadocs marks with data-full. Mintlify runs
    these at 769px, not edge to edge -- its default here would be 1285px. */
 #nd-page[data-full="true"] > * { max-width: var(--rl-measure-wide); }
+/* ...and they never centre: the column stays at x=387 at every width, with
+   no table-of-contents column reserved beside it. */
+@media (min-width: 768px) {
+  html #nd-notebook-layout[data-sidebar-collapsed] #nd-page[data-full="true"] { padding-left: 91.1875px; padding-right: 60px; }
+}
+@media (min-width: 1280px) {
+  html #nd-notebook-layout[data-sidebar-collapsed]:has(#nd-page[data-full="true"]) { --fd-toc-width: 0px; }
+}
 
 body {
   font-family: var(--rl-font-sans);
@@ -276,6 +286,10 @@ code, pre, kbd, samp { font-feature-settings: normal; }
 .rl-callout-body > :first-child { margin-top: 0; }
 .rl-callout-body > :last-child { margin-bottom: 0; }
 .rl-callout-body p, .rl-callout-body li { color: inherit; margin: 0; font-size: 14px; line-height: 20px; }
+/* Doubled up so it wins inside a ParamField or accordion, whose own 24px/28px
+   paragraph rules otherwise set the lines of a callout nested in them. */
+#nd-page .rl-callout .rl-callout-body :is(p, li) { font-size: 14px; line-height: 20px; margin: 0; }
+#nd-page .rl-callout .rl-callout-body p + p { margin-top: 17.5px; }
 .rl-callout-body strong { color: inherit; }
 /* Two paragraphs in one callout sit 1.25em (17.5px) apart, as on the preview. */
 .rl-callout-body p + p { margin-top: 17.5px; }
@@ -354,10 +368,15 @@ code, pre, kbd, samp { font-feature-settings: normal; }
    rhythm comes from each card's own 8px margin, which .rl-card now carries,
    so the group itself needs no margin either. */
 .rl-card-group { display: grid; gap: 0 16px; margin: 0; }
-.rl-card-group[data-cols="1"] { grid-template-columns: 1fr; }
-.rl-card-group[data-cols="2"] { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.rl-card-group[data-cols="3"] { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
-.rl-card-group[data-cols="4"] { grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); }
+/* Mintlify: one column below 640px, then exactly `cols` equal columns --
+   never auto-fit, so a lone card in a two-column group stays half-width
+   rather than stretching across the page. */
+.rl-card-group { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) {
+  .rl-card-group[data-cols="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rl-card-group[data-cols="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .rl-card-group[data-cols="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
 
 /* Mintlify stacks the card: bare icon on its own line, then the title, then
    the body. The previous inline icon-chip + chevron row was the single most
@@ -520,7 +539,13 @@ a.rl-card, div.rl-card { font-weight: 400; }
 .rl-frame-inner { border: 0; border-radius: 12px;
   overflow: hidden; background: transparent; }
 .rl-frame img { display: block; width: 100%; height: auto; margin: 0; border-radius: 0; }
-.rl-frame-caption { margin-top: .55rem; font-size: .83rem; color: var(--rl-faint); text-align: center; }
+/* Caption: 14px/20px body gray, 12px under the image, 32px in each side and
+   8px of mat below. */
+.rl-frame-caption { margin: 12px 0 0; padding: 0 32px 8px; font-size: 14px; line-height: 20px; color: #404045; text-align: center; }
+.dark .rl-frame-caption, [data-theme='dark'] .rl-frame-caption { color: var(--rl-muted); }
+/* A component that follows a Frame directly gets 20px above it on the
+   preview; after a paragraph or heading it has none of its own. */
+.rl-frame + :is(.rl-accordion-group, .rl-accordion, .rl-card-group, .rl-tabs) { margin-top: 20px; }
 
 .rl-tabs { margin: 1.5rem 0; border: 1px solid var(--rl-line); border-radius: var(--rl-radius); overflow: hidden; }
 .rl-tab + .rl-tab { border-top: 1px solid var(--rl-line); }
@@ -612,16 +637,30 @@ a.rl-card, div.rl-card { font-weight: 400; }
   display: flex; flex-direction: column;
   border: 1px solid rgba(0, 0, 0, .1); border-radius: var(--rl-radius-lg);
   background: var(--rl-surface-2); overflow: visible; }
+/* Labels: 0 6px padding, 4px apart from 10px in, the active one in primary
+   over a 2px bar that sits on the code panel's top edge. */
 .rl-codegroup > .rl-tablist { background: transparent; border: 0;
-  padding: 0 10px 0 0; margin: 0; gap: 8px; }
+  padding: 0 46px 0 10px; margin: 0; gap: 4px; }
 .rl-codegroup > .rl-tablist > .rl-tab-button {
-  padding: 0; margin: 4px 0 6px; border: 0; border-radius: 0;
+  position: relative; padding: 0 6px; margin: 4px 0 6px; border: 0; border-radius: 0;
   background: transparent; font-size: 12px; font-weight: 500;
   line-height: 24px; color: var(--rl-codetab); }
 .rl-codegroup > .rl-tablist > .rl-tab-button:hover { background: transparent; color: var(--rl-ink); }
 .rl-codegroup > .rl-tablist > .rl-tab-button[data-active] {
   background: transparent; color: var(--rl-primary); }
-.rl-codegroup .rl-tab-panel { padding: 0; }
+.rl-codegroup > .rl-tablist > .rl-tab-button[data-active]::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
+  border-radius: 9999px; background: var(--rl-primary); }
+.rl-codegroup .rl-tab-panel { padding: 0; position: relative; }
+/* The code block inside is the white panel: no border or margin of its own,
+   a 14px radius, 14px 16px of padding -- and its copy button rides up into
+   the tab row's right end, where Mintlify puts it. */
+.rl-codegroup { position: relative; }
+#nd-page .rl-codegroup figure.shiki {
+  margin: 0; border: 0; border-radius: 14px; overflow: visible;
+  background: var(--rl-code-panel, #FFFFFF); }
+#nd-page .rl-codegroup figure.shiki div[role="region"] { border-radius: 14px; }
+#nd-page .rl-codegroup figure.shiki > div.absolute:has(> button[aria-label="Copy Text"]) { top: -30px; right: 10px; }
 
 /* Six "pick your path" guides wrap their tabs in this to frame the choice.
    Ported from the Mintlify custom stylesheet, retargeted at the markup
@@ -907,7 +946,13 @@ a:has(> .rl-nav-orphan), a:has(.rl-nav-orphan) { display: none !important; }
    at 600 over a gray-200 rule, gray-100 rules between rows but not after the
    last, and 16px of air inside the scroll box above and below. The rounded,
    bordered grid was fumadocs' prose preset. */
-#nd-page .rl-table-scroll { margin: 16px 0; padding: 16px 0; }
+/* The scroll box starts 20px left of the column and pads 20px each side, so
+   the table lines up with the text but ends 40px short of it (637px of 677),
+   and every body cell is at least 150px: a five-column table scrolls rather
+   than squeezing. That min-width is what made two-column tables wrap their
+   second column the way Mintlify's do. */
+#nd-page .rl-table-scroll { margin: 16px 0 16px -20px; padding: 16px 20px; width: 100%; box-sizing: border-box; }
+#nd-page .prose .rl-table-scroll td { min-width: 150px; }
 #nd-page .prose .rl-table-scroll > table {
   margin: 0; width: 100%; border: 0; border-radius: 0; overflow: visible;
   border-collapse: collapse; font-size: 14px; line-height: 20px;
@@ -1105,8 +1150,12 @@ html #nd-notebook-layout[data-sidebar-collapsed] { --fd-layout-width: 100%; }
   /* The offset is written against the main column rather than the viewport,
      so a classic scrollbar cannot shift it: with the 296px sidebar column,
      50vw - 489px from the page edge is 50% - 489px of <main>. */
-  #nd-page { padding-left: max(91px, calc(50% - 489px)); padding-right: 80px; }
+  #nd-page { padding-left: max(91.1875px, calc(50% - 488.8125px)); padding-right: 60px; }
 }
+/* The 80px gap to the table of contents replaces the 60px edge margin once
+   there is one. Mintlify's x is 387.19, not 387: that 0.19px decides where a
+   line that nearly fills the column breaks. */
+@media (min-width: 1280px) { #nd-page { padding-right: 80px; } }
 @media (min-width: 1280px) {
   html #nd-notebook-layout[data-sidebar-collapsed] { --fd-toc-width: 296px; }
 }
@@ -1294,7 +1343,8 @@ html #nd-notebook-layout:has(#nd-page[data-product="no-tabs"]) [data-header-tabs
   padding: 2px 8px; border: 0; border-radius: 6px;
   color: var(--rl-code-ink, #1E2939); background: var(--rl-code-bg, rgba(243, 244, 246, .5)); }
 /* Inside a callout, inline code takes the callout's hue, as links do. */
-.rl-callout :not(pre) > code:not([class]) { color: var(--rl-cal-link, var(--rl-code-ink, #1E2939)); }
+.rl-callout :not(pre) > code:not([class]),
+#nd-page .prose .rl-callout :not(pre) > code:not([class]) { color: var(--rl-cal-link, var(--rl-code-ink, #1E2939)); }
 .dark, [data-theme='dark'] { --rl-code-ink: var(--rl-ink); --rl-code-bg: rgba(255, 255, 255, .06); }
 
 /* ========================================================= list markers
@@ -1346,9 +1396,20 @@ article ol > li::marker { color: var(--rl-counter, #6A7282); }
   border: 1px solid var(--rl-code-line, rgba(12, 12, 17, .1)); border-radius: 16px;
   background: var(--rl-code-panel, #FFFFFF); box-shadow: none; }
 #nd-page figure.shiki > div[role="region"] { padding: 14px 0; font-size: 14px; line-height: 24px; }
+/* Mintlify shows a code block at full length; fumadocs caps it at 600px and
+   scrolls the rest, which hid 172px of the Outlook event payload. */
+#nd-page figure.shiki div[role="region"] { max-height: none; }
 #nd-page figure.shiki pre, #nd-page figure.shiki pre code { font-size: 14px; line-height: 24px; }
 /* The copy button: 26px, #A0A0A5, 12px/16px in from the corner when untitled. */
 #nd-page figure.shiki button[aria-label="Copy Text"] { width: 26px; height: 26px; color: #A0A0A5; }
+/* Mintlify's copy glyph is two overlapping squares (lucide "copy", ISC), not
+   fumadocs' clipboard. Swapped for the idle state only, so the check mark
+   fumadocs shows after a copy still appears. */
+#nd-page figure.shiki button[aria-label="Copy Text"] > svg.lucide-clipboard { display: none; }
+#nd-page figure.shiki button[aria-label="Copy Text"]:has(> svg.lucide-clipboard)::before {
+  content: ""; width: 16px; height: 16px; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3E%3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='14' height='14' x='8' y='8' rx='2' ry='2'/%3E%3Cpath d='M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2'/%3E%3C/svg%3E") center / contain no-repeat; }
 #nd-page figure.shiki > div.absolute:has(> button[aria-label="Copy Text"]) {
   top: 12px; right: 16px; backdrop-filter: none; background: transparent; }
 

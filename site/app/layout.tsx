@@ -23,7 +23,10 @@ import './relevance.css';
  * face that the marketing-brand pass introduced is no longer referenced by any
  * rule -- keeping it would download a second family on every page for nothing.
  */
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
+/* Italic too: Mintlify loads Inter's real italic, which sets wider than the
+   upright face slanted -- without it an italic line that wraps there fit on
+   one line here (every quoted example prompt is italic). */
+const inter = Inter({ subsets: ['latin'], style: ['normal', 'italic'], variable: '--font-inter', display: 'swap' });
 
 /*
  * Paper Mono is Mintlify's monospace -- every code block, inline code span and

@@ -60,6 +60,39 @@ const rewrite = (v) => {
 const LAZY = { loading: 'lazy', decoding: 'async' };
 
 /**
+ * A lazy <img> with no width/height is 0px tall until it loads, so the page
+ * below it jumps when it arrives -- 649px on /get-started/chat/super-gtm/skills
+ * -- and a heading linked to from elsewhere is scrolled to the wrong place.
+ * Markdown images get their size from fumadocs; the raw ones get it here:
+ * from the manifest when the image was re-encoded, else from the file.
+ */
+const PUBLIC = path.resolve(process.cwd(), 'public');
+function sizeOf(url) {
+  if (manifest[url]?.width) return manifest[url];
+  let b;
+  try { b = fs.readFileSync(path.join(PUBLIC, url)); } catch { return undefined; }
+  if (b.length > 24 && b.readUInt32BE(0) === 0x89504e47) return { width: b.readUInt32BE(16), height: b.readUInt32BE(20) };
+  if (b.length > 10 && b.toString('ascii', 0, 3) === 'GIF') return { width: b.readUInt16LE(6), height: b.readUInt16LE(8) };
+  if (b.length > 30 && b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+    const kind = b.toString('ascii', 12, 16);
+    if (kind === 'VP8X') return { width: 1 + b.readUIntLE(24, 3), height: 1 + b.readUIntLE(27, 3) };
+    if (kind === 'VP8L') { const v = b.readUInt32LE(21); return { width: 1 + (v & 0x3fff), height: 1 + ((v >> 14) & 0x3fff) }; }
+    if (kind === 'VP8 ') return { width: b.readUInt16LE(26) & 0x3fff, height: b.readUInt16LE(28) & 0x3fff };
+  }
+  if (b.length > 4 && b[0] === 0xff && b[1] === 0xd8) {
+    for (let i = 2; i + 9 < b.length;) {
+      if (b[i] !== 0xff) { i++; continue; }
+      const m = b[i + 1];
+      if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc) {
+        return { width: b.readUInt16BE(i + 7), height: b.readUInt16BE(i + 5) };
+      }
+      i += 2 + b.readUInt16BE(i + 2);
+    }
+  }
+  return undefined;
+}
+
+/**
  * An <iframe> with no accessible name is a serious axe failure: a screen
  * reader announces "frame" and nothing else. 22 embeds across 16 pages had
  * none. Most sit inside a <Frame caption="...">, which describes them
@@ -82,6 +115,7 @@ const attr = (node, name) =>
 
 function visitJsx(node, caption) {
   if (!Array.isArray(node.attributes)) return;
+  const original = node.name === 'img' ? attr(node, 'src') : undefined;
   for (const a of node.attributes) {
     if (a.type !== 'mdxJsxAttribute') continue;
     if (a.name === 'src' || a.name === 'poster') a.value = rewrite(a.value);
@@ -93,6 +127,11 @@ function visitJsx(node, caption) {
   };
   if (node.name === 'img') {
     for (const [name, value] of Object.entries(LAZY)) push(name, value);
+    if (typeof original === 'string' && !attr(node, 'width') && !attr(node, 'height')) {
+      const bare = original.startsWith(`${BASE}/`) ? original.slice(BASE.length) : original;
+      const dim = ASSET.test(bare) ? sizeOf(bare) : undefined;
+      if (dim?.width && dim?.height) { push('width', String(dim.width)); push('height', String(dim.height)); }
+    }
   } else if (node.name === 'iframe') {
     push('title', typeof caption === 'string' && caption.trim()
       ? caption.trim()
