@@ -1,0 +1,184 @@
+---
+title: 'Miro'
+description: 'Connect your AI agents with Miro to automate collaborative whiteboarding, visual project management, and board content operations.'
+sidebarTitle: 'Miro'
+---
+
+Miro is an online collaborative whiteboarding platform used for visual project management, design thinking, diagramming, and team brainstorming. The Relevance AI integration connects your agents to Miro via native OAuth, enabling them to read and write boards, create sticky notes, shapes, and card items, and call the Miro API directly for operations not covered by the built-in steps.
+
+<Warning>
+  The Miro integration in Relevance AI was built by Relevance AI, and is therefore supported by our team, not Miro. If you have a question or issue with using Miro in Relevance AI, please [reach out to our support team](/get-started/support). If you have a question or issue that is only about Miro itself, you can contact [Miro support](https://help.miro.com/).
+</Warning>
+
+## Connect the integration
+
+The Miro integration uses native OAuth and requests two scopes: `boards:read` and `boards:write`.
+
+1. Navigate to the **Integrations** section in your Relevance AI dashboard.
+2. Find and select **Miro** from the available integrations.
+3. Click **Connect**.
+4. You will be redirected to Miro to authorize the connection.
+5. Log in to your Miro account if prompted.
+6. Review and approve the requested permissions (`boards:read` and `boards:write`).
+7. Once authorized, you will be redirected back to Relevance AI with the integration active.
+
+<Info>
+  Access tokens expire after 60 minutes and are automatically refreshed. Refresh tokens expire after 60 days and are auto-rotated on each use.
+</Info>
+
+## Tool steps
+
+The Miro integration provides 15 tool steps organized by the type of Miro object they operate on.
+
+### Board operations
+
+<CardGroup cols={2}>
+  <Card title="List boards" icon="table-columns">
+    Retrieve a list of all Miro boards accessible to the connected account.
+  </Card>
+  <Card title="Get board" icon="square-info">
+    Fetch details for a specific board by its ID.
+  </Card>
+  <Card title="Create board" icon="square-plus">
+    Create a new Miro board with a specified name and settings.
+  </Card>
+  <Card title="Update board" icon="pen-to-square">
+    Update the name, description, or sharing policy of an existing board.
+  </Card>
+  <Card title="Delete board" icon="trash">
+    Permanently delete a board by its ID.
+  </Card>
+</CardGroup>
+
+### Item operations
+
+<CardGroup cols={2}>
+  <Card title="Get items" icon="list">
+    Retrieve all items on a board, with optional filtering by item type.
+  </Card>
+  <Card title="Get item" icon="magnifying-glass">
+    Fetch a single item from a board by its item ID.
+  </Card>
+  <Card title="Delete item" icon="circle-minus">
+    Remove a specific item from a board.
+  </Card>
+</CardGroup>
+
+### Sticky note operations
+
+<CardGroup cols={2}>
+  <Card title="Create sticky note" icon="note-sticky">
+    Add a sticky note to a board with specified text, color, and position.
+  </Card>
+  <Card title="Update sticky note" icon="pen-nib">
+    Change the text, color, or position of an existing sticky note.
+  </Card>
+</CardGroup>
+
+### Shape operations
+
+<CardGroup cols={2}>
+  <Card title="Create shape" icon="shapes">
+    Add a shape item to a board with specified geometry and style properties.
+  </Card>
+  <Card title="Update shape" icon="vector-square">
+    Update the geometry, style, or content of an existing shape on a board.
+  </Card>
+</CardGroup>
+
+### Card item operations
+
+<CardGroup cols={2}>
+  <Card title="Create card item" icon="credit-card">
+    Create a card item on a board with a title, description, assignee, and due date.
+  </Card>
+  <Card title="Update card item" icon="address-card">
+    Update the title, description, assignee, or due date of an existing card item.
+  </Card>
+</CardGroup>
+
+### Generic API
+
+<CardGroup cols={2}>
+  <Card title="Generic Miro API call" icon="code">
+    Make a custom authenticated request to any Miro REST API endpoint not covered by the specific steps above.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Type "Miro" in the tool step search bar to see all available Miro actions when building a tool.
+</Tip>
+
+## Use the generic API tool step (advanced)
+
+For operations not covered by the 14 specific tool steps, the **Generic Miro API call** step lets you make authenticated requests to any Miro REST API endpoint.
+
+<Steps>
+  <Step title="Create or open a tool">
+    Create a new tool in Relevance AI or open an existing one.
+  </Step>
+  <Step title="Add the Generic Miro API call step">
+    In the tool steps panel, search for **Generic Miro API call** and add it to your workflow.
+  </Step>
+  <Step title="Select your connected Miro account">
+    Choose the Miro account you connected via OAuth.
+  </Step>
+  <Step title="Configure the request">
+    Set the HTTP method (GET, POST, PATCH, DELETE), the API path (for example, `/v2/boards/{board_id}/frames`), and any required request body or query parameters.
+  </Step>
+  <Step title="Test the call">
+    Run the step to verify it returns the expected response before saving your tool.
+  </Step>
+</Steps>
+
+## Migration from Pipedream
+
+If you previously connected Miro through a Pipedream-based integration, a migration wizard automatically upgrades your existing Miro steps to their native equivalents. All 15 Pipedream-based Miro step types are mapped to native versions — no manual reconfiguration required.
+
+<Info>
+  The migration wizard runs automatically when you open a tool that contains Pipedream-based Miro steps. Review the migrated steps to confirm settings transferred as expected.
+</Info>
+
+## Common use cases
+
+<AccordionGroup>
+  <Accordion title="Populating a retrospective board with sticky notes">
+    An agent can read responses from a form or data source, then use the **Create sticky note** step to add each response to a designated Miro board. Sticky notes can be grouped by color to distinguish categories such as "what went well" from "what to improve."
+  </Accordion>
+
+  <Accordion title="Creating and managing project boards">
+    Agents can use **Create board** to spin up a new board for each project, then use **Create card item** steps to populate it with tasks, assign owners, and set due dates — all without manual setup in the Miro UI.
+  </Accordion>
+
+  <Accordion title="Syncing task status from an external system">
+    When a task in an external system changes status, an agent can retrieve the corresponding card item from Miro using **Get item**, then call **Update card item** to reflect the new state — keeping the visual board in sync automatically.
+  </Accordion>
+
+  <Accordion title="Archiving or auditing board content">
+    An agent can call **List boards** to enumerate all boards in an account, then use **Get items** on each board to export a structured snapshot of all content for auditing, backup, or reporting purposes.
+  </Accordion>
+</AccordionGroup>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What permissions does the Miro integration request?">
+    The integration requests two OAuth scopes: `boards:read` (to retrieve board and item data) and `boards:write` (to create, update, and delete boards and items). These scopes are requested at connection time and cannot be changed after authorization without reconnecting.
+  </Accordion>
+
+  <Accordion title="How long do Miro access tokens last?">
+    Access tokens expire after 60 minutes. Relevance AI refreshes them automatically in the background so your agents do not need to re-authenticate. Refresh tokens expire after 60 days and are replaced with a new one each time they are used.
+  </Accordion>
+
+  <Accordion title="Can I connect multiple Miro accounts?">
+    Yes. You can connect more than one Miro account by adding separate integrations for each. When configuring a tool step, select the appropriate account from the connected accounts list.
+  </Accordion>
+
+  <Accordion title="What happens if I revoke access in Miro?">
+    If you revoke the connection in Miro, your agent's tool steps will start returning authentication errors. Reconnect the integration from the Relevance AI Integrations page to restore access.
+  </Accordion>
+
+  <Accordion title="Do I need a paid Miro plan to use this integration?">
+    A free Miro account can connect to the integration, but certain Miro features (such as private boards or advanced sharing settings) may require a paid Miro plan. Check [Miro's pricing page](https://miro.com/pricing/) for details on plan-specific restrictions.
+  </Accordion>
+</AccordionGroup>
