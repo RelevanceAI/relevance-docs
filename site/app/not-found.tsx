@@ -1,32 +1,32 @@
-import Link from 'next/link';
+import type { Metadata } from 'next';
+import { MobileNav } from '@/components/site/mobile-nav';
+
+export const metadata: Metadata = { title: 'Page not found' };
 
 /**
- * Branded 404.
+ * Mintlify's 404, measured on the preview: no sidebar and no tab row, just
+ * the header, then a centred block 192px down -- "404" at 48px/600 in
+ * primary, a 24px/500 heading, one 16px line -- 24px apart. On a phone the
+ * hamburger row stays, titled "Page not found", so the navigation is still
+ * one tap away; on desktop the header search is the way out, as it is there.
  *
- * Next's default is a bare "404: This page could not be found." with no
- * styling and no way out. Mintlify's 404 is client-rendered and returns an
- * empty document to crawlers, so there is nothing to match -- this is simply
- * better than both. It renders inside the docs layout, so the sidebar and
- * search stay available for recovery.
+ * It renders inside the docs layout, so it has to claim the grid's `main`
+ * area itself: left to auto-placement it landed in the first free track, a
+ * 60px column, and pushed the sidebar below it.
  *
  * For static export this becomes 404.html, which is what static hosts serve.
  */
 export default function NotFound() {
   return (
-    <div className="rl-404">
-      <p className="rl-404-code">404</p>
-      <h1 className="rl-404-title">We can&rsquo;t find that page</h1>
-      <p className="rl-404-body">
-        The page may have moved, or the link that brought you here may be out of date.
-      </p>
-      <div className="rl-404-actions">
-        <Link className="rl-404-btn rl-404-btn--primary" href="/docs/get-started/introduction">
-          Go to the docs home
-        </Link>
-        <Link className="rl-404-btn" href="/docs/get-started/support">
-          Contact support
-        </Link>
-      </div>
-    </div>
+    <>
+      <MobileNav title="Page not found" />
+      <main className="rl-404">
+        <div className="rl-404-block">
+          <p className="rl-404-code">404</p>
+          <h1 className="rl-404-title">Page not found</h1>
+          <p className="rl-404-body">We couldn&rsquo;t find the page.</p>
+        </div>
+      </main>
+    </>
   );
 }

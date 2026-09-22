@@ -53,8 +53,9 @@ for (const f of REQUIRED) {
 // output and dependencies are expected; anything else is probably a mistake.
 // `images/_opt` and `image-manifest.json` are written by
 // tools/optimize-images.mjs, which `npm run build` runs before next build.
+// `*.tsbuildinfo` is tsc's incremental cache, written by `tsc --noEmit`.
 const EXPECTED_IGNORES =
-  /(^|\/)(node_modules|\.next|out|dist|\.source|_opt)(\/|$)|next-env\.d\.ts$|(^|\/)image-manifest\.json$/;
+  /(^|\/)(node_modules|\.next|out|dist|\.source|_opt)(\/|$)|next-env\.d\.ts$|(^|\/)image-manifest\.json$|\.tsbuildinfo$/;
 const stray = git(['status', '--ignored', '--short', 'site/'])
   .split('\n')
   .filter((l) => l.startsWith('!!'))
