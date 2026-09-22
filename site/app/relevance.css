@@ -94,6 +94,7 @@
   --rl-cal-yellow-bg:    rgba(234, 179, 8, .2);   --rl-cal-yellow-line:  #713F12;
   --rl-cal-red-bg:       rgba(239, 68, 68, .2);   --rl-cal-red-line:     #7F1D1D;
   /* ...and the 300 weight on the dark fills. */
+  --rl-tab-rule: var(--rl-line);
   --rl-cal-blue-link:    #93C5FD;  --rl-cal-green-link:   #86EFAC;
   --rl-cal-neutral-link: #D4D4D4;  --rl-cal-yellow-link:  #FDE047;
   --rl-cal-red-link:     #FCA5A5;
@@ -360,6 +361,47 @@ a.rl-card:hover { border-color: rgba(0, 0, 0, .18); }
    3.06:1 -- under the 4.5:1 AA floor, and on the SELECTED tab of all
    places. Page ink on that same fill is 6.29:1. */
 .dark .rl-tab-button[data-active] { color: var(--rl-bg); }
+
+/*
+ * <Tabs> in Mintlify is an underlined text row, not a pill group. Measured:
+ * the list is a flex row with a 24px column gap and a 1px #E0E0E5 rule under
+ * it; each tab is 14px/600 with 12px 0 10px padding and a 1px bottom border --
+ * #4F46E5 text and underline when active, page ink and a transparent underline
+ * when not.
+ *
+ * The pill treatment this replaces existed because the strip WRAPPED at 390px
+ * and an unstyled wrapped row read as body copy. Mintlify solves the same
+ * problem by scrolling instead of wrapping, which is what `nowrap` +
+ * `overflow-x: auto` does here -- so the row stays one line at any width and
+ * the reason for the pills goes away.
+ *
+ * Scoped to `.rl-tabs` on purpose: `.rl-codegroup` and `.path-picker` share
+ * these class names and are NOT this component, so they keep the rules above.
+ */
+.rl-tabs { margin: 1.5rem 0; border: 0; border-radius: 0; overflow: visible; }
+.rl-tabs > .rl-tablist {
+  display: flex; flex-wrap: nowrap; gap: 24px;
+  padding: 0 0 1px; margin: 0 0 24px; background: transparent;
+  border-bottom: 1px solid var(--rl-tab-rule, #E0E0E5);
+  overflow-x: auto; scrollbar-width: none;
+}
+.rl-tabs > .rl-tablist::-webkit-scrollbar { display: none; }
+.rl-tabs > .rl-tablist > .rl-tab-button {
+  padding: 12px 0 10px; margin: 0;
+  border: 0; border-bottom: 1px solid transparent; border-radius: 0;
+  background: transparent; color: var(--rl-ink);
+  font-size: 14px; font-weight: 600; line-height: 24px;
+  white-space: nowrap; flex: none;
+}
+.rl-tabs > .rl-tablist > .rl-tab-button:hover {
+  background: transparent; border-bottom-color: var(--rl-line-strong);
+}
+.rl-tabs > .rl-tablist > .rl-tab-button[data-active] {
+  background: transparent; color: var(--rl-primary);
+  border-bottom-color: var(--rl-primary);
+}
+.rl-tabs > .rl-tab-panel { padding: 0; }
+
 .rl-tab-panel { padding: .9rem 1rem; }
 .rl-tab-panel > :first-child { margin-top: 0; }
 .rl-tab-panel > :last-child { margin-bottom: 0; }
