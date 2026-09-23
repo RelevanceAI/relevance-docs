@@ -8,13 +8,13 @@ import { Icon } from '@/components/mintlify';
 
 /**
  * Everything Mintlify puts under a page's content, in its order and at its
- * measured spacing: the feedback row, then prev / next, then a site footer
- * carrying docs.json's `footer.socials`.
+ * measured spacing: the edit / issue row, then prev / next, then a site
+ * footer carrying docs.json's `footer.socials`.
  *
- * The vote posts to PostHog rather than Mintlify's own endpoint, so the
- * signal keeps flowing to a system the team already reads.
+ * There is deliberately no "Was this page helpful?" vote: it was used about
+ * once a fortnight on Mintlify and nothing reads the result here, so it
+ * asked readers for a signal that went nowhere.
  */
-import { FeedbackVote } from './feedback-vote';
 
 export interface PagerLink { url: string; name: string }
 
@@ -31,14 +31,14 @@ export function PageFooter({ filePath, prev, next }: { filePath: string; prev?: 
   return (
     <div className="rl-page-end">
       <div className="rl-feedback-toolbar">
-        <FeedbackVote filePath={filePath}>
+        <div className="rl-feedback-row">
           <a className="rl-fb-btn" href={editUrl} target="_blank" rel="noreferrer">
             <Pencil aria-hidden="true" /><small>Suggest edits</small>
           </a>
           <a className="rl-fb-btn" href={issueUrl} target="_blank" rel="noreferrer">
             <TriangleAlert aria-hidden="true" /><small>Raise issue</small>
           </a>
-        </FeedbackVote>
+        </div>
       </div>
       {prev || next ? (
         <nav className="rl-pager" aria-label="Pagination">

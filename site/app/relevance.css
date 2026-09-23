@@ -821,21 +821,12 @@ a.rl-card, div.rl-card { font-weight: 400; }
 /* ---------------------------------------------------------- page footer */
 
 /* Mintlify's block under the content, measured on the preview at 1440 and
-   390: the feedback row 56px below the last content, 64px under it, then
+   390: the edit / issue row 56px below the last content, 64px under it, then
    prev / next, then the site footer 86px below whichever came last. */
 /* 40px, not 56: #nd-page's 16px flex gap supplies the rest. */
 .rl-page-end { margin-top: 40px; }
 .rl-feedback-toolbar { padding-bottom: 64px; }
-.rl-feedback-row {
-  display: flex; flex-wrap: wrap; gap: 16px;
-  align-items: center; justify-content: space-between;
-}
-.rl-feedback-label { margin: 0; font-size: 14px; line-height: 20px; color: #525256; }
-.rl-feedback-actions {
-  flex: 1 1 auto; display: flex; flex-wrap: wrap; gap: 12px;
-  align-items: center; justify-content: space-between;
-}
-.rl-feedback-group { display: flex; gap: 12px; align-items: center; }
+.rl-feedback-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 /* 34px: 8px 14px padding round 16px-tall 14px text, a 12px radius, and a
    hairline of gray-200 at 70% over white at 50%. */
 .rl-fb-btn {
@@ -850,9 +841,7 @@ a.rl-card, div.rl-card { font-weight: 400; }
 .rl-fb-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
 a.rl-fb-btn svg { width: 14px; height: 14px; }
 .rl-fb-btn:hover { color: #404045; border-color: #727276; }
-.rl-fb-btn[aria-pressed='true'] { color: var(--rl-primary); border-color: var(--rl-primary); }
 .rl-fb-btn:focus-visible { outline: 2px solid var(--rl-primary); outline-offset: -2px; }
-.dark .rl-feedback-label, [data-theme='dark'] .rl-feedback-label { color: var(--rl-muted); }
 .dark .rl-fb-btn, [data-theme='dark'] .rl-fb-btn {
   color: var(--rl-muted); border-color: var(--rl-line); background: rgb(255 255 255 / .02);
 }
@@ -886,7 +875,7 @@ a.rl-fb-btn svg { width: 14px; height: 14px; }
 .rl-socials li { margin: 0; padding: 0; }
 .rl-socials a { display: block; width: 20px; height: 20px; color: #727276; transition: color .15s ease; }
 .rl-socials a:hover { color: #404045; }
-.rl-socials .rl-icon { display: block; font-size: 20px; line-height: 20px; width: 20px; text-align: center; }
+.rl-socials .rl-icon { display: block; font-size: 20px; line-height: 20px; width: 20px; text-align: center; color: inherit; }
 .dark .rl-site-footer, [data-theme='dark'] .rl-site-footer { border-top-color: var(--rl-line); }
 .dark .rl-socials a, [data-theme='dark'] .rl-socials a { color: var(--rl-faint); }
 .dark .rl-socials a:hover, [data-theme='dark'] .rl-socials a:hover { color: var(--rl-ink); }
