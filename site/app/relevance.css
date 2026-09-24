@@ -66,10 +66,10 @@
   /* Tailwind's `font-mono`, which fumadocs uses for every code block. */
   --font-mono: var(--rl-font-mono);
 
-  /* Mintlify's measured content column at every viewport above 1280px, and
-     the wider one it uses for `mode: "wide"` pages. */
+  /* Mintlify's measured content column at every viewport above 1280px. Its
+     `mode: "wide"` pages ran narrower still, at 768.8125px; ours keep the
+     same column as every other page and simply drop the ToC beside it. */
   --rl-measure: 988.8125px;
-  --rl-measure-wide: 768.8125px;
 }
 
 .dark, :root[data-theme='dark'], [data-theme='dark'] {
@@ -141,14 +141,14 @@
    ~200px wider and every paragraph broke in a different place. The id selector
    outranks that class without !important. */
 #nd-page > * { max-width: var(--rl-measure); }
-/* `mode: "wide"` pages, which fumadocs marks with data-full. Mintlify runs
-   these at 769px, not edge to edge -- its default here would be 1285px. */
-#nd-page[data-full="true"] > * { max-width: var(--rl-measure-wide); }
-/* ...and they never centre: the column stays at x=387 at every width, with
-   no table-of-contents column reserved beside it. */
-@media (min-width: 768px) {
-  html #nd-notebook-layout[data-sidebar-collapsed] #nd-page[data-full="true"] { padding-left: 91.1875px; padding-right: 60px; }
-}
+/* `mode: "wide"` pages, which fumadocs marks with data-full, differ from the
+   rest in exactly one way: no table of contents beside them. The column keeps
+   the measure, the left edge and the padding every other page has, so moving
+   between them shifts nothing -- only the rail on the right goes away. That
+   is why there is no max-width or padding override here; the only rule these
+   pages need is the one below, which stops the grid reserving the ToC column.
+   (Mintlify ran them at a narrower 769px pinned left, which left the ToC's
+   whole width empty on the right.) */
 @media (min-width: 1280px) {
   html #nd-notebook-layout[data-sidebar-collapsed]:has(#nd-page[data-full="true"]) { --fd-toc-width: 0px; }
 }
@@ -364,6 +364,14 @@ code, pre, kbd, samp { font-feature-settings: normal; }
 .rl-accordion-group > .rl-accordion { border: 0; border-bottom: 1px solid rgba(229, 229, 229, .7); border-radius: 0; margin: 0; }
 .rl-accordion-group > .rl-accordion:last-child { border-bottom: 0; }
 
+/* The hairline above is Mintlify's light-mode grey. Cards and steps swap
+   theirs for --rl-line in dark; the accordions never did, so the group drew
+   a near-white box against the #0A0E1A page. */
+.dark :is(.rl-accordion, .rl-accordion-group, .rl-accordion-group > .rl-accordion),
+[data-theme='dark'] :is(.rl-accordion, .rl-accordion-group, .rl-accordion-group > .rl-accordion) {
+  border-color: var(--rl-line);
+}
+
 /* ----------------------------------------------------------------- cards */
 
 /* Mintlify's grid has a 16px COLUMN gap and no row gap -- the vertical
@@ -390,11 +398,16 @@ code, pre, kbd, samp { font-feature-settings: normal; }
   margin: 8px 0;
   border: 1px solid rgba(0, 0, 0, .1); border-radius: var(--rl-radius-lg);
   background: var(--rl-bg); color: inherit; text-decoration: none;
-  transition: border-color .15s ease, box-shadow .15s ease;
+  transition: border-color .15s ease, background-color .15s ease;
 }
-a.rl-card:hover { border-color: rgba(0, 0, 0, .18); }
+/* Hover lifts the fill one step off the page and lightens the hairline. The
+   card sits on exactly the page colour at rest, so a border-only hover gave
+   the tile nothing to light up with -- against a newly lighter edge the flat
+   middle read as having gone darker, which is the opposite of the intent. */
+a.rl-card:hover { border-color: rgba(0, 0, 0, .18); background: var(--rl-surface); }
 .dark .rl-card, [data-theme='dark'] .rl-card { border-color: var(--rl-line); }
-.dark a.rl-card:hover, [data-theme='dark'] a.rl-card:hover { border-color: var(--rl-line-strong); }
+.dark a.rl-card:hover, [data-theme='dark'] a.rl-card:hover {
+  border-color: var(--rl-line-strong); background: var(--rl-surface); }
 .dark .rl-card-title, [data-theme='dark'] .rl-card-title { color: var(--rl-ink); }
 .dark article h2, .dark article h3,
 [data-theme='dark'] article h2, [data-theme='dark'] article h3 { color: var(--rl-ink); }
@@ -809,9 +822,6 @@ a.rl-card, div.rl-card { font-weight: 400; }
 
 .rl-brand { display: inline-flex; align-items: center; gap: .5rem; min-width: 0; }
 .rl-brand-mark { height: 1.15rem; width: auto; display: block; }
-.rl-brand-mark--dark { display: none; }
-.dark .rl-brand-mark--light { display: none; }
-.dark .rl-brand-mark--dark { display: block; }
 .rl-brand-text {
   font-family: var(--rl-font-head); font-weight: 400; font-size: .95rem;
   letter-spacing: -.02em; color: var(--rl-faint); white-space: nowrap;
@@ -1180,6 +1190,11 @@ html #nd-notebook-layout[data-sidebar-collapsed] { --fd-layout-width: 100%; }
 @media (min-width: 1280px) { #nd-page { padding-right: 80px; } }
 @media (min-width: 1280px) {
   html #nd-notebook-layout[data-sidebar-collapsed] { --fd-toc-width: 296px; }
+  /* The offset above is half the main column, and a wide page's main column is
+     one whole ToC wider -- so the same formula put its content 148px right of
+     where every other page starts it. Half a ToC back brings the left edge
+     into line, and the column simply runs on into the space the ToC left. */
+  #nd-page[data-full="true"] { padding-left: max(91.1875px, calc(50% - 488.8125px - 148px)); }
 }
 /* Mintlify's "On this page" sits at y=155 whatever the header's height -- on
    the SDK's 64px header as on the 112px tabbed one -- with the first entry
@@ -1222,8 +1237,11 @@ html #nd-notebook-layout[data-sidebar-collapsed] { --fd-header-height: 64px; }
 }
 #nd-subnav [data-header-body] { position: relative; height: 64px; border-bottom: 0; }
 @media (min-width: 768px) { #nd-subnav [data-header-body] { padding-inline: 48px; } }
+/* Full-bleed: the rule under the tab row below is a plain border-bottom and
+   runs edge to edge, so insetting this one to the 48px gutter left the two
+   hairlines misaligned and the top one stopping short of the viewport. */
 #nd-subnav [data-header-body]::after { content: ""; position: absolute; bottom: 0;
-  left: 48px; right: 48px; height: 1px; background: var(--rl-hairline, rgba(107, 114, 128, .05)); }
+  left: 0; right: 0; height: 1px; background: var(--rl-hairline, rgba(107, 114, 128, .05)); }
 
 /* Search: a 437x36 field centred in the viewport (the flex-1 columns either
    side already centre it), 12px radius, a 1px 30% zinc ring, and a single
@@ -1254,7 +1272,7 @@ html #nd-notebook-layout[data-sidebar-collapsed] { --fd-header-height: 64px; }
 @media (min-width: 768px) { #nd-subnav [data-header-body] button[data-collapsed] { display: none; } }
 
 /* Tab row: centred, 48px, 24px apart; active tab in ink (not primary) with a
-   1.5px primary underline, inactive #525256. Fumadocs marks the active tab
+   3px primary underline, inactive #525256. Fumadocs marks the active tab
    only by class, hence `.border-fd-primary`. */
 #nd-subnav [data-header-tabs] { height: 48px; padding-inline: 48px; gap: 24px;
   justify-content: center; align-items: stretch;
@@ -1265,7 +1283,7 @@ html #nd-notebook-layout[data-sidebar-collapsed] { --fd-header-height: 64px; }
 #nd-subnav [data-header-tabs] > a:hover { color: var(--rl-tab-active, #27272C); }
 #nd-subnav [data-header-tabs] > a.border-fd-primary { color: var(--rl-tab-active, #27272C); }
 #nd-subnav [data-header-tabs] > a.border-fd-primary::after { content: ""; position: absolute;
-  left: 0; right: 0; bottom: 0; height: 1.5px; background: var(--rl-primary); }
+  left: 0; right: 0; bottom: 0; height: 3px; background: var(--rl-primary); }
 
 .dark, [data-theme='dark'] {
   --rl-hairline: rgba(255, 255, 255, .07);
@@ -1275,13 +1293,22 @@ html #nd-notebook-layout[data-sidebar-collapsed] { --fd-header-height: 64px; }
 }
 
 /* ============================================================ navbar brand
- * Mintlify shows the logo alone at h-7 (28px) -- no "Docs" label beside it --
- * and puts the product switcher 32px after it.
+ * Mintlify puts the product switcher 32px after the lockup. The lockup is an
+ * inline SVG (components/site/brand-mark.tsx) whose wordmark is drawn in
+ * currentColor, so this one declaration is the whole of its theming -- the
+ * glyph keeps its own indigos. 24px rather than Mintlify's 28px because the
+ * lockup now carries "Docs" as well, which makes it 208px wide.
  */
-.rl-brand-mark { height: 28px; }
-/* Visually hidden, not display:none: both logo images are alt="" (the
-   wordmark is decorative once named), so this text is the home link's only
-   accessible name. */
+.rl-brand { color: #0D162F; }
+.dark .rl-brand, [data-theme='dark'] .rl-brand { color: var(--rl-ink); }
+/* 29px, not 24px: the viewBox grew to 96 units tall to fit the enlarged mark,
+   so the same height would have shrunk the type by a sixth. At 29px the
+   wordmark renders the size it did before and the mark comes out 5px larger.
+   No nudge any more -- brand-mark.tsx centres both halves on y=40. */
+.rl-brand-mark { height: 29px; }
+/* Visually hidden, not display:none: the lockup is aria-hidden (the wordmark
+   is decorative once named), so this text is the home link's only accessible
+   name. */
 .rl-brand-text { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
@@ -1324,14 +1351,28 @@ html #nd-notebook-layout:has(#nd-page[data-product="no-tabs"]) [data-header-tabs
  */
 #nd-sidebar [data-id$="-viewport"] { padding: 32px 0 32px 40px; }
 #nd-sidebar [data-id$="-viewport"] > div { gap: 1px; }
+/* flex-shrink: 0 is load-bearing, not tidiness. An open folder's panel is a
+   column flex container that base-ui measures by reading scrollHeight while
+   the panel is still height:0 -- and a flex item with a min-height shrinks to
+   exactly that floor under a constrained height. The two-line entries under
+   Marketplace > Relevance Builders are 60px each, so the panel measured 190px
+   against a real 238px and every open ended in a 48px jump. Without the
+   min-height below the items would floor at their content height and this
+   would not arise; with it, they have to be told not to shrink. */
 #nd-sidebar a[data-active], #nd-sidebar button[aria-expanded] {
-  min-height: 36px; padding: 6px 12px 6px 16px; border-radius: 12px;
+  min-height: 36px; flex-shrink: 0; padding: 6px 12px 6px 16px; border-radius: 12px;
   font-size: 14px; font-weight: 400; line-height: 24px; color: var(--rl-muted); }
 #nd-sidebar a[data-active]:hover, #nd-sidebar button[aria-expanded]:hover {
   background: var(--rl-press, rgba(0, 0, 0, .04)); color: var(--rl-ink); }
 #nd-sidebar a[data-active="true"] { background: rgba(79, 70, 229, .1); color: var(--rl-primary); }
 #nd-sidebar [data-id$="-viewport"] p { height: 24px; margin: 32px 0 10px; padding: 0 0 0 16px;
   font-size: 14px; font-weight: 600; line-height: 24px; color: var(--rl-ink); }
+
+/* Fumadocs hangs a 1px rule down the left of an open folder's children -- a
+   ::before on SidebarFolderContent at depth 1, the only thing in either
+   sidebar carrying `before:bg-fd-border`. Mintlify indents and leaves it at
+   that, so the children keep their padding and lose the line. */
+[id^="nd-sidebar"] [class*="before:bg-fd-border"]::before { content: none; }
 
 /* Global anchors: keep this one menu item visible at lg+ (see layout.shared). */
 #nd-sidebar div.lg\:hidden:has(> .rl-anchors) { display: block; margin-bottom: 0; }
