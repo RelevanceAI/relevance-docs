@@ -4,6 +4,7 @@ import { getProducts, productOverrides } from './products';
 import { Icon } from '@/components/mintlify';
 import { ProductSwitcher } from '@/components/site/product-switcher';
 import { GlobalAnchors } from '@/components/site/global-anchors';
+import { BrandMark } from '@/components/site/brand-mark';
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -17,16 +18,14 @@ export function baseOptions(): BaseLayoutProps {
       url: '/docs/get-started/introduction',
       title: (
         <span className="rl-brand">
-          {/* Raw <img> is NOT rewritten by Next's basePath -- only next/image
-              and _next assets are -- so these carry the /docs prefix
-              explicitly, matching how the MDX asset refs are rewritten.
-              These reference the .webp that tools/optimize-images.mjs
-              produces: the .png sources are 1163px wide for a 107px slot and
-              both variants preload on every page, ahead of the LCP image. */}
-          <img src="/docs/images/_opt/logo/light.webp" alt="" className="rl-brand-mark rl-brand-mark--light" />
-          <img src="/docs/images/_opt/logo/dark.webp" alt="" className="rl-brand-mark rl-brand-mark--dark" />
-          {/* Mintlify shows the logo alone. The text is kept for the link's
-              accessible name and hidden visually -- see .rl-brand-text. */}
+          {/* Inlined, not an <img>: the wordmark's paths use currentColor so
+              it takes its colour from .rl-brand and follows the theme, which
+              a pair of light/dark raster files could only fake by swapping.
+              It also drops two image requests that preloaded on every page
+              ahead of the LCP image. */}
+          <BrandMark />
+          {/* The lockup is aria-hidden, so this is the link's accessible
+              name. Hidden visually -- see .rl-brand-text. */}
           <span className="rl-brand-text">Relevance AI Docs</span>
         </span>
       ),
