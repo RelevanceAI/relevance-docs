@@ -4,6 +4,76 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
+<Update label="September 25, 2026" description="Auto-diagnosis for failed triggers, and diagrams in Invent">
+
+## Auto-diagnosis for failed triggers, and diagrams in Invent
+
+Trigger alarms can now bring in Invent to investigate a failure and propose a fix, and Invent can draw diagrams directly in its replies.
+
+When you enable an alarm on a trigger, switch on Auto-diagnosis by Invent. On the first failure, Invent investigates and sends a diagnosis with a proposed fix to the alarm's channels. It never changes anything on its own: you approve the fix in an Invent conversation, and Invent applies it. Invent can fix configuration problems such as the wrong account or source, a broken search or query, or an incorrect schedule or template. Reconnecting accounts, API keys, and credits stay with you, and fixes to Workforce triggers are saved as a draft until you publish them.
+
+Ask Invent to visualize something as a flowchart, such as the logic of a system prompt, and it renders a Mermaid diagram in the chat. Switch between Diagram and Code to see the source, click Copy to copy it, or expand the diagram into a full-screen viewer with zoom and pan.
+
+To turn on auto-diagnosis, open Triggers, click a trigger's bell, switch on Auto-diagnosis by Invent, and click Enable alarm. Auto-diagnosis is available in projects with Invent enabled. See [Build with Invent](/build/invent/invent) for more information on using Invent.
+
+</Update>
+
+<Update label="September 22, 2026" description="Large CSV bulk runs fixed for files up to 10,000 rows">
+
+## Large CSV bulk runs fixed for files up to 10,000 rows
+
+![10,000 rows per CSV bulk run beside the Start new bulk run dialog, with a q3_leads.csv file being dropped into the CSV upload area](/images/changelog/changelog-bulk-runs.png)
+
+Bulk runs now process CSV uploads of up to 10,000 rows, and files over that limit are rejected upfront with a clear error.
+
+Previously, large uploads timed out partway through, dropped every row, and reported the run as "Complete, 0 of 0". Runs now show a Preparing status while they start and a Failed status if they don't finish, instead of reporting a success with no results.
+
+No configuration changes are needed. Re-upload any CSV that previously finished with 0 of 0 to process it in full. See [Bulk scheduling](/build/agents/give-your-agent-tasks/bulk-schedule) for how to run a file through an Agent.
+
+</Update>
+
+<Update label="September 17, 2026" description="Routines in Invent">
+
+## Routines in Invent
+
+![Set it once beside the Routines modal on the Yours tab, listing three routines, Reflect daily at 9:00 AM, Sharpen instructions weekly on Monday, and Cost optimize daily at 6:00 PM, above a Schedule with Invent button](/images/changelog/changelog-invent-routines.png)
+
+Invent can now run standing instructions on a daily, weekly, monthly, or annual schedule.
+
+Ask Invent to schedule recurring work, such as reviewing your Agents and suggesting improvements, and it sets up a routine with a name, an instruction, and a time and timezone once you approve it. Each run starts a new Invent conversation as the person who created the routine, and any findings are sent to that person's email or Slack alert channel. Runs with nothing worth reporting stay quiet. Routines can suggest changes, but they can't ask you questions or schedule further work.
+
+Open Routines from the Invent sidebar to see, edit, or delete your routines, or start from a template such as Reflect, Sharpen instructions, or Cost optimize. Set up an [Invent alert channel](/build/invent/invent#alerts-accordion-title) before creating your first routine.
+
+</Update>
+
+<Update label="September 11, 2026" description="Subagents in Invent">
+
+## Subagents in Invent
+
+![Invent brought friends beside an Invent chat running three subagents in parallel, Research lead sources, Build enrichment Tool, and Draft outreach Agent, with a Costs breakdown listing each subagent's credits and a total including subagents](/images/changelog/changelog-invent-subagents.png)
+
+Invent can now hand substantial, independent pieces of work to subagents that run alongside the main conversation.
+
+Invent decides when to start a subagent, and each one appears in the chat as a Subagent card that shows its progress until it's done. Subagents can't publish, delete, or restore anything, ask you questions, or start subagents of their own. Anything that needs publishing or deleting comes back to the main Invent conversation, which asks you to approve it all at once. You can keep sending messages while Invent works, and it stops subagents whose work is no longer needed.
+
+Subagents need no setup. To see what each one cost, click the credits count in an Invent conversation; the Costs breakdown lists every subagent alongside the total. See [Build with Invent](/build/invent/invent) for more information on using Invent.
+
+</Update>
+
+<Update label="September 10, 2026" description="Trigger monitoring and failure alarms">
+
+## Trigger monitoring and failure alarms
+
+![Every trigger, one view beside the Trigger status page, listing triggers with their Agent or Workforce, status, last successful run, and last failed run, led by a failed New support email trigger with its alarm bell on](/images/changelog/changelog-trigger-monitoring.png)
+
+A new Triggers page lists every Agent and Workforce trigger in a project, and failure alarms tell you when one stops running.
+
+The page shows each trigger's status (Active, Failed, Paused, or Cancelled), when it last ran successfully, and when it last failed, with tabs to group triggers by Workforce or by Agent. Click a trigger's bell to enable an alarm, then add email addresses or a Slack channel to notify. The alarm's channels are notified when the trigger fails, and again once it runs successfully after recovering.
+
+Open Triggers from the main navigation, just above Tasks. See [Triggers](/build/agents/build-your-agent/triggers) for how to set up and manage triggers.
+
+</Update>
+
 <Update label="September 3, 2026" description="Meet the new Invent">
 
 ## Meet the new Invent
