@@ -1,0 +1,56 @@
+---
+title: 'Trigger inventory'
+sidebarTitle: 'Trigger inventory'
+description: 'View and manage triggers across all agents in your workspace from a single page.'
+---
+
+<Info>
+Trigger inventory is in early access and requires both the `trigger-inventory-list-be` and `trigger-inventory-page-fe` feature flags to be enabled for your workspace.
+</Info>
+
+The trigger inventory page gives you a centralized view of every trigger across all agents in your workspace. Instead of navigating to each agent individually to check or update trigger alerts, you can see the full picture in one place and take action on multiple triggers at once.
+
+## Accessing the trigger inventory
+
+Navigate to **Triggers** in the main sidebar. The trigger inventory page lists all triggers across your workspace in a table, regardless of which agent owns them.
+
+## Trigger table
+
+The table shows all workspace triggers with their associated agent, trigger type, status, and alert configuration. Use the column headers to sort by any field, or use the search bar to filter by trigger name or agent name.
+
+## Bulk alert configuration
+
+You can configure or mute alerts on multiple triggers at the same time without opening each agent individually.
+
+### Selecting triggers
+
+Each row in the trigger table has a checkbox in the leftmost column. Check one or more rows to select those triggers. Use the checkbox in the column header to select all triggers on the current page.
+
+Selection persists as you paginate through the table and apply search filters, so you can build a selection across multiple pages before taking action.
+
+### Setting up alerts in bulk
+
+1. Select one or more triggers using the checkboxes
+2. In the action bar that appears at the bottom of the page, click **Set up alarm**
+3. In the modal that opens, choose the notification channels you want to use (email, Slack, or Microsoft Teams)
+4. Confirm to apply the alert configuration to all selected triggers
+
+The action bar shows a count of how many triggers are selected. While alerts are being configured, a live progress indicator shows how many triggers have been processed (for example, "Enabling alarms… 3/10").
+
+For details on notification channel setup, see [Alerts](/build/agents/build-your-agent/alerts).
+
+### Muting alerts in bulk
+
+1. Select one or more triggers that already have alerts configured
+2. In the action bar at the bottom, click **Mute alarms**
+3. Confirm the action
+
+The mute action only affects triggers that already have alerts active — triggers without alerts are skipped. The progress indicator tracks the operation across all selected triggers.
+
+### Reviewing and removing selections
+
+After selecting triggers, you can review the full selection in the action bar popover. To remove a specific trigger from the selection without deselecting everything, open the popover and click the remove control next to that trigger.
+
+### Error handling
+
+If an operation fails on some triggers, the progress indicator distinguishes between permanent failures and retryable ones. Permanent failures are reported individually so you can investigate the specific trigger. Retryable failures are handled automatically.
