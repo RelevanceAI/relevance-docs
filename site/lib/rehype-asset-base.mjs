@@ -61,7 +61,7 @@ const LAZY = { loading: 'lazy', decoding: 'async' };
 
 /**
  * A lazy <img> with no width/height is 0px tall until it loads, so the page
- * below it jumps when it arrives -- 649px on /get-started/chat/super-gtm/skills
+ * below it jumps when it arrives -- 649px on one image-heavy page
  * -- and a heading linked to from elsewhere is scrolled to the wrong place.
  * Markdown images get their size from fumadocs; the raw ones get it here:
  * from the manifest when the image was re-encoded, else from the file.
