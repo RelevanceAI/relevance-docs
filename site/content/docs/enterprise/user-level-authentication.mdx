@@ -169,13 +169,26 @@ Integration defaults pre-populate when you create new assets or use assets for t
 
 ### Privacy and account visibility
 
-All team members — not just admins — can add their own OAuth accounts when dynamic authentication is enabled on an agent. Members can connect their own private credentials without needing admin intervention, and can only see and manage their own private accounts. They cannot view or modify project-level shared accounts.
+All team members — not just admins — can add their own OAuth accounts when dynamic authentication is enabled on an agent. Members can only see and manage their own private accounts and cannot view or modify project-level shared accounts.
 
-To protect privacy and security:
+#### Privacy controls in FGA organizations
 
-- **Private accounts are hidden** - Your personal accounts won't be visible to other users
-- **Auths are private by default** - When you connect a new account, it's automatically set as private
-- **Shared accounts** - If your organization has shared project-level accounts, you'll see those as options alongside your personal accounts
+Organizations with Fine-Grained Access (FGA) enabled have explicit privacy controls on every OAuth connection card in Integrations & API Keys.
+
+New connections in FGA organizations default to "Private to you" — only you can use the connection in agents. After connecting, a nudge confirms: "Connected privately — only you can use it. Share it from this row's menu if your teammates need it too."
+
+Each connection card displays its current privacy status:
+
+- **Private to you** — the connection is visible and usable only by you
+- **Shared with project** — the connection is available to all members of the project
+
+To share a connection, open the menu on a connection card and select **Share with project**. A confirmation modal appears before the change takes effect.
+
+<Warning>
+Sharing a connection with the project is permanent and cannot be undone. To make a shared connection private again, you must remove it and reconnect.
+</Warning>
+
+Non-FGA organizations keep the previous behavior: connections are private by default, but connection cards do not display explicit privacy labels or share controls.
 
 ## Frequently asked questions (FAQs)
 
