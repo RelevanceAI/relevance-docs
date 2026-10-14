@@ -43,7 +43,7 @@ The Miro integration provides 15 tool steps organized by the type of Miro object
     Create a new Miro board with a specified name and settings.
   </Card>
   <Card title="Update board" icon="pen-to-square">
-    Update the name, description, or sharing policy of an existing board.
+    Update the name or description of an existing board.
   </Card>
   <Card title="Delete board" icon="trash">
     Permanently delete a board by its ID.
@@ -100,7 +100,7 @@ The Miro integration provides 15 tool steps organized by the type of Miro object
 ### Generic API
 
 <CardGroup cols={2}>
-  <Card title="Generic Miro API call" icon="code">
+  <Card title="Miro API call" icon="code">
     Make a custom authenticated request to any Miro REST API endpoint not covered by the specific steps above.
   </Card>
 </CardGroup>
@@ -111,20 +111,20 @@ The Miro integration provides 15 tool steps organized by the type of Miro object
 
 ## Use the generic API tool step (advanced)
 
-For operations not covered by the 14 specific tool steps, the **Generic Miro API call** step lets you make authenticated requests to any Miro REST API endpoint.
+For operations not covered by the 14 specific tool steps, the **Miro API call** step lets you make authenticated requests to any Miro REST API endpoint.
 
 <Steps>
   <Step title="Create or open a tool">
     Create a new tool in Relevance AI or open an existing one.
   </Step>
-  <Step title="Add the Generic Miro API call step">
-    In the tool steps panel, search for **Generic Miro API call** and add it to your workflow.
+  <Step title="Add the Miro API call step">
+    In the tool steps panel, search for **Miro API call** and add it to your workflow.
   </Step>
   <Step title="Select your connected Miro account">
     Choose the Miro account you connected via OAuth.
   </Step>
   <Step title="Configure the request">
-    Set the HTTP method (GET, POST, PATCH, DELETE), the API path (for example, `/v2/boards/{board_id}/frames`), and any required request body or query parameters.
+    Set the HTTP method (GET, POST, PUT, PATCH, DELETE), the API path (for example, `/v2/boards/{board_id}/frames`), and any required request body or query parameters.
   </Step>
   <Step title="Test the call">
     Run the step to verify it returns the expected response before saving your tool.
@@ -133,10 +133,10 @@ For operations not covered by the 14 specific tool steps, the **Generic Miro API
 
 ## Migration from Pipedream
 
-If you previously connected Miro through a Pipedream-based integration, a migration wizard automatically upgrades your existing Miro steps to their native equivalents. All 15 Pipedream-based Miro step types are mapped to native versions — no manual reconfiguration required.
+If you previously connected Miro through a Pipedream-based integration, a migration wizard can upgrade your existing Miro steps to their native equivalents. The 14 specific Pipedream-based Miro steps map to native versions, with their settings carried across. The Pipedream Miro API call step isn't included, so rebuild any of those with the native **Miro API call** step.
 
 <Info>
-  The migration wizard runs automatically when you open a tool that contains Pipedream-based Miro steps. Review the migrated steps to confirm settings transferred as expected.
+  When you open a tool that contains Pipedream-based Miro steps, a banner offers to upgrade them. Click **Upgrade**, connect or select your native Miro account, then review the migrated steps and click **Save** to apply the changes.
 </Info>
 
 ## Common use cases
