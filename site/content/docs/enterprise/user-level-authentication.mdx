@@ -160,7 +160,7 @@ Users can manage their default authentication accounts for each integration at t
 
 To set or change your default account for an integration:
 
-1. Click on 'Integrations & API Keys' in the sidebar
+1. Click on 'Connectors & API Keys' in the sidebar
 2. Click on the integration you want to configure
 
 <Tip>
@@ -169,16 +169,16 @@ Integration defaults pre-populate when you create new assets or use assets for t
 
 ### Privacy and account visibility
 
-Anyone with access to the project, not just admins, can connect their own OAuth accounts, for example to run agents that have dynamic authentication enabled. If your organization uses [integration controls](/enterprise/integration-controls), people without the Editor or Admin project role can only connect integrations that are enabled. Everyone sees their own private connections plus any connections shared with the project. Project Admins also see other people's private connections in Integrations & API Keys and can remove them, but can't select them in tools or agents. Reconnecting or removing a shared connection that someone else connected needs the Editor or Admin project role.
+Anyone with access to the project, not just admins, can connect their own OAuth accounts, for example to run agents that have dynamic authentication enabled. If your organization uses [integration controls](/enterprise/integration-controls), people without the Editor or Admin project role can only connect integrations that are enabled. Everyone sees their own private connections plus any connections shared with the project. Project Admins also see other people's private connections in Connectors & API Keys and can remove them, but can't select them in tools unless the owner has shared them with that tool. Reconnecting or removing a shared connection that someone else connected needs the Editor or Admin project role.
 
 #### Connection privacy controls
 
-Every OAuth connection card in Integrations & API Keys shows the connection's privacy status:
+Every OAuth connection card in Connectors & API Keys shows the connection's privacy status:
 
-- **Private to you** — only you can use the connection
+- **Private to you** — only you can use the connection, unless you share it with a specific tool
 - **Shared with project** — everyone in the project can see and use the connection
 
-Private connections also show a **Share with project** button on the card. Sharing needs the Editor or Admin project role, and a confirmation modal appears before the change takes effect.
+Private connections also show a **Share with project** button on the card. Sharing needs the Editor or Admin project role, and a confirmation modal appears before the change takes effect. To share a private connection with one tool only, open that tool's account picker and share it from there. This needs admin access to the tool.
 
 <Warning>
 Sharing a connection with the project is permanent and cannot be undone. To make a shared connection private again, you must remove it and reconnect.
@@ -194,7 +194,7 @@ In organizations without FGA, new connections are shared with the project by def
 
 <AccordionGroup>
   <Accordion title="What happens if I need to change my authentication credentials?">
-    If you need to change your authentication credentials, you can do so easily. During Chat, you'll receive modal prompts that allow you to select existing credentials, add new ones, or mark a new credential as default. You can also manage your default credentials by going to Integrations & API Keys in the sidebar and selecting the integration you want to reconfigure.
+    If you need to change your authentication credentials, you can do so easily. During Chat, you'll receive modal prompts that allow you to select existing credentials, add new ones, or mark a new credential as default. You can also manage your default credentials by going to Connectors & API Keys in the sidebar and selecting the integration you want to reconfigure.
   </Accordion>
   
   <Accordion title="Can I use both shared accounts and individual accounts in the same project?">
