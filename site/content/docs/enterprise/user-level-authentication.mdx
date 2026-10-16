@@ -108,7 +108,7 @@ If you have [asset-level authentication controls](/enterprise/rbac#permissions) 
 </Note>
 
 <Info>
-When dynamic authentication is enabled on a shared agent, all team members — not just admins — can add their own OAuth accounts. Members can only manage their own private accounts and cannot view or modify project-level shared accounts, which remain admin-managed.
+When dynamic authentication is enabled on a shared agent, you don't need to be an admin to add your own OAuth account. Everyone can see and select project-level shared accounts, but only project Editors and Admins can reconnect or remove ones that someone else connected. See [Privacy and account visibility](#privacy-and-account-visibility) for details.
 </Info>
 
 ## User experience in Chat
@@ -138,7 +138,7 @@ All team members — not just admins — will see the authentication prompt when
   </Step>
 </Steps>
 
-Members can only add and manage their own private accounts. Project-level shared accounts are managed by project admins and cannot be modified by members.
+You can reconnect or remove the accounts you connected. Project-level shared accounts appear in the dropdown for everyone, but only project Editors and Admins can reconnect or remove ones that someone else connected.
 
 ### Subsequent uses
 
@@ -160,7 +160,7 @@ Users can manage their default authentication accounts for each integration at t
 
 To set or change your default account for an integration:
 
-1. Click on 'Integrations & API Keys' in the sidebar
+1. Click on 'Connectors & API Keys' in the sidebar
 2. Click on the integration you want to configure
 
 <Tip>
@@ -169,19 +169,30 @@ Integration defaults pre-populate when you create new assets or use assets for t
 
 ### Privacy and account visibility
 
-All team members — not just admins — can add their own OAuth accounts when dynamic authentication is enabled on an agent. Members can connect their own private credentials without needing admin intervention, and can only see and manage their own private accounts. They cannot view or modify project-level shared accounts.
+You don't need to be an admin to connect your own OAuth accounts, for example to run agents that have dynamic authentication enabled. Everyone sees their own private connections plus any connections shared with the project. Project Admins also see other people's private connections in Connectors & API Keys and can remove them, but can't select them in tools unless the owner has shared them with that tool. Reconnecting or removing a shared connection that someone else connected needs the Editor or Admin project role.
 
-To protect privacy and security:
+#### Connection privacy controls
 
-- **Private accounts are hidden** - Your personal accounts won't be visible to other users
-- **Auths are private by default** - When you connect a new account, it's automatically set as private
-- **Shared accounts** - If your organization has shared project-level accounts, you'll see those as options alongside your personal accounts
+When you open an integration in Connectors & API Keys, each connection card shows its privacy status:
+
+- **Private to you** — only you can use the connection, unless you share it with a specific tool
+- **Shared with project** — everyone in the project can see the connection and select it
+
+Private connections also show a **Share with project** button on the card. Sharing needs the Editor or Admin project role, and a confirmation modal appears before the change takes effect. To share a private connection with one tool only, open that tool's account picker and share it from there. This needs admin access to the tool.
+
+<Warning>
+Sharing a connection with the project is permanent and cannot be undone. To make a shared connection private again, you must remove it and reconnect.
+</Warning>
+
+<Info>
+In organizations with Fine-Grained Access (FGA) enabled, connections you add from Connectors & API Keys or from a tool's account picker default to **Private to you**. Connections added anywhere else, such as while setting up a trigger, or in organizations without FGA, may be shared with the project by default. Check the label on the connection card to see which applies.
+</Info>
 
 ## Frequently asked questions (FAQs)
 
 <AccordionGroup>
   <Accordion title="What happens if I need to change my authentication credentials?">
-    If you need to change your authentication credentials, you can do so easily. During Chat, you'll receive modal prompts that allow you to select existing credentials, add new ones, or mark a new credential as default. You can also manage your default credentials by going to Integrations & API Keys in the sidebar and selecting the integration you want to reconfigure.
+    If you need to change your authentication credentials, you can do so easily. During Chat, you'll receive modal prompts that allow you to select existing credentials, add new ones, or mark a new credential as default. You can also manage your default credentials by going to Connectors & API Keys in the sidebar and selecting the integration you want to reconfigure.
   </Accordion>
   
   <Accordion title="Can I use both shared accounts and individual accounts in the same project?">
@@ -214,6 +225,6 @@ To protect privacy and security:
   </Accordion>
 
   <Accordion title="Can non-admin team members add their own OAuth accounts?">
-    Yes. When dynamic authentication is enabled on a shared agent, all team members can add their own OAuth accounts — this is not limited to admins. Members see an "Add account" button with the guidance "Connect your account to use this tool." Members can only manage their own private accounts; they cannot view or modify project-level shared accounts, which remain admin-managed.
+    Yes. When dynamic authentication is enabled on a shared agent, all team members can add their own OAuth accounts — this is not limited to admins. Members see an "Add account" button with the guidance "Connect your account to use this tool." Everyone can see and select project-level shared accounts, but only project Editors and Admins can reconnect or remove ones that someone else connected.
   </Accordion>
 </AccordionGroup>
