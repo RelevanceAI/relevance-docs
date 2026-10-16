@@ -169,16 +169,16 @@ Integration defaults pre-populate when you create new assets or use assets for t
 
 ### Privacy and account visibility
 
-All team members — not just admins — can add their own OAuth accounts when dynamic authentication is enabled on an agent. Members can only see and manage their own private accounts and cannot view or modify project-level shared accounts.
+All team members — not just admins — can add their own OAuth accounts when dynamic authentication is enabled on an agent. Everyone sees their own private connections plus any connections shared with the project. Project Admins also see other people's private connections in Integrations & API Keys and can remove them, but can't select them in tools or agents. Reconnecting or removing a shared connection that someone else connected needs the Editor or Admin project role.
 
 #### Connection privacy controls
 
 Every OAuth connection card in Integrations & API Keys shows the connection's privacy status:
 
-- **Private to you** — only you can see and use the connection
+- **Private to you** — only you can use the connection
 - **Shared with project** — everyone in the project can see and use the connection
 
-Private connections also show a **Share with project** button on the card. A confirmation modal appears before the change takes effect.
+Private connections also show a **Share with project** button on the card. Sharing needs the Editor or Admin project role, and a confirmation modal appears before the change takes effect.
 
 <Warning>
 Sharing a connection with the project is permanent and cannot be undone. To make a shared connection private again, you must remove it and reconnect.
