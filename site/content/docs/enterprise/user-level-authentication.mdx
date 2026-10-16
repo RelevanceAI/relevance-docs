@@ -169,14 +169,14 @@ Integration defaults pre-populate when you create new assets or use assets for t
 
 ### Privacy and account visibility
 
-Anyone with access to the project, not just admins, can connect their own OAuth accounts, for example to run agents that have dynamic authentication enabled. If your organization uses [integration controls](/enterprise/integration-controls), people without the Editor or Admin project role can only connect integrations that are enabled. Everyone sees their own private connections plus any connections shared with the project. Project Admins also see other people's private connections in Connectors & API Keys and can remove them, but can't select them in tools unless the owner has shared them with that tool. Reconnecting or removing a shared connection that someone else connected needs the Editor or Admin project role.
+You don't need to be an admin to connect your own OAuth accounts, for example to run agents that have dynamic authentication enabled. Everyone sees their own private connections plus any connections shared with the project. Project Admins also see other people's private connections in Connectors & API Keys and can remove them, but can't select them in tools unless the owner has shared them with that tool. Reconnecting or removing a shared connection that someone else connected needs the Editor or Admin project role.
 
 #### Connection privacy controls
 
-Every OAuth connection card in Connectors & API Keys shows the connection's privacy status:
+When you open an integration in Connectors & API Keys, each connection card shows its privacy status:
 
 - **Private to you** — only you can use the connection, unless you share it with a specific tool
-- **Shared with project** — everyone in the project can see and use the connection
+- **Shared with project** — everyone in the project can see the connection and select it
 
 Private connections also show a **Share with project** button on the card. Sharing needs the Editor or Admin project role, and a confirmation modal appears before the change takes effect. To share a private connection with one tool only, open that tool's account picker and share it from there. This needs admin access to the tool.
 
@@ -188,7 +188,7 @@ Sharing a connection with the project is permanent and cannot be undone. To make
 
 In organizations with Fine-Grained Access (FGA) enabled, connections you add from Connectors & API Keys or from a tool's account picker default to **Private to you**. After connecting from Connectors & API Keys, a nudge confirms: "Connected privately — only you can use it. Share it below if your teammates need it too."
 
-Connections added from other places, such as while setting up a trigger, and connections in organizations without FGA are usually shared with the project by default. Check the label on the connection card to see which applies.
+Connections added anywhere else, such as while setting up a trigger, or in organizations without FGA, may be shared with the project by default. Check the label on the connection card to see which applies.
 
 ## Frequently asked questions (FAQs)
 
