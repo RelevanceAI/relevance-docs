@@ -1,0 +1,92 @@
+---
+title: "Command palette"
+sidebarTitle: "Command palette"
+description: "Search pages, resources, and projects, run quick actions, and ask Invent from anywhere in the Builder"
+---
+
+The command palette gives you keyboard-first access to pages, resources, projects, and common actions from anywhere in the Builder. Press `Cmd+K` on Mac or `Ctrl+K` on Windows and Linux to open it, or click **Search** in the navigation. Press the shortcut again to close it.
+
+When Invent is available on the page you're on, the first row is **Ask Invent to do something**. Once you start typing, it changes to **Ask Invent: "your query"**, and selecting it opens the Invent panel with your query as the message. The row is hidden on the Invent page itself, on pages where the Invent panel isn't available, and in projects without Invent.
+
+## What you can do
+
+<CardGroup cols={2}>
+  <Card title="Quick actions" icon="bolt">
+    Create Agents, Tools, Workforces, and knowledge tables, copy the current URL, or open a support ticket
+  </Card>
+  <Card title="Page search" icon="magnifying-glass">
+    Jump to Builder pages by name, including ones that aren't in the main navigation
+  </Card>
+  <Card title="Resource search" icon="layer-group">
+    Open any Agent, Tool, Workforce, knowledge table, or Invent chat in your project
+  </Card>
+  <Card title="Project switching" icon="arrows-rotate">
+    Type a project name to switch to another project in any region
+  </Card>
+</CardGroup>
+
+## Quick actions
+
+| Action | What it does |
+|--------|--------------|
+| **Create new tool** | Opens a new Tool in the builder |
+| **Create new agent** | Opens the Agent creation page |
+| **Create new workforce** | Creates a blank Workforce and opens it |
+| **Create new knowledge table** | Goes to the Knowledge page, where you can create a table |
+| **Copy current page URL** | Copies the URL of the page you're on |
+| **Open documentation** | Opens these docs in a new tab |
+| **Open Invent panel** | Opens the Invent side panel (only shown when Invent is available) |
+| **Create support ticket** | Opens the bug report form |
+
+<Note>
+The command palette replaced the old `Cmd+K` support drawer in the Builder. To report a problem from the palette, use **Create support ticket**.
+</Note>
+
+## Page search
+
+Type a page name to go straight to it. The palette covers Home, Invent, Marketplace, Tasks, Tools, Workforce, Knowledge, Analytics, Connectors & API Keys, MCP servers, CustomGPT actions, Snippets, Project settings, Profile settings, and Organization settings. Invent only appears when it's enabled for you, and Organization settings only appears if you can manage the organization.
+
+Some pages also match related words. For example, typing "templates" finds Marketplace. Snippets, MCP servers, and CustomGPT actions have no entry in the main navigation, so the palette is the quickest way to reach them.
+
+## Resource search
+
+Type the name of an Agent, Tool, Workforce, or knowledge table in the current project to open it. Results from pages, commands, resources, and projects appear in one list ranked by how well they match, with a type label on each row. Up to 50 results are shown.
+
+If Invent is enabled for you in this project, you can also search your Invent chat conversations by title. Only titled conversations appear, so a chat Invent hasn't named yet won't show up. Up to 100 of your most recent conversations are indexed when the palette first opens, and only conversations you created are included. Selecting a result opens that conversation.
+
+## Project switching
+
+Type a project name to search across all your projects, including projects in other regions. Select a result to switch to that project. The project you're currently in isn't listed. If you belong to more than one region, each result shows its organization and region.
+
+After switching, the palette keeps you on the same kind of page when it can, such as the Agents list or Analytics. If you were viewing a specific item, like a single Agent, you land on the new project's Home page instead, since that item doesn't exist in the other project.
+
+## Recent items
+
+When you open the palette without typing, it lists up to seven items you've selected before under **Recent**. They're ordered by how recently and how often you've used them, with older use counting for half as much every 14 days. The same history gives a small boost to matching results when you type.
+
+Recent history is stored in your browser, so it doesn't carry across browsers or devices. If you close the palette and reopen it within 30 seconds without selecting anything, your previous query is restored.
+
+## Keyboard navigation
+
+| Action | Shortcut |
+|--------|----------|
+| Open or close the palette | `Cmd+K` (Mac) / `Ctrl+K` (Windows/Linux) |
+| Move through results | `↑` / `↓`, or `Ctrl+N` / `Ctrl+P` |
+| Jump to first or last result | `Home` / `End` |
+| Run the selected result | `Enter` |
+| Clear the query, then close | `Esc` |
+
+Pressing `Esc` clears the current query first. Pressing it again when the query is empty closes the palette. Arrow keys wrap from the last result back to the first.
+
+## How results are ranked
+
+The palette scores each result by how your query matches it, in this order:
+
+1. Exact match on the title
+2. Title starts with your query
+3. Query matches the title's initials, for example `cna` for **Create new agent**
+4. Query matches the start of a word in the title, then anywhere in the title
+5. Query matches the result's subtitle or related keywords
+6. Fuzzy match, where the characters of your query appear in order
+
+Matched characters in the title are highlighted. A result that only matched on its subtitle or keywords appears without highlighting.
