@@ -1,0 +1,42 @@
+---
+title: "'Slack - Upload File' Tool step"
+sidebarTitle: "Upload file"
+description: "Upload files to Slack channels or threads from your agent or workforce workflows"
+---
+
+The 'Slack - Upload File' Tool step posts a file to a Slack channel or thread from Relevance AI. You can target a specific channel, post into a thread, or leave both fields empty to have the step auto-detect and post into the Slack thread that triggered the current task.
+
+<Note>You can learn more about the Slack integration [here](/integrations/popular-integrations/slack).</Note>
+
+<Warning>This integration for Slack was developed by our team and is not affiliated with Slack. Please contact our [support team](/get-started/support) for any questions or issues.</Warning>
+
+## Add the 'Slack - Upload File' Tool step to your Tool
+
+1. Open your Tool in the builder and add a new Tool step.
+2. Search for **Slack: Upload file** and select it.
+3. Configure the step fields described below.
+4. Click **Run step** to test your configuration.
+
+## Configuration
+
+| Field | Description |
+|-------|-------------|
+| **Channel** | The Slack channel ID to post the file to. Leave empty to use auto-thread detection. |
+| **Thread** | The thread timestamp (`thread_ts`) to post the file into. Leave empty to post at the top level of the channel, or to use auto-thread detection. |
+| **File** | The file to upload. |
+
+## Auto-thread detection
+
+When both **Channel** and **Thread** are left empty, the step automatically posts the file into the Slack thread that triggered the current task. This works for both agent tasks and workforce tasks triggered from Slack.
+
+<Warning>
+Auto-thread detection only activates when BOTH the Channel and Thread fields are empty. If you fill in either field, the step uses that value instead.
+</Warning>
+
+This means your agents and workforces can share results directly in the conversation where work was requested, without you needing to hard-code any channel or thread identifiers.
+
+## Use cases
+
+- Share generated reports in the same thread where work was requested
+- Post analysis results back to the requesting team without configuring a destination channel
+- Upload files to a specific channel for record-keeping when you know the target channel ID in advance
