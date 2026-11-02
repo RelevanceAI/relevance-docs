@@ -4,6 +4,20 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
+<Update label="November 2, 2026" description="Slack interactive buttons, forms, and wizards for agents">
+
+## Slack interactive buttons, forms, and wizards for agents
+
+Agents can now send Slack messages containing interactive buttons that route user responses directly back to the running agent.
+
+The **Slack: Send message (advanced)** tool step includes a Buttons section where up to five buttons can be configured, each assigned one of three types. A **Message** button sends a fixed text string to the agent when clicked — the equivalent of the user typing that reply. A **Form** button opens a modal pop-up with a title and up to ten fields; each field carries a key (visible to the agent), a label, and optional properties including a prefilled value, multiline input, an optional flag, or a dropdown. A **Wizard** button works identically to a form but spreads its fields across up to ten sequential screens with Next/Back navigation, and uses a `kind` identifier to save a user's in-progress answers so they can resume if the modal is closed and reopened. When the user clicks a button or submits a form or wizard, their input is delivered to the agent as a single message and execution continues.
+
+Example: an agent drafting an outbound email posts it to Slack with a **Send** button (Message type, value: "Approved, send it") and an **Edit** button (Form type, pre-filled with the email body). The rep clicks one, the answer comes back to the agent, and the agent acts on it.
+
+**Where to find it:** Open any tool, add the **Slack: Send message (advanced)** step, connect a Slack account and channel, and scroll to the Buttons section. A few constraints to note: the step must run inside an agent or it will error; each button can only be clicked once; and if you update a wizard's fields, increment its `schema_version` by 1 to reset any saved in-progress answers. Workforce approval steps now automatically include Approve/Reject buttons. Available to all organizations. [Learn more →](/tools)
+
+</Update>
+
 <Update label="August 12, 2026" description="Per-tool approval permissions in Invent">
 
 ## Per-tool approval permissions in Invent
