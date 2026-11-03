@@ -27,7 +27,46 @@ Visual Data Masking operates at the UI layer only. When enabled, sensitive infor
   </Card>
 </Columns>
 
-This approach ensures privacy during UI viewing while maintaining full agent functionality. The backend data remains completely unchanged—Visual Data Masking only affects the display layer.
+This approach ensures privacy during UI viewing, with certain document-processing operations restricted to prevent unmasked data from reaching external providers. The backend data remains completely unchanged—Visual Data Masking only affects the display layer.
+
+## Operations blocked under PII masking
+
+When PII masking is enabled, operations that send raw documents to external providers are blocked. These operations all share the same pattern: they transmit raw document bytes to a third-party OCR or parsing vendor to produce extracted text. Because PII masking operates on extracted text, the unmasked document would reach the external provider before masking could be applied.
+
+### Blocked operations
+
+<CardGroup cols={2}>
+  <Card title="Knowledge file uploads with OCR" icon="file-arrow-up">
+    Uploading knowledge files with OCR enabled is blocked to prevent raw document content from being sent to an external OCR service unmasked.
+  </Card>
+  <Card title="Mistral OCR tool step" icon="eye">
+    The Mistral OCR tool step sends document pages to Mistral's external API before text is extracted.
+  </Card>
+  <Card title="Reducto document parsing" icon="file-lines">
+    All Reducto document-parsing steps are blocked because Reducto receives the raw document for parsing.
+  </Card>
+  <Card title="Advanced retrieval with vision" icon="magnifying-glass">
+    Advanced retrieval with vision enabled is blocked when documents would be processed by an external vision provider.
+  </Card>
+  <Card title="Patch agent extract-document-content" icon="robot">
+    The Patch agent's extract-document-content tool sends raw documents to an external provider before text is available.
+  </Card>
+</CardGroup>
+
+### Error returned
+
+When a blocked operation is attempted, it returns a **403 error** with:
+
+- **Code:** `ocr_blocked_by_pii_masking`
+- **Message:** "OCR and document parsing are off while your organization has PII masking on, because the document would reach the provider unmasked"
+
+### Knowledge sync fallback
+
+Knowledge syncs that would normally auto-enable OCR do not fail outright. Instead, they fall back to plain text extraction so your knowledge base continues to sync. Documents that require OCR for readable text may have lower extraction quality under this fallback.
+
+### Who is affected
+
+Only organizations with PII masking enabled are affected. Organizations without PII masking can use all OCR and document-parsing features normally.
 
 ## When to use Visual Data Masking
 
