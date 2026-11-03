@@ -97,6 +97,14 @@ The color of the counter also indicates how many credits you have remaining base
 
 For example, in the image above, this user is on a Pro plan, billed monthly. They currently receive 2500 Actions per month, and 3000 Vendor Credits. They have 1267 Actions and 1995 Vendor Credits left.
 
+#### When your Vendor Credits reach 0
+
+Once your Vendor Credits balance reaches 0, the counter shows "0 left" by default. For organizations on usage-based billing with overage tracking enabled, the counter instead shows how many credits have been used beyond the prepaid balance — for example, "2,500 over". This overage figure is pulled from the billing provider's upcoming invoice, not from Relevance's internal credit counter.
+
+<Note>
+  Overage tracking is an organization-level setting controlled by your account administrator. It is not user-configurable and only applies to organizations on usage-based billing. If you see an overage figure and have questions about it, contact your admin or [support](/get-started/support).
+</Note>
+
 ## Monitoring concurrency usage
 
 Concurrency is a system capacity metric — it measures how many tasks are running simultaneously across your Organization, not how many credits or actions you consume. Each subscription tier has a specific concurrent task limit. When you reach this limit, additional tasks are queued until capacity becomes available.
