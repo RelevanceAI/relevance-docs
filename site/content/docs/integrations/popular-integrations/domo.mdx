@@ -1,0 +1,347 @@
+---
+title: "Domo"
+description: "Connect Domo to Relevance AI to automate analytics workflows, data operations, and dashboard management with AI agents"
+sidebarTitle: "Domo"
+---
+
+Domo is a business intelligence and data visualization platform for connecting, transforming, and analyzing data across your organization. With the Domo integration in Relevance AI, you can connect your Domo instance to AI agents that automate data operations, manage datasets, trigger reporting workflows, and call any Domo public API endpoint.
+
+<Note>
+This integration is built by Relevance AI. For integration-specific support, contact [Relevance AI support](/get-started/support). For Domo platform issues, visit [Domo Support](https://www.domo.com/support).
+</Note>
+
+<Note>
+The Domo integration is currently in a controlled rollout. If you don't see Domo in your integrations list, it may not yet be enabled for your project or organization.
+</Note>
+
+## Connect the integration
+
+The Domo integration uses OAuth2 client credentials. You create an OAuth client in the Domo developer portal and provide the Client ID and Client Secret to Relevance AI. You only need to complete this process once per Domo instance.
+
+<Steps>
+  <Step title="Navigate to Integrations & API Keys">
+    Select **Integrations & API Keys** from the left sidebar in your Relevance AI dashboard.
+  </Step>
+
+  <Step title="Find Domo">
+    Browse the integrations directory and click on **Domo**.
+  </Step>
+
+  <Step title="Click Connect">
+    Click the **Connect** button to open the connection form.
+  </Step>
+
+  <Step title="Create an OAuth client in Domo">
+    In a separate tab, go to [developer.domo.com/new-client](https://developer.domo.com/new-client) and create a new OAuth client. You'll need a Domo account with permission to create API clients.
+  </Step>
+
+  <Step title="Choose your scopes">
+    Select the scopes your workflows will need. Domo provides these scopes: **data**, **user**, **dashboard**, **account**, **audit**, and **buzz**. Tick every scope you expect to use — you cannot add scopes to an existing client later.
+  </Step>
+
+  <Step title="Copy your credentials">
+    After creating the client, copy the **Client ID** and **Client Secret** that Domo displays.
+  </Step>
+
+  <Step title="Paste credentials into Relevance AI">
+    Return to the Relevance AI connection form and paste the Client ID and Client Secret into the corresponding fields.
+  </Step>
+
+  <Step title="Click Save">
+    Click **Save** to store the connection.
+  </Step>
+
+  <Step title="Confirm connection">
+    Your Domo connection will appear as active in the Integrations dashboard and will be available for use in your agents and tools.
+  </Step>
+</Steps>
+
+You can connect multiple Domo instances by creating a separate OAuth client in each instance and adding each as a distinct connection in Relevance AI.
+
+<Warning>
+Tick every scope your connection needs when creating the OAuth client in Domo. Missing scopes result in 403 errors from the Domo API. To change scopes after creation, you must create a new OAuth client and reconnect — there is no way to add scopes to an existing client.
+</Warning>
+
+## Tools & tool steps
+
+The Domo integration provides one tool step that your agents can use. Search for "Domo" in the tool step search bar when building your tools.
+
+### Domo API Call
+
+<AccordionGroup>
+  <Accordion title="Domo API Call" icon="code">
+    Make an authenticated REST API call to any [Domo public API](https://developer.domo.com/portal/1845fc11bbe5d-api-reference) endpoint. Use this to interact with datasets, users, pages, cards, groups, streams, or any other Domo resource.
+
+    Relevance AI handles OAuth2 token acquisition, caching, and rotation automatically. You don't need to manage access tokens.
+
+    **Key inputs:**
+    - **Method**: The HTTP method — `GET`, `POST`, `PUT`, or `DELETE`
+    - **Endpoint**: The path after `https://api.domo.com` (e.g., `/v1/datasets`)
+    - **Body**: The JSON request body for `POST` and `PUT` requests
+
+    **How Domo identifies your instance:**
+    Domo's API is multi-tenant and uses a single hostname (`api.domo.com`) for all customers. Your OAuth client credentials identify which Domo instance the request is made against — there is no per-customer hostname.
+  </Accordion>
+</AccordionGroup>
+
+## Use the Domo API Call tool step (advanced)
+
+For full control over Domo API calls, the Domo API Call tool step gives you direct access to the [Domo API](https://developer.domo.com/portal/1845fc11bbe5d-api-reference).
+
+### How to use the Domo API Call tool step
+
+<Steps>
+  <Step title="Create or open a tool">
+    Create a new tool in Relevance AI or open an existing one you want to add Domo functionality to.
+  </Step>
+
+  <Step title="Add the tool step">
+    Scroll down to **Tool-steps**, search for "Domo API", and add the **Domo API Call** tool step to your workflow.
+  </Step>
+
+  <Step title="Select your connected account">
+    Choose your connected Domo account from the dropdown.
+  </Step>
+
+  <Step title="Configure the request">
+    Set the HTTP method, endpoint path, and request body:
+    - **Method**: The HTTP method (`GET`, `POST`, `PUT`, `DELETE`)
+    - **Endpoint**: The API path starting with `/` (e.g., `/v1/datasets`)
+    - **Body**: The JSON request body (for `POST` and `PUT` requests)
+  </Step>
+
+  <Step title="Test the request">
+    Run a test to confirm the API call returns the expected data before using it in production.
+  </Step>
+</Steps>
+
+### Example API calls
+
+**List all datasets**
+
+```json
+{
+  "method": "GET",
+  "endpoint": "/v1/datasets"
+}
+```
+
+**Get dataset metadata**
+
+```json
+{
+  "method": "GET",
+  "endpoint": "/v1/datasets/{datasetId}"
+}
+```
+
+**Query dataset data**
+
+```json
+{
+  "method": "GET",
+  "endpoint": "/v1/datasets/query/execute/{datasetId}"
+}
+```
+
+**Create a dataset**
+
+```json
+{
+  "method": "POST",
+  "endpoint": "/v1/datasets",
+  "body": {
+    "name": "My Dataset",
+    "description": "Created via Relevance AI",
+    "schema": {
+      "columns": [
+        { "type": "STRING", "name": "Name" },
+        { "type": "LONG", "name": "Value" }
+      ]
+    }
+  }
+}
+```
+
+**Update dataset data**
+
+```json
+{
+  "method": "PUT",
+  "endpoint": "/v1/datasets/{datasetId}/data"
+}
+```
+
+<Info>
+  Replace `{datasetId}` with the actual dataset ID from your Domo instance. You can find dataset IDs in the Domo UI or by calling `GET /v1/datasets`.
+</Info>
+
+## Common Domo API endpoints
+
+<AccordionGroup>
+  <Accordion title="Datasets" icon="database">
+    All dataset endpoints use the base URL `https://api.domo.com`.
+
+    - **List datasets**: `GET /v1/datasets`
+    - **Get dataset**: `GET /v1/datasets/{datasetId}`
+    - **Create dataset**: `POST /v1/datasets`
+    - **Update dataset**: `PUT /v1/datasets/{datasetId}`
+    - **Delete dataset**: `DELETE /v1/datasets/{datasetId}`
+    - **Query dataset data**: `GET /v1/datasets/query/execute/{datasetId}`
+    - **Import data into dataset**: `PUT /v1/datasets/{datasetId}/data`
+    - **Export data from dataset**: `GET /v1/datasets/{datasetId}/data`
+
+    Requires the **data** scope.
+  </Accordion>
+
+  <Accordion title="Users" icon="user">
+    - **List users**: `GET /v1/users`
+    - **Get user**: `GET /v1/users/{userId}`
+    - **Create user**: `POST /v1/users`
+    - **Update user**: `PUT /v1/users/{userId}`
+    - **Delete user**: `DELETE /v1/users/{userId}`
+
+    Requires the **user** scope.
+  </Accordion>
+
+  <Accordion title="Pages & cards" icon="table-columns">
+    Pages are Domo dashboards; cards are the individual visualizations within a page.
+
+    - **List pages**: `GET /v1/pages`
+    - **Get page**: `GET /v1/pages/{pageId}`
+    - **Create page**: `POST /v1/pages`
+    - **Update page**: `PUT /v1/pages/{pageId}`
+    - **Delete page**: `DELETE /v1/pages/{pageId}`
+    - **List cards on a page**: `GET /v1/pages/{pageId}/cards`
+
+    Requires the **dashboard** scope.
+  </Accordion>
+
+  <Accordion title="Groups" icon="users">
+    Groups control user access and permissions within Domo.
+
+    - **List groups**: `GET /v1/groups`
+    - **Get group**: `GET /v1/groups/{groupId}`
+    - **Create group**: `POST /v1/groups`
+    - **Update group**: `PUT /v1/groups/{groupId}`
+    - **Delete group**: `DELETE /v1/groups/{groupId}`
+    - **List users in a group**: `GET /v1/groups/{groupId}/users`
+    - **Add user to group**: `PUT /v1/groups/{groupId}/users/{userId}`
+    - **Remove user from group**: `DELETE /v1/groups/{groupId}/users/{userId}`
+
+    Requires the **user** scope.
+  </Accordion>
+
+  <Accordion title="Streams" icon="bolt">
+    Streams are used to ingest large datasets incrementally rather than replacing an entire dataset at once.
+
+    - **List streams**: `GET /v1/streams`
+    - **Get stream**: `GET /v1/streams/{streamId}`
+    - **Create stream**: `POST /v1/streams`
+    - **Update stream**: `PUT /v1/streams/{streamId}`
+    - **Delete stream**: `DELETE /v1/streams/{streamId}`
+    - **Create execution**: `POST /v1/streams/{streamId}/executions`
+    - **Upload data part**: `PUT /v1/streams/{streamId}/executions/{executionId}/part/{partId}`
+    - **Commit execution**: `PUT /v1/streams/{streamId}/executions/{executionId}/commit`
+    - **Abort execution**: `PUT /v1/streams/{streamId}/executions/{executionId}/abort`
+
+    Requires the **data** scope.
+  </Accordion>
+</AccordionGroup>
+
+## Example use cases
+
+<AccordionGroup>
+  <Accordion title="Automated reporting workflows" icon="file-chart-column">
+    Build an agent that queries Domo datasets on a schedule, compiles key metrics, and delivers formatted summaries to Slack, email, or another destination. The agent can compare current data against historical baselines and flag significant changes automatically.
+  </Accordion>
+
+  <Accordion title="Dataset management and updates" icon="database">
+    Create an agent that imports data from external sources into Domo datasets automatically. For example, an agent could pull data from a CRM, transform it, and upload it to a Domo dataset on a recurring schedule — keeping your Domo dashboards current without manual intervention.
+  </Accordion>
+
+  <Accordion title="Dashboard creation and management" icon="table-columns">
+    Deploy an agent that provisions Domo pages and cards programmatically. This is useful for agencies or teams that need to create consistent dashboard structures for multiple clients or business units without manually configuring each one.
+  </Accordion>
+
+  <Accordion title="User provisioning and access control" icon="user-gear">
+    Build an agent that manages Domo user accounts and group memberships based on changes in your identity system or HR platform. For example, automatically grant or revoke Domo access when employees join, move teams, or leave the organization.
+  </Accordion>
+
+  <Accordion title="Data quality monitoring" icon="shield-check">
+    Create an agent that queries Domo datasets and checks for data quality issues — missing values, out-of-range numbers, unexpected nulls — then alerts the relevant team or logs the findings. Schedule the agent to run after each data pipeline completes to catch issues before they affect reports.
+  </Accordion>
+</AccordionGroup>
+
+## Best practices
+
+- **Plan scopes upfront**: Choose all the scopes your workflows will need when creating the OAuth client in Domo. Adding scopes later requires creating a new client and reconnecting. When in doubt, select the scopes for the data categories your agents will access rather than adding them one at a time.
+- **Respect rate limits**: The Domo API enforces rate limits. Design your agents to avoid sending bursts of requests and handle `429 Too Many Requests` responses by retrying with backoff. See [Domo API rate limiting documentation](https://developer.domo.com/portal/1845fc11bbe5d-api-reference) for current limits.
+- **Handle errors by type**: Common Domo API error codes to handle explicitly are `403 Forbidden` (missing scope on your OAuth client), `404 Not Found` (the dataset, user, or page ID does not exist), and `429 Too Many Requests` (rate limit exceeded).
+- **Find dataset IDs**: Dataset IDs appear in the Domo UI when you open a dataset's detail page (the ID is in the URL). You can also retrieve them programmatically via `GET /v1/datasets` and filtering by name.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What scopes do I need for my use case?" icon="lock">
+    Choose scopes based on what Domo resources your workflows will access:
+
+    - **data** — read and write datasets and run data queries
+    - **user** — read and manage user accounts
+    - **dashboard** — read and manage pages and cards
+    - **account** — manage Domo account-level settings
+    - **audit** — read audit logs
+    - **buzz** — interact with Domo Buzz (messaging)
+
+    Select every scope your workflows will need when creating the OAuth client, since scopes cannot be added to an existing client.
+  </Accordion>
+
+  <Accordion title="Can I connect multiple Domo instances?" icon="user-group">
+    Yes. Create a separate OAuth client in each Domo instance and add each as a distinct connection in Relevance AI. When configuring a tool step, select the connection corresponding to the Domo instance you want to target.
+  </Accordion>
+
+  <Accordion title="How do I find my dataset ID?" icon="magnifying-glass">
+    In the Domo UI, open a dataset's detail page — the dataset ID appears in the URL (e.g., `app.domo.com/datasources/{datasetId}/details`). You can also retrieve all dataset IDs programmatically by calling `GET /v1/datasets` and reading the `id` field from each result.
+  </Accordion>
+
+  <Accordion title="Why am I getting 403 errors?" icon="triangle-exclamation">
+    A `403 Forbidden` response from the Domo API means your OAuth client does not have the scope required for that endpoint. For example, calling a dataset endpoint without the **data** scope returns a 403. To fix this, create a new OAuth client at [developer.domo.com/new-client](https://developer.domo.com/new-client) with the required scopes, then reconnect in Relevance AI.
+  </Accordion>
+
+  <Accordion title="How do I change scopes?" icon="arrows-rotate">
+    Domo does not allow you to add or remove scopes from an existing OAuth client. To change scopes, create a new OAuth client at [developer.domo.com/new-client](https://developer.domo.com/new-client) with the correct scopes, then update your Relevance AI connection with the new Client ID and Client Secret.
+  </Accordion>
+</AccordionGroup>
+
+## Additional resources
+
+<CardGroup cols={2}>
+  <Card title="Domo API reference" icon="code" href="https://developer.domo.com/portal/1845fc11bbe5d-api-reference">
+    Complete reference for all Domo public API endpoints, including datasets, users, pages, and streams
+  </Card>
+  <Card title="Domo developer portal" icon="browser" href="https://developer.domo.com">
+    Create OAuth clients, explore API documentation, and access developer tools for Domo
+  </Card>
+</CardGroup>
+
+## Remove the integration
+
+To disconnect your Domo connection from Relevance AI:
+
+1. Navigate to **Integrations & API Keys** from the left sidebar.
+2. Find your Domo connection in the integrations list.
+3. Click on the integration to expand its details.
+4. Click the three-dot menu and select **Remove**.
+
+Removing the integration revokes Relevance AI's ability to use the stored credentials. Any agents or tools using Domo tool steps will stop working until you reconnect. Removing the connection from Relevance AI does not affect your Domo instance or its data.
+
+---
+
+<CardGroup cols={2}>
+  <Card title="Need help?" icon="life-ring" href="/get-started/support">
+    Contact our support team for assistance with the Domo integration
+  </Card>
+  <Card title="Explore more integrations" icon="puzzle-piece" href="/integrations/introduction">
+    Discover other integrations to extend your agent workflows
+  </Card>
+</CardGroup>
