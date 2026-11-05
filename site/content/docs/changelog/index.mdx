@@ -4,6 +4,118 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
+<Update label="October 30, 2026" description="Model controls for organization admins">
+
+## Model controls for organization admins
+
+![Models tab of the Integrations & models settings page, with new models set to Block all and the Anthropic and Google models expanded, where Claude Haiku 4.5 is switched off and its Reading web pages for research feature is marked as stopped](/images/changelog/changelog-model-controls.png)
+
+Organization admins on Enterprise plans can now choose which models their organization can use, and see what a change affects before it applies.
+
+Switch off a single model or a whole provider, and choose whether new models start on or stay off until an admin allows them. Each model lists the platform features it powers, such as memory and web reading, and before you confirm you see which features stop or work with limits. The confirmation also warns that your own Agents and LLM tool steps on that model stop until you switch them to another model.
+
+Open organization settings, go to Integrations & models, and select the Models tab. See [Model controls](/enterprise/model-controls) for the full guide.
+
+</Update>
+
+<Update label="October 20, 2026" description="Error, approval, and escalation alarms added to Tasks page">
+
+## Error, approval, and escalation alarms added to Tasks page
+
+![Tasks page on the Approvals view grouped by Agent, with checkbox, Alarm, Run by, Tasks, and Task approval rate columns, where Invoice approver has its alarm turned on at an 18.0% task approval rate](/images/changelog/changelog-task-alarms.png)
+
+You can now set alarms on an Agent or Workforce that notify you when too many of its tasks fail, sit waiting on an approval, or get handed off to a person.
+
+Each alarm fires when the share of tasks crosses your threshold in a time window, for example more than 8% within an hour, once at least 10 tasks have run. Alerts go to email, Slack, or Teams, with a follow-up when things recover. Turn on Auto-diagnose with Invent and Invent proposes a fix for you to approve. Task alarms are available on paid plans.
+
+To set one up, open the Tasks page, switch to the Errors, Approvals, or Escalated view, and group by Agent or Workforce. Click the bell in the Alarm column for a single row, or select several rows and click Enable alarms. See [Tasks page](/build/agents/give-your-agent-tasks/tasks-page) for what each view shows.
+
+### GPT-6 Luna Decisions now available
+
+OpenAI's GPT-6 Luna Decisions joins Jev 1.13 in Workforce condition nodes and the Decide tool step. It runs without your own API key in the US and EU. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions) for how condition nodes route a Workforce.
+
+### Claude Sonnet 5.5 and Claude Haiku 5.5 now available
+
+Sonnet 5.5 balances speed and intelligence for coding, Agents, and knowledge work. Haiku 5.5 is the fastest, lowest-cost Claude model, suited to high-volume classification, extraction, and routing. Select either from the model dropdown in any Agent, Tool, or Workforce. See [language model settings](/build/agents/build-your-agent/agent-settings/language-model) for choosing an Agent's model.
+
+</Update>
+
+<Update label="October 2, 2026" description="Decision models added to Workforce conditions and Tools">
+
+## Decision models added to Workforce conditions and Tools
+
+![Condition panel in the Workforce builder with Evaluate prompts with set to Decision model and Jev 1.13 selected, running on the TypeSafe key, above a prompt-based condition that routes to a refunds Agent](/images/changelog/changelog-decision-models.png)
+
+Jev 1.13, a decision model from TypeSafe, is now available in Workforce condition nodes and in a new Decide tool step.
+
+A decision model answers multiple choice, score, and yes/no questions with a probability for every option, in under a second. It doesn't write text, so it suits routing, triage, and qualification.
+
+Add your TypeSafe API key on the Integrations page. Then, in a Workforce condition node, set Evaluate prompts with to Decision model and pick Jev 1.13, or add the Decide step to a Tool. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions) for how condition nodes route a Workforce.
+
+### MCP server access in Invent
+
+Invent can now call tools on your project's MCP servers, such as GitHub, Linear, or Notion, and you can approve a tool for a single chat for 24 hours. Turn it on in Invent settings under MCP servers.
+
+### Dark mode now available
+
+Relevance AI now has a dark theme across the app, including Invent. Click your profile at the bottom of the left navigation menu and choose Appearance, then pick Match system, Light, or Dark. The choice is stored in your browser, so it applies per device.
+
+</Update>
+
+<Update label="September 25, 2026" description="Trigger status page and failure alarms">
+
+## Trigger status page and failure alarms
+
+![Trigger status page listing triggers with alarm bells, the Agent or Workforce each belongs to, statuses of Failed, Paused, Cancelled, and Active, and last successful and last failed run times](/images/changelog/changelog-trigger-status.png)
+
+The new Trigger status page lists every trigger in a project with its current status and latest runs, and can notify you, or Invent, when one fails.
+
+Each row shows the trigger, its Agent or Workforce, its status, and its last successful and failed runs. A failure alarm alerts email, Slack, or Teams when a trigger fails and again when it recovers. With Auto-diagnose with Invent on, Invent investigates each failure and proposes a fix for you to approve.
+
+Click Triggers in the left navigation menu to open the page. To set an alarm, click the bell on a trigger's row, optionally turn on Auto-diagnose with Invent, and click Enable alarm. Auto-diagnosis needs Invent turned on for the project. See [Triggers](/build/agents/build-your-agent/triggers) for how triggers start tasks.
+
+### Diagrams in Invent
+
+Ask Invent to visualize something, such as the branching logic in an Agent's system prompt, and it draws a Mermaid diagram in the chat, with Diagram and Code tabs, a Copy button, and an expanded view with zoom.
+
+### CSV bulk runs up to 10,000 rows
+
+Bulk run CSV uploads now handle up to 10,000 rows without timing out. Runs show Preparing while rows load and Failed if no tasks ran, instead of Complete with 0 of 0 tasks. See [Bulk scheduling](/build/agents/give-your-agent-tasks/bulk-schedule) for how to set up a bulk schedule from a spreadsheet.
+
+</Update>
+
+<Update label="September 17, 2026" description="Scheduled routines in Invent">
+
+## Scheduled routines in Invent
+
+![Routines panel in Invent with Yours and Templates tabs, a Schedule with Invent button, and six routines such as Reflect, Sharpen instructions, Cost optimize, and Check the outbound queue with their daily and weekly schedules](/images/changelog/changelog-invent-routines.png)
+
+Invent can now run work on a schedule, such as reviewing yesterday's Agent runs or compiling a weekly report from connected tools.
+
+Ask Invent in chat to do something on a recurring basis and it creates a routine that runs daily, weekly, monthly, or annually. The Routines panel lists each routine with its schedule, and the Templates tab offers ready-made routines to start from.
+
+Click Routines in the Invent sidebar to see and edit your routines, or click Schedule with Invent to set up a new one.
+
+### Status feed added to Home page
+
+The Home page now shows a 14-day task health bar and performance for up to five Agents or Workforces. Click the gear on the Status feed to choose which ones appear. It's visible to Admins and Editors.
+
+</Update>
+
+<Update label="September 11, 2026" description="Subagents in Invent">
+
+## Subagents in Invent
+
+![Invent chat splitting a request across four subagents, each with its own mascot: two working with open eyes, one done with happy eyes after 9 steps, and one queued and asleep](/images/changelog/changelog-invent-subagents.png)
+
+Invent can now hand independent parts of a task to subagents that run in parallel.
+
+When a request has independent pieces, such as researching leads while building an enrichment Tool, Invent starts a subagent for each and tracks them as cards in the chat. Subagents can't publish, delete, or restore anything, so those actions still go through your usual approvals.
+
+Subagents start automatically. To see what each one cost, click the credits button in the composer; the breakdown lists each subagent as its own row. See [Build with Invent](/build/invent/invent) for how Invent's credit counter works.
+
+</Update>
+
 <Update label="September 3, 2026" description="Meet the new Invent">
 
 ## Meet the new Invent
