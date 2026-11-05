@@ -1,0 +1,101 @@
+---
+title: 'Trigger status'
+sidebarTitle: 'Trigger status'
+description: 'See every trigger in your project, how it has been running, and who gets alerted when it fails.'
+---
+
+The Trigger status page shows every trigger in your project, from both agents and workforces, in one place. Use it to spot failing triggers, see why a trigger stopped, and set up failure alarms on many triggers at once.
+
+To open it, click **Triggers** in the main sidebar.
+
+<Note>
+Only project members who can create agents and workforces see **Triggers** in the sidebar.
+</Note>
+
+## What's on the page
+
+<CardGroup cols={2}>
+  <Card title="Current trigger health" icon="heart-pulse">
+    Shows how many triggers in your project are failing right now.
+  </Card>
+  <Card title="Runs per day" icon="chart-bar">
+    Charts successful and failed runs for the last 14 days. Hover over a day to see which triggers failed.
+  </Card>
+  <Card title="Trigger table" icon="table">
+    Lists every trigger with its owner, status, last runs and task volume. Use the tabs to group it by workforce or by agent.
+  </Card>
+  <Card title="Trigger details" icon="circle-info">
+    Opens when you click a row, with the trigger's runs, why it was turned off, and who gets alerted.
+  </Card>
+</CardGroup>
+
+## Trigger table
+
+The table opens with failed triggers first. Click a column header to sort, or search by trigger, agent or workforce name.
+
+- **Belonging to** links to the agent or workforce that owns the trigger.
+- **Status** is Failed, Paused, Cancelled or Active.
+- **Last failed** turns red when the trigger failed in the last 14 days.
+- **Task volume (14d)** counts the items the trigger produced in the last 14 days, one for each event it accepted.
+
+## Trigger details
+
+Click a row to open the details panel. It shows the trigger's runs per day, its last successful and failed runs, and everyone with an alarm on it. For an agent's trigger, click **Edit trigger** to open it in the agent's trigger settings.
+
+When the platform turns a trigger off, the panel says why and how to fix it.
+
+<Accordion title="Reasons a trigger is turned off">
+| Reason | What to do |
+| --- | --- |
+| Your organization ran out of credits or actions | Add credits or upgrade your plan, then turn the trigger back on |
+| Your organization or project reached a credit or action limit in its spend controls | Raise or remove the limit, then turn the trigger back on |
+| The workforce no longer has the step the trigger starts | Connect the trigger to a step in the workforce again, or delete it |
+| The person who set up the trigger lost access to the files it watches | Turn it back on as someone with access to those files, or delete it |
+| The connected account stopped accepting our sign-in | Reconnect the account, then turn the trigger back on |
+| The schedule passed its end date | Set a later end date or remove it, then turn the trigger back on |
+</Accordion>
+
+## Failure alarms
+
+Each person sets up their own failure alarm on a trigger. The bell in the **Alarm** column shows yours, and the avatars beside it show who else gets alerted.
+
+To set up an alarm on one trigger:
+
+1. Click the bell in the trigger's row
+2. Choose where to be notified: email, Slack or Teams
+3. Click **Enable alarm**
+
+You get a message when the trigger starts failing and another when it runs again. To mute your alarm, click the bell again.
+
+To set up alarms on several triggers at once:
+
+1. Check the box on each trigger you want. Your selection stays as you change pages, search or switch tabs.
+2. In the bar at the bottom of the page, click **Set up alarm**
+3. Choose your channels, then click **Enable alarms**
+
+To mute alarms in bulk, select the triggers and click **Mute alarms** instead.
+
+For more on notification channels, see [Alerts](/build/agents/build-your-agent/alerts).
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Why does a paused trigger count as healthy?">
+    Trigger health only counts triggers that are failing right now. Paused and cancelled triggers aren't failing, so they count as healthy. Past failures show in the **Runs per day** chart.
+  </Accordion>
+  <Accordion title="Why can't I see who else gets alerted?">
+    Project editors see everyone's alarms. Other members see only their own.
+  </Accordion>
+  <Accordion title="Can I change how often an alarm notifies me?">
+    Yes. In the alarm settings, open **Additional configuration** to change the cooldown, which is 60 minutes by default, or turn off **Notify when recovered**. If you use Invent, you can also turn on **Auto-diagnose with Invent** to get a proposed fix with each notification.
+  </Accordion>
+  <Accordion title="What happens to triggers that already have my alarm when I set up alarms in bulk?">
+    They get the channels you choose in place of their current ones. They keep their own cooldown and recovery setting unless you change those too.
+  </Accordion>
+  <Accordion title="What happens if a bulk action partly fails?">
+    A message shows how many triggers succeeded. Triggers you don't have permission to change are named and leave your selection. Other failed triggers stay selected so you can try again.
+  </Accordion>
+  <Accordion title="Can I edit a workforce trigger from here?">
+    No. **Edit trigger** only works for agent triggers. To change a workforce trigger, open the workforce from the **Belonging to** column.
+  </Accordion>
+</AccordionGroup>
