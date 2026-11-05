@@ -4,6 +4,66 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
+<Update label="November 2, 2026" description="Slack buttons, forms, and wizards for Agents">
+
+## Slack buttons, forms, and wizards for Agents
+
+Agents can now post Slack messages with buttons, and a click sends the answer straight back to the Agent so it carries on with the task.
+
+Each message can have up to five buttons, and each button is one of three types. A Message button sends a fixed reply, such as "Approved, send it", exactly as if the person had typed it. A Form button opens a pop-up with up to 10 fields, which can be prefilled (for example with a drafted email the person can edit), multiline, optional, or a dropdown. A Wizard button works like a form split into up to 10 screens with Next and Back, and saves half-finished answers so they come back when the person reopens it. Submitted answers reach the Agent as a single message. Each button works once, and the step only works when the Tool runs inside an Agent. Agent and Workforce approvals sent to Slack now get Approve and Reject buttons too.
+
+To add buttons, use the Slack: Send message (advanced) step in a Tool, pick the Slack account and channel, then scroll to Buttons. See [Slack send message](/build/tools/tool-steps/slack/send-message) for the step's other settings.
+
+</Update>
+
+<Update label="October 30, 2026" description="Model controls for organizations">
+
+## Model controls for organizations
+
+Organization admins can now choose which models their organization can use, and see what a change affects before it applies.
+
+Models can be switched off one at a time or a whole provider at once. A separate setting decides whether models added to Relevance AI later start on or stay off until an admin turns them on, so organizations that only allow vetted vendors aren't surprised by new releases. Each model shows which Relevance AI platform features run on it, such as memory, web reading, and error explanations. Before you confirm turning one off, you see which features stop, which keep working with limits, and which built-in Agents move to another model. This preview covers only the features Relevance AI runs on models it picks; LLM steps in your own Agents and Tools that use a blocked model fail at run time.
+
+Open organization settings, go to Integrations & models, and select the Models tab.
+
+</Update>
+
+<Update label="October 20, 2026" description="Alarms for pending approvals and escalations">
+
+## Alarms for pending approvals and escalations
+
+The task alarms that launched for errors now cover two more cases: tasks waiting on an approval nobody has given, and tasks an Agent hands off to a person.
+
+Set an alarm on the Approvals or Escalated view, for example more than 10% of tasks within one hour, and it notifies email, Slack, or Teams when the share crosses that threshold. With Auto-diagnose with Invent turned on, Invent looks into the cause when the alarm fires and sends a proposed fix to approve; nothing changes until you do. Approval alarms arrived on October 15 and escalation alarms on October 20. Like error rate alarms, they're available on paid plans.
+
+To set one up, open the Tasks page, switch to the Approvals or Escalated view, group by Agent or Workforce, and click the bell in the Alarm column. See [Tasks page](/build/agents/give-your-agent-tasks/tasks-page) for more on each view.
+
+</Update>
+
+<Update label="October 19, 2026" description="GPT-6 Luna Decisions now available as a decision model">
+
+## GPT-6 Luna Decisions now available as a decision model
+
+OpenAI's GPT-6 Luna Decisions is now available alongside Jev 1.13 in Workforce condition nodes and the Decide tool step.
+
+Like other decision models, it answers multiple choice, score, and yes/no questions with a probability for every option, and doesn't write text or explain its answer. It runs without your own API key in the US and EU regions, or on your own OpenAI key. OpenAI still lists the model as beta, so avoid putting mission-critical workloads on it until it's stable.
+
+In a Workforce condition node, set Evaluate prompts with to Decision model and pick GPT-6 Luna Decisions; in a Tool, choose it in the Decide step. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions) for how condition nodes route a Workforce.
+
+</Update>
+
+<Update label="October 15, 2026" description="Claude Sonnet 5.5 and Claude Haiku 5.5 now available">
+
+## Claude Sonnet 5.5 and Claude Haiku 5.5 now available
+
+Anthropic's Claude Sonnet 5.5 and Claude Haiku 5.5 are now available for all users.
+
+Claude Sonnet 5.5 balances speed and intelligence for coding, Agents, and knowledge work. Claude Haiku 5.5 is the fastest, lowest-cost Claude model, suited to high-volume classification, extraction, and routing.
+
+Select either model from the model dropdown in any Agent, Tool, or Workforce. See [language model settings](/build/agents/build-your-agent/agent-settings/language-model) for how to change an Agent's model.
+
+</Update>
+
 <Update label="October 9, 2026" description="Error rate alarms for Agents and Workforces">
 
 ## Error rate alarms for Agents and Workforces
