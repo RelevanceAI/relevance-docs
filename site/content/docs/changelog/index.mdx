@@ -4,9 +4,9 @@ description: "All the latest updates and changes to the Relevance AI platform."
 mode: "wide"
 ---
 
-<Update label="October 30, 2026" description="Model controls for organizations">
+<Update label="October 30, 2026" description="Model controls for organization admins">
 
-## Model controls for organizations
+## Model controls for organization admins
 
 ![Models tab of the Integrations & models settings page, with new models set to Block all and the Anthropic and Google models expanded, where Claude Haiku 4.5 is switched off and its Reading web pages for research feature is marked as stopped](/images/changelog/changelog-model-controls.png)
 
@@ -18,9 +18,9 @@ Open organization settings, go to Integrations & models, and select the Models t
 
 </Update>
 
-<Update label="October 20, 2026" description="Task alarms for errors, approvals, and escalations">
+<Update label="October 20, 2026" description="Error, approval, and escalation alarms added to Tasks page">
 
-## Task alarms for errors, approvals, and escalations
+## Error, approval, and escalation alarms added to Tasks page
 
 ![Tasks page on the Approvals view grouped by Agent, with checkbox, Alarm, Run by, Tasks, and Task approval rate columns, where Invoice approver has its alarm turned on at an 18.0% task approval rate](/images/changelog/changelog-task-alarms.png)
 
@@ -30,19 +30,19 @@ Each alarm checks a share of tasks over a time window, for example more than 8% 
 
 To set one up, open the Tasks page, switch to the Errors, Approvals, or Escalated view, and group by Agent or Workforce. Click the bell in the Alarm column for a single row, or select several rows and click Enable alarms. See [Tasks page](/build/agents/give-your-agent-tasks/tasks-page) for more on each view.
 
-### GPT-6 Luna Decisions
+### GPT-6 Luna Decisions now available
 
 OpenAI's GPT-6 Luna Decisions is now a decision model alongside Jev 1.13, in Workforce condition nodes and the Decide tool step. It runs without your own API key in the US and EU regions, or on your own OpenAI key. OpenAI still lists it as beta, so avoid putting mission-critical workloads on it yet. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions).
 
-### Claude Sonnet 5.5 and Claude Haiku 5.5
+### Claude Sonnet 5.5 and Claude Haiku 5.5 now available
 
 Sonnet 5.5 balances speed and intelligence for coding, Agents, and knowledge work. Haiku 5.5 is the fastest, lowest-cost Claude model, suited to high-volume classification, extraction, and routing. Select either from the model dropdown in any Agent, Tool, or Workforce. See [language model settings](/build/agents/build-your-agent/agent-settings/language-model).
 
 </Update>
 
-<Update label="October 2, 2026" description="Decision models in Workforce conditions and Tools">
+<Update label="October 2, 2026" description="Decision models added to Workforce conditions and Tools">
 
-## Decision models in Workforce conditions and Tools
+## Decision models added to Workforce conditions and Tools
 
 ![Condition panel in the Workforce builder with Evaluate prompts with set to Decision model and Jev 1.13 selected, running on the TypeSafe key, above a prompt-based condition that routes to a refunds Agent](/images/changelog/changelog-decision-models.png)
 
@@ -52,19 +52,19 @@ A decision model is not a language model. It answers multiple choice, score, and
 
 Decision models run on your own TypeSafe API key. Get a key from typesafe.ai, then add it to the TypeSafe integration on the Integrations page. In a Workforce condition node, set Evaluate prompts with to Decision model and pick Jev 1.13; in a Tool, add the Decide step. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions) for how condition nodes route a Workforce.
 
-### Invent can call your MCP servers
+### MCP server access in Invent
 
 Invent can now call tools on the MCP servers connected to your project, such as GitHub, Linear, or Notion. Approval cards offer Allow for this chat, which lasts 24 hours and applies only to that chat; active grants are listed in the chat's side panel, where each can be revoked. MCP access is off by default: open Invent settings, go to the MCP servers tab, and turn on Use this project's MCP servers. See [Build with Invent](/build/invent/invent).
 
-### Dark mode
+### Dark mode now available
 
 Relevance AI now has a dark theme across the app, including Invent. Click your profile at the bottom of the left navigation menu and choose Appearance, then pick Match system, Light, or Dark. The choice is stored in your browser, so it applies per device.
 
 </Update>
 
-<Update label="September 25, 2026" description="Trigger status page with failure alarms">
+<Update label="September 25, 2026" description="Trigger status page and failure alarms">
 
-## Trigger status page with failure alarms
+## Trigger status page and failure alarms
 
 ![Trigger status page listing triggers with alarm bells, the Agent or Workforce each belongs to, statuses of Failed, Paused, Cancelled, and Active, and last successful and last failed run times](/images/changelog/changelog-trigger-status.png)
 
@@ -74,7 +74,7 @@ Each row shows the trigger, the Agent or Workforce it belongs to, its status (Ac
 
 Click Triggers in the left navigation menu to open the page. To set an alarm, click the bell on a trigger's row, optionally turn on Auto-diagnose with Invent, and click Enable alarm. Auto-diagnosis needs Invent turned on for the project. See [Triggers](/build/agents/build-your-agent/triggers) for how triggers start tasks.
 
-### Invent renders diagrams
+### Diagrams in Invent
 
 Ask Invent to visualize something, such as the branching logic in an Agent's system prompt, and it draws a Mermaid diagram in the chat, with Diagram and Code tabs, a Copy button, and an expanded view with zoom. See [Build with Invent](/build/invent/invent).
 
@@ -84,9 +84,9 @@ Bulk run CSV uploads now process up to 10,000 rows instead of timing out, and a 
 
 </Update>
 
-<Update label="September 17, 2026" description="Invent routines">
+<Update label="September 17, 2026" description="Scheduled routines in Invent">
 
-## Invent routines
+## Scheduled routines in Invent
 
 ![Routines panel in Invent with Yours and Templates tabs, a Schedule with Invent button, and six routines such as Reflect, Sharpen instructions, Cost optimize, and Check the outbound queue with their daily and weekly schedules](/images/changelog/changelog-invent-routines.png)
 
@@ -96,15 +96,15 @@ Ask Invent in chat to do something on a recurring basis and it creates a routine
 
 Click Routines in the Invent sidebar to see and edit your routines, or click Schedule with Invent to set up a new one. See [Build with Invent](/build/invent/invent) for more on using Invent.
 
-### Status feed on the Home page
+### Status feed added to Home page
 
 The Home page now shows a 14-day task health bar and performance for up to five Agents or Workforces. Click the gear on the Status feed to choose which ones appear. It's visible to Admins and Editors.
 
 </Update>
 
-<Update label="September 11, 2026" description="Invent subagents">
+<Update label="September 11, 2026" description="Subagents in Invent">
 
-## Invent subagents
+## Subagents in Invent
 
 ![Invent chat splitting a request across four subagents, each with its own mascot: two working with open eyes, one done with happy eyes after 9 steps, and one queued and asleep](/images/changelog/changelog-invent-subagents.png)
 
