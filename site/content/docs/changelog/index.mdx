@@ -26,9 +26,13 @@ Each alarm checks a share of tasks over a time window, for example more than 8% 
 
 To set one up, open the Tasks page, switch to the Errors, Approvals, or Escalated view, and group by Agent or Workforce. Click the bell in the Alarm column for a single row, or select several rows and click Enable alarms. See [Tasks page](/build/agents/give-your-agent-tasks/tasks-page) for more on each view.
 
-**GPT-6 Luna Decisions.** OpenAI's GPT-6 Luna Decisions is now a decision model alongside Jev 1.13, in Workforce condition nodes and the Decide tool step. It runs without your own API key in the US and EU regions, or on your own OpenAI key. OpenAI still lists it as beta, so avoid putting mission-critical workloads on it yet. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions).
+### GPT-6 Luna Decisions
 
-**Claude Sonnet 5.5 and Claude Haiku 5.5.** Sonnet 5.5 balances speed and intelligence for coding, Agents, and knowledge work. Haiku 5.5 is the fastest, lowest-cost Claude model, suited to high-volume classification, extraction, and routing. Select either from the model dropdown in any Agent, Tool, or Workforce. See [language model settings](/build/agents/build-your-agent/agent-settings/language-model).
+OpenAI's GPT-6 Luna Decisions is now a decision model alongside Jev 1.13, in Workforce condition nodes and the Decide tool step. It runs without your own API key in the US and EU regions, or on your own OpenAI key. OpenAI still lists it as beta, so avoid putting mission-critical workloads on it yet. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions).
+
+### Claude Sonnet 5.5 and Claude Haiku 5.5
+
+Sonnet 5.5 balances speed and intelligence for coding, Agents, and knowledge work. Haiku 5.5 is the fastest, lowest-cost Claude model, suited to high-volume classification, extraction, and routing. Select either from the model dropdown in any Agent, Tool, or Workforce. See [language model settings](/build/agents/build-your-agent/agent-settings/language-model).
 
 </Update>
 
@@ -42,9 +46,13 @@ A decision model is not a language model. It answers multiple choice, score, and
 
 Decision models run on your own TypeSafe API key. Get a key from typesafe.ai, then add it to the TypeSafe integration on the Integrations page. In a Workforce condition node, set Evaluate prompts with to Decision model and pick Jev 1.13; in a Tool, add the Decide step. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions) for how condition nodes route a Workforce.
 
-**Invent can call your MCP servers.** Invent can now call tools on the MCP servers connected to your project, such as GitHub, Linear, or Notion. Approval cards offer Allow for this chat, which lasts 24 hours and applies only to that chat; active grants are listed in the chat's side panel, where each can be revoked. MCP access is off by default: open Invent settings, go to the MCP servers tab, and turn on Use this project's MCP servers. See [Build with Invent](/build/invent/invent).
+### Invent can call your MCP servers
 
-**Dark mode.** Relevance AI now has a dark theme across the app, including Invent. Click your profile at the bottom of the left navigation menu and choose Appearance, then pick Match system, Light, or Dark. The choice is stored in your browser, so it applies per device.
+Invent can now call tools on the MCP servers connected to your project, such as GitHub, Linear, or Notion. Approval cards offer Allow for this chat, which lasts 24 hours and applies only to that chat; active grants are listed in the chat's side panel, where each can be revoked. MCP access is off by default: open Invent settings, go to the MCP servers tab, and turn on Use this project's MCP servers. See [Build with Invent](/build/invent/invent).
+
+### Dark mode
+
+Relevance AI now has a dark theme across the app, including Invent. Click your profile at the bottom of the left navigation menu and choose Appearance, then pick Match system, Light, or Dark. The choice is stored in your browser, so it applies per device.
 
 </Update>
 
@@ -60,9 +68,13 @@ Each row shows the trigger, the Agent or Workforce it belongs to, its status (Ac
 
 Click Triggers in the left navigation menu to open the page. To set an alarm, click the bell on a trigger's row, optionally turn on Auto-diagnose with Invent, and click Enable alarm. Auto-diagnosis needs Invent turned on for the project. See [Triggers](/build/agents/build-your-agent/triggers) for how triggers start tasks.
 
-**Invent renders diagrams.** Ask Invent to visualize something, such as the branching logic in an Agent's system prompt, and it draws a Mermaid diagram in the chat, with Diagram and Code tabs, a Copy button, and an expanded view with zoom. See [Build with Invent](/build/invent/invent).
+### Invent renders diagrams
 
-**CSV bulk runs up to 10,000 rows.** Bulk run CSV uploads now process up to 10,000 rows instead of timing out, and a larger file is rejected with an error asking you to split it. Runs now show Preparing while rows are written and Failed if no tasks ran, instead of Complete with 0 of 0 tasks. Some older stuck runs now show Failed for the same reason. See [Bulk scheduling](/build/agents/give-your-agent-tasks/bulk-schedule).
+Ask Invent to visualize something, such as the branching logic in an Agent's system prompt, and it draws a Mermaid diagram in the chat, with Diagram and Code tabs, a Copy button, and an expanded view with zoom. See [Build with Invent](/build/invent/invent).
+
+### CSV bulk runs up to 10,000 rows
+
+Bulk run CSV uploads now process up to 10,000 rows instead of timing out, and a larger file is rejected with an error asking you to split it. Runs now show Preparing while rows are written and Failed if no tasks ran, instead of Complete with 0 of 0 tasks. Some older stuck runs now show Failed for the same reason. See [Bulk scheduling](/build/agents/give-your-agent-tasks/bulk-schedule).
 
 </Update>
 
@@ -78,7 +90,9 @@ Ask Invent in chat to do something on a recurring basis and it creates a routine
 
 Click Routines in the Invent sidebar to see and edit your routines, or click Schedule with Invent to set up a new one. See [Build with Invent](/build/invent/invent) for more on using Invent.
 
-**Status feed on the Home page.** The Home page now shows a 14-day task health bar and performance for up to five Agents or Workforces. Click the gear on the Status feed to choose which ones appear. It's visible to Admins and Editors.
+### Status feed on the Home page
+
+The Home page now shows a 14-day task health bar and performance for up to five Agents or Workforces. Click the gear on the Status feed to choose which ones appear. It's visible to Admins and Editors.
 
 </Update>
 
