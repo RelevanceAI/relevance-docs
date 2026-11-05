@@ -16,33 +16,21 @@ Open organization settings, go to Integrations & models, and select the Models t
 
 </Update>
 
-<Update label="October 20, 2026" description="Alarms for pending approvals and escalations">
+<Update label="October 20, 2026" description="Task alarms for errors, approvals, and escalations">
 
-## Alarms for pending approvals and escalations
+## Task alarms for errors, approvals, and escalations
 
-The task alarms that launched for errors now cover two more cases: tasks waiting on an approval nobody has given, and tasks an Agent hands off to a person.
+You can now set alarms on an Agent or Workforce that notify you when too many of its tasks fail, sit waiting on an approval, or get handed off to a person.
 
-Set an alarm on the Approvals or Escalated view, for example more than 10% of tasks within one hour, and it notifies email, Slack, or Teams when the share crosses that threshold. With Auto-diagnose with Invent turned on, Invent looks into the cause when the alarm fires and sends a proposed fix to approve; nothing changes until you do. Approval alarms arrived on October 15 and escalation alarms on October 20. Like error rate alarms, they're available on paid plans.
+Each alarm checks a share of tasks over a time window, for example more than 8% of tasks within one hour, and only fires once at least 10 tasks have run in that window. A Workforce alarm counts the tasks of every Agent in the Workforce together. Notifications go to email, Slack, or Teams, and a follow-up arrives once the share drops back under the threshold. With Auto-diagnose with Invent turned on, Invent looks into the cause when an alarm fires and sends a proposed fix to approve; nothing changes until you do. Error alarms arrived on October 9, approval alarms on October 15, and escalation alarms on October 20. Task alarms are available on paid plans.
 
-To set one up, open the Tasks page, switch to the Approvals or Escalated view, group by Agent or Workforce, and click the bell in the Alarm column. See [Tasks page](/build/agents/give-your-agent-tasks/tasks-page) for more on each view.
+To set one up, open the Tasks page, switch to the Errors, Approvals, or Escalated view, and group by Agent or Workforce. Click the bell in the Alarm column for a single row, or select several rows and click Enable alarms. See [Tasks page](/build/agents/give-your-agent-tasks/tasks-page) for more on each view.
 
 ### Other improvements
 
 **GPT-6 Luna Decisions (October 19).** OpenAI's GPT-6 Luna Decisions is now a decision model alongside Jev 1.13, in Workforce condition nodes and the Decide tool step. It runs without your own API key in the US and EU regions, or on your own OpenAI key. OpenAI still lists it as beta, so avoid putting mission-critical workloads on it yet. See [Add conditions](/build/workforces/build-an-ai-workforce/add-conditions).
 
 **Claude Sonnet 5.5 and Claude Haiku 5.5 (October 15).** Sonnet 5.5 balances speed and intelligence for coding, Agents, and knowledge work. Haiku 5.5 is the fastest, lowest-cost Claude model, suited to high-volume classification, extraction, and routing. Select either from the model dropdown in any Agent, Tool, or Workforce. See [language model settings](/build/agents/build-your-agent/agent-settings/language-model).
-
-</Update>
-
-<Update label="October 9, 2026" description="Error rate alarms for Agents and Workforces">
-
-## Error rate alarms for Agents and Workforces
-
-You can now set an alarm that notifies you when the share of failed tasks on an Agent or Workforce crosses a threshold you choose.
-
-Each alarm checks the error rate over a time window, for example more than 8% of tasks within one hour, and only fires once at least 10 tasks have run in that window. A Workforce alarm counts the tasks of every Agent in the Workforce together. Notifications go to email, Slack, or Teams, and a follow-up arrives once the error rate drops back under the threshold. Error rate alarms are available on paid plans.
-
-To set one up, open the Tasks page, switch to the Errors view, and group by Agent or Workforce. Click the bell in the Alarm column for a single row, or select several rows and click Enable alarms. See [Tasks page](/build/agents/give-your-agent-tasks/tasks-page) for more on the Errors view.
 
 </Update>
 
