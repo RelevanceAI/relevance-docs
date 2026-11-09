@@ -263,9 +263,9 @@ MCP access is bounded by your project role — the API enforces a ceiling so a s
 
 ---
 
-## Key tools
+## Score past tasks
 
-The MCP server exposes tools for agents, tools, workforces, knowledge, and evals. `relevance_run_evaluation` is the tool for running eval batches — it supports both scenario-based and historical scoring modes, where you pass existing `task_ids` and `check_ids` to grade already-completed production conversations without re-executing them. See [agent skills](/integrations/mcp/agent-skills) for the full runbook on using evals via MCP.
+`relevance_run_evaluation` runs in one of two modes. Pass `test_set_id` or `scenario_ids` to replay test scenarios, or pass `task_ids` with `check_ids` to score Agent or Workforce tasks that already ran. Scoring past tasks re-runs nothing, so it's a quick way to calibrate a new or edited check against real runs. It's a write tool, so it isn't available in [Run-Only mode](#run-only-mode).
 
 ---
 
