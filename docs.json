@@ -54,19 +54,7 @@
                     ]
                   },
                   "get-started/chat/saved-prompts",
-                  "get-started/chat/mobile-app",
-                  {
-                    "group": "Super GTM",
-                    "pages": [
-                      "get-started/chat/super-gtm/introduction",
-                      "get-started/chat/super-gtm/integrations",
-                      "get-started/chat/super-gtm/skills",
-                      "get-started/chat/super-gtm/subagents",
-                      "get-started/chat/super-gtm/file-system",
-                      "get-started/chat/super-gtm/memory",
-                      "get-started/chat/super-gtm/scheduled-tasks"
-                    ]
-                  }
+                  "get-started/chat/mobile-app"
                 ]
               },
               {
@@ -105,6 +93,12 @@
                 ]
               },
               {
+                "group": "Invent",
+                "pages": [
+                  "build/invent/invent"
+                ]
+              },
+              {
                 "group": "Agents",
                 "pages": [
                   "build/agents/create-an-agent",
@@ -117,7 +111,7 @@
                       "build/agents/build-your-agent/alerts",
                       "build/agents/build-your-agent/memory",
                       "build/agents/build-your-agent/variables",
-                      "build/agents/build-your-agent/evals",
+                      "build/agents/build-your-agent/version-history",
                       {
                         "group": "Trigger Types",
                         "pages": [
@@ -162,6 +156,16 @@
                     ]
                   },
                   {
+                    "group": "Evaluating Performance",
+                    "pages": [
+                      "build/agents/evals/introduction",
+                      "build/agents/evals/test-sets",
+                      "build/agents/evals/checks",
+                      "build/agents/evals/running-evaluations",
+                      "build/agents/evals/monitor"
+                    ]
+                  },
+                  {
                     "group": "Running Tasks",
                     "pages": [
                       "build/agents/give-your-agent-tasks/task-overview",
@@ -172,19 +176,7 @@
                     ]
                   },
                   "build/agents/share-your-agent",
-                  "build/agents/delete-agent",
-                  {
-                    "group": "Use-cases & Examples",
-                    "pages": [
-                      "build/agents/agent-examples/bosh-bdr-agent"
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "Invent",
-                "pages": [
-                  "build/invent/invent"
+                  "build/agents/delete-agent"
                 ]
               },
               {
@@ -466,6 +458,7 @@
                       "integrations/popular-integrations/google-drive",
                       "integrations/popular-integrations/notion",
                       "integrations/popular-integrations/trello",
+                      "integrations/popular-integrations/miro",
                       "integrations/popular-integrations/confluence",
                       "integrations/popular-integrations/content-snare",
                       "integrations/popular-integrations/canva"
@@ -568,6 +561,7 @@
                 "group": "Governance & Controls",
                 "pages": [
                   "enterprise/integration-controls",
+                  "enterprise/model-controls",
                   "enterprise/default-org",
                   "enterprise/manage-projects-and-users-api",
                   "enterprise/asset-controls",
@@ -725,18 +719,13 @@
       "anchors": [
         {
           "anchor": "Community",
-          "href": "https://community.relevanceai.com",
+          "href": "/community",
           "icon": "users"
         },
         {
           "anchor": "Contact Support",
           "href": "https://relevanceai.com/docs/get-started/support",
           "icon": "envelope"
-        },
-        {
-          "anchor": "JavaScript SDK",
-          "href": "https://relevanceai.com/docs/sdk/introduction",
-          "icon": "code"
         },
         {
           "anchor": "Changelog",
@@ -805,7 +794,7 @@
     },
     {
       "source": "/get-started/chat/super-gtm",
-      "destination": "/get-started/chat/super-gtm/introduction"
+      "destination": "/get-started/chat/introduction"
     },
     {
       "source": "/build/agents/build-your-agent/escalations",
@@ -1138,6 +1127,18 @@
     {
       "source": "/get-started/chat/deep-researcher",
       "destination": "/get-started/chat/chat-agents/deep-researcher"
+    },
+    {
+      "source": "/evals",
+      "destination": "/build/agents/evals/introduction"
+    },
+    {
+      "source": "/build/agents/evals",
+      "destination": "/build/agents/evals/introduction"
+    },
+    {
+      "source": "/build/agents/build-your-agent/evals",
+      "destination": "/build/agents/evals/introduction"
     }
   ]
 }

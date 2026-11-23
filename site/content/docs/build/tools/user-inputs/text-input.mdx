@@ -1,0 +1,25 @@
+---
+title: 'Text input'
+sidebarTitle: 'Text input'
+description: 'Input a line of text'
+---
+
+## What is a Text input
+Text input is an input component that allows you to enter a line of text. 
+The value can be entered by the user or later fetched from an uploaded dataset (bulk-run).
+
+## When to use the Text input component
+The Text input component is suitable for short pieces of text. Such as a question, name, topic, etc.
+
+## How to add a Text input to my custom Tool
+The Text input component is listed under User inputs. You can add it to your Tool using the main section
+or the side-bar.
+![Text inputs](/images/build-custom-tools/user-input/text-input-1.png)
+
+## Text input setting
+<include>../../../../_snippets/components/inputs/general-input-setting.mdx</include>
+<include>../../../../_snippets/components/inputs/default-value-tip.mdx</include>
+
+## Access the entered text
+To access the entered text use the variable mode `{{}}` and the input step name. Under the default setting it is accessible
+via `{{text}}` (or `params.text` in  a JavaScript step).

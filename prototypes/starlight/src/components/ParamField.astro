@@ -1,0 +1,14 @@
+---
+// Mintlify spells the name differently per context: query/path/body/header.
+const { query, path, body, header, type, required, default: def } = Astro.props;
+const name = query ?? path ?? body ?? header;
+---
+<div class="rl-param">
+  <div class="rl-param-head">
+    <code class="rl-param-name">{name}</code>
+    {type && <span class="rl-param-type">{type}</span>}
+    {required && <span class="rl-param-req">required</span>}
+    {def !== undefined && <span class="rl-param-type">default: {String(def)}</span>}
+  </div>
+  <div class="rl-param-body"><slot /></div>
+</div>

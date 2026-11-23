@@ -1,0 +1,65 @@
+---
+title: "Model controls"
+sidebarTitle: "Model controls"
+description: "Choose which models your organization can use, and see what a change affects before it applies"
+---
+
+Model controls let organization admins decide which models people in the organization can use. You can block a whole provider or a single model, decide whether models added to Relevance AI later start on or off, and see which features a change affects before you confirm it.
+
+<Info>Model controls are available on Enterprise plans. You need to be an organization admin to change them.</Info>
+
+## Open model controls
+
+<Steps>
+  <Step title="Open organization settings">
+    Open your organization settings and select **Integrations & models**.
+  </Step>
+  <Step title="Open the Models tab">
+    Select the **Models** tab. The count beside it shows how many models are on, for example **17 of 19**.
+  </Step>
+</Steps>
+
+## Choose which models are allowed
+
+The dropdown at the top of the Models tab sets every model at once:
+
+- **Allow all** turns every model on, including new ones.
+- **Block all** turns every model off. Agents and Tools using them stop until a model is switched back on, and new models are off by default.
+- **Custom** lets you choose provider by provider and model by model. Your saved choices come back whenever you switch to Custom.
+
+Each provider, such as Anthropic or Google, has its own count and its own **Allow all**, **Block all**, or **Custom** dropdown. Expand a provider to switch individual models on or off with the toggle on each row.
+
+If an organization API key that a model relies on is switched off, the model shows **API key off** and is blocked until the key is turned back on. See [Organization- and project-level API keys](/enterprise/org-project-level-api-keys) for managing those keys.
+
+## Control new models
+
+**Turn on new models automatically** decides what happens when Relevance AI adds a model:
+
+- **Allow all** turns new models on for every provider.
+- **Block all** keeps new models off until an admin turns them on.
+- **Custom** lets each provider decide, using the **Turn on new [provider] models automatically** toggle inside that provider.
+
+Organizations that only allow approved vendors can use **Block all** so models released later never turn on without review.
+
+## See what a change affects
+
+Relevance AI runs some platform features, such as memory, web reading, and error explanations, on models it chooses. Each model lists the features it powers under **Powers**. A red pill marks a feature that your current settings have turned off.
+
+When your settings affect any features, a banner at the top of the tab shows how many, and how many stop or work with limits. Expand it to see each feature and the models it needs.
+
+Before a model turns off, a confirmation lists what it affects:
+
+- **Stops** marks a platform feature that won't run without the model.
+- **Works with limits** marks a feature that keeps running with less capability.
+- **Uses [model] instead** marks a built-in Agent that moves to another allowed model.
+- **Your agents and tools** lists your own Agents and LLM tool steps on that model, which stop until you switch them to another model or turn the model back on.
+
+Turning the model back on restores everything the confirmation listed.
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="What happens to Agents that use a model I block?">Agents and LLM tool steps that use a blocked model stop when they run. Switch them to an allowed model in their settings, or turn the model back on.</Accordion>
+  <Accordion title="Do I lose my choices if I switch to Allow all or Block all?">No. Your per-model choices are saved, and they come back when you switch to Custom.</Accordion>
+  <Accordion title="Can I use model controls without Enterprise?">No. Model controls are available on Enterprise plans only.</Accordion>
+</AccordionGroup>

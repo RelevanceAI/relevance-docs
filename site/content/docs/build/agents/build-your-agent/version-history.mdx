@@ -1,0 +1,88 @@
+---
+title: "Version history"
+sidebarTitle: "Version history"
+description: "Track, restore, and manage versions of your Agents, Tools, and Workforces."
+---
+
+Version history gives you a complete record of every saved state for your Agents, Tools, and Workforces. Every time you save a draft or publish, a new version is created automatically — so you can experiment freely and roll back if something breaks.
+
+<img src="/images/version-history-panel.png" alt="The Version History panel listing published versions, with the live version marked and Invent badges on versions created by Invent" />
+
+## How version history works
+
+A new version is created in two situations:
+
+- **On every draft save** — whenever you make a change and save without publishing
+- **On publish** — when you publish a draft to make it the active version
+
+This means every meaningful edit is captured. You don't need to manually create snapshots or remember to save before experimenting.
+
+When you edit an Agent, Tool, or Workforce, your changes go to a **draft** first — they don't affect the live, published version until you explicitly publish. This means:
+
+- Your published (active) version keeps running while you iterate
+- Draft changes are saved automatically as you work
+- Publishing is an intentional step — you decide when changes go live
+
+Each saved draft state and each published state becomes a distinct version in the history list.
+
+### Version names and descriptions
+
+Each version has a short name and a longer description, and both are optional. A version saved without a name is listed by its timestamp instead — for example, `Aug 18, 2:30 am` — so naming the versions you might want to return to makes them much easier to find later. Invent sets a name and description when it publishes changes, but neither field is enforced by the platform.
+
+<Tip>
+  Use descriptions that capture intent, not just the change. "Added web search tool" is more useful than "Updated version 3" when you're scanning a list of 20 versions.
+</Tip>
+
+When you restore a version, the restored state is saved as a new draft with `(restored)` appended to the version name. The description carries over unchanged from the version you restored.
+
+## Accessing and restoring versions
+
+Version history works the same way for Agents, Tools, and Workforces:
+
+1. Open the Agent, Tool, or Workforce in the builder
+2. Click the three-dot menu in the top right
+3. Select **Versions**
+
+The panel lists every saved version with its name, who saved it, and its description. The active version is marked **Live**, and a version created by Invent or over MCP carries a badge naming the surface that made the change.
+
+<Note>
+  The three-dot menu only lists **Versions** in the builder. It's hidden on an Agent's Use tab, when you're not on the Workforce Build tab, and in the Tool builder embedded inside the Agent builder, where you need to open the Tool on its own page instead.
+</Note>
+
+To restore a version, click the three-dot menu on that version in the panel, then select **Restore this version**. You can also ask [Invent](/build/invent/invent) in plain language. Either way the restored state lands in draft, so you review it and publish when ready.
+
+### With Invent
+
+Ask Invent to restore a version by describing what you want — for example:
+
+> "Restore the previous version of this Tool"
+
+Invent always asks you to confirm before applying the restore. It can also rename an existing version for you if you'd rather not open the panel yourself.
+
+### Edit a version name or description
+
+You can relabel any version after it's been saved, including the current draft, the active version, and historical versions. In the version history panel, click the three-dot menu on a version, then select **Edit name / description**. This changes only the label — the configuration stored in that version is untouched, as are its author and timestamp.
+
+<Note>
+  Renaming an Agent version requires admin permission on that Agent, while Tools and Workforces also accept project editor permission.
+</Note>
+
+## Version retention
+
+Versions are kept indefinitely unless your organization has a data retention policy in place. Where one applies, a version is deleted only if both of these hold:
+
+- It is older than the retention window, measured from when the version was created rather than when it was last edited
+- It is not the **active version** (the one currently published) or the **draft version** (your current work in progress). Those two are always protected, at any age
+
+For retention windows and how they're configured, see [Data retention](/enterprise/data-retention).
+
+## Frequently asked questions (FAQs)
+
+<AccordionGroup>
+  <Accordion title="Can I rename a version after it's been saved?">
+    Yes. Open the version history panel, click the three-dot menu on the version, then select **Edit name / description**. This works for Agents, Tools, and Workforces, and applies to the current draft, the active version, and historical versions alike. You can also ask Invent to rename a version.
+  </Accordion>
+  <Accordion title="Does restoring a version publish it automatically?">
+    No. A restored version always lands in draft, and you publish it yourself when you're ready. The live version keeps running until you do, so you get a chance to review the restored state before it goes out.
+  </Accordion>
+</AccordionGroup>

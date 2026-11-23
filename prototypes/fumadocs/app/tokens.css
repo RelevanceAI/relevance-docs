@@ -1,0 +1,55 @@
+/* Shared neutral design system for the Mintlify-migration prototypes.
+   Deliberately NOT a Mintlify clone and NOT either framework's stock theme:
+   both prototypes import this file unchanged so the comparison measures how
+   hard each framework is to restyle, not how good the CSS is. */
+
+:root {
+  /* Brand — carried over from docs.json colors */
+  --rl-accent:        #4F46E5;
+  --rl-accent-soft:   #a5b4fc;
+  --rl-accent-deep:   #3730a3;
+
+  /* Editorial neutral ramp */
+  --rl-bg:            #ffffff;
+  --rl-bg-subtle:     #f7f7f8;
+  --rl-bg-inset:      #f0f0f2;
+  --rl-border:        #e3e3e7;
+  --rl-border-strong: #c9c9d1;
+  --rl-text:          #16161a;
+  --rl-text-muted:    #5e5e6b;
+  --rl-text-faint:    #8a8a97;
+
+  /* Semantic callout hues */
+  --rl-note:    #2563eb;
+  --rl-tip:     #0d9488;
+  --rl-warning: #d97706;
+  --rl-danger:  #dc2626;
+  --rl-check:   #16a34a;
+
+  /* Type — editorial serif headings against a clean UI sans */
+  --rl-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --rl-font-head: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --rl-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  --rl-measure: 74ch;
+  --rl-radius:  10px;
+  --rl-radius-sm: 6px;
+  --rl-shadow: 0 1px 2px rgb(16 16 26 / .04), 0 4px 16px rgb(16 16 26 / .06);
+}
+
+:root[data-theme="dark"], .dark, [data-theme="dark"] {
+  --rl-bg:            #0d0d11;
+  --rl-bg-subtle:     #16161c;
+  --rl-bg-inset:      #1e1e26;
+  --rl-border:        #2a2a34;
+  --rl-border-strong: #3d3d4a;
+  --rl-text:          #f2f2f5;
+  --rl-text-muted:    #a4a4b3;
+  --rl-text-faint:    #74748a;
+  --rl-accent:        #8b85f5;
+  --rl-note:    #60a5fa;
+  --rl-tip:     #2dd4bf;
+  --rl-warning: #fbbf24;
+  --rl-danger:  #f87171;
+  --rl-check:   #4ade80;
+}

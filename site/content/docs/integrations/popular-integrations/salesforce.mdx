@@ -1,0 +1,132 @@
+---
+title: 'Salesforce'
+description: 'Interact with your Salesforce CRM with Relevance.'
+---
+
+Salesforce is designed to help businesses manage their sales pipeline, primarily through customer relationship tracking activities. With Relevance AI, your agents can interact with Salesforce much like your human sales team would.
+
+Below, we'll show you how to get started with the Salesforce integration, including how to connect your Salesforce account, how to trigger agentic workflows based on Salesforce events, and how to complete common CRM activities with your agents.
+
+## How to connect your Salesforce account
+
+To add Salesforce as an integration, all you need to do is sign-into your Salesforce account via the integrations page:
+
+1. Go to the "Integrations" page in the sidebar.
+2. Click on "Salesforce".
+3. Click on the Add Integration button.
+4. Sign-in to your Salesforce account.
+5. Click "Allow access" to Relevance AI.
+
+## Setup Salesforce as an Agent Trigger
+
+A trigger is an event that triggers your agent to start working. In the case of Salesforce, a trigger might be new leads added to your CRM, demos have been booked, a lead has moved down the sales funnel (e.g. Prospect -> Qualified lead) or other events unique to your sales workflows.
+
+### Add a Salesforce trigger to your agent.
+
+After you have created a new agent, you can add Salesforce as a trigger:
+
+1. Open your agent settings (Agent profile tab).
+2. Scroll down to Integrations > Triggers.
+3. Click on Salesforce.
+4. Select your connected Salesforce account, or sign-in if not already added via the integrations page (previous section).
+5. Click "Allow access" to Relevance AI.
+6. Write an SOQL query to retrieve the data you want to pull in from your Salesforce account. 
+
+Here is an example on an SOQL query that pulls in new leads:
+
+The following SOQL query pulls in Lead objects with the selected properties, where the "Relevance_Outreached__c" custom object has been set to "true".
+
+```SOQL
+SELECT Id, Name, Email, Phone, AccountId, Account.Name, Title
+FROM Lead
+WHERE Relevance_Outreached__c = true
+```
+
+Now, any new Leads that are added to the CRM since the last time we checked that meet the query conditions, will be sent to the agent.
+
+<Info>Make sure that you are writing [Salesforce Object Query Language (SOQL) queries](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql.htm), and not SQL queries here. SQL queries that use order-by statements for example, will fail.</Info>
+
+7. Advanced option (Optional): Specify a frequency, which is how often you want to fetch data from Salesforce. If you don't specify a frequency, it'll check every 1 minute.
+
+8. Set a Cadence (Optional): Specificy a cadence, which is how often one of the items fetched from Salesforce triggers the agent (if 100 new leads are added, you might not want your agent to outreach to them all the same day, especially if you're in the middle of warming up your inboxes). The rest will wait in a queue.
+
+## Get your agent to complete common Salesforce activities
+
+Once your account is connected, you can use the Salesforce API call step in the Tool builder. This tool step allows you to complete Salesforce-specific activities, like managing Leads, Contacts, Notes, Tasks and more.
+
+### Use Salesforce API tool-step
+
+You can build custom tools that perform Salesforce activities, by using the Salesforce API Call tool-step:
+
+1. Create a new tool.
+2. Scroll down to Tool-steps.
+3. Add Salesforce API tool-step.
+4. Select your connected Salesforce account in the dropdown.
+
+Below are examples of common Salesforce activities your agents can perform.
+
+### Get an existing Contact's details.
+
+<img src="/images/get_contact.png" alt="The Salesforce tool step for retrieving an existing contact's details" />
+
+### Create a new Lead.
+
+<img src="/images/create_new_lead.png" alt="The Salesforce tool step for creating a new lead" />
+
+### Create a note (e.g. lead qual research).
+
+<img src="/images/create_note.png" alt="The Salesforce tool step for creating a note" />
+
+### Create a task
+
+<img src="/images/create_task.png" alt="The Salesforce tool step for creating a task" />
+
+### Mark a task as complete
+
+<img src="/images/complete_task.png" alt="The Salesforce tool step for marking a task complete" />
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="OAuth approval error when connecting">
+    If you encounter an `OAUTH_APPROVAL_ERROR_GENERIC` error when authenticating with Salesforce, this is typically due to Salesforce security updates implemented in September 2024 that require explicit installation of connected apps.
+
+    This issue commonly occurs with:
+
+    - Sandbox environments created before September 8th, 2024
+    - New Salesforce instances
+    - Users without System Administrator permissions
+
+    To resolve this issue:
+
+    1. **Verify System Administrator access**
+        - The first user to authenticate must have System Administrator permissions or the "Approve Uninstalled Connected Apps" permission
+        - Have a System Administrator complete the initial authentication with Relevance AI
+    2. **For Sandbox environments created before September 8th:**
+        - Go to **Setup** → **Company Information**
+        - Click **"Match Production Licenses"** to update the sandbox with the necessary infrastructure
+    3. **Install the Relevance AI connected app:**
+        - After a System Administrator successfully authenticates once, go to **Setup**
+        - In Quick Find, type **"OAuth"**
+        - Navigate to **Connected Apps OAuth Usage**
+        - Locate the Relevance AI app in the list
+        - Click **"Install"** to approve the connected app for your organization
+    4. **Grant permissions to other users (optional):**
+        - System Administrators can grant the **"Approve Uninstalled Connected Apps"** permission to other users who need to authenticate
+
+    <Note>Scratch orgs created before September 8th, 2024 cannot have connected apps added and must be recreated. If issues persist after following these steps, contact Salesforce support for assistance with connected app authentication in your organization.</Note>
+
+    For more information, see the [Salesforce documentation](https://help.salesforce.com/s/articleView?id=005132365&type=1).
+  </Accordion>
+</AccordionGroup>
+
+## Remove Salesforce integration
+
+You can remove Salesforce as a Trigger in your agent settings, by clicking the three dots next to your connected account, and then "Remove".
+
+If you want to remove the Salesforce integration completely, you can:
+
+1. Go to the "Integrations" page from the sidebar
+2. Select Salesforce from the list
+3. Click "..." on the account you want to remove
+4. Click remove

@@ -1,0 +1,8 @@
+---
+import Icon from './Icon.astro';
+const { title, defaultOpen = false, icon } = Astro.props;
+---
+<details class="rl-accordion" open={defaultOpen}>
+  <summary><Icon name={icon} />{title}</summary>
+  <div class="rl-accordion-body"><slot /></div>
+</details>

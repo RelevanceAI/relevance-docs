@@ -1,0 +1,29 @@
+---
+title: 'Add conditions to steps'
+sidebarTitle: 'Conditions'
+description: 'Running a step only if conditions are met'
+---
+
+By default, when running a Tool, each tool step is executed once. However, Relevance supports conditional execution. Where 
+a step runs only if the defined condition is met
+
+## Conditions
+
+Access loops under the three-dot menu on the top right of steps. Click on **Enable conditions**.
+
+  <p align="center">
+  <img width="350" height="150" align="center" src="/images/build-custom-tools/tool-step/add-delete-condition-loop.png" alt="The three-dot step menu open, showing Enable conditions and the loop options" />
+  </p>
+
+Conditions must follow JavaScript syntax and must be written inside the template handlebars `{{ condition }}`. 
+
+<Tip>
+You can use `&&` and `||` for "and" and "or", respectively. 
+</Tip>
+
+In the example below, the LLM step runs if the input variable `age` is 30 (`{{ age === 30 }}`) and the input variable 
+`gender` is female (`{{ gender === "female" }}`).
+
+<Frame caption="Screenshot of the Conditions input in a step">
+  <img src="/images/conditions.png" alt="The Conditions input on a step, holding a template expression" />
+</Frame>

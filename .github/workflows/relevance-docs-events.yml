@@ -23,13 +23,22 @@ name: Notify Relevance Docs Workforce
 # now the async-correct one: the authoring run never creates the card, and `opened` does.
 # One creator again, just a different one.
 #
+# converted_to_draft / ready_for_review are forwarded so the card reflects a PR being
+# pulled back into draft. Without them, moving a PR to draft changed nothing in Slack and
+# the board kept saying it needed review.
+#
+# review_requested / review_request_removed keep the Reviewer field honest. Without them
+# the card sits on a dash until some unrelated event happens to refresh it. Deliberately
+# NOT forwarding assigned/unassigned: the assignee is set once, by Claude, at PR creation,
+# which `opened` already covers.
+#
 # `authored` tells the Notifier whether this is a PR the workforce produced — true when the
 # body carries the docs-run-id marker. Only those may create a card; a hand-made PR is
 # still ignored, which is the documented behaviour (Slack only shows PRs that came
 # through the gate).
 on:
   pull_request:
-    types: [opened, synchronize, closed, labeled]
+    types: [opened, synchronize, closed, labeled, converted_to_draft, ready_for_review, review_requested, review_request_removed]
   pull_request_review:
     types: [submitted, dismissed]
 
