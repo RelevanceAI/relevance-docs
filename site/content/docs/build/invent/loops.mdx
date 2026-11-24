@@ -1,0 +1,128 @@
+---
+title: "Loops page"
+sidebarTitle: "Loops page"
+description: "A project-level view in Invent showing performance loops, scheduled routines, and asset loops for your agents and workforces."
+---
+
+The Loops page is a project-level view inside Invent that organizes all loops running in your project — monitors watching for problems, recurring routines Invent runs on your behalf, and loops grouped by the agent or workforce they belong to.
+
+<div className="invent-callout">
+  <strong>Invent can set this up for you.</strong> Ask Invent to create a routine with a name and a purpose, and it writes the standing instructions, sets the cadence, and starts running it on schedule.
+</div>
+
+## How to access the Loops page
+
+Open Invent, then click **Loops** in the left navigation panel of your project.
+
+## The three sections
+
+<CardGroup cols={3}>
+  <Card title="Performance loops" icon="bell">
+    Alarms that monitor agents and workforces for problems. These run diagnostics and alert you when something needs attention.
+  </Card>
+  <Card title="Scheduled loops" icon="calendar-clock">
+    Recurring Invent routines that run on a daily or weekly cadence. Invent carries out the work autonomously on your behalf.
+  </Card>
+  <Card title="Asset loops" icon="layer-group">
+    Loops grouped by the agent or workforce they are associated with. Use this view to see all loops for a specific asset.
+  </Card>
+</CardGroup>
+
+## Scheduled loops (routines)
+
+A scheduled loop is a recurring routine where Invent works on your project on a set cadence — daily or weekly. You write standing instructions once; Invent runs them on schedule without any manual input.
+
+<Note>
+  Scheduled loops are not agent triggers. Agent triggers start an individual agent on a schedule. A scheduled loop is Invent itself working autonomously on your behalf — reading task history, updating memories, reviewing prompts, and proposing improvements.
+</Note>
+
+### Creating a routine from a template
+
+The **Scheduled loops** section includes an **Add new** button with a dropdown of six pre-built routine templates. Each template pre-fills the name, standing instructions, and default cadence so you can get started without writing instructions from scratch.
+
+<Steps>
+  <Step title="Open the Loops page">
+    In Invent, click **Loops** in the left navigation panel.
+  </Step>
+  <Step title="Open the Add new dropdown">
+    In the **Scheduled loops** section, click the arrow on the **Add new** button to expand the dropdown.
+  </Step>
+  <Step title="Select a template">
+    Choose one of the six templates from the dropdown. The routine opens pre-filled with a name, standing instructions, and a default cadence.
+  </Step>
+  <Step title="Review and save">
+    Adjust the name, instructions, or cadence if needed, then save the routine.
+  </Step>
+</Steps>
+
+#### Available templates
+
+<AccordionGroup>
+  <Accordion title="Reflect (daily)">
+    Reads yesterday's agent tasks and looks for patterns — repeated errors, slow steps, or missed instructions — then summarizes what needs fixing. Runs daily.
+  </Accordion>
+  <Accordion title="Dream (daily)">
+    Turns what Invent learns about your goals and working patterns into lasting memories, so it can act with better context over time. Runs daily.
+  </Accordion>
+  <Accordion title="Grow evals (daily)">
+    Converts real agent tasks into evaluation cases that catch regressions before they reach production. Runs daily.
+  </Accordion>
+  <Accordion title="Sharpen instructions (weekly)">
+    Compares each agent's prompt against how it actually behaves in live tasks, then proposes prompt improvements where behavior and instructions diverge. Runs weekly.
+  </Accordion>
+  <Accordion title="Cost optimize (daily)">
+    Identifies which agents and tools are consuming the most credits and suggests where usage can be reduced. Runs daily.
+  </Accordion>
+  <Accordion title="Grow use cases (weekly)">
+    Finds recurring work in your project that has no agent handling it yet, and proposes a new agent or workflow for each gap. Runs weekly.
+  </Accordion>
+</AccordionGroup>
+
+### Creating a routine from scratch
+
+To create a custom routine without using a template:
+
+<Steps>
+  <Step title="Open the Loops page">
+    In Invent, click **Loops** in the left navigation panel.
+  </Step>
+  <Step title="Click Add new">
+    In the **Scheduled loops** section, click **Add new** (not the dropdown arrow).
+  </Step>
+  <Step title="Write standing instructions">
+    Give the routine a name and write the standing instructions — what Invent should do each time this routine runs.
+  </Step>
+  <Step title="Set the cadence">
+    Choose daily or weekly, then set the time or day the routine should run.
+  </Step>
+  <Step title="Save">
+    Save the routine. It will run automatically on the schedule you set.
+  </Step>
+</Steps>
+
+## Managing routines
+
+### Editing a routine
+
+Open the Loops page, find the routine in the **Scheduled loops** section, and click on it to open the editor. Update the name, standing instructions, or cadence, then save your changes.
+
+### Deleting a routine
+
+Open the routine from the **Scheduled loops** section, then use the delete option in the routine editor. Deleting a routine is permanent and cannot be undone.
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="What is the difference between a scheduled loop and a scheduled agent trigger?">
+    A scheduled agent trigger starts a specific agent on a timer — the agent then runs its task as normal. A scheduled loop is Invent itself working on your project on a recurring basis, reading history, updating context, and proposing improvements. They serve different purposes and are configured in different places.
+  </Accordion>
+  <Accordion title="Can I run a scheduled loop immediately instead of waiting for the next scheduled time?">
+    Open the routine from the Scheduled loops section and use the run option to trigger it manually outside its normal cadence.
+  </Accordion>
+  <Accordion title="How do I see what a scheduled loop did when it ran?">
+    Each loop run appears in Invent's task history. Open Invent and look at the conversation history to find the routine's output from each run.
+  </Accordion>
+  <Accordion title="Can I have more than one routine of the same template type?">
+    Yes. You can create multiple routines from the same template or from scratch. Each runs independently on its own schedule.
+  </Accordion>
+</AccordionGroup>
